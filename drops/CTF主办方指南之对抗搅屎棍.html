@@ -3,14 +3,14 @@
 			<head>
 			     <title>CTF主办方指南之对抗搅屎棍 - phith0n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/9405">http://drops.wooyun.org/tips/9405</a></h1>
 				
       <p>
-        <h1>0x00 背景</h1>
+        </p><h1>0x00 背景</h1>
 
-<hr />
+<hr>
 
 <p>XDCTF2015是我觉得很给力的一次CTF，题目难度适中，也没出什么乱子，圆满结束了。</p>
 
@@ -20,7 +20,7 @@
 
 <h1>0x01 保证题目质量</h1>
 
-<hr />
+<hr>
 
 <p>这是一切防御手段的本源。</p>
 
@@ -34,7 +34,7 @@
 
 <h1>0x02 防御第一招——代码层</h1>
 
-<hr />
+<hr>
 
 <p>有些权限限制，在代码上防御就可以了。</p>
 
@@ -42,7 +42,7 @@
 
 <p>所以我在删除的代码中，加了个判断：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100804160651533110.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100804160651533110.png" alt=""></p>
 
 <p>如果是管理员用户，就直接返回false，不允许其删除。增删改查四个操作，删、改都要加这个判断。当然，好事者可以写个脚本，增加999999个假文件，flag样式都类似，谁也不知道哪个是真flag，也很影响接下来的选手做题。所以严格来说，“增”的地方也需要加这个判断。</p>
 
@@ -54,7 +54,7 @@
 
 <h1>0x03防御第二招——服务权限层</h1>
 
-<hr />
+<hr>
 
 <p>PWN暂时不说，WEB肯定会涉及一些系统服务：web服务、数据库服务、缓存服务等。其中，Web服务又涉及中间件权限和脚本权限。我这里以nginx+php为例，数据库以mysql为例。</p>
 
@@ -72,7 +72,7 @@
 <li>不能增加管理员</li>
 </ol>
 
-<p>一旦有忘记的就悲剧了。那么，不妨从根本上解决这个问题：直接去除当前数据库用户对于管理员表的“增”、“删”、“改”权限。在mysql里就是类似GRANT select ON db.admin <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="267269e4865e5e5e664a4945474a4e495552">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，只给予select权限。当然，具体情况具体分析，可以制定出更细致的权限规划。</p>
+<p>一旦有忘记的就悲剧了。那么，不妨从根本上解决这个问题：直接去除当前数据库用户对于管理员表的“增”、“删”、“改”权限。在mysql里就是类似GRANT select ON db.admin <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="267269e4865e5e5e664a4945474a4e495552">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，只给予select权限。当然，具体情况具体分析，可以制定出更细致的权限规划。</p>
 
 <p>在pwn中，也有同样的问题。我们遇到了一个需要用户执行命令的题目，在选手成功完成执行命令的目标以后，顺手写了个循环kill，将pwn自己的服务杀掉了，导致其他队伍不能继续做题。这确实是个棘手的问题，因为pwn fork出的进程权限正常情况下是和pwn一样的，那么不管你再怎么给pwn降权，你也避免不了用户直接kill掉pwn进程。</p>
 
@@ -88,7 +88,7 @@
 
 <h1>0x04防御第三招——文件权限层</h1>
 
-<hr />
+<hr>
 
 <p>如果ctf涉及到文件操作（读取、上传、删除、修改、重命名）的话，就得合理设置文件权限了。</p>
 
@@ -101,17 +101,17 @@
 <ol>
 <li><p>整站，只有指向index.php和th3r315adm1n.php两个文件的请求才会发送给fastcgi执行：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/201510080416106769527.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/201510080416106769527.png" alt=""></p>
 
 <p>这样就有效的保证了任意其他php文件都无法执行，这一步主要是为了保证服务器的安全。</p></li>
 <li><p>所有其他以.php为后缀的请求，如果该文件存在，我就认为用户成功getshell了。这时就将请求rewrite到flag文本文件里，用户得到flag：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/201510080416193080035.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/201510080416193080035.png" alt=""></p>
 
 <p>因为我这个环境，原本整个web目录只有两个php文件，如果发现存在第三个php文件，那么就肯定是用户的webshell了。</p></li>
 <li><p>所有请求为“flag-”开头，以“.txt”结尾的，全部返回403。这是为了防止有人直接猜到flag文件名：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/201510080416212324541.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/201510080416212324541.png" alt=""></p>
 
 <p>这三步下来，就完成了一个“getshell”漏洞的配置，模拟了getshell的情况，却并不真正getshell。</p></li>
 </ol>
@@ -120,7 +120,7 @@
 
 <p>当然是防范搅屎棍。搅屎棍有一千种方式可以让游戏玩不了：删除/覆盖/重命名正常文件、将正常文件mv走，甚至是“帮助”主办方修改flag，或者修改漏洞文件。对付起来也很简单，我将所有已存在的文件（正常文件）的权限全部改成755，所有者改成root：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/201510080416255635352.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/201510080416255635352.png" alt=""></p>
 
 <p>这样即使有任意文件操作漏洞，也没权限修改正常文件了。</p>
 
@@ -130,7 +130,7 @@
 
 <p>这种情况怎么办？Linux下的文件有一些“隐藏属性”，我们可以通过lsattr来查看，chattr来修改：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/201510080416278805361.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/201510080416278805361.png" alt=""></p>
 
 <p>如上图，这是我配置的js目录文件的隐藏权限。</p>
 
@@ -138,7 +138,7 @@
 
 <p>这时候我们可以试试rm：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/201510080416337011072.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/201510080416337011072.png" alt=""></p>
 
 <p>如图，root用户也没法删除flag文件了。</p>
 
@@ -146,11 +146,11 @@
 
 <h1>0x05防御第四招——对抗报复社会型搅屎棍</h1>
 
-<hr />
+<hr>
 
 <p>这类搅屎棍就是真正的“坏人”了，损人不利己，是直接来捣蛋的。比如自己拿下了flag，然后就把flag通过官方QQ群、IRC等渠道告诉所有人，直接破坏游戏的可玩性与公平性。还有比赛的时候DDOS比赛服务器的人。（那是跟你有多大仇）对于这类人，我觉得也没什么好说，该封号的封号，该拉黑的拉黑，尽量让他无法接触参赛选手。同时，服务器的日志要多看看，异常状态可以及时发觉。推荐一个实时日志查看工具——ngxtop：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/201510080416368967882.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/201510080416368967882.png" alt=""></p>
 
 <p>源码和使用方法可以github上搜。</p>
 
@@ -161,7 +161,7 @@
 <ul>
 <li>选手writeup：<a href="http://t.cn/RyleXYm">http://t.cn/RyleXYm</a> 密码: imwg</li>
 <li>web2 writeup：<a href="https://github.com/phith0n/XDCTF2015">https://github.com/phith0n/XDCTF2015</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

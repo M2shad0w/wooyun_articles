@@ -3,14 +3,14 @@
 			<head>
 			     <title>Powershell之MOF后门 - Evi1cg</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12354">http://drops.wooyun.org/tips/12354</a></h1>
 				
       <p>
-        <h1>0x00 MOF</h1>
+        </p><h1>0x00 MOF</h1>
 
-<hr />
+<hr>
 
 <p>Managed Object Format (MOF)是WMI数据库中类和类实例的原始保存形式。具体介绍可以阅读<a href="http://drops.wooyun.org/tips/10346">《WMI 的攻击，防御与取证分析技术之防御篇》</a>，Windows 管理规范 (WMI) 提供了以下三种方法编译到WMI存储库的托管对象格式 (MOF) 文件：</p>
 
@@ -60,7 +60,7 @@ instance of __FilterToConsumerBinding
 
 <h1>0x01 MOF and Powershell</h1>
 
-<hr />
+<hr>
 
 <p>如果获取了管理员权限，使用MOF可以做一个永久的隐藏后门。对于很多后门来说，都需要一个触发，在这里，可以使用<a href="http://www.jb51.net/article/52489.htm">WMI Query Language(WQL)</a>来查询事件，以便确定什么时候触发我们的后门。（更多详细的解释可在查看<a href="http://www.codeproject.com/Articles/28226/Creating-WMI-Permanent-Event-Subscriptions-Using-M">戳我</a>，<a href="http://poppopret.blogspot.com/2011/09/playing-with-mof-files-on-windows-for.html">戳我</a>)。</p>
 
@@ -122,7 +122,7 @@ instance of __EventFilter as $Filt
 
 <p>下面使用Veil来生成Powershell payload:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160119/2016011911191070861170.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160119/2016011911191070861170.png" alt="Alt text"></p>
 
 <p>选择x86里面进行测试，payload如下：</p>
 
@@ -223,11 +223,11 @@ C:\&gt;mofcomp.exe c:\test.mof
 
 <p>执行以后，当打开记事本的时候，则可生成meterpreter会话：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160119/2016011911191592205236.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160119/2016011911191592205236.png" alt="Alt text"></p>
 
 <p>同时，这个mof文件是免杀的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160119/2016011911191813228325.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160119/2016011911191813228325.png" alt="Alt text"></p>
 
 <p>当然除了这个我们还可以做其他事情，比如关闭某个程序，当其启动时就关闭，MOF文件如下：</p>
 
@@ -299,11 +299,11 @@ foreach ($nethost in $nethosts)
 c:\&gt; powershell -ExecutionPolicy Bypass .\test.ps1 # mof文件在同一个文件夹下面
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160119/2016011911191951709426.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160119/2016011911191951709426.png" alt="Alt text"></p>
 
 <h1>0x02 Meterpreter Post Module</h1>
 
-<hr />
+<hr>
 
 <p>这里有一个msf的模块，可以实现此后门安装，地址：<a href="https://github.com/khr0x40sh/metasploit-modules">metasploit-modules</a>，下载以后将其移动到<code>post/windows/</code>文件夹则可使用：</p>
 
@@ -328,7 +328,7 @@ msf post(mof_ps_persist) &gt; run
   <p>默认payload为<code>windows/meterpreter/reverse_tcp</code>，执行时间间隔为60秒，如果想通过触发方式启动，可以自行修改ruby脚本。</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20160119/2016011911192192490522.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160119/2016011911192192490522.png" alt="Alt text"></p>
 
 <p>开启监听：</p>
 
@@ -343,7 +343,7 @@ lport =&gt; 8887
 msf exploit(handler) &gt; exploit -j
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160119/2016011911192345537618.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160119/2016011911192345537618.png" alt="Alt text"></p>
 
 <blockquote>
   <p>如果看到错误80041003，说明权限不够，可以试试试用bypassuac,具体怎么bypass，请<a href="http://evi1cg.me/archives/Powershell_Bypass_UAC.html">戳我</a>。</p>
@@ -353,11 +353,11 @@ msf exploit(handler) &gt; exploit -j
 
 <p>如果想要清除后门，可以resource 生成的rc文件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160119/2016011911192492227717.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160119/2016011911192492227717.png" alt="Alt text"></p>
 
 <h1>0x03 停止MOF</h1>
 
-<hr />
+<hr>
 
 <p>要停止mof，可进行如下操作：</p>
 
@@ -369,13 +369,13 @@ msf exploit(handler) &gt; exploit -j
 
 <h1>0x04 小结</h1>
 
-<hr />
+<hr>
 
 <p>本篇文章主要介绍了一些结合MOF与powershell来进行制作后门的方式方法，对于MOF大家可能接触最多的就是在MYSQL提权时使用MOF来提权，其实玩儿法还很多，大家可以继续来研究研究，希望此文对你有帮助。</p>
 
 <h1>0x05 参考</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="http://drops.wooyun.org/tips/10346">http://drops.wooyun.org/tips/10346</a></li>
@@ -388,7 +388,7 @@ msf exploit(handler) &gt; exploit -j
 <li><a href="http://www.jb51.net/article/52489.htm">http://www.jb51.net/article/52489.htm</a></li>
 </ul>
 
-<p><strong>本文由evi1cg原创并首发于乌云drops，转载请注明</strong></p>      </p>
+<p><strong>本文由evi1cg原创并首发于乌云drops，转载请注明</strong></p>      <p></p>
     
 			</body>
 		</html>

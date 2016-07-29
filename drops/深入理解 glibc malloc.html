@@ -3,14 +3,14 @@
 			<head>
 			     <title>深入理解 glibc malloc - 新一葛格</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6595">http://drops.wooyun.org/tips/6595</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>近期的在看 pwn 的一些东西，发现无论是实际场景中，还是 CTF 中，堆的利用越来越多，又由于各种环境下堆的实现都不太一样，因此就让皂皂翻译这篇文章, 我也对本文作了润色修改，以飨读者。</p>
 
@@ -41,7 +41,7 @@
 
 <h1>0x01 历史</h1>
 
-<hr />
+<hr>
 
 <p>历史： <a href="http://www.malloc.de/en/">ptmalloc2</a> 来自于 <a href="http://g.oswego.edu/dl/html/malloc.html">dlmalloc</a> 的分支。此后，添加线程支持并于 2006 年发布。正式发布后，patmalloc2 集成到 glibc 源码中。随着源码集成，代码修改便直接在 glibc malloc 源码里进行。因此 ptmalloc2 与 glibc 之间的 malloc 实现有很多不同。</p>
 
@@ -51,7 +51,7 @@
 
 <h1>0x02 示例：</h1>
 
-<hr />
+<hr>
 
 <pre><code>#!c
 /* Per thread arena example. */
@@ -108,17 +108,17 @@ int main() {
 <p>在主线程 malloc 之前：在以下输出里我们可以看到，由于 thread1 尚未创建，这里尚无堆分段，也没有线程栈。</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="483b382427213c2e3d26083b382427213c2e3d26651e213a3c3d29240a2730">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ ./mthread 
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="483b382427213c2e3d26083b382427213c2e3d26651e213a3c3d29240a2730">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ ./mthread 
 Welcome to per thread arena example::6501
 Before malloc in main thread
 ...
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8af9fae6e5e3feecffe4caf9fae6e5e3feecffe4a7dce3f8feffebe6c8e5f2">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ cat /proc/6501/maps
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8af9fae6e5e3feecffe4caf9fae6e5e3feecffe4a7dce3f8feffebe6c8e5f2">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ cat /proc/6501/maps
 08048000-08049000 r-xp 00000000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
 08049000-0804a000 r--p 00000000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
 0804a000-0804b000 rw-p 00001000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
 b7e05000-b7e07000 rw-p 00000000 00:00 0 
 ...
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3340435f5c5a4755465d7340435f5c5a4755465d1e655a414746525f715c4b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3340435f5c5a4755465d7340435f5c5a4755465d1e655a414746525f715c4b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$
 </code></pre>
 
 <p>在主线程 malloc 之后: 在下面的输出里我们可以看到，堆正好被创建在数据段附近（0804b000-0806c000），这表明堆的空间是由调用高级别的中断所创建（即，使用 <a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L2458">brk</a> 系统调用）。还要注意的是，即使用户只发出了 1000 bytes 请求，就会创建 <a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L2429">132 KB</a> 大小的堆内存。这个堆内存的连续区域被称为「arena」。这个 arena 是由主线程创建，则被称为<a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L1740">main arena</a>。进一步的分配请求会继续使用这个 arena 直到 <a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L3788">arena 空闲空间耗尽</a>。当 arena 耗尽空闲空间 时，它能在线程调用高级别的中断的位置时建立（调整建立开始块的 <a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L2521">size</a> 以包含额外空间之后）。类似地，arena 也能在 top chunk 有大量空闲空间时<a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L4044">回收</a>。</p>
@@ -126,51 +126,51 @@ b7e05000-b7e07000 rw-p 00000000 00:00 0
 <p>注：top chunk 是一个 arena 里最多的块。关于它的更多细节，请看以下 "Top Chunk" 部分</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="87f4f7ebe8eef3e1f2e9c7f4f7ebe8eef3e1f2e9aad1eef5f3f2e6ebc5e8ff">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ ./mthread 
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="87f4f7ebe8eef3e1f2e9c7f4f7ebe8eef3e1f2e9aad1eef5f3f2e6ebc5e8ff">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ ./mthread 
 Welcome to per thread arena example::6501
 Before malloc in main thread
 After malloc and before free in main thread
 ...
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6112110d0e081507140f2112110d0e081507140f4c3708131514000d230e19">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/lsploits/hof/ptmalloc.ppt/mthread$ cat /proc/6501/maps
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6112110d0e081507140f2112110d0e081507140f4c3708131514000d230e19">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/lsploits/hof/ptmalloc.ppt/mthread$ cat /proc/6501/maps
 08048000-08049000 r-xp 00000000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
 08049000-0804a000 r--p 00000000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
 0804a000-0804b000 rw-p 00001000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
 0804b000-0806c000 rw-p 00000000 00:00 0          [heap]
 b7e05000-b7e07000 rw-p 00000000 00:00 0 
 ...
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c1b2b1adaea8b5a7b4af81b2b1adaea8b5a7b4afec97a8b3b5b4a0ad83aeb9">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c1b2b1adaea8b5a7b4af81b2b1adaea8b5a7b4afec97a8b3b5b4a0ad83aeb9">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$
 </code></pre>
 
 <p>在主线程 Free 之后： 在以下输出里我们可以看到，当分配内存区域被释放时，其后内存不会被立即释放给操作系统。分配内存区域（1000 bytes 大小）只释放给 "glibc malloc" 库，在这里的释放掉的 Chunk 会被添加到 main arenas 中（在 glibc malloc 里，freelist 这种数据结构被称为 bins 译者注：freelist 是一种单向链表）。此后当用户申请内存时，glibc malloc 不会从内核中获得新的堆内存，而是尽量在 bins 里找到一个空闲块(Free Chunk)。只有当没有空闲块存在时，glibc malloc 才会从继续内核中申请内存。</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6714170b080e130112092714170b080e130112094a310e151312060b25081f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ ./mthread 
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6714170b080e130112092714170b080e130112094a310e151312060b25081f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ ./mthread 
 Welcome to per thread arena example::6501
 Before malloc in main thread
 After malloc and before free in main thread
 After free in main thread
 ...
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4734372b282e332132290734372b282e332132296a112e353332262b05283f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/lsploits/hof/ptmalloc.ppt/mthread$ cat /proc/6501/maps
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4734372b282e332132290734372b282e332132296a112e353332262b05283f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/lsploits/hof/ptmalloc.ppt/mthread$ cat /proc/6501/maps
 08048000-08049000 r-xp 00000000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
 08049000-0804a000 r--p 00000000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
 0804a000-0804b000 rw-p 00001000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
 0804b000-0806c000 rw-p 00000000 00:00 0          [heap]
 b7e05000-b7e07000 rw-p 00000000 00:00 0 
 ...
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9feceff3f0f6ebf9eaf1dfeceff3f0f6ebf9eaf1b2c9f6edebeafef3ddf0e7">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9feceff3f0f6ebf9eaf1dfeceff3f0f6ebf9eaf1b2c9f6edebeafef3ddf0e7">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$
 </code></pre>
 
 <p>在线程1 malloc 之前：在以下输出中我们可以看到，这里没有 thread1 的堆但现在 thread1 的每一线程栈已被创建。</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c4b7b4a8abadb0a2b1aa84b7b4a8abadb0a2b1aae992adb6b0b1a5a886abbc">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ ./mthread 
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c4b7b4a8abadb0a2b1aa84b7b4a8abadb0a2b1aae992adb6b0b1a5a886abbc">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ ./mthread 
 Welcome to per thread arena example::6501
 Before malloc in main thread
 After malloc and before free in main thread
 After free in main thread
 Before malloc in thread 1
 ...
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="156665797a7c6173607b556665797a7c6173607b38437c6761607479577a6d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ cat /proc/6501/maps
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="156665797a7c6173607b556665797a7c6173607b38437c6761607479577a6d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ cat /proc/6501/maps
 08048000-08049000 r-xp 00000000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
 08049000-0804a000 r--p 00000000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
 0804a000-0804b000 rw-p 00001000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
@@ -178,7 +178,7 @@ Before malloc in thread 1
 b7604000-b7605000 ---p 00000000 00:00 0 
 b7605000-b7e07000 rw-p 00000000 00:00 0          [stack:6594]
 ...
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9be8ebf7f4f2effdeef5dbe8ebf7f4f2effdeef5b6cdf2e9efeefaf7d9f4e3">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9be8ebf7f4f2effdeef5dbe8ebf7f4f2effdeef5b6cdf2e9efeefaf7d9f4e3">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$
 </code></pre>
 
 <p>在线程1 malloc 之后：在以下输出里我们可以看到，thread1 的堆被创建了。且在内存映射段区域出现（b7500000-b7521000 大小为 132 KB），这表明堆内存通过使用 mmap 系统调用而不是主线程（使用 sbrk）创建。这里再一次看到，即使用户只请求 1000 bytes，1MB 大小的堆内存还是会被映射到进程地址空间中。而<a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/arena.c#L546">1 MB</a> 以外只有 132KB 被设置有读写权限，并同时成为该线程的堆。这块内存（132KB）区域被称为<a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/arena.c#L736">thread arena</a>。</p>
@@ -186,7 +186,7 @@ b7605000-b7e07000 rw-p 00000000 00:00 0          [stack:6594]
 <p>注：当用户申请的内存大小超过 128KB（ malloc(132*1024) ）并且当一个 arena 里没有足够的空间来满足用户的请求时，内存是使用 mmap 系统调用来分配的（不使用 sbrk） 无论这个请求是来自于 main arena 还是 thread arena。</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="abd8dbc7c4c2dfcddec5ebd8dbc7c4c2dfcddec586fdc2d9dfdecac7e9c4d3">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ ./mthread 
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="abd8dbc7c4c2dfcddec5ebd8dbc7c4c2dfcddec586fdc2d9dfdecac7e9c4d3">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ ./mthread 
 Welcome to per thread arena example::6501
 Before malloc in main thread
 After malloc and before free in main thread
@@ -194,7 +194,7 @@ After free in main thread
 Before malloc in thread 1
 After malloc and before free in thread 1
 ...
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="80f3f0ecefe9f4e6f5eec0f3f0ecefe9f4e6f5eeadd6e9f2f4f5e1ecc2eff8">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ cat /proc/6501/maps
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="80f3f0ecefe9f4e6f5eec0f3f0ecefe9f4e6f5eeadd6e9f2f4f5e1ecc2eff8">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ cat /proc/6501/maps
 08048000-08049000 r-xp 00000000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
 08049000-0804a000 r--p 00000000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
 0804a000-0804b000 rw-p 00001000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
@@ -204,13 +204,13 @@ b7521000-b7600000 ---p 00000000 00:00 0
 b7604000-b7605000 ---p 00000000 00:00 0 
 b7605000-b7e07000 rw-p 00000000 00:00 0          [stack:6594]
 ...
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ed9e9d818284998b9883ad9e9d818284998b9883c0bb849f99988c81af8295">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ed9e9d818284998b9883ad9e9d818284998b9883c0bb849f99988c81af8295">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$
 </code></pre>
 
 <p>在线程1 free 掉后：在以下输出我们可以看到，释放分配内存区域的过程中并不会把堆释放到操作系统。取而代之的是这块被分配的内存区域（1000 bytes 大小）还是 <a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L4017">被释放</a> 到了 "glibc malloc" 里，并将这个释放块添加到 thread arenas 的 bins 里。</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a4d7d4c8cbcdd0c2d1cae4d7d4c8cbcdd0c2d1ca89f2cdd6d0d1c5c8e6cbdc">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ ./mthread 
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a4d7d4c8cbcdd0c2d1cae4d7d4c8cbcdd0c2d1ca89f2cdd6d0d1c5c8e6cbdc">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ ./mthread 
 Welcome to per thread arena example::6501
 Before malloc in main thread
 After malloc and before free in main thread
@@ -219,7 +219,7 @@ Before malloc in thread 1
 After malloc and before free in thread 1
 After free in thread 1
 ...
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="780b081417110c1e0d16380b081417110c1e0d16552e110a0c0d19143a1700">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ cat /proc/6501/maps
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="780b081417110c1e0d16380b081417110c1e0d16552e110a0c0d19143a1700">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$ cat /proc/6501/maps
 08048000-08049000 r-xp 00000000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
 08049000-0804a000 r--p 00000000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
 0804a000-0804b000 rw-p 00001000 08:01 539625     /home/sploitfun/ptmalloc.ppt/mthread/mthread
@@ -229,12 +229,12 @@ b7521000-b7600000 ---p 00000000 00:00 0
 b7604000-b7605000 ---p 00000000 00:00 0 
 b7605000-b7e07000 rw-p 00000000 00:00 0          [stack:6594]
 ...
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ccbfbca0a3a5b8aab9a28cbfbca0a3a5b8aab9a2e19aa5beb8b9ada08ea3b4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ccbfbca0a3a5b8aab9a28cbfbca0a3a5b8aab9a2e19aa5beb8b9ada08ea3b4">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/ptmalloc.ppt/mthread$
 </code></pre>
 
 <h1>0x03 Arena</h1>
 
-<hr />
+<hr>
 
 <p>Arena的数量：在以上示例中，我们看到了主线程包含 main arena 同时 thread 1 包含了它自己的 thread arena。所以不论线程数量，在线程与 arena 之间可以有一对一的映射吗？当然没有。一个 arena 应用程序可以包含更多数量的线程（相较于 Cores 的数量），在这样的情况下，每个线程拥有一个 arena 显得有些不值。因此，应用程序的<a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/arena.c#L847">arena 数量的限制是基于系统里现有的 Cores 的数量</a>。</p>
 
@@ -247,7 +247,7 @@ For 64 bit systems:
 
 <h1>0x04 Multiple Arena ：</h1>
 
-<hr />
+<hr>
 
 <p>示例：我们来看一个多线程应用（4线程 &#45;--||- 主线程 + 3个用户线程）在一个单核的 32 位系统上运行。这里线程数量（4）> 2 * 核心数量（2）。因此，"glibc malloc" 认定 Multiple Arena 被所有可用进程共享。但它是怎样共享的呢？</p>
 
@@ -269,7 +269,7 @@ For 64 bit systems:
 
 <h1>0x05 Multiple Heaps：</h1>
 
-<hr />
+<hr>
 
 <p>在 “glibc malloc”源代码里主要发现以下三种数据结构：</p>
 
@@ -289,7 +289,7 @@ For 64 bit systems:
 
 <p>thread arena 的形象化视图（多个堆分段）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150614/2015061423215359015CA24BECA-D95B-4587-8230-6F841164E8D9.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150614/2015061423215359015CA24BECA-D95B-4587-8230-6F841164E8D9.png" alt="enter image description here"></p>
 
 <p>Chunk ：在堆里的块可以是以下几种类型中的一种：</p>
 
@@ -302,9 +302,9 @@ For 64 bit systems:
 
 <h1>0x06 Allocated Chunk：</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org//drops/20150614/20150614232417514417B132109-7AB2-4F1B-AA66-604646E73A7A.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150614/20150614232417514417B132109-7AB2-4F1B-AA66-604646E73A7A.png" alt="enter image description here"></p>
 
 <p><a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L1111">size</a>: 这部分包含了此处 Allocated 块的容量大小，该部分最后 3 bits 包含了关键信息。 <a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L1267">PREV_INUSE (P)</a> – 这一 bit 在前一个块被分配时就被设置。 <a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L1274">IS_MMAPPED</a> (M) – 这一 bit 在块即在 mmap 时被设置。 <a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L1283">NON&#95;MAIN&#95;ARENA</a> (N) – 这一 bit 在块分配给 thread arena 时设置。</p>
 
@@ -356,7 +356,7 @@ For 64 bit systems:
 
 <p>Unsorted bin 包含空闲块的一个循环双向链表（也称为 binlist 容器列表）。 块的大小 - 没有大小限制，任何大小的块都属于此容器。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150614/20150614233302341567E826E78-54CF-48AC-8917-19B5C2F6A530.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150614/20150614233302341567E826E78-54CF-48AC-8917-19B5C2F6A530.png" alt="enter image description here"></p>
 
 <p>Small Bin: 小于 512 bytes 的块叫做 small chunk。 支持 small chunks 的容器叫做 small bins。 Small bins 在内存分配和回收时比 large bins 快（比 fast bins 慢）。</p>
 
@@ -424,7 +424,7 @@ For 64 bit systems:
 
 <p>引用地址是怎样归档的？</p>
 
-<p>现在当<a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L3449">用户随后请求的一个 small chunk 并且最后剩余块是 unsorted bin 里唯一的块</a>时，最后剩余块会<a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L3455">分裂</a>成两块，用户块会返回给用户同时剩余的那个块会添加到 unsorted bin。此外，<a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L3458">它还会成为新的一个最后剩余块</a>。如此后续的内存分配会相继结束。</p>      </p>
+<p>现在当<a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L3449">用户随后请求的一个 small chunk 并且最后剩余块是 unsorted bin 里唯一的块</a>时，最后剩余块会<a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L3455">分裂</a>成两块，用户块会返回给用户同时剩余的那个块会添加到 unsorted bin。此外，<a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L3458">它还会成为新的一个最后剩余块</a>。如此后续的内存分配会相继结束。</p>      <p></p>
     
 			</body>
 		</html>

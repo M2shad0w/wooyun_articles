@@ -3,14 +3,14 @@
 			<head>
 			     <title>Burp Suite使用介绍（一） - 小乐天</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/1548">http://drops.wooyun.org/tools/1548</a></h1>
 				
       <p>
-        <h1>Getting Started</h1>
+        </p><h1>Getting Started</h1>
 
-<hr />
+<hr>
 
 <p>Burp Suite 是用于攻击web 应用程序的集成平台。它包含了许多工具，并为这些工具设计了许多接口，以促进加快攻击应用程序的过程。所有的工具都共享一个能处理并显示HTTP 消息，持久性，认证，代理，日志，警报的一个强大的可扩展的框架。本文主要介绍它的以下特点：</p>
 
@@ -33,7 +33,7 @@
 
 <p>Burp支持手动的Web应用程序测试的活动。它可以让你有效地结合手动和自动化技术，使您可以完全控制所有的BurpSuite执行的行动，并提供有关您所测试的应用程序的详细信息和分析。 让我们一起来看看Burp Suite的测试流程过程吧。 如下图</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120074380.png" alt="Image001" title="image001.png" border="0" width="582" height="568" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120074380.png" alt="Image001" title="image001.png" border="0" width="582" height="568"></p>
 
 <h2>简要分析</h2>
 
@@ -675,11 +675,11 @@
 
 <h1>Proxy功能</h1>
 
-<hr />
+<hr>
 
 <p>Burp Proxy相当于BurpSuite的心脏，通过拦截，查看和修改所有的请求和响应您的浏览器与目标Web服务器之间传递。 下面了解有关BurpProxy：</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120067021.png" alt="Image003" title="image003.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120067021.png" alt="Image003" title="image003.png" border="0"></p>
 
 <h2>Using BurpProxy http、https</h2>
 
@@ -692,13 +692,13 @@
 
 <p>这里端口可以随便定义但是要跟burp的监听端口要一致然后保存再到Proxy的Options中添加add</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120062713.jpg" alt="Image005" title="image005.jpg" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120062713.jpg" alt="Image005" title="image005.jpg" border="0"></p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120053086.jpg" alt="Image007" title="image007.jpg" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120053086.jpg" alt="Image007" title="image007.jpg" border="0"></p>
 
 <p>这样http协议的监听就可以了,当intercept is on表示开启拦截功能，反之</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120574272.jpg" alt="Image009" title="image009.jpg" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120574272.jpg" alt="Image009" title="image009.jpg" border="0"></p>
 
 <p>这样就代表拦截成功，我们可以右击send to Repeater去修改数据再发送，也可以右击改变提交请求方式(change request method)比如get或者post等功能</p>
 
@@ -744,13 +744,13 @@
 
 <p>为请求或响应添加注释，以便更容易在History选项卡中识别它们。</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120578170.png" alt="Image011" title="image011.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120578170.png" alt="Image011" title="image011.png" border="0"></p>
 
 <h4>Highlight</h4>
 
 <p>为请求或响应添加颜色，可以在history选项卡和截获中更容易发现。</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120669655.png" alt="Image013" title="image013.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120669655.png" alt="Image013" title="image013.png" border="0"></p>
 
 <h4>History</h4>
 
@@ -762,17 +762,17 @@
 
 <p><code># (请求索引号)、Host(主机)、Method(请求方式)、URL(请求地址)、Params(参数)、Edited(编辑)、Status(状态)、Length(响应字节长度)、MIME type(响应的MLME类型)、Extension(地址文件扩展名)、Title(页面标题)、Comment(注释)、SSL、IP(目标IP地址)、Cookies、Time(发出请求时间)、Listener port(监听端口)</code>。</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120687800.png" alt="Image015" title="image015.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120687800.png" alt="Image015" title="image015.png" border="0"></p>
 
 <p>您可以通过单击任何列标题进行升序或降序排列。如果您在表中双击选择一个项目地址，会显示出一个详细的请求和响应的窗口。或者右击选择 <code>Show new history window</code></p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120625578.png" alt="Image017" title="image017.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120625578.png" alt="Image017" title="image017.png" border="0"></p>
 
 <h3>Display Filter</h3>
 
 <p>Proxy histroy有一个可以用来在视图中隐藏某些内容的功能，以使其更易于分析和你感兴趣的工作内容的显示过滤。 History Table上方的过滤栏描述了当前的显示过滤器。点击过滤器栏打开要编辑的过滤器选项。该过滤器可以基于以下属性进行配置：</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120694811.png" alt="Image019" title="image019.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120694811.png" alt="Image019" title="image019.png" border="0"></p>
 
 <h4>Request type</h4>
 
@@ -814,7 +814,7 @@
 
 <p>代理侦听器是侦听从您的浏览器传入的连接本地HTTP代理服务器。它允许您监视和拦截所有的请求和响应，并且位于BurpProxy的工作流的心脏。默认情况下，Burp默认监听12.0.0.1地址，端口8080。要使用这个监听器，你需要配置你的浏览器使用127.0.0.1:8080作为代理服务器。此默认监听器是必需的测试几乎所有的基于浏览器的所有Web应用程序。</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120626419.png" alt="Image021" title="image021.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120626419.png" alt="Image021" title="image021.png" border="0"></p>
 
 <h4>1)Binding</h4>
 
@@ -909,7 +909,7 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 
 <p>在替换字符串，组可以使用其次为索引$引用。所以下面的替换字符串将包含被匹配在上述正则表达式，该标记的名称：</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120634416.png" alt="Image023" title="image023.png" border="0" width="1362" height="110" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120634416.png" alt="Image023" title="image023.png" border="0" width="1362" height="110"></p>
 
 <h3>SSL Pass Through</h3>
 
@@ -947,21 +947,21 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 
 <p>在地址栏输入www.baidu.com，如图</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120617724.jpg" alt="Image025" title="image025.jpg" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120617724.jpg" alt="Image025" title="image025.jpg" border="0"></p>
 
 <p>这样看起来site map是不是很乱，则可以右击add to scope，然后点击Filter勾选Show only in-scope items，此时你再回头看Site map就只有百度一个地址了，这里filter可以过滤一些参数，show all显示全部，hide隐藏所有，如果勾选了表示不过滤</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120751588.jpg" alt="Image027" title="image027.jpg" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120751588.jpg" alt="Image027" title="image027.jpg" border="0"></p>
 
 <p>针对地址右击显示当前可以做的一些动作操作等功能。左图 针对文件右击显示当前可以做一些动作操作等功能。右图</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071402582281360.jpg" alt="Image029" title="image029.jpg" border="0" width="294" height="459" /><img src="http://static.wooyun.org/20140714/2014071402582382937.jpg" alt="Image031" title="image031.jpg" border="0" width="295" height="460" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071402582281360.jpg" alt="Image029" title="image029.jpg" border="0" width="294" height="459"><img src="http://static.wooyun.org/20140714/2014071402582382937.jpg" alt="Image031" title="image031.jpg" border="0" width="295" height="460"></p>
 
 <h3>2)Scope</h3>
 
 <p>这个主要是配合Site map做一些过滤的功能，如图：</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120768777.png" alt="Image033" title="image033.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120768777.png" alt="Image033" title="image033.png" border="0"></p>
 
 <p>Include in scope就是扫描地址或者拦截历史记录里右击有个add to scope就是添加到这了，也可以自己手动添加。</p>
 
@@ -987,7 +987,7 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 
 <p>已请求在SiteMap中的项目会显示为黑色。尚未被请求的项目显示为灰色。默认情况下（与被动蜘蛛(passviely scan this host)启用） ，当你开始浏览一个典型的应用，大量的内容将显示为灰色之前，你甚至得到尽可能要求，因为BurpSuite发现在您所请求的内容链接到它。您可以删除不感兴趣的地址</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120832954.png" alt="Image035" title="image035.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120832954.png" alt="Image035" title="image035.png" border="0"></p>
 
 <h4>Display Filter</h4>
 
@@ -1016,7 +1016,7 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 
 <p>Target scope设置，可以从SiteMap中添加也可以手动添加扫描范围到Scope。你可以在Target SiteMap和Proxy history上设置只显示在范围内的项目。并且可以设置代理拦截只有在范围内的请求和响应。Spider会扫描在范围内的地址。专业版还可以设置自动启动在范围内项目的漏洞扫描。您可以配置Intruder和Repeater跟随重定向到任何在范围内的网址。发送Burp目标以适当的方式执行行动，只针对你感兴趣并愿意攻击项目。</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120869997.png" alt="Image037" title="image037.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120869997.png" alt="Image037" title="image037.png" border="0"></p>
 
 <p>范围定义使用的URL匹配规则两个表 - 一个“包括(include)”列表和“exclude(排除)”列表中。Burp根据一个URL地址来决定，如果它是目标范围之内，这将被视为是在范围上如果URL匹配至少一个“include”在内的规则，不符合“exclude”规则。这样能够定义特定的主机和目录为大致范围内，且距离该范围特定的子目录或文件（如注销或行政职能）排除。</p>
 
@@ -1032,7 +1032,7 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 2 到站点地图的”target”选项上，选中目标应用程序驻留的主机和目录。选择上下文菜单的” spider this host/branch”选项。
 </code></pre>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120832553.png" alt="Image039" title="image039.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120832553.png" alt="Image039" title="image039.png" border="0"></p>
 
 <p>你也可以在任何 Burp 工具的任意请求或响应上使用上下文菜单上选择” spider this item”。当你发送一个站点地图的分支来 spidering，Spider 会首先检查这个分支是否在定义好的spidering 的范围内。如果不是，Burp 会提示你是否把相关的 URL 添加到范围里。然后，Burp 开始 spidering，并执行下面的操作：</p>
 
@@ -1048,7 +1048,7 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 
 <h4>Spider Status</h4>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120887420.png" alt="Image041" title="image041.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120887420.png" alt="Image041" title="image041.png" border="0"></p>
 
 <h4>1)Spider running</h4>
 
@@ -1068,7 +1068,7 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 
 <h4>Crawler Settings</h4>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120858563.png" alt="Image043" title="image043.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120858563.png" alt="Image043" title="image043.png" border="0"></p>
 
 <h4>1)check robots.txt</h4>
 
@@ -1098,7 +1098,7 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 
 <h2>Passive Spidering(被动扫描)</h2>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120825072.png" alt="Image045" title="image045.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120825072.png" alt="Image045" title="image045.png" border="0"></p>
 
 <h4>1)passively spider as you browse</h4>
 
@@ -1110,7 +1110,7 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 
 <h3>Form Submission</h3>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120952125.png" alt="Image047" title="image047.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120952125.png" alt="Image047" title="image047.png" border="0"></p>
 
 <h4>1)individuate forms</h4>
 
@@ -1134,7 +1134,7 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 
 <h3>Application Login</h3>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120998771.png" alt="Image049" title="image049.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711120998771.png" alt="Image049" title="image049.png" border="0"></p>
 
 <p>登陆表单在应用程序中扮演一个特殊角色，并且你常常会让 Burp 用和处理平常表单不 一样的方式来处理这个表单。使用这个配置，你可以告诉 Spider 在遇到一个表单执行下面 4 种不同操作的一种：</p>
 
@@ -1148,7 +1148,7 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 
 <h3>Spider Engine</h3>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121055065.png" alt="Image051" title="image051.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121055065.png" alt="Image051" title="image051.png" border="0"></p>
 
 <p>这些设置控制用于Spidering时发出HTTP请求的引擎。下列选项可用：</p>
 
@@ -1165,7 +1165,7 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 
 <p>以下选项也可用：</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121061095.png" alt="Image053" title="image053.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121061095.png" alt="Image053" title="image053.png" border="0"></p>
 
 <pre><code>1)Use HTTP version 1.1----如果选中，Spider会使用HTTP1.1版在其请求;否则，它会使用1.0版。
 
@@ -1178,25 +1178,25 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 
 <p>分以下几个步骤来简单使用Scanner 1.设置好代理之后在地址栏输入你要抓取的地址，并且要在Proxy里把拦截关了，随后切换到Scanner的Results就可以看到地址已经在开始扫描咯</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121128756.png" alt="Image055" title="image055.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121128756.png" alt="Image055" title="image055.png" border="0"></p>
 
 <p>2.对地址右击还可以导出报告，</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121157380.png" alt="Image057" title="image057.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121157380.png" alt="Image057" title="image057.png" border="0"></p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121141522.png" alt="Image059" title="image059.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121141522.png" alt="Image059" title="image059.png" border="0"></p>
 
 <p>Html或者xml随便你以什么格式的，然后一直下一步下一步到如下图选择保存文件到哪</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121154576.png" alt="Image061" title="image061.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121154576.png" alt="Image061" title="image061.png" border="0"></p>
 
 <p>我们打开看看，是不是很漂亮呢</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121194134.png" alt="Image063" title="image063.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121194134.png" alt="Image063" title="image063.png" border="0"></p>
 
 <p>3.如果扫描出漏洞了我们还可以直接在这针对某个漏洞进行查看，如果想测试的话可以发送到Repeater进行测试哦</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121260493.png" alt="Image065" title="image065.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121260493.png" alt="Image065" title="image065.png" border="0"></p>
 
 <h3>Results</h3>
 
@@ -1212,7 +1212,7 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 
 <p>这个问题已经上市，你可以用它来执行以下操作的上下文菜单：如图所示</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121228957.png" alt="Image067" title="image067.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121228957.png" alt="Image067" title="image067.png" border="0"></p>
 
 <h3>Report selected issues</h3>
 
@@ -1226,7 +1226,7 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 
 <p>Active Scanning(主动扫描)过程通常包括发送大量请求到服务器为所扫描的每个基本的请求，这可能是一个耗时的过程。当您发送的主动扫描请求，这些被添加到活动扫描队列，它们被依次处理。如图</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121261155.png" alt="Image069" title="image069.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121261155.png" alt="Image069" title="image069.png" border="0"></p>
 
 <p>扫描队列中显示每个项目的详细信息如下：</p>
 
@@ -1244,7 +1244,7 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 
 <p>你可以双击任何项目在扫描队列显示，到目前为止发现的问题，并查看了基本请求和响应的项目。您可以使用扫描队列的上下文菜单来执行各种操作来控制扫描过程。确切的可用选项取决于所选的项目（S ）的状态，并包括：如下图所示</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121223207.png" alt="Image071" title="image071.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121223207.png" alt="Image071" title="image071.png" border="0"></p>
 
 <h3>Show details</h3>
 
@@ -1278,7 +1278,7 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 
 <p>实时扫描可让您决定哪些内容通过使用浏览器的目标应用，通过BurpProxy服务器进行扫描。您可以实时主动扫描设定live active scanning和live passive两种扫描模式。如图</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121272043.png" alt="Image073" title="image073.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121272043.png" alt="Image073" title="image073.png" border="0"></p>
 
 <h3>Live active scanning</h3>
 
@@ -1306,7 +1306,7 @@ Bind to address---这是Burp绑定到本地接口的IP地址。
 
 <p>注：除了让Burp自动指定插入点，就可以完全自定义这些，这样你就可以在你想要攻击的地方放在任意一个位置。要使用此功能，将请求发送给Intruder，用payload positions标签来定义通常的方式各插入点的开始和结束，并选择入侵者菜单选项“积极定义扫描插入点” 。您也可以指定以编程方式使用Burp扩展的自定义插入点位置。</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121335428.png" alt="Image075" title="image075.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121335428.png" alt="Image075" title="image075.png" border="0"></p>
 
 <h4>1)Insertion Point Locations</h4>
 
@@ -1353,7 +1353,7 @@ Cookie to body
 
 <p>控制用来做主动扫描时发出HTTP请求的引擎。下列选项可用：</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121391377.png" alt="Image077" title="image077.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121391377.png" alt="Image077" title="image077.png" border="0"></p>
 
 <pre><code>1)Number of threads - 控制并发请求数。
 2)Number of retries on network failure - 如果出现连接错误或其他网络问题，Burp会放弃和移动之前重试的请求指定的次数。测试时间歇性网络故障是常见的，所以最好是在发生故障时重试该请求了好几次。
@@ -1372,7 +1372,7 @@ Cookie to body
 
 <p>主动扫描逻辑的行为，以反映扫描的目的和目标应用程序的性质。例如，您可以选择更容易发现问题，在一个大型应用程序的快速扫描;或者您可以执行更慢全面扫描，以发现更难，而且需要更多的扫描请求，以检测问题。</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121341699.png" alt="Image079" title="image079.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121341699.png" alt="Image079" title="image079.png" border="0"></p>
 
 <p>下列选项可用：</p>
 
@@ -1386,7 +1386,7 @@ Cookie to body
 
 <p>定义哪些是主动扫描过程中进行检查。是检查以下类别可供选择：</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121323228.png" alt="Image081" title="image081.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121323228.png" alt="Image081" title="image081.png" border="0"></p>
 
 <pre><code>SQL injection(SQL注入) - 这有子选项，以使不同的测试技术（误差为基础，延时测试，布尔条件测试） ，并且也使检查特定于单个数据库类型（ MSSQL ，Oracle和MySQL的） 。
 OS command injection(操作系统命令注入) - 这有子选项，以使不同的测试技术.。
@@ -1407,7 +1407,7 @@ Server-level issues服务器级的问题
 
 <p>自定义的请求和响应的各个方面在被动扫描检查。下列选项可用：</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121316955.png" alt="Image083" title="image083.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121316955.png" alt="Image083" title="image083.png" border="0"></p>
 
 <pre><code>Headers--头 
 Forms--表格 
@@ -1426,9 +1426,9 @@ ASP.NET的ViewState
 
 <p>Burp intruder是一个强大的工具，用于自动对Web应用程序自定义的攻击。它可以用来自动执行所有类型的任务您的测试过程中可能出现的。</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121336510.png" alt="Image085" title="image085.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121336510.png" alt="Image085" title="image085.png" border="0"></p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121439648.png" alt="Image087" title="image087.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121439648.png" alt="Image087" title="image087.png" border="0"></p>
 
 <p>要开始去了解BurpSuite Intruder，执行以下步骤：</p>
 
@@ -1441,7 +1441,7 @@ ASP.NET的ViewState
 7)旁边的请求编辑器中的按钮可以被用于添加和清除有效载荷的标志。试着增加payload position在新的地点请求中，并删除其他标志物，并看到效果了。当你理解了payload positions是如何工作的，请单击“Auto§ ”按钮恢复到BurpSuite为您配置的默认payload positions。如果你修改了请求本身的文本，可以重复步骤3创建与它的原始请求一个新的Intruder的攻击选项卡。
 </code></pre>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121441372.png" alt="Image089" title="image089.png" border="0" width="72" height="134" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121441372.png" alt="Image089" title="image089.png" border="0" width="72" height="134"></p>
 
 <pre><code>8)转到Payloads选项卡。这使您可以定义将要放入已定义的有效载荷仓的有效载荷。保持默认设置（使用有效载荷的“Simple list” ） ，并添加一些测试字符串到列表中。您可以通过输入到“Enter a new item”框中，单击“add”，输入自己的字符串。或者您可以使用“add from file”下拉菜单，然后选择“Fuzzing-quick”，从内置的负载串[专业版]列表中。
 9)现在，您已经配置了最低限度的选项来发动攻击。转到Intruder菜单，然后选择“Start attack” 。
@@ -1457,7 +1457,7 @@ ASP.NET的ViewState
 
 <p>for example 这里我本地搭建一个环境，爆破一个php大马，如果是一句话就把get改成post，如果是php一句话，就在下面加上php这行代码，如图</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121444235.png" alt="Image091" title="image091.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121444235.png" alt="Image091" title="image091.png" border="0"></p>
 
 <pre><code>asp     password=execute("response.clear:response.write(""passwordright""):response.end")
 php     password=execute("response.clear:response.write(""elseHelloWorld""):response.end")
@@ -1468,35 +1468,35 @@ aspx    password=execute("response.clear:response.write(""elseHelloWorld""):resp
 
 <p>1.代理好服务器地址，然后访问这个大马地址</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121481236.png" alt="Image093" title="image093.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121481236.png" alt="Image093" title="image093.png" border="0"></p>
 
 <p>2.随后点击forward,并且在大马页面随便输入什么，burp拦截了数据之后发送到repeater</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121410149.png" alt="Image095" title="image095.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121410149.png" alt="Image095" title="image095.png" border="0"></p>
 
 <p>3.切换到repeater选项卡中，点击go按钮，找出一些反馈的错误信息，当然如果不要也可以，这里找错误信息是方便爆破成功了之后便于发现，我这个马反馈的是中文错误信息，显示是乱码就不写了，我们可以通过爆破成功了之后看字节数。 4.接下来就是发送到intruder，target一般都不需要管，已经自动填好了，然后选择positions</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121567189.png" alt="Image097" title="image097.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121567189.png" alt="Image097" title="image097.png" border="0"></p>
 
 <p>先点击Clear$，选择密码地地方点击add$。</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121551234.png" alt="Image099" title="image099.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121551234.png" alt="Image099" title="image099.png" border="0"></p>
 
 <p>5.切换到payloads设置payload type，选择我们自己的字典</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121532703.png" alt="Image101" title="image101.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121532703.png" alt="Image101" title="image101.png" border="0"></p>
 
 <p>6.切换到options去设置进程数和失败之后重试次数、过滤结果</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121554609.png" alt="Image103" title="image103.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121554609.png" alt="Image103" title="image103.png" border="0"></p>
 
 <p>一般我都会把Grep-Match清理掉，省得干扰。</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121599797.png" alt="Image105" title="image105.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121599797.png" alt="Image105" title="image105.png" border="0"></p>
 
 <p>7.接下来点击intruder下的start attack就开始爆破了，密码admin，我是根据length来判断跟其他的不同</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121647776.png" alt="Image107" title="image107.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121647776.png" alt="Image107" title="image107.png" border="0"></p>
 
 <p>附赠一个webshell字典：<a href="http://static.wooyun.org/20141017/2014101711121696735.zip">shellpassword.txt.zip</a></p>
 
@@ -1548,21 +1548,21 @@ aspx    password=execute("response.clear:response.write(""elseHelloWorld""):resp
 
 <p>Burp Intruder支持各种攻击类型 - 这些决定在何种负载分配给有效载荷仓的方式。攻击类型可以使用请求模板编辑器上方的下拉菜单进行选择。以下攻击类型可供选择：</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121998569.png" alt="Image109" title="image109.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121998569.png" alt="Image109" title="image109.png" border="0"></p>
 
 <p>Sniper(狙击手) - 这将使用一套单一的payloads。它的目标依次在每个有效载荷的位置，并把每个有效载荷送入依次那个位置。这不是针对一个给定的请求的位置不受影响 - 位置标记被移除，并在它们之间出现在模板中任何封闭文本保持不变。这种攻击类型为个别模糊测试的一些请求参数常见的漏洞非常有用。在攻击中生成的请求的总数是位置的数目和在有效载荷中设定的有效载荷的数量的乘积。</p>
 
 <p>Battering ram(撞击物) - 使用一组payload。通过迭代的有效载荷方式，并将相同的payloads再一次填充到所有已定义的有效载荷仓。当其中一个攻击需要相同的输入将被插入在多个地方在请求中（例如，一个Cookie中的用户名和cookie参数）对这种攻击类型是非常有用的。在攻击中生成的请求的总数是有效载荷的有效载荷中设定的数目。</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121992842.png" alt="Image111" title="image111.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121992842.png" alt="Image111" title="image111.png" border="0"></p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121957831.png" alt="Image113" title="image113.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711121957831.png" alt="Image113" title="image113.png" border="0"></p>
 
 <p>例如生成一组数字1-9，则就是1-1 ，2-2，3-3这种形式 Pitchfork(相交叉) - 这将使用多个payloads集。有对每个定义的位置（最多20个）不同的有效载荷组。通过设置所有有效载荷的攻击迭代的方式，并将一个有效载荷到每个定义的位置。</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122127325.png" alt="Image115" title="image115.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122127325.png" alt="Image115" title="image115.png" border="0"></p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122150222.png" alt="Image117" title="image117.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122150222.png" alt="Image117" title="image117.png" border="0"></p>
 
 <p>例如设置多个，每个payload设置一个字典，则就是1-1-1，2-2-2，3-3-3这种形式</p>
 
@@ -1572,7 +1572,7 @@ aspx    password=execute("response.clear:response.write(""elseHelloWorld""):resp
 
 <p>例如设置三个字典都是10个数，则总共有1000总匹配的模式</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122189353.png" alt="Image119" title="image119.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122189353.png" alt="Image119" title="image119.png" border="0"></p>
 
 <p>也就是说，如果有两个有效载荷的位置，则该攻击将放置第一个有效载荷从payload set 2到Positions 2 ，并通过在有效负载的所有 payload set 1中的positions 1 ;然后它将第二个有效载荷从载荷设置2到位置2 ，并通过有效载荷全部载入循环设置1到位置1 。其中一个攻击需要不同的和无关的或未知输入要在多个地方插入这种类型的攻击是非常有用的在请求中（例如猜测凭证，在一个参数的用户名，并且在另一个参数密码时） 。在攻击中生成的请求的总数是在所有定义的有效载荷的有效载荷集的数目的乘积 - 这可能是非常大的。</p>
 
@@ -1642,7 +1642,7 @@ Copy other payload--复制其它有效负载
 
 <p>在它被使用之前可以定义规则来对每个有效载荷执行各种处理任务。该定义的规则按顺序执行，并且可以打开和关闭，以帮助调试与配置的任何问题。有效载荷的处理规则是有用的在多种情况下，你需要生成不同寻常的有效载荷，或者需要在一个更广泛的结构或在使用前编码方案包的有效载荷可达。</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122171902.png" alt="Image121" title="image121.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122171902.png" alt="Image121" title="image121.png" border="0"></p>
 
 <pre><code>Add prefix - 添加一个文字前缀
 Add suffix - 添加一个文字后缀
@@ -1717,11 +1717,11 @@ Exclude HTTP headers(不包括HTTP头) - 指定的HTTP响应头是否应被排�
 
 <p>可以被用来Extrack(提取)从反应有用的信息进入攻击结果的表。对于配置列表中的每个项目，Burp会添加一个包含提取该项目的文本的新成果列。然后，您可以排序此列（通过单击列标题）命令所提取的数据。例如我要匹配</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122144357.png" alt="Image123" title="image123.png" border="0" width="813" height="37" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122144357.png" alt="Image123" title="image123.png" border="0" width="813" height="37"></p>
 
 <p>information_schema这个表。则可以这样写，都是需要匹配唯一的那种，也可以使用正则，前提是你会写正则。在乌云社区有人提起过当时怎么匹配手机号，就可以从这里提取。</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122149847.png" alt="Image125" title="image125.png" border="0" width="756" height="632" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122149847.png" alt="Image125" title="image125.png" border="0" width="756" height="632"></p>
 
 <h4>Grep-Payloads</h4>
 
@@ -1778,9 +1778,9 @@ Match against pre-URL-encoded payloads(对预URL编码的有效载荷匹配) - �
 
 <p>Results Table显示已在attack中所有的请求和响应的详细信息。根据不同的攻击配置，表可能包含以下几列，其中一些是默认隐藏的，可以使用Columns菜单 中取消隐藏：</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122190859.png" alt="Image127" title="image127.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122190859.png" alt="Image127" title="image127.png" border="0"></p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122295512.png" alt="Image129" title="image129.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122295512.png" alt="Image129" title="image129.png" border="0"></p>
 
 <p>request 请求数 Position 有效载荷位置编号 Payload 有效载荷 Status http状态 Error 请求错误 Timeout 超时 Length 字节数 Comment 注释</p>
 
@@ -1788,7 +1788,7 @@ Match against pre-URL-encoded payloads(对预URL编码的有效载荷匹配) - �
 
 <p>结果选项卡，可以用来隐藏某些内容从视图中，以使其更易于分析和对你感兴趣的工作内容显示过滤在结果表中。点击过滤器栏打开要编辑的过滤器选项。该过滤器可以基于以下属性进行配置：</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122263054.png" alt="Image131" title="image131.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122263054.png" alt="Image131" title="image131.png" border="0"></p>
 
 <pre><code>Search term(检索词) - [专业版]您可以筛选反应是否不包含指定的搜索词。您可以设定搜索词是否是一个文字字符串或正则表达式，以及是否区分大小写。如果您选择了“negative search(消极搜索)”选项，然后不匹配的搜索词唯一的项目将被显示。
 Status code(状态代码) - 您可以配置是否要显示或隐藏各种HTTP状态码响应。
@@ -1805,9 +1805,9 @@ Annotation(注释) - 您可以设定是否显示使用用户提供的评论或�
 
 <p>结果视图包含几个菜单命令与控制的攻击，并进行其他操作。这些将在下面说明。</p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122362902.png" alt="Image133" title="image133.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122362902.png" alt="Image133" title="image133.png" border="0"></p>
 
-<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122330940.png" alt="Image135" title="image135.png" border="0" /></p>
+<p><img style="display:block; margin-left:auto; margin-right:auto;" src="http://static.wooyun.org/20141017/2014101711122330940.png" alt="Image135" title="image135.png" border="0"></p>
 
 <h4>1)Attack Menu(攻击菜单)</h4>
 
@@ -1823,7 +1823,7 @@ Attack configuration - 这是用来保存当前正在执行攻击的配置（而
 
 <h4>3)Columns Menu(列菜单)</h4>
 
-<p>这使您可以选择哪些可用的列是可见的攻击结果表。</p>      </p>
+<p>这使您可以选择哪些可用的列是可见的攻击结果表。</p>      <p></p>
     
 			</body>
 		</html>

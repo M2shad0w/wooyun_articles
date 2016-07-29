@@ -3,14 +3,14 @@
 			<head>
 			     <title>邮箱伪造详解 - 瞌睡龙</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/534">http://drops.wooyun.org/papers/534</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>邮箱伪造技术，可被用来做钓鱼攻击。</p>
 
@@ -20,7 +20,7 @@
 
 <h2>0x01 细节</h2>
 
-<hr />
+<hr>
 
 <p>SMTP协议中,允许发件人伪造绝大多数的发件人特征信息。</p>
 
@@ -40,7 +40,7 @@
 
 <h2>0x02 防御</h2>
 
-<hr />
+<hr>
 
 <p>为了防止邮箱伪造，就出现了SPF。</p>
 
@@ -52,8 +52,8 @@
 
 <p>正确设置后邮件头一般显示如下：</p>
 
-<pre><code>Received-SPF: pass (google.com: domain of <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="47302835233735223434073e283235">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_domain.com designates 72.47.192.112 as permitted sender) client-ip=72.47.192.112;
-Authentication-Results: mx.google.com; spf=pass (google.com: domain of <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="81f6eef3e5f1f3e4f2f2c1f8eef4f3">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_domain.com designates 72.47.192.112 as permitted sender) <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="26554b5256084b474f4a1b514954425654435555665f495354">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_domain.com
+<pre><code>Received-SPF: pass (google.com: domain of <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="47302835233735223434073e283235">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_domain.com designates 72.47.192.112 as permitted sender) client-ip=72.47.192.112;
+Authentication-Results: mx.google.com; spf=pass (google.com: domain of <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="81f6eef3e5f1f3e4f2f2c1f8eef4f3">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_domain.com designates 72.47.192.112 as permitted sender) <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="26554b5256084b474f4a1b514954425654435555665f495354">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_domain.com
 </code></pre>
 
 <p>关于SPF是否有设定的必要？一般认为有加上SPF比较好，怕万一碰到哪个收件服务器有采用SenderID机制来过滤信件的话就有用处了。</p>
@@ -64,7 +64,7 @@ Authentication-Results: mx.google.com; spf=pass (google.com: domain of <a class=
 
 <p><a href="http://old.openspf.org/wizard.html">http://old.openspf.org/wizard.html</a></p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071406372877631.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071406372877631.jpeg" alt="enter image description here"></p>
 
 <pre><code>a 你域名的A记录，一般选择yes，因为他有可能发出邮件，比如我上面提到的Wordpress的回信。
 mx 一般也是yes，MX服务器会有退信等。
@@ -81,14 +81,14 @@ ip4： 你还有没有其他的ip发信？可能你的smtp服务器是独立出�
 <pre><code>nslookup -type=txt 域名
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808393352525.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20131018/2013101808393352525.jpeg" alt="enter image description here"></p>
 
 <p>Unix操作系统下用：</p>
 
 <pre><code># dig -t txt 域名
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808393421891.jpeg" alt="enter image description here" /></p>      </p>
+<p><img src="http://static.wooyun.org/20131018/2013101808393421891.jpeg" alt="enter image description here"></p>      <p></p>
     
 			</body>
 		</html>

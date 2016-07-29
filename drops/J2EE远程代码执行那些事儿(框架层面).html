@@ -3,14 +3,14 @@
 			<head>
 			     <title>J2EE远程代码执行那些事儿(框架层面) - Nebula</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/914">http://drops.wooyun.org/papers/914</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>在J2EE远程代码执行中,大部分的代码执行情况的本质是,能够从外部去直接控制Java对象(其他语言暂不讨论,其实也差不多),控制Java对象大致包括几种情况:直接new对象;调用对象的方法(包括静态方法);访问对象的属性(赋值)等 </p>
 
@@ -20,7 +20,7 @@
 
 <h2>0x01 OGNL</h2>
 
-<hr />
+<hr>
 
 <p>参考：<a href="http://drops.wooyun.org/papers/340">http://drops.wooyun.org/papers/340</a></p>
 
@@ -28,11 +28,11 @@
 
 <pre><code>...
 OgnlContext context = new OgnlContext();
-Ognl.getValue("@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="89e3e8ffe8a7e5e8e7eea7dbfce7fde0e4ecc9eeecfddbfce7fde0e4ec">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>().exec('calc')",context,context.getRoot());
+Ognl.getValue("@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="89e3e8ffe8a7e5e8e7eea7dbfce7fde0e4ecc9eeecfddbfce7fde0e4ec">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>().exec('calc')",context,context.getRoot());
 ...  
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201402/2014021112460957891.png" alt="2014021112460957891.png" /></p>
+<p><img src="http://static.wooyun.org/201402/2014021112460957891.png" alt="2014021112460957891.png"></p>
 
 <p>set方式，new一个对象调用方法执行命令： </p>
 
@@ -48,7 +48,7 @@ Ognl.setValue(new java.lang.ProcessBuilder((new java.lang.String[] {"calc" })).s
 
 <h2>0x02 在spring框架中也有类似OGNL的Spel表达式</h2>
 
-<hr />
+<hr>
 
 <h3>1.调用对象的静态方法执行命令: </h3>
 
@@ -57,7 +57,7 @@ org.springframework.expression.Expression exp=parser.parseExpression("T(java.lan
 ...   
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201402/2014021112491712314.png" alt="2014021112491712314.png" /></p>
+<p><img src="http://static.wooyun.org/201402/2014021112491712314.png" alt="2014021112491712314.png"></p>
 
 <h3>2.new一个对象调用方法执行命令: </h3>
 
@@ -66,13 +66,13 @@ org.springframework.expression.Expression exp=parser.parseExpression("new java.l
 ... 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201402/2014021112505361561.png" alt="2014021112505361561.png" /></p>
+<p><img src="http://static.wooyun.org/201402/2014021112505361561.png" alt="2014021112505361561.png"></p>
 
 <p>但spring在安全方面应该不会像struts2一样这么不负责任（不过，现在稍微好点了！），它有没有类似的安全漏洞，有兴趣的可以去找找 ^-^ </p>
 
 <h2>0x03 spring 标签实现中的el表达式注入</h2>
 
-<hr />
+<hr>
 
 <p>例如，类似的代码场景： </p>
 
@@ -83,7 +83,7 @@ el: &lt;spring:message text="${param.el}"&gt;&lt;/spring:message&gt;
 
 <p>之前是个信息泄露漏洞（路径及jar等信息）： </p>
 
-<p><img src="http://static.wooyun.org/201402/2014021112525255051.png" alt="2014021112525255051.png" /></p>
+<p><img src="http://static.wooyun.org/201402/2014021112525255051.png" alt="2014021112525255051.png"></p>
 
 <p>前段时间老外弄出了远程命令执行,部分exp（网上都有，有兴趣自己找试一下。能否执行代码和web容器有很大关系，最好选老外一样的Glassfish或者resin某些版本用反射技巧实现执行代码）:</p>
 
@@ -106,7 +106,7 @@ el: &lt;spring:message text="${param.el}"&gt;&lt;/spring:message&gt;
 
 <h2>0x04 反射机制实现功能时，动态方法调用</h2>
 
-<hr />
+<hr>
 
 <p>参考：<a href="http://zone.wooyun.org/content/6971">http://zone.wooyun.org/content/6971</a></p>
 
@@ -125,11 +125,11 @@ m.invoke(对象);
 
 <h2>0x05 spring class.classLoader.URLs[0]对象属性赋值</h2>
 
-<hr />
+<hr>
 
 <p>cve-2010-1622 这是我最喜欢的一个漏洞利用技巧：</p>
 
-<p><img src="http://static.wooyun.org/201402/2014021112554878852.png" alt="2014021112554878852.png" /></p>
+<p><img src="http://static.wooyun.org/201402/2014021112554878852.png" alt="2014021112554878852.png"></p>
 
 <p>这个利用有点绕，其实如果看得懂Java其实也很简单！（大家常说，<strong>喜欢熬夜的coder不是好员工</strong>，睡觉了！） </p>
 
@@ -139,7 +139,7 @@ m.invoke(对象);
 
 <p>另外，其实我个人觉得，这个漏洞的其他利用的实际危害要超过执行命令方式，比如：拒绝服务等 </p>
 
-<p>如果把你想像力再上升一个层面:在<strong>任意场景</strong>中只要能够控制Java对象,理论上它就能执行代码(至于是否能够被有效利用是另外一回事)。其实说得再执白点，写底层代码的程序员知不知道这些问题可能导致安全漏洞！ </p>      </p>
+<p>如果把你想像力再上升一个层面:在<strong>任意场景</strong>中只要能够控制Java对象,理论上它就能执行代码(至于是否能够被有效利用是另外一回事)。其实说得再执白点，写底层代码的程序员知不知道这些问题可能导致安全漏洞！ </p>      <p></p>
     
 			</body>
 		</html>

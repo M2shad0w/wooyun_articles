@@ -3,26 +3,26 @@
 			<head>
 			     <title>Android Service Security - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4907">http://drops.wooyun.org/tips/4907</a></h1>
 				
       <p>
-        <h2>0x00 科普</h2>
+        </p><h2>0x00 科普</h2>
 
-<hr />
+<hr>
 
 <p>一个Service是没有界面且能长时间运行于后台的应用组件．其它应用的组件可以启动一个服务运行于后台，即使用户切换到另一个应用也会继续运行．另外，一个组件可以绑定到一个service来进行交互，即使这个交互是进程间通讯也没问题．例如，一个service可能处理网络事物，播放音乐，执行文件I/O，或与一个内容提供者交互，所有这些都在后台进行．</p>
 
 <h2>0x01 知识要点</h2>
 
-<hr />
+<hr>
 
 <p><strong>生命周期</strong></p>
 
 <!--more -->
 
-<p><img src="http://static.wooyun.org/drops/20150211/2015021104391895764service_lifecycle.png" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20150211/2015021104391895764service_lifecycle.png" alt=""></p>
 
 <p>左图是startService()创建service，右图是bindService()创建service。 startService与bindService都可以启动Service，那么它们之间有什么区别呢？它们两者的区别就是使Service的周期改变。由startService启动的Service必须要有stopService来结束Service，不调用stopService则会造成Activity结束了而Service还运行着。bindService启动的Service可以由unbindService来结束，也可以在Activity结束之后(onDestroy)自动结束。</p>
 
@@ -103,11 +103,11 @@
 
 <h2>0x02 安全建议</h2>
 
-<hr />
+<hr>
 
 <p><strong>service分类</strong></p>
 
-<p><img src="http://static.wooyun.org/drops/20150211/2015021104391996450type.png" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20150211/2015021104391996450type.png" alt=""></p>
 
 <pre><code>私有service:不能被其他应用调用,相对安全
 公开service:可以被任意应用调用
@@ -117,7 +117,7 @@
 
 <p><strong>intent-filter与exported组合建议</strong></p>
 
-<p><img src="http://static.wooyun.org/drops/20150211/2015021104391915436intent.png" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20150211/2015021104391915436intent.png" alt=""></p>
 
 <p>总结:</p>
 
@@ -142,7 +142,7 @@
 
 <h2>0x03 测试方法</h2>
 
-<hr />
+<hr>
 
 <ol>
 <li><p>service不像broadcast receicer只能静态注册,通过反编译查看配置文件Androidmanifest.xml即可确定service,若有导出的service则进行下一步</p></li>
@@ -153,7 +153,7 @@
 
 <h2>0x04 案例</h2>
 
-<hr />
+<hr>
 
 <p><strong>案例1：权限提升</strong></p>
 
@@ -169,7 +169,7 @@
 
 <p>攻击模型</p>
 
-<p><img src="http://static.wooyun.org/drops/20150211/2015021104392094331hijack.png" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20150211/2015021104392094331hijack.png" alt=""></p>
 
 <p><strong>案例3:拒绝服务</strong></p>
 
@@ -202,13 +202,13 @@
 
 <h2>0x05 参考</h2>
 
-<hr />
+<hr>
 
 <p><a href="http://blog.csdn.net/niu_gao/article/details/7307462">http://blog.csdn.net/niu_gao/article/details/7307462</a></p>
 
 <p><a href="http://developer.android.com/reference/android/app/Service.html">http://developer.android.com/reference/android/app/Service.html</a></p>
 
-<p><a href="http://developer.android.com/guide/components/services.html">http://developer.android.com/guide/components/services.html</a></p>      </p>
+<p><a href="http://developer.android.com/guide/components/services.html">http://developer.android.com/guide/components/services.html</a></p>      <p></p>
     
 			</body>
 		</html>

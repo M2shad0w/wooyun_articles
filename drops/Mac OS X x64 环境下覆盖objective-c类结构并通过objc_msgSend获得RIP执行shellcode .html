@@ -3,22 +3,22 @@
 			<head>
 			     <title>Mac OS X x64 环境下覆盖objective-c类结构并通过objc_msgSend获得RIP执行shellcode  - vvun91e0n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6444">http://drops.wooyun.org/tips/6444</a></h1>
 				
       <p>
-        <p><em>author vvun91e0n</em></p>
+        </p><p><em>author vvun91e0n</em></p>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>阅读学习国外nemo大牛《Modern Objective-C Exploitation Techniques》文章的内容，就想在最新的OS X版本上调试出作者给出的代码。控制rip。我根据自己的调试，修改了原程序，才调试成功。对大牛原程序的部分代码的意图和计算方法难免理解不足，欢迎留言与我交流学习。本文主要简要介绍下对objective-c类的覆盖到控制rip的技术。是目前OS X平台下，比较主流的一种溢出利用方式。</p>
 
 <h1>0x01 64位汇编知识及lldb简单调试命令</h1>
 
-<hr />
+<hr>
 
 <p>汇编知识主要是在调试的时候使用，在64位平台下调试必不可少的知识。对此熟悉的读者可直接跳过。下面简要介绍下64位汇编。</p>
 
@@ -99,7 +99,7 @@ Current executable set to '/Users/vvun91e0n/Desktop/OC64exploit' (x86_64).
 
 <h1>0x02 objective-c方法调用</h1>
 
-<hr />
+<hr>
 
 <p>你需要对objective-c语言有一定的基本的了解。特别是objc_msgSend函数的调用机制。可以参考：《The Objective-C Runtime: Understanding and Abusing》。这篇文章是nemo2009年发表在phrack上的。在32位系统基础上讲Objective-C Runtime溢出的文章。还是有阅读价值的。特别是对后面64位溢出的理解。</p>
 
@@ -136,7 +136,7 @@ int main(int argc, const char * argv[]) {
 <p>如上面代码所示，定义了一个Talker类，并在main函数中调用了say方法。 可以看出objective-c语言的方法调用语法为</p>
 
 <p>[\<object>
-  \<method>: \<argument>];</p></p>
+  \<method>: \<argument>];</argument></method></object></p><p></p>
 
 <p>
     主程序进行了3次函数调用
@@ -382,7 +382,7 @@ LCacheMiss:
     0x04 具体代码及细节说明
   </h1>
 
-<hr />
+<hr>
 
 <p>
     完整代码如下：
@@ -559,7 +559,7 @@ sh-3.2$
     0x05 总结
   </h1>
 
-<hr />
+<hr>
 
 <p>
     通过这个代码调试过程验证里对objective-c类结构进行溢出的可行性。可以成功获得rip。
@@ -617,7 +617,7 @@ sh-3.2$
         理解objc_msgSend的作用 <a href="http://book.51cto.com/art/201403/432144.htm">http://book.51cto.com/art/201403/432144.htm</a>
       </p>
     </li>
-  </ol>      </p>
+  </ol>      <p></p>
     
 			</body>
 		</html>

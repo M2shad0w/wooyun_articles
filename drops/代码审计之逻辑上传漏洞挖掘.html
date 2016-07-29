@@ -3,14 +3,14 @@
 			<head>
 			     <title>代码审计之逻辑上传漏洞挖掘 - felixk3y</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1957">http://drops.wooyun.org/papers/1957</a></h1>
 				
       <p>
-        <h2>0x00 前言</h2>
+        </p><h2>0x00 前言</h2>
 
-<hr />
+<hr>
 
 <p>话说一个人的快乐,两个人分享就成为两份快乐,这个我看未必吧,倘若分享与被分享的两者之间是情敌关系,而分享者快乐的原因恰好是… 哈哈,不说了,都懂的;</p>
 
@@ -22,7 +22,7 @@
 
 <h2>0x01 程序员对某些常用函数的错误认识</h2>
 
-<hr />
+<hr>
 
 <!--more-->
 
@@ -62,7 +62,7 @@ if($operateId == 1){
 
 <p>我们来看上面的这段代码,要想文件成功的上传, if(empty($msg)) 必须为True才能进入if的分支,接下来我们来看empty函数何时返回True,看看PHP Manual怎么说,如图</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811130880389.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811130880389.png" alt="enter image description here"></p>
 
 <p>很明显，""、0、"0"、NULL、FALSE、array()、var $var; 以及没有任何属性的对象都将被认为是空的，如果var为空，则返回True。 非常好，接下来我们往回看，有这样的几行代码</p>
 
@@ -81,7 +81,7 @@ if(!in_array($nameExt, $allowedType)){
 
 <h2>0x02 程序员对某些常用函数的错误使用</h2>
 
-<hr />
+<hr>
 
 <p>这些函数有iconv()、copy()等,如下面的这段代码(摘自SiteStar)</p>
 
@@ -124,7 +124,7 @@ private function _savelinkimg($struct_file){
 
 <h2>0x03 历史经典漏洞再次爆发</h2>
 
-<hr />
+<hr>
 
 <p>条件竞争漏洞,这类历史经典漏洞在逐渐淡出人们视线的时候,再次爆发..</p>
 
@@ -162,7 +162,7 @@ if($_POST['realfile']){
 
 <p> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2014-048202">WooYun: 国内外多家vpn设备厂商批量漏洞(续集一)</a> </p>
 
-<p> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2014-049794">WooYun: PHPCMS前台设计缺陷导致任意代码执行</a> </p>      </p>
+<p> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2014-049794">WooYun: PHPCMS前台设计缺陷导致任意代码执行</a> </p>      <p></p>
     
 			</body>
 		</html>

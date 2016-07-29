@@ -3,20 +3,20 @@
 			<head>
 			     <title>Trying to hack Redis via HTTP requests - 我是壮丁</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/3062">http://drops.wooyun.org/papers/3062</a></h1>
 				
       <p>
-        <h2>0x00 写在前面的话</h2>
+        </p><h2>0x00 写在前面的话</h2>
 
-<hr />
+<hr>
 
 <p>文章是翻译过来的，翻译过程中做了一些修改，添加了些东西。有兴趣的直接可以看原文,原文的链接接在文章的最底部。</p>
 
 <h2>0x01 情景</h2>
 
-<hr />
+<hr>
 
 <p>我们假设存在一个SSRF漏洞或者配置不当的代理服务器，使攻击者可以通过HTTP请求直接访问Redis服务。在上面假设的两种情况中，要求我们对于HTTP的访问请求至少有一行是完全可控的，这种完全可控是很容易实现的。但是,命令行的客户端(redis-cli)是不支持HTTP代理的，而且我们需要构造出自己的命令。这些构造好的语句，封装在HTTP请求中，通过代理进行发送。以下所有的测试都是在redis 2.6.0版本中,虽然不是最新版，但是我们的要攻击的目标使用的就是这个版本......</p>
 
@@ -24,13 +24,13 @@
 
 <h2>0x02 Redis简介</h2>
 
-<hr />
+<hr>
 
 <p>Redis是一个NoSQL的数据库(NoSQl泛指非关系型的数据库,常用的mysql是关系型数据库)，数据通过键/值对存储在内存中。默认配置中，在服务运行的时候，会开放一个没有验证的TCP/6379端口，提供的这个接口是很“宽容”。它会尝试去解析处理每一次输入(直到超时或者输入’QUIT’命令退出)，对于那些不存在的命令，则会显示像"-ERR unknown command"这样的输出。</p>
 
 <h2>0x03 目标识别</h2>
 
-<hr />
+<hr>
 
 <p>当我们利用SSRF漏洞或者配置不当的代理服务器进行进一步渗透时，第一步通常是扫描已知的服务。作为一个攻击者，得知这个服务只在本地回环接口上进行了端口监听，使用了基于来源的验证或者认为这种保护方式风险很小，因为这个是外部不能访问的。 在测试过程中，看到以下日志会令人亢奋：</p>
 
@@ -47,7 +47,7 @@
 
 <h2>0x04 基本交互</h2>
 
-<hr />
+<hr>
 
 <p>在上面构造的场景中，发出去的HTTP请求是几乎完全可控的，同时请求是通过Squid代理发送的。 这包含以下两个方面</p>
 
@@ -84,7 +84,7 @@ QUIT
 
 <h2>0x05 突破空格的限制</h2>
 
-<hr />
+<hr>
 
 <p>正如你所注意到的,服务器会返回特定的数据,再加上像”*2”或者”$7”这种的字符,这是根据Redis协议对二进制数据安全的规定返回的数据，如果你要使用包含空格的参数,则必须使用这个规则。</p>
 
@@ -113,7 +113,7 @@ QUIT
 
 <h2>0x06 信息收集</h2>
 
-<hr />
+<hr>
 
 <p>经过前面的铺垫，我们可以很好的和服务器进行交互获取我们想要的信息。Redis的一些命令是很有用的，例如”INFO”和”CONFIG GET (dir|dbfilename|logfile|pidfile)＂。这里就把测试机器上的执行＂INFO＂的输出贴出来</p>
 
@@ -198,13 +198,13 @@ EVAL “dofile('/home/ubuntu/.selected_editor');return(SELECTED_EDITOR);” 0
 
 <h2>0x07 暴力破解</h2>
 
-<hr />
+<hr>
 
 <p>Redis提供一个redis.sha1hex()函数，可以被Lua脚本调用，所以还可以通过Redis服务器进行SHA-1的破解，相关代码在adam_baldwin 的GitHub上(https://github.com/evilpacket/redis-sha-crack)，相关原理的描述在 (http://fr.slideshare.net/evilpacket/ev1lsha-misadventures-in-the-land-of-lua需要翻墙访问)</p>
 
 <h2>0x08 Dos</h2>
 
-<hr />
+<hr>
 
 <p>这里有很多Dos Redis的方法，例如通过调用shutdown这个命令删除数据。</p>
 
@@ -234,13 +234,13 @@ e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4
 
 <h2>0x09 数据窃取</h2>
 
-<hr />
+<hr>
 
 <p>如果Redis服务器存储一些有趣的数据(像session cookie或商业数据)，你可以通过get枚举键值，获取数据。</p>
 
 <h2>0x0A 加密</h2>
 
-<hr />
+<hr>
 
 <p>Lua使用完全可以预测的”随机数”，细节在scripting.c的evalGenericCommand()函数中</p>
 
@@ -260,7 +260,7 @@ redisSrand48(0);
 
 <h2>0x0b 远程命令执行</h2>
 
-<hr />
+<hr>
 
 <p>为了在开放的Redis服务器上进行命令执行，有以下三种情况： 首先能够修改底层的字节码,能够进行虚拟机的逃逸。(Lua的一个例子https://gist.github.com/corsix/6575486)；或者是绕过全局保护并且试图访问一些有趣的函数。</p>
 
@@ -295,13 +295,13 @@ CONGIG SET dbfilename dump.rdb
 
 <h2>0x0C 关于如何发觉公网上的Redis未授权访问</h2>
 
-<hr />
+<hr>
 
 <p>Redis默认是运行在TCP的6379端口上的，需要进行端口扫描.确定端口是否开放。 同时，Python中有redis这个模块，可以编写脚本调用端口扫描后的结果，对Redis服务是否可以直接访问,进行快速判断。</p>
 
 <h2>0x0D 安全配置Redis的一些建议</h2>
 
-<hr />
+<hr>
 
 <pre><code>不要以root用户运行redis
 </code></pre>
@@ -315,7 +315,7 @@ rename-command CONFIG ""　   ＃禁用CONFIG命令
 rename-command info info2   #重命名info为info2
 </code></pre>
 
-<p>源文章: http://www.agarri.fr/kom/archives/2014/09/11/trying&#95;to&#95;hack&#95;redis&#95;via&#95;http&#95;requests/index.html 参考: Redis protocol：http://redis.io/topics/protocol Redis 命令参考：http://redis.readthedocs.org/en/latest/</p>      </p>
+<p>源文章: http://www.agarri.fr/kom/archives/2014/09/11/trying&#95;to&#95;hack&#95;redis&#95;via&#95;http&#95;requests/index.html 参考: Redis protocol：http://redis.io/topics/protocol Redis 命令参考：http://redis.readthedocs.org/en/latest/</p>      <p></p>
     
 			</body>
 		</html>

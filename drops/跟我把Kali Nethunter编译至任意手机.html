@@ -3,22 +3,22 @@
 			<head>
 			     <title>跟我把Kali Nethunter编译至任意手机 - lxj616</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/10993">http://drops.wooyun.org/tips/10993</a></h1>
 				
       <p>
-        <p>Kali Nethunter是一款用于安全研究的手机固件包，可以使Android设备增加“无线破解”、“HID攻击”、“伪造光驱”等的硬件功能以及metasploit等软件工具，目前官方只支持少量的Android手机，然而，通过重新编译Kali Nethunter源代码，可以将其编译到其他型号的手机上</p>
+        </p><p>Kali Nethunter是一款用于安全研究的手机固件包，可以使Android设备增加“无线破解”、“HID攻击”、“伪造光驱”等的硬件功能以及metasploit等软件工具，目前官方只支持少量的Android手机，然而，通过重新编译Kali Nethunter源代码，可以将其编译到其他型号的手机上</p>
 
 <p>本文将以Oneplus one为例讲解Kali Nethunter代码的移植方式，同时也在三星的i9100g手机上测试成功</p>
 
-<p><img src="http://static.wooyun.org//drops/20151202/2015120202554626080.png" alt="cm12" /></p>
+<p><img src="http://static.wooyun.org//drops/20151202/2015120202554626080.png" alt="cm12"></p>
 
 <!--more-->
 
 <h1>0x00 Kali Nethunter架构分析</h1>
 
-<hr />
+<hr>
 
 <p>Kali Nethunter大体分为三个部分</p>
 
@@ -32,7 +32,7 @@
 
 <h1>0x01 准备CM 12.1源码以及相关环境</h1>
 
-<hr />
+<hr>
 
 <p>首先，我们为了简化修改内核的过程，可以直接编译一份CyanogenMod 12.1的代码，其中就包括了对应机型（Oneplus one、三星i9100g）的内核代码。而且鉴于Kali Nethunter本身采用的就是CM 12.1的ROM，为了避免其他ROM中可能存在的兼容性问题，建议选择CyanogenMod支持的手机来进行移植</p>
 
@@ -127,7 +127,7 @@ $ brunch bacon
 
 <h1>0x02 简易的CM 12.1编译环境及代码</h1>
 
-<hr />
+<hr>
 
 <p>所有环境配置问题都可以用Woobuntu系统来解决，直接安装Woobuntu后内部已经集成了Android编译环境（包括adb）</p>
 
@@ -149,11 +149,11 @@ brunch bacon
 
 <h1>0x03 修改Android内核</h1>
 
-<hr />
+<hr>
 
 <p>在修改Android内核时，我们需要交叉编译ARM架构的代码</p>
 
-<p>cd到对应机型的kernel文件夹下，例如演示的oneplus内核目录为 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="85e4e9eee4ece1c5e4e9eee4ece1a8d3ecf7f1f0e4e9c7eafd">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/android/system/kernel/oneplus/msm8974</p>
+<p>cd到对应机型的kernel文件夹下，例如演示的oneplus内核目录为 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="85e4e9eee4ece1c5e4e9eee4ece1a8d3ecf7f1f0e4e9c7eafd">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/android/system/kernel/oneplus/msm8974</p>
 
 <pre><code>export ARCH=arm
 </code></pre>
@@ -200,7 +200,7 @@ patch -p1 &lt; kernel-3.4.patch
 
 <p>报错：</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2445484f454d406445484f454d4009724d5650514548664b5c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/android/system/kernel/oneplus/msm8974$ patch -p1 &lt; kernel-3.4.patch
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2445484f454d406445484f454d4009724d5650514548664b5c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/android/system/kernel/oneplus/msm8974$ patch -p1 &lt; kernel-3.4.patch
 patching file drivers/usb/gadget/Makefile
 patching file drivers/usb/gadget/android.c
 Hunk #1 succeeded at 75 (offset 1 line).
@@ -218,16 +218,16 @@ Hunk #13 succeeded at 713 (offset -8 lines).
 patching file drivers/usb/gadget/f_hid.h
 patching file drivers/usb/gadget/f_hid_android_keyboard.c
 patching file drivers/usb/gadget/f_hid_android_mouse.c
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="badbd6d1dbd3defadbd6d1dbd3de97ecd3c8cecfdbd6f8d5c2">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/android/system/kernel/oneplus/msm8974$
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="badbd6d1dbd3defadbd6d1dbd3de97ecd3c8cecfdbd6f8d5c2">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/android/system/kernel/oneplus/msm8974$
 </code></pre>
 
 <p>可以看到是android.c第3和第4处patch失败，我们去手动patch</p>
 
-<p><img src="http://static.wooyun.org//drops/20151202/2015120202554767144.png" alt="patch01" /></p>
+<p><img src="http://static.wooyun.org//drops/20151202/2015120202554767144.png" alt="patch01"></p>
 
 <p>前两处都已经patch成功了，所以跳过就好了</p>
 
-<p><img src="http://static.wooyun.org//drops/20151202/2015120202554765692.png" alt="patch02" /></p>
+<p><img src="http://static.wooyun.org//drops/20151202/2015120202554765692.png" alt="patch02"></p>
 
 <p>解释一下：左边是patch代码，右边是目前的android.c，patch的意思是要在<code>&amp;uasp_function,</code>下面加一个<code>&amp;hid_function,</code>，第四处也去找一下用大脑找到位置敲上代码即可</p>
 
@@ -237,7 +237,7 @@ patching file drivers/usb/gadget/f_hid_android_mouse.c
 
 <h1>0x04 编译Kali Nethunter的rootfs</h1>
 
-<hr />
+<hr>
 
 <p>在Kali Nethunter的github页面内有详细的说明，强烈建议在Kali中进行Nethunter的编译</p>
 
@@ -255,7 +255,7 @@ cd ~/arm-stuff/kali-nethunter
 
 <h1>0x05 刷机测试</h1>
 
-<hr />
+<hr>
 
 <p>如果你不会刷机，请先百度一下如何正常刷机，比如unlock bootloader啦，TWRP啦，这些百度去吧</p>
 
@@ -263,7 +263,7 @@ cd ~/arm-stuff/kali-nethunter
 
 <p>下图是在测试HID攻击的i9100g</p>
 
-<p><img src="http://static.wooyun.org//drops/20151202/2015120202554772154.jpg" alt="i9100g" /></p>
+<p><img src="http://static.wooyun.org//drops/20151202/2015120202554772154.jpg" alt="i9100g"></p>
 
 <p>检查各项功能：</p>
 
@@ -275,7 +275,7 @@ cd ~/arm-stuff/kali-nethunter
 
 <h1>0x06 可能遇到的问题</h1>
 
-<hr />
+<hr>
 
 <p>在移植至三星i9100g手机时，由于手机内存储空间不够大（Kali Nethunter刷机方式要求至少有2GB的可用空间），因此一直刷机失败，当终于定位到问题所在后，最终决定采用其他的方式加载Kali Nethunter的rootfs。首先把kali nethunter的rootfs编译出来，然后做成一个img磁盘镜像文件，之后把这个img文件放在sd卡中，动态挂载到/data/local/kali-armhf中，这样就解决了内存储空间不够的问题</p>
 
@@ -283,13 +283,13 @@ cd ~/arm-stuff/kali-nethunter
 
 <h1>0x07 后话</h1>
 
-<hr />
+<hr>
 
 <p>以后我们就可以开始玩耍Nethunter了，比如把整个WooyunWifi都移植到手机上，再做上离线劫持钓鱼的功能……不过这些都是编译完Nethunter之后的事情了</p>
 
 <p>结尾图片：在手机上的WooyunWifi，开启了热点用于钓鱼</p>
 
-<p><img src="http://static.wooyun.org//drops/20151202/2015120202554977547.jpg" alt="woophone" /></p>      </p>
+<p><img src="http://static.wooyun.org//drops/20151202/2015120202554977547.jpg" alt="woophone"></p>      <p></p>
     
 			</body>
 		</html>

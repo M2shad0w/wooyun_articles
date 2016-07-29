@@ -3,14 +3,14 @@
 			<head>
 			     <title>你所不知道的XML安全 - 小飞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5290">http://drops.wooyun.org/tips/5290</a></h1>
 				
       <p>
-        <h1>0x00 XML简介</h1>
+        </p><h1>0x00 XML简介</h1>
 
-<hr />
+<hr>
 
 <p>XML 可扩展标记语言，被设计用来传输和存储数据。其形式多样</p>
 
@@ -40,7 +40,7 @@
 
 <h1>0x01 初识XML外部实体攻击</h1>
 
-<hr />
+<hr>
 
 <h2>基于外部实体的文件包含</h2>
 
@@ -71,9 +71,9 @@
 
 <p>更糟糕的是，当你选择包含的是一个完整的xml文件(比如数据库连接文件)的时候，返回结果将是</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302535658263.jpg" alt="RHM" /></p>
+<p><img src="http://static.wooyun.org/drops/20150323/2015032302535658263.jpg" alt="RHM"></p>
 
-<p>可以看到，在<lastname>标签中的数据库配置文档被嵌入时，大部分内容都是省略号，只显示了文档的结构。这是由xml parser特性决定的。</p>
+<p>可以看到，在<lastname>标签中的数据库配置文档被嵌入时，大部分内容都是省略号，只显示了文档的结构。这是由xml parser特性决定的。</lastname></p>
 
 <h2>URL Invocation</h2>
 
@@ -85,7 +85,7 @@
 
 <p>比如“server-side request forgery”(ssrf).理论上来说，URL Invocation甚至可以用来发起内部网络中的洪水攻击。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302535633776.jpg" alt="RHM" /></p>
+<p><img src="http://static.wooyun.org/drops/20150323/2015032302535633776.jpg" alt="RHM"></p>
 
 <p>大部分人不知道的是，即使外部实体被禁用了，许多xml parsers还是会去解析那些URL。举个例子，一些parsers会在文档定义阶段对url发起请求</p>
 
@@ -117,7 +117,7 @@ http://location/of/remote/schema/secondary.xsd"&gt;
 
 <h1>0x02 引入参数实体后的攻击手段</h1>
 
-<hr />
+<hr>
 
 <p>当我们的恶意xml被成功解析，这时我们有可能面临两个问题：</p>
 
@@ -182,7 +182,7 @@ http://location/of/remote/schema/secondary.xsd"&gt;
 
 <p>流程如下</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302535659816.jpg" alt="RHM" /></p>
+<p><img src="http://static.wooyun.org/drops/20150323/2015032302535659816.jpg" alt="RHM"></p>
 
 <h2>XXE的奇门遁甲</h2>
 
@@ -220,7 +220,7 @@ http://location/of/remote/schema/secondary.xsd"&gt;
 &lt;lolz&gt;&amp;lol9;&lt;/lolz&gt;
 </code></pre>
 
-<p>回忆一下解析过程，当XML处理器载入这个文档的时候，它会包含根元素<lolz>，而里面定义了实体&amp;lol9 ，而19实体扩展成了包含了<code>“&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;”</code>这个字符串。</p>
+<p>回忆一下解析过程，当XML处理器载入这个文档的时候，它会包含根元素<lolz>，而里面定义了实体&amp;lol9 ，而19实体扩展成了包含了<code>“&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;”</code>这个字符串。</lolz></p>
 
 <p>如此递归上去，压入内存的东西呈指数增长，实验发现，一个小于1KB的XML攻击payload能消耗3GB的内存。</p>
 
@@ -279,7 +279,7 @@ home
 
 <h2>0x03 总结</h2>
 
-<hr />
+<hr>
 
 <p>XXE攻击总在被忽视</p>
 
@@ -299,7 +299,7 @@ home
 
 <p>OWASP  https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Processing</p>
 
-<p>ssrf扫描图引用自OWASP一位speaker的PDF</p>      </p>
+<p>ssrf扫描图引用自OWASP一位speaker的PDF</p>      <p></p>
     
 			</body>
 		</html>

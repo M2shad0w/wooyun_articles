@@ -3,20 +3,20 @@
 			<head>
 			     <title>Discuz! X系列远程代码执行漏洞分析 - tang3</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/7830">http://drops.wooyun.org/papers/7830</a></h1>
 				
       <p>
-        <h1>0x00 漏洞概述</h1>
+        </p><h1>0x00 漏洞概述</h1>
 
-<hr />
+<hr>
 
 <p>上周有一个朋友问我有没有办法在知道uc的appkey的情况下getshell，刚好我在原来看discuz代码时曾经有过几个相关的想法，但是一直没有仔细去看，接着这个机会去看了下，果然有个很好玩的代码执行漏洞。</p>
 
 <h1>0x01 漏洞根源</h1>
 
-<hr />
+<hr>
 
 <p>这个问题的根源在于api/uc.php文件中的updatebadwords方法，代码如下：</p>
 
@@ -54,7 +54,7 @@ function updatebadwords($get, $post) {
 
 <h1>0x02 漏洞触发</h1>
 
-<hr />
+<hr>
 
 <p>全局代码搜了下<code>badwords</code>，用的地方比较少，主要集中在uc的pm和user模块中。这里我用user来举例，在<code>uc_client/model/user.php</code>文件中有一个<code>check_usernamecensor</code>方法，来校验用户名中是否有badwords，如果有的话就将他替换掉，代码如下：</p>
 
@@ -77,7 +77,7 @@ function check_usernamecensor($username) {
 
 <h1>0x03 漏洞利用</h1>
 
-<hr />
+<hr>
 
 <p>首先我们们访问<code>api/uc.php</code>（居然可以直接访问，好开心），之后我们会发现uc处理机制中比较讨厌的环节——用户传递的参数需要经过<code>UC_KEY</code>加密：</p>
 
@@ -100,11 +100,11 @@ if(!defined('IN_UC')) {
 
 <p>我们在后台中站长<code>-&gt;UCenter</code>设置中发现有“<code>UCenter 通信密钥</code>”这个字段，这是用于操控discuz和uc连接的app key，而非高级的uc_server key，不过对于我们getshell来说足够了。在这里修改为任意值，这样我们就获取到了加密用的key值了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081006105261769.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150810/2015081006105261769.png" alt="enter image description here"></p>
 
 <p>从下图我们可以看到，配置文件已经被修改了:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081006105247962.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150810/2015081006105247962.png" alt="enter image description here"></p>
 
 <p>然后我们在自己搭建的discuz的<code>api/uc.php</code>文件中添加两行代码，来加密get请求所需要的内容：</p>
 
@@ -116,7 +116,7 @@ $a = 'time='.time().'&amp;action=updatebadwords';
 
 <p>这样我们就可以获取到加密后的code值了！</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081006105368463.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150810/2015081006105368463.png" alt="enter image description here"></p>
 
 <p>然后用post方法向api/uc.php发送带有正则表达式信息的xml数据包，请求头中有两个地方需要注意，一个是formhash，一个是刚才获取的code需要进行一次url编码，否则解密会出现问题。我使用的数据包如下图所示：</p>
 
@@ -145,17 +145,17 @@ Cookie: FPDO_2132_saltkey=Z777zGG4; FPDO_2132_lastvisit=1432691505; FPDO_2132_ul
 
 <p>发送后可以发现<code>uc_client/data/cache</code>目录下的<code>badwords.php</code>内容变为了我们刚刚设定的正则表达式的样子：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081006105364148.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150810/2015081006105364148.png" alt="enter image description here"></p>
 
 <p>之后利用方法就有很多种了，可以通过增加一个用户来实现代码执行，也可以通过发消息的方式来触发，这里我以添加一个用户为例。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081006105355692.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150810/2015081006105355692.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081006105493258.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150810/2015081006105493258.png" alt="enter image description here"></p>
 
 <h1>0x04 漏洞总结</h1>
 
-<hr />
+<hr>
 
 <h3>漏洞小结</h3>
 
@@ -165,7 +165,7 @@ Cookie: FPDO_2132_saltkey=Z777zGG4; FPDO_2132_lastvisit=1432691505; FPDO_2132_ul
 
 <h3>防护方案</h3>
 
-<p>限制用户提交正则表达式的内容，允许提交正则表达式就可以了，就不要让用户提交正则参数了吧。而且纯粹的使用正则表达式替换字符串，str_replace不可以吗？</p>      </p>
+<p>限制用户提交正则表达式的内容，允许提交正则表达式就可以了，就不要让用户提交正则参数了吧。而且纯粹的使用正则表达式替换字符串，str_replace不可以吗？</p>      <p></p>
     
 			</body>
 		</html>

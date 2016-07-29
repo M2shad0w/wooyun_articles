@@ -3,12 +3,12 @@
 			<head>
 			     <title>浅谈大型互联网的安全 - 梧桐雨</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/139">http://drops.wooyun.org/tips/139</a></h1>
 				
       <p>
-        <p>这里用浅谈，因为这块也只能算是有点研究，也希望看到本文的各位如果能有所收获即可。如果不喜欢，也请不要喷。码这么多字很不容易，做一个分享者更是如此。</p>
+        </p><p>这里用浅谈，因为这块也只能算是有点研究，也希望看到本文的各位如果能有所收获即可。如果不喜欢，也请不要喷。码这么多字很不容易，做一个分享者更是如此。</p>
 
 <p>一直以来，很多大厂商的安全一直被认为相对薄弱，因为他们业务线长，同时，子站、分站众多，往往安全性子站与分站没有主站做的那么好。</p>
 
@@ -19,7 +19,7 @@
 
 <h2>0×01:敏感业务系统未认证登录</h2>
 
-<hr />
+<hr>
 
 <p>百度某后台访问未限制，泄漏业务信息!</p>
 
@@ -37,11 +37,11 @@
 
 <p>最终挖出了百度的某个后台：</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101806092212227.jpg" alt="http://wutongyu.info/wp-content/uploads/2013/06/3.jpg" /></p>
+<p><img src="http://static.wooyun.org/20131018/2013101806092212227.jpg" alt="http://wutongyu.info/wp-content/uploads/2013/06/3.jpg"></p>
 
 <h2>0×02:备份文件开放下载</h2>
 
-<hr />
+<hr>
 
 <p>而往往，大厂商对外IP开放的情况下，对权限设置的就不严谨了。</p>
 
@@ -51,11 +51,11 @@
 
 <p>这里再一次证明，不少厂商没绑定域名的IP上，一样是有业务在运营的，只不过你能否找到，你找到的是否真正能对外访问并且你能操作的。</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101806092442648.jpg" alt="http://wutongyu.info/wp-content/uploads/2013/06/1.jpg" /></p>
+<p><img src="http://static.wooyun.org/20131018/2013101806092442648.jpg" alt="http://wutongyu.info/wp-content/uploads/2013/06/1.jpg"></p>
 
 <h2>0×03:安全意识不到位</h2>
 
-<hr />
+<hr>
 
 <p>还有一部分则是因为安全意识不到位造成的。</p>
 
@@ -63,13 +63,13 @@
 
 <p>不少人在线上开发，总会想备份文件，有时贪图方便，往往会把系统文件重命名，但是重命名的过程并没有考虑他是否会被web容器重新解析，如果不被解析，那么攻击者就能直接从这里读取出敏感信息，并且实施下一步的攻击。</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101806092469480.jpg" alt="http://wutongyu.info/wp-content/uploads/2013/06/2.jpg" /></p>
+<p><img src="http://static.wooyun.org/20131018/2013101806092469480.jpg" alt="http://wutongyu.info/wp-content/uploads/2013/06/2.jpg"></p>
 
 <p>这样，攻击者丝毫不费劲的就获得了config配置文件了。</p>
 
 <h2>0×04:运维配置不当</h2>
 
-<hr />
+<hr>
 
 <p>案例:</p>
 
@@ -84,7 +84,7 @@
 
 <p><a href="http://drops.wooyun.org/papers/60">web服务器分层架构的资源文件映射安全以及在J2EE应用中的利用与危害</a></p>
 
-<p>上面这些案例，最终都是为了说明一点，无论厂商们的业务是否绑定域名，这点并不重要。重要的是安全人员一定要清楚，自己的那些业务哪些是暴露在公网，哪些是可以被访问到而又没配置好的。分享这篇文章的目的也只是想和大家探讨探讨，或许文章没有太多闪亮的技术要点，但更多的是安全意识。你，真的做到了吗？</p>      </p>
+<p>上面这些案例，最终都是为了说明一点，无论厂商们的业务是否绑定域名，这点并不重要。重要的是安全人员一定要清楚，自己的那些业务哪些是暴露在公网，哪些是可以被访问到而又没配置好的。分享这篇文章的目的也只是想和大家探讨探讨，或许文章没有太多闪亮的技术要点，但更多的是安全意识。你，真的做到了吗？</p>      <p></p>
     
 			</body>
 		</html>

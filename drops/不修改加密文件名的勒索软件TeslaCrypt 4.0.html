@@ -3,14 +3,14 @@
 			<head>
 			     <title>不修改加密文件名的勒索软件TeslaCrypt 4.0 - SwordLea</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/14671">http://drops.wooyun.org/papers/14671</a></h1>
 				
       <p>
-        <h1>0x00 概述</h1>
+        </p><h1>0x00 概述</h1>
 
-<hr />
+<hr>
 
 <p>安天安全研究与应急处理中心（Antiy CERT）近期发现勒索软件TeslaCrypt的最新变种TeslaCrypt 4.0，它具有多种特性，例如：加密文件后不修改原文件名、对抗安全工具、具有PDB路径、利用CMD自启动、使用非常规的函数调用、同一域名可以下载多个勒索软件等。</p>
 
@@ -22,11 +22,11 @@
 
 <h1>0x01 传播方式</h1>
 
-<hr />
+<hr>
 
 <p>勒索软件TeslaCrypt 4.0利用网站挂马和电子邮件进行传播，在国内网站挂马发现的较少，通常利用浏览器漏洞（Chrome、Firefox、Internet Explorer）、Flash漏洞和Adobe Reader漏洞进行传播；而利用电子邮件传播的数量较多，安天CERT发现的多起勒索软件事件也都是通过电子邮件传播的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/2016040804572441139115.jpg" alt="p1" /> 图 1 利用电子邮件传播勒索软件</p>
+<p><img src="http://static.wooyun.org//drops/20160408/2016040804572441139115.jpg" alt="p1"> 图 1 利用电子邮件传播勒索软件</p>
 
 <p>在分析TeslaCrypt的下载地址时，安天CERT研究人员发现，相同域名下存放多个TeslaCrypt 4.0程序，且文件HASH各不相同。例如：域名http://&#42;**|||pasqq.com，可以下载TeslaCrypt 4.0的地址如下：</p>
 
@@ -59,7 +59,7 @@
 
 <h1>0x02 样本分析</h1>
 
-<hr />
+<hr>
 
 <p>安天CERT共发现近300个勒索软件TeslaCrypt 4.0。研究人员在其中选择了时间较新的样本进行分析。</p>
 
@@ -191,23 +191,23 @@
 
 <p>该样本运行后复制自身至%Application Data%文件夹中，重命名为wlrmdr.exe，设置自身属性为隐藏，然后使用CreateProcessW为其创建进程。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/2016040804572658553212.jpg" alt="p2" /> 图 2 创建wlrmdr.exe进程</p>
+<p><img src="http://static.wooyun.org//drops/20160408/2016040804572658553212.jpg" alt="p2"> 图 2 创建wlrmdr.exe进程</p>
 
 <p>样本在新创建的进程中使用CreateThread开启线程，对全盘文件进行加密。首先样本使用GetLogicalDriveStringsW获取所有逻辑驱动器，成功后使用FindFirstFileW与FindNextFileW遍历全盘所有文件，进行加密。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/201604080457288157633.jpg" alt="p3" /> 图 3 遍历磁盘文件</p>
+<p><img src="http://static.wooyun.org//drops/20160408/201604080457288157633.jpg" alt="p3"> 图 3 遍历磁盘文件</p>
 
 <p>加密函数地址为0x0040190A。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/201604080457299159843.jpg" alt="p4" /> 图 4 调用加密函数对遍历到的文件加密</p>
+<p><img src="http://static.wooyun.org//drops/20160408/201604080457299159843.jpg" alt="p4"> 图 4 调用加密函数对遍历到的文件加密</p>
 
 <p>利用RSA4096算法加密后，调用WriteFile将加密后的数据由内存写入文件，没有对文件名做修改。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/201604080457312293554.jpg" alt="p5" /> 图 5 将加密后的数据写入文件</p>
+<p><img src="http://static.wooyun.org//drops/20160408/201604080457312293554.jpg" alt="p5"> 图 5 将加密后的数据写入文件</p>
 
 <p>加密前后的文件对比：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/201604080457338411465.jpg" alt="p6" /> 图 6加密前后的文件对比</p>
+<p><img src="http://static.wooyun.org//drops/20160408/201604080457338411465.jpg" alt="p6"> 图 6加密前后的文件对比</p>
 
 <h3>2.3 对抗安全工具</h3>
 
@@ -265,35 +265,35 @@
   </tr>
 </table>
 
-<p><img src="http://static.wooyun.org//drops/20160408/201604080457345289275.jpg" alt="p7" /> 图 7 隐藏cmd界面</p>
+<p><img src="http://static.wooyun.org//drops/20160408/201604080457345289275.jpg" alt="p7"> 图 7 隐藏cmd界面</p>
 
 <h3>2.4 具有PDB信息</h3>
 
 <p>样本具有PDB信息，其文件名为“<code>wet problem i yuoblem i_x.pdb</code>”</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/201604080457356953783.jpg" alt="p8" /> 图 8 样本的调试信息中包含PDB信息</p>
+<p><img src="http://static.wooyun.org//drops/20160408/201604080457356953783.jpg" alt="p8"> 图 8 样本的调试信息中包含PDB信息</p>
 
 <h3>2.5利用CMD自启动</h3>
 
 <p>样本调用RegCreateKeyExW，将使用CMD启动自身的代码写入至注册表中，使其随系统开机启动。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/201604080457372782093.jpg" alt="p9" /> 图 9 利用CMD达到随系统开机启动的目的</p>
+<p><img src="http://static.wooyun.org//drops/20160408/201604080457372782093.jpg" alt="p9"> 图 9 利用CMD达到随系统开机启动的目的</p>
 
 <h3>2.6使用非常规的函数调用和跳转</h3>
 
 <p>样本使用了很多非常规的函数调用和跳转，用来阻止安全人员分析该病毒。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/2016040804573911922103.jpg" alt="p10" /> 图 10　非常规的函数调用</p>
+<p><img src="http://static.wooyun.org//drops/20160408/2016040804573911922103.jpg" alt="p10"> 图 10　非常规的函数调用</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/2016040804574037165116.jpg" alt="p11" /> 图 11　非常规的跳转</p>
+<p><img src="http://static.wooyun.org//drops/20160408/2016040804574037165116.jpg" alt="p11"> 图 11　非常规的跳转</p>
 
 <h3>2.7 TeslaCrypt 4.0加密的文件格式</h3>
 
-<p><img src="http://static.wooyun.org//drops/20160408/2016040804574274626124.jpg" alt="p12" /> 图 12 TeslaCrypt 4.0加密的文件格式</p>
+<p><img src="http://static.wooyun.org//drops/20160408/2016040804574274626124.jpg" alt="p12"> 图 12 TeslaCrypt 4.0加密的文件格式</p>
 
 <h1>0x03 总结</h1>
 
-<hr />
+<hr>
 
 <p>勒索软件对企业和个人用户都具有极大的威胁，被加密后的文件无法恢复，将给用户造成巨大的损失。解决勒索软件的威胁问题除安装安全产品、防护产品、备份产品外，更需要用户在接收邮件时谨慎小心，慎重打开邮件附件或点击邮件内的链接，尤其是陌生人邮件。</p>
 
@@ -301,19 +301,19 @@
 
 <h1>0x04 附录一：参考资料</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>【1】<a href="http://www.antiy.com/response/ransomware.html">安天发布：揭开勒索软件的真面目</a></li>
-<li>【2】思科发布：针对勒索软件TeslaCrypt的解密工具：<br />
-<a href="http://www.freebuf.com/sectool/66060.html">http://www.freebuf.com/sectool/66060.html</a><br />
+<li>【2】思科发布：针对勒索软件TeslaCrypt的解密工具：<br>
+<a href="http://www.freebuf.com/sectool/66060.html">http://www.freebuf.com/sectool/66060.html</a><br>
 <a href="http://blogs.cisco.com/security/talos/teslacrypt">http://blogs.cisco.com/security/talos/teslacrypt</a></li>
 <li>【3】<a href="http://www.antiy.com/response/locky/locky.html">首例具有中文提示的比特币勒索软件“LOCKY”</a></li>
 </ul>
 
 <h1>0x05 附录二：安天CERT发现的50多个传播勒索软件的域名</h1>
 
-<hr />
+<hr>
 
 <table>
   <tr>
@@ -570,7 +570,7 @@
 
 <h1>0x06 附录三：安天CERT发现的C&amp;C地址</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>addagapublicschool.com/binfile.php</li>
@@ -611,9 +611,9 @@
 
 <h1>0x07 附录四：关于安天</h1>
 
-<hr />
+<hr>
 
-<p>安天从反病毒引擎研发团队起步，目前已发展成为拥有四个研发中心、监控预警能力覆盖全国、产品与服务辐射多个国家的先进安全产品供应商。安天历经十五年持续积累，形成了海量安全威胁知识库，并综合应用网络检测、主机防御、未知威胁鉴定、大数据分析、安全可视化等方面经验，推出了应对持续、高级威胁（APT）的先进产品和解决方案。安天技术实力得到行业管理机构、客户和伙伴的认可，安天已连续四届蝉联国家级安全应急支撑单位资质，亦是CNNVD六家一级支撑单位之一。安天移动检测引擎是获得全球首个AV-TEST（2013）年度奖项的中国产品，全球超过十家以上的著名安全厂商都选择安天作为检测能力合作伙伴。</p>      </p>
+<p>安天从反病毒引擎研发团队起步，目前已发展成为拥有四个研发中心、监控预警能力覆盖全国、产品与服务辐射多个国家的先进安全产品供应商。安天历经十五年持续积累，形成了海量安全威胁知识库，并综合应用网络检测、主机防御、未知威胁鉴定、大数据分析、安全可视化等方面经验，推出了应对持续、高级威胁（APT）的先进产品和解决方案。安天技术实力得到行业管理机构、客户和伙伴的认可，安天已连续四届蝉联国家级安全应急支撑单位资质，亦是CNNVD六家一级支撑单位之一。安天移动检测引擎是获得全球首个AV-TEST（2013）年度奖项的中国产品，全球超过十家以上的著名安全厂商都选择安天作为检测能力合作伙伴。</p>      <p></p>
     
 			</body>
 		</html>

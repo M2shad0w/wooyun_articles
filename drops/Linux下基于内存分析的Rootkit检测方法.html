@@ -3,18 +3,18 @@
 			<head>
 			     <title>Linux下基于内存分析的Rootkit检测方法 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4731">http://drops.wooyun.org/tips/4731</a></h1>
 				
       <p>
-        <h1>0x00 引言</h1>
+        </p><h1>0x00 引言</h1>
 
-<hr />
+<hr>
 
 <p>某Linux服务器发现异常现象如下图，确定被植入Rootkit，但运维人员使用常规Rootkit检测方法无效，对此情况我们还可以做什么？</p>
 
-<p><img src="http://static.wooyun.org/drops/20150122/2015012210534589860image0013.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150122/2015012210534589860image0013.png" alt="enter image description here"></p>
 
 <p>图1 被植入Rootkit的Linux服务器</p>
 
@@ -32,7 +32,7 @@
 
 <h1>0x01 Rootkit实现方式和检测方法</h1>
 
-<hr />
+<hr>
 
 <p>一般来说，Rootkit检测方式有以下几种：</p>
 
@@ -45,7 +45,7 @@
 
 <p>在分析这几种检测方法的优劣之前，我们先通过图2了解一下Linux Rootkit的一般实现原理</p>
 
-<p><img src="http://static.wooyun.org/drops/20150122/2015012210544792030image002.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150122/2015012210544792030image002.png" alt="enter image description here"></p>
 
 <p>图2 Linux中系统命令执行的一般流程</p>
 
@@ -53,7 +53,7 @@
 
 <p>那么如果中了Rootkit，这个流程会发生什么变化呢？下面通过图3来了解一下。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150122/2015012211001475869image0033.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150122/2015012211001475869image0033.png" alt="enter image description here"></p>
 
 <p>图3 Rootkit的一般执行流程</p>
 
@@ -76,7 +76,7 @@
 
 <p>在rkhunter脚本文件中，scanrootkit函数部分代码如下：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150122/2015012211012643016image004.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150122/2015012211012643016image004.png" alt="enter image description here"></p>
 
 <p>图4 rkhunter中的scanrootkit函数</p>
 
@@ -87,7 +87,7 @@ RKHTMPVAR="${RKHINST_SIG_DIR}"
 RKHINST_SIG_DIR="${RKHINST_DB_DIR}/signatures"
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150122/2015012211021497528image0053.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150122/2015012211021497528image0053.png" alt="enter image description here"></p>
 
 <p>图5 Signatures目录中的文件列表——Rootkit签名列表</p>
 
@@ -95,19 +95,19 @@ RKHINST_SIG_DIR="${RKHINST_DB_DIR}/signatures"
 
 <p>下面的四幅图分别是Adore和KBeast两个Rootkit检测的具体代码。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150122/2015012211031041527image006.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150122/2015012211031041527image006.png" alt="enter image description here"></p>
 
 <p>图6 rkhunter中经典Rootkit Adore的检测流程</p>
 
-<p><img src="http://static.wooyun.org/drops/20150122/2015012211034813952image0074.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150122/2015012211034813952image0074.png" alt="enter image description here"></p>
 
 <p>图7 rkhunter中检测Adore的文件和目录的清单</p>
 
-<p><img src="http://static.wooyun.org/drops/20150122/2015012211040582777image008.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150122/2015012211040582777image008.png" alt="enter image description here"></p>
 
 <p>图8 rkhunter中Rootkit KBeast的检测流程</p>
 
-<p><img src="http://static.wooyun.org/drops/20150122/2015012211042546391image0093.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150122/2015012211042546391image0093.png" alt="enter image description here"></p>
 
 <p>图9 rkhunter中检测KBeast的文件和目录的清单</p>
 
@@ -115,7 +115,7 @@ RKHINST_SIG_DIR="${RKHINST_DB_DIR}/signatures"
 
 <p>而另一款流行的Rootkit检测工具chkrootkit，其LKM Rootkit检测模块源文件为chkproc.c，最后更新日期为2006.1.11日。检测原理与rkhunter大致相似，也主要基于签名检测并将ps命令的输出同/proc目录作比对。在它的FAQ中Q2的回答也印证了我们的结论。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150122/2015012211054736902image010.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150122/2015012211054736902image010.png" alt="enter image description here"></p>
 
 <p>图10 chkrootkit的FAQ之Q2</p>
 
@@ -164,45 +164,45 @@ RKHINST_SIG_DIR="${RKHINST_DB_DIR}/signatures"
 
 <h1>0x02 基于内存检测和分析Rootkit</h1>
 
-<hr />
+<hr>
 
 <p>Rootkit难以被检测，主要是因为其高度的隐匿特性，一般表现在进程、端口、内核模块和文件等方面的隐藏。但无论怎样隐藏，内存中一定有这些方面的蛛丝马迹，如果我们能正常dump物理内存，并通过debug symbols.和kernel`s data structure来解析内存文件，那么就可以对系统当时的活动状态有一个真实的“描绘”，再将其和直接在系统执行命令输出的“虚假”结果做对比，找出可疑的方面。下面简述一下部分原理。</p>
 
 <h2>1. 基于内存分析检测进程</h2>
 
-<hr />
+<hr>
 
 <p>在Linux系统中查看进程一般执行的是ps –aux命令，其实质是通过读取/proc/pid/来获取进程信息的。而在内核的task&#95;struct注3(进程结构体)中，也同样包含进程pid、 创建时间、映像路径等信息。也就是说每个进程的相关信息都可以通过其对应task&#95;struct内存地址获取。而且，每个task&#95;struct通过next&#95;task和prev&#95;task串起成为一个双向链表，可通过for&#95;each&#95;task宏来遍历进程。基于这个原理我们可以先找到PID为0的init&#95;task symobol（祖先进程）的内存地址，再进行遍历就能模拟出ps的效果。部分细节可参考下图。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150122/2015012211135646971image0113.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150122/2015012211135646971image0113.png" alt="enter image description here"></p>
 
 <p>图11 内核中的task_struct</p>
 
 <p>此外，Linux内核中有一个东西叫PID Hash Chain，如图12所示，它是一个指针数组,每个元素指向一组pid的task&#95;struct链表中的元素 ，能够让内核快速的根据pid找到对应的进程。所以分析pid&#95;hash也能用来检测隐藏进程和获取相应进程信息,并且效率更高。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150122/2015012212071570098image012.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150122/2015012212071570098image012.png" alt="enter image description here"></p>
 
 <p>图12 内核中的PID Hash Chain</p>
 
 <h2>2. 基于内存分析Process Memory Maps（进程映射）</h2>
 
-<hr />
+<hr>
 
 <p>在task&#95;struct中，mm&#95;struct注4描述了一个进程的整个虚拟地址空间，进程映射主要存储在一个vm&#95;area&#95;struct的结构变量mm_rb注5和mmap 中，大致结构如下图所示</p>
 
-<p><img src="http://static.wooyun.org/drops/20150122/2015012212081829734image0134.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150122/2015012212081829734image0134.png" alt="enter image description here"></p>
 
 <p>图13 mm_struct(内存描述符)的结构</p>
 
-<p>每一个vm&#95;area&#95;struct节点详细记录了VMA（virtual memory area）的相关属性，比如vm&#95;start（起始地址）、vm&#95;end（结束地址）、vm&#95;flags（访问权限）以及对应的vm&#95;file（映射文件）。从内存中我们得到信息就相当于获得了/proc/<pid>/maps的内容。</p>
+<p>每一个vm&#95;area&#95;struct节点详细记录了VMA（virtual memory area）的相关属性，比如vm&#95;start（起始地址）、vm&#95;end（结束地址）、vm&#95;flags（访问权限）以及对应的vm&#95;file（映射文件）。从内存中我们得到信息就相当于获得了/proc/<pid>/maps的内容。</pid></p>
 
 <h2>3. 基于内存分析检测网络连接和打开的文件(lsof)</h2>
 
-<hr />
+<hr>
 
 <p>Linux中的lsof（List Open Files）实质是读取/proc/pid/文件夹中的信息。而这些信息通过task_struct也能获取。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150122/2015012212083718910image014.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150122/2015012212083718910image014.png" alt="enter image description here"></p>
 
 <p>图14 内核中的task_struct细节</p>
 
@@ -212,21 +212,21 @@ RKHINST_SIG_DIR="${RKHINST_DB_DIR}/signatures"
 
 <h2>4. 基于内存分析检测bash_history</h2>
 
-<hr />
+<hr>
 
 <p>后渗透测试阶段，攻击者常使用history –c命令来清空未保存进.bash&#95;history文件的命令历史。而在Rootkit中，通过配置HISTSIZE = 0 或将HISTFILE = /dev/null也是一种常见的隐藏命令历史的方法。对于后者，由于bash进程的history也记录在相应的MMAP中（其对应的宏定义为 HISTORY&#95;USE&#95;MMAP注6），通过history&#95;list()函数相应的mmap数据也可以还原其历史记录。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150122/2015012212101872935image0153.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150122/2015012212101872935image0153.png" alt="enter image description here"></p>
 
 <p>图15 bash 4.0源码histfile.c文件中history&#95;do&#95;write函数功能图示.</p>
 
 <h2>5. 基于内存分析检测内核模块</h2>
 
-<hr />
+<hr>
 
 <p>通过遍历module list上所有的struct module来检查Rootkit是一种代替lsmod命令的的方法。但是如果Rootkit把自己的LKM从module list摘除，但仍加载在内存中，这种方法就不起作用了。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150122/2015012212104093112image016.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150122/2015012212104093112image016.png" alt="enter image description here"></p>
 
 <p>图16 内核中Kernel Module List</p>
 
@@ -234,13 +234,13 @@ RKHINST_SIG_DIR="${RKHINST_DB_DIR}/signatures"
 
 <h2>6. 基于内存分析检测process credentials</h2>
 
-<hr />
+<hr>
 
 <p>在2.6.29内核的以前版本，Rootkit可以将用户态的进程通过设置其effective user ID和effective group ID为0（root）进行特权提升。而在后面的版本中，kernel引入了'cred' structure。为此，Rootkit与时俱进，通过设置同某个root权限进程一样的'cred' structure 来应对这种改进。所以通过检查所有进程的'cred' structure 能更好的发现活动的Rootkit。</p>
 
 <h2>7. 基于内存分析检测Rootkit的流程</h2>
 
-<hr />
+<hr>
 
 <p>限于篇幅，本文不再介绍更多的原理和细节，简单总结一下这种方法的的大致流程。</p>
 
@@ -249,13 +249,13 @@ RKHINST_SIG_DIR="${RKHINST_DB_DIR}/signatures"
 3 使用profile解析内存映像文件，输出系统信息
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150122/2015012212170910146image0172.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150122/2015012212170910146image0172.png" alt="enter image description here"></p>
 
 <p>图17 基于内存分析检测Rootkit原理示意图</p>
 
 <h1>0x03 总结与实践</h1>
 
-<hr />
+<hr>
 
 <p>基于内存分析检测Rootkit的方法比对常规的检测方法有较大的优势，但它不是万能的，如果被Bootkit之类的高级Rootkit干扰，Dump的物理内存不正确或不完整，后面的步骤就是空中阁楼。另外也要确保制作Profile时需要的System.map没有被篡改或者直接使用同一内核版本号的Linux发行版中的文件来替代。</p>
 
@@ -263,7 +263,7 @@ RKHINST_SIG_DIR="${RKHINST_DB_DIR}/signatures"
 
 <h1>0x04 附注</h1>
 
-<hr />
+<hr>
 
 <pre><code>注1：Linux中的so（shared object）文件近似于Windows下的dll（dynamic link library）文件，均用来提供函数和资源。
 注2：Syscall Table一般可以通过查看/boot/System.map文件来获取其内容
@@ -275,9 +275,9 @@ RKHINST_SIG_DIR="${RKHINST_DB_DIR}/signatures"
 
 <h1>0x05 参考文献</h1>
 
-<hr />
+<hr>
 
-<p>http://www.rootkitanalytics.com/kernelland/linux-kernel-rootkit.php https://media.blackhat.com/bh-us-11/Case/BH&#95;US&#95;11&#95;Case&#95;Linux_Slides.pdf https://www.safaribooksonline.com/library/view/understanding-the-linux/0596005652/ch03s02.html http://www.wowotech.net/linux/19.html http://www.lenky.info/archives/2012/04/1424 http://code.google.com/p/volatility/</p>      </p>
+<p>http://www.rootkitanalytics.com/kernelland/linux-kernel-rootkit.php https://media.blackhat.com/bh-us-11/Case/BH&#95;US&#95;11&#95;Case&#95;Linux_Slides.pdf https://www.safaribooksonline.com/library/view/understanding-the-linux/0596005652/ch03s02.html http://www.wowotech.net/linux/19.html http://www.lenky.info/archives/2012/04/1424 http://code.google.com/p/volatility/</p>      <p></p>
     
 			</body>
 		</html>

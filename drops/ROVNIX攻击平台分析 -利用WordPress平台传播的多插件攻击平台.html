@@ -3,24 +3,24 @@
 			<head>
 			     <title>ROVNIX攻击平台分析 -利用WordPress平台传播的多插件攻击平台 - SwordLea</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/7478">http://drops.wooyun.org/papers/7478</a></h1>
 				
       <p>
-        <p>微信公众号:Antiylab</p>
+        </p><p>微信公众号:Antiylab</p>
 
 <h1>0x00 背景</h1>
 
-<hr />
+<hr>
 
 <p>近期，安天安全研究与应急处理中心（安天CERT）的安全研究人员在跟踪分析HaveX家族样本的过程中，意外地发现了Rovnix家族（Trojan/Win32.Rovnix）在建立其恶意代码下载服务器时，也开始使用类似HaveX的方式，即：使用WordPress搭建的网站，或入侵第三方由WordPress搭建的正常网站（HaveX的C&amp;C服务器地址都是通过入侵由WrdPress搭建的网站得到的）。因此，安天CERT 的研究人员对Rovnix家族展开分析。</p>
 
 <h1>0x01 威胁概述</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711511164573.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150727/2015072711511164573.png" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -32,7 +32,7 @@
 
 <h1>0x02. 样本功能分析</h1>
 
-<hr />
+<hr>
 
 <p><strong>2.1 主程序分析</strong></p>
 
@@ -63,23 +63,23 @@ VT检测结果 32 / 56
 
 <p>Rovnix主程序的主要功能是回传用户系统信息、释放其他插件、安装Bootkit以及加载插件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711511262029.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150727/2015072711511262029.png" alt="enter image description here"></p>
 
 <p>图 2 主程序流程图</p>
 
 <p>1、样本运行后首先解密出自身代码，将地址401000处的数据清0，再重新写入解密后的代码。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711511231162.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150727/2015072711511231162.png" alt="enter image description here"></p>
 
 <p>图3 解密自身代码</p>
 
 <p>2、进入代码空间后，使用Xor 0x14h解密对应的字符串。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711511482232.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150727/2015072711511482232.png" alt="enter image description here"></p>
 
 <p>3、随后检测样本运行环境，包括是否运行于虚拟机环境、沙箱环境。样本使用的异常处理机制并非常见的SHE（Structure Exception Handler，结构化异常处理），而且采用了VEH（Vectored Exception Handler，向量化异常处理）。样本检测当前运行环境是否支持脚本语言（如：Python、perl等），并检查样本执行路径及文件名中，是否包含sample、virus等字样（这通常是反病毒厂商在其动态分析平台所使用的文件名），从而判断是否运行于恶意代码分析环境。同时，这些环境信息也会上传到C&amp;C服务器。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711511492382.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150727/2015072711511492382.png" alt="enter image description here"></p>
 
 <p>4、该样本随后执行提权（WIN7利用漏洞提权、XP利用普通提权）、复制自身到其他目录、修改文件时间、自删除、检测反病毒软件、回传系统信息、安装VBR-BootKit等一系列操作。</p>
 
@@ -120,7 +120,7 @@ VT检测结果 32 / 56
 
 <h1>3.2 插件分析</h1>
 
-<hr />
+<hr>
 
 <p>安天CERT研究人员对Rovnix的插件进行分析，发现若干其他插件，这些插件均从相关恶意服务器下载执行，其中包括具有TOR功能的洋葱匿名网络服务的客户端程序、后门程序、驱动程序、虚拟网络等，详情见如下列表：</p>
 
@@ -178,11 +178,11 @@ VT检测结果 31 / 55
 
 <p>该插件为主程序释放的DLL插件，该DLL将大量字符串与API进行加密处理，解密后的主要功能包括更新C&amp;C地址、创建命名管道、下载更多插件等。详细分析流程图与描述如</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711511471520.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150727/2015072711511471520.png" alt="enter image description here"></p>
 
 <p>1、解密字符串：样本运行后首先将该样本中所使用到的系统中的DLL、要操作的注册表键值、进程名称均使用异或0x14的方式进行了加密。其中，对于窄字节形式字符串，将以BYTE为单位异或0x14，对于宽字节形式字符串将以WORD为单位异或0x14。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711512941192.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150727/2015072711512941192.png" alt="enter image description here"></p>
 
 <p>2、随后样本创建线程，进行加载样本进程的判断，并置位对应的内存标志，样本判断如下4个加载自身的程序。</p>
 
@@ -201,11 +201,11 @@ rundll32.exe 0x76016354
 
 <p>3、样本获取系统文件路径并提取卷标、磁盘类型等信息。如果样本是NTFS类型，则置位76016344内存为1</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711511729575.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150727/2015072711511729575.png" alt="enter image description here"></p>
 
 <p>并根据磁盘信息创建互斥量字符串</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711511882077.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150727/2015072711511882077.png" alt="enter image description here"></p>
 
 <p>互斥量的组成Global\BD（文件系统类型\卷序列号），如：Global\BDNTFS816090805。</p>
 
@@ -219,9 +219,9 @@ rundll32.exe 0x76016354
 
 <p>线程4： 通过创建命名管道的方式与其他恶意进程进行通信。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711511969815.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150727/2015072711511969815.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711511929109.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150727/2015072711511929109.png" alt="enter image description here"></p>
 
 <p>管道的命名也与卷序列号有关，.\pipe\vhost（卷序列号），如：.\pipe\vhost816090805</p>
 
@@ -231,7 +231,7 @@ rundll32.exe 0x76016354
 
 <p>在样本中C&amp;C域名有3个，均经过异或0x14后，键名称分别为：SH1、SH2、SH3，保存到注册表中，地址为：HKCU（或HKLM）\Software\Microsoft\Product\B（卷序列号）。样本读取该键值，判断是否有数据，如果有，则更新到样本中；如果没有，则使用样本中硬编码的三个C&amp;C域名。当连网获取到新的C&amp;C后，会更新到注册表中。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711512071819.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150727/2015072711512071819.png" alt="enter image description here"></p>
 
 <p>根据GDA解密后的域名：</p>
 
@@ -262,17 +262,17 @@ condition:
 
 <h1>0x03 传播URL分析</h1>
 
-<hr />
+<hr>
 
 <p>2015年，安天CERT共发现了300多个恶意代码下载地址，URL对应的IP地理位置涉及34个国家，其中数量最多的国家是美国，占总数量的一半以上。这些URL有一个共同的特点，如下图所示</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711530449637.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150727/2015072711530449637.png" alt="enter image description here"></p>
 
 <p>图 7 Rovnix下载地址结构</p>
 
 <p>与此同时，安天CERT又发现了另一个家族的样本也是使用类试的URL结构形式如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711512320191.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150727/2015072711512320191.png" alt="enter image description here"></p>
 
 <p>图8 另一个家族的地址结构</p>
 
@@ -284,13 +284,13 @@ condition:
 
 <h1>0x04 总结</h1>
 
-<hr />
+<hr>
 
 <p>Rovnix是一个喜欢使用冷门技术的恶意代码家族，具有如下特性：它喜欢使用VEH异常处理机制，BootKit使用的是VBR-BootKit；支持众多的Windows版本，根据环境投放32位或64位的插件；定制化的插件支持多种恶意功能。这些特性让安天CERT的研究人员将其归类为专业化的攻击平台，是有可能被用来进行定向攻击的武器之一。</p>
 
 <p>PS:插件Hash列表见原文</p>
 
-<p>博文地址: http://www.antiy.com/response/ROVNIX.html</p>      </p>
+<p>博文地址: http://www.antiy.com/response/ROVNIX.html</p>      <p></p>
     
 			</body>
 		</html>

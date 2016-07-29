@@ -3,38 +3,38 @@
 			<head>
 			     <title>三个白猫条条大路通罗马系列2之二进制题分析 - netwind</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/16113">http://drops.wooyun.org/binary/16113</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>该题目是一道算法题，算法涉及二次HASH加密及验证。本人通过分析，认为只有用暴力枚举的方法才能得到认证码。经过长时间跟踪，通过研究加密算法，分析出了通过枚举的方式猜解得到认证码的方法。本文将先对该题进行二进制逆向分析，然后进行算法破解分析。</p>
 
 <h1>0x01 逆向</h1>
 
-<hr />
+<hr>
 
 <p>直接将exe拖入IDA中，然后查找字符串Your code 和Wrong code</p>
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160601/2016060103495182066190.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160601/2016060103495182066190.png" alt=""></p>
 
 <p>找到的每处所在的函数都按F2设置一个断点：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160601/2016060103495386691248.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160601/2016060103495386691248.png" alt=""></p>
 
 <p>选择local win32 debugger，然后点击开始按钮进行调试：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160601/2016060103495586348327.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160601/2016060103495586348327.png" alt=""></p>
 
 <p>这时候程序中断在我们设置的断点处：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160601/2016060103495788915423.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160601/2016060103495788915423.png" alt=""></p>
 
 <p>上图中，如果界面显示的是汇编代码，直接按一下F5就切换到了伪C代码里了。</p>
 
@@ -56,7 +56,7 @@ int __cdecl sub_431970(int a1, int a2)
         v2 = strlen(secret[0]);
         if ( k &gt;= v2 )
           break;
-        if ( secret[0][k] == *(_BYTE *)(j + a1) )  //a1 由b@@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f084a3b0b2a8">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="cc878ca8a2">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@@X转换得到
+        if ( secret[0][k] == *(_BYTE *)(j + a1) )  //a1 由b@@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f084a3b0b2a8">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="cc878ca8a2">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@@X转换得到
         {
           v7 &lt;&lt;= 6;
           v7 += k;
@@ -73,13 +73,13 @@ int __cdecl sub_431970(int a1, int a2)
 }
 </code></pre>
 
-<p>通过阅读上面的代码，以及跟踪分析，首先发现字符串a1是把我们输入的认证码依次替换掉<code>b@@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f185a2b1b3a9">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b7fcf7d3d9">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@@X</code>中的<code>@</code>得到的。另外字符串secret[0]是固定的值为：<code>R9Ly6NoJvsIPnWhETYtHe4Sdl+MbGujaZpk102wKCr7/ODg5zXAFqQfxBicV3m8U</code></p>
+<p>通过阅读上面的代码，以及跟踪分析，首先发现字符串a1是把我们输入的认证码依次替换掉<code>b@@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f185a2b1b3a9">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b7fcf7d3d9">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@@X</code>中的<code>@</code>得到的。另外字符串secret[0]是固定的值为：<code>R9Ly6NoJvsIPnWhETYtHe4Sdl+MbGujaZpk102wKCr7/ODg5zXAFqQfxBicV3m8U</code></p>
 
 <p>通过查看内存值，便一目了然：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160601/2016060103495867693519.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160601/2016060103495867693519.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160601/2016060103500029999618.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160601/2016060103500029999618.png" alt=""></p>
 
 <p>通过分析算法发现他的HASH加密算法如下：</p>
 
@@ -98,13 +98,13 @@ Hash= v7&lt;&lt;6+k //k是a1[i]在字符串secret[0]里的下标。
 
 <p>这里随便输入的认证码，本次HASH运算完，得到的12字节数据如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160601/2016060103500277335718.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160601/2016060103500277335718.png" alt=""></p>
 
 <p>然后第一次HASH结束。</p>
 
 <p>在函数尾部下断点，F9 一次，再F8后来到了 程序最开始的函数中，也就是第一次我们断下的函数里：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160601/2016060103500443487814.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160601/2016060103500443487814.png" alt=""></p>
 
 <p>继续按F8，进入了下面的函数：</p>
 
@@ -191,14 +191,14 @@ int __cdecl sub_431CA0(int a1)
 
 <h1>0x02 算法破解</h1>
 
-<hr />
+<hr>
 
-<p>针对第一部分HASH算法，我计划是从<code>R9Ly6NoJvsIPnWhETYtHe4Sdl+MbGujaZpk102wKCr7/ODg5zXAFqQfxBicV3m8U</code>里任意选取两个（根据需要也可能是1个）字符分别填充到<code>b@@t <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9bc8dbd9c3">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> @<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8fc4cfeb">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> n@@X</code>，并分组进行HASH加密，再验证HASH结果是否满足条件，如果满足条件，那么就保存一下选取的字符以及HASH后的密文。</p>
+<p>针对第一部分HASH算法，我计划是从<code>R9Ly6NoJvsIPnWhETYtHe4Sdl+MbGujaZpk102wKCr7/ODg5zXAFqQfxBicV3m8U</code>里任意选取两个（根据需要也可能是1个）字符分别填充到<code>b@@t <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9bc8dbd9c3">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> @<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8fc4cfeb">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> n@@X</code>，并分组进行HASH加密，再验证HASH结果是否满足条件，如果满足条件，那么就保存一下选取的字符以及HASH后的密文。</p>
 
 <p>具体算法如下：</p>
 
 <pre><code>#!c
-char m2[17]="b@@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="106443505248">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b1faf1d5df">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@@X",*p,*q;
+char m2[17]="b@@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="106443505248">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b1faf1d5df">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@@X",*p,*q;
     int in1=0,in2=0,in3=0,in4=0;
     q=m2;
     get(q,0,1,2);   //分组取hash  参数分别为字符串 序号  m2里需要填充的字符坐标
@@ -331,7 +331,7 @@ void get(char *s,int index,int in1,int in2)  //暴力枚举 获得满足第一�
 }
 void main()
 {
-    char m2[17]="b@@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1b6f485b5943">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a7ece7c3c9">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@@X",*p,*q;
+    char m2[17]="b@@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1b6f485b5943">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a7ece7c3c9">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@@X",*p,*q;
     int in1=0,in2=0,in3=0,in4=0;
     q=m2;
     get(q,0,1,2);   //分段hash  参数分别为字符串 序号  m2里需要填充的字符坐标
@@ -434,17 +434,17 @@ void main()
 
 <h1>0x03 验证</h1>
 
-<hr />
+<hr>
 
 <p>破解代码运行后结果如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160601/2016060103500624950915.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160601/2016060103500624950915.png" alt=""></p>
 
 <p>得到了两个结果：</p>
 
 <p>分别输入两个结果，显示如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160601/20160601035008312301014.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160601/20160601035008312301014.png" alt=""></p>
 
 <p>第一个结果，输入后没任何反应，也不提示错误。第二个输入后成功得到flag。</p>
 
@@ -452,11 +452,11 @@ void main()
 
 <h1>0x04 总结</h1>
 
-<hr />
+<hr>
 
 <p>本题主要是通过两次HASH运算 并分别进行验证的方式加密；两次都可以根据已知限制条件，分别采用暴力枚举的方式进行暴力破解。虽然破解代码量有点大，但是破解速度并没有收到影响，执行破解代码后能马上得到结果！</p>
 
-<p>文中有分析不当或不周全的地方，希望大家批评指正！</p>      </p>
+<p>文中有分析不当或不周全的地方，希望大家批评指正！</p>      <p></p>
     
 			</body>
 		</html>

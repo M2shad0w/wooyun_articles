@@ -3,14 +3,14 @@
 			<head>
 			     <title>隐写术总结 - AppLeU0</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4862">http://drops.wooyun.org/tips/4862</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>之前还没有见到drops上有关于隐写术的总结，我之前对于隐写术比较有兴趣，感觉隐写术比较的好玩。所以就打算总结总结一些隐写术方面的东西。写的时候，可能会有错误的地方，请不吝赐教，谢谢。</p>
 
@@ -18,7 +18,7 @@
 
 <p>最开始接触到隐写术，是看到一种叫做图种的东西，当时不懂，只说要另存为zip，然后解压出来就可以了，当时觉得特别神奇，就像发现了新大陆，然后就尝试了一下，发现可以用另存为zip的方式，用7z或者是winzip等工具打开，然后就可以看到福利了。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583591324.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583591324.png" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -26,13 +26,13 @@
 
 <p>后来才懂得了，先制作一个1.zip，把想要隐藏的东西放进去，再需要一张jpg图片2.jpg，然后就可以执行一个命令 copy /b 2.jpg+1.zip output.jpg。就可以得到一张图种，这是利用了copy命令，将两个文件已二进制方式连接起来，生成output.jpg的新文件。而在jpg中，是有结束符的，16进制是FF D9，利用winhex可以看到正常的jpg结尾都是FF D9的，图片查看器会忽视jpg结束符之后的内容，所以我们附加的zip，自然也就不会影响到图像的正常显示。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583530521.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583530521.png" alt="enter image description here"></p>
 
 <p>图2.png</p>
 
 <p>这种类型的隐写也是比较容易被发现的，如果发现是jpg图片的话，观察文件结束符之后的内容，查看是否附加的内容，正常图片都会是FF D9结尾的。还有一种方式来发现就是利用binwalk这个工具，在kali下自带的一个命令行工具。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583553360.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583553360.png" alt="enter image description here"></p>
 
 <p>图片3.png</p>
 
@@ -40,17 +40,17 @@
 
 <h1>0x01 修改数据</h1>
 
-<hr />
+<hr>
 
 <p>上面说到的隐藏方式，是利用了增加数据的方式，把数据直接增加在了jpg后面。还有另一类隐藏的方法，就是利用了修改数据的方式来隐藏自己传递的信息。</p>
 
 <p>一种常见的方式是利用LSB来进行隐写，LSB也就是最低有效位 (Least Significant Bit)。原理就是图片中的像数一般是由三种颜色组成，即三原色，由这三种原色可以组成其他各种颜色，例如在PNG图片的储存中，每个颜色会有8bit，LSB隐写就是修改了像数中的最低的1bit，在人眼看来是看不出来区别的，也把信息隐藏起来了。譬如我们想把’A’隐藏进来的话，如下图，就可以把A转成16进制的0x61再转成二进制的01100001，再修改为红色通道的最低位为这些二进制串。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583637323.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583637323.png" alt="enter image description here"></p>
 
 <p>图4.png</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583659244.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583659244.png" alt="enter image description here"></p>
 
 <p>图4.png</p>
 
@@ -60,7 +60,7 @@
 
 <p>打开之后，使用Stegsolve——Analyse——Frame Browser这个可以浏览三个颜色通道中的每一位，可以在红色通道的最低位，发现一个二维码，然后可以扫描得到结果。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583641426.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583641426.png" alt="enter image description here"></p>
 
 <p>图6.png</p>
 
@@ -70,25 +70,25 @@
 
 <h1>0x02 隐写与加密</h1>
 
-<hr />
+<hr>
 
 <p>我们先要区分一个概念，隐写术和加解密的区别。其实说起来很简单，加解密的话，就是会出现一些神秘的，可疑的字符串或者是数据之类的。而隐写术的话，就是信息明明就在你的面前，你却对他视而不见。隐写术在CTF中出现时，常常会和加解密结合起来一起出现，或者是一些编码方式一起出现，以提高题目的难度。</p>
 
 <p>用一个ctf的题目作为例子吧，iscc2014中有一个题目，给了一个名为 此为gif图片.gif的文件，打开发现了报错。有的时候，会需要我们去修复图片，这对我们对于图片的文件结构要有了解。找到gif的文件格式，然后对照这个破损的文件。Gif的图片格式文档可以查看这个链接，http://dev.gameres.com/Program/Visual/Other/GIFDoc.htm</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583717722.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583717722.png" alt="enter image description here"></p>
 
 <p>图片8.png</p>
 
 <p>用winhex打开，我们会发现他和普通的GIF图片不一样，头部缺少了东西，在对比一些文档，会发现是少了GIF8。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583767535.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583767535.png" alt="enter image description here"></p>
 
 <p>图片9.png</p>
 
 <p>我们手动修复一下，增加GIF8。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583779653.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583779653.png" alt="enter image description here"></p>
 
 <p>图片10.png</p>
 
@@ -98,11 +98,11 @@
 
 <h1>0x03 载体</h1>
 
-<hr />
+<hr>
 
 <p>数据在隐藏的时候，我们常常是需要先分析是数据隐藏在哪里，也就是他在利用是什么做载体，之后才可以进一步的分析是加密或编码的。这也就是说我们要对一个图片的格式要有了解，才能知道哪些地方是可疑的，哪些是可以隐藏起信息的，会有冗余的成分在。举个例子吧，比如给了一个jpg的图片。除了我们之前说到的隐藏在结束符之后的信息，jpg图片还可以把信息隐藏的exif的部分。exif的信息是jpg的头部插入了数码照片的信息，比如是用什么相机拍摄的。这些信息我们也是可以控制的，用查看属性的方式可以修改一部分的信息，还可以用exif编辑器来进行编辑。Power_exif这个可以用来编辑。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583742750.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583742750.png" alt="enter image description here"></p>
 
 <p>图片11.png</p>
 
@@ -110,7 +110,7 @@
 
 <h1>0x04 编程辅助</h1>
 
-<hr />
+<hr>
 
 <p>有一些情况下，我们也是没有现成的工具来完成的，可以自己写一些简单的程序来辅助我们进行分析，或者是加解密。比如sctf的misc400的题目，就需要用到一些简单的编程。题目给出了一个png图片，需要我们找到有SCTF{}标志的flag。</p>
 
@@ -120,19 +120,19 @@
 
 <p>有详细的介绍。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583730998.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583730998.png" alt="enter image description here"></p>
 
 <p>图片12.png</p>
 
 <p>可以用pngcheck来辅助我们观察，可以看得更加清晰。pngcheck.exe -v sctf.png</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583840003.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583840003.png" alt="enter image description here"></p>
 
 <p>图片13.png</p>
 
 <p>可以看到，正常的块的length是在65524的时候就满了，而倒数第二个IDAT块长度是45027，最后一个长度是138，很明显最后一个IDAT块是有问题的，因为他本来应该并入到倒数第二个未满的块里。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583813078.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583813078.png" alt="enter image description here"></p>
 
 <p>图片14.png</p>
 
@@ -140,7 +140,7 @@
 
 <p>我们使用python来编程，先把那段数据处理一下，保存成16进制的。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583853090.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583853090.png" alt="enter image description here"></p>
 
 <p>图片15.png</p>
 
@@ -170,7 +170,7 @@ print result
 
 <p>得到的01 串的长度是625，除以8 除以7 都无法整除，也就是说没法直接转换成ascii码。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583935376.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583935376.png" alt="enter image description here"></p>
 
 <p>图片16.png</p>
 
@@ -197,11 +197,11 @@ pic.save("flag.png")
 
 <p>发现是一个二维码 可以编码来画出 0代表了是白色 而1代表了黑色，然后可能会需要旋转来调整一下，才能扫描出来。处理一下得到了一个二维码。然后扫描得到了flag。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583932639.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583932639.png" alt="enter image description here"></p>
 
 <p>图片17.png</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583959314.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583959314.png" alt="enter image description here"></p>
 
 <p>图片18.png</p>
 
@@ -211,31 +211,31 @@ pic.save("flag.png")
 
 <h1>0x05 双图</h1>
 
-<hr />
+<hr>
 
 <p>还有一种情况是比较特殊的，有的时候会给出两张图片，或者是需要你去寻找原来的图片来进行对比寻找隐藏的信息。这个一般是因为一张图片给出来的隐藏信息太过于隐蔽，无法找不到具体的位置，具体的信息。这个时候就要用到一些对比的技巧来查找了。比如ISG2014的misc200就是用到的这种给出了两张图的。有的情况下，第二张图是需要你自己去找到的。</p>
 
 <p>我们来看isg2014-misc200的题，题目给了一张png图片，png的图片，就怕里面插个什么rar之类的，所以先用linux下的binwalk命令跑一跑。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109583938289.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109583938289.png" alt="enter image description here"></p>
 
 <p>图片19.png</p>
 
 <p>跑一跑，发现了有两个PNG图片，binwalk会给出偏移，确定了偏移是0x1D55DC之后，用winhex把图片扣出来，保存成2.png。原来的图final.png删除后面那的一部分，保存成1.png。肉眼查看了一下，发现两张图片没有太大的区别，我们用软件来帮助我们区分他。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109584072895.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109584072895.png" alt="enter image description here"></p>
 
 <p>图片20.png</p>
 
 <p>用linux下的命令可以进行对比，生成一个有差异的图片diff.png。compare 1.png 2.png diff.png 观察一下发现了左下角有异常，png图片像数保存是从左到右，从下往上排列的。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109584064134.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109584064134.png" alt="enter image description here"></p>
 
 <p>图片21.png</p>
 
 <p>发现了左下的第二条像素有异常，对比一下1.png 2.png发现了2.png有问题 那么我们可以用神器stegsolve来辅助，stegsolve——Analyse——Image Combiner对比两个文件。查看Sub或Xor，可以发现左下角，第二条像数条是有异常的，有红色的出现。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109584058067.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109584058067.png" alt="enter image description here"></p>
 
 <p>图片22.png</p>
 
@@ -245,17 +245,17 @@ pic.save("flag.png")
 
 <p>这个题还有一个坑点就是偏移的问题 png图片的扫描是从左向右，从下往上来的。而坑的是这个图的信息隐藏并没有在一开头的像数，而是是第二行像数，所以就需要利用bmp的优势，储存无压缩，方便寻找到偏移，从而找到信息隐藏的地方。利用winhex打开，黑色的像数的在bmp中的hex的00保存的，那么我们就寻找不是00的地方。在偏移0x1110的地方可以发现</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109584098043.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109584098043.png" alt="enter image description here"></p>
 
 <p>图片23.png</p>
 
 <p>有不是00的字节，一开始还以为这些就是flag的信息了，后来才发现是因为两个图片sub影响到了效果，真正的信息是隐藏在2.png中的，所以打开由2.png转换的2.bmp来对，通过之前diff得到的偏移，寻找到0x1110的地方，直到0x1330结束，这是隐藏的信息。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109584194950.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109584194950.png" alt="enter image description here"></p>
 
 <p>图片24.png</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109584141205.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109584141205.png" alt="enter image description here"></p>
 
 <p>图片25.png</p>
 
@@ -273,13 +273,13 @@ pic.save("flag.png")
 
 <p>对比2.bmp可以发现隐藏了一些00 01这些信息，把这一部分扣出来。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109584236818.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109584236818.png" alt="enter image description here"></p>
 
 <p>图片26.png</p>
 
 <p>JPK——binary——binary to ascii</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109584252025.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109584252025.png" alt="enter image description here"></p>
 
 <p>图片27.png</p>
 
@@ -289,9 +289,9 @@ pic.save("flag.png")
 
 <h1>0x06 后记</h1>
 
-<hr />
+<hr>
 
-<p>这个总结其实还是缺很多的，因为隐写术能写的东西太多了，比如jpg的冗余信息的压缩也可以隐藏进信息，还有其他的多媒体文件也可以进行隐写，例如音频文件，视频文件等等，有很多东西可以研究。一开始是觉得隐写术特别的有趣才接触到的，就像是在藏宝寻宝一样，特别好玩，希望你们也可以感受到这种快乐。欢迎大家和我交流，我的博客地址是http://appleu0.sinaapp.com/。</p>      </p>
+<p>这个总结其实还是缺很多的，因为隐写术能写的东西太多了，比如jpg的冗余信息的压缩也可以隐藏进信息，还有其他的多媒体文件也可以进行隐写，例如音频文件，视频文件等等，有很多东西可以研究。一开始是觉得隐写术特别的有趣才接触到的，就像是在藏宝寻宝一样，特别好玩，希望你们也可以感受到这种快乐。欢迎大家和我交流，我的博客地址是http://appleu0.sinaapp.com/。</p>      <p></p>
     
 			</body>
 		</html>

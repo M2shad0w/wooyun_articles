@@ -3,14 +3,14 @@
 			<head>
 			     <title>CSRF简单介绍及利用方法 - VIP</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/155">http://drops.wooyun.org/papers/155</a></h1>
 				
       <p>
-        <h3>0x00 简要介绍</h3>
+        </p><h3>0x00 简要介绍</h3>
 
-<hr />
+<hr>
 
 <p>CSRF（Cross-site request forgery）跨站请求伪造，由于目标站无token/referer限制，导致攻击者可以用户的身份完成操作达到各种目的。根据HTTP请求方式，CSRF利用方式可分为两种。</p>
 
@@ -18,7 +18,7 @@
 
 <h3>0x01 GET类型的CSRF</h3>
 
-<hr />
+<hr>
 
 <p>这种类型的CSRF一般是由于程序员安全意识不强造成的。GET类型的CSRF利用非常简单，只需要一个HTTP请求，所以，一般会这样利用：</p>
 
@@ -27,7 +27,7 @@
 
 <p>如下图，在访问含有这个img的页面后，成功向http://wooyun.org/csrf.php?xx=11发出了一次HTTP请求。所以，如果将该网址替换为存在GET型CSRF的地址，就能完成攻击了。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810470535516.jpg" alt="20130701174309_63157.jpg" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091810470535516.jpg" alt="20130701174309_63157.jpg"></p>
 
 <p>乌云相关案例：</p>
 
@@ -37,7 +37,7 @@
 
 <h3>0x02 POST类型的CSRF</h3>
 
-<hr />
+<hr>
 
 <p>这种类型的CSRF危害没有GET型的大，利用起来通常使用的是一个自动提交的表单，如：</p>
 
@@ -57,13 +57,13 @@
 
 <h3>0x03 其他猥琐流CSRF</h3>
 
-<hr />
+<hr>
 
 <p>过基础认证的CSRF(常用于路由器):</p>
 
 <p>POC:</p>
 
-<pre><code>&lt;img src=http://admin:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="84e5e0e9edeac4b5bdb6aab5b2bcaab5aab5">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> /&gt; 
+<pre><code>&lt;img src=http://admin:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="84e5e0e9edeac4b5bdb6aab5b2bcaab5aab5">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> /&gt; 
 </code></pre>
 
 <p>加载该图片后，路由器会给用户一个合法的SESSION，就可以进行下一步操作了。</p>
@@ -74,7 +74,7 @@
 
 <h3>0x04 如何修复</h3>
 
-<hr />
+<hr>
 
 <p>针对CSRF的防范，有以下几点要注意：</p>
 
@@ -109,7 +109,7 @@ Token要注意保密性————敏感操作使用post，防止Token出现在
 
 <h3>0x05 测试CSRF中注意的问题</h3>
 
-<hr />
+<hr>
 
 <p>如果同域下存在xss的话，除了验证码，其他的方式都无法防御这个问题。</p>
 
@@ -138,7 +138,7 @@ http://attack.com/test.com/index.php
 document.getElementById("aa").src='javascript:"&lt;html&gt;&lt;body&gt;wooyun.org&lt;scr'+'ipt&gt;eval(你想使用的代码)&lt;/scr'+'ipt&gt;&lt;/body&gt;&lt;/html&gt;"';
 &lt;/script&gt;
 //来自于二哥gainover
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

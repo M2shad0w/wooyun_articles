@@ -3,12 +3,12 @@
 			<head>
 			     <title>Satellite Turla: APT Command and Control in the Sky - 左懒</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/8644">http://drops.wooyun.org/papers/8644</a></h1>
 				
       <p>
-        <p>你有看过卫星电视吗？对里面丰富的电视频道和广播电台是否感到非常惊讶？你有没有想过了解卫星电话或卫星网络（satellite-based Internet connections）是如何运作的？如果我告诉你，除了娱乐，交通和天气外卫星Internet还有更多的使用方法。更多，更多的...</p>
+        </p><p>你有看过卫星电视吗？对里面丰富的电视频道和广播电台是否感到非常惊讶？你有没有想过了解卫星电话或卫星网络（satellite-based Internet connections）是如何运作的？如果我告诉你，除了娱乐，交通和天气外卫星Internet还有更多的使用方法。更多，更多的...</p>
 
 <p><a href="https://youtu.be/Du3rBVZqKkk">Turla: Hiding Traces High in the Skies</a></p>
 
@@ -24,11 +24,11 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20150913/2015091304581911774satellite_Internet_en_5.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150913/2015091304581911774satellite_Internet_en_5.png" alt=""></p>
 
 <h1>0x01 技术细节</h1>
 
-<hr />
+<hr>
 
 <p>虽然比较罕见，但自2007年以来，几个顶尖的APT团队一直在使用卫星链路来管理他们的业务。大多数情况下使用的是C&amp;C基础设施，Turla就是其中之一。使用这个方法有一些优点，比如很难分辩出发起攻击的背后运营商，但它同时也给攻击者带来一些风险。</p>
 
@@ -40,7 +40,7 @@
 
 <h1>0x02 购买卫星网络链路，还是使用MitM攻击或BGP劫持?</h1>
 
-<hr />
+<hr>
 
 <p>购买卫星Internet链路是APT团队确保C&amp;C业务运转的选择之一。然而，全双工的卫星链路是非常昂贵的：一个简单的双工为1Mbit up/down卫星链路的费用可能高达每星期7000美刀。对于较长期的合同，这笔费用可能会大幅度降低，但带宽仍然非常昂贵。</p>
 
@@ -54,11 +54,11 @@
 
 <p>显然，这种极其明显和大规模的攻击几乎无法幸存太长时间，而这是运行APT的关键要求之一。因此，通过MitM劫持流量不是一个可行的方案，除非攻击者直接控制一些诸如骨干路由器和光纤高流量的网络点。有迹象表明，这种攻击越来越普遍，但有一个更简单的方法--劫持卫星网络。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150913/2015091304582470128satellite_Internet_en_6.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150913/2015091304582470128satellite_Internet_en_6.png" alt=""></p>
 
 <h1>0x03 劫持卫星链路（DVB-S）</h1>
 
-<hr />
+<hr>
 
 <p>S21Sec的研究人员Leonardo Nve Egea在过去已经介绍了几次卫星DVB-S链路劫持，详情查看：<a href="https://www.blackhat.com/presentations/bh-dc-10/Nve_Leonardo/BlackHat-DC-2010-Nve-Playing-with-SAT-1.2-wp.pdf">hijacking satellite DVB links was delivered at BlackHat 2010</a>。</p>
 
@@ -73,7 +73,7 @@
 
 <p>卫星盘和LNB最少要符合标准。TBS卡可能是最重要的组件。目前最好的DVB-S卡是<a href="http://www.tbsdtv.com/">TBS Technologies</a>生产的。<a href="http://www.tbsdtv.com/products/tbs6922se-dvb-s2-tv-tuner-pcie-card.html">TBS-6922SE</a>也许是最好的入门级卡。</p>
 
-<p><strong>TBS-6922SE PCIe card for receiving DVB-S channels</strong> <img src="http://static.wooyun.org//drops/20150913/2015091304584033866satellite_Internet_eng_11.jpg" alt="" /></p>
+<p><strong>TBS-6922SE PCIe card for receiving DVB-S channels</strong> <img src="http://static.wooyun.org//drops/20150913/2015091304584033866satellite_Internet_eng_11.jpg" alt=""></p>
 
 <p>上面所述的TBS卡特别适合这项任务，因为它有专门的Linux内核驱动并提供一个暴力扫描函数，允许测试宽频范围的信号。当然，使用其它PCI或PCIe卡可能也没问题。但是基于USB的卡相对较差，应该避免使用他们。</p>
 
@@ -83,9 +83,9 @@
 
 <h1>0x04 如何劫持卫星网络？</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org//drops/20150913/2015091304583649346satellite_Internet_eng_4.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150913/2015091304583649346satellite_Internet_eng_4.png" alt=""></p>
 
 <p>为了攻击基于卫星的Internet，这些链路的合法用户以及攻击者自己的卫星盘需要指向特定卫星广播流量，攻击者利用这些未加密的数据包，确定通过卫星的下行链路路由的IP地址，然后监听这个来自Internet的IP地址的数据包，一旦接收到TCP/IP的SYN包，他们就可以伪造一个TCP的SYN ACK应答包重新建立Internet链路。</p>
 
@@ -93,33 +93,33 @@
 
 <h1>0x05 受到侵害的Intenet范围</h1>
 
-<hr />
+<hr>
 
 <p>在分析过程中，我们观察到Turla团队利用几个卫星DVB-S Internet提供商，其中大部分是提供中东和非洲地区的downstream-only链路。有趣的是，覆盖地区并不包括欧洲和非洲。这意味着在中东或非洲需要一个卫星盘。另外，一个更大的卫星盘（3米+）可于增强其它地区信号。</p>
 
 <p>为了计算卫星盘的大小，可以使用各种工具，包括诸如satbeams.com的在线工具：</p>
 
-<p><strong>Sample dish calculation – (c) www.satbeams.com</strong> <img src="http://static.wooyun.org//drops/20150913/2015091304582812690satellite_Internet_eng_2.png" alt="" /></p>
+<p><strong>Sample dish calculation – (c) www.satbeams.com</strong> <img src="http://static.wooyun.org//drops/20150913/2015091304582812690satellite_Internet_eng_2.png" alt=""></p>
 
 <p>下表显示了Turla攻击者用域名解析器获得的卫星Internet服务提供商那些与C&amp;C服务器相关的IP地址。</p>
 
-<p><strong>Note: 84.11.79.6 is hardcoded in the configuration block of the malicious sample.</strong> <img src="http://static.wooyun.org//drops/20150913/2015091304584364785table11.png" alt="" /></p>
+<p><strong>Note: 84.11.79.6 is hardcoded in the configuration block of the malicious sample.</strong> <img src="http://static.wooyun.org//drops/20150913/2015091304584364785table11.png" alt=""></p>
 
 <p>下面是所观察到的卫星IP地址相关信息：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150913/2015091304584755521table21.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150913/2015091304584755521table21.png" alt=""></p>
 
 <p>84.11.79.6这个IP比较有趣，它属于IABG mbH的卫星IP范围。</p>
 
 <p>这个C&amp;C服务器IP地址是加密的，Turla团队在一个Agent.DNE后门中使用到：</p>
 
-<p><strong>Agent.DNE C&amp;C configuration</strong> <img src="http://static.wooyun.org//drops/20150913/2015091304583124305satellite_Internet_eng_3.png" alt="" /></p>
+<p><strong>Agent.DNE C&amp;C configuration</strong> <img src="http://static.wooyun.org//drops/20150913/2015091304583124305satellite_Internet_eng_3.png" alt=""></p>
 
 <p>这个Agent.DNE样本中的编译时间戳是2007年11月22日14点34分15秒星期四。说明Turla团队已使用了近八年的卫星Internet链路。</p>
 
 <h1>0x06 结论</h1>
 
-<hr />
+<hr>
 
 <p>这些链路通常都高达数个月，但从来不会太久。具体多久无法确定，因为有可能是服务器自身的业务安全限定或者是其它方由于要进行其它恶意行为而关闭。</p>
 
@@ -251,13 +251,13 @@ Trojan.Win32.Agent.dne
 
 <h1>0x08 参考</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li><a href="https://securelist.com/blog/virus-watch/58551/agent-btz-a-source-of-inspiration/">Agent.btz: a Source of Inspiration?</a></li>
 <li><a href="https://securelist.com/analysis/publications/65545/the-epic-turla-operation/">The Epic Turla operation</a></li>
 <li><a href="https://securelist.com/blog/research/67962/the-penquin-turla-2/">The ‘Penquin’ Turla</a></li>
-</ol>      </p>
+</ol>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>利用JSONP进行水坑攻击 - 大学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/6612">http://drops.wooyun.org/papers/6612</a></h1>
 				
       <p>
-        <h1>0x00 简介</h1>
+        </p><h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>前几天安全研究者Jaime Blasco发现了在中国某些特定主题的网站被进行了<a href="https://www.alienvault.com/open-threat-exchange/blog/watering-holes-exploiting-jsonp-hijacking-to-track-users-in-china">水坑攻击</a>，攻击方法有一定多样性，其中存在一些比较少见于此类型攻击中的技术，不过其实是比较早的技术了，国内猥琐流已经玩了很久的玩意。攻击类型的多样性在于，该安全公司并非追踪到了某个攻击组织的多次活动，而是某个特定主题网站的多次攻击。</p>
 
@@ -20,13 +20,13 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502390491117.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062502390491117.png" alt="enter image description here"></p>
 
 <p>至于提到的玩烂了，乌云上有记录的分析最早是剑心boss 2012年发布的 《Json hijacking/Json劫持漏洞》参考文献<a href="http://drops.wooyun.org/papers/42">4</a> 以及2014 年zone社区的两篇相关文章以及利用文章。可看参考<a href="http://zone.wooyun.org/content/16309">5</a>，<a href="http://zone.wooyun.org/content/16828">6</a>。</p>
 
 <h1>0x01 原理 &amp; 攻击分析</h1>
 
-<hr />
+<hr>
 
 <p>总结来说js会通过某种方式获取数据来方便用户的交互，这种获取数据的方式有一些通用的格式，这里就是json or jsonp。一般js会通过两种方式获取数据。一种是xmlhttp还有一种是script的形式。</p>
 
@@ -45,23 +45,23 @@ alert(a);
 
 <p>1 利用代码，通过某种方式在受害者访问的网站嵌入</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502390781633.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062502390781633.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502390879166.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062502390879166.png" alt="enter image description here"></p>
 
 <p>2 通过callback获取响应数据</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502390990853.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062502390990853.png" alt="enter image description here"></p>
 
 <p>3 解析响应数据</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502391169667.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062502391169667.png" alt="enter image description here"></p>
 
 <p>老外提到了一个<a href="http://jzking121.blog.51cto.com/5436671/1306505">中国安全博客</a> 代码风格有点像。这里大概原理已经解释的差不多了。</p>
 
 <h1>0x02 利用代码 &amp; 案例</h1>
 
-<hr />
+<hr>
 
 <p>关于这方面就是jacks写的《<a href="http://zone.wooyun.org/content/16309">JSON探针—定位目标网络虚拟信息身份</a>》参考5 和 xiaoxin在此之上扩展的 《<a href="http://zone.wooyun.org/content/16828">jsonp探针callback地址收集帖</a>》参考6。</p>
 
@@ -83,13 +83,13 @@ alert(Qmail.newMailsList.summary);
 
 <h1>0x03 攻击原因分析</h1>
 
-<hr />
+<hr>
 
 <p>Jaime Blasco提到攻击原因的方面，攻击出现某些特定的主题的网站，以某些少数民族以及支持自由言论的非政府组织。攻击目标以小部分群体为主，攻击的目的应该在于收集其个人的资料，其中一个原因可能在于在中国一部分网站受到gfw的拦截，但是只要使用vpn以及tor就可以正常访问，在使用某种代理的前提下收集这一部分群体的信息存在难度，那么就可以通过水坑的方式，跨域收集个人信息。</p>
 
 <h1>0x04 修复 &amp; 防御 方案</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>尽量避免跨域的数据传输，对于同域的数据传输使用xmlhttp的方式作为数据获取的方式，依赖于javascript在浏览器域里的安全性保护数据。</li>
@@ -109,7 +109,7 @@ alert(Qmail.newMailsList.summary);
 
 <h1>参考文献</h1>
 
-<hr />
+<hr>
 
 <p>(1] https://www.alienvault.com/open-threat-exchange/blog/cyber-espionage-campaign-against-the-uyghur-community-targeting-macosx-syst#sthash.fHOjOceQ.dpuf</p>
 
@@ -123,7 +123,7 @@ alert(Qmail.newMailsList.summary);
 
 <p>(6] http://zone.wooyun.org/content/16309</p>
 
-<p>(7] https://www.alienvault.com/open-threat-exchange/blog/watering-holes-exploiting-jsonp-hijacking-to-track-users-in-china</p>      </p>
+<p>(7] https://www.alienvault.com/open-threat-exchange/blog/watering-holes-exploiting-jsonp-hijacking-to-track-users-in-china</p>      <p></p>
     
 			</body>
 		</html>

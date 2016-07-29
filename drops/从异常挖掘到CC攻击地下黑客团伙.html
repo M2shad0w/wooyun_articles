@@ -3,16 +3,16 @@
 			<head>
 			     <title>从异常挖掘到CC攻击地下黑客团伙 - 百度安全攻防实验室</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/10656">http://drops.wooyun.org/papers/10656</a></h1>
 				
       <p>
-        <p>Author: 百度云安全天网团队 百度安全攻防实验室 百度云安全云端防护团队</p>
+        </p><p>Author: 百度云安全天网团队 百度安全攻防实验室 百度云安全云端防护团队</p>
 
 <h1>0x00 异常挖掘与回溯</h1>
 
-<hr />
+<hr>
 
 <p>11月13日，百度云安全天网系统，通过数十TB的日志挖掘，发现了安全宝某重点客户网站上的异常行为。之后我们的分析人员跟进，发现这是一起针对安全宝某重点客户的持续攻击。最终在客户系统上放置了Web后门。</p>
 
@@ -35,7 +35,7 @@ Content-Length: 60
 
 <p>通过进一步的分析，我们发现，该攻击者修改了Discuz系统的class&#95;core.php。在该class&#95;core.php中添加的代码如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151124/2015112412000698099p12.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151124/2015112412000698099p12.jpg" alt=""></p>
 
 <p>从该代码中，我们可以做出以下结论：</p>
 
@@ -46,7 +46,7 @@ Content-Length: 60
 
 <h1>0x01 影响确认和攻击代码</h1>
 
-<hr />
+<hr>
 
 <p>我们从CC的攻击代码中提取了以下特征fuwuqibeiheikeruqin，在现有的网页情报库中搜索，发现以下的链接地址：</p>
 
@@ -60,18 +60,18 @@ Content-Length: 60
 
 <p>以dm123.cn为例：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151124/2015112412074045322p21.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151124/2015112412074045322p21.jpg" alt=""></p>
 
 <p>显然该网站被利用来做CC攻击。</p>
 
 <p>同时我们针对以上网站挂CC攻击的js进行了分析，发现有三种:</p>
 
 <ol>
-<li>dm123.cn中，直接在dm123网站上挂js，脚本路径如下:<br />
+<li>dm123.cn中，直接在dm123网站上挂js，脚本路径如下:<br>
 <a href="http://www.dm123.cn/gd.js">http://www.dm123.cn/gd.js</a></li>
-<li>php100.com中，托管在SAE上的攻击脚本，脚本路径如下:<br />
+<li>php100.com中，托管在SAE上的攻击脚本，脚本路径如下:<br>
 <a href="http://jsddos.sinaapp.com/ddos.js">http://jsddos.sinaapp.com/ddos.js</a></li>
-<li>12edu.com中，通过api接口动态获得要攻击的网站，更加难以定位:<br />
+<li>12edu.com中，通过api接口动态获得要攻击的网站，更加难以定位:<br>
 <a href="http://www.12edu.com/api.php?op=count&amp;id=34380&amp;modelid=1">http://www.12edu.com/api.php?op=count&amp;id=34380&amp;modelid=1</a></li>
 </ol>
 
@@ -102,7 +102,7 @@ setInterval(imgflyygffhghddfgd, 0.1)
 
 <h1>0x02 身份确认</h1>
 
-<hr />
+<hr>
 
 <p>通过域名的相似度，我们在现有的网页情报库中发现了如下域名：</p>
 
@@ -119,7 +119,7 @@ setInterval(imgflyygffhghddfgd, 0.1)
 
 <p>对该域名的whois进行查询，如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151124/2015112411580894934p3.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151124/2015112411580894934p3.jpg" alt=""></p>
 
 <p>从我们发现该攻击到发稿前，该黑客做了如下的事情:</p>
 
@@ -130,7 +130,7 @@ setInterval(imgflyygffhghddfgd, 0.1)
 
 <h1>0x03 后续</h1>
 
-<hr />
+<hr>
 
 <p>我们有理由相信，这是一个在不断进化的地下黑客团体。通过更加隐蔽的手法进行CC攻击挂马。该问题的影响范围目前我们还在进一步确认。欢迎业内同仁继续跟进分析。</p>
 
@@ -143,7 +143,7 @@ setInterval(imgflyygffhghddfgd, 0.1)
 
 <p>我们从该攻击中提取了以下信息作为攻击情报或者IOC：</p>
 
-<p><a href="http://file.lbgoo.com/file_120/37/ver.php">http://file.lbgoo.com/file_120/37/ver.php</a></p>      </p>
+<p><a href="http://file.lbgoo.com/file_120/37/ver.php">http://file.lbgoo.com/file_120/37/ver.php</a></p>      <p></p>
     
 			</body>
 		</html>

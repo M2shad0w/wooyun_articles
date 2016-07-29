@@ -3,14 +3,14 @@
 			<head>
 			     <title>算力验证码的尝试 - EtherDream</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11704">http://drops.wooyun.org/tips/11704</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>验证码的初衷是人机识别。不过大多时候，只是用来增加一些时间成本，降低频率而已。</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 如何消耗时间</h1>
 
-<hr />
+<hr>
 
 <p>先来思考一个问题：写一个能消耗对方时间的程序。</p>
 
@@ -83,7 +83,7 @@ MD5("问题" + X) == "0000......"
 
 <h1>0x02 传统应用</h1>
 
-<hr />
+<hr>
 
 <p>Hashcash 早不是新鲜事，曾经在反垃圾邮件中就已使用。</p>
 
@@ -103,7 +103,7 @@ Hash(X, Salt) == "000000..."
 
 <h1>0x03 Web 应用</h1>
 
-<hr />
+<hr>
 
 <p>同样的，Hashcash 也能用于 Web。例如论坛，可在发帖时计算：</p>
 
@@ -152,7 +152,7 @@ end
 
 <h1>0x04 Web 性能</h1>
 
-<hr />
+<hr>
 
 <p>当然在 Web 中使用，性能也是一大问题。如果 10 秒的脚本计算，用本地程序只需 1 秒，那攻击者就可以使用本地版的外挂了。</p>
 
@@ -166,7 +166,7 @@ end
 
 <h1>0x05 致命缺陷</h1>
 
-<hr />
+<hr>
 
 <p>不过，语言上的性能差距还是有限的，外挂不会纠结于此，而是使用更强力的武器 —— GPU。</p>
 
@@ -187,7 +187,7 @@ end
 
 <h1>0x06 以暴制暴</h1>
 
-<hr />
+<hr>
 
 <p>如果我们也能在 Web 中调用显卡计算，那 GPU 版的外挂就毫无优势了。</p>
 
@@ -199,7 +199,7 @@ end
 
 <h1>0x07 代码混淆</h1>
 
-<hr />
+<hr>
 
 <p>上回讨论慢加密时，曾提到为什么要性能优化。因为自己创造加密算法是不推荐的，所以得优化现有的算法。</p>
 
@@ -215,7 +215,7 @@ end
 
 <h1>0x08 串行模式</h1>
 
-<hr />
+<hr>
 
 <p>Hashcash 的原理，决定了它是可以并行计算的。有什么样的算法，是无法并行计算的？</p>
 
@@ -284,7 +284,7 @@ end
 
 <h1>0x09 演示</h1>
 
-<hr />
+<hr>
 
 <p>因为 Hashcash 比较简单，所以这里演示一个 md5 版的，使用 asm.js 和 flash 实现，并对算法做了一定优化。</p>
 
@@ -294,7 +294,7 @@ end
 
 <p><a href="http://www.etherdream.com/FunnyScript/hashcash/js/test.html">http://www.etherdream.com/FunnyScript/hashcash/js/test.html</a></p>
 
-<p><img src="http://static.wooyun.org//drops/20151229/2015122910145265117demo.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151229/2015122910145265117demo.png" alt=""></p>
 
 <p>看起来好像不慢，不过对比 <a href="http://hashcat.net/oclhashcat/">GPU 的速度</a> 就相形见绌了。所以，使用经典算法的 Hashcash，简直就是不堪一击的。</p>
 
@@ -302,7 +302,7 @@ end
 
 <h1>0x0A 总结</h1>
 
-<hr />
+<hr>
 
 <p>最后来对比下，算力验证和传统图形验证的区别。</p>
 
@@ -381,7 +381,7 @@ end
 
 <p>当然，安全防御涉及的领域越多越好。每一个方案都不是无敌的，都只是为了增加一些攻击成本而已。</p>
 
-<p>所以算力验证，结合传统防御方案，才能出发挥价值。</p>      </p>
+<p>所以算力验证，结合传统防御方案，才能出发挥价值。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,16 +3,16 @@
 			<head>
 			     <title>Burpsuite中protobuf数据流的解析 - Vincent</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/12680">http://drops.wooyun.org/tools/12680</a></h1>
 				
       <p>
-        <p><strong>Author:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="94722635732a29d47d0c2b7d131873332f711e3c713a1d71113c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
+        </p><p><strong>Author:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="94722635732a29d47d0c2b7d131873332f711e3c713a1d71113c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>对于protobuf over-HTTP的数据交互方式Burpsuite不能正确的解析其中的数据结构，需要Burpsuite扩展才能解析，笔者使用mwielgoszewski的burp-protobuf-decoder<sup>【1】</sup>扩展实践了protobuf数据流的解析，供有需要的同学学习交流。笔者实践使用的环境： burpsuite+python2.7+protobuf2.5.0。</p>
 
@@ -20,23 +20,23 @@
 
 <h1>0x01 安装burp-protobuf-decoder扩展</h1>
 
-<hr />
+<hr>
 
 <p>burp-protobuf-decoder<sup>【1】</sup>扩展是基于protobuf库（2.5.x版本）开发的burpsuite python扩展，可用于解析、篡改 request/response中protobuf数据流。从<a href="https://github.com/mwielgoszewski/burp-protobuf-decoder">https://github.com/mwielgoszewski/burp-protobuf-decoder</a>下载该扩展源码，然后解压。</p>
 
 <p>该扩展是基于protobuf和jython实现的。先下载protobuf 2.5.0<sup>【2】</sup>源码进行编译，编译方法请参考其README.txt文件。需求在burpsuite的Extender中配置Jython<sup>【3】</sup>的路径：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/201602030751069811211.jpg" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160203/201602030751069811211.jpg" alt="p1"></p>
 
 <p>Burpsuite中添加扩展：</p>
 
 <ol>
 <li><p>在Burpsuite的Extender窗口中点击“Add”按钮，弹出的“Load Burp Extension”窗口中选择如下信息：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/201602030751094116721.jpg" alt="p2" /></p></li>
+<p><img src="http://static.wooyun.org//drops/20160203/201602030751094116721.jpg" alt="p2"></p></li>
 <li><p>然后Next，当看到如下信息时表示扩展加载成功：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/20160203075111668323.jpg" alt="p3" /></p></li>
+<p><img src="http://static.wooyun.org//drops/20160203/20160203075111668323.jpg" alt="p3"></p></li>
 </ol>
 
 <p><strong>Tips：</strong></p>
@@ -57,7 +57,7 @@
 
 <h1>0x02 protobuf简介</h1>
 
-<hr />
+<hr>
 
 <p>protobuf是Google开源的一个跨平台的结构化数据存储格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。</p>
 
@@ -97,7 +97,7 @@ address_book = addressbook_pb2.AddressBook()
 person = address_book.person.add()
 person.id = 9
 person.name = 'Vincent'
-person.email = <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="597e0f30373a3c372d192d3c2a2d773a3634">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>'
+person.email = <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="597e0f30373a3c372d192d3c2a2d773a3634">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>'
 phone = person.phone.add()
 phone.number = '15011111111'
 phone.type = 2
@@ -108,7 +108,7 @@ f.close()
 
 <p>序列化后的二进制数据流如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/20160203075114635374.jpg" alt="p4" /></p>
+<p><img src="http://static.wooyun.org//drops/20160203/20160203075114635374.jpg" alt="p4"></p>
 
 <p>有关Protobuf的语法网上已有很多文章了，你可以网上搜索或参考其官网<sup>【4】</sup>说明。</p>
 
@@ -120,7 +120,7 @@ f.close()
 
 <p>下图演示了protobuf如何解析两个 bytes。注意到最终计算前将两个 byte 的位置相互交换过一次，这是因为protobuf 字节序采用 little-endian 的方式。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/20160203075115128765.jpg" alt="p5" /> <em>(图片来自网络)</em></p>
+<p><img src="http://static.wooyun.org//drops/20160203/20160203075115128765.jpg" alt="p5"> <em>(图片来自网络)</em></p>
 
 <h3>2.2数值类型</h3>
 
@@ -195,7 +195,7 @@ f.close()
 
 <h3>2.3手动反序列化</h3>
 
-<p><img src="http://static.wooyun.org//drops/20160203/20160203075118511076.jpg" alt="p6" /></p>
+<p><img src="http://static.wooyun.org//drops/20160203/20160203075118511076.jpg" alt="p6"></p>
 
 <p>以上面例子中序列化后的二进制数据流进行反序列化分析：</p>
 
@@ -215,7 +215,7 @@ f.close()
 10 = 0001 0000 =&gt; value=16;
 </code></pre>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8e6621356b0118bfbe6a36246b23196922286c0e12d8e7e0edebe0facefaebfdfaa0ede1e36c0e13">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>；</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8e6621356b0118bfbe6a36246b23196922286c0e12d8e7e0edebe0facefaebfdfaa0ede1e36c0e13">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>；</p>
 
 <pre><code>#!bash
 22 = 0010 0010 =&gt; field_num=4, type=2;
@@ -237,7 +237,7 @@ f.close()
 1 {
   1: "Vincent"
   2: 9
-  3: "<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="43152a2d20262d3703372630376d202c2e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>"
+  3: "<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="43152a2d20262d3703372630376d202c2e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>"
   4 {
     1: "15011111111"
     2: 2
@@ -274,7 +274,7 @@ f.close()
 
 <h1>0x03 burpsuite+protobuf实战</h1>
 
-<hr />
+<hr>
 
 <p>用webpy模拟protobuf over-HTTP的web app。</p>
 
@@ -355,7 +355,7 @@ print 'response:',resp
 
 <p>此时burp中已解析出protobuf数据，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/20160203075121375967.jpg" alt="p7" /></p>
+<p><img src="http://static.wooyun.org//drops/20160203/20160203075121375967.jpg" alt="p7"></p>
 
 <p>但是这个结构的可读性还是比较差，我们可以通过逆向分析逐步猜测字段名称、类型，然后再解析，方便实现协议的逆向、安全测试等。</p>
 
@@ -385,29 +385,29 @@ message Root {
 
 <p>然后使用右键的“Load .proto”加载该文件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/20160203075123484058.jpg" alt="p8" /></p>
+<p><img src="http://static.wooyun.org//drops/20160203/20160203075123484058.jpg" alt="p8"></p>
 
 <p>再看解析结果：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/20160203075125983819.jpg" alt="p9" /></p>
+<p><img src="http://static.wooyun.org//drops/20160203/20160203075125983819.jpg" alt="p9"></p>
 
 <h3>3.2数据篡改</h3>
 
 <p>打开request拦截：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/201602030751289651710.jpg" alt="p10" /></p>
+<p><img src="http://static.wooyun.org//drops/20160203/201602030751289651710.jpg" alt="p10"></p>
 
 <p>运行<code>python overHttp_client.py</code>发送请求。拦截到request后，把<code>sub1_field2</code>改为999。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/2016020307512933236111.jpg" alt="p11" /></p>
+<p><img src="http://static.wooyun.org//drops/20160203/2016020307512933236111.jpg" alt="p11"></p>
 
 <p>“Forward”后看request数据，已被篡改：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/201602030751317063912.jpg" alt="p12" /></p>
+<p><img src="http://static.wooyun.org//drops/20160203/201602030751317063912.jpg" alt="p12"></p>
 
 <h1>0x04 参考</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>【1】<a href="https://github.com/mwielgoszewski/burp-protobuf-decoder">https://github.com/mwielgoszewski/burp-protobuf-decoder</a></li>
@@ -417,7 +417,7 @@ message Root {
 <li>【5】<a href="https://www.ibm.com/developerworks/cn/linux/l-cn-gpb/">https://www.ibm.com/developerworks/cn/linux/l-cn-gpb/</a></li>
 <li>【6】<a href="https://developers.google.com/protocol-buffers/docs/overview">https://developers.google.com/protocol-buffers/docs/overview</a></li>
 <li>【7】<a href="http://www.tssci-security.com/archives/2013/05/30/decoding-and-tampering-protobuf-serialized-messages-in-burp/">http://www.tssci-security.com/archives/2013/05/30/decoding-and-tampering-protobuf-serialized-messages-in-burp/</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

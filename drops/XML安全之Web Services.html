@@ -3,20 +3,20 @@
 			<head>
 			     <title>XML安全之Web Services - L.N.</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/5410">http://drops.wooyun.org/web/5410</a></h1>
 				
       <p>
-        <h1>0x01 引言</h1>
+        </p><h1>0x01 引言</h1>
 
-<hr />
+<hr>
 
 <p>前段时间搞站遇到了TRS的系统里面涉及到了ws（Web Services简称）的相关技术，不久前玩一个xx酒店的时候又通过ws进入了它的数据库，后来接连遇到或看见一些app服务和物联网相关系统中出现XML相关漏洞，于是搜索相关资料做技术积累。如果文中出现错误，望指正。     </p>
 
 <h1>0x02 什么是WS</h1>
 
-<hr />
+<hr>
 
 <!--more-->
 
@@ -26,7 +26,7 @@
 
 <h1>0x03 xml注入（soap注入）</h1>
 
-<hr />
+<hr>
 
 <p>以下将介绍一些利用场景，漏洞是千变万化的肯定不全，也不是每种环境都适用。</p>
 
@@ -49,19 +49,19 @@ A&lt;/USER&gt;&lt;USER role="admin"&gt;B
 
 <p>漏洞：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033016002146412.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150330/2015033016002146412.png" alt="enter image description here"></p>
 
-<p>改变了<lname><lname>为空，通过返回错误发现loginid作为登陆判断：</p>
+<p>改变了<lname><lname>为空，通过返回错误发现loginid作为登陆判断：</lname></lname></p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033016002227033.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150330/2015033016002227033.png" alt="enter image description here"></p>
 
 <p>poc:</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033016002218100.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150330/2015033016002218100.png" alt="enter image description here"></p>
 
 <p> 结果bypass登陆：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033016002230060.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150330/2015033016002230060.png" alt="enter image description here"></p>
 
 <h2>情景3：</h2>
 
@@ -81,7 +81,7 @@ A&lt;/USER&gt;&lt;USER role="admin"&gt;B
 
 <h1>0x03 SQL注入和xpath注入</h1>
 
-<hr />
+<hr>
 
 <p>总所周知SQL注入，注入的是数据库，作为owasp top10的漏洞，存在相当的普遍，ws中也同样存在。wooyun上也同样存在案例 <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2015-094720">WooYun: 安盛天平某平台系统可被getshell第四弹，并存在注入</a> ，这种ws上的sql注入漏洞也是非常容易被忽略的。至于sql注入的利用，不用多少，不同数据库不同注入手法，和我们常见的sql注入方法一样，并无区别。</p>
 
@@ -117,7 +117,7 @@ A&lt;/USER&gt;&lt;USER role="admin"&gt;B
 
 <h1>0x04 DDOS和XXE</h1>
 
-<hr />
+<hr>
 
 <p>为什么会有DDOS和XXE呢，前面已经说过了ws可以看成xml和http的结合，因此XML相关漏洞也是可能会出现在ws之中的，关于xml中的DDOS和XXE都是各位大牛都做了很多分析：</p>
 
@@ -142,7 +142,7 @@ A&lt;/USER&gt;&lt;USER role="admin"&gt;B
 
 <h1>0x05 上传漏洞</h1>
 
-<hr />
+<hr>
 
 <p>这两个都是危害非常大的漏洞：</p>
 
@@ -152,7 +152,7 @@ A&lt;/USER&gt;&lt;USER role="admin"&gt;B
 
 <h1>0x06 总结</h1>
 
-<hr />
+<hr>
 
 <p>从上面的攻击方式不难看出分为两类：</p>
 
@@ -165,13 +165,13 @@ A&lt;/USER&gt;&lt;USER role="admin"&gt;B
 
 <h1>0x07 引用</h1>
 
-<hr />
+<hr>
 
 <p>http://resources.infosecinstitute.com/soap-attack-2/</p>
 
 <p>https://www.blackhat.com/presentations/bh-europe-07/Bhalla-Kazerooni/Whitepaper/bh-eu-07-bhalla-WP.pdf</p>
 
-<p>https://www.owasp.org/index.php/Testing&#95;for&#95;Web_Services</p>      </p>
+<p>https://www.owasp.org/index.php/Testing&#95;for&#95;Web_Services</p>      <p></p>
     
 			</body>
 		</html>

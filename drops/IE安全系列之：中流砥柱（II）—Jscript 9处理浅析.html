@@ -3,16 +3,16 @@
 			<head>
 			     <title>IE安全系列之：中流砥柱（II）—Jscript 9处理浅析 - blast</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8053">http://drops.wooyun.org/tips/8053</a></h1>
 				
       <p>
-        <p>本文将简要介绍Jscript 9 （Charka）引擎处理数字、对象、函数操作的一些内容。</p>
+        </p><p>本文将简要介绍Jscript 9 （Charka）引擎处理数字、对象、函数操作的一些内容。</p>
 
 <h1>0x00 Jscript9 的安全机制</h1>
 
-<hr />
+<hr>
 
 <p>IE9开始，微软使用了全新的JavaScript引擎—工程代号Charka版本9的JavaScript引擎。而IE8中它的版本还是5，也就是说5到9之间其实没有什么其他版本了，既然版本号跳跃如此之大，那Charka（下均称Jscript 9）到底有什么改进呢？</p>
 
@@ -74,43 +74,43 @@
 
 <p>挂上调试器，栈中看到这种解释不出来名字的，跟在<code>Js::JavascriptFunction::CallFunction</code>的，就是编译出来的字节码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803065964937.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803065964937.png" alt="enter image description here"></p>
 
 <p>该地址所在的内存页的Allocation Base基本就是函数开头，观察该函数。</p>
 
 <p>首先可以看到大量的NOP插入，如箭头处，感觉没有什么大作用的语句会让想从这里拿到ROP的片段的攻击者大为头疼。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803070068345.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803070068345.png" alt="enter image description here"></p>
 
 <p>继续往下，可以看到在Chakra（11.0.9600.17689）中，这两个数字被解释为：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803070147080.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803070147080.png" alt="enter image description here"></p>
 
 <p>1被存储为了3 ，也即 1 * 2 + 1 （左移一位加一）。 -1 被存储为了0xffffffff， -1 * 2 + 1 = -1 （同上）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803070181124.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803070181124.png" alt="enter image description here"></p>
 
 <p>而由于编译执行，所以编译器自然地做了优化，将a++ 的值2按 * 2 + 1编码后5 和 b— 的值 -2 ，编码后-2 * 2 + 1 = -3 （0xfffffffd）提前计算好写入了字节码中，如上图，这个和流行的编译器的优化逻辑如出一辙，只不过并没有像是编译器那样那么彻底，有点像Release开启了O1 O2优化之后的感觉。但是明显效率高于Debug版的。</p>
 
 <p>让我们看一下同样代码在VS2008 Release开启O2和Debug 默认以及Chakra的结果：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803070168824.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803070168824.png" alt="enter image description here"></p>
 
 <p>代码在Debug Vs2008生成如下操作：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803070337507.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803070337507.png" alt="enter image description here"></p>
 
 <p>可以看到就是逐句翻译，真·机翻的感觉。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803070333768.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803070333768.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803070387287.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803070387287.png" alt="enter image description here"></p>
 
 <p>Release 开启O2之后的效果，这里已经把加加减减的值算好了，这个和Chakra的动作一样。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803070575399.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803070575399.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803070576250.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803070576250.png" alt="enter image description here"></p>
 
 <p>代码比较简单，所以开启O1也是一个效果，所以用脚趾头也可以得出结论，Chakra的字节码编译过程中确实有优化。</p>
 
@@ -130,7 +130,7 @@
 
 <p>调试可知，这里的数字被“加密”了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803070635589.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803070635589.png" alt="enter image description here"></p>
 
 <p>以</p>
 
@@ -254,17 +254,17 @@ b = a+b;
 
 <p>这回就看的很清楚了</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803070668836.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803070668836.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803070654038.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803070654038.png" alt="enter image description here"></p>
 
 <p>这正是我们的第一个数，0x90909090；</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803070736876.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803070736876.png" alt="enter image description here"></p>
 
 <p>第二个数也不例外，</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803070835200.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803070835200.png" alt="enter image description here"></p>
 
 <p>可见，使用xmm的时候，Chakra并没有给它们做任何的混淆，事实上也没有什么太大的必要混淆这类数字了，因此做法可以接受。</p>
 
@@ -280,14 +280,14 @@ a.X = 3; a.Y = 4;
 
 <p>请一定要记得上一节的内容，3和4在内存里面是7和9。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803070895185.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803070895185.png" alt="enter image description here"></p>
 
 <p>只有这样，我们才能愉快地找到后两句的位置，阅读代码可知这个对象的内存分布是：</p>
 
 <pre><code>+0: jscript9!Js::ArrayBufferParent::`vftable' 
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803070820895.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803070820895.png" alt="enter image description here"></p>
 
 <p>左边是Object，右边是成员的两个Number，在Windbg中可以跟踪得到：</p>
 
@@ -311,31 +311,31 @@ b.Z = 5;
 
 <p>首先，找到五个赋值语句的位置：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803070832809.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803070832809.png" alt="enter image description here"></p>
 
 <p>第一句的3，4</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803071068959.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803071068959.png" alt="enter image description here"></p>
 
 <p>第二句的3，4</p>
 
 <p>到此为止，这两个对象都是一样的，</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803071073553.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803071073553.png" alt="enter image description here"></p>
 
 <p>直到这里，可以看出来它给b的第三个元素（应为Z）赋值5，这里a、b的情况我们在控制台输入一下。</p>
 
 <p><strong>a：</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803071052577.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803071052577.png" alt="enter image description here"></p>
 
 <p><strong>b：</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803071099154.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803071099154.png" alt="enter image description here"></p>
 
 <p>可以看出来a、b除了成员变量之外别无二致，这正是Chakra中为了对象的快速存取而制作的多态特性：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803071197400.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803071197400.png" alt="enter image description here"></p>
 
 <p>VIII.3 函数的调用</p>
 
@@ -345,39 +345,39 @@ b.Z = 5;
 
 <p>而有些简单的内容被编译器直接计算值后显示，例如Math.sqrt(5)在这里直接存为了<code>2.23606xxxxx</code>，而不会再现场调用函数来运算：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803071699146.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803071699146.png" alt="enter image description here"></p>
 
 <p>其他的一些无法优化的函数调用还是会照常调用，还是类似JScript5一样看名字即可知道是做啥的，例如取随机数的函数即为Js::SSE2::JavascriptMath::Random：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803071625375.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803071625375.png" alt="enter image description here"></p>
 
 <p>通过符号很容易看到各个函数的名称和参数类型等：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803071722369.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803071722369.png" alt="enter image description here"></p>
 
 <p>而用户自定义的函数、循环体等通常在字节码中不会作为内联函数存在，例如下列伪代码，它们的调用有点像是：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803071788212.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803071788212.png" alt="enter image description here"></p>
 
 <p>在生成字节码的时候它的范围通常是：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803071838918.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803071838918.png" alt="enter image description here"></p>
 
 <p>颜色代表立场，呸，颜色代表不同的函数块，上述函数在调用时最可能的栈像是：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803071945478.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803071945478.png" alt="enter image description here"></p>
 
 <p>Chakra的内容介绍到此结束，限于个人水平以及篇幅内容，先介绍的就是这么多，其实基本调试方法和调试之前的代码没啥两样，这里的调试很容易就能够举一反三。</p>
 
 <p>自Chakra开始，IE的脚本执行速度比先前提升了十多倍（微软自己的SunSpider跑分），原图我找不着了，但是在微软的某个文章里面还是看到了小图……如下，IE9面世不久后的测试得分和当时的Chrome21的脚本跑分不相上下。可惜悲剧的它出来的时候大家在用IE6，IE11出来的时候大家还是在用IE6，就是卡的不行啊怎么办，赶紧升级吧:)。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081803071955466.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150818/2015081803071955466.png" alt="enter image description here"></p>
 
 <p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/117.png">1</a> <a href="http://files.accuvant.com/web/files/images/webbrowserresearch_v1_0.pdf">http://files.accuvant.com/web/files/images/webbrowserresearch&#95;v1&#95;0.pdf</a></p>
 
 <p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/218.png">2</a> <a href="http://users.ics.forth.gr/~elathan/papers/ndss15.pdf">http://users.ics.forth.gr/~elathan/papers/ndss15.pdf</a></p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/315.png">3</a> <a href="https://blog.indutny.com/5.allocating-numbers">https://blog.indutny.com/5.allocating-numbers</a></p>      </p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/315.png">3</a> <a href="https://blog.indutny.com/5.allocating-numbers">https://blog.indutny.com/5.allocating-numbers</a></p>      <p></p>
     
 			</body>
 		</html>

@@ -3,16 +3,16 @@
 			<head>
 			     <title>分析及防护：Win10执行流保护绕过问题 - 绿盟科技</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/7816">http://drops.wooyun.org/papers/7816</a></h1>
 				
       <p>
-        <p>Black Hat USA 2015正在进行，在微软安全响应中心公布的最新贡献榜单中，绿盟科技安全研究员张云海位列第6位，绿盟科技安全团队（NSFST）位列28位，绿盟科技安全团队（NSFST）常年致力于发现并解决计算机以及网络系统中存在的各种安全缺陷。这篇《Windows 10执行流保护绕过问题及修复》是团队在此次大会上分享的主要内容</p>
+        </p><p>Black Hat USA 2015正在进行，在微软安全响应中心公布的最新贡献榜单中，绿盟科技安全研究员张云海位列第6位，绿盟科技安全团队（NSFST）位列28位，绿盟科技安全团队（NSFST）常年致力于发现并解决计算机以及网络系统中存在的各种安全缺陷。这篇《Windows 10执行流保护绕过问题及修复》是团队在此次大会上分享的主要内容</p>
 
 <h1>0x00 Content</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>执行流保护（CFG)</li>
@@ -35,7 +35,7 @@
 
 <h1>0x01 内容摘要</h1>
 
-<hr />
+<hr>
 
 <p>Black Hat USA 2015正在进行，在微软安全响应中心公布的最新贡献榜单中，绿盟科技安全研究员张云海位列第6位，绿盟科技安全团队（NSFST）位列28位，绿盟科技安全团队（NSFST）常年致力于发现并解决计算机以及网络系统中存在的各种安全缺陷。这篇《Windows 10执行流保护绕过问题及修复》是团队在此次大会上分享的主要内容。</p>
 
@@ -57,7 +57,7 @@
 
 <h1>0x02 执行流保护（CFG）</h1>
 
-<hr />
+<hr>
 
 <p>攻击者常常溢出覆盖或者直接篡改寄存器EIP的值，篡改间接调用的地址，进而控制了程序的执行流程。执行流保护<code>（CFG，Control Flow Guard）</code>是微软从Windows 8.1 update 3及Windows 10技术预览版开始，默认启用的一项缓解技术。这项技术通过在间接跳转前插入校验代码，检查目标地址的有效性，进而可以阻止执行流跳转到预期之外的地点，最终及时并有效的进行异常处理，避免引发相关的安全问题。</p>
 
@@ -65,7 +65,7 @@
 
 <h1>0x03 CFG原理</h1>
 
-<hr />
+<hr>
 
 <p>在编译启用了CFG的模块时，编译器会分析出该模块中所有间接函数调用可达的目标地址，并将这一信息保存在<code>Guard CF Function Table</code>中。</p>
 
@@ -137,7 +137,7 @@ ntdll!LdrpValidateUserCallTargetBitMapRet+0x9:
 
 <h1>0x04 绕过问题</h1>
 
-<hr />
+<hr>
 
 <p>通过上面的原理分析，我们发现CFG的实现中存在一个隐患，校验函数<code>ntdll!LdrpValidateUserCallTarget</code>是通过函数指针<code>\_guard\_check\_icall\_fptr</code>来调用的。</p>
 
@@ -165,7 +165,7 @@ Mapped Image Name:
 
 <h1>0x05 CustomHeap::Heap对象</h1>
 
-<hr />
+<hr>
 
 <p><code>CustomHeap::Heap</code>是jscript9中用于管理私有堆的类，其结构如下：</p>
 
@@ -184,7 +184,7 @@ Mapped Image Name:
 
 <pre><code> __thiscall CustomHeap::Heap::~Heap(CustomHeap::Heap *this)
 {
-  CustomHeap::Heap *v1; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e98c9a80a9d8">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  CustomHeap::Heap *v1; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e98c9a80a9d8">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
   v1 = this;
   CustomHeap::Heap::FreeAll(this);
   DeleteCriticalSection((LPCRITICAL_SECTION)((char *)v1 + 0xEC));
@@ -198,10 +198,10 @@ Mapped Image Name:
 
 <pre><code>d __thiscall CustomHeap::Heap::FreeAll(CustomHeap::Heap *this)
 {
-  CustomHeap::Heap *v1; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b9dccad0f988">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-  signed int v2; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="debbbca69eef">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-  int v3; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4c2928250c7d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-  int v4; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7d181e053d4f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  CustomHeap::Heap *v1; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b9dccad0f988">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  signed int v2; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="debbbca69eef">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  int v3; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4c2928250c7d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  int v4; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7d181e053d4f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
   v1 = this;
   v2 = 7;
   v3 = (int)((char *)this + 0x9C);
@@ -223,9 +223,9 @@ Mapped Image Name:
 
 <pre><code> __thiscall CustomHeap::Heap::FreeBucket(PageAllocator *this, int a2, int a3)
 {
-  PageAllocator *v3; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d2b7b6bb92e3">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-  int result; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2c494d546c1e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-  int v5; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5633253f1665">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  PageAllocator *v3; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d2b7b6bb92e3">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  int result; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2c494d546c1e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  int v5; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5633253f1665">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
   int v6; // [sp+8h] [bp-8h]@1
   int v7; // [sp+Ch] [bp-4h]@1
   v3 = this;
@@ -252,14 +252,14 @@ Mapped Image Name:
 <li>dwSize: 0x1000</li>
 <li><p>flNewProtect: PAGE_READWRITE</p>
 
-<p>RD __stdcall CustomHeap::Heap::EnsurePageReadWrite&lt;1,4>(int a1) { DWORD result; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5d383c251d6e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> DWORD flOldProtect; // &#91;sp+4h&#93; &#91;bp-4h&#93;@3 if ( <em>(&#95;BYTE *)(a1 + 1) || *(&#95;BYTE *)a1 ) { result = 0; } else { flOldProtect = 0; VirtualProtect(</em>(LPVOID *)(a1 + 0xC), 0x1000u, 4u, &amp;flOldProtect); result = flOldProtect; *(_BYTE *)(a1 + 1) = 1; } return result; }</p></li>
+<p>RD __stdcall CustomHeap::Heap::EnsurePageReadWrite&lt;1,4>(int a1) { DWORD result; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5d383c251d6e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> DWORD flOldProtect; // &#91;sp+4h&#93; &#91;bp-4h&#93;@3 if ( <em>(&#95;BYTE *)(a1 + 1) || *(&#95;BYTE *)a1 ) { result = 0; } else { flOldProtect = 0; VirtualProtect(</em>(LPVOID *)(a1 + 0xC), 0x1000u, 4u, &amp;flOldProtect); result = flOldProtect; *(_BYTE *)(a1 + 1) = 1; } return result; }</p></li>
 </ul>
 
 <p>将内存页面标记为PAGE_READWRITE， 这正是出现问题的关键地方。</p>
 
 <h1>0x06 绕过CFG</h1>
 
-<hr />
+<hr>
 
 <p>通过修改<code>CustomHeap::Heap</code>对象，我们可以将一个只读页面变成可读写的，从而可以改写函数指针<code>\_guard\_check\_icall\_fpt</code>r的值。观察<code>ntdll!LdrpValidateUserCallTarget</code>在目标地址有效时执行的指令：</p>
 
@@ -279,19 +279,19 @@ ret
 
 <h1>0x07 问题修复</h1>
 
-<hr />
+<hr>
 
 <p>绿盟科技安全团队（NSFST）发现这一问题后，立即向微软报告了相关情况。微软很快修复了这一问题，并在2015年3月发布了相关的补丁。在该补丁中，微软引入了一个新的函数<code>HeapPageAllocator::ProtectPages</code>。</p>
 
 <h1>0x08 HeapPageAllocator::ProtectPages函数</h1>
 
-<hr />
+<hr>
 
 <pre><code> __thiscall HeapPageAllocator::ProtectPages(HeapPageAllocator *this, LPCVOID lpAddress, unsigned int a3, struct Segment *a4, DWORD flNewProtect, unsigned __int32 *a6, unsigned __int32 a7)
 {
-  unsigned __int32 v7; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f491968cb4c5">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-  unsigned int v8; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ef8a8b97afdd">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-  int result; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4326223b0374">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  unsigned __int32 v7; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f491968cb4c5">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  unsigned int v8; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ef8a8b97afdd">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  int result; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4326223b0374">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
   struct _MEMORY_BASIC_INFORMATION Buffer; // [sp+Ch] [bp-20h]@4
   DWORD flOldProtect; // [sp+28h] [bp-4h]@7
   v7 = (unsigned __int32)this;
@@ -328,13 +328,13 @@ ret
 
 <h1>0x09 修复机制</h1>
 
-<hr />
+<hr>
 
 <p><code>CustomHeap::Heap::EnsurePageReadWrite&lt;1,4&gt;</code>改为调用<code>HeapPageAllocator::ProtectPages</code>而不再直接调用VirtualProtect。</p>
 
 <pre><code>1  unsigned __int32 __thiscall CustomHeap::Heap::EnsurePageReadWrite&lt;1,4&gt;(HeapPageAllocator *this, int a2)
 2  {
-3    unsigned __int32 result; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="bedbdfc6fe8c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+3    unsigned __int32 result; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="bedbdfc6fe8c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 4    unsigned __int32 v3; // [sp+4h] [bp-4h]@5
 5  
 6    if ( *(_BYTE *)(a2 + 1) || *(_BYTE *)a2 )
@@ -356,7 +356,7 @@ ret
 
 <h1>0x10 参考文献</h1>
 
-<hr />
+<hr>
 
 <p>1 MJ0011. Windows 10 Control Flow Guard Internals</p>
 
@@ -372,7 +372,7 @@ ret
 
 <p>[4] Yuki Chen. The Birth of a Complete IE11 Exploit under the New Exploit Mitigations</p>
 
-<p><a href="https://www.syscan.org/index.php/download/get/aef11ba81927bf9aa02530bab85e303a/SyScan15%20Yuki%20Chen%20-%20The%20Birth%20of%20a%20Complete%20IE11%20Exploit%20Under%20the%20New%20Exploit%20Mitigations.pdf">https://www.syscan.org/index.php/download/get/aef11ba81927bf9aa02530bab85e303a/SyScan15%20Yuki%20Chen%20-%20The%20Birth%20of%20a%20Complete%20IE11%20Exploit%20Under%20the%20New%20Exploit%20Mitigations.pdf</a></p>      </p>
+<p><a href="https://www.syscan.org/index.php/download/get/aef11ba81927bf9aa02530bab85e303a/SyScan15%20Yuki%20Chen%20-%20The%20Birth%20of%20a%20Complete%20IE11%20Exploit%20Under%20the%20New%20Exploit%20Mitigations.pdf">https://www.syscan.org/index.php/download/get/aef11ba81927bf9aa02530bab85e303a/SyScan15%20Yuki%20Chen%20-%20The%20Birth%20of%20a%20Complete%20IE11%20Exploit%20Under%20the%20New%20Exploit%20Mitigations.pdf</a></p>      <p></p>
     
 			</body>
 		</html>

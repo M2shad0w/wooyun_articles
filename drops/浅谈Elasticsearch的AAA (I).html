@@ -3,14 +3,14 @@
 			<head>
 			     <title>浅谈Elasticsearch的AAA (I) - 淡定淞淞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8129">http://drops.wooyun.org/tips/8129</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>Elasticsearch（以下简称es）被越来越多的公司广泛使用，而其本身安全问题也备受关注，最近出现的安全问题比较多，例如影响比较大的漏洞有CVE-2014-3120和CVE-2015-1427。</p>
 
@@ -22,7 +22,7 @@
 
 <h1>0x01 需求</h1>
 
-<hr />
+<hr>
 
 <p>随着es的普及，对安全的需求越来越多，例如：</p>
 
@@ -35,7 +35,7 @@
 
 <h1>0x02 方案选择</h1>
 
-<hr />
+<hr>
 
 <p>需求已确定，经过一番寻找得到以下几种方案备选。、</p>
 
@@ -50,7 +50,7 @@
 
 <h1>0x03 安装和配置</h1>
 
-<hr />
+<hr>
 
 <h3>准备工作</h3>
 
@@ -110,13 +110,13 @@ wget http://mirror.bit.edu.cn/apache/maven/maven-3/3.3.3/binaries/apache-maven-3
 <p>设置用户名和密码</p>
 
 <blockquote>
-  <h1>searchguard.authentication.settingsdb.user.<username>: password searchguard.authentication.settingsdb.user.admin: adminpass searchguard.authentication.settingsdb.user.user: userpass</h1>
+  <h1>searchguard.authentication.settingsdb.user.<username>: password searchguard.authentication.settingsdb.user.admin: adminpass searchguard.authentication.settingsdb.user.user: userpass</username></h1>
 </blockquote>
 
 <p>给用户分配角色，<code>admin</code>为超级管理员，角色为<code>root</code>，<code>user</code>为只读用户橘色。</p>
 
 <blockquote>
-  <h1>searchguard.authentication.authorization.settingsdb.roles.<username>: <array of roles> searchguard.authentication.authorization.settingsdb.roles.admin: ["root"] searchguard.authentication.authorization.settingsdb.roles.user: ["readonly"]</h1>
+  <h1>searchguard.authentication.authorization.settingsdb.roles.<username>: <array of="" roles=""> searchguard.authentication.authorization.settingsdb.roles.admin: ["root"] searchguard.authentication.authorization.settingsdb.roles.user: ["readonly"]</array></username></h1>
 </blockquote>
 
 <p>设置<code>filter</code>，我设置两个权限，<code>readonly</code>和<code>deny</code>权限， readonly的filter只允许读操作，以及kibana必须的两个操作，禁止写操作。</p>
@@ -203,11 +203,11 @@ wget http://mirror.bit.edu.cn/apache/maven/maven-3/3.3.3/binaries/apache-maven-3
 
 <h1>0x04 总结</h1>
 
-<hr />
+<hr>
 
 <p>其实<code>search guard</code>的功能远不止以上介绍的这些，例如细化到字段或者文档级别的ACL；节点之间通过SSL同步数据；使用ladp或者AD账号进行验证等功能希望后续能给大家带来介绍。</p>
 
-<p>愿本文能起到抛砖引玉的效果。</p>      </p>
+<p>愿本文能起到抛砖引玉的效果。</p>      <p></p>
     
 			</body>
 		</html>

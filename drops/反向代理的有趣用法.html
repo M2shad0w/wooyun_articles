@@ -3,14 +3,14 @@
 			<head>
 			     <title>反向代理的有趣用法 - VIP</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/509">http://drops.wooyun.org/tips/509</a></h1>
 				
       <p>
-        <h2>0x00 简介</h2>
+        </p><h2>0x00 简介</h2>
 
-<hr />
+<hr>
 
 <p>首先请各位客官看这里:<a href="http://viptest.yupage.com">http://viptest.yupage.com</a></p>
 
@@ -20,7 +20,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/201308/2013081909582854868.jpg" alt="2013081909582854868.jpg" /></p>
+<p><img src="http://static.wooyun.org/201308/2013081909582854868.jpg" alt="2013081909582854868.jpg"></p>
 
 <p>整个流程非常简单，只需要负责映射请求的.htaccess和负责抓取内容的index.php就可完成，中间还可以通过正则表达式等实现内容和网址的替换。</p>
 
@@ -28,7 +28,7 @@
 
 <h2>0x01 用反向代理让漏洞检测平台帮我们扫漏洞</h2>
 
-<hr />
+<hr>
 
 <p>现在有一些在线漏洞检测平台（如360 安全宝等），都能让我们对目标网站的安全状况有一个初步的了解。但是，这些漏洞检测平台都是需要验证所有权的，那么，我们能不能绕过这个限制呢？反向代理能解决这个问题。</p>
 
@@ -36,7 +36,7 @@
 
 <h2>0x02 搭建一个“蜜罐”来抓取漏洞扫描平台的扫描语句</h2>
 
-<hr />
+<hr>
 
 <p>各个在线漏洞扫描平台都看上去非常高端洋气国际化的样子，那么，它们是怎么扫描的呢？可以使用反向代理来抓扫描语句。</p>
 
@@ -73,7 +73,7 @@ file_put_contents("log.txt", $data, FILE_APPEND);
 
 <h2>0x03 钓鱼</h2>
 
-<hr />
+<hr>
 
 <p>由于所有经过反向代理服务器的页面都可以控制，所以我们也可以利用此进行钓鱼。请各位看这里：<a href="http://viptest.yupage.com/user.php?action=login">http://viptest.yupage.com/user.php?action=login</a></p>
 
@@ -86,7 +86,7 @@ file_put_contents("log.txt", $data, FILE_APPEND);
 
 <h2>0x04 如何防止被反向代理</h2>
 
-<hr />
+<hr>
 
 <p>看完了反向代理的危害后，如何防止自己的站被反向代理呢？有一段代码能够较好地防止被反向代理</p>
 
@@ -105,7 +105,7 @@ file_put_contents("log.txt", $data, FILE_APPEND);
 ?&gt;
 </code></pre>
 
-<p>实际上XFF头完全可以伪造，此方法并不能完全防御住~</p>      </p>
+<p>实际上XFF头完全可以伪造，此方法并不能完全防御住~</p>      <p></p>
     
 			</body>
 		</html>

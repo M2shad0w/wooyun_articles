@@ -3,14 +3,14 @@
 			<head>
 			     <title>GSM HACK的另一种方法:RTL-SDR - light</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4716">http://drops.wooyun.org/papers/4716</a></h1>
 				
       <p>
-        <h1>0x00 背景</h1>
+        </p><h1>0x00 背景</h1>
 
-<hr />
+<hr>
 
 <p>文中所有内容仅供学习研究，请勿用于非法用途。在绝大多数国家里非法窃听都是严重非法行为。</p>
 
@@ -26,7 +26,7 @@
 
 <p>以上文字有所演绎，真实历史请参见：http://rtlsdr.org/#history&#95;and&#95;discovery&#95;of&#95;rtlsdr</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123135081101image001.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150121/2015012123135081101image001.jpg" alt="enter image description here"></p>
 
 <p>该电视棒PBC板裸照</p>
 
@@ -36,7 +36,7 @@
 
 <p>作为高富帅代表的light教授，当然没有选用这些资本主义土豪的玩意儿，而是打开x宝，淘了一款华强北山寨的硬件。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123144217736image0032.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150121/2015012123144217736image0032.png" alt="enter image description here"></p>
 
 <p>Gnuradio（硬件要用作sdr用途，就得装他，可以简单理解为驱动）</p>
 
@@ -50,11 +50,11 @@
 
 <p>sources.list(/etc/apt/sources.list)文件里有这两条：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123154536120image0052.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150121/2015012123154536120image0052.png" alt="enter image description here"></p>
 
 <h1>0x01 安装GNU Radio</h1>
 
-<hr />
+<hr>
 
 <p>Kali已经预装了gnuradio，kali用户可以跳过这一步。</p>
 
@@ -84,11 +84,11 @@ chmod a+x build-gnuradio
 
 <h1>0x02 安装Airprobe</h1>
 
-<hr />
+<hr>
 
 <h2>1. 各种依赖包依赖库：（少装一个都不行！）</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!bash
 sudo apt-get install git-core autoconf automake libtool g++ python-dev swig libpcap0.8-dev cmake git libboost-all-dev libusb-1.0-0 libusb-1.0-0-dev libfftw3-dev swig python-numpy libpulse-dev libpcsclite-dev
@@ -97,31 +97,31 @@ sudo apt-get install git-core autoconf automake libtool g++ python-dev swig libp
 <p>新建一个目录来git clone，我比较喜欢在/opt 目录下来安装新东西。</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0c60656b64784c676d6065">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# cd /opt/
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c3afaaa4abb783a8a2afaa">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt# mkdir gsm
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="84e8ede3ecf0c4efe5e8ed">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt# cd gsm/
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0c60656b64784c676d6065">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# cd /opt/
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c3afaaa4abb783a8a2afaa">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt# mkdir gsm
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="84e8ede3ecf0c4efe5e8ed">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt# cd gsm/
 </code></pre>
 
 <h2>2. 安装libosmocore</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0f636668677b4f646e6366">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm# git clone git://git.osmocom.org/libosmocore.git
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0f636668677b4f646e6366">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm# git clone git://git.osmocom.org/libosmocore.git
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123190270400image0073.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150121/2015012123190270400image0073.png" alt="enter image description here"></p>
 
-<p>接着： <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="264a4f414e52664d474a4f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm/libosmocore# autoreconf -i <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4e222729263a0e252f2227">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm/libosmocore# ./configure <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3854515f504c7853595451">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm/libosmocore# make <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="bcd0d5dbd4c8fcd7ddd0d5">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm/libosmocore# sudo make install</p>
+<p>接着： <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="264a4f414e52664d474a4f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm/libosmocore# autoreconf -i <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4e222729263a0e252f2227">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm/libosmocore# ./configure <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3854515f504c7853595451">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm/libosmocore# make <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="bcd0d5dbd4c8fcd7ddd0d5">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm/libosmocore# sudo make install</p>
 
-<p>最后”刷新”一下动态链接库： <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="462a2f212e32062d272a2f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm/libosmocore# sudo ldconfig</p>
+<p>最后”刷新”一下动态链接库： <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="462a2f212e32062d272a2f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm/libosmocore# sudo ldconfig</p>
 
 <h2>3. 安装airprobe</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4824212f203c0823292421">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm# git clone git://svn.berlin.ccc.de/airprobe
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4824212f203c0823292421">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm# git clone git://svn.berlin.ccc.de/airprobe
 </code></pre>
 
 <p>注意：这里有个大坑。上面的git地址得到的airprobe版本和我们的系统环境有点不搭，编译时会出错。谷狗了一下，找到一个 git://git.gnumonks.org/airprobe.git 还是用不了。=。=||| 继续谷狗，找到https://github.com/ksnieck/airprobe，亲测git clone到一半也会出错，所以干脆打包成zip下载。成功编译。大家可以直接在这个地址下载打包的源码，或者在本帖附件中下载我上传的。</p>
@@ -136,7 +136,7 @@ make
 
 <h1>0x03 START TO HACK</h1>
 
-<hr />
+<hr>
 
 <p>中国移动GSM信号频段：上行/下行：890-909/935-954Mhz，但是测试时需要相对精确的数值。怎么办？打给10086客服小妹，她也未必知道。因为你所处位置的GSM频率和基站功率、你距离基站距离等都有关系，而且我们的接收装置（电视棒）本身还存在ppm offset。</p>
 
@@ -147,7 +147,7 @@ make
 <p>先看看kalibrate的基本用法：</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="375b5e505f43775c565b5e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# kal -h
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="375b5e505f43775c565b5e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# kal -h
 kalibrate v0.4.1-rtl, Copyright (c) 2010, Joshua Lackey
 modified for use with rtl-sdr devices, Copyright (c) 2012, Steve Markgraf
 Usage:
@@ -173,26 +173,26 @@ Where options are:
 <p>搜索附近的GSM基站信息：</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6804010f001c2803090401">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# kal -s 900
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6804010f001c2803090401">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# kal -s 900
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123223431278image0092.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150121/2015012123223431278image0092.png" alt="enter image description here"></p>
 
 <p>搜到两个基站，上面一个信号比较强，频率为946Mhz，我们选用这个基站，并 继续使用kalibrate帮助我们校准电视棒的偏频，使用 -c 参数加我们基站的频道号（channel）来计算出这个误差值：</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2f434648475b6f444e4346">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# kal -c 55
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2f434648475b6f444e4346">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# kal -c 55
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123231565666image0112.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150121/2015012123231565666image0112.png" alt="enter image description here"></p>
 
 <p>得到的结果，average为偏频的平均值，单位kHz，+表示我们的电视棒高出这么多，所以在测试时要用频率值减去这个值。下面的ppm值是另一种偏频单位，反而更常用，但是我们用来接收先好的软件不支持这个值的改动，所以先不做深究。</p>
 
 <p>接下来打开wireshark，注意要选择回环网卡，并在启动后选择gsmtap过滤器：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123235841278image0133.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150121/2015012123235841278image0133.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123244634666image0152.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150121/2015012123244634666image0152.png" alt="enter image description here"></p>
 
 <p>接着把wireshark放在一边，使用airprobe的gsm&#95;receive&#95;rtl 模块来接收GSM信号：</p>
 
@@ -203,7 +203,7 @@ Where options are:
 <p>接着输入以下命令，打开一个动态的波形图：</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="82eeebe5eaf6c2e9e3eeeb">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm/airprobe/gsm-receiver/src/python# ./gsm_receive_rtl.py -s 1e6 -f 946M 
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="82eeebe5eaf6c2e9e3eeeb">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm/airprobe/gsm-receiver/src/python# ./gsm_receive_rtl.py -s 1e6 -f 946M 
 </code></pre>
 
 <p>参数解释：-s 采样率，默认为1800000，但实践证明1000000 的采样率采样效果更好，1e6的写法表示1后面有6个0，大家上小学用的计算器上应该见过这种表示方法。-f 频率，不用多说。还有个常用的参数是 -c ，配置控制信道类型。</p>
@@ -223,33 +223,33 @@ Where options are:
 
 <p>理论上，你用频率值减去偏频值得到的数字，放gsm&#95;receive&#95;rtl 的-f参数中，或者直接输入频率值，在打开的波形图中鼠标点击波峰偏左一点的位置，就可以接收到信号。但现实往往是残酷的，你会发现经常打开波形图都是下图这样的：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123260047439image0171.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150121/2015012123260047439image0171.png" alt="enter image description here"></p>
 
 <p>波峰距离原点十万八千里有木有！这种情况下，不管你怎么点，点哪里，在wireshark里都看不到任何东西。</p>
 
 <p>这时候需要我们小幅修改频率值，将波峰尽量微调值处在原点附近。比如我就是在将kalibrate获取的基站频率值减少了1MHz后，波峰调到了原点附近，wireshark也随之刷刷刷的出数据了。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123263160307image0191.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150121/2015012123263160307image0191.png" alt="enter image description here"></p>
 
 <p>有了数据，接下来大家就自由发挥吧。点到为止。</p>
 
 <p>Kali还自带了一个好玩的东西，叫gqrx，一款基于GNU Radio和Qt的sdr工具。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123273874009image0211.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150121/2015012123273874009image0211.png" alt="enter image description here"></p>
 
 <p>我们可以用它来收听广播：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123291766771image0231.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150121/2015012123291766771image0231.png" alt="enter image description here"></p>
 
 <p>或者收听GSM信号传输的声音</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123294435943image025.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150121/2015012123294435943image025.png" alt="enter image description here"></p>
 
 <p>PS：听到我耳朵都快怀孕了也只是沙沙声和蜂鸣声，难道有干扰信号？说好的不加密呢 ToT</p>
 
 <h1>0x04 结语</h1>
 
-<hr />
+<hr>
 
 <p>用来接收GSM信号还有很多方法可以尝试，比如kali自带的rtl_sdr、开源的arfcncalc等工具。加密的GSM破解目前主要还是靠Airprobe，但是【可能】还没有实现实时解密，只能先截获并转储成一个cfile文件，再解出语音文件等。</p>
 
@@ -257,13 +257,13 @@ Where options are:
 
 <p>话说一入GSM深似海，里面涉及大量通信原理。大家研究这个的时候可以顺便把通信的东西再复习几遍。</p>
 
-<p>作者智商有限，文中不免纰漏和不妥之处。有任何建议或意见大家<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="33d697a9d697a9d6bca2dab19dd78885d488aad5bba2d0b3b1415c5c4773025a545b471d505c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
+<p>作者智商有限，文中不免纰漏和不妥之处。有任何建议或意见大家<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="33d697a9d697a9d6bca2dab19dd78885d488aad5bba2d0b3b1415c5c4773025a545b471d505c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
 
 <p>附件 <a href="http://drops.wooyun.org/wp-content/uploads/2015/01/airprobe-master.zip">下载地址</a></p>
 
 <h1>0x05 参考文献</h1>
 
-<hr />
+<hr>
 
 <p>https://gnuradio.org/redmine/projects/gnuradio/</p>
 
@@ -281,7 +281,7 @@ Where options are:
 
 <p>https://srlabs.de/airprobe-how-to/</p>
 
-<p>https://ferrancasanovas.wordpress.com/cracking-and-sniffing-gsm-with-rtl-sdr-concept/</p>      </p>
+<p>https://ferrancasanovas.wordpress.com/cracking-and-sniffing-gsm-with-rtl-sdr-concept/</p>      <p></p>
     
 			</body>
 		</html>

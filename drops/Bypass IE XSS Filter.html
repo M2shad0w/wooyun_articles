@@ -3,14 +3,14 @@
 			<head>
 			     <title>Bypass IE XSS Filter - livers</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/159">http://drops.wooyun.org/tips/159</a></h1>
 				
       <p>
-        <h3>0x00 背景</h3>
+        </p><h3>0x00 背景</h3>
 
-<hr />
+<hr>
 
 <p>从IE8 beta2 开始，微软加入了xss Filter。如同大部分安全产品一样，防护的对策就是利用规则去过滤攻击代码，基于可用和效率的考虑，同时加入黑白名单策略（即同源策略）。</p>
 
@@ -20,15 +20,15 @@
 
 <!--more-->
 
-<hr />
+<hr>
 
 <p>IE xss filter工作原理</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810452690579.png" alt="20130702203010_17247.png" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091810452690579.png" alt="20130702203010_17247.png"></p>
 
 <p>其流程</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810452784488.png" alt="20130702203042_19772.png" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091810452784488.png" alt="20130702203042_19772.png"></p>
 
 <p>这里有很多环节可以bypass 例如验证同源80sec发现的问题。</p>
 
@@ -40,21 +40,21 @@
 
 <h3>0x02 提取正则</h3>
 
-<hr />
+<hr>
 
 <p>这里提供几种方法寻找IE xss Filter的正则。（Ie 的xss filter regx 存在于系统内核 mshtml.dll模块中）。</p>
 
 <p>查找很简单 可以使用notepad++ textfx 16进制查看。（搜索‘sc{’）</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810452774284.png" alt="20130702203129_11721.png" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091810452774284.png" alt="20130702203129_11721.png"></p>
 
 <p>或者使用 winhex(作者喜欢的工具) （搜索‘sc{’）</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810452730843.png" alt="20130702203156_31657.png" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091810452730843.png" alt="20130702203156_31657.png"></p>
 
 <p>不过这里强烈建议大家熟悉下IDApro(原因：后面你研究webkit 或者andriod等其他应用时，IDApro是非常好用的利器)</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810452820075.png" alt="20130702203236_24352.png" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091810452820075.png" alt="20130702203236_24352.png"></p>
 
 <p>这里给出一个老外blog 的一条 console 命令 非常实用。</p>
 
@@ -150,7 +150,7 @@ Bypass : "+{valueOf:location, toString: [].join,0:'jav\x61script:alert\x280)',le
 
 <h3>0x03 进行Fuzz</h3>
 
-<hr />
+<hr>
 
 <p>简单的浏览观察，并不能高效的进行bypass.</p>
 
@@ -162,7 +162,7 @@ Bypass : "+{valueOf:location, toString: [].join,0:'jav\x61script:alert\x280)',le
 
 <p>用法。IEfilter.txt 是IE的正则。Bypasstest.txt是绕过语句，result和console界面程序会保存输出结果。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810452879897.png" alt="20130702203334_32890.png" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091810452879897.png" alt="20130702203334_32890.png"></p>
 
 <p>downloadlink:<a href="http://pan.baidu.com/share/link?shareid=1243023532&amp;uk=1259968226">http://pan.baidu.com/share/link?shareid=1243023532&amp;uk=1259968226</a></p>
 
@@ -180,7 +180,7 @@ Bypass : "+{valueOf:location, toString: [].join,0:'jav\x61script:alert\x280)',le
 
 <h3>0x04 一些分享</h3>
 
-<hr />
+<hr>
 
 <p>欢迎和我沟通或者写文章（升，升，升！）</p>
 
@@ -197,7 +197,7 @@ Tip7: User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)xss"&gt;&lt;
 
 <p>参考：</p>
 
-<p><a href="http://blogs.technet.com/b/srd/archive/2008/08/19/ie-8-xss-filter-architecture-implementation.aspx">http://blogs.technet.com/b/srd/archive/2008/08/19/ie-8-xss-filter-architecture-implementation.aspx</a> <a href="http://www.80sec.com">http://www.80sec.com</a></p>      </p>
+<p><a href="http://blogs.technet.com/b/srd/archive/2008/08/19/ie-8-xss-filter-architecture-implementation.aspx">http://blogs.technet.com/b/srd/archive/2008/08/19/ie-8-xss-filter-architecture-implementation.aspx</a> <a href="http://www.80sec.com">http://www.80sec.com</a></p>      <p></p>
     
 			</body>
 		</html>

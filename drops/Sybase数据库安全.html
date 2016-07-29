@@ -3,14 +3,14 @@
 			<head>
 			     <title>Sybase数据库安全 - clzzy</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/7962">http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/7962</a></h1>
 				
       <p>
-        <h1>0x00 Sybase数据库介绍</h1>
+        </p><h1>0x00 Sybase数据库介绍</h1>
 
-<hr />
+<hr>
 
 <h3>简介</h3>
 
@@ -18,15 +18,15 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306512687853.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306512687853.png" alt="enter image description here"></p>
 
 <p>创建数据库的时候要注意存放设备：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150825/2015082516460141007.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150825/2015082516460141007.png" alt="enter image description here"></p>
 
 <h3>服务及端口</h3>
 
-<p><img src="http://static.wooyun.org//drops/20150825/2015082516460120429.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150825/2015082516460120429.png" alt="enter image description here"></p>
 
 <p>开放端口：</p>
 
@@ -34,7 +34,7 @@
 
 <h3>默认数据库</h3>
 
-<p><img src="http://static.wooyun.org//drops/20150825/2015082516460179600.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150825/2015082516460179600.png" alt="enter image description here"></p>
 
 <p><strong>Master</strong>：系统的核心数据库，控制服务器的操作以及存储有关所有用户数据库和相关的存储设备的信息，包括用户的用户名和密码；</p>
 
@@ -92,13 +92,13 @@ to username
 
 <p>2）、组（group）为数据库用户的集合，即通过对组(group)的权限的控制达到对该组中数据库用户的控制，但也可对该组中数据库某些用户进行格外的权限控制。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306512734019.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306512734019.png" alt="enter image description here"></p>
 
 <h3>角色</h3>
 
 <p>一般在管理分工较细的数据库系统中，sa用户往往被分为三种角色：系统管理员角色(SA role)、系统安全员角色(SSO role)、操作员角色（OPER role）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306512746014.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306512746014.png" alt="enter image description here"></p>
 
 <h3>连接及管理工具</h3>
 
@@ -106,7 +106,7 @@ to username
 
 <p>类似于mysql数据库的的mysql.exe。可连接本地及网络数据库。 使用isql –U sa –P “”连接:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306512751746.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306512751746.png" alt="enter image description here"></p>
 
 <p>所有参数要区分大小写：</p>
 
@@ -130,9 +130,9 @@ to username
 
 <p>b、只支持SQL语句，个人觉得就是isql的图形化版，有所不便。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306512747480.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306512747480.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150825/2015082516460177422.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150825/2015082516460177422.png" alt="enter image description here"></p>
 
 <p>（Sql.ini设定及功能：http://blog.csdn.net/potato015/article/details/2450989 ）</p>
 
@@ -142,11 +142,11 @@ to username
 
 <p>b、功能不是很强大</p>
 
-<p><img src="http://static.wooyun.org//drops/20150825/2015082516460111395.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150825/2015082516460111395.png" alt="enter image description here"></p>
 
 <p><strong>4）、DBArtisan</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306512851942.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306512851942.png" alt="enter image description here"></p>
 
 <h1>0x01 Sybase安全</h1>
 
@@ -154,19 +154,19 @@ to username
 
 <p>默认xp&#95;cmdshell是不开启的。未开启xp&#95;cmdshell时：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150825/2015082516460294021.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150825/2015082516460294021.png" alt="enter image description here"></p>
 
 <p>开启xp&#95;cmdshell : sp&#95;configure 'xp_cmdshell context',0</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306512869760.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306512869760.png" alt="enter image description here"></p>
 
 <p>开启xp_cmdshell后执行命令:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150825/2015082516460288549.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150825/2015082516460288549.png" alt="enter image description here"></p>
 
 <p>权限不够时执行xp_cmdshell:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306512853933.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306512853933.png" alt="enter image description here"></p>
 
 <p><strong>细节：</strong></p>
 
@@ -180,54 +180,54 @@ to username
 
 <p>支持union，可以用/<strong>/、--来注释，可以用/</strong>/来替换空格，也可以用+代替空格，也支持count(<em>)，不过通配符</em>不能出现在子查询中。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306512944427.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306512944427.png" alt="enter image description here"></p>
 
 <p>12.5.2及以前的版本不支持TOP关键字，形如select top N from注入语句将报错</p>
 
-<p><img src="http://static.wooyun.org//drops/20150825/2015082516460226691.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150825/2015082516460226691.png" alt="enter image description here"></p>
 
 <p>当然，不能用top，肯定会有替代方案，那就是set rowcount N</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306512974578.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306512974578.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306512939934.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306512939934.png" alt="enter image description here"></p>
 
 <p>但是set rowcount N貌似不支持子查询和条件句：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150825/2015082516460236306.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150825/2015082516460236306.png" alt="enter image description here"></p>
 
 <h3>多句执行</h3>
 
 <p>与mssql不同的地方是：多条语句直接以空格分隔，而不是分号。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306512972697.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306512972697.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306512993361.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306512993361.png" alt="enter image description here"></p>
 
 <h3>对编码的支持</h3>
 
 <p>与MSSQL相同：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306513020530.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306513020530.png" alt="enter image description here"></p>
 
 <h3>SQL注入特性</h3>
 
 <p>以Php为脚本：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306513061702.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306513061702.png" alt="enter image description here"></p>
 
 <p>以Java为脚本：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306513084275.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306513084275.png" alt="enter image description here"></p>
 
 <p>判断是否是Sybase数据库：</p>
 
 <pre><code>id=1 and exists(select * from master.dbo.ijdbc_function_escapes)
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306513059759.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306513059759.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150825/2015082516460266914.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150825/2015082516460266914.png" alt="enter image description here"></p>
 
 <p>以报错方式注入时要注意，sybase是不支持不同类型数据直接相比较的（与MSSQL不同）：</p>
 
@@ -243,7 +243,7 @@ id=1 and 1=convert(integer,(select+@@version))
 id=-1 union select 1,"",(select @@version)
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306513146395.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306513146395.png" alt="enter image description here"></p>
 
 <p>列库（复杂版本）：</p>
 
@@ -257,18 +257,18 @@ id=-1 union select 1,"",(select @@version)
 
 <p>列出除master外的第一个库</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306513177379.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306513177379.png" alt="enter image description here"></p>
 
 <p>列库（简单版本）：</p>
 
 <pre><code>id=1 and 1=convert(integer,(SELECT name FROM master..sysdatabases where dbid=1))   不断递增dbid的值
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306513170113.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306513170113.png" alt="enter image description here"></p>
 
 <p>dbid是连续的数字，猜解起来很容易</p>
 
-<p><img src="http://static.wooyun.org//drops/20150825/2015082516460257931.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150825/2015082516460257931.png" alt="enter image description here"></p>
 
 <p>PS：虽然Sybase不能用TOP、for xml path，但是支持having、where not in等语法，变化方式依然有多种</p>
 
@@ -276,7 +276,7 @@ id=-1 union select 1,"",(select @@version)
 
 <p>MSSQL是xtype Sybase是type</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306513265232.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306513265232.png" alt="enter image description here"></p>
 
 <p>列表(只能用复杂版)：</p>
 
@@ -290,7 +290,7 @@ id=-1 union select 1,"",(select @@version)
 
 <p>列出除cmd外的第一个表cmd0</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306513243212.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306513243212.png" alt="enter image description here"></p>
 
 <p>列字段：</p>
 
@@ -302,15 +302,15 @@ id=-1 union select 1,"",(select @@version)
 <pre><code>id=1 and 1=convert(integer,(select name from test..syscolumns where id=object_id('users') and colid=1))
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306513230650.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306513230650.png" alt="enter image description here"></p>
 
 <p>工具注入：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150825/2015082516460313121.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150825/2015082516460313121.png" alt="enter image description here"></p>
 
 <p>穿山甲猜不出库名，抓包发现使用了TOP关键字，看来穿山甲只支持12.5.3以后的sybase</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306513267232.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306513267232.png" alt="enter image description here"></p>
 
 <h3>备份写文件（webshell）</h3>
 
@@ -338,7 +338,7 @@ id=-1 union select 1,"",(select @@version)
 4、drop table cmd--
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081306513366665.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150813/2015081306513366665.png" alt="enter image description here"></p>
 
 <h3>加固与防范</h3>
 
@@ -381,12 +381,12 @@ sp_configure “maximum failed logins”,5   ---设置口令错误锁定阀�
 
 <pre><code>create procedure login_trg 
 as  
-   <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="294d4c4a45485b4ceb89694059eb895f485b4a41485b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>(18),@login_name varchar(20) 
+   <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="294d4c4a45485b4ceb89694059eb895f485b4a41485b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>(18),@login_name varchar(20) 
 begin  
    select 
    @ip=t.ipaddr,@login_name=suser_name() 
    from master.dbo.sysprocesses t where t.spid=@@spid  
-   <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ea838c284aaa839a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&lt;&gt;'192.168.0.102'
+   <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ea838c284aaa839a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&lt;&gt;'192.168.0.102'
       begin  
          raiserror 30000 'IP address %1! ,with user %2! login failed!',@ip,@login_name 
          select syb_quit() 
@@ -410,7 +410,7 @@ isql&gt;sp_modifylogin loginname, "login script",login_trg
 isql&gt;exec sp_configure "log audit logon success",1 --记录登录成功信息
 </code></pre>
 
-<p>http://drops.wooyun.org/wp-content/uploads/2015/08/</p>      </p>
+<p>http://drops.wooyun.org/wp-content/uploads/2015/08/</p>      <p></p>
     
 			</body>
 		</html>

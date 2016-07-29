@@ -3,14 +3,14 @@
 			<head>
 			     <title>QQ模拟登录实现之四两拨千斤（基于V8引擎） - iv4n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/13556">http://drops.wooyun.org/tips/13556</a></h1>
 				
       <p>
-        <h1>0x00 概述</h1>
+        </p><h1>0x00 概述</h1>
 
-<hr />
+<hr>
 
 <p>很多时候，我们需要模拟QQ自动登录的场景，比如爬取QQ页面的时候，我们需要登录，当然，还有其它的需求就不方便说了。</p>
 
@@ -26,7 +26,7 @@
 
 <p>通常会看到如下页面</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110921267567919.jpg" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160311/201603110921267567919.jpg" alt="p1"></p>
 
 <p>简单的分析一下这个登录页面，这里QQ支持3种登陆方式：</p>
 
@@ -38,13 +38,13 @@
 
 <p>登录页面展示的逻辑如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110921284269326.jpg" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160311/201603110921284269326.jpg" alt="p2"></p>
 
 <p>从自动化的角度来考虑，第一种方式直接排除，需要手机互动；第三种方式，需要有客户端支持，在win下面也是不错的方案；第二种方式最普遍，也是比较实用，本文重点讲解这种登陆方式的自动化。</p>
 
 <h1>0x01 用户名密码登录流程分析</h1>
 
-<hr />
+<hr>
 
 <p>要想实现模拟登录，我们得先搞清楚登录的流程。</p>
 
@@ -54,9 +54,9 @@
 
 <h1>0x02 整体流程</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110921292095936.jpg" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20160311/201603110921292095936.jpg" alt="p3"></p>
 
 <h3>流程说明</h3>
 
@@ -117,7 +117,7 @@ V0VRhNIHGyezVzO7YgH82MmYj78KF6csGHq3330UXWDa79ZSUPy6J84RwcBzbFaQ
 
 <h1>0x03 自动登录实现</h1>
 
-<hr />
+<hr>
 
 <h3>自动登录实现的几种方案</h3>
 
@@ -260,14 +260,14 @@ def login(self):
         return [True, ""]
 </code></pre>
 
-<p>show me the code代码传送门：<br />
+<p>show me the code代码传送门：<br>
 <a href="https://github.com/LeoHuang2015/qqloginjs">https://github.com/LeoHuang2015/qqloginjs</a></p>
 
 <h1>0x04 总结</h1>
 
-<hr />
+<hr>
 
-<p>通过这种方式，只需要使用JS引擎，调用JS的加密方法即可生成加密的密码，不需要深入研究TX密码加密的流程和算法，比较简单方便。</p>      </p>
+<p>通过这种方式，只需要使用JS引擎，调用JS的加密方法即可生成加密的密码，不需要深入研究TX密码加密的流程和算法，比较简单方便。</p>      <p></p>
     
 			</body>
 		</html>

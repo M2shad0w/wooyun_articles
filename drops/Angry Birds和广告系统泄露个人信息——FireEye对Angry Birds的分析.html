@@ -3,16 +3,16 @@
 			<head>
 			     <title>Angry Birds和广告系统泄露个人信息——FireEye对Angry Birds的分析 - 我是壮丁</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/news/1408">http://drops.wooyun.org/news/1408</a></h1>
 				
       <p>
-        <p>from:<a href="http://www.fireeye.com/blog/technical/mobile-threats/2014/03/a-little-bird-told-me-personal-information-sharing-in-angry-birds-and-its-ad-libraries.html">http://www.fireeye.com/blog/technical/mobile-threats/2014/03/a-little-bird-told-me-personal-information-sharing-in-angry-birds-and-its-ad-libraries.html</a></p>
+        </p><p>from:<a href="http://www.fireeye.com/blog/technical/mobile-threats/2014/03/a-little-bird-told-me-personal-information-sharing-in-angry-birds-and-its-ad-libraries.html">http://www.fireeye.com/blog/technical/mobile-threats/2014/03/a-little-bird-told-me-personal-information-sharing-in-angry-birds-and-its-ad-libraries.html</a></p>
 
 <h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>很多流行的app，包括愤怒的小鸟在内，收集并且分享玩家的个人信息的广泛程度，远远超过大多数人所了解的。</p>
 
@@ -32,7 +32,7 @@
 
 <h2>0x01 什么信息会被收集？</h2>
 
-<hr />
+<hr>
 
 <p>Angry Birds鼓励用户创建Rovio账户，这样会给用户带来以下好处:</p>
 
@@ -42,29 +42,29 @@
 
 <p>图一显示Rovio的注册页面</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071422560488876.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071422560488876.png" alt="enter image description here"></p>
 
 <p>图一：Rovio的注册页面</p>
 
 <p>图二显示了在注册过程中收集生日信息，遵循最终使用许可协议(EULA)和授权Rovio可以上传用户信息，同时把信息上传到第三方机构进行营销。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071407450450020.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071407450450020.png" alt="enter image description here"></p>
 
 <p>图二:Rovio注册过程中收集信息和遵守EULA</p>
 
 <p>图三，注册页面提示用户输入邮件地址和性别。当用户点击注册按钮。Rovio上传收集到的数据到云端，同时创建用户</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071407450722900.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071407450722900.png" alt="enter image description here"></p>
 
 <p>图三:Rovio在注册过程中输入邮箱地址和性别</p>
 
 <p>图四显示愤怒的小鸟通过其他方式收藏用户信息。Rovio推送给注册用户更新游戏的提示，信息片段和特殊优惠。在时事通讯注册过程中，Rovio收集用户的名字、邮箱、生日、居住国和性别。这些信息会和用户的Rovio账户信息的邮箱进行比对</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071422560464357.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071422560464357.png" alt="enter image description here"></p>
 
 <p>图四:时事通讯注册页面要求更多的用户信息</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071407450880944.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071407450880944.png" alt="enter image description here"></p>
 
 <p>图五:愤怒的小鸟、广告平台和广告云之间的信息流。</p>
 
@@ -77,7 +77,7 @@
 <p>数据流：
 表一是一个总结，下面会有详细讲解</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071407450935375.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071407450935375.jpg" alt="enter image description here"></p>
 
 <p>表1：“愤怒的小鸟”，Burstly和第三方广告云之间的信息传递</p>
 
@@ -85,7 +85,7 @@
 
 <p>例如:一些信息被明文存储在缓存中，被称为webviewCacheChromium。</p>
 
-<pre><code>{“accountId”:”AC3XXX…XXXA62B”,”accountExtRef”:”hE…fDc”,”personal”:{“firstName”:null,”lastName”:null,“birthday”:”19XXXXX-01″, “age”:”30″, “gender”:”FEMALE”, “country”:”United States” , “countryCode”:”US”, “marketingConsent”:false, “avatarId”:”AVXXX…XXX2c”,”imageAssets”:[...], “nickName”:null}, “abid”:{“email”:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d4365449b18c8c8c3654728c8c8cb1948c8c8cfa8c8c8c365449">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>, “isConfirmed”:false}, “phoneNumber”:null, “facebook”:{“facebookId”:”",”email”:”"},”socialNetworks”:[]}
+<pre><code>{“accountId”:”AC3XXX…XXXA62B”,”accountExtRef”:”hE…fDc”,”personal”:{“firstName”:null,”lastName”:null,“birthday”:”19XXXXX-01″, “age”:”30″, “gender”:”FEMALE”, “country”:”United States” , “countryCode”:”US”, “marketingConsent”:false, “avatarId”:”AVXXX…XXX2c”,”imageAssets”:[...], “nickName”:null}, “abid”:{“email”:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d4365449b18c8c8c3654728c8c8cb1948c8c8cfa8c8c8c365449">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>, “isConfirmed”:false}, “phoneNumber”:null, “facebook”:{“facebookId”:”",”email”:”"},”socialNetworks”:[]}
 </code></pre>
 
 <p>这个设备被赋予一个通用id 1XXXXX8,这是明文存储在webviewCookieChromiun</p>
@@ -219,7 +219,7 @@ Accept-Charset: utf-8, iso-8859-1, utf-16, *;q=0.7
 
 <h2>0x02 个人信息是怎么被分享的？</h2>
 
-<hr />
+<hr>
 
 <p>我们研究了Burstly(广告中介平台)的源代码，来跟踪叫做信息贡献的方法。</p>
 
@@ -262,11 +262,11 @@ this.mBurstlyView.setCrParms(v0);
 
 <h2>0x03 结论</h2>
 
-<hr />
+<hr>
 
 <p>综上所述、"愤怒的小鸟"会收集用户个人信息和自定义的ID，在存储到本地之前进行上传。然后Burstly的广告库导入到“愤怒的小鸟”的自定义ID，上传相应的个人信息给Burstly云和其他广告云系统。</p>
 
-<p>我们在网络中捕获到响应的数据包、同时逆向分析了代码。</p>      </p>
+<p>我们在网络中捕获到响应的数据包、同时逆向分析了代码。</p>      <p></p>
     
 			</body>
 		</html>

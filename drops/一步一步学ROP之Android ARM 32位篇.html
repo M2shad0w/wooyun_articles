@@ -3,14 +3,14 @@
 			<head>
 			     <title>一步一步学ROP之Android ARM 32位篇 - 蒸米</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/11390">http://drops.wooyun.org/papers/11390</a></h1>
 				
       <p>
-        <h1>0x00 序</h1>
+        </p><h1>0x00 序</h1>
 
-<hr />
+<hr>
 
 <p>ROP的全称为Return-oriented programming（返回导向编程），这是一种高级的内存攻击技术，可以用来绕过现代操作系统的各种通用防御（比如内存不可执行和代码签名等）。之前我们主要讨论了linux上的ROP攻击：</p>
 
@@ -22,14 +22,14 @@
 
 <p>在这次的教程中我们会带来arm上rop利用的技术，欢迎大家继续学习。</p>
 
-<p>另外文中涉及代码可在我的github下载:<br />
+<p>另外文中涉及代码可在我的github下载:<br>
 <a href="https://github.com/zhengmin1989/ROP_STEP_BY_STEP">https://github.com/zhengmin1989/ROP&#95;STEP&#95;BY_STEP</a></p>
 
 <!--more-->
 
 <h1>0x01 ARM上的Buffer Overflow</h1>
 
-<hr />
+<hr>
 
 <p>作为一个程序员我们的目标是要会写所有语言的”hello world”。同样的，作为一个安全工程师，我们的目标是会exploit掉所有语言的buffer overflow。：）因为buffer overflow实在是太经典了，所以我们的arm篇也是从buffer overflow开始。</p>
 
@@ -153,7 +153,7 @@ hex pattern decoded as: Ae4A
 
 <p>OK，我们知道了溢出点的位置，接下来我们找一下返回的地址。其实利用的代码在程序中已经有了。我们只要将pc指向callsystem()这个函数地址即可。我们在ida中可以看到地址为<code>0x00008554</code>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121615312451451170.png" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20151216/2015121615312451451170.png" alt="p1"></p>
 
 <p>因为<code>callsystem()</code>被编译成了thumb指令，所以我们需要将地址+1，让pc知道这里的代码为thumb指令，最终exp如下：</p>
 
@@ -186,7 +186,7 @@ uid=0(root) gid=0(root) context=u:r:shell:s0
 
 <h1>0x02 寻找thumb gadgets</h1>
 
-<hr />
+<hr>
 
 <p>下面我们来看第二个程序level7.c：</p>
 
@@ -238,9 +238,9 @@ $ ROPgadget --binary=./level7 --thumb | grep "ldr r0"
 
 <p>接下来就是找system和<code>"/system/bin/sh"</code>的地址，分别为0x00008404和000096C0：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121615312684436227.png" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20151216/2015121615312684436227.png" alt="p2"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121615312843984321.png" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20151216/2015121615312843984321.png" alt="p3"></p>
 
 <p>要注意的是，因为<code>system()</code>函数在plt区域，并没有被编译成thumb指令，而是普通的arm指令，因此并不需要将地址+1。最终level7.py如下：</p>
 
@@ -282,12 +282,12 @@ uid=0(root) gid=0(root) context=u:r:shell:s0
 
 <h1>0x03 Android上的ASLR</h1>
 
-<hr />
+<hr>
 
 <p>Android上的ASLR其实伪ASLR，因为如果程序是由皆由zygote fork的，那么所有的系统library(<code>libc</code>,<code>libandroid_runtime</code>等)和<code>dalvik - heap</code>的基址都会是相同的，并且和zygote的内存布局一模一样。比如我们随便看两个由zygote fork的进程：</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="64160b0b10240c05090901160c010500">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/ # cat /proc/1698/maps
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="64160b0b10240c05090901160c010500">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/ # cat /proc/1698/maps
 400e8000-400ed000 r-xp 00000000 b3:19 8201       /system/bin/app_process
 400ed000-400ee000 r--p 00004000 b3:19 8201       /system/bin/app_process
 400ee000-400ef000 rw-p 00005000 b3:19 8201       /system/bin/app_process
@@ -307,7 +307,7 @@ uid=0(root) gid=0(root) context=u:r:shell:s0
 
 
 
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5624393922163e373b3b33243e333732">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/ # cat /proc/1720/maps
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5624393922163e373b3b33243e333732">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/ # cat /proc/1720/maps
 400e8000-400ed000 r-xp 00000000 b3:19 8201       /system/bin/app_process
 400ed000-400ee000 r--p 00004000 b3:19 8201       /system/bin/app_process
 400ee000-400ef000 rw-p 00005000 b3:19 8201       /system/bin/app_process
@@ -365,9 +365,9 @@ vulnerable_function();
 
 <p>接下来就是在libc.so中找<code>system()</code>和<code>"/system/bin/sh"</code>的位置：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121615313047065420.png" alt="p4" /></p>
+<p><img src="http://static.wooyun.org//drops/20151216/2015121615313047065420.png" alt="p4"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121615313156402517.png" alt="p5" /></p>
+<p><img src="http://static.wooyun.org//drops/20151216/2015121615313156402517.png" alt="p5"></p>
 
 <p>可以看到地址分别为<code>0x000253A4</code>和<code>0x0003F9B4</code>。当然了，就算获取了这些地址，我们也需要根据<code>system()</code>在内存中的地址进行偏移量的计算才能够成功的找到gadgets和<code>"/system/bin/sh"</code>在内存中的地址。除此之外，还要注意thumb指令和arm指令的转换问题。最终的exp level8.py如下：</p>
 
@@ -417,7 +417,7 @@ uid=0(root) gid=0(root) context=u:r:shell:s0
 
 <h1>0x04 Android上的information leak</h1>
 
-<hr />
+<hr>
 
 <p>在上面的例子中，我们假设已经知道了libc.so的基址了，但是如果我们是进行远程攻击，并且原程序中没有调用<code>system()</code>函数怎么办？这意味着目标程序的内存布局对我们来说是随机的，我们并不能直接调用libc.so中的gadgets，因为我们并不知道libc.so在内存中的地址。其实这也是有办法的，我们首先需要一个information leak的漏洞来获取libc.so在内存中的地址，然后再控制pc去执行我们的rop。现在我们来看level9.c:</p>
 
@@ -438,11 +438,11 @@ vulnerable_function();
 }
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121615313311640617.png" alt="p6" /></p>
+<p><img src="http://static.wooyun.org//drops/20151216/2015121615313311640617.png" alt="p6"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121615313520385716.png" alt="p7" /></p>
+<p><img src="http://static.wooyun.org//drops/20151216/2015121615313520385716.png" alt="p7"></p>
 
-<p>虽然程序非常简单，可用的gadgets很少。但好消息是我们发现除了程序本身的实现的函数之外，我们还可以使用<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6611140f120326160a12">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>()</code>函数。但因为程序本身并没有调用<code>system()</code>函数，所以我们并不能直接调用<code>system()</code>来获取shell。但其实我们有<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5a2d28332e3f1a2a362e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>()</code>函数就够了，因为我们可以通过<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="95e2e7fce1f0d5e5f9e1">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>()</code>函数把<code>write()</code>函数在内存中的地址也就是write.got给打印出来。既然<code>write()</code>函数实现是在libc.so当中，那我们调用的<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="285f5a415c4d6858445c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>()</code>函数为什么也能实现<code>write()</code>功能呢? 这是因为android和linux类似采用了延时绑定技术，当我们调用<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9fe8edf6ebfadfeff3f6eb">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>()</code>的时候，系统会将真正的<code>write()</code>函数地址link到got表的write.got中，然后<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0e797c677a6b4e7e62677a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>()</code>会根据write.got 跳转到真正的<code>write()</code>函数上去。（如果还是搞不清楚的话，推荐阅读潘爱民老师的《程序员的自我修养 - 链接、装载与库》这本书，潘老师是我主管的事情我才不会告诉你。。。）</p>
+<p>虽然程序非常简单，可用的gadgets很少。但好消息是我们发现除了程序本身的实现的函数之外，我们还可以使用<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6611140f120326160a12">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>()</code>函数。但因为程序本身并没有调用<code>system()</code>函数，所以我们并不能直接调用<code>system()</code>来获取shell。但其实我们有<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5a2d28332e3f1a2a362e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>()</code>函数就够了，因为我们可以通过<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="95e2e7fce1f0d5e5f9e1">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>()</code>函数把<code>write()</code>函数在内存中的地址也就是write.got给打印出来。既然<code>write()</code>函数实现是在libc.so当中，那我们调用的<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="285f5a415c4d6858445c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>()</code>函数为什么也能实现<code>write()</code>功能呢? 这是因为android和linux类似采用了延时绑定技术，当我们调用<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9fe8edf6ebfadfeff3f6eb">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>()</code>的时候，系统会将真正的<code>write()</code>函数地址link到got表的write.got中，然后<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0e797c677a6b4e7e62677a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>()</code>会根据write.got 跳转到真正的<code>write()</code>函数上去。（如果还是搞不清楚的话，推荐阅读潘爱民老师的《程序员的自我修养 - 链接、装载与库》这本书，潘老师是我主管的事情我才不会告诉你。。。）</p>
 
 <p>因为<code>system()</code>函数和<code>write()</code>在libc.so中的offset(相对地址)是不变的，所以如果我们得到了<code>write()</code>的地址并且拥有目标手机上的libc.so就可以计算出<code>system()</code>在内存中的地址了。然后我们再将pc指针return回<code>vulnerable_function()</code>函数，就可以进行第二次溢出攻击了，并且这一次我们知道了<code>system()</code>在内存中的地址，就可以调用<code>system()</code>函数来获取我们的shell了。</p>
 
@@ -454,7 +454,7 @@ vulnerable_function();
 
 <p>另外为了能再一次返回<code>vulnerable_function()</code>，我们需要构造好执行完write函数后的栈的数据，让程序执行完<code>ADD SP, SP</code>,<code>#0x84</code>;<code>POP {PC}</code>后，PC能再一次指向<code>0x000084D8</code>。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121615313664430815.png" alt="p8" /></p>
+<p><img src="http://static.wooyun.org//drops/20151216/2015121615313664430815.png" alt="p8"></p>
 
 <p>最终的explevel9.py如下：</p>
 
@@ -524,7 +524,7 @@ uid=0(root) gid=0(root) context=u:r:shell:s0
 
 <h1>0x05 Android ROP调试技巧</h1>
 
-<hr />
+<hr>
 
 <p>因为gdb对thumb指令的解析并不好，所以我还是推荐用ida来进行调试。如果你还不会用ida，可以先看一下我之前写的关于ida调试的文章：</p>
 
@@ -536,23 +536,23 @@ http://drops.wooyun.org/tips/6840
 
 <p>比如图中是libc.so中system的代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121615313832741914.png" alt="p9" /></p>
+<p><img src="http://static.wooyun.org//drops/20151216/2015121615313832741914.png" alt="p9"></p>
 
 <p>这段代码其实是thumb指令，但是我们怎么样才能让ida解析正确呢？方法就是用鼠标选中<code>0xB6EE03A4</code>，然后按<code>alt+g</code>键，然后将<code>value</code>改成<code>0x1</code>。这样的话，ida就会按照thumb指令来解析这段数据了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/20151216153142479391014.png" alt="p10" /></p>
+<p><img src="http://static.wooyun.org//drops/20151216/20151216153142479391014.png" alt="p10"></p>
 
 <p>我们随后选中那块数据然后按c键，就可以看到指令被正确的解析了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/20151216153143164511118.png" alt="p11" /></p>
+<p><img src="http://static.wooyun.org//drops/20151216/20151216153143164511118.png" alt="p11"></p>
 
 <h1>0x06 总结</h1>
 
-<hr />
+<hr>
 
 <p>我们这篇文章介绍了32位android的ROP。在下一篇中我会继续带来64位arm和iOS上ROP的利用技巧，欢迎大家继续学习。另外文中涉及代码可在我的github下载:</p>
 
-<p><a href="https://github.com/zhengmin1989/ROP_STEP_BY_STEP">https://github.com/zhengmin1989/ROP&#95;STEP&#95;BY_STEP</a></p>      </p>
+<p><a href="https://github.com/zhengmin1989/ROP_STEP_BY_STEP">https://github.com/zhengmin1989/ROP&#95;STEP&#95;BY_STEP</a></p>      <p></p>
     
 			</body>
 		</html>

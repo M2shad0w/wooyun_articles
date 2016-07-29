@@ -3,16 +3,16 @@
 			<head>
 			     <title>利用基于 NTP 的 TOTP 算法缺陷绕过 WordPress 登陆验证 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/10511">http://drops.wooyun.org/papers/10511</a></h1>
 				
       <p>
-        <p>近日，国外安全研究人员 Gabor 发表了两篇关于如何利用基于 NTP （Network Time Protocol）的验证算法缺陷绕过 WordPress 登陆验证的文章，这两篇文章分别介绍了<a href="https://blog.gaborszathmari.me/2015/11/11/tricking-google-authenticator-totp-with-ntp/">基于 NTP 的验证算法缺陷</a>以及<a href="https://blog.gaborszathmari.me/2015/11/11/bypassing-wordpress-login-pages-with-wpbiff/">如何利用该缺陷绕过 WordPress 登陆验证</a>并给出了 POC 和相关工具。以下内容是对这两篇文章的汇总介绍。 ；）</p>
+        </p><p>近日，国外安全研究人员 Gabor 发表了两篇关于如何利用基于 NTP （Network Time Protocol）的验证算法缺陷绕过 WordPress 登陆验证的文章，这两篇文章分别介绍了<a href="https://blog.gaborszathmari.me/2015/11/11/tricking-google-authenticator-totp-with-ntp/">基于 NTP 的验证算法缺陷</a>以及<a href="https://blog.gaborszathmari.me/2015/11/11/bypassing-wordpress-login-pages-with-wpbiff/">如何利用该缺陷绕过 WordPress 登陆验证</a>并给出了 POC 和相关工具。以下内容是对这两篇文章的汇总介绍。 ；）</p>
 
 <h1>0x00 WordPress 插件 Google Authenticator 验证算法介绍</h1>
 
-<hr />
+<hr>
 
 <p>关于 NTP 相关的知识，可以在<a href="http://baike.baidu.com/link?url=aDjxXw3OivotsPntFuppRDAiJsN_rgrUP3NEHdqZXrvXbzwo7ed4PNmgtZxuAV0ojPyHHco4KYNZfpJjbBnvGK">这里</a>进行了解。</p>
 
@@ -26,7 +26,7 @@
 
 <p>在这个动态口令生成过程中所存在的问题就在于每次使用相同的密钥种子和时间戳的组合总会生成一个相同的动态口令。而密钥种子是个不变量同时在攻击中不可控，因此只要控制了时间戳那么即可生成任意时间戳所对应的动态口令。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151116/2015111605225597641totp-explained-300x53.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151116/2015111605225597641totp-explained-300x53.jpg" alt=""></p>
 
 <p>图 1 ：基于 NTP 的 TOTP 算法</p>
 
@@ -54,7 +54,7 @@
 
 <h1>0x01 绕过 WordPress 登陆验证</h1>
 
-<hr />
+<hr>
 
 <p>通过上述描述，让我们来总结一下攻击 NTP 的现有条件：</p>
 
@@ -66,7 +66,7 @@
 
 <p>WordPress 中的插件 <a href="https://wordpress.org/plugins/google-authenticator/">Google Authenticator</a> 可以对 WordPress 后台登录开启双重验证。如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151116/2015111605230015841Wordpress-dashboard-login-two-factor-1024x825.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151116/2015111605230015841Wordpress-dashboard-login-two-factor-1024x825.png" alt=""></p>
 
 <p>图 2 ：Google Authenticator 插件对 WordPress 后台登录开启双重验证</p>
 
@@ -85,43 +85,43 @@
 
 <p>整个网络非常简单，三台 Ubuntu 虚拟机需要处于同一个子网中。如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151116/2015111605230134349wordpress-wpbiff-network-diagram-300x189.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151116/2015111605230134349wordpress-wpbiff-network-diagram-300x189.png" alt=""></p>
 
 <p>图 3 ：搭建攻击网络环境</p>
 
 <p>为了模拟中间人攻击以<a href="http://arstechnica.com/security/2015/10/new-attacks-on-network-time-protocol-can-defeat-https-and-create-chaos/">篡改 NTP 传输数据</a>，我们首先需要修改 WordPress 服务器的 <code>/etc/hosts</code> 文件，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151116/2015111605225875531tripelover-hosts-e1447195874345-1024x507.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151116/2015111605225875531tripelover-hosts-e1447195874345-1024x507.png" alt=""></p>
 
 <p>图 4 ：修改 /etc/hosts 文件</p>
 
 <p>其次，我们假设管理员使用计划任务每隔一分钟同步一次时间（事实上很多人都是这么做的），如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151116/2015111605225765649tripelover-crontab-e1447195835823-1024x248.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151116/2015111605225765649tripelover-crontab-e1447195835823-1024x248.png" alt=""></p>
 
 <p>图 5 ：管理员每隔一分钟同步一次时间</p>
 
 <p>然后，我们使用预先设置的时间作为参数执行 Delorean ，同时 WordPress 服务器依旧会每隔一分钟同步一次时间。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151116/2015111605225252104delorean-ntp-server-1024x716.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151116/2015111605225252104delorean-ntp-server-1024x716.png" alt=""></p>
 
 <p>图 6 ：使用预先设置的时间作为参数执行 Delorean</p>
 
 <p>现在，我们在另外一台虚拟机中，也就是攻击者的机器中运行 WPBiff。设置 WordPress 后台登录用户名和密码，以及与上图相同的时间戳作为运行参数。如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151116/2015111605230388427wpbiff-1-e1447198290204-1024x394.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151116/2015111605230388427wpbiff-1-e1447198290204-1024x394.png" alt=""></p>
 
 <p>图 7 ：运行 WPBiff 开始攻击</p>
 
 <p>在 WPBiff 运行了 39 分钟后，成功的爆破出了 6 位纯数字动态口令，同时 dump 出了有效的登陆 WordPress 后台的 session cookies。如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151116/2015111605230599608wpbiff-2-1024x896.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151116/2015111605230599608wpbiff-2-1024x896.png" alt=""></p>
 
 <p>图 8 ：成功爆破出了动态口令</p>
 
 <p>由于插件不允许动态口令的重用，所以可以使用 dump 出来的 session cookies 直接登录 WordPress 后台。 在额外的三次测试中，又分别花费了 51分钟，57分钟，83分钟 爆破出了动态口令。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151116/2015111605225454373logon.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151116/2015111605225454373logon.png" alt=""></p>
 
 <p>图 9 ：成功登陆 WordPress 后台</p>
 
@@ -130,7 +130,7 @@
 <ul>
 <li><a href="https://blog.gaborszathmari.me/2015/11/11/tricking-google-authenticator-totp-with-ntp/">https://blog.gaborszathmari.me/2015/11/11/tricking-google-authenticator-totp-with-ntp/ </a> </li>
 <li><a href="https://blog.gaborszathmari.me/2015/11/11/bypassing-wordpress-login-pages-with-wpbiff/">https://blog.gaborszathmari.me/2015/11/11/bypassing-wordpress-login-pages-with-wpbiff/</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

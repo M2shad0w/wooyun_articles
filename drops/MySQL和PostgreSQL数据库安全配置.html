@@ -3,14 +3,14 @@
 			<head>
 			     <title>MySQL和PostgreSQL数据库安全配置 - shewey</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/16067">http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/16067</a></h1>
 				
       <p>
-        <h1>0x00 MySQL和PostgreSQL安全配置</h1>
+        </p><h1>0x00 MySQL和PostgreSQL安全配置</h1>
 
-<hr />
+<hr>
 
 <p>针对开源数据库MySQL和PostgreSQL的安全配置主要主要通过身份鉴别、访问控制、安全审计、入侵防范、资源控制五个方面来实现。</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 身份鉴别</h1>
 
-<hr />
+<hr>
 
 <p>MySQL和PostgreSQL均可以实现身份鉴别功能。通过设置数据库基本上能够实现能够满足《信息系统安全等级保护基本要求》第三级身份鉴别中大部分要求，但是对于“f 项应采用两种或两种以上组合的鉴别技术对管理用户进行身份鉴别”，需要使用第三方的身份鉴别技术，如：口令、数字证书、生物特征等<sup><a href="http://static.wooyun.org//drops/20160524/2016052416232193467pic21.jpg">2</a></sup>。</p>
 
@@ -26,7 +26,7 @@
 
 <p>MySQL数据库在安装后默认存在mysql数据库，该数据库为系统表所在的数据库，所有用户记录在mysql数据库的user三个权限表的用户列（包括host、user、password三个字段）。</p>
 
-<p>1）对于身份认证MySQL是通过IP地址和用户名进行联合确认的，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3eda87a1db8e8fd8a691d6918adcbea2d9aa96d8b689dbaeb37e776edcbea3d9aa96d8a39bd68495da8583d6909ad691bfd9a4badbaa91da86bed89eb9d691b8">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>；</p>
+<p>1）对于身份认证MySQL是通过IP地址和用户名进行联合确认的，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3eda87a1db8e8fd8a691d6918adcbea2d9aa96d8b689dbaeb37e776edcbea3d9aa96d8a39bd68495da8583d6909ad691bfd9a4badbaa91da86bed89eb9d691b8">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>；</p>
 
 <p>2）安全配置时尽量避免采用默认的用户名root，建议对默认用户名进行重命名，这样增加鉴别信息被猜测的难度；</p>
 
@@ -37,7 +37,7 @@
 <p>3）mysql数据库默认无法实现密码更改周期和密码复杂度要求，需要管理员定期更改口令的复杂度，可以通过如下命令设置密码；</p>
 
 <ul>
-<li><code>mysql&gt;update mysql.user set password=password("<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c0f1f2a5b2a580f1f2f3939785">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>!@") where User="root" and host="localhost";</code> --设置密码复杂度</li>
+<li><code>mysql&gt;update mysql.user set password=password("<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c0f1f2a5b2a580f1f2f3939785">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>!@") where User="root" and host="localhost";</code> --设置密码复杂度</li>
 <li><code>mysql&gt;FLUSH PRIVILEGES;</code> --刷新权限表</li>
 </ul>
 
@@ -77,7 +77,7 @@
 
 <h1>0x02 访问控制</h1>
 
-<hr />
+<hr>
 
 <p>MySQL和PostgreSQL均可以实现访问控制功能。</p>
 
@@ -136,7 +136,7 @@
 
 <p>为了保护数据安全，当用户对某个数据库对象进行操作之前，必须检查用户在对象上的操作权限。访问控制列表（ACL）是对象权限管理和权限检查的基础，在PostgreSQL通过操作ACL实现对象的访问控制管理。所有表的基本定义保存在系统表pg_class中，除了包括表，视图、序列和索引(与其他许多系统不同，PG的索引也被视作一个类，事实上索引项无论在逻辑组成还是物理结构上都类似一个表的元组。)等对象的基本定义外，它的relacl属性中为每个对象维护一个ACL<sup>[5]</sup>。Relacl是PostgreSQL支持的数组属性，该数组成员是抽象的数据类型aclitem。这些aclitem作为对象访问控制权限的ACE（ACL是存储控制箱（Access Control Entruy，ACE）的集合，每个ACL实际上是一个由多个aclitem构成的链表，ACE由数据库对象和权限列表构成，记录着可访问兑现的用户或者执行单元（进程、存储过程等））共同组成对象的ACL。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160524/2016052416231930540pic11.jpg" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160524/2016052416231930540pic11.jpg" alt="p1"></p>
 
 <p>图1：ACL权限信息。</p>
 
@@ -152,7 +152,7 @@
 
 <h1>0x03 安全审计</h1>
 
-<hr />
+<hr>
 
 <p>商业数据库均有安全审计功能，通过相关配置，能够对系统的重要事件进行安全审计目前MySQL数据库具有基本的日志功能，通过日志数据挖掘可以实现安全审计功能，但其实现起来较为复杂。PostgreSQL具备了良好的审计功能。</p>
 
@@ -193,7 +193,7 @@ server_audit_file_path  = /usr/local/mysql/mysql_logs/auditlog/server_audit.log
 mysql&gt; SHOW global VARIABLES LIKE '%audit%';
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160524/2016052416232193467pic21.jpg" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160524/2016052416232193467pic21.jpg" alt="p2"></p>
 
 <p>图1：审计配置参数</p>
 
@@ -293,7 +293,7 @@ mysql&gt; SHOW global VARIABLES LIKE '%audit%';
 
 <h1>0x04 入侵防范</h1>
 
-<hr />
+<hr>
 
 <p>针对数据库的安全防范主要体现在数据库补丁更新，特定函数的使用等方面。</p>
 
@@ -324,7 +324,7 @@ mysql&gt; SHOW global VARIABLES LIKE '%audit%';
 
 <h1>0x05 资源控制</h1>
 
-<hr />
+<hr>
 
 <p>资源控制主要保证数据库的资源不被非法的占用。</p>
 
@@ -360,7 +360,7 @@ mysql&gt; SHOW global VARIABLES LIKE '%audit%';
 
 <h1>0x06 参考文献</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>【1】 《关于应用安全可控信息技术加强银行业网络安全和信息化建设的指导意见》[ON/EL].http://www.cbrc.gov.cn/govView_EE29BABB27EB4E51A4343517691438F9.html</li>
@@ -369,7 +369,7 @@ mysql&gt; SHOW global VARIABLES LIKE '%audit%';
 <li>【4】 吴飞林，王晓艳，郎波，基于MySQL的可定制强制访问控制的研究与实现[J].计算机应用研究，第24卷第11期,119</li>
 <li>【5】 张孝，PostgreSQL中基于ACL的数据访问控制技术[J]，计算机应用和软件，第24卷第9期，68</li>
 <li>【6】 刘欣，沈昌祥，基于PostgreSQL的强制访问控制的实现[J]，计算机工程，第32卷第2期，50</li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

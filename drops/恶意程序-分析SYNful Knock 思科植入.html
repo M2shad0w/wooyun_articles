@@ -3,20 +3,20 @@
 			<head>
 			     <title>恶意程序-分析SYNful Knock 思科植入 - virustracker</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/8886">http://drops.wooyun.org/papers/8886</a></h1>
 				
       <p>
-        <h1>0x00 综述</h1>
+        </p><h1>0x00 综述</h1>
 
-<hr />
+<hr>
 
 <p>这个植入木马由一个经过篡改的思科IOS镜像组成，能允许攻击者保持匿名性，同时从网络上加载不同的功能模块。这个植入木马还使用了一个秘密的后门密码，能给攻击者提供非限制权限。每个模块都能通过HTTP协议（不是HTTPS）来启用，只需向路由器的接口发送一个特别制作的TCP数据包。这些数据包都使用了非标准的序列号和相应的承认号。而这些模块可以把自己显示成路由器IOS中独立的可执行代码或hook，提供的功能与后门密码类似。后门密码通过控制台，远程登陆协议和权限提升，使用enable命令，能提供对路由器的访问。</p>
 
 <p>图1：模块更新 图2：后门权限</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716494837785pic110.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716494837785pic110.png" alt=""></p>
 
 <!--more-->
 
@@ -26,13 +26,13 @@
 
 <h1>0x01 维护</h1>
 
-<hr />
+<hr>
 
 <p>这个植入木马寄存于一个被篡改过的思科IOS镜像，并且在加载后，植入就能维护自己，系统重启也无法清除。但是，攻击者之后载入的模块就只能储存在路由器的内存中，系统重启后就没有了。从分析的角度看，如果模块是加载到内存中，分析人员就可以通过获取路由器镜像的核心转储来对这些模块进行分析。</p>
 
 <h1>0x02 检测方法</h1>
 
-<hr />
+<hr>
 
 <p>对于能发出命令并接收响应的组织来说，主机标识非常实用。但是只有一小部分的路由器是放置在比较容易接触的网络区域中，在这种情况下，这种方法就是可行的。</p>
 
@@ -45,7 +45,7 @@
 
 <p><strong>表1-主机标识命令和预期输出</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716495153644pic27.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716495153644pic27.png" alt=""></p>
 
 <p>除了表1中的命令，思科的IOS防篡改文档中还提供了其他的一些检测技术： <code>http://www.cisco.com/web/about/security/ intelligence/integrity-assurance.html</code></p>
 
@@ -73,19 +73,19 @@
 
 <p>图3-篡改TLB权限（上为未篡改，下为篡改后）</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716495857372pic36.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716495857372pic36.png" alt=""></p>
 
 <p>这就联系到了我们上面讨论过的主机标识方法。使用enable模式命令 “show platform”就能检查TLB属性。如果IOS映像没有遭到篡改，TLB就会输出图4中的内容。</p>
 
 <p>图4-合法IOS镜像的TLB项</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716500435697pic45.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716500435697pic45.png" alt=""></p>
 
 <p>如果路由器中植入了篡改过的IOS镜像，其RW属性就会如下：</p>
 
 <p>图5-篡改后IOS镜像的TLB项</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716500818305pic55.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716500818305pic55.png" alt=""></p>
 
 <p>视路由器硬件而定，内存地址的有些特定范围一般是只读的可执行代码部分。检测路由器是否遭篡改的最简单方法就是使用命令“<code>show platform | include RO, Valid</code>”。如果没有结果显示，那么，IOS镜像很可能就遭到了篡改，其目的是为了篡改可行代码。</p></li>
 <li><p><strong>初始化木马</strong></p>
@@ -102,38 +102,38 @@
 
 <p>图6-木马覆盖了这些与一个有效函数相关的字符串</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716501327423pic66.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716501327423pic66.png" alt=""></p>
 
 <p>木马就是用下面图7中的内容覆盖了图6中的内容。这很明显就是木马的字符串（包括CC中使用的HTTP标头），以及默认的密码-我们故意抹去了。这样，潜在的受害者就有时间来查看自己的网络有没有遭到入侵，从而修复这一问题。如果你怀疑你的系统被入侵了，请联系我们的邮箱<code>synfulknock [at] fireeye.com</code>，我们会提供给你密码。</p>
 
 <p>图7-木马字符串</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716501712605pic75.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716501712605pic75.png" alt=""></p>
 
 <p>这个主机标识，也可以用于识别植入木马。但是，首先需要找到配置字符串的位置，而在不同的部署中，其位置可能也不同。当运行一个常规的IOS命令时，篡改过的IOS镜像会输出一个非常可疑的结果，如下：</p>
 
 <p>视植入木马而定，在运行了一个合法的IOS命令后，可能会显示后门标头。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716502121031pic86.png" alt="" /></p></li>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716502121031pic86.png" alt=""></p></li>
 </ol>
 
 <h1>0x04 后门密码</h1>
 
-<hr />
+<hr>
 
 <p>攻击者可以在三种不同的认证方案中，利用后门密码。植入木马首先会检查用户输入的是不是后门密码。如果是，则授予权限。否则，植入代码就会传递凭据，以便验证凭据的有效性。这就有些可疑了。在使用后门木马时，下面的三个实例在经过验证后就能启用权限：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716502469205pic95.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716502469205pic95.png" alt=""></p>
 
 <p>但是，此次研究表明，SSH或HTTPS会话并不能给后门密码提供权限。这可能是一个配置问题，在不同的入侵中，情况也可能发生变化。</p>
 
 <p>图8-合法密码验证与后门密码验证之间的细微差别（上为合法密码，下位后门密码）</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716502983463pic104.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716502983463pic104.png" alt=""></p>
 
 <h1>0x05 网络命令和控制</h1>
 
-<hr />
+<hr>
 
 <p>植入木马的CC部分是模块化的，并且能在IOS中加载额外的功能。其CC功能是秘密进行的，因为CC功能需要一系列的TCP触发数据包，木马会监视这些数据包，寻找特定的TCP标头值和内容。即使路由器启用了过滤，木马还是能处理TCP触发数据包。木马会响应从3个地址上发出的触发数据包，分别是：路由器接口，广播IP和网络位置（子网中的第一个IP）。</p>
 
@@ -142,7 +142,7 @@
 
 <p>图9-TCP SYN序列号和承认号之间的差值是0xC123D</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716503338762pic111.jpeg" alt="" /></p></li>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716503338762pic111.jpeg" alt=""></p></li>
 <li><p>虽然，木马通常有3种握手方式，会响应一个TCP SYN-ACK信息，承认第一个SYN信息。但是，要避免下面的情况：</p>
 
 <ul>
@@ -154,7 +154,7 @@
 
 <p>图10-TCP SYN序列号和承认号之间的差值是0xC123E</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716503683983pic121.jpeg" alt="" /></p></li>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716503683983pic121.jpeg" alt=""></p></li>
 <li><p>当最终的 ACK 完成了3种方式的握手后，控制器接下来会发送下面的 TCP 信息：</p>
 
 <ul>
@@ -171,19 +171,19 @@
 
 <p>图11-控制器命令数据包</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716504087859pic13.jpe" alt="" /></p></li>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716504087859pic13.jpe" alt=""></p></li>
 <li><p>木马响应就包含在下面的静态HTTP/HTML服务器响应中。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716504277536pic143.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716504277536pic143.png" alt=""></p>
 
 <p>图12-受害者响应</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716504714243pic151.jpeg" alt="" /></p></li>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716504714243pic151.jpeg" alt=""></p></li>
 </ol>
 
 <h1>0x06 受支持的命令</h1>
 
-<hr />
+<hr>
 
 <p>我们之前提到过，这个植入木马是分模块的。下表中的前五个命令是用来在受害者的路由器上加载额外的模块和功能。总共可以加载100个额外模块，但是，这些模块都是储存在内存中，在重启或重载后就没有了。</p>
 
@@ -193,11 +193,11 @@
 
 <p>表3-受支持的命令</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716504960961pic16.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716504960961pic16.jpg" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716505196485pic171.jpeg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716505196485pic171.jpeg" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716505713321pic18.jpeg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716505713321pic18.jpeg" alt=""></p>
 
 <p>如果信息的第一个WORD不是0，与第一个WORD模块ID相关的代码就会执行。这样没有hook到IOS函数的代码就可以执行了。</p>
 
@@ -222,13 +222,13 @@
 
 <p>当一个命令发出时，下面的签名会检测HTTP服务器响应。下面签名的优势在于，这个签名是一个标准的snort签名；但是，这个签名不能验证TCP序列号和承认号之间的差值。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716505951131pic19.jpe" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716505951131pic19.jpe" alt=""></p>
 
 <p><strong>4.控制器命令</strong></p>
 
 <p>下面的签名会检测从控制器中发出的命令。它会在木马预期的位置上，使用 “text”字符串，其信息的大小会少于256字节。这个签名还会假设不会呈现TCP标头选项。如果包括了TCP标头选项，签名可能需要转换成经过编译的签名或创建多个变体来处理每个长度。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716510085126pic20.png" alt="" /></p></li>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716510085126pic20.png" alt=""></p></li>
 <li><p><strong>主动网络检测</strong></p>
 
 <ul>
@@ -247,7 +247,7 @@
 
 <p>NSE数据包库不允许用户修改ack值；所以，曼迪昂特公司修改了这个库来允许这个功能。区别如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091716510275418pic211.png" alt="" /></p></li>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091716510275418pic211.png" alt=""></p></li>
 <li><p>**估计最坏情况下的速度（）(<code>THIS FACTORS IN HIGH UNUSED IP SPACE</code>) **</p>
 
 <p>曼迪昂特公司首先用Nmap的默认扫描速度-T3来运行这个扫描：</p>
@@ -356,9 +356,9 @@ E..4H@....]~.... .....P.........A .....V.......... ....
 
 <h1>0x07 应对方法</h1>
 
-<hr />
+<hr>
 
-<p>在确认遭到入侵后，最有效的应对办法是下载一个干净的镜像，再刷到路由器上。保证新镜像的哈希值，然后加强设备防御攻击的能力。在综述中提到过，初始入侵是由默认凭据或发现的凭据造成的，在修复了路由器后，重点就落在了网路上的其他部分上。如果路由器没有默认的凭据，感染就一定是通过其他方式导致的。接下来就是对入侵进行评估。</p>      </p>
+<p>在确认遭到入侵后，最有效的应对办法是下载一个干净的镜像，再刷到路由器上。保证新镜像的哈希值，然后加强设备防御攻击的能力。在综述中提到过，初始入侵是由默认凭据或发现的凭据造成的，在修复了路由器后，重点就落在了网路上的其他部分上。如果路由器没有默认的凭据，感染就一定是通过其他方式导致的。接下来就是对入侵进行评估。</p>      <p></p>
     
 			</body>
 		</html>

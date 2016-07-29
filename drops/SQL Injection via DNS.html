@@ -3,18 +3,18 @@
 			<head>
 			     <title>SQL Injection via DNS - BMa</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4605">http://drops.wooyun.org/tips/4605</a></h1>
 				
       <p>
-        <p>原文：<a href="https://blog.skullsecurity.org/2014/plaidctf-writeup-for-web-300-whatscat-sql-injection-via-dns">https://blog.skullsecurity.org/2014/plaidctf-writeup-for-web-300-whatscat-sql-injection-via-dns</a></p>
+        </p><p>原文：<a href="https://blog.skullsecurity.org/2014/plaidctf-writeup-for-web-300-whatscat-sql-injection-via-dns">https://blog.skullsecurity.org/2014/plaidctf-writeup-for-web-300-whatscat-sql-injection-via-dns</a></p>
 
 <p>建议先看：<a href="http://drops.wooyun.org/papers/3133">http://drops.wooyun.org/papers/3133</a></p>
 
 <h2>0x00 分析</h2>
 
-<hr />
+<hr>
 
 <p>Whatscat是一个可以上传猫咪的照片并且可以评论的php应用，地址：</p>
 
@@ -43,7 +43,7 @@ If it wasn't you who changed your password, we have logged their IP information 
 CAT;
       $details = gethostbyaddr($_SERVER['REMOTE_ADDR']).
         print_r(dns_get_record(gethostbyaddr($_SERVER['REMOTE_ADDR'])),true);
-      mail($res-&gt;email,"whatscat password reset",$message.$details,"From: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6f18070e1b1c0c0e1b2f18070e1b1c0c0e1b410c0e1b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>\r\n");
+      mail($res-&gt;email,"whatscat password reset",$message.$details,"From: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6f18070e1b1c0c0e1b2f18070e1b1c0c0e1b410c0e1b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>\r\n");
       mysql_query(sprintf("update users set password='%s', resetinfo='%s' where username='%s'",
               $pwnew,$details,$res-&gt;username));
     }
@@ -57,7 +57,7 @@ CAT;
 <pre><code>#!php
   $details = gethostbyaddr($_SERVER['REMOTE_ADDR']).
     print_r(dns_get_record(gethostbyaddr($_SERVER['REMOTE_ADDR'])),true);
-  mail($res-&gt;email,"whatscat password reset",$message.$details,"From: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c7b0afa6b3b4a4a6b387b0afa6b3b4a4a6b3e9a4a6b3">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>\r\n");
+  mail($res-&gt;email,"whatscat password reset",$message.$details,"From: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c7b0afa6b3b4a4a6b387b0afa6b3b4a4a6b3e9a4a6b3">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>\r\n");
   mysql_query(sprintf("update users set password='%s', resetinfo='%s' where username='%s'",
           $pwnew,$details,$res-&gt;username));
 </code></pre>
@@ -94,7 +94,7 @@ test123.skullseclabs.org. 1     IN      TXT     "Hello yes this is test.test123.
 
 <h2>0x01 The exploit</h2>
 
-<hr />
+<hr>
 
 <p>我并不是盲注的fans，所以我在本地服务器搭了一个版本，打开SQL错误。然后我开始开发一个exploit！这是一条update语句，所以不能直接注入。我只能间接地通过将数据库内容返回在email上来读取。我也不知道如何适当地终止SQL语句(既不用#，也不用--，以及;)，最终我的payload将能够：</p>
 
@@ -171,9 +171,9 @@ If you are not ron, we'll tell them something fishy is going on!
 
 <h2>0x02 总结</h2>
 
-<hr />
+<hr>
 
-<p>这篇paper的重点是通过伪造了PTR的记录类型，将DNS查询的TXT记录定向到自己控制的dns服务器，从而控制了DNS插叙返回的内容，而人们往往是无条件信任DNS查询返回的内容。</p>      </p>
+<p>这篇paper的重点是通过伪造了PTR的记录类型，将DNS查询的TXT记录定向到自己控制的dns服务器，从而控制了DNS插叙返回的内容，而人们往往是无条件信任DNS查询返回的内容。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,20 +3,20 @@
 			<head>
 			     <title>二进制漏洞之——邪恶的printf - 55-AA</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/6259">http://drops.wooyun.org/binary/6259</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>本文是二进制漏洞相关的系列文章。printf有一些鲜为人知的特性，在为编码提供便利的同时，也引入了安全的问题。本文重点描述printf在漏洞利用中的一些用法，在正常的编程中不建议这么用。</p>
 
 <h1>0x01 概述</h1>
 
-<hr />
+<hr>
 
 <p>printf系列函数的%$(如：%20$x)格式输出，可泄漏栈内的数据(如模块加载的基址)，给攻方提供下一步所必须的信息； prinrf系列函数的%n、%hn格式输出，可修改栈中指针指向的任意可写地址（如函数向量表中函数的地址，Windows下叫IAT）。</p>
 
@@ -24,7 +24,7 @@
 
 <h1>0x02 基础知识</h1>
 
-<hr />
+<hr>
 
 <p>通常printf的%根据在格式串中出现的顺序，依次使用栈中的地址，但是使用$可以指定特定序号的栈参数。例如： printf(%20$x, 0x100)实际输出的是第20个参数的值。尽管调用者没有提供20个参数，但是c调用格式的压栈方式，能使该代码顺利执行。</p>
 
@@ -65,14 +65,14 @@ printf("%#o\n", 0x10);  //#表示输出前导符，如：020
 
 <h1>0x03 实例片段</h1>
 
-<hr />
+<hr>
 
 <p>下面是内存的栈内存的变化情况来展示攻击的过程。</p>
 
 <p>在调用printf时，执行call指令之前:</p>
 
 <pre><code>(gdb) uu $eip
-=&gt; 0x2a9188:    call   0x2a8880 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b0c0c2d9dec4d6f0c0dcc4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+=&gt; 0x2a9188:    call   0x2a8880 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b0c0c2d9dec4d6f0c0dcc4">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
    0x2a918d:    lea    eax,[ebx-0x1fb4]
    0x2a9193:    mov    DWORD PTR [esp],eax
 </code></pre>
@@ -145,7 +145,7 @@ printf("%#o\n", 0x10);  //#表示输出前导符，如：020
 
 <h1>0x04 实例分析</h1>
 
-<hr />
+<hr>
 
 <p>这里采用了DEFCON CTF 2015的一个pwn做为例子(wwtw_c3722e23150e1d5abbc1c248d99d718d)。</p>
 
@@ -154,9 +154,9 @@ printf("%#o\n", 0x10);  //#表示输出前导符，如：020
 <pre><code>    #!c++
 int sub_1027()
 {
-  double v0; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="98cbccaaa0c7a0d8ae">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-  int result; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1c797d645c25">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-  int v2; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a6c3c5dee69f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  double v0; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="98cbccaaa0c7a0d8ae">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  int result; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1c797d645c25">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  int v2; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a6c3c5dee69f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
   char *nptr; // [sp+24h] [bp-424h]@4
   double v4; // [sp+30h] [bp-418h]@6
   char s; // [sp+3Ch] [bp-40Ch]@2
@@ -254,7 +254,7 @@ exp = preload + payload + "\n"
 
 <h1>0x05 exp代码</h1>
 
-<hr />
+<hr>
 
 <pre><code>#!python
 # -*- coding: utf-8 -*-
@@ -320,7 +320,7 @@ sh.interact()
 
 <h1>0x06 构建环境</h1>
 
-<hr />
+<hr>
 
 <p>本文的GDB调试环境使用了.gdbinit和pygdb.py，扩展了raw gdb的功能。 原ELF文件前面有许多坑，为了方便测试，这里绕过了这些坑，修改如下：</p>
 
@@ -388,7 +388,7 @@ sh.interact()
 <p>id 查看结果：</p>
 
 <pre><code>uid=0(root) gid=0(root) group=0(root) env=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

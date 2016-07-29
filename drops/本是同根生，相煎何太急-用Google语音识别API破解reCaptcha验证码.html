@@ -3,16 +3,16 @@
 			<head>
 			     <title>本是同根生，相煎何太急-用Google语音识别API破解reCaptcha验证码 - A胖</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1524">http://drops.wooyun.org/papers/1524</a></h1>
 				
       <p>
-        <p>from：http://www.debasish.in/2014/04/attacking-audio-recaptcha-using-googles.html</p>
+        </p><p>from：http://www.debasish.in/2014/04/attacking-audio-recaptcha-using-googles.html</p>
 
 <h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>关于验证码和验证码破解的入门，请看：<a href="http://drops.wooyun.org/tips/141">http://drops.wooyun.org/tips/141</a></p>
 
@@ -20,7 +20,7 @@
 
 <p>reCaptchas是由Google提供的基于云的验证码系统，通过结合程序生成的验证码和较难被OCR识别的图片，来帮助Google数字化一些书籍，报纸和街景里的门牌号等。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811544862206.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811544862206.png" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -28,17 +28,17 @@
 
 <h2>0x01 细节</h2>
 
-<hr />
+<hr>
 
 <p>中心思想：</p>
 
 <p>用Google的Web Speech API语音识别来破解它自己的reCaptcha声音验证码.</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811544932894.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811544932894.png" alt="enter image description here"></p>
 
 <p>下面来看一下用来语音识别的API</p>
 
-<p>Chrome浏览器内建了一个基于HTML5的语音输入API，通过它，用户可以通过麦克风输入语音，然后Chrome会识别成文字，这个功能在Android系统下也有。如果你不熟悉这个功能的话这里有个demo:<br />
+<p>Chrome浏览器内建了一个基于HTML5的语音输入API，通过它，用户可以通过麦克风输入语音，然后Chrome会识别成文字，这个功能在Android系统下也有。如果你不熟悉这个功能的话这里有个demo:<br>
 <a href="https://www.google.com/intl/en/chrome/demos/speech.html">https://www.google.com/intl/en/chrome/demos/speech.html</a></p>
 
 <p>我一直很好奇这个语音识别API是如何工作的，是通过浏览器本身识别的还是把音频发送到云端识别呢？</p>
@@ -97,22 +97,22 @@ google_speech.close()
 
 <p>然后用一个叫Audacity的音频编辑软件打开,如图</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811544998283.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811544998283.png" alt="enter image description here"></p>
 
 <p>把第一个数字的声音复制到新窗口中，然后再重复一次，这样我们把第一位数字的声音复制成连续的两个相同声音。</p>
 
 <p>比如这个验证码是76426，我们的目的是把7先分离出来，然后让7的语音重复两次。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811544968372.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811544968372.png" alt="enter image description here"></p>
 
 <p>最后把这段音频保存成wav格式，再转换成flac格式,然后提交到API。</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d8bcbdbab9abb1abb098bcbdbab9abb1abb0">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/Desktop/audio/heart attack/final $ sox cut_0.wav -r 16000 -b 16 -c 1 cut_0.flac lowpass -2 2500
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3450515655475d475c7450515655475d475c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/Desktop/audio/heart attack/final $ python send.py cut_0.flac 
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d8bcbdbab9abb1abb098bcbdbab9abb1abb0">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/Desktop/audio/heart attack/final $ sox cut_0.wav -r 16000 -b 16 -c 1 cut_0.flac lowpass -2 2500
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3450515655475d475c7450515655475d475c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/Desktop/audio/heart attack/final $ python send.py cut_0.flac 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811545036977.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811545036977.png" alt="enter image description here"></p>
 
 <p>很好，服务器成功识别了这段音频并且返回了正确的结果，下面就需要把这个过程自动化了。</p>
 
@@ -124,7 +124,7 @@ google_speech.close()
 
 <p>把一个wav格式的文件用16进制编辑器打开:</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811545059771.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811545059771.png" alt="enter image description here"></p>
 
 <p>用Python WAVE模块处理wav格式的音频:</p>
 
@@ -226,7 +226,7 @@ plt.xlabel('Time')
 plt.show()
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811545010704.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811545010704.png" alt="enter image description here"></p>
 
 <p>这个图实际上就是声音的波形图</p>
 
@@ -363,13 +363,13 @@ for i in range(0, len(chunks)):
 
 <p>这个图片是用前面的程序画出来的复杂语音验证码的波形图:</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811545248048.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811545248048.png" alt="enter image description here"></p>
 
 <p>从图里我们可以看到，这段音频中一直存在一个恒定的噪声，就是中间横的蓝色的那条，对于这样的噪声我们可以用标准的离散傅里叶变换，通过快速傅里叶变换fast Fourier transform(挂在高树上的注意了!)来解决。</p>
 
 <p>回到多年前校园中的数字信号处理这门课，让我们在纯洁的正弦波 <code>s(t)=sint(w*t)</code>上叠加一个白噪声，<code>S(t)=S(t+n)</code>, F为S的傅里叶变换，把频率高于和低于w的F值设为0，噪声就被这样过滤掉了。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811545292797.gif" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811545292797.gif" alt="enter image description here"></p>
 
 <p>比如这张图里，正弦波的频谱域被分离了出来，只要把多余频率切掉，再逆变换回去就相当于过滤掉部分噪音了。其实自己写这样的过滤器实在太蛋疼了，Python有不少音频处理库并且自带降噪滤镜。</p>
 
@@ -381,9 +381,9 @@ for i in range(0, len(chunks)):
 
 <h2>0x02 结论</h2>
 
-<hr />
+<hr>
 
-<p>我把这个问题报给了Google安全团队，他们说这个东西就是这样设计的(苦逼的作者),如果系统怀疑对方不是人是机器的时候会自动提升到高难度验证码，目前Google不打算改进这个设计。</p>      </p>
+<p>我把这个问题报给了Google安全团队，他们说这个东西就是这样设计的(苦逼的作者),如果系统怀疑对方不是人是机器的时候会自动提升到高难度验证码，目前Google不打算改进这个设计。</p>      <p></p>
     
 			</body>
 		</html>

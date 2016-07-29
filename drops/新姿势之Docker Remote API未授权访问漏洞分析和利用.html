@@ -3,14 +3,14 @@
 			<head>
 			     <title>新姿势之Docker Remote API未授权访问漏洞分析和利用 - 黑客,绝对是黑客</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/15892">http://drops.wooyun.org/papers/15892</a></h1>
 				
       <p>
-        <h1>0x00 概述</h1>
+        </p><h1>0x00 概述</h1>
 
-<hr />
+<hr>
 
 <p>最近提交了一些关于 docker remote api 未授权访问导致代码泄露、获取服务器root权限的漏洞，造成的影响都比较严重，比如</p>
 
@@ -26,7 +26,7 @@
 
 <h1>0x01 起因</h1>
 
-<hr />
+<hr>
 
 <p>先介绍一些东西～</p>
 
@@ -51,7 +51,7 @@
 
 <h1>0x02 背锅侠</h1>
 
-<hr />
+<hr>
 
 <p>要查清楚是谁的锅，首先要复现下问题，那么只有一种方法，照的文档装一遍docker swarm。</p>
 
@@ -104,7 +104,7 @@
 
 <h1>0x03 漏洞利用</h1>
 
-<hr />
+<hr>
 
 <p>说如何利用之前，我们先整理下现在能做的事情</p>
 
@@ -134,7 +134,7 @@
 
 <h1>0x04 影响</h1>
 
-<hr />
+<hr>
 
 <p>影响总结：攻击者可以利用该漏洞执行docker命令，获取敏感信息，并获取服务器root权限</p>
 
@@ -142,7 +142,7 @@
 
 <p>但docker swarm更多的情况是用在企业内部，虽然在内网，也不意味着绝对安全，当边界被突破，就嘿嘿嘿了～</p>
 
-<hr />
+<hr>
 
 <h1>0x05 修复方案</h1>
 
@@ -155,7 +155,7 @@
 <p>为了找到答案，特意看了下docker swarm的文档，<a href="https://docs.docker.com/swarm/plan-for-production/#cluster-ownership">Plan for Swarm in production</a> 这篇文章提到了两种方案</p>
 
 <ul>
-<li>第一种方法是使用TLS认证：<a href="https://docs.docker.com/swarm/secure-swarm-tls/">Overview Swarm with TLS</a> 和 <a href="https://docs.docker.com/swarm/configure-tls/">Configure Docker Swarm for TLS</a>这两篇文档，说的是配置好TLS后，Docker CLI 在发送命令到docker daemon之前，会首先发送它的证书，如果证书是由daemon信任的CA所签名的，才可以继续执行，官网图如下： <a href="http://drops.wooyun.org/wp-content/uploads/2016/05/trust-diagram.jpg"><img src="http://static.wooyun.org//drops/20160517/2016051703300142934.jpg" alt="" title="trust-diagram" class="alignnone size-full wp-image-15893" /></a></li>
+<li>第一种方法是使用TLS认证：<a href="https://docs.docker.com/swarm/secure-swarm-tls/">Overview Swarm with TLS</a> 和 <a href="https://docs.docker.com/swarm/configure-tls/">Configure Docker Swarm for TLS</a>这两篇文档，说的是配置好TLS后，Docker CLI 在发送命令到docker daemon之前，会首先发送它的证书，如果证书是由daemon信任的CA所签名的，才可以继续执行，官网图如下： <a href="http://drops.wooyun.org/wp-content/uploads/2016/05/trust-diagram.jpg"><img src="http://static.wooyun.org//drops/20160517/2016051703300142934.jpg" alt="" title="trust-diagram" class="alignnone size-full wp-image-15893"></a></li>
 </ul>
 
 <p>​然而在我对公网中使用TLS的docker remote api（使用2376端口）测试中发现，即使没有证书，Docker CLI仍然可以正常访问，这里我也拿docker python api写了脚本，<a href="http://docker-py.readthedocs.io/en/stable/tls/#TLSConfig">设置不验证证书有效性</a>，也同样可以访问。</p>
@@ -176,7 +176,7 @@
 
 <h1>0x06 瞎扯</h1>
 
-<hr />
+<hr>
 
 <p>如果你仔细阅读了docker swarm的文档，你就会发现除了2375端口，还有其他一些端口也存在相同的问题，这里就不一一的列出了。</p>
 
@@ -192,7 +192,7 @@
 
 <p>​</p>
 
-<p>​</p>      </p>
+<p>​</p>      <p></p>
     
 			</body>
 		</html>

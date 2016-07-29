@@ -3,16 +3,16 @@
 			<head>
 			     <title>DNS泛解析与内容投毒，XSS漏洞以及证书验证的那些事 - 爱小狐狸的小螃蟹</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1354">http://drops.wooyun.org/tips/1354</a></h1>
 				
       <p>
-        <p>from:<a href="http://w00tsec.blogspot.com/2014/03/wilcard-dns-content-poisoning-xss-and.html">http://w00tsec.blogspot.com/2014/03/wilcard-dns-content-poisoning-xss-and.html</a></p>
+        </p><p>from:<a href="http://w00tsec.blogspot.com/2014/03/wilcard-dns-content-poisoning-xss-and.html">http://w00tsec.blogspot.com/2014/03/wilcard-dns-content-poisoning-xss-and.html</a></p>
 
 <h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>今天来讨论一下之前几个月我上报给Google和Facebook的一个有趣的漏洞，我在去年十月份利用一些空闲的时间在几家悬赏漏洞的公司当中测试，这个bug Google奖励了我5000美元，Facebook奖励了我500美元。</p>
 
@@ -26,7 +26,7 @@
 
 <h2>0x01 Wilcard DNS 和 Content Poisoning</h2>
 
-<hr />
+<hr>
 
 <p>应用程序从HTTP Host头与domain name中不验证产生完整的 URL 会造成主机名中毒。近日，Django框架修复了一些漏洞，与James Kettle发表的<a href="http://www.skeletonscribe.net/2013/05/practical-http-host-header-attacks.html">host header攻击</a>相关。</p>
 
@@ -47,9 +47,9 @@ www.-.plus.google.com
 
 <p>是有效的。但是Android不是这么认为的：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091818061596155.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091818061596155.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091818061556027.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091818061556027.png" alt="enter image description here"></p>
 
 <p>举个例子，下面的URL：</p>
 
@@ -62,15 +62,15 @@ www.-.plus.google.com
 sites.google.com
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091818061669230.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091818061669230.png" alt="enter image description here"></p>
 
 <p>Facebook在zero.facebook.com域名下有一个泛解析。为了利用这个漏洞，我们有使用中毒的URL来浏览服务，并执行可能需要电子邮件确认动作，检查Facebook是否会把精心构造URL的电子邮件发送给用户。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091818061694177.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091818061694177.png" alt="enter image description here"></p>
 
 <p>我发现这个问题产生的唯一漏洞就是注册邮件确认流程中，你可能会问一个人如何利用这个来攻击一个正常的用户呢？</p>
 
-<p>假设我想利用<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f89f97979c9f8d81b89d80999588949dd69b9795">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></code>攻击Facebook帐户。</p>
+<p>假设我想利用<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f89f97979c9f8d81b89d80999588949dd69b9795">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></code>攻击Facebook帐户。</p>
 
 <p>如果我使用</p>
 
@@ -79,20 +79,20 @@ sites.google.com
 
 <p>浏览Facebook，我所需要做的就是创建两个账户</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="25424a4a4142505c0e617075696c6664716065405d44485549400b464a48">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="25424a4a4142505c0e617075696c6664716065405d44485549400b464a48">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="84633f196120236d072c610c02631e00e1e9e5ede8621809610e25611d2c612206c3e9e5ede8611608ccebf0e9e5ede8613d32603c096c04076c1d15660418af6604">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�后面的字符，会把它转发到原始的账户中。</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="84633f196120236d072c610c02631e00e1e9e5ede8621809610e25611d2c612206c3e9e5ede8611608ccebf0e9e5ede8613d32603c096c04076c1d15660418af6604">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�后面的字符，会把它转发到原始的账户中。</p>
 
 <p>在这个例子当中，Facebook发送的所有确认的email有污染过的连接：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091818061676649.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091818061676649.png" alt="enter image description here"></p>
 
 <p>这也可以用来攻击密码重置电子邮件，但Facebook并没有受到影响。他们很快通过编码修复了电子邮件确认系统。它也可以（但不推荐）通过相对链接，而不是完整的URL （请点击<a href="http://zero.facebook.com">这里</a>，而不是一个具体的URL <code>www.example.com.-.zero.facebook.com</code>） 。</p>
 
 <h2>0x02 XSS和Wildcard DNS</h2>
 
-<hr />
+<hr>
 
 <p>在Google上寻找此类问题的时候，我很快就发现了泛解析的域名，如：</p>
 
@@ -115,7 +115,7 @@ sites.google.com
 
 <p>当你使用那个URL使用Google Drive时，上传一个文件到一个文件夹，并尝试<code>压缩/下载</code>它，会要求电子邮件确认，电子邮件的确认消息是这样的：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091818061736081.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091818061736081.png" alt="enter image description here"></p>
 
 <p>“ready for downloading”链接指向</p>
 
@@ -126,11 +126,11 @@ sites.google.com
 
 <p>我不停地测试不同的URL ，直到我发现了一个谷歌DNS服务器怪异的行为。当输入的URL中包含一定数量的“-”之后，解析的IP地址将会是你前面所可控部分域名的IP地址：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091818061715011.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091818061715011.png" alt="enter image description here"></p>
 
 <p>出于某种原因，他们的DNS服务器有这样的小问题，更具体地说在剥离了正则表达式“--”的前缀。我不知道他们为什么进行这些检查，但可能有些事情与<a href="https://en.wikipedia.org/wiki/Internationalized_domain_name">国际化域名</a>相关。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091818061774014.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091818061774014.png" alt="enter image description here"></p>
 
 <p>受此问题影响的一些谷歌的域名（ 2013年10月） ：</p>
 
@@ -166,17 +166,17 @@ sites.google.com
 
 <p>请求发送到合法的网站：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091818061840215.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091818061840215.png" alt="enter image description here"></p>
 
 <p>请求转向到用户可控的网站中，这个例子当中，我自己的服务器运行着nginx：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091818061867711.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091818061867711.png" alt="enter image description here"></p>
 
 <p>这可以导致xss，你已经绕过了同源策略，可以偷取cookie，执行脚本了。</p>
 
 <h2>0x03 Certificate Pinning 和 Wildcard DNS</h2>
 
-<hr />
+<hr>
 
 <p>到目前为止，一切都很好，但如果我们在Google Chrome当中做同样的测试，它会强制执行证书验证码？</p>
 
@@ -184,9 +184,9 @@ sites.google.com
 
 <p>网络堆栈的其他部分进行了处理，并提取从这些“无效”的DNS名称的结果，但TransportSecurityState否决了，因此HSTS政策并不适用。他们只是删除了完整性检查，这使TransportSecurityState的过程更加复杂。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091818061897001.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091818061897001.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091818061975842.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091818061975842.png" alt="enter image description here"></p>
 
 <p>你可以在Chrome V31版本之前容易重现此问题：通过OWASP ZAP代理铬（接受其证书），请访问网址</p>
 
@@ -207,9 +207,9 @@ sites.google.com
 
 <p>Chrome浏览器提供了“Proceed anyway”的选项。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091818061978552.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091818061978552.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091818061984579.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091818061984579.png" alt="enter image description here"></p>
 
 <p>值得注意的是,根据 RFC 2818 当你在你的网站上使用通配证书(wildcard certificate)的时候，比如<em>.google.com，通配证书只在单层域名可用，比如如果你把匹配</em>.google.com的证书放到abc.def.google.com上，浏览器会提示证书错误。</p>
 
@@ -225,13 +225,13 @@ sites.google.com
 
 <h2>0x04 结论</h2>
 
-<hr />
+<hr>
 
 <p>Google和Facebook的安全团队处理的都很好。这个bug是非常好玩的，它与OWASP的Top 10的内容都不相同。</p>
 
 <p>这个bug需要一个新的名词，有人愿意称这些攻击将命名为 Advanced Persistent Cross Site Wildcard Domain Header Poisoning （或简称APCSWDHP ） 。</p>
 
-<p>如果你来自NSA，并希望使用此技术来植入我们的DNS，请使用代号 CRAZY KOALA 这样斯诺登泄漏你的文件时，我们就可以更好地跟踪他们了。</p>      </p>
+<p>如果你来自NSA，并希望使用此技术来植入我们的DNS，请使用代号 CRAZY KOALA 这样斯诺登泄漏你的文件时，我们就可以更好地跟踪他们了。</p>      <p></p>
     
 			</body>
 		</html>

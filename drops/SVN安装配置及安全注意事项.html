@@ -3,14 +3,14 @@
 			<head>
 			     <title>SVN安装配置及安全注意事项 - 瞌睡龙</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/352">http://drops.wooyun.org/tips/352</a></h1>
 				
       <p>
-        <h3>0x00 SVN介绍</h3>
+        </p><h3>0x00 SVN介绍</h3>
 
-<hr />
+<hr>
 
 <p>Subversion，简称SVN，是一个开放源代码的版本控制系统，相对于的RCS、CVS，采用了分支管理系统，它的设计目标就是取代CVS。互联网上越来越多的控制服务从CVS转移到Subversion。</p>
 
@@ -26,7 +26,7 @@
 
 <h3>0x01 安装配置</h3>
 
-<hr />
+<hr>
 
 <p>安装SVN</p>
 
@@ -105,7 +105,7 @@ name = password
 
 <h3>0x02 注意的问题</h3>
 
-<hr />
+<hr>
 
 <p>1、检出(导出结果带.svn文件夹的目录树)</p>
 
@@ -139,11 +139,11 @@ svn  export  本地检出的(即带有.svn文件夹的)目录全路径  要导�
 
 <p>这就使.svn隐藏文件夹被暴露于外网环境，黑客可以借助其中包含的用于版本信息追踪的“entries”文件，逐步摸清站点结构。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810473698478.png" alt="svn及entries文件夹暴露于外网环境" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091810473698478.png" alt="svn及entries文件夹暴露于外网环境"></p>
 
 <p>更严重的问题在于，SVN产生的.svn目录下还包含了以.svn-base结尾的源代码文件副本（低版本SVN具体路径为text-base目录，高版本SVN为pristine目录），如果服务器没有对此类后缀做解析，黑客则可以直接获得文件源代码。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810473645138.png" alt="源代码文件副本暴露于外网环境" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091810473645138.png" alt="源代码文件副本暴露于外网环境"></p>
 
 <p>如果解析了该后缀，可能会有文件解析的漏洞，可能会有扩展解析漏洞，找地方上传xxx.php.gif也许就可以直接得到webshell了。</p>
 
@@ -168,7 +168,7 @@ return 404;
 
 <p>附上个遍历.svn/entries展现网站目录结构的两个脚本：</p>
 
-<p><a href='http://static.wooyun.org/20141017/2014101714374572884.zip'>svn遍历脚本.zip</a></p>
+<p><a href="http://static.wooyun.org/20141017/2014101714374572884.zip">svn遍历脚本.zip</a></p>
 
 <p>wooyun上也是已经有非常多的svn泄露网站信息的事件，有的甚至由此导致整个服务器沦陷：</p>
 
@@ -198,7 +198,7 @@ return 404;
 
 <p><a href="http://www.cnblogs.com/aLittleBitCool/archive/2011/07/09/2101602.html">linux下svn常用指令</a></p>
 
-<p> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2012-05539">WooYun: .svn目录未设权限限制的漏洞利用总结</a> </p>      </p>
+<p> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2012-05539">WooYun: .svn目录未设权限限制的漏洞利用总结</a> </p>      <p></p>
     
 			</body>
 		</html>

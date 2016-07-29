@@ -3,20 +3,20 @@
 			<head>
 			     <title>导出当前域内所有用户hash的技术整理 - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6617">http://drops.wooyun.org/tips/6617</a></h1>
 				
       <p>
-        <h1>0x00目标：</h1>
+        </p><h1>0x00目标：</h1>
 
-<hr />
+<hr>
 
 <p>导出当前域内所有用户的hash</p>
 
 <h1>0x01测试环境：</h1>
 
-<hr />
+<hr>
 
 <pre><code>域控：server2008 r2
 杀毒软件：已安装*
@@ -27,7 +27,7 @@
 
 <h1>0x02测试方法：</h1>
 
-<hr />
+<hr>
 
 <p>（1）mimikatz：</p>
 
@@ -78,9 +78,9 @@
     用vssown.vbs复制出来的ntds.dit数据库无法使用QuarksPwDump.exe读取       
 </code></pre>
 
-<hr />
+<hr>
 
-<p><strong><em>Tips:</em></strong><br />
+<p><strong><em>Tips:</em></strong><br>
 libesedb + NtdsXtract环境搭建的一点提示：</p>
 
 <pre><code>(download libesedb)
@@ -104,7 +104,7 @@ cd NTDSXtract 1.0/
 python dsusers.py ../ntds.dit.export/datatable.3 ../ntds.dit.export/link_table.5 --passwordhashes '/root/SYSTEM'
 </code></pre>
 
-<hr />
+<hr>
 
 <p>（4）ntdsutil.exe + QuarksPwDump.exe</p>
 
@@ -118,7 +118,7 @@ python dsusers.py ../ntds.dit.export/datatable.3 ../ntds.dit.export/link_table.5
 
 <h1>0x03实际测试：</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>gethashes.exe：没有源码，忽略</li>
@@ -130,7 +130,7 @@ python dsusers.py ../ntds.dit.export/datatable.3 ../ntds.dit.export/link_table.5
 
 <h1>0x04分析：</h1>
 
-<hr />
+<hr>
 
 <p>5种方法唯一成功的是<code>vssown.vbs + libesedb + NtdsXtract</code>，但是耗时太久，操作麻烦，下载数据库容易暴露，<code>vssown.vbs</code>备份的信息容易被管理员发现</p>
 
@@ -140,12 +140,12 @@ python dsusers.py ../ntds.dit.export/datatable.3 ../ntds.dit.export/link_table.5
 
 <h1>0x05改进：</h1>
 
-<hr />
+<hr>
 
 <p>（1）分析<code>vssown.vbs</code>的复制办法，找到一种更好的解决办法，改用<code>ShadowCopy</code>实现<code>ntds.dit</code>的复制
 （2）对<code>QuarksPwDump</code>的改造，实现命令行下的自动读取及导出信息</p>
 
-<hr />
+<hr>
 
 <p><strong><em>Tips：</em></strong></p>
 
@@ -156,7 +156,7 @@ python dsusers.py ../ntds.dit.export/datatable.3 ../ntds.dit.export/link_table.5
 
 <h1>0x06最终方案：</h1>
 
-<hr />
+<hr>
 
 <p>（1）使用ShadowCopy的命令行版，编写bat实现拷贝ntds.dit至当前目录</p>
 
@@ -196,7 +196,7 @@ copy "%SHADOW_DEVICE_1%\%SOURCE_RELATIVE_PATH%" %DESTINATION_PATH%
 
 <p>注：实际使用时ntds.dit和log.txt需要加绝对路径</p>
 
-<hr />
+<hr>
 
 <p><strong><em>Tips：</em></strong></p>
 
@@ -207,7 +207,7 @@ https://github.com/quarkslab/quarkspwdump
 
 <h1>0x07小结：</h1>
 
-<hr />
+<hr>
 
 <p>ShadowCopy+QuarksPwDump：</p>
 
@@ -217,7 +217,7 @@ https://github.com/quarkslab/quarkspwdump
     获得信息全面
     bat一键搞定，简单高效
     无需下载ntds.dit，隐蔽性高
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

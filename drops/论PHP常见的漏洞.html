@@ -3,20 +3,20 @@
 			<head>
 			     <title>论PHP常见的漏洞 - ′  雨。</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4544">http://drops.wooyun.org/papers/4544</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>里面很多都是像laterain学习到的, 如果能考上cuit的话 自动献菊花了。</p>
 
 <h1>0x01 安装的问题</h1>
 
-<hr />
+<hr>
 
 <p>首先拿到一份源码 肯定是先install上。 而在安装文件上又会经常出现问题。</p>
 
@@ -28,7 +28,7 @@
 
 <h2>根本无验证。</h2>
 
-<hr />
+<hr>
 
 <p>这种的虽然不多 但是有时还是会遇到个。 在安装完成后 并不会自动删除文件 又不会生成lock来判断是否安装过了。 导致了可以直接重装过</p>
 
@@ -36,7 +36,7 @@
 
 <h2>安装file</h2>
 
-<hr />
+<hr>
 
 <p>因为install 一般都会有step 步骤啥的。。 Step 1 check 啥啥 step 2 是安装啥的。 而一些cms 默认step是1 而step又是GET 来的 而他check lock的时候就是在step1里面。 这时候如果我们直接用GET提交step 2 那么就直接进入下一步了 就没check lock了。</p>
 
@@ -90,7 +90,7 @@ else
 
 <h2>变量覆盖导致重装</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!php
 header("Content-Type: text/html; charset={$lang}");     
@@ -124,7 +124,7 @@ foreach($$_request as $_k =&gt; $_v) ${$_k} = _runmagicquotes($_v);
 
 <h2>判断Lock后 无exit的。</h2>
 
-<hr />
+<hr>
 
 <p>这个从早期的phpdisk 的那个 header bypass 到现在的又遇到各种。</p>
 
@@ -142,13 +142,13 @@ foreach($$_request as $_k =&gt; $_v) ${$_k} = _runmagicquotes($_v);
 
 <h2>解析漏洞</h2>
 
-<hr />
+<hr>
 
 <p>这个也比较少, 就随便说句。 就是像dedecms很久以前的那样 在安装完成后会在install.php rename 为 Install.php.bak 但是由于apache的解析漏洞 如果无法识别最后的一个后缀的话 就会向上解析,那么就又成php了。 然后又结合dedecms安装时的变量覆盖 又成重装了。</p>
 
 <h2>满足一些条件不会退出的。</h2>
 
-<hr />
+<hr>
 
 <p>这种例子也不算太多, 自己好像也没遇到过太多。</p>
 
@@ -222,7 +222,7 @@ case 8:
 
 <h1>0x02 包含漏洞</h1>
 
-<hr />
+<hr>
 
 <p>这里再来谈一下包含</p>
 
@@ -256,7 +256,7 @@ if ( isset( $include_file ) &amp;&amp; strtolower( substr( $include_file, -4 ) )
 
 <p>然后把这个.jpg上传上去 然后包含</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011310582363782image0011.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150113/2015011310582363782image0011.png" alt="enter image description here"></p>
 
 <p>对于一些LFI 找不到上传图片的地方的话 也有很多牛发过了一些不能上传图片LFI的技巧 各种包含日志 环境变量啥的 这里我就也不多说了。</p>
 
@@ -299,29 +299,29 @@ include($_GET[yu]);
 
 <p>首先 allow&#95;url&#95;include &amp;&amp; allow&#95;url&#95;fopen 都为on的时候</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011311021152837image0031.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150113/2015011311021152837image0031.png" alt="enter image description here"></p>
 
 <p>成功RFI。</p>
 
 <p>然后 allow&#95;url&#95;include 为 on allow&#95;url&#95;fopen 为off</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011311025596714image0051.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150113/2015011311025596714image0051.png" alt="enter image description here"></p>
 
 <p>直接包含远程文件失败 这时候我们用一下伪协议试试。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011311032528103image0072.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150113/2015011311032528103image0072.png" alt="enter image description here"></p>
 
 <p>再次成功rfi。</p>
 
 <p>当allow&#95;url&#95;include &amp;&amp; allow&#95;url&#95;fopen 为off的时候。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011311041670237image0091.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150113/2015011311041670237image0091.png" alt="enter image description here"></p>
 
 <p>伪协议失败。</p>
 
 <p>包含文件</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011311045731325image0111.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150113/2015011311045731325image0111.png" alt="enter image description here"></p>
 
 <p>URL file-access is disabled in the server configuration 不允许包含。</p>
 
@@ -333,7 +333,7 @@ include($_GET[yu]);
 
 <p>那么这里我们也试试</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011311053411551image0131.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150113/2015011311053411551image0131.png" alt="enter image description here"></p>
 
 <p>包含共享文件成功。 这里只本地测试了 没具体测试。</p>
 
@@ -341,7 +341,7 @@ include($_GET[yu]);
 
 <h1>0x03 注入</h1>
 
-<hr />
+<hr>
 
 <p>下面来说一下注入。 这里谈的是mysql。 注入大概也就是把用户可控的一些变量, 带入到了数据库的各种操作当中且没有做好很好的过滤。 比如注册用户的时候检测用户名是否存在的时候,把用户提交的用户名拿到数据库中去查询。 查询是否存在这个用户名, 如果这里对用户名没有做好过滤的话 那么用户就可以提交一些特殊字符来注入了。</p>
 
@@ -408,7 +408,7 @@ include($_GET[yu]);
 
 <h2>宽字节注入</h2>
 
-<hr />
+<hr>
 
 <p>这个是一个老生常谈的问题, 从一开始的数据库字符集GBK的宽字节注入 到现在也有很久了。</p>
 
@@ -438,7 +438,7 @@ include($_GET[yu]);
 
 <h2>解码导致</h2>
 
-<hr />
+<hr>
 
 <p>因为在全局文件中addslashes</p>
 
@@ -458,7 +458,7 @@ include($_GET[yu]);
 
 <h2>变量覆盖</h2>
 
-<hr />
+<hr>
 
 <p>常见的变量覆盖 有啥extract 和 parse_str 函数啥的</p>
 
@@ -486,7 +486,7 @@ include($_GET[yu]);
 
 <h2>一些replace造成的</h2>
 
-<hr />
+<hr>
 
 <p>一些cms中 总有一些逗比过滤函数</p>
 
@@ -545,7 +545,7 @@ NULL =&gt; \0
 
 <h2>SERVER 注入</h2>
 
-<hr />
+<hr>
 
 <p>因为在很多cms中 基本上都只是对GET POST COOKIE 进行addslashes</p>
 
@@ -625,7 +625,7 @@ preg_match('/^(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){3}([1-9]?[0-9]|1[0-
 
 <h2>FILES注入。</h2>
 
-<hr />
+<hr>
 
 <p>也差不多 也是因为全局只对COOKIE GET POST 转义 遗漏了FILES 且不受gpc。</p>
 
@@ -643,7 +643,7 @@ preg_match('/^(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){3}([1-9]?[0-9]|1[0-
 
 <h2>未初始化造成的注入</h2>
 
-<hr />
+<hr>
 
 <p>很久以前php&lt;4.20的时候 为了方便 register_globals 默认都是on。</p>
 
@@ -667,7 +667,7 @@ preg_match('/^(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){3}([1-9]?[0-9]|1[0-
 
 <h2>数组中的key。</h2>
 
-<hr />
+<hr>
 
 <p>因为在对全局转义的时候</p>
 
@@ -691,7 +691,7 @@ preg_match('/^(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){3}([1-9]?[0-9]|1[0-
 
 <h2>offset</h2>
 
-<hr />
+<hr>
 
 <p>这种算是比较常见的一种注入的。</p>
 
@@ -721,7 +721,7 @@ Mysql_query("select * from table where xxx='$a' and xx='$b'")
 
 <h2>第三方插件</h2>
 
-<hr />
+<hr>
 
 <p>很常见的一种洞。</p>
 
@@ -751,7 +751,7 @@ Mysql_query("select * from table where xxx='$a' and xx='$b'")
 
 <h2>数字型注入</h2>
 
-<hr />
+<hr>
 
 <p>其实也不只是数字型 只是说一些忘记加单引号的地方都这样。</p>
 
@@ -800,7 +800,7 @@ If ($a&gt;1){
 
 <h2>二次注入</h2>
 
-<hr />
+<hr>
 
 <p>也是一种比较常见的注入。 涉及到的是入库和出库。 因为有全局转义 然后入库的时候</p>
 
@@ -816,7 +816,7 @@ Insert into table (username) values ('a\'');
 
 <h2>查询当中key可控</h2>
 
-<hr />
+<hr>
 
 <p>不知道也应不应该把这个归为一类。</p>
 
@@ -832,9 +832,9 @@ Insert into table (username) values ('a\'');
 
 <h2>striplashes</h2>
 
-<hr />
+<hr>
 
-<p>有些cms 在全局addslashes后 然后在后面的文件中又stripslashes<br />
+<p>有些cms 在全局addslashes后 然后在后面的文件中又stripslashes<br>
 去掉了转义符 然后又可以闭合单引号了。</p>
 
 <pre><code>#!php
@@ -845,7 +845,7 @@ $_SESSION['flow_consignee'] = stripslashes_deep($consignee);
 
 <h2>截取字符导致的注入</h2>
 
-<hr />
+<hr>
 
 <p>有些cms 有的时候会限制用户输入的长度</p>
 
@@ -869,7 +869,7 @@ $_SESSION['flow_consignee'] = stripslashes_deep($consignee);
 
 <h2>绕过限制继续注册GLOBALS变量</h2>
 
-<hr />
+<hr>
 
 <p>不知道放哪。这个也放到注入板块来把。。</p>
 
@@ -915,7 +915,7 @@ foreach(array('_COOKIE', '_POST', '_GET') as $_request) {
 
 <h1>0x04 找回密码出现的问题。</h1>
 
-<hr />
+<hr>
 
 <p>下面介绍一些我在cms遇到的找回密码时候犯得错误。</p>
 
@@ -923,7 +923,7 @@ foreach(array('_COOKIE', '_POST', '_GET') as $_request) {
 
 <h2>rand 函数生成的token</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!php
 $resetpwd = md5(rand());
@@ -939,7 +939,7 @@ $resetpwd = md5(rand());
 
 <h2>修改hdwiki任意用户密码</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!php
 $encryptstring=md5($this-&gt;time.$verification.$auth);
@@ -951,7 +951,7 @@ $encryptstring=md5($this-&gt;time.$verification.$auth);
 
 <h1>0x05 上传</h1>
 
-<hr />
+<hr>
 
 <p>这个上传就大概说说。</p>
 
@@ -999,13 +999,13 @@ $encryptstring=md5($this-&gt;time.$verification.$auth);
 
 <h2>任意文件操作</h2>
 
-<hr />
+<hr>
 
 <p>这个主要是涉及到的是 任意文件删除 任意文件复制 任意文件重命名 任意文件移动 任意文件下载……。 因为像现在的cms很多都自带得有加密 解密 函数 例如qibocms的mymd5 Dz的authcode 啥的。 对于这些任意文件操作的 首先可以试试拿到配置文件中的数据库的连接帐号和密码 尝试外联一下 但是很多时候都是只允许本地连的 很多时候不好利用的时候可以利用拿到配置文件 然后拿到这些函数的key 然后自己生成一个加密的字符串 然后再结合具体的代码进行最大化的利用。</p>
 
 <h2>对于任意文件删除</h2>
 
-<hr />
+<hr>
 
 <p>一般是挺不好利用的，还是结合具体的场景，有些因为全局的过滤而不能注入的，可以尝试用任意文件删除，删掉这个文件，再进行注入 一般的利用还是通过删除安装文件生成的lock文件，然后达到重装。</p>
 
@@ -1015,7 +1015,7 @@ $encryptstring=md5($this-&gt;time.$verification.$auth);
 
 <h2>任意文件复制 / 任意文件移动 / 任意文件重命名</h2>
 
-<hr />
+<hr>
 
 <p>复制的话 肯定涉及到了 要复制的文件 要复制到的路径。</p>
 
@@ -1037,7 +1037,7 @@ copy(ROOT_PATH."$webdb[updir]/$value",ROOT_PATH."$webdb[updir]/{$value}.jpg");�
 
 <h2>任意文件下载</h2>
 
-<hr />
+<hr>
 
 <p>其实跟上面复制差不多， 很多时候也是通过下载配置文件 拿到key。 再进行各种操作。。</p>
 
@@ -1047,7 +1047,7 @@ copy(ROOT_PATH."$webdb[updir]/$value",ROOT_PATH."$webdb[updir]/{$value}.jpg");�
 
 <h1>0x06 加密函数问题。</h1>
 
-<hr />
+<hr>
 
 <p>这种问题主要是想进各种办法把这些加密函数的key拿到 或者想办法加密一些特殊字符然后拿到加密的字符串</p>
 
@@ -1055,7 +1055,7 @@ copy(ROOT_PATH."$webdb[updir]/$value",ROOT_PATH."$webdb[updir]/{$value}.jpg");�
 
 <h2>加密可逆</h2>
 
-<hr />
+<hr>
 
 <p>算法问题一般主要是因为一些弱算法 导致了 知道明文 知道密文 可逆</p>
 
@@ -1067,7 +1067,7 @@ copy(ROOT_PATH."$webdb[updir]/$value",ROOT_PATH."$webdb[updir]/{$value}.jpg");�
 
 <h2>加密可控</h2>
 
-<hr />
+<hr>
 
 <p>还有的一类算是 一个点 要加密的是我们可控的 而且密文会输出 而且这个可控的点能引入特殊字符 那么我们就把一些特殊字符带入到这里面 然后拿到密文 再找到一处decode后会进行特殊操作的点 然后进行各种操作。</p>
 
@@ -1083,7 +1083,7 @@ copy(ROOT_PATH."$webdb[updir]/$value",ROOT_PATH."$webdb[updir]/{$value}.jpg");�
 
 <h1>0x07 后记</h1>
 
-<hr />
+<hr>
 
 <p>寥寥草草的把这篇文章写完了。</p>
 
@@ -1099,7 +1099,7 @@ copy(ROOT_PATH."$webdb[updir]/$value",ROOT_PATH."$webdb[updir]/{$value}.jpg");�
 
 <p>当然这里只是总结了一些常见的类型, 肯定在实战中会遇到各种各样的情况 各种过滤啥的。</p>
 
-<p>各种逻辑错误需要自己慢慢去体会了。</p>      </p>
+<p>各种逻辑错误需要自己慢慢去体会了。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,20 +3,20 @@
 			<head>
 			     <title>SqlServer 2005 Trigger - darksn0w</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3464">http://drops.wooyun.org/tips/3464</a></h1>
 				
       <p>
-        <h2>0x01 什么是触发器：</h2>
+        </p><h2>0x01 什么是触发器：</h2>
 
-<hr />
+<hr>
 
 <p>触发器对表进行插入、更新、删除的时候会自动执行的特殊存储过程。触发器一般用在check约束更加复杂的约束上面。触发器和普通的存储过程的区别是：触发器是当对某一个表进行操作。诸如：update、insert、delete这些操作的时候，系统会自动调用执行该表上对应的触发器。SQL Server 2005中触发器可以分为两类：DML触发器和DDL触发器，其中DDL触发器它们会影响多种数据定义语言语句而激发，这些语句有create、alter、drop语句。</p>
 
 <h2>0x02 问题描述：</h2>
 
-<hr />
+<hr>
 
 <p>a)通过Sqlserver的触发器，可以利用执行者的权限执行自定义的命令。</p>
 
@@ -49,33 +49,33 @@ END
 GO
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141102/2014110205235261752.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141102/2014110205235261752.png" alt="enter image description here"></p>
 
 <p>b)执行UPDATE操作，是触发器执行：</p>
 
 <p>1)使用UPDATE语句来触发触发器：</p>
 
 <pre><code>#!bash
-UPDATE bairong_Administrator SET <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7f3a121e161342582c2b3b3f110c19101c0a0c511c1012">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>' WHERE UserName='admin';
+UPDATE bairong_Administrator SET <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7f3a121e161342582c2b3b3f110c19101c0a0c511c1012">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>' WHERE UserName='admin';
 </code></pre>
 
 <p>使用test用户执行：</p>
 
-<p><img src="http://static.wooyun.org/20141102/2014110205235385303.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141102/2014110205235385303.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141102/2014110205235341115.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141102/2014110205235341115.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141102/2014110205235312184.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141102/2014110205235312184.png" alt="enter image description here"></p>
 
 <p>2)使用sa用户执行：</p>
 
-<p><img src="http://static.wooyun.org/20141102/2014110205235371463.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141102/2014110205235371463.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141102/2014110205235399090.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141102/2014110205235399090.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141102/2014110205235359009.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141102/2014110205235359009.png" alt="enter image description here"></p>
 
-<p>那么这就产生一个问题了，如何利用被动触发留后门或渗透攻击。</p>      </p>
+<p>那么这就产生一个问题了，如何利用被动触发留后门或渗透攻击。</p>      <p></p>
     
 			</body>
 		</html>

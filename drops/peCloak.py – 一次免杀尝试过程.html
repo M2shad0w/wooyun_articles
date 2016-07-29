@@ -3,14 +3,14 @@
 			<head>
 			     <title>peCloak.py – 一次免杀尝试过程 - DM_</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/5286">http://drops.wooyun.org/binary/5286</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>From: http://www.securitysift.com/pecloak-py-an-experiment-in-av-evasion/</p>
 
@@ -32,7 +32,7 @@
 
 <h1>0x01 测试环境</h1>
 
-<hr />
+<hr>
 
 <p>Windows XP SP3虚拟机，Kali Linux。</p>
 
@@ -48,7 +48,7 @@
 
 <h1>0x02 免杀过程</h1>
 
-<hr />
+<hr>
 
 <p>为了成功免杀，我列出了一些重要的点。</p>
 
@@ -60,7 +60,7 @@
 
 <h1>0x03 peClock.py</h1>
 
-<hr />
+<hr>
 
 <p>为了满足所有要求，我写了一个python脚本，叫做“peCloak”。尽管我大致的完成了基本操作，但还是要清楚大块花了一个星期的时间，所以代码还有很多需要完善的地方。而且我也没打算将它作为Veil Framework的替代，所以我并不打算长久的维护这个脚本。这是个简单的自动化免杀脚本，而且这只是我实验中小小的一次开发过程。但我仍希望我用的这些方法便于你深入的理解免杀的世界。</p>
 
@@ -76,7 +76,7 @@
 
 <h1>0x04 编码</h1>
 
-<hr />
+<hr>
 
 <p>为了防止特征化查杀，选择一些编码方式是很重要的，在我强加的条件中有提到只用一些简单的add，sub，xor指令。动态的选择编码顺序，我想出了下面这个非常简单的方法 (函数内容有简要删减)：</p>
 
@@ -135,7 +135,7 @@ data_to_encode = retrieve_data(pe, section_name, "virtual") # grab unencoded dat
 
 <h1>0x05 解码</h1>
 
-<hr />
+<hr>
 
 <p>解码操作相对来说也很简单，它只是编码的逆过程。指令的顺序也是相反的(FIFO 先入先出)并且指令本身也必须取逆操作(add变成sub，sub变成add，xor不变)。下面是一个编码和解码的相对操作过程。</p>
 
@@ -227,7 +227,7 @@ def build_decoder(pe, encoder, section, decode_start, decode_end):
 
 <h1>0x06 Heuristic 绕过</h1>
 
-<hr />
+<hr>
 
 <p>Heuristic 绕过也只不过是一系列指令循环执行诱导AV以为可执行文件已经运行。NOPS, INC/DEC, ADD/SUB, PUSH/POP 指令都是可行的。就像编码过程一样，首先生成一个伪随机数决定起始指令的顺序，然后与递增和比较指令相配对（当然这一过程也是在某个范围中随机产生）创建有限的迭代循环。</p>
 
@@ -275,13 +275,13 @@ def build_heuristic_bypass(heuristic_iterations):
 
 <h1>0x07 开辟代码区</h1>
 
-<hr />
+<hr>
 
 <p>最终代码所做的就是编码设定的PE文件块，然后插入一个包含heuristic bypass 和相对应的译码器的代码区，这个代码区所在的位置由脚本运行时检索PE文件每块中连续的空字节的最小数量(当前是1000)决定的。如果发现，脚本就会使这个部分标记为可执行，然后在该位置插入代码。否则脚本将会创建一个使用SectionDoubleP代码的新块(名为”.NewSection”)。当然你也可以选择 –a | -add 参数将代码插入一个已存在的块中（或许会损坏文件）。</p>
 
 <h1>0x08 跳向代码区</h1>
 
-<hr />
+<hr>
 
 <p>为了跳入代码区，改变PE文件的执行流需要修改ModuleEntryPoint,这个过程有两点需要注意: 创建跳转指令需要使用之前创建代码区的地址。</p>
 
@@ -315,7 +315,7 @@ ef preserve_entry_instructions(pe, ep, ep_ava, offset_end):
 
 <h1>0x09 恢复执行流</h1>
 
-<hr />
+<hr>
 
 <p>这一点，块入口包括跳转指令跳转到代码区的heuristic bypass函数部分，然后会继续解码PE文件编码过的部分，一旦完成，执行流就会转向回起初的位置这样文件就可以按照本身的内容运行。这是含有两步动作的作业： 重运行覆盖的原始指令。</p>
 
@@ -356,27 +356,27 @@ def update_jump_location(asm, current_address, instruction_offset):
 
 <h1>0x10 其他特点</h1>
 
-<hr />
+<hr>
 
 <p>正如我所做的任何事，通常都会有一些拓展所以在这个工具中我也加入了一些其他功能辅 助分析目标文件。比如在测试中有的时候我想能够看到PE文件的某部分来确定是什么诱发 了特征检测所以我加入了一个简单的十六进制文本查看器。</p>
 
 <h1>0x11 保存修改过的PE文件</h1>
 
-<hr />
+<hr>
 
 <p>之前写过一篇笔记提到想要从自己修改的函数中获取更多的信息我不得不轻微的修改pefile库。特别是当我查看issue时发现当pefile 保存一个修改过的文件时，它会覆盖块结构数据上的几个字节。换句话说，如果你修改了某给定文件.rdata块的前50个字节，修改过的东西将会被原始的块头替换。对此，我给pefile 的write()函数加了一个附加参数(SizeofHeaders)。这样我就可以保留PE文件头然后替换我想要部分：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150319/2015031904302643493image0017.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150319/2015031904302643493image0017.png" alt="enter image description here"></p>
 
 <p>同样，字符串也会被覆盖所以我又对write()函数做了点修改：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302554432291.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150323/2015032302554432291.png" alt="enter image description here"></p>
 
 <p>根据你修改的程度，额外的修改也许是有必要的，虽然这两处修改也可以满足简单的测试。</p>
 
 <h1>0x12 更详细的说明 &amp; 结束</h1>
 
-<hr />
+<hr>
 
 <p>假如你想用peCloak或者你自己的工具免杀，下面的这些就是准确使用peCloak操作的参数，还有一些需要记住的： * 首先我并没有包含每次扫描结果的截图作为免杀的证据，这样会使这篇文章篇幅过长，虽然我确实展示了一张示例图说明免杀的结果。</p>
 
@@ -394,7 +394,7 @@ def update_jump_location(asm, current_address, instruction_offset):
 <li>vdmallowed.exe – local Windows privilege escalation exploit</li>
 </ul>
 
-<p>前三个文件是直接由metasploit生成的，第三个由源代码编译，除了peCloak没有用其他工具处理过。</p>      </p>
+<p>前三个文件是直接由metasploit生成的，第三个由源代码编译，除了peCloak没有用其他工具处理过。</p>      <p></p>
     
 			</body>
 		</html>

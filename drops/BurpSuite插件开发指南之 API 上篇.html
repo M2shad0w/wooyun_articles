@@ -3,16 +3,16 @@
 			<head>
 			     <title>BurpSuite插件开发指南之 API 上篇 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/14040">http://drops.wooyun.org/tools/14040</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
-<p>BurpSuite 作为一款 Web 安全测试的利器，得益于其强大的代理，操控数据的功能，在 Web 安全测试过程中，为我们省下了不少时间和精力专注于漏洞的挖掘和测试。更重要的是 BurpSuite 提供了插件开发接口，Web 安全测试人员可以根据实际需求自己开发出提高安全测试效率的插件，虽然 BApp Store 上面已经提供了很多插件，其中也不乏优秀好用的插件，但是作为一名专业的 Web 安全测试人员，有必要熟练掌握 BurpSuite 插件开发技术。<br />
+<p>BurpSuite 作为一款 Web 安全测试的利器，得益于其强大的代理，操控数据的功能，在 Web 安全测试过程中，为我们省下了不少时间和精力专注于漏洞的挖掘和测试。更重要的是 BurpSuite 提供了插件开发接口，Web 安全测试人员可以根据实际需求自己开发出提高安全测试效率的插件，虽然 BApp Store 上面已经提供了很多插件，其中也不乏优秀好用的插件，但是作为一名专业的 Web 安全测试人员，有必要熟练掌握 BurpSuite 插件开发技术。<br>
 国内针对 BurpSuite 插件开发的技术文档并不是很多，也不够全面，《BurpSuite 插件开发指南》系列文章作为 BurpSuite 非官方非权威开发指南，希望在这块填补一些空白。文章中难免有纰漏，望读者自行验证并及时指出。</p>
 
 <!--more-->
@@ -29,7 +29,7 @@
 
 <h1>0x01 BurpSuite 插件开发说明</h1>
 
-<hr />
+<hr>
 
 <p>BurpSuite 插件扩展开发所支持的编程语言有 Java 和 Python，使用这两种开发语言开发的插件在功能上并没有太多区别，使用原生的 Java 开发的插件要比 Python 开发的插件，加载和执行效率更高。所以，笔者推荐使用 Java 作为插件开发的首选语言。</p>
 
@@ -58,7 +58,7 @@
 <li><a href="http://www.swinginspector.com/">Swing Inspector</a> 是一个 Java Swing/AWT 用户界面分析、调试工具。可以快速调试，定位问题，提高开发效率。</li>
 </ul>
 
-<p><strong>学习资料：</strong><br />
+<p><strong>学习资料：</strong><br>
 BurpSuite 官方并未提供详细的开发文档，只有少量的开发实例，可以<a href="https://portswigger.net/burp/extender/">在此找到</a>。不过，BurpSuite 官方建立了<a href="http://forum.portswigger.net/">插件开发者社区</a>和<a href="http://blog.portswigger.net/">博客</a>，可以帮助开发者解答疑问。</p>
 
 <p>在 乌云Drops 上也有两篇专门介绍 BurpSuite 插件开发的文章，读者可以参考：</p>
@@ -72,7 +72,7 @@ BurpSuite 官方并未提供详细的开发文档，只有少量的开发实例�
 
 <p>注：安装了 BApp Store 中的插件后，会在 BurpSuite 所在目录下的 bapps 文件夹中找到插件文件。</p>
 
-<p><strong>插件开发“方法论”：</strong><br />
+<p><strong>插件开发“方法论”：</strong><br>
 插件型的应用程序在设计时就一定会考虑插件的开发，因此，主程序与插件之间必然有一种“约定”，在开发插件的过程中，只需按照程序开发者设计的这种“约定”开发就好了，读者在阅读参考官方开发文档时只需注意以下三点：</p>
 
 <ul>
@@ -85,7 +85,7 @@ BurpSuite 官方并未提供详细的开发文档，只有少量的开发实例�
 
 <h1>0x02 API 参考</h1>
 
-<hr />
+<hr>
 
 <p>本节将对 BurpSuite 的官方文档做简要的说明，并给出简单的 Demo code，各个接口具体的使用实例，可以在笔者后续的两篇文章中看到。</p>
 
@@ -93,7 +93,7 @@ BurpSuite 官方并未提供详细的开发文档，只有少量的开发实例�
 
 <p><strong>public interface IBurpExtender</strong></p>
 
-<p>所有的扩展必须实现此接口，实现的类名必须为“BurpExtender”。在 burp 包中，必须申明为 public ,并且必须提供一个默认的构造器。<br />
+<p>所有的扩展必须实现此接口，实现的类名必须为“BurpExtender”。在 burp 包中，必须申明为 public ,并且必须提供一个默认的构造器。<br>
 此接口实现了以下方法：</p>
 
 <pre><code>#!java
@@ -160,7 +160,7 @@ java.util.List&lt;javax.swing.JMenuItem&gt;   createMenuItems(IContextMenuInvoca
 <li>invocation - 一个实现 <strong>IMessageEditorTabFactory</strong> 接口的对象, 通过此对象可以获取上下文菜单调用的细节。 </li>
 </ul>
 
-<p>返回值：<br />
+<p>返回值：<br>
 此工厂方法将会返回需要被显示的自定义菜单项的一个列表（包含子菜单，checkbox 菜单项等等）， 若无菜单项显示，此工厂方法会返回 <strong>null</strong>。</p>
 
 <p>Demo code：</p>
@@ -535,7 +535,7 @@ public class BurpExtender implements IBurpExtender, IHttpListener{
 
 <p><strong>public interface IInterceptedProxyMessage</strong></p>
 
-<p>注：<br />
+<p>注：<br>
 在 BurpSuite 的 Proxy 工具下的 Options 标签里有几个自定义消息拦截和响应的功能。读者可以在熟悉了这几个功能后，再了解此接口的作用。</p>
 
 <p>此接口不能被扩展实现，它表示了已被 Burp 代理拦截的 HTTP 消息。扩展可以利用此接口注册一个 IProxyListener 以便接收代理消息的细节。</p>
@@ -681,7 +681,7 @@ public class BurpExtender implements IBurpExtender, IIntruderPayloadGeneratorFac
 
 <p>在 Burp 加载了上述插件后，可以按照下图标红的步骤操作，即可看到自定义的 payload 生成器：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160324/2016032405151718669IntruderPayloadGenerator.jpg" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160324/2016032405151718669IntruderPayloadGenerator.jpg" alt="p1"></p>
 
 <h3>IIntruderPayloadGeneratorFactory</h3>
 
@@ -725,7 +725,7 @@ byte[]  processPayload(byte[] currentPayload, byte[] originalPayload, byte[] bas
 <li>baseValue - payload 位置的基准值，将用当前已被处理过的 payload 替代</li>
 </ul>
 
-<p>返回值:<br />
+<p>返回值:<br>
 返回已被处理过的 payload 的值。 如果返回 null 意味着当前的 payload 将被跳过,并且此次攻击将被直接移动到下一个 payload 。</p>
 
 <p>Demo code：</p>
@@ -761,7 +761,7 @@ public class BurpExtender implements IBurpExtender, IIntruderPayloadProcessor{
 
 <p>在 Burp 加载了上述插件后，可以按照下图标红的步骤操作，即可看到自定义的 payload 生成器：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160324/2016032405151951188IntruderPayloadProcessor.jpg" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160324/2016032405151951188IntruderPayloadProcessor.jpg" alt="p2"></p>
 
 <h3>IMenuItemHandler</h3>
 
@@ -778,7 +778,7 @@ public class BurpExtender implements IBurpExtender, IIntruderPayloadProcessor{
 void    menuItemClicked(java.lang.String menuItemCaption, IHttpRequestResponse[] messageInfo)  
 </code></pre>
 
-<p><strong>本文由 Her0in 原创并首发于乌云drops，转载请注明出处</strong></p>      </p>
+<p><strong>本文由 Her0in 原创并首发于乌云drops，转载请注明出处</strong></p>      <p></p>
     
 			</body>
 		</html>

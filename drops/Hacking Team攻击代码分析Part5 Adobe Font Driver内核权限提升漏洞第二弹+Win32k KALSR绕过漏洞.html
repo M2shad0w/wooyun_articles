@@ -3,16 +3,16 @@
 			<head>
 			     <title>Hacking Team攻击代码分析Part5 Adobe Font Driver内核权限提升漏洞第二弹+Win32k KALSR绕过漏洞 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/7116">http://drops.wooyun.org/papers/7116</a></h1>
 				
       <p>
-        <p>作者：360Vulcan Team成员： MJ0011、pgboy</p>
+        </p><p>作者：360Vulcan Team成员： MJ0011、pgboy</p>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>继360Vulcan上周分析了Hacking Team泄露信息中曝光的三个Flash漏洞和一个Adobe Font Driver内核漏洞后（链接见文后）。 Hacking Team泄露信息中仍在不断被发现存在新的攻击代码和0day漏洞。7月12日，Twitter上安全研究人员<code>@vlad902</code>公布了Hacking Team的邮件(<code>https://wikileaks.org/hackingteam/emails/emailid/974752</code>)中可能的一处Windows权限提升漏洞，并将其攻击代码上传到Github上（<code>https://github.com/vlad902/hacking-team-windows-kernel-lpe</code>)。</p>
 
@@ -20,7 +20,7 @@
 
 <h1>0x01 漏洞原理分析：</h1>
 
-<hr />
+<hr>
 
 <p>通过简单浏览攻击代码，我们知道攻击代码运用了一处<code>Win32k.sys</code>中的KASLR绕过漏洞获得Win32k的基地，并组织ROP链，同时，加载一个字体文件(font-data.bin)来利用字体驱动漏洞，触发ROP链，最终完成攻击。</p>
 
@@ -28,7 +28,7 @@
 
 <h1>0x02 Win32k.sys KASLR绕过漏洞</h1>
 
-<hr />
+<hr>
 
 <p>在Windows8.1以上的系统上，微软增强了针对KALSR的缓和能力，对于低完整性级别及以下的程序，禁止获得系统内核模块的地址信息，来缓和内核漏洞针对IE沙盒等安全机制的攻击。在360Vulcan Team 5月的博客《谈谈15年5月修复的三个0day》（<code>http://blogs.360.cn/blog/fixed_three_0days_in_may/</code>）中，我们比较详细地介绍了这类问题的的背景，以及一个和本次漏洞类似的<code>CNG.sys KASLR</code>绕过漏洞<code>CVE-2015-1674</code>。 这里Hacking Team所使用的是一个win32k处理字体信息时的栈未初始化导致的信息泄露漏洞。</p>
 
@@ -54,7 +54,7 @@
 
 <p>＃0x03 Adobe Font Driver(atmfd.dll)内核池溢出漏洞</p>
 
-<hr />
+<hr>
 
 <p>接下来我们来分析这个攻击代码中的重头戏：字体漏洞， 我们可以看到，在攻击代码中使用了AddFontMemResourceEx函数来加载了font-data.bin这个OTF字体文件，我们尝试在Windows 7系统上将这个文件改名为.otf文件（Explorer在渲染这个文件时也会加载它），系统立即蓝屏崩溃，但是在Windows8.1 x64系统上，则不会出现这个情况，是不是Windows 8.1中已经修补了这个漏洞？</p>
 
@@ -140,17 +140,17 @@ win32k!NtGdiAddFontResourceW
 
 <p>首先，我们打开这个字体文件，找到<code>Advanced Typography Tables-&gt;GPOS Table</code>，打开FeatureList,可以看到FeatureTag是”kern”的FeatureRecord，这个FeatureRecord的<code>LookupCount = 1</code> ，它的<code>LookupIndex = 1</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071402325177550.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150714/2015071402325177550.png" alt="enter image description here"></p>
 
 <p>我们打开LookupList，查看这个Index = 1的Lookup：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071402325147899.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150714/2015071402325147899.png" alt="enter image description here"></p>
 
 <p>正如我们前面推测的，这里的<code>Class1Count</code>就是=0 ， 也就是触发这个漏洞的根本原因。</p>
 
 <h1>0x04 漏洞利用</h1>
 
-<hr />
+<hr>
 
 <p>介绍了Adobe Font Driver的这个内核池溢出漏洞，接下来我们就看看攻击代码是如何利用这个漏洞，最终实现内核代码执行，提升权限的。</p>
 
@@ -170,7 +170,7 @@ win32k!NtGdiAddFontResourceW
 
 <p>整个内核池的布局操控过程如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071402325121179.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150714/2015071402325121179.png" alt="enter image description here"></p>
 
 <p>由于Windows8以后微软已经移除了很多Win32k中的结构信息，因此<code>CHwndTargetProp</code>的数据结构只能通过猜测来分析，我们使用内核调试器分析一个<code>CHwndTargetProp</code>对象:</p>
 
@@ -312,9 +312,9 @@ fffff960`00526d18 6cfcae1f`9eaeabb3
 
 <h1>0x05 漏洞缓解</h1>
 
-<hr />
+<hr>
 
-<p>近期atmfd字体漏洞泛滥，建议禁用atmfd.dll （直接将其改名即可）。对于Windows 10用户，可以使用缓和策略阻止非信任字体加载，这个功能在今年1月我们介绍过（<code>http://blogs.360.cn/blog/windows10_font_security_mitigations/</code>），微软5月将其文档化：<code>https://msdn.microsoft.com/en-us/library/dn985836%28v=vs.85%29.aspx</code></p>      </p>
+<p>近期atmfd字体漏洞泛滥，建议禁用atmfd.dll （直接将其改名即可）。对于Windows 10用户，可以使用缓和策略阻止非信任字体加载，这个功能在今年1月我们介绍过（<code>http://blogs.360.cn/blog/windows10_font_security_mitigations/</code>），微软5月将其文档化：<code>https://msdn.microsoft.com/en-us/library/dn985836%28v=vs.85%29.aspx</code></p>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>SNORT入侵检测系统 - YxWa</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/9232">http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/9232</a></h1>
 				
       <p>
-        <h1>0x00 一条简单的规则</h1>
+        </p><h1>0x00 一条简单的规则</h1>
 
-<hr />
+<hr>
 
 <p><code>alert tcp 202.110.8.1 any -&gt; 122.111.90.8 80 (msg:”Web Access”; sid:1)</code></p>
 
@@ -30,7 +30,7 @@
 
 <h1>0x01 SNORT目录结构</h1>
 
-<hr />
+<hr>
 
 <p>建议将Snort的目录结构配置成如下：</p>
 
@@ -59,7 +59,7 @@
 
 <h1>0x02 snort.conf配置文件</h1>
 
-<hr />
+<hr>
 
 <pre><code>此文件是配置snort的核心文件，包括以下几部分：
   1) Set the network variables.  设置各类网络地址，规则中易于使用
@@ -75,9 +75,9 @@
 
 <h1>0x03 SNORT体系结构</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810095475574.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810095475574.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <ul>
 <li>数据包嗅探模块，主要负责监听网络数据包，并根据TCP/IP协议解析数据包。</li>
@@ -90,7 +90,7 @@
 
 <h1>0x04 解码模块与预处理模块</h1>
 
-<hr />
+<hr>
 
 <h2>4.1 模块介绍</h2>
 
@@ -183,7 +183,7 @@ http_methods { GET POST PUT SEARCH MKCOL ...} \
 
 <h1>0x05检测引擎模块</h1>
 
-<hr />
+<hr>
 
 <p>规则结构 alert tcp 202.110.8.1 any -> 122.111.90.8 80 (msg:”Web Access”; sid:1) |&#45;--||&#45;--||&#45;--||&#45;--||&#45;--||&#45;--||&#45;--||&#45;--||&#45;--||--规则头&#45;--||&#45;--||&#45;--||&#45;--||&#45;--||&#45;--||&#45;--||&#45;--||--||&#45;--||&#45;--||&#45;--||-规则选项&#45;--||&#45;--||&#45;--||&#45;--||-|</p>
 
@@ -254,7 +254,7 @@ http_methods { GET POST PUT SEARCH MKCOL ...} \
 
 <p>此文件作用是将sid与msg的一一对应，否则，在告警中会出现下图中第一条的现象。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810095412627.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810095412627.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <p>此文件用于自定义规则中sid与msg的对应和在snort自有规则中自定义告警信息。 上图中<code>Snort Alert[1:1000015:0]</code>其中内容对应为<code>Snort alert[gid:sid:rev]</code>。这说明一个规则需要这三个因素才能确定,之前说只有sid唯一标示一条规则是不严谨的。</p>
 
@@ -309,7 +309,7 @@ ftp                   125 # FTP decoder（解码器）
 
 <p>外部攻击参考，这个关键字允许规则包含一个外面的攻击识别系统。这个插件目前支持几种特定的系统，这些插件被输出插件用来提供一个关于产生报警的额外信息的连接。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810095452300.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810095452300.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <p><strong><em>reference.config</em></strong></p>
 
@@ -378,7 +378,7 @@ http_encode       匹配编码格式
 
 <p>格式 <code>pcre:[!]"(/&lt;regex&gt;/|m&lt;delim&gt;&lt;regex&gt;&lt;delim&gt;)[ismxAEGRUBPHMCOIDKY]</code></p>
 
-<p>例子：<br />
+<p>例子：<br>
 <code>alert tcp any any -&gt; any 80 (content:“/foo.php?id="; pcre:"/\/foo.php?id=[0-9]{1,10}/iU";)</code> 正则的细节查阅snort_manual。</p>
 
 <p><strong>protected_content</strong></p>
@@ -439,7 +439,7 @@ Detection-filter          检测过滤
 
 <h1>0x06 Snort告警/日志模块</h1>
 
-<hr />
+<hr>
 
 <h2>6.1 输出模块配置</h2>
 
@@ -453,11 +453,11 @@ Detection-filter          检测过滤
 
 <p>ER图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810095580282.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810095580282.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <p><strong>schema</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810095530047.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810095530047.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <pre><code>vseq：数据库模式ID
 ctime：数据库创建时间
@@ -467,7 +467,7 @@ ctime：数据库创建时间
 
 <p><strong>sensor</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810095695959.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810095695959.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <pre><code>sid：传感器代号
 hostname：传感器所属的用户名称
@@ -480,7 +480,7 @@ last_cid： 对应每个sid即传感器捕获告警的最后一个值
 
 <p><strong>detail</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810095636647.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810095636647.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <pre><code>0-fast快速检测
 1-full全面检测
@@ -490,7 +490,7 @@ last_cid： 对应每个sid即传感器捕获告警的最后一个值
 
 <p><strong>encoding</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810095621139.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810095621139.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <pre><code>0- Hex
 1- base64
@@ -501,7 +501,7 @@ last_cid： 对应每个sid即传感器捕获告警的最后一个值
 
 <p><strong>event</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151009/2015100902372036572.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151009/2015100902372036572.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <pre><code>sid：sensor id，传感器id。
 cid；event id   事件id。sid和cid共同作为主码，其中cid是在sid的基础上进行排序的。每个sid对应自己的cid排序。
@@ -513,7 +513,7 @@ timestamp：对应告警事件发生的系统时间。
 
 <p><strong>signature</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810095994822.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810095994822.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <pre><code>sig_id： 总数代表发生告警种类的总数。是告警种类的主码。唯一标识一条规则。
 sig_name：告警名称。对应每条alert语句的Msg。
@@ -528,7 +528,7 @@ sig_gid：generate id
 
 <p><strong>sig_reference</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810095914306.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810095914306.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <pre><code>sig_id：对应的告警种类。
 ref_id：对应reference表格中的主码
@@ -539,7 +539,7 @@ ref_seq：参考序列号
 
 <p><strong>reference</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810095965137.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810095965137.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <pre><code>Ref_id：主码
 Ref_system_id：对应reference_system表格
@@ -548,7 +548,7 @@ Ref_tag：规则中 cve,bugtraq 后面的参数
 
 <p><strong>reference_system</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810100059931.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810100059931.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <pre><code>ref_system_id：主码
 ref_system_name：reference system的名字，如cve，url等。
@@ -556,7 +556,7 @@ ref_system_name：reference system的名字，如cve，url等。
 
 <p><strong>sig_class</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810100030403.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810100030403.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <pre><code>sig_class_id：分类编号
 sig_class_name：分类名称
@@ -566,23 +566,23 @@ sig_class_name：分类名称
 
 <p><strong>iphdr</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810100063549.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810100063549.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <p><strong>tcphdr</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810100030198.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810100030198.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <p><strong>udphdr</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810100129109.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810100129109.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <p><strong>icmphdr</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151009/2015100902372064887.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151009/2015100902372064887.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <p><strong>data</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810100370267.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810100370267.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <pre><code>data_payload：数据包有效载荷
 </code></pre>
@@ -593,7 +593,7 @@ sig_class_name：分类名称
 
 <p><strong>opt</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100810100320383.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20151008/2015100810100320383.png?imagemogr2/auto-orient/strip%7cimageview2/2/w/1240" alt="Paste_Image.png"></p>
 
 <p>IP和OPT的option。</p>
 
@@ -620,7 +620,7 @@ sig_class_name：分类名称
 <li><a href="http://www.jianshu.com/p/6de14a787868">[18] Snort sid-msg.map文件概述</a></li>
 <li><a href="http://www.jianshu.com/p/e031003dfcff">[19] Snort classification.config文件概述</a></li>
 <li><a href="http://www.jianshu.com/p/d08bfe6210bf">[20] Snort reference.config文件概述</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

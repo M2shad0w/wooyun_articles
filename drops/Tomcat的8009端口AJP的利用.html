@@ -3,12 +3,12 @@
 			<head>
 			     <title>Tomcat的8009端口AJP的利用 - mickey</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/737">http://drops.wooyun.org/tips/737</a></h1>
 				
       <p>
-        <p>Tomcat在安装的时候会有下面的界面，我们通常部署war，用的最多的是默认的8080端口。</p>
+        </p><p>Tomcat在安装的时候会有下面的界面，我们通常部署war，用的最多的是默认的8080端口。</p>
 
 <p>可是当8080端口被防火墙封闭的时候，是否还有办法利用呢？</p>
 
@@ -16,7 +16,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/201311/2013111512070655523.png" alt="2013111512070655523.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013111512070655523.png" alt="2013111512070655523.png"></p>
 
 <p>下面是实验环境：</p>
 
@@ -26,18 +26,18 @@
 
 <p>首先nmap扫描，发现8009端口开放</p>
 
-<p><img src="http://static.wooyun.org/201311/2013111512075970614.png" alt="2013111512075970614.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013111512075970614.png" alt="2013111512075970614.png"></p>
 
 <p>BT5默认apache2是安装的，我们仅需要安装mod-jk</p>
 
 <pre><code>#!shell
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="24564b4b5064494d474f415d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# apt-get install libapache2-mod-jk 
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="24564b4b5064494d474f415d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# apt-get install libapache2-mod-jk 
 </code></pre>
 
 <p>jk.conf的配置文件如下：</p>
 
 <pre><code>#!shell
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="681a07071c2805010b030d11">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/etc/apache2/mods-available# cat jk.conf  
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="681a07071c2805010b030d11">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/etc/apache2/mods-available# cat jk.conf  
 
 # Update this path to match your conf directory location 
 
@@ -79,7 +79,7 @@ ln -s /etc/apache2/mods-available/jk.conf /etc/apache2/mods-enabled/jk.conf
 <p>配置 jk_workers.properties</p>
 
 <pre><code>#!shell
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ed9f828299ad80848e868894">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/etc/apache2# cat jk_workers.properties  
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ed9f828299ad80848e868894">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/etc/apache2# cat jk_workers.properties  
 
 worker.list=ajp13 
 
@@ -106,7 +106,7 @@ worker.ajp13.socket_timeout=300
 
 <p>默认站点的配置</p>
 
-<p><img src="http://static.wooyun.org/201311/2013111512095536811.png" alt="2013111512095536811.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013111512095536811.png" alt="2013111512095536811.png"></p>
 
 <p>重启apache</p>
 
@@ -120,11 +120,11 @@ sudo /etc/init.d/apache2 restart
 
 <p>现在apache的mod_jk模块就配置好了，访问192.168.0.103的80端口，就被重定向到192.168.0.102的8009端口了，然后就可以部署war了。</p>
 
-<p><img src="http://static.wooyun.org/201311/2013111512103969324.png" alt="2013111512103969324.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013111512103969324.png" alt="2013111512103969324.png"></p>
 
 <p>对渗透有兴趣的朋友，加我多交流 ：）</p>
 
-<p> </p>      </p>
+<p> </p>      <p></p>
     
 			</body>
 		</html>

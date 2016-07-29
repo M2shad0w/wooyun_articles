@@ -3,18 +3,18 @@
 			<head>
 			     <title>Hacking Team攻击代码分析 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/6968">http://drops.wooyun.org/papers/6968</a></h1>
 				
       <p>
-        <p>作者：360Vulcan Team成员Yuki Chen</p>
+        </p><p>作者：360Vulcan Team成员Yuki Chen</p>
 
 <h1>攻击代码分析Part 1: Flash 0day</h1>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>最近专门提供通过攻击手法进行网络监听的黑客公司Hacking Team被黑，包含该公司的邮件、文档和攻击代码的400G数据泄漏。360Vulcan Team第一时间获取了相关信息，并对其中的攻击代码进行了分析。</p>
 
@@ -30,13 +30,13 @@
 
 <p>看起来HackingTeam的远程exploit工具中广泛使用了同一个flash漏洞（攻击目标可以是IE、Chrome、Office系列）:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150707/2015070706045768567.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150707/2015070706045768567.jpg" alt="enter image description here"></p>
 
 <p>初步分析这个Exploit之后，我们发现这个Exploit在最新版本的Adobe Flash（18.0.0.194）中仍然可以触发，因此这应该是一个0day漏洞。</p>
 
 <h1>0x01 漏洞原理分析</h1>
 
-<hr />
+<hr>
 
 <p>这个漏洞成因在于，Flash对ByteArray内部的buffer使用不当，而造成Use After Free漏洞。</p>
 
@@ -84,7 +84,7 @@ prototype.valueOf = function()
         }
 </code></pre>
 
-<p>在valueOf函数中，最关键的一部是更改了ByteArray的长度，将其设置成为0x1100，这个操作将会触发ByteArray内部buffer的重新分配，旧的buffer（大小为0x1000）将会被释放。紧接着exploit代码会分配若干个vector<uint>对象，每个vector同样占用0x1000字节的内存，试图去重新使用已经释放的ByteArray buffer的内存。</p>
+<p>在valueOf函数中，最关键的一部是更改了ByteArray的长度，将其设置成为0x1100，这个操作将会触发ByteArray内部buffer的重新分配，旧的buffer（大小为0x1000）将会被释放。紧接着exploit代码会分配若干个vector<uint>对象，每个vector同样占用0x1000字节的内存，试图去重新使用已经释放的ByteArray buffer的内存。</uint></p>
 
 <p>valueOf函数返回0x40，然后0x40会被写入<code>buffer[3]</code>这里，如果逻辑正确，那么此处应该写入的是新分配的buffer；然而由于代码漏洞，这里写入的已经释放的0x1000大小的旧buffer，于是事实上写入的是vector对象的头部，整个过程如下：</p>
 
@@ -114,7 +114,7 @@ prototype.valueOf = function()
 
 <p>于是我们可以得到一个超长的vector对象：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150707/2015070706045777405.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150707/2015070706045777405.jpg" alt="enter image description here"></p>
 
 <p>我们可以通过调试来观察漏洞的触发过程：</p>
 
@@ -179,7 +179,7 @@ Flash32_18_0_0_194!IAEModule_IAEKernel_UnloadModule+0x1ba07f:
 
 <h1>0x02 漏洞防范</h1>
 
-<hr />
+<hr>
 
 <p>由于该漏洞利用非常稳定，而Adobe暂时没有发布该漏洞的补丁，更可怕的是从HackingTeam泄露的数据来看，该exploit还带有沙盒突破提权功能，危害甚大。我们建议补丁发布之前，可以暂时先禁用flash插件；也可以开启Chrome或Chrome核心浏览器针对插件的Click-to-Run功能，来缓解Flash 0day的攻击。</p>
 
@@ -187,7 +187,7 @@ Flash32_18_0_0_194!IAEModule_IAEKernel_UnloadModule+0x1ba07f:
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>之前我们分析了HackingTeam泄露数据中的Flash 0day (bytearray 0day)。而在泄露数据中我们还看到了另外一个名为convolution_filter的flash exploit。</p>
 
@@ -197,13 +197,13 @@ Flash32_18_0_0_194!IAEModule_IAEKernel_UnloadModule+0x1ba07f:
 
 <p>这个漏洞有个不平凡的故事，今年的Pwn2Own大赛中，前Vupen主力Nicolas Joly正是用这个漏洞拿下了64位Flash插件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150707/20150707060301775750000.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150707/20150707060301775750000.jpg" alt="enter image description here"></p>
 
 <p>所以事情就变得很有趣了，一边是Nico用这个漏洞打 Pwn2Own，另一边HackingTeam（从常理推测，应该是通过其它渠道，和Nico无关）也掌握了这个漏洞并将其用于自己的Exploit工具包中。</p>
 
 <h1>0x01 CVE-2015-0349原理分析</h1>
 
-<hr />
+<hr>
 
 <p>再回头看一下CVE-2015-0349这个漏洞，这是一个ActionScript 3中ConvolutionFilter类的内部matrix数组的一个Use After Free漏洞，这是个非常好用的漏洞，在32位和64位上都可以轻松实现稳定利用。</p>
 
@@ -271,11 +271,11 @@ prototype.valueOf = function()
         }
 </code></pre>
 
-<p>事实上filter.matrixX = 15执行完毕之后，ConvolutionFilter内部的一个float数组（我们叫他matrixArray）就会被释放，而从valueOf返回之后，已经释放的matrixArray还会继续被使用，并且往里面写入数据，从而造成了Use-After-Free。我们可以看到valueOf函数中，在设置了filter.matrixX之后，分配了一系列的vector<uint>，这些vector就是用来占用释放后的matrixArray的内存的。这样当程序继续往被释放后的matrixArray里写数据时，实际上是在往vector对象里面写数据，从而达到修改vector长度字段的目的，便于进一步exploit。</p>
+<p>事实上filter.matrixX = 15执行完毕之后，ConvolutionFilter内部的一个float数组（我们叫他matrixArray）就会被释放，而从valueOf返回之后，已经释放的matrixArray还会继续被使用，并且往里面写入数据，从而造成了Use-After-Free。我们可以看到valueOf函数中，在设置了filter.matrixX之后，分配了一系列的vector<uint>，这些vector就是用来占用释放后的matrixArray的内存的。这样当程序继续往被释放后的matrixArray里写数据时，实际上是在往vector对象里面写数据，从而达到修改vector长度字段的目的，便于进一步exploit。</uint></p>
 
 <h1>0x02 细节分析</h1>
 
-<hr />
+<hr>
 
 <p>我们首先先介绍一下ConvolutionFilter的关键结构：</p>
 
@@ -339,9 +339,9 @@ matrixArray[i] = (float)ConvertToNumber(paramArray.get(i));
 
 <h1>0x03 漏洞防范</h1>
 
-<hr />
+<hr>
 
-<p>由于Adobe官方已针对此漏洞发布了安全更新，用户只要及时升级就可避免受此漏洞影响。</p>      </p>
+<p>由于Adobe官方已针对此漏洞发布了安全更新，用户只要及时升级就可避免受此漏洞影响。</p>      <p></p>
     
 			</body>
 		</html>

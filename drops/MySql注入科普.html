@@ -3,12 +3,12 @@
 			<head>
 			     <title>MySql注入科普 - 瞌睡龙</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/123">http://drops.wooyun.org/tips/123</a></h1>
 				
       <p>
-        <h3>默认存在的数据库：</h3>
+        </p><h3>默认存在的数据库：</h3>
 
 <table>
   <tr>
@@ -1247,7 +1247,7 @@ preg_match('/(and|or|union|where|limit|group by|select|\'|hex|substr)/i', $id)</
     <tr>
         <td>会过滤的攻击代码</td>
         <td>1 && substr(user,1,1) = lower(conv(11,10,16))/td>
-    </tr>
+    </td></tr>
     <tr>
         <td>绕过方式</td>
         <td>1 && lpad(user,7,1)</td>
@@ -1267,7 +1267,7 @@ preg_match('/(and|or|union|where|limit|group by|select|\'|hex|substr)/i', $id)</
     <tr>
         <td>会过滤的攻击代码</td>
         <td>1 && lpad(user,7,1)/td>
-    </tr>
+    </td></tr>
     <tr>
         <td>绕过方式</td>
         <td>1%0b||%0blpad(user,7,1)</td>
@@ -1349,7 +1349,7 @@ http://www.test.com/list.php?order=rand(false)
 
 <h4>宽字节注入</h4>
 
-<p>sql注入中的宽字节国内最常使用的gbk编码，这种方式主要是绕过addslashes等对特殊字符进行转移的绕过。反斜杠(&#41;的十六进制为%5c，在你输入%bf%27时，函数遇到单引号自动转移加入\，此时变为%bf%5c%27，%bf%5c在gbk中变为一个宽字符“縗”。%bf那个位置可以是%81-%fe中间的任何字符。不止在sql注入中，宽字符注入在很多地方都可以应用。</p>      </p>
+<p>sql注入中的宽字节国内最常使用的gbk编码，这种方式主要是绕过addslashes等对特殊字符进行转移的绕过。反斜杠(&#41;的十六进制为%5c，在你输入%bf%27时，函数遇到单引号自动转移加入\，此时变为%bf%5c%27，%bf%5c在gbk中变为一个宽字符“縗”。%bf那个位置可以是%81-%fe中间的任何字符。不止在sql注入中，宽字符注入在很多地方都可以应用。</p>      <p></p>
     
 			</body>
 		</html>

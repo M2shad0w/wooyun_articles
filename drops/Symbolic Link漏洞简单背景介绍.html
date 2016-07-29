@@ -3,14 +3,14 @@
 			<head>
 			     <title>Symbolic Link漏洞简单背景介绍 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/8812">http://drops.wooyun.org/papers/8812</a></h1>
 				
       <p>
-        <h1>0x00 背景</h1>
+        </p><h1>0x00 背景</h1>
 
-<hr />
+<hr>
 
 <p>Symbolic Link是微软Windows系统上一项关键机制，从Windows NT3.1开始引入对象和注册表Symbolic Link后，微软从Windows2000开始也引入了NTFS Mount Point和Directory Juntions，这些机制对于熟悉Windows内部机理的技术人员并不陌生，在著名的Windows Internals系列中，也有介绍这些机制。在过去，安全人员利用Symbolic Link来攻击系统安全机制或安全软件，也并不少见。</p>
 
@@ -24,7 +24,7 @@
 
 <h1>0x01 微软的缓和措施</h1>
 
-<hr />
+<hr>
 
 <p>随着这些漏洞攻击的频繁爆出，微软也在寻找更有效地缓和方式，既然低权限创建符号链接是问题的关键所在，那么封堵低权限程序创建符号链接就成了自然会想到的解决方案。</p>
 
@@ -46,7 +46,7 @@
 
 <h1>0x02 针对缓和的绕过</h1>
 
-<hr />
+<hr>
 
 <p>在这里，本文就是要介绍一种绕过Windows 10 Mount Point Mitigation（目录挂载点缓和）的方式，由于这个缓和在Windows7/8/8.1等系统上是通过MS15-090得到修复的，因此这里介绍的方法也是对MS15-090（CVE-2015-2430）的绕过攻击方式。</p>
 
@@ -178,7 +178,7 @@ DeviceIoControl(hlink , FSCTL_SET_REPARSE_POINT , pBuffer , buffsize, NULL , 0 ,
 
 <p>可以看到低权限的poc_mklink成功创建目录1，链接到c:\windows的junction。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091703444531666.png" alt="enter image description here" /></p>      </p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091703444531666.png" alt="enter image description here"></p>      <p></p>
     
 			</body>
 		</html>

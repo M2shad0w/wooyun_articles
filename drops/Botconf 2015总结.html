@@ -3,21 +3,21 @@
 			<head>
 			     <title>Botconf 2015总结 - virustracker</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/11652">http://drops.wooyun.org/papers/11652</a></h1>
 				
       <p>
         <blockquote>
-  <p>链接：<br />
-  <a href="https://blog.rootshell.be/2015/12/02/botconf-2015-wrap-up-day-1/">https://blog.rootshell.be/2015/12/02/botconf-2015-wrap-up-day-1/</a><br />
-  <a href="https://blog.rootshell.be/2015/12/03/botconf-2015-wrap-up-day-2/">https://blog.rootshell.be/2015/12/03/botconf-2015-wrap-up-day-2/</a><br />
+  <p>链接：<br>
+  <a href="https://blog.rootshell.be/2015/12/02/botconf-2015-wrap-up-day-1/">https://blog.rootshell.be/2015/12/02/botconf-2015-wrap-up-day-1/</a><br>
+  <a href="https://blog.rootshell.be/2015/12/03/botconf-2015-wrap-up-day-2/">https://blog.rootshell.be/2015/12/03/botconf-2015-wrap-up-day-2/</a><br>
   <a href="https://blog.rootshell.be/2015/12/04/botconf-2015-wrap-up-day-3/">https://blog.rootshell.be/2015/12/04/botconf-2015-wrap-up-day-3/</a></p>
 </blockquote>
 
-<h1>0x00 第一天</h1>
+</p><h1>0x00 第一天</h1>
 
-<hr />
+<hr>
 
 <p>下面是一些与会议相关的 数字：</p>
 
@@ -47,7 +47,7 @@
 
 <p>接着，是Maarten van Dantzig 和 <a href="https://twitter.com/ydklijnsma">Jonathan Klijnsma</a>。Ponmocup演讲的“<em>Ponmocup,the full story: A giant hiding in the shadows</em>”（<em>Ponmocup，阴影中的巨人</em>），虽然<em>Ponmocup</em>并不是最新出现的（在之前的Botconf中就涉及过），但是仍然在活动中（从2006年开始）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/20151226065039489451108.png" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/20151226065039489451108.png" alt="p1"></p>
 
 <p>Ponmocup中有多个组织的参与，很可能是俄国人主导的。Ponmocup感染了大量的受害者，其目的也不是单一的。Ponmocup还利用了没有记录的Windows API调用。首先，Maarten &amp; Jonathan介绍了受害者是如何被感染的。这个木马实现了一些技巧来欺骗安全研究人员，比如特定的访问来源、cookie、IP黑名单等。并且，他们还利用了一些技术来防止木马被直接下载。另外，如果尝试的太频繁，你就会被加入到黑名单。除了反分析功能，木马还会检查进程、用户名、驱动、显示器分辨率、近期打开的文档、浏览器历史记录、安装的程序等。干得好！在安装阶段，木马会重置系统的恢复点，并禁用系统的恢复功能。木马还会打开防火墙，并禁用UAC功能。每当感染一个主机，木马就会根据卷序列号创建一个唯一的文件。每个副本对于目标而言都是独一无二的。Ponmocup最出色的一点：实际上这个木马是一个包括了多个已知模块（25个）的框架：AV killers, SOCKS proxy, SIP scanners, FTP stealers, 系统信息收集器, Facebook cookie stealer, Bitcoin钱包盗取器等 。这个木马还能对抗污水池技术：域名都不是在同一时间全部部署的，而是根据有效载荷的版本进行分组。政府的取缔行动只能影响部分僵尸网络。演讲人检查了木马的多个功能，这些功能之间的配合很让人吃惊。总的来说， Ponmocup：</p>
 
@@ -63,7 +63,7 @@
 
 <p>接下来是一次短讨论，演讲人是Alexander Chailykto 和 Aliaksandr Trafimchuk。这次讨论的标题是“<em>DGA clustering and analysis: mastering modern, evolving threats</em>”（DGA分类与分析：掌握现代威胁的进化旅程）。DGA（域名生成算法）是现代木马中很重要的一部分。率先使用这项技术的是Conficker。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/2015122606504383625253.png" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/2015122606504383625253.png" alt="p2"></p>
 
 <p>DGA造成的问题：</p>
 
@@ -96,7 +96,7 @@
 
 <p>午饭后，Zoltan Balazs进行了一次短讨论：“<em>Sandbox detection for the masses: leak, abuse, test</em>”（沙盒检测：泄露、滥用和测试）。Zoltan首先问了观众几个问题。事实上，每个人都会面临这样的问题。木马会检测我们的沙盒，所以我们需要更强大的沙盒系统。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/2015122606504649278340.png" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/2015122606504649278340.png" alt="p3"></p>
 
 <p>木马开发者可以很容易地检测出沙盒的存在。Zoltan利用VirtualBox快速地进行了演示。常见的问题有：</p>
 
@@ -115,7 +115,7 @@
 
 <p>然后，来自CERT.p的<a href="https://twitter.com/maldr0id">Lukasz Siewierski</a>发布了一篇叫做 “<em>Polish threat landscape</em>”（“波兰威胁规模”）的演讲。Lukasz 讲了一家波兰公司遭到社会工程袭击的故事。其他国家的一些公司也在面临相同的问题。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/2015122606505034188438.png" alt="p4" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/2015122606505034188438.png" alt="p4"></p>
 
 <p>其攻击方案非常经典：发一封邮件，有人回信，再用假冒的NDA发第二封。一旦入侵了这家企业，攻击者就会窃取客户名单，并发给他们虚假的发票。Lukasz在分析完技术后，又说明了一个更严重的情况。Lukasz解释了这家公司是怎么反应的，他们起诉了一名记者，假装自己没有遭到攻击，客户信息也没有泄露。有趣的故事！</p>
 
@@ -123,7 +123,7 @@
 
 <p>接着，来自思科的<a href="https://twitter.com/verovaleros">Veronica Valeros</a>演讲了“<em>Make it count: An analysis of a brute-force botnet</em>”（分析爆破僵尸网络）。她研究说：我们通常首先会分析木马一开始的几分钟。那么一周、一个月会怎么样呢？</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/2015122606505313895529.png" alt="p5" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/2015122606505313895529.png" alt="p5"></p>
 
 <p>她发现了一个看似普通的样本，但是在几天后，这个样本开始有其他的行为…下载了一个新的有效载荷并开始执行爆破攻击。这个样本的攻击目标是WordPress网站。我们并不意外这样的网站数量庞大。下面是一些关于这次攻击数字：</p>
 
@@ -139,7 +139,7 @@
 
 <p><a href="https://twitter.com/jetdisct1">Frank Denis</a> 展示了他的研究： “<em>The missing piece in threat intelligence</em>”(网络情报中缺失的一环)，Frank正在 <a href="http://www.ovh.net/">OVH</a> 任职，能接触到一些恶意活动的源头。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/2015122606505786457628.png" alt="p6" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/2015122606505786457628.png" alt="p6"></p>
 
 <p>ISP必须应对各种问题。比如，托管服务滥用、入侵等，这类问题很难管理。IP地址就是一个很好的例子。IP地址可以分配给不同的用户，而新的用户会继承这个IP的名誉。 这样就可能对他的业务造成影响。另外，有些厂商的行为很不好，仅仅是重复使用在线服务提供的数据。比如，有些厂商会拦截IP地址，仅仅是因为这些IP的: 评分>0！ Frank解释了ISP是如何应对并追踪这些问题。然后，他提出了一种结构化语言来描述ISP所采取的行动。比如，IP地址可以被标记位：</p>
 
@@ -167,13 +167,13 @@
 
 <p>Marc Dioudet 谈论了 “<em>Honey!? Where is my POS?</em>”（亲，我的POS在那里？）他的研究目标是想要更好的理解POS木马使用的技术和过程。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/2015122606510075773725.png" alt="p7" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/2015122606510075773725.png" alt="p7"></p>
 
 <p>在简单地查看了一个标准POS系统后，Marc解释了他部署用来创建POS蜜罐的解决方案。在仅仅三小时后，他就抓到了一个Morto木马感染。他还说明了为什么这个蜜罐很难吸引攻击者。一开始，他把服务器放在了广泛使用chip &amp; pin的德国。在他把服务器转移到美国后，他捉到了更多木马。</p>
 
 <p>最后，<a href="https://twitter.com/bambenek">John Bambenek</a> 再次讨论了僵尸网络的取缔，题目叫做 “<em>Takedowns; case studies ad what we all could be doing better</em>”（取缔，案例研究，我们怎样才能做的更好）。与Margarita一样，他解释了为什么组织一次僵尸网络取缔会这么困难。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/2015122606510480736823.png" alt="p8" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/2015122606510480736823.png" alt="p8"></p>
 
 <p>John提到我们如今面临的问题有：我们在竞赛中已经落后了，我们注定要失败。不过好消息是，我们会有很多活干。什么是取缔？需要根据：</p>
 
@@ -194,11 +194,11 @@
 
 <h1>0x01 第二天</h1>
 
-<hr />
+<hr>
 
 <p>第一篇来自Daniel Plohmann关于DGA的讨论：“DGArchive – A deep dive into domain generating malware”（深入研究域名生成木马）。像往常一样，开篇就是对DGA的审查，基本上没什么新内容（昨天已经都说过了）。去年，Daniel只是稍微介绍了他的项目，今天他展示了自己的研究成果。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/2015122606510764085922.png" alt="p9" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/2015122606510764085922.png" alt="p9"></p>
 
 <p>DGA的小历史：</p>
 
@@ -238,7 +238,7 @@
 
 <p>下一篇演讲的重点是Andromeda僵尸网络。Jose Miguel Esparza讨论了“<em>Travelling to the far side of Andromeda</em>”（前往 Andromeda的另一端） 。这次讨论的不是要逆向僵尸网络（因为已经有大量可用的信息），而是讨论僵尸网络背后的人。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/20151226065110987241021.png" alt="p10" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/20151226065110987241021.png" alt="p10"></p>
 
 <p>关于 Andromeda的几点信息：</p>
 
@@ -309,13 +309,13 @@
 
 <p>下一个议题还是DGA：“<em>Building a better botnet DGA mousetrap: separating mice, rats and cheese in DNS data</em>”（创建一个更好的僵尸网络DGA捕鼠器：区别DNS数据中的小老鼠、大老鼠和奶酪）(Josiah Hagen)。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/20151226065114848391125.png" alt="p11" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/20151226065114848391125.png" alt="p11"></p>
 
 <p>第四次讨论了DGA...我想现在我们都知道了黑客会利用这项技术来混淆bot与CC之间的通讯。在这次的讨论中，还涉及到了机器学习。下午，我们还开玩笑说把“Botconf”改成“DGAconf”算了。</p>
 
 <p>Apostolos Malatras 很风趣的讨论了移动僵尸网络，更确切的说，是如何在实验室中研究这些僵尸网络。(“<em>Building an hybrid experimental platform for mobile botnet research</em>” 创建一个综合性的实验平台来研究移动版僵尸网络)。如果前面的讨论都集中在木马是怎样攻击安卓设备，那么这次讨论就是安装在这些受感染设备上的僵尸网络是如何运作的。事实上，这与常规僵尸网络的运作方式没有差别：受感染的设备会等待僵尸主控发送的命令。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/20151226065117578791219.png" alt="p12" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/20151226065117578791219.png" alt="p12"></p>
 
 <p>你要记住，一台移动设备就是一台计算机，但是移动设备中还包含有大量的机主信息（利益丰厚）。并且这些移动设备还会连接其他的计算机，接入企业网络。这些移动设备上有大量的传感器，并且越来越多的用作移动钱包。下面是移动设备使用的一些技术：</p>
 
@@ -331,7 +331,7 @@
 
 <p>午饭后，Paul Jung 上台讲了“<em>Box botnets</em>”。好消息：他没有讲到IDA。故事开始于日志文件中出现的一个奇怪的HTTP请求。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/20151226065121972511317.png" alt="p13" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/20151226065121972511317.png" alt="p13"></p>
 
 <p>攻击者会将恶意脚本隐藏在像GIF这样的文件中，从而尝试持续感染目标网站。恶意代码经常会利用字符串<code>str_rot13()</code>,<code>gzuncompress()</code>来进行混淆。使用在线工具<code>ddecode.com/phpdecoder</code>就可以解码。Paul提醒说：大多数提供在线服务的网站，比如这个网站，会保留用户上传的数据。注意你的敏感数据。那么怎样才能感染一个主机呢？这个方案需要：</p>
 
@@ -355,7 +355,7 @@
 
 <p>然后，我们又讨论了大量的汇编代码： <a href="https://twitter.com/macteca">Matthieu Kaczmarek</a>提出了“<em>Malware instrumentation: application to Regin analysis</em>”（木马插桩：应用到Regin分析）。如今的现代木马都很复杂。为什么选Regin？因为这是一个僵尸网络。其网络拓扑就是一个僵尸网络。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/20151226065124451241417.png" alt="p14" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/20151226065124451241417.png" alt="p14"></p>
 
 <p>要知道，木马通讯可以通过UDP、TCP、cookie、文件、USB磁盘实现。你还需要一个打开世界的窗口。在网络中的每个节点上都有一个私钥以及一个可信公钥列表，每个节点还都有一个虚拟的IP地址。这种设计是以服务为导向的架构，包括有下面的模块：</p>
 
@@ -369,7 +369,7 @@
 
 <p>在喝完咖啡后，Mark Graham讨论了“<em>Practical experiences of building an IPFIX based open source botnet detector</em>”（实践根据开源botnet检测器来创建一个IPFIX）。Mark的问题是什么：如何有效地在云供应商那里检测僵尸网络？Mark说，在云上可是寻找僵尸网络活动的好地方。他首先简单的介绍了IPFIX （说实话我真不知道这是什么）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/20151226065128602971518.png" alt="p15" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/20151226065128602971518.png" alt="p15"></p>
 
 <p>人人都知道Netflow (Cisco在2009年创建)，但是基本没人知道IPFIX是什么（大部分Botconf的观众都不知道）。Netflow存在哪些问题？</p>
 
@@ -400,7 +400,7 @@
 
 <p>下一篇演讲，<a href="https://twitter.com/taldars">Tal Darsan</a>介绍了巴西的威胁情况(“<em>The dirty half-dozen of the Brazilian threat landscape</em>”巴西威胁概况)。今天的巴西在经历什么？他们使用Delphi，VB脚本和C#。他们使用了封装器：CPL 和 VBE 趋势。Themida 封装器。他们有独特的诈骗地下社区，全面的攻击途径，把恶意程序捆绑到合法工具上。你可以购买到教程，学习诈骗。那么哪些攻击最流行呢？</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/20151226065131176711616.png" alt="p16" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/20151226065131176711616.png" alt="p16"></p>
 
 <ul>
 <li>利用图片发动钓鱼攻击。Tal 介绍了Boleto攻击活动。</li>
@@ -413,15 +413,15 @@
 
 <p><a href="http://liuya0904/">Ya Liu</a> 是今天最后一位演讲者：“<em>Automatically classifying unknown bots by the register messages</em>”（根据注册人信息自动分类未知bot）。这一研究的思路是根据计算机在感染后，与CC交换的信息来判断僵尸网络。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/20151226065134583761716.png" alt="p17" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/20151226065134583761716.png" alt="p17"></p>
 
 <p>如今，每天都会出现大量的木马变种，必须要有新技术才能区分它们。大多数木马都可以划分到已知的木马系列，比如zbot或darkshell。它们都有一个共同点：需要与CC通讯。Ya的思路是分析这些木马是如何注册到CC上的（在成功感染后执行的第一个操作）。在注册信息中包含有主机名、IP、CPU、OS、版本等信息。Ya研究了这些信息是如何编码的，以及如何发送到CC上。有趣的研究！</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/20151226065139996991812.png" alt="p18" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/20151226065139996991812.png" alt="p18"></p>
 
 <h1>0x02 第三天</h1>
 
-<hr />
+<hr>
 
 <p>这里是第三天的会议总结。第一篇讨论来自Yonathan Klijnsma，他介绍了Cryptowall的历史概况。Cryptonwall分为多个版本，并经过了几代的发展。这个勒索软件最早出现在2013年9月，具有独立的ID，利用HTTP进行CC通讯。</p>
 
@@ -433,7 +433,7 @@
 <li>木马一直在使用新技术</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20151226/20151226065142357411912.png" alt="p19" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/20151226065142357411912.png" alt="p19"></p>
 
 <p>如果你对这个木马很感兴趣，Yonathan发布了一些好玩的<a href="http://github.com0x3a/cryptowall">工具</a> 。</p>
 
@@ -449,7 +449,7 @@
 
 <p>Renaud演示了“你只需要JS就能实现这些任务。”当然，JS注入是基于XSS漏洞实现的。他说“XSS就可以看做是缓冲区溢出。”</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/2015122606514552680208.png" alt="p20" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/2015122606514552680208.png" alt="p20"></p>
 
 <p>在说完XSS之后，他又依次说明了如何用Javascript来实现上述的各种恶意目的。为了保证持续性，必须要通过load.js入侵浏览器（Javascript代码会重新加载自己并从外部URL中加载代码）。他还演示了如何使用包含有代码的PNG图像。为了实现CC通讯，必须使用twitter来获取命令。今天，谁会拦截Twitter呢？Javascript还非常便于操作：</p>
 
@@ -465,13 +465,13 @@
 
 <p>下一名演讲者<a href="https://twitter.com/herebepanda">Jeremy du Bruyn</a>，讨论了<a href="http://www.darkcomet-rat.com/">DarkComet</a> (“<em>Inside DarkComet: a wild case-study</em>” 深入DaekComet：一个疯狂的案例研究)。他首先展示了一些研究数据：8万3千个DarkComet样本，4万个配置文件，2万5千个CC，751次渗透。他非常了解这个木马。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/20151226065148739302115.png" alt="p21" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/20151226065148739302115.png" alt="p21"></p>
 
 <p>DarkComet是一个看似合法的RAT。这个木马的功能就像是一个全键盘，能够控制远程主机、执行命令、记录键盘输入等。DarkComet有两个组件：CC和bot本身。Jeremy演示了和讲解了一个配置样本（已经解密）。DarkComet使用了静态秘钥，版本不同使用的秘钥也不同。然后，Jerem讲解了木马在感染受害者时，从CC上获取的初始配置。每隔20s，就发送一条活动信息。这种设计非常高效：尽可能的隐藏木马，可以扩展木马的功能，具备反调试功能，支持使用协议，可以收集样本，符合botnet规则（botmaster能够正常识别）。在介绍完这个木马后，他又开始讨论对于样本的分析（4万个）。大部分样本使用了动态DNS（约40%）来联系CC。有趣的是，已经发现的最大bot（8000名受害者）位于法国！这个bot的CC隐藏在了一名居民的ADSL连接上。他解释了自己是如何借助<a href="http://matasano.com/research/PEST-CONTROL.pdf">QUICKUP</a>漏洞的帮助，破坏了其中的某些CC。</p>
 
 <p>然后，讨论了ANSSI。这在Botconf上可不常见，题目是“<em>Air-gap limitations and bypass techniques: command and control using smart electromagnetic interferences</em>”（隔离限制与绕过技术：使用智能电磁干扰进行命令与控制，Chaouki Kasmi, José Lopes Estves）</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/20151226065152385632211.png" alt="p22" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/20151226065152385632211.png" alt="p22"></p>
 
 <p>首先，隔离是什么意思？不同的IT系统可能设置了不同的安全级别和信任级别（互联网，内网和关键服务）。隔离指的是移除系统中的所有通信通道，形成物理孤立。隔离也有缺点：</p>
 
@@ -503,13 +503,13 @@
 
 <p>午饭后，<a href="https://twitter.com/Kleissner">Peter Kleissner</a>讨论了“<a href="http://www.symantec.com/securityresponse/writeup.jsp?docid=2006-011714-3948-99">Sality</a>”。Sality在2003年出现在俄罗斯，并感染了很多文件。这个botnet有很多目的，利用了一个P2P算法来窃取信息，发送DDoS攻击或发送垃圾邮件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/20151226065156663312311.png" alt="p23" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/20151226065156663312311.png" alt="p23"></p>
 
 <p>这个botnet感染了200万+主机，全球范围内总共感染了400万台，虽然没有走向前台，但是这个botnet仍然活跃在今天。根据样本中的昵称和邮箱地址，我们应该能猜出Sality的作者是谁？什么受害者会被感染呢？原因为简单，没有给系统打补丁，并且没有使用AV产品。这个botnet发动DDoS攻击了Virustracker：攻击了4次，从1Gbps到120Gbps。Peter解释了botnet是如何利用了P2P算法，以及其他一些特征。</p>
 
 <p>下一篇是Olivier Bilodeau 提出的“<em>A moose once bit my honeypot</em>”（一只曾被我的蜜罐咬过的麋鹿）。这里的麋鹿指的是<a href="http://www.welivesecurity.com/2015/05/26/moose-router-worm/">Moose</a>。一个内嵌的Linux botnet。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/20151226065159753302410.png" alt="24" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/20151226065159753302410.png" alt="24"></p>
 
 <p>所有的IoT设备（智能电视 、IP摄像头、冰箱、路由器等）都有相似的特征：</p>
 
@@ -525,7 +525,7 @@
 
 <p>最后一篇来自Thomas Barabosch“<em>Behaviour-driven development in malware analysis</em>”（分析木马中的行为驱动开发）。这份报告研究了如何逆向恶意代码？Thomas的动力是什么？木马分析很无聊！这是一项日常任务，需要重复，投入大量的时间。这些代码仅仅是从asm翻译成更高级的语言，但是怎么保证可靠性呢？解决办法：改善这一过程！</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/2015122606520291972254.png" alt="p25" /></p>
+<p><img src="http://static.wooyun.org//drops/20151226/2015122606520291972254.png" alt="p25"></p>
 
 <p>他提出了两种方法：TDD-测试驱动型开发和BDD-行为驱动型开发。简单地说：这样做的目的是使用开发技术和过程，并将其应用到逆向工程中，从而改善逆向过程。但是，有趣的是，和众多学术研究者一样，他们说的并不容易立刻实现。</p>
 
@@ -541,7 +541,7 @@
 
 <p>下一次会议会在Lyon 20/11-02/12举办。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151226/2015122606520614793264.png" alt="p26" /></p>      </p>
+<p><img src="http://static.wooyun.org//drops/20151226/2015122606520614793264.png" alt="p26"></p>      <p></p>
     
 			</body>
 		</html>

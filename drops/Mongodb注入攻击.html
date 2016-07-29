@@ -3,14 +3,14 @@
 			<head>
 			     <title>Mongodb注入攻击 - Th1nk</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3939">http://drops.wooyun.org/tips/3939</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>关于mongodb的基本安装运行操作以及php操作mongodb，请参考我以前的文章</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 概括</h1>
 
-<hr />
+<hr>
 
 <p>php下操作mongodb大致有以下两种方式</p>
 
@@ -74,11 +74,11 @@ $result = $db-&gt;execute($query);
 
 <h1>0x02 注入攻击</h1>
 
-<hr />
+<hr>
 
 <p>0.在攻击前，我们需要先建立一个集合，作为攻击的基础。</p>
 
-<p><img src="http://static.wooyun.org/20141119/2014111903392399595.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141119/2014111903392399595.png" alt="enter image description here"></p>
 
 <p>用户test是攻击者已经知道账号密码的一个测试账号，其他账号的话密码随机。想通过注入获取其他账号的密码。</p>
 
@@ -111,7 +111,7 @@ else{
 ?&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141119/2014111903392368569.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141119/2014111903392368569.jpg" alt="enter image description here"></p>
 
 <p>此时的攻击利用了php可以传递数组参数的一个特性。</p>
 
@@ -155,7 +155,7 @@ $data = array(
 
 <p>结果如图</p>
 
-<p><img src="http://static.wooyun.org/20141119/2014111903392475473.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141119/2014111903392475473.jpg" alt="enter image description here"></p>
 
 <p>因为传入的键名$ne正是一个mongodb操作符，最终执行了语句：</p>
 
@@ -236,7 +236,7 @@ for ($i=0; $i &lt;10 ; $i++) {
 
 <p>结果如图：</p>
 
-<p><img src="http://static.wooyun.org/20141119/2014111903392576644.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141119/2014111903392576644.png" alt="enter image description here"></p>
 
 <p>相当于在数据库中多次执行查询:</p>
 
@@ -279,7 +279,7 @@ if ($data['ok'] == 1) {
   <p>http://127.0.0.1/1.php?username=test'&amp;password=test</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org/20141119/2014111903392559454.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141119/2014111903392559454.png" alt="enter image description here"></p>
 
 <p>报错。 想办法闭合语句。</p>
 
@@ -289,7 +289,7 @@ if ($data['ok'] == 1) {
 
 <p>该语句能返回一个数组，username键值是1，password键值是2.</p>
 
-<p><img src="http://static.wooyun.org/20141119/2014111903392615950.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141119/2014111903392615950.png" alt="enter image description here"></p>
 
 <p>爆mongodb版本</p>
 
@@ -301,7 +301,7 @@ if ($data['ok'] == 1) {
 
 <p>PS:因为db.getCollectionNames()返回的是数组，需要用tojson转换为字符串。并且mongodb函数区分大小写。</p>
 
-<p><img src="http://static.wooyun.org/20141119/2014111903392661471.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141119/2014111903392661471.png" alt="enter image description here"></p>
 
 <p>爆test集合的第一条数据</p>
 
@@ -309,11 +309,11 @@ if ($data['ok'] == 1) {
   <p>http://127.0.0.1/1.php?username=test'});return {username:tojson(db.test.find()[0]),password:2};//&amp;password=test</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org/20141119/2014111903392681825.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141119/2014111903392681825.png" alt="enter image description here"></p>
 
 <p>爆test集合的第二条数据</p>
 
-<p><img src="http://static.wooyun.org/20141119/2014111903392684960.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141119/2014111903392684960.png" alt="enter image description here"></p>
 
 <p>因为execute方法支持多语句执行，所以可以执行太多语句了，不演示~</p>
 
@@ -327,7 +327,7 @@ if ($data['ok'] == 1) {
   <p>http://127.0.0.1/1.php?username=test'});if (db.version() > "0") { sleep(10000); exit; }var b=({a:'1&amp;password=test</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org/20141119/2014111903392679969.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141119/2014111903392679969.png" alt="enter image description here"></p>
 
 <p>成功延时了十秒。</p>
 
@@ -402,7 +402,7 @@ if ($result-&gt;count()&gt;0) {
 
 <p>返回正常，集合数等于5</p>
 
-<p><img src="http://static.wooyun.org/20141119/2014111903392752340.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141119/2014111903392752340.png" alt="enter image description here"></p>
 
 <p>获取集合名称</p>
 
@@ -424,7 +424,7 @@ if ($result-&gt;count()&gt;0) {
 
 <p>返回正常，第一个集合名称第一个字符为m</p>
 
-<p><img src="http://static.wooyun.org/20141119/2014111903392768685.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141119/2014111903392768685.png" alt="enter image description here"></p>
 
 <p>最终可以破解出存在user集合。</p>
 
@@ -438,11 +438,11 @@ if ($result-&gt;count()&gt;0) {
 
 <h1>0x03 Referer</h1>
 
-<hr />
+<hr>
 
 <p>http://drops.wooyun.org/papers/850</p>
 
-<p>http://webcache.googleusercontent.com/search?q=cache:fPNiwObqKcEJ:hi.baidu.com/d4rkwind/item/ad7b81efb799ce2e6dabb8c3+&amp;cd=1&amp;hl=zh-CN&amp;ct=clnk&amp;gl=cn</p>      </p>
+<p>http://webcache.googleusercontent.com/search?q=cache:fPNiwObqKcEJ:hi.baidu.com/d4rkwind/item/ad7b81efb799ce2e6dabb8c3+&amp;cd=1&amp;hl=zh-CN&amp;ct=clnk&amp;gl=cn</p>      <p></p>
     
 			</body>
 		</html>

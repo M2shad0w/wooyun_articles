@@ -3,14 +3,14 @@
 			<head>
 			     <title>QQ模拟登录实现后篇 - iv4n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14042">http://drops.wooyun.org/tips/14042</a></h1>
 				
       <p>
-        <h1>0x00 概述</h1>
+        </p><h1>0x00 概述</h1>
 
-<hr />
+<hr>
 
 <p>本来是和上篇文章一起发的，后来出去，就搁置了。</p>
 
@@ -35,7 +35,7 @@
 
 <h1>0x01 QQ模拟登录实现之愚公移山（流程算法实现）</h1>
 
-<hr />
+<hr>
 
 <p>在上一篇文章：<a href="http://drops.wooyun.org/tips/13556">QQ模拟登录实现之四两拨千斤(基于V8引擎)</a></p>
 
@@ -59,7 +59,7 @@
 
 <p><strong>加密总流程图</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160328/2016032805064384659pic1.jpg" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160328/2016032805064384659pic1.jpg" alt="p1"></p>
 
 <p>基本上看懂这个流程图，就明白QQ密码的加密流程了。</p>
 
@@ -137,12 +137,12 @@ def tx_pwd_encode(self, pwd, salt, verifycode):
     ).decode().replace('/', '-').replace('+', '*').replace("=", "_")
 </code></pre>
 
-<p>代码传送门：<br />
+<p>代码传送门：<br>
 <a href="https://github.com/LeoHuang2015/qqloginjs/blob/master/autologin_account.py">https://github.com/LeoHuang2015/qqloginjs/blob/master/autologin_account.py</a></p>
 
 <h1>0x02 QQ模拟登陆实现之草船借箭（客户端快速登录实现）</h1>
 
-<hr />
+<hr>
 
 <p>我们在对QQ进行爬取和扫描的时候，很多时候需要考虑到登录的情况，如果使用用户名密码的方式，可能因为一些风控规则，当我们多次登陆时就要求图片验证码，而使用快速登录就能很好的规避这种情况。</p>
 
@@ -150,7 +150,7 @@ def tx_pwd_encode(self, pwd, salt, verifycode):
 
 <p>客户端快速登录方式是用户在PC端已经登录了QQ客户端软件，如果用户再打开Web页面进行登陆，不用再输入用户名和密码，只需要选择已经登录的帐号，点击确认登录即可。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160328/2016032805064549963pic2.jpg" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160328/2016032805064549963pic2.jpg" alt="p2"></p>
 
 <p>快速登录的本质上是使用clientkey置换token。</p>
 
@@ -172,7 +172,7 @@ def tx_pwd_encode(self, pwd, salt, verifycode):
 
 <p>另外一种是费插件模式，或者clientkey出现一些异常情况，通过请求server把clientkey设置到cookie，然后再置换token登陆。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160328/2016032805064683835pic3.jpg" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20160328/2016032805064683835pic3.jpg" alt="p3"></p>
 
 <h3>流程分析</h3>
 
@@ -182,7 +182,7 @@ def tx_pwd_encode(self, pwd, salt, verifycode):
 
 <p>同帐号和密码登陆，只是这里获取已经登陆QQ客户端的用户头像和昵称。</p>
 
-<p>获取登陆信息，用户<br />
+<p>获取登陆信息，用户<br>
 <a href="http://ptlogin2.qq.com/getface">http://ptlogin2.qq.com/getface</a></p>
 
 <p>返回：帐号、头像地址（有多个客户端登陆的帐号，请求多个）</p>
@@ -191,7 +191,7 @@ def tx_pwd_encode(self, pwd, salt, verifycode):
 
 <p>用户点击登陆，实际上是一个clientkey置换token的过程。</p>
 
-<p>请求会带上clientkey进行认证<br />
+<p>请求会带上clientkey进行认证<br>
 <a href="http://ptlogin2.qq.com/jump">http://ptlogin2.qq.com/jump</a></p>
 
 <p>如果client不正确，则会登陆失败，后续登陆不会信任原来的clientkey，会走clientkey不存在/异常的流程。</p>
@@ -237,7 +237,7 @@ http://localhost.ptlogin2.qq.com:4300/pt_get_st
 var var_sso_get_st_uin={uin:"1802014971"};ptui_getst_CB(var_sso_get_st_uin);
 </code></pre>
 
-<p>然后进行登陆置换<br />
+<p>然后进行登陆置换<br>
 <a href="http://ptlogin2.qq.com/jump">http://ptlogin2.qq.com/jump</a></p>
 
 <p>返回：设置cookie</p>
@@ -260,7 +260,7 @@ ptui_qlogin_CB('0', 'http://www.qq.com/qq2012/loginSuccess.htm', '');
 <li>置换token</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160328/2016032805064718764pic4.jpg" alt="p4" /></p>
+<p><img src="http://static.wooyun.org//drops/20160328/2016032805064718764pic4.jpg" alt="p4"></p>
 
 <p>这里有两个安全点需要注意：</p>
 
@@ -282,8 +282,8 @@ def get_client_uins(self):
     self.session.headers.update({'Referer':'http://ui.ptlogin2.qq.com/'})
 </code></pre>
 
-<p>具体实现参考代码：<br />
-<a href="https://github.com/LeoHuang2015/qqloginjs/blob/master/autologin_quick.py">https://github.com/LeoHuang2015/qqloginjs/blob/master/autologin_quick.py</a></p>      </p>
+<p>具体实现参考代码：<br>
+<a href="https://github.com/LeoHuang2015/qqloginjs/blob/master/autologin_quick.py">https://github.com/LeoHuang2015/qqloginjs/blob/master/autologin_quick.py</a></p>      <p></p>
     
 			</body>
 		</html>

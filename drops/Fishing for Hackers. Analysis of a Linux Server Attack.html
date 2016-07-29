@@ -3,12 +3,12 @@
 			<head>
 			     <title>Fishing for Hackers: Analysis of a Linux Server Attack - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14148">http://drops.wooyun.org/tips/14148</a></h1>
 				
       <p>
-        <p>From: <a href="https://sysdig.com/blog/fishing-for-hackers/">https://sysdig.com/blog/fishing-for-hackers/</a></p>
+        </p><p>From: <a href="https://sysdig.com/blog/fishing-for-hackers/">https://sysdig.com/blog/fishing-for-hackers/</a></p>
 
 <p>几天前我偶然看到一篇经典的<a href="http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers">博文</a>，文章介绍了加强一个全新Linux服务安全性的常规做法，其中包括安装fail2ban，禁用SSH密码认证，随机化SSH端口，配置iptables等内容。这让我联想到，假如我与其背道而驰会发生什么？当然，最常见的结果就是使其沦陷成为一个僵尸网络的受害者，僵尸网络就是在不停地扫描大范围的公网IP地址，以期望通过暴力破解（SSH或Wordpress等）的方式找到一些配置不当的服务。但是当你成为这些简单攻击的受害者时，实际上发生了什么？攻击者又做了些什么？本篇文章就使用<a href="http://www.sysdig.org/">sysdig</a>捕获分析我们服务器上实际攻击的例子，进而解答以上提出的问题。所以让我们钓起鱼儿来！</p>
 
@@ -16,7 +16,7 @@
 
 <h1>0x00 起步</h1>
 
-<hr />
+<hr>
 
 <p>具体的想法就是将一组配置不当且存在漏洞的服务器暴露在互联网上，等到有人入侵后，我们再来分析一下发生了哪些有趣的事情。这就相当于：把诱饵撒到水中，等待鱼儿上钩，然后抓一个上来研究研究。首先我需要一些诱饵，意即一些配置不当的主机。现在来说这些都是so easy的事儿啦。我使用了好几种IaaS供应商（确切来说是AWS，Rackspace和Digital Ocean）的服务，配置了大约20台Ubuntu 12.04服务器——希望其中至少有一个服务器能够成为某些僵尸网络的“重点”关注对象。接下来就需要正确地记录操作系统的活动，这样我就可以确切地知道攻击者采取了哪些手段。因为我喜爱使用sysdig，所以我选择将sysdig和S3组合使用。我使用<code>-z</code>来启用sysdig的压缩功能，进而捕获每个I/O buffer中产生的大量字节数。</p>
 
@@ -28,13 +28,13 @@ sysdig -s 4096 -z -w /mnt/sysdig/$(hostname).scap.gz
 
 <h1>0x01 中头彩了！</h1>
 
-<hr />
+<hr>
 
 <p>第一个鱼儿来得如此之快：其中一个服务器仅在4小时后就被攻陷了！我是怎么知道的？我注意到在我的S3 bucket上，sysdig记录的文件在顷刻间往上跳了好几兆——远远超过了闲置服务器在后台运行时，应该产生大约100KB/hour的流量。所以我就将这个记录文件（大约150MB）下载到我的OSX上，探索研究一下。</p>
 
 <h1>0x02 探索服务器端产生的攻击</h1>
 
-<hr />
+<hr>
 
 <p>我以我比较喜欢的方式开始进行分析：总览一下主机上进程，网络和I/O当中发生了些什么。首先，我通过受害主机上的网络I/O流量来查看top进程：</p>
 
@@ -120,7 +120,7 @@ $ sysdig -r trace.scap.gz -A -c echo_fds fd.filename=.sloboz.pdf
 <pre><code>#!shell
 $ sysdig -r trace.scap.gz -A -c echo_fds evt.buffer contains @udp
 ------ Read 67B from 170.170.35.93:39194-&gt;162.243.147.173:3132
-:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="126a336c6a6a6a6a6a6a6a6a6a526a6a6a6a6a6a6a6a6a3c7e73">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> PRIVMSG #nanana :!u @udp1 39.115.244.150 800 300
+:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="126a336c6a6a6a6a6a6a6a6a6a526a6a6a6a6a6a6a6a6a3c7e73">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> PRIVMSG #nanana :!u @udp1 39.115.244.150 800 300
 </code></pre>
 
 <p>正如你所见，bot接收到一个（肯定来自它的owner）TCP连接，其中包含一条向39.115.244.150IP的800端口的攻击命令，这正好跟之前网络连接列表中，前两项泛洪数百兆流量的IP地址和端口号相同。这一切都很有意义！但是攻击并没有就此止步：</p>
@@ -212,13 +212,13 @@ my $pid=fork;
 
 <h1>0x04 结论</h1>
 
-<hr />
+<hr>
 
 <p>哇噢。通过从高角度分析和在必要的时候深入到某个系统调用，我能够很准确地追踪到发生了什么。而这一切都是在实例完全关闭的情况下，仅仅使用<a href="http://www.sysdig.org/">sysdig</a>来记录包含所有系统活动的文件！</p>
 
 <h1>0x05 最后说明</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>本篇博文中的所有IP地址都是经过随机化处理和隐藏的，因为其中的一些被攻击的服务器很可能仍然在使用，我不想暴露他们的任何信息。</li>
@@ -227,7 +227,7 @@ my $pid=fork;
 
 <h1>0x06 译者注</h1>
 
-<hr />
+<hr>
 
 <h2><a href="https://github.com/draios/sysdig/wiki/How%20to%20Install%20Sysdig%20for%20Linux">安装</a></h2>
 
@@ -772,7 +772,7 @@ apt-get -y install sysdig
 <li><a href="http://draios.com/fishing-for-hackers/">Fishing for Hackers: Analysis of a Linux Server Attack</a></li>
 <li><a href="http://draios.com/fishing-for-hackers-part-2/">Fishing for Hackers (Part 2): Quickly Identify Suspicious Activity With Sysdig</a></li>
 </ul></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

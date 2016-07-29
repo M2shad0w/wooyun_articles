@@ -3,12 +3,12 @@
 			<head>
 			     <title>IOS开发安全须知 - G8dSnow</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/746">http://drops.wooyun.org/tips/746</a></h1>
 				
       <p>
-        <p>最近移动端的漏洞见得比较多，正好从OWASP上找到了IOS开发安全须知，翻译过来，给各位看看。</p>
+        </p><p>最近移动端的漏洞见得比较多，正好从OWASP上找到了IOS开发安全须知，翻译过来，给各位看看。</p>
 
 <h3>不安全的数据存储 (M1)</h3>
 
@@ -91,7 +91,7 @@
 
 <p><strong>补充</strong></p>
 
-<p>永远不要将密钥硬编码或存储在攻击者可以很简单就能找到的地方：包括明文数据文件、属性文件和编译后的二进制文件。使用安全的容器来存储加密密钥；此外，当密钥是由一个安全服务器控制时，构建一个安全的密钥交换系统，永远不要存储在移动设备上。使用强壮的加密算法及算法实现，包括密钥生成器、哈希等。尽可能使用平台加密API时，如果不能使用，则使用可信任的第三方加密代码。消费级敏感数据应该使用苹果提供的API，将数据存储在安全容器中。<br />
+<p>永远不要将密钥硬编码或存储在攻击者可以很简单就能找到的地方：包括明文数据文件、属性文件和编译后的二进制文件。使用安全的容器来存储加密密钥；此外，当密钥是由一个安全服务器控制时，构建一个安全的密钥交换系统，永远不要存储在移动设备上。使用强壮的加密算法及算法实现，包括密钥生成器、哈希等。尽可能使用平台加密API时，如果不能使用，则使用可信任的第三方加密代码。消费级敏感数据应该使用苹果提供的API，将数据存储在安全容器中。<br>
 少量数据，如用户身份认证凭证、会话令牌等，可以安全的存储在设备的Keychain内。(更多请看：Keychain Services Reference in Apple’s iOS Developer Library).</p>
 
 <p>较大或一般类型的数据，苹果的文件保护机制可以保证安全。(更多请看： NSData Class Reference for protection options).</p>
@@ -104,17 +104,17 @@
 
 <p><strong>补充</strong></p>
 
-<p>所有必须保证私密的东西都不应放在移动设备上；最好将他们（如算法、专有/机密信息）存储在服务器端。如果私密信息必须存储在移动设备上，尽量将它们保存在进程内存中，如果一定要放在设备存储上，就要做好保护。不要硬编码或简单的存储密码、会话令牌等机密数据。在发布前，清理被编译进二进制数据中的敏感信息，因为编译后的可执行文件仍然可以被逆向破解。<br />
+<p>所有必须保证私密的东西都不应放在移动设备上；最好将他们（如算法、专有/机密信息）存储在服务器端。如果私密信息必须存储在移动设备上，尽量将它们保存在进程内存中，如果一定要放在设备存储上，就要做好保护。不要硬编码或简单的存储密码、会话令牌等机密数据。在发布前，清理被编译进二进制数据中的敏感信息，因为编译后的可执行文件仍然可以被逆向破解。<br>
 引用及推荐阅读</p>
 
-<p>OWASP Top 10 Mobile Risks presentation, Appsec USA, Minneapolis, MN, 23 Sept 2011. Jack Mannino, Mike Zusman, and Zach Lanier.<br />
+<p>OWASP Top 10 Mobile Risks presentation, Appsec USA, Minneapolis, MN, 23 Sept 2011. Jack Mannino, Mike Zusman, and Zach Lanier.<br>
 “iOS Security”, Apple, May 2012, <a href="http://images.apple.com/ipad/business/docs/iOS_Security_May12.pdf">http://images.apple.com/ipad/business/docs/iOS_Security_May12.pdf</a></p>
 
 <p>“Deploying iPhone and iPad: Apple Configurator”, Apple, March 2012, <a href="http://images.apple.com/iphone/business/docs/iOS_Apple_Configurator_Mar12.pdf">http://images.apple.com/iphone/business/docs/iOS_Apple_Configurator_Mar12.pdf</a></p>
 
-<p>“iPhone OS: Enterprise Deployment Guide”, Apple, 2010, <a href="http://manuals.info.apple.com/en_US/Enterprise_Deployment_Guide.pdf">http://manuals.info.apple.com/en_US/Enterprise_Deployment_Guide.pdf</a><br />
+<p>“iPhone OS: Enterprise Deployment Guide”, Apple, 2010, <a href="http://manuals.info.apple.com/en_US/Enterprise_Deployment_Guide.pdf">http://manuals.info.apple.com/en_US/Enterprise_Deployment_Guide.pdf</a><br>
 “iPhone in Business”, Apple resources, <a href="http://www.apple.com/iphone/business/resources/">http://www.apple.com/iphone/business/resources/</a>
-Apple iOS Developer website.<br />
+Apple iOS Developer website.<br>
 "iOS Application (in)Security", MDSec - May 2012, <a href="http://www.mdsec.co.uk/research/iOS_Application_Insecurity_wp_v1.0_final.pdf">http://www.mdsec.co.uk/research/iOS_Application_Insecurity_wp_v1.0_final.pdf</a></p>
 
 <p>作者与主编</p>
@@ -123,11 +123,11 @@ Apple iOS Developer website.<br />
 
 <p>翻译</p>
 
-<p>G8dSnow <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e483dc80978a8b93a48389858d88ca878b89">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
+<p>G8dSnow <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e483dc80978a8b93a48389858d88ca878b89">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
 
 <p>原文地址：</p>
 
-<p><a href="https://www.owasp.org/index.php/IOS_Developer_Cheat_Sheet">https://www.owasp.org/index.php/IOS_Developer_Cheat_Sheet</a></p>      </p>
+<p><a href="https://www.owasp.org/index.php/IOS_Developer_Cheat_Sheet">https://www.owasp.org/index.php/IOS_Developer_Cheat_Sheet</a></p>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>fail2ban防暴力破解介绍使用 - 布鲁</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3029">http://drops.wooyun.org/tips/3029</a></h1>
 				
       <p>
-        <h2>0x00 介绍</h2>
+        </p><h2>0x00 介绍</h2>
 
-<hr />
+<hr>
 
 <p>fail2ban可以监视你的系统日志，然后匹配日志的错误信息（正则式匹配）执行相应的屏蔽动作（一般情况下是调用防火墙iptables屏蔽），如:当有人在试探你的SSH、SMTP、FTP密码，只要达到你预设的次数，fail2ban就会调用防火墙屏蔽这个IP，而且可以发送e-mail通知系统管理员，是一款很实用、很强大的软件！</p>
 
@@ -24,7 +24,7 @@
 
 <h2>0x01安装</h2>
 
-<hr />
+<hr>
 
 <p>1） apt-get 安装</p>
 
@@ -50,7 +50,7 @@ beta       0.9.0
 
 <h2>0x02 配置</h2>
 
-<hr />
+<hr>
 
 <p>安装完成后配置文件在目录/etc/fail2ban/中：</p>
 
@@ -64,7 +64,7 @@ beta       0.9.0
 
 <h2>0x03 监控nginx日志</h2>
 
-<hr />
+<hr>
 
 <p>假设nginx默认日志路径为/var/log/nginx/access_log，需要防止黑客暴力破解HTTP FORM登陆，此登陆检测链接为</p>
 
@@ -86,7 +86,7 @@ findtime =60    ;检测周期 单位秒 以下一样
 bantime =300    ;iptable封禁IP时间
 maxretry =10    ;最大尝试次数
 action = iptables[name=nginx, port=http, protocal=tcp] ;发现暴力破解采取iptalbes封禁IP的措施
-sendmail[name=nginx, <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="593d3c2a2d643420743c34383035192121773a3634">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>]    ;发现暴力破解后采取sendmail发送邮件的措施，需要注意的是：iptables和sendmail必须对齐，要不然会发生错误；不要问我为什么会知道，我先哭会儿-_-!!!
+sendmail[name=nginx, <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="593d3c2a2d643420743c34383035192121773a3634">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>]    ;发现暴力破解后采取sendmail发送邮件的措施，需要注意的是：iptables和sendmail必须对齐，要不然会发生错误；不要问我为什么会知道，我先哭会儿-_-!!!
 </code></pre>
 
 <p>2)然后创建 /etc/fail2ban/filter.d/nginx.conf文件，并添加以下内容：</p>
@@ -158,10 +158,10 @@ dest = root
 
 <p>2)然后在jail.conf文件下添加以下内容:</p>
 
-<pre><code>action = mutt[name=nginx, <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8de9e8fef9b0e0f4a0e8e0ece4e1cdf5f5a3eee2e0">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>]   
+<pre><code>action = mutt[name=nginx, <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8de9e8fef9b0e0f4a0e8e0ece4e1cdf5f5a3eee2e0">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>]   
 </code></pre>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="40a9c7cda5d0efa8ffc7a5d0cea5f0f1a5cfefa4fbe5a4fdffa7d4e82d353434a6d6c7a4fbf6a5cfd1a9c0c1a9c2eea4fbf6a4fac6a3c0c2a4fbe5a4f8caa5fec8a5">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>��名词是笔者自己翻译，可能表达的意思并不精确，请大牛们手下留情。有不对的地方欢迎指出，有兴趣的同学也欢迎交流。</p>      </p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="40a9c7cda5d0efa8ffc7a5d0cea5f0f1a5cfefa4fbe5a4fdffa7d4e82d353434a6d6c7a4fbf6a5cfd1a9c0c1a9c2eea4fbf6a4fac6a3c0c2a4fbe5a4f8caa5fec8a5">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>��名词是笔者自己翻译，可能表达的意思并不精确，请大牛们手下留情。有不对的地方欢迎指出，有兴趣的同学也欢迎交流。</p>      <p></p>
     
 			</body>
 		</html>

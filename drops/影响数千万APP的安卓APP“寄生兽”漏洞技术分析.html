@@ -3,14 +3,14 @@
 			<head>
 			     <title>影响数千万APP的安卓APP“寄生兽”漏洞技术分析 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/6910">http://drops.wooyun.org/mobile/6910</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>360手机安全研究团队vulpecker近日发现了一种新型的安卓app安全漏洞，市面上数以千万的app都受该漏洞影响。该漏洞一旦被攻击者利用，可以直接在用户手机中植入木马，盗取用户的短信、照片以及银行、支付宝等账号密码，vulpecker以“寄生兽”命名这个漏洞。</p>
 
@@ -22,7 +22,7 @@
 
 <h1>0x01 关于app的缓存代码</h1>
 
-<hr />
+<hr>
 
 <p>安卓的应用程序apk文件是zip压缩格式的文件，apk文件中包含的classes.dex文件相当于app的可执行文件，当app运行后系统会对classes.dex进行优化，生成对应的odex格式的文件。</p>
 
@@ -30,13 +30,13 @@
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150701/2015070106112945810.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150701/2015070106112945810.png" alt="enter image description here"></p>
 
 <p>可以看到该目录下的文件只有system用户有写权限，只有在拥有system权限的情况下才能对odex文件进行写操作。</p>
 
 <h1>0x02 广泛流行的插件机制</h1>
 
-<hr />
+<hr>
 
 <p>由于安卓应用的升级都需要重新安装程序，频繁的升级给用户体验和开发都带来了不便，所以市面上的app都开始采用插件机制，利用插件机制可以做到无缝升级和扩展功能，app只需要引入相应的插件文件就可以做到功能添加或升级，无需再重新安装程序。</p>
 
@@ -62,13 +62,13 @@ parent：父加载器
 
 <p>如图drozer.apk插件在被调用后生成了drozer.dex缓存文件，注意这个文件是odex格式.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150701/2015070106112951176.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150701/2015070106112951176.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150701/2015070106112970607.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150701/2015070106112970607.png" alt="enter image description here"></p>
 
 <h1>0x03 插件机制引入的攻击点</h1>
 
-<hr />
+<hr>
 
 <p>在2013年，国外的mwr实验室给出了一个利用中间人的方式劫持app升级插件的攻击案例，参考</p>
 
@@ -80,7 +80,7 @@ parent：父加载器
 
 <h1>0x04 插件机制新的攻击点</h1>
 
-<hr />
+<hr>
 
 <p>近日，国外的nowsecure公司公布了三星输入法的一个漏洞，利用过程直接替换了系统app的odex缓存代码。参考：</p>
 
@@ -110,11 +110,11 @@ parent：父加载器
 
 <p>下面是一个修改后的odex文件实例，dex&#95;old是修改前的odex文件，dex&#95;new是修改后的dex文件，两个文件的md5不一样，但是crc及modWhen却是一样的，这样就可以绕过DexClassLoader的校验。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150701/2015070106112948852.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150701/2015070106112948852.png" alt="enter image description here"></p>
 
 <h1>0x05 “寄生兽”漏洞的真正危害</h1>
 
-<hr />
+<hr>
 
 <p>安卓应用的代码缓存机制是程序在执行时优先加载运行缓存代码，而google却只对缓存代码做了可以伪造的弱校验，这明显这是一个安全架构实现上的严重漏洞。</p>
 
@@ -122,7 +122,7 @@ parent：父加载器
 
 <h1>0x06 现实中的“寄生兽”漏洞攻击案例</h1>
 
-<hr />
+<hr>
 
 <p><strong><em>1）利用zip解压缩漏洞覆盖缓存代码</em></strong></p>
 
@@ -144,7 +144,7 @@ of the intended destination directory.
 
 <p>这类漏洞主要影响有皮肤功能的APP，如输入法，浏览器类APP .很多app在manifest中做了zip类文件的关联，如果注册的文件格式被点击，对应的app就会启动解压文件。下图是app注册文件关联的一个示例</p>
 
-<p><img src="http://static.wooyun.org//drops/20150701/2015070106112928872.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150701/2015070106112928872.jpg" alt="enter image description here"></p>
 
 <p>这个app关联了一个ssf格式的文件，其实这个文件的格式是zip压缩格式，用户在手机中下载打开ssf文件时，就会启动对应的app自动解压文件，文件中包含的恶意代码可以覆盖该app的缓存代码。</p>
 
@@ -176,7 +176,7 @@ of the intended destination directory.
 
 <h1>0x07 “寄生兽”漏洞的防护方案</h1>
 
-<hr />
+<hr>
 
 <p>“寄生兽”漏洞的核心有两点，一是google没有考虑odex的安全问题需要开发者自己做防护，另一个是要阻断漏洞的攻击入口和利用方式，这里我们给出一些防护建议缓解该漏洞的攻击。</p>
 
@@ -194,7 +194,7 @@ of the intended destination directory.
 
 <p>调用DexClassLoader动态加载dex的时候，第二个参数不要指定在sdcard上；</p>
 
-<p>在manifest里指定allowBackup=”false”，防止应用数据备份覆盖;</p>      </p>
+<p>在manifest里指定allowBackup=”false”，防止应用数据备份覆盖;</p>      <p></p>
     
 			</body>
 		</html>

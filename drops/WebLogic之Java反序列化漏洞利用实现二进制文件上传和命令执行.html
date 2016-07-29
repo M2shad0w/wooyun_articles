@@ -3,20 +3,20 @@
 			<head>
 			     <title>WebLogic之Java反序列化漏洞利用实现二进制文件上传和命令执行 - Bird101</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/11690">http://drops.wooyun.org/papers/11690</a></h1>
 				
       <p>
-        <h1>0x00 简介</h1>
+        </p><h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>Java反序列化漏洞由来已久，在WebLogic和JBoss等著名服务器上都曝出存在此漏洞。FoxGlove Security安全团队的breenmachine给出了详细的分析，但没有给出更近一步的利用方式。前段时间rebeyond在不需要连接公网的情况下使用RMI的方式在WebLogic上实现了文本文件上传和命令执行，但没有实现二进制文件上传。我通过使用Socket的方式实现了二进制文件上传和命令执行，同时也实现了RMI方式的二进制文件。</p>
 
 <h1>0x01 思路</h1>
 
-<hr />
+<hr>
 
 <p>首先发Payload在目标服务器中写入一个Socket实现的迷你服务器类，所有的功能都将由这个迷你服务器来执行，然后再发一个Payload来启动服务器，最后本地客户端创建Socket连接的方式向服务器发送请求来使用相应的功能，其中上传二进制文件我采用分块传输的思想，这样可以实现上传较大的文件。</p>
 
@@ -32,7 +32,7 @@
 
 <h1>0x02 实现</h1>
 
-<hr />
+<hr>
 
 <h2>1.本地创建Socket实现的迷你服务器类并导出jar包</h2>
 
@@ -325,9 +325,9 @@ public class Client {
 }
 </code></pre>
 
-<p>测试结果1 <img src="http://static.wooyun.org//drops/20151229/2015122907083131610110.jpg" alt="图片1" /></p>
+<p>测试结果1 <img src="http://static.wooyun.org//drops/20151229/2015122907083131610110.jpg" alt="图片1"></p>
 
-<p>测试结果2 <img src="http://static.wooyun.org//drops/20151229/201512290708334313528.jpg" alt="图片2" /></p>
+<p>测试结果2 <img src="http://static.wooyun.org//drops/20151229/201512290708334313528.jpg" alt="图片2"></p>
 
 <h2>5. 发送关闭请求清理残留文件</h2>
 
@@ -358,7 +358,7 @@ if ("bye".equals(receive[0])) {
 
 <h1>0x03 RMI方式实现二进制文件上传及优化流程</h1>
 
-<hr />
+<hr>
 
 <p>这部分只是对rebeyond的利用方式进行了扩展，添加了二进制文件上传的功能以及优化了流程。</p>
 
@@ -462,7 +462,7 @@ public class RemoteObjectImpl implements RemoteObject {
 
 <h1>0x04 Socket VS RMI</h1>
 
-<hr />
+<hr>
 
 <table>
 <thead>
@@ -488,13 +488,13 @@ public class RemoteObjectImpl implements RemoteObject {
 
 <h1>0x05 总结</h1>
 
-<hr />
+<hr>
 
 <p>这里以创建Socket服务器的思想实现了漏洞利用，我们可以继续扩展服务器的功能，甚至其他的代码执行漏洞也可以尝试这种方式，在传输较大文件时建议优先使用Socket方式。最后，我开发了GUI程序集成了Socket和RMI两种利用方式，大家可以自主选择。</p>
 
-<p>Socket利用方式 <img src="http://static.wooyun.org//drops/20151229/2015122907083570549310.jpg" alt="图片3" /></p>
+<p>Socket利用方式 <img src="http://static.wooyun.org//drops/20151229/2015122907083570549310.jpg" alt="图片3"></p>
 
-<p>RMI利用方式 <img src="http://static.wooyun.org//drops/20151229/201512290708362894444.jpg" alt="图片4" /></p>
+<p>RMI利用方式 <img src="http://static.wooyun.org//drops/20151229/201512290708362894444.jpg" alt="图片4"></p>
 
 <blockquote>
   <p><strong>下载链接：<a href="http://pan.baidu.com/s/1pKuR9GJ">http://pan.baidu.com/s/1pKuR9GJ</a></strong> <strong>密码：62x4</strong></p>
@@ -502,12 +502,12 @@ public class RemoteObjectImpl implements RemoteObject {
 
 <h1>0x06 参考链接</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li><a href="http://www.freebuf.com/vuls/90802.html">http://www.freebuf.com/vuls/90802.html</a></li>
 <li><a href="http://foxglovesecurity.com/2015/11/06/what-do-weblogic-websphere-jboss-jenkins-opennms-and-your-application-have-in-common-this-vulnerability/">http://foxglovesecurity.com/2015/11/06/what-do-weblogic-websphere-jboss-jenkins-opennms-and-your-application-have-in-common-this-vulnerability/</a></li>
-</ol>      </p>
+</ol>      <p></p>
     
 			</body>
 		</html>

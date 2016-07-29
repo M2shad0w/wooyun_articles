@@ -3,18 +3,18 @@
 			<head>
 			     <title>对github的中间人攻击 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/6043">http://drops.wooyun.org/papers/6043</a></h1>
 				
       <p>
-        <h1>0x00 简介</h1>
+        </p><h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>source: http://www.netresec.com/?page=Blog&amp;month=2015-03&amp;post=China%27s-Man-on-the-Side-Attack-on-GitHub</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062506552821810.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062506552821810.png" alt="enter image description here"></p>
 
 <p>3月27号github官方发布<a href="https://github.com/blog/1981-large-scale-ddos-attack-on-github-com">公告</a></p>
 
@@ -38,7 +38,7 @@
 
 <p>我们用了一个简单的办法让浏览器加载恶意脚本，就是让浏览器去访问一些中国网站，加载了恶意js后，下面是我们在网络流量中观察到的恶意行为。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062506553077089.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062506553077089.png" alt="enter image description here"></p>
 
 <p>工具 <a href="http://caploader.com/">CapLoader</a></p>
 
@@ -46,7 +46,7 @@
 
 <h1>0x01 百度统计</h1>
 
-<hr />
+<hr>
 
 <p>百度统计脚本会加载url像酱紫</p>
 
@@ -56,11 +56,11 @@ http://hm.baidu.com/hm.js?0deadbeef000deadbeef000deadbeef0 异步版
 
 <p>正常情况下请求百度脚本是张这个样子的</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062506553312529.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062506553312529.png" alt="enter image description here"></p>
 
 <p>注入后的恶意脚本是张这个样子的</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062506553553013.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062506553553013.png" alt="enter image description here"></p>
 
 <p>注入后的响应每次的表现都是一样的，注入的三个数据包是下面这个样子的。</p>
 
@@ -88,13 +88,13 @@ t|1E4|cache|beforeSend|latest|complete|return|Math|floor|3E5|UTC|getFullYear|get
 
 <p>恶意的js是经过混淆的，只需要一些简单的反混淆就可以得到源码。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062506553727902.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062506553727902.png" alt="enter image description here"></p>
 
 <p>其中可以看到，两个目标url为 github.com/greatfire和github.com/cn-nytimes 这两个均为一个用于规避(GFW)的镜像站点。</p>
 
 <h1>0x02 TTL Analysis</h1>
 
-<hr />
+<hr>
 
 <p>Time-To-Live (TTL) 分析是一种非常有效的手段用于进行中间人攻击的分析，我们用这种方法在之前对于 iCloud, Yahoo, Google和GitHub的攻击上进行分析并且取得了不错的结果。</p>
 
@@ -138,7 +138,7 @@ tshark -r baidu-low-ttl.pcap -T fields -e ip.src -e ip.dst -e tcp.flags -e ip.tt
 
 <h1>0x03 其他的恶意js来源</h1>
 
-<hr />
+<hr>
 
 <p>百度统计并不是唯一数据包被替换成恶意的站点，根据GreatFire.org的<a href="https://drive.google.com/file/d/0ByrxblDXR_yqeUNZYU5WcjFCbXM/view?pli=1">分析报告</a>，他们发现的url有如下</p>
 
@@ -159,7 +159,7 @@ tshark -r baidu-low-ttl.pcap -T fields -e ip.src -e ip.dst -e tcp.flags -e ip.tt
 
 <h1>0x04 更新</h1>
 
-<hr />
+<hr>
 
 <p><strong><em>4月2日</em></strong></p>
 
@@ -196,7 +196,7 @@ tshark -r baidu-low-ttl.pcap -T fields -e ip.src -e ip.dst -e tcp.flags -e ip.tt
 
 <h1>0x05 iCloud中国MITM攻击 &amp; 假冒ssl证书</h1>
 
-<hr />
+<hr>
 
 <p>ps:下面补充翻译 http://www.netresec.com/?page=Blog&amp;month=2014-10&amp;post=Chinese-MITM-Attack-on-iCloud</p>
 
@@ -204,7 +204,7 @@ tshark -r baidu-low-ttl.pcap -T fields -e ip.src -e ip.dst -e tcp.flags -e ip.tt
 
 <p>在GreatFire，一家监控某国防火墙活动的网站发布过一篇相关的<a href="https://en.greatfire.org/blog/2014/oct/china-collecting-apple-icloud-data-attack-coincides-launch-new-iphone">分析</a>，他们的博客中链接到一个捕获的数据包数据，为了验证其是否为MITM攻击，我们对其进行了分析，我们将PcapNG文件加载进<a href="http://www.netresec.com/?page=Networkminer">NetworkMiner Professional</a>并提取了X.509 SSL证书。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062506553943450.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062506553943450.png" alt="enter image description here"></p>
 
 <p>提取的证书<a href="http://www.netresec.com/files/www.icloud.com.cer">下载地址</a>，下面是一些证书的细节。</p>
 
@@ -221,11 +221,11 @@ SHA1 Fingerprint=F4:68:B5:F3:FE:D8:07:97:44:76:A2:2B:32:EA:31:37:D9:24:F7:BA
 
 <h1>0x06 MITM攻击定位</h1>
 
-<hr />
+<hr>
 
 <p>通过NetworkMiner对于假的ssl服务器的分析我们可以看出，其中离客户端只经过了6个路由器hops，这表明mitm攻击是在中国进行的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062508542627668.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062508542627668.png" alt="enter image description here"></p>
 
 <p>pcap文件中的数据包显示其来自同样的ip，同样的80端口，其中经过了11次的hops(ip ttl 53)，因此我们假设只有通过443端口的流量才有可能为mitm攻击。</p>
 
@@ -254,7 +254,7 @@ Host                          Loss% Snt  Last   Avg  Best  Wrst StDev
 <p>这次结果显示攻击出现在中国电信 AS4134</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0b696e6a7962686e4b496e6a7962686e26466a68264a627926436a787c6e6767">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0b696e6a7962686e4b496e6a7962686e26466a68264a627926436a787c6e6767">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~
 %tcptraceroute 23.59.94.46 443
 Selected device en0, address 192.168.100.16, port 52406 for outgoing packets
 Tracing the path to 23.59.94.46 on TCP port 443 (https), 30 hops max
@@ -271,13 +271,13 @@ Tracing the path to 23.59.94.46 on TCP port 443 (https), 30 hops max
 
 <p>当然联通也别想跑</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062508542954612.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062508542954612.jpg" alt="enter image description here"></p>
 
 <p><a href="https://twitter.com/chenshaoju/status/524113869946372096">原地址</a></p>
 
 <p>Tcproute显示CHINANET骨干网络似乎是主要用于进行攻击的地方。</p>
 
-<p>TCP traceroutes的结果显示，虽然mitm攻击位于几个不同的位置不过集中在中国的互联网基础设施上，具体点说，进行mitm攻击的骨干网络属于电信和联通。</p>      </p>
+<p>TCP traceroutes的结果显示，虽然mitm攻击位于几个不同的位置不过集中在中国的互联网基础设施上，具体点说，进行mitm攻击的骨干网络属于电信和联通。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,18 +3,18 @@
 			<head>
 			     <title>正确地使用加密与认证技术 - XDSEC</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6042">http://drops.wooyun.org/tips/6042</a></h1>
 				
       <p>
-        <p>在密码学专家之中，“加密并不是认证”是一个简单的共识。但很多不了解密码学的开发者，并不知道这句话的意义。如果这个知识更广为人知和深入理解，那么将会避免很多的设计错误。</p>
+        </p><p>在密码学专家之中，“加密并不是认证”是一个简单的共识。但很多不了解密码学的开发者，并不知道这句话的意义。如果这个知识更广为人知和深入理解，那么将会避免很多的设计错误。</p>
 
 <p>这一概念本身并不困难，但在表面之下，还有更多丰富的细节和玄妙之处有待发现。本文就是讲述开发者对于加密和认证二者的混淆与误用，并附上了优秀的解决方案。</p>
 
 <h1>0x01 加密与认证之间有哪些区别？</h1>
 
-<hr />
+<hr>
 
 <p>加密是呈现信息，使其在没有正确的密钥情况下，变得难以卒读的过程。在简单的对称加密中，同一个密钥被用于加密和解密。在非对称加密中，可以使用用户的公钥对信息加密，使得只有对应私钥的拥有者才能读取它。</p>
 
@@ -34,7 +34,7 @@
 
 <h1>0x02 加密</h1>
 
-<hr />
+<hr>
 
 <p>我们之前定义了加密，并且详细说明了它是提供机密性，但不提供完整性和真实性的。你可以篡改加密信息，并将产生的垃圾给予接收者。而且你甚至可以利用这种垃圾产生机制，来绕过安全控制。</p>
 
@@ -86,7 +86,7 @@ function getUnsafeCookie($name, $key)
 
 <h1>0x03 如何攻击未经认证的加密</h1>
 
-<hr />
+<hr>
 
 <p>比方说，在登录到这个应用程序之后，你会发现你收到一个会话cookie，看起来就像</p>
 
@@ -129,7 +129,7 @@ array(2) {
 
 <h1>0x04 认证</h1>
 
-<hr />
+<hr>
 
 <p>如上所述，认证旨在提供信息的完整性（我们指显著抗篡改能力），而这证明它来自预期的源（真实性）。这样做的典型方法是，为信息计算一个密钥散列消息认证码（HMAC的简称），并将信息与它连结。</p>
 
@@ -184,7 +184,7 @@ function unsafe_hash_verify($bundle, $key)
 
 <h1>0x05 用Libsodium安全加密Cookies</h1>
 
-<hr />
+<hr>
 
 <pre><code>#!php
 
@@ -251,7 +251,7 @@ function getSafeCookie($name, $key)
 
 <h1>0x06 使用关联数据的认证加密</h1>
 
-<hr />
+<hr>
 
 <p>在我们前面的示例中，我们集中精力于，同时使用加密和认证，使其作为必须小心使用的单独组件，以避免加密的悲剧。具体而言，我们专注于密码段链接模块的AES加密。</p>
 
@@ -280,7 +280,7 @@ function getSafeCookie($name, $key)
 
 <p>更重要的是：在密码学专家的监督下，使用具有韧性被证实记录的库，而不是自己在那里闭门造车，你会好得多。</p>
 
-<p>原文：https://paragonie.com/blog/2015/05/using-encryption-and-authentication-correctly</p>      </p>
+<p>原文：https://paragonie.com/blog/2015/05/using-encryption-and-authentication-correctly</p>      <p></p>
     
 			</body>
 		</html>

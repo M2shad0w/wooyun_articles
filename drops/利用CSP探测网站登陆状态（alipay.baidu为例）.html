@@ -3,14 +3,14 @@
 			<head>
 			     <title>利用CSP探测网站登陆状态（alipay/baidu为例） - phith0n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4482">http://drops.wooyun.org/tips/4482</a></h1>
 				
       <p>
-        <h1>0x00 背景</h1>
+        </p><h1>0x00 背景</h1>
 
-<hr />
+<hr>
 
 <p>今天看到zone里有同学发帖说了探测支付宝登录状态的帖子：http://zone.wooyun.org/content/17665</p>
 
@@ -18,9 +18,9 @@
 
 <h1>0x01 CSP简介</h1>
 
-<hr />
+<hr>
 
-<p>内容安全策略（Content Security Policy，简称CSP）是一种以可信白名单作机制，来限制网站中是否可以包含某来源内容。默认配置下不允许执行内联代码 <code>&lt;script&gt;</code> 块内容，内联事件，内联样式 ，以及禁止执行eval() , newFunction() , setTimeout([string], …) 和setInterval([string], …) 。</p></p>
+<p>内容安全策略（Content Security Policy，简称CSP）是一种以可信白名单作机制，来限制网站中是否可以包含某来源内容。默认配置下不允许执行内联代码 <code>&lt;script&gt;</code> 块内容，内联事件，内联样式 ，以及禁止执行eval() , newFunction() , setTimeout([string], …) 和setInterval([string], …) 。</p><p></p>
 
 <p>
   CSP更详尽的介绍可以在drops看到：http://drops.wooyun.org/tips/1439
@@ -32,7 +32,7 @@
   0x02 大环境介绍与原理
 </h1>
 
-<hr />
+<hr>
 
 <p>
   简单了解一下CSP，我们知道CSP可以限制网站中可否包含某来源的内容。同时，csp还可以在页面违反规则的时候发送一个数据包，将具体细节通知给服务端。
@@ -75,7 +75,7 @@
 </p>
 
 <p>
-  <img src="http://static.wooyun.org/drops/20150103/2015010315292633985file0001.png" alt="enter image description here" />
+  <img src="http://static.wooyun.org/drops/20150103/2015010315292633985file0001.png" alt="enter image description here">
 </p>
 
 <p>
@@ -86,7 +86,7 @@
   0x03 以支付宝为例编写探测代码
 </h1>
 
-<hr />
+<hr>
 
 <p>
   所以，根据上面的思路，我们第一步就是找到一个这样的页面：登录、未登录用户访问时到达的“域名”不相同。这里的“域名”包括protocol和hostname，也就是说http://test.alipay.com和https://test.alipay.com是不同的域名。
@@ -109,7 +109,7 @@
 </p>
 
 <p>
-  <img src="http://static.wooyun.org/drops/20150103/2015010315302962312file0002.png" alt="enter image description here" />
+  <img src="http://static.wooyun.org/drops/20150103/2015010315302962312file0002.png" alt="enter image description here">
 </p>
 
 <p>
@@ -201,7 +201,7 @@ session_destroy();
 </p>
 
 <p>
-  <img src="http://static.wooyun.org/drops/20150103/2015010315334640339file0003.png" alt="enter image description here" />
+  <img src="http://static.wooyun.org/drops/20150103/2015010315334640339file0003.png" alt="enter image description here">
 </p>
 
 <p>
@@ -209,14 +209,14 @@ session_destroy();
 </p>
 
 <p>
-  <img src="http://static.wooyun.org/drops/20150103/2015010315341627454file0004.png" alt="enter image description here" />
+  <img src="http://static.wooyun.org/drops/20150103/2015010315341627454file0004.png" alt="enter image description here">
 </p>
 
 <h1>
   0x04 由http/https混用造成的问题（百度为例）
 </h1>
 
-<hr />
+<hr>
 
 <p>
   同样的问题，不仅仅是支付宝存在，只要有“统一登录入口”的网站都可能出现这个问题，因为统一登录入口通常是一个单独的域名。
@@ -239,7 +239,7 @@ session_destroy();
 </p>
 
 <p>
-  <img src="http://static.wooyun.org/drops/20150103/2015010315352438518file0005.png" alt="enter image description here" />
+  <img src="http://static.wooyun.org/drops/20150103/2015010315352438518file0005.png" alt="enter image description here">
 </p>
 
 <p>
@@ -247,7 +247,7 @@ session_destroy();
 </p>
 
 <p>
-  <img src="http://static.wooyun.org/drops/20150103/2015010315354942828file0006.png" alt="enter image description here" />
+  <img src="http://static.wooyun.org/drops/20150103/2015010315354942828file0006.png" alt="enter image description here">
 </p>
 
 <p>
@@ -266,7 +266,7 @@ session_destroy();
   0x05 影响及防范方法
 </h1>
 
-<hr />
+<hr>
 
 <p>
   严格来论，只是判断用户是否登录，这个问题并不算一个漏洞。当时@/fd将问题提交到推特之后推特的回应也是不算漏洞，但确实如果与其他一些漏洞结合使用，会让某些漏洞的成功率提高一大截。所以我们可以将之归为一个“奇技淫巧”。
@@ -278,7 +278,7 @@ session_destroy();
 
 <p>
   这个方法还有一个限制，就是用户使用的浏览器需要是现代浏览器，需要支持CSP安全策略。如果你要探测的用户还在用IE6~IE10，那么是肯定不行的。 如何解决这个问题？如果你真的觉得这是个安全问题的话，那么尽量避免跳转，或者使用javascript进行页面的跳转。
-</p>      </p>
+</p>      <p></p>
     
 			</body>
 		</html>

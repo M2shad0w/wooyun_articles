@@ -3,16 +3,16 @@
 			<head>
 			     <title>利用cache特性检测Android模拟器 - leonnewton</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/13245">http://drops.wooyun.org/tips/13245</a></h1>
 				
       <p>
-        <p><strong>Author</strong>:<a href="https://github.com/leonnewton">leonnewton</a></p>
+        </p><p><strong>Author</strong>:<a href="https://github.com/leonnewton">leonnewton</a></p>
 
 <h1>0x00 序</h1>
 
-<hr />
+<hr>
 
 <p>目前对Android模拟器的检测，主要是从特定的系统值来进行区分的。例如，getDeviceId()、getLine1Number()这类函数，还有android.os.Build类记录的一系列值等等。但是偶然发现有位<a href="https://bluebox.com/android-emulator-detection-by-observing-low-level-caching-behavior/">老外</a>提出了用cache来区分模拟器和真机的idea，但是这位老外可能当时比较懒，没有具体的细节，写了个简单的PoC后把Evaluation空着了，也没有实验，所以并不知道这个方法是否真的有效。因此，本文就把检测的整个方法从原理到实现完整地展现出来。</p>
 
@@ -20,11 +20,11 @@
 
 <h1>0x01 ARM和x86</h1>
 
-<hr />
+<hr>
 
 <p>由于现在大部分的Android手机都是ARM架构的，因此首先看一下ARM架构和x86架构在cache上的区别。两者简明的区别如下图所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160229/2016022914015914007127.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160229/2016022914015914007127.png" alt=""></p>
 
 <p>图1：ARM和x86 cache区别</p>
 
@@ -38,30 +38,30 @@
 
 <h1>0x02 思路</h1>
 
-<hr />
+<hr>
 
 <p>先看下思路的流程图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160229/2016022914020048464223.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160229/2016022914020048464223.png" alt=""></p>
 
 <p>图2：检测思路</p>
 
 <p>左边的是真机上发生的情况，右边是模拟器发生的情况，下面详述一下操作和后果。</p>
 
-<p>第一步：<br />
+<p>第一步：<br>
 执行一个地址上的指令，假设就是<code>$address</code>这个地址。那么在真机上，指令会写到I-Cache上，模拟器直接写到cache上（因为模拟器就一个整块的cache)。</p>
 
-<p>第二步：<br />
+<p>第二步：<br>
 向<code>$address</code>写入一个新指令。注意，这就有区别了，真机上的新指令会写入D-Cache，而在模拟器直接写到cache上。</p>
 
-<p>第三步：<br />
+<p>第三步：<br>
 执行<code>$address</code>的指令。那么此时，在真机上，会从I-Cache读指令，也就是会执行第一步的指令。模拟器直接从cache上读指令，会执行第二步的新指令。</p>
 
 <p>当然有可能发生在真机上的指令cache被洗掉了，但是实验下来可能性还是比较小的。</p>
 
 <h1>0x03 show me the code</h1>
 
-<hr />
+<hr>
 
 <p>首先是设计一段代码，会向一个特定的地址重新写一个指令。然后由于要重新回到原来的地址再执行一遍，因此可以用一个循环来实现。代码如下：</p>
 
@@ -126,7 +126,7 @@ __asm __volatile (
 
 <h1>0x04 调试</h1>
 
-<hr />
+<hr>
 
 <p>调试的方法可以见郑博士的文章<a href="http://drops.wooyun.org/tips/6840">安卓动态调试七种武器之孔雀翎 – Ida Pro</a>。</p>
 
@@ -134,25 +134,25 @@ __asm __volatile (
 
 <p>在进入10000000前下断点，然后F7进去。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160229/2016022914020239919315.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160229/2016022914020239919315.png" alt=""></p>
 
 <p>进入以后，在mov r0,r4的时候下断，F9执行，这时候看到r4的值是10，这是在真机上测试的结果。可以看到原先add r4,#1 已经变成了add r7,#1，但是实际执行的还是add r4,#1。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160229/2016022914020366987410.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160229/2016022914020366987410.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160229/2016022914020731880610.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160229/2016022914020731880610.png" alt=""></p>
 
 <p>在模拟器执行的结果如下,可以看到r4的值是1，r7是10,所以执行的是新指令，是在模拟器上：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160229/2016022914020515577510.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160229/2016022914020515577510.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160229/201602291402088802178.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160229/201602291402088802178.png" alt=""></p>
 
 <h1>0x05 测试</h1>
 
-<hr />
+<hr>
 
-<p>不知道在其他机器上是否可行，大家可以从<a href="https://github.com/leonnewton/cache_test">https://github.com/leonnewton/cache_test</a>下载进行测试。</p>      </p>
+<p>不知道在其他机器上是否可行，大家可以从<a href="https://github.com/leonnewton/cache_test">https://github.com/leonnewton/cache_test</a>下载进行测试。</p>      <p></p>
     
 			</body>
 		</html>

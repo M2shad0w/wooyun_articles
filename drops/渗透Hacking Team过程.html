@@ -3,20 +3,20 @@
 			<head>
 			     <title>渗透Hacking Team过程 - range</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/pentesting/15117">http://drops.wooyun.org/pentesting/15117</a></h1>
 				
       <p>
-        <h1>0x00 Hacking Team</h1>
+        </p><h1>0x00 Hacking Team</h1>
 
-<hr />
+<hr>
 
 <p>Hacking Team 是一个协助政府hack和监视记者、政治家等的公司（详见段尾链接），当然有时候也会监控恐怖分子和罪犯。其CEO——Vincenzetti——很喜欢在他的邮件末尾加上一句纳粹标语“boia chi molla” (放弃者该死)，同时，他一直宣称拥有可以解决“Tor 问题”和“暗网问题”的技术。但是我一直很怀疑他的那种技术的有效性。</p>
 
 <h1>0x01 小心点</h1>
 
-<hr />
+<hr>
 
 <p>很不幸，我们的世界是颠倒的，你越做坏事越富有，越做好事反而被抓。但幸运的是，多亏了人们的努力，比如"Tor项目"，你可以通过以下指导来防止被人抓住把柄：</p>
 
@@ -42,7 +42,7 @@
 
 <h1>0x02 搜集信息</h1>
 
-<hr />
+<hr>
 
 <p>尽管这个过程非常无聊，但却是非常重要，目标越大越多，漏洞出现的几率就越大。</p>
 
@@ -112,7 +112,7 @@
 
 <h1>0x03 打入内网</h1>
 
-<hr />
+<hr>
 
 <p>进入内网的方式有很多种。我打入HT内网的方式是不常见的，而且比平时花的精力要多得多，所以我在这里提一下进入内网的两种常见的方式，这两种也是我推荐的。</p>
 
@@ -144,7 +144,7 @@ descr:          HT public subnet
 
 <h1>0x04 事前准备</h1>
 
-<hr />
+<hr>
 
 <p>在正式攻击之前，我做了很多测试和准备，在硬件里面写入了一个后门，并且在嵌入式系统上编译了各种各样的工具：</p>
 
@@ -212,13 +212,13 @@ descr:          HT public subnet
 
 <h1>0x05 到处看看</h1>
 
-<hr />
+<hr>
 
 <p>现在我已经进入内网了，我想看到处看一下，并决定我下一步的工作。把Responder.py切换到分析模式<code>(-A)</code>,然后用Nmap慢慢的扫着先。</p>
 
 <h1>0x06 非关系型数据库</h1>
 
-<hr />
+<hr>
 
 <p>NoSQL，这种无需认证的数据库对我来说简直就是天赐良机。当我还在担心无法通过MySQL继续下去的时候，这些缺乏认证的数据库出现了。Nmap发现了HT内网的一些数据库：</p>
 
@@ -244,7 +244,7 @@ descr:          HT public subnet
 
 <h1>0x07 跨网段</h1>
 
-<hr />
+<hr>
 
 <p>比较有趣的是，看着监视器中正在开发恶意软件的HT，尽管这对我的渗透来说并没有什么用。他们不安全的备份系统是下一个敞开的大门。根据他们自己的文档，他们的iSCSI系统应该在一个分离的网段，但是却在192.168.1.200/24网段被nmap扫描出来了：</p>
 
@@ -311,7 +311,7 @@ mount -o loop /mnt/vhd-disk/Partition1 /mnt/part1
 
 <h1>0x08 从安全备份到域管理员</h1>
 
-<hr />
+<hr>
 
 <p>.其实我最感兴趣的还是想在安全备份文件里面找到一些常用的密码或者hash以便于进入物理机。我使用pwdump, cachedump 和lsadump去寻找可能的密码，最后lsdadump发现了一个bes管理服务器的账户的密码:</p>
 
@@ -346,12 +346,12 @@ HACKINGTEAM  w.furlan       Blu3.B3rry!
 HACKINGTEAM  d.romualdi     Rd13136f@#
 HACKINGTEAM  l.invernizzi   L0r3nz0123!
 HACKINGTEAM  e.ciceri       2O2571&amp;2E
-HACKINGTEAM  e.rabe         <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="127760737052265a46">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>!
+HACKINGTEAM  e.rabe         <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="127760737052265a46">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>!
 </code></pre>
 
 <h1>0x09 下载邮件</h1>
 
-<hr />
+<hr>
 
 <p>现在我有了域管理员密码，就可以进入到业务核心——邮件中了。之后做的每一步操作都有可能随身被发现，以防万一，先下载邮件，这里powershell起了很大的作用。我发现了处理日期的一个bug。在得到邮件后，我又花了两周时间去获得源码和其他东西，之后又把新的邮件下载了下来。服务器是意大利的，时间的格式是：日/月/年，我用：</p>
 
@@ -362,7 +362,7 @@ HACKINGTEAM  e.rabe         <a class="__cf_email__" href="/cdn-cgi/l/email-prote
 
 <h1>0x0a 下载档案</h1>
 
-<hr />
+<hr>
 
 <p>现在我已经是域管理了，我开始通过smb客户端和代理去下载各种资源：</p>
 
@@ -373,7 +373,7 @@ HACKINGTEAM  e.rabe         <a class="__cf_email__" href="/cdn-cgi/l/email-prote
 
 <h1>0x0b windows域渗透简介</h1>
 
-<hr />
+<hr>
 
 <p>在与HT的故事结束之前，我想对windows内网渗透做一些简介。</p>
 
@@ -481,25 +481,25 @@ select fullname | out-file -append files.txt}
 
 <h1>0x0c 寻猎系统管理员</h1>
 
-<hr />
+<hr>
 
 <p>通过对他们内部的文档的阅读，我发现我缺少一个很重要的权限——“Rete Sviluppo”——一个存放RCS源码的孤立网络。系统管理员总是有所有的权限，所以我就搜索Mauro Romeo 和Christian Pozzi的电脑，看他们怎么管理Sviluppo网络，顺便看看有没有其他我感兴趣的系统。他们的电脑也是域成员，所以搞到他们的电脑权限很简单。Mauro Romeo的电脑没有开放任何端口，所以我打开了WMI的端口并执行了meterpreter。为了监控他们的键盘和屏幕，我使用很多metersploit的/gathre/模块。然后到处搜索感兴趣的文件。我发现Pozzi有个加密卷，便等他把它挂载上来的时候，复制了所有的文件。他们的密码对我来说，都是没有任何用处的，我感到很可笑。因为mimikatz和键盘记录器泄露了一切。</p>
 
 <h1>0x0d 桥梁</h1>
 
-<hr />
+<hr>
 
 <p>Pozzi的加密卷中，有很多文本格式的密码。其中一些就是Nagios服务器的密码，为了方便监视，这个服务器有权限访问那个Sviluppo网络。我也就找到了一座进入孤立网络的桥梁。尽管我有那个服务器的密码，但是他还有个公开的命令执行。</p>
 
 <h1>0x0e 再次利用并重置密码</h1>
 
-<hr />
+<hr>
 
 <p>阅读邮件后，我看到了Daniele Milan有git机器的权限。我已经有了他的windows密码(mimikatz)，我在git机器上尝试了一下，成功了！而且可以sudo。为了拿到gitlab服务器和他们的推特账号，我利用了邮件服务器和“忘记密码”功能重置了密码。</p>
 
 <h1>0x0f 总结</h1>
 
-<hr />
+<hr>
 
 <p>以上就是我对抗一个公司并且终止了他们侵犯人权的行为的过程。 这也是Hacking的魅力与不对称：一个人花100个小时，便可以对抗并逆转一个有着好几年历史价值数百万美元公司的命运。Hacking能够给予失败者战斗并赢回的机会。</p>
 
@@ -507,7 +507,7 @@ select fullname | out-file -append files.txt}
 
 <p>HT视他们自己为意大利创新的一部分，但是在我看来，Vincenzetti和他的公司，他在警察中的密友，政府都是意大利法西斯主义的传统。谨以此文献给在迪亚兹阿曼多学校的突袭中的受害者们，和所有因意大利法西斯主义而受到过伤害的人们。</p>
 
-<p>原作：https://ghostbin.com/paste/6kho7?luicode=10000359，由<a href="http://weibo.com/u/5824380435">安全工具箱</a>翻译。</p>      </p>
+<p>原作：https://ghostbin.com/paste/6kho7?luicode=10000359，由<a href="http://weibo.com/u/5824380435">安全工具箱</a>翻译。</p>      <p></p>
     
 			</body>
 		</html>

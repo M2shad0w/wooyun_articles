@@ -3,14 +3,14 @@
 			<head>
 			     <title>Nginx安全配置研究 - zhangsan</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1323">http://drops.wooyun.org/tips/1323</a></h1>
 				
       <p>
-        <h2>0x00 测试环境</h2>
+        </p><h2>0x00 测试环境</h2>
 
-<hr />
+<hr>
 
 <pre><code>操作系统：CentOS6.5
 Web服务器：Nginx1.4.6
@@ -19,7 +19,7 @@ Php版本：Php5.4.26
 
 <h2>0x01 Nginx介绍</h2>
 
-<hr />
+<hr>
 
 <p>nginx本身不能处理PHP，它只是个web服务器，当接收到请求后，如果是php请求，则发给php解释器处理，并把结果返回给客户端。nginx一般是把请求发fastcgi管理进程处理，fastcgi管理进程选择cgi子进程处理结果并返回被nginx。</p>
 
@@ -29,7 +29,7 @@ Php版本：Php5.4.26
 
 <h2>0x02 研究发现的结论</h2>
 
-<hr />
+<hr>
 
 <pre><code>1. linux下，要读取一个文件，首先需要具有对文件所在文件夹的执行权限,然后需要对文件的读取权限。 
 2. php文件的执行不需要文件的执行权限，只需要nginx和php-fpm运行账户的读取权限。 
@@ -41,7 +41,7 @@ Php版本：Php5.4.26
 
 <h2>0x03 Nginx服务器涉及到的安全配置</h2>
 
-<hr />
+<hr>
 
 <pre><code>1. Nginx.conf的配置 
 2. php-fpm.conf的配置 
@@ -51,7 +51,7 @@ Php版本：Php5.4.26
 
 <h2>0x04 常见需要配置的操作方法</h2>
 
-<hr />
+<hr>
 
 <h3>1. 禁止一个目录的访问</h3>
 
@@ -98,7 +98,7 @@ deny all;
 
 <h2>0x05 需要解决的常见问题</h2>
 
-<hr />
+<hr>
 
 <h3>1. 让木马上传后不能执行</h3>
 
@@ -118,7 +118,7 @@ deny all;
 
 <h2>0x06 Nginx安全配置方案</h2>
 
-<hr />
+<hr>
 
 <h3>1. 修改网站目录所有者为非php-fpm运行账户，此处修改所有者为root。</h3>
 
@@ -128,19 +128,19 @@ deny all;
 chown -R root:root html/ 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201403/2014032713413545690.png" alt="2014032713413545690.png" /></p>
+<p><img src="http://static.wooyun.org/201403/2014032713413545690.png" alt="2014032713413545690.png"></p>
 
 <h3>2. 修改nginx及php-fpm的运行账户及组为nobody</h3>
 
 <pre><code>nginx.conf
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201403/2014032713415348030.png" alt="2014032713415348030.png" /></p>
+<p><img src="http://static.wooyun.org/201403/2014032713415348030.png" alt="2014032713415348030.png"></p>
 
 <pre><code>Php-fpm.conf
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201403/2014032713421181020.png" alt="2014032713421181020.png" /></p>
+<p><img src="http://static.wooyun.org/201403/2014032713421181020.png" alt="2014032713421181020.png"></p>
 
 <h3>3. 取消nobody对所有目录的的读取权限，然后添加对网站目录的读取权限</h3>
 
@@ -164,7 +164,7 @@ chmod o+r –R html/
 
 <h3>8. 配置nginx.conf禁止访问的文件夹，如后台，或者限制访问ip</h3>
 
-<h3>9. 配置nginx.conf禁止访问的文件类型，如一些txt日志文件</h3>      </p>
+<h3>9. 配置nginx.conf禁止访问的文件类型，如一些txt日志文件</h3>      <p></p>
     
 			</body>
 		</html>

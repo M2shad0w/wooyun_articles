@@ -3,14 +3,14 @@
 			<head>
 			     <title>无线多操作系统启动之uInitrd阶段NFS挂载篇 - Focusstart</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2179">http://drops.wooyun.org/tips/2179</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>项目组在无线环境下实现了Ubuntu12.04和Android4.0系统在Pandaboard ES开发板上的无线加载、启动及切换。启动过程中操作系统内核uImage和临时根文件系统uInitrd通过wifi网络加载到SD卡中，SD卡中只有轻量级的操作系统引导程序及我们特制的meta OS，系统实际的根文件系统rootfs存储于远程的服务器上，我们使用NFS协议在无线环境下挂载实际的根文件系统完成系统的启动。目前，国内无线多操作系统引导技术文档资料较少，支持多操作系统启动的手机主要有两款：一个是西班牙手机厂商Geeksphone开发的一款代号为Revolution的手机，另外一个是谷歌发布的Nexus系列。在这分享无线多操作系统启动过程中通过NFS协议挂载远程服务器上实际文件系统的一些经验，一种可行的技术手段。目前是在局域网环境，性能有限，仅供大家参考。想分三部分来讲。</p>
 
@@ -25,15 +25,15 @@
 
 <p>附上demo图一张：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071409424467635.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071409424467635.png" alt="enter image description here"></p>
 
 <h2>0x01 NFS概述</h2>
 
-<hr />
+<hr>
 
 <p>NFS，即Network File System网络文件系统协议。NFS协议可以透过网络，让不同的机器、不同的操作系统彼此分享文件。它与Windows系统中的文件资源共享类似，不同的是NFS是在UNIX/Linux系统下实现的。NFS协议是通过网络将用户远程服务器上的数据挂载到本地目录，从而实现远程数据本地透明获取与访问的一种方式。NFS服务器与客户端挂载示意图如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071409424434996.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071409424434996.jpg" alt="enter image description here"></p>
 
 <p>服务器将目录<code>/home/gsm/ubuntu</code>设为共享目录，其他的客户端主机可以将该共享目录挂在指定的某个目录下。挂载成功后，就可以在挂载目录下看到与<code>/home/gsm/ubuntu</code>完全一样的子目录和文件。</p>
 
@@ -41,7 +41,7 @@
 
 <h2>0x02 Linux系统启动流程分析</h2>
 
-<hr />
+<hr>
 
 <pre><code>（1）硬件加电自检、初始化；
 （2）读取配置文件并执行操作系统引导程序Boot Loader；
@@ -61,7 +61,7 @@
 
 <h2>0x03 NFS无线挂载实现</h2>
 
-<hr />
+<hr>
 
 <h3>Step 1:</h3>
 
@@ -106,19 +106,19 @@
 
 <h2>0x04 NFS协议分析</h2>
 
-<hr />
+<hr>
 
 <p>目前制约性能的一些主要因素。在启动过程中通过wireshark抓包分析可以知道，当终端与服务器的连接出现问题的时候，比如无线网络突然出现问题的时候，终端将不断地尝试与服务器重新建立连接直到与服务器的连接恢复正常。在每次尝试重连不成功后，连接的时间间隔将成指数级增长。（这里我们使用的NFS协议版本为V3，使用的传输协议为TCP/IP协议）</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071409424522046.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071409424522046.png" alt="enter image description here"></p>
 
 <p>除此之外，在无线网络环境下，数据块丢包是经常出现的，如果出现了一个丢包，这丢失的数据块会被重传。无线网络的不稳定性增加了数据块丢失率。在这段期间，NFS客户端将不断地向NFS服务器请求重传丢失的块直至客户端成功收到丢失的块。（以太网有最大传输单元MTU的限制，为1500字节，所以数据传输过程会进行分块）</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071409424576675.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071409424576675.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071409424551122.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071409424551122.png" alt="enter image description here"></p>
 
-<p>对NFS协议有一定研究的欢迎交流，包括NFS协议改进，并发环境以及NFS读写块大小，传输协议使用等参数设置问题。了解pNFS协议的求指导。</p>      </p>
+<p>对NFS协议有一定研究的欢迎交流，包括NFS协议改进，并发环境以及NFS读写块大小，传输协议使用等参数设置问题。了解pNFS协议的求指导。</p>      <p></p>
     
 			</body>
 		</html>

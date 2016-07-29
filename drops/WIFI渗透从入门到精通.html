@@ -3,20 +3,20 @@
 			<head>
 			     <title>WIFI渗透从入门到精通 - 末笔丶</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/pentesting/3390">http://drops.wooyun.org/pentesting/3390</a></h1>
 				
       <p>
-        <h2>0×00 前言</h2>
+        </p><h2>0×00 前言</h2>
 
-<hr />
+<hr>
 
 <p>写这篇文章的初衷也是因为狗哥的一篇<a href="http://daily.zhihu.com/story/4126951">文章</a> 看到狗哥的这篇文章不禁感触.不过我还是想说一句不一定免费的wifi才有风险哦~~.</p>
 
 <h2>0×01 让小绵羊知道自己是怎么被黑的.</h2>
 
-<hr />
+<hr>
 
 <p><strong>路由器wps功能漏洞</strong></p>
 
@@ -30,15 +30,15 @@
 
 <p>Pin码会分成前半四码和后半四码。前四码如果错误的话，那路由器就会直接送出错误讯息，而不会继续看后四码，意味着试到正确的前四码，最多只需要试 10000 组号码。一旦没有错误讯息，就表示前四码是正确的，而我们便可以开始尝试后四码。 后四码比前四码还要简单，因为八码中的最后一码是检查码，由前面七个数字产生，因此实际上要试的只有三个数字，共一千个组合。这使得原本最高应该可达一千万组的密码组合（七位数+检查码），瞬间缩减到仅剩 11,000 组，大幅降低破解所需的时间.</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593228535.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807593228535.png" alt="enter image description here"></p>
 
 <p><strong>根据路由MAC地址算出默认pin码</strong></p>
 
 <p>另外有种更快破解wifi的方法就是根据路由MAC地址（MAC是路由器的物理地址，是唯一的识别标志）算出默认出产时的pin码例如以下软件 还可以通过别人共享的找到pin码！http://mac-pin.456vv.net/</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593256313.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807593256313.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593361248.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807593361248.png" alt="enter image description here"></p>
 
 <p><strong>抓取握手包破解</strong></p>
 
@@ -56,9 +56,9 @@
 
 <p>另外也提下关于这行的黑色产业.当我们抓到带数据的握手包时.这时候黑色产业往往会帮我们很大的忙.GPU速度也是我们普通设备跑密码的速度上百倍.所以我是不建议自己跑密码的！吧包发给那些团队,跑的出密码才收10-30rmb不等的费用(根据需要跑的密码定价分普通包还有金刚包，普通包的字典只使用十个G的字典.金刚包会使用五十G以上的字典收费也会偏贵些)不过也有一些团队会收取电费(既跑不跑的出密码都会收取一定的费用)...另外这样的设备非常耗电不是一般人的消耗的起的哦.一般闲置的时候会利用这样的机器挖矿</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593373045.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807593373045.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593364777.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807593364777.jpg" alt="enter image description here"></p>
 
 <p><strong>分布式破解</strong></p>
 
@@ -66,7 +66,7 @@
 
 <p><strong>Wifi万能钥匙 or wifi分享</strong></p>
 
-<p>其实我是十分不愿意提到这款流氓软件的.但这也是大部分网友主要的破解wifi的途径.为什么我不愿意提这款软件.又必须提到呢.答:这款最流氓的功能也就是这款软件最核心的功能.就是集成了全国各地的wifi账号密码.这必定包括一些恶意分享和一些无意分享出来的使用这款软件开始的时候有两个选项一.自动分享热点.二.分享前提示我.默认是选择一的.有些心急破解wifi的小伙伴可能看到没看就直接点击了下一步.将自己本机保存的wifi账号无意间公之于众.酱紫即使wifi密码强度在强也会因为猪一样的队友.团灭.这样误操作的例子真的很多.不得不提到的就是这款软件强大的集成了全国各地的wifi账号密码.当你使用这款软件的时候可以很方便的根据附近的ssid.mac地址在万能钥匙的数据库中找到正确的密码.这方便了用户也方便了不怀好意的童鞋~~ 小米科技也试着模仿盛大的万能钥匙.可最终还是死在了摇篮里。 13年9月5日晚间消息，小米科技今日年度发布会上发布的MIUI新功能——Wifi密码自助分享引发争议，众多网友指责小米此行为将导致Wifi严重安全隐患，有咖啡店主甚至指责小米此行为如同偷窃。从2013-8-2开始到发布会截止前，一个月就分享了32万个公共Wi-Fi密码，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a94c26064f2a1a4129254e360c4c39274e12044116304d11034032034e392a4d15334f12334c173e4f321d4c23094c0d0e4a292b4c17074c24334e14384c2622e94e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>��伟 也对这个新功能十分愤怒，他表示：“我们只剩下两个选择：1、拒绝向使用小米手机的朋友提供家里/公司的wifi密码。2、使用小米手机的朋友离开之后马上更改家里\公司的wifi密码。”另外为什么万能钥匙没有遭到封杀我也不得而知了.但我想劝大家一句.逼不得已千万不要依靠万能钥匙.</p>
+<p>其实我是十分不愿意提到这款流氓软件的.但这也是大部分网友主要的破解wifi的途径.为什么我不愿意提这款软件.又必须提到呢.答:这款最流氓的功能也就是这款软件最核心的功能.就是集成了全国各地的wifi账号密码.这必定包括一些恶意分享和一些无意分享出来的使用这款软件开始的时候有两个选项一.自动分享热点.二.分享前提示我.默认是选择一的.有些心急破解wifi的小伙伴可能看到没看就直接点击了下一步.将自己本机保存的wifi账号无意间公之于众.酱紫即使wifi密码强度在强也会因为猪一样的队友.团灭.这样误操作的例子真的很多.不得不提到的就是这款软件强大的集成了全国各地的wifi账号密码.当你使用这款软件的时候可以很方便的根据附近的ssid.mac地址在万能钥匙的数据库中找到正确的密码.这方便了用户也方便了不怀好意的童鞋~~ 小米科技也试着模仿盛大的万能钥匙.可最终还是死在了摇篮里。 13年9月5日晚间消息，小米科技今日年度发布会上发布的MIUI新功能——Wifi密码自助分享引发争议，众多网友指责小米此行为将导致Wifi严重安全隐患，有咖啡店主甚至指责小米此行为如同偷窃。从2013-8-2开始到发布会截止前，一个月就分享了32万个公共Wi-Fi密码，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a94c26064f2a1a4129254e360c4c39274e12044116304d11034032034e392a4d15334f12334c173e4f321d4c23094c0d0e4a292b4c17074c24334e14384c2622e94e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>��伟 也对这个新功能十分愤怒，他表示：“我们只剩下两个选择：1、拒绝向使用小米手机的朋友提供家里/公司的wifi密码。2、使用小米手机的朋友离开之后马上更改家里\公司的wifi密码。”另外为什么万能钥匙没有遭到封杀我也不得而知了.但我想劝大家一句.逼不得已千万不要依靠万能钥匙.</p>
 
 <p><strong>弱密码</strong></p>
 
@@ -86,34 +86,34 @@
 
 <h2>0×02 实例</h2>
 
-<hr />
+<hr>
 
 <p><strong>抓取握手包破解.</strong></p>
 
 <p>网卡的选择也十分重要.一般使用笔记本内置网卡破解的话一定要看一下网卡型号kali有没有驱动.我用的是8187卡,kali自带驱动我就不说了。 本次的实例是根据抓握手包破解进行的</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593391202.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807593391202.png" alt="enter image description here"></p>
 
 <pre><code>Airmon-ng start wlan0
 </code></pre>
 
 <p>意思是启动网卡的监听模式.敲完这条命令后设备名 wlan=mon0 一般命令后都是要跟上设备名</p>
 
-<p><img src="http://static.wooyun.org/20141031/2014103103083272119.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141031/2014103103083272119.jpg" alt="enter image description here"></p>
 
 <pre><code>Airodump-ng mon0 
 </code></pre>
 
 <p>在抓包前肯定是要先选择目标.这条命令的意思是探测无线网络.选好目标,首选是客户端连接多的.复制好BSSID即MAC地址.记住信道（CH）</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593486306.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807593486306.png" alt="enter image description here"></p>
 
 <pre><code>Airodump-ng -c 1 --bssid XX:XX:XX:XX:XX -w mobi mon0
 </code></pre>
 
 <p><code>-C</code>参数是选择目标信道.如果该信道就目标一个AP使用的话不用加上<code>--bssid</code>,这个参数是为了跟精准的锁定目标~~ <code>-w</code> 是保存握手包的名字.获取后会在当前目录生成一个<code>mobi-01.cap</code>的握手包。这时就不用关闭这条shell而是另外打开一个shell</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593885110.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807593885110.png" alt="enter image description here"></p>
 
 <pre><code>Aireplay-ng -0 10 -a (AP的mac) -c (客户端的mac) 
 </code></pre>
@@ -126,7 +126,7 @@
   <p>-c 即STATION下客户机的MAC地址(这条为可选项)</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593896330.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807593896330.png" alt="enter image description here"></p>
 
 <pre><code>Aircrack-ng -w /pentest/passwords/sxsx.lst mobi-01.cap
 </code></pre>
@@ -139,7 +139,7 @@
 
 <p>Airodump-ng mon0 查看附近无线情况。在MB这行带点的“.”表示能跑出pin码。使用wash -i mon0 -C可查看是否开启了wps功能</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593880370.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807593880370.jpg" alt="enter image description here"></p>
 
 <pre><code>Reaver -i mon0 -b xx:xx:xx:xx -vv
 </code></pre>
@@ -186,45 +186,45 @@
 
 <h2>0×03 防御只是一个步骤.安全是一个系统.</h2>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594072238.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807594072238.jpg" alt="enter image description here"></p>
 
 <p>看我任何突MAC封锁！</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594030634.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807594030634.png" alt="enter image description here"></p>
 
 <p>客户机的截图模拟主人使用MAC过滤功能！.</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594064926.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807594064926.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594160875.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807594160875.png" alt="enter image description here"></p>
 
 <p>在路由器上使用mac过滤.黑客就一点办法的没有了么？.no！</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594164765.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807594164765.png" alt="enter image description here"></p>
 
 <p>由于路由器只接受白名单的数据包.所以kali无法从dns服务器获取到域名IP</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594157829.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807594157829.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594112993.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807594112993.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594149295.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807594149295.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594189235.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807594189235.jpg" alt="enter image description here"></p>
 
 <p>伪装MAC地址上网由于有两个无线客户端.所有的数据包都会发送至两个客户端.难免会出现数据包丢失的！</p>
 
 <p><strong>关闭dhcp真的有用么?</strong></p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594240732.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807594240732.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594211588.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141028/2014102807594211588.jpg" alt="enter image description here"></p>
 
 <p>首先我先模拟WIFI的管理员.吧DHCP关了.并且设置了一个只有自己知道的网关IP.</p>
 
-<p>可以清楚的看到.kali并不在管理员使用的网段内.但在OSI二层环境中.kali抓取了路由器与客户端的ARP报文.</p>      </p>
+<p>可以清楚的看到.kali并不在管理员使用的网段内.但在OSI二层环境中.kali抓取了路由器与客户端的ARP报文.</p>      <p></p>
     
 			</body>
 		</html>

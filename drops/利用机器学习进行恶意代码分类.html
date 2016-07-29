@@ -3,12 +3,12 @@
 			<head>
 			     <title>利用机器学习进行恶意代码分类 - bindog</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8151">http://drops.wooyun.org/tips/8151</a></h1>
 				
       <p>
-        <p>最近在Kaggle上微软发起了一个<a href="https://www.kaggle.com/c/malware-classification/">恶意代码分类的比赛</a>，并提供了超过500G的数据(解压后)。有意思的是，取得第一名的队伍三个人都不是搞安全出身的，所采用的方法与我们常见的方法存在很大不同，展现了机器学习在安全领域的巨大潜力。在仔细读完他们的代码和相关的论文后，我简单的进行了一些总结与大家分享。</p>
+        </p><p>最近在Kaggle上微软发起了一个<a href="https://www.kaggle.com/c/malware-classification/">恶意代码分类的比赛</a>，并提供了超过500G的数据(解压后)。有意思的是，取得第一名的队伍三个人都不是搞安全出身的，所采用的方法与我们常见的方法存在很大不同，展现了机器学习在安全领域的巨大潜力。在仔细读完他们的代码和相关的论文后，我简单的进行了一些总结与大家分享。</p>
 
 <p>需要指出的是，(1)比赛的主题是恶意代码的分类，不是病毒查杀(2)比赛采用的方法是纯静态分析的方法，不涉及行为分析等动态分析方法。</p>
 
@@ -16,7 +16,7 @@
 
 <h1>0x01 总览</h1>
 
-<hr />
+<hr>
 
 <h3>背景</h3>
 
@@ -28,7 +28,7 @@
 
 <p>微软提供的数据包括训练集、测试集和训练集的标注。其中每个恶意代码样本(去除了PE头)包含两个文件，一个是十六进制表示的<code>.bytes</code>文件，另一个是利用IDA反汇编工具生成的<code>.asm</code>文件。如下图所示</p>
 
-<p><img src="http://static.wooyun.org//drops/20150819/2015081908421014077.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150819/2015081908421014077.png" alt="enter image description here"></p>
 
 <h3>方法简述</h3>
 
@@ -38,7 +38,7 @@
 
 <h1>0x02 恶意代码图像</h1>
 
-<hr />
+<hr>
 
 <p>这个概念最早是2011年由加利福尼亚大学的<code>Nataraj</code>和<code>Karthikeyan</code>在他们的论文 <code>Malware Images: Visualization and Automatic Classification</code> 中提出来的，思路非常新颖，把一个二进制文件以灰度图的形式展现出来，利用图像中的纹理特征对恶意代码进行聚类。此后，有许多研究人员在这个思路基础上进行了改进和探索。就目前发表的文章来看，恶意代码图像的形式并不固定，研究人员可根据实际情况进行调整和创新。</p>
 
@@ -68,25 +68,25 @@ im.save("your_img_filename.png")
 
 <p>利用该代码生成的几种病毒样本图像如下所示</p>
 
-<p><img src="http://static.wooyun.org//drops/20150819/2015081908421089907.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150819/2015081908421089907.png" alt="enter image description here"></p>
 
 <p>用肉眼可看出，同一个家族的恶意代码图像在纹理上存在一定的相似性，不同的恶意代码家族是有一定区别的。如何用计算机发现和提取这些纹理的相似特征用以分类呢？这就需要用到计算机视觉里的一些技术了。在<code>Nataraj</code>和<code>Karthikeyan</code>的论文中采用的是<code>GIST特征</code>，<code>GIST特征</code>常用于场景分类任务(如城市、森林、公路和海滩等)，用一个五维的感知维度来代表一个场景的主要内容(详情请参考文献[xx])。简单来说，输入图像，输出为对应的GIST描述符，如下图所示</p>
 
-<p><img src="http://static.wooyun.org//drops/20150819/2015081908421348858.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150819/2015081908421348858.jpg" alt="enter image description here"></p>
 
 <p>在<code>matlab</code>实现里面每个图像的GIST描述符都用一个向量表示，最后用<code>SVM</code>完成分类训练。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150819/2015081908421385904.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150819/2015081908421385904.png" alt="enter image description here"></p>
 
 <p>这已经远远超出了场景识别所能做的。不过，国外有学者利用一些类似前文生成那种不规则图像来欺骗深度学习模型，如下图所示</p>
 
-<p><img src="http://static.wooyun.org//drops/20150819/2015081908421463474.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150819/2015081908421463474.png" alt="enter image description here"></p>
 
 <p>详情请参考<a href="http://weibo.com/u/1657470871">@王威廉</a>老师的<a href="http://www.weibo.com/1657470871/BA2q8s0Vd?type=comment#_rnd1439964425558">微博</a>。当然，二者并没有什么直接关联，因为基于深度学习的图像识别系统的训练数据是一些有意义的图像。但这是一个非常有意思的巧合，至于基于深度学习的图像识别能否用于恶意代码图像的特征提取和分类，我认为是一个潜在的研究点，所能做的也不局限于此，如果有做深度学习的朋友可以伙同做安全的朋友一起研究交流。</p>
 
 <h1>0x03 OpCode n-gram</h1>
 
-<hr />
+<hr>
 
 <p><code>n-gram</code>是自然语言处理领域的概念，早期的语音识别技术和统计语言模型与它密不可分。<code>n-gram</code>基于一个简单的假设，即认为一个词出现的概率仅与它之前的n-1个词有关，这个概率可从大量语料中统计得到。例如“吃”的后面出现“苹果”或“披萨”的概率就会比“公路”的概率大(正常的语料中基本不会出现“吃公路”这种组合)，可以看出<code>n-gram</code>在一定程度上包含了部分语言特征。</p>
 
@@ -94,7 +94,7 @@ im.save("your_img_filename.png")
 
 <p>具体来说，一个二进制文件的<code>OpCode n-gram</code>如下图所示</p>
 
-<p><img src="http://static.wooyun.org//drops/20150819/2015081908421525407.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150819/2015081908421525407.png" alt="enter image description here"></p>
 
 <p>针对这次Kaggle比赛提供的数据，用python提取出其n-gram特征</p>
 
@@ -129,13 +129,13 @@ print opngram
 
 <h1>0x04 决策树和随机森林</h1>
 
-<hr />
+<hr>
 
 <h3>决策树</h3>
 
 <p>决策树在我们日常生活中无处不在，在众多机器学习的书籍中提到的一个例子(银行预测客户是否有能力偿还贷款)如下图所示</p>
 
-<p><img src="http://static.wooyun.org//drops/20150819/2015081908421530130.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150819/2015081908421530130.png" alt="enter image description here"></p>
 
 <p>在这个在决策树中，非叶子结点如“拥有房产”、“是否结婚”就是所谓的特征，它们是依靠我们的知识人工提取出来的特征。但如果对某个领域不了解，特征数量又较多时，人工提取特征的方法就不可行了，需要依靠算法来寻找合适的特征构造决策树。</p>
 
@@ -147,19 +147,19 @@ print opngram
 
 <p>随机森林的思想与<code>Adaboost</code>里面的弱分类器组合成强分类器的思想类似，是一种“集体智慧”的体现。例如，屋子里面有n个人，每个人作出正确判断的概率为p(p略高于0.5,这时每个人可视为一个弱分类器)，他们判断的过程独立互不影响，最终以多数人的判断为准。这里我们不从数学上来推导，类比抛硬币，对一枚均匀的硬币，抛n次的结果中，正面和反面的次数是差不多的。而对一枚不均匀的硬币，若出现正面的概率略大于反面，抛n次的结果中出现正面次数比反面次数多的概率就会很大。所以即使每个分类器的准确度不高，但是结合在一起时就可以变成一个强分类器。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150819/2015081908421586170.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150819/2015081908421586170.jpg" alt="enter image description here"></p>
 
 <p>如图所示，将训练数据有放回的抽样出多个子集(即随机选择矩阵中的行)，当然在特征选择上也可以进行随机化(即随机选择矩阵中的列，图中没有体现出来)，分别在每个子集上生成对应的决策树</p>
 
-<p><img src="http://static.wooyun.org//drops/20150819/2015081908421637777.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150819/2015081908421637777.png" alt="enter image description here"></p>
 
 <p>决策过程如下图所示(忽略画风不一致的问题...)</p>
 
-<p><img src="http://static.wooyun.org//drops/20150819/2015081908421784702.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150819/2015081908421784702.png" alt="enter image description here"></p>
 
 <h1>0x05 冠军队伍的实现细节</h1>
 
-<hr />
+<hr>
 
 <h3>ASM文件图像</h3>
 
@@ -179,7 +179,7 @@ print opngram
 
 <h1>0x06 实验</h1>
 
-<hr />
+<hr>
 
 <p>冠军队伍的代码是为了参加比赛而写的，时间仓促，又是多人合作完成，导致组织结构很乱，且基本没有注释，可读性较差。更重要的是自己想动手实践一下，所以按照他们的思路写了几个简单的程序，忽略了一些处理起来比较复杂或者难以理解的过程，代码可以在我的github上下载</p>
 
@@ -257,7 +257,7 @@ print srf.score(X_test,y_test)  # 测试
 
 <p>在只应用<code>.asm</code>文件图像特征(<code>firstrandomforest.py</code>)或者Opcode n-gram特征(<code>secondrandomforest.py</code>)的情况下，以及二者相结合的情况(<code>combine.py</code>)，准确率如下所示</p>
 
-<p><img src="http://static.wooyun.org//drops/20150819/2015081908421713995.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150819/2015081908421713995.png" alt="enter image description here"></p>
 
 <p>由于随机森林训练的过程中存在一定的随机性，因此每次结果不一定完全相同，但总的来说，二者结合的准确率通常要高出许多，基本可以达到98%以上的准确率，而且别忘了我们只用了不到<code>1/10</code>的数据</p>
 
@@ -265,7 +265,7 @@ print srf.score(X_test,y_test)  # 测试
 
 <p>观察.asm文件的格式，开头部分其实是IDA生成的一些信息，如下图所示</p>
 
-<p><img src="http://static.wooyun.org//drops/20150819/2015081908421754743.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150819/2015081908421754743.png" alt="enter image description here"></p>
 
 <p>可以目测这个长度已经超出了800个像素(800个字节)，实际上这800个像素和反汇编代码没有关系！完全就是IDA产生的一些信息，更进一步的说，实际上冠军队伍的方法压根与恶意代码图像没有关系，实际上是用到了IDA产生的信息。</p>
 
@@ -275,7 +275,7 @@ print srf.score(X_test,y_test)  # 测试
 
 <h1>0x07 其他</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>好的方法总是简单又好理解的。这次Kaggle比赛也是如此，冠军队伍的方法没有特别难理解的部分。但是请注意：面上的方法并不能体现背后难度和工作量，真正复杂和耗时的部分在于特征选择和交叉验证上。比如他们最终放弃GIST特征正是经过反复对比验证才做出的决定。</li>
@@ -288,7 +288,7 @@ print srf.score(X_test,y_test)  # 测试
 
 <h1>0x08 资源和参考资料</h1>
 
-<hr />
+<hr>
 
 <h3>比赛说明和原始数据</h3>
 
@@ -322,7 +322,7 @@ print srf.score(X_test,y_test)  # 测试
 
 <p><a href="http://sarvamblog.blogspot.jp/2014/08/supervised-classification-with-k-fold.html">Supervised Classification with k-fold Cross Validation on a Multi Family Malware Dataset</a></p>
 
-<p>我的博客 &lt;http://bindog.github.io/blog/ > 我的邮箱 bindog 艾特 奥特路克 .com 欢迎大家与我交流~</p>      </p>
+<p>我的博客 &lt;http://bindog.github.io/blog/ > 我的邮箱 bindog 艾特 奥特路克 .com 欢迎大家与我交流~</p>      <p></p>
     
 			</body>
 		</html>

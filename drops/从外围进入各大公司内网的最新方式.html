@@ -3,14 +3,14 @@
 			<head>
 			     <title>从外围进入各大公司内网的最新方式 - boooooom</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7831">http://drops.wooyun.org/tips/7831</a></h1>
 				
       <p>
-        <h1>0x01 背景</h1>
+        </p><h1>0x01 背景</h1>
 
-<hr />
+<hr>
 
 <p>为什么是以进入内网作为一个目标来讨论，因为我认为站在攻击者的角度来说攻击的核心目标是获取数据。而相对来说几乎攻击者想要的所有数据都在内网，而相对来说本身内网的安全防御能力就几乎为0。所以从外部寻找一个突破口进入内网是整个获得数据的过程中最关键的一个环节。</p>
 
@@ -22,7 +22,7 @@
 
 <h1>0x02 成也边界，败也边界</h1>
 
-<hr />
+<hr>
 
 <p>而大公司这个命门在哪？我们知道既然要从外围进入内网，那么必然要做的一件事情就是跨越边界，所有这个命门我们也就自然应该在企业的内外网边界上来寻找。</p>
 
@@ -36,17 +36,17 @@
 
 <h1>0x03 攻击思路之内网业务直接对外</h1>
 
-<hr />
+<hr>
 
 <p>我们先来看一张图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081008175798155.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150810/2015081008175798155.png" alt=""></p>
 
 <p>从图中我们可以看到当我对一个公网ip的80端口发起http请求时，他会返回一段js代码，这段js执行以后会直接跳转到http://passport.oa.com/passport/... 这样一个地址，但是我却发现passport.oa.com这样一个地址实际上是无法访问的，因为他指向了一个内网IP。那这样看起来就是一个很奇怪的问题了。为什么访问一个公网IP却要跳转到一个内网的地址，我们在仔细看这个域名的是passport.oa.com;从命名来看似乎是说oa（办公网）的统一登陆认证地址？这意味着什么呢？我们大胆的猜想一下，是不是因为这个公网ip对应的服务器实际上是部署着一个内部的业务，这样解释起来貌似比较靠谱啊？为了验证我的想法，我对该公司的所有C段开放http服务的IP进行了批量的探测，发现了一些同样有意思的东西：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081008175853504.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150810/2015081008175853504.png" alt=""></p>
 
-<p>这个返回同样是一段js判断，很直接的逻辑，如果你访问的host是指向内网（.oa.com）那么他会跳转到一个内部的服务地址，如果你访问的host的是指向外网（.qq.com）;那么他会跳转到一个外部的服务地址。那么我接下来很简单，只需要对这个ip进行绑定host来测试即可： <img src="http://static.wooyun.org//drops/20150810/2015081008175877623.png" alt="" /></p>
+<p>这个返回同样是一段js判断，很直接的逻辑，如果你访问的host是指向内网（.oa.com）那么他会跳转到一个内部的服务地址，如果你访问的host的是指向外网（.qq.com）;那么他会跳转到一个外部的服务地址。那么我接下来很简单，只需要对这个ip进行绑定host来测试即可： <img src="http://static.wooyun.org//drops/20150810/2015081008175877623.png" alt=""></p>
 
 <p>从返回内容来看确实是一个内网业务。</p>
 
@@ -59,7 +59,7 @@
 
 <h1>0x04 内网业务对外的漏洞挖掘</h1>
 
-<hr />
+<hr>
 
 <p>首先需要获取攻击目标企业的资产信息，即Ip及域名信息；然后通过获取到的外网域名及IP信息获取banner信息。然后通过判断返回banner信息的特征来判断该IP/域名是否存在内网业务对外的问题，具体的一些特征信息主要有如下几点：</p>
 
@@ -78,7 +78,7 @@
 
 <h1>0x05 攻击思路之弱点扫描</h1>
 
-<hr />
+<hr>
 
 <p>弱点扫描是一个典型的企业合规性检测的盲区，即备份文件、测试代码文件的检测。这个完全依赖于字典的暴力枚举来进行检测。通常一些开发的测试文件，运维的备份文件spider是无法抓取到的，只能靠字典来暴力枚举，那么在进行黑盒的安全检测的时候就会出现两个问题：</p>
 
@@ -98,11 +98,11 @@ http://wooyun.org/bugs/wooyun-2015-0122949
 
 <h1>0x06 写在最后</h1>
 
-<hr />
+<hr>
 
 <p>对于一个大型互联网公司来说，其实并不是因为他们安全做的不够好，而是守需要考虑的是一个面，而攻只需要一个点，对一个点进行深入的挖掘，一定可以找到突破口，而本身企业的安全建设其实也是一直在提高攻击门槛，并不是无懈可击。</p>
 
-<p>而不管是对于攻击者还是防守者来说，本身对于安全问题的发现能力是决定着这场持久的攻防战中最核心的决定因素，正是如此，大家可以对tangscan有一些期待，希望联合所有白帽子的力量，tangscan能够拥有最强的安全问题的发现能力。</p>      </p>
+<p>而不管是对于攻击者还是防守者来说，本身对于安全问题的发现能力是决定着这场持久的攻防战中最核心的决定因素，正是如此，大家可以对tangscan有一些期待，希望联合所有白帽子的力量，tangscan能够拥有最强的安全问题的发现能力。</p>      <p></p>
     
 			</body>
 		</html>

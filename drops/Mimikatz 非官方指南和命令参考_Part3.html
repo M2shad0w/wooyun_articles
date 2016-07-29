@@ -3,20 +3,20 @@
 			<head>
 			     <title>Mimikatz 非官方指南和命令参考_Part3 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/12754">http://drops.wooyun.org/tools/12754</a></h1>
 				
       <p>
-        <p>原文地址：<a href="https://adsecurity.org/?page_id=1821">https://adsecurity.org/?page_id=1821</a><br />
+        </p><p>原文地址：<a href="https://adsecurity.org/?page_id=1821">https://adsecurity.org/?page_id=1821</a><br>
 原文作者：<a href="https://twitter.com/PyroTek3">Sean Metcalf</a></p>
 
-<p><strong>译者注：</strong><br />
+<p><strong>译者注：</strong><br>
 由于<a href="https://adsecurity.org/?page_id=1821">原文</a>中，作者（<a href="https://twitter.com/PyroTek3">Sean Metcalf</a>）已经明确的指出 <strong>“未经本文作者明确的书面同意，请勿复制包含在此页面的全部或部分内容。”</strong>，因此为了分享此佳作，译者与作者（<a href="https://twitter.com/PyroTek3">Sean Metcalf</a>）在推上取得了联系，沟通之后，作者允许我将此文完整翻译并分享给其他人。在此也感谢 Sean Metcalf 大牛将有关 Mimikatz 的全部内容做了系统的整理并分享出来。以下是原文作者（Sean Metcalf）回复的截图,以作授权说明：</p>
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408381418713MP1.png" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408381418713MP1.png" alt="p1"></p>
 
 <p>Mimikatz 作为当下内网渗透神器之一，看起来似乎很少有人真正关注它的全部功能（Sean Metcalf 在原文开头也表示了这样的疑惑），在一些诸如 <strong>“十大黑客工具”</strong> 的文章中也看不到 Mimikatz 的影子。 Sean Metcalf 大牛将有关 Mimikatz 的相关技术做了系统的整理，遂做粗糙翻译并作分享。译文难免有误，望各位看官及时指正。</p>
 
@@ -29,7 +29,7 @@
 
 <h1>0x00 最流行的 Mimikatz 命令</h1>
 
-<hr />
+<hr>
 
 <p>下面就介绍一些最流行的 Mimikatz 命令及相关功能。</p>
 
@@ -59,7 +59,7 @@
 
 <h1>0x01 Mimikatz 命令参考</h1>
 
-<hr />
+<hr>
 
 <p>Mimikatz 的模块如下：</p>
 
@@ -124,7 +124,7 @@
 
 <p>需要管理员权限。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408381662753MP2.png" alt="p53" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408381662753MP2.png" alt="p53"></p>
 
 <h3>LSADUMP::Cache</h3>
 
@@ -132,7 +132,7 @@
 
 <p>获取 SysKey 用于解密 NLKM 和 MSCache(v2)（来自注册表或 hive 文件） 。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408381775109MP3.png" alt="p54" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408381775109MP3.png" alt="p54"></p>
 
 <h3><a href="https://adsecurity.org/?p=1729">LSADUMP::DCSync</a></h3>
 
@@ -189,7 +189,7 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:rd.adsecurity.org /user:Adm
 Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:adsdc03$" exit
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408381918434MP4.jpg" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408381918434MP4.jpg" alt="p2"></p>
 
 <h3>LSADUMP::LSA</h3>
 
@@ -212,11 +212,11 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:ad
 
 <p>RID 为 502 的帐户是 KRBTGT 帐户，RID 为 500 的帐户是默认的域管理员账户。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408382029849MP5.png" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408382029849MP5.png" alt="p3"></p>
 
 <p>下图是运行 <strong>LSADUMP::lsa /patch</strong> 命令后只导出了 NTLM 密码哈希的执行结果。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408382251164MP6.png" alt="p4" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408382251164MP6.png" alt="p4"></p>
 
 <h3>LSADUMP::Rpdata</h3>
 
@@ -230,13 +230,13 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:ad
 
 <p>获取一个模拟的 SYSTEM 令牌： <strong>Mimikatz “PRIVILEGE::Debug” “TOKEN:elevate”</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408382516992MP7.png" alt="p5" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408382516992MP7.png" alt="p5"></p>
 
 <p><strong>LSADUMP::Secrets</strong> – 获取用于解密 SECRETS 项（从注册表或hive数据中获取）数据的 Syskey。</p>
 
 <p>需要 SYSTEM 或 DEBUG 权限。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408382616121MP8.png" alt="p6" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408382616121MP8.png" alt="p6"></p>
 
 <h3>LSADUMP::Trust</h3>
 
@@ -246,7 +246,7 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:ad
 
 <p>从活动目录中已有的域信任关系中提取数据。信任的密钥（密码）也将会显示出来。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408382725066MP9.png" alt="p7" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408382725066MP9.png" alt="p7"></p>
 
 <h2>MISC</h2>
 
@@ -258,36 +258,36 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:ad
 
 <p>需要 SYSTEM 或 DEBUG 。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408382970583MP10.png" alt="p8" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408382970583MP10.png" alt="p8"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408383094958MP11.png" alt="p9" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408383094958MP11.png" alt="p9"></p>
 
 <p><strong>MISC::Cmd</strong> － 命令行提示（无 DisableCMD）。</p>
 
 <p>需要管理员权限。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408383196500MP12.png" alt="p10" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408383196500MP12.png" alt="p10"></p>
 
 <p><strong>MISC::Detours</strong> – (实验) 尝试使用 Detours HOOK 列举所有的模块。</p>
 
 <p>需要管理员权限。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408383355305MP13.png" alt="p11" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408383355305MP13.png" alt="p11"></p>
 
 <p><strong>MISC::MemSSP</strong> – 注入一个记录本地身份认证凭证的恶意的 Windows SSP，通过在内存中对 LSASS 进程使用新的 SSP 进行补丁，此操作无需重启，重启会清除 Mimikatz 注入的 SSP。详情请见<a href="https://adsecurity.org/?p=1760">《Mimikatz SSP 内存补丁以及更多 SSP 持久化技术》</a>。</p>
 
 <p>需要管理员权限。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408383497559MP14.png" alt="p12" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408383497559MP14.png" alt="p12"></p>
 
 <p><a href="https://dl.mandiant.com/EE/library/MIRcon2014/MIRcon_2014_IR_Track_Analysis_of_Malicious_SSP.pdf">曼迪昂特对 MemSSP 的介绍</a></p>
 
-<p><strong>MISC::Ncroutemon</strong> – Juniper 管理器 (无 DisableTaskMgr)<br />
+<p><strong>MISC::Ncroutemon</strong> – Juniper 管理器 (无 DisableTaskMgr)<br>
 <strong>MISC::Regedit</strong> – 注册表编辑器 (无 DisableRegistryTools)</p>
 
 <p>需要管理员权限。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408383672637MP15.jpg" alt="p13" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408383672637MP15.jpg" alt="p13"></p>
 
 <p><a href="https://adsecurity.org/?p=1275"><strong>MISC::Skeleton</strong></a> - 在 DC 上将 Skeleton 密钥注入到 LSASS 进程中。</p>
 
@@ -295,13 +295,13 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:ad
 
 <p>此操作会对 DC 进行补丁，使得所有用户将使用的 “主密码” （又名万能钥匙）以及他们自己通常使用的密码进行身份验证。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408383739653MP16.png" alt="p14" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408383739653MP16.png" alt="p14"></p>
 
 <p><strong>MISC::Taskmgr</strong> - 任务管理器（无 DisableTaskMgr）</p>
 
 <p>需要管理员权限。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408383847671MP17.jpg" alt="p15" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408383847671MP17.jpg" alt="p15"></p>
 
 <p><strong>MISC::Wifi</strong></p>
 
@@ -311,8 +311,8 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:ad
 
 <h2>Net</h2>
 
-<p><strong>NET::User</strong><br />
-<strong>NET::Group</strong><br />
+<p><strong>NET::User</strong><br>
+<strong>NET::Group</strong><br>
 <strong>NET::LocalGroup</strong></p>
 
 <h2>PRIVILEGE</h2>
@@ -325,7 +325,7 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:ad
 
 <p><a href="http://msdn.microsoft.com/library/windows/hardware/ff541528.aspx">http://msdn.microsoft.com/library/windows/hardware/ff541528.aspx</a></p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408384096745MP18.png" alt="p16" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408384096745MP18.png" alt="p16"></p>
 
 <p>Benjamin 对此命令的备注信息:</p>
 
@@ -337,41 +337,41 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:ad
 
 <p><strong>PROCESS::Exports</strong> – 列出进程可执行文件的导出表</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408384154604MP19.jpg" alt="p17" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408384154604MP19.jpg" alt="p17"></p>
 
 <p><strong>PROCESS::Imports</strong> – 列出进程可执行文件的导入表</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408384392377MP20.jpg" alt="p18" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408384392377MP20.jpg" alt="p18"></p>
 
 <p><strong>PROCESS::List</strong> – 列出正在运行的进程。</p>
 
-<p>需要管理员权限。<br />
-<img src="http://static.wooyun.org//drops/20160214/2016021408384578522MP21.jpg" alt="p19" /></p>
+<p>需要管理员权限。<br>
+<img src="http://static.wooyun.org//drops/20160214/2016021408384578522MP21.jpg" alt="p19"></p>
 
 <p><strong>PROCESS::Resume</strong> - 恢复一个进程</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408384611613MP22.jpg" alt="p20" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408384611613MP22.jpg" alt="p20"></p>
 
-<p><strong>PROCESS::Start</strong> – 启动一个进程<br />
-<strong>PROCESS::Stop</strong> – 结束一个进程<br />
+<p><strong>PROCESS::Start</strong> – 启动一个进程<br>
+<strong>PROCESS::Stop</strong> – 结束一个进程<br>
 <strong>PROCESS::Suspend</strong> – 挂起一个进程</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408384728316MP23.jpg" alt="p21" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408384728316MP23.jpg" alt="p21"></p>
 
 <h2>SERVICE</h2>
 
-<p><strong>SERVICE::List</strong> – 列出所有服务<br />
-<strong>SERVICE::Preshutdown</strong> – 预关掉服务<br />
-<strong>SERVICE::Remove</strong> – 卸载服务<br />
-<strong>SERVICE::Resume</strong> – 恢复服务<br />
-<strong>SERVICE::Shutdown</strong> – 关掉服务<br />
-<strong>SERVICE::Start</strong> – 启动一个服务<br />
-<strong>SERVICE::Stop</strong> – 停止服务<br />
+<p><strong>SERVICE::List</strong> – 列出所有服务<br>
+<strong>SERVICE::Preshutdown</strong> – 预关掉服务<br>
+<strong>SERVICE::Remove</strong> – 卸载服务<br>
+<strong>SERVICE::Resume</strong> – 恢复服务<br>
+<strong>SERVICE::Shutdown</strong> – 关掉服务<br>
+<strong>SERVICE::Start</strong> – 启动一个服务<br>
+<strong>SERVICE::Stop</strong> – 停止服务<br>
 <strong>SERVICE::Suspend</strong> – 挂起服务</p>
 
 <h2>SEKURLSA</h2>
 
-<p>Mimikatz 的 SEKURLSA 模块提供了与被保护的内存进行交互的功能。此模块能够从 LSASS（本地安全认证子系统服务） 进程的内存中提取密码，密钥，pin 码，票证。<br />
+<p>Mimikatz 的 SEKURLSA 模块提供了与被保护的内存进行交互的功能。此模块能够从 LSASS（本地安全认证子系统服务） 进程的内存中提取密码，密钥，pin 码，票证。<br>
 为了能够与 LSASS 进程进行交互，Mimikatz 进程需要适当的权限：</p>
 
 <ul>
@@ -383,19 +383,19 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:ad
 
 <p><strong>SEKURLSA::Backupkeys</strong> － 获得首选备份的主密钥。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408384863447MP24.jpg" alt="p22" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408384863447MP24.jpg" alt="p22"></p>
 
 <p><strong>SEKURLSA::Credman</strong> - 列出凭证管理器</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408385055603MP25.png" alt="p23" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408385055603MP25.png" alt="p23"></p>
 
 <p><strong>SEKURLSA::Dpapi</strong> – 列出已缓存的主密钥</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408385197795MP26.png" alt="p24" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408385197795MP26.png" alt="p24"></p>
 
 <p><strong>SEKURLSA::DpapiSystem</strong> - 获取 DPAPI_SYSTEM 密文</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408385387976MP27.png" alt="p25" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408385387976MP27.png" alt="p25"></p>
 
 <p><strong>SEKURLSA::Ekeys</strong> – 列出 Kerberos 加密密钥</p>
 
@@ -403,15 +403,15 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:ad
 
 <p><strong>SEKURLSA::Kerberos</strong> – 列出所有已通过验证的用户（包括服务和计算机帐户）的 Kerberos 凭证。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408385684542MP29.png" alt="p27" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408385684542MP29.png" alt="p27"></p>
 
 <p><strong>SEKURLSA::Krbtgt</strong> - 获取域 Kerberos 服务帐户（KRBTGT）密码数据</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408385861226MP30.png" alt="p28" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408385861226MP30.png" alt="p28"></p>
 
 <p><strong>SEKURLSA::LiveSSP</strong> – 列出 LiveSSP 凭证</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408385994994MP31.png" alt="p29" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408385994994MP31.png" alt="p29"></p>
 
 <p><strong>SEKURLSA::LogonPasswords</strong> – 列出所有可用的提供者的凭证数据。命令执行结果会显示最近登陆的用户和计算机的凭证。</p>
 
@@ -423,33 +423,33 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:ad
 
 <p><strong>Windows Server 2008 R2 （显示明文密码）</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408390034428MP32.png" alt="p30" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408390034428MP32.png" alt="p30"></p>
 
 <p><strong>Windows Server 2012 R2 （未显示明文密码）</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408390291344MP33.png" alt="p31" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408390291344MP33.png" alt="p31"></p>
 
 <p>同样可以使用此命令将使用帐户凭证运行的服务的凭证进行转储。需要注意的是，只有服务正在运行（运行后凭证才会存储在内存中）才可以使用此方式进行转储。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408390476554MP34.png" alt="p32" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408390476554MP34.png" alt="p32"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408390625521MP35.png" alt="p33" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408390625521MP35.png" alt="p33"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408390997744MP36.png" alt="p34" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408390997744MP36.png" alt="p34"></p>
 
 <p><strong>SEKURLSA::Minidump</strong> – 切换到“轻量级”转储 LSASS 进程上下文</p>
 
 <p>需要注意的是，Minidumps 是对相同的平台上进行转储的数据进行读取， NT5 Win32 or NT5x64 or NT6 Win32 or NT6 x64。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408391045729MP37.png" alt="p35" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408391045729MP37.png" alt="p35"></p>
 
 <p><strong>SEKURLSA::MSV</strong> – 列出 LM 和 NTLM 凭证数据</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408391663956MP38.png" alt="p36" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408391663956MP38.png" alt="p36"></p>
 
 <p><strong>SEKURLSA::Process</strong> – 转换到 LSASS 进程上下文</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408391724470MP39.png" alt="p37" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408391724470MP39.png" alt="p37"></p>
 
 <p><strong>SEKURLSA::Pth</strong> – Hash 传递， key 传递</p>
 
@@ -462,7 +462,7 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:ad
 <li>/run （可选的） – 需要运行的命令行 – 默认为：cmd ，得到一个 cmd shell。</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408391821533MP40.jpg" alt="p38" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408391821533MP40.jpg" alt="p38"></p>
 
 <p>Benjamin 对此命令的备注：</p>
 
@@ -477,7 +477,7 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:ad
 
 <p><strong>SEKURLSA::SSP</strong> － 列出 SSP 凭证。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408392057249MP41.png" alt="p39" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408392057249MP41.png" alt="p39"></p>
 
 <p><strong>SEKURLSA::Tickets</strong> - 列出最近所有已经过身份验证的用户的可用的 Kerberos 票证，包括使用用户帐户的上下文运行的服务和本地计算机在 AD 中的计算机帐户。</p>
 
@@ -500,16 +500,16 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:ad
 <li>需要已激活 DEBUG 权限的管理员权限或本地 SYSTEM 权限</li>
 </ul>
 
-<p>下图显示了转储另外一个域管理员（LukeSkywalker）的密码和Kerberos票证（TGS 和 TGT）。<br />
-<img src="http://static.wooyun.org//drops/20160214/2016021408392291080MP42.png" alt="p40" /></p>
+<p>下图显示了转储另外一个域管理员（LukeSkywalker）的密码和Kerberos票证（TGS 和 TGT）。<br>
+<img src="http://static.wooyun.org//drops/20160214/2016021408392291080MP42.png" alt="p40"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408392479634MP43.png" alt="p41" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408392479634MP43.png" alt="p41"></p>
 
-<p>下图显示了转储另外一个域管理员（HanSolo）的密码和Kerberos票证（TGS 和 TGT）。<br />
-<img src="http://static.wooyun.org//drops/20160214/2016021408392632184MP44.png" alt="p42" /></p>
+<p>下图显示了转储另外一个域管理员（HanSolo）的密码和Kerberos票证（TGS 和 TGT）。<br>
+<img src="http://static.wooyun.org//drops/20160214/2016021408392632184MP44.png" alt="p42"></p>
 
-<p>下图显示了转储一个 SQL 服务帐户（svc-SQLDBEngine01）的密码和Kerberos票证（TGS 和 TGT）。<br />
-<img src="http://static.wooyun.org//drops/20160214/2016021408392984668MP45.png" alt="p43" /></p>
+<p>下图显示了转储一个 SQL 服务帐户（svc-SQLDBEngine01）的密码和Kerberos票证（TGS 和 TGT）。<br>
+<img src="http://static.wooyun.org//drops/20160214/2016021408392984668MP45.png" alt="p43"></p>
 
 <p><strong>SEKURLSA::Trust</strong> – 获取信任密钥</p>
 
@@ -517,20 +517,20 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:ad
 
 <p><strong>SEKURLSA::TSPKG</strong> － 列出 TsPkg 凭证。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408393150639MP46.png" alt="p44" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408393150639MP46.png" alt="p44"></p>
 
 <p><strong>SEKURLSA::Wdiget</strong> - 列出 Wdiget 凭证。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408393365681MP47.jpg" alt="p45" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408393365681MP47.jpg" alt="p45"></p>
 
 <h2>STANDARD</h2>
 
-<p><strong>STANDARD::Base64</strong> – 转换输出到 Base64 输出<br />
-<strong>STANDARD::CD</strong> – 改变或显示当前文件夹<br />
-<strong>STANDARD::CLS</strong> – 清屏<br />
-<strong>STANDARD::Exit</strong> – 退出 Mimikatz<br />
-<strong>STANDARD::Log</strong> – 记录 Mimikatz 数据到日志文件中<br />
-<strong>STANDARD::Sleep</strong> – 指定毫秒级的延时<br />
+<p><strong>STANDARD::Base64</strong> – 转换输出到 Base64 输出<br>
+<strong>STANDARD::CD</strong> – 改变或显示当前文件夹<br>
+<strong>STANDARD::CLS</strong> – 清屏<br>
+<strong>STANDARD::Exit</strong> – 退出 Mimikatz<br>
+<strong>STANDARD::Log</strong> – 记录 Mimikatz 数据到日志文件中<br>
+<strong>STANDARD::Sleep</strong> – 指定毫秒级的延时<br>
 <strong>STANDARD::Version</strong> – 显示版本信息</p>
 
 <h2>TOKEN</h2>
@@ -539,43 +539,43 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:ad
 
 <p><strong>TOKEN::Elevate</strong> – 假冒令牌。用于提升权限至 SYSTEM 权限（默认）或者使用 Windows API 找到域管理员令牌。</p>
 
-<p>需要管理员权限。<br />
-<img src="http://static.wooyun.org//drops/20160214/2016021408393422918MP48.png" alt="p46" /></p>
+<p>需要管理员权限。<br>
+<img src="http://static.wooyun.org//drops/20160214/2016021408393422918MP48.png" alt="p46"></p>
 
 <p>找到一个域管理员凭证并且使用该域管理员的令牌：</p>
 
 <p><strong>token::elevate /domainadmin</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408393615064MP49.jpg" alt="p47" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408393615064MP49.jpg" alt="p47"></p>
 
 <p><strong>TOKEN::List</strong> - 列出系统中所有的令牌</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408393764731MP50.png" alt="p48" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408393764731MP50.png" alt="p48"></p>
 
 <p><strong>TOKEN::Revert</strong> - 恢复进程令牌</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408393998992MP51.png" alt="p49" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408393998992MP51.png" alt="p49"></p>
 
 <p><strong>TOKEN::Whoami</strong> – 显示当前身份信息</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408394057892MP52.png" alt="p50" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408394057892MP52.png" alt="p50"></p>
 
 <h2>TS</h2>
 
 <p><strong>TS::Multirdp</strong> - (实验) 补丁终端服务器服务允许多个用户连接</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408394272709MP53.png" alt="p51" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408394272709MP53.png" alt="p51"></p>
 
 <h2>VAULT</h2>
 
 <p><strong>VAULT::List</strong> - 列出 Vault 凭证</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021408394367405MP54.png" alt="p52" /></p>
+<p><img src="http://static.wooyun.org//drops/20160214/2016021408394367405MP54.png" alt="p52"></p>
 
 <p><strong>VAULT::Cred</strong> - cred</p>
 
-<p><strong>原文所有权归 Sean Metcalf (ADSecurity.org) 所有</strong><br />
-<strong>本文由 Her0in 翻译并首发于乌云 drops，转载请注明出处</strong></p>      </p>
+<p><strong>原文所有权归 Sean Metcalf (ADSecurity.org) 所有</strong><br>
+<strong>本文由 Her0in 翻译并首发于乌云 drops，转载请注明出处</strong></p>      <p></p>
     
 			</body>
 		</html>

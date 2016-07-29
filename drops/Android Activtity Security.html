@@ -3,14 +3,14 @@
 			<head>
 			     <title>Android Activtity Security - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3936">http://drops.wooyun.org/tips/3936</a></h1>
 				
       <p>
-        <h2>0x00 科普</h2>
+        </p><h2>0x00 科普</h2>
 
-<hr />
+<hr>
 
 <p>Android每一个Application都是由Activity、Service、content Provider和Broadcast Receiver等Android的基本组件所组成，其中Activity是实现应用程序的主体，它承担了大量的显示和交互工作，甚至可以理解为一个"界面"就是一个Activity。</p>
 
@@ -22,13 +22,13 @@
 
 <h2>0x01 知识要点</h2>
 
-<hr />
+<hr>
 
 <p>参考：<a href="http://developer.android.com/guide/components/activities.html">http://developer.android.com/guide/components/activities.html</a></p>
 
 <p><strong>生命周期</strong></p>
 
-<p><img src="http://static.wooyun.org/drops/20141117/201411171046activity_lifecycle.png" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141117/201411171046activity_lifecycle.png" alt=""></p>
 
 <p><strong>启动方式</strong></p>
 
@@ -101,7 +101,7 @@ startActivity(intent);
 
 <p>如果用户离开一个task很长时间，系统会清理栈顶以下的activity，这样task被从新打开时，栈顶activity就被还原了。</p>
 
-<p><img src="http://static.wooyun.org/drops/20141117/201411171045task2.png" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141117/201411171045task2.png" alt=""></p>
 
 <p><strong>Intent Selector</strong></p>
 
@@ -123,9 +123,9 @@ startActivity(intent);
 
 <p><a href="http://developer.android.com/intl/zh-cn/guide/topics/manifest/permission-element.html">http://developer.android.com/intl/zh-cn/guide/topics/manifest/permission-element.html</a></p>
 
-<p><img src="http://static.wooyun.org/drops/20141117/201411171045permission.png" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141117/201411171045permission.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org/drops/20141117/201411171045permission2.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141117/201411171045permission2.jpg" alt=""></p>
 
 <p>normal:默认值。低风险权限，只要申请了就可以使用，安装时不需要用户确认。</p>
 
@@ -175,15 +175,15 @@ android:permission="org.jssec.android.permission.protectedapp.MY_PERMISSION" &gt
 
 <h2>0x02 Activity分类</h2>
 
-<hr />
+<hr>
 
 <p>Activity类型和使用方式决定了其风险和防御方式,故将Activity分类如下： Private、Public、Parter、In-house</p>
 
-<p><img src="http://static.wooyun.org/drops/20141117/201411171045types.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141117/201411171045types.jpg" alt=""></p>
 
 <h3>private activity</h3>
 
-<hr />
+<hr>
 
 <p>私有Activity不应被其他应用启动相对是安全的</p>
 
@@ -211,7 +211,7 @@ android:permission="org.jssec.android.permission.protectedapp.MY_PERMISSION" &gt
 
 <h3>public activity</h3>
 
-<hr />
+<hr>
 
 <p>公开暴露的Activity组件，可以被任意应用启动</p>
 
@@ -250,7 +250,7 @@ android:permission="org.jssec.android.permission.protectedapp.MY_PERMISSION" &gt
 
 <h2>0x04 测试方法</h2>
 
-<hr />
+<hr>
 
 <p>查看activity：</p>
 
@@ -272,7 +272,7 @@ android:permission="org.jssec.android.permission.protectedapp.MY_PERMISSION" &gt
 
 <h2>0x05 案例</h2>
 
-<hr />
+<hr>
 
 <p><strong>案例1：绕过本地认证</strong></p>
 
@@ -283,7 +283,7 @@ android:permission="org.jssec.android.permission.protectedapp.MY_PERMISSION" &gt
 <pre><code>$ am start -a android.intent.action.MAIN -n com.wsandroid.suite/com.mcafee.main.MfeMain
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20141117/201411171045mcafee.png" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141117/201411171045mcafee.png" alt=""></p>
 
 <p><strong>案例2：本地拒绝服务</strong></p>
 
@@ -313,7 +313,7 @@ android:permission="org.jssec.android.permission.protectedapp.MY_PERMISSION" &gt
 &lt;/activity&gt;
 </code></pre>
 
-<p>Class "com.google.android.apps.chrome.SimpleChromeActivity" 配置 <intent-filter>但是未设置 "android:exported" 为 "false". 恶意应用先调用该类并设置data为” http://google.com” 再次调用时设置data为恶意js例如'javascript:alert(document.cookie)', 恶意代码将在http://google.com域中执行. "com.google.android.apps.chrome.SimpleChromeActivity" class 可以通过Android api或者am（activityManager）打开. POC如下</p>
+<p>Class "com.google.android.apps.chrome.SimpleChromeActivity" 配置 <intent-filter>但是未设置 "android:exported" 为 "false". 恶意应用先调用该类并设置data为” http://google.com” 再次调用时设置data为恶意js例如'javascript:alert(document.cookie)', 恶意代码将在http://google.com域中执行. "com.google.android.apps.chrome.SimpleChromeActivity" class 可以通过Android api或者am（activityManager）打开. POC如下</intent-filter></p>
 
 <pre><code>public class TestActivity extends Activity {
     @Override
@@ -347,7 +347,7 @@ android:permission="org.jssec.android.permission.protectedapp.MY_PERMISSION" &gt
 
 <p>暂缺可公开案例,攻击模型如下图。</p>
 
-<p><img src="http://static.wooyun.org/drops/20141117/201411171045selector.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141117/201411171045selector.jpg" alt=""></p>
 
 <p><strong>案例6：Fragment注入(绕过PIN+拒绝服务)</strong></p>
 
@@ -358,14 +358,14 @@ android:permission="org.jssec.android.permission.protectedapp.MY_PERMISSION" &gt
 &lt;/a&gt;&lt;br&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20141117/201411171051pin.png" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141117/201411171051pin.png" alt=""></p>
 
 <pre><code>&lt;a href="intent:#Intent;S.:android:show_fragment=XXXX;launchFlags=0x00008000;SEL;component=com.android.settings/com.android.settings.Settings;end"&gt;
 17、fragment dos android 4.4 (selector)
 &lt;/a&gt;&lt;br&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20141117/201411171045fragdos.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141117/201411171045fragdos.jpg" alt=""></p>
 
 <p><strong>案例7:webview RCE</strong></p>
 
@@ -374,15 +374,15 @@ android:permission="org.jssec.android.permission.protectedapp.MY_PERMISSION" &gt
 &lt;/a&gt;&lt;br&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20141117/201411171051lvmm.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141117/201411171051lvmm.jpg" alt=""></p>
 
-<p><img src="http://static.wooyun.org/20141117/2014111703585555826.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/20141117/2014111703585555826.jpg" alt=""></p>
 
 <h2>0x06 参考</h2>
 
-<hr />
+<hr>
 
-<p><a href="http://www.jssec.org/dl/android_securecoding_en.pdf">http://www.jssec.org/dl/android&#95;securecoding&#95;en.pdf</a></p>      </p>
+<p><a href="http://www.jssec.org/dl/android_securecoding_en.pdf">http://www.jssec.org/dl/android&#95;securecoding&#95;en.pdf</a></p>      <p></p>
     
 			</body>
 		</html>

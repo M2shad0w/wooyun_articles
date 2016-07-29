@@ -3,24 +3,24 @@
 			<head>
 			     <title>Powershell and Windows RAW SOCKET - DM_</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4707">http://drops.wooyun.org/tips/4707</a></h1>
 				
       <p>
-        <h1>Powershell c# and .NET</h1>
+        </p><h1>Powershell c# and .NET</h1>
 
-<hr />
+<hr>
 
 <p>大家都知道powershell有一个非常厉害的地方是可以直接调用.net框架，并且.net框架在windows7/2008及以后是默认安装的。 Powershell调用.net框架可以有多种方法，最简单的方法是写c#代码然后直接运行，或者在powershell中使用new-object创建.net对象，然后再调用。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150119/2015011909365353553run-c-sharp-code-in-powershell.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150119/2015011909365353553run-c-sharp-code-in-powershell.jpg" alt="enter image description here"></p>
 
 <!--more-->
 
 <p>(在powershell中运行c#代码)</p>
 
-<p><img src="http://static.wooyun.org/drops/20150119/2015011909352825887use-dotnet-class-in-powershell.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150119/2015011909352825887use-dotnet-class-in-powershell.png" alt="enter image description here"></p>
 
 <p>(在powershell中直接创建.net对象)</p>
 
@@ -28,7 +28,7 @@
 
 <h1>Windows Raw Socket</h1>
 
-<hr />
+<hr>
 
 <p><a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms740548%28v=vs.85%29.aspx">raw socket</a>提供了底层网络包的操作，所以需要administrator的权限,关于当前环境支持的raw socket的详细信息可以通过下面的命令查看。</p>
 
@@ -39,7 +39,7 @@
 
 <h1>evil things</h1>
 
-<hr />
+<hr>
 
 <p>通晓上面的过程后，就明白基本的网络操作都可以用powershell完成，比如端口扫描，CMD SHELL，文件上传下载,嗅探等。</p>
 
@@ -49,17 +49,17 @@
 
 <p><strong>而且这些操作是以白名单的powershell运行的!</strong></p>
 
-<p>比如构建一个反向连接的CMDSHELL熟悉上面的过程之后，写起来就会变得很简单，首先我们需要用c#写一个反向交互式CMD shell的对象，加上定时回连的功能，并且注意这个对象必须是public的，这样才能在powershell中调用。然后将你的代码复制进一个新的ps1文件中，并且用Add-Type @’ <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a0422039e0452c2545300b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="38dc81b3dda8b6dd8889ddb797dc839dd088bbdfac90d087a1dc8092dd9781d08999dc82bedbb8badd85abdfbc8edc8598dc81a7ddb797dc839ddfa38cdeb69ddfac">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�powershell调用.NET的socket与Process和其他对象(主要)构建一个反向交互式的CMDSHELL。</p>
+<p>比如构建一个反向连接的CMDSHELL熟悉上面的过程之后，写起来就会变得很简单，首先我们需要用c#写一个反向交互式CMD shell的对象，加上定时回连的功能，并且注意这个对象必须是public的，这样才能在powershell中调用。然后将你的代码复制进一个新的ps1文件中，并且用Add-Type @’ <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a0422039e0452c2545300b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="38dc81b3dda8b6dd8889ddb797dc839dd088bbdfac90d087a1dc8092dd9781d08999dc82bedbb8badd85abdfbc8edc8598dc81a7ddb797dc839ddfa38cdeb69ddfac">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�powershell调用.NET的socket与Process和其他对象(主要)构建一个反向交互式的CMDSHELL。</p>
 
 <h1>Demo</h1>
 
-<hr />
+<hr>
 
 <p><strong>Reverse TCP SHELL</strong></p>
 
 <p>在这里并不是调用的raw socket，所以不需要administrator权限，下面的Bind TCP shell也是。只有sniffer需要administrator权限。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150119/2015011909372034420reverse_tcp_shell.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150119/2015011909372034420reverse_tcp_shell.png" alt="enter image description here"></p>
 
 <pre><code>#!c#
 $Addr = "127.0.0.1"
@@ -167,7 +167,7 @@ public class ReverseTCPShell
 
 <p><strong>Bind TCP SHELL</strong></p>
 
-<p><img src="http://static.wooyun.org/drops/20150119/2015011909380335184bind_tcp_cmdshell.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150119/2015011909380335184bind_tcp_cmdshell.png" alt="enter image description here"></p>
 
 <pre><code>#!c#
 $port = 2233
@@ -271,7 +271,7 @@ public class BindTCPShell
 
 <p><strong>SNIFFER</strong></p>
 
-<p><img src="http://static.wooyun.org/drops/20150119/2015011909384490535powershell-simple-sniffer-and-TCP-filter.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150119/2015011909384490535powershell-simple-sniffer-and-TCP-filter.png" alt="enter image description here"></p>
 
 <p>注意这里需要administrator权限。下面的demo只是做到了TCP解析的部分，filter也只是简单的给出了HTTP和FTP的筛选，关于IP和TCP解包的部分我已经在注释中给出了。 如果有其他需求可以自行修改。</p>
 
@@ -520,7 +520,7 @@ public class DataFilter
 '@
 
 [Sniffer]::run($Addr)
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

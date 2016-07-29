@@ -3,16 +3,16 @@
 			<head>
 			     <title>Laravel cookie伪造,解密,和远程命令执行 - fate0</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1515">http://drops.wooyun.org/papers/1515</a></h1>
 				
       <p>
-        <p>from:<a href="https://labs.mwrinfosecurity.com/blog/2014/04/11/laravel-cookie-forgery-decryption-and-rce/">laravel-cookie-forgery-decryption-and-rce</a></p>
+        </p><p>from:<a href="https://labs.mwrinfosecurity.com/blog/2014/04/11/laravel-cookie-forgery-decryption-and-rce/">laravel-cookie-forgery-decryption-and-rce</a></p>
 
 <h2>0x00 内容</h2>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="#translate">名词约定</a></li>
@@ -31,15 +31,15 @@
 
 <h2>0x01 名词约定</h2>
 
-<hr />
+<hr>
 
 <h3>下图为CBC模式加密过程</h3>
 
-<p><img src="http://static.wooyun.org/20140918/2014091814183850698.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091814183850698.png" alt="enter image description here"></p>
 
 <h3>下图为CBC模式解密过程</h3>
 
-<p><img src="http://static.wooyun.org/20140918/2014091814183849766.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091814183849766.png" alt="enter image description here"></p>
 
 <ul>
 <li>Plaintext: 明文(P)</li>
@@ -48,13 +48,13 @@
 <li>Key: 密钥(K)</li>
 </ul>
 
-<p><img src="http://static.wooyun.org/20140918/2014091814183929055.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091814183929055.jpg" alt="enter image description here"></p>
 
 <p><a name="introduction"></a></p>
 
 <h2>0x02 简介</h2>
 
-<hr />
+<hr>
 
 <p>Laravel PHP框架中的加密模块存在漏洞，攻击者能够利用该漏洞伪造session cookie来实现任意用户登录， 在某些情况下，攻击者能够伪造明文对应的密文，并以此来实行远程代码执行。</p>
 
@@ -64,7 +64,7 @@
 
 <h2>0x03 任意用户登录</h2>
 
-<hr />
+<hr>
 
 <p>下面的代码展示了MAC验证和解密过程:</p>
 
@@ -91,7 +91,7 @@ $plaintext = unserialize($this-&gt;stripPadding($this-&gt;mcryptDecrypt($value, 
 
 <p>如果我们想伪造ID为1的用户，也就是cookie明文为<code>s:1:"1";后接24byte的补充</code>，为了能够使服务器端成功解密出ID为1的明文， 需要按照以下步骤生成IV:</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091814183978745.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091814183978745.jpg" alt="enter image description here"></p>
 
 <p>就获得了Pb 相对应的IVb，提交新的cookie，我们就成了ID为1的用户，也可以用同样的方法来登录其他ID。 对攻击者来说，能够登录任意用户也是相当牛逼的，但你能牛逼的程度取决于应用程序傻逼的程度。有没有一种方法， 能够通杀使用Laravel的应用呢？</p>
 
@@ -99,7 +99,7 @@ $plaintext = unserialize($this-&gt;stripPadding($this-&gt;mcryptDecrypt($value, 
 
 <h2>0x04 发送任意密文</h2>
 
-<hr />
+<hr>
 
 <p>另外一个问题，进行MAC检验的时候使用的是<code>!=</code>。这以为着PHP在实际比较前会进行类型判断。hash_hmac返回的结果永远都是字符串， 但是如果<code>$payload['mac']</code>是一个整型，那么强制类型转换会使得伪造一个对应的MAC变得相对简单， 例如，正确的MAC以"0"或者其他非数字起头，那么整数0将与之匹配，如果以"1x"(x非数字)，那么整数1与之匹配，依此类推。 (译者注:作者难道没有被1e[1-9]xxx坑过没?)</p>
 
@@ -115,7 +115,7 @@ var_dump('2abcdef' == 2); // true
 
 <h2>0x05 解密密文</h2>
 
-<hr />
+<hr>
 
 <p>Laravel使用的是CBC模式的分组密码，我们也能够提供任意密文让其解密，我们是否能够实施一次牛逼哄哄的 <a href="http://link.springer.com/chapter/10.1007/3-540-46035-7_35">CBC padding oracle attack</a>攻击呢？ 答案是：在某种情况下，YES</p>
 
@@ -135,11 +135,11 @@ var_dump('2abcdef' == 2); // true
 
 <h2>0x06 为任意明文伪造合法的密文</h2>
 
-<hr />
+<hr>
 
 <p>既然有了个CBC decryption oracle，那就很有可能利用<a href="https://www.usenix.org/legacy/events/woot10/tech/full_papers/Rizzo.pdf">CBC-R</a>技术来加密任意明文。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091814184020140.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091814184020140.png" alt="enter image description here"></p>
 
 <p>CBC模式的解密过程为 Pi=DK(Ci) xor Ci−1,C0=IV ，如果攻击者能够控制或者知晓 DK(Ci) 和Ci−1 ， 他就能够生成他想要的明文块。既然这里有个选择密文攻击，很显然攻击者能够控制 Ci 和 Ci−1 ， 至于DK(Ci)</p>
 
@@ -149,7 +149,7 @@ var_dump('2abcdef' == 2); // true
 
 <h2>0x07 发送任意密文</h2>
 
-<hr />
+<hr>
 
 <p>我们已经使用<code>unserialize()</code>作为我们padding oracle的基础， 那我们再次利用<code>unserialize()</code>作一次PHP对象注入来达到任意代码执行，如何？</p>
 
@@ -191,7 +191,7 @@ print bin2hex(serialize($handler)) . "\n";
 
 <h2>0x08 译者总结</h2>
 
-<hr />
+<hr>
 
 <p>对于原作者所说的漏洞，我拿一个开源blog <a href="https://github.com/5-say/laravel-4.1-simple-blog">laravel-4.1-simple-blog</a> 做实验，将关键文件回滚到存在漏洞状态，如果有人想研究，也可以在这<a href="http://static.wooyun.org/20141017/2014101716030797096.zip">laravel-cookie-forgery-decryption-and-rce.zip</a>下载完整文件。</p>
 
@@ -199,7 +199,7 @@ print bin2hex(serialize($handler)) . "\n";
 
 <p>在本地:</p>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3adcac8adc8992dfbcb6de82bade8290d28e9cdcb28d5c5b4e5f0a7a5c5b4e5f405f48551455485d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，得到用户ID为62，利用以下代码即可获取指定ID用户的cookie</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3adcac8adc8992dfbcb6de82bade8290d28e9cdcb28d5c5b4e5f0a7a5c5b4e5f405f48551455485d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，得到用户ID为62，利用以下代码即可获取指定ID用户的cookie</p>
 
 <pre><code>#!php
 &lt;?php
@@ -233,7 +233,7 @@ function addPadding($value) {
 
 <p>运行结果</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091814184014500.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091814184014500.png" alt="enter image description here"></p>
 
 <h3>测试2 利用padding oracle来实现RCE</h3>
 
@@ -264,7 +264,7 @@ def init_parser():
     print("")
     print("=== POC for laravel RCE ===")
     print("=== by fate0            ===")
-    print("=== <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4d2b2c39287d0d2b2c392837283f2263223f2a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>  ===")
+    print("=== <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4d2b2c39287d0d2b2c392837283f2263223f2a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>  ===")
     print("=== weibo.com/fatez3r0  ===")
     print("")
     usage = "Usage: %prog --host http://www.fatezero.org"
@@ -426,7 +426,7 @@ if __name__ == '__main__':
 
 <p>运行结果</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091814184136717.png" alt="enter image description here" /></p>      </p>
+<p><img src="http://static.wooyun.org/20140918/2014091814184136717.png" alt="enter image description here"></p>      <p></p>
     
 			</body>
 		</html>

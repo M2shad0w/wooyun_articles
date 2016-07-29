@@ -3,14 +3,14 @@
 			<head>
 			     <title>劫持GPS定位&劫持WIFI定位 - lxj616</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/10580">http://drops.wooyun.org/tips/10580</a></h1>
 				
       <p>
-        <h2>0x00 概述</h2>
+        </p><h2>0x00 概述</h2>
 
-<hr />
+<hr>
 
 <p>在刚刚举行的Black Hat Europe 2015大会上，来自阿里移动安全的Wang Kang &amp; Shuhua Chen &amp; Aimin Pan 展示了劫持GPS定位以及劫持WIFI定位的技术</p>
 
@@ -18,7 +18,7 @@
 
 <h2>0x01 GPS劫持步骤</h2>
 
-<hr />
+<hr>
 
 <p>在Ubuntu 15.10中安装gnuradio以及hackrf工具</p>
 
@@ -50,17 +50,17 @@ make
 
 <p>效果如图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151119/2015111903443588322.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20151119/2015111903443588322.jpg" alt="enter image description here"></p>
 
 <p>所有的卫星GPS都是伪造出来的，因此也比较整齐，不够整齐是因为山寨的Hackrf硬件原因</p>
 
-<p><img src="http://static.wooyun.org//drops/20151119/2015111903443512671.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20151119/2015111903443512671.jpg" alt="enter image description here"></p>
 
 <p>这里的坐标我随便定的，定在吉林省了，上文中给出的坐标是杭州</p>
 
 <h2>0x02 WIFI定位劫持步骤</h2>
 
-<hr />
+<hr>
 
 <p>安装aircrack系列工具</p>
 
@@ -133,35 +133,35 @@ sudo airmon-ng start wlan0
 
 <h2>0x03 GPS定位与劫持原理</h2>
 
-<hr />
+<hr>
 
 <p>这里是用Hackrf伪造的GPS信号</p>
 
 <p>以下翻译内容摘自https://www.blackhat.com/docs/eu-15/materials/eu-15-Kang-Is-Your-Timespace-Safe-Time-And-Position-Spoofing-Opensourcely-wp.pdf 有删减</p>
 
-<p><img src="http://static.wooyun.org//drops/20151119/2015111903443588613.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20151119/2015111903443588613.png" alt="enter image description here"></p>
 
 <p>1) GPS定位原理</p>
 
 <p>首先，让我们明确我们的需求。我们想要知道的是我们的位置坐标(x,y,z)，如果从一个已知坐标(x1,y1,z1)的点A（这个点在现实情况下是卫星）广播一个信号，比如说光和声音或者电磁波，然后我们试着去测量信号发送至到达的时间差τ1（在gps系统中我们用的是电磁波，我们知道它的速度），然后我们就能得出下面的等式：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151119/2015111903443545170.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20151119/2015111903443545170.png" alt="enter image description here"></p>
 
 <p>这个等式有3个未知变量，因此单单一个等式解不出来，我们可以再加两个已知位置的点（卫星），我们把它们记作(x2,y2,z2) 和 (x3,y3,z3)，然后就是下面的方程组</p>
 
-<p><img src="http://static.wooyun.org//drops/20151119/2015111903443658157.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20151119/2015111903443658157.png" alt="enter image description here"></p>
 
 <p>现在我们就能解出我们的位置(x,y,z)了</p>
 
 <p>但在工程应用中这样还不够。为了测量电磁波发送至到达的时间差τ1，需要在电磁波发送的时候写一个时间戳t1，然后是卫星上的时钟时间参考值，当信号到达我们这里时，我们提取出时间戳t1，然后计算t1和当地时间t2的差值来计算时间差τ1。然而当地时间和卫星时间并不是同步的，会出现一个时间偏移量∆t1，所以这个时间偏移量也要被考虑进去，于是修正后的方程式如下所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151119/2015111903443683065.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20151119/2015111903443683065.png" alt="enter image description here"></p>
 
 <p>译者注：所以有4个变量，就需要4个卫星来创造4个等式啦，以下高等数学内容略，以上内容说明我们需要伪造至少4颗卫星的信号才能使gps定位</p>
 
 <p>2) GPS信号帧：GPS信号帧的结构如图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151119/2015111903443692245.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20151119/2015111903443692245.png" alt="enter image description here"></p>
 
 <p>GPS信号的比特率为50 bps。GPS卫星在不同的频率和幅度上广播GPS信号，民用最常用的是L1 信号。</p>
 
@@ -171,7 +171,7 @@ sudo airmon-ng start wlan0
 
 <p>这些档案按照如下格式命名（如下表所示）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151119/2015111903443691625.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20151119/2015111903443691625.png" alt="enter image description here"></p>
 
 <p>举个例子：‘brdc3540.14n’意味着2014年的12月20号</p>
 
@@ -179,7 +179,7 @@ sudo airmon-ng start wlan0
 
 <h2>0x04 WIFI定位劫持原理</h2>
 
-<hr />
+<hr>
 
 <p>由于GPS定位在室内无法使用，各种定位平台厂商比如苹果地图、谷歌地图、百度地图通常会使用WIFI信号来帮助用户获得更好的定位</p>
 
@@ -195,7 +195,7 @@ sudo airmon-ng start wlan0
 
 <h2>0x05 参考文献&amp;致谢</h2>
 
-<hr />
+<hr>
 
 <p>《Time and Position Spoofing with Open Source Projects》 Kang Wang ，Shuhua Chen ，Aimin Pan</p>
 
@@ -213,7 +213,7 @@ sudo airmon-ng start wlan0
 
 <p><a href="http://drops.wooyun.org/wp-content/uploads/2015/11/79.png">7</a> https://en.wikipedia.org/wiki/Global Positioning System</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/11/87.png">8</a> https://en.wikipedia.org/wiki/GPS signals</p>      </p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/11/87.png">8</a> https://en.wikipedia.org/wiki/GPS signals</p>      <p></p>
     
 			</body>
 		</html>

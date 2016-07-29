@@ -3,16 +3,16 @@
 			<head>
 			     <title>APT30-网络间谍活动分析 - virustracker</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5670">http://drops.wooyun.org/tips/5670</a></h1>
 				
       <p>
-        <p>from：https://www2.fireeye.com/rs/fireye/images/rpt-apt30.pdf</p>
+        </p><p>from：https://www2.fireeye.com/rs/fireye/images/rpt-apt30.pdf</p>
 
 <h1>0x00 介绍</h1>
 
-<hr />
+<hr>
 
 <p>APT30非常擅长执行长期的网络攻击活动，并且从2005年开始，这个黑客组织就一直成功地维护着相关的攻击工具，攻击策略和基础设施。</p>
 
@@ -28,7 +28,7 @@
 
 <h1>0x01 关键发现</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><p>APT30持续开发并改进着一系列的集成工具，并且他们在这10年中重复使用了一些基础设施，由此可见，他们的任务是长期的。在这一套工具中包括下载器，后门，中央控制器，几个可以感染移动设备和隔离网络的组件。APT30常常是自己注册DNS域名，然后用作木马的C2域名。我们发现，有些木马中的恶意域名已经使用了很多年。</p></li>
@@ -40,7 +40,7 @@
 
 <h1>0x02 APT30:长期发展</h1>
 
-<hr />
+<hr>
 
 <table>
 <thead>
@@ -79,7 +79,7 @@
 
 <h2>APT30在执行长期任务时，使用的都是已有的工具。</h2>
 
-<hr />
+<hr>
 
 <p>FireEye已经识别了两个主要的BACKSPACE代码分支（“ZJ”和“ZR”），这两个代码的编译命令都略有不同。此外，虽然BACKSPACE的安装方式（如EXE程序，DLL文件，以及可以解压出DLL文件的EXE）和维护方法（如，利用Startup文件夹中的捷径（.link）文件，作为DLL服务文件）有很多，并且也会新增一些其他功能，但是核心功能都是一致的。</p>
 
@@ -87,11 +87,11 @@
 
 <p>APT3一直都是在修改已有的工具而没有，这点表明APT30的任务是长期一致的，所以他们只需要修改自己的工具就能胜任长期的任务。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041703125789905.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/2015041703125789905.jpg" alt="enter image description here"></p>
 
 <h1>0x03 专业的开发工具：APT30的开发方法具有一致性和组织性</h1>
 
-<hr />
+<hr>
 
 <p>除了APT30长期使用的工具，在多数情况下，其他工具的作用可能不同，但是开发特征都具有一致性。这些工具都具有精密的版本管理系统，也会使用相同的版本检测方法和更新方法；这样就能保证在同一时间中只有一个工具在受害设备上运行。由此可见，APT30的行动非常紧凑，效率也很高。</p>
 
@@ -99,11 +99,11 @@
 
 <p>表1-ZRLnk的历史版本</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041702491567269871f4cbc489c2507e166e9ef4200d785" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/2015041702491567269871f4cbc489c2507e166e9ef4200d785" alt="enter image description here"></p>
 
 <h2>APT30有可能是自己开发工具，也可能有开发者在支持他们</h2>
 
-<hr />
+<hr>
 
 <p>根据版本号，我们发现BACKSPACEH后门的”ZJ”变体具有最长的修改历史。我们对55个ZJ样本进行了分析，版本涵盖了1.2到20.50，时间跨度有8年（编译时间从2005年到2012年）。</p>
 
@@ -115,53 +115,53 @@
 
 <p>表2-进程执行和版本控制中使用的互斥量和事件</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041702491913765e5631b40ac2c58337abc942aa22dba84" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/2015041702491913765e5631b40ac2c58337abc942aa22dba84" alt="enter image description here"></p>
 
 <h1>0x04 为了平衡隐秘性和规模性，木马的C2通信分为了两个阶段</h1>
 
-<hr />
+<hr>
 
 <p>BACKSPACE后门和NETEAGLE后门使用了两个阶段的C2服务器。后门首先与 阶段1的C2位置通信，通常是一个或多个C2域名。与阶段1 C2的交互是完全自动的；也就是说，阶段1 C2不支持黑客与受害主机之间进行任何交互通信。BACKSPACE和NETEAGLE都会使用HTTP请求与阶段1 C2交互，请求URI下载包含基础指令和信息（包括阶段2的C2位置）的文件，或者是下载并执行额外的二进制。受害主机可能会提示阶段2 C2（如传输关于受害主机的数据），只有接收到指令需要这样操作的主机才会创建完整的连接到BACKSPACE控制器。一旦木马连接到了控制器，黑客就能直接操作受害主机。</p>
 
 <p>黑客利用这种分阶段方法，混淆了自己与受害人之间的关联。这样他们就能方便的管理大量的受害人；新感染的主机可以自动与阶段1 C2服务器交互，直至黑客选中了特定的主机进行阶段2的交互。</p>
 
-<p>下表中列出了BACKSPACE样本（md5 哈希6ee35da59f92f71e757d4d5b964ecf00）可能请求的URI，以及每个文件的目的。完整的URI格式是<code>hxxp://&lt;c2_domain&gt;/&lt;path&gt;/&lt;file&gt;</code>, 其中<c2_domain>是木马指定的C2域名；<path>不同样本的路径名称也一般不同(/some/ or/ForZRLnk3z/in the examples below)；<file>是请求指定的文件。</p>
+<p>下表中列出了BACKSPACE样本（md5 哈希6ee35da59f92f71e757d4d5b964ecf00）可能请求的URI，以及每个文件的目的。完整的URI格式是<code>hxxp://&lt;c2_domain&gt;/&lt;path&gt;/&lt;file&gt;</code>, 其中<c2_domain>是木马指定的C2域名；<path></path>不同样本的路径名称也一般不同(/some/ or/ForZRLnk3z/in the examples below)；<file>是请求指定的文件。</file></c2_domain></p>
 
 <p>表3-BACKSPACE在第一阶段 C2通信时使用的URI</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041703125758000.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/2015041703125758000.jpg" alt="enter image description here"></p>
 
 <p>图1-受害主机与阶段1和阶段2 C2服务器的交互</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041702492693291dccaa0c679b8ee0a80f8e9471e1012cf" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/2015041702492693291dccaa0c679b8ee0a80f8e9471e1012cf" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/201504170249349890981c8d1d842c6120100c3d589ad1c2603" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/201504170249349890981c8d1d842c6120100c3d589ad1c2603" alt="enter image description here"></p>
 
 <h1>0x05 APT30的全能后门控制系统</h1>
 
-<hr />
+<hr>
 
 <h2>给目标指定优先级，黑客轮流攻击</h2>
 
-<hr />
+<hr>
 
 <p>通过检查管理BACKSPACE 后门程序的GUI控制器，能推断出APT30执行了哪些其他的攻击活动。FireEye分析了三个BACKSPACE的控制器软件-网络神鹰远程控制系统（该系统在样本中的版本信息中称作“NetEagle Remote Control System”；在“相关”对话框中称为网络神鹰远程控制系统）。尽管我们分析的副本分别在2010，2011和2013年编译的，但是工具的描述文件还是能说明最原始的控制器软件是在2004年编译的。</p>
 
 <p>BACKSPACE控制器是发展良好且功能全面的GUI工具。该控制器有主菜单项，包括“系统”，“网络”，“文件”，“远程”和“攻击”操作，还包括“相关”对话框。与控制器相连的受害主机的信息会在底端窗格中展示出来，其中包括主机名称，内部和外部IP地址，系统运行时间和OS版本及其语言。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/20150417024931749741882421eb15380eae88d218d8da8dfaf" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/20150417024931749741882421eb15380eae88d218d8da8dfaf" alt="enter image description here"></p>
 
 <h1>0x06 APT30使用的工具进行版本检查并尝试自我更新</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041702492443865b8de37d6703fd7a58f23e2d7d0c33995" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/2015041702492443865b8de37d6703fd7a58f23e2d7d0c33995" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/20150417024922522654e1d5e3dee473eaac75f1ae6e76813fe" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/20150417024922522654e1d5e3dee473eaac75f1ae6e76813fe" alt="enter image description here"></p>
 
 <h2>建立远程控制</h2>
 
-<hr />
+<hr>
 
 <p>阶段一C2服务器中的两个文件（dizhi.gif 和 connect.gif）能够管理阶段二C2服务器（比如，BACKSPACE控制器）的通信。BACKSPACE受害者电脑将检索dizhi.gif，并通过HTTP POST将受害者电脑的信息传递至阶段二中的IP地址和dizhi.gif明确指定的端口。该受害者信息可用于填充GUI控制器（见Figure 4）。然而，BACKSPACE客户端不能在默认情况下与BACKSPACE控制器建立交互式连接，因为这样，阶段二C2服务器被暴露的风险就会增加。</p>
 
@@ -171,13 +171,13 @@
 
 <p>下面的屏幕截图表明了这两个文件的配置选项，包括用于连接阶段一服务器的FTP证书，文件路径，文件名及备用的阶段二C2服务器。这些相同的配置设置能够“修复”BACKSPACE二进制中为相关字节，自定义BACKSPACE木马。 相似的，第二个对话框允许威胁发起者指定联系阶段二C2服务器/BACKSPACE控制器的端口（位于dizhi.gif中）。第一个端口用于通过HTTP POST传递受害者数据。第二个端口用于与BACKSPACE控制器建立交互式连接。第三个用于操作位于控制器和受害者机器之间的反向连接后门。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041702495159642b0c1f458caaa09e8fbb818f01e6f42e5" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/2015041702495159642b0c1f458caaa09e8fbb818f01e6f42e5" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/20150417024929631751913d08e51bd951d93e71a6e5bfecf43" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/20150417024929631751913d08e51bd951d93e71a6e5bfecf43" alt="enter image description here"></p>
 
 <h2>BACKSPACE控制器-后门通讯</h2>
 
-<hr />
+<hr>
 
 <p>BACKSPACE控制器用改进的HTTP协议与受害主机上的BACKSPACE用户进行通信。受害主机向HTTP POST格式下的控制器发送数据。当该控制器接受到数据时，它就会忽略其他的HTTP头，只解析Content-Length 值和主体数据。这时也不会有确认信息反馈给后门。</p>
 
@@ -185,21 +185,21 @@
 
 <h2>目标优先级和警报</h2>
 
-<hr />
+<hr>
 
 <p>BACKSPACE控制器允许威胁发起者更进一步地管理受害主机，主要通过用注释标识个人主机，给受害者机器指定优先级（“普通”，“重要”，“非常重要”），以及当受害主机上线时，设置一个警报通知威胁发起者。</p>
 
 <h1>0x07 APT30确定目标的优先级：“不同”“重要”“非常重要”。</h1>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041702493715712f21fe796539c521a8ec819bf7450832b" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/2015041702493715712f21fe796539c521a8ec819bf7450832b" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/201504170249332414253d843d80e37b397a1e607bab4fa3446" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/201504170249332414253d843d80e37b397a1e607bab4fa3446" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/201504170250002835526970051e89df11efc4d63a1d0ae0383" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/201504170250002835526970051e89df11efc4d63a1d0ae0383" alt="enter image description here"></p>
 
 <h2>执行自定义任务</h2>
 
-<hr />
+<hr>
 
 <p>BACKSPACE控制器包括一个“自动执行自定义任务”（下方标注）的菜单项，它可以发送“O”命令，该命令受BACKSPACE后门的多种变体支持。当后门接收该命令时，会在受害主机($LDDATA$\和 %WINDIR%\$NtUninstallKB900727$) 上，根据事先定义好的路径上传数据至控制器。在自动模式下（与手动上传文件或目录相反），这个特殊的命令用来检索受害电脑上的被盗数据。APT30（特别是SPACESHIP 和FLASHFLOOD）用其他工具发现的路径常用于针对目标性的隔离电脑和网络。</p>
 
@@ -207,33 +207,33 @@
 
 <h2>版本控制和自动更新</h2>
 
-<hr />
+<hr>
 
 <p>像许多APT30用过的工具，BACKSPACE控制器也执行版本检查并试图自我更新。开始执行时，该控制器把一个版本文件（(NetEagleVer.txt）和更新过的二进制(NetEagle.exe）传递至下一个HTTP请求。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/20150417024936897012f92aeb7224dea75ed5ad71a7776144e" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/20150417024936897012f92aeb7224dea75ed5ad71a7776144e" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/uploads/21b12c0902b639e57ba06331e063afd0.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/uploads/21b12c0902b639e57ba06331e063afd0.png" alt="enter image description here"></p>
 
 <h2>硬盘序列号认证</h2>
 
-<hr />
+<hr>
 
 <p>BACKSPACE控制器中有一种检查，能确保控制器只能在已授权的机器上运行。控制器把本地主机硬盘序列号与控制器二进制中经过硬编码的45个序列号做比较，直到互相匹配才停止比较。这意味着控制器开发者想要限制控制器的分配和使用。开发者能为他们自己编写控制器；那么出售时，有内置限制的控制器就轮流出售，这样开发者就要持续编写、再向其他人出售自定义版本。如果大部分APT30使用的恶意软件（APT30恶意软件之间及其与控制器之间）具备紧凑的一体化性质，而且控制器能使用APT30域名进行自我更新检查，APT30（或一个与之紧密相联的开发者小组）就更有可能创建一个供他们自己使用的控制器。</p>
 
 <h2>APT30实行轮流工作制</h2>
 
-<hr />
+<hr>
 
 <p>APT30 POSSIBLY WORKING ON SHIFTS 分析BACKSPACE控制器时，我们在可移植可执行（PE）资源部分识别了一个对话框。该对话框包含一个有“请输入您的值班员代号”的登录提示，英文表示为“Please enter your attendant code”。尽管在我们分析的样本中禁用这个功能，这个工具能追踪多个操作员的工作轨迹。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/20150417024939467463de331bdddb16cf4ede822130b6253b5" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/20150417024939467463de331bdddb16cf4ede822130b6253b5" alt="enter image description here"></p>
 
 <p>BACKSPACE控制器（可能早在2014年就被编写了，但仍然能与去年编译的BACKSPACE变体相互兼容）的历史反映了随着时间的推移，工具得以发展，且能通过一个相对简单的界面，促进与受害主机的相互作用。<strong>这个工具能支持大量受害主机的交互活动，还能允许操作员进行过滤、优先化和预警，另外能管理他或她的受害者，<em>这表明了这些操作已经能证明这些特性了</em>。</strong>控制器有相同的版本控制和自我更新特性，该特性是由APT30用其他恶意软件发现的。此外，嵌入BACKSPACE控制器的序列号检查暗含着一个非常有限的分配工具，它只用于用户选择的号码。最后，“助手”对话框表明控制器本身就是在高度组织化的环境中使用的。<strong>所有这些因素都与一个威胁小组有关，这个威胁小组长期存在，且有组织、结构化的开发资源；随着时间的推移，它也能管理和追踪大量隐藏的受害者；且有实现组织目标的工作能力。</strong></p>
 
 <h1>0x07 APT30的主要任务：出于政治利益窃取数据</h1>
 
-<hr />
+<hr>
 
 <p>基于我们对APT30目标活动和工具的了解，由于他们对经济利益不感兴趣，所以其目标应该是窃取数据。APT30并没有把容易货币化（例如，信用卡数据、个人身份信息或银行转账凭证）的受害者和数据定为攻击目标。相反，他们的工具能够识别和窃取文件，这些文件中包括利益文件，它们可能存储在隔离网络中。</p>
 
@@ -245,13 +245,13 @@
 
 <p><strong>SHIPSHAPE</strong>用于将文件复制到插在主机上的可移动硬盘内，这些文件来自受SHIPSHAPE感染电脑上的特定路径。SHIPSHAPE会查找可移动硬盘上的现有文件和文件夹并将其隐藏。然后，它将可执行文件复制到可移动硬盘，复制后的文件名和文件夹名同原来一致，但是增加了 一个<strong>.exe</strong>扩展名。SHIPSHAPE修改了主机设置以隐藏文件扩展名，所以，可执行文件看起来和原始文件相同。在Windows资源管理器中查看时，可移动硬盘中的内容会正常显示：</p>
 
-<p><img src="http://static.wooyun.org/drops/uploads/c8b05e9cac74e3266c39d76fe34d6463.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/uploads/c8b05e9cac74e3266c39d76fe34d6463.png" alt="enter image description here"></p>
 
 <p>APT30识别并窃取文件，尤其是识别和窃取存储在隔离网络中的文件。</p>
 
 <p>但是，从命令行查看驱动器内容时会显示文件的两种设置：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041702494994811ca30e911483ae6bb08da83923e9ff41a" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/2015041702494994811ca30e911483ae6bb08da83923e9ff41a" alt="enter image description here"></p>
 
 <p>如果某用户试图在受感染的驱动器中“打开”一个文件，取而代之的将是执行一个恶意软件的副本。</p>
 
@@ -265,23 +265,23 @@
 
 <p>我们通过大量资料来了解APT30的预定目标。我们的资料包括：来自FireEye用户的APT30恶意软件警告、网络钓鱼诱饵文件内容和预定收件人、200多个APT30恶意软件样本以及APT30的操作时间和基础设施。我们还注意到，我们通过自己的产品检测的APT30恶意软件中，大约96%试图破坏位于东亚的客户端。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/201504170249448088815e2aac2bf87f3690f4ad970c9b9c71e" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/201504170249448088815e2aac2bf87f3690f4ad970c9b9c71e" alt="enter image description here"></p>
 
 <h1>0x09 APT30跟踪东南亚国家联盟（东盟，ASEAN）的成员</h1>
 
-<hr />
+<hr>
 
 <p>该组织对与东盟有关的机构和政府十分感兴趣，尤其是在东盟召开官方会议期间。东盟是一个重要的区域性组织，其各成员国之间倡导在政治、经济、教育和社会问题方面团结与协作。目前，东盟有10个成员国：印度尼西亚、马来西亚、菲律宾、新加坡、泰国、文莱、越南、老挝、缅甸和柬埔寨。</p>
 
 <h2>以东盟为主题的基础设施和自定义工具</h2>
 
-<hr />
+<hr>
 
 <p>APT30已为C2注册了以东盟为主题的域名，并且编译了窃取数据的恶意软件，该恶意软件专用于东盟事件。APT30很可能试图攻击东盟成员以窃取信息，这些信息有利于深入了解区域的政治和经济。</p>
 
 <p>域<strong>aseanm[.]com——</strong>好像是模仿的东盟的合法域(www.asean.org (http://www.asean.org/))——首次注册是在2010年三月。FireEye识别了100多个BACKSPACE恶意软件变体，这些变体的C2都使用域<strong>aseanm[.]com</strong>，其中含有东盟共同体重大事件的编译日期。下表为BACKSPACE样本的编译次数，这些样本的C2也都使用<strong>aseanm[.]com</strong>，通常与东盟事件有关：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041702494795049c06891f25de3e63aa2d6c101c910a80e" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/2015041702494795049c06891f25de3e63aa2d6c101c910a80e" alt="enter image description here"></p>
 
 <p>最近，大量BACKSPACE样本的出现提高了我们的评估质量，被编译的恶意软件用于以重大东盟问题为中心的攻击运动。87个最新BACKSPACE样本使用C2域<strong>aseanm[.]com</strong>，这些样本的编译日期集中在2013年1月和4月的一段时间。有35个样本的编译日期为2012年12月31日、2013年1月4日和2013年1月5日；2013年1月1日，东盟新秘书长Le Luong Minh执政，任期五年。相似地，有61个样本编译于2013年4月22日和23日；2013年4月24日-25日，第22届东盟峰会在文莱召开。</p>
 
@@ -293,11 +293,11 @@
 
 <p>修改后的URL</p>
 
-<p>其中一个自定义位于指定的URL，用于BACKSPACE C2通信。BACKSPACE对其大部分的C2使用HTTP，并从第一阶段的C2服务器检索了大量文件，每个文件都有恶意软件的附加说明。典型的C2 URL格式是<strong>http://<c2_domain>/<path>/<file></strong>，此处，<strong><c2_domain></strong>是第一阶段C2的位置，<path>是一个目录名称，可能不同样本的目录名称有所不同，<strong><filename></strong>是要下载的文件（如：<strong>dizhi.gif</strong>）。</p>
+<p>其中一个自定义位于指定的URL，用于BACKSPACE C2通信。BACKSPACE对其大部分的C2使用HTTP，并从第一阶段的C2服务器检索了大量文件，每个文件都有恶意软件的附加说明。典型的C2 URL格式是<strong>http://<c2_domain>/<path></path>/<file></file></c2_domain></strong>，此处，<strong><c2_domain></c2_domain></strong>是第一阶段C2的位置，<path></path>是一个目录名称，可能不同样本的目录名称有所不同，<strong><filename></filename></strong>是要下载的文件（如：<strong>dizhi.gif</strong>）。</p>
 
-<p>2013年1月和4月BACKSPACE样本使用的<strong><path></strong>名称大概暗示出，恶意软件最初打算攻击的国家（红色标记出）如下表所示：</p>
+<p>2013年1月和4月BACKSPACE样本使用的<strong><path></path></strong>名称大概暗示出，恶意软件最初打算攻击的国家（红色标记出）如下表所示：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/20150417025004699588498ed24119e2b38af11ac5859187e08" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/20150417025004699588498ed24119e2b38af11ac5859187e08" alt="enter image description here"></p>
 
 <p>支持数据窃取的自定义恶意软件</p>
 
@@ -306,7 +306,7 @@
 <ul>
 <li><strong>%WINDIR%\$NtUninstallKB900727$</strong></li>
 <li><strong>%WINDIR%\$NtUninstallKB885884$</strong></li>
-<li><strong><CSIDL_PROGRAMS>\Outlook Express\data</strong></li>
+<li><strong><csidl_programs>\Outlook Express\data</csidl_programs></strong></li>
 <li><strong>&lt;CSIDL&#95;COMMON&#95;PROGRAMS>\Outlook Express\data</strong></li>
 <li>** path.ini**文件中的指定自定义路径</li>
 </ul>
@@ -319,7 +319,7 @@
 
 <h2>APT30利用重大的政治交接事件作为钓鱼邮件的内容，感染重要的政治人士</h2>
 
-<hr />
+<hr>
 
 <p>在2014年夏天，FireEye检测到APT30使用钓鱼邮件攻击了一名地区客户。这个诱饵文件的主题是东南亚的以此重大政权更替。在这个钓鱼邮件中植入了一个后门（攻击前一天编译），ATP30利用这个后门可以入侵受害人的计算机，从而获取关于本国不安定因素和政权交替的情报。这类情报属于高度机密的政府类情报。</p>
 
@@ -327,13 +327,13 @@
 
 <h2>多个诱饵文件的主题都涉及不同国家的军事关系</h2>
 
-<hr />
+<hr>
 
 <p>APT30把不同国家的军事关系用做了诱饵文件的主题。这样做的目的可能是为了攻击那些持有双边关系情报的目标。APT30使用了一份合法的学术期刊作为其中一份诱饵文件的内容，这篇学术期刊的内容是针对印度国防和军事物资的诱饵文件</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041702500279452873bc4da8b6e6bc35727f07b5f9f4b98" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/2015041702500279452873bc4da8b6e6bc35727f07b5f9f4b98" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/201504170249538430537853c8b6ab3c2d007252f464c17a68d" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/201504170249538430537853c8b6ab3c2d007252f464c17a68d" alt="enter image description here"></p>
 
 <p>类似的，已经有APT30的诱饵文件的内容都涉及印度国防与军事物资问题。尤其是有许多&#95;网络钓鱼攻击&#95;spear phishing subjects 都针对印度航空母舰和海洋监测进程。在 Figure 20中出现的诱饵文件与印度首次独立进行航空母舰的实际建设和发射有关。</p>
 
@@ -348,7 +348,7 @@
 
 <h2>APT30针对进行负面报道的记者</h2>
 
-<hr />
+<hr>
 
 <p>我们研究发现，APT30不仅关注东南亚和印度，还针对报道腐败、经济、人权问题的记者。黑客组织之前针对过新闻工作者，现在也经常如此，以便更好了解事件进展，预测负面报道，左右公共信息。</p>
 
@@ -362,25 +362,25 @@
 
 <h2>已经证实的APT30目标国家及可能目标国家</h2>
 
-<hr />
+<hr>
 
 <p>已经证实的APT30目标国家(印度,泰国,韩国,沙特阿拉伯,马来西亚,美国,越南)</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/201504170249582076656f2af5fd023a7292b93df5970f5aeb5" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/201504170249582076656f2af5fd023a7292b93df5970f5aeb5" alt="enter image description here"></p>
 
 <p>可能成为APT30 目标的国家(尼泊尔,印尼,不丹,文莱,菲律宾,缅甸,新加坡,老挝)</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041702495975455089732791e41ab0adb74831864ba624d" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150417/2015041702495975455089732791e41ab0adb74831864ba624d" alt="enter image description here"></p>
 
 <h1>0x09 总结</h1>
 
-<hr />
+<hr>
 
 <p>网络间谍有明确的目标，坚持不懈，又有着充足的资源。APT30只是他们的一个缩影。在我们看来，黑客组织要考虑操作的时机，又要优先处理目标，他们的工具还可以侵染隔离网络，对敏感数据（比如政府网络数据）兴趣十足。研究一下网络间谍筛选、跟踪病毒的方式，不难看出，这一组织内部合作协调，管理得当。我们所遭遇的黑客组织中APT30可以说是元老级，运营时间已有十年之久。它也有明确区域瞄准优先权，这种黑客组织为数不多。</p>
 
 <p>我们对APT30的研究证实了许多猜想：网络间谍依靠网络收集近邻的信息，同时也在更大范围内收集全球信息。APT30并不注重窃取宝贵的商业知识产权亦或前沿科技，而是旨在获取邻近的东南亚地区的敏感数据。</p>
 
-<p>在曝光APT30的过程中，我们希望各组织能增强风险意识，提升自我防御能力。APt30目标性很强，因此区域内各组织机构应加强防护，保护信息资产不为对网络间谍所用。</p>      </p>
+<p>在曝光APT30的过程中，我们希望各组织能增强风险意识，提升自我防御能力。APt30目标性很强，因此区域内各组织机构应加强防护，保护信息资产不为对网络间谍所用。</p>      <p></p>
     
 			</body>
 		</html>

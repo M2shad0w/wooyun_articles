@@ -3,12 +3,12 @@
 			<head>
 			     <title>如何发现 NTP 放大攻击漏洞 - 心伤的胖子</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4715">http://drops.wooyun.org/tips/4715</a></h1>
 				
       <p>
-        <p>原文：<a href="http://jamesdotcom.com/?p=578">http://jamesdotcom.com/?p=578</a></p>
+        </p><p>原文：<a href="http://jamesdotcom.com/?p=578">http://jamesdotcom.com/?p=578</a></p>
 
 <p>NTP 漏洞相关的文章在 Drops 已经有过了，并且不止一篇，之所以又翻译了这一片文章，是觉得文章的整体思路很不错，希望对看这篇文章的你有所帮助。</p>
 
@@ -16,7 +16,7 @@
 
 <h2>0x00 简介</h2>
 
-<hr />
+<hr>
 
 <p>NTP 放大攻击其实就是 DDoS 的一种。通过 NTP 服务器，可以把很小的请求变成很大的响应，这些响应可以直接指向到受害者的电脑。</p>
 
@@ -28,7 +28,7 @@
 
 <h2>0x01 如何去做</h2>
 
-<hr />
+<hr>
 
 <p>为了确定有多少 NTP 服务器响应 MONLIST 请求，我会通过两个独立的部分去做。</p>
 
@@ -167,7 +167,7 @@ print 'End'
 
 <h2>0x02 最后</h2>
 
-<hr />
+<hr>
 
 <p>正如我前面所提到的，我的带宽实在是太小了，所以我只能够选择一个 IP 段：101.0.0.0-120.0.0.0。如果我的数学不是体育老师教的话，那么我应该不会算错，这个 IP 段内包含 318,767,104 个 IP 地址（19<em>256</em>256）。</p>
 
@@ -177,7 +177,7 @@ print 'End'
 
 <p>如果按照这个比例进行换算的话，那个整个互联网上将有 91,000 台开启 MONLIST 功能的 NTP 服务器。</p>
 
-<p>over!</p>      </p>
+<p>over!</p>      <p></p>
     
 			</body>
 		</html>

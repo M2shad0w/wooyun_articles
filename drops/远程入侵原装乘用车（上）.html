@@ -3,18 +3,18 @@
 			<head>
 			     <title>远程入侵原装乘用车（上） - 唐朝实验室</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/9974">http://drops.wooyun.org/papers/9974</a></h1>
 				
       <p>
-        <p><strong>Author: Dr. Charlie Miller (<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2f4c424643434a5d6f405f4a415d4c4a01405d48">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>) Chris Valasek (<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b8dbced9d4d9cbddd3f8dfd5d9d1d496dbd7d5">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>)</strong></p>
+        </p><p><strong>Author: Dr. Charlie Miller (<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2f4c424643434a5d6f405f4a415d4c4a01405d48">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>) Chris Valasek (<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b8dbced9d4d9cbddd3f8dfd5d9d1d496dbd7d5">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>)</strong></p>
 
 <p><strong>唐朝实验室翻译组:朱于涛 刘家志</strong></p>
 
 <h1>0x00 简介&amp;背景</h1>
 
-<hr />
+<hr>
 
 <p>汽车安全研究一直是大众消费者非常感兴趣的一个话题，因为汽车已经走入了寻常百姓家，而且我们也明白一旦攻击者可以任意的操控我们的汽车，那么我们的行车安全就会受到极大的威胁。很大程度上，汽车安全研究是从2010年开始的。当时，华盛顿大学和加州大学圣地亚哥分校的研究人员称，如果他们能够将某些信息注入到车辆的CAN总线中，他们就可以操控车辆的一些物理状态（推测的测试车型是2009年的雪佛兰迈锐宝），比如控制仪表盘上的显示速度，关闭引擎或影响刹车性能。虽然这次研究很有意思，但是也遭到了大众的广泛批评，因为他们认为攻击者在无法近距离接触到车辆的情况下，是没有办法向汽车中注入此类信息的，不过，如果攻击者能近距离接触到目标车辆，他们可以直接切断某条线路，或执行其他的一些物理攻击就足够了。</p>
 
@@ -36,17 +36,17 @@
 
 <h1>0x01 目标-2014款吉普切诺</h1>
 
-<hr />
+<hr>
 
 <p>我们选择2014款吉普切诺是因为这款车给我们提供了最佳的机会来证明，一旦远程入侵成功，攻击者就可以通过发送信息，侵入驾驶员的隐私，代替攻击者执行一些物理操作。正如我们在先前研究中就指出的，对于攻击者来说，这款车的攻击障碍更少。但是，这并不代表其他制造商生产的汽车就是无法入侵的或是更安全的，只是说，我们认为这款车是适合我们的研究对象。更重要是，在我们的预算限制中，只有这款车能提供我们想要的技术功能。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008571883402.com/blob/dpvaaab46fm/n3ocq0aljnai5zudtvoujg?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008571883402.com/blob/dpvaaab46fm/n3ocq0aljnai5zudtvoujg?s=2sdkadyvrlzm" alt=""></p>
 
 <h2>网络架构</h2>
 
 <p>这台2014款吉普切诺的架构非常吸引我们，因为这款车的头单元（无线电广播）连接到了车辆上实现的两条CAN总线。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007554398612.com/blob/dpvaaab46fm/jvnju0kkly7ttzro-gdxzw?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042007554398612.com/blob/dpvaaab46fm/jvnju0kkly7ttzro-gdxzw?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-2014年款吉普切诺的结构图</p>
 
@@ -113,7 +113,7 @@
 
 <p>与ACC类似，前向碰撞警告系统+（FCW+）会防止车辆与前方物体发生碰撞。但是，不同于ACC，除非特意关闭，FCW+是一直开启的，在遇到突发情况时，系统会协助驾驶员刹车。例如，如果驾驶员正在看手机，而没有注意前方的道路，并且前方车辆突然刹车了，FCW+就会发出声音警报，并代替驾驶员刹车。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042011003279377.com/blob/dpvaaab46fm/-jxh1jsg2_j6yym1thefug?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042011003279377.com/blob/dpvaaab46fm/-jxh1jsg2_j6yym1thefug?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-FCW+</p>
 
@@ -121,7 +121,7 @@
 
 <p>车道偏离警告系统（LDW+）这项功能是为了保证驾驶员在高速公路上的驾驶安全。LDW+在启用时会检查行车线路（道路上的油漆线），判断车辆是否乱线，从而避免碰撞或更严重的事故。如果系统检测到车辆正在偏离当前的线路，系统就会调整方向盘以保持在当前线路上形式。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008572569210.com/blob/dpvaaab46fm/08bxjfiakybo-mnxoxhbuw?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008572569210.com/blob/dpvaaab46fm/08bxjfiakybo-mnxoxhbuw?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-LDW+</p>
 
@@ -129,17 +129,17 @@
 
 <p>近期，最新的泊车辅助功能（PAM）也加入到了普通车辆上。泊车辅助系统（PAM）能帮助驾驶员完成停车操作，在多数情况下不需要驾驶员出力，比如平行停车，倒车停车等。我们认为以此为切入点，是控制车辆方向盘的最简单方法，并且我们已经证明了利用这项技术，只需要通过CAN信息就能控制车辆在高速行驶中的转向。在后面你会发现，PAM技术和模块在我们的研究中发挥了关键作用。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042009173586994.com/blob/dpvaaab46fm/yeco4capwhncvmdljbgyva?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042009173586994.com/blob/dpvaaab46fm/yeco4capwhncvmdljbgyva?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-使用中的PAM系统显示</p>
 
 <h1>0x03 远程攻击途径</h1>
 
-<hr />
+<hr>
 
 <p>在下表中，我们列出了攻击者可能选择的一些切入点。很多人在看到这些项目时想到的都是各种技术术语，但是对于攻击者来说，每项与外界交互的技术都是一个潜在的攻击切入点。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008572953812.com/blob/dpvaaab46fm/1wdffyjjfwnwdbq3bxfdha?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008572953812.com/blob/dpvaaab46fm/1wdffyjjfwnwdbq3bxfdha?s=2sdkadyvrlzm" alt=""></p>
 
 <h2>被动防盗系统（PATS）</h2>
 
@@ -147,7 +147,7 @@
 
 <p>从远程攻击的角度看，这个攻击平面太窄了。唯一的数据传输（并且是由IC上的软件处理）就是识别码和射频信号。很难想象这个识别代码中会存在可利用的漏洞，即使是有，你也必须要接近传感器，因为传感器在设计上就只能接收附近的信号。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007555846678.com/blob/dpvaaab46fm/kqfr4kevkg6_pxl_b1halg?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042007555846678.com/blob/dpvaaab46fm/kqfr4kevkg6_pxl_b1halg?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-显示没有检测到钥匙</p>
 
@@ -157,7 +157,7 @@
 
 <p>几乎可以确定的是，通过采取一些操作是可以攻击TPMS系统的，比如让车辆误以为轮胎或TPMS系统出现了问题。另外，研究人员还证明了在有些情况下，是可以造成相关的ECU崩溃或变砖。考虑到代码执行的可能性，这个攻击平面也很窄。但是，既然ECU能远程变砖，这还是说明其数据处理方式不够安全，所以这类攻击还是可行的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008573121991.com/blob/dpvaaab46fm/rqb3gs1fxzk-0r-m5pev4a?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008573121991.com/blob/dpvaaab46fm/rqb3gs1fxzk-0r-m5pev4a?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-2014年款吉普切诺的TPMS系统显示界面</p>
 
@@ -167,7 +167,7 @@
 
 <p>鉴于远程代码执行，这种攻击平面很窄。因为，RHFM中一定有专门的固件来负责处理射频信号，加密/解密代码和识别电子钥匙数据的逻辑以及编程备用电子钥匙的逻辑。虽然这是一种可能的攻击途径，但是要想在RKE中找到漏洞来实现远程代码执行似乎是不可能的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042009173856909.com/blob/dpvaaab46fm/ib9vmf4boyrxwxfvr5iaxq?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042009173856909.com/blob/dpvaaab46fm/ib9vmf4boyrxwxfvr5iaxq?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-2014年款吉普切诺的电子钥匙</p>
 
@@ -177,7 +177,7 @@
 
 <p>不同于现有的其他信号，蓝牙栈很庞大，同时也存在着大量的攻击漏洞，所以攻击平面很大。一般来说，涉及到蓝牙栈的攻击方案有两种。第一种是利用未配对的设备。这种攻击的危险程度是最高的，因为攻击者可以获取到设备的代码。第二种利用方法是在配对完成后，因为涉及到了用户交互，所以威胁性没有那么大。曾经就有研究人员演示了如何利用蓝牙接口来入侵一辆汽车。Codenomicon的研究人员还发现，汽车中常用的蓝牙接收器有很多崩溃的情况。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042009174290585.com/blob/dpvaaab46fm/dyr6nprtjlx4o_gb-ipmyg?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042009174290585.com/blob/dpvaaab46fm/dyr6nprtjlx4o_gb-ipmyg?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-2014年款吉普切诺的蓝牙面板</p>
 
@@ -185,7 +185,7 @@
 
 <p>无线电广播不仅仅可以接收声音信号，也可以接收数据。在吉普切诺上，无线电广播可以接收多种远程输入，比如GPS，AM/FM广播和卫星电台。在多数情况下，这些信号都会简单的转换成音频输出，数据解析的数量也不大，这就说明其中不太可能有可以利用的漏洞。但是，例外就是无线电数据系统中用于发送数据和FM模拟信号（或卫星电台）的数据。用户可以感知到包括当电台播报的电台名称和正在播放的歌曲名称，在这时，数据必须要经过解析和显示，这样就为安全漏洞创造了空间。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008573736625.com/blob/dpvaaab46fm/ixsxvkscpjouwczv_gfk-w?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008573736625.com/blob/dpvaaab46fm/ixsxvkscpjouwczv_gfk-w?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-2014年款吉普切诺的无线电广播数据面板</p>
 
@@ -193,7 +193,7 @@
 
 <p>有些汽车还提供了蜂窝数据上网功能，实际上，这些汽车是通过Wi-Fi热点的方式来为乘客提供网络连接。在吉普切诺上，这是一个根据使用情况购买的功能，比如按天或按月购买。我们观察到即使是不了解汽车系统的人也可以访问这个Wi-Fi系统。虽然Wi-Fi安全评估方法已经存在了好多年，但是近年来，数据点入侵攻击还是经常发生。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042009174582165.com/blob/dpvaaab46fm/dy6jd4neg8rrxeoimnvgca?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042009174582165.com/blob/dpvaaab46fm/dy6jd4neg8rrxeoimnvgca?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-2014年款吉普切诺的Wi-Fi面板</p>
 
@@ -205,11 +205,11 @@
 
 <p>在2014年的吉普切诺上，其通讯系统、网络、无线电广播和Apps都在出厂时绑定到了哈曼Uconnect 系统上。接下来我们会详细地介绍这个Uconnect系统，但是我们想要指出，所有与“信息娱乐”系统相关的功能都是物理集成在一个单元上。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042009174866812.com/blob/dpvaaab46fm/nt7vyzm5ojbaasrauqtczg?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042009174866812.com/blob/dpvaaab46fm/nt7vyzm5ojbaasrauqtczg?s=2sdkadyvrlzm" alt=""></p>
 
 <h1>0x04 Uconnect系统</h1>
 
-<hr />
+<hr>
 
 <p>2014年款的吉普雷诺使用了由哈曼卡顿生产的Uconnect 8.4AN/RA4 无线电广播系统，并且哈曼卡顿是吉普汽车的唯一供应商，负责提供信息娱乐系统、Wi-Fi连接、导航、app和蜂窝通讯。大多数的功能都是集成在一块德州仪器芯片上的OMAP-DM3730系统中，这是汽车上经常使用的一个系统。菲亚特克莱斯勒汽车的很多不同车型也都使用了哈曼Uconnect系统，包括克莱斯勒、道奇、吉普和Ram。当然，其他品牌的汽车也有的使用了Uconnect系统。</p>
 
@@ -417,7 +417,7 @@ RADIO_W_GYRO::1
 
 <pre><code>int convert_byte_to_ascii_letter(signed int c_val)
 {
-  char v3; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f684c2b6c4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  char v3; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f684c2b6c4">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
   if ( c_val &gt; 9 )
   {
     if ( c_val &gt; 35 )
@@ -527,7 +527,7 @@ ERROR "Unknown command"
 
 <p>Uconnect系统上的D-Bus信息守护进程绑定到了端口6667，并且如上所述，用于跨进程通讯。进程之间的交互如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008574468572.com/blob/dpvaaab46fm/ftiwp8b1w4wfxiyf-tpora?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008574468572.com/blob/dpvaaab46fm/ftiwp8b1w4wfxiyf-tpora?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-<code>http://dbus.freedesktop.org/doc/diagram.png</code></p>
 
@@ -550,7 +550,7 @@ BEGIN
 
 <p>用户可以使用DFeet工具与吉普切诺上的D-Bus服务交互。在下面的截图中，我们看到的是‘<code>com.harman.service.SoftwareUpdate</code>’ 服务的方法。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008131243520.com/blob/dpvaaab46fm/qbatob9ryfrfiwd9tve5rg?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008131243520.com/blob/dpvaaab46fm/qbatob9ryfrfiwd9tve5rg?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-<code>com.harman.service.SoftwareUpdat</code> 服务在DFeet中的输出</p>
 
@@ -566,7 +566,7 @@ com.harman.service.AudioCtrlSvc
 
 <p>在DFeet中就可以调用这些服务。比如，你可以单击’<code>com.harman.service.Control</code>’，然后是‘<code>/com/harman/service/Control</code>’，接着是‘ ‘Serviceipc’下的Invoke’，最后执行下面的参数：“getServices”, “”</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008574775776.com/blob/dpvaaab46fm/ej87wpm-sa8ctm0hmdw-va?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008574775776.com/blob/dpvaaab46fm/ej87wpm-sa8ctm0hmdw-va?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-通过DFeet调用</p>
 
@@ -594,7 +594,7 @@ lProperties":"getAllProperties","setProperties":"setProperties"}},
 
 <p>蜂窝连接可能是通过Sierra Wireless AirPrime AR5550无线模块实现的，如下。</p>
 
-<p><img src="http://www.quip.com/blob/dPVAAAb46Fm/0_5KQGs1A11-SCz1rHidRg?s=2SDKADyVrLzM" alt="" /></p>
+<p><img src="http://www.quip.com/blob/dPVAAAb46Fm/0_5KQGs1A11-SCz1rHidRg?s=2SDKADyVrLzM" alt=""></p>
 
 <p>图-哈曼Uconnect系统上的Sierra Wireless AirPrime AR5550无线模块</p>
 
@@ -606,7 +606,7 @@ lProperties":"getAllProperties","setProperties":"setProperties"}},
 
 <p>负责与内部高速CAN（CAN-IHS）交互的处理器和主要的CAN-C总线是一个Renesas V850处理器，如下。</p>
 
-<p><img src="http://www.quip.com/blob/dPVAAAb46Fm/4n7vLxMtoVzqyfKyqXO7cw?s=2SDKADyVrLzM" alt="" /></p>
+<p><img src="http://www.quip.com/blob/dPVAAAb46Fm/4n7vLxMtoVzqyfKyqXO7cw?s=2SDKADyVrLzM" alt=""></p>
 
 <p>图-Renesas V850 FJ3</p>
 
@@ -616,7 +616,7 @@ lProperties":"getAllProperties","setProperties":"setProperties"}},
 
 <h1>0x05 劫持Uconnect</h1>
 
-<hr />
+<hr>
 
 <p>接下来你会发现，要想劫持Uconnect设备，并不需要远程入侵这辆吉普，但是，要想弄清楚如何探索头单元和其他部分，劫持是很有必要的。我们在这里提供了一些具体的信息来帮助那些热衷于访问头单元文件的用户。很显然，本地安全是整个汽车安全中很重要的一个部分。因为任何漏洞作者都会告诉你说，只有搞明白了目标系统中错综复杂的关系，你才能创建一个能完全发挥作用的漏洞。</p>
 
@@ -626,7 +626,7 @@ lProperties":"getAllProperties","setProperties":"setProperties"}},
 
 <p>你可以把一个有效的ISO文件放到一个U盘上，再把这个U盘插入到Uconnect系统的USB端口。头单元就会识别这个包含有更新文件的U盘并开始更新过程，如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042009175618175.com/blob/dpvaaab46fm/crfr_fwy3lseaak8ejdl2q?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042009175618175.com/blob/dpvaaab46fm/crfr_fwy3lseaak8ejdl2q?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-Uconnect的更新界面</p>
 
@@ -634,7 +634,7 @@ lProperties":"getAllProperties","setProperties":"setProperties"}},
 
 <p>但是，在验证了U盘后，系统就会重启头单元。如果，你这时候关机并拔出U盘，系统就会简单地要求你插入U盘。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042011140191928.com/blob/dpvaaab46fm/qy0q2kbnnc8t03sqyrdy9q?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042011140191928.com/blob/dpvaaab46fm/qy0q2kbnnc8t03sqyrdy9q?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-要求插入U盘的界面</p>
 
@@ -663,7 +663,7 @@ print("system_module_check: skip ISO integrity check")
 
 <p>绕过ISO有效性检查很简单，只需要在一个十六进制编辑器中手动编辑文件并把偏移128 (0x80) 上的值修改为‘S’ (0x53)。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042009180284870.com/blob/dpvaaab46fm/lh9guxrrlca83aasx9sfqq?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042009180284870.com/blob/dpvaaab46fm/lh9guxrrlca83aasx9sfqq?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-修改后的完整性检查字节</p>
 
@@ -689,9 +689,9 @@ print("system_module_check: skip ISO integrity check")
 
 <p>如下是通过SSH登录哈曼Uconnect系统：</p>
 
-<pre><code>ssh <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d7a5b8b8a397e6eee5f9e6e1eff9e2f9e6">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code>ssh <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d7a5b8b8a397e6eee5f9e6e1eff9e2f9e6">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 ******************************** CMC ******************************** Warning - You are knowingly accessing a secured system. That means you are liable for any mischeif you do. *********************************************************************
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1e6c71716a5e2f272c302f2826302b302f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>'s password:
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1e6c71716a5e2f272c302f2826302b302f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>'s password:
 </code></pre>
 
 <p>注意：其中有个词拼错了。</p>
@@ -704,7 +704,7 @@ print("system_module_check: skip ISO integrity check")
 <p>很明显，通过发出另一个挂载命令就可以逆向这个过程：</p>
 
 <pre><code>mount -ur /fs/mmc0/
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

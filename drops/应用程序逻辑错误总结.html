@@ -3,14 +3,14 @@
 			<head>
 			     <title>应用程序逻辑错误总结 - jaffer</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1418">http://drops.wooyun.org/papers/1418</a></h1>
 				
       <p>
-        <h2>0x00 引言</h2>
+        </p><h2>0x00 引言</h2>
 
-<hr />
+<hr>
 
 <p>所有应用程序都是通过逻辑实现各种丰富多彩的功能的，要实现这些功能，必须掌握大量的技巧并进行周密的安排。但是，有很多情况这些功能逻辑存在缺陷，比如程序员的安全意识，比如考虑问题不周全等。即使是最简单的web应用程序，每个阶段都会执行大量的逻辑操作，这些逻辑操作代表着一个复杂的攻击面，它从没有消失，只是容易被遗忘。</p>
 
@@ -22,7 +22,7 @@
 
 <h2>0x01 欺骗密码找回功能</h2>
 
-<hr />
+<hr>
 
 <p>密码找回功能本意是设计给那些忘记密码的用户，以便他们能够找回自己的密码。</p>
 
@@ -38,7 +38,7 @@
 
 <h2>0x02 规避交易限制</h2>
 
-<hr />
+<hr>
 
 <p>在一些网上交易网站上，开发者一般的设计是这样的：用户购买商品，然后根据价格，得到一个总价，然后根据总价来扣钱。</p>
 
@@ -56,7 +56,7 @@
 
 <h2>0x03 越权缺陷</h2>
 
-<hr />
+<hr>
 
 <p>这个就以发帖来说明，一般的假设都是这样的，A发了一篇帖子，这篇帖子的地址是<a href="http://xxxx.com/fatie/A">http://xxxx.com/fatie/A</a>, 然后，B用户发帖，发帖的地址是http://xxxx.com/fatie/B。</p>
 
@@ -72,7 +72,7 @@
 
 <h2>0x04 cookies和session的问题</h2>
 
-<hr />
+<hr>
 
 <p>一些网站对于用户是否成功登录不是看用户名与密码是否与数据库里面的匹配，而是看cookies是否为空或session是否为true。这样的问题的假设就是开发者认为用户能够登录，那么cookies就不会为空或session就不会为false。但是逻辑缺陷很明显，那么只要能知道用户ID，然后构造一个cookies或让session值为true就可以绕过这样的认证了。</p>
 
@@ -82,7 +82,7 @@
 
 <h2>0x05 顺序执行缺陷（强制浏览）</h2>
 
-<hr />
+<hr>
 
 <p>有些网站，可能会有这样的功能：</p>
 
@@ -104,7 +104,7 @@
 
 <h2>0x06 时间刷新缺陷</h2>
 
-<hr />
+<hr>
 
 <p>这个缺陷我想主要是针对的12306吧。</p>
 
@@ -118,7 +118,7 @@
 
 <h2>0x07 避免逻辑缺陷一些建议</h2>
 
-<hr />
+<hr>
 
 <p>逻辑缺陷给应用程序带来的危害是巨大的。我进行了一个简单的统计，对于BAT3个公司，逻辑缺陷（这里我将逻辑缺陷、权限绕过的比例加在了一起）的比例分别是：百度15%，在所有漏洞中占的比例排第二，阿里巴巴32%，在所有漏洞中排名第一，腾讯27%，与XSS漏洞并列第一。从这3个公司可以看出，逻辑缺陷或逻辑错误的危害是相当大的。</p>
 
@@ -132,13 +132,13 @@
 
 <h2>0x08 结束语</h2>
 
-<hr />
+<hr>
 
 <p>逻辑缺陷是一个非常常见的问题，因为对于一个设计者，不可能面面俱到，总会有疏漏。那么对于渗透测试员来说就必须从不同的角度考虑问题了。尤其是从异常考虑问题，从而发现应用程序是否是正确处理了异常。</p>
 
 <p>除了基本的测试，在探查逻辑缺陷面临的最大的挑战就是，如何深入了解开发者的思维。需要了解他们想要打到什么目的，可能会做什么假设，可能采取哪些捷径，可能犯下什么错误。想想一个项目最后期限到了，开发人员为了完成任务，就会不顾安全。然后就会很容易犯下错误。我们想的就是如何利用这些错误了。</p>
 
-<p> </p>      </p>
+<p> </p>      <p></p>
     
 			</body>
 		</html>

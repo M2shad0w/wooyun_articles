@@ -3,16 +3,16 @@
 			<head>
 			     <title>由“正方”jiam、jiemi之逆向思及Base64之逆编码表 - RedFree</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/847">http://drops.wooyun.org/tips/847</a></h1>
 				
       <p>
-        <p>申明：本文旨在技术交流，并不针对“正方”（新版正方教务系统密码处理方式也换了，只是用这个做个引子而已……）！本文并没有什么深度，仅探讨已知明文、密文和算法的情况下逆向得Key的可能！</p>
+        </p><p>申明：本文旨在技术交流，并不针对“正方”（新版正方教务系统密码处理方式也换了，只是用这个做个引子而已……）！本文并没有什么深度，仅探讨已知明文、密文和算法的情况下逆向得Key的可能！</p>
 
 <h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>经常遇到基友求助类似Base64编码的解码(先不说是不是Base64,下文会做说明)。如：p6FDpXlnQ1tHlLZK+NvA1hwfeND8NdXt1q6whqP6WODTEBP4UzzjnDQ== 这个很像Base64编码吧，但你用标准Base64去解码得到的结果明显不是想要的(这个有N多可能)。</p>
 
@@ -20,7 +20,7 @@
 
 <h2>0x01 编解码</h2>
 
-<hr />
+<hr>
 
 <p>且从编码、解码说起吧，最简单的编码（为什么不叫加密、解密呢？看你用它干什么了……）是将字符映射，例如：</p>
 
@@ -35,7 +35,7 @@ y=c
 z=d
 </code></pre>
 
-<p>这只是个例子，还有数字、特殊字符等没写进去呢。当然你也可以用没有规律的映射方式去编码。这样的编码如果用于加密密码的话会有什么缺陷呢？<br />
+<p>这只是个例子，还有数字、特殊字符等没写进去呢。当然你也可以用没有规律的映射方式去编码。这样的编码如果用于加密密码的话会有什么缺陷呢？<br>
 假定某人已经拥有了几组明文和对应的密文，那么他可以用手上的这几组明文和密文寻找规律来还原映射关系，然后再由这个映射关系轻松破解其它密文。</p>
 
 <p>由此，我们将可还原明文的加密算法分为如下几类(为什么要密文可还原？还是让厂商来回答吧！)：</p>
@@ -48,7 +48,7 @@ z=d
 
 <h2>0x02 再议“正方”之jiam、jiemi</h2>
 
-<hr />
+<hr>
 
 <p>为什么是再议呢？因为正方教务系统的“加密”、“解密”运作方式早已被讨论N多次了，网上甚至可以找到此算法的N多版本(可自行Baidu、Google)。
 两个典型的场景是：</p>
@@ -59,7 +59,7 @@ z=d
 
 <p>为了研究此算法尝试逆得Key，我决定再写个VB版的。由于事先已从网上查知算法位于/bin/zjdx.dll中，所以找起来就简单了，网上找得一份“源码”使用Reflector载入zjdx.dll，由登录页Default2跟进到jiam方法如图：</p>
 
-<p><img src="http://static.wooyun.org/201401/2014010421455783468.jpg" alt="2014010421455783468.jpg" /></p>
+<p><img src="http://static.wooyun.org/201401/2014010421455783468.jpg" alt="2014010421455783468.jpg"></p>
 
 <p>源码如下(已写上注释)：</p>
 
@@ -173,10 +173,10 @@ z=d
 
 <p>解密逻辑：</p>
 
-<p>+--判断密文长度是否是偶数|下一步<br />
-|是(重组密文) 否|下一步<br />
-|一位位截得密码和key的某位异或|下一步<br />
-|根据异或结果组合字符|下一步<br />
+<p>+--判断密文长度是否是偶数|下一步<br>
+|是(重组密文) 否|下一步<br>
+|一位位截得密码和key的某位异或|下一步<br>
+|根据异或结果组合字符|下一步<br>
 +最终结果|</p>
 
 <p>根据此逻辑书写的VB代码如下：</p>
@@ -257,7 +257,7 @@ Acxy*f3**j*
 
 <h2>0x03 反观Base64编码</h2>
 
-<hr />
+<hr>
 
 <p>看一看类似的可以编码且可还原原码的Base64编码吧!</p>
 
@@ -269,14 +269,14 @@ Acxy*f3**j*
 
 <p>Base标准编码表：</p>
 
-<p><img src="http://static.wooyun.org/201401/2014010421512778349.jpg" alt="2014010421512778349.jpg" /></p>
+<p><img src="http://static.wooyun.org/201401/2014010421512778349.jpg" alt="2014010421512778349.jpg"></p>
 
 <p>示例：</p>
 
-<p><img src="http://static.wooyun.org/201401/2014010421514440450.jpg" alt="2014010421514440450.jpg" /></p>
+<p><img src="http://static.wooyun.org/201401/2014010421514440450.jpg" alt="2014010421514440450.jpg"></p>
 
-<p><img src="http://static.wooyun.org/201401/2014010421515961709.jpg" alt="2014010421515961709.jpg" /><br />
-A   QQ==<br />
+<p><img src="http://static.wooyun.org/201401/2014010421515961709.jpg" alt="2014010421515961709.jpg"><br>
+A   QQ==<br>
 BC  QkM=</p>
 
 <p>正常情况下Base64的编码表是：ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=，但如果将编码表中的字符换其它顺序排一下结果又是什么样子呢？</p>
@@ -347,11 +347,11 @@ Base64(Base64(I))= Base64(编码表中第18位的字符)
 
 <h2>0x04 反思</h2>
 
-<hr />
+<hr>
 
 <p>本文只尝试了从首字符去还原二次编码的Base64编码表，是不是有其它方法能很轻易的还原编码表呢？</p>
 
-<p>对于类似edcode(str,key)一次加密得到的密文且已知算法(密码可还原)的情况下，是不是都可以通过明文和密文逆到key呢？</p>      </p>
+<p>对于类似edcode(str,key)一次加密得到的密文且已知算法(密码可还原)的情况下，是不是都可以通过明文和密文逆到key呢？</p>      <p></p>
     
 			</body>
 		</html>

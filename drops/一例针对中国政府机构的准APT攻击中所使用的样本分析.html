@@ -3,12 +3,12 @@
 			<head>
 			     <title>一例针对中国政府机构的准APT攻击中所使用的样本分析 - SwordLea</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/6332">http://drops.wooyun.org/papers/6332</a></h1>
 				
       <p>
-        <p>作者:安天</p>
+        </p><p>作者:安天</p>
 
 <p>微信公众号:Antiylab</p>
 
@@ -16,7 +16,7 @@
 
 <h1>0x00 背景</h1>
 
-<hr />
+<hr>
 
 <p>安天近期发现一例针对中国政府机构的准APT攻击事件，在攻击场景中，攻击者依托自动化攻击测试平台Cobalt Strike生成的、使用信标（Beacon）模式进行通信的Shellcode，实现了对目标主机进行远程控制的能力。这种攻击模式在目标主机中体现为:无恶意代码实体文件、每60秒发送一次网络心跳数据包、使用Cookie字段发送数据信息等行为，这些行为在一定程度上可以躲避主机安全防护检测软件的查杀与防火墙的拦截。鉴于这个攻击与Cobalt Strike平台的关系，我们暂时将这一攻击事件命名为APT-TOCS（TOCS，取Threat on Cobalt Strike之意。）</p>
 
@@ -30,11 +30,11 @@
 
 <h1>0x01 事件样本分析</h1>
 
-<hr />
+<hr>
 
 <h2>2.1 前导文件与样本加载</h2>
 
-<hr />
+<hr>
 
 <p>APT-TOCS是利用了"powershell.exe"执行Shellcode的脚本实现对目标系统的远程控制。安天分析人员认为攻击者掌握较多种最终可以达成多种脚本加载权限的远程注入手段，如利用安全缺陷或漏洞直接实现脚本在主机上执行。同时，通过关联分析，发现如下的二进制攻击前导文件（以下简称Sample A），曾被用于类似攻击：</p>
 
@@ -61,13 +61,13 @@ MD5 44BCF2DD262F12222ADEAB6F59B2975B
 
 <p>该PE样本中嵌入的脚本，与安天获取到的Shellcode脚本功能代码完全相同，但加密数据存在差异，该PE样本曾在2015年5月2日被首次上传到Virustotal。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503012999353.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503012999353.png" alt="enter image description here"></p>
 
 <p>图1 PE文件内嵌的使用powershell.exe加载加密数据</p>
 
 <p>该PE样本使用WinExec运行嵌入的恶意代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503012926176.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503012926176.png" alt="enter image description here"></p>
 
 <p>图2使用WinExec函数调用powershell.exe加载加密数据</p>
 
@@ -75,19 +75,19 @@ MD5 44BCF2DD262F12222ADEAB6F59B2975B
 
 <h2>2.2 关键机理</h2>
 
-<hr />
+<hr>
 
 <p>APT-TOCS攻击远控的核心部分是依托PowerShell加载的加密数据脚本（以下简称Sample_B），图1为脚本各模块之间的衍生关系和模块主要功能：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013045084.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503013045084.png" alt="enter image description here"></p>
 
 <h2>2.3 APT-TOCS的主样本（SampleB）分析</h2>
 
-<hr />
+<hr>
 
 <p>Sample B文件的内容（base64的内容已经省略）如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013079242.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503013079242.png" alt="enter image description here"></p>
 
 <p>图4 Sample B的内容</p>
 
@@ -95,11 +95,11 @@ MD5 44BCF2DD262F12222ADEAB6F59B2975B
 
 <h2>2.4 脚本1分析</h2>
 
-<hr />
+<hr>
 
 <p>脚本1的内容（base64的内容已经省略）如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013183122.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503013183122.png" alt="enter image description here"></p>
 
 <p>图5脚本1的内容</p>
 
@@ -107,11 +107,11 @@ MD5 44BCF2DD262F12222ADEAB6F59B2975B
 
 <h2>2.5 模块1分析</h2>
 
-<hr />
+<hr>
 
 <p>该模块的主要功能是调用wininet模块的函数，进行连接网络，下载模块2的操作；并加载到内存中执行。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013150165.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503013150165.png" alt="enter image description here"></p>
 
 <p>图6HTTP GET请求</p>
 
@@ -119,29 +119,29 @@ MD5 44BCF2DD262F12222ADEAB6F59B2975B
 
 <h2>2.6 模块2分析</h2>
 
-<hr />
+<hr>
 
 <p>模块2创建并挂起系统进程rundll32.exe：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013148415.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503013148415.png" alt="enter image description here"></p>
 
 <p>图7创建挂起系统进程rundll32.exe</p>
 
 <p>写入模块3的数据：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013257201.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503013257201.png" alt="enter image description here"></p>
 
 <p>图8写入模块3的数据</p>
 
 <p>模块3的数据虽然是以"MZ"开头，但并非为PE文件，而是具有后门功能的Shellcode。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013349647.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503013349647.png" alt="enter image description here"></p>
 
 <p>图9以MZ（4D 5A）开头的Shellcode</p>
 
 <h2>2.7 模块3分析</h2>
 
-<hr />
+<hr>
 
 <p>该模块会连接两个地址，端口号为80：</p>
 
@@ -152,31 +152,31 @@ dc.******69.info (146.0.***.***)    （罗马尼亚）
 
 <p>发送请求数据，接收返回数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013453849.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503013453849.png" alt="enter image description here"></p>
 
 <p>图10发送请求数据</p>
 
 <p>上述IP、域名和访问地址的解密方式是"异或0x69"。 从该模块的字符串与所调用的系统函数来判断，该模块为后门程序，会主动向指定的地址发送GET请求，使用Cookie字段来发送心跳包，间隔时间为60秒。心跳包数据包括校验码、进程ID、系统版本、IP地址、计算机名、用户名、是否为64位进程，并将该数据使用RSA、BASE64加密及编码。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013479544.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503013479544.png" alt="enter image description here"></p>
 
 <p>图11心跳包原始数据</p>
 
 <p>由于进程ID与校验码的不同，导致每次传输的心跳包数据不相同。校验码是使用进程ID和系统开机启动所经过的毫秒数进程计算得出的。算法如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013559672.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503013559672.png" alt="enter image description here"></p>
 
 <p>图12校验码算法</p>
 
 <p>加密后的心跳包使用Cookie字段进行传输：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013643606.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503013643606.png" alt="enter image description here"></p>
 
 <p>图13数据包内容</p>
 
 <h1>0x03 攻击技术来源的验证分析</h1>
 
-<hr />
+<hr>
 
 <p>安天CERT分析人员关联的PE前导文件Sample&#95;A和Sample B利用PowerShell的方法和完全相同，但正应为相关脚本高度的标准化，并不排除Sample&#95;A与本次攻击没有必然联系。而基于其他的情况综合分析，我们依然判断是一个系列化的攻击事件，攻击者可能采用了社工邮件、文件捆绑、系统和应用漏洞利用、内网横向移动等方式实现对目标主机的控制。</p>
 
@@ -184,61 +184,61 @@ dc.******69.info (146.0.***.***)    （罗马尼亚）
 
 <h2>3.1 模块1比较</h2>
 
-<hr />
+<hr>
 
 <p>我们将模块1与使用Beacon生成的Payload进行比较，发现只有三处数据不同，分别为：Get请求时所发送的Head数据、请求的文件名称和IP地址。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505002414038.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062505002414038.png" alt="enter image description here"></p>
 
 <p>图14模块1对比</p>
 
 <p>左侧为样本模块1，右侧为由Beacon所生成的模块，从图中对比来看，可以得出结论，模块1是由Beacon所生成。 在请求时的数据包截图如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014025287.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503014025287.png" alt="enter image description here"></p>
 
 <p>图15模块1发包数据对比</p>
 
 <h2>3.2 模块2反汇编指令比较</h2>
 
-<hr />
+<hr>
 
 <p>分析人员将样本的模块2与Beacon相关的文件进行比较，发现两者的反汇编指令除了功能代码不同之外，其它指令完全一致，包括入口处的异或解密、加载系统DLL、获取函数地址、函数调用方式等，下面列举三处：</p>
 
 <p>样本模块2</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014089939.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503014089939.png" alt="enter image description here"></p>
 
 <p>Beacon相关文件</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014050932.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503014050932.png" alt="enter image description here"></p>
 
 <p>入口处异或解密（使用x86/shikata&#95;ga&#95;nai变形）</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014117156.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503014117156.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014193825.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503014193825.png" alt="enter image description here"></p>
 
 <p>解密后入口处代码</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014149590.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503014149590.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014120436.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503014120436.png" alt="enter image description here"></p>
 
 <p>函数调用</p>
 
 <h2>3.3 模块3数据包对比分析</h2>
 
-<hr />
+<hr>
 
 <p>下面是样本模块3与Beacon所生成模块的Get请求比较，可以看出，两者都是使用Cookie来传输信息，该信息进行了加密，每间隔60秒主动发送请求，该数据为上线包/心跳包。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505002697402.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062505002697402.png" alt="enter image description here"></p>
 
 <p>图16模块3数据包对比</p>
 
 <h2>3.4 Cobalt Strike特点</h2>
 
-<hr />
+<hr>
 
 <p>利用Cobalt Strike的攻击可以在目标系统中执行多种操作，如：下载文件、上传文件、执行指定程序、注入键盘记录器、通过PowerShell执行命令、导入PowerShell脚本、通过CMD执行命令、利用mimikatz抓取系统密码等。 Cobalt Strike具有以下特点：</p>
 
@@ -252,7 +252,7 @@ dc.******69.info (146.0.***.***)    （罗马尼亚）
 
 <h1>0x04 总结</h1>
 
-<hr />
+<hr>
 
 <p>使用自动化攻击测试平台Cobalt Strike进行攻击渗透方式具有穿透防火墙的能力，其控制目标主机的方式非常隐蔽，难以被发现；同时具备攻击多种平台，如Windows、Linux、Mac等；同时与可信计算环境、云检测、沙箱检测等安全环节和手段均有对抗能力。从安天过去的跟踪来看，这种威胁已经存在近五年之久，但依然却缺乏有效检测类似威胁的产品和手段。</p>
 
@@ -266,15 +266,15 @@ dc.******69.info (146.0.***.***)    （罗马尼亚）
 
 <h1>附录一：关于Cobalt Strike及其作者的参考资料</h1>
 
-<hr />
+<hr>
 
 <p>Cobalt Strike是Armitage的商业版本。Armitage是一款Java写的Metasploit图形界面的渗透测试软件，可以用它结合Metasploit已知的exploit来针对存在的漏洞自动化攻击。bt5、kali linx下集成免费版本Armitage，最强大的功能是多了个Beacon的Payload。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014417754.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503014417754.jpg" alt="enter image description here"></p>
 
 <p>Cobalt Strike作者：Raphael Mudge（美国），他是Strategic Cyber LLC（战略网络有限责任公司）创始人，基于华盛顿的公司为RED TEAM开发软件，他为Metaslpoit创造了Armitage，sleep程序语言和IRC客户端jIRCii。此前作为美国空军的安全研究员，渗透实验的测试者。他设置发明了一个语法检测器卖给了Automattic。发表多篇文章，定期进行安全话题的演讲。给许多网络防御竞赛提供RED TEAM，参加2012-2014年黑客大会。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014489029.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503014489029.png" alt="enter image description here"></p>
 
 <p>教育背景：Syracuse University 美国雪城大学，密歇根科技大学</p>
 
@@ -282,7 +282,7 @@ dc.******69.info (146.0.***.***)    （罗马尼亚）
 
 <p>技能：软件开发信息安全面向对象的设计分布式系统图形界面计算机网络设计博客系统社会工程学安全研究等等</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014538091.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503014538091.jpg" alt="enter image description here"></p>
 
 <p>支持的组织机构：</p>
 
@@ -342,7 +342,7 @@ https://twitter.com/rsmudge
 http://www.hick.org/~raffi/index.html 
 http://www.blackhat.com/html/bh-us-12/speakers/Raphael-Mudge.html
 http://www.linkedin.com/in/rsmudge
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

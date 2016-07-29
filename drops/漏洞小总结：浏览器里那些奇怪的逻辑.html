@@ -3,14 +3,14 @@
 			<head>
 			     <title>漏洞小总结：浏览器里那些奇怪的逻辑 - blast</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1020">http://drops.wooyun.org/papers/1020</a></h1>
 				
       <p>
-        <h2>0x00 引言</h2>
+        </p><h2>0x00 引言</h2>
 
-<hr />
+<hr>
 
 <p>最早在几年前看到一本书《挖0day》，里面介绍了一个搜狗浏览器的漏洞--伪造网站，虽然时隔四年搜狗还是犯了同样的错误，不过那会儿俺是只知道有这个理儿，但是苦于对这个理解并不深，现在接触的时间多了，渐渐的就快要走到入门的门口了。</p>
 
@@ -24,7 +24,7 @@
 
 <h2>0x01 成因</h2>
 
-<hr />
+<hr>
 
 <p>事出有因，大致分一下类：</p>
 
@@ -42,7 +42,7 @@
 
 <h2>0x03 案例</h2>
 
-<hr />
+<hr>
 
 <p>从简单到稍稍复杂看一些例子。</p>
 
@@ -444,7 +444,7 @@ window.open(s);
 
 <h2>0x04 预防&amp;总结</h2>
 
-<hr />
+<hr>
 
 <p>大部分还是从开发的角度来说吧，一定要在页面加载完之后再改变地址，新窗口将地址栏置为about:blank，并在页面有实际的加载之后再改地址；</p>
 
@@ -456,7 +456,7 @@ window.open(s);
 [1] http://www.w3.org/TR/2008/WD-html5-20080610/web-browsers.html 
 [2] http://tools.ietf.org/html/rfc2616#section-14.13 
 [3] 《挖0day》，爱无言； 应该就是他：http://www.wooyun.org/whitehats/%E7%88%B1%E6%97%A0%E8%A8%80 
-[4] http://illmatics.com/Understanding&#95;the&#95;LFH.pdf</p>      </p>
+[4] http://illmatics.com/Understanding&#95;the&#95;LFH.pdf</p>      <p></p>
     
 			</body>
 		</html>

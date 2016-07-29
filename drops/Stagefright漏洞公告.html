@@ -3,20 +3,20 @@
 			<head>
 			     <title>Stagefright漏洞公告 - 阿里移动安全</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/7558">http://drops.wooyun.org/papers/7558</a></h1>
 				
       <p>
-        <p>作者: 迅迪 没羽 轩夏 成淼 奋龙 逆巴</p>
+        </p><p>作者: 迅迪 没羽 轩夏 成淼 奋龙 逆巴</p>
 
 <h1>0x00 什么是Stagefright</h1>
 
-<hr />
+<hr>
 
 <p>StageFright是一个Android中的系统服务，可处理各种多媒体格式，由Natvie C++代码实现，多媒体应用如何与Android Native多媒体进行交互可参考如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073108541630345.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073108541630345.png" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -47,13 +47,13 @@
 
 <h1>0x01 谁发现了Stagefright</h1>
 
-<hr />
+<hr>
 
 <p>以色列移动信息安全公司Zimperium研究人员Joshua Drake在7月21号发布的声明，声称会在8月的BlackHat会议上发布细节。</p>
 
 <h1>0x02 漏洞概要</h1>
 
-<hr />
+<hr>
 
 <p>Android Stagefright框架中发现了多个整数溢出和下溢，不正确整数溢出检查等漏洞，可导致任意代码执行等问题。</p>
 
@@ -76,7 +76,7 @@ CVE-2015-3829
 
 <h1>0x03 漏洞分析</h1>
 
-<hr />
+<hr>
 
 <p>根据<code>https://github.com/CyanogenMod/android_frameworks_av/commits/cm-12.1</code>提供的补丁，进行了相关的分析：</p>
 
@@ -89,11 +89,11 @@ CVE-2015-3829
 
 <p>该漏洞产生在以下的chunk中：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073108541760326.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073108541760326.png" alt="enter image description here"></p>
 
 <p>这是一个堆内存读越界漏洞，parse3GPPMetaData方法中调用<code>mDataSource-&gt;readAt( offset, buffer, size)</code>读取size大小的数据到申请的buffer中，然后下面会调用<code>mFileMetaData-&gt;setCString()</code>方法进行内存拷贝：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107235241441image00517.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107235241441image00517.png" alt="enter image description here"></p>
 
 <p>我们来看setCString()方法的最终会调用memcpy进行内在拷贝：</p>
 
@@ -117,15 +117,15 @@ void MetaData::typed_data::setData(uint32_t type, const void *data, size_t size)
 
 <p>该漏洞是一个integer underflow漏洞，对于构造的size来说，如果size&lt;6，可导致len16的值变的很大：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107240376717image0081.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107240376717image0081.png" alt="enter image description here"></p>
 
 <p>导致接下来的内存越界操作：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107241151607image0101.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107241151607image0101.png" alt="enter image description here"></p>
 
 <p><strong>4.3 Fix integer overflow when handling MPEG4 tx3g atom</strong></p>
 
-<hr />
+<hr>
 
 <p>补丁链接：</p>
 
@@ -134,7 +134,7 @@ void MetaData::typed_data::setData(uint32_t type, const void *data, size_t size)
 
 <p>该漏洞产生在“tx3g”的chunk中，chunk_size是uint，与size之和溢出，会导致实际分配比size小的内存。后面的memcpy函数将会发生堆溢出：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107242245140image0121.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107242245140image0121.png" alt="enter image description here"></p>
 
 <p>当<code>mLastTrack-&gt;meta-&gt;findData(kKeyTextFormatData, &amp;type, &amp;data, &amp;size)</code>函数调用返回为真，size值将不会为0，chunk&#95;size与size都为uint8&#95;t，之和后发生整数溢出，这样导致new一个比size更小的空间，在随后的memcpy将发生堆溢出：</p>
 
@@ -153,7 +153,7 @@ bool MetaData::findData(uint32_t key, uint32_t *type,
 
 <p>接下来<code>new (std::nothrow) uint8_t[size + chunk_size]</code> ,size与chunk_size之和发生整数溢出，值将小于size,此后的memcpy发生堆溢出：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107243070335image0159.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107243070335image0159.png" alt="enter image description here"></p>
 
 <p><strong>4.4 Fix integer underflow in covr MPEG4 processing</strong></p>
 
@@ -164,7 +164,7 @@ bool MetaData::findData(uint32_t key, uint32_t *type,
 
 <p>从patch代码可知，由于未检测chunk&#95;data&#95;size的长度，导致后面的chunk&#95;data&#95;size – kSkipBytesOfDataBox为负数，</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107243649146image0179.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107243649146image0179.png" alt="enter image description here"></p>
 
 <p>向上追溯，chunk&#95;data&#95;size = <em>offset + chunk&#95;size - data&#95;offset；off64&#95;t data&#95;offset = *offset + 8；其中chunk&#95;size为mpeg4格式中box的chunk&#95;size，</em>offset为当前的box的起始位置。由patch代码可知，有这样的不等或成立才能避免该漏洞的出现：</p>
 
@@ -176,7 +176,7 @@ bool MetaData::findData(uint32_t key, uint32_t *type,
 
 <p>所以当chunk_size的值&lt;=24时会触发漏洞。构造的一个样本（0x08）截图如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107244211299image0199.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107244211299image0199.png" alt="enter image description here"></p>
 
 <p><strong>4.5 Prevent integer overflow when processing covr MPEG4 atoms</strong></p>
 
@@ -187,7 +187,7 @@ bool MetaData::findData(uint32_t key, uint32_t *type,
 
 <p>从patch代码可知，由于未对chunk&#95;data&#95;size的长度进行限制，当<code>chunk_data_size&gt;=SIZE_MAX-1时，chunk_data_size＋1&gt;=SIZE_MAX</code>，导致ABuffer分配0长度的内存，后续再进行内存操作就导致堆越界。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107245258200image0219.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107245258200image0219.png" alt="enter image description here"></p>
 
 <p><strong>4.6 Fix integer overflow during MP4 atom processing</strong></p>
 
@@ -200,13 +200,13 @@ bool MetaData::findData(uint32_t key, uint32_t *type,
 
 <p>我们构造如下样本：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073108541742737.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073108541742737.png" alt="enter image description here"></p>
 
 <p>其中chunk_size 为1，<code>large_chunk_size</code>为<code>0x100000007</code>, <code>mNumSampleToChunkOffsets</code>为<code>0x15555555</code>。</p>
 
 <p>加载该样本，运行截图如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107251930533image0275.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107251930533image0275.png" alt="enter image description here"></p>
 
 <p><strong>4.7 Fix integer underflow in ESDS processing</strong></p>
 
@@ -217,19 +217,19 @@ bool MetaData::findData(uint32_t key, uint32_t *type,
 
 <p>从patch代码可知，由于未对size的大小进行检测，后续会进行多次－2操作，导致size为负数，导致堆下溢出。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107252790971image0296.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107252790971image0296.png" alt="enter image description here"></p>
 
 <p>要构造poc需进入ESDS.cpp查看详细代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107253646242image0315.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107253646242image0315.png" alt="enter image description here"></p>
 
 <p>首先获取偏移的值，并进行一系列运算，当more＝true时停止，并返回data_size，然后开始解析ESDS。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107254651495image0335.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107254651495image0335.png" alt="enter image description here"></p>
 
 <p>从代码可以看出来当3个标志位都为1时，才会进行size－2操作，因此构造的poc必须满足3个标志位，0xE0以上数值就满足要求。因此将size修改为5，标志位修改为0xE3就能触发漏洞的畸形样本截图如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107255267344image0355.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107255267344image0355.png" alt="enter image description here"></p>
 
 <p><strong>4.8 Fix several ineffective integer overflow checks</strong></p>
 
@@ -240,25 +240,25 @@ bool MetaData::findData(uint32_t key, uint32_t *type,
 
 <p>此漏洞有3处patch，涉及到3个chunk分别是“stts”、“ctts”、“stss”。是由于几个uint32型数据相乘，再赋值给uint64可能会导致溢出：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073108541722622.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073108541722622.png" alt="enter image description here"></p>
 
 <p>以“stts”chunk为例来说一下poc的构造： 代码分析，我可得“stts”chunk的结构头如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/20150731080655407130001.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/20150731080655407130001.jpg" alt="enter image description here"></p>
 
 <p>第4个4字节的值即为mTimeToSampleCount，我们假设存在这样一个等式：<code>mTimeToSampleCount * 2 * 4 = 0xFFFFFFFF+0x1</code>可得，<code>mTimeToSampleCount＝0x20000000</code> 我们以mTimeToSampleCount＝0x20000000构造的一个POC如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107261349566image040.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107261349566image040.png" alt="enter image description here"></p>
 
 <p>运行结果：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107262794126image042.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107262794126image042.png" alt="enter image description here"></p>
 
 <p>chunk“ctts”、“stss”也可以通过类似的方法构造出POC。</p>
 
 <h1>0x04 触发途径</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>可通过发送嵌入恶意视频文件的彩信</li>
@@ -268,7 +268,7 @@ bool MetaData::findData(uint32_t key, uint32_t *type,
 
 <h1>0x05 受影响厂商</h1>
 
-<hr />
+<hr>
 
 <pre><code>Amazon   Barnes and Noble    
 Google   HTC     
@@ -284,7 +284,7 @@ Sony Corporation
 
 <h1>0x06 受影响应用：</h1>
 
-<hr />
+<hr>
 
 <p>由于Stagefright是一个底层的多媒体处理库，因此调用该库的应用都受此漏洞影响，我们随机检测国内主流的几个应用做，发现都存在此问题：</p>
 
@@ -294,20 +294,20 @@ Sony Corporation
 - 点击特制构建的视频文件，选择“乐视视频”播放：
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107263753326image044.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107263753326image044.png" alt="enter image description here"></p>
 
 <ul>
 <li>查看手机端，乐视视频播放文件出错：</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107264660098image046.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107264660098image046.png" alt="enter image description here"></p>
 
 <p>-查看日志信息，可以看到libstagefright.so的crash信息，在<code>MPEG4Extractor::parseChunk(off64_t *offset, int depth)</code> 方法中解析文件出错，受影响代码可以参考：</p>
 
 <pre><code>https://android.googlesource.com/platform/frameworks/av/+/android-5.1.1_r8/media/libstagefright/MPEG4Extractor.cpp：
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107265090424image048.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107265090424image048.png" alt="enter image description here"></p>
 
 <p><strong>6.2 某手机浏览器</strong></p>
 
@@ -318,15 +318,15 @@ Sony Corporation
   在浏览器弹出的提示窗口中选择“直接打开”：
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107270150595image050.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107270150595image050.png" alt="enter image description here"></p>
 
 <p>-查看手机端，播放视频文件出错：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107270672721image052.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107270672721image052.png" alt="enter image description here"></p>
 
 <p>-查看日志信息，可以看到libstagefright.so的crash信息，在<code>MPEG4Extractor::parseChunk(off64_t *offset, int depth)</code> 方法中解析文件出错。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107271149474image054.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107271149474image054.png" alt="enter image description here"></p>
 
 <p><strong>6.3某SNS通讯工具</strong></p>
 
@@ -335,19 +335,19 @@ Android/6.2.2
 -  发送特殊构建的视频文件时，点击播放会弹出“播放失败”窗口，如图：
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107271692782image056.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107271692782image056.png" alt="enter image description here"></p>
 
 <ul>
 <li>在后台接收手机的错误信息，发现了libstagefright.so的crash信息：</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073107272363523image058.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073107272363523image058.png" alt="enter image description here"></p>
 
 <p>可以看到解析视频文件时发生崩溃，通过视频发送或SNS形式传播，可大范围的影响用户。</p>
 
 <h1>0x07，缓解方案</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>root安卓设备，禁用Stagefright,(会导致大量应用不可用，系统无法正常使用)</li>
@@ -360,7 +360,7 @@ Android/6.2.2
 
 <h1>0x08 厂商解决方案</h1>
 
-<hr />
+<hr>
 
 <p>Google已经发布Android 5.1.1_r5修复该漏洞，注意不是所有Android 5.1.1 (Lollipop)手机应用了该补丁，需要安装patchlevel r5补丁：</p>
 
@@ -378,7 +378,7 @@ https://android.googlesource.com/platform/frameworks/av/+/030d8d0%5E!/
 
 <h1>0x09 参考链接</h1>
 
-<hr />
+<hr>
 
 <pre><code>-   http://blog.zimperium.com/experts-found-a-unicorn-in-the-heart-of-android/ 
 -   http://www.kb.cert.org/vuls/id/924951
@@ -390,7 +390,7 @@ https://android.googlesource.com/platform/frameworks/av/+/030d8d0%5E!/
 -   https://android.googlesource.com/platform/frameworks/av/+/030d8d0%5E!/ 
 -   http://source.android.com/devices/media.html 
 -   https://www.duosecurity.com/blog/exploit-mitigations-in-android-jelly-bean-4-1
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

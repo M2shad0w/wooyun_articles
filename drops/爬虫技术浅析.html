@@ -3,14 +3,14 @@
 			<head>
 			     <title>爬虫技术浅析 - Manning</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3915">http://drops.wooyun.org/tips/3915</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>网络爬虫（Web crawler），是一种“自动化浏览网络”的程序，或者说是一种网络机器人。它们被广泛用于互联网搜索引擎或其他类似网站，以获取或更新这些网站的内容和检索方式。它们可以自动采集所有其能够访问到的页面内容，以便程序做下一步的处理。</p>
 
@@ -36,17 +36,17 @@
 
 <h1>0x01 爬虫架构</h1>
 
-<hr />
+<hr>
 
 <p>谈到爬虫架构，不得不提的是Scrapy的爬虫架构。Scrapy，是Python开发的一个快速,高层次的爬虫框架，用于抓取web站点并从页面中提取结构化的数据。Scrapy用途广泛，可以用于数据挖掘、监测和自动化测试。Scrapy吸引人的地方在于它是一个框架，任何人都可以根据需求方便的修改。它也提供了多种类型爬虫的基类，如BaseSpider、sitemap爬虫等。</p>
 
-<p><img src="http://static.wooyun.org/20141117/2014111704532399718.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141117/2014111704532399718.jpeg" alt="enter image description here"></p>
 
 <p>上图是Scrapy的架构图，绿线是数据流向，首先从初始URL 开始，Scheduler 会将其交给 Downloader 进行下载，下载之后会交给 Spider 进行分析，需要保存的数据则会被送到Item Pipeline，那是对数据进行后期处理。另外，在数据流动的通道里还可以安装各种中间件，进行必要的处理。 因此在开发爬虫的时候，最好也先规划好各种模块。我的做法是单独规划下载模块，爬行模块，调度模块，数据存储模块。</p>
 
 <h1>0x02 页面下载与解析</h1>
 
-<hr />
+<hr>
 
 <h2>页面下载</h2>
 
@@ -54,11 +54,11 @@
 
 <p>传统爬虫利用的是静态下载方式，静态下载的优势是下载过程快，但是页面只是一个枯燥的html，因此页面链接分析中获取的只是&lt; a >标签的href属性或者高手可以自己分析js，form之类的标签捕获一些链接。在python中可以利用urllib2模块或requests模块实现功能。 动态爬虫在web2.0时代则有特殊的优势，由于网页会使用javascript处理，网页内容通过Ajax异步获取。所以，动态爬虫需要分析经过javascript处理和ajax获取内容后的页面。目前简单的解决方法是通过基于webkit的模块直接处理。PYQT4、Splinter和Selenium这三个模块都可以达到目的。对于爬虫而言，浏览器界面是不需要的，因此使用一个headless browser是非常划算的，HtmlUnit和phantomjs都是可以使用的headless browser。</p>
 
-<p><img src="http://static.wooyun.org/20141117/2014111704532338021.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141117/2014111704532338021.png" alt="enter image description here"></p>
 
 <p>以上这段代码是访问新浪网主站。通过对比静态抓取页面和动态抓取页面的长度和对比静态抓取页面和动态抓取页面内抓取的链接个数。</p>
 
-<p><img src="http://static.wooyun.org/20141117/2014111704532368203.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141117/2014111704532368203.png" alt="enter image description here"></p>
 
 <p>在静态抓取中，页面的长度是563838，页面内抓取的链接数量只有166个。而在动态抓取中，页面的长度增长到了695991，而链接数达到了1422，有了近10倍的提升。</p>
 
@@ -74,7 +74,7 @@
 
 <h1>0x03 URL去重</h1>
 
-<hr />
+<hr>
 
 <p>URL去重是爬虫运行中一项关键的步骤，由于运行中的爬虫主要阻塞在网络交互中，因此避免重复的网络交互至关重要。爬虫一般会将待抓取的URL放在一个队列中，从抓取后的网页中提取到新的URL，在他们被放入队列之前，首先要确定这些新的URL没有被抓取过，如果之前已经抓取过了，就不再放入队列了。</p>
 
@@ -90,7 +90,7 @@
 
 <p>Bloom Filter是通过极少的错误换取了存储空间的极大节省。Bloom Filter 是通过一组k 个定义在n 个输入key 上的Hash Function，将上述n 个key 映射到m 位上的数据容器。</p>
 
-<p><img src="http://static.wooyun.org/20141117/2014111704532391542.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141117/2014111704532391542.png" alt="enter image description here"></p>
 
 <p>上图很清楚的说明了Bloom Filter的优势，在可控的容器长度内，所有hash函数对同一个元素计算的hash值都为1时，就判断这个元素存在。 Python中hashlib，自带多种hash函数，有MD5，sha1，sha224，sha256，sha384，sha512。代码中还可以进行加盐处理，还是很方便的。 Bloom Filter也会产生冲突的情况，具体内容查看文章结尾的参考文章。</p>
 
@@ -100,27 +100,27 @@
 
 <p>有个小细节，在建立hash表的时候选择容器很重要。hash表占用空间太大是个很不爽的问题，因此针对爬虫去重，下列方法可以解决一些问题。</p>
 
-<p><img src="http://static.wooyun.org/20141117/2014111704532396765.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141117/2014111704532396765.png" alt="enter image description here"></p>
 
 <p>上面这段代码简单验证了生成容器的运行时间。</p>
 
-<p><img src="http://static.wooyun.org/20141117/2014111704532362916.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141117/2014111704532362916.png" alt="enter image description here"></p>
 
 <p>由上图可以看出，建立一个长度为1亿的容器时，选择list容器程序的运行时间花费了7.2s，而选择字符串作为容器时，才花费了0.2s的运行时间。</p>
 
 <p>接下来看看内存的占用情况。</p>
 
-<p><img src="http://static.wooyun.org/20141117/2014111704532464751.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141117/2014111704532464751.png" alt="enter image description here"></p>
 
 <p>如果建立1亿的列表占用了794660k内存。</p>
 
-<p><img src="http://static.wooyun.org/20141117/2014111704532435233.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141117/2014111704532435233.png" alt="enter image description here"></p>
 
 <p>而建立1亿长度的字符串却占用了109720k内存，空间占用大约减少了700000k。</p>
 
 <h1>0x04 URL相似性</h1>
 
-<hr />
+<hr>
 
 <p>初级算法</p>
 
@@ -162,19 +162,19 @@
 
 <p>具体算法</p>
 
-<p><img src="http://static.wooyun.org/20141117/2014111704532480379.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141117/2014111704532480379.png" alt="enter image description here"></p>
 
 <p>算法本身很菜，各位一看就能懂。</p>
 
 <p>实际效果：</p>
 
-<p><img src="http://static.wooyun.org/20141117/2014111704532414259.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141117/2014111704532414259.png" alt="enter image description here"></p>
 
 <p>上图显示了把8个不一样的url，算出了2个值。通过实践，在一张千万级的hash表中，冲突的情况是可以接受的。</p>
 
 <h1>0x05 并发操作</h1>
 
-<hr />
+<hr>
 
 <p>Python中的并发操作主要涉及的模型有：多线程模型、多进程模型、协程模型。Elias专门写了一篇文章，来比较常用的几种模型并发方案的性能。对于爬虫本身来说，限制爬虫速度主要来自目标服务器的响应速度，因此选择一个控制起来顺手的模块才是对的。</p>
 
@@ -196,7 +196,7 @@
 
 <h1>0x06 数据存储</h1>
 
-<hr />
+<hr>
 
 <p>数据存储本身设计的技术就非常多，作为小菜不敢乱说，但是工作还是有一些小经验是可以分享的。</p>
 
@@ -208,11 +208,11 @@
 
 <h1>0x07 动态爬虫源码分享</h1>
 
-<hr />
+<hr>
 
 <p>爬虫模型</p>
 
-<p><img src="http://static.wooyun.org/20141117/2014111704532427592.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141117/2014111704532427592.png" alt="enter image description here"></p>
 
 <p>目前这个爬虫模型如上图，调度模块是核心模块。调度模块分别与下载模块，析取模块，存储模块共享三个队列，下载模块与析取模块共享一个队列。数据传递方向如图示。</p>
 
@@ -238,7 +238,7 @@
 
 <h1>0x08 参考文章</h1>
 
-<hr />
+<hr>
 
 <p>感谢以下分享的文章与讨论</p>
 
@@ -260,7 +260,7 @@
 
 <p>http://blog.csdn.net/jiaomeng/article/details/1495500 http://bbs.chinaunix.net/forum.php?mod=viewthread&amp;tid=1337181</p>
 
-<p>http://www.tuicool.com/articles/nieEVv http://www.zhihu.com/question/21652316 http://code.rootk.com/entry/crawler</p>      </p>
+<p>http://www.tuicool.com/articles/nieEVv http://www.zhihu.com/question/21652316 http://code.rootk.com/entry/crawler</p>      <p></p>
     
 			</body>
 		</html>

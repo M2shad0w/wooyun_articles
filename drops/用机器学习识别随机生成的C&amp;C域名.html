@@ -3,14 +3,14 @@
 			<head>
 			     <title>用机器学习识别随机生成的C&amp;C域名 - phunter</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6220">http://drops.wooyun.org/tips/6220</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>本文用识别由域名生成算法<code>Domain Generation Algorithm: DGA</code>生成的C&amp;C域名作为例子，目的是给白帽安全专家们介绍一下机器学习在安全领域的应用，演示一下机器学习模型的一般流程。机器的力量可以用来辅助白帽专家们更有效率的工作。</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 为什么要机器学习？</h1>
 
-<hr />
+<hr>
 
 <p>DGA生成C&amp;C域名的办法常见于一类botnet，比如conficker，zeus之类，他们的方法是用一个私有的随机字符串生成算法，按照日期或者其他随机种子（比如twitter头条），每天生成一些随机字符串域名然后用其中的一些当作C&amp;C域名。在他们的bot malware里面也按照同样的算法尝试生成这些随机域名然后碰撞得到当天可用的C&amp;C域名。</p>
 
@@ -53,7 +53,7 @@ frewrdbm.net
 
 <h1>0x02 数据收集</h1>
 
-<hr />
+<hr>
 
 <p>分类的任务需要告诉机器他用来学习的正例(positive samples)和反例(negative samples)，在这里正例就是C&amp;C域名，反例就是正常的合法域名。</p>
 
@@ -63,7 +63,7 @@ frewrdbm.net
 
 <h1>0x03 特征工程</h1>
 
-<hr />
+<hr>
 
 <p>这几乎是整个文章最有值得读的部分。如果能把人类的经验用数量化表达给机器，机器就能学习到人类的经验，而<strong>特征(feature)就是人类经验的数量化</strong>。特征工程是个反复循环的过程，一开始我们找到基线特征，用分类算法计算并评价结果，如果结果不能达到预期，再回头来加入新的特征帮助更好的分类。</p>
 
@@ -110,7 +110,7 @@ entropy = -sum(j/f_len*(math.log(j/f_len)) for i,j in count)#shannon entropy
 
 <p>特征工程就好像Taylor Swift的胸一样，你只要需要，用力挤努力挤还是有的。如果按照反例Alexa前10万名训练隐含马尔可夫链，计算一下从<code>A_i</code>到<code>A_i+1</code>转换的概率。这个转换概率的分布对于正例有一些区别，也可以用来帮助区分。具体关于马尔可夫链相关知识请参见<a href="http://en.wikipedia.org/wiki/Markov_chain">http://en.wikipedia.org/wiki/Markov_chain</a> （解释起来背后的原因篇幅比较大，就只贴一下这个特征的分布图，但是不要害怕，看示例代码里的实现其实很简单，只是计算转移矩阵而已）</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503145385140.png" alt="markov example" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503145385140.png" alt="markov example"></p>
 
 <h3>领域特征：安全专家的领域知识</h3>
 
@@ -170,7 +170,7 @@ feature_list = vec.fit_transform(measurements).toarray()
 
 <h1>0x04 模型选择和训练</h1>
 
-<hr />
+<hr>
 
 <p>判断一个域名是不是C&amp;C域名这样Yes or No任务是分类任务。对于分类任务，常见的模型一般是Logistic Regression啊决策树啊之类的。这里我选择SVM支持向量机作为分类算法，关于SVM的理论知识可以前往 <a href="http://en.wikipedia.org/wiki/Support_vector_machine">http://en.wikipedia.org/wiki/Support&#95;vector&#95;machine</a> 阅读了解，而我们用起来它只需要：</p>
 
@@ -191,7 +191,7 @@ probas_ = classifier.fit(X_train, y_train).predict(X_test)
 
 <h1>0x05 评价函数和交叉验证</h1>
 
-<hr />
+<hr>
 
 <p>为了评价机器的预测效果，我们需要量化的评价函数。对于“判断域名是否为C&amp;C”的问题可以考虑：</p>
 
@@ -211,13 +211,13 @@ precision, recall, thresholds = precision_recall_curve(y_truth, probas_)
 
 <p>对于每次的交叉检验，我们可以画出precision vs recall的曲线图，从中可以看到precision和recall的相对平衡，比如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503145331429.png" alt="AUC example" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503145331429.png" alt="AUC example"></p>
 
 <p>我们可以看到，如果要保持0.8左右的recall召回率，precision可以达到90%以上，但是如果要召回率达到100%，那precision只能有15%左右了。</p>
 
 <p>域名的分类效果和域名的长度也有关系，我们可以画出来平均的Accuracy和域名长度的关系图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503145458766.png" alt="accuracy example" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503145458766.png" alt="accuracy example"></p>
 
 <p>正如大家想到的一样，对短的域名分类效果一般，因为短域字符串本身的信息不如长域名丰富。不过现在C&amp;C的域名越来越长，如果只看长于12个字符的C&amp;C域名，预测效果还是很不错的。</p>
 
@@ -225,7 +225,7 @@ precision, recall, thresholds = precision_recall_curve(y_truth, probas_)
 
 <h1>0x06 总结</h1>
 
-<hr />
+<hr>
 
 <p>这篇文章用域名字符串特征判别C&amp;C的任务，简单介绍了一下机器学习在安全领域的一个小小应用，主要为了演示一下一个机器学习任务的基本流程。在机器学习里，特征工程几乎是最重要的部分，在这篇文章里面我们深入挖掘了“看起来像”这个分类特征的若干种可以量化的表达方式，有些特征需要反复思考得到，有些特征需要领域知识。对于输入的一组很好的特征，基本上各种分类器都能有不错的表现，我们用精度和召回率评价模型的分类效果，看看有哪些C&amp;C我们放过了，哪些合法域名我们误杀了，用交叉验证的方式判断模型效果，并根据这些评价来调整模型。更简单一点就是这个套路：</p>
 
@@ -247,7 +247,7 @@ precision, recall, thresholds = precision_recall_curve(y_truth, probas_)
 
 <h1>0x07 深入阅读和参考文献</h1>
 
-<hr />
+<hr>
 
 <p>从域名的“看起来像”这个特征来判断C&amp;C域名的想法受到这片文章的启发 <a href="http://www.sersc.org/journals/IJSIA/vol7_no1_2013/5.pdf">http://www.sersc.org/journals/IJSIA/vol7&#95;no1&#95;2013/5.pdf</a></p>
 
@@ -255,7 +255,7 @@ precision, recall, thresholds = precision_recall_curve(y_truth, probas_)
 
 <p>机器学习在安全领域有很多应用，比如Kaggle的Malware分类任务，机器可以分析反编译的ASM和原始binary自动判别malware的种类并取得很好的效果，几位获胜者的报告很值得研究一下<a href="https://www.kaggle.com/c/malware-classification">https://www.kaggle.com/c/malware-classification</a></p>
 
-<p>在Kaggle比赛和本文中用到的机器学习软件包 scikit-learn 的主页在<a href="http://scikit-learn.org/stable/">http://scikit-learn.org/stable/</a> （已被墙）</p>      </p>
+<p>在Kaggle比赛和本文中用到的机器学习软件包 scikit-learn 的主页在<a href="http://scikit-learn.org/stable/">http://scikit-learn.org/stable/</a> （已被墙）</p>      <p></p>
     
 			</body>
 		</html>

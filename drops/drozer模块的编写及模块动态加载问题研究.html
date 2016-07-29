@@ -3,18 +3,18 @@
 			<head>
 			     <title>drozer模块的编写及模块动态加载问题研究 - thor</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/13239">http://drops.wooyun.org/tips/13239</a></h1>
 				
       <p>
-        <p>drozer是MWR Labs开发的一款Android安全测试框架。是目前最好的Android安全测试工具之一。drozer提供了命令行交互式界面，使用drozer进行安全测试，用户在自己的console端输入命令，drozer会将命令发送到Android设备上的drozer agent代理程序执行。drozer采用了模块化的设计，用户可以定制开发需要的测试模块。编写drozer模块主要涉及python模块及dex模块。python模块在drozer console端运行，类似于metasploit中的插件，可以扩展drozer console的测试功能。dex模块是java编写的android代码，类似于android的dex插件，在android手机上运行，用于扩展drozer agent的功能。</p>
+        </p><p>drozer是MWR Labs开发的一款Android安全测试框架。是目前最好的Android安全测试工具之一。drozer提供了命令行交互式界面，使用drozer进行安全测试，用户在自己的console端输入命令，drozer会将命令发送到Android设备上的drozer agent代理程序执行。drozer采用了模块化的设计，用户可以定制开发需要的测试模块。编写drozer模块主要涉及python模块及dex模块。python模块在drozer console端运行，类似于metasploit中的插件，可以扩展drozer console的测试功能。dex模块是java编写的android代码，类似于android的dex插件，在android手机上运行，用于扩展drozer agent的功能。</p>
 
 <!--more-->
 
 <h1>0x00 简单的drozer模块demo代码</h1>
 
-<hr />
+<hr>
 
 <p>首先看看drozer wiki给出的demo，该模块的功能就是在android设备上反射调用java.util.Random类生成一个随机数并返回：</p>
 
@@ -46,7 +46,7 @@ dz&gt; run exp.test.getinteger
 
 <p>运行效果如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160308/2016030813583048133r1.png" alt="1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160308/2016030813583048133r1.png" alt="1"></p>
 
 <p>drozer 通过Module类的metadata来配置和管理每个模块,因此模块编写时需要包含以下 metadata信息:</p>
 
@@ -63,7 +63,7 @@ path          描述模块命令空间
 
 <h1>0x01 drozer模块仓库的创建及模块安装</h1>
 
-<hr />
+<hr>
 
 <p>drozer模块安装有两种方法，一种是直接在repository中按照python包管理的方法新建目录结构，将python文件放入相应目录中，另一种是在drozer console中通过module install命令直接安装模块。</p>
 
@@ -132,7 +132,7 @@ dz&gt; run scanner.misc.checkjavascriptbridge
 
 <h1>0x02 利用drozer提供的API扩展功能</h1>
 
-<hr />
+<hr>
 
 <p>drozer封装了android中大部分API功能，使得能够在python中方便的使用这些API扩展功能，发挥drozer及python的强大威力。</p>
 
@@ -190,7 +190,7 @@ class MyModule(Module, common.FileSystem, common.ZipFile):
 
 <h1>0x03 实现find port及find IP模块</h1>
 
-<hr />
+<hr>
 
 <p>1) app开放端口查找模块</p>
 
@@ -209,7 +209,7 @@ class findport(Module,common.Shell):
     name = ""
     description = "find open port in android"
     examples = "run exp.work.findport"
-    author = "<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5e2a36312c1e332d6b6e67">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>"
+    author = "<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5e2a36312c1e332d6b6e67">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>"
     date = "2015-12-02"
     license = "BSD (3-clause)"
     path = ["exp","work"]
@@ -289,7 +289,7 @@ dz&gt; run exp.work.findport
 
 <p>运行效果如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160308/2016030813583322539r3.png" alt="image" /></p>
+<p><img src="http://static.wooyun.org//drops/20160308/2016030813583322539r3.png" alt="image"></p>
 
 <p>2）app中IP地址扫描模块</p>
 
@@ -307,7 +307,7 @@ class findips(Module, common.FileSystem, common.PackageManager, common.Provider,
     Find IPs in apk files
     """
     examples = ""
-    author = "<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9aadf2aae8daf7e9afaaa3">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>"
+    author = "<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9aadf2aae8daf7e9afaaa3">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>"
     date = "2015-12-9"
     license = ""
     path = ["exp", "server"]
@@ -400,11 +400,11 @@ dz&gt; run exp.server.findips -a com.dianping.v1
 
 <p>运行效果如下所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160308/2016030813583549341r4.png" alt="image" /></p>
+<p><img src="http://static.wooyun.org//drops/20160308/2016030813583549341r4.png" alt="image"></p>
 
 <h1>0x04 编写dex插件</h1>
 
-<hr />
+<hr>
 
 <p>除了利用drozer以python代码形式提供的API，用户还可以用java代码编写dex插件。 例如下面的java代码就可以编译为drozer的dex插件：</p>
 
@@ -470,13 +470,13 @@ self.stdout.write("[color red]get string from dex plugin: %s  [/color]\n" % dext
 
 <p>该测试插件根据提供的部分电话号码去匹配手机通讯录中的联系人，并返回匹配到的联系人姓名，执行效果如下:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160308/2016030813583289216r2.png" alt="2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160308/2016030813583289216r2.png" alt="2"></p>
 
 <p>dex插件是由drozer上传到android手机上加载执行，它的作用还是为drozer模块提供更方便易用的接口，扩展更多的功能。由于dex插件是Java编写的原生android代码，在执行效率上比通过反射调用更高。drozer的modules/common目录下包含了多个dex插件的源码，有兴趣的同学可以自己查看。</p>
 
 <h1>0x05 drozer模块的reload及动态加载问题</h1>
 
-<hr />
+<hr>
 
 <p>编写drozer module难免会涉及到调试的问题，drozer console提供了debug选项，会在console中打印异常信息，但是比较麻烦的是，修改module源码后必须要重启drozer console才能生效。</p>
 
@@ -510,7 +510,7 @@ def reload(self):
 <p>reload命令将<code>self.__modules</code>置为空，在get中按理说就会重新加载所有的drozer模块。但是在mac下始终无法实现该功能，其他平台未做测试。这里就涉及到python模块的import及reload机制问题，在网上查找到python的reload机制一些解释：</p>
 
 <blockquote>
-  <p>reload会重新加载已加载的模块，但原来已经使用的实例还是会使用旧的模块， 而新生产的实例会使用新的模块, reload后还是用原来的内存地址；不能支持from。。import。。格式的模块进行重新加载。<br />
+  <p>reload会重新加载已加载的模块，但原来已经使用的实例还是会使用旧的模块， 而新生产的实例会使用新的模块, reload后还是用原来的内存地址；不能支持from。。import。。格式的模块进行重新加载。<br>
   <a href="http://blog.csdn.net/five3/article/details/7762870">http://blog.csdn.net/five3/article/details/7762870</a></p>
 </blockquote>
 
@@ -592,7 +592,7 @@ module_class = getattr(mod,module_class_name)  #get module class object
 return module_class(self)
 </code></pre>
 
-<p>首先使用python的reload函数重新加载指定的模块，然后再在重新加载的模块中查找到drozer模块关联的类，最后实例化并返回。只需添加几行代码便可实现动态加载模块类，这样调试的时候就不用每次重启drozer console了。这里只是提供了一种简单的实现动态加载模块的方法，主要是方便模块的编写及测试。</p>      </p>
+<p>首先使用python的reload函数重新加载指定的模块，然后再在重新加载的模块中查找到drozer模块关联的类，最后实例化并返回。只需添加几行代码便可实现动态加载模块类，这样调试的时候就不用每次重启drozer console了。这里只是提供了一种简单的实现动态加载模块的方法，主要是方便模块的编写及测试。</p>      <p></p>
     
 			</body>
 		</html>

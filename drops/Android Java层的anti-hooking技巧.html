@@ -3,16 +3,16 @@
 			<head>
 			     <title>Android Java层的anti-hooking技巧 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/16356">http://drops.wooyun.org/tips/16356</a></h1>
 				
       <p>
-        <p><strong>原文：</strong><a href="http://d3adend.org/blog/?p=589">http://d3adend.org/blog/?p=589</a></p>
+        </p><p><strong>原文：</strong><a href="http://d3adend.org/blog/?p=589">http://d3adend.org/blog/?p=589</a></p>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>一个最近关于检测native hook框架的方法让我开始思考一个Android应用如何在Java层检测Cydia Substrate或者Xposed框架。</p>
 
@@ -24,7 +24,7 @@
 
 <h1>0x01 检测安装的应用</h1>
 
-<hr />
+<hr>
 
 <p>一个最直接的想法就是检测设备上有没有安装Substrate或者Xposed框架，可以直接调用PackageManager显示所有安装的应用，然后看是否安装了Substrate或者Xposed。</p>
 
@@ -44,7 +44,7 @@ for(ApplicationInfo applicationInfo : applicationInfoList) {
 
 <h1>0x02 检查调用栈里的可疑方法</h1>
 
-<hr />
+<hr>
 
 <p>另一个想到的方法是检查Java调用栈里的可疑方法，主动抛出一个异常，然后打印方法的调用栈。代码如下：</p>
 
@@ -193,7 +193,7 @@ catch(Exception e) {
 
 <h1>0x03 检测并不应该native的native方法</h1>
 
-<hr />
+<hr>
 
 <p>Xposed框架会把hook的Java方法类型改为"native"，然后把原来的方法替换成自己的代码（调用hookedMethodCallback）。可以查看<a href="https://github.com/rovo89/Xposed/blob/6a8c2db5523377742a2c40fbd317b559e46b386f/libxposed_dalvik.cpp">XposedBridge_hookMethodNative</a>的实现，是修改后app_process里的方法。</p>
 
@@ -266,7 +266,7 @@ for (ApplicationInfo applicationInfo : applicationInfoList) {
 
 <h1>0x04 通过/proc/[pid]/maps检测可疑的共享对象或者JAR</h1>
 
-<hr />
+<hr>
 
 <p>/proc/[pid]/maps记录了内存映射的区域和访问权限，首先查看Android应用的映像，第一列是起始地址和结束地址，第六列是映射文件的路径。</p>
 
@@ -337,7 +337,7 @@ Xposed JAR found: /data/data/de.robv.android.xposed.installer/bin/XposedBridge.j
 
 <h1>0x05 绕过检测的方法</h1>
 
-<hr />
+<hr>
 
 <p>上面讨论了几个anti-hooking的方法，不过相信也会有人提出绕过的方法，这里对应每个检测方法如下：</p>
 
@@ -346,7 +346,7 @@ Xposed JAR found: /data/data/de.robv.android.xposed.installer/bin/XposedBridge.j
 <li>hook Exception的getStackTrace，把自己的方法去掉</li>
 <li>hook getModifiers，把flag改成看起来不是native</li>
 <li>hook 打开的文件的操作，返回/dev/null或者修改的map文件</li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

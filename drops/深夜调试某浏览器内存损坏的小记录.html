@@ -3,14 +3,14 @@
 			<head>
 			     <title>深夜调试某浏览器内存损坏的小记录 - blast</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1026">http://drops.wooyun.org/papers/1026</a></h1>
 				
       <p>
-        <h2>0x00 引言</h2>
+        </p><h2>0x00 引言</h2>
 
-<hr />
+<hr>
 
 <p>@瞌睡龙让俺仔细介绍一下，所以我就把之前文章<a href="http://drops.wooyun.org/papers/1020">http://drops.wooyun.org/papers/1020</a>的一节的东西单独提出来了，之前百度浏览器5.0版本子窗口堆溢出的那版的程序我已经找不太到了，找到最接近的版本修复的只剩一个栈空间不足的问题而已了，这个小毛病我就搁在事后分析里面好了。</p>
 
@@ -24,7 +24,7 @@
 
 <h2>0x01 基本需求</h2>
 
-<hr />
+<hr>
 
 <p>一个调试器是必要的，由于涉及事后调试和即时调试，俺就使用windbg来进行啦。由于目标程序是32位的，所以我选择了x86版的windbg。操作系统是Windows 7 sp1 简体中文版，说是oem但是看起来像盗版系统的系统。</p>
 
@@ -32,7 +32,7 @@
 
 <h2>0x02 简单的事后分析（介绍）</h2>
 
-<hr />
+<hr>
 
 <p>事后分析我们就用百度浏览器5.0的一个栈内存不够分导致的Stack Buffer Overrun为例好了，poc还是那个，口胡我第一，那么开始呗。</p>
 
@@ -40,7 +40,7 @@
 
 <p>首先，我们可以确定的是我们的poc可以导致这个程序崩溃，而通常我们的目标程序也会自带有一个dump文件，例如：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816551761511.png" alt="2014030816551761511.png" /><br />
+<p><img src="http://static.wooyun.org/201403/2014030816551761511.png" alt="2014030816551761511.png"><br>
   图：通常在<code>%temp%</code>下可能有崩溃文件，也有可能在<code>%appdata%</code>下</p>
 
 <p>打开windbg，载入dump文件，进行简单的<code>!analyze -v</code>。显示信息如下：</p>
@@ -288,7 +288,7 @@ No code found, aborting
 
 <h2>0x03 实时调试</h2>
 
-<hr />
+<hr>
 
 <p>下面使用的目标程序是百度浏览器v4.5，由于我们的poc简单粗暴，为了防止代码一加载就崩，我们在它崩溃前加一个alert(1)，给我们和windbg一个心理准备，使得poc变成下面这样：</p>
 
@@ -305,12 +305,12 @@ window.open(s);
 
 <p>运行浏览器，最好是直接把html拖图标上，这样之后方便我们找哪个进程容纳着html，如下：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816544725513.png" alt="2014030816544725513.png" /><br />
+<p><img src="http://static.wooyun.org/201403/2014030816544725513.png" alt="2014030816544725513.png"><br>
   图： 暴风雨前夕</p>
 
 <p>姨妈大，给它Attach上，</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816542723049.png" alt="2014030816542723049.png" /><br />
+<p><img src="http://static.wooyun.org/201403/2014030816542723049.png" alt="2014030816542723049.png"><br>
   图：这样就能找到pid了</p>
 
 <p>找到对应进程的PID，然后Attach，之后按下g让它跑起来：</p>
@@ -557,7 +557,7 @@ call @__sec_check_cookie               ; check the cookie.
 .text:004010D7                 xor     ecx, ebp  
 .text:004010D9                 xor     eax, eax  
 .text:004010DB                 pop     esi  
-.text:004010DC                 call    @<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b1eeeec2d4d2c4c3d8c5c8eed2d9d4d2daeed2dededad8d4f185">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ; __security_check_cookie(x)   ；对比下其他程序，其实就是__security_check_cookie失败了
+.text:004010DC                 call    @<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b1eeeec2d4d2c4c3d8c5c8eed2d9d4d2daeed2dededad8d4f185">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ; __security_check_cookie(x)   ；对比下其他程序，其实就是__security_check_cookie失败了
 .text:004010E1                 mov     esp, ebp  
 .text:004010E3                 pop     ebp  
 .text:004010E4                 retn  
@@ -717,7 +717,7 @@ bdlogicmain+0x7565:
 
 <h2>0x04 试验</h2>
 
-<hr />
+<hr>
 
 <p>试验环境：</p>
 
@@ -731,17 +731,17 @@ bdlogicmain+0x7565:
 
 <p>1、VC2010 Debug + malloc（0）</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816534264313.png" alt="2014030816534264313.png" /><br />
+<p><img src="http://static.wooyun.org/201403/2014030816534264313.png" alt="2014030816534264313.png"><br>
   返回了一个非NULL的堆。</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816531984074.png" alt="2014030816531984074.png" /><br />
+<p><img src="http://static.wooyun.org/201403/2014030816531984074.png" alt="2014030816531984074.png"><br>
  </p>
 
 <p>损坏。</p>
 
 <p>2、 VC2010 Release + malloc（0）</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816524787877.png" alt="2014030816524787877.png" /><br />
+<p><img src="http://static.wooyun.org/201403/2014030816524787877.png" alt="2014030816524787877.png"><br>
   情形类似</p>
 
 <p>HEAP[testMalloc.exe]: Heap block at 005455B8 modified at 005455C1 past requested size of 1 Windows 已在 testMalloc.exe 中触发一个断点。</p>
@@ -754,18 +754,18 @@ bdlogicmain+0x7565:
 
 <p>3、gcc Debug+malloc（0）</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816522134427.png" alt="2014030816522134427.png" /><br />
+<p><img src="http://static.wooyun.org/201403/2014030816522134427.png" alt="2014030816522134427.png"><br>
   分配了一个非NULL但是可以释放的堆。</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816515591239.png" alt="2014030816515591239.png" /><br />
+<p><img src="http://static.wooyun.org/201403/2014030816515591239.png" alt="2014030816515591239.png"><br>
   成功覆盖了堆的信息</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816512347292.png" alt="2014030816512347292.png" /><br />
+<p><img src="http://static.wooyun.org/201403/2014030816512347292.png" alt="2014030816512347292.png"><br>
   同样崩溃</p>
 
 <p>4、gcc Release+malloc（0）</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816505532197.png" alt="2014030816505532197.png" /><br />
+<p><img src="http://static.wooyun.org/201403/2014030816505532197.png" alt="2014030816505532197.png"><br>
   情形类似</p>
 
 <p>果不其然四个情况下都表明：VS和G++编译器编译后malloc(0)返回的不是NULL，而是一个活生生的堆，而且你动它一下，它就赖地上让你赔钱了。</p>
@@ -813,13 +813,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 <p>在wmain处下断点，l-t之后并用p执行完malloc，然后查看当前分配来的堆的信息：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816503217634.png" alt="2014030816503217634.png" /><br />
+<p><img src="http://static.wooyun.org/201403/2014030816503217634.png" alt="2014030816503217634.png"><br>
   可以看到当前的堆内数据如下，其中数据使用了堆的填充模式abababe8 abababab，而这看起来像是一个已分配的堆空间的末尾的填充模式（为什么呢？因为如果分配了字节的话，堆会用baadf00d这个填充模式来填充将来可能会被使用的空间，而这个abababe8 blablabla则是像是这个填充模式的末尾，或者，更像是说ANSI字符串的中止符号“”的东西）：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816500856704.png" alt="2014030816500856704.png" /><br />
+<p><img src="http://static.wooyun.org/201403/2014030816500856704.png" alt="2014030816500856704.png"><br>
   这是memset完，我们26个字符填充进去之后的效果：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816494124061.png" alt="2014030816494124061.png" />  </p>
+<p><img src="http://static.wooyun.org/201403/2014030816494124061.png" alt="2014030816494124061.png">  </p>
 
 <p>这个相当于什么？相当于在一个堆的用户可操作区域之外做写入操作，这样数据就已然超出了堆的申请大小，让它活生生的演变成了堆溢出，之后程序还会对它进行free，必然是错上加错。</p>
 
@@ -827,13 +827,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 <p>让我们换一点代码，我们把malloc(0)修改为malloc(27)，重新载入。</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816490529344.png" alt="2014030816490529344.png" /></p>
+<p><img src="http://static.wooyun.org/201403/2014030816490529344.png" alt="2014030816490529344.png"></p>
 
 <p>这回，我们看到了一个新的填充模式，baadf00d ，而这正是我们之前提到的可用但是未初始化的堆空间的填充模式。</p>
 
 <p>而如此如此运行之后，程序正常退出。</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816484971812.png" alt="2014030816484971812.png" /></p>
+<p><img src="http://static.wooyun.org/201403/2014030816484971812.png" alt="2014030816484971812.png"></p>
 
 <h3>0x04c 几个小名词</h3>
 
@@ -855,7 +855,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 <h4>&#91;buffer&#93;&#91;cookie&#93;&#91;savedEBP&#93;&#91;savedEIP&#93;</h4>
 
-<p>在函数的结尾处，程序会把这个cookie和保存在.data节中的cookie进行比较。 <br />
+<p>在函数的结尾处，程序会把这个cookie和保存在.data节中的cookie进行比较。 <br>
 如果不相等，就说明进程栈被破坏，进程必须被终止。 </p>
 
 <p>为了尽量减少额外的代码行对性能带来的影响，只有当一个函数中包含字符串缓冲区或使用_alloca函数在栈上分配空间的时候编译器才在栈中保存cookie。另外，当缓冲区至少于5个字节时，在栈中也不保存cookie。 </p>
@@ -868,13 +868,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 <h2>0x05 修复</h2>
 
-<hr />
+<hr>
 
 <p>官方是修复了，不过纵观全局他这代码也太粗心了，俺的最大的建议就是每个返回值都检查一遍，千万别嫌麻烦……</p>
 
 <p>0x06 参考资料</p>
 
-<hr />
+<hr>
 
 <p>Mario Heweardt, Daniel Pravat 《windows高级调试》</p>
 
@@ -884,7 +884,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 <p> </p>
 
-<p> </p>      </p>
+<p> </p>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>2016 ALICTF xxFileSystem write-up - Bird101</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/16678">http://drops.wooyun.org/tips/16678</a></h1>
 				
       <p>
-        <h1>0x00 介绍</h1>
+        </p><h1>0x00 介绍</h1>
 
-<hr />
+<hr>
 
 <p>这是关于文件系统的一个题，给了程序和数据，比赛时是分成了两部分，第一部分是需要我们恢复删除的文件，第二部分是需要解密加了密的文件。比赛完时有挺多队把第一部分解出，但第二部分只有PPP解出，我赛后在队友wxy前期的分析和出题人的帮助下才解了出来，这里仅做一个分享，各位大大忽喷。</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 恢复文件</h1>
 
-<hr />
+<hr>
 
 <p>第一部分的题是恢复删除的文件，删除文件的函数为0x4018FC</p>
 
@@ -227,7 +227,7 @@ print filenames
 
 <p>搜索出的结果如下图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061314055399362137.png" alt="search_result" /></p>
+<p><img src="http://static.wooyun.org//drops/20160613/2016061314055399362137.png" alt="search_result"></p>
 
 <p>发现了一个奇怪的名为555的文件，根据它的文件块id提取出这个文件</p>
 
@@ -245,18 +245,18 @@ out.close()
 
 <p>提取出来是一个tar包，解压后得到一个名为555的文件，cat一下在最后得到flag</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061314055510981219.png" alt="get_flag1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160613/2016061314055510981219.png" alt="get_flag1"></p>
 
 <h1>0x02 解密文件</h1>
 
-<hr />
+<hr>
 
 <p>第二部分的题是解密加了密的文件，首先搜索xxdisk.bin可以发现有一个flag.file的加密文件，通过查看type可以知道是一个加密的文件，因此需要分析加密函数0x402B04</p>
 
 <pre><code>#!cpp
 __int64 __fastcall crypt_func(MemStruct *system, const char **filename_arg)
 {
-  unsigned int pass_len; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8beeeaf3cbbabb">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  unsigned int pass_len; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8beeeaf3cbbabb">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
   const char *filename; // [sp+10h] [bp-130h]@1
   inodeSt *filenode; // [sp+18h] [bp-128h]@4
   char input_password_md5; // [sp+20h] [bp-120h]@10
@@ -311,8 +311,8 @@ __int64 __fastcall crypt_func(MemStruct *system, const char **filename_arg)
 <pre><code>#!cpp
 __int64 __fastcall do_crypt(MemStruct *system, inodeSt *filenode, char *pass_arg, unsigned __int16 parent_filenode_id_arg)
 {
-  char *password; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b3e0e7828bec8bf382">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-  unsigned __int16 parent_filenode_id; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="772423464328453746">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  char *password; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b3e0e7828bec8bf382">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  unsigned __int16 parent_filenode_id; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="772423464328453746">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
   char key; // [sp+20h] [bp-20h]@1
   __int64 v8; // [sp+38h] [bp-8h]@1
 
@@ -375,11 +375,11 @@ print indexes
 
 <p>搜索结果如下图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061314055727751317.png" alt="search_ids" /></p>
+<p><img src="http://static.wooyun.org//drops/20160613/2016061314055727751317.png" alt="search_ids"></p>
 
 <p>接下来就是爆破出加密flag.file的key，由于不是标准的DES，我抽取的代码也有问题，所以我直接patch程序，把main函数改为了下面这样</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061314055981520416.png" alt="patched_main" /></p>
+<p><img src="http://static.wooyun.org//drops/20160613/2016061314055981520416.png" alt="patched_main"></p>
 
 <p>print&#95;char&#95;table是数字+字母+下划线，indexes是上面搜索出的id，这里可以把第一个for循环分块处理，这样可以比较快地跑出key</p>
 
@@ -393,17 +393,17 @@ Wh4Vfab0
 
 <p>这样就知道了flag.file的parent&#95;node&#95;id为0x210，接下来就是解密这个文件，有4个key，随便取一个就行，解密时可以把flag.file挂载到根目录，就是把根目录的parent&#95;node&#95;id改为0x210，把0x2d4(flag.file的id)加到目录的文件id中，并把mask的有效位和size都设置正确，然后动态调试下断点解密，你们懂的，解密出来之后cat，在最后得到下一部分的文件名</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/201606131406001514058.png" alt="cat_flag.file" /></p>
+<p><img src="http://static.wooyun.org//drops/20160613/201606131406001514058.png" alt="cat_flag.file"></p>
 
 <p>查看xx&#95;0.0&#95;xx的type发现它是一个隐藏了的加密文件，用之前的方法爆破出key为<code>B4d_a8bc</code>，然后把type改为0x8，挂载到根目录，相同的方法解密出xx&#95;0.0&#95;xx是一个tar包，解压得到一个aes.cc的文件，cat一下得到flag</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/201606131406025951867.png" alt="get_flag2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160613/201606131406025951867.png" alt="get_flag2"></p>
 
 <h1>0x03 总结</h1>
 
-<hr />
+<hr>
 
-<p>收获挺多的，增强了我patch的能力，但是还有很长的路要走。。。</p>      </p>
+<p>收获挺多的，增强了我patch的能力，但是还有很长的路要走。。。</p>      <p></p>
     
 			</body>
 		</html>

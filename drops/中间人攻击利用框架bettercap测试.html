@@ -3,26 +3,26 @@
 			<head>
 			     <title>中间人攻击利用框架bettercap测试 - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/7480">http://drops.wooyun.org/papers/7480</a></h1>
 				
       <p>
-        <h2>0x00前言</h2>
+        </p><h2>0x00前言</h2>
 
-<hr />
+<hr>
 
 <p>上篇提到内网渗透很有趣，这次就从一款新工具说起: bettercap</p>
 
 <h2>0x01简介</h2>
 
-<hr />
+<hr>
 
 <p>bettercap可用来实现各种中间人攻击，模块化，便携、易扩展</p>
 
 <h2>0x02特点</h2>
 
-<hr />
+<hr>
 
 <p>提到中间人攻击，最知名的莫过于ettercap，而开发bettercap的目的不是为了追赶它，而是替代它 原因如下：</p>
 
@@ -34,7 +34,7 @@
 
 <h2>0x03测试环境搭建</h2>
 
-<hr />
+<hr>
 
 <p>kali linux：</p>
 
@@ -46,7 +46,7 @@ sudo gem install bettercap*.gem
 
 <p>如果报错，如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150728/2015072803284157642.net/20150727204425999" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150728/2015072803284157642.net/20150727204425999" alt="这里写图片描述"></p>
 
 <p>执行如下命令：</p>
 
@@ -56,11 +56,11 @@ sudo gem install bettercap*.gem
 
 <p>最后成功，如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150728/2015072803284235834.net/20150727204357337" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150728/2015072803284235834.net/20150727204357337" alt="这里写图片描述"></p>
 
 <h2>0x04参数说明</h2>
 
-<hr />
+<hr>
 
 <p>已做翻译并加入个人理解</p>
 
@@ -71,7 +71,7 @@ sudo gem install bettercap*.gem
   
   <p>-S, --spoofer NAME 指定欺骗模块，此参数默认为ARP，目前仅支持ARP，新版本会添加更多选项</p>
   
-  <p>-T, --target ADDRESS 指定单一ip，如果未设置，则代表所有子网，子网所有主机自动扫描，简单高效，十分推荐<br />
+  <p>-T, --target ADDRESS 指定单一ip，如果未设置，则代表所有子网，子网所有主机自动扫描，简单高效，十分推荐<br>
   -O, --log LOG_FILE 日志功能</p>
   
   <p>-D, --debug 调试功能，会将每一步操作详细记录，便于调试</p>
@@ -87,14 +87,14 @@ sudo gem install bettercap*.gem
 
 <h2>0x05功能测试</h2>
 
-<hr />
+<hr>
 
 <h3>1、HOST DISCOVERY + ARP MAN IN THE MIDDLE</h3>
 
 <pre><code>sudo bettercap -X
 </code></pre>
 
-<p>扫描全部内网主机，傻瓜式操作，自动扫描并进行arp欺骗，使所有流量经过本机，如图 <img src="http://static.wooyun.org//drops/20150728/2015072803284214062.net/20150727204420503" alt="这里写图片描述" /></p>
+<p>扫描全部内网主机，傻瓜式操作，自动扫描并进行arp欺骗，使所有流量经过本机，如图 <img src="http://static.wooyun.org//drops/20150728/2015072803284214062.net/20150727204420503" alt="这里写图片描述"></p>
 
 <h3>2、CREDENTIALS SNIFFER</h3>
 
@@ -119,7 +119,7 @@ NTLMv1/v2 ( HTTP, SMB, LDAP, etc ) credentials.
 
 <p>如图为抓到的163邮箱登陆数据</p>
 
-<p><img src="http://static.wooyun.org//drops/20150728/2015072803284317696.net/20150727204554497" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150728/2015072803284317696.net/20150727204554497" alt="这里写图片描述"></p>
 
 <p>指定抓取的数据包:</p>
 
@@ -128,7 +128,7 @@ NTLMv1/v2 ( HTTP, SMB, LDAP, etc ) credentials.
 
 <p>如图为抓到192.168.40.146的FTP</p>
 
-<p><img src="http://static.wooyun.org//drops/20150728/2015072803284470379.net/20150727204614840" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150728/2015072803284470379.net/20150727204614840" alt="这里写图片描述"></p>
 
 <h3>3、MODULAR TRANSPARENT PROXY</h3>
 
@@ -204,7 +204,7 @@ end
 
 <h2>0x06测试心得</h2>
 
-<hr />
+<hr>
 
 <p>亮点：</p>
 
@@ -220,19 +220,19 @@ end
 
 <h2>0x07总结</h2>
 
-<hr />
+<hr>
 
 <p>之前我用过c++开发arp欺骗&amp;中间人攻击的程序,个人认为arp欺骗的成功与否关键在于ARP缓存表的修改，<strong>锁定ARP缓存表目前就能防御bettercap基于arp的中间人攻击</strong> 但我相信，bettercap的前景十分广阔。</p>
 
 <h2>0x08补充</h2>
 
-<hr />
+<hr>
 
 <p>bettercap下载地址：</p>
 
 <p>http://www.bettercap.org/</p>
 
-<p>水平有限，欢迎补充。</p>      </p>
+<p>水平有限，欢迎补充。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>“海莲花”APT报告：攻击中国政府海事机构的网络空间威胁 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/6335">http://drops.wooyun.org/papers/6335</a></h1>
 				
       <p>
-        <h1>0x00 OceanLotus概述</h1>
+        </p><h1>0x00 OceanLotus概述</h1>
 
-<hr />
+<hr>
 
 <p>2012年4月起至今，某境外黑客组织对中国政府、科研院所、海事机构、海域建设、航运企业等相关重要领域展开了有组织、有计划、有针对性的长时间不间断攻击。该组织主要通过鱼叉攻击和水坑攻击等方法，配合多种社会工程学手段进行渗透，向境内特定目标人群传播特种木马程序，秘密控制部分政府人员、外包商和行业专家的电脑系统，窃取系统中相关领域的机密资料。</p>
 
@@ -34,19 +34,19 @@
 <li>2015年3月至今，OceanLotus针对更多中国政府直属机构发起攻击。</li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011355526.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011355526.jpg" alt="enter image description here"></p>
 
 <p>通过对OceanLotus组织数年活动情况的跟踪与取证，我们已经确认了大量的受害者。下图为2014年2月至今，全球每月感染OceanLotus特种木马的电脑数量趋势分布。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011442657.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011442657.png" alt="enter image description here"></p>
 
 <p>从地域分布上看，OceanLotus特种木马的境内感染者占全球感染总量的92.3%。而在境内感染者中，北京地区最多，占22.7%，天津次之，为15.5%。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011426651.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011426651.jpg" alt="enter image description here"></p>
 
 <p>下图为境内OceanLotus特种木马感染者数量地域分布图。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011445839.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011445839.jpg" alt="enter image description here"></p>
 
 <p>技术分析显示，初期的OceanLotus特种木马技术并不复杂，比较容易发现和查杀。但到了2014年以后，OceanLotus特种木马开始采用包括文件伪装、随机加密和自我销毁等一系列复杂的攻击技术与安全软件进行对抗，查杀和捕捉的难度大大增加。而到了2014年11月以后，OceanLotus特种木马开始转向云控技术，攻击的危险性、不确定性与木马识别查杀的难度都大大增强。</p>
 
@@ -54,11 +54,11 @@
 
 <h1>0x01 OceanLotus攻击手法</h1>
 
-<hr />
+<hr>
 
 <h2>1. 攻击手法概述</h2>
 
-<hr />
+<hr>
 
 <p>OceanLotus主要使用两类攻击手法，一类是鱼叉攻击，一类是水坑攻击。</p>
 
@@ -68,19 +68,19 @@
 
 <p>下图给出了OceanLotus使用鱼叉攻击和水坑攻击的基本方法。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011474273.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011474273.png" alt="enter image description here"></p>
 
 <p>从目前受害者遭到攻击的情况看，鱼叉攻击占58.6%，水坑攻击占41.4%。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011424740.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011424740.jpg" alt="enter image description here"></p>
 
 <p>下图给出了因鱼叉攻击或水坑攻击而感染OceanLotus特种木马的电脑数量历史分布。从图中可以看出，鱼叉攻击的最高峰出现在2014年5月，而水坑攻击的最高峰出现在2015年1月。此外，2014年5月和2014年9月也是两个水坑攻击的高峰期。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011522967.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011522967.jpg" alt="enter image description here"></p>
 
 <h2>2. 鱼叉攻击</h2>
 
-<hr />
+<hr>
 
 <p>OceanLotus组织会非常有针对性地挑选目标机构，并收集目标机构人员的邮箱信息，再通过向这些邮箱中投递恶意邮件实现定向攻击。当受害者不小心点击执行邮件附件后，电脑就会感染OceanLotus特种木马，木马与C2服务器相连接后，用户系统由此就落入OceanLotus组织的控制网络中。监测显示，从2014年2月至今，OceanLotus的鱼叉攻击始终没有停止，每个月都有新的受害者增加。</p>
 
@@ -109,11 +109,11 @@
 
 <p>统计还显示，OceanLotus发动的鱼叉攻击也具有很强的时间性和周期性。在一周7天中，工作日，即星期一至星期五截获的鱼叉攻击数量较多，而周末截获的鱼叉攻击数量则往往不及工作日的1/5。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011526432.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011526432.png" alt="enter image description here"></p>
 
 <h2>3. 水坑攻击</h2>
 
-<hr />
+<hr>
 
 <p>OceanLotus组织在设置水坑时，主要采用两类方式：一是入侵与目标关的Web应用系统，替换正常文件或引诱下载伪造的正常应用升级包，以实现在目标用户系统上执行恶意代码的目的；二是入侵与目标相关的Web应用系统后，篡改其中链接，使其指向OceanLotus设置的恶意网址，并在指向的恶意网址上设置木马下载链接。</p>
 
@@ -125,7 +125,7 @@
 
 <p>下图为用户访问该水坑站点时，攻击者的JS代码生成的提示用户下载执行伪造Flash升级包的页面。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011556490.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011556490.jpg" alt="enter image description here"></p>
 
 <p>该组织的专业之处还体现在，水坑攻击会识别访问来源的操作系统平台，并根据客户端返回的系统信息，返回针对不同平台的恶意代码。在Windows平台下我们使用不同的浏览器访问该页面都会提示下载名为“install&#95;flashplayer.exe”的更新文件；当操作系统为Mac OS时，水坑则向Safari浏览器推送能在MAC OS环境中运行的恶意更新程序“install&#95;flashplayer_mac.zip”。</p>
 
@@ -135,15 +135,15 @@
 
 <p>在该政府网站上，当用户点击某个通告链接时会提示文件下载，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011522104.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011522104.png" alt="enter image description here"></p>
 
 <p>提示框中的download.mail-attach.net为组织控制的服务器，将下载的“乌鲁木齐7时50分发生爆炸致多人伤亡.rar”压缩包文件解压后，可以看到文件夹内包含显示为JPG图片图标的exe可执行文件。若此时目标用户点击该文件，系统就会被感染。如下为部分下载回来的文件列表：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011671031.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011671031.png" alt="enter image description here"></p>
 
 <p>与此同时，在该服务器水坑文件同级目录下还发现存放了部分用于鱼叉攻击的恶意代码，证实了这起水坑攻击与之前提及的鱼叉攻击为同一组织发起。如下是部分文件列表：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011697445.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011697445.png" alt="enter image description here"></p>
 
 <p>通过对该组织水坑式攻击手法的跟踪分析，发现该组织如果有机会入侵与目标相关的服务器，就会尽可能替换服务器上可能被下载的正常程序，诱骗用户下载并执行伪造的应用升级包。</p>
 
@@ -162,23 +162,23 @@ NetcaEKeyClient.exe 41bced8c65c5822d43cadad7d1dc49fd
 
 <p>从目前截获OceanLotus发动的水坑攻击的情况来看，每周的周一和周二感染者数量最多。分析认为，这可能是因为攻击者认真研究了政府和科研机构等工作人员的上网习惯。由于水坑攻击容易将组织信息泄漏，因此，OceanLotus每发动一次水坑攻击的周期一般都不会超过3天。而如果要使3天的攻击更加有效，就需要考虑攻击目标会在一周中的哪些天更容易访问水坑网站。由于中国政府和研究机构的工作人员往往有在星期一、二登录办公系统查询重大内部新闻和通知的习惯，所以在一周的前两天发动水坑攻击，效果相对更好。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011650855.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011650855.png" alt="enter image description here"></p>
 
 <h2>4. 域名变换</h2>
 
-<hr />
+<hr>
 
 <p>为了隐藏自己的真实身份，OceanLotus组织经常变换下载服务器和C2服务器的域名和IP。统计显示，在过去的3年中，该组织至少使用了C2服务器域名35个，相关服务器IP地址19个。而且大多数域名为了抵抗溯源都开启了Whois域名隐藏，使得分析人员很难知道恶意域名背后的注册者是谁。下图给出了OceanLotus注册各个域名时间点信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011691247.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011691247.png" alt="enter image description here"></p>
 
 <p>通过对攻击活动相关域名的统计，我们按注册时间的先后顺序对各个域名做了排序。时间线疏密程度显示该组织在2014年2月至2014年4月申请了大量的新域名。域名的生命周期如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011792234.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011792234.png" alt="enter image description here"></p>
 
 <p>这些恶意域名的注册地和服务器也分布在世界各地。从注册地来看，最大的注册地是巴哈马10个，其次是美国4个，尼日利亚3个。从服务器实际所在地来看，美国和乌克兰最多，各5个，其次是瑞典4个，以色列3个。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011745068.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011745068.jpg" alt="enter image description here"></p>
 
 <p>按时间先后顺序排列，部分较活跃的域名详情如下：</p>
 
@@ -211,7 +211,7 @@ autoupdate.adobe.com            通过域名劫持伪造的Adobe子域名，用�
 
 <h1>0x02 特种木马技术</h1>
 
-<hr />
+<hr>
 
 <p>从具体的攻击技术来看，OceanLotus先后使用过4种主要形态的特种木马，其中3种是Windows木马，一种是MAC系统木马。虽然这4种形态的木马均是以窃取感染目标电脑中的机密数据为目的的，但从攻击原理和攻击方式来看，却有着很大的区别。特别是针对Windows系统的3种特种木马形态，其出现时间有先有后，危险程度不断升级，攻击方式从简单到复杂、从本地到云控，可以让我们清楚的看到该组织木马的技术发展脉络和攻击思路的不断转变。</p>
 
@@ -221,7 +221,7 @@ autoupdate.adobe.com            通过域名劫持伪造的Adobe子域名，用�
 
 <h2>1. OceanLotus Tester</h2>
 
-<hr />
+<hr>
 
 <p>OceanLotus Tester最早被捕获于2012年，是一种比较简单的木马，与民用领域所见的一般间谍程序差别不大，安全软件也比较容易将其识别出来。从历史监测的数据来看，Tester的感染量微乎其微，在早期被捕获以后，长期处于不活跃的状态，在当时属于孤立出现的木马样本。</p>
 
@@ -231,11 +231,11 @@ autoupdate.adobe.com            通过域名劫持伪造的Adobe子域名，用�
 
 <h2>2. OceanLotus Encryptor</h2>
 
-<hr />
+<hr>
 
 <p>Encryptor木马最早被截获于2014年2月。当时，安全人员截获了一批将自身图标伪装成Word文档或JPG文档的“.exe”文件，而且这些文件都还使用了一些颇具迷惑性的社工类文件名。下图就是Encryptor木马的某个样本伪装成文件名为“商量好的合同”的Word文档后，查看文件属性时的截图。其实仔细观看不难发现，文件的真实类型是应用程序（.exe）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011799647.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011799647.png" alt="enter image description here"></p>
 
 <p>Encryptor木马的主要作用是打包和向C2服务器上传电脑中存在的各种Office文档，包括Word、PPT、Outlook邮箱文件等。而从攻击技术上来看，Encryptor木马最明显的特点就是会对自己的数据区进行随机递归加密处理，从而大大增加安全软件对其进行识别的难度。</p>
 
@@ -245,11 +245,11 @@ autoupdate.adobe.com            通过域名劫持伪造的Adobe子域名，用�
 
 <h2>3. OceanLotus Cloudrunner</h2>
 
-<hr />
+<hr>
 
 <p>Cloudrunner木马最早被截获于2014年11月。与之前的Encryptor木马不同，Cloudrunner木马只是一个体量很小的可执行文件，木马本身不显现任何恶意特征，在完成初始的感染以后，却会自动从指定的服务器上将其他木马程序下载到被感染的电脑上。这种攻击方式具有明显的云控特点。攻击者可以根据不同的需要，向被感染的电脑上发送各种不同的木马，从而使攻击更加隐蔽，也更具危险性。下图为查看该类木马文件的属性截图。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011714828.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011714828.png" alt="enter image description here"></p>
 
 <p>从木马特点上来看，此木马采用了Shellcode加密，解密执行，然后从网络下载接收第二阶段的木马功能模块，使木马在用户系统上的痕迹尽可能最小化，以逃避防恶意代码工具的查杀，并实现类似云控制的灵活性。具体的信息收集及其他恶意操作以插件的方式投放到受感染的系统上并执行，功能包含如下表所列：</p>
 
@@ -265,7 +265,7 @@ autoupdate.adobe.com            通过域名劫持伪造的Adobe子域名，用�
 
 <h2>4. OceanLotus MAC</h2>
 
-<hr />
+<hr>
 
 <p>OceanLotus MAC与OceanLotus Encryptor大致出现在同一时期，二者都属于OceanLotus使用的第二代木马程序。MAC木马主要针对Mac OS系统，主要作用是在水坑网站中诱骗用户下载执行。在APT攻击中，使用针对苹果操作系统的木马并不多见。</p>
 
@@ -303,7 +303,7 @@ autoupdate.adobe.com            通过域名劫持伪造的Adobe子域名，用�
 
 <h1>0x03 OceanLotus能力分析</h1>
 
-<hr />
+<hr>
 
 <p>通过对OceanLotus组织所使用的恶意代码、攻击载荷和诱饵数据的分析，该组织内部可能有多个小组，每个小组有自己的分工。组织中各组可能针对性地收集社工信息、开发定制的工具以及对窃取的情报进行集中二次处理挖掘，各个环节紧密配合，并在其内部共享窃取的情报信息和攻击载荷。概括来说，要达到目前已知的攻击效果，该组织至少应该具备如下能力：</p>
 
@@ -315,13 +315,13 @@ autoupdate.adobe.com            通过域名劫持伪造的Adobe子域名，用�
 
 <p>对应到以上的3种能力，我们推测OceanLotus组织很可能存在3个小组，其基本能力及任务分工大致如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011758956.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503011758956.png" alt="enter image description here"></p>
 
 <p>此外，考虑到OceanLotus组织制作的特种木马大多使用中文名称，而且往往紧贴中国国内最新时政变化，所以，该组织中一定有精通中文、了解中国国情的人专门从事有针对性的社会工程学研究。  </p>
 
 <h1>0x04 OceanLotus攻击的捕获</h1>
 
-<hr />
+<hr>
 
 <p>随着“互联网+”时代的到来，越来越多的政府机构和企事业单位实现了网络化办公，并将内部的办公网络与外部的互联网相连。企业的互联网化在提高企业办公效率的同时，也使内部网络面临着越来越多的来自全球各地不同目的攻击者的网络攻击。</p>
 
@@ -341,7 +341,7 @@ autoupdate.adobe.com            通过域名劫持伪造的Adobe子域名，用�
 
 <p>天眼实验室此次捕获的OceanLotus组织及其攻击，主要使用了多维度大数据关联分析的方法。我们将百亿级的恶意程序样本库、数亿级的安全终端的防护数据、PB级的搜索引擎的全网抓取数据以及其他多个维度的互联网大数据进行了关联分析和历史检索，最终在每天海量的网络攻击事件中定位出与OceanLotus相关的各种攻击事件和攻击元素，最终绘制出OceanLotus组织对我国境内目标发动APT攻击的全貌。</p>
 
-<p>目前，能够在实践中使用大数据方法分析定位APT攻击的研究机构并不多，同时，具有互联网大数据的处理与分析能力和高级攻防对抗经验的安全企业寥寥。天眼实验室针对未知威胁和APT攻击的研究是建立在360公司多年积累的安全大数据和互联网安全技术方法的基础之上的，因此能够捕获一些以往国内外其他研究者无法发现的威胁元素，并进行事件关联分析。我们也希望能够通过这种新的基于大数据的互联网安全研究成果，给其他网络安全工作者提供一些有益的参考和帮助。</p>      </p>
+<p>目前，能够在实践中使用大数据方法分析定位APT攻击的研究机构并不多，同时，具有互联网大数据的处理与分析能力和高级攻防对抗经验的安全企业寥寥。天眼实验室针对未知威胁和APT攻击的研究是建立在360公司多年积累的安全大数据和互联网安全技术方法的基础之上的，因此能够捕获一些以往国内外其他研究者无法发现的威胁元素，并进行事件关联分析。我们也希望能够通过这种新的基于大数据的互联网安全研究成果，给其他网络安全工作者提供一些有益的参考和帮助。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>自制分布式漏洞扫描 - TMaMba</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/862">http://drops.wooyun.org/tips/862</a></h1>
 				
       <p>
-        <h2>0x00 前言</h2>
+        </p><h2>0x00 前言</h2>
 
-<hr />
+<hr>
 
 <p>在渗透测试和安全扫描工作中，发现越来越多站点部署了应用防护系统或异常流量监控系统，其中包括：WEB应用防火墙（软件WAF、硬件WAF、云WAF）、入侵检测系统、入侵防御系统、访问监控系统等。很多防护系统不仅可实时检测攻击和拦截，并且具备自动阻断功能。当系统检测到某些IP在特定时间段内产生大量攻击行为时会开启阻断功能，阻断该IP在一定时间内的任何访问。</p>
 
@@ -28,7 +28,7 @@
 
 <h2>0x01 分布式漏洞扫描</h2>
 
-<hr />
+<hr>
 
 <h3>1) 分布式漏洞扫描基本思路</h3>
 
@@ -36,7 +36,7 @@
 
 <p>分布式漏洞扫描的整体框架图如下：</p>
 
-<p><img src="http://static.wooyun.org/201401/2014011309344133329.png" alt="2014011309344133329.png" /></p>
+<p><img src="http://static.wooyun.org/201401/2014011309344133329.png" alt="2014011309344133329.png"></p>
 
 <h3>2) 常见扫描器及漏洞检测工具</h3>
 
@@ -83,7 +83,7 @@ wscan
 
 <p>开启Burp，进入“Proxy——>Options”中的“Match and Replace”功能将扫描器指纹信息消除，扫描器指纹信息大多包含Http头部字段、http参数值、COOKIE特殊参数等如下图：</p>
 
-<p><img src="http://static.wooyun.org/201401/2014011309350183102.png" alt="2014011309350183102.png" /></p>
+<p><img src="http://static.wooyun.org/201401/2014011309350183102.png" alt="2014011309350183102.png"></p>
 
 <p>以下总结部分常见应用漏洞扫描器的指纹：</p>
 
@@ -152,13 +152,13 @@ X-Scan-Memo
 
 <h2>0x02 总结</h2>
 
-<hr />
+<hr>
 
 <p>一句恒久远永流传的话——在攻与防的对立统一中寻求突破。</p>
 
 <p> </p>
 
-<p> </p>      </p>
+<p> </p>      <p></p>
     
 			</body>
 		</html>

@@ -3,12 +3,12 @@
 			<head>
 			     <title>运维安全之NFS安全 - rootsecurity</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1423">http://drops.wooyun.org/tips/1423</a></h1>
 				
       <p>
-        <p>说起NFS是（Network File System）的缩写，相信这很多人都知道。其最大的优点就是可以在网络里使不同的主机，不同的操作系统来互相分享文件。由于NFS不像WEB那样经常使用，一般也就用到的时候去网上随便找篇文档安装一下，剩下的就是能用就行了。所以安全性往往是比较容易忽略的问题。</p>
+        </p><p>说起NFS是（Network File System）的缩写，相信这很多人都知道。其最大的优点就是可以在网络里使不同的主机，不同的操作系统来互相分享文件。由于NFS不像WEB那样经常使用，一般也就用到的时候去网上随便找篇文档安装一下，剩下的就是能用就行了。所以安全性往往是比较容易忽略的问题。</p>
 
 <p>NFS的联动进程有nfsd，rpc.mountd，rpc.statd， locked，rpc.idmapd，rpc.gssd，rpc.svcgssd，其主进程nfsd使用的是TCP/UDP的2049端口，其中TCP协议是在V3版本才引入的。下面是NFS的发展历程：</p>
 
@@ -44,7 +44,7 @@ NFS V4在RFC3530中描述，相对于V3版本，它把lock喝mount整合进协�
 
 <p>虽然nfsd固定使用2049端口，但是lockd、mountd、statd都使用portmap随机分配的端口，这让防火墙很难配置，而且还可能占用还没起来的其它服务的端口。可以在/etc/sysconfig/nfs中把这些进程的端口都配置成固定的，这样配置防火墙（只放行自己信任的IP）就容易了</p>
 
-<p>rpcinfo -p可以查看portmap分配出去的端口。</p>      </p>
+<p>rpcinfo -p可以查看portmap分配出去的端口。</p>      <p></p>
     
 			</body>
 		</html>

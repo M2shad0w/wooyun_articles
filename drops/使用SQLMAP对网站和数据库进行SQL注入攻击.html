@@ -3,16 +3,16 @@
 			<head>
 			     <title>使用SQLMAP对网站和数据库进行SQL注入攻击 - windhawk</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2113">http://drops.wooyun.org/tips/2113</a></h1>
 				
       <p>
-        <p>from：http://www.blackmoreops.com/2014/05/07/use-sqlmap-sql-injection-hack-website-database/</p>
+        </p><p>from：http://www.blackmoreops.com/2014/05/07/use-sqlmap-sql-injection-hack-website-database/</p>
 
 <h2>0x00 背景介绍</h2>
 
-<hr />
+<hr>
 
 <h3>1. 什么是SQL注入？</h3>
 
@@ -38,7 +38,7 @@
 
 <h2>0x01 定位注入的网站</h2>
 
-<hr />
+<hr>
 
 <p>这通常是最枯燥和最耗时的一步，如果你已经知道如何使用Google Dorks（Google dorks sql insection：谷歌傻瓜式SQL注入）或许会有些头绪，但是假如你还没有整理过用于Google搜索的那些字符串的话，可以考虑复制下面的条目，等待谷歌的搜索结果。</p>
 
@@ -852,7 +852,7 @@
 
 <p>下面是我自己测试时的SQL错误截图：</p>
 
-<p><img src="http://static.wooyun.org/201405/2014052914544392535.png" alt="2014052914544392535.png" /> </p>
+<p><img src="http://static.wooyun.org/201405/2014052914544392535.png" alt="2014052914544392535.png"> </p>
 
 <p>不同的数据库返回的SQL错误或许会有不同，比如：</p>
 
@@ -889,7 +889,7 @@ Error: SQLExceptionjava.sql.SQLException: ORA-01756: quoted string not pro
 
 <h2>0x02 列出DBMS数据库</h2>
 
-<hr />
+<hr>
 
 <p>正如上图你看到的，我找到了一个存在SQL注入点的网站。现在我需要列出所有的数据库（有时这也称为枚举列数）。因为我一直在使用SQLMAP，它会告诉我哪个存在漏洞。</p>
 
@@ -909,7 +909,7 @@ Error: SQLExceptionjava.sql.SQLException: ORA-01756: quoted string not pro
 
 <h2>0x03 列出目标数据库的表</h2>
 
-<hr />
+<hr>
 
 <p>现在我们需要知道在数据库sqldummywebsite中都有哪些表，为了弄清这些信息，我们使用下面的命令：</p>
 
@@ -931,13 +931,13 @@ Error: SQLExceptionjava.sql.SQLException: ORA-01756: quoted string not pro
 [10:56:42] [INFO] retrieved: user_info
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201405/2014052914585030373.png" alt="2014052914585030373.png" /> </p>
+<p><img src="http://static.wooyun.org/201405/2014052914585030373.png" alt="2014052914585030373.png"> </p>
 
 <p>显而易见，我们的兴趣主要在表user_info中，因为这张表中包含着数据库的用户名和密码。</p>
 
 <h2>0x04 列出指定数据库中的列</h2>
 
-<hr />
+<hr>
 
 <p>现在我们需要列出数据库sqldummywebsite的表user_info中的所有的列，使用SQLMAP进行这一步会非常简单，运行下面的命令：</p>
 
@@ -961,13 +961,13 @@ Error: SQLExceptionjava.sql.SQLException: ORA-01756: quoted string not pro
 [10:57:43] [INFO] retrieved: tinyint(4)
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201405/2014052915004160941.png" alt="2014052915004160941.png" /> </p>
+<p><img src="http://static.wooyun.org/201405/2014052915004160941.png" alt="2014052915004160941.png"> </p>
 
 <p>哈哈！其中的<code>user_login</code>和<code>user_password</code>字段就是我们要找的！</p>
 
 <h2>0x05 从指定的数据库的表中列出用户名</h2>
 
-<hr />
+<hr>
 
 <p>SQLMAP的SQL注入非常简单！再次运行下面的命令吧：</p>
 
@@ -980,13 +980,13 @@ Error: SQLExceptionjava.sql.SQLException: ORA-01756: quoted string not pro
 [10:58:40] [INFO] analyzing table dump for possible password hashes
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201405/2014052915114612604.png" alt="2014052915114612604.png" /></p>
+<p><img src="http://static.wooyun.org/201405/2014052915114612604.png" alt="2014052915114612604.png"></p>
 
 <p>现在我们只需要这个用户的密码了，下面就来介绍如何得到密码！</p>
 
 <h2>0x06 提取用户密码</h2>
 
-<hr />
+<hr>
 
 <p>你可能已经习惯如何使用SQLMAP了！使用下面的参数来提取密码字段的数值吧！</p>
 
@@ -1008,7 +1008,7 @@ Table: user_info
 +---------------+
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201405/2014052915045923606.png" alt="2014052915045923606.png" /></p>
+<p><img src="http://static.wooyun.org/201405/2014052915045923606.png" alt="2014052915045923606.png"></p>
 
 <p>虽然我们得到了密码字段的值，但是却是密码的HASH值，现在我们需要解密这个密码了。我之前已经探讨过在Kali Linux上如何解密MD5、phpBB、MySQL和SHA-1。</p>
 
@@ -1020,7 +1020,7 @@ Table: user_info
 
 <h2>0x07 破解密码</h2>
 
-<hr />
+<hr>
 
 <p>现在密码字段的值是 24iYBc17xK0e ，你首先应当判断HASH的类型。</p>
 
@@ -1032,7 +1032,7 @@ Table: user_info
 
 <p>然后根据提示提供HASH值就可以了：</p>
 
-<p><img src="http://static.wooyun.org/201405/2014052915061762603.png" alt="2014052915061762603.png" /> </p>
+<p><img src="http://static.wooyun.org/201405/2014052915061762603.png" alt="2014052915061762603.png"> </p>
 
 <p>所以这是一个DES(Unix) HASH。</p>
 
@@ -1047,7 +1047,7 @@ Table: user_info
 
 <p>【PS：这里的cudahashcat是借助GPU进行破解的工具，下面提到的oclHashcat也是同样的工具，详细介绍与用法可以参考HASHCAT使用简介传送门：<a href="http://drops.wooyun.org/tools/655">http://drops.wooyun.org/tools/655</a>】</p>
 
-<p><img src="http://static.wooyun.org/201405/2014052915070592604.png" alt="2014052915070592604.png" /> </p>
+<p><img src="http://static.wooyun.org/201405/2014052915070592604.png" alt="2014052915070592604.png"> </p>
 
 <p>如图所示：代码要么是1500要么是3100，因为目标是一个MySQL数据库，所以一定是1500.我运行的电脑使用的是NVDIA显卡，因此我可以使用cudaHashcat；我的笔记本是AMD显卡，那么我就只能使用oclHashcat破解MD5.如果你运行在VirtualBox或者VMWare上，你既不能使用cudahashcat也不能使用oclhashcat，你必须安装Kali Linux。</p>
 
@@ -1056,11 +1056,11 @@ Table: user_info
 <pre><code>cudahashcat -m 1500 -a 0 /root/sql/DES.hash /root/sql/rockyou.txt
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201405/2014052915081195605.png" alt="2014052915081195605.png" /> </p>
+<p><img src="http://static.wooyun.org/201405/2014052915081195605.png" alt="2014052915081195605.png"> </p>
 
 <p>现在我们得到了破解的密码：abc123，接下来我们就可以使用这个用户的身份登录了。</p>
 
-<p> </p>      </p>
+<p> </p>      <p></p>
     
 			</body>
 		</html>

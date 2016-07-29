@@ -3,14 +3,14 @@
 			<head>
 			     <title>解密MSSQL链接数据库的密码 - wefgod</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1067">http://drops.wooyun.org/tips/1067</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>from:<a href="https://www.netspi.com/blog/entryid/221/decrypting-mssql-database-link-server-passwords">https://www.netspi.com/blog/entryid/221/decrypting-mssql-database-link-server-passwords</a></p>
 
@@ -26,17 +26,17 @@
 
 <h2>0x01 链接服务器</h2>
 
-<hr />
+<hr>
 
 <p>Microsoft SQL Server允许用户使用MSSQL管理其它不同类型的数据库，一般情况下链接服务器用来管理与本地不同版本的MSSQL服务。当链接建立之后，它们可以被配置为使用安全的上下文和静态sql server凭据。如果sql server的凭据被添加使用了，相关的用户名和密码会被加密存储到相关的表内，而这一加密是可逆的。单向不可逆的hash是不可以用于链接服务器的，因为sql server必须要使用明文的密码信息去访问其它的数据库。所以，如果密码信息是使用了对称加密而不是单向hash的话，sql server自然会有方法去解密相关的密文凭证。本文主要介绍这一加密、解密的过程及其工具化的实现。</p>
 
 <h2>0x02 链接服务器的密码存储方式</h2>
 
-<hr />
+<hr>
 
 <p>MSSQL将链接服务器的信息（包含加密的密码）保存在master.sys.syslnklgns表中。我们重点关注的加密密码是保存在字段“pwdhash”中的（虽然写着hash但是他不是一个普通的hash），下图是一个例子：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014031313584244331.jpg" alt="2014031313584244331.jpg" /></p>
+<p><img src="http://static.wooyun.org/201403/2014031313584244331.jpg" alt="2014031313584244331.jpg"></p>
 
 <p>master.sys.syslnklgns表在正常的数据库连接情况下是无法访问的，必须在专用管理员连接（DAC）下才可以访问（更多关于DAC的信息请查看<a href="http://technet.microsoft.com/en-us/library/ms178068%28v=sql.105%29.aspx">http://technet.microsoft.com/en-us/library/ms178068%28v=sql.105%29.aspx</a>）。打开专用管理员连接有两个条件：一是需要有mssql的Sysadmin权限，二是本地服务器的管理员权限。</p>
 
@@ -44,23 +44,23 @@
 
 <h2>0x03 MSSQL加密</h2>
 
-<hr />
+<hr>
 
 <p>下面介绍一些MSSQL加密的基本原理。首先我们可以先了解一下服务主密钥（SMK）（更多信息请参考<a href="http://technet.microsoft.com/en-us/library/ms189060.aspx">http://technet.microsoft.com/en-us/library/ms189060.aspx</a>）。根据微软的描述“服务主密钥为 SQL Server 加密层次结构的根。</p>
 
 <p>服务主密钥是首次需要它来加密其他密钥时自动生成的”可知SMK保存在master.sys.key&#95;encryptions表中，而他的key&#95;id对应的值是102。SMK是使用DPAPI来加密的，而这里他有两个可用的版本，第一种是使用的LocalMachine加密，另一种是CurrentUser的相关上下文（意思是SQL Server服务运行的账户）。这里我们挑使用LocalMachine的Machinekey来单独加密的、解密时不依赖于SQL Server账户的格式来讨论。下面是一个例子：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014031313592481620.jpg" alt="2014031313592481620.jpg" /></p>
+<p><img src="http://static.wooyun.org/201403/2014031313592481620.jpg" alt="2014031313592481620.jpg"></p>
 
 <p>为了增强加密的强度，算法中会加入熵（密码学用语，可自行查阅），不过算法中使用到的熵字节我们可以从注册表<code>HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\[instancename]\Security\Entropy</code>中找到。再次提醒，访问此表项需要本地系统的管理员权限。下图是熵的一个例子：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014031313595995821.jpg" alt="2014031313595995821.jpg" /></p>
+<p><img src="http://static.wooyun.org/201403/2014031313595995821.jpg" alt="2014031313595995821.jpg"></p>
 
 <p>搞定上面这些之后（同时必须去除填充字节等）我们就可以使用DPAPI来解密SMK了。</p>
 
 <h2>0x04 解密链接服务器的密码</h2>
 
-<hr />
+<hr>
 
 <p>从SMK的长度（或MSSQL的版本）我们可以看出两种不同的加密算法：MSSQL 2012使用的是AES，而早期的版本使用的是3DES。另外，pwdhash必须解析为bit才可以找到相关的加密密码。版本使用的算法参考了高级T-SQL程序员发布的文章，见<a href="http://stackoverflow.com/questions/2822592/how-to-get-compatibility-between-c-sharp-and-sql2k8-aes-encryption">http://stackoverflow.com/questions/2822592/how-to-get-compatibility-between-c-sharp-and-sql2k8-aes-encryption</a></p>
 
@@ -68,7 +68,7 @@
 
 <h2>0x05 使用脚本解密链接服务器的密码</h2>
 
-<hr />
+<hr>
 
 <p>下面给出powershell的自动解密脚本Get-MSSQLLinkPasswords.psm1的源码链接（译者提示：该脚本必须在powershell2.0下运行）：</p>
 
@@ -87,11 +87,11 @@
 9. 若程序运行成功则会回显相关的密码信息，比如下图就是一个例子：
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201403/2014031314002642166.jpg" alt="2014031314002642166.jpg" /></p>
+<p><img src="http://static.wooyun.org/201403/2014031314002642166.jpg" alt="2014031314002642166.jpg"></p>
 
 <h2>0x06 译者自测</h2>
 
-<hr />
+<hr>
 
 <p>在测试这个的过程中很多问题的产生，要不是DAC登录不上，就是powershell的脚本一直有问题。</p>
 
@@ -107,19 +107,19 @@
 
 <p>1.pwdhash</p>
 
-<p><img src="http://static.wooyun.org/201403/2014031314004519325.png" alt="2014031314004519325.png" /></p>
+<p><img src="http://static.wooyun.org/201403/2014031314004519325.png" alt="2014031314004519325.png"></p>
 
 <p>2.读取加密的SMK</p>
 
-<p><img src="http://static.wooyun.org/201403/2014031314010729749.png" alt="2014031314010729749.png" /></p>
+<p><img src="http://static.wooyun.org/201403/2014031314010729749.png" alt="2014031314010729749.png"></p>
 
 <p>3.查看注册表key</p>
 
-<p><img src="http://static.wooyun.org/201403/2014031314012465783.png" alt="2014031314012465783.png" /></p>
+<p><img src="http://static.wooyun.org/201403/2014031314012465783.png" alt="2014031314012465783.png"></p>
 
 <p>但是在运行脚本的时候（注意要2.0以上）还是报错了：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014031314014787183.png" alt="2014031314014787183.png" /></p>
+<p><img src="http://static.wooyun.org/201403/2014031314014787183.png" alt="2014031314014787183.png"></p>
 
 <p>已经测试过两个参数都非空，而且应该是正确的。</p>
 
@@ -127,7 +127,7 @@
 
 <p>另外，这也是一种“找数据库连接信息”的方法。虽然有点奇葩，但是预计还是可行的，以后如果可以安排得过来，而且没有大牛修改上面的脚本的话……我再来献丑。</p>
 
-<p>第一次搞翻译，翻译的不好大家多多原谅。</p>      </p>
+<p>第一次搞翻译，翻译的不好大家多多原谅。</p>      <p></p>
     
 			</body>
 		</html>

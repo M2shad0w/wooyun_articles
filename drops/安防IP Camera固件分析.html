@@ -3,20 +3,20 @@
 			<head>
 			     <title>安防IP Camera固件分析 - liwenhaosuper</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/2792">http://drops.wooyun.org/papers/2792</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>之前一直看的是传统的系统安全问题，最近了解了下嵌入式设备的安全，颇有意思。</p>
 
 <p>首先要从下面一个图说起：</p>
 
-<p><img src="http://static.wooyun.org/20140811/2014081102352872385.jpg" alt="botnet.jpg" /></p>
+<p><img src="http://static.wooyun.org/20140811/2014081102352872385.jpg" alt="botnet.jpg"></p>
 
 <!--more-->
 
@@ -30,7 +30,7 @@
 
 <h2>0x01 细节</h2>
 
-<hr />
+<hr>
 
 <p>接下来要考虑的是研究哪种嵌入式设备，选择路由器？好像乐趣不多；前几天看了部电影《风暴》，我对里面警察通过监控摄像头查找证据的场景印象深刻，当时浮现的想法是：如果匪徒也能控制这些监控摄像头，反过来通过它们监控警察的行踪，或者在他们作案前或作案后将监控摄像头的数据删除掉，那么警匪的力量就不会这么悬殊，剧情会不会更有意思？</p>
 
@@ -46,19 +46,19 @@
 
 <p>登陆进去后它打印显示“welcome to monitor tech”，“嗯，不客气，反正我都来了”。先查看系统信息吧：</p>
 
-<p><img src="http://static.wooyun.org/20140811/2014081102353183829.png" alt="cpuinfo.png" /></p>
+<p><img src="http://static.wooyun.org/20140811/2014081102353183829.png" alt="cpuinfo.png"></p>
 
-<p><img src="http://static.wooyun.org/20140811/2014081102353218924.png" alt="versioninfo.png" /></p>
+<p><img src="http://static.wooyun.org/20140811/2014081102353218924.png" alt="versioninfo.png"></p>
 
-<p><img src="http://static.wooyun.org/20140811/2014081102353247102.png" alt="meminfo.png" /></p>
+<p><img src="http://static.wooyun.org/20140811/2014081102353247102.png" alt="meminfo.png"></p>
 
 <p>可看到系统用的是ucLinux，内核是3.0.8，处理器是ARM926EJ-S，芯片是海思的Hi3518，google一些这方面的信息，海思的hi3XXX都是有名的安防解决方案，海思的SDK可在<a href="http://download.csdn.net/download/wumusenxppp/5731827">这里</a>下载。</p>
 
 <p>找了一番发现系统就是一个ucLinux内核加一个busybox组成的，核心IPC固件在/usr/bin下，ps一下看到进程主要是Sofia和dvrbox，而关键是Sofia。：</p>
 
-<p><img src="http://static.wooyun.org/20140811/2014081102353327491.png" alt="bininfo.png" /></p>
+<p><img src="http://static.wooyun.org/20140811/2014081102353327491.png" alt="bininfo.png"></p>
 
-<p><img src="http://static.wooyun.org/20140811/2014081102353362992.png" alt="psinfo.png" /></p>
+<p><img src="http://static.wooyun.org/20140811/2014081102353362992.png" alt="psinfo.png"></p>
 
 <p>重启Sofia可以看到一系列log信息，其中它开了一个web server，目录在/mnt/web下。</p>
 
@@ -66,7 +66,7 @@
 
 <p>想到它开有web server，于是打算将文件放到/mnt/web下再从浏览器下载下来。可惜不成功：目录只读！</p>
 
-<p><img src="http://static.wooyun.org/20140811/2014081102353433870.png" alt="mountinfo.png" /></p>
+<p><img src="http://static.wooyun.org/20140811/2014081102353433870.png" alt="mountinfo.png"></p>
 
 <p>想到一个办法：虽然/mnt/web下是只读的cramfs文件系统，可通过mount mtd到/mnt/web下覆盖原有目录做到：</p>
 
@@ -83,7 +83,7 @@
 
 <p>接下来有空的话要做的事情就是尝试扫描网络发现这些设备并利用google map组成一个摄像头监控网络。</p>
 
-<p>目前尚未解决的问题：由于无法物理接触到这些设备，系统busybox里面又没有可用的工具，尚不能上传文件到设备上。</p>      </p>
+<p>目前尚未解决的问题：由于无法物理接触到这些设备，系统busybox里面又没有可用的工具，尚不能上传文件到设备上。</p>      <p></p>
     
 			</body>
 		</html>

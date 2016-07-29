@@ -3,14 +3,14 @@
 			<head>
 			     <title>Hibernate对注入的简单测试 - clzzy</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/748">http://drops.wooyun.org/tips/748</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>前段时间遇到一个使用了Hibernate框架的站，以前没怎么接触过（由于是Java盲，所以大家勿喷），再注入的事情发生了许多奇奇怪怪的事情，于是向本地搭一个看看是个神马情况。Hibernate配备了一种非常强大的查询语言，这种语言看上去很像SQL。但是不要被语法结构上的相似所迷惑，HQL是非常有意识的被设计为完全面向对象的查询。</p>
 
@@ -18,11 +18,11 @@
 
 <h2>0x01 测试</h2>
 
-<hr />
+<hr>
 
 <p>本次测试的环境是JDK5.0+Tomcat8+Hibernate3.0+Servlet。数据库情况如下：</p>
 
-<p><img src="http://static.wooyun.org/201311/2013112511500521075.png" alt="2013112511500521075.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511500521075.png" alt="2013112511500521075.png"></p>
 
 <p>通过百度知道Hibernate的查询大概有5、6种，通过分析对注入能产生不同影响的应该有如下三种：</p>
 
@@ -65,7 +65,7 @@
 3、不能使用数据库中的列名，比如USERNAME映射为username之后，不能再使用USERNAME，否则报错。
 </code></pre>
 
-<p></br></p>
+<p><br></p>
 
 <pre><code>#!xml
 &lt;?xml version="1.0" encoding="utf-8"?&gt;
@@ -112,41 +112,41 @@ HibernateSessionFactory.closeSession();
 
 <p>使用单引号测试（有返回异常的代码，数据库报错）：</p>
 
-<p><img src="http://static.wooyun.org/201311/2013112511511598103.png" alt="2013112511511598103.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511511598103.png" alt="2013112511511598103.png"></p>
 
 <p>使用单引号测试（没有返回异常的代码，默认情况，Tomcat报错）：</p>
 
-<p><img src="http://static.wooyun.org/201311/2013112511514496111.png" alt="2013112511514496111.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511514496111.png" alt="2013112511514496111.png"></p>
 
 <pre><code>And 'a'='a 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201311/2013112511522315773.png" alt="2013112511522315773.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511522315773.png" alt="2013112511522315773.png"></p>
 
 <pre><code>And 'a'='b
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201311/2013112511525569278.png" alt="2013112511525569278.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511525569278.png" alt="2013112511525569278.png"></p>
 
 <p>跨库查系统表？想都不要想：</p>
 
-<p><img src="http://static.wooyun.org/201311/2013112511532221767.png" alt="2013112511532221767.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511532221767.png" alt="2013112511532221767.png"></p>
 
 <p>*号也是不能用滴：</p>
 
-<p><img src="http://static.wooyun.org/201311/2013112511534553955.png" alt="2013112511534553955.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511534553955.png" alt="2013112511534553955.png"></p>
 
 <p>不支持union：</p>
 
-<p><img src="http://static.wooyun.org/201311/2013112511541396421.png" alt="2013112511541396421.png" /></p></p>
+<p><img src="http://static.wooyun.org/201311/2013112511541396421.png" alt="2013112511541396421.png"></p><p></p>
 
 <p>单独内嵌select作为条件（正常执行）：</p>
 
-<p><img src="http://static.wooyun.org/201311/2013112511544292137.png" alt="2013112511544292137.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511544292137.png" alt="2013112511544292137.png"></p>
 
 <p>单独执行substr()，ASCII()函数没问题：</p>
 
-<p><img src="http://static.wooyun.org/201311/2013112511550372977.png" alt="2013112511550372977.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511550372977.png" alt="2013112511550372977.png"></p>
 
 <p>但是执行</p>
 
@@ -155,13 +155,13 @@ HibernateSessionFactory.closeSession();
 
 <p>就不行了：</p>
 
-<p><img src="http://static.wooyun.org/201311/2013112511552223471.png" alt="2013112511552223471.png" /><br /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511552223471.png" alt="2013112511552223471.png"><br></p>
 
 <p>结论：这里能爆的列还得看前面那个select的心情。</p>
 
 <p>小刺猬和它的小伙伴们都惊呆了：</p>
 
-<p><img src="http://static.wooyun.org/201311/2013112511554437592.png" alt="2013112511554437592.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511554437592.png" alt="2013112511554437592.png"></p>
 
 <p>对于第二种使用原生SQL的方式，写法大概是这样：</p>
 
@@ -175,7 +175,7 @@ mUserPwd=(String)it.get(0);
 
 <p>就不多说了，就可普通注入一样。毫无压力：</p>
 
-<p><img src="http://static.wooyun.org/201311/2013112511561333503.png" alt="2013112511561333503.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511561333503.png" alt="2013112511561333503.png"></p>
 
 <p>说说第三种，写法大概是这样：</p>
 
@@ -192,13 +192,13 @@ mUserPwd=u.getUserpwd();
 
 <p>来猜解前面SELECT中选择的列中有的列的内容的话，那么在第三种Criteria方式下，基本就绝望了：</p>
 
-<p><img src="http://static.wooyun.org/201311/2013112511564296588.png" alt="2013112511564296588.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511564296588.png" alt="2013112511564296588.png"></p>
 
-<p><img src="http://static.wooyun.org/201311/2013112511565763376.png" alt="2013112511565763376.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511565763376.png" alt="2013112511565763376.png"></p>
 
-<p><img src="http://static.wooyun.org/201311/2013112511571458944.png" alt="2013112511571458944.png" /><br /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511571458944.png" alt="2013112511571458944.png"><br></p>
 
-<p><img src="http://static.wooyun.org/201311/2013112511573196321.png" alt="2013112511573196321.png" /><br /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511573196321.png" alt="2013112511573196321.png"><br></p>
 
 <p>本来要结束的时候，我发现了第四种，是HQL的另一种写法，大概代码这么写：</p>
 
@@ -212,15 +212,15 @@ mUserPwd=(String)it.get(0);
 
 <p>貌似这样的也没得玩，歇菜了：</p>
 
-<p><img src="http://static.wooyun.org/201311/2013112511581343139.png" alt="2013112511581343139.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511581343139.png" alt="2013112511581343139.png"></p>
 
-<p><img src="http://static.wooyun.org/201311/2013112511581991918.png" alt="2013112511581991918.png" /></p>
+<p><img src="http://static.wooyun.org/201311/2013112511581991918.png" alt="2013112511581991918.png"></p>
 
 <h2>0x02 总结</h2>
 
-<hr />
+<hr>
 
-<p>最后：时间有限，只做了字符型的简单粗浅表面测试，抛个砖，希望有更多经验的留言啊，毕竟这方面的资料网上真心极少，为了方便大众，请大牛们现身说法。</p>      </p>
+<p>最后：时间有限，只做了字符型的简单粗浅表面测试，抛个砖，希望有更多经验的留言啊，毕竟这方面的资料网上真心极少，为了方便大众，请大牛们现身说法。</p>      <p></p>
     
 			</body>
 		</html>

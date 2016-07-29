@@ -3,14 +3,14 @@
 			<head>
 			     <title>WebView中接口隐患与手机挂马利用 - livers</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/548">http://drops.wooyun.org/papers/548</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>在android的sdk中封装了webView控件。这个控件主要用开控制的网页浏览。在程序中装载webView控件，可以设置属性（颜色，字体等）。类似PC下directUI的功能。在webView 下有一个非常特殊的接口函数addJavascriptInterface。能实现本地java和js的交互。利用addJavascriptInterface这个接口函数可实现穿透webkit控制android 本机。</p>
 
@@ -18,7 +18,7 @@
 
 <h2>0x01 检测利用</h2>
 
-<hr />
+<hr>
 
 <p>一般使用html 来设计应用页面的几乎不可避免的使用到addJavascriptInterface，包含不限于android浏览器。</p>
 
@@ -62,7 +62,7 @@ function execute(cmdArgs)
 
 <h2>0x02 远程获取shell</h2>
 
-<hr />
+<hr>
 
 <p>套用yuange的一句话：Poc远远小于exp的价值。</p>
 
@@ -96,13 +96,13 @@ alert("ok3");
 
 <p>// 注 xxx 保护隐私用xx代指。</p>
 
-<p>效果如下 ￼ <img src="http://static.wooyun.org/20140714/2014071403514516065.png" alt="enter image description here" /></p>
+<p>效果如下 ￼ <img src="http://static.wooyun.org/20140714/2014071403514516065.png" alt="enter image description here"></p>
 
 <p>当然可以用远程IP地址。</p>
 
 <h2>0x03 远程挂马</h2>
 
-<hr />
+<hr>
 
 <p>毕竟是android环境，shell使用不是很方便。类似xsser肯定不满足于此。</p>
 
@@ -169,17 +169,17 @@ alert("over !!!");
 
 <p>利用echo写入到sdcard中（此目录可读可写 不可执行）。</p>
 
-<p>利用自身带的adb进行安装（安装各种xx手机助手的不在少数吧）。 ￼ <img src="http://static.wooyun.org/20140714/2014071405240230747.png" alt="enter image description here" /></p>
+<p>利用自身带的adb进行安装（安装各种xx手机助手的不在少数吧）。 ￼ <img src="http://static.wooyun.org/20140714/2014071405240230747.png" alt="enter image description here"></p>
 
 <p>Androrat 成功安装，这里使用了androrat的debug=true模式。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403285078564.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403285078564.png" alt="enter image description here"></p>
 
 <p>成功连接到控制端。</p>
 
 <h2>0x04 修复</h2>
 
-<hr />
+<hr>
 
 <p>1、Android 4.2 （api17）已经开始采用新的接口函数【java中应该叫方法：） 】，@JavascriptInterface 代替addjavascriptInterface, 有些android 2.3不再升级，浏览器需要兼容。</p>
 
@@ -187,7 +187,7 @@ alert("over !!!");
 
 <p>3、控制相关权限或者尽可能不要使用js2java的bridge。</p>
 
-<p>Link: <a href="http://developer.android.com/reference/android/webkit/WebView.html">http://developer.android.com/reference/android/webkit/WebView.html</a> <a href="http://developer.android.com/reference/android/webkit/WebView.html#addJavascriptInterface%28java.lang.Object,%20java.lang.String%29">http://developer.android.com/reference/android/webkit/WebView.html#addJavascriptInterface(java.lang.Object, java.lang.String)</a> <a href="http://www.cis.syr.edu/~wedu/Research/paper/webview_acsac2011.pdf">http://www.cis.syr.edu/~wedu/Research/paper/webview_acsac2011.pdf</a> <a href="http://50.56.33.56/blog/?p=314">http://50.56.33.56/blog/?p=314</a></p>      </p>
+<p>Link: <a href="http://developer.android.com/reference/android/webkit/WebView.html">http://developer.android.com/reference/android/webkit/WebView.html</a> <a href="http://developer.android.com/reference/android/webkit/WebView.html#addJavascriptInterface%28java.lang.Object,%20java.lang.String%29">http://developer.android.com/reference/android/webkit/WebView.html#addJavascriptInterface(java.lang.Object, java.lang.String)</a> <a href="http://www.cis.syr.edu/~wedu/Research/paper/webview_acsac2011.pdf">http://www.cis.syr.edu/~wedu/Research/paper/webview_acsac2011.pdf</a> <a href="http://50.56.33.56/blog/?p=314">http://50.56.33.56/blog/?p=314</a></p>      <p></p>
     
 			</body>
 		</html>

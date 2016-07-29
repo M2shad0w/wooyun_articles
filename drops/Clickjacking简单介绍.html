@@ -3,12 +3,12 @@
 			<head>
 			     <title>Clickjacking简单介绍 - 瞌睡龙</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/104">http://drops.wooyun.org/papers/104</a></h1>
 				
       <p>
-        <h2>0x00 相关背景介绍</h2>
+        </p><h2>0x00 相关背景介绍</h2>
 
 <p>Clickjacking（点击劫持）是由互联网安全专家罗伯特·汉森和耶利米·格劳斯曼在2008年首创的。</p>
 
@@ -95,7 +95,7 @@ var url = window.location.href; top.location.replace(url)
 
 <p>访问1.html之后可以看到页面并无跳转等动作。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811440968989.png" alt="http://static.wooyun.org/20141017/2014101711515250154.png" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811440968989.png" alt="http://static.wooyun.org/20141017/2014101711515250154.png"></p>
 
 <h3>二、onBeforeUnload函数的利用：</h3>
 
@@ -120,11 +120,11 @@ window.onbeforeunload = function() { if(framekiller) { return
 
 <p>打开页面显示如下：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811441088237.png" alt="http://static.wooyun.org/20141017/2014101711515274922.png" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811441088237.png" alt="http://static.wooyun.org/20141017/2014101711515274922.png"></p>
 
 <p>欺骗用户点击留在此页后显示：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811441036490.png" alt="http://static.wooyun.org/20141017/2014101711515228109.png" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811441036490.png" alt="http://static.wooyun.org/20141017/2014101711515228109.png"></p>
 
 <h3>三、XSS filter的利用</h3>
 
@@ -144,7 +144,7 @@ window.onbeforeunload = function() { if(framekiller) { return
 
 <p>访问后页面显示：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811441171702.png" alt="http://static.wooyun.org/20141017/2014101711515211018.png" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811441171702.png" alt="http://static.wooyun.org/20141017/2014101711515211018.png"></p>
 
 <p>IE的xss筛选器自动拦截了跳转。</p>
 
@@ -240,7 +240,7 @@ if (self == top) {
     top.location = self.location;
 }
 &lt;/script&gt;
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>Android证书信任问题与大表哥 - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3296">http://drops.wooyun.org/tips/3296</a></h1>
 				
       <p>
-        <h2>0x00 起因</h2>
+        </p><h2>0x00 起因</h2>
 
-<hr />
+<hr>
 
 <p>1、近期icloud.com、yahoo.com、apple.com遭遇到大规模劫持</p>
 
@@ -30,7 +30,7 @@
 
 <h2>0x01 科普</h2>
 
-<hr />
+<hr>
 
 <p><strong>https&amp;&amp;ssl</strong></p>
 
@@ -50,11 +50,11 @@
 
 <h2>0x02 分析</h2>
 
-<hr />
+<hr>
 
 <p>如果自己简单的实现android webview加载网页，如果直接访问可信证书的站点是可以正常显示，但是如果访问自签名的证书的站点就会显示notfound的页面。(写本文时apple.com以及apple.com.cn处于劫持状态)</p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115732webview.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141023/20141023115732webview.jpg" alt=""></p>
 
 <p>logcat会输出网页显示不安全的内容</p>
 
@@ -63,11 +63,11 @@
 
 <p>功能健全的手机浏览器访问自签名证书的站点会如下提醒</p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115731mUC.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141023/20141023115731mUC.jpg" alt=""></p>
 
 <p>在PC端如果访问自签名证书的站点则会出现如下图左侧的提醒</p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115731360.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141023/20141023115731360.jpg" alt=""></p>
 
 <p>为解决<code>javax.net.ssl.SSLPeerUnverifiedException: No peer certificate</code>的异常，开发者往往会采用以下的错误解决方案。如此是浏览器应用采用此类解决方案，那么风险就更大了。</p>
 
@@ -158,31 +158,31 @@ return true;
 
 <p>百度和遨游轻松检测出证书异常</p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115732baidu.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141023/20141023115732baidu.jpg" alt=""></p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115731aoyou.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141023/20141023115731aoyou.jpg" alt=""></p>
 
 <p>而360和搜狗直接加载进入了被劫持的网站。</p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115731m360.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141023/20141023115731m360.jpg" alt=""></p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115732sougou.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141023/20141023115732sougou.jpg" alt=""></p>
 
 <p>反编译查看遨游浏览器的代码，针对证书异常做了处理</p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115732true.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141023/20141023115732true.jpg" alt=""></p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115731mismatch.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141023/20141023115731mismatch.jpg" alt=""></p>
 
 <p>而搜狗浏览器则是做了证书信任所有主机名不当处理</p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115732trust.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/drops/20141023/20141023115732trust.jpg" alt=""></p>
 
 <p>关键字：checkServerTrusted、setHostnameVerifier、ALLOW&#95;ALL&#95;HOSTNAME_VERIFIER、X509TrustManager、onReceivedSslError</p>
 
 <h2>0x03 对比</h2>
 
-<hr />
+<hr>
 
 <p>对主流手机浏览器进行了横向对比，测试对象包括：firefox、chrome、UC浏览器、搜狗浏览器、百度浏览器、360安全浏览器、欧鹏浏览器、遨游云浏览器、猎豹浏览器。</p>
 
@@ -194,7 +194,7 @@ return true;
 
 <h2>0x04 建议</h2>
 
-<hr />
+<hr>
 
 <p>开发者：</p>
 
@@ -223,7 +223,7 @@ java public class SecureSocketFactory extends SSLSocketFactory {
 
     /**
      * Instantiate a new secured factory pertaining to the passed store. Be sure to initialize the
-     * store with the password using <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="374c775b5e595c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> java.security.KeyStore#load(java.io.InputStream,
+     * store with the password using <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="374c775b5e595c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> java.security.KeyStore#load(java.io.InputStream,
      * char[])} method.
      *
      * @param store The key store holding the certificate details
@@ -366,7 +366,7 @@ java public class SecureSocketFactory extends SSLSocketFactory {
 
 <h2>0x05 参考</h2>
 
-<hr />
+<hr>
 
 <p><a href="http://drops.wooyun.org/tips/2775" title="http://drops.wooyun.org/tips/2775">http://drops.wooyun.org/tips/2775</a></p>
 
@@ -378,7 +378,7 @@ java public class SecureSocketFactory extends SSLSocketFactory {
 
 <p><a href="http://developer.android.com/training/articles/security-ssl.html">http://developer.android.com/training/articles/security-ssl.html</a></p>
 
-<p><a href="http://developer.android.com/reference/org/apache/http/conn/ssl/SSLSocketFactory.html">http://developer.android.com/reference/org/apache/http/conn/ssl/SSLSocketFactory.html</a></p>      </p>
+<p><a href="http://developer.android.com/reference/org/apache/http/conn/ssl/SSLSocketFactory.html">http://developer.android.com/reference/org/apache/http/conn/ssl/SSLSocketFactory.html</a></p>      <p></p>
     
 			</body>
 		</html>

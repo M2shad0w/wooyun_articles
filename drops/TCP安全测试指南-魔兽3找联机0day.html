@@ -3,12 +3,12 @@
 			<head>
 			     <title>TCP安全测试指南-魔兽3找联机0day - lxj616</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/15557">http://drops.wooyun.org/papers/15557</a></h1>
 				
       <p>
-        <p>在安全测试的过程中，我们通常使用应用层工具直接测试待测目标，比如一个HTTP网站应用程序，我们可以直接发送HTTP请求来对其进行模糊测试，而对于HTTPS，也可以建立SSL连接后直接发送HTTP请求对其进行模糊测试</p>
+        </p><p>在安全测试的过程中，我们通常使用应用层工具直接测试待测目标，比如一个HTTP网站应用程序，我们可以直接发送HTTP请求来对其进行模糊测试，而对于HTTPS，也可以建立SSL连接后直接发送HTTP请求对其进行模糊测试</p>
 
 <p>然而在某些黑盒测试中，由于信息不对称，我们无法获悉应用层协议的具体格式，因此难以直接在应用层进行安全测试，这时我们需要对应用层协议本身进行FUZZ，这就需要使用更底层协议来进行安全测试</p>
 
@@ -16,7 +16,7 @@
 
 <h1>0x00 概述</h1>
 
-<hr />
+<hr>
 
 <p>我想测试魔兽争霸3联机游戏的安全问题</p>
 
@@ -37,13 +37,13 @@
 
 <h1>0x01 断线测试</h1>
 
-<hr />
+<hr>
 
 <p>由于魔兽争霸3并没有断线重连机制，所以TCP连接断开后会直接导致游戏断开，而在许多第三方对战平台上，玩家的离线等同于战败，因此也诞生了许多游戏“踢人”外挂</p>
 
 <p>下面使用WooyunWifi路由器上的dsniff工具包中的tcpkill工具为例进行测试：</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2c5e4343586c635c49427b5e58">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# tcpkill -i br-lan port 6112
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2c5e4343586c635c49427b5e58">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# tcpkill -i br-lan port 6112
 tcpkill: listening on br-lan [port 6112]
 192.168.1.143:59892 &gt; 192.168.1.163:6112: R 2875503812:2875503812(0) win 0
 192.168.1.143:59892 &gt; 192.168.1.163:6112: R 2875504063:2875504063(0) win 0
@@ -78,13 +78,13 @@ tcpkill: listening on br-lan [port 6112]
 192.168.1.143:59892 &gt; 192.168.1.163:6112: R 2875503830:2875503830(0) win 0
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160430/2016043010265840612.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160430/2016043010265840612.png" alt=""></p>
 
 <p>这里演示的是全局切断，在实际应用场景中也可以使用包过滤表达式切断特定IP的连接</p>
 
 <h1>0x02 网络的延迟与丢包</h1>
 
-<hr />
+<hr>
 
 <p>由于魔兽争霸3是一个实时对战的游戏，因此网络状态也会影响游戏的进行，魔兽争霸3本身对于实时操作的要求并不高，但是形如DOTA之类的自定义游戏模式对网络的延迟极为敏感，如果玩家在DOTA游戏中有很大延迟，可能会直接导致团灭并且游戏失败</p>
 
@@ -93,17 +93,17 @@ tcpkill: listening on br-lan [port 6112]
 <pre><code>tc qdisc add dev wlan0 root netem delay 1s
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160430/2016043010270080515.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160430/2016043010270080515.png" alt=""></p>
 
 <p>由于网络延迟，玩家控制的英雄在延时时间内无法响应玩家的操作</p>
 
-<p><img src="http://static.wooyun.org//drops/20160430/2016043010270337589.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160430/2016043010270337589.png" alt=""></p>
 
 <p>当然，您也可以用包过滤表达式指定任意ip的延时规则，包括随机浮动的延时时间</p>
 
 <h1>0x03 TCP原始数据的嗅探/修改</h1>
 
-<hr />
+<hr>
 
 <p>如何嗅探TCP数据包已经是妇孺皆知的常识了，用wireshark或者tcpdump之类的都可以</p>
 
@@ -113,7 +113,7 @@ tcpkill: listening on br-lan [port 6112]
 
 <p>首先，我们在11对战平台上新建一个房间，然后打开wireshark，抓取war3的服务器端口（11对战平台使用的是服务器建主策略，并不是玩家建立主机，而是在服务器上有一个proxy专门用来与各个客户端通信）</p>
 
-<p><img src="http://static.wooyun.org//drops/20160430/2016043010270543793.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160430/2016043010270543793.png" alt=""></p>
 
 <p>我们可以看到建主服务器ip为119.188.39.137，端口为2012，而聊天数据以及最开始交换用户名的数据都是明文的，而且后来测试发现也没有数据完整性验证</p>
 
@@ -125,8 +125,8 @@ netsed tcp 10101 119.188.39.137 2012 s/lxj616/wooyun
 
 
 
-netsed 1.2 by Julien VdG &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b2d8c7dedbd7dcf2c1dbdedbd1dddcd79cdadddfd7dedbdcc7ca9cddc0d5">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
-  based on 0.01c from Michal Zalewski &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="cda1aeaca0b9b8ab8da4a9bee3bda1">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+netsed 1.2 by Julien VdG &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b2d8c7dedbd7dcf2c1dbdedbd1dddcd79cdadddfd7dedbdcc7ca9cddc0d5">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+  based on 0.01c from Michal Zalewski &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="cda1aeaca0b9b8ab8da4a9bee3bda1">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
 [*] Parsing rule s/lxj616/wooyun...
 [+] Loaded 1 rule...
 [+] Using fixed forwarding to 119.188.39.137,2012.
@@ -148,7 +148,7 @@ netsed 1.2 by Julien VdG &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-prot
 
 <p>于是整局游戏里lxj616都在其他用户眼里变成了wooyun，包括聊天和玩家列表</p>
 
-<p><img src="http://static.wooyun.org//drops/20160430/2016043010270543081.png" alt="" /> <img src="http://static.wooyun.org//drops/20160430/2016043010270785293.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160430/2016043010270543081.png" alt=""> <img src="http://static.wooyun.org//drops/20160430/2016043010270785293.png" alt=""></p>
 
 <p>当然，netsed只有简单的替换功能，下面介绍一些更灵活的解决方案（不再以war3为例）</p>
 
@@ -159,7 +159,7 @@ netsed 1.2 by Julien VdG &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-prot
 
 <p>下面使用Woobuntu系统上的mitmproxy工具为例进行测试：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160430/2016043010270914344.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160430/2016043010270914344.png" alt=""></p>
 
 <p>bettercap的官方示例介绍了如何修改TCP数据：</p>
 
@@ -170,11 +170,11 @@ netsed 1.2 by Julien VdG &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-prot
 
 <p>注：tcp-proxy刚开始时显示未启动，后面在输出信息中后续启动的tcp-proxy</p>
 
-<p><img src="http://static.wooyun.org//drops/20160430/2016043010270938647.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160430/2016043010270938647.png" alt=""></p>
 
 <h1>0x04 TCP连接的重放与交互式测试</h1>
 
-<hr />
+<hr>
 
 <p>如果只是想要重放TCP的数据包本身而非TCP连接，使用tcpreplay工具直接重放即可，这种方式确实可以把之前抓取的pcap数据包全部重放到指定的interface上，这在测试一些IDS设备或者有抓包业务逻辑的应用时能起到预期的效果</p>
 
@@ -183,7 +183,7 @@ netsed 1.2 by Julien VdG &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-prot
 <pre><code>tcpreplay -i enp0s3 test.pcap
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160430/2016043010270975391.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160430/2016043010270975391.png" alt=""></p>
 
 <p>然而仅仅重放抓取的数据包并不能建立有效的tcp连接，因此也不会被服务端正确的响应，这样就起不到FUZZ服务端应用的作用了，我们如果想要和服务端模拟一次真正的TCP会话，就必须在建立新连接后重新填写数据包对应的TCP序列号。形象的比喻一下就是你在重放HTTP请求时要修改你自己cookie里面的session-id</p>
 
@@ -203,7 +203,7 @@ netsed 1.2 by Julien VdG &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-prot
 
 <p>之后我们抓取我们想要重放的tcp数据包，这里我们用wireshark进行抓取，抓取的是玩家lxj616加入房间然后在聊天栏里面说了两句话整个过程</p>
 
-<p><img src="http://static.wooyun.org//drops/20160430/2016043010271069553.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160430/2016043010271069553.png" alt=""></p>
 
 <p>您也可以在WooyunWifi路由器上通过tcpdump工具进行抓包</p>
 
@@ -249,17 +249,17 @@ Warning : some extracted files are incomplete!
 <pre><code>cat a2b_contents.dat | nc 192.168.1.163 6112
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160430/2016043010271082539.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160430/2016043010271082539.png" alt=""></p>
 
 <p>而对于游戏主机来说，确实看起来有玩家跑进来说了两句话</p>
 
-<p><img src="http://static.wooyun.org//drops/20160430/2016043010271055710.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160430/2016043010271055710.png" alt=""></p>
 
 <h1>0x05 总结</h1>
 
-<hr />
+<hr>
 
-<p>虽然在本文中对魔兽争霸3测试时发现了一些潜在问题，但都只是程序逻辑的小问题，而非安全性bug，因此在不会影响游戏平衡性的条件下，不需要把它们当做漏洞进行报送（虽然对于11对战平台而言，用户名是不可以修改的，但是你改了又能怎样，并没有用），写出本文来分享思路，供同道中人一起学习讨论</p>      </p>
+<p>虽然在本文中对魔兽争霸3测试时发现了一些潜在问题，但都只是程序逻辑的小问题，而非安全性bug，因此在不会影响游戏平衡性的条件下，不需要把它们当做漏洞进行报送（虽然对于11对战平台而言，用户名是不可以修改的，但是你改了又能怎样，并没有用），写出本文来分享思路，供同道中人一起学习讨论</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,18 +3,18 @@
 			<head>
 			     <title>WordPress 利用 XMLRPC 高效爆破 原理分析 - RickGray</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/9510">http://drops.wooyun.org/papers/9510</a></h1>
 				
       <p>
-        <p><strong>By: RickGray (知道创宇404安全实验室)</strong></p>
+        </p><p><strong>By: RickGray (知道创宇404安全实验室)</strong></p>
 
 <p>xmlrpc 是 WordPress 中进行远程调用的接口，而使用 xmlrpc 调用接口进行账号爆破在很早之前就被提出并加以利用。近日 <a href="https://blog.sucuri.net/2015/10/brute-force-amplification-attacks-against-wordpress-xmlrpc.html">SUCURI</a> 发布文章介绍了如何利用 xmlrpc 调用接口中的 <code>system.multicall</code> 来提高爆破效率，使得成千上万次的帐号密码组合尝试能在一次请求完成，极大的压缩请求次数，在一定程度上能够躲避日志的检测。</p>
 
 <h1>0x01 原理分析</h1>
 
-<hr />
+<hr>
 
 <p>WordPress 中关于 xmlrpc 服务的定义代码主要位于 <code>wp-includes/class-IXR.php</code> 和 <code>wp-includes/class-wp-xmlrpc-server.php</code> 中。基类 IXR_Server 中定义了三个内置的调用方法，分别为 <code>system.getCapabilities</code>，<code>system.listMethods</code> 和 <code>system.multicall</code>，其调用映射位于 <code>IXR_Server</code> 基类定义中：</p>
 
@@ -151,7 +151,7 @@ if ( !$user = $this-&gt;login($username, $password) )
 
 <h1>0x02 防护建议</h1>
 
-<hr />
+<hr>
 
 <p>最新版 WordPress(4.3.1) 中仍存在该问题。多重调用（multicall）属于 xmlrpc 的标准，为了防止攻击者利用此点对网站发起爆破攻击，给出以下防护建议：</p>
 
@@ -164,7 +164,7 @@ if ( !$user = $this-&gt;login($username, $password) )
 
 <h1>0x03 参考链接</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="https://blog.sucuri.net/2015/10/brute-force-amplification-attacks-against-wordpress-xmlrpc.html">https://blog.sucuri.net/2015/10/brute-force-amplification-attacks-against-wordpress-xmlrpc.html</a></li>
@@ -172,7 +172,7 @@ if ( !$user = $this-&gt;login($username, $password) )
 <li><a href="http://www.deluxeblogtips.com/2013/08/disable-xml-rpc-wordpress.html">http://www.deluxeblogtips.com/2013/08/disable-xml-rpc-wordpress.html</a></li>
 </ul>
 
-<p>原文出处：<a href="http://blog.knownsec.com/2015/10/wordpress-xmlrpc-brute-force-amplification-attack-analysis/">http://blog.knownsec.com/2015/10/wordpress-xmlrpc-brute-force-amplification-attack-analysis/</a></p>      </p>
+<p>原文出处：<a href="http://blog.knownsec.com/2015/10/wordpress-xmlrpc-brute-force-amplification-attack-analysis/">http://blog.knownsec.com/2015/10/wordpress-xmlrpc-brute-force-amplification-attack-analysis/</a></p>      <p></p>
     
 			</body>
 		</html>

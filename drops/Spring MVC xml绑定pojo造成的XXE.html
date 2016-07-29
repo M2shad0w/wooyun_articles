@@ -3,14 +3,14 @@
 			<head>
 			     <title>Spring MVC xml绑定pojo造成的XXE - Nebula</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1911">http://drops.wooyun.org/papers/1911</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>什么是XXE ? 就是我们所说的所谓xml实体注入.这里不去讲所有xml语法规范了,稍微就说一下XML entity:</p>
 
@@ -47,7 +47,7 @@
 
 <h2>0x01 原理</h2>
 
-<hr />
+<hr>
 
 <p>规范没有问题,xml解析器有些也没有问题,有问题的是使用他的人.</p>
 
@@ -91,7 +91,7 @@ public static void main(String[] args) throws  Exception {
 
 <p>然后被root的子节点,name内容域引用.解析结果,如图：</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050722403743880.png" alt="2014050722403743880.png" /></p>
+<p><img src="http://static.wooyun.org/201405/2014050722403743880.png" alt="2014050722403743880.png"></p>
 
 <p>接下来讲，spring MVC在xml格式到java对象反序列化中，可能存在的XXE 形成的文件读取：</p>
 
@@ -181,11 +181,11 @@ public class User {
 
 <p>发包，xml绑定pojo,如图:</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050723155955348.png" alt="2014050723155955348.png" /></p>
+<p><img src="http://static.wooyun.org/201405/2014050723155955348.png" alt="2014050723155955348.png"></p>
 
 <p>pojo User对象的name属性被污染，如图：</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050723180180429.png" alt="2014050723180180429.png" /></p>
+<p><img src="http://static.wooyun.org/201405/2014050723180180429.png" alt="2014050723180180429.png"></p>
 
 <p>如果，攻击者最终能看到这个name值（直接显示到页面或存储到数据库再现实到页面什么的），就是文件读取漏洞了！</p>
 
@@ -195,7 +195,7 @@ public class User {
 
 <p>https://jira.spring.io/browse/SPR-10806</p>
 
-<p>当然，还存在一个小而很有意思的问题，过一段时间的文章中可能会讲到。</p>      </p>
+<p>当然，还存在一个小而很有意思的问题，过一段时间的文章中可能会讲到。</p>      <p></p>
     
 			</body>
 		</html>

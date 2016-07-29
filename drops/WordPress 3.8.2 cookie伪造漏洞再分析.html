@@ -3,14 +3,14 @@
 			<head>
 			     <title>WordPress 3.8.2 cookie伪造漏洞再分析 - donwa</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1409">http://drops.wooyun.org/papers/1409</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>看了WordPress 3.8.2补丁分析 HMAC timing attack，眼界大开，原来还可以利用时间差来判断HMAC。</p>
 
@@ -24,7 +24,7 @@
 
 <h2>0x01 PHP的特性</h2>
 
-<hr />
+<hr>
 
 <p>当PHP在进行 ”==”,”!=”等非严格匹配的情况下，会按照值的实际情况，进行强制转换。</p>
 
@@ -41,7 +41,7 @@ var_dump(1 == '1abcdef'); // true
 
 <h2>0x02 分析修复的代码</h2>
 
-<hr />
+<hr>
 
 <p>官方版的diff只在php里改动了一个位置:</p>
 
@@ -96,7 +96,7 @@ $hash = ‘af253e501c301bf5bf293c40d7d92ded’;
 
 <h2>0x03 漏洞利用</h2>
 
-<hr />
+<hr>
 
 <p>我们看看cookie解析的代码：</p>
 
@@ -128,7 +128,7 @@ var_dump($hmac);//string(“1”);
 
 <h2>0x04 柳暗花明又一村</h2>
 
-<hr />
+<hr>
 
 <p>还有什么情况能让字符串识别成整数吗？是的，还有！</p>
 
@@ -155,7 +155,7 @@ var_dump($hmac == $hash);  // true
 
 <h2>0x05 攻击代码</h2>
 
-<hr />
+<hr>
 
 <p>本地测试代码（实际攻击代码应该是构造cookies远程请求）：</p>
 
@@ -191,7 +191,7 @@ var_dump($hmac == $hash);  // true
 
 <p>但是几率太小，还不如穷举密码了。</p>
 
-<p>Ps：我本地跑了几个小时了，还没遇到一个。</p>      </p>
+<p>Ps：我本地跑了几个小时了，还没遇到一个。</p>      <p></p>
     
 			</body>
 		</html>

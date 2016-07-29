@@ -3,14 +3,14 @@
 			<head>
 			     <title>PHP本地文件包含漏洞环境搭建与利用 - janes</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/13249">http://drops.wooyun.org/web/13249</a></h1>
 				
       <p>
-        <h1>0x00 简介</h1>
+        </p><h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>php本地文件包含漏洞相关知识，乌云上早有相应的文章，lfi with phpinfo最早由国外大牛提出，可参考下面两篇文章。利用的原理是利用php post上传文件产生临时文件，phpinfo()读临时文件的路径和名字，本地包含漏洞生成1句话后门。</p>
 
@@ -35,7 +35,7 @@
 
 <h1>0x01 php 上传</h1>
 
-<hr />
+<hr>
 
 <p>向服务器上任意php文件<strong>post请求上传文件</strong>时，都会生成临时文件，可以直接在phpinfo页面找到临时文件的路径及名字。</p>
 
@@ -68,7 +68,7 @@
 
 <h1>0x02 手工测试phpinfo()获取临时文件路径</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>html表单</li>
@@ -151,7 +151,7 @@ _FILES["file"]
 
 <h1>0x03 python脚本 upload file</h1>
 
-<hr />
+<hr>
 
 <pre><code>#!python
 import requests
@@ -182,7 +182,7 @@ print(response.text)
 
 <h1>0x04 本地搭建环境</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><p>get shell</p>
@@ -257,9 +257,9 @@ python lfi_phpinfo.py docker_host_ip
 
 <h1>0x06 结束语</h1>
 
-<hr />
+<hr>
 
-<p>动手实践 LFI with PHPInfo利用的过程，其实并不像看文章过程那样顺利，期间多多少少会碰见一些与环境有关的问题，而解决这些问题会耗费精力，这正是催生我用docker来构建测试环境想法的来源，希望能给网络安全的热爱者们提供更方便的学习环境。最后感谢[LFI with PHPInfo本地测试过程]文章的作者，给我研究LFI with phpinfo提供了不少帮助。</p>      </p>
+<p>动手实践 LFI with PHPInfo利用的过程，其实并不像看文章过程那样顺利，期间多多少少会碰见一些与环境有关的问题，而解决这些问题会耗费精力，这正是催生我用docker来构建测试环境想法的来源，希望能给网络安全的热爱者们提供更方便的学习环境。最后感谢[LFI with PHPInfo本地测试过程]文章的作者，给我研究LFI with phpinfo提供了不少帮助。</p>      <p></p>
     
 			</body>
 		</html>

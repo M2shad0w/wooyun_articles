@@ -3,14 +3,14 @@
 			<head>
 			     <title>Fireeye Mandiant 2014 安全报告 Part1 - insight-labs</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5042">http://drops.wooyun.org/papers/5042</a></h1>
 				
       <p>
-        <h1>0x00 case study 1</h1>
+        </p><h1>0x00 case study 1</h1>
 
-<hr />
+<hr>
 
 <p>美国最大的实体零售连锁店是如何在3个月内被窃取几百万笔信用卡资料的</p>
 
@@ -20,7 +20,7 @@
 
 <h1>0x01 切入点</h1>
 
-<hr />
+<hr>
 
 <p>攻击者首先使用合法账号登录了零售商的虚拟应用服务器。这个虚拟服务器给了攻击者一个权限有限的虚拟化桌面环境(目测是Citrix,传说中的透明计算吗?)。我们没有发现失败登录的记录，说明攻击者在攻击之前就已经获得合法账号(当前证据没有显示攻击者是如何获取到账号的，不过很可能是社工，钓鱼等手段。)</p>
 
@@ -56,7 +56,7 @@ Service Start Type: demand start
 
 <h1>0x02 后门</h1>
 
-<hr />
+<hr>
 
 <p>为了持久的控制已经拿下的系统，攻击者在多个机器中植入了后门，后门是针对win XP系统的驱动型木马。</p>
 
@@ -66,7 +66,7 @@ Service Start Type: demand start
 
 <p>这个技巧让这个后门变的很万能，因为想增加新功能的话只要在服务端加个新的shellcode就行了。虽然这种通过shellcode实现的下载马已经出现很久了，但是通过和驱动级后门的结合说明这个后门很先进。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150306/2015030609515153925figure2.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150306/2015030609515153925figure2.jpg" alt="enter image description here"></p>
 
 <p>Figure 2 后门和C2服务器的通信方式</p>
 
@@ -92,7 +92,7 @@ Service Start Type: demand start
 
 <p>之后攻击者把收集到的数据打包然后发送到零售内网的一台有外网连接的工作站，之后传到自己控制的FTP服务器上</p>
 
-<p><img src="http://static.wooyun.org/drops/20150306/2015030609535656952figure3.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150306/2015030609535656952figure3.jpg" alt="enter image description here"></p>
 
 <p>Figure 3</p>
 
@@ -104,33 +104,33 @@ Service Start Type: demand start
 
 <h1>0x03 意见与建议</h1>
 
-<hr />
+<hr>
 
 <p>面对这样的攻击，应该怎么防御呢? 你没法阻止每次进攻，也没法保证自己无法被黑，但是下面的一些基本规则可以阻止攻击者在你的内网畅通无阻的行动。 通过使用正确的工具和高度警惕的安全团队，你可以减缓攻击者的速度，给你足够的时间在最坏的情况发生前，去发现，分析和应对攻击。</p>
 
 <h2>1.远程登录安全</h2>
 
-<hr />
+<hr>
 
 <p>分析和检查员工，临时工还有供货商等如何远程连接到你的网络环境。确保远程连接一切可控，比如远程连接方式，可以远程连接的用户，密码要求等等。全部可以远程登录的账号都应该使用双因素认证。 确保积极监控远程登录日志，尽早发现任何可疑活动。</p>
 
 <h2>2. 确保支付卡PCI环境的安全</h2>
 
-<hr />
+<hr>
 
 <p>按照Payment Card Industry(PCI)和相关的安全认证PCIDSS的标准来规划你的内网环境。一切进入到PCI环境的登录和连接都要通过一个安全的堡垒机进行。登录堡垒机需要使用双因素认证。如果可能的话，把企业域环境和零售域环境分开，尽量减少和零售域以外的连接。另外，最好在零售域使用白名单，只有列表内的机器和地址才能被零售域内的系统访问。</p>
 
 <h2>3. 在核心系统上使用应用程序白名单</h2>
 
-<hr />
+<hr>
 
 <p>在所有核心系统上都应该通过应用程序白名单的方式，减少恶意软件执行的机会。核心系统包括任何能接触到信用卡资料的系统，堡垒机服务器，域控服务器等等。</p>
 
 <h2>4.管理好高权限账号</h2>
 
-<hr />
+<hr>
 
-<p>攻击者会瞄准高权限账号比如本地管理员，域管理员还有服务账号等等。减少高权限账号的数量，并且确保每个本地管理员账号的密码不同，最好是随机的。 使用密码管理工具来管理账号，最好每次使用这些账号后自动重新生成新密码。这些技术可以更好的控制高权限账号的使用。</p>      </p>
+<p>攻击者会瞄准高权限账号比如本地管理员，域管理员还有服务账号等等。减少高权限账号的数量，并且确保每个本地管理员账号的密码不同，最好是随机的。 使用密码管理工具来管理账号，最好每次使用这些账号后自动重新生成新密码。这些技术可以更好的控制高权限账号的使用。</p>      <p></p>
     
 			</body>
 		</html>

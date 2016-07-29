@@ -3,14 +3,14 @@
 			<head>
 			     <title>TcpDump使用手册 - 珈蓝夜宇</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/8885">http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/8885</a></h1>
 				
       <p>
-        <h1>0x01 Tcpdump简介</h1>
+        </p><h1>0x01 Tcpdump简介</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li><p>tcpdump 是一个运行在命令行下的嗅探工具。它允许用户拦截和显示发送或收到过网络连接到该计算机的TCP/IP和其他数据包。tcpdump 是一个在BSD许可证下发布的自由软件。</p></li>
@@ -22,7 +22,7 @@
 
 <h1>0x02 Tcpdump用途</h1>
 
-<hr />
+<hr>
 
 <p>tcpdump能够分析网络行为，性能和应用产生或接收网络流量。它支持针对网络层、协议、主机、网络或端口的过滤，并提供and、or、not等逻辑语句来帮助你去掉无用的信息，从而使用户能够进一步找出问题的根源。</p>
 
@@ -34,7 +34,7 @@
 
 <h1>0x03 Tcpdump的安装</h1>
 
-<hr />
+<hr>
 
 <p>做好编译源程序前的准备活动</p>
 
@@ -86,7 +86,7 @@ make install   //安装   库文件默认安装在目录  /usr/lib,头文件默�
 
 <h1>0x04 Tcpdump的超详细使用命令</h1>
 
-<hr />
+<hr>
 
 <pre><code>-A  以ASCII码方式显示每一个数据包(不会显示数据包中链路层头部信息). 在抓取包含
     网页数据的数据包时, 可方便查看数据(nt: 即Handy for capturing web pages).
@@ -119,9 +119,9 @@ make install   //安装   库文件默认安装在目录  /usr/lib,头文件默�
 
 -e  每行的打印输出中将包括数据包的数据链路层头部信息
 
--E  <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e695968fa68f9687828294">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> algo:secret,...
+-E  <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e695968fa68f9687828294">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> algo:secret,...
 
-    <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="31d4be9ed8b1abd98eb642415871584150555543">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> algo:secret 来解密IPsec ESP包(nt | rt:IPsec Encapsulating Security Payload,
+    <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="31d4be9ed8b1abd98eb642415871584150555543">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> algo:secret 来解密IPsec ESP包(nt | rt:IPsec Encapsulating Security Payload,
     IPsec 封装安全负载, IPsec可理解为, 一整套对ip数据包的加密协议, ESP 为整个IP 数据包或其中上层协议部分被加密后的数据,
     前者的工作模式称为隧道模式; 后者的工作模式称为传输模式 . 工作原理, 另需补充).
 
@@ -134,8 +134,8 @@ make install   //安装   库文件默认安装在目录  /usr/lib,头文件默�
     该选项中ESP 的定义遵循RFC2406, 而不是 RFC1827. 并且, 此选项只是用来调试的, 不推荐以真实密钥(secret)来
     使用该选项, 因为这样不安全: 在命令行中输入的secret 可以被其他人通过ps 等命令查看到.
 
-    除了以上的语法格式(nt: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4ea8c2c93d3e270e273e2f2a2a3c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> algo:secret), 还可以在后面添加一个语法输入文件名字供tcpdump 使用
-    (nt：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2bcea698cda1a1585b426b425b4a4f4f59">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> algo:secret,... 中...换成一个语法文件名). 此文件在接受到第一个ESP　包时会打开此
+    除了以上的语法格式(nt: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4ea8c2c93d3e270e273e2f2a2a3c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> algo:secret), 还可以在后面添加一个语法输入文件名字供tcpdump 使用
+    (nt：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2bcea698cda1a1585b426b425b4a4f4f59">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> algo:secret,... 中...换成一个语法文件名). 此文件在接受到第一个ESP　包时会打开此
     文件, 所以最好此时把赋予tcpdump 的一些特权取消(nt: 可理解为, 这样防范之后, 当该文件为恶意编写时,
     不至于造成过大损害).
 
@@ -278,7 +278,7 @@ make install   //安装   库文件默认安装在目录  /usr/lib,头文件默�
 
 <h1>0x05 Tcpdump表达式详解</h1>
 
-<hr />
+<hr>
 
 <pre><code>该表达式用于决定哪些数据包将被打印.  
 如果不给定条件表达式, 网络上所有被捕获的包都会被打印,
@@ -349,7 +349,7 @@ wlan(802.11 wireless LAN)的头部. 对于802.11 协议数据包的头部, 目�
 
 <h1>0x06 Tcpdump常用命令实例</h1>
 
-<hr />
+<hr>
 
 <h2>默认启动</h2>
 
@@ -431,7 +431,7 @@ wlan(802.11 wireless LAN)的头部. 对于802.11 协议数据包的头部, 目�
 
 <h1>0x07 tcpdump 与wireshark</h1>
 
-<hr />
+<hr>
 
 <p>Wireshark(以前是ethereal)是Windows下非常简单易用的抓包工具。但在Linux下很难找到一个好用的图形化抓包工具。</p>
 
@@ -453,7 +453,7 @@ wlan(802.11 wireless LAN)的头部. 对于802.11 协议数据包的头部, 目�
 
 <p>(7)src net 192.168.1.0/24 : 数据包的源网络地址为192.168.1.0/24</p>
 
-<p>(8)-w ./target.cap : 保存成cap文件，方便用ethereal(即wireshark)分析</p>      </p>
+<p>(8)-w ./target.cap : 保存成cap文件，方便用ethereal(即wireshark)分析</p>      <p></p>
     
 			</body>
 		</html>

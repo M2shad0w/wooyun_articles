@@ -3,16 +3,16 @@
 			<head>
 			     <title>Powershell恶意代码的N种姿势 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/14688">http://drops.wooyun.org/papers/14688</a></h1>
 				
       <p>
-        <p><strong>Author:360天眼实验室</strong></p>
+        </p><p><strong>Author:360天眼实验室</strong></p>
 
 <h1>0x00 引言</h1>
 
-<hr />
+<hr>
 
 <p>人在做，天在看。</p>
 
@@ -26,7 +26,7 @@
 
 <h1>0x01 实例分析</h1>
 
-<hr />
+<hr>
 
 <p>这里我们基于360威胁情报中心的数据，对接触到的Powershell恶意代码按分类各举一例。</p>
 
@@ -48,23 +48,23 @@
 
 <p>脚本的原貌为：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105003825877117.jpg" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105003825877117.jpg" alt="p1"></p>
 
 <p>可见，脚本做了混淆处理，简单处理以后归纳出的脚本主要执行过程如下：</p>
 
 <p>1.生成三个随机数，分别表示加密密钥、加密用的盐、UUID</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105003941617213.jpg" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105003941617213.jpg" alt="p2"></p>
 
 <p>把上面生成随机数发送到服务器中保存</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/201604110500419669134.jpg" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/201604110500419669134.jpg" alt="p3"></p>
 
 <p>2.用随机数生成加密容器</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/201604110500429391944.jpg" alt="p4" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/201604110500429391944.jpg" alt="p4"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/201604110500443747855.jpg" alt="p5" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/201604110500443747855.jpg" alt="p5"></p>
 
 <p>3.得到磁盘中的所有的指定后缀的文件</p>
 
@@ -74,19 +74,19 @@
 $folder= gdr|where {$_.Free}|Sort-Object -Descending 
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160411/201604110500467716566.jpg" alt="p6" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/201604110500467716566.jpg" alt="p6"></p>
 
 <p>4.加密这些文件的前2048个字节后写回文件</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/201604110500473564676.jpg" alt="p7" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/201604110500473564676.jpg" alt="p7"></p>
 
 <p>5.解码Base64得到提示勒索的html文件</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/201604110500496486684.jpg" alt="p8" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/201604110500496486684.jpg" alt="p8"></p>
 
 <p>在html文件的尾部添加上赎回密钥用的UUID及当前时间</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/201604110500509016094.jpg" alt="p9" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/201604110500509016094.jpg" alt="p9"></p>
 
 <h3>渗透测试</h3>
 
@@ -96,7 +96,7 @@ $folder= gdr|where {$_.Free}|Sort-Object -Descending
 
 <p>文件打开后，会显示文件损坏，用来迷惑用户，Word中的宏却悄然运行了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105005257874104.jpg" alt="p10" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105005257874104.jpg" alt="p10"></p>
 
 <p>宏的内容为：</p>
 
@@ -124,13 +124,13 @@ $1 = '$c = ''[DllImport("kernel32.dll")]public static extern IntPtr VirtualAlloc
 
 <p>将其中的shellcode提取出来进行分析得知，这段shellcode的主要功能是反向连接内网IP 192.168.1.30的4444端口。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105005383717118.jpg" alt="p11" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105005383717118.jpg" alt="p11"></p>
 
 <p>另一个与上述样本有着类似功能的样本的MD5为：1e39753fd56f17010ac62b1d84b5e650</p>
 
 <p>从文件中提取出来的宏为：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105005582625125.jpg" alt="p12" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105005582625125.jpg" alt="p12"></p>
 
 <p>而这四个函数对应的功能分别为</p>
 
@@ -142,7 +142,7 @@ $1 = '$c = ''[DllImport("kernel32.dll")]public static extern IntPtr VirtualAlloc
 
 <p>其中部分代码为：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105005687949134.jpg" alt="p13" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105005687949134.jpg" alt="p13"></p>
 
 <ul>
 <li>Persist：</li>
@@ -201,23 +201,23 @@ $o::CreateThread(0,0,$x,0,0,0) | out-null; Start-Sleep -Second 86400}catch{}
 <li>eae0906f98568c5fb25b2bb32b1dbed7</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105005847371144.jpg" alt="p14" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105005847371144.jpg" alt="p14"></p>
 
 <ul>
 <li>1a42671ce3b2701956ba49718c9e118e</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105005980463154.jpg" alt="p15" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105005980463154.jpg" alt="p15"></p>
 
 <ul>
 <li>496ed16e636203fa0eadbcdc182b0e85</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105010084230163.jpg" alt="p16" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105010084230163.jpg" alt="p16"></p>
 
 <p>使用LNK文件，建立反弹shell的样本</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105010223029175.jpg" alt="p17" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105010223029175.jpg" alt="p17"></p>
 
 <h3>流量欺骗</h3>
 
@@ -227,7 +227,7 @@ $o::CreateThread(0,0,$x,0,0,0) | out-null; Start-Sleep -Second 86400}catch{}
 
 <p>文档打开后里面只有“test by c”这几个文字</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105010330622184.jpg" alt="p18" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105010330622184.jpg" alt="p18"></p>
 
 <p>提取出文档中的宏中的加密字符解密后得到可读的ps脚本如下</p>
 
@@ -237,7 +237,7 @@ $1 = '$c = ''[DllImport("kernel32.dll")]public static extern IntPtr VirtualAlloc
 
 <p>可见，ps脚本的主要功能就是执行Shellcode，这段Shellcode的功能就是调用wininet.dll中的函数进行连接138.128.196.84地址的443端口。而138.128.196.84地址正为流量宝类的软件用的地址。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105010539500193.jpg" alt="p19" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105010539500193.jpg" alt="p19"></p>
 
 <h3>探测控制</h3>
 
@@ -266,69 +266,69 @@ Sub AutoOpen()
 
 <p>其中的对应32位系统的cache文件的内容如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105010657558203.jpg" alt="p20" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105010657558203.jpg" alt="p20"></p>
 
 <p>我们对Shellcode进行简单分析：</p>
 
 <p>1.在内存中解密，生成一个PE文件，在内存中展开跳到入口点处执行，将PE文件的.BSS区段进行解码，解码算法如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105010811080214.jpg" alt="p21" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105010811080214.jpg" alt="p21"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105010958214223.jpg" alt="p22" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105010958214223.jpg" alt="p22"></p>
 
 <p>解密后的结果为：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105011080145232.jpg" alt="p23" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105011080145232.jpg" alt="p23"></p>
 
 <p>2.判断是不是64位系统</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105011283803242.jpg" alt="p24" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105011283803242.jpg" alt="p24"></p>
 
 <p>判断虚拟机</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105011359036252.jpg" alt="p25" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105011359036252.jpg" alt="p25"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105011567777262.jpg" alt="p26" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105011567777262.jpg" alt="p26"></p>
 
 <p>3.用FindFirstUrlCacheEntry和FindNextUrlCacheEntry遍历IE临时文件目录 ，用于判断用户是否是攻击者的目标用户</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105011647459272.jpg" alt="p27" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105011647459272.jpg" alt="p27"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105011734588281.jpg" alt="p28" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105011734588281.jpg" alt="p28"></p>
 
 <p>4.计算用户和电脑信息的HASH</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105011920930291.jpg" alt="p29" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105011920930291.jpg" alt="p29"></p>
 
 <p>随后B03938处创建线程进行下面的动作</p>
 
 <p>判断<code>ipconfig -all</code>命令中是否有.edu、school、hospital、colledge、health、nurse等字符串</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105012022318301.jpg" alt="p30" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105012022318301.jpg" alt="p30"></p>
 
 <p>调用<code>cmd /C ""ipconfig -all &gt; C:\DOCUME~1\yyyyy\LOCALS~1\Temp\xxxx.TMP</code>(xxx代表随机数)生成文件，检测.edu、school、hospital、colledge、health、nurse等字符串</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105012226452312.jpg" alt="p31" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105012226452312.jpg" alt="p31"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105012379649322.jpg" alt="p32" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105012379649322.jpg" alt="p32"></p>
 
 <p>5.遍历系统中的进程，检测有否指定hash的进程正在运行</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105012442645331.jpg" alt="p33" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105012442645331.jpg" alt="p33"></p>
 
 <p>从IE缓存中查找用户是不是访问过这些网址：</p>
 
 <p>通过WININET.FindFirstUrlCacheEntryW , WININET.FindNextUrlCacheEntryW WININET.FindCloseUrlCache</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041105012645057341.jpg" alt="p34" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/2016041105012645057341.jpg" alt="p34"></p>
 
 <p>得到<code>net view</code>命令返回值中是否有pos、store、shop、sale等字符串</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/201604110501273785035.jpg" alt="p35" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/201604110501273785035.jpg" alt="p35"></p>
 
 <p>发送用户信息，并下载相对应的恶意程序：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/201604110501292137436.jpg" alt="p36" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/201604110501292137436.jpg" alt="p36"></p>
 
 <p>其中，用这种手法的恶意样本还有如下：</p>
 
@@ -428,27 +428,27 @@ Sub AutoOpen()
 
 <p>提取出来的宏代码为：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/201604110501304850637.jpg" alt="p37" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/201604110501304850637.jpg" alt="p37"></p>
 
 <p>下载一个名为Get-Info-2.ps1的脚本，脚本功能是将本机的IP地址、domainname、username、usbid等发送到远端服务器中。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/201604110501322390538.jpg" alt="p38" /></p>
+<p><img src="http://static.wooyun.org//drops/20160411/201604110501322390538.jpg" alt="p38"></p>
 
 <h1>0x02 总结</h1>
 
-<hr />
+<hr>
 
 <p>天眼实验室再次提醒用户，此类恶意软件主要依赖通过微软的Office文档传播，用户应该确保宏不默认启用，提防任何来自不受信任来源的文件，当打开文件系统提示要使用宏时务必慎重。同时要尽量选用可靠的安全软件进行防范，如无必要不要关闭安全软件，当发现系统出现异常情况，应及时查杀木马，尽可能避免各类恶意代码的骚扰。</p>
 
 <h1>0x03 参考资料</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="http://news.softpedia.com/news/powerware-ransomware-abuses-microsoft-word-and-powershell-to-infect-users-502200.shtml">http://news.softpedia.com/news/powerware-ransomware-abuses-microsoft-word-and-powershell-to-infect-users-502200.shtml</a></li>
 <li><a href="https://www.carbonblack.com/2016/03/25/threat-alert-powerware-new-ransomware-written-in-powershell-targets-organizations-via-microsoft-word/">https://www.carbonblack.com/2016/03/25/threat-alert-powerware-new-ransomware-written-in-powershell-targets-organizations-via-microsoft-word/</a></li>
 <li><a href="https://www.10dsecurity.com/">https://www.10dsecurity.com/</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

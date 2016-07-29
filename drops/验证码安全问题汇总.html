@@ -3,22 +3,22 @@
 			<head>
 			     <title>验证码安全问题汇总 - 易水寒</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/5459">http://drops.wooyun.org/web/5459</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ea0f6f5c0f44748e98859a99036d660377480f5d580d51650c76630f5a6502697c02697caa0f5a6502697c02697c024c6b0f6d6502684f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f91c6b75b81e7062b990978a909e918dd495989b8a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> 相应的文章，只是觉得应该有个入门级的“测试用例”。本文不涉及OCR，不涉及暴力四六位纯数字验证码，不涉及没有验证码的情况（神马？没有验证码？没有验证码还讨论什么，要不人家不 care，要不人家已经胸有成竹有更牛逼的方法）。本文可能会与之前的某些文章有重合，可能与drops的“最严肃的安全原创平台”气质不符，请在家长指导下阅读。</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ea0f6f5c0f44748e98859a99036d660377480f5d580d51650c76630f5a6502697c02697caa0f5a6502697c02697c024c6b0f6d6502684f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f91c6b75b81e7062b990978a909e918dd495989b8a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> 相应的文章，只是觉得应该有个入门级的“测试用例”。本文不涉及OCR，不涉及暴力四六位纯数字验证码，不涉及没有验证码的情况（神马？没有验证码？没有验证码还讨论什么，要不人家不 care，要不人家已经胸有成竹有更牛逼的方法）。本文可能会与之前的某些文章有重合，可能与drops的“最严肃的安全原创平台”气质不符，请在家长指导下阅读。</p>
 
 <p>首先，我们来看下整个验证码实现的原理</p>
 
 <p>图一</p>
 
-<p><img src="http://static.wooyun.org/drops/20150402/2015040201525779550.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150402/2015040201525779550.png" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -32,13 +32,13 @@
 
 <h1>0x01 安全问题及案例</h1>
 
-<hr />
+<hr>
 
 <p>根据上面的实现流程，我们大概可以从四个方面入手，客户端问题、服务端问题、验证码本身问题，还有一个验证码流程设计问题。</p>
 
 <h2>1. 客户端问题</h2>
 
-<hr />
+<hr>
 
 <h3>客户端生成验证码</h3>
 
@@ -62,7 +62,7 @@
 
 <h2>2. 服务端</h2>
 
-<hr />
+<hr>
 
 <h3>验证码不过期，没有及时销毁会话导致验证码复用</h3>
 
@@ -88,7 +88,7 @@
 
 <h2>3. 其他类型验证码绕过</h2>
 
-<hr />
+<hr>
 
 <h3>“调试功能”还是设计缺陷？</h3>
 
@@ -112,7 +112,7 @@
 
 <h2>4. 验证码太简单，容易被机器识别</h2>
 
-<hr />
+<hr>
 
 <p>直接引用猪猪侠的两个金融案例</p>
 
@@ -122,7 +122,7 @@
 
 <h1>0x03修改建议</h1>
 
-<hr />
+<hr>
 
 <p>梳理清楚验证码实现逻辑。（包括不限于验证码会话及时销毁等） 验证码不要太简单。扭曲、粘连等。</p>
 
@@ -130,11 +130,11 @@
 
 <h1>0x04 参考</h1>
 
-<hr />
+<hr>
 
 <p>https://www.owasp.org/index.php/Testing&#95;for&#95;Captcha_(OWASP-AT-008) http://www.mcafee.com/uk/resources/white-papers/foundstone/wp-attacking-captchas-for-fun-profit.pdf http://www.lijiejie.com/safe-issues-of-captcha/ http://*.wooyun.org</p>
 
-<p>最后，祝大家愚人节快乐！</p>      </p>
+<p>最后，祝大家愚人节快乐！</p>      <p></p>
     
 			</body>
 		</html>

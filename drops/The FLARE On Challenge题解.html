@@ -3,12 +3,12 @@
 			<head>
 			     <title>The FLARE On Challenge题解 - g3t</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2988">http://drops.wooyun.org/tips/2988</a></h1>
 				
       <p>
-        <h2>第一题</h2>
+        </p><h2>第一题</h2>
 
 <p>这个题目是个 .Net 程序, 让根据这个程序找出一个邮箱地址, 然后给其发邮件, 它就会回复你下一个题目.</p>
 
@@ -16,7 +16,7 @@
 
 <p>拖到 <strong>ILSpy</strong> 中看了看, 没有发现什么机关, 答案应该通过函数 <code>btnDecode_Click</code> 获取, 于是将函数 <code>btnDecode_Click</code> 扣出来, 打印中间变量, 第一步转换就是结果了, 其邮箱地址为:</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7c4f0e111d141b4f0e18521e4c1e52184c1b193c1a101d0e19511312521f1311">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7c4f0e111d141b4f0e18521e4c1e52184c1b193c1a101d0e19511312521f1311">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>附源代码:</p>
@@ -74,7 +74,7 @@ namespace flare_on_1
 }
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>第二题</h2>
 
@@ -115,12 +115,12 @@ if(isset($_POST["\97\49\49\68\x4F\84\116\x68\97\x74\x44\x4F\x54\x6A\97\x76\x61\x
 
 <p>替换大写字母:</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0e6f3f3f207a666f7a20646f786f3b6d7c6f7e4e68626f7c6b236160206d6163">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0e6f3f3f207a666f7a20646f786f3b6d7c6f7e4e68626f7c6b236160206d6163">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>注意: 是 <code>a11</code> (数字11) 而不是 <code>all</code>.</p>
 
-<hr />
+<hr>
 
 <h2>第三题</h2>
 
@@ -155,16 +155,16 @@ if(isset($_POST["\97\49\49\68\x4F\84\116\x68\97\x74\x44\x4F\x54\x6A\97\x76\x61\x
 0012FE81  2D 89 F1 81 C1 D6 00 00 00 89 D8 83 C0 18 39 D8  -夞伭?..壺兝9
 0012FE91  75 05 89 E3 83 C3 04 39 CE 74 08 8A 13 30 16 43  u夈兠9蝨?0C
 0012FEA1  46 EB EB E9 1D 00 00 00 73 75 63 68 2E 35 68 33  F腚?...such.5h3
-0012FEB1  31 31 30 31 30 31 30 31 40 66 6C 61 72 65 2D 6F  <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="50616160616061606110363c3122357d3f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+0012FEB1  31 31 30 31 30 31 30 31 40 66 6C 61 72 65 2D 6F  <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="50616160616061606110363c3122357d3f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 0012FEC1  6E 2E 63 6F 6D 68 6E 74 00 00 68 20 73 70 65 68  n.comhnt..h speh
 </code></pre>
 
 <p>邮箱地址:</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f48781979cdac19cc7c5c5c4c5c4c5c4c5b49298958691d99b9ada979b99">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f48781979cdac19cc7c5c5c4c5c4c5c4c5b49298958691d99b9ada979b99">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>第四题</h2>
 
@@ -227,7 +227,7 @@ for (EvMRYMExyjbCXxMkAjebxXmNeLXvloPzEWhKA=0;EvMRYMExyjbCXxMkAjebxXmNeLXvloPzEWh
 
 <p>此时已经可以看到邮箱地址了, 然而也可以 邮箱地址是:</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2b5c4a1a4843054f184605585b471b1a5f586b4d474a594e06444505484446">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2b5c4a1a4843054f184605585b471b1a5f586b4d474a594e06444505484446">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>随后的代码是调用 <code>MessageBoxA</code> 弹窗口的, 默认情况会将邮箱地址与 <strong>0x46454542</strong> 异或, 可以直接跳过, 这样弹窗就可以打印邮箱地址了:</p>
@@ -349,12 +349,12 @@ int main(int argc, const char **argv, const char **envp)
 
 <p>去掉 <strong>dot</strong>, <strong>at</strong>, <strong>dash</strong>, 得到:</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="660a5601010f080148131448531214560d035326000a0714034b09084805090b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="660a5601010f080148131448531214560d035326000a0714034b09084805090b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>PS: 没有找到一个简单的方法让这个程序自己输出邮箱地址...</p>
 
-<hr />
+<hr>
 
 <h2>第六题</h2>
 
@@ -377,7 +377,7 @@ int main(int argc, const char **argv, const char **envp)
 <p>另外, 在使用 <code>strace</code> 命令查看程序的系统调用时也可以发现, 只要参数个数不是两个的时候, 程序行为与是否被 <code>strace</code> 监控无关, 一旦程序有两个参数时, 这个程序就有个反调试判定:</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="96e4f9f9e2d6fdf7faff">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/6# strace -i ./e7bc5d2c0cf4480348f5504196561297 1 1
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="96e4f9f9e2d6fdf7faff">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/6# strace -i ./e7bc5d2c0cf4480348f5504196561297 1 1
 [    7fc5b45bba87] execve("./e7bc5d2c0cf4480348f5504196561297", ["./e7bc5d2c0cf4480348f55041965612"..., "1", "1"], [/* 30 vars */]) = 0
 [          4a9297] uname({sys="Linux", node="kali", ...}) = 0
 [          4aa78a] brk(0)               = 0x1441000
@@ -418,7 +418,7 @@ int main(int argc, const char **argv, const char **envp)
 <p>看看第一个参数检测通过后程序做了什么:</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="14667b7b60547f75787d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/6# strace -i ./test 4815162342 a
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="14667b7b60547f75787d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/6# strace -i ./test 4815162342 a
 [    7ff6ad0f4a87] execve("./test", ["./test", "4815162342", "a"], [/* 31 vars */]) = 0
 [          4a9297] uname({sys="Linux", node="kali", ...}) = 0
 [          4aa78a] brk(0)               = 0x10c9000
@@ -437,7 +437,7 @@ int main(int argc, const char **argv, const char **envp)
 <p>再使用 <code>strace</code> 跟踪程序, 什么都发现不了了...</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0c7e6363784c676d6065">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/6# strace ./test 4815162342  a
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0c7e6363784c676d6065">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/6# strace ./test 4815162342  a
 [    7fbf6cd9ea87] execve("./test", ["./test", "4815162342", "a"], [/* 30 vars */]) = 0
 [          4a9297] uname({sys="Linux", node="kali", ...}) = 0
 [          4aa78a] brk(0)               = 0x103c000
@@ -508,16 +508,16 @@ No function contains program counter for selected frame.
 .text:000000000044BB39                 jz      short loc_44BB6C
 </code></pre>
 
-<p>最终得出第二个参数是 <strong><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="335f025d5b524b1d5b4641471d46061d52025f73555f5241561e5c5d1d505c5e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong>.</p>
+<p>最终得出第二个参数是 <strong><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="335f025d5b524b1d5b4641471d46061d52025f73555f5241561e5c5d1d505c5e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong>.</p>
 
-<p>因此, 该程序的两个参数分别是 <strong>4815162342 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="761a47181e170e581e0304025803435817471a36101a1704135b19185815191b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
+<p>因此, 该程序的两个参数分别是 <strong>4815162342 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="761a47181e170e581e0304025803435817471a36101a1704135b19185815191b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
 
 <h3>附录:</h3>
 
 <p>gdb中查看字符串:</p>
 
 <pre><code>#!bash
-p  "%s", *(char*)<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0d6c69697f687e7e4d616863">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+p  "%s", *(char*)<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0d6c69697f687e7e4d616863">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>生成第二个参数的C语言代码(程序中验证过程的逆运算):</p>
@@ -857,7 +857,7 @@ int main()
 }
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>第七题</h2>
 
@@ -955,18 +955,18 @@ int main()
 
 <p>再后面就是将解密后的程序写入文件 <strong>gratz.exe</strong> 并运行了.</p>
 
-<p>程序运行界面: <img src="http://static.wooyun.org/20140918/2014091811174674844.png" alt="flare-on challenge 7" /></p>
+<p>程序运行界面: <img src="http://static.wooyun.org/20140918/2014091811174674844.png" alt="flare-on challenge 7"></p>
 
 <p>这是个 .Net 程序, 拖到 <strong>ILSpy</strong> 里, 可以看到如下程序结构:</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811174610174.png" alt="flare-on challenge 7" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811174610174.png" alt="flare-on challenge 7"></p>
 
 <p>其中, <code>lulz.decoder1</code>, <code>lulz.decoder2</code>, <code>lulz.decoder3</code> 和 <code>lulz.decoder4</code> 都是将输入字符串的每个字符经过一系列转换后生成解密后的字符. 解密后发现 <code>lulz.datwork</code> 里面使用SMTP协议发送邮件的几个设置都是错误的, 其具体值为:</p>
 
 <pre><code>#!bash
-To: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2a4b461b044e4b5e044e4b5e4b6a4c464b584f07454404494547">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-Subject: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="86e7eab7a8e2e7f2a8e2e7f2e7c6e0eae7f4e3abe9e8a8e5e9eb">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-From: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ddb1a8b1a79dbbb1bcafb8f0b2b3f3beb2b0">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+To: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2a4b461b044e4b5e044e4b5e4b6a4c464b584f07454404494547">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+Subject: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="86e7eab7a8e2e7f2a8e2e7f2e7c6e0eae7f4e3abe9e8a8e5e9eb">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+From: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ddb1a8b1a79dbbb1bcafb8f0b2b3f3beb2b0">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 SmtpClient: smtp.secureserver.net
 </code></pre>
 
@@ -988,14 +988,14 @@ public void lulzors()
 
 <p>这个 <code>Form1.label2</code> 应该就是程序界面下方空白的那一部分吧, 把调用 <code>lulz.decoder4</code> 这一行单独拿出来执行, 其结果为:</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d5b1b4e2fbb3e4b4a7b0fbb3bcbbbca6bdfbb9bcbbe695b3b9b4a7b0f8babbfbb6bab8">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d5b1b4e2fbb3e4b4a7b0fbb3bcbbbca6bdfbb9bcbbe695b3b9b4a7b0f8babbfbb6bab8">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>这个就是最终正确的邮箱地址了.</p>
 
 <p>当然也可以修改程序, 让程序直接输出邮箱地址:</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811174632044.png" alt="flare-on challenge 7" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811174632044.png" alt="flare-on challenge 7"></p>
 
 <h2>参考链接:</h2>
 
@@ -1004,7 +1004,7 @@ public void lulzors()
 <li>加密与解密(第三版)</li>
 <li><a href="http://blog.csdn.net/hqucth/article/details/7884917">利用pdf的js函数漏洞构造堆喷射的攻击思路</a></li>
 <li><a href="http://book.51cto.com/art/201405/438749.htm">找到shellcode</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

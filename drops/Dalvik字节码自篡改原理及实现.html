@@ -3,16 +3,16 @@
 			<head>
 			     <title>Dalvik字节码自篡改原理及实现 - leonnewton</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/16677">http://drops.wooyun.org/mobile/16677</a></h1>
 				
       <p>
-        <p><strong>Author:<a href="https://github.com/leonnewton">leonnewton</a></strong></p>
+        </p><p><strong>Author:<a href="https://github.com/leonnewton">leonnewton</a></strong></p>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>早在2013年，bluebox就发布了一个可以在运行时篡改Dalvik字节码的Demo。之后，国内有很多对这个Demo进行分析的资料，分析得也非常详细。但是看了很多资料以后，感觉缺少从实现的角度可以给学习的同学进行练手的资料。因此，本文从实现的角度，解释篡改的原理并实现篡改的过程，并附上实现的源代码。希望可以帮助想自己实现着玩的同学。</p>
 
@@ -24,23 +24,23 @@
 
 <h1>0x01 篡改的原理</h1>
 
-<hr />
+<hr>
 
 <p>由于Dex文件被映射为只读的，因此从Dex文件自己的代码里来修改自己的字节码是不行的。但是native代码和DVM却运行在相同的比字节码低的层次，所以可以通过native代码来修改字节码。在修改字节码之前，用mprotect把字节码所在的内存重新映射为可写，然后把新的字节码覆盖原来的字节码即可。</p>
 
 <p>而在应用程序的进程空间，有一段是加载的odex文件，odex的0x28偏移开始的地方就是Dex文件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061311430664294130.png" alt="1.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20160613/2016061311430664294130.png" alt="1.png"></p>
 
 <p>在得到Dex文件在内存中的地址之后，通过查找Dex一系列相应的结构，最终找到存放指令的地址，把新的指令覆盖原来的指令即可。</p>
 
 <h1>0x02 搜索method指令位置的过程</h1>
 
-<hr />
+<hr>
 
 <p>找到了Dex文件的位置，需要经过几个查找步骤，最终定位到method存放指令的位置。具体的过程如图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061311430754978218.png" alt="2.png" /></p>
+<p><img src="http://static.wooyun.org//drops/20160613/2016061311430754978218.png" alt="2.png"></p>
 
 <ol>
 <li>首先是需要确定method的名字，也就是method字符串，再确定method所在class的名字，也就是class字符串。这确定了要修改的方法。</li>
@@ -53,7 +53,7 @@
 
 <h1>0x03 实验的设计</h1>
 
-<hr />
+<hr>
 
 <p>首先写一个应用，应用的TestAdd类有一个add方法，这个方法代码里进行的是乘法，计划篡改字节码后，运行的时候进行的是加法。如下：</p>
 
@@ -69,7 +69,7 @@ public int add(int a, int b){
 
 <h1>0x04 代码实现</h1>
 
-<hr />
+<hr>
 
 <h3>搜索Dex文件开头</h3>
 
@@ -83,7 +83,7 @@ FILE *fp;
     char line [ 2048 ];
     while ( fgets ( line, sizeof line, fp ) != NULL ) 
                {
-                  if (strstr(line, "<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9db2f9fce9fcb2f9fcf1ebf4f6b0fefcfef5f8b2f9fce9fcddfceded">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@com.example.selfmodify") != NULL) //找到odex文件的名字
+                  if (strstr(line, "<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9db2f9fce9fcb2f9fcf1ebf4f6b0fefcfef5f8b2f9fce9fcddfceded">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@com.example.selfmodify") != NULL) //找到odex文件的名字
                       {
                          if (strstr(line, "classes.dex") != NULL) 
                              {
@@ -283,11 +283,11 @@ memcpy(code_insns_address,&amp;inject,6);//将字节码复制过去
 
 <h1>0x04 结果</h1>
 
-<hr />
+<hr>
 
 <p>可以看到各个字段读取的结果，本来应该是1*2=2，修改字节码之后为1+2=3了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061311430935785316.png" alt="3.png" /></p>      </p>
+<p><img src="http://static.wooyun.org//drops/20160613/2016061311430935785316.png" alt="3.png"></p>      <p></p>
     
 			</body>
 		</html>

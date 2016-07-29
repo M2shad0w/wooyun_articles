@@ -3,14 +3,14 @@
 			<head>
 			     <title>并发请求导致的业务处理安全风险及解决方案 - blue</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/831">http://drops.wooyun.org/papers/831</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>一段简单的购买程序，看起来没有任何问题。</p>
 
@@ -22,7 +22,7 @@
 
 <h2>0x01 问题分析</h2>
 
-<hr />
+<hr>
 
 <p>还是以商城购买为例，商城网站是web程序和数据库两部分，业务处理流程：</p>
 
@@ -30,7 +30,7 @@
 用户金额是否大于商品价格—&gt;商品库存是否充足—&gt;购买操作:生成订单—&gt;扣除用户金额—&gt;商品库存减1
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201312/2013122510571541794.png" alt="2013122510571541794.png" /></p>
+<p><img src="http://static.wooyun.org/201312/2013122510571541794.png" alt="2013122510571541794.png"></p>
 
 <p>流程的每一部分都是web与数据库打交道，查询或者操作数据库。</p>
 
@@ -58,13 +58,13 @@ ShowSuccess('购买成功');
 
 <p>当商品库存仅为1时，同时有多个请求，而当前没有一个请求走到商品库存减少位置，多次购买都能成功，而商城却无货可发。</p>
 
-<p><img src="http://static.wooyun.org/201312/2013122510574019546.png" alt="2013122510574019546.png" /></p>
+<p><img src="http://static.wooyun.org/201312/2013122510574019546.png" alt="2013122510574019546.png"></p>
 
 <p>总结来说，当有大量的购买操作同时进行，如果<strong>数据库的处理速度跟不上程序的请求速度</strong>，就会出现判断不准确的问题，造成用户以单个商品的金额购买多个商品、某些用户付款了但得不到商品等，算是一个安全风险。</p>
 
 <h2>0x02 解决方案：</h2>
 
-<hr />
+<hr>
 
 <p>核心思想：将一次业务处理流程（如购买操作）作为一个最小操作单元，同一时间只能有一个操作。</p>
 
@@ -99,7 +99,7 @@ $db-&gt;Execute("UPDATE ".Tb('goods')." SET num=num-1 WHERE goods_id='{$goods_id
 $mmc-&gt;set('buying',0);
 $mmc-&gt;set('lastBuyTime_'.$user-&gt;userId,time());
 ShowSuccess('购买成功');
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

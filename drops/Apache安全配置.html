@@ -3,20 +3,20 @@
 			<head>
 			     <title>Apache安全配置 - zhangsan</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/2727">http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/2727</a></h1>
 				
       <p>
-        <h2>0x00 测试环境</h2>
+        </p><h2>0x00 测试环境</h2>
 
-<hr />
+<hr>
 
 <p>centos6.5+apache2.2.15+php5.3.3</p>
 
 <h2>0x01 php的运行模式介绍</h2>
 
-<hr />
+<hr>
 
 <p>php的运行模式分四种：</p>
 
@@ -30,13 +30,13 @@
 
 <h2>0x02 Apache运行原理介绍</h2>
 
-<hr />
+<hr>
 
 <p>Apache是基于模块化设计的，各个模块在系统启动的时候按需载入。Apache对于php的解析，就是通过众多Module中的php Module来完成的。</p>
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/201408/2014080322524877722.png" alt="2014080322524877722.png" /></p>
+<p><img src="http://static.wooyun.org/201408/2014080322524877722.png" alt="2014080322524877722.png"></p>
 
 <p>所以，php加载成为了apache的一个模块，可以把apache和php当成一个整体看待。</p>
 
@@ -46,7 +46,7 @@
 
 <h2>0x03 Apache安全配置方案</h2>
 
-<hr />
+<hr>
 
 <h3>1. 选择漏洞较少的apache版本，并打上安全补丁</h3>
 
@@ -148,7 +148,7 @@ Group apache
 
 <h2>0x04 .htaccess常见配置方法参考</h2>
 
-<hr />
+<hr>
 
 <p>首先，不建议使用.htaccess,其次，使用.htaccess需要在httpd.conf中开启，最后，开始.htaccess支持后需要在httpd.conf中配置防止.htaccess文件被下载，下面介绍几个基本配置方法不全，更多的可以参考其他网站专门针对.htaccess 的配置方法。</p>
 
@@ -176,7 +176,7 @@ allow from 192.168.0.0/24
 
 <h2>0x05 总结</h2>
 
-<hr />
+<hr>
 
 <p>其实一个web服务器的保护是分几个层次的（暂不考虑程序的漏洞）：</p>
 
@@ -202,7 +202,7 @@ allow from 192.168.0.0/24
 
 <h3>6. 记录日志</h3>
 
-<p>最后，当黑客已经光顾之后，我们也只能通过日志来分析，看问题出在哪里了。</p>      </p>
+<p>最后，当黑客已经光顾之后，我们也只能通过日志来分析，看问题出在哪里了。</p>      <p></p>
     
 			</body>
 		</html>

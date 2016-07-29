@@ -3,22 +3,22 @@
 			<head>
 			     <title>分析“蜜罐NS”上的查询，提升DNS日志的质量 - virustracker</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5300">http://drops.wooyun.org/tips/5300</a></h1>
 				
       <p>
-        <p>from:http://securityintelligence.com/analyzing-queries-on-a-honeypot-name-server-for-better-dns-log-quality/</p>
+        </p><p>from:http://securityintelligence.com/analyzing-queries-on-a-honeypot-name-server-for-better-dns-log-quality/</p>
 
 <h1>0x00 网络杂讯</h1>
 
-<hr />
+<hr>
 
 <p>“蜜罐”是统计“网络杂讯”的一种常用方法，并且这种方法也比较简单。你对“网络杂讯”了解的程度越高，那么你就能<a href="http://securityintelligence.com/five-steps-for-better-security-analytics-in-2015/">更好地做安全分析</a>。 我好奇的是，在公有云上，NS蜜罐能接收哪些流量；我的研究如下：</p>
 
 <h1>0x01 设置NS蜜罐</h1>
 
-<hr />
+<hr>
 
 <p>这个服务器的系统是默认设置下的Ubuntu 14.04.1 LTS，由法兰克福亚马逊弹性计算云（Frankfurt EC Amazon cloud）托管，并且服务器配置了一个IPv4地址（我没有查看IPv6数据）。因为公共渠道上并没有公布服务器的IP地址和DNS（域名服务器）服务，所以，任何进入这个服务器的请求都可被视作可疑请求。目前，我还没有调查云提供商<a href="http://arxiv.org/pdf/1204.0764.pdf">重复使用IP地址</a> 对此造成的影响。</p>
 
@@ -30,7 +30,7 @@
 
 <h1>0x02 Bind配置</h1>
 
-<hr />
+<hr>
 
 <pre><code>options { directory "/var/cache/bind"; dnssec-validation auto; recursion no; allow-transfer { none; }; auth-nxdomain no; # conform to RFC1035 // listen-on-v6 { any; }; statistics-file "/var/log/named/named_stats.txt"; memstatistics-file "/var/log/named/named_mem_stats.txt"; version "9.9.1-P2";}; logging{ channel query_log { file "/var/log/named/query.log"; severity info; print-time yes; print-severity yes; print-category yes; }; category queries { query_log; };};
 </code></pre>
@@ -42,17 +42,17 @@
 
 <h1>0x03 统计数据</h1>
 
-<hr />
+<hr>
 
 <p>第一组统计数字表示的是从日志文件中发现的原始数据。</p>
 
 <h1>0x04 时间范围</h1>
 
-<hr />
+<hr>
 
 <p>如果我们根据这些数据映射查询，我们就会发现，在1月15日和1月20日、1月末和2月初，查询量猛增。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503243349369.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150325/2015032503243349369.png" alt="enter image description here"></p>
 
 <p>通过进一步的调查，我们发现这些查询都是由一个IP地址引起的；这个IP地址属于德国波鸿鲁尔大学。在波鸿鲁尔大学的校网站上解释说明了一个“<a href="http://scanresearch.syssec.ruhr-uni-bochum.de/">DDos放大攻击追踪者项目</a> （Amplification DDoS Tracker Project）”。这个网站通过获取扫描数据，提醒网络所有者可能出现的问题。我们发现有两个IP地址进行了这些扫描：其中一个属于德国波鸿鲁尔大学，另一个属于德国萨尔大学。</p>
 
@@ -60,39 +60,39 @@
 
 <h1>0x05 这些查询来自何方？</h1>
 
-<hr />
+<hr>
 
 <p>我提取出了日志中的IP地址，然后使用<a href="http://asn.cymru.com/">Team Cymru</a> 公司的ASN，获取了这些IP的对应国家。自治系统（AS）可以告诉我们IP地址所属的网络区段。在<a href="https://github.com/cudeso/cudeso-honeypot/tree/master/elk">Github</a> 网站上也可以找到这个脚本。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503243497506.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150325/2015032503243497506.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503243539413.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150325/2015032503243539413.png" alt="enter image description here"></p>
 
 <p>扫描主要来自德国，美国和中国这三个国家。其中，DFN（德国）和湖南Chinanet这两个AS的查询较多。有超过半数的查询来自欧洲（RIPE）。考虑到这中间有大量的请求来自德国鲁尔大学，出现这样的结果也就不足为奇了。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503243742995.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150325/2015032503243742995.png" alt="enter image description here"></p>
 
 <h1>0x06 他们在找什么？</h1>
 
-<hr />
+<hr>
 
 <p>多数查询都是为了获得域名的A记录，18%以上的查询是为了获得域名的ANY记录。TXT请求主要是为了获取DNS服务器的版本。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503243837944.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150325/2015032503243837944.png" alt="enter image description here"></p>
 
 <p>这些查询是为了获取Google和Shadowsever的IP地址，或者是Bind NS的版本。不出意外，最普遍的<a href="http://en.wikipedia.org/wiki/Top-level_domain">TLD</a> 是.com和.org。在你创办企业时，<a href="http://securityintelligence.com/malicious-domains-can-give-you-the-biz/">要谨慎选择域名</a> 和TLD。这份数据中，最有趣的部分是.ru和.cn这两个TLD所占的比例。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503243962264.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150325/2015032503243962264.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503244045129.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150325/2015032503244045129.png" alt="enter image description here"></p>
 
 <h1>0x07 open resolver扫描</h1>
 
-<hr />
+<hr>
 
 <p>如上文所述，open resolver项目导致了大量的请求。事实上，大约56%的查询都是来自一些参与open resolver的组织。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503244041454.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150325/2015032503244041454.png" alt="enter image description here"></p>
 
 <p>虽然，这类查询的数量很大，但是在日志中可以很容易地辨别。</p>
 
@@ -105,21 +105,21 @@
 
 <h1>0x08 过滤open resolver扫描后的结果</h1>
 
-<hr />
+<hr>
 
 <p>在过滤了open resolver查询后，得到了下列结果：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503244197351.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150325/2015032503244197351.png" alt="enter image description here"></p>
 
 <p>在这些时间范围中，并没有显著地突增。多数查询都是来自美国和中国。RISs Ripe，Arin和Apnic之间的查询分布也都大致相当。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503244232674.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150325/2015032503244232674.png" alt="enter image description here"></p>
 
 <p>在这一类别中，请求类型不是A记录查询就是ANY资源查询。多数都是谷歌域名查询。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503244240672.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150325/2015032503244240672.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503244355710.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150325/2015032503244355710.png" alt="enter image description here"></p>
 
 <p>在剔除了open resolver的干扰后，数据集揭露了两个特别主机的行为：一个来自中国(AS 63835)，另一个来自俄罗斯(AS 2848)。</p>
 
@@ -135,7 +135,7 @@
 
 <h1>0x09 'ANY'请求出了什么问题？</h1>
 
-<hr />
+<hr>
 
 <p>大约半数的请求是“ANY”请求、</p>
 
@@ -184,13 +184,13 @@
 
 <h1>0x10 结论</h1>
 
-<hr />
+<hr>
 
 <p>如果一个随机的DNS服务器快速接受了大量针对开放解析器测试的请求，那么这些网络杂讯就会污染日志；这样你就很难检测到DNS服务器上的攻击。</p>
 
 <p>你可以使用DNS服务器“蜜罐”，捕捉这些网络杂讯。</p>
 
-<p>仅仅使用几个脚本，你就可以根据“蜜罐”数据集提供的信息，轻松地过滤掉主要的扫描者。然后，你就可以使用这个白名单，把他们从真正的DNS日志中去除，使你的日志监控或SIEM解决方案更具价值。但是，如果你想要阻止某些高级黑客入侵你的白名单，手动设置白名单认证还是很有必要的。</p>      </p>
+<p>仅仅使用几个脚本，你就可以根据“蜜罐”数据集提供的信息，轻松地过滤掉主要的扫描者。然后，你就可以使用这个白名单，把他们从真正的DNS日志中去除，使你的日志监控或SIEM解决方案更具价值。但是，如果你想要阻止某些高级黑客入侵你的白名单，手动设置白名单认证还是很有必要的。</p>      <p></p>
     
 			</body>
 		</html>

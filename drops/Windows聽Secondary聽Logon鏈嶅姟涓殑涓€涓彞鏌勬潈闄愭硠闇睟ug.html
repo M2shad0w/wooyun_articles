@@ -3,23 +3,23 @@
 			<head>
 			     <title>Windows Secondary Logon服务中的一个句柄权限泄露Bug - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/14018">http://drops.wooyun.org/papers/14018</a></h1>
 				
       <p>
-        <p>原文地址：<br />
+        </p><p>原文地址：<br>
 <a href="https://googleprojectzero.blogspot.jp/2016/03/exploiting-leaked-thread-handle.html">https://googleprojectzero.blogspot.jp/2016/03/exploiting-leaked-thread-handle.html</a></p>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>原作者写了太多的从句，token handle换来换去，一大堆三四行没逗号的句子看得我头晕不已，如果手滑翻译错了，比如把令牌误打成句柄，请不要疑惑，联系我。</p>
 
 <h1>0x01 Bug 本貌</h1>
 
-<hr />
+<hr>
 
 <p>我偶然发现了发现一个可以把在特权进程中打开的句柄泄漏到较低的特权进程的bug。Bug位于Windows Secondary Logon服务中，该漏洞可以泄漏一个具有完全访问权限的线程句柄。微软在MS16-032补丁中修复了这个bug。这篇博客将告诉你不用传统的内存损坏技术时，你将如何使用线程句柄来获得系统权限。</p>
 
@@ -109,7 +109,7 @@ HANDLE GetThreadHandle() {
 
 <h1>0x02 利用</h1>
 
-<hr />
+<hr>
 
 <p>利用环节。很幸运这个句柄属于一个线程池线程，这意味着该线程将用来处理其他RPC请求。如果线程只存在于服务的一个请求中，用完就渣都不剩了的话将是一个棘手很多的利用。</p>
 
@@ -187,13 +187,13 @@ HANDLE GetSystemToken(HANDLE hThread) {
 
 <h1>0x03 结论</h1>
 
-<hr />
+<hr>
 
 <p>希望我通过这个文章描绘出了一个有趣的在有权限的服务中泄漏线程句柄的攻击方式。当然，它只在泄漏的线程句柄用作能够直接给予我们进程创建能力的服务，但是你也可以用这种方式创建任意文件或其他资源。你可以通过内存损坏利用技术来达到这个目的，但是你不一定需要这么做。</p>
 
 <h1>0x04 代码</h1>
 
-<hr />
+<hr>
 
 <pre><code>#!cpp
 #include &lt;stdio.h&gt;
@@ -385,7 +385,7 @@ int main()
 
   return 0;
 }
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

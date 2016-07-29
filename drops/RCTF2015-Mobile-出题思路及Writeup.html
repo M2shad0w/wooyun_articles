@@ -3,12 +3,12 @@
 			<head>
 			     <title>RCTF2015-Mobile-出题思路及Writeup - Xbalien</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/10557">http://drops.wooyun.org/mobile/10557</a></h1>
 				
       <p>
-        <p>@Xbalien ROIS</p>
+        </p><p>@Xbalien ROIS</p>
 
 <p>从最初CTF上apk的简单反编译到现在各种加固逆向，难度已经上升了好多个级别。但感觉除了ACTF，多数的Mobile题目还是以逆向为主。此次作为ROIS成员有幸能参与到RCTF2015的出题工作中，于是尝试了一些新的出题思路，导致大家做题都很不适应，也把大家坑了一波。欢迎建议、意见、吐槽。</p>
 
@@ -16,7 +16,7 @@
 
 <h1>0x00 Mobile100-FlagSystem</h1>
 
-<hr />
+<hr>
 
 <blockquote>
   <p>Show me the flag. (The flag should include RCTF{}). <a href="https://github.com/Xbalien/RCTF2015-MOBILE/blob/master/FlagSystem/ab_2e204fe0ec33b1689f1c47bd60a9770c">ab_2e204fe0ec33b1689f1c47bd60a9770c</a></p>
@@ -28,7 +28,7 @@
 
 <p>该题给出了一个修改过的backup.ab，稍微需改了ab的头部，version以及compress。直接使用abe进行提取的话需要根据代码简单修复一下ab头部。提取出来后发现有两个备份apk文件。</p>
 
-<p>com.example.mybackup<br />
+<p>com.example.mybackup<br>
 com.example.zi</p>
 
 <p>其中mybackup里提供了一个经过sqlcipher加密过的BOOKS.db.该数据库里存储了flag，只要解密该数据库之后即可获取flag。</p>
@@ -58,7 +58,7 @@ sqlite&gt; select * from books_table
 
 <h1>0x01 Mobile200-Where</h1>
 
-<hr />
+<hr>
 
 <blockquote>
   <p>Where is the flag.(The flag should include RCTF{}) <a href="https://github.com/Xbalien/RCTF2015-MOBILE/blob/master/Where/misc_5b0a7ae29fe01c7a76a19503e1e0273e">misc_5b0a7ae29fe01c7a76a19503e1e0273e</a></p>
@@ -68,11 +68,11 @@ sqlite&gt; select * from books_table
 
 <p>该题的定位是杂项题，给了一个apk，但apk啥都没做。在assets目录下存在了一个abc文件，打开后可以看到是损坏的dex header，只要根据dex header其他相关结构把各id_size都修复。</p>
 
-<p>剩下就是要寻找到隐藏起来的dex body.参考聚安全博客<a href="http://jaq.alibaba.com/blog.htm?spm=0.0.0.0.v5UAtC&amp;id=76">[1]</a>，我在META-INF目录里隐藏了一个y，并把加密的dex <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="90f2fff4e9742b35751f1a770b28751523751a30753f16742f3176113fdbd5c9adddf9e3f3d0f9fef6a0">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>#fjhx11.DEX=en(dex body)，aes-128-cbc存放在CERT.RSA尾部，这样一来主apk是能正常安装的。</p>
+<p>剩下就是要寻找到隐藏起来的dex body.参考聚安全博客<a href="http://jaq.alibaba.com/blog.htm?spm=0.0.0.0.v5UAtC&amp;id=76">[1]</a>，我在META-INF目录里隐藏了一个y，并把加密的dex <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="90f2fff4e9742b35751f1a770b28751523751a30753f16742f3176113fdbd5c9adddf9e3f3d0f9fef6a0">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>#fjhx11.DEX=en(dex body)，aes-128-cbc存放在CERT.RSA尾部，这样一来主apk是能正常安装的。</p>
 
 <p>其实这道题目我描述的不太清楚，坑了一波，所谓的KEY其实只是openssl的-pass，通过KEY生成真正的key以及iv。</p>
 
-<p>通过相关的openssl操作<code>openssl enc -aes-128-cbc -d -k <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fcb1958f9fbc95929acc">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>#fjhx11 -nosalt -in xxx -out xxx2</code>将dex body解密后与dex header进行拼接，jeb反编译后结果如下：</p>
+<p>通过相关的openssl操作<code>openssl enc -aes-128-cbc -d -k <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fcb1958f9fbc95929acc">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>#fjhx11 -nosalt -in xxx -out xxx2</code>将dex body解密后与dex header进行拼接，jeb反编译后结果如下：</p>
 
 <pre><code>#!java
 public class MainActivity extends ActionBarActivity {
@@ -121,7 +121,7 @@ public class MainActivity extends ActionBarActivity {
 
 <h1>0x02 Mobile350-Load</h1>
 
-<hr />
+<hr>
 
 <blockquote>
   <p>This APK has a vulnerability,Can you load the flag? Try it. <a href="https://github.com/Xbalien/RCTF2015-MOBILE/blob/master/Load/WaWaWa_0bb98521a9f21cc3672774cfec9c7140">WaWaWa_0bb98521a9f21cc3672774cfec9c7140</a></p>
@@ -281,7 +281,7 @@ startService(intent);
 
 <h1>0x03 Mobile450-Target</h1>
 
-<hr />
+<hr>
 
 <blockquote>
   <p>This APK has a vulnerability, please use it to start the target activity.The flag should include RCTF{}. <a href="https://github.com/Xbalien/RCTF2015-MOBILE/blob/master/Target/Package_b6411947d3b360182e8897be40064023">Package_b6411947d3b360182e8897be40064023</a></p>
@@ -289,7 +289,7 @@ startService(intent);
 
 <h2>出题思路：开放本地端口 + PendingIntent + 运行时自窜改</h2>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="80682f2569221865073a69221866001d68372f650f02680003643a06c065300f680d3766090d691c32653016653016682712671a04663505683008c1eee4f2efe9e4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>开放网络端口的安全风险<a href="http://drops.wooyun.org/mobile/6973">[2]</a>，X-team的PendingIntent双无intent可导致的能力泄露<a href="http://xteam.baidu.com/?p=77">[3]</a> 以及运行时自篡改代码<a href="http://blog.csdn.net/freshui/article/details/13620647">[4]</a>。</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="80682f2569221865073a69221866001d68372f650f02680003643a06c065300f680d3766090d691c32653016653016682712671a04663505683008c1eee4f2efe9e4">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>开放网络端口的安全风险<a href="http://drops.wooyun.org/mobile/6973">[2]</a>，X-team的PendingIntent双无intent可导致的能力泄露<a href="http://xteam.baidu.com/?p=77">[3]</a> 以及运行时自篡改代码<a href="http://blog.csdn.net/freshui/article/details/13620647">[4]</a>。</p>
 
 <p>出题本意是，通过该apk开放的一个本地端口，传递相关参数，最后触发主dex中的PendingIntent双无Intent的通知，获取相关通知后修改intent内容开启TargetActivty.其中向端口中传递的能够正确触发双无Intent的参数的md5(输入参数)即为flag。（但dex几处代码经过so的自篡改，因此需要获取真正加载的代码）</p>
 
@@ -489,7 +489,7 @@ public int onStartCommand(Intent arg5, int arg6, int arg7) {
 
 <h1>0x04 小结</h1>
 
-<hr />
+<hr>
 
 <p>此次RCTF2015 Mobile类题目，我尝试了一些漏洞的思路进行出题，也许还会存在我没有考虑到的问题，也或许获取flag的方式让大家不解，包括让大家入坑的都请见谅哈。希望有兴趣童鞋可以尝试把Mobile的CTF题出得更全面、更有意思。</p>
 
@@ -497,7 +497,7 @@ public int onStartCommand(Intent arg5, int arg6, int arg7) {
 
 <h1>0x05 参考</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li><a href="http://jaq.alibaba.com/blog.htm?spm=0.0.0.0.v5UAtC&amp;id=76">http://jaq.alibaba.com/blog.htm?spm=0.0.0.0.v5UAtC&amp;id=76</a></li>
@@ -505,7 +505,7 @@ public int onStartCommand(Intent arg5, int arg6, int arg7) {
 <li><a href="http://xteam.baidu.com/?p=77">http://xteam.baidu.com/?p=77</a></li>
 <li><a href="http://blog.csdn.net/freshui/article/details/13620647">http://blog.csdn.net/freshui/article/details/13620647</a></li>
 <li><a href="https://github.com/Xbalien/GuardDroid">https://github.com/Xbalien/GuardDroid</a></li>
-</ol>      </p>
+</ol>      <p></p>
     
 			</body>
 		</html>

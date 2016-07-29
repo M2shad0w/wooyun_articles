@@ -3,16 +3,16 @@
 			<head>
 			     <title>Rocket Kitten 报告 - virustracker</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/10560">http://drops.wooyun.org/tips/10560</a></h1>
 				
       <p>
-        <p>from:http://blog.checkpoint.com/wp-content/uploads/2015/11/rocket-kitten-report.pdf</p>
+        </p><p>from:http://blog.checkpoint.com/wp-content/uploads/2015/11/rocket-kitten-report.pdf</p>
 
 <h1>0x00 概括</h1>
 
-<hr />
+<hr>
 
 <p>网络间谍小组“Rocket Kitten”，由伊朗人组成，他们的首次活动可以追溯到2014年，主要是通过钓鱼活动来传播木马，从而感染目标受害者。据报道，这个小组现在仍在活动中，最新的攻击活动出现在了2015年10月。</p>
 
@@ -36,7 +36,7 @@
 
 <h1>0x01 调查时间回顾</h1>
 
-<hr />
+<hr>
 
 <p>（如果你已经看过了以前出版的报告，可以跳过这一部分）</p>
 
@@ -50,7 +50,7 @@
 
 <p>我们现在就回顾和简要总结一些有趣的发现。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042019135925484.com/blob/fudaaay7cmi/wt31bsvo0ubpffnl8ftkdg?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042019135925484.com/blob/fudaaay7cmi/wt31bsvo0ubpffnl8ftkdg?s=raybawkd2kaf" alt=""></p>
 
 <p>2014年发布的‘Operation Saffron Rose’报告把这个伊朗攻击小组命名为了‘Ajax Security’（CrowdStrike使用的代码名称是‘Flying Kitten’）。报告中称，这个小组通过钓鱼攻击了伊朗的异议分子（那些企图规避政府交通监控的人）。这个小组与最近发生的Rocket Kitten活动很可能存在联系（不同的工具，但是行动模式和钓鱼域名的命名方式类似）。不过，目前还没有确凿的证据能证实这样的关联。</p>
 
@@ -58,13 +58,13 @@
 
 <p>ClearSky在2014年9月发布的文章中，首次说明了这些攻击活动使用了一种叫做‘Gholee’ 的木马（这个名称出现在了恶意有效载荷的导出函数中，可能是根据一名伊朗歌星来命名的）。研究人员发现了一些与其他攻击活动相关的线索，并且注意到大量的AV产品都无法检测出这个木马。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042013323161938.com/blob/fudaaay7cmi/fxkfexetzpscqvghw_nabg?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042013323161938.com/blob/fudaaay7cmi/fxkfexetzpscqvghw_nabg?s=raybawkd2kaf" alt=""></p>
 
 <p>图1-ClearSky注意到的<em>‘gholee’</em>导出名称</p>
 
 <p>Gadi &amp; Tillman在31c3大会（第31届Chaos通讯大会，德国）上，通过报告首次明确了Rocket Kitten的身份，紧接着CrowdStrike确定了对伊朗攻击小组的命名方式。在报告中，研究人员介绍了黑客‘Wool3n.H4t’以及其他成员的身份。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042013015693474.com/blob/fudaaay7cmi/fy663nlxlt7liisfbzecga?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042013015693474.com/blob/fudaaay7cmi/fy663nlxlt7liisfbzecga?s=raybawkd2kaf" alt=""></p>
 
 <p>图2-<em>Tillman Werner &amp; Gadi Evron</em>注意到恶意文档中的人工痕迹能指示文件创建者</p>
 
@@ -72,7 +72,7 @@
 
 <ul>
 <li>在深入研究了ClearSky所说的“Gholee”木马后，我们发现这个木马实际上是一个渗透测试工具的“Wrapper”，这个测试工具最初是阿根廷公司Core Security开发的，是一个合法的渗透测试工具，叫做“Core Impact”。攻击者非法修改了这个工具，然后，用在了Rocket Kitten小组的恶意攻击活动中。</li>
-<li>一个基于.NET的凭据窃取器，负责窃取在受感染计算机上储存的某些凭据，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="49acf0ffa0c9d3a1f6cea0cbe7adf2ffaed3cdafdff0acf5c6acc6d8a0c9c8acc1f9abc9d13e2626257a2767217d3d092e24282025672a2624">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> (mailto:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b6c1d9d9da85d898de82c2f6d1dbd7dfda98d5d9db">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>)<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d537554c36555733416e30526e3d5550326e4c3d6a4c316d7f3062703050623d6062324f51304558307842316969316c5b334d7a37554d93bca7b098b4b9a337554c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>。</li>
+<li>一个基于.NET的凭据窃取器，负责窃取在受感染计算机上储存的某些凭据，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="49acf0ffa0c9d3a1f6cea0cbe7adf2ffaed3cdafdff0acf5c6acc6d8a0c9c8acc1f9abc9d13e2626257a2767217d3d092e24282025672a2624">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> (mailto:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b6c1d9d9da85d898de82c2f6d1dbd7dfda98d5d9db">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>)<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d537554c36555733416e30526e3d5550326e4c3d6a4c316d7f3062703050623d6062324f51304558307842316969316c5b334d7a37554d93bca7b098b4b9a337554c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>。</li>
 </ul>
 
 <p>Trend Micro在2015年的报告中重新介绍了‘Gholee’木马（GHOLE）活动和‘Operation Woolen Goldfish’行动，以及一个不太复杂的键盘记录器‘CWoolger’-这个程序的名称似乎是‘woolger’（可能是从‘wool3n keylogger’这个词而来），使用了C++进行编写，现有证据表明，这个程序是从2011年开始出现的。</p>
@@ -82,7 +82,7 @@
 
 <p>研究人员还称，Wool3n.H4T很可能就是木马的作者，这个人只登录过伊朗的一个博客平台。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042019140269027.com/blob/fudaaay7cmi/w2g1poyk6hruv_ytdzmoeq?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042019140269027.com/blob/fudaaay7cmi/w2g1poyk6hruv_ytdzmoeq?s=raybawkd2kaf" alt=""></p>
 
 <p>图4-<em>Trend Micro</em>的研究人员发现了<em>wool3nh4t.blog.ir</em></p>
 
@@ -90,7 +90,7 @@
 
 <p>ClearSky仍然在继续调查这个小组的活动，并且在2015年6月公布的报告中介绍了 ‘Thamar Reservoir’活动，这次活动使用了Thamar E. Gindin来命名，因为她也是Rocket Kitten小组的攻击目标。ClearSky的研究人员指出，在这次活动中，钓鱼网站托管在了以色列的一家学术研究网站上，接着，ClearSky的研究人员发现攻击者犯了一次OPSEC（行动安全）失误，从而发现了一份详细的目标名单（一部分）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042013020489073.com/blob/fudaaay7cmi/fmdpdztj5jobhqpzraw2tg?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042013020489073.com/blob/fudaaay7cmi/fmdpdztj5jobhqpzraw2tg?s=raybawkd2kaf" alt=""></p>
 
 <p>图5-ClearSky在钓鱼服务器日志中发现的部分目标国家分布</p>
 
@@ -98,13 +98,13 @@
 
 <p>ClearSky展示了大量私人定制的钓鱼邮件和通讯，其中涉及到了一些电话通话，攻击者利用了这些通话来诱惑受害者打开邮件中的附件。由此可见，这个攻击小组的毅力和行动广度不一般。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042013020727400.com/blob/fudaaay7cmi/az7wngcm4gqi0j8opfckjq?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042013020727400.com/blob/fudaaay7cmi/az7wngcm4gqi0j8opfckjq?s=raybawkd2kaf" alt=""></p>
 
 <p>图6-ClearSky发现了定制的钓鱼页面</p>
 
 <p>Citizen Lab在2015年8月发布了一份报告，详细地说明了攻击者如何利用这种电话通话骗局，来诱骗受害者交出他们的双重认证令牌。很显然，攻击者会首先研究受害者，然后拨打电话，督促他们赶快处理接收到的邮件。在受到攻击的受害者中，Citizen Lab提到了EFF的国际言论自由主管Jillian York。Citizen Lab在报告中说道，在这次钓鱼攻击中，有一些钓鱼域名是已经报道过的，已经确认了与Rocket Kitten存在关联。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042019140765569.com/blob/fudaaay7cmi/vwa_m8mtrexwki_esfv66w?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042019140765569.com/blob/fudaaay7cmi/vwa_m8mtrexwki_esfv66w?s=raybawkd2kaf" alt=""></p>
 
 <p>图7-Citizen Lab发现的谷歌密码重置钓鱼页面</p>
 
@@ -114,7 +114,7 @@
 
 <h1>0x02 Rocket Kitten使用的工具&amp;基础设施</h1>
 
-<hr />
+<hr>
 
 <p>Rocket Kitten攻击小组的主要攻击途径是钓鱼。有效的钓鱼攻击只需要一个定制的钓鱼页面，托管在一个价格较低的web服务器上就足够了。正如先前的报告中所说的，Rocket Kitten小组利用了各种各样的钓鱼方式，有时候是通过邮件往来与受害者通讯，有时候甚至会拨打电话来诱使受害者打开恶意附件。</p>
 
@@ -149,7 +149,7 @@
 
 <p>结合目前完成的研究工作以及Check Point所观察到的攻击活动，我们绘制了一幅攻击者的基础设施概况图。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042102472021667.com/blob/fudaaay7cmi/wcj7y5ogc5nxhkq8pzhoww?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160421/2016042102472021667.com/blob/fudaaay7cmi/wcj7y5ogc5nxhkq8pzhoww?s=raybawkd2kaf" alt=""></p>
 
 <ul>
 <li>我们不认为上述的任何提供商参与了这次恶意活动。很可能是攻击者伪装成了合法的消费者或入侵了这些服务器，而服务提供商并不知情。</li>
@@ -159,7 +159,7 @@
 
 <h1>0x03 GEFILTE PHISH—永志之仇</h1>
 
-<hr />
+<hr>
 
 <p>在得知了某个客户网络遭到了Rocket Kitten小组的攻击后，Check Point的研究人员决定主动参与调查。虽然，在Trend Micro和ClearSky最近公布的报告中(‘The Spy Kittens Are Back: Rocket Kitten 2’)已经详细地介绍了这次活动，但是我们想要确认我们分析的攻击活动与这次活动存在关系，并发现其他有价值的信息。</p>
 
@@ -171,7 +171,7 @@
 
 <p>我们怀疑脚本出现了误报结果，所以，我们在浏览器中输入了/xampp，结果令我们很惊讶：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042021091552939.com/blob/fudaaay7cmi/aar3mta6tpkkmiyx5qetqa?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042021091552939.com/blob/fudaaay7cmi/aar3mta6tpkkmiyx5qetqa?s=raybawkd2kaf" alt=""></p>
 
 <p>图8-XAMPP的默认配置-在一个活动的攻击服务器上</p>
 
@@ -183,11 +183,11 @@
 
 <p>如果他们注意到了‘XAMPP Security’页面：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042103325251588.com/blob/fudaaay7cmi/iw8qmd4jxygnrgtmgbdb5w?s=raybawkd2kaf" alt="" /> 图9-MySQL管理用户root不需要密码-不安全</p>
+<p><img src="http://static.wooyun.org//drops/20160421/2016042103325251588.com/blob/fudaaay7cmi/iw8qmd4jxygnrgtmgbdb5w?s=raybawkd2kaf" alt=""> 图9-MySQL管理用户root不需要密码-不安全</p>
 
 <p>在浏览了整个数据库后，我们很快发现了大量的图示结构，但是大多数都是空的（是为了用于测试？），其中有一个很突出：‘phakeddb’。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042102472686333.com/blob/fudaaay7cmi/jimrg0finb4hqiv-vfutzg?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160421/2016042102472686333.com/blob/fudaaay7cmi/jimrg0finb4hqiv-vfutzg?s=raybawkd2kaf" alt=""></p>
 
 <p>图10-phakeddb方案-注意几个列表中的<em>utf8&#95;persian&#95;ci collation</em></p>
 
@@ -197,7 +197,7 @@
 
 <p>我们首先看看‘users’ 列表：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042102472932136.com/blob/fudaaay7cmi/dkk8vjaixxuvshlptzezna?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160421/2016042102472932136.com/blob/fudaaay7cmi/dkk8vjaixxuvshlptzezna?s=raybawkd2kaf" alt=""></p>
 
 <p>图11-‘users’ 列表</p>
 
@@ -211,7 +211,7 @@
 
 <p>接下来是“conversation”一栏，这好像是攻击者之间通讯使用的一个实验功能。不过很少使用。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042023042910643.com/blob/fudaaay7cmi/obselx97_2fslwkslmob1q?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042023042910643.com/blob/fudaaay7cmi/obselx97_2fslwkslmob1q?s=raybawkd2kaf" alt=""></p>
 
 <p>图12-“conversation”列表</p>
 
@@ -241,19 +241,19 @@ I need make a new project please add 50 subject tank you so match fadaaaaaaaaaaa
 
 <p>这是什么意思呢？这个系统的用户指的是什么项目和话题呢？我们通过调查‘requiretypes’更加明确了这个系统的目的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042013022165017.com/blob/fudaaay7cmi/oludidyziqejkfzi1g44rw?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042013022165017.com/blob/fudaaay7cmi/oludidyziqejkfzi1g44rw?s=raybawkd2kaf" alt=""></p>
 
 <p>图13-‘requiretypes’列表</p>
 
 <p>我们发现了钓鱼页面使用的代码样板，包括“Victim Full Name” “Victim User Name”等字段值。甚至我们还获取到每个字段所使用的样本。Wool3n.H4T再次引起了我们的注意（键盘记录木马的作者），因为在这一栏中不停地提到了这个人。我们有理由怀疑Wool3n.H4T编写了这个“钓鱼应用”来支持其行动。</p>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="43abfcdaaac4cfabfcdba5dfcaa7fbc3a7fbe9aadedda6fbfba5dfcaabf5e0a4d9c7a1c3db3036332631352a302c31033a21302c25376d202c2e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> (mailto:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6f1c1a1f0a1d19061c001d2f160d1c00091b410c0002">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>)’，但是ybsoft.com目前注册到了中国的一家电商，所以这个方向上就没什么好运了。</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="43abfcdaaac4cfabfcdba5dfcaa7fbc3a7fbe9aadedda6fbfba5dfcaabf5e0a4d9c7a1c3db3036332631352a302c31033a21302c25376d202c2e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> (mailto:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6f1c1a1f0a1d19061c001d2f160d1c00091b410c0002">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>)’，但是ybsoft.com目前注册到了中国的一家电商，所以这个方向上就没什么好运了。</p>
 
 <p>但是，真正的大奖还在前面。</p>
 
 <p>当我们打开“projects”时，我们都忘了喘气了。很明显每个“project”代表的就是一个受害者（目标的邮箱地址），每个“project”还会分配有一个“proj_id”，一名操作员和一个特定的链接，这个链接就会发送给这名受害者。我们总共发现了1842条记录，包括从2014年8月到2015年8月期间（我们访问这个数据库的时间），所有遭到攻击的受害者。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042023043356110.com/blob/fudaaay7cmi/79gd9o9ipbm__h8jevr3mq?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042023043356110.com/blob/fudaaay7cmi/79gd9o9ipbm__h8jevr3mq?s=raybawkd2kaf" alt=""></p>
 
 <p>图14-<em>‘projects’列表</em></p>
 
@@ -261,7 +261,7 @@ I need make a new project please add 50 subject tank you so match fadaaaaaaaaaaa
 
 <p>不出所料，我们验证并获取到了已经报道过的受害者姓名和照片。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042019143439362.com/blob/fudaaay7cmi/x36nxkw27alspfmqauyjog?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042019143439362.com/blob/fudaaay7cmi/x36nxkw27alspfmqauyjog?s=raybawkd2kaf" alt=""></p>
 
 <p>图15-<em>‘projectmailrequirevalues’</em>列表</p>
 
@@ -269,7 +269,7 @@ I need make a new project please add 50 subject tank you so match fadaaaaaaaaaaa
 
 <p>是我想的那样吗？</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042103522563161.com/blob/fudaaay7cmi/bz_wpvduhzcgh01wod1hpq?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160421/2016042103522563161.com/blob/fudaaay7cmi/bz_wpvduhzcgh01wod1hpq?s=raybawkd2kaf" alt=""></p>
 
 <p>图16-每条访问钓鱼页面的记录</p>
 
@@ -277,19 +277,19 @@ I need make a new project please add 50 subject tank you so match fadaaaaaaaaaaa
 
 <p>我们在继续探索这个服务器时，发现了一个类似暴露的‘Webalizer’界面，这个界面提供了一些实用的分析工具，包括计数器和一些经常访问的链接。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042021093492699.com/blob/fudaaay7cmi/jppdqtlrucm1pdhzabcqag?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042021093492699.com/blob/fudaaay7cmi/jppdqtlrucm1pdhzabcqag?s=raybawkd2kaf" alt=""></p>
 
 <p>图17-2015年8月的Webalizer统计</p>
 
 <p>Webalizer界面给我们提供了大量有用的元数据，包括“前40个访客IP”-我们能很清楚的知道是哪个攻击者访问了这个网站，并且这个界面还能为接下来的调查提供很多线索。很有趣，我们还发现了一些来源标头，这些标头指向了相同服务器上的一个路径：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042013023885658.com/blob/fudaaay7cmi/kljluek_dnci34zpihnvfw?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042013023885658.com/blob/fudaaay7cmi/kljluek_dnci34zpihnvfw?s=raybawkd2kaf" alt=""></p>
 
 <p>图18-登录界面</p>
 
 <p>在一个‘hacker secret access’门户中，我们似乎遇到了钓鱼平台的web界面。通过测试我们此前“破解的”“admin”凭据，我们获取到了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042013024025512.com/blob/fudaaay7cmi/ouxefhifibyelepa8lqawg?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042013024025512.com/blob/fudaaay7cmi/ouxefhifibyelepa8lqawg?s=raybawkd2kaf" alt=""></p>
 
 <p>图19-<em>“Oyun Mangement System (OMS)”</em>“Oyun”管理系统</p>
 
@@ -297,13 +297,13 @@ I need make a new project please add 50 subject tank you so match fadaaaaaaaaaaa
 
 <h1>0x04 WOOLGERED—搬起石头砸自己的脚</h1>
 
-<hr />
+<hr>
 
 <p>凭借在woolen键盘记录器中硬编码的凭据，我们获取到了大量的woolger DAT文件（键盘记录日志），是世界各地的受害者上传的。</p>
 
 <p>同样明显的是，同样的硬编码FTP凭据实际上是C&amp;C Windows服务器上的管理员凭据，在这上面有C$和D$ NetBIOS/SMB管理员共享，可以通过WAN访问。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042013330824638.com/blob/fudaaay7cmi/tigy06vfwdp0swgeyi4weg?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042013330824638.com/blob/fudaaay7cmi/tigy06vfwdp0swgeyi4weg?s=raybawkd2kaf" alt=""></p>
 
 <p>图20-如果你不想让研究人员获取你的CC服务器<em>&lt;captain_hindsight.png></em> 上的管理员权限，你不应该把管理员凭据硬编码到你的木马中</p>
 
@@ -311,13 +311,13 @@ I need make a new project please add 50 subject tank you so match fadaaaaaaaaaaa
 
 <p>我们最感兴趣的还是‘Wool3n.H4t’自己的日志：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042013024492435.com/blob/fudaaay7cmi/rarp-ql-fryt9uisdgyu9g?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042013024492435.com/blob/fudaaay7cmi/rarp-ql-fryt9uisdgyu9g?s=raybawkd2kaf" alt=""></p>
 
 <p>图21-测试成功</p>
 
 <p>对于接下来在同一个日志文件中发现的东西，你感到惊讶吗？</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042019144383454.com/blob/fudaaay7cmi/inttnlndvvtpgyhkrc7qvw?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042019144383454.com/blob/fudaaay7cmi/inttnlndvvtpgyhkrc7qvw?s=raybawkd2kaf" alt=""></p>
 
 <p>图22-攻击者测试了自己的工具</p>
 
@@ -325,13 +325,13 @@ I need make a new project please add 50 subject tank you so match fadaaaaaaaaaaa
 
 <p>在另一个日志中，我们观察到了一个特定的程序会加载‘wsc.vbs’脚本，符合Trend Micro和其他厂商公布的报告。此时，毫无疑问，我们现在查看的就是木马作者的开发工作站。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042014334787025.com/blob/fudaaay7cmi/y5-k5mxgju8lvah0itnh6w?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042014334787025.com/blob/fudaaay7cmi/y5-k5mxgju8lvah0itnh6w?s=raybawkd2kaf" alt=""></p>
 
 <p>图23-互斥量和线程-你最不应该担心的就是安全性</p>
 
 <p>下一个日志告诉我们，攻击者想要测试他的工具能否准确地捕捉输入到Firefox HTTP认证窗口的凭据，因此，他输入了自己的C&amp;C服务器…</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042021093788594.com/blob/fudaaay7cmi/dxkwoacfkbqaobjor_aljw?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042021093788594.com/blob/fudaaay7cmi/dxkwoacfkbqaobjor_aljw?s=raybawkd2kaf" alt=""></p>
 
 <p>图24</p>
 
@@ -339,7 +339,7 @@ I need make a new project please add 50 subject tank you so match fadaaaaaaaaaaa
 
 <p>然后，我们就注意到了这个日志区段：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042014335487110.com/blob/fudaaay7cmi/ljtesuixnfmuxwcibzos1q?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042014335487110.com/blob/fudaaay7cmi/ljtesuixnfmuxwcibzos1q?s=raybawkd2kaf" alt=""></p>
 
 <p>tu 25-<em>‘AOL Mail’</em>已经缩小了范围</p>
 
@@ -347,19 +347,19 @@ I need make a new project please add 50 subject tank you so match fadaaaaaaaaaaa
 
 <p>这名用户是否是近期Trend Micro和ClearSky报告中指出的‘Yaser’呢？ (‘D:\Yaser Logers\CWoolger’...) 能否解释Phakeddb对“ybsoft”的引用呢？ 目前我还不清楚，我们还需要继续深入。</p>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="34d6b4ac4d5547514656555855535c5d74555b581a575b59">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> (mailto:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f28b9381978090939e93959a9bb2939d9edc919d9f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>)’在伊斯兰立法年1389年（2010-2011）时， 在伊朗的一个程序员论坛(“Barname Nevis”)上通过一个C++线程给出了自己的技术回答：</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="34d6b4ac4d5547514656555855535c5d74555b581a575b59">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> (mailto:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f28b9381978090939e93959a9bb2939d9edc919d9f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>)’在伊斯兰立法年1389年（2010-2011）时， 在伊朗的一个程序员论坛(“Barname Nevis”)上通过一个C++线程给出了自己的技术回答：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042019145022828.com/blob/fudaaay7cmi/jtidm7kvitgp0yyjyajbcq?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042019145022828.com/blob/fudaaay7cmi/jtidm7kvitgp0yyjyajbcq?s=raybawkd2kaf" alt=""></p>
 
 <p>这名yaserbalaghi用户还发了另外几个帖子，与多个编程教程视频存在关联，涉及到的主题有ASP.NET，AJAX，jQuery 和 SQL 注入，他要求用户都使用截屏软件。</p>
 
 <p>在仔细看完了这些视频后，我们发现了几处有意思的细节。首先，Yaser Balaghi是一名Microsoft Visual Studio 2010用户，很熟悉在‘Rocket Kitten’活动中使用的几个工具。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042107501515530.com/blob/fudaaay7cmi/xojtnkt4thmbwerq8vaahw?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160421/2016042107501515530.com/blob/fudaaay7cmi/xojtnkt4thmbwerq8vaahw?s=raybawkd2kaf" alt=""></p>
 
 <p>图26-Yaser Balaghi<em>(Engineer Balaghi)</em> 教程视频中的截图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042102494715766.com/blob/fudaaay7cmi/hkgyjf2-g78zznhonj9v3q?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160421/2016042102494715766.com/blob/fudaaay7cmi/hkgyjf2-g78zznhonj9v3q?s=raybawkd2kaf" alt=""></p>
 
 <p>图27-<em>Engineer Balaghi</em>主机名</p>
 
@@ -367,17 +367,17 @@ I need make a new project please add 50 subject tank you so match fadaaaaaaaaaaa
 
 <p>几分钟后，我们在SQLi教程视频中发现了一处OPSEC错误，这就是我们要找的关键证据：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042102473898629.com/blob/fudaaay7cmi/v3bljne8jv4ietcbyyjhtw?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160421/2016042102473898629.com/blob/fudaaay7cmi/v3bljne8jv4ietcbyyjhtw?s=raybawkd2kaf" alt=""></p>
 
 <p>图28-我们在看了一个小时的SQL注入教程后有了发现</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042013333037572.com/blob/fudaaay7cmi/i66tfwxze9u0bfhu8humcw?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042013333037572.com/blob/fudaaay7cmi/i66tfwxze9u0bfhu8humcw?s=raybawkd2kaf" alt=""></p>
 
 <p>Wool3n.H4t当场现行。在他犯的众多错误之一，他现在竟然在教程中登录了自己的秘密化名，如果他没有这样做的话，我们根本不会联系到他的真实身份。这些视频是在2014年2月拍摄的，早于 Rocket Kitten在年中实施的首次攻击。</p>
 
 <p>我们看了一眼W00l3n.Hat的桌面，发现桌面上的攻击工具就是Rocket Kitten所使用的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042103325874861.com/blob/fudaaay7cmi/rymayzw8ki_yzepgtcc6ha?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160421/2016042103325874861.com/blob/fudaaay7cmi/rymayzw8ki_yzepgtcc6ha?s=raybawkd2kaf" alt=""></p>
 
 <p>图29-<em>Havij, Acunetix, Netsparker, SQLMap, wamp,</em>那是一个正常的IDA许可吗？</p>
 
@@ -385,25 +385,25 @@ I need make a new project please add 50 subject tank you so match fadaaaaaaaaaaa
 
 <p><em>Engineer</em>Yaser Balaghi不仅仅活跃在一些编程论坛上-他还有一个网站（<a href="http://www.eng-balaghi.xn--com20148,wayback-fr9y23hbnh64f0opk11bei4bcc1c6y2d9sye92b/">www.eng-balaghi.com在2014年8月下线，仍然可以通过Wayback</a> Machine访问）。在网站介绍中，他称自己是一名“程序员，分析师，顾问和讲师”，并且接受聘用。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042013333649671.com/blob/fudaaay7cmi/ed0lzxd8-_hhfbxzks47ig?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042013333649671.com/blob/fudaaay7cmi/ed0lzxd8-_hhfbxzks47ig?s=raybawkd2kaf" alt=""></p>
 
 <p>图30-Yaser Balaghi的stackoverflow账户</p>
 
 <p>如果所有这些还不够的话，我们还获取到了一份最新的简历，上面显示Balaghi的所在地是德黑兰：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042014341541448.com/blob/fudaaay7cmi/lqlkagl3wks-ydb1gekedw?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042014341541448.com/blob/fudaaay7cmi/lqlkagl3wks-ydb1gekedw?s=raybawkd2kaf" alt=""></p>
 
 <p>图31-Yaser Balaghi的的简历（2013）</p>
 
 <p>Balaghi毕业于伊斯兰阿萨德大学计算机软件专业，曾经担任“软件开发团队的技术总监和团队领导（Private）”和“安全与进攻主管（合法）（Private）”。随后，他又列出了曾经完成的项目，包括为一家“安全组织”开发和设计了一个“钓鱼攻击系统”。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042103330240388.com/blob/fudaaay7cmi/v6hvkb3tuv-0vzc3-jpnsa?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160421/2016042103330240388.com/blob/fudaaay7cmi/v6hvkb3tuv-0vzc3-jpnsa?s=raybawkd2kaf" alt=""></p>
 
-<p>应一家网络组织的要求，设计爆破软件<br />
-应一家网络组织的要求，设计钓鱼攻击系统<br />
-应一家网络组织的要求，设置文件装订软件<br />
-应一家网络组织的要求，设计一个用Python写的Windows木马<br />
-应一家网络组织的要求，完成大量的攻击项目<br />
+<p>应一家网络组织的要求，设计爆破软件<br>
+应一家网络组织的要求，设计钓鱼攻击系统<br>
+应一家网络组织的要求，设置文件装订软件<br>
+应一家网络组织的要求，设计一个用Python写的Windows木马<br>
+应一家网络组织的要求，完成大量的攻击项目<br>
 设置并执行了大量的软件项目，入侵工具和其他项目</p>
 
 <p>图32-（原文和翻译）-我们不骗你</p>
@@ -412,7 +412,7 @@ I need make a new project please add 50 subject tank you so match fadaaaaaaaaaaa
 
 <h1>0x05 收线—分析钓鱼日志</h1>
 
-<hr />
+<hr>
 
 <p>据目前的报道，攻击者会向受害者发送邮件，拨打电话，并根据不同的受害者伪装成相应的身份。很显然，攻击者们会阅读相关的分析报告，并修改自己的战术。</p>
 
@@ -426,7 +426,7 @@ I need make a new project please add 50 subject tank you so match fadaaaaaaaaaaa
 
 <p>从目标数据库的数量来看，这几个月以来，攻击行动很频繁 ，工作量也很大。这些日志中包括有访问IP的所属国家。我们通过分析，确定了下面的IP分布：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042013031339184.com/blob/fudaaay7cmi/p-qw7j20b8dzutlkgvnvuq?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042013031339184.com/blob/fudaaay7cmi/p-qw7j20b8dzutlkgvnvuq?s=raybawkd2kaf" alt=""></p>
 
 <p>表1-钓鱼访客的国家分布</p>
 
@@ -436,7 +436,7 @@ I need make a new project please add 50 subject tank you so match fadaaaaaaaaaaa
 
 <p>通过绘制出钓鱼日志图，我们可以观察其时间线：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042013031515051.com/blob/fudaaay7cmi/wlcyznqcm0bxs1s_gxlekw?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042013031515051.com/blob/fudaaay7cmi/wlcyznqcm0bxs1s_gxlekw?s=raybawkd2kaf" alt=""></p>
 
 <p>表2-钓鱼日志和成功事件</p>
 
@@ -450,13 +450,13 @@ I need make a new project please add 50 subject tank you so match fadaaaaaaaaaaa
 
 <p>我们根据user_id对项目进行了分类，借此我们更了解了攻击者的任务分配；虽然我们的目标分析还远远无法得出结论，我们可以评估每名用户的作用和任务：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042019151013874.com/blob/fudaaay7cmi/nns2jkqvt_nupi38go_gza?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042019151013874.com/blob/fudaaay7cmi/nns2jkqvt_nupi38go_gza?s=raybawkd2kaf" alt=""></p>
 
 <p>虽然，我们的了解有限，但是我们可以确定大量的攻击都是成功的-攻击者从世界各地的目标那里收集到了大量的机密信息。</p>
 
 <h1>0x06 后记</h1>
 
-<hr />
+<hr>
 
 <p>我们认为，在木马研究行业中，Rocket Kitten是一个非常有趣的研究案例，代表了我们在这两年中亲历的国家级攻击者趋势；现在，对于网络间谍活动，不仅仅是财力雄厚的组织会雇佣上千名的网络战士来破解超级计算机的密码或通过高级研究来感染你的硬盘固件。攻击者经常会通过更简单的方式来实现更有效的入侵，比如钓鱼和简单地定制木马。</p>
 
@@ -891,7 +891,7 @@ Source IP: %s DESTINATION IP: %s SOURCE PORT: %d DESTINATION PORT: %d
 
 <p>可执行程序自己的“文件版本信息”会被解析，用于获取服务器的IP，编码到“Company”值：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042013031877563.com/blob/fudaaay7cmi/-wnfrzp-cu5mklefkti5ua?s=raybawkd2kaf" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042013031877563.com/blob/fudaaay7cmi/-wnfrzp-cu5mklefkti5ua?s=raybawkd2kaf" alt=""></p>
 
 <p>这个数据中包含有硬编码的IP地址和CC服务器的端口。在这个样本中是：</p>
 
@@ -917,7 +917,7 @@ Source IP: %s DESTINATION IP: %s SOURCE PORT: %d DESTINATION PORT: %d
 • 13C2h—errorwithfile
 </code></pre>
 
-<p>文件名称位于第一个数据包的偏移0x08h。接下来的数据包只会包含文件内容。</p>      </p>
+<p>文件名称位于第一个数据包的偏移0x08h。接下来的数据包只会包含文件内容。</p>      <p></p>
     
 			</body>
 		</html>

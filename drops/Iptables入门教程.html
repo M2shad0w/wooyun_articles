@@ -3,14 +3,14 @@
 			<head>
 			     <title>Iptables入门教程 - zhangsan</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1424">http://drops.wooyun.org/tips/1424</a></h1>
 				
       <p>
-        <h2>0x00 iptables介绍</h2>
+        </p><h2>0x00 iptables介绍</h2>
 
-<hr />
+<hr>
 
 <p>linux的包过滤功能，即linux防火墙，它由netfilter 和 iptables 两个组件组成。</p>
 
@@ -20,11 +20,11 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/201404/2014041522224868618.png" alt="2014041522224868618.png" /></p>
+<p><img src="http://static.wooyun.org/201404/2014041522224868618.png" alt="2014041522224868618.png"></p>
 
 <h2>0x01 iptables的结构</h2>
 
-<hr />
+<hr>
 
 <p>iptables的结构：</p>
 
@@ -33,17 +33,17 @@
 
 <p>简单地讲，tables由chains组成，而chains又由rules组成。iptables 默认有四个表Filter, NAT, Mangle, Raw，其对于的链如下图。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403584011695.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403584011695.jpg" alt="enter image description here"></p>
 
 <h2>0x02 iptables工作流程</h2>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403583754959.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403583754959.jpg" alt="enter image description here"></p>
 
 <h2>0x03 filter表详解</h2>
 
-<hr />
+<hr>
 
 <h3>1. 在iptables中，filter表起过滤数据包的功能，它具有以下三种内建链：</h3>
 
@@ -80,7 +80,7 @@ FORWARD链 – 将数据转发到本机的其他网卡设备上。
 
 <h2>0x04 iptables命令参考</h2>
 
-<hr />
+<hr>
 
 <p>命令：</p>
 
@@ -214,11 +214,11 @@ FORWARD链 – 将数据转发到本机的其他网卡设备上。
 
 <p>b)隐式扩展包括：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403584061278.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403584061278.jpg" alt="enter image description here"></p>
 
 <p>c)常用显式扩展</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403582276903.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403582276903.jpg" alt="enter image description here"></p>
 
 <h3>5. 目标值</h3>
 
@@ -234,7 +234,7 @@ RETURN：防火墙停止执行当前链中的后续Rules，并返回到调用链
 
 <h2>0x05 Iptables常见命令</h2>
 
-<hr />
+<hr>
 
 <p>a) 1. 删除iptables现有规则</p>
 
@@ -302,7 +302,7 @@ iptables -I INPUT 2 -p tcp --dport 22 -d 192.168.146.3 -m limit --limit 2/minute
 
 <h2>0x06 如何正确配置iptables</h2>
 
-<hr />
+<hr>
 
 <p>a) 1. 删除现有规则</p>
 
@@ -335,7 +335,7 @@ iptables -A OUTPUT -o eth0 -p tcp –sport 80 -m state –state ESTABLISHED -j A
 
 <h2>0x07 使用iptables抵抗常见攻击</h2>
 
-<hr />
+<hr>
 
 <h3>1.防止syn攻击</h3>
 
@@ -389,7 +389,7 @@ iptables -A syn-flood -j DROP
 <pre><code>iptables -A INPUT -p icmp --icmp-type echo-request -m limit --limit 1/m -j ACCEPT 
 </code></pre>
 
-<p>个人见解，不足之处求指正。</p>      </p>
+<p>个人见解，不足之处求指正。</p>      <p></p>
     
 			</body>
 		</html>

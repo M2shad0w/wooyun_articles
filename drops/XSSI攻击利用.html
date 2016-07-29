@@ -3,14 +3,14 @@
 			<head>
 			     <title>XSSI攻击利用 - 大学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5797">http://drops.wooyun.org/papers/5797</a></h1>
 				
       <p>
-        <h1>0x00 介绍</h1>
+        </p><h1>0x00 介绍</h1>
 
-<hr />
+<hr>
 
 <p>From: <a href="http://www.mbsd.jp/Whitepaper/xssi.pdf">MBSD Technical Whitepaper</a></p>
 
@@ -33,7 +33,7 @@
 
 <h1>0x01 攻击技术／漏洞</h1>
 
-<hr />
+<hr>
 
 <p>我们总共发现了5种与xssi相关的漏洞利用技术，或者是浏览器漏洞。</p>
 
@@ -47,7 +47,7 @@
 
 <h2>2.1 IE bug导致错误信息泄漏</h2>
 
-<hr />
+<hr>
 
 <p>为了防止js错误信息跨域泄漏，对于外部加载的js文件，现在主流的浏览器只有固定的错误信息，比如“script error”,当是在ie9与ie10，情况不一定如此。</p>
 
@@ -86,7 +86,7 @@ Content-Length: 13
 
 <h2>2. 用UTF-16获取json和其他类型的数据</h2>
 
-<hr />
+<hr>
 
 <p>大家可以看到，上面的东西只在csv这种操蛋的玩意上有用， 所以我们做了更多的研究看看能否获取不同格式的数据，之后我们发现通过UTF-16编码可以达到我们的目标。</p>
 
@@ -112,11 +112,11 @@ Content-Length: 39
 
 <p>测试这段代码之后，我们给自己弹了个窗。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503210937058.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503210937058.jpg" alt="enter image description here"></p>
 
 <p>我们可以看到一串乱码，因为，当浏览器获取目标网页的数据，之间经过了一次编码，然后到我们的页面上经过charset制定的字符集进行了一次解码。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503210988643.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503210988643.jpg" alt="enter image description here"></p>
 
 <p>我们能很简单的得出一个结论就是我们能通过对乱码的再次编码来获得原有的信息，不过需要注意的就是只有当编码后的信息能够被浏览器识别为有效的js标示符的时候攻击才有可能成功，这是一个重要的条件，对于不同的平台的编码是有所不同的，在ie上可以被识别为有效js标示符的字符是多于其他平台的，至于其他来说ie的 ECMAScript规范 (5]跟其他浏览器总体没什么不同。</p>
 
@@ -124,13 +124,13 @@ Content-Length: 39
 
 <p>我们花了很多时间研究了什么样的组合，能够被浏览器认定为有效的js标示符，当字符编码为UTF-16的时候的数字字母组合，ie 9将其99.3%认为是有效的js标示符，高于chrome和firefox。具体结果见下图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503210975596.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503210975596.jpg" alt="enter image description here"></p>
 
 <p>需要注意的一件事就是在ie 10 或者更高的版本，可能攻击无法奏效，因为ie 10 拒绝将没有空字节活着bom的编码为utf16。</p>
 
 <h2>3. Harmony proxy bug in Firefox / Chrome</h2>
 
-<hr />
+<hr>
 
 <p>Harmony是一个ECMAScript 6中的新功能 (6] ，类似于java的反射类，其中定义了对于对象属性的查找，分配，函数调用，在我们针对这些新特性的研究过程中发现该功能可以用于xssi的攻击中。</p>
 
@@ -172,7 +172,7 @@ Content-Length: 13
 
 <h2>4. 穷举搜索</h2>
 
-<hr />
+<hr>
 
 <p>假设一个攻击页面通过js 加载了下面的csv文件。</p>
 
@@ -235,35 +235,35 @@ Sub [1,"xyz124"]: MsgBox "value=xyz124": End Sub
 
 <h2>CSV with quotations thef</h2>
 
-<hr />
+<hr>
 
 <p>上面获取csv的信息只在目标的字符串没被引号扩起来的情况下，不过同样是一些小技巧能够使我们绕过这一限制。</p>
 
 <p>让我们假设一个csv长这个b样。</p>
 
-<p><code>1,"___","<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4a2b2b2b0a2b642f322b273a262f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>","03-0000-0001"</code></p>
+<p><code>1,"___","<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4a2b2b2b0a2b642f322b273a262f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>","03-0000-0001"</code></p>
 
-<p><code>2,"foo","<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2547474765470b405d4448554940">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>","03-0000-0002"</code></p>
+<p><code>2,"foo","<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2547474765470b405d4448554940">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>","03-0000-0002"</code></p>
 
 <p><code>...</code></p>
 
-<p><code>98,"bar","<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="641d1d1d24011c05091408014a0a0110">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>","03-0000-0088"</code></p>
+<p><code>98,"bar","<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="641d1d1d24011c05091408014a0a0110">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>","03-0000-0088"</code></p>
 
-<p><code>99,"___","<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="dfa5a5a59fbaa7beb2afb3baf1bcb0b2">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>","03-0000-0099"</code></p>
+<p><code>99,"___","<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="dfa5a5a59fbaa7beb2afb3baf1bcb0b2">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>","03-0000-0099"</code></p>
 
 <p>假设攻击者能够插入自己的字符串，那么只需要根据RFC相关CSV (RFC 4180 (12])中的规定来添加一个双引号就可以bypass这个限制。</p>
 
 <p>for example</p>
 
-<p><code>1,"\"",$$$=function(){/*","<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="cbaaaaaa8baae5aeb3aaa6bba7ae">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>","03-0000-0001"</code></p>
+<p><code>1,"\"",$$$=function(){/*","<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="cbaaaaaa8baae5aeb3aaa6bba7ae">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>","03-0000-0001"</code></p>
 
-<p><code>2,"foo","<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ee8c8c8cae8cc08b968f839e828b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>","03-0000-0002"</code></p>
+<p><code>2,"foo","<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ee8c8c8cae8cc08b968f839e828b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>","03-0000-0002"</code></p>
 
 <p><code>...</code></p>
 
-<p><code>98,"bar","<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3f4646467f5a475e524f535a11515a4b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>","03-0000-0088"</code></p>
+<p><code>98,"bar","<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3f4646467f5a475e524f535a11515a4b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>","03-0000-0088"</code></p>
 
-<p><code>99,"*/}//","<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="82f8f8f8c2e7fae3eff2eee7ace1edef">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>","03-0000-0099"</code></p>
+<p><code>99,"*/}//","<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="82f8f8f8c2e7fae3eff2eee7ace1edef">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>","03-0000-0099"</code></p>
 
 <p>一个比较蛋疼的问题就是如何获取多行的信息，因为多行在js中是违法的，上面的例子里，我们使用 $$$=function() {/<em>…</em>/}来进行攻击，然后攻击者可以调用$$$.toString() 获取函数远吗来达到攻击目标数据的目的。这种攻击方式试用于所有的浏览器。</p>
 
@@ -271,7 +271,7 @@ Sub [1,"xyz124"]: MsgBox "value=xyz124": End Sub
 
 <h1>0x02 结论</h1>
 
-<hr />
+<hr>
 
 <p>下面是需要注意的一些问题。</p>
 
@@ -297,7 +297,7 @@ Sub [1,"xyz124"]: MsgBox "value=xyz124": End Sub
 <li><p>使用自定义头时使用XHR进行请求。</p></li>
 </ul>
 
-<p>或者说只是拒绝不满足条件的http请求，简单来说设置一些过滤规则进行拦截。</p>      </p>
+<p>或者说只是拒绝不满足条件的http请求，简单来说设置一些过滤规则进行拦截。</p>      <p></p>
     
 			</body>
 		</html>

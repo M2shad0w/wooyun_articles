@@ -3,20 +3,20 @@
 			<head>
 			     <title>PHP绕过open_basedir列目录的研究 - phith0n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3978">http://drops.wooyun.org/tips/3978</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>近期由于在开发自己的webshell，所以对PHP一些已有的漏洞进行了一定的研究，并且也自己发现了部分PHP存在的安全隐患。这篇文章我来与大家分享一下自己对于PHP中open_basedir绕过并列举目录的方法总结。</p>
 
 <h1>0x01 open_basedir的简介</h1>
 
-<hr />
+<hr>
 
 <p>Open&#95;basedir是PHP设置中为了防御PHP跨目录进行文件（目录）读写的方法，所有PHP中有关文件读、写的函数都会经过open&#95;basedir的检查。</p>
 
@@ -32,7 +32,7 @@
 
 <h1>0x02 利用DirectoryIterator + Glob 直接列举目录</h1>
 
-<hr />
+<hr>
 
 <p>这是@/fd 脚本（http://zone.wooyun.org/content/11268）里给出的第一个方法。</p>
 
@@ -67,13 +67,13 @@ foreach($file_list as $f){
 
 <p>执行我们可以发现，open_basedir为/usr/share/nginx/www/:/tmp/，但我们成功列举了/根目录下的所有文件：</p>
 
-<p><img src="http://static.wooyun.org/20141121/2014112108064315695.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141121/2014112108064315695.png" alt="enter image description here"></p>
 
 <p>这个方法也是迄今为止最方便的方法，他不用暴力猜解目录，而是直接列举。但他对php版本、系统版本有一定要求，在5.3以上可列举（5.5/5.6可能会有修复？在官方没看到有fix），需要在Linux下才能绕过open_basedir。</p>
 
 <h1>0x03 realpath列举目录</h1>
 
-<hr />
+<hr>
 
 <p>这是@/fd 脚本（http://zone.wooyun.org/content/11268）里给出的第二个方法。</p>
 
@@ -87,7 +87,7 @@ foreach($file_list as $f){
 
 <p>26 ** 6 = 308915776次</p>
 
-<p><img src="http://static.wooyun.org/20141121/2014112108064311320.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141121/2014112108064311320.png" alt="enter image description here"></p>
 
 <p>这样是需要跑很久的，基本每次跑的时候我都没耐心了，这样暴力猜解肯定是不行的。那么，有什么好办法可以变这个“鸡肋”的漏洞为一个“好用”的漏洞？</p>
 
@@ -122,11 +122,11 @@ function isexists($errno, $errstr)
 
 <p>执行可以看到：</p>
 
-<p><img src="http://static.wooyun.org/20141121/2014112108064366618.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141121/2014112108064366618.png" alt="enter image description here"></p>
 
 <p>Open_basedir为c:\wamp\www，但我们列举出了d:/test/目录下的文件：</p>
 
-<p><img src="http://static.wooyun.org/20141121/2014112108064388839.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141121/2014112108064388839.png" alt="enter image description here"></p>
 
 <p>当然，这是个很粗糙的POC，因为我并没有考虑到首字母相同的文件，所以这个POC只能列举首字母不同的文件。</p>
 
@@ -136,7 +136,7 @@ function isexists($errno, $errstr)
 
 <h1>0x04 SplFileInfo::getRealPath列举目录</h1>
 
-<hr />
+<hr>
 
 <p>受到上一个方法的启发，我开始在php中寻找类似的方法。一旦realpath不能使用的情况下，也能找到替代方式。</p>
 
@@ -176,13 +176,13 @@ function dump($s){
 
 <p>只是把之前的POC稍作修改，同样列出了D:/test下的文件：</p>
 
-<p><img src="http://static.wooyun.org/20141121/2014112108064472195.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141121/2014112108064472195.png" alt="enter image description here"></p>
 
 <p>这个方法有个特点，不管是否开启open&#95;basedir都是可以枚举任意目录的。而上一个方法（realpath）只有在开启open&#95;basedir且在open&#95;basedir外的时候才会报错，才能列举目录。当然，没有开启open&#95;basedir的时候也不需要这样列举目录了。</p>
 
 <h1>0x05 GD库imageftbbox/imagefttext列举目录</h1>
 
-<hr />
+<hr>
 
 <p>GD库一般是PHP必备的扩展库之一，所以我在寻找open_basedir的时候也会看看这些有用的扩展库。</p>
 
@@ -220,7 +220,7 @@ function isexists($errno, $errstr)
 
 <p>同样列举一下d:/test</p>
 
-<p><img src="http://static.wooyun.org/20141121/2014112108064438430.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141121/2014112108064438430.png" alt="enter image description here"></p>
 
 <p>如上图，我们发现虽然“通配符”在判断是否存在的时候奏效了，但我们真正的文件名并没有显示出来，而是还是以通配符“&lt;>&lt;”代替。</p>
 
@@ -228,7 +228,7 @@ function isexists($errno, $errstr)
 
 <h1>0x06 bindtextdomain暴力猜解目录</h1>
 
-<hr />
+<hr>
 
 <p>这是新方法： <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2014-083457">WooYun: php设计缺陷导致绕过open_basedir列举目录#2</a> </p>
 
@@ -236,7 +236,7 @@ function isexists($errno, $errstr)
 
 <p>Bindtextdomain函数在环境支持Gettext Functions的时候才能使用，而我的windows环境下是没有bindtextdomain函数的，我的linux环境是默认存在这个函数。</p>
 
-<p><img src="http://static.wooyun.org/20141121/2014112108064460117.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141121/2014112108064460117.png" alt="enter image description here"></p>
 
 <p>如上图，这个函数第二个参数$directory是一个文件路径。它会在$directory存在的时候返回$directory，不存在则返回false。</p>
 
@@ -252,11 +252,11 @@ var_dump($re);
 
 <p>当/etc/passwd存在的时候输出之：</p>
 
-<p><img src="http://static.wooyun.org/20141121/2014112108064487382.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141121/2014112108064487382.png" alt="enter image description here"></p>
 
 <p>当/etc/wooyun不存在的时候返回false：</p>
 
-<p><img src="http://static.wooyun.org/20141121/2014112108064482082.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141121/2014112108064482082.png" alt="enter image description here"></p>
 
 <p>并没有考虑到open_basedir。所以，我们也可以通过返回值的不同来猜解、列举某个目录。</p>
 
@@ -266,17 +266,17 @@ var_dump($re);
 
 <h1>0x07 总结</h1>
 
-<hr />
+<hr>
 
 <p>open&#95;basedir本来作为php限制跨目录读写文件的最基础的方式，应该需要进行完好的设计。但可能php在当初编写代码的时候并没有进行一个统一的设计，导致每当新增加功能或遇到一些偏僻的函数的时候，都会出现类似“open&#95;basedir绕过”等悲剧。</p>
 
 <p>我曾经写过一篇文章，《lnmp虚拟主机安全配置研究》，中讲述了一个防止虚拟主机跨目录的方法。但受到了一些白帽子的质疑：</p>
 
-<p><img src="http://static.wooyun.org/20141121/2014112108064525480.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141121/2014112108064525480.png" alt="enter image description here"></p>
 
 <p>原因是很多人过于相信open&#95;basedir的可靠性。open&#95;basedir固然是一个简单地限制跨目录的方法，但如果过于依赖某一个方法去防御一类攻击，你将会死的很惨。</p>
 
-<p><img src="http://static.wooyun.org/20141121/2014112108064544229.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141121/2014112108064544229.png" alt="enter image description here"></p>
 
 <p>open&#95;basedir绕过方法固然有版本局限，但不排除有很多人手中握着0day。像我这样对php造诣并不算高的菜鸟也能找到的open&#95;basedir绕过漏洞，你真的能保证大牛们都没有办法绕过么？</p>
 
@@ -290,7 +290,7 @@ var_dump($re);
 
 <h1>0x08 参考</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><p><a href="http://zone.wooyun.org/content/11268">http://zone.wooyun.org/content/11268</a></p></li>
@@ -303,7 +303,7 @@ var_dump($re);
 <li><p><a href="http://php.net/manual/en/splfileinfo.getrealpath.php">http://php.net/manual/en/splfileinfo.getrealpath.php</a></p></li>
 <li><p><a href="http://php.net/manual/en/book.image.php">http://php.net/manual/en/book.image.php</a></p></li>
 <li><p><a href="http://php.net/manual/en/function.gettext.php">http://php.net/manual/en/function.gettext.php</a></p></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

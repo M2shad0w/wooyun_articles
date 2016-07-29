@@ -3,18 +3,18 @@
 			<head>
 			     <title>WordPress 3.5.1远程代码执行EXP - 瞌睡龙</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/785">http://drops.wooyun.org/papers/785</a></h1>
 				
       <p>
-        <p>from：<a href="http://vagosec.org/2013/12/wordpress-rce-exploit/">Remote Code Execution exploit in WordPress 3.5.1</a></p>
+        </p><p>from：<a href="http://vagosec.org/2013/12/wordpress-rce-exploit/">Remote Code Execution exploit in WordPress 3.5.1</a></p>
 
 <p>（ps：老外也有几分标题党的意思，虽然是wordpress本身留下的坑，但是目前的利用还是需要安装的插件踩到了这个坑，才会被利用成功，并且要进入后台……感谢horseluke帮忙测试并翻译EXP与总结部分。）</p>
 
 <h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>之前，在<a href="http://vagosec.org/2013/09/wordpress-php-object-injection/">http://vagosec.org/2013/09/wordpress-php-object-injection/</a>发表了WordPress中php对象注入的漏洞，那时候考虑到影响，没有讲解如何利用该漏洞，现在已经过去了三个月的时间，网站管理员应该都已经更新的WordPress，现在觉得可以公开了。</p>
 
@@ -26,7 +26,7 @@
 
 <h2>0x01 如何寻找</h2>
 
-<hr />
+<hr>
 
 <p>看完以前的那个文章之后，会发现有三种方法可能被利用</p>
 
@@ -47,7 +47,7 @@ __toString()
 
 <h2>0x02 分析详情</h2>
 
-<hr />
+<hr>
 
 <p><strong>Lightbox plus ColorBox</strong>插件的<code>/classes/shd.class.php</code>文件中的<code>simple_html_dom_node</code>类，其中代码如下：</p>
 
@@ -144,7 +144,7 @@ var_dump((array)$swag);
 
 <h2>0x03 EXP</h2>
 
-<hr />
+<hr>
 
 <p>根据以上分析，你应该可以构造一个属于自己的完美exploit了。不过先展示一下我的做法：</p>
 
@@ -183,11 +183,11 @@ echo serialize(new simple_html_dom_node()).'{0xf09d8c86}';
 
 <h2>0x04 总结</h2>
 
-<hr />
+<hr>
 
 <p>本文以低于3.6.1版本的Wordpress为基础，展示一个php对象漏洞exploit例子。这个exploit需要利用近乎百万下载量的插件Lightbox Plus ColorBox中，其中一组类（simple html dom）所定义的逻辑；接着再组合利用WordPress核心中，另一些类和方法所定义的程序逻辑，我们就可以通过一段攻击者可控字符串执行任意函数，远程执行命令也就不在话下了。天啊不会吧！如果你还没更新WordPress，那现在可是个好时机了！</p>
 
-<p>（译注：原作者说插件Lightbox Plus ColorBox中阐述的漏洞，似乎是将simple html dom的特性——模仿浏览器中dom.outerText操作——用成漏洞。另外在php开发中，该simple html dom组件类应用极广泛，主要用于html解析和提取、过滤文本。虽然说像文中这种利用需要碰运气，不过开发可以此例子思考：（1）如何不被攻击者将特性利用为漏洞通道？虽然这真的有些难（2）如何解决数据和执行混合导致的安全问题？虽然这似乎是终极问题之一了）</p>      </p>
+<p>（译注：原作者说插件Lightbox Plus ColorBox中阐述的漏洞，似乎是将simple html dom的特性——模仿浏览器中dom.outerText操作——用成漏洞。另外在php开发中，该simple html dom组件类应用极广泛，主要用于html解析和提取、过滤文本。虽然说像文中这种利用需要碰运气，不过开发可以此例子思考：（1）如何不被攻击者将特性利用为漏洞通道？虽然这真的有些难（2）如何解决数据和执行混合导致的安全问题？虽然这似乎是终极问题之一了）</p>      <p></p>
     
 			</body>
 		</html>

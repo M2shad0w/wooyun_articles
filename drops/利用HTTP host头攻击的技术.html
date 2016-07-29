@@ -3,16 +3,16 @@
 			<head>
 			     <title>利用HTTP host头攻击的技术 - 龙臣</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1383">http://drops.wooyun.org/papers/1383</a></h1>
 				
       <p>
-        <p>from:<a href="http://www.skeletonscribe.net/2013/05/practical-http-host-header-attacks.html">http://www.skeletonscribe.net/2013/05/practical-http-host-header-attacks.html</a></p>
+        </p><p>from:<a href="http://www.skeletonscribe.net/2013/05/practical-http-host-header-attacks.html">http://www.skeletonscribe.net/2013/05/practical-http-host-header-attacks.html</a></p>
 
 <h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>一般通用web程序是如果想知道网站域名不是一件简单的事情，如果用一个固定的URI来作为域名会有各种麻烦。开发人员一般是依赖HTTP Host header（比如在php里是<code>_SERVER["HTTP_HOST"]</code> ），而这个header很多情况下是靠不住的。而很多应用是直接把这个值不做html编码便输出到了页面中，比如：</p>
 
@@ -30,7 +30,7 @@
 
 <h2>0x01 密码重置污染攻击</h2>
 
-<hr />
+<hr>
 
 <p>拿 <a href="http://galleryproject.org/">Gallery</a> 这个站来做例子。当我们进行密码重置的时候，网站会给我们发送一个随机的key：</p>
 
@@ -42,7 +42,7 @@ $message -&gt; confirm_url = url::abs_site("password/do_reset?key=$user-&gt;hash
 
 <p>当用户点击重置密码的链接时，肯定可以说明点的是自己的账户。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811183018026.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811183018026.png" alt="enter image description here"></p>
 
 <p>这个地方的漏洞是： <code>url::abs_site</code> 这一部分使用的Host header是来自用户重置密码的请求，那么攻击者可以通过一个受他控制的链接来污染密码重置的邮件。</p>
 
@@ -60,7 +60,7 @@ $message -&gt; confirm_url = url::abs_site("password/do_reset?key=$user-&gt;hash
 
 <h2>0x02 缓存污染</h2>
 
-<hr />
+<hr>
 
 <p>通过Host header来污染缓存的攻击方法最初是Carlos Beuno 在2008年提出来的。但是在现在的网络架构中，这种攻击还是比较困难的，因为现在的缓存设备都能够识别Host。比如对于下面的这两种情况他们绝对不会弄混淆：</p>
 
@@ -95,7 +95,7 @@ $message -&gt; confirm_url = url::abs_site("password/do_reset?key=$user-&gt;hash
 
 <h2>0x03 安全的配置</h2>
 
-<hr />
+<hr>
 
 <p>在这里我假设你可以通过任何类型的应用来发起一个http请求，而host header也是可以任意编辑的。虽然在一个http请求里，host header是用来告诉webserver该请求应该转发给哪个站点，但是事实上，这个header的作用或者说风险并不止如此。</p>
 
@@ -119,7 +119,7 @@ $message -&gt; confirm_url = url::abs_site("password/do_reset?key=$user-&gt;hash
 
 <p>当用户点击这个链接的时候就会发现，其实这个key已经被发送到passwordreset.net这个站点了。在我报告了此问题后，Django又推出了一个补丁：<a href="https://www.djangoproject.com/weblog/2012/oct/17/security/">https://www.djangoproject.com/weblog/2012/oct/17/security/</a></p>
 
-<p>不幸的是，这个补丁只是简单的通过黑名单方式来简单的过滤<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3cdab2b5d886ba7cd9aeb0d9b98ad887aad884bcd886a7d991abdb909adfbcbed4bcb0dba88dd886b2d993badb9cbdd5bbb1db8192d5af82dab299daa493d88799db">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>��文本而不是html的方式发送的，所以此补丁只需要添加一个空格就可以绕过：</p>
+<p>不幸的是，这个补丁只是简单的通过黑名单方式来简单的过滤<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3cdab2b5d886ba7cd9aeb0d9b98ad887aad884bcd886a7d991abdb909adfbcbed4bcb0dba88dd886b2d993badb9cbdd5bbb1db8192d5af82dab299daa493d88799db">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>��文本而不是html的方式发送的，所以此补丁只需要添加一个空格就可以绕过：</p>
 
 <pre><code>&gt; POST /en-US/firefox/users/pwreset HTTP/1.1
 &gt; Host: addons.mozilla.org: www.securepasswordreset.com
@@ -137,7 +137,7 @@ $message -&gt; confirm_url = url::abs_site("password/do_reset?key=$user-&gt;hash
 
 <h2>0x04 服务器方面需要做的</h2>
 
-<hr />
+<hr>
 
 <p>由于http请求的特点，host header的值其实是不可信的。唯一可信的只有SERVER_NAME，这个在Apache和Nginx里可以通过设置一个虚拟机来记录所有的非法host header。在Nginx里还可以通过指定一个SERVER_NAME名单，Apache也可以通过指定一个SERVER_NAME名单并开启UseCanonicalName选项。建议两种方法同时使用。</p>
 
@@ -154,9 +154,9 @@ $message -&gt; confirm_url = url::abs_site("password/do_reset?key=$user-&gt;hash
 
 <h2>0x05 应用本身需要做的</h2>
 
-<hr />
+<hr>
 
-<p>解决这个问题其实是很困难的，因为没有完全自动化的方法来帮助站长识别哪些host 的值是值得信任的。虽然做起来有点麻烦，但是最安全的做法是：效仿Django的方法，在网站安装和初始化的时候，要求管理员提供一个可信任的域名白名单。如果这个实现起来比较困难，那至少也要保证使用SERVER_NAME而不是host header，并且鼓励用户使用安全配置做的比较好的站点。</p>      </p>
+<p>解决这个问题其实是很困难的，因为没有完全自动化的方法来帮助站长识别哪些host 的值是值得信任的。虽然做起来有点麻烦，但是最安全的做法是：效仿Django的方法，在网站安装和初始化的时候，要求管理员提供一个可信任的域名白名单。如果这个实现起来比较困难，那至少也要保证使用SERVER_NAME而不是host header，并且鼓励用户使用安全配置做的比较好的站点。</p>      <p></p>
     
 			</body>
 		</html>

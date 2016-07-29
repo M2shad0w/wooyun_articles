@@ -3,16 +3,16 @@
 			<head>
 			     <title>破解勒索软件 - mssp299</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7074">http://drops.wooyun.org/tips/7074</a></h1>
 				
       <p>
-        <p>原文地址：http://blog.cylance.com/cracking-ransomware</p>
+        </p><p>原文地址：http://blog.cylance.com/cracking-ransomware</p>
 
 <h1>0x00 背景</h1>
 
-<hr />
+<hr>
 
 <p>在2013年初，某公司向我们求助，因为他们有大量的重要文件被勒索软件加密，导致无法访问。这次攻击者使用的，是一款披着“反儿童色情邮件”外衣的勒索软件，它会遍历所有磁盘，并加密其中的重要文件。由于该软件发动攻击时，会安装备份驱动器，因此总的来说，公司的数据会面临一定的损失。不过幸运的是，我们能够破解其口令，从而将被加密的数据恢复如初。下面，我们详细介绍破解的流程。</p>
 
@@ -24,7 +24,7 @@
 
 <h1>0x01 改进型的ACCDFISA</h1>
 
-<hr />
+<hr>
 
 <p>最初的勒索软件样本，都是来自同一个系列：ACCDFISA。由于该系列开发者的人为错误或者疏漏，该软件系列早就被研究人员干倒了。不过，这次我们所面临的勒索软件，比以前的有了很大改进。它自称使用了AES-256加密算法，为每位受害者都单独使用了一个长256个字符的随机密钥，并且将其发送给了攻击者。此外，它还声称为了防止未加密的原始文件和口令被人恢复，已经将其彻底删除了。实际上，这些声明只是勒索软件妄图让受害者放弃反抗，乖乖就范的攻心术罢了。但是，勒索软件作者会不会真有如此神通呢？</p>
 
@@ -34,11 +34,11 @@
 
 <h1>0x02 寻找口令生成器</h1>
 
-<hr />
+<hr>
 
 <p>首先，在我们一次性的机器上运行该勒索软件，然后，连接调试工具来拦截<code>CreateProcess</code>调用，这个调用的作用是启动加密文件的那个RAR工具。不一会儿，调试工具就停下来，这时就可以查看完整的命令行了，其中口令就位于“-hp”选项中。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150716/2015071602543258858e5fe69deaf116ea58c1a2f302a8bf959" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150716/2015071602543258858e5fe69deaf116ea58c1a2f302a8bf959" alt="enter image description here"></p>
 
 <p>当在调试工具中运行的勒索软件试图启动该RAR工具（这里它被伪装成“<code>svchost.exe</code>”）时，就会被我们截获。这样，我们可以看到执行勒索软件的命令的具体内容了，其中就包括用来加密文件的口令。</p>
 
@@ -46,7 +46,7 @@
 
 <p>拦截到的口令，看起来像是由57个字母、数字和标点符号混合而成的。对于这个口令，如果是由人键入的话，看起来好像太随意了一点，并且其前缀为字符串“aes”。后者也许只是一个巧合，就像汽车牌照上也会出现有意义的单词或者号码，同时，这个前缀也可能是勒索软件中的硬编码字符串造成的。事实上，当我们用反汇编程序打开该勒索软件时，我们不仅找到了字符串“aes”，而且发现，更为完整的前缀实际上是“<code>aesT322</code>”：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150716/20150716025434162924e16b1d8a3267d32e087237d1e4a4777" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150716/20150716025434162924e16b1d8a3267d32e087237d1e4a4777" alt="enter image description here"></p>
 
 <p>在这个勒索软件的反汇编代码中，出现了硬编码的字符串“<code>aesT322</code>”，这与我们之前拦截的口令的前七个字符非常吻合。同时，我们还为在之前的逆向工程期间得到的一些函数（<code>“_main”， “_strcat_edx”</code>）和全局变量（“<code>PasswordPrefix</code>”）进行了命名。</p>
 
@@ -54,13 +54,13 @@
 
 <p>在上图中，部分高亮显示的指令，就是用来加载指向“<code>aesT322</code>”字符串的引用的。我们由此推断，后面的指令，将加载一个指向存储字符串的全局变量的引用。我们已经给该变量取名为“<code>PasswordPrefix</code>”，下面我们来定位该变量在内存中的具体地址。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150716/2015071602543661589982c9a0ac0f3ac6192993081c982bed8" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150716/2015071602543661589982c9a0ac0f3ac6192993081c982bed8" alt="enter image description here"></p>
 
 <p>该勒索软件的数据段包含了一些与生成随机口令有关的全局变量。就像以前一样，这里也对某些变量重新进行命名并加以注释。</p>
 
 <p>知道了这些变量的地址后，我们就可以利用调试工具来查看在实际测试期间，这些变量到底存放了哪些值，具体如下所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150716/2015071602543892832871b3b40b95cf9e07c678555636e8642" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150716/2015071602543892832871b3b40b95cf9e07c678555636e8642" alt="enter image description here"></p>
 
 <p>尽管我们可以轻松地通过反汇编程序浏览勒索软件的程序代码，但是这样做的缺点是，这只能针对磁盘上的静态程序，或者说是“无生命的”程序。要想操作运行在内存中的、活蹦乱跳的勒索软件进程的话，我们还需借助于调试工具。下面，我们就通过它来观察三个字符串变量的取值情况。</p>
 
@@ -68,43 +68,43 @@
 
 <p>然后，利用前面的发现和方法，继续跟踪字符串“-hp”。通过反汇编程序，我们迅速锁定了几个实例，下面便是其中之一：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150716/20150716025439930485a5f332e5b6e36a5cd5a624300520652" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150716/20150716025439930485a5f332e5b6e36a5cd5a624300520652" alt="enter image description here"></p>
 
 <p>我们在程序代码中发现了字符串“-hp”的一个实例，显然，它肯定位于构建含有口令的命令行并（通过 <code>CreateProcessA</code> 或 <code>ShellExecuteA</code>）执行该命令的代码中。
 到此为止，我们虽然对该勒索软件有了更多的了解，但是仍然不知道是否足以解救受害者。不过有一件事情是肯定的，那就是该口令不能适用于所有受害者。幸运的是，通过反汇编程序我们可以轻松找出程序中所有访问某个变量的代码，这样我们就能追踪到构造“<code>PasswordFull</code>”的代码了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150716/20150716025441238009a866ee7b5d4184ea8263ec9dd53c993" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150716/20150716025441238009a866ee7b5d4184ea8263ec9dd53c993" alt="enter image description here"></p>
 
 <p>上面的代码，通过连接“<code>aesT322</code>”和随机字符串而构造了“<code>PasswordFull</code>”所指向的字符串。</p>
 
 <p>然后，我们利用交叉引用找到了“<code>PasswordRandom</code>”。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150716/20150716025444420951317808f4f80cccd35ae26b4c1e41620" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150716/20150716025444420951317808f4f80cccd35ae26b4c1e41620" alt="enter image description here"></p>
 
 <p>这个循环（图中用粗虚线箭头加以指示）的作用是从由78个字符组成的“字母表”中挑选50个字符组成一个串，通过前面拦截的口令可以看出，它好像是随机挑选出来的。
 我们还发现了一个循环，它的循环计数是从1到50，这跟口令中随机部分的那50个字符的长度非常吻合。同时，我们还在这个循环内部找到了一个字符串，看起来非常像是用来随机选择50个字符的“字母表”。在这个字母表中，包含了26个小写字母，26个大写字母，10个数字，以及16个标点符号。</p>
 
 <p>接下来，我们需要找出选择随机字符的那个函数，当然，上面循环内部的指令肯定会调用这个函数的。尽管人们普遍认为计算机能够产生真正的随机数，但是现实是，它只能带来伪随机数。长期以来，人们不断探索针对伪随机数生成器的攻击技术，以便能够战胜加密术，这为我们的工作做好了很好的铺垫。上面，我们标出了一个名为“<code>_get_random_Alphabet_char</code>”的函数，其反汇编代码如下所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150716/201507160254488690636f1880c7e768e6480a108091757687d" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150716/201507160254488690636f1880c7e768e6480a108091757687d" alt="enter image description here"></p>
 
 <p>观察上面的反汇编代码不难发现，函数“<code>_get_random_Alphabet_char</code>”好像生成了一个随机数，并将其保存到了局部变量“<code>var_8</code>”中。并且，这段循环代码会顺序遍历字母表的各个字符，直到抵达某个字符为止。然后，那个字符被转换成一个单字符字符串，其地址被存放到被我们命名为“<code>RandomAlphabetChar</code>”的全局变量内。</p>
 
 <p>当确定出上面高亮显示的函数就是<code>PureBasic</code>的随机数生成函数“Rnd”之后，这些汇编代码就立马变得非常容易阅读了。这个函数的代码如下所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150716/201507160254501841903c7793b3778c41b4f9ea90e179a5e7b" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150716/201507160254501841903c7793b3778c41b4f9ea90e179a5e7b" alt="enter image description here"></p>
 
 <p>随机数函数“Rnd”的作用是，确保初始化伪随机数生成器，以生成一个介于0到指定最大值“<code>arg_0</code>”之间的一个数值。当然，这个范围也包括了它的两个边界值。
 函数“Rnd”封装了许多其他函数的调用，尤其是我们前面命名的那些函数。这里的“<code>_internal_Randomize_default</code>”函数，除了调用一些Windows函数外，还调用了该勒索软件自身的一个函数，该函数被命名为“<code>_internal_RandomInit</code>”。下面，我们将这些函数并列显示，具体如下图所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150716/201507160254518261387a4fd3dfdf6eebb14870cbb1aa2961a" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150716/201507160254518261387a4fd3dfdf6eebb14870cbb1aa2961a" alt="enter image description here"></p>
 
 <p>在上图中，左窗口显示的是“<code>_internal_Randomize_default</code>”函数的反汇编结果，而右窗口中是我们更为感兴趣的“<code>_internal_RandomInit</code>”函数的反汇编结果。
 现在，我们终于取得了一个重大突破。在左边窗口可以看到，PRNG是通过由执行这个程序代码的线程的标示符和以毫秒计算的系统运行时间共同得到的一个32位数字来初始化或者说指定种子值的，而这两个数值相对来说都比较容易预测。在右边的窗口中，我们高亮显示了一个常量“magic”，这是一个专用的数字，通常用于网络搜索。在这里，这个数字好像采用了16进制的形式，具体为<code>53A9B4FBh</code>，当然，还有其他可能的表示形式，如<code>0x53A9B4FB</code>，或者十进制表示形式<code>1403630843</code>。它后面的指令，可以转换为“<code>1 - EAX * 0x53A9B4FB</code>”的形式，这意味着我们所看到的这个常量实际上可能是负数<code>-1403630843</code>，如果看作是无符号数字的话，还可以表示为<code>AC564B05h</code>，<code>0xAC564B05</code>或者<code>2891336453</code>。利用上面的这些内容作为搜索词进行网络搜索，我们竟然在<code>PureBasic</code>论坛中找到了与这些随机数生成程序有关的源代码，以及相应的反汇编代码。</p>
 
 <p>下面所谓“<code>Rnd</code>”函数的反汇编代码中明显的循环操作进一步印证了我们的发现，它跟我们从网络上找到的源代码的反汇编代码是一致的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150716/2015071602545330044b846554818ebb363e4402b86c09024e9" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150716/2015071602545330044b846554818ebb363e4402b86c09024e9" alt="enter image description here"></p>
 
 <p>上面高亮显示的“<code>ror</code>”助记符表示的是循环左移指令，分别表示循环左移13比特和5比特。并且，我们从网上找到的源代码也在类似的上下文中执行循环左移操作，甚至移动的位数也是相同的。</p>
 
@@ -114,12 +114,12 @@
 
 <h1>0x03 猜解口令</h1>
 
-<hr />
+<hr>
 
 <p>实际上，猜口令并不是很难，问题在于这需要耗费大量的时间。当然，单纯利用给定种子值生成一个口令的话，速度是极快的，但是对于我们匆匆拼凑起来的这台一次性机器来说，我们只进行了一种猜解试验，即尝试解密RAR看看能否找出有用的东西来，这种尝试所需的运算量非常之大，尤其是需要尝试几百万次的时候。正如结果所展示的那样，虽然没能找到受害者电脑运行时间方面的线索，但是，却出乎意料地发现了可能比这个更有用的东西。
 首先，在检查被感染的磁盘的时候，我们注意到，<code>\ProgramData</code>文件夹下面隐藏了许多子目录，这些目录名是由随机字母组合而成的，并且这些子目录下面还隐藏了许多奇怪的文件。此外，我们还发现了一个名为<code>\ProgramData\svcfnmainstvestvs\stppthmainfv.dll</code>的文本文件，其中共21行，每行含有8个随机字母。随着进一步的检查，我们发现每一行内容实际上就是勒索软件<code>\ProgramData</code>目录下面的由随机字母组成的子目录名或文件名，只不过顺序给倒过来了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150716/2015071602545553927e4cfba958428537c22edd1992d96588f" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150716/2015071602545553927e4cfba958428537c22edd1992d96588f" alt="enter image description here"></p>
 
 <p>文件<code>\ProgramData\svcfnmainstvestvs\stppthmainfv.dll</code>中的内容，是我们在运行测试过程中得到的。虽然这个文件的扩展名是<code>.dll</code>，但是这纯粹是忽悠人的，它实际上就是一个文本文件。对于每一行字母，只要把它们倒过来，例如<code>chlqfohk</code>，都对应于一个子目录或者文件的随机名称，这些都是勒索软件在<code>\ProgramData</code>目录下面创建的。</p>
 
@@ -127,11 +127,11 @@
 
 <p>这里有几点需要注意。首先，就像在随机函数中识别出的线程本地存储（TLS）调用所暗示的那样，每个线程都有自己的PRNG状态，并且在第一次被“Rnd”调用时，都会单独进行初始化。碰巧的是，那八个随机字母构成的名称是由勒索软件进程的主线程生成的，而密码是由分线程决定的。下面是生成21个名称的一段循环代码；标为绿色的代码交叉引用（“<code>CODE XREF</code>”）注释表明，该代码驻留在程序的“start”函数中，并且该函数是该进程第一个执行的线程。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150716/2015071602545782155063fdcc6e2f5a20d827aa67754a930ad" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150716/2015071602545782155063fdcc6e2f5a20d827aa67754a930ad" alt="enter image description here"></p>
 
 <p>在勒索软件的“start”函数中的这段循环代码，将创建21个随机的文件名和子目录名。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150716/2015071602545973735e395bbd6aa11da54734efa1f6c76caa8" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150716/2015071602545973735e395bbd6aa11da54734efa1f6c76caa8" alt="enter image description here"></p>
 
 <p>这是上面提到过的那个从A到Z的字母表中随机选择8个字母函数中的循环代码段。正如所料，该函数会针对每个字符都调用一次“Rnd”。</p>
 
@@ -143,13 +143,13 @@
 
 <p>因此，我们需要找出针对“Rnd”的各个调用。如果将反汇编代码稍微上滚一点，就会看到“start”函数中针对“Rnd”的唯一的一个调用，具体如下所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150716/2015071602550153907c5d2b8ce6859bb92a04d05adc475ab01" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150716/2015071602550153907c5d2b8ce6859bb92a04d05adc475ab01" alt="enter image description here"></p>
 
 <p>这是该勒索软件对“Rnd”的第一次调用，并且是生成文件和子目录名称的循环代码之前的唯一的一次调用。</p>
 
 <p>另一方面，执行口令生成代码的“_ServiceMain”线程对“Rnd”总共调用了3次，并且都是在它使用PRNG构造口令之前调用的，具体见下图。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150716/20150716025503912207e213aee784ff1ff4734c8b4f41a63d4" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150716/20150716025503912207e213aee784ff1ff4734c8b4f41a63d4" alt="enter image description here"></p>
 
 <p>这三个针对“Rnd”的调用，都先于“_ServiceMain”线程中生成口令的那些代码。</p>
 
@@ -232,7 +232,7 @@ for (unsigned int seed = namesseed - 32768; seed &lt;= namesseed + 180000; seed+
 )
 </code></pre>
 
-<p>我们让这个批处理文件通宵运行，在第二天早晨终于找到了期盼已久的东西：正确的口令。至此，我们大功告成了！ 我们没有辜负受害者对我们的信任，最终将其数据恢复如初。</p>      </p>
+<p>我们让这个批处理文件通宵运行，在第二天早晨终于找到了期盼已久的东西：正确的口令。至此，我们大功告成了！ 我们没有辜负受害者对我们的信任，最终将其数据恢复如初。</p>      <p></p>
     
 			</body>
 		</html>

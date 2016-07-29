@@ -3,16 +3,16 @@
 			<head>
 			     <title>Black Vine网络间谍小组 - virustracker</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/news/11524">http://drops.wooyun.org/news/11524</a></h1>
 				
       <p>
-        <p><a href="http://www.symantec.com/content/en/us/enterprise/media/security_response/whitepapers/the-black-vine-cyberespionage-group.pdf">http://www.symantec.com/content/en/us/enterprise/media/security_response/whitepapers/the-black-vine-cyberespionage-group.pdf</a></p>
+        </p><p><a href="http://www.symantec.com/content/en/us/enterprise/media/security_response/whitepapers/the-black-vine-cyberespionage-group.pdf">http://www.symantec.com/content/en/us/enterprise/media/security_response/whitepapers/the-black-vine-cyberespionage-group.pdf</a></p>
 
 <h1>0x00 综述</h1>
 
-<hr />
+<hr>
 
 <p>在2014年初，Anthem遭到黑客袭击，泄露了8000万份医疗记录。媒体在2015年2月曝光了这次入侵事件，而发动攻击的网络间谍小组很可能就是Black Vine。</p>
 
@@ -26,7 +26,7 @@
 
 <h1>0x01 介绍</h1>
 
-<hr />
+<hr>
 
 <p>2014年1月26日，医疗公司Anthem的一名系统管理员发现，他们的账户遭到了黑客入侵，访问了内部数据库中的敏感数据。虽然很多请求都是从这个账户发起的，但是系统管理员发现是其他人在执行这些请求。很快，Anthem就意识到，他们遭到了网络攻击。这次攻击事件是今天最严重的医疗数据失窃事件，丢失了8000万份记录。Symantec认为实施这次攻击活动是Black Vine小组。</p>
 
@@ -38,7 +38,7 @@
 
 <h1>0x02 关键发现</h1>
 
-<hr />
+<hr>
 
 <p>通过研究Black Vine的活动，Symantec发现了下面的信息：</p>
 
@@ -53,7 +53,7 @@
 
 <h1>0x03 目标</h1>
 
-<hr />
+<hr>
 
 <p>在调查Black Vine期间，Symantec确定了大量遭到攻击的企业。由于Black Vine的攻击途径，仅仅依靠攻击数据可能会误导你。Black Vine经常会利用水坑攻击入侵合法网站，从而强制网站感染其访客。因此，如果只是分析遭到入侵的计算机是无法准确地反映Black Vine的攻击目的。相反，这样能反映出哪些行业的感染率是最高的。</p>
 
@@ -71,13 +71,13 @@
 
 <p>为了进一步判断Black Vine的目标产业，Symantec评估了持有受影响网站的企业。Symantec还调查了Black Vine发动的一些水坑攻击活动。在调查了大量的攻击目标后，Symantec认为Black Vine的主要目标产业是航空航天业和医疗业。很可能，遭到感染的其他行业是次级目标。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151218/2015121809251069226199.png" alt="p1" /> 图1-Black Vine的受害者分布</p>
+<p><img src="http://static.wooyun.org//drops/20151218/2015121809251069226199.png" alt="p1"> 图1-Black Vine的受害者分布</p>
 
 <p>根据受害者计算机的IP地址位置，我们确定Black Vine的攻击目标主要分布在几个地区。主要的感染地区是美国，其次是中国、加拿大、意大利、丹麦和印度。</p>
 
 <h1>0x04 攻击者的资源</h1>
 
-<hr />
+<hr>
 
 <p>攻击者的资源</p>
 
@@ -126,19 +126,19 @@
 
 <p>另外，大多数木马样本的数字签名都是由韩国软件公司DTOPTOOLZ Co或软件开发商MICRO DIGITAL INC签署的。Symantec已经观察到，DTOPTOOLZ Co证书还用于签名了一个广告软件，而这起恶意广告活动并没有Black Vine的参与。图2和图3中是详细的证书信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151218/2015121809251315259238.png" alt="p2" /> 图2-DTOPTOOLZ Co数字证书</p>
+<p><img src="http://static.wooyun.org//drops/20151218/2015121809251315259238.png" alt="p2"> 图2-DTOPTOOLZ Co数字证书</p>
 
-<p><img src="http://static.wooyun.org//drops/20151218/2015121809251454682329.png" alt="p3" /> 图3-MICRO DIGITAL INC数字签名</p>
+<p><img src="http://static.wooyun.org//drops/20151218/2015121809251454682329.png" alt="p3"> 图3-MICRO DIGITAL INC数字签名</p>
 
 <h1>0x05 活动</h1>
 
-<hr />
+<hr>
 
 <p>Symantec发现Black Vine的活动最早可以追溯到2012年。从那时开始，Symantec就观察到Black Vine多次发动了针对性攻击活动。在我们调查过的所有活动中，我们发现Black Vine的主要目的是入侵目标的基础设施并窃取信息。</p>
 
 <h1>0x06 能源业</h1>
 
-<hr />
+<hr>
 
 <p>2012年12月，安全研究员Eric Romang发表了一篇博客称，燃气涡轮制造商Capstone Turbine遭到了水坑攻击。Symantec通过调查，也证实了Romang的发现，Capstone Turbine的合法域名capstoneturbine.com上放置了一个0-day exploit，实际是Microsoft Internet Explorer ‘CDwnBindInfo’ Use-After-Free 远程代码执行漏洞 (CVE-2012-4792)。当时，只要用户使用漏洞版本的IE浏览器访问Capstone的网站，就会被Sakurel的有效载荷入侵。Sakurel能够允许Black Vine访问受害者的计算机和信息。如前面提到的，这个Sakurel样本使用了MICRO DIGITAL INC颁发的数字签名。</p>
 
@@ -173,7 +173,7 @@
 
 <h1>0x07 航空航天业</h1>
 
-<hr />
+<hr>
 
 <p>在2013年中期，一篇第三方博客记录了攻击活动中如何利用Citrix诱饵投放Hurix木马来攻击航空公司。这篇博客中写到，攻击中使用的木马是通过钓鱼邮件发送给航空公司的特定员工。在这些邮件中会包括一个URL，用于重定向用户下载Hurix。不过，Symantec无法访问必要的数据来验证博客中说的对不对。我们只是为了记录目的，概括性的总结这次攻击活动。</p>
 
@@ -207,7 +207,7 @@
 <li>邮政编码:37182</li>
 <li>国家:China</li>
 <li>电话号码:+86.3781263856</li>
-<li>邮箱:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c9ada6ababa0a7e7b9a8aaa1acaaa689a8a6a5e7aaa6a4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></li>
+<li>邮箱:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c9ada6ababa0a7e7b9a8aaa1acaaa689a8a6a5e7aaa6a4">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></li>
 </ul>
 
 <p>Black Vine创建域名ameteksen.com是为了伪装成合法网站ameteksensors.com 或ametek.com，这两个合法域名属于航天和国防承包商Ametek。</p>
@@ -220,7 +220,7 @@
 
 <p>表1-添加到主机文件中的域名和IP</p>
 
-<p><img src="http://static.wooyun.org//drops/20151218/2015121809251693395427.png" alt="p4" /></p>
+<p><img src="http://static.wooyun.org//drops/20151218/2015121809251693395427.png" alt="p4"></p>
 
 <p>在调查这次攻击事件时，我们发现了大量与航空领域相关的域名，这些域名都与Black Vine有关联。在2014年1月末和2月中期，攻击者使用了域名www.savmpet.com 和 gifas. asso.net。另外，Symantec和多家第三方来源此前就报道过有针对性攻击利用这些域名来攻击航空产业的目标。</p>
 
@@ -230,7 +230,7 @@
 
 <h1>0x08 医疗业</h1>
 
-<hr />
+<hr>
 
 <p>在2015年2月，媒体曝光了一起针对医疗行业的网络间谍活动。这次入侵活动攻击了医疗公司Anthem，导致泄漏了8000万份医疗记录。最初的报告中称，Anthem是在2015年1月26日发现了这次入侵时间，当时系统管理员发现有人利用他的凭证请求了数据库，而他并不知情。很快，Anthem就反应过来自己遭到了攻击，而这次攻击活动可能是从2014年5月开始的。根据我们调查分析的样本，Symantec识别出在这次攻击活动中使用的木马变种是Mivast。其他的第三方厂商也说攻击Anthem的是Mivast木马。</p>
 
@@ -238,13 +238,13 @@
 
 <p>表2-伪装成医疗和科技公司的域名</p>
 
-<p><img src="http://static.wooyun.org//drops/20151218/2015121809251883731523.png" alt="p5" /></p>
+<p><img src="http://static.wooyun.org//drops/20151218/2015121809251883731523.png" alt="p5"></p>
 
 <p>Black Vine通常不会用相同的邮箱地址来注册域名。注册人地址<a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x6c;i&#50;&#51;&#x38;&#x34;&#56;&#50;&#x36;&#x34;&#48;&#50;&#x40;&#x79;a&#104;&#111;&#x6f;&#x2e;&#99;&#111;&#x6d;">&#x6c;i&#50;&#51;&#x38;&#x34;&#56;&#50;&#x36;&#x34;&#48;&#50;&#x40;&#x79;a&#104;&#111;&#x6f;&#x2e;&#99;&#111;&#x6d;</a>似乎属于一个域名经销商，与Black Vine并无直接联系。</p>
 
 <p>表3-在Anthem攻击中发现的Mivast样本</p>
 
-<p><img src="http://static.wooyun.org//drops/20151218/2015121809252051810623.png" alt="p6" /></p>
+<p><img src="http://static.wooyun.org//drops/20151218/2015121809252051810623.png" alt="p6"></p>
 
 <p>表3中列出了Anthem事件中使用的几个Mivast样本。</p>
 
@@ -252,7 +252,7 @@
 
 <h1>0x09 Black Vine的背后是谁？</h1>
 
-<hr />
+<hr>
 
 <p>我们分析了Black Vine使用的基础设施、资源和攻击模式，从而确定他们的动机。我们还研究了一些开源数据，这些数据表明Black Vine的成员与北京一家公司有关联。</p>
 
@@ -260,9 +260,9 @@
 
 <p>Threat Connect在发表的一份博客中提到，根据基础设施的注册信息，能够追踪到Anthem入侵事件的源头来自中国。在入侵Anthem时使用的Mivast木马样本(MD5:230D8 A7A60A07DF28A291B13DDF3351F)，关联到了一个IP地址是192.199.254.126的基础设施。在Mivast 样本的CC托管在这个IP地址上的时间前后，这个IP上只有为数不多的几个域名，其中就包括域名topsec2014.com。</p>
 
-<p>topsec2014. com 的注册地址是<a href="&#x6d;&#97;&#x69;&#108;&#116;&#x6f;&#58;&#x74;&#x6f;&#112;&#x73;&#101;c&#x32;&#48;&#x31;&#52;&#64;&#x31;&#54;3&#x2e;&#99;&#x6f;&#109;">&#x74;&#x6f;&#112;&#x73;&#101;c&#x32;&#48;&#x31;&#52;&#64;&#x31;&#54;3&#x2e;&#99;&#x6f;&#109;</a>,这个邮箱地址与<a href="/cdn-cgi/l/email-protection#b693f38e93f4f0938f8f93f38293f48e93f7f793f38f938e8493f7f393f38193f7f393f48793f383938ff593f48693f383938ff2938e8693f38293f48e938ef3e2d9XpSec_2014@163.com"><span class="__cf_email__" data-cfemail="9bcff4ebc8fef8c4a9abaaafdbaaada8b5f8f4f6">[email&#160;protected]</span><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a>很类似。topsec2014 domain域名和先前提到的邮箱地址都与北京某IT公司有关联。</p>
+<p>topsec2014. com 的注册地址是<a href="&#x6d;&#97;&#x69;&#108;&#116;&#x6f;&#58;&#x74;&#x6f;&#112;&#x73;&#101;c&#x32;&#48;&#x31;&#52;&#64;&#x31;&#54;3&#x2e;&#99;&#x6f;&#109;">&#x74;&#x6f;&#112;&#x73;&#101;c&#x32;&#48;&#x31;&#52;&#64;&#x31;&#54;3&#x2e;&#99;&#x6f;&#109;</a>,这个邮箱地址与<a href="/cdn-cgi/l/email-protection#b693f38e93f4f0938f8f93f38293f48e93f7f793f38f938e8493f7f393f38193f7f393f48793f383938ff593f48693f383938ff2938e8693f38293f48e938ef3e2d9XpSec_2014@163.com"><span class="__cf_email__" data-cfemail="9bcff4ebc8fef8c4a9abaaafdbaaada8b5f8f4f6">[email&#160;protected]</span><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a>很类似。topsec2014 domain域名和先前提到的邮箱地址都与北京某IT公司有关联。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151218/2015121809252135823720.png" alt="p7" /> 图4-关于北京某IT公司的详细介绍</p>
+<p><img src="http://static.wooyun.org//drops/20151218/2015121809252135823720.png" alt="p7"> 图4-关于北京某IT公司的详细介绍</p>
 
 <p>北京某IT公司这个组织主要专注于安全研究、培训、审计和产品开发。其客户包括私有公司和公共部门。这家公司每年还会举办计算机攻击竞赛，并且据报道雇佣了黑客来提供服务和培训。</p>
 
@@ -272,7 +272,7 @@
 
 <p>对于Black Vine而言，Symantec发现他们的活动与其他的网络间谍活动之间有相似的模式。这些攻击活动也会使用相同的0-day漏洞，但是投放不同的有效载荷。很明显，他们能接触到相同的0-day漏洞，然后在不同的小组之间传播和利用，如图5。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151218/2015121809252350346819.png" alt="p8" /> 图5-0-day的传播和使用时间</p>
+<p><img src="http://static.wooyun.org//drops/20151218/2015121809252350346819.png" alt="p8"> 图5-0-day的传播和使用时间</p>
 
 <p><strong>CVE-2012-4792 0-day漏洞</strong></p>
 
@@ -304,7 +304,7 @@
 
 <h1>0x0A 结论</h1>
 
-<hr />
+<hr>
 
 <p>至少从2012年起，Black Vine久开始了攻击活动。经过Symantec的分析，Black Vine针对能源、航空航天业、医疗业和其他行业发动了多起攻击活动。Black Vine利用了多个木马变种，包括Hurix，Sakurel和 Mivast。所有这些木马都是由同一名作者开发和更新的。每个变种都会通过更新来增加功能，并更改哈希来躲避检测。</p>
 
@@ -316,7 +316,7 @@
 
 <h1>0x0B 应对办法</h1>
 
-<hr />
+<hr>
 
 <p>Symantec能够防御Black Vine的木马：</p>
 
@@ -329,7 +329,7 @@
 
 <p><strong>IPS</strong></p>
 
-<p>System Infected: Trojan.Sakurel Activity</p>      </p>
+<p>System Infected: Trojan.Sakurel Activity</p>      <p></p>
     
 			</body>
 		</html>

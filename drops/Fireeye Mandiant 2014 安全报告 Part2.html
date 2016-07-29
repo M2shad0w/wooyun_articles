@@ -3,14 +3,14 @@
 			<head>
 			     <title>Fireeye Mandiant 2014 安全报告 Part2 - insight-labs</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/news/5153">http://drops.wooyun.org/news/5153</a></h1>
 				
       <p>
-        <h1>0x00 进化中的攻击生命周期</h1>
+        </p><h1>0x00 进化中的攻击生命周期</h1>
 
-<hr />
+<hr>
 
 <p>在我们调查过的多数案子中都出现了相似的行为模式，我们叫它攻击生命周期。</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 VPN劫持</h1>
 
-<hr />
+<hr>
 
 <p>获取了目标网络的VPN登录权限给了攻击者两个非常有利的优势。首先他们可以在不用部署后门的情况下持续连接到目标网络内。其次他们可以像正常用户那样登录内部网络。</p>
 
@@ -42,7 +42,7 @@
 
 <h1>0x02 在眼皮底下隐藏的恶意软件</h1>
 
-<hr />
+<hr>
 
 <p>恶意软件检测是一个永不停歇过程。在2014年我们发现攻击者使用了很多新技巧来隐藏他们的操作和新的安装长期后门的方式。</p>
 
@@ -61,7 +61,7 @@
 
 <h1>0x03 WMI后门</h1>
 
-<hr />
+<hr>
 
 <p>Windows Management Instrumentation (WMI)是一个Windows的核心组件，它提供了广泛的系统管理功能和接口。程序和各种脚本语言都可以用WMI来收集数据，和系统底层交互和执行命令。WMI还提供了一个基于事件(Event)的触发器功能，可以被用来在特定对象的状态发生改变的时候触发恶意软件。</p>
 
@@ -74,7 +74,7 @@ Event consumer事件消费者: 在发生特定事件的时候执行特定的程�
 Filer to Consumer Binding: 把consumer绑定到filter上，确保在事件发生的时候event consumer得到执行。
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150311/2015031102541515021figure7.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/drops/20150311/2015031102541515021figure7.jpg" alt="enter image description here"></p>
 
 <p>Figure7:</p>
 
@@ -107,7 +107,7 @@ Set-WmiInstance -Namespace “root\subscription” -Class ‘CommandLineEventCon
 
 <h1>0x04 恶意安全模块(Security Packages)</h1>
 
-<hr />
+<hr>
 
 <p>我们还观察到几个案例，攻击者使用了Windows Local Security Authority (LSA) security packages. 一种少见的基于注册表的长期后门。用来隐蔽的自动加载恶意软件。 安全包是一些在系统启动时由LSA自动加载的一些DLL。这些安全模块通过注册表里的 HKLM\ SYSTEM\CurrentControlSet\Control\Lsa 键值来加载。 每个键值都包括了一个字符串列表，指向%SYSTEMROOT%\system32\下需要加载的文件名（不含扩展名）</p>
 
@@ -125,7 +125,7 @@ SECURITY PACKAGES (修改后): kerberos msv1_0 schannel wdigest tspkg pku2u tspk
 
 <h1>0x05 Mimikatz是个 女子 东 西</h1>
 
-<hr />
+<hr>
 
 <p>在几乎全部的调查中我们都遇到了能绕过杀软的各种Mimikatz的改版，攻击者一般都修改和重新编译了源码来绕过检测。 Mimikatz也包括了一个邪恶的LSA模块 mimilib ssp 用来获取密码。</p>
 
@@ -147,7 +147,7 @@ SECURITY PACKAGES (修改后): kerberos msv1_0 schannel wdigest tspkg pku2u tspk
 
 <h1>0x06 通过WMI和Powershell后期渗透</h1>
 
-<hr />
+<hr>
 
 <p>在过去，在windows内网环境中渗透用的都是一些windows自带的工具，比如net，at，还有自己写的小工具，脚本或者vbs，要么就是psexec。这些手段又快又好用，但是会留下一些证据还有记录。</p>
 
@@ -155,7 +155,7 @@ SECURITY PACKAGES (修改后): kerberos msv1_0 schannel wdigest tspkg pku2u tspk
 
 <h1>0x07 本篇总结,攻击者的新技巧:</h1>
 
-<hr />
+<hr>
 
 <p>VPN劫持: 在这一年里我们发现了更多受害方的VPN权限被攻击者成功获取。</p>
 
@@ -167,7 +167,7 @@ SECURITY PACKAGES (修改后): kerberos msv1_0 schannel wdigest tspkg pku2u tspk
 
 <p>使用WMI和powershell: 越来越多的攻击利用了WMI和Powershel，两个windows内置的强大工具/功能，用来保持长期后门，收集数据和持续渗透。</p>
 
-<p>Kerberos攻击: 在拿到了域管理员权限后，攻击者使用了Kerberos golden ticket attack来登录任意账号，即使域管理员重置了密码。</p>      </p>
+<p>Kerberos攻击: 在拿到了域管理员权限后，攻击者使用了Kerberos golden ticket attack来登录任意账号，即使域管理员重置了密码。</p>      <p></p>
     
 			</body>
 		</html>

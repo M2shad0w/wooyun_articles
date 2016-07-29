@@ -3,14 +3,14 @@
 			<head>
 			     <title>Memory Dump利用实例 - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8567">http://drops.wooyun.org/tips/8567</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>众所周知，procdump可以获得进程的内存dump文件
 最常见的用法如下：</p>
@@ -27,13 +27,13 @@
 
 <h1>0x01 目标</h1>
 
-<hr />
+<hr>
 
 <p>尝试使用procdump获取putty ssh登录的密钥，实现非授权登录目标Linux服务器</p>
 
 <h1>0x02 测试环境</h1>
 
-<hr />
+<hr>
 
 <p>目标：</p>
 
@@ -51,7 +51,7 @@ windbg 6.3.9600
 
 <h1>0x03 环境搭建</h1>
 
-<hr />
+<hr>
 
 <h2>1、工具下载地址：</h2>
 
@@ -71,7 +71,7 @@ http://download.csdn.net/detail/ytfrdfiw/8182431
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091103045172466.net/20150909173736282" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091103045172466.net/20150909173736282" alt="这里写图片描述"></p>
 
 <p><strong>（2）上传公钥</strong></p>
 
@@ -88,7 +88,7 @@ $ chmod 600 authorized_keys
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091103045220723.net/20150909173749517" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091103045220723.net/20150909173749517" alt="这里写图片描述"></p>
 
 <p><strong>（3）导入私钥实现自动登录</strong></p>
 
@@ -96,9 +96,9 @@ $ chmod 600 authorized_keys
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091103045237272.net/20150909173804070" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091103045237272.net/20150909173804070" alt="这里写图片描述"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091103045211693.net/20150909173815305" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091103045211693.net/20150909173815305" alt="这里写图片描述"></p>
 
 <p><em>Tips：</em></p>
 
@@ -108,7 +108,7 @@ $ chmod 600 authorized_keys
 
 <h1>0x04 实际测试</h1>
 
-<hr />
+<hr>
 
 <h2>1、获取进程pageant的内存文件</h2>
 
@@ -119,7 +119,7 @@ $ chmod 600 authorized_keys
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091103045360282.net/20150909173834654" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091103045360282.net/20150909173834654" alt="这里写图片描述"></p>
 
 <h2>2、使用WinDBG定位内存文件</h2>
 
@@ -139,7 +139,7 @@ $ chmod 600 authorized_keys
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091103045326988.net/20150909173849358" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091103045326988.net/20150909173849358" alt="这里写图片描述"></p>
 
 <p>说明：</p>
 
@@ -159,7 +159,7 @@ $ chmod 600 authorized_keys
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091103045392795.net/20150909173905450" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091103045392795.net/20150909173905450" alt="这里写图片描述"></p>
 
 <pre><code>struct tree234_Tag{
     node234 *root=013607c0;
@@ -173,7 +173,7 @@ $ chmod 600 authorized_keys
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091103045410271.net/20150909173917274" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091103045410271.net/20150909173917274" alt="这里写图片描述"></p>
 
 <pre><code>struct node234_Tag{
     node234 *parent=00000000;
@@ -189,7 +189,7 @@ $ chmod 600 authorized_keys
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091103045475633.net/20150909173928521" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091103045475633.net/20150909173928521" alt="这里写图片描述"></p>
 
 <pre><code>struct ssh2_userkey{
     const struct ssh_signkey *alg=0041c83c;
@@ -204,7 +204,7 @@ $ chmod 600 authorized_keys
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091103045470745.net/20150909173941334" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091103045470745.net/20150909173941334" alt="这里写图片描述"></p>
 
 <p>发现字符<code>rsa-key-20150908</code></p>
 
@@ -214,7 +214,7 @@ $ chmod 600 authorized_keys
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091103045467475.net/20150909173952529" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091103045467475.net/20150909173952529" alt="这里写图片描述"></p>
 
 <pre><code>struct RSAKey{
     int bits=01363f38;
@@ -255,7 +255,7 @@ Returns:
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091103045497811.net/20150909174006633" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091103045497811.net/20150909174006633" alt="这里写图片描述"></p>
 
 <p>第一位<code>00000020</code>表示读取长度，转为10进制为32,读取长度为32</p>
 
@@ -274,7 +274,7 @@ Returns:
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091103045567882.net/20150909174019834" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091103045567882.net/20150909174019834" alt="这里写图片描述"></p>
 
 <p>第一位00000001表示读取长度，转为10进制为1，读取长度为1</p>
 
@@ -286,7 +286,7 @@ Returns:
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091103045551804.net/20150909174030932" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091103045551804.net/20150909174030932" alt="这里写图片描述"></p>
 
 <p>第一位00000020表示读取长度，转为10进制为32，读取长度为32</p>
 
@@ -330,13 +330,13 @@ if __name__ == "__main__":
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091103045575408.net/20150909174043663" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091103045575408.net/20150909174043663" alt="这里写图片描述"></p>
 
 <p>同puttygen.exe生成的公钥做对比</p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091103045692697.net/20150909174101509" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091103045692697.net/20150909174101509" alt="这里写图片描述"></p>
 
 <p><em>Tips：</em></p>
 
@@ -348,13 +348,13 @@ if __name__ == "__main__":
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091103045690366.net/20150909174114946" alt="这里写图片描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091103045690366.net/20150909174114946" alt="这里写图片描述"></p>
 
 <h2>3、利用获取的私钥远程登录</h2>
 
 <h1>0x05 补充</h1>
 
-<hr />
+<hr>
 
 <pre><code>https://blog.netspi.com/stealing-unencrypted-ssh-agent-keys-from-memory/
 http://www.oschina.net/translate/stealing-unencrypted-ssh-agent-keys-from-memory
@@ -373,12 +373,12 @@ https://diablohorn.wordpress.com/2015/09/04/discovering-the-secrets-of-a-pageant
 
 <h1>0x06 小结</h1>
 
-<hr />
+<hr>
 
 <p>本文仅测试了putty&amp;pageant的内存密钥获取，证明了思路的正确
 更多测试持续进行中</p>
 
-<p>本文由三好学生原创并首发于乌云知识库，转载请注明</p>      </p>
+<p>本文由三好学生原创并首发于乌云知识库，转载请注明</p>      <p></p>
     
 			</body>
 		</html>

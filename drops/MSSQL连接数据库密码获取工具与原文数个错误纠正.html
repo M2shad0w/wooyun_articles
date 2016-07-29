@@ -3,18 +3,18 @@
 			<head>
 			     <title>MSSQL连接数据库密码获取工具与原文数个错误纠正 - zcgonvh</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1477">http://drops.wooyun.org/tips/1477</a></h1>
 				
       <p>
-        <p>原文链接：<a href="http://drops.wooyun.org/tips/1067">http://drops.wooyun.org/tips/1067</a>。</p>
+        </p><p>原文链接：<a href="http://drops.wooyun.org/tips/1067">http://drops.wooyun.org/tips/1067</a>。</p>
 
 <p>在测试时发现了一些问题，于是把解决方案与一些结论共享出来，以供需要。</p>
 
 <h2>0x00 原文提供的powershell脚本出错的解决方案</h2>
 
-<hr />
+<hr>
 
 <p>原文提供的脚本直接导入执行会抛出“数据无效”的错误，测试系统在查询分析器中获取到的密文为：</p>
 
@@ -40,7 +40,7 @@
 
 <h2>0x01 原文错误的定论与拓展利用</h2>
 
-<hr />
+<hr>
 
 <p>原文中有两个错误的定论，而这两个定论在某些条件下恰好可以组合成为一个新的获取途径。</p>
 
@@ -83,11 +83,11 @@ SQLServerMSSQLUser$[机器名]$[实例名]:查询，修改，创建子项，枚�
 
 <p>如图：当sqlserver实例服务账户配置为network service运行时，默认iis应用程序池账户network service具有读取注册表的权限：</p>
 
-<p><img src="http://static.wooyun.org/201404/2014042501272227571.png" alt="2014042501272227571.png" /></p>
+<p><img src="http://static.wooyun.org/201404/2014042501272227571.png" alt="2014042501272227571.png"></p>
 
 <p>于是可以通过工具直接获取到链接服务器密码：</p>
 
-<p><img src="http://static.wooyun.org/201404/2014042501284933549.png" alt="2014042501284933549.png" /></p>
+<p><img src="http://static.wooyun.org/201404/2014042501284933549.png" alt="2014042501284933549.png"></p>
 
 <p>有了以上结论与原始的Powershell脚本，工具也就不难写了，Powershell脚本实际上就是.net类库的调用，略作修改即可。</p>
 
@@ -115,9 +115,9 @@ Params:null
 
 <p>调用结果如图：</p>
 
-<p><img src="http://static.wooyun.org/201404/2014042501315093112.png" alt="2014042501315093112.png" /></p>
+<p><img src="http://static.wooyun.org/201404/2014042501315093112.png" alt="2014042501315093112.png"></p>
 
-<p>附件：<a href="http://static.wooyun.org/20141017/2014101714011650242.7z">mssql_linkedserver_pwd.7z</a></p>      </p>
+<p>附件：<a href="http://static.wooyun.org/20141017/2014101714011650242.7z">mssql_linkedserver_pwd.7z</a></p>      <p></p>
     
 			</body>
 		</html>

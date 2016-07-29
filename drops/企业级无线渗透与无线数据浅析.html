@@ -3,26 +3,26 @@
 			<head>
 			     <title>企业级无线渗透与无线数据浅析 - 等TA回来</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/wireless/16971">http://drops.wooyun.org/wireless/16971</a></h1>
 				
       <p>
-        <p>author: icecolor</p>
+        </p><p>author: icecolor</p>
 
 <h1>0x00 企业级无线渗透</h1>
 
-<hr />
+<hr>
 
 <blockquote>
-  <p>注：<br />
-  这篇文章里我详细说一下针对企业802.1X的安全解析，还有一些针对数据协议的分析方法和浅析关于个人渗透太多太啰嗦我就不写了，有机会在说。<br />
+  <p>注：<br>
+  这篇文章里我详细说一下针对企业802.1X的安全解析，还有一些针对数据协议的分析方法和浅析关于个人渗透太多太啰嗦我就不写了，有机会在说。<br>
   因为我不想一部分一部分的写，所以索性就把三个内容写在了一起，如果大家觉得那里有问题，欢迎指正与交流。</p>
 </blockquote>
 
 <h2>一．关于网卡</h2>
 
-<p>工欲善其事，必先利其器。在无线渗透或者是无线攻击中，并不是任何支持linux的网卡都支持无线工具的。推荐过一款网卡 ：‘AWUS036H’我用过这款网卡，是RT8187芯片的。确实不错，完美的支持工具。当然，也可以选用RTL3070芯片。<br />
+<p>工欲善其事，必先利其器。在无线渗透或者是无线攻击中，并不是任何支持linux的网卡都支持无线工具的。推荐过一款网卡 ：‘AWUS036H’我用过这款网卡，是RT8187芯片的。确实不错，完美的支持工具。当然，也可以选用RTL3070芯片。<br>
 其实除了不兼容工具外，选好网卡还有个很重要的因素就是质量问题，质量不好的可能不稳定，造成断开，或者是蓝屏，嗅探抓包时出现丢包等状况。</p>
 
 <!--more-->
@@ -31,7 +31,7 @@
 
 <p>互联网企业里只要有一定规模的公司，一般无线架设都会选用Radius。WPA+Radius应该算是标配了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061907065659295170.png" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/2016061907065659295170.png" alt="p1"></p>
 
 <p>这是一个简单的Radius的工作原理图，我画图画不好，就弄个简单的，复杂的也不一定有人看，能表示就行了。</p>
 
@@ -47,7 +47,7 @@
 
 <p>EAP在企业WPA-802.11X的认证方式（果然还是老外的图易懂）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061907065867903235.png" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/2016061907065867903235.png" alt="p2"></p>
 
 <p>802.1X协议是在第二层，上一层是EAP。EAP上一层是各种认证方法，最底层是802.11（图不画了。请君脑补。） 整个EAP通信，包括EAP的协商都是通过TLS隧道执行。</p>
 
@@ -55,7 +55,7 @@
 
 <p>因为本身EAP是没有保护的，它的EAP-Identity明文显示，EAP-Success等信息被仿冒或抓取：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061907065959679335.png" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/2016061907065959679335.png" alt="p3"></p>
 
 <p><strong>（1）</strong> EAP-TLS：它是一个双向认证的机制，Server与client之间完成的认证。它哪里都好，就是两个缺点致命：（1）是传输用户名用的是明文可以抓到（2）是他要求企业部署PKI，因为它基于这个证书体系。但是PKI太庞大太复杂了。所以....</p>
 
@@ -65,9 +65,9 @@
 
 <p>这是WPA/WPA2允许的两个PEAP子类型。企业使用最多的就是第一种域架构【EAP-MS-CHAPv2】。说了这么多，可能公司企业无线部署是这样情况的能明白，没遇到种架构的可能比较难脑补。我给几张图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/20160619070701231854.jpg" alt="p4" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/20160619070701231854.jpg" alt="p4"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/20160619070703402845.jpg" alt="p5" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/20160619070703402845.jpg" alt="p5"></p>
 
 <p>就是这样的，一般情况下，用你的域账号登陆进去，就可以连接你公司的无线网络了。</p>
 
@@ -77,7 +77,7 @@
 
 <p>在PEAP-MSCHAPV2认证流程中呢，会有一些Server与client的交互，这里面包含了EAP-Respons/Identitye和challenge字符串。在PEAP的保护下，因为它们的认证是在内部TLS隧道里，所以我们很难直接对MSCHAPV2做什么手脚，但是MSCHAPV2爆出了漏洞可被暴力破解。所以我们就可以对它进行fake AP从而取得它们的hash。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/20160619070705294256.jpg" alt="p6" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/20160619070705294256.jpg" alt="p6"></p>
 
 <p>如果没有验证服务器的TLS证书.那么通过模拟的AP，攻击者就可以诱骗客户连接到恶意接入点，并获得客户的内部认证。很遗憾，上面已经说过了pki的问题。就这样，黑客就进入到了你的企业域。具体的攻击方式呢，就是利用 hostapd-wpe这个工具。它替代了freeradius-wpe.</p>
 
@@ -100,13 +100,13 @@
 
 <p>当目标连接到我们的Fake AP 上时：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061907070626443712.png" alt="p7" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/2016061907070626443712.png" alt="p7"></p>
 
 <p>这是抓取到的hash。你所有抓取的hash都在 hostapd目录下的一个名为host-wpe.log的文件内。</p>
 
 <p>当我们抓到这些hash以后，需要破解它，可以用asleap破解密码。Kali内置了好像。也可以自己去github。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061907070868649812.png" alt="p8" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/2016061907070868649812.png" alt="p8"></p>
 
 <p>可能有的人觉得，一个暴力破解，关键还是要看字典，密码设置的复杂就没有关系。但是大家有没有想过，一个无线架构在radius的企业，我假设它有2000人。2000人中我保守一点估计抓了1000的人hash。难道我连1000/5的概率都没有么？更何况无线其他攻击也很多,拿到几个域账号根本没难度。组合攻击的手法还是不容小觑的。</p>
 
@@ -114,11 +114,11 @@
 
 <p>还有一种认证是EAP—MD5，这个可能现在见不到了，不过应该也有吧，凡事不绝对，遇到了就简单提一下，它的认证我就不说了，其实也没什么可说的，没安全性可言，数据不受ssl保护，只有个MD5，只提供了最低级加密，MD5hash能被字典破掉，而且不支持密钥生成，所以就根本不适合企业加密。我也不知道这是谁想出来的，可能开发这个加密的时候还没无线安全呢吧。抓包就能抓出来。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061907071017949912.png" alt="p9" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/2016061907071017949912.png" alt="p9"></p>
 
 <p>这是一个在连接了EAP-MD5认证的AP。通过抓包我们直接可以看到了它的challenge. 我们把他们通讯的整个过程抓下来。就像WPA/WPA2的握手包一样。捕获数据包之后，有一个专门针对EAP-MD5的破解工具叫做：eapmd5Pass。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/20160619070712143071011.png" alt="p10" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/20160619070712143071011.png" alt="p10"></p>
 
 <p>使用方法也简单:</p>
 
@@ -141,7 +141,7 @@
 
 <p>在我们针对一个未知的不了解的企业热点进行渗透时，我们需要事先清楚它是采用什么加密，我们可以通过wireshark过滤一下类型：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/20160619070713124611116.png" alt="p11" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/20160619070713124611116.png" alt="p11"></p>
 
 <p>也算个小技巧，受用。</p>
 
@@ -167,7 +167,7 @@ mdk3 mon0 x
 
 <p><code>MDK3 X 1 -t &lt;目标mac地址&gt; -c &lt;客户端mac地址&gt;</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20160621/2016062102553939741fix.png" alt="p12" /></p>
+<p><img src="http://static.wooyun.org//drops/20160621/2016062102553939741fix.png" alt="p12"></p>
 
 <p>再推荐个工具吧：3vilTiwnAttacker</p>
 
@@ -195,7 +195,7 @@ mdk3 mon0 x
 
 <p>1.因为无线网络的特殊性，我们去真正检测一个攻击行为是否真实存在时，多少会有一些误差。简单例子：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/201606190707177189713.jpg" alt="p13" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/201606190707177189713.jpg" alt="p13"></p>
 
 <p>这个客户端对这个 AP发起了Deauth 攻击，那我该将它判定为洪水还是捕获握手包？</p>
 
@@ -207,7 +207,7 @@ mdk3 mon0 x
 
 <p>2.还有一种就是针对伪AP的这种。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/201606190707192245614.jpg" alt="p14" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/201606190707192245614.jpg" alt="p14"></p>
 
 <p>如上图，我们可以用一些mac地址的策略去识别这些‘fake AP’。</p>
 
@@ -229,7 +229,7 @@ mdk3 mon0 x
 
 <h1>0x01 无线数据分析</h1>
 
-<hr />
+<hr>
 
 <p>说一些数据分析吧，802.11 有好几个标准，像什么802.11g 802.11n 等等之类的，不同的标准对应着不同的频道。分析数据肯定是避免不了的，况且无线就是协议的东西。 我就简单说一下常见的，时常用到的。就算你不分析，起码遇到了能看懂不是。</p>
 
@@ -245,7 +245,7 @@ mdk3 mon0 x
 
 <p>这不是完整的数据，只是其中一部分，它的头部的‘type’定义为beacon。它是作为一个广播数据包由wap发送。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/20160619070720105831510.png" alt="p15" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/20160619070720105831510.png" alt="p15"></p>
 
 <p>这不是全部的，简单点我们可以看出的信息有：它的头部给它定义的类型为:Beacon. 设备信息是：Huawei. MAC地址之类的。下面可以看出SSID的名称。用的802.11B协议。工作11信道。</p>
 
@@ -253,15 +253,15 @@ mdk3 mon0 x
 
 <p>先看下 Authentiction数据中的 Authentiction Algorithm：open System（0）数值是否为0 ，则说明并非Shared加密模式，而是Open加密或WPA加密。和下面的Beacon数据中的数值是否为（1）来判定是否启用加密。AP与STA的认证一致。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/20160619070722174401610.png" alt="p16" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/20160619070722174401610.png" alt="p16"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061907072399667178.png" alt="p17" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/2016061907072399667178.png" alt="p17"></p>
 
 <p>当然加密还有别的。只举一例了。</p>
 
 <p>还有就是关于DOS攻击的分析，这个更简单了，DOS攻击很多，什么beacon flood Authentication DoS Deauthentication/Disassociation 等等。。 就拿Authentication Flood 举个例子吧。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061907072560846188.png" alt="p18" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/2016061907072560846188.png" alt="p18"></p>
 
 <p>从type类型和请求可以看出是什么样的攻击类型<strong>（Authentiction）</strong>。</p>
 
@@ -337,17 +337,17 @@ mdk3 mon0 x
 </tbody>
 </table>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061907072787801197.png" alt="p19" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/2016061907072787801197.png" alt="p19"></p>
 
 <p>这就是只显示10信道的数据。</p>
 
 <p>其实无线数据里面头疼的也就是它的封包结构，控制帧、管理帧、数据帧。全都弄懂真心不容易。我现在也还在学习中，如果是简单分析是用不太多这些东西的。我给大家提供一些802.11的type与subtype类型。方便大家对照</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/201606190749371581130.jpg" alt="p30" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/201606190749371581130.jpg" alt="p30"></p>
 
 <p>还有一些wireshark的过滤参数：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061907072842407206.png" alt="p20" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/2016061907072842407206.png" alt="p20"></p>
 
 <p>这个不全，老外整理了一篇 集 过滤参数、802.11模型和数据值解释为一体的pdf：</p>
 
@@ -355,11 +355,11 @@ mdk3 mon0 x
 
 <p>如果大家想分析指定的AP包的话，可以</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/20160619070730903412112.png" alt="p21" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/20160619070730903412112.png" alt="p21"></p>
 
 <p>我们也可以分析下握手包，下面以Wpa为例，</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/20160619070731683912210.png" alt="p22" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/20160619070731683912210.png" alt="p22"></p>
 
 <p>因为WPA-psk （个人版）在STA和ap建立数据后使用了EAPOL协议处理用户登录认证。然后由四次握手组成。支持WPA的AP工作时候呢，如果客户端里面有Radius服务器的话就用802.1X认证。要没有就用psk的方式认证。上面是第四次握手中抓到的数据，别的都好懂，这个MIC我说一下，这个值是最后握手成功的一个重点。</p>
 
@@ -373,13 +373,13 @@ mdk3 mon0 x
 
 <p>借老外的一张图吧：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061907073357842231.jpg" alt="p23" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/2016061907073357842231.jpg" alt="p23"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/201606190707342543724.jpg" alt="p24" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/201606190707342543724.jpg" alt="p24"></p>
 
 <p>老外这张图表示的是一个底层。它可能表示的意思就是一个溢出fuzz。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160621/2016062103010898483fix2.png" alt="p31" /></p>
+<p><img src="http://static.wooyun.org//drops/20160621/2016062103010898483fix2.png" alt="p31"></p>
 
 <p>分别是类型，长度，和信息值，OCtets 定义了长度和Element ID为1（bit） 我们都知道FUZZ的原理就是尝试协议各种奇葩数据看看协议有没有考虑到，我可以给它定义一个自定值，如果客户端没有处理的话就会出现内核破坏类的漏洞。</p>
 
@@ -395,7 +395,7 @@ mdk3 mon0 x
 
 <p>先要用airmon-ng把网卡监听一下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061907073681921256.png" alt="p25" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/2016061907073681921256.png" alt="p25"></p>
 
 <p>下面的参数对应着攻击类型。</p>
 
@@ -432,13 +432,13 @@ Wed Sep 28 10:40:42 2011 {WIFI} [!] The AP does not respond anymore. Latest test
 
 <p>其实在Metasploit里面也内置了一些fuzzer的脚本。要想在Metasploit进行fuzz的话，要安装一个lorcon2模块。这个模块是专门用于无线注入的。Google把代码撤了。如果想自己安的话，环境变量要自己设置.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061907073764019266.png" alt="p26" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/2016061907073764019266.png" alt="p26"></p>
 
 <p>自己airodump一个STA 的mac。因为是Beacon fuzz，它要制出大量的ssid。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061907074073804276.png" alt="p27" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/2016061907074073804276.png" alt="p27"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061907074294112286.png" alt="p28" /></p>
+<p><img src="http://static.wooyun.org//drops/20160619/2016061907074294112286.png" alt="p28"></p>
 
 <p>可以看下该频道的ESSID。 这就证明开始fuzz了。</p>
 
@@ -460,7 +460,7 @@ Wed Sep 28 10:40:42 2011 {WIFI} [!] The AP does not respond anymore. Latest test
 
 <h1>0x02 参考文献</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="https://www.blackhat.com/presentations/bh-europe-07/Butti/Presentation/bh-eu-07-Butti.pdf">https://www.blackhat.com/presentations/bh-europe-07/Butti/Presentation/bh-eu-07-Butti.pdf</a></li>
@@ -468,7 +468,7 @@ Wed Sep 28 10:40:42 2011 {WIFI} [!] The AP does not respond anymore. Latest test
 <li>Wireless&#95;Threats&#95;Practical_Exploits.pdf</li>
 <li><a href="http://www.sysvalue.com/en/heartbleed-cupid-wireless/">http://www.sysvalue.com/en/heartbleed-cupid-wireless/</a></li>
 <li><a href="http://archive.oreilly.com/wireless/2002/10/17/peap.html">http://archive.oreilly.com/wireless/2002/10/17/peap.html</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

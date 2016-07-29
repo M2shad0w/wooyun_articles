@@ -3,14 +3,14 @@
 			<head>
 			     <title>mitmproxy中libmproxy简单介绍 - jaffer</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2943">http://drops.wooyun.org/tips/2943</a></h1>
 				
       <p>
-        <h2>0x00 简介</h2>
+        </p><h2>0x00 简介</h2>
 
-<hr />
+<hr>
 
 <p>Mitmproxy是一个基于python的中间人代理的框架。做过渗透测试的肯定很熟悉工具burpsuite或Fiddler，这些工具能够拦截并修改http或https的数据包，对于分析数据包交互的应用来说是非常有用的。但是这些工具都是整套给我们做好了。比如如果想自己定制一套这样的工具，添加一些自己需要的功能的话，那么我想，mitmproxy将是一个比较好的选择，因为它提供了一个可供用户调用的库libmproxy（注意该库目前只支持linux系统）。</p>
 
@@ -26,11 +26,11 @@
 
 <h2>0x01 libmproxy介绍</h2>
 
-<hr />
+<hr>
 
 <p>一旦用户安装上了mitmproxy，那么，在python的dist-packages目录下就会有一个libmproxy的目录。点击进去，如下图所示。</p>
 
-<p><img src="http://static.wooyun.org/201409/2014090322432418732.jpg" alt="2014090322432418732.jpg" /></p>
+<p><img src="http://static.wooyun.org/201409/2014090322432418732.jpg" alt="2014090322432418732.jpg"></p>
 
 <p>有很多文件，里面最关键的一个文件就是flow.py。里面有从客户端请求的类Request，也有从服务器返回的可以操作的类Response。并且都实现了一些方法可以调用请求或回复的数据，包括请求url，header，body，content等。具体如下：</p>
 
@@ -53,7 +53,7 @@ Httpversion：http版本。
 
 <h2>0x02 一个简单的实例</h2>
 
-<hr />
+<hr>
 
 <p>下面就来写一个这样的程序：抓取含有password或passwd这样字段的数据包，将这个数据包打印出来。</p>
 
@@ -125,13 +125,13 @@ m.run()
 
 <p>我使用手机端浏览器，登录人人网，使用上述代码截获数据包如图：</p>
 
-<p><img src="http://static.wooyun.org/201409/2014090322444687124.jpg" alt="2014090322444687124.jpg" /></p>
+<p><img src="http://static.wooyun.org/201409/2014090322444687124.jpg" alt="2014090322444687124.jpg"></p>
 
 <h2>0x04 后记</h2>
 
-<hr />
+<hr>
 
-<p>Mitmproxy提供的libmproxy很是强大方便，对于自己需要自己定制的程序代码有帮助，当然上面只是一个简单的实现，还有更多的功能需要更多的挖掘，libmproxy下面的那些内容可以继续学习。</p>      </p>
+<p>Mitmproxy提供的libmproxy很是强大方便，对于自己需要自己定制的程序代码有帮助，当然上面只是一个简单的实现，还有更多的功能需要更多的挖掘，libmproxy下面的那些内容可以继续学习。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>Dionaea低交互式蜜罐部署详解 - Eoh</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/640">http://drops.wooyun.org/tips/640</a></h1>
 				
       <p>
-        <h2>0x00 Dionaea 低交互式蜜罐简介</h2>
+        </p><h2>0x00 Dionaea 低交互式蜜罐简介</h2>
 
-<hr />
+<hr>
 
 <p>Dionaea(捕蝇草) 低交互式蜜罐(http://dionaea.carnivore.it) 是 Honeynet Project 的开源项目，起始于 Google Summer of Code 2009，是Nepenthes(猪笼草)项目的后继。Honeynet Project 是成立于 1999 年的国际性非盈利研究组织，致力于提高因特网的安全性，在蜜罐技术与互联网安全威胁研究领域具有较大的影响力。</p>
 
@@ -22,16 +22,16 @@
 
 <h2>0x01 Dionaea 的整体结构和工作机制</h2>
 
-<hr />
+<hr>
 
-<p>Dionaea是运行于Linux上的一个应用程序，将程序运行于网络环境下，它开放Internet上常见服务的默认端口，当有外来连接时，模拟正常服务给予反馈，同时记录下出入网络数据流。网络数据流经由检测模块检测后按类别进行处理，如果有 shellcode 则进行仿真执行；程序会自动下载 shellcode 中指定下载或后续攻击命令指定下载的恶意文件。从捕获数据到下载恶意文件，整个流程的信息都被保存到数据库中，留待分析或提交到第三方分析机构。<br />
+<p>Dionaea是运行于Linux上的一个应用程序，将程序运行于网络环境下，它开放Internet上常见服务的默认端口，当有外来连接时，模拟正常服务给予反馈，同时记录下出入网络数据流。网络数据流经由检测模块检测后按类别进行处理，如果有 shellcode 则进行仿真执行；程序会自动下载 shellcode 中指定下载或后续攻击命令指定下载的恶意文件。从捕获数据到下载恶意文件，整个流程的信息都被保存到数据库中，留待分析或提交到第三方分析机构。<br>
 Dionaea 整体结构和工作机制如图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091815270337100.png" alt="Dionaea-%E6%95%B4%E4%BD%93%E7%BB%93%E6%9" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091815270337100.png" alt="Dionaea-%E6%95%B4%E4%BD%93%E7%BB%93%E6%9"></p>
 
 <h2>0x02 Dionaea 蜜罐安装过程</h2>
 
-<hr />
+<hr>
 
 <p>Dionaea 目前版本是 0.1.0，采用源码安装。软件运行依赖于以下库：</p>
 
@@ -169,7 +169,7 @@ make install
 
 <h2>0x03 Dionaea 使用方法</h2>
 
-<hr />
+<hr>
 
 <p>Dionaea 根据命令参数运行，可选择不同的运行环境、任务和筛选事件记录内容。配置文件则具体规定蜜罐运行后开启的模块，记录文件的保存位置和扩展功能的参数等信息。默认配置下 Dionaea 自动选择一个网络接口进行监听。</p>
 
@@ -209,7 +209,7 @@ make install
 
 <h2>0x04 安装 DionaeaFR</h2>
 
-<hr />
+<hr>
 
 <p>DionaeaFR(<a href="https://github.com/RootingPuntoEs/DionaeaFR">https://github.com/RootingPuntoEs/DionaeaFR</a>)是用于前端web展示Dionaea的数据。</p>
 
@@ -297,13 +297,13 @@ python manage.py collectstatic python manage.py runserver 0.0.0.0:8000
 
 <p>浏览器访问：http://你的IP:8000</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091815270452976.png" alt="DionaeaFR.png" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091815270452976.png" alt="DionaeaFR.png"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091815270520626.png" alt="DionaeaFR_ATTACKERS.png" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091815270520626.png" alt="DionaeaFR_ATTACKERS.png"></p>
 
 <h2>0x05 结束</h2>
 
-<hr />
+<hr>
 
 <p>低交互式蜜罐的普遍弱点，即对网络服务的模拟与真实服务存在差距，可能无法捕获某些对环境敏感的攻击，可以搭配其他专用服务蜜罐一起使用，来不断进行完善。</p>
 
@@ -315,7 +315,7 @@ python manage.py collectstatic python manage.py runserver 0.0.0.0:8000
 
 <p><strong>本文基本上参考代恒，诸葛建伟前辈下面这2篇文章。</strong></p>
 
-<p><a href="http://netsec.ccert.edu.cn/zhugejw/files/2011/09/Dionaea%E4%BD%8E%E4%BA%A4%E4%BA%92%E5%BC%8F%E8%9C%9C%E7%BD%90%E4%BB%8B%E7%BB%8D.pdf">http://netsec.ccert.edu.cn/zhugejw/files/2011/09/Dionaea低交互式蜜罐介绍.pdf</a> <a href="http://netsec.ccert.edu.cn/zhugejw/files/2011/09/Dionaea%E4%BD%8E%E4%BA%A4%E4%BA%92%E5%BC%8F%E8%9C%9C%E7%BD%90%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5.pdf">http://netsec.ccert.edu.cn/zhugejw/files/2011/09/Dionaea低交互式蜜罐部署实践.pdf</a></p>      </p>
+<p><a href="http://netsec.ccert.edu.cn/zhugejw/files/2011/09/Dionaea%E4%BD%8E%E4%BA%A4%E4%BA%92%E5%BC%8F%E8%9C%9C%E7%BD%90%E4%BB%8B%E7%BB%8D.pdf">http://netsec.ccert.edu.cn/zhugejw/files/2011/09/Dionaea低交互式蜜罐介绍.pdf</a> <a href="http://netsec.ccert.edu.cn/zhugejw/files/2011/09/Dionaea%E4%BD%8E%E4%BA%A4%E4%BA%92%E5%BC%8F%E8%9C%9C%E7%BD%90%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5.pdf">http://netsec.ccert.edu.cn/zhugejw/files/2011/09/Dionaea低交互式蜜罐部署实践.pdf</a></p>      <p></p>
     
 			</body>
 		</html>

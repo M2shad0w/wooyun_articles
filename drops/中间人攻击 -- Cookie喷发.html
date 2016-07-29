@@ -3,14 +3,14 @@
 			<head>
 			     <title>中间人攻击 -- Cookie喷发 - EtherDream</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/12645">http://drops.wooyun.org/papers/12645</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>分享个中间人攻击姿势，屡试不爽。</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 原理</h1>
 
-<hr />
+<hr>
 
 <p>传统 cookie 嗅探，只能获得用户主动访问的站点。不访问就抓不到，效率很低。</p>
 
@@ -34,7 +34,7 @@ new Image().src = 'http://anyhost'
 
 <h1>0x02 爆发</h1>
 
-<hr />
+<hr>
 
 <p>首先收集各大网站域名，然后挨个来一发：</p>
 
@@ -52,7 +52,7 @@ for (var i of list) {
 
 <h1>0x03 优化</h1>
 
-<hr />
+<hr>
 
 <p>因为收集了各种站点，所以需要大量的域名解析。</p>
 
@@ -71,7 +71,7 @@ for (var i of list) {
 
 <h1>0x04 演示</h1>
 
-<hr />
+<hr>
 
 <p>我们用 nginx 来演示：</p>
 
@@ -172,19 +172,19 @@ http {
 
 <p>打开任意 HTTP 页面，就可以爆出用户的各种 Cookie：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160201/20160201042748973561104.png" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160201/20160201042748973561104.png" alt="p1"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160201/2016020104275065872270.png" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160201/2016020104275065872270.png" alt="p2"></p>
 
 <p>实战方式有很多，能控制流量就行。比如 ARP 攻击、钓鱼 WiFi、钓鱼代理，或者<a href="http://fex.baidu.com/blog/2014/04/traffic-hijack/">劫持小区 PPPoE 网络</a>，等等。</p>
 
 <h1>0x05 防范</h1>
 
-<hr />
+<hr>
 
 <p>其实和 JSONP 隐私泄露类似，关闭浏览器「第三方 cookie」即可。</p>
 
-<p>三方 cookie 百害而无一利，隐私泄露的罪魁祸首。</p>      </p>
+<p>三方 cookie 百害而无一利，隐私泄露的罪魁祸首。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,16 +3,16 @@
 			<head>
 			     <title>iOS环境下的中间人攻击风险浅析 - 阿里移动安全</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/9925">http://drops.wooyun.org/tips/9925</a></h1>
 				
       <p>
-        <p><strong>作者：轩夏</strong></p>
+        </p><p><strong>作者：轩夏</strong></p>
 
 <h1>0x00概述</h1>
 
-<hr />
+<hr>
 
 <p>中间人攻击（Man-in-the-Middle Attack，简称“MITM攻击”）是一种“间接”的入侵攻击，这种攻击模式是通过各种技术手段将受入侵者控制的一台计算机虚拟放置在网络连接中的两台通信计算机之间，这台计算机就称为“中间人”。通过中间人攻击可以窃取信息、进行篡改、欺骗等多种攻击。</p>
 
@@ -20,7 +20,7 @@
 
 <h1>0x01中间人攻击</h1>
 
-<hr />
+<hr>
 
 <p>在未做特殊说明的情况下，本文所有实验环境为：</p>
 
@@ -40,11 +40,11 @@
 
 <p>对于这三种情况，我们以一个例子分别对这三种情况进行说明。借用Owasp关于iOS https中间人演示的例子，稍做修改。正常情况下，程序启动时如图1，点击“Fetch Secret”程序请求server端数据并显示，如图2。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151022/20151022054801124411101.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151022/20151022054801124411101.png" alt=""></p>
 
 <p>图 1 启动界面</p>
 
-<p><img src="http://static.wooyun.org//drops/20151022/2015102205481440039248.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151022/2015102205481440039248.png" alt=""></p>
 
 <p>图 2 正常获取数据</p>
 
@@ -52,25 +52,25 @@
 
 <p>在此次连接的NSURLConnection对象的delegate类中只实现一个<code>connection:didReceiveAuthenticationChallenge:</code>方法，如图3。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151022/2015102205481641337328.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151022/2015102205481641337328.png" alt=""></p>
 
 <p>图 3 连接校验方法</p>
 
 <p>设置burp suite，开启代理，如图4。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151022/2015102205481878394422.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151022/2015102205481878394422.png" alt=""></p>
 
 <p>图 4 burp suite设置</p>
 
 <p>手机设置代理为burp suite运行pc的地址，如图5。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151022/2015102205482058420518.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151022/2015102205482058420518.png" alt=""></p>
 
 <p>图 5 手机代理设置</p>
 
 <p>运行程序，点击“Fetch Secret”，程序正常获取到了与图2相同的数据，burp suite也截获了所有信息，如图6，中间人攻击成功。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151022/2015102205482242334617.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151022/2015102205482242334617.png" alt=""></p>
 
 <p>图 6 burp suite截获数据</p>
 
@@ -78,19 +78,19 @@
 
 <p>修改程序，在NSURLConnection对象的delegate类中实现<code>connection:willSendRequestForAuthenticationChallenge:</code>方法，如图7。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151022/2015102205482534161719.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151022/2015102205482534161719.png" alt=""></p>
 
 <p>图 7 连接校验方法</p>
 
 <p>其他设置与1.1.1小节完全相同，程序发现连接异常，终止获取数据，如图8，burp suite也理所当然获取数据失败。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151022/2015102205482949814821.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151022/2015102205482949814821.png" alt=""></p>
 
 <p>图 8 获取数据失败</p>
 
 <p>此时，向手机中安装burp suite证书，如图9。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151022/2015102205483054641918.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151022/2015102205483054641918.png" alt=""></p>
 
 <p>图 9 安装burp证书</p>
 
@@ -100,15 +100,15 @@
 
 <p>继续对程序进行修改，将公钥证书放入应用中，并修改<code>connection:didReceiveAuthenticationChallenge:</code>方法在连接过程中获取证书信息，对server端证书进行强校验，如图10。同时，注释掉<code>connection:willSendRequestForAuthenticationChallenge:</code>方法，因为如图实现了这个方法，方法<code>connection:didReceiveAuthenticationChallenge:</code>将不会被调用。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151022/20151022054837656471016.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151022/20151022054837656471016.png" alt=""></p>
 
 <p>图 10 连接校验方法</p>
 
 <p>其他设置不变，手机中依然安装有burp suite证书，打开应用，点击“Fetch Secret”，应用无法正常获取数据，如图11，burp suite也不能截获数据，中间人攻击失败。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151022/201510220548413155011_1.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151022/201510220548413155011_1.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20151022/201510220548433512211_2.png" alt="" /> 图 11 证书错误</p>
+<p><img src="http://static.wooyun.org//drops/20151022/201510220548433512211_2.png" alt=""> 图 11 证书错误</p>
 
 <h3>1.2.4一些建议</h3>
 
@@ -118,7 +118,7 @@
 
 <h1>0x02可信证书管理</h1>
 
-<hr />
+<hr>
 
 <p>上一章节中谈到向手机中导入可信证书的问题，小生在编写一个iOS工具的时候无意发现iOS证书管理的一个有趣的地方。通过“Settings”->“General”->“Profiles”可以查看当前设备信任的证书列表，但这个列表就真的是设备信任的证书列表吗？</p>
 
@@ -126,7 +126,7 @@
 
 <p>按照上一章节建议，将应用防中间人级别设置为level2，即应用信任当前设备上的所有证书，如果要使用burp suite对该应用进行中间人攻击，需要向设备中安装burp的证书，而目前设备上的信任证书如图12所示，设备上只有一个用于连接公司内网的员工证书。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/201510230514594248212ed.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/201510230514594248212ed.png" alt=""></p>
 
 <p>图 12 证书列表</p>
 
@@ -140,7 +140,7 @@
 
 <p>该文件中存储的才是当前设备真正信任的证书列表，而通过“Settings”->“General”->“Profiles”查看到的证书列表与该文件中存储的证书列表可以不同步，如果我们手动对该sqlite3文件进行更改，就能让手机实际的可信证书列表与在“Profiles”中看到的完全不一样。小生写了一个工具，对该sqlite3文件进行管理，查看该文件中的存储，如图13。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/201510230515013187013ed.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/201510230515013187013ed.png" alt=""></p>
 
 <p>图 13 证书列表</p>
 
@@ -148,19 +148,19 @@
 
 <p>我们删除掉该sqlite3文件中的ID为1的证书，如图14，并对设备进行重启或静置10分钟，再进行2.1章节中的实验。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/201510230515059846214ed1.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/201510230515059846214ed1.png" alt=""></p>
 
 <p>图 14 删除burp证书</p>
 
 <p>打开应用，点击“Fetch Secret”，应用报错，如图15。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151022/20151022054853618541514.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151022/20151022054853618541514.png" alt=""></p>
 
 <p>图 15 证书错误</p>
 
 <p>如果重新将burp suite证书手动插入TrustStore.sqlite3文件中，如图16，并对设备进行重启或静置10分钟，再进行2.1章节中的实验，发现中间人攻击成功。而本文中对TrustStore.sqlite3文件的所有手动操作，都不会影响到“Profiles”中的任何显示，“Profiles”始终只显示一张员工证书。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151023/201510230515091432516ed.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151023/201510230515091432516ed.png" alt=""></p>
 
 <p>图 16 插入证书</p>
 
@@ -172,9 +172,9 @@
 
 <h1>0x03小节</h1>
 
-<hr />
+<hr>
 
-<p>iOS系统的中间人攻击方法与防范措施，总结在在0x01章节中，小生认为普通应用只需要信任当前设备上的所有可信证书即可。关于iOS系统的可信证书列表，越狱过的朋友还是去检查下“<code>/private/var/Keychains/TrustStore.sqlite3</code>”文件中是否有“Profiles”中未显示或显示不对等的情况。</p>      </p>
+<p>iOS系统的中间人攻击方法与防范措施，总结在在0x01章节中，小生认为普通应用只需要信任当前设备上的所有可信证书即可。关于iOS系统的可信证书列表，越狱过的朋友还是去检查下“<code>/private/var/Keychains/TrustStore.sqlite3</code>”文件中是否有“Profiles”中未显示或显示不对等的情况。</p>      <p></p>
     
 			</body>
 		</html>

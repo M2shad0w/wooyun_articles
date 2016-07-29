@@ -3,18 +3,18 @@
 			<head>
 			     <title>GNU/Linux安全基线与加固-0.1 - insight-labs</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2621">http://drops.wooyun.org/tips/2621</a></h1>
 				
       <p>
-        <p><strong>from:https://raw.githubusercontent.com/citypw/DNFWAH/master/4/d4&#95;0x02&#95;DNFWAH&#95;gnu-linux&#95;security&#95;baseline&#95;hardening.txt</strong></p>
+        </p><p><strong>from:https://raw.githubusercontent.com/citypw/DNFWAH/master/4/d4&#95;0x02&#95;DNFWAH&#95;gnu-linux&#95;security&#95;baseline&#95;hardening.txt</strong></p>
 
 <p>By Shawn</p>
 
 <h2>0x00 关于这份文档</h2>
 
-<hr />
+<hr>
 
 <p>随着GNU/Linux在各个行业的IT基础架构中的普及，安全问题也成为了关注的焦点， GNU/Linux主要是由GNU核心组建( 编译器GCC, C库Glibc等)和Linux内核组合而成， 在自由开源软件统治着基础平台的大环境下，不少人认为开源一定是安全的，这 是一种不完全正确的观念，Coverity的报告只是说明了开源比闭源更安全，这并 不代表自由开源软件就是牢不可破的，自由开源软件在一定程度上具有一些安全 的特性，这些特性不一定在GNU/Linux发行版中是默认开启，这些特性中有一些是 必须在安全基线中去部署的，有一些可以根据具体需求来定制，这篇文档主要是 介绍一些关于安全基线建设和加固的基本内容。</p>
 
@@ -24,7 +24,7 @@
 
 <h2>0x01 安全基线</h2>
 
-<hr />
+<hr>
 
 <p>在遵循最小安装和最小权限的部署原则下，还有一些地方是需要注意的，我们把 这些部分称为安全基线。</p>
 
@@ -99,7 +99,7 @@
 <pre><code>PermitRootLogin no
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>(可选)</h2>
 
@@ -149,7 +149,7 @@ PasswordAuthentication no
 -w /etc/apparmor.d -p wa -k MAC-policy
 </code></pre>
 
-<hr />
+<hr>
 
 <p>上面的例子对一系列关于时间的系统调用进行了监控，一旦时间出现改变就会记 录进如日志，之后对几个跟创建/删除用户和组的文件也进行了监控，最后是对 apparmor的配置文件和规则目录进行监控。在/etc/apparmor下的shell中输入：</p>
 
@@ -158,22 +158,22 @@ PasswordAuthentication no
 
 <p>用工具ausearch来进行查询：</p>
 
-<hr />
+<hr>
 
 <pre><code>sudo ausearch -i -k MAC-policy
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>type=CONFIG_CHANGE msg=audit(07/20/2014 20:36:48.397:58) : auid=root ses=2 op="add rule" key=MAC-policy list=exit res=1 
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>type=CONFIG_CHANGE msg=audit(07/20/2014 20:36:48.445:59) : auid=root ses=2 op="add rule" key=MAC-policy list=exit res=1 
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>type=PATH msg=audit(07/20/2014 20:38:42.717:61) : item=1 name=hello inode=799889 dev=08:01 mode=file,644 ouid=root ogid=root rdev=00:00 nametype=CREATE 
 type=PATH msg=audit(07/20/2014 20:38:42.717:61) : item=0 name=/etc/apparmor inode=783766 dev=08:01 mode=dir,755 ouid=root ogid=root rdev=00:00 nametype=PARENT 
@@ -181,7 +181,7 @@ type=CWD msg=audit(07/20/2014 20:38:42.717:61) :  cwd=/etc/apparmor
 type=SYSCALL msg=audit(07/20/2014 20:38:42.717:61) : arch=i386 syscall=open success=yes exit=3 a0=bfeca8ab a1=8941 a2=1b6 a3=1 items=2 ppid=17704 pid=17876 auid=root uid=root gid=root euid=root suid=root fsuid=root egid=root sgid=root fsgid=root tty=pts1 ses=2 comm=touch exe=/bin/touch key=MAC-policy 
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>type=PATH msg=audit(07/20/2014 20:38:56.017:62) : item=1 name=hello inode=799889 dev=08:01 mode=file,644 ouid=root ogid=root rdev=00:00 nametype=DELETE 
 type=PATH msg=audit(07/20/2014 20:38:56.017:62) : item=0 name=/etc/apparmor inode=783766 dev=08:01 mode=dir,755 ouid=root ogid=root rdev=00:00 nametype=PARENT 
@@ -189,7 +189,7 @@ type=CWD msg=audit(07/20/2014 20:38:56.017:62) :  cwd=/etc/apparmor
 type=SYSCALL msg=audit(07/20/2014 20:38:56.017:62) : arch=i386 syscall=unlinkat success=yes exit=0 a0=ffffff9c a1=89eb8c0 a2=0 a3=0 items=2 ppid=17704 pid=17889 auid=root uid=root gid=root euid=root suid=root fsuid=root egid=root sgid=root fsgid=root tty=pts1 ses=2 comm=rm exe=/bin/rm key=MAC-policy 
 </code></pre>
 
-<hr />
+<hr>
 
 <p>也可以使用aureport来生成报告。</p>
 
@@ -200,14 +200,14 @@ type=SYSCALL msg=audit(07/20/2014 20:38:56.017:62) : arch=i386 syscall=unlinkat 
 <pre><code>find / -path /proc -prune  -name "-*"
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>2, 所谓的world-writable权限的文件是不太合理的，所以这种文件我们必须得提防：</h2>
 
 <pre><code>find / -path /proc -prune -o -perm -2 ! -type l -ls
 </code></pre>
 
-<hr />
+<hr>
 
 <p>3, 一个没有owner的文件是存在潜在威胁的，因为你永远也不知道未来某个时候她的</p>
 
@@ -216,14 +216,14 @@ type=SYSCALL msg=audit(07/20/2014 20:38:56.017:62) : arch=i386 syscall=unlinkat 
 <pre><code>find / -path /proc -prune -o -nouser -o -nogroup
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>4, 作为"自主可控"的自由软件用户，你得知道你的生产环境中哪些用户是可用的：</h2>
 
 <pre><code>egrep -v '.*:\*|:\!' /etc/shadow | awk -F: '{print $1}'
 </code></pre>
 
-<hr />
+<hr>
 
 <p>5, 你要删除一个用户前，应该先了解一些有哪些文件是他拥有的： &#45;--||||&#45;--||||&#45;--||||&#45;--||||&#45;--||||&#45;--||||&#45;--||||&#45;--||||&#45;--||||&#45;--||||&#45;--||||&#45;--||||&#45;--||||&#45;--||||&#45;--||||&#45;--||||&#45;--||||&#45;--||||&#45;--||||&#45;--||||--x</p>
 
@@ -235,21 +235,21 @@ type=SYSCALL msg=audit(07/20/2014 20:38:56.017:62) : arch=i386 syscall=unlinkat 
 <pre><code>userdel -r account
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>6, 如果不带':x:'的用户肯定是无法正常使用的：</h2>
 
 <pre><code>grep -v ':x:' /etc/passwd
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>7, /boot目录权限下至少是644，甚至是600:</h2>
 
 <pre><code>ls -l /boot
 </code></pre>
 
-<hr />
+<hr>
 
 <p>(可选)</p>
 
@@ -266,7 +266,7 @@ type=SYSCALL msg=audit(07/20/2014 20:38:56.017:62) : arch=i386 syscall=unlinkat 
 
 <h2>0x02 内核安全基线</h2>
 
-<hr />
+<hr>
 
 <h2>SYN cookies防护主要是为了防止SYN洪水攻击，开启设置为1：</h2>
 
@@ -293,7 +293,7 @@ echo 0 &gt; /proc/sys/net/netfilter/nf_conntrack_tcp_loose
 /proc/sys/net/ipv4/conf/all/accept_source_route
 </code></pre>
 
-<hr />
+<hr>
 
 <p>ICMP重定向，正常用于选择最优路径，攻击者可以利用开展中间人攻击，关闭设</p>
 
@@ -303,7 +303,7 @@ echo 0 &gt; /proc/sys/net/netfilter/nf_conntrack_tcp_loose
 /proc/sys/net/ipv4/conf/all/accept_redirects
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>IP欺骗防护，启动设置为1：</h2>
 
@@ -311,7 +311,7 @@ echo 0 &gt; /proc/sys/net/netfilter/nf_conntrack_tcp_loose
 /proc/sys/net/ipv4/conf/all/rp_filter
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>忽略ICMP请求( PING)，启动设置为1：</h2>
 
@@ -319,7 +319,7 @@ echo 0 &gt; /proc/sys/net/netfilter/nf_conntrack_tcp_loose
 /proc/sys/net/ipv4/icmp_echo_ignore_all
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>忽略ICMP广播请求，启动设置为1：</h2>
 
@@ -327,7 +327,7 @@ echo 0 &gt; /proc/sys/net/netfilter/nf_conntrack_tcp_loose
 /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>错误消息防护，会警告你关于网络中的ICMP异常，启动设置为1：</h2>
 
@@ -335,7 +335,7 @@ echo 0 &gt; /proc/sys/net/netfilter/nf_conntrack_tcp_loose
 /proc/sys/net/ipv4/icmp_ignore_bogus_error_responses
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>对特定packet(IP欺骗，源路由，重定向）进行审计，启动设置为1：</h2>
 
@@ -343,7 +343,7 @@ echo 0 &gt; /proc/sys/net/netfilter/nf_conntrack_tcp_loose
 net.ipv4.conf.all.log_martians = 1
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>地址随机化，启动设置为2：</h2>
 
@@ -351,7 +351,7 @@ net.ipv4.conf.all.log_martians = 1
 /proc/sys/kernel/randomize_va_space
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>内核符号限制访问，启动设置为1：</h2>
 
@@ -367,7 +367,7 @@ net.ipv4.conf.all.log_martians = 1
 /proc/sys/vm/mmap_min_addr
 </code></pre>
 
-<hr />
+<hr>
 
 <p><strong>Apparmor</strong></p>
 
@@ -381,11 +381,11 @@ net.ipv4.conf.all.log_martians = 1
 <pre><code>sudo aa-status
 </code></pre>
 
-<hr />
+<hr>
 
 <h2>0x03 加固</h2>
 
-<hr />
+<hr>
 
 <p>安全基线是在防御已知的威胁，而加固则是侧重于防御未知的威胁，加固的主要 目的是增加攻击者的成本。</p>
 
@@ -430,7 +430,7 @@ patch -p1 &lt; ../grsecurity-3.0-3.14.3-201405121814.patch
 <pre><code>dpkg -i ../*.deb
 </code></pre>
 
-<hr />
+<hr>
 
 <p>现在内核的部分结束，关于RBAC规则可以使用用户态工具gradm的Learning Mode 来实现，但不在本文的讨论范畴。</p>
 
@@ -438,17 +438,17 @@ patch -p1 &lt; ../grsecurity-3.0-3.14.3-201405121814.patch
 
 <p>1, PHP是常用的WEB开发语言，在WEB生产环境部署的过程中，目录和文件的权限是需 要关注的，通常除了少数用途的目录（比如上传）外，都应该把写入权限禁用：</p>
 
-<hr />
+<hr>
 
 <pre><code>find -type f -name \*.php -exec chmod 444 {} \;
 find -type d -exec chmod 555 {} \;
 </code></pre>
 
-<hr />
+<hr>
 
 <p>2, 开启 php 的安全模式,禁用 php 不安全的函数等加固，修改 php 配置文件 /etc/php5/apache2/php.ini :</p>
 
-<hr />
+<hr>
 
 <p>// 设置模式为安全模式,此值直接影响 disable_functions 的命令是否生效; [SQL]</p>
 
@@ -483,11 +483,11 @@ passthru, phpinfo, escapeshellarg, escapeshellcmd
 <pre><code>allow_url_include = Off
 </code></pre>
 
-<hr />
+<hr>
 
 <p>0x04 Reference</p>
 
-<hr />
+<hr>
 
 <p>[1] 开源闭源项目代码质量对比 http://www.solidot.org/story?sid=39173</p>
 
@@ -511,7 +511,7 @@ passthru, phpinfo, escapeshellarg, escapeshellcmd
 
 <p>[11] Hardening PHP from php.ini http://www.madirish.net/199</p>
 
-<p>[12] CVE-2014-0196 exploit http://bugfuzz.com/stuff/cve-2014-0196-md.c</p>      </p>
+<p>[12] CVE-2014-0196 exploit http://bugfuzz.com/stuff/cve-2014-0196-md.c</p>      <p></p>
     
 			</body>
 		</html>

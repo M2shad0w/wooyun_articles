@@ -3,14 +3,14 @@
 			<head>
 			     <title>Android Content Provider Security - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4314">http://drops.wooyun.org/tips/4314</a></h1>
 				
       <p>
-        <h2>0x00 科普</h2>
+        </p><h2>0x00 科普</h2>
 
-<hr />
+<hr>
 
 <p>内容提供器用来存放和获取数据并使这些数据可以被所有的应用程序访问。它们是应用程序之间共享数据的唯一方法；不包括所有Android软件包都能访问的公共储存区域。Android为常见数据类型（音频，视频，图像，个人联系人信息，等等）装载了很多内容提供器。你可以看到在android.provider包里列举了一些。你还能查询这些提供器包含了什么数据。当然，对某些敏感内容提供器，必须获取对应的权限来读取这些数据。</p>
 
@@ -18,11 +18,11 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/20141212/2014121202372462932.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/20141212/2014121202372462932.jpg" alt=""></p>
 
 <h2>0x01 知识要点</h2>
 
-<hr />
+<hr>
 
 <p>参考：<a href="http://developer.android.com/guide/topics/providers/content-providers.html">http://developer.android.com/guide/topics/providers/content-providers.html</a></p>
 
@@ -30,11 +30,11 @@
 
 <p>content URI 是一个标志provider中的数据的URI．Content URI中包含了整个provider的以符号表示的名字(它的authority) 和指向一个表的名字(一个路径)．当你调用一个客户端的方法来操作一个provider中的一个表，指向表的content URI是参数之一．</p>
 
-<p><img src="http://static.wooyun.org/20141212/2014121202373074404.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/20141212/2014121202373074404.jpg" alt=""></p>
 
 <p>A. 标准前缀表明这个数据被一个内容提供器所控制。它不会被修改。</p>
 
-<p>B. URI的权限部分；它标识这个内容提供器。对于第三方应用程序，这应该是一个全称类名（小写）以确保唯一性。权限在<provider>元素的权限属性中进行声明：</p>
+<p>B. URI的权限部分；它标识这个内容提供器。对于第三方应用程序，这应该是一个全称类名（小写）以确保唯一性。权限在<provider>元素的权限属性中进行声明：</provider></p>
 
 <pre><code>    &lt;provider name=".TransportationProvider"
       authorities="com.example.transportationprovider"
@@ -90,7 +90,7 @@ String mSelectionClause =  "var = ?";
 
 <p><strong>权限</strong></p>
 
-<p>下面的<uses-permission> 元素请求对用户词典的读权限：</p>
+<p>下面的<uses-permission> 元素请求对用户词典的读权限：</uses-permission></p>
 
 <pre><code>&lt;uses-permission android:name="android.permission.READ_USER_DICTIONARY"&gt;
 </code></pre>
@@ -138,17 +138,17 @@ String mSelectionClause =  "var = ?";
 
 <h2>0x02 content provider 分类</h2>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org/20141212/2014121202373078881.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/20141212/2014121202373078881.jpg" alt=""></p>
 
-<p><img src="http://static.wooyun.org/20141212/2014121202373089005.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org/20141212/2014121202373089005.jpg" alt=""></p>
 
 <p>这个老外分的特别细，个人认为就分private、public、in-house差不多够用。</p>
 
 <h2>0x03 安全建议</h2>
 
-<hr />
+<hr>
 
 <ol>
 <li>minSdkVersion不低于9</li>
@@ -162,7 +162,7 @@ String mSelectionClause =  "var = ?";
 
 <h2>0x04 测试方法</h2>
 
-<hr />
+<hr>
 
 <p>1、反编译查看AndroidManifest.xml（drozer扫描）文件定位content provider是否导出，是否配置权限，确定authority</p>
 
@@ -193,7 +193,7 @@ run app.provider.query content://telephony/carriers/preferapn --vertical
 
 <h2>0x05 案例</h2>
 
-<hr />
+<hr>
 
 <p><strong>案例1：直接暴露</strong></p>
 
@@ -288,7 +288,7 @@ private static String IMAGE_DIRECTORY = localFile.getAbsolutePath();
 
 <h2>0x06 参考</h2>
 
-<hr />
+<hr>
 
 <p><a href="https://www.securecoding.cert.org/confluence/pages/viewpage.action?pageId=111509535">https://www.securecoding.cert.org/confluence/pages/viewpage.action?pageId=111509535</a></p>
 
@@ -300,7 +300,7 @@ private static String IMAGE_DIRECTORY = localFile.getAbsolutePath();
 
 <p><a href="http://zone.wooyun.org/content/15097">http://zone.wooyun.org/content/15097</a></p>
 
-<p><a href="http://drops.wooyun.org/tips/2997">http://drops.wooyun.org/tips/2997</a></p>      </p>
+<p><a href="http://drops.wooyun.org/tips/2997">http://drops.wooyun.org/tips/2997</a></p>      <p></p>
     
 			</body>
 		</html>

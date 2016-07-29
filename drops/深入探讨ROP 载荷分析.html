@@ -3,14 +3,14 @@
 			<head>
 			     <title>深入探讨ROP 载荷分析 - cssembly</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4077">http://drops.wooyun.org/papers/4077</a></h1>
 				
       <p>
-        <h1>0x00 简介</h1>
+        </p><h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>Exploit-db上看到的感觉还不错，所以就翻译一下，原文题目为《Deep Dive into ROP Payload Analysis》，作者Sudeep Singh。</p>
 
@@ -24,7 +24,7 @@
 
 <h1>0x01 场景</h1>
 
-<hr />
+<hr>
 
 <p>漏洞利用正变成越来越流行的领域，同时在类似浏览器、Adobe Reader、Flash Player、Microsoft Silverlight 、Java等通用软件中也经常发现漏洞。由于漏洞利用通常是攻击中的第一个阶段，因此比较适宜在漏洞利用阶段对攻击做防护。</p>
 
@@ -39,7 +39,7 @@
 
 <h1>0x02 利用缓解</h1>
 
-<hr />
+<hr>
 
 <p>这篇文章中，我们主要关注ROP载荷分析，因此将主要讨论stack pivot检测技术。</p>
 
@@ -92,7 +92,7 @@ StackLimit: 02201000
 
 <h1>0x03 ROP链分析</h1>
 
-<hr />
+<hr>
 
 <p>这篇文章中，我将介绍ROP链的分析。请注意，我们并不是分析漏洞的根本原因。我们主要是深入理解ROP载荷是如何工作的。</p>
 
@@ -117,11 +117,11 @@ StackLimit: 02201000
 
 <p>在转储shellcode到文件中以后，通过十六进制编辑器打开文件，可以看到它不是一个常规的shellcode。我已经标示出了其中一些ROP gadgets：</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802035447870.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802035447870.png" alt="enter image description here"></p>
 
 <p>通常情况下，所有的ROP gadgets将从同一个未被基址随机化的模块中选取。这种情况下，可以看到所有的gadgets都来自一个模块，它的基址是0x07000000。通过Windbg打开Adobe Reader，可以看到BIB.dll模块占用了0x07000000的地址。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802040091954.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802040091954.png" alt="enter image description here"></p>
 
 <p>因此，在这个例子中所有的ROP gadgets都是从这个模块中选择的。</p>
 
@@ -129,7 +129,7 @@ StackLimit: 02201000
 
 <p>我的代码将区分ROP gadgets和ROP gadgets的参数。现在通过IDA加载这个文件，标记适当的节为代码和数据。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802040275028.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802040275028.png" alt="enter image description here"></p>
 
 <p>现在我们就能更高效的分析ROP shellcode了。 某些情况下，我们需要单步跟踪ROP shellcode来更好的理解他。这种情况下，我们就需要调试ROP shellcode，可以通过在ROP链的第一个ROP gadget上设置断点来调试。</p>
 
@@ -141,7 +141,7 @@ StackLimit: 02201000
 
 <p>特别主要注意的是，这里icucnv36.dll还没有被Adobe Reader加载。如果我在第一个ROP gadget上设置断点，将不允许这样做并显示如下信息：</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802040216832.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802040216832.png" alt="enter image description here"></p>
 
 <p>这是因为我们正在尝试在一个还没有加载的dll地址空间中设置断点。</p>
 
@@ -151,37 +151,37 @@ StackLimit: 02201000
 
 <p>现在，运行Adobe Reader进程，打开恶意的PDF文件，很快icucnv36.dll被加载，同时自动中断到调试器。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802040357054.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802040357054.png" alt="enter image description here"></p>
 
 <p>现在就能够成功的在第一个ROP gadget上设置断点。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802040448346.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802040448346.png" alt="enter image description here"></p>
 
 <p>现在执行进程，很快第一个ROP gadget被执行了，中断到了调试器。当我们观察寄存器的内容，可以看到esp指向了0x0c0c0c10。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802040463774.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802040463774.png" alt="enter image description here"></p>
 
 <p>通过stack pivot gadget攻击者能够成功的切换堆栈。</p>
 
 <p>如果观察地址空间中的内容，在0x0c0c0c0c处可以看到整个ROP shellcode。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802040592596.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802040592596.png" alt="enter image description here"></p>
 
 <p>这样就能够调试ROP shellcode，在调试器中进行单步跟踪。</p>
 
 <p>让我们看看这个恶意PDF文档如何因为stack pivot被检测到。如果我们进一步追踪ROP链，我们注意到它通过0x4a80b692处的ROP gadget调用了API函数CreateFileA。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802040652116.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802040652116.png" alt="enter image description here"></p>
 
 <p>现在我们在API函数CreateFileA()上。</p>
 
 <p>如果检查TEB中的StackBase和StackLimit的值，可以看到esp在这个范围以外。如果安全软件在CreateFileA()上设置了API钩子，这个漏洞利用将在stack pivot阶段被很容易的检测到。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802040691360.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802040691360.png" alt="enter image description here"></p>
 
 <h1>0x04 Stack Pivot 检测绕过</h1>
 
-<hr />
+<hr>
 
 <p>我们现在来看最近刚发现的利用CVE-2014-0569漏洞的样本，它使用了可以绕过stack pivot检测的ROP载荷。这种ROP载荷之前并没有看到过。之前它只是一种概念性的证明，而现在已经被用于实际的漏洞利用中。</p>
 
@@ -191,7 +191,7 @@ StackLimit: 02201000
 
 <p>正如下图看到的，该漏洞利用工具部署在kethanlingtoro.eu处。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802040652332.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802040652332.png" alt="enter image description here"></p>
 
 <p>下面的HTML代码用于在浏览器中加载恶意swf文件，触发在Adobe Flash Player插件中的漏洞。</p>
 
@@ -213,17 +213,17 @@ StackLimit: 02201000
 
 <p>在这个例子中，恶意的swf文件被高度的混淆，如下图所示，常用的Flash Decompilers也不能成功的反编译这些代码。因此通过静态分析来定位ROP gadgets并不容易。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802040732447.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802040732447.png" alt="enter image description here"></p>
 
 <p>通过查看反汇编后的Flash代码，可以看到在漏洞利用函数中它使用了一个Sound对象，同时调用了它的toString()方法。采用Sound对象进行漏洞利用的技术在当前很流行。通过该漏洞，Sound对象的虚函数表将被重写，而这将最终导致攻击者控制程序的执行流。</p>
 
 <p>Sound对象：</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802040749006.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802040749006.png" alt="enter image description here"></p>
 
 <p>Sound对象的toString()方法被调用：</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802040774226.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802040774226.png" alt="enter image description here"></p>
 
 <p>下面来看如何通过调试器来分析这个ROP载荷。</p>
 
@@ -266,7 +266,7 @@ Flash32_15_0_0_167!IAEModule_IAEKernel_UnloadModule+0x11c185:
 
 <p>如果我们查看该指令之前的反汇编代码，我们将看到在漏洞利用中，完整的Sound对象的虚函数表都被改写了，如下图：</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802040887299.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802040887299.png" alt="enter image description here"></p>
 
 <pre><code>5eef8940 8b01   mov eax,dword ptr [ecx]
 5eef8942 8b5070     mov edx,dword ptr [eax+70h]
@@ -297,7 +297,7 @@ Flash32_15_0_0_167+0x205bb:
 5e8805bc c3     ret
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802040956834.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802040956834.png" alt="enter image description here"></p>
 
 <p>这就是stack pivot gadget，这意味着攻击者控制着eax的值以及它指向的数据。让我们查看一下：</p>
 
@@ -312,7 +312,7 @@ Flash32_15_0_0_167+0x205bb:
 070ab070 5e8805bb 5e8c1478 5e8c1478 5e8c1478
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802040942090.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802040942090.png" alt="enter image description here"></p>
 
 <p>在我们的ROP载荷中，所有的gadgets都来自于Flash32&#95;15&#95;0&#95;0&#95;167.ocx这个模块。</p>
 
@@ -333,7 +333,7 @@ Flash32_15_0_0_167+0x1192:
 5e861193 c3  ret
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802041033152.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802041033152.png" alt="enter image description here"></p>
 
 <p>这个ROP gadget将ecx的值设置为0x5e8805bb</p>
 
@@ -350,7 +350,7 @@ Flash32_15_0_0_167+0x61478:
 5e8c1479 c3     ret
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802041036830.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802041036830.png" alt="enter image description here"></p>
 
 <p>正如我们之前提到的，在stack pivot执行前的原始esp的值已经被存储在了eax中。因此，eax减小四次，就是在原始栈上开辟出一个四字节。</p>
 
@@ -378,7 +378,7 @@ Flash32_15_0_0_167+0x3a4ca:
 
 <p>这将存储ecx的值在原始堆栈上（esp-4处）</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802041116789.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802041116789.png" alt="enter image description here"></p>
 
 <p>下一个ROP gadget将0x41414141弹出到ebp中，这只是为了填充用。因为我们的ROP gadget在返回之前包含了一条pop ebp指令。 上面这些ROP gadgets将被多次执行。我们可以总结如下：</p>
 
@@ -410,11 +410,11 @@ retn
 
 <p>如果现在查看原始堆栈，可以看到堆栈被精心布置，stack pivot将重定向控制流到kernel32!VirtualAllocStub()。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802041121188.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802041121188.png" alt="enter image description here"></p>
 
 <p>在堆栈上精心布置的VirtualAlloc的参数如下：</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802041216088.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802041216088.png" alt="enter image description here"></p>
 
 <p>这意味着，ROP载荷将分配具有PAGE&#95;EXECUTE&#95;READWRITE (0x40) 和 MEM_COMMIT (0x1000)属性的0x1000字节的内存空间。</p>
 
@@ -422,7 +422,7 @@ retn
 
 <p>如下所示，栈指针在StackBase和StackLimit的范围以内，因此stack pivot缓解措施将不能阻止该漏洞利用。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802041272765.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802041272765.png" alt="enter image description here"></p>
 
 <p>进一步分析，在调用VirtualAllocStub()的点，堆栈布局如下：</p>
 
@@ -473,33 +473,33 @@ pop ecx/retn ; set ecx to 0x143
 push eax/retn ; now we are at the shellcode
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802041253436.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802041253436.png" alt="enter image description here"></p>
 
 <p>这部分ROP载荷将从主shellcode中拷贝0x143个DWORD到新分配的内存空间中。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802041399594.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802041399594.png" alt="enter image description here"></p>
 
 <p>现在就是第二阶段的shellcode了。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802041347084.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802041347084.png" alt="enter image description here"></p>
 
 <p>进一步对代码进行跟踪，将看到动态查找kernelbase.dll基址以及计算VirtualProtect函数地址。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802041336949.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802041336949.png" alt="enter image description here"></p>
 
 <p>这将修改0x01c10060处0x4b3字节大小内存区域的保护属性。然后调用GetTempPathA 构建路径C:\Users\n3on\AppData\Local\Temp\stuprt.exe。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802041489767.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802041489767.png" alt="enter image description here"></p>
 
 <p>通过LoadLibraryA加载wininet.dll库。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802041437003.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802041437003.png" alt="enter image description here"></p>
 
 <p>然后可以看到通过调用InternetOpenUrlA从http://kethanlingtoro.eu/xs3884y132186/lofla1.php下载载荷。</p>
 
 <p>我们可以确定这和PCAP文件中是相同的URL，如下所示：</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802041448750.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802041448750.png" alt="enter image description here"></p>
 
 <p>载荷将被存储在C:\Users\n3on\AppData\Local\Temp\stuprt.exe，并被执行。</p>
 
@@ -511,7 +511,7 @@ push eax/retn ; now we are at the shellcode
 
 <p>我们可以从内存中转储ROP载荷和shellcode到文件中。正如下面看到的，可以使用writemem命令从内存中转储大约0x1500字节的shellcode到rop.txt文件中。</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802041526750.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802041526750.png" alt="enter image description here"></p>
 
 <p>接下来，写一个C程序，打印rop.txt中的DWORD列表。</p>
 
@@ -523,7 +523,7 @@ push eax/retn ; now we are at the shellcode
 
 <h1>0x05 Heap Spray 模式</h1>
 
-<hr />
+<hr>
 
 <p>由于ROP是和Heap Spray技术一起使用的，因此讨论一下这两个漏洞利用中的heap spray模式的不同。在第一个例子中，当我们在调试器中，中断到恶意PDF的第一个ROP gadget时，我们进行一下堆分析。</p>
 
@@ -531,13 +531,13 @@ push eax/retn ; now we are at the shellcode
 
 <p>!heap -stat</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802041574874.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802041574874.png" alt="enter image description here"></p>
 
 <p>可以看到在00390000处分配的堆空间具有最大的提交字节。让我们进行进一步的分析：</p>
 
 <p>0:000> !heap -stat -h 00390000</p>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802041540704.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802041540704.png" alt="enter image description here"></p>
 
 <p>正如所看到的，它包含了0x1f0个大小为0xfefc字节大小的块。这是一种非常固定的分配模式，也是一张很好地识别heap spray的标记。 进一步枚举所有大小为0xfefc字节的堆块</p>
 
@@ -616,7 +616,7 @@ size #blocks total ( %) (percent of total busy bytes)
 580 8 - 2c00 (2.58)
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141128/2014112802041691778.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141128/2014112802041691778.png" alt="enter image description here"></p>
 
 <p>这里并没有看到固定的模式，也就是说在第二个漏洞利用中，类似EMET的安全软件对于heap spray的检测方法将无法工作。</p>
 
@@ -653,17 +653,17 @@ size #blocks total ( %) (percent of total busy bytes)
 
 <h1>0x06 结论</h1>
 
-<hr />
+<hr>
 
 <p>可以看到由于新的漏洞利用检测技术被安全软件所使用，漏洞利用的过程也变得更加复杂。显然用于攻击的漏洞利用也注意到了这些检测技术并尝试绕过他们。通过阅读这篇文章，你将能够深入的分析漏洞利用中的ROP载荷。</p>
 
 <h1>0x07 附录</h1>
 
-<hr />
+<hr>
 
 <p>这里有两个附录的文件用来参考</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/%E9%99%84%E5%BD%95.zip">附录</a></p>      </p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/%E9%99%84%E5%BD%95.zip">附录</a></p>      <p></p>
     
 			</body>
 		</html>

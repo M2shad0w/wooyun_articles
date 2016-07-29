@@ -3,16 +3,16 @@
 			<head>
 			     <title>逆向基础（二） - reverse-engineering</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1931">http://drops.wooyun.org/tips/1931</a></h1>
 				
       <p>
-        <p>from:http://yurichev.com/RE-book.html</p>
+        </p><p>from:http://yurichev.com/RE-book.html</p>
 
 <h1>Chapter 5 printf() 与参数处理</h1>
 
-<hr />
+<hr>
 
 <p>现在让我们扩展"hello, world"(2)中的示例，将其中main()函数中printf的部分替换成这样</p>
 
@@ -85,7 +85,7 @@ add esp, 24
 
 <p>栈中的数据又在哪？那么看一下调试器右下方的窗口:</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405091653869.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405091653869.png" alt="enter image description here"></p>
 
 <p>图 5.1</p>
 
@@ -97,7 +97,7 @@ add esp, 24
 
 <p>然后我们就可以看到输出</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405091765666.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405091765666.png" alt="enter image description here"></p>
 
 <p>图5.2 执行printf()函数</p>
 
@@ -115,19 +115,19 @@ add esp, 24
 
 <p>因为在栈指针寄存器之上的数据都是无用的。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403551980846.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403551980846.png" alt="enter image description here"></p>
 
 <p>图5.3 OllyDbg:main()初始处</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403551957449.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403551957449.png" alt="enter image description here"></p>
 
 <p>图5.4 OllyDbg:printf()执行时</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403552072114.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403552072114.png" alt="enter image description here"></p>
 
 <p>图5.5 Ollydbg:printf()执行后</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403552030877.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403552030877.png" alt="enter image description here"></p>
 
 <p>图5.6 OllyDbg ADD ESP, 10执行完后</p>
 
@@ -276,7 +276,7 @@ Dump of assembler code for function main:
     0x0804842e &lt;+17&gt;:   movl    $0x2,0x8(%esp)
     0x08048436 &lt;+25&gt;:   movl    $0x1,0x4(%esp)
     0x0804843e &lt;+33&gt;:   movl    $0x80484f0,(%esp)
-    0x08048445 &lt;+40&gt;:   call    0x80482f0 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1767657e79637157677b63">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+    0x08048445 &lt;+40&gt;:   call    0x80482f0 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1767657e79637157677b63">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
 =&gt;  0x0804844a &lt;+45&gt;:   mov     $0x0,%eax
     0x0804844f &lt;+50&gt;:   leave
     0x08048450 &lt;+51&gt;:   ret
@@ -297,7 +297,7 @@ Dump of assembler code for function main:
     0x0804842e &lt;+17&gt;:   mov     DWORD PTR [esp+0x8],0x2
     0x08048436 &lt;+25&gt;:   mov     DWORD PTR [esp+0x4],0x1
     0x0804843e &lt;+33&gt;:   mov     DWORD PTR [esp],0x80484f0
-    0x08048445 &lt;+40&gt;:   call    0x80482f0 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ed9d9f8483998bad9d8199">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+    0x08048445 &lt;+40&gt;:   call    0x80482f0 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ed9d9f8483998bad9d8199">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
 =&gt;  0x0804844a &lt;+45&gt;:   mov     eax,0x0
     0x0804844f &lt;+50&gt;:   leave
     0x08048450 &lt;+51&gt;:   ret
@@ -509,7 +509,7 @@ Dump of assembler code for function main:
     0x0000000000400562 &lt;+53&gt;:   mov     esi,0x1
     0x0000000000400567 &lt;+58&gt;:   mov     edi,0x400628
     0x000000000040056c &lt;+63&gt;:   mov     eax,0x0
-    0x0000000000400571 &lt;+68&gt;:   call    0x400410 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ea9a9883849e8caa9a869e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+    0x0000000000400571 &lt;+68&gt;:   call    0x400410 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ea9a9883849e8caa9a869e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
     0x0000000000400576 &lt;+73&gt;:   mov     eax,0x0
     0x000000000040057b &lt;+78&gt;:   leave
     0x000000000040057c &lt;+79&gt;:   ret
@@ -778,7 +778,7 @@ __text:00002BD8 80 BD           POP     {R7,PC}
 
 <h1>Chapter 6 scanf()</h1>
 
-<hr />
+<hr>
 
 <p>现在我们来使用scanf()。</p>
 
@@ -901,7 +901,7 @@ _TEXT ENDS
 
 <p>可以右击寄存器窗口的EAX，再点击"堆栈窗口中跟随"。这个地址会在堆栈窗口中显示。观察，这是局部栈中的一个变量。我在图中用红色箭头标出。这里是一些无用数据（0x77D478）。PUSH指令将会把这个栈元素的地址压入栈中。然后按F8直到scanf()函数执行完。在scanf()执行时，我们要在命令行窗口中输入，例如输入123。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405091723713.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405091723713.png" alt="enter image description here"></p>
 
 <p>图6.1 命令行输出</p>
 
@@ -909,15 +909,15 @@ _TEXT ENDS
 
 <p>接下来，这个值从栈中复制到ECX寄存器中，然后传递给printf()。图6.4</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405432541053.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405432541053.png" alt="enter image description here"></p>
 
 <p>图6.2 OllyDbg：计算局部变量的地址</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403552151387.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403552151387.png" alt="enter image description here"></p>
 
 <p>图6.3：OllyDbg：scanf()执行</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403552377932.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403552377932.png" alt="enter image description here"></p>
 
 <p>图6.4：OllyDbg：准备把值传递给printf()</p>
 
@@ -1124,11 +1124,11 @@ _x      DD      0aH
 
 <p>X变量地址是0xDC3390.在OllyDbg中我们看进程内存映射(Alt-M)，然后发现这个地在PE文件.data结构处。见表6.6</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403552386718.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403552386718.png" alt="enter image description here"></p>
 
 <p>表6.5 OllyDbg: scanf()执行后</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403552412156.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403552412156.png" alt="enter image description here"></p>
 
 <p>表6.6: OllyDbg 进程内存映射</p>
 
@@ -1285,18 +1285,18 @@ What you entered? Huh?
         call    _scanf
         add     esp, 8
         cmp     eax, 1
-        jne     SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c8ec8486fa88a5a9a1a6">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+        jne     SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c8ec8486fa88a5a9a1a6">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
         mov     ecx, DWORD PTR _x$[ebp]
         push    ecx
         push    OFFSET $SG3834 ; ’You entered %d...’, 0aH, 00H
         call    _printf
         add     esp, 8
-        jmp     SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="77533b3946371a161e19">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b89cf4f68af8d5d9d1d6">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:
+        jmp     SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="77533b3946371a161e19">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b89cf4f68af8d5d9d1d6">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:
         push    OFFSET $SG3836 ; ’What you entered? Huh?’, 0aH, 00H
         call    _printf
         add     esp, 4
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="13375f5d22537e727a7d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="13375f5d22537e727a7d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:
         xor     eax, eax
 </code></pre>
 
@@ -1306,7 +1306,7 @@ What you entered? Huh?
 
 <p>JNE根据CMP的结果判断跳至哪，JNE表示(jump if Not Equal)</p>
 
-<p>所以，如果EAX中的值不等于1，那么处理器就会将执行流程跳转到JNE指向的，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="13f68fbbf59b82f7a8bff48997f7ad98f6be83f7abbef58bbc375f5d21537e727a7d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，当流程跳到这里时，CPU将会带着参数"What you entered? Huh?"执行printf(),但是执行正常，就不会发生跳转，然后另外一个printf()就会执行，两个参数为"<code>You entered %d…</code>"及x变量的值。</p>
+<p>所以，如果EAX中的值不等于1，那么处理器就会将执行流程跳转到JNE指向的，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="13f68fbbf59b82f7a8bff48997f7ad98f6be83f7abbef58bbc375f5d21537e727a7d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，当流程跳到这里时，CPU将会带着参数"What you entered? Huh?"执行printf(),但是执行正常，就不会发生跳转，然后另外一个printf()就会执行，两个参数为"<code>You entered %d…</code>"及x变量的值。</p>
 
 <p>因为第二个printf()并没有被执行，后面有一个JMP(无条件跳转)，就会将执行流程到第二个printf()后"XOR EAX, EAX"前，执行完返回0。</p>
 
@@ -1405,11 +1405,11 @@ What you entered? Huh?
 
 <p>这个非常的有用。可以这么说，逆向工程师很重要的一点就是缩小他所有的信息。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071411023311664.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071411023311664.png" alt="enter image description here"></p>
 
 <p>图6.7: IDA 图形模式</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403552492254.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403552492254.png" alt="enter image description here"></p>
 
 <p>图6.8: Graph mode in IDA with 3 nodes folded</p>
 
@@ -1429,17 +1429,17 @@ What you entered? Huh?
 
 <p>按下F9我们可以在窗口中看到:</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404333278651.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071404333278651.png" alt="enter image description here"></p>
 
 <p>图6.9</p>
 
 <p>实际上，5035128是栈上一个数据(0x4CD478)的十进制表示!</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405432689791.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405432689791.png" alt="enter image description here"></p>
 
 <p>图6.10</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403552575490.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403552575490.png" alt="enter image description here"></p>
 
 <p>图6.11</p>
 
@@ -1457,11 +1457,11 @@ What you entered? Huh?
 
 <p>另外我们也可以这样做：替换第一个字节为EB，这样就不修改第二处（jump offset），这样就会无条件跳转，不管我们输入什么，错误信息都可以打印出来了。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403552574836.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403552574836.png" alt="enter image description here"></p>
 
 <p>图6.12:main()函数</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403552638684.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403552638684.png" alt="enter image description here"></p>
 
 <p>图6.13:Hiew 用两个NOP替换JNZ</p>
 
@@ -1492,15 +1492,15 @@ $LN5:
             lea         rcx, OFFSET FLAT:$SG2926 ; ’%d’
             call        scanf
             cmp         eax, 1
-            jne         SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="46620a0874062b272f28">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+            jne         SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="46620a0874062b272f28">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
             mov         edx, DWORD PTR x$[rsp]
             lea         rcx, OFFSET FLAT:$SG2927 ; ’You entered %d...’
             call        printf
-            jmp         SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a682eae897e6cbc7cfc8">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="93b7dfdda1d3fef2fafd">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:
+            jmp         SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a682eae897e6cbc7cfc8">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="93b7dfdda1d3fef2fafd">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:
             lea rcx, OFFSET FLAT:$SG2929 ; ’What you entered? Huh?’
             call printf
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e0c4acaed1a08d81898e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e0c4acaed1a08d81898e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:
             ; return 0
             xor         eax, eax
             add         rsp, 56
@@ -1545,7 +1545,7 @@ loc_1E                                  ; CODE XREF: main+12
 
 <p>BEQ是跳向另一处地址，如果数相等就会跳，如果最后一次比较结果为0，或者Z flag是1。和x86中的JZ是一样的。</p>
 
-<p>其他的都很简单，执行流程分为两个方向，当R0被写入0后，两个方向则会合并，作为函数的返回值，然后函数结束。</p>      </p>
+<p>其他的都很简单，执行流程分为两个方向，当R0被写入0后，两个方向则会合并，作为函数的返回值，然后函数结束。</p>      <p></p>
     
 			</body>
 		</html>

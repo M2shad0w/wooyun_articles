@@ -3,20 +3,20 @@
 			<head>
 			     <title>SQLMap的前世今生（Part1） - 猎豹科学院</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8614">http://drops.wooyun.org/tips/8614</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>谈到SQL注入，那麽第一时间就会想到神器SQLMAP，SQLMap是一款用来检测与利用的SQL注入开源工具。那麽SQLMap在扫描SQL的逻辑到底是怎样实现的呢，接下来就探讨下SQLMap的扫描逻辑，通过了解SQLMap的扫描逻辑打造一款属于自己的SQL扫描工具。</p>
 
 <h1>0x01 SQL扫描规则：</h1>
 
-<hr />
+<hr>
 
 <p>要了解SQLMap的扫描规则，也就是Payload,那麽到底Payload是哪里来，是根据什么逻辑生成的呢，接下来必须先了解几个文件的，SQLMap的扫描规则文件位于\xml文件夹中，其中boundaries.xml与Payloads文件夹则为SQLMap的扫描规则所在，\xml\payloads中的6个文件，里面的6个文件分别是存放着不同注入手法的PAYLOAD。</p>
 
@@ -129,13 +129,13 @@ SELECT tableid FROM ".DB::table('forum_attachment')." WHERE pid='' AND 'test' = 
 
 <p>其中要注意的是,Payload中的字符串会根据当前Payload所适用的数据库类型对字符串进行处理，其处理的代码位于\plugins\dbms下对应数据库文件夹中的syntax.py脚本中。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107311141296.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091107311141296.png" alt="enter image description here"></p>
 
 <p>所以最终的payload是根据test的payload子节点和boundary的prefix（前缀）、suffix（后缀）子节点的值组合而成的，即：最终的<code>payload =  url参数 + boundary.prefix+test.payload+boundary.suffix</code></p>
 
 <h1>0x02 实例</h1>
 
-<hr />
+<hr>
 
 <p>接下来以报错注入来实际讲解下Payload与boundary的使用。</p>
 
@@ -169,7 +169,7 @@ http://127.0.0.1/search-result.php?keyword=&amp;ad_id=' AND (SELECT 2214 FROM(SE
 
 <p>如下为返回的页面信息</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107311183851.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091107311183851.png" alt="enter image description here"></p>
 
 <p>后根据grep中的正规来匹配当前页面。</p>
 
@@ -181,9 +181,9 @@ http://127.0.0.1/search-result.php?keyword=&amp;ad_id=' AND (SELECT 2214 FROM(SE
 
 <h1>0x03 总结</h1>
 
-<hr />
+<hr>
 
-<p>通过SQLMap的扫描逻辑，我们可以了解到SQL注入的常规手法与实现，熟悉SQLMap的配置文件之后，自己就可以根据实际的情况对Payload与boundary进行修改，通过增加Payload与boundary来增强SQLMap的扫描规则，也可以利用其扫描规则来打造一款自己的SQL扫描工具。</p>      </p>
+<p>通过SQLMap的扫描逻辑，我们可以了解到SQL注入的常规手法与实现，熟悉SQLMap的配置文件之后，自己就可以根据实际的情况对Payload与boundary进行修改，通过增加Payload与boundary来增强SQLMap的扫描规则，也可以利用其扫描规则来打造一款自己的SQL扫描工具。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,18 +3,18 @@
 			<head>
 			     <title>三种新的针对IOS的假面攻击方法（Masque Attacks） - Fnut</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/7431">http://drops.wooyun.org/mobile/7431</a></h1>
 				
       <p>
-        <p>国外安全公司FireEye的博客文章，觉得还不错就翻译了一下，如有不足，敬请指正。（视频部分需要翻墙）</p>
+        </p><p>国外安全公司FireEye的博客文章，觉得还不错就翻译了一下，如有不足，敬请指正。（视频部分需要翻墙）</p>
 
 <p>原文链接：<a href="https://www.fireeye.com/blog/threat-research/2015/06/three_new_masqueatt.html">https://www.fireeye.com/blog/threat-research/2015/06/three&#95;new&#95;masqueatt.html</a></p>
 
 <h1>0x01 前言</h1>
 
-<hr />
+<hr>
 
 <p>在最近的IOS8.4版本里，苹果修复了几个漏洞包括允许攻击者部署两种新型的假面攻击（CVE-2015-3722/3725，和CVE-2015-3725）。我们叫这两种利用方法Manifest Masque和Extension Masque,它们可以被用来摧毁apps，包括系统应用程序（比如：Apple Watch，Health，Pay等等），并且可以破坏应用的数据容器。在这篇文章中，我们也不会透露之前修补过的漏洞的细节，而是去关注那些没有被曝光的假面攻击漏洞：Plugin Masque(插件假面攻击)，它可以绕过IOS的强制权限措施并且劫持VPN通信。我们的调查也表明三分之一的IOS设备在发布8.1.3版本5个月之后仍然没有更新到8.1.3及以上版本，而这些设备仍然可能遭受假面攻击。</p>
 
@@ -43,7 +43,7 @@
     </td>
     
     <td>
-      * 替换一个已知的应用 <br />* 获取隐私数据
+      * 替换一个已知的应用 <br>* 获取隐私数据
     </td>
     
     <td>
@@ -57,7 +57,7 @@
     </td>
     
     <td>
-      * 绕过信任提示 <br />* 劫持应用程序内部通信
+      * 绕过信任提示 <br>* 劫持应用程序内部通信
     </td>
     
     <td>
@@ -85,7 +85,7 @@
     </td>
     
     <td>
-      * 绕过信任提示<br /> * 绕过VPN插件的权限 <br /> * 替换一个存在的VPN插件<br /> * 劫持设备通信 <br /> * 阻止设备重启 <br />* 利用更多的内核漏洞
+      * 绕过信任提示<br> * 绕过VPN插件的权限 <br> * 替换一个存在的VPN插件<br> * 劫持设备通信 <br> * 阻止设备重启 <br>* 利用更多的内核漏洞
     </td>
     
     <td>
@@ -99,7 +99,7 @@
     </td>
     
     <td>
-      * 获取其他应用程序数据 <br />* 或者阻止另外的应用程序获取它自己的数据
+      * 获取其他应用程序数据 <br>* 或者阻止另外的应用程序获取它自己的数据
     </td>
     
     <td>
@@ -118,7 +118,7 @@
 
 <h1>0x02 Manifest Masque</h1>
 
-<hr />
+<hr>
 
 <p>为了使用公司配置文件来通过无线分发IOS内的应用程序，必须要创建一个包含一个重定向到XML manifest文件的超链接的web页面，而这个XML manifest文件是被保存在一个http服务器上的<a href="http://drops.wooyun.org/wp-content/uploads/2015/07/1.jpg">1</a>。这个XML manifest文件也包含了这个内部应用程序的元数据，包括它绑定的标识符，绑定的版本和.ipa文件的下载链接，如下所示。当通过无线安装这个内部的IOS应用程序的时候，IOS会首先下载manifest文件，为安装进程解析元数据。</p>
 
@@ -166,7 +166,7 @@
 
 <p>通过利用这个漏洞，一个应用程序开发者可以在安装他自己的应用程序的同时卸载掉其他的应用程序（比如竞争对手的应用程序）。用这种方法，攻击者可以在IOS中实施Dos攻击或者钓鱼攻击。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072709040083079.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150727/2015072709040083079.jpg" alt="enter image description here"></p>
 
 <p>Figure 1.通过安装“恶意chrome”并卸载掉原始的chrome来进行钓鱼攻击</p>
 
@@ -180,7 +180,7 @@
 
 <h1>0x03 Extension Masque</h1>
 
-<hr />
+<hr>
 
 <p>苹果公司在IOS8系统引入了扩展应用程序特征<a href="https://www.fireeye.com/blog/threat-research/2015/06/three\_new\_masqueatt.html">2</a>。不同类型的扩展应用程序为开发者提供了各种各样的新方法来扩展IOS8系统上应用的功能。比如，应用程序可以作为窗口小部件出现在今天的屏幕上，可以给Action表增加新的按钮，为IOS的照片应用提供照片滤镜，或者展示一种新的系统风格的键盘<a href="http://drops.wooyun.org/wp-content/uploads/2015/07/1.jpg">3</a>。另外，iPhone上的手表扩展程序<a href="http://static.wooyun.org//drops/20150727/2015072709040083079.jpg">4</a>代表了IOS8.2/8.3上所有手表类应用的逻辑。一个扩展应用程序可以执行代码，并且被限制为只能接近他自己的数据容器的数据。扩展程序是作为IOS应用程序的一部分被分发的，这可以被攻击者利用作为一种潜在的攻击手段。</p>
 
@@ -199,13 +199,13 @@
 
 <h2>0x04 Plugin Masque</h2>
 
-<hr />
+<hr>
 
 <p>和IOS扩展程序不同，VPN插件是另外的一种在.ipa文件中绑定的类型。和不需要任何权限就可以嵌入到任何IOS8的应用程序中的扩展程序相比，VPN应用和VPN插件需要被分配“com.apple.networking.vpn.configuration”权限来提供系统内的VPN服务。迄今为止只有极少数的IOS开发者可以在IOS系统上发布这样的VPN客户端（比如Cisco Anyconnect, Junos Pulse, OpenVPN等）。在安装之后，VPN插件就通过一个特权系统进程（neagent<a href="http://drops.wooyun.org/wp-content/uploads/2015/07/3.jpg">8</a>）被加载，不使用任何的用户接口。</p>
 
 <p>Figure 2展示了Junos Pulse的.ipa文件的目录结构，VPN插件（SSLVPNJuniper.vpnplugin）定位到了这个Payload目录，和应用（Junos Pulse.app）一起为用户提供验证VPN的接口。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072709040156618.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150727/2015072709040156618.jpg" alt="enter image description here"></p>
 
 <p>Figure 2 Junos Pulse应用的目录结构</p>
 
@@ -232,21 +232,21 @@ sleep(3);
 
 <h1>0x05 IOS更新在企业网络中的空白</h1>
 
-<hr />
+<hr>
 
 <p>IOS8.1.3版本的发布（这个版本App Masque, URL Masque, and Plugin Masque的问题都被修复或者部分修复了）是在2015年的1月份，并且IOS众所周知会快速的采用新版本。然而，我们最近的针对几个比较著名的网络的IOS web通信的监控显示了令人惊讶的结果。如Figure 3所示，我们监控的将近三分之一的IOS通信仍然是在低于8.1.3版本的设备上，即使已经发布这个版本5个月了。在数据通信之后的这些设备对于所有类型的假面攻击仍然是脆弱的，包括App Masque, URL Masque, 和Plugin Masque。我们呼吁每个人，特别是企业用户，要对IOS进行彻底的更新。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072709040161870.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150727/2015072709040161870.jpg" alt="enter image description here"></p>
 
 <p>Figure 3 根据FireEye监控的网络通信的IOS版本比例</p>
 
 <h1>0x06 结论</h1>
 
-<hr />
+<hr>
 
 <p>总结一下，尽管苹果公司已经在IOS8.1.3版本修复或者部分修复了原始的假面攻击漏洞[6,11]，仍然有其他类型的攻击利用IOS安装进程中的漏洞。我们在这篇文章中纰漏了三种假面攻击的变形来帮助用户认识到风险，并且更好的保护他们自己。并且，我们建议所有的IOS用户保持对自己的系统版本进行更新。</p>
 
-<p>Reference:<br />
+<p>Reference:<br>
 <a href="https://www.fireeye.com/blog/threat-research/2015/06/three_new_masqueatt.html">1</a> https://manuals.info.apple.com/MANUALS/1000/MA1685/en&#95;US/ios&#95;deployment_reference.pdf</p>
 
 <p><a href="https://www.fireeye.com/blog/threat-research/2015/06/three\_new\_masqueatt.html">2</a> https://developer.apple.com/app-extensions/</p>
@@ -269,7 +269,7 @@ sleep(3);
 
 <p>[11] https://www.fireeye.com/blog/threat-research/2015/02/ios&#95;masque&#95;attackre.html</p>
 
-<p>[12] http://en.pangu.io/</p>      </p>
+<p>[12] http://en.pangu.io/</p>      <p></p>
     
 			</body>
 		</html>

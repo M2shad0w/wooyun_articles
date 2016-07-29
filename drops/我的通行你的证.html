@@ -3,14 +3,14 @@
 			<head>
 			     <title>我的通行你的证 - 呆子不开口</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/12695">http://drops.wooyun.org/web/12695</a></h1>
 				
       <p>
-        <h1>0x00 简介</h1>
+        </p><h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>这篇是我前几个月在CSDN开发者大会上讲的账号通行证安全相关的PPT<a href="http://pan.baidu.com/s/1bnsjoM7">《我的通行你的证》</a>的文字整理版，稍微补充了点内容。因为懒一直没时间写，但年关将至，想到可以为老家的孩子们多挣点压岁钱……</p>
 
@@ -25,11 +25,11 @@
 <h3>主流盗号的八十一种姿势</h3>
 
 <ul>
-<li><strong>密码类漏洞</strong><br />
+<li><strong>密码类漏洞</strong><br>
 ——密码泄露、暴力破解、撞库、密码找回漏洞、社工库、钓鱼…</li>
-<li><strong>认证cookie被盗</strong><br />
+<li><strong>认证cookie被盗</strong><br>
 ——xss攻击、网络泄露、中间人攻击</li>
-<li><strong>其他漏洞</strong><br />
+<li><strong>其他漏洞</strong><br>
 ——二维码登录、单点登录、第三方登录、客户端web自动登录、绑定其他账号登录、oauth登陆漏洞…</li>
 </ul>
 
@@ -37,7 +37,7 @@
 
 <h1>0x01 先稍微讲讲认证cookie的安全</h1>
 
-<hr />
+<hr>
 
 <p>目前各大互联网公司的网站大多使用cookie来实现对用户的认证。如果攻击者拿到了这个认证cookie，就可以登录了用户的账号了</p>
 
@@ -70,7 +70,7 @@
 
 <h1>0x02通行证的“其他漏洞”</h1>
 
-<hr />
+<hr>
 
 <p><strong><em>常见的通行证相关功能</em></strong></p>
 
@@ -87,7 +87,7 @@
 
 <h1>0x03 二维码登录的安全风险</h1>
 
-<hr />
+<hr>
 
 <p><strong>1. 无行为确认</strong></p>
 
@@ -121,7 +121,7 @@
 
 <h1>0x04 绑定其他账号的安全风险</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li><p>绑定请求未做csrf防护，攻击者可以构造恶意请求让用户绑定了攻击者的账号。这样攻击者登录他自己的账号后就可以操作用户的资源</p>
@@ -138,25 +138,25 @@
 
 <h1>0x05 绑定第三方oauth账号登陆的安全风险</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>从oauth服务商那获取到accesstoken后，在和本站账号绑定时，未校验state参数，导致绑定请求可以csrf。攻击者可以用csrf估计让你绑定他的账号</li>
-<li>即使做了state参数的校验。绑定的初始请求，如点击绑定按钮发出的请求未做csrf防护<br />
-新浪微博等某些服务商的oauth授权有如下特点，如果当前登陆的微博曾经授权过该应用，那么就会自动绑定成功<br />
-所以我们可以找一个新浪微博登陆的csrf漏洞，让用户自动登陆攻击者的微博（新浪有此类漏洞，这里就不详细写出）<br />
+<li>即使做了state参数的校验。绑定的初始请求，如点击绑定按钮发出的请求未做csrf防护<br>
+新浪微博等某些服务商的oauth授权有如下特点，如果当前登陆的微博曾经授权过该应用，那么就会自动绑定成功<br>
+所以我们可以找一个新浪微博登陆的csrf漏洞，让用户自动登陆攻击者的微博（新浪有此类漏洞，这里就不详细写出）<br>
 然后再让用户访问绑定请求，这样就完成了对攻击者微博的绑定。攻击者使用微博登陆就可以进入用户的账号</li>
 </ol>
 
-<p>案例：<br />
+<p>案例：<br>
 <a href="http://www.wooyun.org/bugs/wooyun-2010-0162481">点我的链接我就可能会进入你的果壳账号</a></p>
 
-<p>关于oauth的更多安全总结，可以参考文章<br />
+<p>关于oauth的更多安全总结，可以参考文章<br>
 <a href="http://drops.wooyun.org/papers/598">OAuth 2.0安全案例回顾</a></p>
 
 <h1>0x06 认证cookie的不规范传输安全风险</h1>
 
-<hr />
+<hr>
 
 <p>认证cookie本应该只出现在http请求中，并且在浏览器端的存储中加了httponly属性，是不会被xss攻击盗取的。但某些功能架构中，认证cookie的不规范传输和使用可能会导致认证cookie泄露</p>
 
@@ -175,16 +175,16 @@
 
 <h1>0x07 单点登录的安全风险</h1>
 
-<hr />
+<hr>
 
 <h3>单点登陆的简单原理</h3>
 
-<p>需求：如果用户已经登陆B站，则自动登陆A站<br />
+<p>需求：如果用户已经登陆B站，则自动登陆A站<br>
 实现：用户访问A站，A站把用户跳转到B站，B站验证用户已登陆，给用户一张票，用户拿着票去找A站，A拿着票去B那，验证成功后放用户进去</p>
 
 <p>下文中将大量出现如下示例站点</p>
 
-<p>A:<code>http://www.t99y.com</code><br />
+<p>A:<code>http://www.t99y.com</code><br>
 B:`http://passport.wangzhan.com</p>
 
 <p>举例：用户访问<code>http://passport.wangzhan.com/login.php?url=http://www.t99y.com/a.php</code></p>
@@ -197,7 +197,7 @@ B:`http://passport.wangzhan.com</p>
 
 <p>偷认证信息的大概流程如下，后面会细讲。总之攻击的目的就是，拿到用户的ticket信息</p>
 
-<p><img src="http://static.wooyun.org//drops/20150715/20150715022102641949f96b5c8a3b518a24a835a1396bf549a" alt="此处输入图片的描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150715/20150715022102641949f96b5c8a3b518a24a835a1396bf549a" alt="此处输入图片的描述"></p>
 
 <h2>常见的漏洞场景</h2>
 
@@ -225,7 +225,7 @@ B:`http://passport.wangzhan.com</p>
 
 <p>示意图如下，如下是我画的一个chrome浏览器，地址栏里ticket参数会被包含到下面的一些元素的请求的referrer中</p>
 
-<p><img src="http://static.wooyun.org//drops/20150715/201507150221023834350d46e039c99279af5e9baff3a87fc0d" alt="此处输入图片的描述" /></p>
+<p><img src="http://static.wooyun.org//drops/20150715/201507150221023834350d46e039c99279af5e9baff3a87fc0d" alt="此处输入图片的描述"></p>
 
 <p>参考案例： WooYun: <a href="http://www.wooyun.org/bugs/wooyun-2015-0124352">微博上你点我发的链接我就可以登上你的微博（web版和app端均可两个漏洞一并提交）</a></p>
 
@@ -233,7 +233,7 @@ B:`http://passport.wangzhan.com</p>
 
 <p><code>http://t99y.com/login.php?ticket=XXXXXXXXXXXXXXXX&amp;url=http://t99y.com/a.php</code> 此时会种上认证cookie</p>
 
-<p>然后页面会使用js跳转到 <code>http://t99y.com/a.php</code><br />
+<p>然后页面会使用js跳转到 <code>http://t99y.com/a.php</code><br>
 <code>location.href=“http://t99y.com/a.php”;</code></p>
 
 <p>例子：某绑定了微博账号后可以自动登陆的网站</p>
@@ -249,8 +249,8 @@ B:`http://passport.wangzhan.com</p>
 
 <p>如下的多个302跳转</p>
 
-<p><code>http://passport.wangzhan.com/login.php?url=http://www.t99y.com/a.php</code><br />
-<code>http://t99y.com/login.php?ticket=XXXXXXXXXXXXXXXX&amp;url=http://t99y.com/a.php</code><br />
+<p><code>http://passport.wangzhan.com/login.php?url=http://www.t99y.com/a.php</code><br>
+<code>http://t99y.com/login.php?ticket=XXXXXXXXXXXXXXXX&amp;url=http://t99y.com/a.php</code><br>
 <code>http://t99y.com/a.php</code></p>
 
 <p>偷的方式</p>
@@ -282,14 +282,14 @@ i &lt; 20; i++) {
 
 <h1>0x08 App内嵌页登录的风险</h1>
 
-<hr />
+<hr>
 
 <p>当我们在一个app内打开其公司产品的一些链接，会被加上认证信息去让用户自动登陆</p>
 
 <p>微博客户端、QQ客户端、微信客户端都曾有或现在正有此问题，一般会加上参数sid、gsid、key</p>
 
 <ul>
-<li>案例：<a href=" <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2014-070454">WooYun: 聊着聊着我就上了你……的微信（两处都可以劫持微信登录的漏洞）</a> ">聊着聊着我就上了你……的微信</a></li>
+<li>案例：<a href=" <a target=" _blank"="">WooYun: 聊着聊着我就上了你……的微信（两处都可以劫持微信登录的漏洞）</a> ">聊着聊着我就上了你……的微信</li>
 <li>案例：<a href="http://www.wooyun.org/bugs/wooyun-2010-027590">手机版QQ空间身份因素可被盗用</a> </li>
 <li>案例：之前的一个手机qq的漏洞，找一qq域下论坛发一张图，然后把此页发给手机qq上好友，他点击就会被盗号</li>
 </ul>
@@ -308,7 +308,7 @@ i &lt; 20; i++) {
 
 <h1>0x09 跨域从通行证获取到的凭证</h1>
 
-<hr />
+<hr>
 
 <p>跨域从通行证获取登陆ticket</p>
 
@@ -334,7 +334,7 @@ i &lt; 20; i++) {
 
 <h1>0x0A 主流SSO的一些问题</h1>
 
-<hr />
+<hr>
 
 <p>如上都是漏洞信息，但有时候还有些架构上的小问题可能会导致出现漏洞，或者让攻击者的漏洞利用更方便</p>
 
@@ -367,9 +367,9 @@ i &lt; 20; i++) {
 
 <h1>0x0B 总结</h1>
 
-<hr />
+<hr>
 
-<p>网络是我家，安全靠大家。保护女网友，帮她加把锁</p>      </p>
+<p>网络是我家，安全靠大家。保护女网友，帮她加把锁</p>      <p></p>
     
 			</body>
 		</html>

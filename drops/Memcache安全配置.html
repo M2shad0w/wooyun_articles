@@ -3,14 +3,14 @@
 			<head>
 			     <title>Memcache安全配置 - 瞌睡龙</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/865">http://drops.wooyun.org/papers/865</a></h1>
 				
       <p>
-        <h2>0x00 Memcache简介</h2>
+        </p><h2>0x00 Memcache简介</h2>
 
-<hr />
+<hr>
 
 <p>Memcache是一个高性能的分布式的内存对象缓存系统，通过在内存里维护一个统一的巨大的hash表，它能够用来存储各种格式的数据，包括图像、视频、文件以及数据库检索的结果等。简单的说就是将数据调用到内存中，然后从内存中读取，从而大大提高读取速度。</p>
 
@@ -22,7 +22,7 @@
 
 <h2>0x01 搭建Memcache服务</h2>
 
-<hr />
+<hr>
 
 <pre><code>yum install memcached 
 </code></pre>
@@ -69,7 +69,7 @@
 
 <p>最新版默认界面</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403202672425.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403202672425.jpeg" alt="enter image description here"></p>
 
 <p>Execute Commands on Servers那里可以执行命令。</p>
 
@@ -77,7 +77,7 @@
 
 <h2>0x02 memcache匿名访问危害</h2>
 
-<hr />
+<hr>
 
 <p>在乌云提交的漏洞当中，有很多因为memecache限制不严格，导致信息泄露的问题：</p>
 
@@ -91,12 +91,12 @@
 
 <p>stats items</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071409163857804.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071409163857804.jpg" alt="enter image description here"></p>
 
 <pre><code>stats cachedump &lt;item: id&gt; &lt;返回结果数量,0代表返回全部&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403202794840.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403202794840.jpg" alt="enter image description here"></p>
 
 <p>除了查看信息，通用可以修改删除信息。</p>
 
@@ -104,7 +104,7 @@
 
 <h2>0x03 查找可匿名访问memcache的方式</h2>
 
-<hr />
+<hr>
 
 <p>memcache默认是11211端口，可使用nmap扫描有开11211端口的服务器。</p>
 
@@ -120,7 +120,7 @@
 
 <h2>0x04安全配置</h2>
 
-<hr />
+<hr>
 
 <p>Memcache服务器端都是直接通过客户端连接后直接操作，没有任何的验证过程，这样如果服务器是直接暴露在互联网上的话是比较危险，轻则数据泄露被其他无关人员查看，重则服务器被入侵，因为Mecache是以root权限运行的，况且里面可能存在一些我们未知的bug或者是缓冲区溢出的情况，这些都是我们未知的，所以危险性是可以预见的。</p>
 
@@ -143,7 +143,7 @@
 # iptables -A INPUT -p udp -s 192.168.0.2 --dport 11211 -j ACCEPT
 </code></pre>
 
-<p>上面的iptables规则就是只允许192.168.0.2这台Web服务器对Memcache服务器的访问，能够有效的阻止一些非法访问，相应的也可以增加一些其他的规则来加强安全性，这个可以根据自己的需要来做。</p>      </p>
+<p>上面的iptables规则就是只允许192.168.0.2这台Web服务器对Memcache服务器的访问，能够有效的阻止一些非法访问，相应的也可以增加一些其他的规则来加强安全性，这个可以根据自己的需要来做。</p>      <p></p>
     
 			</body>
 		</html>

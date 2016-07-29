@@ -3,16 +3,16 @@
 			<head>
 			     <title>一种自动化检测 Flash 中 XSS 方法的探讨 - 新浪安全中心</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1985">http://drops.wooyun.org/tips/1985</a></h1>
 				
       <p>
-        <p>作者：piaca</p>
+        </p><p>作者：piaca</p>
 
 <h2>0x00 前面的话</h2>
 
-<hr />
+<hr>
 
 <p>对于如何检测 Flash 中的 XSS，每个人都有自己的方法，无论是使用成型的自动化工具（比如 swfscan）还是自己开发自动化工具（先反编译，再对 actionscript 代码审计）还是直接人工对代码进行审计。都能够检测到 Flash 中存在的 XSS 漏洞。但是这些方法会存在一些问题，如：</p>
 
@@ -27,17 +27,17 @@
 
 <h2>0x01 原理</h2>
 
-<hr />
+<hr>
 
 <p>所谓动态检测，就是通过程序加载 Flash 插件，然后再载入 Flash 文件，对事件和错误信息进行捕捉，再对信息分析来判断 Flash 中是否存在 XSS 漏洞。</p>
 
 <p>先来看下面两张图，以 Firefox 浏览器为例：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812410219468.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091812410219468.jpeg" alt="enter image description here"></p>
 
 <p>Firefox 访问 <a href="http://test.com/xss.swf?alert=1">http://test.com/xss.swf?alert=1</a>，Flash 成功执行 JS 代码，弹出对话框。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812410268955.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091812410268955.jpeg" alt="enter image description here"></p>
 
 <p>Firefox 访问 <a href="http://test.com/xss.swf?alert=1%5C%22">http://test.com/xss.swf?alert=1\"</a>，Flash 执行 JS 报错，显示错误详细信息。Firefox 能够显示 Flash 执行 JS 错误时的详细错误信息。</p>
 
@@ -53,7 +53,7 @@
 
 <h2>0x02 具体实现</h2>
 
-<hr />
+<hr>
 
 <p>具体如何实现呢？我们不会真的调用 Firefox，而是直接采用一套开源的可以解析 JS 的工具包：CasperJS。下面看下 CasperJS 官网的一段介绍：</p>
 
@@ -101,7 +101,7 @@ casper.run();
 
 <h2>0x03 执行效果</h2>
 
-<hr />
+<hr>
 
 <p>我们刚才那个 Flash 文件用这个检测代码检测下看看效果 ，如下：</p>
 
@@ -115,7 +115,7 @@ piaca at piaca in ~/source$ casperjs --engine=slimerjs flash_detect.js "http://t
 
 <h2>0x05 写在后面的话</h2>
 
-<hr />
+<hr>
 
 <p>实际中我通过访问网上的一些业务，把其中的 Flash 抓下来，然后通过程序去检测，效果还是不错的。当然这其中包括我们自己业务中的 Flash XSS 漏洞。</p>
 
@@ -133,7 +133,7 @@ piaca at piaca in ~/source$ casperjs --engine=slimerjs flash_detect.js "http://t
 <li>这个检测脚本只能检测很明显的 XSS 漏洞，如果 Flash 中对参数有一定的处理措可能就无法进行检测了；</li>
 </ul>
 
-<p>所以本文仅仅做自动化检测 Flash 中 XSS 漏洞的探讨，如果你有好的方法，希望能与我交流。thx。</p>      </p>
+<p>所以本文仅仅做自动化检测 Flash 中 XSS 漏洞的探讨，如果你有好的方法，希望能与我交流。thx。</p>      <p></p>
     
 			</body>
 		</html>

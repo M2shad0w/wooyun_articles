@@ -3,20 +3,20 @@
 			<head>
 			     <title>由Ghost漏洞引发的“血案” - 阿里云安全</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4823">http://drops.wooyun.org/papers/4823</a></h1>
 				
       <p>
-        <h1>0x00 背景</h1>
+        </p><h1>0x00 背景</h1>
 
-<hr />
+<hr>
 
 <p>最近某安全公司发现的glibc gethostbyname buffer overflow漏洞，该漏洞被命名为ghost，其原因是glibc的Gethostbyname函数在处理传入的畸形域名信息作解析时导致堆溢出，众多网络应用依赖glibc模块的将受到影响，现已经确认受影响的版本是glibc 2.2&lt;=version&lt;=2.17，但是在我们的安全研究人员在测试时触发了另一个有意思的格式串漏洞，让我们来看看具体过程。</p>
 
 <h1>0x01 分析细节</h1>
 
-<hr />
+<hr>
 
 <p>测试环境ubuntu glibc 2.12 python 2.6.6</p>
 
@@ -29,25 +29,25 @@ import socket
 socket.gethostbyname('0'*10000000)
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109592753747.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109592753747.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109592730967.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109592730967.jpeg" alt="enter image description here"></p>
 
 <p>让我们看看漏洞触发流程，上gdb看看</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109592834710.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109592834710.png" alt="enter image description here"></p>
 
 <p>通过查看异常信息点发现，异常发生在如下代码处</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109592872121.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109592872121.png" alt="enter image description here"></p>
 
 <p>在memcpy函数进行内存拷贝时出错</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109592888456.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109592888456.png" alt="enter image description here"></p>
 
 <p>通过分析发现，rdx是拷贝长度，rsi是源缓冲区，rdi是目的缓冲区，通过分析发现rsi是我们传入的数据，而rdi这个地址不能访问，所以memcpy函数进行拷贝操作时将会出现写入目的地址空间失败，通过分析发现这个地址未初始化，最终导致程序crash.</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109592894354.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109592894354.png" alt="enter image description here"></p>
 
 <p>我们通过分析发现python语句</p>
 
@@ -58,31 +58,31 @@ Socket.gethostbyname(‘0’*10000000)
 
 <p>将会调用sscanf格式转换字符串’0’*10000000成整形数据“%d.%d.%d.%d”，我们通过分析glibc里面的源代码stdio-common/vfscanf.c发现，将会如下处理</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109592970770.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109592970770.png" alt="enter image description here"></p>
 
 <p>关键问题发生在宏ADDW，如下代码是glibc 2.12</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109592994029.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109592994029.jpeg" alt="enter image description here"></p>
 
 <p>这里代码的作用是把我们传入的字串循环拷贝到栈上面去，alloca函数是开辟栈空间，我们知道默认情况下Linux的栈空间是8MB，当我们传入的参数超长时，会导致栈空间耗尽，导致内存写上溢，当我们写入不可预知的未映射的内存时导致程序崩溃. 通过搜索发现这个格式串漏洞在2.15版被修复</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109592971483.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109592971483.png" alt="enter image description here"></p>
 
 <p>补丁代码如下:</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021109592953571.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150211/2015021109592953571.png" alt="enter image description here"></p>
 
 <p>补丁代码的处理逻辑是把传入的数据复制到堆内存里面去而不是在栈空间里面。 https://sourceware.org/bugzilla/show_bug.cgi?id=13138</p>
 
 <h1>0x02 漏洞利用</h1>
 
-<hr />
+<hr>
 
 <p>该格式串漏洞很难利用，拷贝到的目的地址不可预测并且很难控制。</p>
 
 <h1>0x03 结论 &amp; 引用</h1>
 
-<hr />
+<hr>
 
 <p>该漏洞会造成远程crash，赶紧升级glibc吧。</p>
 
@@ -96,7 +96,7 @@ Socket.gethostbyname(‘0’*10000000)
 
 <p>http://seclists.org/fulldisclosure/2015/Jan/111</p>
 
-<p>source:http://blog.sina.com.cn/s/blog_e8e60bc00102vhz7.html</p>      </p>
+<p>source:http://blog.sina.com.cn/s/blog_e8e60bc00102vhz7.html</p>      <p></p>
     
 			</body>
 		</html>

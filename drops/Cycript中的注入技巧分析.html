@@ -3,14 +3,14 @@
 			<head>
 			     <title>Cycript中的注入技巧分析 - 世杰同学</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/15794">http://drops.wooyun.org/mobile/15794</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>目前,在iOS中很多dylib是通过DYLDINSERTLIBRARIES来动态注入的,关于这种注入的防范方式最好的方法是在程序编译时,添加一个空的restict区段,因为dyld在load动态库时会检查区段中是否存在restict,如果存在那么就跳过加载。详情参见:<a href="http://bbs.iosre.com/t/tweak-app-app-tweak/438">防止tweak依附,App有高招;破解App保护,tweak留一手</a></p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 cycript简介</h1>
 
-<hr />
+<hr>
 
 <p>cycript是大神saurik开发的一个非常强大的工具,可以让开发者在命令行下和应用交互,在运行时查看和修改应用。其中的底层实现,是通过苹果的JavaScriptCore.framework来打通iOS与javascript的桥梁。具体详解,<a href="http://www.cycript.org/">参考</a></p>
 
@@ -26,17 +26,17 @@
 
 <h1>0x02 cycript结构</h1>
 
-<hr />
+<hr>
 
 <p>在安装cycript过后,通过cydia可以看到安装cycript之后影响的目录结构</p>
 
-<p><img src="http://static.wooyun.org//drops/20160518/2016051803510584079138.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160518/2016051803510584079138.png" alt=""></p>
 
 <p>虽然只提到这几个文件,但是在/usr/bin下,还有一个cynject的可执行文件和cycript相关,后面分析会发现,这个程序才是注入的核心文件。我这里,通过scp把这些文件都下载到本地,方便分析。</p>
 
 <h1>0x03 cycript主程序</h1>
 
-<hr />
+<hr>
 
 <p>分析Cycript主程序时,观察到里面有一个InjectLibrary的函数被调用</p>
 
@@ -75,11 +75,11 @@ void InjectLibrary(int pid, int argc, const char *argv[]) {
 
 <h1>0x04 cynject注入程序</h1>
 
-<hr />
+<hr>
 
 <p>接下来分析cynject,在函数subb308的位置可以看到,通过调用taskfor_pid获取到进程句柄结构。通过该结构,可以对进程能够有访问权限。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160518/2016051803510741139220.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160518/2016051803510741139220.png" alt=""></p>
 
 <p>举个栗子:</p>
 
@@ -90,11 +90,11 @@ task_for_pid(mach_task_self(), pid, &amp;rtask);
 
 <p>程序为了让内存中的dylib有执行能力,把dylib通过线程的方式来加载。继续往下看,就发现进程创建一个被挂起的线程</p>
 
-<p><img src="http://static.wooyun.org//drops/20160518/2016051803510934775314.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160518/2016051803510934775314.png" alt=""></p>
 
 <p>拿到句柄结构,在进程的空间中申请内存,将dylib映射之后,写入到这片申请的空间里面。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160518/2016051803511114716414.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160518/2016051803511114716414.png" alt=""></p>
 
 <p>所以,代码逻辑大概是这样的:</p>
 
@@ -108,14 +108,14 @@ vm_protect(rtask, rAddress, codeSize, FALSE, VM_PROT_READ | VM_PROT_WRITE | VM_P
 
 <p>最后,等dylib加载完全后,为dylib恢复启动并执行使其开始运行</p>
 
-<p><img src="http://static.wooyun.org//drops/20160518/2016051803511342269513.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160518/2016051803511342269513.png" alt=""></p>
 
 <p>梳理一下大体的流程:</p>
 
 <blockquote>
-  <p>( 1 )获取 PID 的进程句柄<br />
-  ( 2 )在 PID 中创建一个被挂起的线程<br />
-  ( 3 )在 PID 进程中申请一片用于加载 DYLIB 的内存<br />
+  <p>( 1 )获取 PID 的进程句柄<br>
+  ( 2 )在 PID 中创建一个被挂起的线程<br>
+  ( 3 )在 PID 进程中申请一片用于加载 DYLIB 的内存<br>
   ( 4 )调用 RESUME ,恢复线程</p>
 </blockquote>
 
@@ -123,19 +123,19 @@ vm_protect(rtask, rAddress, codeSize, FALSE, VM_PROT_READ | VM_PROT_WRITE | VM_P
 
 <p>说到这里,流程差不多梳理完了,拿一个dylib测试一下</p>
 
-<p><img src="http://static.wooyun.org//drops/20160518/2016051803511527290612.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160518/2016051803511527290612.png" alt=""></p>
 
 <p>通过lldb连上程序,看一下内存加载模块:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160518/2016051803511661422712.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160518/2016051803511661422712.png" alt=""></p>
 
 <p>可以发现,我们恶意的dylib已经注入到进程中了。</p>
 
 <h1>0x05 后记</h1>
 
-<hr />
+<hr>
 
-<p>cycript里面还有一些比较有意思的东西,大家可以深挖一下。另外,上面的内容不要用到自己企业的app产品中,按照苹果appStore原则,调用私有api以及动态注入代码的操作,是会被下架的。</p>      </p>
+<p>cycript里面还有一些比较有意思的东西,大家可以深挖一下。另外,上面的内容不要用到自己企业的app产品中,按照苹果appStore原则,调用私有api以及动态注入代码的操作,是会被下架的。</p>      <p></p>
     
 			</body>
 		</html>

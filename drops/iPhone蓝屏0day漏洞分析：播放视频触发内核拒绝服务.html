@@ -3,18 +3,18 @@
 			<head>
 			     <title>iPhone蓝屏0day漏洞分析：播放视频触发内核拒绝服务 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/7435">http://drops.wooyun.org/papers/7435</a></h1>
 				
       <p>
-        <p>Proteas of 360 NirvanTeam</p>
+        </p><p>Proteas of 360 NirvanTeam</p>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
-<p>近期发现有人会在微信群中分享视频链接，当使用苹果设备的用户点击这个视频链接播放视频时会造成苹果设备重启。发现这个问题后，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="122124225c7b6064737c4677737ff4b2aaf7ad91f49a82f7838a5242607d66777361f5bebef6aa92f485a4fb85a6f499adf79aa2f4b2a5f48ebefaad89fab39ef79a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�析，在非越狱iPhone设备iOS 8.0.2、 iOS 8.4、iOS 8.4.1 Beta 1、iOS 9 Beta 3 系统上进行测试，均导致设备蓝屏并重启，判断为0Day所致，决定详细分析导致iPhone蓝屏的原因。</p>
+<p>近期发现有人会在微信群中分享视频链接，当使用苹果设备的用户点击这个视频链接播放视频时会造成苹果设备重启。发现这个问题后，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="122124225c7b6064737c4677737ff4b2aaf7ad91f49a82f7838a5242607d66777361f5bebef6aa92f485a4fb85a6f499adf79aa2f4b2a5f48ebefaad89fab39ef79a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�析，在非越狱iPhone设备iOS 8.0.2、 iOS 8.4、iOS 8.4.1 Beta 1、iOS 9 Beta 3 系统上进行测试，均导致设备蓝屏并重启，判断为0Day所致，决定详细分析导致iPhone蓝屏的原因。</p>
 
 <p>通过dump arm64位内核及Panic Log详细分析，确定崩溃发生在内核扩展 AppleVXD393.kext 中。该内核扩展主要用来解码视频帧，导致漏洞利用的原因为：没有校验指针的合法性，对空指针进行解引用所致；此外在分析过程中，我们发现了该扩展模块还存在另外一个漏洞利用的0Day，已经提交苹果官方等待确认。</p>
 
@@ -22,11 +22,11 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325698397.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150724/2015072406325698397.png" alt="enter image description here"></p>
 
 <h1>0x01 漏洞影响</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>该DoS影响非越狱设备，综合手中的测试设备及逆向分析，可影响iOS 8 以上的所有64位设备：iPhone 5s，iPhone 6， iPhone 6 Plus，iPad Air， iPad mini 等。</li>
@@ -35,13 +35,13 @@
 
 <h1>0x02 编写辅助崩溃的程序</h1>
 
-<hr />
+<hr>
 
 <p>由于在分析的过程中我们很可能需要多次造成内核崩溃，如果每次都从微信中触发崩溃会很麻烦，也很不合理，因此我们需要先获取视频，然后用自己的程序来播放视频。</p>
 
 <p>这个程序很简单，运行起来的界面如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325657368.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150724/2015072406325657368.png" alt="enter image description here"></p>
 
 <p>只要点击“Play Video”就会调起播放器播放相应视频，进而引起系统崩溃。这里遇到个小问题，之前播放视频都是使用 MPMoviePlayerController，但是 MPMoviePlayerController 在播放有问题的视频时一直处于加载状态，于是换 AVPlayer 来播放视频，为了方便大家构建 Demo 进行测试，给出 “Play Video”的相应代码：</p>
 
@@ -89,11 +89,11 @@
 
 <h1>0x03 定位崩溃点与相关模块</h1>
 
-<hr />
+<hr>
 
 <p>首先播放视频，系统会发生崩溃，在设备重启后，从设备上读取崩溃日志，崩溃日志的主要内容如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325685607.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150724/2015072406325685607.png" alt="enter image description here"></p>
 
 <p>上图中比较重要的值已经被圈出来了，其中 pc 与 lr 用来定位崩溃点。另外 kernel slide 也非常重要，因为上图中的寄存器值都是经过 slide 后的值，且这个 slide 每次启动都会变化（KASLR），我们首先需要换算出真实的地址：</p>
 
@@ -116,11 +116,11 @@ lr = 0xffffff8005043a58 = 0xffffff8003043a58 + 0x2000000
 
 <p>然后在 IDA Pro 定位到相应的地址， PC指向如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325778786.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150724/2015072406325778786.png" alt="enter image description here"></p>
 
 <p>LR 指向如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325814467.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150724/2015072406325814467.png" alt="enter image description here"></p>
 
 <p>从崩溃日志中可以知道崩溃时 <code>x0 = 0x0000000000000000</code>，可以确定崩溃的原因是由于对空指针解引用，即：没有校验入口参数的合法性。</p>
 
@@ -128,13 +128,13 @@ lr = 0xffffff8005043a58 = 0xffffff8003043a58 + 0x2000000
 
 <p>比较幸运的是， LR 指向的地址周围包含了内核扩展的信息：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325874241.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150724/2015072406325874241.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325875426.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150724/2015072406325875426.png" alt="enter image description here"></p>
 
 <p>我们获取运行时内核扩展信息，看看有没有与 AppleVXD393 相关的内核扩展，结果如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325917569.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150724/2015072406325917569.png" alt="enter image description here"></p>
 
 <p>可以看到我们找到了相关的内核扩展。</p>
 
@@ -142,7 +142,7 @@ lr = 0xffffff8005043a58 = 0xffffff8003043a58 + 0x2000000
 
 <h1>0x04 确定用户空间中调用 AppleVXD393 服务的模块</h1>
 
-<hr />
+<hr>
 
 <p>首先需要确定这个内核扩展是不是在沙盒内使用的，经过测试发现：这个内核扩展不是在沙盒中调用的，下面就需要确定具体是哪个模块在使用这个服务。 因为调用内核扩展的服务时，需要根据服务名称来获取服务，于是在 grep 了下 iOS 8.0.2 的系统库，得到如下信息：</p>
 
@@ -161,13 +161,13 @@ Binary file VideoDecoders/MP4VH6.videodecoder matches
 
 <p>结合对 VideoToolBox 的反汇编分析，可以知道 VideoToolBox 利用 MP4VH6.videodecoder 来做 MP4 解码，将 MP4VH6.videodecoder 拖到 IDA Pro 中，查看导出表：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325942336.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150724/2015072406325942336.png" alt="enter image description here"></p>
 
 <p>可以看到与 AppleVXD393 相关的函数，MP4VH6.videodecoder 应该封装了内核扩展 com.apple.driver.AppleVXD393 的用户空间接口。</p>
 
 <h1>0x05 确定视频解码服务</h1>
 
-<hr />
+<hr>
 
 <p>通过上面的分析我们已经知道：1、MP4VH6.videodecoder 封装了视频解码服务的用户空间接口；2、VideoToolBox.framework 直接调用了 MP4VH6.videodecoder。接下来我们需要知道哪个后台进程通过 xpc 对外提供视频解码服务，ps + grep：</p>
 
@@ -208,7 +208,7 @@ com.apple.audio.SystemSounds
 
 <h1>0x06 分析可控性</h1>
 
-<hr />
+<hr>
 
 <p>首先看下视频解码时的调用栈：</p>
 
@@ -230,25 +230,25 @@ com.apple.audio.SystemSounds
 
 <p>为了确定可控性，于是编写了一个 Tweak 来 Hook mediaserverd，并 Hook IOConnectCallStructMethod，在发现待解码的视频帧序号与引起内核崩溃的视频帧序号一致时，修改交由内核解码的数据，查看、对比崩溃日志，总结输入对崩溃时寄存器值的影响。 对缓冲区一共进行如下几个填充测试：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325945778.png" alt="enter code here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150724/2015072406325945778.png" alt="enter code here"></p>
 
 <p>缓冲区填充测试，0x00 vs. 0x01：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325934729.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150724/2015072406325934729.png" alt="enter image description here"></p>
 
 <p>可以看到 PC 寄存器有差别，说明走的不是相同的代码路径。在对缓冲填充 0x01 时，内核的崩溃点为：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406330047396.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150724/2015072406330047396.png" alt="enter image description here"></p>
 
 <p>缓冲区填充测试，0x01 vs. 0x02：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406330043662.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150724/2015072406330043662.png" alt="enter image description here"></p>
 
 <p>可以看到 x0 的部分位是可控的，x12, x13 是从 x1 指向的地址处加载的。至此已经完成了对问题的分析，至于利用，就大家各显神通吧。</p>
 
 <h1>0x07 其他</h1>
 
-<hr />
+<hr>
 
 <p>一、经过处理的只包含单帧的视频，</p>
 
@@ -260,7 +260,7 @@ com.apple.audio.SystemSounds
 
 <p>二、如果大家有利用思路，欢迎关注微博交流：@NirvanTeam</p>
 
-<p>此外，对iOS安全领域开发、漏洞分析、挖掘感兴趣的同学<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3adfb595de819fdfbf89dc8992df8494dfb7a07a7453484c5b546e5f5b57dd9dbbde859bdcb2acd2babfdfb5abd3b894de818cdfb28a5453484c5b544e5f5b57">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@360.cn联系我们。</p>      </p>
+<p>此外，对iOS安全领域开发、漏洞分析、挖掘感兴趣的同学<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3adfb595de819fdfbf89dc8992df8494dfb7a07a7453484c5b546e5f5b57dd9dbbde859bdcb2acd2babfdfb5abd3b894de818cdfb28a5453484c5b544e5f5b57">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@360.cn联系我们。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,30 +3,30 @@
 			<head>
 			     <title>Mimikatz 非官方指南和命令参考_Part2 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/pentesting/12521">http://drops.wooyun.org/pentesting/12521</a></h1>
 				
       <p>
-        <p><strong>原文地址：</strong><a href="https://adsecurity.org/?page_id=1821">https://adsecurity.org/?page_id=1821</a><br />
+        </p><p><strong>原文地址：</strong><a href="https://adsecurity.org/?page_id=1821">https://adsecurity.org/?page_id=1821</a><br>
 <strong>原文作者：</strong><a href="https://twitter.com/PyroTek3">Sean Metcalf</a></p>
 
-<p><strong>译者注：</strong><br />
+<p><strong>译者注：</strong><br>
 由于<a href="https://adsecurity.org/?page_id=1821">原文</a>中，作者（<a href="https://twitter.com/PyroTek3">Sean Metcalf</a>）已经明确的指出 <strong>“未经本文作者明确的书面同意，请勿复制包含在此页面的全部或部分内容。”</strong>，因此为了分享此佳作，译者与作者（<a href="https://twitter.com/PyroTek3">Sean Metcalf</a>）在推上取得了联系，沟通之后，作者允许我将此文完整翻译并分享给其他人。在此也感谢 Sean Metcalf 大牛将有关 Mimikatz 的全部内容做了系统的整理并分享出来。以下是原文作者（Sean Metcalf）回复的截图,以作授权说明：</p>
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160129/20160129004320667761101.png" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160129/20160129004320667761101.png" alt="p1"></p>
 
 <h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>Mimikatz 作为当下内网渗透神器之一，看起来似乎很少有人真正关注它的全部功能（Sean Metcalf 在原文开头也表示了这样的疑惑），在一些诸如 <strong>“十大黑客工具”</strong> 的文章中也看不到 Mimikatz 的影子。 Sean Metcalf 大牛将有关 Mimikatz 的相关技术做了系统的整理，遂做粗糙翻译并作分享。译文难免有误，望各位看官及时指正。此文是译文的第二部分，主要阐述了使用 Mimikatz 创建三大票证（黄金票证，白银票证，信任票证）的命令用法，以及 哈希传递（PTH），票证传递（PTT），密钥传递（PTK），缓存传递（PTC）的利用，在第三部分中会包含大量常用或不常用的 Mimikatz 命令的具体用法。</p>
 
 <h1>0x01 执行 Mimikatz 的“另类思路”</h1>
 
-<hr />
+<hr>
 
 <p>Casey Smith (<a href="https://twitter.com/subTee">@subtee</a> &amp; <a href="http://subt0x10.blogspot.com/">blog</a>) 已经做了很多事情，表明了<a href="http://subt0x10.blogspot.com/2015/11/your-whitelisting-application-has-no.html">应用程序白名单不是万能的</a>。 Casey 也想出了很多新的想法，以“猥琐”的方式来执行 Mimikatz 。</p>
 
@@ -38,7 +38,7 @@
 
 <h1>0x02 最流行的 Mimikatz 命令</h1>
 
-<hr />
+<hr>
 
 <p>下面就介绍一些最流行的 Mimikatz 命令及相关功能。</p>
 
@@ -68,7 +68,7 @@
 
 <h1>0x03 ADSecurity 中与 Mimikatz 相关的文章</h1>
 
-<hr />
+<hr>
 
 <p>所有提及到 Mimikatz 的文章：<a href="https://adsecurity.org/?tag=mimikatz">ADSecurity.org Mimikatz Posts</a></p>
 
@@ -86,7 +86,7 @@
 
 <h1>0x04 Mimikatz 命令指南</h1>
 
-<hr />
+<hr>
 
 <p>Mimikatz 可以在交互模式中运行，只需运行 “Mimikatz.exe” 即可或传递命令并退出（例如：'<code>Mimikatz “Kerberos::list” exit</code>'）。Invoke-Mimikatz 没有交互模式。</p>
 
@@ -100,7 +100,7 @@ PS C:\temp\mimikatz&gt; .\mimikatz "privilege::debug" "sekurlsa::logonpasswords"
 .#####.   mimikatz 2.0 alpha (x64) release "Kiwi en C" (Nov 13 2015 00:44:32)
  .## ^ ##.
  ## / \ ##  /* * *
- ## \ / ##   Benjamin DELPY `gentilkiwi` ( <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1e7c7b70747f7377705e797b706a777275776977307d7173">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> )
+ ## \ / ##   Benjamin DELPY `gentilkiwi` ( <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1e7c7b70747f7377705e797b706a777275776977307d7173">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> )
  '## v ##'   http://blog.gentilkiwi.com/mimikatz             (oe.eo)
  '#####'                                     with 17 modules * * */
 
@@ -145,7 +145,7 @@ PS C:\temp\mimikatz&gt; .\mimikatz
 .#####.   mimikatz 2.0 alpha (x64) release "Kiwi en C" (Nov 13 2015 00:44:32)
  .## ^ ##.
  ## / \ ##  /* * *
- ## \ / ##   Benjamin DELPY `gentilkiwi` ( <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="88eaede6e2e9e5e1e6c8efede6fce1e4e3e1ffe1a6ebe7e5">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> )
+ ## \ / ##   Benjamin DELPY `gentilkiwi` ( <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="88eaede6e2e9e5e1e6c8efede6fce1e4e3e1ffe1a6ebe7e5">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> )
  '## v ##'   http://blog.gentilkiwi.com/mimikatz             (oe.eo)
  '#####'                                     with 17 modules * * */
 
@@ -185,7 +185,7 @@ Authentication Id : 0 ; 646260 (00000000:0009dc74)
 
 <h1>0x05 Mimikatz 命令参考</h1>
 
-<hr />
+<hr>
 
 <p>Mimikatz 的模块如下：</p>
 
@@ -244,7 +244,7 @@ Authentication Id : 0 ; 646260 (00000000:0009dc74)
 
 <p><strong>注：任何被标记为“实验”的项目，都应该仅在测试环境中使用。</strong></p>
 
-<h3><Her0in id="CRYPTO"> 加密模块（CRYPTO） </Her0in></h3>
+<h3><her0in id="CRYPTO"> 加密模块（CRYPTO） </her0in></h3>
 
 <p>Mimikatz 的 CRYPTO 模块提供与 Windows 加密功能（<a href="https://msdn.microsoft.com/en-us/library/ms867086.aspx">CryptoAPI</a>）进行对接的高级功能。</p>
 
@@ -252,9 +252,9 @@ Authentication Id : 0 ; 646260 (00000000:0009dc74)
 
 <p>CRYPTO::CAPI – （实验）是对 CryptoAPI 层的补丁，便于导出凭证数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900432263030223.jpg" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160129/2016012900432263030223.jpg" alt="p2"></p>
 
-<h4><Her0in id="CRYPTOCertificates"> CRYPTO::Certificates - 列出/导出 证书</Her0in></h4>
+<h4><her0in id="CRYPTOCertificates"> CRYPTO::Certificates - 列出/导出 证书</her0in></h4>
 
 <p>关于<a href="http://www.darkoperator.com/blog/2013/6/11/stealing-user-certificates-with-meterpreter-mimikatz-extensi.html">使用 Mimikatz 导出证书</a>，Carlos Perez (又名<a href="https://twitter.com/Carlos_Perez">DarkOperator</a>) 发表过一篇很棒的文章。</p>
 
@@ -283,7 +283,7 @@ Authentication Id : 0 ; 646260 (00000000:0009dc74)
 
 <h5>CRYPTO::Providers - 列出加密提供者</h5>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900432482839313.jpg" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20160129/2016012900432482839313.jpg" alt="p3"></p>
 
 <h5>CRYPTO::Stores - 列出加密存储库</h5>
 
@@ -304,31 +304,31 @@ CERT_SYSTEM_STORE_USERS or USERS
 CERT_SYSTEM_STORE_SERVICES or SERVICES
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160129/201601290043258443649.jpg" alt="p4" /></p>
+<p><img src="http://static.wooyun.org//drops/20160129/201601290043258443649.jpg" alt="p4"></p>
 
-<h3><Her0in id="DPAPI"> DPAPI 模块 </Her0in></h3>
+<h3><her0in id="DPAPI"> DPAPI 模块 </her0in></h3>
 
-<p><strong>DPAPI::Blob</strong> – 使用 API 或 Masterkey 解除 DPAPI 二进制大对象的保护<br />
-<strong>DPAPI:Cache</strong><br />
-<strong>DPAPI::CAPI</strong> – CAPI 密钥测试<br />
-<strong>DPAPI::CNG</strong> – CNG 密钥测试<br />
-<strong>DPAPI::Cred</strong> – CRE 测试<br />
-<strong>DPAPI::CredHist</strong> – 配置一个 Credhist 文件<br />
-<strong>DPAPI::MasterKey</strong> – 配置 Masterkey 文件或解除保护（依赖于密钥）<br />
-<strong>DPAPI::Protect</strong> – 使用 DPAPI 保护数据<br />
+<p><strong>DPAPI::Blob</strong> – 使用 API 或 Masterkey 解除 DPAPI 二进制大对象的保护<br>
+<strong>DPAPI:Cache</strong><br>
+<strong>DPAPI::CAPI</strong> – CAPI 密钥测试<br>
+<strong>DPAPI::CNG</strong> – CNG 密钥测试<br>
+<strong>DPAPI::Cred</strong> – CRE 测试<br>
+<strong>DPAPI::CredHist</strong> – 配置一个 Credhist 文件<br>
+<strong>DPAPI::MasterKey</strong> – 配置 Masterkey 文件或解除保护（依赖于密钥）<br>
+<strong>DPAPI::Protect</strong> – 使用 DPAPI 保护数据<br>
 <strong>DPAPI::Vault</strong> – VAULT 测试</p>
 
-<h3><Her0in id="EVENT"> EVENT 模块 </Her0in></h3>
+<h3><her0in id="EVENT"> EVENT 模块 </her0in></h3>
 
 <p>EVENT::Clear – 清空事件日志</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900432741089532.png" alt="p5" /></p>
+<p><img src="http://static.wooyun.org//drops/20160129/2016012900432741089532.png" alt="p5"></p>
 
 <p>EVENT:::Drop –（实验）对事件服务进行补丁，避免新的事件产生</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900432824447627.png" alt="p6" /></p>
+<p><img src="http://static.wooyun.org//drops/20160129/2016012900432824447627.png" alt="p6"></p>
 
-<h3><Her0in id="KERBEROS"> KERBEROS 模块 </Her0in></h3>
+<h3><her0in id="KERBEROS"> KERBEROS 模块 </her0in></h3>
 
 <p>Mimikatz 的 KERBEROS 模块用于与微软官方的 Kerberos API 进行对接。此模块中的命令不需要特殊的权限。</p>
 
@@ -392,16 +392,16 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
     </td>
     
     <td width="400">
-      Domain/Forest -> Domain/Forest<br /> (基于帐户的访问)
+      Domain/Forest -> Domain/Forest<br> (基于帐户的访问)
     </td>
   </tr>
 </table>
 
-<h3><Her0in id="KERBEROSGolden"> 黄金票证（Golden Ticket）</Her0in></h3>
+<h3><her0in id="KERBEROSGolden"> 黄金票证（Golden Ticket）</her0in></h3>
 
 <p>黄金票证是一个使用 KRBTGT 帐户的 NTLM 密码哈希来加密和签名的 TGT 。</p>
 
-<p>黄金票证（简称：GT）可以用于创建任何在域中的用户（实际存在或不存在的均可）冒充为任何在域中的组（提供几乎不受限制的权限）的成员以及在域中的任何资源。由于黄金票证是一种身份验证票证（TGT 如下所述），所以其范围是 TGT 整个域（以及利用了 SID 历史的 AD 林），还有一个原因是 TGT 可以用来获取用于访问资源的服务票据（TGS）。黄金票证（TGT）包含了用户组成员信息（PAC），这些信息使用了域的 Kerberos 服务帐户（KRBTGT）进行加密，签名并且只能由 KRBTGT 帐户才能打开并读取这些信息。<br />
+<p>黄金票证（简称：GT）可以用于创建任何在域中的用户（实际存在或不存在的均可）冒充为任何在域中的组（提供几乎不受限制的权限）的成员以及在域中的任何资源。由于黄金票证是一种身份验证票证（TGT 如下所述），所以其范围是 TGT 整个域（以及利用了 SID 历史的 AD 林），还有一个原因是 TGT 可以用来获取用于访问资源的服务票据（TGS）。黄金票证（TGT）包含了用户组成员信息（PAC），这些信息使用了域的 Kerberos 服务帐户（KRBTGT）进行加密，签名并且只能由 KRBTGT 帐户才能打开并读取这些信息。<br>
 总之，一旦攻击者能够访问 KRBTGT 帐户的密码哈希，他们就可以创建黄金票证（TGT）用于在任何时候访问在 AD 中的任何东西。</p>
 
 <h3>Mimikatz 黄金票证命令参考</h3>
@@ -429,19 +429,19 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 <h3>黄金票证默认的组</h3>
 
 <ul>
-<li>Domain Users 组的 SID: S-1-5-21<DOMAINID>-513</li>
-<li>Domain Admins 组的 SID: S-1-5-21<DOMAINID>-512</li>
-<li>Schema Admins 组的 SID: S-1-5-21<DOMAINID>-518</li>
-<li>Enterprise Admins 组的 SID: S-1-5-21<DOMAINID>-519 (只有在林的根域中创建了伪造的票证并使用 /sids 参数指定 AD 林中管理员权限的情况下才会有效)</li>
-<li>Group Policy Creator Owners 组的 SID: S-1-5-21<DOMAINID>-520</li>
+<li>Domain Users 组的 SID: S-1-5-21<domainid>-513</domainid></li>
+<li>Domain Admins 组的 SID: S-1-5-21<domainid>-512</domainid></li>
+<li>Schema Admins 组的 SID: S-1-5-21<domainid>-518</domainid></li>
+<li>Enterprise Admins 组的 SID: S-1-5-21<domainid>-519 (只有在林的根域中创建了伪造的票证并使用 /sids 参数指定 AD 林中管理员权限的情况下才会有效)</domainid></li>
+<li>Group Policy Creator Owners 组的 SID: S-1-5-21<domainid>-520</domainid></li>
 </ul>
 
 <p><strong>kerberos::golden /admin:ADMIINACCOUNTNAME /domain:DOMAINFQDN /id:ACCOUNTRID /sid:DOMAINSID /krbtgt:KRBTGTPASSWORDHASH /ptt</strong></p>
 
-<p>命令示例：<br />
+<p>命令示例：<br>
 <strong>.\mimikatz “kerberos::golden /admin:DarthVader /domain:rd.lab.adsecurity.org /id:9999 /sid:S-1-5-21-135380161-102191138-581311202 /krbtgt:13026055d01f235d67634e109da03321 /startoffset:0 /endin:600 /renewmax:10080 /ptt” exit</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900432946018726.png" alt="p7" /></p>
+<p><img src="http://static.wooyun.org//drops/20160129/2016012900432946018726.png" alt="p7"></p>
 
 <p><strong>黄金票证参考</strong>：</p>
 
@@ -453,13 +453,13 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 
 <p>下面是使用 diff 列出了 Mimikatz 代码的不同之处：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/201601290043312453388.jpg" alt="p8" /></p>
+<p><img src="http://static.wooyun.org//drops/20160129/201601290043312453388.jpg" alt="p8"></p>
 
 <p>更多关于检测伪造的 Kerberos 票证（黄金票证，白银票证，等等）的不同之处，请看<a href="https://adsecurity.org/?p=1515#DetectingForgedKerberosTickets">这里</a>。</p>
 
-<h3><Her0in id="SilverTicket"> 白银票证（Silver Ticket）</Her0in></h3>
+<h3><her0in id="SilverTicket"> 白银票证（Silver Ticket）</her0in></h3>
 
-<p>白银票证（Silver Ticket）是一个 TGS （在格式上类似于 TGT），使用了目标的服务帐户（通过 SPN 映射标识）的 NTLM 密码哈希做加密，签名。<br />
+<p>白银票证（Silver Ticket）是一个 TGS （在格式上类似于 TGT），使用了目标的服务帐户（通过 SPN 映射标识）的 NTLM 密码哈希做加密，签名。<br>
 创建一个白银票证的 Mimikatz 命令为 “kerberos::golden”</p>
 
 <h3>Mimikatz 白银票证命令参考</h3>
@@ -493,11 +493,11 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 <h3>白银票证默认的组</h3>
 
 <ul>
-<li>Domain Users 组的 SID: S-1-5-21<DOMAINID>-513</li>
-<li>Domain Admins 组的 SID: S-1-5-21<DOMAINID>-512</li>
-<li>Schema Admins 组的 SID: S-1-5-21<DOMAINID>-518</li>
-<li>Enterprise Admins 组的 SID: S-1-5-21<DOMAINID>-519 (只有在林的根域中创建了伪造的票证并使用 /sids 参数指定 AD 林中管理员权限的情况下才会有效)</li>
-<li>Group Policy Creator Owners 组的 SID: S-1-5-21<DOMAINID>-520</li>
+<li>Domain Users 组的 SID: S-1-5-21<domainid>-513</domainid></li>
+<li>Domain Admins 组的 SID: S-1-5-21<domainid>-512</domainid></li>
+<li>Schema Admins 组的 SID: S-1-5-21<domainid>-518</domainid></li>
+<li>Enterprise Admins 组的 SID: S-1-5-21<domainid>-519 (只有在林的根域中创建了伪造的票证并使用 /sids 参数指定 AD 林中管理员权限的情况下才会有效)</domainid></li>
+<li>Group Policy Creator Owners 组的 SID: S-1-5-21<domainid>-520</domainid></li>
 </ul>
 
 <h3>使用 Mimikatz 创建白银票证（Silver Ticket）示例</h3>
@@ -506,7 +506,7 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 
 <p><strong>mimikatz “kerberos::golden /admin:LukeSkywalker /id:1106 /domain:lab.adsecurity.org /sid:S-1-5-21-1473643419-774954089-2222329127 /target:adsmswin2k8r2.lab.adsecurity.org /rc4:d7e2b80507ea074ad59f152a1ba20458 /service:cifs /ptt” exit</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900433222625924.png" alt="p9" /></p>
+<p><img src="http://static.wooyun.org//drops/20160129/2016012900433222625924.png" alt="p9"></p>
 
 <p><strong>更新于 1/5/2016：</strong></p>
 
@@ -514,11 +514,11 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 
 <p>下面是使用 diff 列出了 Mimikatz 代码的不同之处：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/201601290043312453388.jpg" alt="p10" /></p>
+<p><img src="http://static.wooyun.org//drops/20160129/201601290043312453388.jpg" alt="p10"></p>
 
 <p>更多关于检测伪造的 Kerberos 票证（黄金票证，白银票证，等等）的不同之处，请看<a href="https://adsecurity.org/?p=1515#DetectingForgedKerberosTickets">这里</a>。</p>
 
-<h3><Her0in id="TrustTicket"> 信任票证（Trust Ticket）</Her0in></h3>
+<h3><her0in id="TrustTicket"> 信任票证（Trust Ticket）</her0in></h3>
 
 <p>一旦 Active Directory 的信任密码哈希确定后 <a href="https://adsecurity.org/?page_id=1821#LSADUMP">(Mimikatz “privilege::debug” “lsadump::trust /patch” exit)</a>，就可以生成一个信任票证（Trust Ticket）。关于信任票证（Trust Ticket）背后的更多细节，请看<a href="https://adsecurity.org/?p=1588">这里</a></p>
 
@@ -532,11 +532,11 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 
 <p><a href="https://adsecurity.org/?page_id=1821#LSADUMP">(Mimikatz “privilege::debug” “lsadump::trust /patch” exit)</a></p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900433424678103.jpg" alt="p11" /></p>
+<p><img src="http://static.wooyun.org//drops/20160129/2016012900433424678103.jpg" alt="p11"></p>
 
 <h4>第二步 使用 Mimikatz 创建伪造的信任票证（跨域 TGT）</h4>
 
-<p>伪造信任票证说明了票证的持有人是 AD 林中的企业管理员（Enterprise Admin）。这使得从一个子域到父域的访问会得到完全的管理权限。请注意，此帐户没有存在于任何地方，因为它有效的使用黄金票证跨越了信任域。<br />
+<p>伪造信任票证说明了票证的持有人是 AD 林中的企业管理员（Enterprise Admin）。这使得从一个子域到父域的访问会得到完全的管理权限。请注意，此帐户没有存在于任何地方，因为它有效的使用黄金票证跨越了信任域。<br>
 创建一个信任票证的 Mimikatz 命令为 “kerberos::golden”</p>
 
 <h3>Mimikatz 信任票证命令参考</h3>
@@ -571,11 +571,11 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 <h3>信任票证默认的组</h3>
 
 <ul>
-<li>Domain Users 组的 SID: S-1-5-21<DOMAINID>-513</li>
-<li>Domain Admins 组的 SID: S-1-5-21<DOMAINID>-512</li>
-<li>Schema Admins 组的 SID: S-1-5-21<DOMAINID>-518</li>
-<li>Enterprise Admins 组的 SID: S-1-5-21<DOMAINID>-519 (只有在林的根域中创建了伪造的票证并使用 /sids 参数指定 AD 林中管理员权限的情况下才会有效)</li>
-<li>Group Policy Creator Owners 组的 SID: S-1-5-21<DOMAINID>-520</li>
+<li>Domain Users 组的 SID: S-1-5-21<domainid>-513</domainid></li>
+<li>Domain Admins 组的 SID: S-1-5-21<domainid>-512</domainid></li>
+<li>Schema Admins 组的 SID: S-1-5-21<domainid>-518</domainid></li>
+<li>Enterprise Admins 组的 SID: S-1-5-21<domainid>-519 (只有在林的根域中创建了伪造的票证并使用 /sids 参数指定 AD 林中管理员权限的情况下才会有效)</domainid></li>
+<li>Group Policy Creator Owners 组的 SID: S-1-5-21<domainid>-520</domainid></li>
 </ul>
 
 <p><strong>Mimikatz “Kerberos::golden /domain:child.lab.adsecurity.org /sid:S-1-5-21-3677078698-724690114-1972670770 /sids:S-1-5-21-1581655573-3923512380-696647894-519 /rc4:49ed1653275f78846ff06de1a02386fd /user:DarthVader /service:krbtgt /target:lab.adsecurity.org /ticket:c:\temp\tickets\EA-ADSECLABCHILD.kirbi” exit</strong></p>
@@ -586,13 +586,13 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 
 <p><strong>Asktgs c:\temp\tickets\EA-ADSECLABCHILD.kirbi CIFS/ADSDC02.lab.adsecurity.org</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/20160129004335845761110.jpg" alt="p12" /></p>
+<p><img src="http://static.wooyun.org//drops/20160129/20160129004335845761110.jpg" alt="p12"></p>
 
 <h4>第四步 利用第三步中创建的 TGS 文件并使用已经欺骗到手的权限访问目标服务</h4>
 
 <p><strong>Kirbikator lsa c:\temp\tickets\CIFS.ADSDC02.lab.adsecurity.org.kirbi</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900433724879128.jpg" alt="p13" /></p>
+<p><img src="http://static.wooyun.org//drops/20160129/2016012900433724879128.jpg" alt="p13"></p>
 
 <ul>
 <li><strong>KERBEROS::Hash</strong> – 将密码哈希为密钥</li>
@@ -604,16 +604,16 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 
 <p>请注意，在有些情况下，用户的凭证将不会被导出。这时候需要运行 <strong>SEKURLSA::Tickets /export</strong>（需要有适当的权限）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/20160129004338779451322.png" alt="p14" /></p>
+<p><img src="http://static.wooyun.org//drops/20160129/20160129004338779451322.png" alt="p14"></p>
 
-<p><strong>KERBEROS::PTC</strong> – 缓存传递（NT6）<br />
+<p><strong>KERBEROS::PTC</strong> – 缓存传递（NT6）<br>
 *Nix 操作系统，如 Mac OS， Linux，BSD， Unix，等等会将 Kerberos 凭证进行缓存。这些已经被缓存的文件通过使用 Mimikatz 可以被复制以及传递。同样对将 Kerberos 票证注入到缓存文件中也很有用。</p>
 
 <p>一个很好的例子是在<a href="https://adsecurity.org/?p=676">使用 PyKEK 利用 MS14-068 漏洞</a>时所使用的 Mimikatz 的 <strong>kerberos::ptc</strong> 命令。PyKEK 生成了一个缓存文件，使用 Mimikatz 的 <strong>kerberos::ptc</strong> 命令可以注入操作。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900434099613145.jpg" alt="p15" /></p>
+<p><img src="http://static.wooyun.org//drops/20160129/2016012900434099613145.jpg" alt="p15"></p>
 
-<h3><Her0in id="KERBEROSPTT"><strong>KERBEROS::PTT – 票证传递</strong> </Her0in></h3>
+<h3><her0in id="KERBEROSPTT"><strong>KERBEROS::PTT – 票证传递</strong> </her0in></h3>
 
 <p>在找到 Kerberos 票证之后，它可以被复制到其他系统上，并且可以传递到当前会话中有效的模拟一次登录且无需与域控制器有任何通信。未指定所需的权限。</p>
 
@@ -624,17 +624,17 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 <li>/diretory – 指定所有将被注入的 .kirbi 文件的文件夹路径</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160129/20160129004342692041518.png" alt="p16" /></p>
+<p><img src="http://static.wooyun.org//drops/20160129/20160129004342692041518.png" alt="p16"></p>
 
 <p><strong>KERBEROS::Purge</strong> – 清除所有的 Kerberos 票证</p>
 
 <p>功能类似于 “klist purge” 。在传递票证（PTC，PTT，等）前运行此命令，并且确保使用了正确的用户上下文。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/20160129004338779451322.png" alt="p17" /></p>
+<p><img src="http://static.wooyun.org//drops/20160129/20160129004338779451322.png" alt="p17"></p>
 
 <p><strong>KERBEROS::TGT</strong> – 获取当前用户的 TGT</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/20160129004343342351616.png" alt="p18" /></p>      </p>
+<p><img src="http://static.wooyun.org//drops/20160129/20160129004343342351616.png" alt="p18"></p>      <p></p>
     
 			</body>
 		</html>

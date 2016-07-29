@@ -3,12 +3,12 @@
 			<head>
 			     <title>OS X平台的Dylib劫持技术（上） - vvun91e0n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/9249">http://drops.wooyun.org/tips/9249</a></h1>
 				
       <p>
-        <p>原文：<a href="https://www.virusbtn.com/virusbulletin/archive/2015/03/vb201503-dylib-hijacking">https://www.virusbtn.com/virusbulletin/archive/2015/03/vb201503-dylib-hijacking</a></p>
+        </p><p>原文：<a href="https://www.virusbtn.com/virusbulletin/archive/2015/03/vb201503-dylib-hijacking">https://www.virusbtn.com/virusbulletin/archive/2015/03/vb201503-dylib-hijacking</a></p>
 
 <p>作者：Patrick Wardleku</p>
 
@@ -20,7 +20,7 @@
 
 <h1>0x01 背景</h1>
 
-<hr />
+<hr>
 
 <p>在介绍OS X平台下的dynamic library（dylib）劫持攻击细节之前，我们先介绍下Windows平台下的dynamic link library（DLL）劫持。因为这两种攻击在概念上很相似。通过学习成熟的Windows平台攻击方法可以帮助理解OS X平台下的方法。</p>
 
@@ -30,11 +30,11 @@
 
 <p>下面的图1和图2进行了说明，一个存在漏洞的程序被一个恶意DLL劫持了。该恶意DLL放在当前工作目录中。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/201509300913438788614.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/201509300913438788614.jpg" alt=""></p>
 
 <p>图1  加载正常系统DLL</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/201509300913451378425.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/201509300913451378425.jpg" alt=""></p>
 
 <p>图2 加载攻击者的恶意DLL</p>
 
@@ -48,7 +48,7 @@
 
 <p>另一个恶意软件利用DLL劫持技术的例子可以在泄露的银行木马‘Carberp’]【6】中找到。源代码显示该恶意软件是通过sysprep.exe（图3）的DLL劫持来绕过UAC的。这个程序是一个自动提权的进程，即不需要任何UAC请求就可以获得更高的权限。不幸的是，它存在着DLL劫持漏洞，被攻击者利用来加载恶意的DLL（cryptbase.dll）【7】。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/201509300913537157233.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/201509300913537157233.jpg" alt=""></p>
 
 <p>图3 Carberp利用DLL劫持来绕过UAC</p>
 
@@ -56,7 +56,7 @@
 
 <h1>0x02 Dylib劫持</h1>
 
-<hr />
+<hr>
 
 <p>曾经以为动态库劫持只一个Windows平台独有的问题。但是，在2010年，一个机敏的StackOverflow用户指出来，‘任何允许动态链接外部库的操作系统在理论上都是有漏洞的’【9】。直到2015年他才证明了这个观点的正确性。本文将揭示在OS X平台下具有毁灭性的动态库劫持攻击技术。</p>
 
@@ -83,7 +83,7 @@
 
 <p>回顾之前，加载器调用ImageLoader类的recursiveLoadLibraries()方法来寻找和加载所有的需求的库。如图4所示，加载代码中处理dylib加载失败的代码是被try/catch块包含的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/201509300913553621543.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/201509300913553621543.jpg" alt=""></p>
 
 <p>图4 dyilb加载失败时的处理逻辑</p>
 
@@ -93,7 +93,7 @@
 
 <p>加载命令是Mach-O文件格式（OS X的原生二进制文件格式）必有的组成部分。在文件中紧接着Mach-O头，它提供了不同的命令给加载器。例如，加载命令可以用来说明二进制文</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/201509300913504510958.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/201509300913504510958.png" alt=""></p>
 
 <p>图5 设置required变量</p>
 
@@ -101,23 +101,23 @@
 
 <p>图5中的代码显示了加载器依次处理所有加载命令的过程，寻找所有声明倒入的动态库。这些加载命令的定义可以在mach-o/loader.h文件中找到。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/201509300914304159363.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/201509300914304159363.jpg" alt=""></p>
 
 <p>图6 通过MachOView查看Calculator.app的加载命令</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/201509300914334810571.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/201509300914334810571.jpg" alt=""></p>
 
 <p>图7 LC&#95;LOAD&#95;*加载命令的格式</p>
 
 <p>对应可执行程序需要每个动态链接库，程序头都包含一个LC&#95;LOAD&#95;*加载命令（LC&#95;LOAD&#95;DYLIB，LC&#95;LOAD&#95;WEAK&#95;DYLIB等）。像图4，图5中加载代码显示的一样，LC&#95;LOAD&#95;DYLIB加载命令声明了一个所需的动态库，通过LC&#95;LOAD&#95;WEAK&#95;DYLIB声明的库就是可选的（weak）。前面一种情况（LC&#95;LOAD&#95;DYLIB），如果所需库没有被找到就会抛出一个异常，加载器就会放弃并结束该进程。但是如果是后面的情况（LC&#95;LOAD&#95;WEAK_DYLIB），动态库是可选的，如果没有发现也并没有声明影响。主程序将会继续执行。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/20150930091435274278.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/20150930091435274278.jpg" alt=""></p>
 
 <p>图8 尝试加载弱（weak）库</p>
 
 <p>该加载器逻辑上满足了第一个假设劫持场景的条件，因此，可以对OS X平台进行动态库劫持攻击。换句话说，如图9所示，如果一个声明的弱引用库没有找到，攻击者就可以在该位置上放置一个恶意的动态库文件。然后，加载器就会找到攻击者的动态库并且加载恶意代码到漏洞程序的进程空间。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/20150930091437599669.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/20150930091437599669.jpg" alt=""></p>
 
 <p>图9 通过恶意的‘weak’动态库进行劫持</p>
 
@@ -127,47 +127,47 @@
 
 <p>如图10所示，在dyld.cpp中的loadPhase3()函数中，有一些有趣的处理逻辑。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/201509300914389365510.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/201509300914389365510.jpg" alt=""></p>
 
 <p>图10 加载依赖‘rpath’的库</p>
 
 <p>Dyld会循环迭代rp->paths向量来动态构建路径（存贮在‘newpath’变量中），之后调用loadPhase4（）函数。这样的做法就满足了第二种劫持场景的要求（dyld在多个位置寻找同一dylib），当然还需要进行一下路径顺序检查。</p>
 
-<p>图10中，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d6b2afbab2306c46326d75317657314c52317a7a326e563e775a314c5230657e3f515c305946335e66326c5034564e96a4a6b7a2be34564f35565430766f305b783e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>��果文档，这是一个特别的加载关键字（在OS X 105，Leopard中有介绍），用来定义一个动态库为‘run-path-dependent library’【12】。苹果解释run-path-denpendent library是一种在创建时完整安装路径并不知道的依赖库。其他文档【13】和【14】等提供了更多的细节，解释了这种库所起到的作用，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fb135c58127c711f417dbb898b9a8f931e7e48126f551e566c1f466e1d6c4d1d67721d6e73">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>：‘frameworks and dynamic libraries to finally be built only once and be used for both system-wide installation and embedding without changes to their install names, and allowing applications to provide alternate locations for a given library, or even override the location specified for a deeply embedded library’【14】。</p>
+<p>图10中，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d6b2afbab2306c46326d75317657314c52317a7a326e563e775a314c5230657e3f515c305946335e66326c5034564e96a4a6b7a2be34564f35565430766f305b783e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>��果文档，这是一个特别的加载关键字（在OS X 105，Leopard中有介绍），用来定义一个动态库为‘run-path-dependent library’【12】。苹果解释run-path-denpendent library是一种在创建时完整安装路径并不知道的依赖库。其他文档【13】和【14】等提供了更多的细节，解释了这种库所起到的作用，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fb135c58127c711f417dbb898b9a8f931e7e48126f551e566c1f466e1d6c4d1d67721d6e73">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>：‘frameworks and dynamic libraries to finally be built only once and be used for both system-wide installation and embedding without changes to their install names, and allowing applications to provide alternate locations for a given library, or even override the location specified for a deeply embedded library’【14】。</p>
 
 <p>通过这种特性，软件开发者可以更为简单的部署复杂的程序，但同时也为动态库劫持提供了方便。一个可执行程序为了使用run-path-dependent library，需要提供给加载器运行时搜索路径列表，加载器在加载时再来寻找这些库【12】。在dyld的代码的很多地方都发现了这样的代码。包括图10里面给出的代码片段。</p>
 
 <p>因为run-path-dependent library是相对新的概念，有些不为人所知，提供一个例子来说明应该是很有必要的，例子包含了run-path-dependent library和使用该库的例子程序。</p>
 
-<p>一个run-path-dependent <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4a262328382b3833acd2e5aef2caaef2e0afe4c3a2e9cfafdac7aef1efa8cad20a383a2b3e22a8cad3afe7ddade6ecaef2f8aff6caafeefeadd0ceacd3e4a3cad02e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>ylib。如图11所示，在Xcode中创建这样一个动态库只需简单的将dylib的安<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="df377c5a3844713a624a3771613862713b67653d5f479fadafbeabb73d5f463c5f5d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
+<p>一个run-path-dependent <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4a262328382b3833acd2e5aef2caaef2e0afe4c3a2e9cfafdac7aef1efa8cad20a383a2b3e22a8cad3afe7ddade6ecaef2f8aff6caafeefeadd0ceacd3e4a3cad02e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>ylib。如图11所示，在Xcode中创建这样一个动态库只需简单的将dylib的安<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="df377c5a3844713a624a3771613862713b67653d5f479fadafbeabb73d5f463c5f5d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093009144099581111.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/2015093009144099581111.jpg" alt=""></p>
 
 <p>图11 建立一个 run-path-dependent library </p>
 
-<p>当run-path-dependent library编译成功之后，检查LC&#95;ID&#95;DYLIB（包含了该dylib的标识信息）加载命令显示的dylib运行时路径。特别是，LC&#95;ID&#95;DYLIB加载命令中‘name’项，显示了该dylib的文件名（rpathLib.framework/ Versions/A/rpathLib）<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c5235d6a217e6027455d85b7b5a4b1ad27455c207945206171225f41264547206347205e7bf4f7234c4522617f264547">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
+<p>当run-path-dependent library编译成功之后，检查LC&#95;ID&#95;DYLIB（包含了该dylib的标识信息）加载命令显示的dylib运行时路径。特别是，LC&#95;ID&#95;DYLIB加载命令中‘name’项，显示了该dylib的文件名（rpathLib.framework/ Versions/A/rpathLib）<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c5235d6a217e6027455d85b7b5a4b1ad27455c207945206171225f41264547206347205e7bf4f7234c4522617f264547">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093009144344199121.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/2015093009144344199121.jpg" alt=""></p>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9b7e0025aaa9593b791b03dbe9ebfaeff3791b027e171e7e0b307e0733ffe2f7f2f97c011f7e351273381e732c347e251f7e0b167f2336">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9b7e0025aaa9593b791b03dbe9ebfaeff3791b027e171e7e0b307e0733ffe2f7f2f97c011f7e351273381e732c347e251f7e0b167f2336">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
 
 <p>构建一个加载run-path-dependent library的程序也是非常直接简单的。首先，将run-path-dependent library添加到Xcode的Libraries列表里面。然后，将run-path搜寻路径添加到‘Runpath Search Paths’列表。最后，这些搜寻目录将会在动态加载器加载库时被搜索到，以确定run-path-dependent library的具体目录。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093009145333432131.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/2015093009145333432131.jpg" alt=""></p>
 
 <p>图13 @rpath库的链接设置和声明run path搜索路径</p>
 
 <p>一旦应用程序被建立，dumping该程序的加载命令会显示一些与run-path依赖库相关的各种命令。一个标准的LC&#95;LOAD&#95;DYLIB加载命令会为需要加载的run-path-dependent dylib的关联依赖提供信息，如图14所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093009145558630141.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/2015093009145558630141.jpg" alt=""></p>
 
 <p>图14 @rpath库的依赖信息</p>
 
-<p>在图14中，注意到安装名name项指向run-path-dependent <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a1c5d8cdc8c347390e451a0444282c461d21432139e1d3d1c0d5c9432138441d2144062a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，并和图12中的run-path-dependent dylib的LC&#95;ID&#95;DYLIB命令的name值是一样的。该程序包含的与run-path-dependent dylib相关的LC&#95;LOAD&#95;DYLIB加载命令告诉加载器：‘我需要rapthLib dylib，但是在组建时，我不知道它的具体安装位置。请用我包含的run-path搜索路径找到并加载它。’</p>
+<p>在图14中，注意到安装名name项指向run-path-dependent <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a1c5d8cdc8c347390e451a0444282c461d21432139e1d3d1c0d5c9432138441d2144062a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，并和图12中的run-path-dependent dylib的LC&#95;ID&#95;DYLIB命令的name值是一样的。该程序包含的与run-path-dependent dylib相关的LC&#95;LOAD&#95;DYLIB加载命令告诉加载器：‘我需要rapthLib dylib，但是在组建时，我不知道它的具体安装位置。请用我包含的run-path搜索路径找到并加载它。’</p>
 
 <p>我们之前在Xcode中将run-path搜索路径添加进‘Runpath Search Paths’表单中。这些搜索路径会在程序中生成LC&#95;RPATH加载命令，每条路径对应一个加载命令。查看编译好的程序可以发现包含的LC&#95;RPATH加载命令，如图15所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093009145757272154.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/2015093009145757272154.png" alt=""></p>
 
 <p>图15 加载命令中的run-path搜索路径</p>
 
@@ -177,25 +177,25 @@
 
 <p>为了提取所有的run-path搜索路径，dyld调用ImageLoader类的getRpaths()方法。该方法（被recursiveLoadLibraries()方法调用）简单的解析程序中所有的LC_RPATH加载命令。对应每个这种加载命令，dyld提取出run-path搜索路径并添加到一个向量中（例如：一个表），如图16所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093009145847848161.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/2015093009145847848161.jpg" alt=""></p>
 
 <p>图16 提取并保存所有内置的run-path搜索路径</p>
 
-<p>有了run-path搜索路径列表，dyld就可以找到所有依赖的run-path-dependent libraries了。这部分逻辑代码在dyld.cpp的loadPhase3()函数中。如图17所示，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2fcb948cc88faecb93b5c98cafc9b08acb91b2c79ab9ca95bcc8b5abcabfa2ca82b8c9b780cabf89c9b3a6caa6a2c893afcdafb76f5d5f4e5b47cdafb6caaa9cc6bb">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�字。如果有，dyld就循环迭代run-path搜索表，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4dabd6f2abc0efafcdd50d3f3d2c3925afcdd4a8c8fea4d9e3a8e0da">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，然后尝试从新生成的路径加载dylib。</p>
+<p>有了run-path搜索路径列表，dyld就可以找到所有依赖的run-path-dependent libraries了。这部分逻辑代码在dyld.cpp的loadPhase3()函数中。如图17所示，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2fcb948cc88faecb93b5c98cafc9b08acb91b2c79ab9ca95bcc8b5abcabfa2ca82b8c9b780cabf89c9b3a6caa6a2c893afcdafb76f5d5f4e5b47cdafb6caaa9cc6bb">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�字。如果有，dyld就循环迭代run-path搜索表，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4dabd6f2abc0efafcdd50d3f3d2c3925afcdd4a8c8fea4d9e3a8e0da">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，然后尝试从新生成的路径加载dylib。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093009150123102171.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/2015093009150123102171.jpg" alt=""></p>
 
-<p>图17 搜索run-path搜索目录，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="46a0cff8a3e9fda0dacf06343627322ea1dcc2223f2a2f24a5c6c4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
+<p>图17 搜索run-path搜索目录，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="46a0cff8a3e9fda0dacf06343627322ea1dcc2223f2a2f24a5c6c4">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
 
 <p>重要的一点是dyld搜索的路径顺序是确定的，是符合LC_RPATH加载命令的顺序的。如图17中显示的代码片段显示，搜索循环会不停寻找，直到找到目标dylib或者是所有的路径都搜索了。</p>
 
 <p>图18，图解了搜索过程。可以看到dyld搜索了不同的run-path搜索路径，为了找到需要的run-path-denpendent dylib。注意在这个例子中，目标dylib是在第二个搜索目录中找到的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093009150266843181.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/2015093009150266843181.jpg" alt=""></p>
 
 <p>图18 Dyld搜索多个run-path搜索目录</p>
 
-<p>总结一下到此的发现：一个OS X系统是可以被劫持攻击的，只要任何程序存在以下的任意条件： 1，包含一个LC&#95;LOAD&#95;WEAK&#95;DYLIB加载命令，但是相关的dylib并不存在。 2，同时包含一个LC&#95;LOAD*&#95;DYLIB加载命令指向一个run-path-denpendent library（<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="486f083a38293c20">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>'）和多个LC&#95;RPATH加载命令。并且run-path-denpendent library没有在第一个run-path搜索目录中。</p>
+<p>总结一下到此的发现：一个OS X系统是可以被劫持攻击的，只要任何程序存在以下的任意条件： 1，包含一个LC&#95;LOAD&#95;WEAK&#95;DYLIB加载命令，但是相关的dylib并不存在。 2，同时包含一个LC&#95;LOAD*&#95;DYLIB加载命令指向一个run-path-denpendent library（<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="486f083a38293c20">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>'）和多个LC&#95;RPATH加载命令。并且run-path-denpendent library没有在第一个run-path搜索目录中。</p>
 
 <p>本文的余下部分会先讲述一个完整的dylib劫持攻击，然后给出几个不同的攻击（驻留，加载时劫持，远程注入等），最后总结下如何防御此类攻击。</p>
 
@@ -203,9 +203,9 @@
 
 <p>回顾之前描述的例子程序（'rPathApp.app'）。我们用来解释连接run-path-denpendent dylib的。这个程序将会是我们劫持攻击的目标。</p>
 
-<p>dylib劫持攻击的对象只能是存在漏洞的程序（满足前面讲述的两个劫持条件之一的程序）。因为本例子程序（rPathApp.app）需要连接一个run-path-dependent dylib，它也许就满足上面第二个条件。最简单的检测方式就是开启加载器的debug logging功能，然后在命令行简单的运行该程序。为了开启这种logging，需要设置DYLD&#95;PRINT&#95;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="60323021342887eecf85c2e385eff889e7ef83e0e288dff984dcfa88cec904190c0486e9f385edd085e7da20121001140886e9c985d1f586e3e585e6d585f2ec0419">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="036f6a61e689a3ebbebee6b39eebac96e49987e7bca2e582ace08381eba481e6ac9cebbc9ae7b998ebbd90e684b9e6b3b2e68cace7b8a6e6bca8ea839ce49987e68c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�现漏洞（例如：第一个扩展指向了不存在的dylib）如图20所示。</p>
+<p>dylib劫持攻击的对象只能是存在漏洞的程序（满足前面讲述的两个劫持条件之一的程序）。因为本例子程序（rPathApp.app）需要连接一个run-path-dependent dylib，它也许就满足上面第二个条件。最简单的检测方式就是开启加载器的debug logging功能，然后在命令行简单的运行该程序。为了开启这种logging，需要设置DYLD&#95;PRINT&#95;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="60323021342887eecf85c2e385eff889e7ef83e0e288dff984dcfa88cec904190c0486e9f385edd085e7da20121001140886e9c985d1f586e3e585e6d585f2ec0419">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="036f6a61e689a3ebbebee6b39eebac96e49987e7bca2e582ace08381eba481e6ac9cebbc9ae7b998ebbd90e684b9e6b3b2e68cace7b8a6e6bca8ea839ce49987e68c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�现漏洞（例如：第一个扩展指向了不存在的dylib）如图20所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093009150713841201.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/2015093009150713841201.jpg" alt=""></p>
 
 <p>图20 存在漏洞的测试程序rPathApp</p>
 
@@ -213,25 +213,25 @@
 
 <p>我们创建了一个简单的dylib来扮演恶意的劫持库。为了能够在加载时自动执行，该dylib实现了一个构造函数。该构造函数在dylib成功加载后会自动执行。这是一个很好的特性，因为一般的dylib代码不会执行，直到主程序调用它的某个导出函数。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093009150844552211.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/2015093009150844552211.jpg" alt=""></p>
 
 <p>图21 一个dylib的构造函数将会自动执行</p>
 
 <p>编译组建完成后，将dylib重命名，改成目标库的名字：rpathlib。接下来，创建需要的目录结构（Library/One/rpathLib.framework/Versions/A/）并将恶意的dylib拷贝进该目录。这就保证了无论何时程序启动，dyld在搜索run-path-denpendent dylib时会找到劫持dylib。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093009151144472221.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/2015093009151144472221.jpg" alt=""></p>
 
 <p>图22 恶意dylib被放置在第一个run-path搜索目录中</p>
 
 <p>不幸的是，这一次劫持尝试失败了。程序意外的崩溃了。见图23。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093009151318331231.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/2015093009151318331231.jpg" alt=""></p>
 
 <p>图23 成功解析路径，然后崩溃</p>
 
 <p>虽然失败了，但是好消息就是，加载器找到了并尝试加载劫持dylib（看图23中的'RPATH successful expansion…'日志消息）。虽然程序崩溃了，但是加载器还是抛出了一条详细的异常信息。这条异常看起来是自解释的：劫持库的版本和要求的版本不同。重新研究加载器的源代码，找到了抛出这条异常的代码。见图24。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093009151539414241.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/2015093009151539414241.png" alt=""></p>
 
 <p>图24 Dyld提取和比较合适的版本号</p>
 
@@ -239,19 +239,19 @@
 
 <p>解决此兼容问题也不难，只需要通过在Xcode中更新版本号，重新编译下就行。见图25。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093009151950899251.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/2015093009151950899251.jpg" alt=""></p>
 
 <p>图25 设置兼容和当前版本号</p>
 
 <p>检查重新编译的劫持dylib的LC&#95;ID&#95;DYLIB加载命令。确认已经更新版本号。见图26</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/201509300915201703826.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/201509300915201703826.jpg" alt=""></p>
 
 <p>图26 兼容版本号和当前版本号</p>
 
 <p>更新版本号后的劫持dylib又被拷贝进程序的第一个run-path搜索目录。重启漏洞程序，显示加载器找到了劫持dylib并且尝试加载。可是虽然现在dylib版本兼容。但是一个新的异常被抛出，程序又一次崩溃。见图27。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/201509300915228395927.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/201509300915228395927.jpg" alt=""></p>
 
 <p>图27 ‘符号没有找到’异常</p>
 
@@ -259,33 +259,33 @@
 
 <p>有几种方法可以确保劫持dylib导出正确的符号表，这样才能完整的进行连接。一个简单的方法就是劫持dylib直接仿造目标dylib的导出信息。也许这样就可以成功了，看起来有点复杂并且不同的dylib各有特点（比如，攻击另外一个dylib需要另外的导出信息）。一个更优雅的办法是简单的让连接器去别的地方寻则它要求的符号。当然别的地方就是指合法的dylib。在这个场景中，劫持dylib将简单的扮演一个代理或者是一个‘re-exporter’dylib，加载器将会跟随它的重导出指令，没有连接错误会被抛出。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/201509300915238144328.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/201509300915238144328.jpg" alt=""></p>
 
 <p>图28 重导出合法的dylib</p>
 
 <p>需要付出一些努力，才能让重导出的库完美工作。第一步是回到Xcode，添加多个链接的flags到劫持dylib项目。这些flags包括“-Xlinker '，' reexport_library '，然后还有到包含漏洞程序真正需要导出接口的目标库的路径。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/201509300915258217029.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/201509300915258217029.jpg" alt=""></p>
 
 <p>图29 要求的链接flag，来实现re-exporting</p>
 
 <p>这些链接flags会生成一个内置的LC&#95;REEXPORT&#95;DYLIB加载命令。其中包含到目标dylib的路径。见图30。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/201509300915261338030.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/201509300915261338030.jpg" alt=""></p>
 
 <p>图30 内置的LC&#95;REEXPORT&#95;DYLIB加载命令</p>
 
-<p>然而，事情并非如此简单。因为劫持dylib重导出目标是一个run-path-denpendent library。LC&#95;REEXPORT&#95;DYLIB（从合法的dylib的LC&#95;ID&#95;DYLIB加载命令中导出）<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="02e6baaf6c636f67e4acb7e49aade6b9a7e0829a42707263766ae0829be7be82e7a589e59886e18280eabd9be49aade49e8beb95aceba09ae59886">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，因为不像LC&#95;LOAD*&#95;DYLIB加载命令，dyld不会解析LC&#95;REEXPORT&#95;DYLIB加载命令中的run-path-denpendent路径。换句话说，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2ecba48ec69393cbb786ca92b4c9b59ac8a08bcba48ec69393ccaeb66e5c5e4f5a46">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8ca3fefcedf8e4c0e5eea2eafeede1e9fbe3fee7a3dae9feffe5e3e2ffa3cda3fefcedf8e4c0e5ee6e0c156f0c0e6433156a1423640e2369221668301669283d6438">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�的。</p>
+<p>然而，事情并非如此简单。因为劫持dylib重导出目标是一个run-path-denpendent library。LC&#95;REEXPORT&#95;DYLIB（从合法的dylib的LC&#95;ID&#95;DYLIB加载命令中导出）<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="02e6baaf6c636f67e4acb7e49aade6b9a7e0829a42707263766ae0829be7be82e7a589e59886e18280eabd9be49aade49e8beb95aceba09ae59886">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，因为不像LC&#95;LOAD*&#95;DYLIB加载命令，dyld不会解析LC&#95;REEXPORT&#95;DYLIB加载命令中的run-path-denpendent路径。换句话说，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2ecba48ec69393cbb786ca92b4c9b59ac8a08bcba48ec69393ccaeb66e5c5e4f5a46">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8ca3fefcedf8e4c0e5eea2eafeede1e9fbe3fee7a3dae9feffe5e3e2ffa3cda3fefcedf8e4c0e5ee6e0c156f0c0e6433156a1423640e2369221668301669283d6438">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�的。</p>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="30d89793d5b683d5baaed683a5d6a89fd7978bd9a994d5b6b5d78d9ed2b0a8704240514458d2b0a9d8879fd58eb4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，提供目标库的完整路径给LC&#95;REEXPORT&#95;DYLIB加载命令。这需要借助一款苹果开发者工具：install&#95;name&#95;tool。来更新LC&#95;REEXPORT&#95;DYLIB加载命令中的install name。这个工具执行时，用-change选项，随后是现存的name（LC&#95;REEXPORT&#95;DYLIB中的），新的name，劫持dylib的路径。见图31。</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="30d89793d5b683d5baaed683a5d6a89fd7978bd9a994d5b6b5d78d9ed2b0a8704240514458d2b0a9d8879fd58eb4">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，提供目标库的完整路径给LC&#95;REEXPORT&#95;DYLIB加载命令。这需要借助一款苹果开发者工具：install&#95;name&#95;tool。来更新LC&#95;REEXPORT&#95;DYLIB加载命令中的install name。这个工具执行时，用-change选项，随后是现存的name（LC&#95;REEXPORT&#95;DYLIB中的），新的name，劫持dylib的路径。见图31。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093009152853993311.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/2015093009152853993311.jpg" alt=""></p>
 
 <p>图31 使用installl&#95;tool&#95;name来更新内置的name</p>
 
 <p>在LC&#95;REEXPORT&#95;DYLIB加载命令正确更新后，劫持dylib被重新拷贝到主程序的第一个run-path搜索目录，重启程序。如图32，最终成功执行。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093009153067666321.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150930/2015093009153067666321.jpg" alt=""></p>
 
 <p>图32 成功劫持又漏洞的程序</p>
 
@@ -293,7 +293,7 @@
 
 <h1>0x03 参考</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>Secure loading of libraries to prevent DLL preloading attacks. <a href="http://blogs.technet.com/cfs-file.ashx/__key/CommunityServer-Components-PostAttachments/00-03-35-14-21/Secure-loading-of-libraries-to-prevent-DLL-Preloading.docx">http://blogs.technet.com/cfs-file.ashx/__key/CommunityServer-Components-PostAttachments/00-03-35-14-21/Secure-loading-of-libraries-to-prevent-DLL-Preloading.docx</a>.</li>
@@ -310,7 +310,7 @@
 <li>Run-Path Dependent Libraries. <a href="https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/RunpathDependentLibraries.html">https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/RunpathDependentLibraries.html</a>.</li>
 <li>Using @rpath: Why and How. <a href="http://www.dribin.org/dave/blog/archives/2009/11/15/rpath/">http://www.dribin.org/dave/blog/archives/2009/11/15/rpath/</a>.</li>
 <li>Friday Q&amp;A 2012-11-09: dyld: Dynamic Linking On OS X. <a href="https://www.mikeash.com/pyblog/friday-qa-2012-11-09-dyld-dynamic-linking-on-os-x.html">https://www.mikeash.com/pyblog/friday-qa-2012-11-09-dyld-dynamic-linking-on-os-x.html</a>.</li>
-</ol>      </p>
+</ol>      <p></p>
     
 			</body>
 		</html>

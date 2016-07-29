@@ -3,12 +3,12 @@
 			<head>
 			     <title>卧底路由器之WooyunWifi of DOOM - lxj616</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/16184">http://drops.wooyun.org/tips/16184</a></h1>
 				
       <p>
-        <p>在实际业务中，我们经常会遇到一些渗透测试项目由于处于企业内网，因此不得不把白帽子们集合起来塞进小黑屋实地测试。</p>
+        </p><p>在实际业务中，我们经常会遇到一些渗透测试项目由于处于企业内网，因此不得不把白帽子们集合起来塞进小黑屋实地测试。</p>
 
 <p>本文基于Openwrt，通过Openvpn桥接本地网络与远程目标内网，实现layer 3的内网访问，文章重点不是如何进行内网渗透，而是如何授权完全不会内网渗透的白帽子远程进入内网搞渗透测试。</p>
 
@@ -42,7 +42,7 @@
 
 <h2>0x00 基本原理</h2>
 
-<hr />
+<hr>
 
 <p>首先我们利用Openvpn的隧道来穿透企业内网，这一点对于企业自身的网络工程师而言比较轻松，只要放行一条tcp连接（或者udp）用于构建vpn隧道就可以了，如果企业内网本身就没有封杀到外网的出站连接，那就更简单了</p>
 
@@ -50,7 +50,7 @@
 
 <h2>0x01 Server搭建</h2>
 
-<hr />
+<hr>
 
 <p>首先要安装Openvpn</p>
 
@@ -161,7 +161,7 @@ ifconfig-push 10.8.0.29 10.8.0.1
 
 <h2>0x02 client配置</h2>
 
-<hr />
+<hr>
 
 <p>其实就是一个和server端相对应的client配置文件： client1.ovpn</p>
 
@@ -206,7 +206,7 @@ verb 3
 
 <h2>0x03 内网target配置</h2>
 
-<hr />
+<hr>
 
 <p>内网target的openvpn配置文件和正常client的配置文件是相同的，只要把key和crt替换成target自己的就可以</p>
 
@@ -226,7 +226,7 @@ verb 3
 
 <h2>0x04 自动化部署</h2>
 
-<hr />
+<hr>
 
 <p>我们可以把target部署在一个Openwrt路由器上，把target部署的全部步骤彻底自动化，简化成只需要给路由器配置网络即可</p>
 
@@ -252,7 +252,7 @@ verb 3
 
 <p>下图为client1测试<code>mtr 192.168.35.154</code>连接192.168.35.0/24内网中设备的路由情况，成功通过10.8.0.29连接到了内网设备</p>
 
-<p><img src="http://static.wooyun.org//drops/20160526/2016052608282027240.png" alt="mtr" /></p>
+<p><img src="http://static.wooyun.org//drops/20160526/2016052608282027240.png" alt="mtr"></p>
 
 <p>我把整个自动部署的配置打成了个Openwrt的package，大家可以到github上下载示例（替换成自己的key和crt）</p>
 
@@ -260,13 +260,13 @@ verb 3
 
 <h2>0x05 参考文献 &amp; 致谢</h2>
 
-<hr />
+<hr>
 
 <p>kali官方给出的single server与single agent模式配置介绍： https://www.offensive-security.com/kali-linux/kali-rolling-iso-of-doom/</p>
 
 <p>binkybear 给出的利用openvpn-as来做的multi-client形式的教程（在Nethunter上实现的agent），由于openvpn-as是商业版的（免费授权最多两个连接，限制太多），因此我决定在Openwrt上基于原版openvpn来做： https://github.com/offensive-security/kali-nethunter/issues/421</p>
 
-<p>最后声明一下，这个功能不包含在WooyunWifi里面，公开的代码完全不依赖WooyunWifi，也不包含任何WooyunWifi的代码，对于普通的Openwrt路由器，只需要安装openvpn即可，请在合法的范围内使用本文中所提到的技术，不要在未经同意的情况下把路由器放进别人内网，也不要把Openvpn server部署到国外免得违背某些奇怪的政策……</p>      </p>
+<p>最后声明一下，这个功能不包含在WooyunWifi里面，公开的代码完全不依赖WooyunWifi，也不包含任何WooyunWifi的代码，对于普通的Openwrt路由器，只需要安装openvpn即可，请在合法的范围内使用本文中所提到的技术，不要在未经同意的情况下把路由器放进别人内网，也不要把Openvpn server部署到国外免得违背某些奇怪的政策……</p>      <p></p>
     
 			</body>
 		</html>

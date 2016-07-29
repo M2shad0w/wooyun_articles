@@ -3,20 +3,20 @@
 			<head>
 			     <title>GET来的漏洞 - 呆子不开口</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/7112">http://drops.wooyun.org/web/7112</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>这篇文章主要讲目前互联网上get方法被不规范使用带来的一些安全漏洞。其中重点会讲get请求在账号登陆体系中被滥用的场景和攻击方式。</p>
 
 <h1>0x01 Get方法的定义</h1>
 
-<hr />
+<hr>
 
 <p>在客户机和服务器之间进行请求-响应时，两种最常被用到的方法是：GET 和 POST</p>
 
@@ -30,7 +30,7 @@ POST - 向指定的资源提交要被处理的数据
 
 <h1>0x02 Get请求常见于如下场景中</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>浏览器地址栏中可见，会被别人看到</li>
@@ -48,7 +48,7 @@ POST - 向指定的资源提交要被处理的数据
 
 <h1>0x03 Get请求的风险</h1>
 
-<hr />
+<hr>
 
 <p>根据HTTP规范，GET用于信息获取，是安全的和幂等的。安全的意思是get请求不会让服务端的资源或状态改变。幂等的意思是无论请求多少次，返回的结果都一样，都不会对服务端资源有任何副作用。</p>
 
@@ -74,7 +74,7 @@ POST - 向指定的资源提交要被处理的数据
 
 <h1>0x04 若你非要用get实现增删改</h1>
 
-<hr />
+<hr>
 
 <p>会被重放，导致服务端资源状态发生改变</p>
 
@@ -96,7 +96,7 @@ POST - 向指定的资源提交要被处理的数据
 
 <h1>0x06 若你非用get传输敏感信息</h1>
 
-<hr />
+<hr>
 
 <p>互联网上常见的敏感信息举例：</p>
 
@@ -126,11 +126,11 @@ http://XXX.XXXXXX.XXX/index.php?gsid=******************
 
 <h1>0x07 敏感信息泄露举例</h1>
 
-<hr />
+<hr>
 
 <p><strong>隐私信息泄露举例</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150715/201507150221018939658b4e497063484d7e61a6432343bb2fc" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150715/201507150221018939658b4e497063484d7e61a6432343bb2fc" alt="enter image description here"></p>
 
 <p>用户登录微博后，首页的url会含有用户ID信息。所以timeline上的链接的主人会通过referrer知道哪些用户访问了它。可能大家都不会在意，它可能会帮你逮微博马甲、捉奸在网……</p>
 
@@ -144,7 +144,7 @@ http://XXX.XXXXXX.XXX/index.php?gsid=******************
 
 <p><strong>token信息泄露举例</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150715/201507150221015492439237847f8aa3d198a0e13140b9a92c5" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150715/201507150221015492439237847f8aa3d198a0e13140b9a92c5" alt="enter image description here"></p>
 
 <p>如上图，这是微信公众平台后台管理员点击了网友发来的信息后的打开第三方页面的请求，referrer字段中的url中包含了管理后台的csrf防护的token</p>
 
@@ -156,27 +156,27 @@ http://XXX.XXXXXX.XXX/index.php?gsid=******************
 
 <p><strong>认证信息泄露举例——被referrer发到第三方</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150715/2015071502210156232ea43a1e8550427e425da246d3eb39a37" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150715/2015071502210156232ea43a1e8550427e425da246d3eb39a37" alt="enter image description here"></p>
 
 <p>上图是现在的乌云的厂商用户的查看漏洞详情的临时页面，原来的页面是没有查看密码的，是可以通过地址栏里那个含有auth信息的get请求直接查看漏洞详情的</p>
 
 <p>但某一漏洞详情页包含了一个优酷的视频，这个查看详情的链接会在优酷的视频页显示。因为优酷为了告诉用户展示来源，显示了referrer信息。这样这个漏洞详情的临时查看页面就可以被网友在网上无意撞见了，厂商的漏洞详情可能会被提前泄露。见下图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150715/20150715022101343127f24b04d0ee21aafeef5471629adbb03" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150715/20150715022101343127f24b04d0ee21aafeef5471629adbb03" alt="enter image description here"></p>
 
 <p>详情可参考  <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2015-0102609">WooYun: 乌云某临时授权查看链接在某些极小可能性下有泄露的可能</a> </p>
 
 <p>然后我想看看这个查看漏洞的授权页在网上泄露了多少，去百度搜了下</p>
 
-<p><img src="http://static.wooyun.org//drops/20150715/201507150221011975434960df931b0f618c712642c4581d1e5" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150715/201507150221011975434960df931b0f618c712642c4581d1e5" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150715/2015071502210272002577ee8c1a3a4e79c578107fb65ff9d8b" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150715/2015071502210272002577ee8c1a3a4e79c578107fb65ff9d8b" alt="enter image description here"></p>
 
 <p>一个月内泄露的乌云厂商用户的临时查看链接竟然有十二页之多，我觉得应该不可能全是厂商管理员分享出去的。所以我有了一个猜测，不一定是错的，那就是：乌云的所有get请求都已被百度云加速收集，用来帮助用户进行搜索的seo优化。</p>
 
 <h1>0x08 偷最敏感的信息——认证信息</h1>
 
-<hr />
+<hr>
 
 <p>使用get请求认证的一些场景</p>
 
@@ -219,11 +219,11 @@ http://XXX.XXXXXX.XXX/index.php?gsid=******************
 
 <p>偷认证信息的大概流程如下，后面会细讲。总之攻击的目的就是，拿到用户的ticket信息</p>
 
-<p><img src="http://static.wooyun.org//drops/20150715/20150715022102641949f96b5c8a3b518a24a835a1396bf549a" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150715/20150715022102641949f96b5c8a3b518a24a835a1396bf549a" alt="enter image description here"></p>
 
 <h1>0x09 How</h1>
 
-<hr />
+<hr>
 
 <p>互联网上常见的几个单点登陆场景，通行证或第三方站给的登陆凭的证使用的方式各有不同，分别该怎么偷</p>
 
@@ -250,7 +250,7 @@ http://XXX.XXXXXX.XXX/index.php?gsid=******************
 
 <p>示意图如下，如下是我画的一个chrome浏览器，地址栏里ticket参数会被包含到下面的一些元素的请求的referrer中</p>
 
-<p><img src="http://static.wooyun.org//drops/20150715/201507150221023834350d46e039c99279af5e9baff3a87fc0d" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150715/201507150221023834350d46e039c99279af5e9baff3a87fc0d" alt="enter image description here"></p>
 
 <p>参考案例： <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2015-0124352">WooYun: 微博上你点我发的链接我就可以登上你的微博（web版和app端均可两个漏洞一并提交）</a> </p>
 
@@ -356,7 +356,7 @@ iframe.addEventListener('load', function(){
 
 <h1>0x0a 总结</h1>
 
-<hr />
+<hr>
 
 <p>综上所述，get请求的滥用大家都没重视过，但综合一些小漏洞，可能会产生一些意想不到的大漏洞</p>
 
@@ -364,7 +364,7 @@ iframe.addEventListener('load', function(){
 
 <p>在前几天的阿里安全峰会上，我讲了这个议题，最后的观众提问环节有人问使用https可不可以解决上面的问题。答案当然是不可以，https解决的只是客户端到服务端的传输加密防篡改。但get请求的数据在两个端，尤其是客户端，https是保护不了的。</p>
 
-<p>至于单点登录问题的修复方案，有很多层面都可以去解决，比如不使用get，不让攻击者发起伪造的单点登录请求等等， 这些细节需要具体问题具体对待，这里就不细讲了。有需求的女网友可以私下找我交流，共同为互联网的安全学习进步</p>      </p>
+<p>至于单点登录问题的修复方案，有很多层面都可以去解决，比如不使用get，不让攻击者发起伪造的单点登录请求等等， 这些细节需要具体问题具体对待，这里就不细讲了。有需求的女网友可以私下找我交流，共同为互联网的安全学习进步</p>      <p></p>
     
 			</body>
 		</html>

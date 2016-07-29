@@ -3,14 +3,14 @@
 			<head>
 			     <title>URL Hacking - 前端猥琐流 - 0x_Jin</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/750">http://drops.wooyun.org/tips/750</a></h1>
 				
       <p>
-        <h2>0x00 目录</h2>
+        </p><h2>0x00 目录</h2>
 
-<hr />
+<hr>
 
 <pre><code>0x01 链接的构成
 0x02 浏览器算如何对url进行解析的
@@ -22,13 +22,13 @@
 
 <h2>0x01 链接的构成</h2>
 
-<hr />
+<hr>
 
 <p>链接真的只能固定成我们常用的格式么？</p>
 
 <p>不知道有多少人思考过这个问题！我们经常输入的格式一般都是www.xxxx.com！</p>
 
-<p>或者再加上协议名 http https 端口以及路径什么的 或者再加上账号密码！如下图： ￼ <img src="http://static.wooyun.org/20140918/2014091813180662058.png" alt="enter image description here" /></p>
+<p>或者再加上协议名 http https 端口以及路径什么的 或者再加上账号密码！如下图： ￼ <img src="http://static.wooyun.org/20140918/2014091813180662058.png" alt="enter image description here"></p>
 
 <pre><code>第一部分：协议名(以单个冒号结束)
 第二部分：用户信息 也就是账号密码！(登陆ftp时常用)
@@ -40,7 +40,7 @@
 
 <h2>0x02 浏览器是如何对url进行解析的</h2>
 
-<hr />
+<hr>
 
 <p>我们都知道我们访问一个网站是带有协议的比如http ftp https 等等！</p>
 
@@ -79,7 +79,7 @@
 
 <p>结合以上信息 我们分析下以下链接：</p>
 
-<pre><code>ftp://admin:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="98f9fcf5f1f6d8a9a1aab6a9aea0b6a9b6a9a8a8">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:21
+<pre><code>ftp://admin:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="98f9fcf5f1f6d8a9a1aab6a9aea0b6a9b6a9a8a8">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:21
 </code></pre>
 
 <p>这样的链接我经常用来登陆ftp！这样便会以admin的身份 密码为:admin</p>
@@ -104,14 +104,14 @@
 
 <h3>例子1：</h3>
 
-<pre><code>http://xss1.com&amp;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b7d6d4c3ded8d98ac3d2c4c3f7c0c0c099d5d6ded3c299d4d8da">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code>http://xss1.com&amp;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b7d6d4c3ded8d98ac3d2c4c3f7c0c0c099d5d6ded3c299d4d8da">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>这样一个链接在普通用户看来 是会认为访问xss1.com的！</p>
 
 <p>但是实际上是去往www.baidu.com 的！为什么呢？结合以上的知识我们分析一下！</p>
 
-<p>首先 协议名提取出来了 然后获得授权部分信息，? / # 都未出现 浏览器便无法获得一个字符串来获得主机地址！<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="dc3a544d386770395a5139625c394c523b40579c3b707a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> @符前面的便认为是登陆信息 并不会当做主机名来解析！所以现在xss1.com&amp;action=test 已经被当做登陆信息了 现在唯一的主机名便只有www.baidu.com了！</p>
+<p>首先 协议名提取出来了 然后获得授权部分信息，? / # 都未出现 浏览器便无法获得一个字符串来获得主机地址！<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="dc3a544d386770395a5139625c394c523b40579c3b707a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> @符前面的便认为是登陆信息 并不会当做主机名来解析！所以现在xss1.com&amp;action=test 已经被当做登陆信息了 现在唯一的主机名便只有www.baidu.com了！</p>
 
 <p>而xss1.com&amp;action=test在我们访问网站的时候 被当做了登陆了信息去访问www.baidu.com了！</p>
 
@@ -122,13 +122,13 @@
 
 <p>首先看下这个链接在chrome中的样子：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813180771134.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091813180771134.jpeg" alt="enter image description here"></p>
 
 <p>很明显的看到 这样一个链接在chrome中是会去访问xss1.com的！</p>
 
 <p>现在我们来看下在firefox下的样子：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813180829058.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091813180829058.jpeg" alt="enter image description here"></p>
 
 <p>会提示我们是否要用账号为：xss1.com\的信息去访问www.baidu.com!</p>
 
@@ -140,7 +140,7 @@
 
 <p>所以授权信息部分结束 那么前面的便当成了主机名！</p>
 
-<p>而firefox是不会把\当成正斜杠的 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fc147c70bc1b505a19734b19757115615e1b6678">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> 便算登陆信息 后面的就是主机名！所以当用firefox去访问这个链接时 才出现了 上图中的提示！</p>
+<p>而firefox是不会把\当成正斜杠的 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fc147c70bc1b505a19734b19757115615e1b6678">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> 便算登陆信息 后面的就是主机名！所以当用firefox去访问这个链接时 才出现了 上图中的提示！</p>
 
 <h3>例子3：</h3>
 
@@ -157,7 +157,7 @@
 
 <h2>0x03 链接真的只能是这样固定的格式么？</h2>
 
-<hr />
+<hr>
 
 <p>不知道有多少人想过这个问题，链接真的只能是这样么！</p>
 
@@ -177,20 +177,20 @@ var b='://';
 
 <p>如下图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813180996908.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091813180996908.png" alt="enter image description here"></p>
 
 <p>可以看到//后面我们还能输入tab，换行，<code>/ @ \</code> 等等！那我们来测试一下！构造如下链接去访问一下！</p>
 
 <pre><code>\\/www.baidu.com
 \\@www.baidu.com
-\\<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="cbe48bbcbcbce5a9aaa2afbee5a8a4a6">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+\\<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="cbe48bbcbcbce5a9aaa2afbee5a8a4a6">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 \\\\\\\www.baidu.com
 ///////www.baidu.com
 </code></pre>
 
 <p>等等全部能正常的访问到百度!大家可以自己试一下！最好的话写在a 标签 或者 img script里把！这样更贴近我们平常所遇到的环境！</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091813181033337.png" alt="enter image description here" /></p>
+<p>￼<img src="http://static.wooyun.org/20140918/2014091813181033337.png" alt="enter image description here"></p>
 
 <p>既然我们在文章的标题提到了猥琐 这样够猥琐？No 还不够！这样我们的连接始终还是带着一定的特征！</p>
 
@@ -236,11 +236,11 @@ var b='://';
 
 <p>都设置好 如下图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181129065.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091813181129065.jpg" alt="enter image description here"></p>
 
 <p>下面的小参数可以使用默认的！参数都设置好了，现在我们要标识 我们要测试哪个字符，用:{chr} 代替该字符即可！</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181267163.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091813181267163.jpeg" alt="enter image description here"></p>
 
 <p>好，现在设置好后点击Fuzzing 枪打出头鸟 我们就先测d吧！</p>
 
@@ -250,7 +250,7 @@ var b='://';
 
 <p>现在我们复制他们！然后丢chrome里把他们给还原回来！打开控制台(F12)</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181226492.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091813181226492.jpeg" alt="enter image description here"></p>
 
 <p>输入String.fromCharCode(ASCII码) 回车便出来了！</p>
 
@@ -272,7 +272,7 @@ var b='://';
 
 <p>如果curl的话就不行了！</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181348857.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091813181348857.jpeg" alt="enter image description here"></p>
 
 <p>为什么呢？很简单因为没解析 curl他不会去解析这个字符串！</p>
 
@@ -290,7 +290,7 @@ var b='://';
 
 <p>首先拿一个被腾讯认为是危险网站的红X站</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181472483.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091813181472483.jpeg" alt="enter image description here"></p>
 
 <p>可以看到这个链接发出来是会被当做危险网站的！</p>
 
@@ -298,7 +298,7 @@ var b='://';
 
 <p>(因为你fuzz的字符多了 会被当成符号 让腾讯认为这不是一个链接！然后就不 能一点就会打开网页了 比如这样。。。)</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181436152.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091813181436152.jpg" alt="enter image description here"></p>
 
 <p>可以看到这样带的符号多了 让腾讯这不是一个链接 就不会生成个超链接了！</p>
 
@@ -310,7 +310,7 @@ var b='://';
 
 <p>还是用 http://xsser.me/hf.html 来fuzz</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181530821.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091813181530821.jpeg" alt="enter image description here"></p>
 
 <p>经过fuzz 测试出来 http://laohujijiqiao8.com 的o 可以用以下的字符来代替！ ￼</p>
 
@@ -324,13 +324,13 @@ var b='://';
 
 <p>发出去 看还带没带危险网站的标识！上图： ￼</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181519392.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091813181519392.jpeg" alt="enter image description here"></p>
 
 <p>现在已经没有标识这是个危险网站的 并且还能够正常打开！是不是已经达到我们的目的了呢？</p>
 
 <p>之前用这种方式把一个蓝色标示的网站弄成显示为腾讯官网！链接如下：</p>
 
-<pre><code>http:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="bb9494cccccc95caca95d8d4d6fbc3c8c88a95d8d4d6">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>#
+<pre><code>http:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="bb9494cccccc95caca95d8d4d6fbc3c8c88a95d8d4d6">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>#
 </code></pre>
 
 <p>(ps:以前没加#号时 还是蓝色链接 但是加了#号就显示为腾讯的官网了！)</p>
@@ -339,7 +339,7 @@ var b='://';
 
 <h2>0x04 链接真的是你看到的那样么？</h2>
 
-<hr />
+<hr>
 
 <p>有人在社区里发了这么个帖子：百度URL跳转 绕过腾讯红XX</p>
 
@@ -347,20 +347,20 @@ var b='://';
 
 <p>No 任何网站都可以！如下：</p>
 
-<pre><code>http:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b09f9fc7c7c79ed2d1d9d4c59ed3dfddf0c1c19ed3dfdd">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code>http:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b09f9fc7c7c79ed2d1d9d4c59ed3dfddf0c1c19ed3dfdd">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>把这段地址填入浏览器中 访问会发现去了 www.qq.com了 而并不是平常大家所认为的www.baidu.com 这是为什么，我们可以看看此篇文章的开头！</p>
 
 <p>http:// 后面可以算userinfo 也就算用户信息 账号密码什么的！</p>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7196cae297ecee97e9de95cad494fce495c9db3194fec696cae297ecee">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>！ 所以我们这段链接为什么去qq.com 而不是去baidu.com <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ec0b427b09774c08545608546c085446ac0b404a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> 让浏览器认为www.baidu.com 算一段用户信息 而后面的才算主机名 他要去访问的地址！</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7196cae297ecee97e9de95cad494fce495c9db3194fec696cae297ecee">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>！ 所以我们这段链接为什么去qq.com 而不是去baidu.com <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ec0b427b09774c08545608546c085446ac0b404a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> 让浏览器认为www.baidu.com 算一段用户信息 而后面的才算主机名 他要去访问的地址！</p>
 
 <p>所以我们有时候伪装找不到跳转漏洞也可以如此实现！</p>
 
 <p>然而在chrome 跟firefox下 还可以这么写:</p>
 
-<pre><code>http:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1f686868317d7e767b6a317c70725f6e6e317c7072">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code>http:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1f686868317d7e767b6a317c70725f6e6e317c7072">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>协议名没有// 也会被认为是http://</p>
@@ -378,7 +378,7 @@ var b='://';
 <pre><code>首先把这四段数字给 转成 16 进制！结果：73 ef d2 1a  然后把 73efd21a 这十六进制一起转换成8进制！
 </code></pre>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091813181665105.jpeg" alt="enter image description here" /></p>
+<p>￼<img src="http://static.wooyun.org/20140918/2014091813181665105.jpeg" alt="enter image description here"></p>
 
 <p>结果：16373751032</p>
 
@@ -387,31 +387,31 @@ var b='://';
 <pre><code>http://0016373751032
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181777390.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091813181777390.jpeg" alt="enter image description here"></p>
 
 <p>成功解析成我们原来的ip了！</p>
 
 <p>结合最开始的一个例子：</p>
 
-<pre><code>http://xss1.com&amp;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4e2f2d3a272120733a2b3d3a0e393939602c2f272a3b602d2123">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code>http://xss1.com&amp;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4e2f2d3a272120733a2b3d3a0e393939602c2f272a3b602d2123">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>后面还带着www.baidu.com 太打眼了,现在把我们上面转换后的地址加在后面 记得带上0前缀!</p>
 
-<pre><code>http://xss1.com&amp;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="650406110c0a0b581100161125555453565256525054555657">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code>http://xss1.com&amp;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="650406110c0a0b581100161125555453565256525054555657">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>这样就不打眼了 看上去舒服多了 有木有？</p>
 
 <p>既然解析回来了 那我们看看能不能用这个地址来加载一些资源比如图片 js什么的！</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091813181716006.jpeg" alt="enter image description here" /></p>
+<p>￼<img src="http://static.wooyun.org/20140918/2014091813181716006.jpeg" alt="enter image description here"></p>
 
 <p>可以看到成功加载了图片！那应该也是加载js等等的！</p>
 
 <p>相信有扩散性的基友们都有想法了，平时用来绕过一些限制等等！</p>
 
-<p>具体的大家去实验吧！web的世界 无穷大啊！</p>      </p>
+<p>具体的大家去实验吧！web的世界 无穷大啊！</p>      <p></p>
     
 			</body>
 		</html>

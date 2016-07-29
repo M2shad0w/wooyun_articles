@@ -3,20 +3,20 @@
 			<head>
 			     <title>基于snmp的反射攻击的理论及其实现 - 付弘雪</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2106">http://drops.wooyun.org/tips/2106</a></h1>
 				
       <p>
-        <h2>0x00前言</h2>
+        </p><h2>0x00前言</h2>
 
-<hr />
+<hr>
 
 <p>当时dns反射攻击爆发的时候，我就开始研究snmp的反射攻击（实际可以达到20倍的放大效果），在2013年夏天就已经理论研究完成，后来实现工具化。最后还差规模化（武器化）。其实，是国外在2013年初，就有只言片语叙述snmp的反射攻击，但是没有一篇完整的文章，最近在微博上看到很多朋友转载国外的信息，我觉得，如果再不把自己所研究的放出来刷刷存在感，让我这个rank9的人活不下去了。</p>
 
 <h2>0x01背景</h2>
 
-<hr />
+<hr>
 
 <p>罗嗦了这么多，进入正题。</p>
 
@@ -26,7 +26,7 @@
 
 <h2>0x02理论</h2>
 
-<hr />
+<hr>
 
 <p>Snmp就不过多介绍了，大家可以百度。Snmp有3个版本，这里攻击最理想的是2c版本，而恰恰2c版本也是应用最广的。</p>
 
@@ -37,7 +37,7 @@
 
 <p>这里oid是获取snmp具体信息内容的一个标识，snmp里面存的信息是一个树状的信息结构。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014052716250940920.jpg" alt="2014052716250940920.jpg" /></p>
+<p><img src="http://static.wooyun.org/201405/2014052716250940920.jpg" alt="2014052716250940920.jpg"></p>
 
 <p>其实snmpwalk是获取一条oid信息，但是这个oid里面附带了下一个树节点的oid号，然后snmp会通过 snmpget继续访问下一个oid号（在getnext字段里面），来执行一个类似于循环的行为，但是snmpget的协议大家也看到了，只能获取到一条信息，79的信息长度，只能获得279的反馈，这样实现攻击的放大倍数是不给力的。</p>
 
@@ -48,7 +48,7 @@
 
 <p>对应就是获取当前oid后面的70个团体字，这样如果你用snmpwalk跑一个1.3.6的团体字会看到很多信息，而你用bulkget这个一次就可以收到一个包里面包含70条信息的数据包，如图。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014052716263586576.jpg" alt="2014052716263586576.jpg" /></p>
+<p><img src="http://static.wooyun.org/201405/2014052716263586576.jpg" alt="2014052716263586576.jpg"></p>
 
 <p>这里看到数据包的length大家就会明白了，就是利用这种方式，来获得反射攻击的效果。</p>
 
@@ -67,22 +67,22 @@
 
 <p>下面是效果，这个包就发到本地吧，这里的源地址就是ddos的反射攻击的被攻击者的地址。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014052716275084302.jpg" alt="2014052716275084302.jpg" /></p>
+<p><img src="http://static.wooyun.org/201405/2014052716275084302.jpg" alt="2014052716275084302.jpg"></p>
 
 <p>这里看到了效果，为下一步工具化进行了铺垫</p>
 
 <p>最后这个图是虚拟机环境搭的，实现反射攻击的整体图</p>
 
-<p><img src="http://static.wooyun.org/201405/2014052716283040757.jpg" alt="2014052716283040757.jpg" /></p>
+<p><img src="http://static.wooyun.org/201405/2014052716283040757.jpg" alt="2014052716283040757.jpg"></p>
 
 <h2>0x03工具化</h2>
 
-<hr />
+<hr>
 
 <p>首先要解决snmp数据包pdu部分的蛋疼的编码部分，snmp的数据部分是符合基本编码规则（ber）的这里有三篇文章，大家可以完全读懂ber编码和snmp的关系。</p>
 
-<p>http://blog.csdn.net/shanzhizi/article/details/11574849<br />
-http://yuanmuqiuyu2000.blog.sohu.com/72641116.html<br />
+<p>http://blog.csdn.net/shanzhizi/article/details/11574849<br>
+http://yuanmuqiuyu2000.blog.sohu.com/72641116.html<br>
 http://blog.chinaunix.net/uid-23069658-id-3251045.html</p>
 
 <p>对于这个蛋疼的编码，我写了个java程序来生成pdu，里面有注释，大家很好理解的。</p>
@@ -373,7 +373,7 @@ class MonitorPortRunnable implements Runnable {
 }
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201405/2014052716295083031.png" alt="2014052716295083031.png" /></p>
+<p><img src="http://static.wooyun.org/201405/2014052716295083031.png" alt="2014052716295083031.png"></p>
 
 <p>最后还有一个java写的结果过滤，其实就是一个snmp的信息获取程序，来筛选可利用的主机或者设备，大家可以增加更多的功能，例如看出口的速度等。</p>
 
@@ -491,7 +491,7 @@ public class SnmpDATAget {
 
 <h2>0x04武器化</h2>
 
-<hr />
+<hr>
 
 <p>这里面sendip可以作为一个模块集成到linux下面的ddos马里面。</p>
 
@@ -499,7 +499,7 @@ public class SnmpDATAget {
 
 <h2>0x05局限性，防御办法和解决办法</h2>
 
-<hr />
+<hr>
 
 <p>第一，需要发包的肉鸡是属于纯外网ip地址，因为一般经过路由或者特殊设置（例如设置：忽略从lan口来的源ip地址不属于本子网的数据包）的三层交换时，此伪造包就会被过滤掉，从而失去效果。解决办法就是找那种可以发伪造包的肉鸡，其实还是很多的，简单点说nat形式为0的，基本都能发。这种肉鸡国外还是不少的。</p>
 
@@ -507,7 +507,7 @@ public class SnmpDATAget {
 
 <p>第三，防御办法，开snmp的主机尽量不要暴露在外网，还可以用改 默认密码来限制访问，或者改默认161端口。或者禁止响应bulkget的这种包，仅仅响应get方式获取</p>
 
-<p>欢迎各位朋友来指正问题。</p>      </p>
+<p>欢迎各位朋友来指正问题。</p>      <p></p>
     
 			</body>
 		</html>

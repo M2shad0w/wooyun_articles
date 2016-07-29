@@ -3,14 +3,14 @@
 			<head>
 			     <title>php比较操作符的安全问题 - xxlegend</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7679">http://drops.wooyun.org/tips/7679</a></h1>
 				
       <p>
-        <h1>0x00 比较操作符</h1>
+        </p><h1>0x00 比较操作符</h1>
 
-<hr />
+<hr>
 
 <p>php的比较操作符有==（等于）松散比较，===（完全等于）严格比较，这里面就会引入很多有意思的问题。</p>
 
@@ -32,14 +32,14 @@ $a &gt;= $b    大于等于     TRUE，如果 $a 大于或者等于 $b。
 
 <h1>0x01 安全问题</h1>
 
-<hr />
+<hr>
 
 <h2>1 hash比较缺陷</h2>
 
 <p>php在处理hash字符串的时候会用到<code>!=,==</code>来进行hash比较，如果hash值以0e开头，后边都是数字，再与数字比较，就会被解释成0*10^n还是为0，就会被判断相等，绕过登录环节。</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a8dac7c7dce8c3c9c4c1">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/tool# php -r 'var_dump("00e0345" == "0");var_dump("0e123456789"=="0");var_dump("0e1234abc"=="0");'
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a8dac7c7dce8c3c9c4c1">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/tool# php -r 'var_dump("00e0345" == "0");var_dump("0e123456789"=="0");var_dump("0e1234abc"=="0");'
 bool(true)
 bool(true)
 bool(false)
@@ -63,7 +63,7 @@ if ($data['user'] == 'admin' &amp;&amp; $data['pass']=='secirity')
 <p>运行结果：</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="81f3eeeef5c1eae0ede8">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# php /root/php/hash.php
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="81f3eeeef5c1eae0ede8">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# php /root/php/hash.php
 logined in as bool
 </code></pre>
 
@@ -81,7 +81,7 @@ if ($data_unserialize['user'] == 'admin' &amp;&amp; $data_unserialize['pass']=='
 <p>运行结果如下：</p>
 
 <pre><code>#!php
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f3819c9c87b398929f9a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# php /root/php/hash.php
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f3819c9c87b398929f9a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# php /root/php/hash.php
 logined in unserialize
 </code></pre>
 
@@ -158,15 +158,15 @@ if ($flag == 0) {
 
 <p>运行结果：</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8ffde0e0fbcfe4eee3e6">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/php# php strcmp.php
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8ffde0e0fbcfe4eee3e6">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/php# php strcmp.php
 PHP Warning:  strcmp() expects parameter 2 to be string, array given in /root/php/strcmp.php on line 13
 Welcome!
 </code></pre>
 
 <p>参考：
-1，http://phpsadness.com/sad/47<br />
-2，http://php.net/language.operators.comparison<br />
-3，http://indico.cern.ch/event/241705/material/slides/0.pdf</p>      </p>
+1，http://phpsadness.com/sad/47<br>
+2，http://php.net/language.operators.comparison<br>
+3，http://indico.cern.ch/event/241705/material/slides/0.pdf</p>      <p></p>
     
 			</body>
 		</html>

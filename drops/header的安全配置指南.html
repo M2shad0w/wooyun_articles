@@ -3,16 +3,16 @@
 			<head>
 			     <title>header的安全配置指南 - 龙臣</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1166">http://drops.wooyun.org/tips/1166</a></h1>
 				
       <p>
-        <p>from:<a href="https://blog.veracode.com/2014/03/guidelines-for-setting-security-headers/">https://blog.veracode.com/2014/03/guidelines-for-setting-security-headers/</a></p>
+        </p><p>from:<a href="https://blog.veracode.com/2014/03/guidelines-for-setting-security-headers/">https://blog.veracode.com/2014/03/guidelines-for-setting-security-headers/</a></p>
 
 <h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>在统计了Alexa top 100万网站的header安全分析之后（2012年11月 - 2013年3月 - 2013年11月），我们发现其实如何正确的设置一个header并不是一件容易的事情。尽管有数不胜数的网站会使用大量有关安全方面的header，但并没有一个像样的平台能够为开发者们提供必要的信息，以辨别那些常见的错误设置。或者说，即使这些安全方面的header设置正确了，也没有一个平台能够为开发者提供一个系统的测试方法，用来测试正确与否。这些header如果设置错误了不仅会产生安全的假象，甚至会对网站的安全产生威胁。veracode认为安全性header是网络防护中非常重要的一环，并且他希望让开发者们能够简捷、正确地设置站点。如果您对某一header或设置有任何疑问，我们有极好的资源能够追踪到浏览器支持情况。</p>
 
@@ -20,7 +20,7 @@
 
 <h2>0x01 细节</h2>
 
-<hr />
+<hr>
 
 <h3>1. X-XSS-Protection</h3>
 
@@ -48,8 +48,8 @@
 
 <p><strong>参考文献</strong></p>
 
-<p>Post from Microsoft on the X-XSS-Protection Header<br />
-Chromium X-XSS-Protection Header Parsing Source<br />
+<p>Post from Microsoft on the X-XSS-Protection Header<br>
+Chromium X-XSS-Protection Header Parsing Source<br>
 Discussion of report format in WebKit bugzilla</p>
 
 <h3>2. X-Content-Type-Options</h3>
@@ -100,9 +100,9 @@ text/live script
 
 <p><strong>参考文献</strong></p>
 
-<p>Microsoft Post on Reducing MIME type security risks<br />
-Chromium Source for parsing nosniff from response<br />
-Chromium Source list of JS MIME types<br />
+<p>Microsoft Post on Reducing MIME type security risks<br>
+Chromium Source for parsing nosniff from response<br>
+Chromium Source list of JS MIME types<br>
 MIME Sniffing Living Standard</p>
 
 <h3>3. X-Frame-Options</h3>
@@ -130,17 +130,17 @@ ALLOW-FROM example.com – ALLOW-FROM选项后面必须跟上一个URI而且要�
 
 <p><strong>参考文献</strong></p>
 
-<p>X-Frame-Options RFC<br />
+<p>X-Frame-Options RFC<br>
 Combating ClickJacking With X-Frame-Options</p>
 
 <h3>4. Strict-Transport-Security</h3>
 
 <p><strong>目的</strong></p>
 
-<p>Strict Transport Security (STS) 是用来配置浏览器和服务器之间安全的通信。它主要是用来防止中间人攻击，因为它强制所有的通信都走TLS。目前IE还不支持 STS头。需要注意的是，在普通的http请求中配置STS是没有作用的，因为攻击者很容易就能更改这些值。为了防止这样的现象发生，很多浏览器内置了一个配置了STS的站点list。<br />
- <br />
-<strong>正确的设置</strong>  <br />
-注意下面的值必须在https中才有效，如果是在http中配置会没有效果。<br />
+<p>Strict Transport Security (STS) 是用来配置浏览器和服务器之间安全的通信。它主要是用来防止中间人攻击，因为它强制所有的通信都走TLS。目前IE还不支持 STS头。需要注意的是，在普通的http请求中配置STS是没有作用的，因为攻击者很容易就能更改这些值。为了防止这样的现象发生，很多浏览器内置了一个配置了STS的站点list。<br>
+ <br>
+<strong>正确的设置</strong>  <br>
+注意下面的值必须在https中才有效，如果是在http中配置会没有效果。<br>
  </p>
 
 <pre><code>max-age=31536000 – 告诉浏览器将域名缓存到STS list里面，时间是一年。  
@@ -163,7 +163,7 @@ max-age=0 – 尽管这样在技术上是没有问题的，但是很多站点可
 
 <p><strong>参考文献</strong></p>
 
-<p>Strict Transport Security RFC6797<br />
+<p>Strict Transport Security RFC6797<br>
 Wikipedia page on Strict Transport Security (with examples)</p>
 
 <h3>5. Public-Key-Pins (起草中)</h3>
@@ -191,8 +191,8 @@ max-age=3000; pin-sha256=”d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=”; rep
 
 <p><strong>参考文献</strong></p>
 
-<p>Public-Key-Pins draft specification<br />
-Chrome issue tracking the implementation of Public-Key-Pins<br />
+<p>Public-Key-Pins draft specification<br>
+Chrome issue tracking the implementation of Public-Key-Pins<br>
 Chromium source code for processing Public-Key-Pins header</p>
 
 <h3>6. Access-Control-Allow-Origin</h3>
@@ -220,7 +220,7 @@ http://*.example.com – 同上面一样
 
 <p><strong>参考文献</strong></p>
 
-<p>W3C CORS specification<br />
+<p>W3C CORS specification<br>
 Content-Security-Policy 1.0</p>
 
 <p><strong>目的</strong></p>
@@ -237,13 +237,13 @@ Content-Security-Policy 1.0</p>
 2、unsafe-eval：允许资源动态的执行函数，比如eval，setTimeout, setInterval, new等函数。
 </code></pre>
 
-<p>object-src – 决定从哪里加载和执行插件。<br />
-style-src – 决定从哪里加载css和样式标记。<br />
-img-src – 决定从哪里加载图片。<br />
-media-src – 决定从哪里加载视频和音频资源。<br />
-frame-src – 决定哪里的frames 可以被嵌入。<br />
-font-src – 决定从哪里加载字体。<br />
-connect-src – 限制在 XMLHttpRequest, WebSocket 和 EventSource 中可以使用哪些类型的资源。<br />
+<p>object-src – 决定从哪里加载和执行插件。<br>
+style-src – 决定从哪里加载css和样式标记。<br>
+img-src – 决定从哪里加载图片。<br>
+media-src – 决定从哪里加载视频和音频资源。<br>
+frame-src – 决定哪里的frames 可以被嵌入。<br>
+font-src – 决定从哪里加载字体。<br>
+connect-src – 限制在 XMLHttpRequest, WebSocket 和 EventSource 中可以使用哪些类型的资源。<br>
 sandbox – 这是一个可选形式，它决定了沙盒的策略，如何将内容嵌入到沙盒中以保证安全。</p>
 
 <p>当这个策略被特定的url违反了，我们也可以用报告地址直接发送报告。这样做有利于debug和当攻击发生时通知我们。</p>
@@ -266,12 +266,12 @@ sandbox – 这是一个可选形式，它决定了沙盒的策略，如何将�
 
 <p><strong>参考文献</strong></p>
 
-<p>Content Security Policy 1.0 Specification<br />
-Content Security Policy 1.1 Working Draft Specification<br />
-cspplayground.com’s excellent collection of resources for CSP<br />
+<p>Content Security Policy 1.0 Specification<br>
+Content Security Policy 1.1 Working Draft Specification<br>
+cspplayground.com’s excellent collection of resources for CSP<br>
 Sublime Text 2 Plugin for validating HTML/JS while you code your site</p>
 
-<p>关于Alexa排名top 100万网站的安全header的研究</p>      </p>
+<p>关于Alexa排名top 100万网站的安全header的研究</p>      <p></p>
     
 			</body>
 		</html>

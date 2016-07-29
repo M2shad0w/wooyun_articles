@@ -3,16 +3,16 @@
 			<head>
 			     <title>检测php网站是否已经被攻破的方法 - spiderman</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/2718">http://drops.wooyun.org/web/2718</a></h1>
 				
       <p>
-        <p><strong>from :http://www.gregfreeman.org/2013/how-to-tell-if-your-php-site-has-been-compromised/</strong></p>
+        </p><p><strong>from :http://www.gregfreeman.org/2013/how-to-tell-if-your-php-site-has-been-compromised/</strong></p>
 
 <h2>0x01 查看访问日志</h2>
 
-<hr />
+<hr>
 
 <p>看是否有文件上传操作(POST方法)，</p>
 
@@ -39,7 +39,7 @@ IPREMOVED - - [01/Mar/2013:06:12:58 -0600] "POST/public/style_images/master
 
 <h2>0x02 查找含有恶意php代码的文件</h2>
 
-<hr />
+<hr>
 
 <p><strong>2.1 查找最近发生变化的php文件</strong></p>
 
@@ -120,7 +120,7 @@ if (!$fp) {
 
 <h2>0x03 比较代码文件</h2>
 
-<hr />
+<hr>
 
 <p>这种情况需要有一份干净的代码，这份代码和正在使用的代码进行比较。例如</p>
 
@@ -131,7 +131,7 @@ if (!$fp) {
 
 <h2>0x04 搜寻可写的目录</h2>
 
-<hr />
+<hr>
 
 <p>看这个目录里面是否有可疑文件，如下脚本查找权限为777的目录是否存在php文件</p>
 
@@ -154,7 +154,7 @@ done
 
 <h2>0x05 检测iframe标签</h2>
 
-<hr />
+<hr>
 
 <p>黑客经常做的是嵌入iframe标签，因此可以查看网页的源代码，并且搜索其中是否存在iframe标签，可使用如下命令：</p>
 
@@ -165,13 +165,13 @@ done
 
 <h2>0x06 查找数据库中是否存在敏感字符串</h2>
 
-<hr />
+<hr>
 
 <p>包括%base64_%、%eval(%&lt;等上面提到的一些关键词</p>
 
 <h2>0x07 检查.htaccess文件</h2>
 
-<hr />
+<hr>
 
 <p>是否包含了auto&#95;prepend&#95;file和auto&#95;append&#95;file，使用如下命令</p>
 
@@ -197,7 +197,7 @@ Rewriterule ^(.*)$ http://www.hacker.com/muma.php [R=301]
 <pre><code>find . -type f -name '\.htaccess' | xargs grep -i http;
 find . -type f -name '\.htaccess' | xargs grep -i HTTP_USER_AGENT; 
 find . -type f -name '\.htaccess' | xargs grep -i HTTP_REFERER
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

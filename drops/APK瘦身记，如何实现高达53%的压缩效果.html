@@ -3,16 +3,16 @@
 			<head>
 			     <title>APK瘦身记，如何实现高达53%的压缩效果 - 阿里移动安全</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobiledev/14289">http://drops.wooyun.org/mobiledev/14289</a></h1>
 				
       <p>
-        <p><strong>Author：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9a7307047c1212da730225731d167d3d217f10327f34137f1f32">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
+        </p><p><strong>Author：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9a7307047c1212da730225731d167d3d217f10327f34137f1f32">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
 
 <h1>0x00 我是怎么思考这件事情的</h1>
 
-<hr />
+<hr>
 
 <p>APK是Android系统安装包的文件格式，关于这个话题其实是一个老生常谈的题目，不论是公司内部，还是外部网络，前人前辈已经总结出很多方法和规律。不过随着移动端技术近两年的飞速发展，一些新的思维方式和优化方法也逐渐涌现和成熟起来。笔者在实践过程中踩过一些坑，收获了一些经验，在这里做个思考和总结，所以随笔给大家，希望对大家从事相关工作的时候有所帮助和参考，同时也是抛砖引玉，希望大家共同探讨这个开放性的话题。</p>
 
@@ -26,7 +26,7 @@
 
 <h1>0x01 寻找问题</h1>
 
-<hr />
+<hr>
 
 <p><a href="https://nimbledroid.com/">NimbleDroid</a>是美国哥伦比亚大学的博士创业团队研发出来的分析Android app性能指标的系统，分析的方式有静态和动态两种方式，其中静态分析可以分析出APK安装包中大文件排行榜，各种知名SDK的大小以及占代码整体的比例，各种类型文件的大小以及占排行，各种知名SDK的方法数以及占所有dex中方法数的比例，废话不多说，下面上高清无码大图看看颜值吧。</p>
 
@@ -34,35 +34,35 @@
 
 <p>登录</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033010431010259138.jpg" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033010431010259138.jpg" alt="p1"></p>
 
 <p>上传apk文件</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033010431117074216.jpg" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033010431117074216.jpg" alt="p2"></p>
 
 <p>分析结果摘要，可以看到一些概览的信息，apk文件大小，总的方法数</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033010431373965315.jpg" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033010431373965315.jpg" alt="p3"></p>
 
 <p>文件大小分析详情页，大文件列表，这里列出的是apk文件中超过100k的文件排行，这里的文件大小指的是apk文件中的大小</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033010431573454413.jpg" alt="p4" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033010431573454413.jpg" alt="p4"></p>
 
 <p>各种知名SDK的大小以及占代码整体的比例，这里目前能识别出Android Support，Jackson JSON parser, Google Play Services, Paypal, Glide, OkHttp, Facebook SDK, Fabric, Gson等等，Application表示App中自己编写的代码部分</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033010431691677515.jpg" alt="p5" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033010431691677515.jpg" alt="p5"></p>
 
 <p>各种类型文件的大小以及排行</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033010431829628612.jpg" alt="p6" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033010431829628612.jpg" alt="p6"></p>
 
 <p>各种知名SDK占所有dex中方法数的比例</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033010432021960710.jpg" alt="p7" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033010432021960710.jpg" alt="p7"></p>
 
 <p>各种知名SDK的方法数排行榜</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/201603301043213522889.jpg" alt="p8" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/201603301043213522889.jpg" alt="p8"></p>
 
 <p>看完这个apk内剖图是不是有一种神清气爽的感觉！我把这个分析工具比做我们家买的智能体重秤，可以称体重，脂肪含量，骨重，骨密度，肌肉含量等等，那么，我们是不是发现了一些问题，进而把这些问题和我们之前靠经验和一拍脑袋的原因可以用逻辑联系在一起。 那么，我们接下来可以通过分析数据整理出我们的优化目标</p>
 
@@ -76,7 +76,7 @@
 
 <h1>0x02 梳理优化目标</h1>
 
-<hr />
+<hr>
 
 <p>所以我们的目标是没有蛀牙，不对，是下面的目标：</p>
 
@@ -92,11 +92,11 @@
 
 <p>这次用了一些简单的工具组合，系统自带的cmd就好。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/201603301043235018199.jpg" alt="p9" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/201603301043235018199.jpg" alt="p9"></p>
 
 <p>命令执行的结果如下</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033010432443466107.jpg" alt="p10" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033010432443466107.jpg" alt="p10"></p>
 
 <p>恩，所有的png文件居然是STORE的方式存储到apk里的，关于zip里的STORE和DEFLATE，<a href="https://en.wikipedia.org/wiki/Zip_(file_format">详见</a> )</p>
 
@@ -106,13 +106,13 @@
 
 <p>优化前：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/20160330104326353871112.jpg" alt="p11" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/20160330104326353871112.jpg" alt="p11"></p>
 
 <p>10536027字节</p>
 
 <p>优化后：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/20160330104328909011210.jpg" alt="p12" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/20160330104328909011210.jpg" alt="p12"></p>
 
 <ul>
 <li>普通zip压缩： 8786265字节 （压缩了将近17%）</li>
@@ -123,11 +123,11 @@
 
 <p>优化前</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033010433079797139.jpg" alt="p13" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033010433079797139.jpg" alt="p13"></p>
 
 <p>优化后</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033010433298064145.jpg" alt="p14" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033010433298064145.jpg" alt="p14"></p>
 
 <ol>
 <li>资源（png, xml, jpg等）名称混淆，资源路径名称混淆以及名称长度压缩；</li>
@@ -137,13 +137,13 @@
 
 <p>用apk反编译神器<a href="https://github.com/skylot/jadx.git">jadx</a>内窥apk寻找真相</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033010433439104154.jpg" alt="p15" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033010433439104154.jpg" alt="p15"></p>
 
 <p>原来apk中资源（png, xml，以及properties文件）的相对路径会存放到<code>META-INF/*.SF</code>以及<code>META-INF/*.MF</code>中并为每个资源文件计算SHA1值并存储在这两个文件中，至于为啥这么做以及这两个SHA1有啥区别和作用请参考网络上关于这方面知识的文章，已超出本文的主题所以这里不再赘述。</p>
 
 <p>对于resources.arsc文件</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033010433665712163.jpg" alt="p16" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033010433665712163.jpg" alt="p16"></p>
 
 <p>很容易看出来它是资源文件索引表，所以，看到这里大家应该明白这三个文件为啥会变小了吧。</p>
 
@@ -151,7 +151,7 @@
 
 <p>顺着resources.arsc往下看，发现一个有趣的东西，</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033010433833912172.jpg" alt="p17" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033010433833912172.jpg" alt="p17"></p>
 
 <p>这又将成为一个优化点，去除那些没用的翻译资源，引入一些第三方的SDK，往往这些SDK带了很多翻译资源在里面，比如android support库，去掉后我们来看看效果。</p>
 
@@ -165,7 +165,7 @@
 
 <p>gradle配置示例如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033010433975060182.jpg" alt="p18" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033010433975060182.jpg" alt="p18"></p>
 
 <p>记得包在<code>android{}</code>中间哦。那么，有人要问了，abi里肿么没有x86？据说intel提供了一个解决方案叫houdini，是一个运行在x86设备上的中间件，可以将arm转码为x86的指令，不过效率很低，有些运算型的，比如计算MD5和SHA1，甚至不如java，笔者曾经做过测试对比，又是另外一个话题，此处不赘述，感兴趣的读者可以移步。</p>
 
@@ -183,13 +183,13 @@
 
 <p>配置如下图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033010434132054192.jpg" alt="p19" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033010434132054192.jpg" alt="p19"></p>
 
 <p>2.gradle脚本中开启shrinkResources</p>
 
 <p>脚本参考如下</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033010434267086201.jpg" alt="p20" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033010434267086201.jpg" alt="p20"></p>
 
 <p>shrinkResources配合minifyEnabled使用效果更佳，详见<a href="http://tools.android.com/tech-docs/new-build-system/resource-shrinking">shrinkResources</a>用法以及注意</p>
 
@@ -212,7 +212,7 @@
 
 <p>先上效果图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033010434393826217.jpg" alt="p21" /></p>
+<p><img src="http://static.wooyun.org//drops/20160330/2016033010434393826217.jpg" alt="p21"></p>
 
 <p>采用7zip压缩：4926912字节 （压缩了将近53%，再增加30个点）</p>
 
@@ -263,7 +263,7 @@
 
 <h1>0x03 总结</h1>
 
-<hr />
+<hr>
 
 <p>~~~~华丽丽的分界线~~~~以下是<strong>总结</strong>~~~~</p>
 
@@ -288,7 +288,7 @@
 
 <h1>0x04 附录</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="http://blog.csdn.net/UsherFor/article/details/46827587">如何做到将apk大小减少6M</a></li>
@@ -296,7 +296,7 @@
 <li><a href="http://www.jayfeng.com/2015/12/29/APK%E7%98%A6%E8%BA%AB%E5%AE%9E%E8%B7%B5/">APK瘦身实践</a></li>
 </ul>
 
-<p>更多技术干货，请访问<a href="http://jaq.alibaba.com/community/index.htm">阿里聚安全博客</a></p>      </p>
+<p>更多技术干货，请访问<a href="http://jaq.alibaba.com/community/index.htm">阿里聚安全博客</a></p>      <p></p>
     
 			</body>
 		</html>

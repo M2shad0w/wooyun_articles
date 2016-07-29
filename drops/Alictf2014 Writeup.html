@@ -3,18 +3,18 @@
 			<head>
 			     <title>Alictf2014 Writeup - Sasiki</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3166">http://drops.wooyun.org/tips/3166</a></h1>
 				
       <p>
-        <p>Team Name: 0ops</p>
+        </p><p>Team Name: 0ops</p>
 
 <p>ctf所有文件打包下载：<a href="http://static.wooyun.org/drops/20141005/Alictf.zip">Alictf.zip</a></p>
 
 <h2>Part 1 BigData</h2>
 
-<hr />
+<hr>
 
 <h3>100pt</h3>
 
@@ -31,13 +31,13 @@
 
 <!--more-->
 
-<p>这里与其说是“加密”还不如说是“编码”,因为之前交换的公钥的模数N实在太短,非常容易就可以分解,强度这么弱的RSA就跟编码差不太多了。然后解出之后的通信数据,<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="df3a504e38516fbdb0bd3a504e365f5e3b65593b675f3b6775bdb0bd9fbdb0bdf1bcb0b2">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>,<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="42a4e2fba4cfecabe0daa5d9ecaae4c3a4f3c0abdec2aae4c3a4d9fda4cfe0a4cad22f232e2e2d303b022f232e2e2d303b6c212d2f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>,而后alice与bob会再度交换公钥,重复上述过程。</p>
+<p>这里与其说是“加密”还不如说是“编码”,因为之前交换的公钥的模数N实在太短,非常容易就可以分解,强度这么弱的RSA就跟编码差不太多了。然后解出之后的通信数据,<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="df3a504e38516fbdb0bd3a504e365f5e3b65593b675f3b6775bdb0bd9fbdb0bdf1bcb0b2">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>,<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="42a4e2fba4cfecabe0daa5d9ecaae4c3a4f3c0abdec2aae4c3a4d9fda4cfe0a4cad22f232e2e2d303b022f232e2e2d303b6c212d2f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>,而后alice与bob会再度交换公钥,重复上述过程。</p>
 
 <p>这里我因为想偷懒没有用分解N而后求d的方法,而是直接把双方在消息里发送的公钥的指数e从65537换成1,这样双方发送的消息就是明文了,而作为中 间人只是需要把修改后的消息用另一方真正的公钥再加密一次再发送即可,重复这样的过程许多次之后服务器就会把flag发送出来。</p>
 
 <h2>Part 2 Web-A</h2>
 
-<hr />
+<hr>
 
 <h3>100pt</h3>
 
@@ -154,7 +154,7 @@
 
 <h2>Part 3 Reverse</h2>
 
-<hr />
+<hr>
 
 <h3>100pt</h3>
 
@@ -183,7 +183,7 @@
 
 <h2>Part 4 Web-B</h2>
 
-<hr />
+<hr>
 
 <h3>100pt</h3>
 
@@ -207,7 +207,7 @@
 
 <p>此题限定了开始部分,利用基础认证的形式,构造</p>
 
-<pre><code>http://www.taobao.com:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b7d3c4d3f7c0d2d5858787d599d6dbded4c3d199d4d8da">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/5.php
+<pre><code>http://www.taobao.com:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b7d3c4d3f7c0d2d5858787d599d6dbded4c3d199d4d8da">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/5.php
 </code></pre>
 
 <p>得到flag。</p>
@@ -388,7 +388,7 @@ data = user.ljust(128, '\x00') + password.ljust(128, '\x00') + cmd.ljust(256, '\
 
 <h2>Part 6 EvilApk</h2>
 
-<hr />
+<hr>
 
 <h3>100pt</h3>
 
@@ -439,7 +439,7 @@ Padding模式:PKC5
 <pre><code>0xF7, 0x3A, 0xDC, 0xB7, 0xFB, 0xF7, 0xDD, 0x6E, 0xF7,0xB, 0x7E, 0x59, 0x7E
 </code></pre>
 
-<p>运气较好,尝试提交后通过。</p>      </p>
+<p>运气较好,尝试提交后通过。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>Android App Injection&&Drozer Use - 小乐天</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2997">http://drops.wooyun.org/tips/2997</a></h1>
 				
       <p>
-        <h2>0x01 准备工作</h2>
+        </p><h2>0x01 准备工作</h2>
 
-<hr />
+<hr>
 
 <p>测试环境：</p>
 
@@ -32,7 +32,7 @@
 
 <h2>0x02 drozer安装与使用</h2>
 
-<hr />
+<hr>
 
 <p><strong>安装</strong></p>
 
@@ -132,15 +132,15 @@ $ drozer        //运行测试
 Dz &gt; run scanner.provider.injection
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810505521596.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091810505521596.png" alt="enter image description here"></p>
 
 <p>2) 启动WebContentResolver.apk应用程序，Web界面访问url格式如下</p>
 
 <p>http://localhost:8080/query?a=providers&amp;path0=Parameter1&amp;path1=Parameter2&amp;pathn=parametern&amp;selName=column&amp;selId=id</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810505587807.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091810505587807.png" alt="enter image description here"></p>
 
-<p>解释： providers：为content://后第一个参数比如records Parameter1：为第二个参数operations Parameter2..parametern：为后门的依次类推的参数，如果后面有这么多参数 Column：表字段例如上面字段<_id> Id：为字段数据</p>
+<p>解释： providers：为content://后第一个参数比如records Parameter1：为第二个参数operations Parameter2..parametern：为后门的依次类推的参数，如果后面有这么多参数 Column：表字段例如上面字段<_id> Id：为字段数据</_id></p>
 
 <p>注意：格式必须是这样，selName、selId这两个参数第二个单词是大写的。</p>
 
@@ -155,25 +155,25 @@ Dz &gt; run scanner.provider.injection
 <pre><code>http://localhost:8080/query?a=settings&amp;path0=bookmarks&amp;selName=_id&amp;selId=1
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810505587807.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091810505587807.png" alt="enter image description here"></p>
 
 <p>5) 自动化结合SQLMAP</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810505661655.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091810505661655.png" alt="enter image description here"></p>
 
 <h2>0x04 总结&amp;&amp;解决方案</h2>
 
-<hr />
+<hr>
 
 <p>总结：虽然很多小伙说直接用文件管理进去查看数据库更方便，我也不多说什么，就像上次看到一帖子为了查看wifi密码写了一大篇的，直接进去数据库看不就是了，我能呵呵一句么。 避免这个漏洞方法只需要指定标志读取权限和限制写入权限。如果我们不想共享存储第三方应用程序记录,另一个解决方案可以消除provider或将其设置为false。</p>
 
 <h2>0x05 参考：</h2>
 
-<hr />
+<hr>
 
 <ul>
 <li>https://labs.mwrinfosecurity.com/blog/2011/12/02/how-to-find-android-0day-in-no-time/</li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>IPS BYPASS姿势 - MayIKissYou</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4323">http://drops.wooyun.org/papers/4323</a></h1>
 				
       <p>
-        <h1>0x00 背景</h1>
+        </p><h1>0x00 背景</h1>
 
-<hr />
+<hr>
 
 <p>之前wooyun上经常也看到一些bypass的方法，如利用mysql的特性bypass web程序的防注入函数，又例如直接构造绕过防注入的正则等等。最近在编写IPS特征的时候，发现在一些其他的角度上可以做到绕过IPS防护，下面就将这些另外的角度做一个总结。在描述的时候涉及到一些网络层面的基础知识，这里不单独叙述，在利用姿势里面强调。</p>
 
@@ -20,11 +20,11 @@
 
 <h1>0x01 bypass姿势</h1>
 
-<hr />
+<hr>
 
 <h2>IPS性能优化导致IPS规则bypass</h2>
 
-<hr />
+<hr>
 
 <p>做过IPS测试的选手应该都会听到过这样一句话，厂商在保证检测率90%的条件下，性能是多少。这里所说的性能一般是性能测试中涉及的新建，并发，吞吐等等指标。此处不叙述这些指标。</p>
 
@@ -32,17 +32,17 @@
 
 <p>在网络基础中有五元组的概念，即为源地址，目的地址，源端口，目的端口以及协议号，五元组相同即认为是一条同样的会话，当你在浏览器中访问www.wooyun.org的时候，打开wireshark抓包工具抓包，然后follow下这一条stream可以发现如下内容。这也就是所描述的会话和流。</p>
 
-<p><img src="http://static.wooyun.org/20141216/2014121608180749736.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141216/2014121608180749736.png" alt="enter image description here"></p>
 
 <p>IPS中一般是通过会话，流来进行检测的。如何来通过会话来检测呢，这里有第二个概念需要了解，第二个概念为重组：</p>
 
 <p>为什么要重组，一个以太网包的最大长度为1518字节，譬如我们这时候发送一个大附件出去，此时就会把数据分成多个数据包发送出去，数据包在internet上转发的时候会被路由转发，在整个internet中转发的时候会出现乱序，导致有些数据包先到IPS设备，有些数据包后到IPS设备，此时就需要IPS将发送的数据包，完整的组合起来。因为组合起来之后才可以方便后面的数据分析，提取内容。如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20141216/2014121608180815249.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141216/2014121608180815249.png" alt="enter image description here"></p>
 
 <p>现在问题就来了，如果对于每条数据流的所有内容都做检测应该就没问题了，但是每条数据流的所有内容都进行检测，肯定所耗费的资源也就越多，应该大部分厂商不会检测数据流的所有包。因此就会出现个问题，到底检测多大的大小呢？在处理这个问题的时候有些使用的是包数，有些使用的是流大小的方法。但是这都会导致所说的一个问题，就是性能优化导致的bypass。如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20141216/2014121608180829340.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141216/2014121608180829340.png" alt="enter image description here"></p>
 
 <p>在该数据流中，前面多个包如20个包没有发现特征，20个包之后的内容不再做ips检测，这样后面的包里的特征就没有受到IPS引擎的检测。</p>
 
@@ -52,7 +52,7 @@
 
 <h2>截断绕过IPS规则</h2>
 
-<hr />
+<hr>
 
 <p>Ips规则即为经常说到的ips特征，见到过的很多IPS特征都是根据不同协议来分的，如http,smtp,pop3,tcp,udp等等，每一种协议下又可以有不同的内容，如http协议下可以有cookie，header，msgbody等等。</p>
 
@@ -60,7 +60,7 @@
 
 <p>协议解析为啥？即将上面重组过后的信息，提取相应的内容赋值给协议变量。打个比方，如http协议，在重组完成之后肯定会出现http标准的内容，http的cookie，header，method等等，因此IPS会根据标准的内容解析，然后将解析的内容赋值给类似http&#95;cookie,http&#95;method的变量。有了这些变量就可以对数据流进行IPS特征匹配了。效果如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20141216/2014121608180821244.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141216/2014121608180821244.png" alt="enter image description here"></p>
 
 <p>解析出来各种http的相关内容，当然不同的协议解析出来的内容不相同，有的可能是smtp，tcp等等。</p>
 
@@ -70,7 +70,7 @@
 
 <h2>编码绕过IPS规则</h2>
 
-<hr />
+<hr>
 
 <p>url编码绕过IPS规则同样存在可能性。</p>
 
@@ -80,13 +80,13 @@
 
 <p>之前碰到了一个例子，在IPS规则中，书写特征的人员使用了未解码的协议变量书写特征，如特征为包含search关键字，此时我们可以这样bypass规则，将search书写为%73earch，这样当数据包经过IPS设备的时候，内容未作解码还是为%73earch，未匹配上规则，而到服务器端时候，被解码为search。</p>
 
-<p><img src="http://static.wooyun.org/20141216/2014121608180870620.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20141216/2014121608180870620.png" alt="enter image description here"></p>
 
 <p>因此这里说，在做web测试的时候，尽量编码一些英文字符提交，可能会有惊喜。</p>
 
 <h2>请求方式绕过IPS规则</h2>
 
-<hr />
+<hr>
 
 <p>http常用请求方式有GET和POST两种方式，POST提交的时候又常见的有www/urlencode的方式和multipart的方式，后者常常用于文件上传。 查看一些CMS的源码，经常会发现有类似的代码，如下代码摘抄自dedecms：</p>
 
@@ -122,7 +122,7 @@ if (!defined('DEDEREQUEST'))
 
 <h2>其他方式绕过IPS规则</h2>
 
-<hr />
+<hr>
 
 <p>1：对于host以及useraget的修改 一般不要使用默认的useragent，如使用一些自定义或则模拟浏览器的http-header字段。如那些sqlmap的特征可能就是针对于useragent做的文章。</p>
 
@@ -132,9 +132,9 @@ if (!defined('DEDEREQUEST'))
 
 <h1>0x02 总结</h1>
 
-<hr />
+<hr>
 
-<p>IPS和WAF网络攻击的防护设备，往往为了自身的一些如性能的提升，而放弃了一些功能，例如我见过有些IPS规则在编写的时候不支持正则表达式。可能就是正则表达式匹配的时候会大大的影响性能。由于这些功能上的放弃，必然导致各种各样规则的bypass，作为用户既需要这些防护设备，同时也需要做好自身网络安全的提升，如服务器的补丁，相关服务器的实时监控等等。</p>      </p>
+<p>IPS和WAF网络攻击的防护设备，往往为了自身的一些如性能的提升，而放弃了一些功能，例如我见过有些IPS规则在编写的时候不支持正则表达式。可能就是正则表达式匹配的时候会大大的影响性能。由于这些功能上的放弃，必然导致各种各样规则的bypass，作为用户既需要这些防护设备，同时也需要做好自身网络安全的提升，如服务器的补丁，相关服务器的实时监控等等。</p>      <p></p>
     
 			</body>
 		</html>

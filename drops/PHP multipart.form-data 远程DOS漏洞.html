@@ -3,16 +3,16 @@
 			<head>
 			     <title>PHP multipart/form-data 远程DOS漏洞 - 百度安全攻防实验室</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/6077">http://drops.wooyun.org/papers/6077</a></h1>
 				
       <p>
-        <p>作者：LiuShusheng_0_</p>
+        </p><p>作者：LiuShusheng_0_</p>
 
 <h1>0x00 摘要</h1>
 
-<hr />
+<hr>
 
 <p>PHP解析<code>multipart/form-datahttp</code>请求的body part请求头时，重复拷贝字符串导致DOS。远程攻击者通过发送恶意构造的<code>multipart/form-data</code>请求，导致服务器CPU资源被耗尽，从而远程DOS服务器。</p>
 
@@ -25,7 +25,7 @@
 
 <h1>0x01 漏洞入口</h1>
 
-<hr />
+<hr>
 
 <p>PHP源码中<code>main/ rfc1867.c</code>负责解析<code>multipart/form-data</code>协议，DOS漏洞出现在<code>main/rfc46675pxultipart_buffer_headers</code>函数。</p>
 
@@ -71,7 +71,7 @@ boundary= strstr(content_type_dup, "boundary");
 
 <h1>0x02 漏洞函数multipart_buffer_headers执行逻辑</h1>
 
-<hr />
+<hr>
 
 <p>进入漏洞函数，本段先分析漏洞函数的执行逻辑，下一段根据函数执行逻辑详细分析漏洞的原理。<code>multipart_buffer_headers</code>函数源码如下：</p>
 
@@ -171,7 +171,7 @@ zend_llist_remove_tail(header);
 
 <h1>0x03 漏洞原理</h1>
 
-<hr />
+<hr>
 
 <p>在<code>multipart_buffer_headers</code>函数解析header对应value时，value值存在n行。每行的字符串以空白符开头或不存字符<code>':'</code>，都触发以下合并value的代码块。那么解析header的value就要执行(n-1)次合并value的代码块。该代码块进行1次内存分配，2次内存拷贝，1次内存释放。当value值越来越长，将消耗大量的cpu时间。如果以拷贝一个字节为时间复杂度单位，value的长度为m，时间复杂度为m*m.</p>
 
@@ -191,7 +191,7 @@ prev_len= strlen(prev_entry.value);
 
 <h1>0x04 利用</h1>
 
-<hr />
+<hr>
 
 <p>构造像以下恶意的http请求，当存在350000行<code>a\n</code>时，在我的测试环境中，一个http请求将消耗10s的cpu时间。每隔若干秒，同时并发多个请求，将导致server端cpu资源长期耗尽，从而到达DOS。总的来说，利用方式和Hash Collision DOS一样。</p>
 
@@ -212,12 +212,12 @@ why is it?
 
 <h1>0x05 POC</h1>
 
-<hr />
+<hr>
 
 <pre><code>#!python
 '''
 Author: Shusheng Liu,The Department of Security Cloud, Baidu
-email: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="036f6a7670706070433235302d606c6e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+email: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="036f6a7670706070433235302d606c6e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 '''
 import sys
 import urllib,urllib2
@@ -282,7 +282,7 @@ def main():
 
 if __name__=="__main__":
     main()
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

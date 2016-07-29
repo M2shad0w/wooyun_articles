@@ -3,24 +3,24 @@
 			<head>
 			     <title>工控安全入门分析 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8594">http://drops.wooyun.org/tips/8594</a></h1>
 				
       <p>
-        <h1>0x00写在前面</h1>
+        </p><h1>0x00写在前面</h1>
 
-<hr />
+<hr>
 
 <p>工业4.0，物联网趋势化，工控安全实战化。安全从业保持敏感，本篇以科普角度对工控安全做入门分析，大牛绕过，不喜轻喷。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107543925392pic15.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091107543925392pic15.png" alt=""></p>
 
 <!--more-->
 
 <h1>0x01专业术语</h1>
 
-<hr />
+<hr>
 
 <p><code>SCADA</code>：数据采集与监视控制系统</p>
 
@@ -48,7 +48,7 @@
 
 <h1>0x02协议端口及测试脚本</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><p><strong>协议科普</strong></p>
@@ -58,7 +58,7 @@
 
 <p>MODBUS协议定义了一个与基础通信层无关的简单协议数据单元（PDU）。特定总线或网络上的MODBUS协议映射能够在应用数据单元（ADU）上引入一些附加域。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107544572757pic22.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091107544572757pic22.png" alt=""></p>
 
 <p>安全问题：</p>
 
@@ -105,51 +105,51 @@
 <ul>
 <li><p><strong>协议测试脚本</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107544851182pic32.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091107544851182pic32.png" alt=""></p>
 
 <p><em>PS：简要测试，大量脚本自行测试。</em></p></li>
 <li><p><strong>相关搜索引擎</strong></p>
 
 <p>Shodan搜索</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107545396665pic41.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091107545396665pic41.png" alt=""></p>
 
 <p><em>PS：Shodan搜索引擎介绍 <code>http://drops.wooyun.org/tips/2469</code></em></p>
 
 <p>Zoomeye搜索</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107545732819pic52.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091107545732819pic52.png" alt=""></p>
 
 <p><em>PS：敏感信息，你懂得。</em></p></li>
 <li><p><strong>Ethernet/IP 44818</strong></p>
 
 <p><code>nmap -p 44818 --script enip-enumerate.nse  85.132.179.*</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107550062851pic62.png" alt="" /></p></li>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091107550062851pic62.png" alt=""></p></li>
 <li><p><strong>Modbus 502</strong></p>
 
 <p><code>nmap --script modicon-info.nse -Pn -p 502 -sV 91.83.43.*</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107550422138pic71.png" alt="" /></p></li>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091107550422138pic71.png" alt=""></p></li>
 <li><p><strong>IEC 61870-5-101/104 2404</strong></p>
 
 <p><code>nmap -Pn -n -d --script iec-identify.nse  --script-args=iec-identify -p 2404 80.34.253.*</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107550864441pic82.png" alt="" /></p></li>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091107550864441pic82.png" alt=""></p></li>
 <li><p><strong>Siemens S7 102</strong></p>
 
 <p><code>nmap -p 102 --script s7-enumerate -sV 140.207.152.*</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107551121974pic91.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091107551121974pic91.png" alt=""></p>
 
 <p><code>nmap -d --script mms-identify.nse  --script-args='mms-identify.timeout=500' -p 102  IP</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107551634424pic101.png" alt="" /></p></li>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091107551634424pic101.png" alt=""></p></li>
 <li><p><strong>Tridium Niagara Fox 1911</strong></p>
 
 <p><code>nmap -p 1911 --script fox-info 99.55.238.*</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107552153232pic111.png" alt="" /></p></li>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091107552153232pic111.png" alt=""></p></li>
 <li><p><strong>意义何在</strong></p>
 
 <p>上述NSE脚本意义：</p>
@@ -174,16 +174,16 @@
 
 <h1>0x03乌云工控漏洞的分析</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><p><strong>工控相关漏洞分析</strong></p>
 
 <p>针对乌云主站的漏洞进行关键字搜索：工控(31)、SCADA(15)、Modbus(9)、PLC并进一步整合得到如下列表。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107552526506pic121.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091107552526506pic121.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107553092937pic131.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091107553092937pic131.png" alt=""></p>
 
 <p>在以上的漏洞列表中，可以得出如下结论：</p>
 
@@ -210,12 +210,12 @@
 
 <p>乌云工控相关的精华漏洞如下7个，在思路亮点中分析了漏洞的核心，同样也可能是获得打雷精华的理由。几乎共同点均是操控了对应的工控系统。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107553563835pic141.png" alt="" /></p></li>
+<p><img src="http://static.wooyun.org//drops/20150911/2015091107553563835pic141.png" alt=""></p></li>
 </ul>
 
 <h1>0x04参考资源</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><p>工控专题</p>
@@ -241,7 +241,7 @@
 <li>协议安全分析专业公司——科诺康：<a href="http://www.codenomicon.com/cn/">http://www.codenomicon.com/cn/</a></li>
 <li>Modbus通讯协议学习 - 认识篇：<a href="http://www.cnblogs.com/luomingui/archive/2013/06/14/Modbus.html">http://www.cnblogs.com/luomingui/archive/2013/06/14/Modbus.html</a></li>
 </ul></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

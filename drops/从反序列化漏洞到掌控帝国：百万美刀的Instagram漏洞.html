@@ -3,16 +3,16 @@
 			<head>
 			     <title>从反序列化漏洞到掌控帝国：百万美刀的Instagram漏洞 - 我是小号</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/11548">http://drops.wooyun.org/papers/11548</a></h1>
 				
       <p>
-        <p>http://exfiltrated.com/research-Instagram-RCE.php</p>
+        </p><p>http://exfiltrated.com/research-Instagram-RCE.php</p>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>2012年，Blloberg在Facebook白帽子奖励计划的网站上发表了一片著名的文章，文章中提到：“如果Facebook出了价值百万美刀的漏洞,我们也愿意照单全付”。在本文开始之前，我想为骗点击量的文章标题向各位道个歉，不过Facebook之前放的豪言是我写这篇文章的重要背景。经过一番尝试和努力，我确实发现了一个价值百万美刀的Instagram漏洞，该漏洞可以用来获取Instagram的源代码，照片和SSL证书等。</p>
 
@@ -20,19 +20,19 @@
 
 <h1>0x01 绝佳线索</h1>
 
-<hr />
+<hr>
 
 <p>去年，我曾对Facebook的安全性进行过一些小的测试，也取得了一些成果，所以我对于深入测试Facebook的整体业务安全性有着十分浓厚的兴趣。发现这个漏洞其实也要感谢我所在的公司能够允许我在非工作时间查找其他公司的漏洞，要不然根本没有这篇文章了。事情是这样的，我的一个朋友前段时间和我提到，他们正在测试作为Facebook漏洞奖励计划重要组成成分的Ins系统的安全性。他们发现Instagram存在一台有漏洞的Ruby服务器(<a href="https://sensu.instagram.com">https://sensu.instagram.com</a>)，我的朋友告诉我，这个漏洞已经被他提交到Facebook漏洞响应团队，漏洞分类是“内部管理后台对外”。在他向Facebook中提交的报告中提到，该后台可能存在一个Ruby密码重置漏洞由此可以被黑客利用登录进入后台，不过他并没有成功印证他的猜测。看到这个漏洞细节的第一眼，我就想起了CVE-2013-3221（<a href="http://ronin-ruby.github.io/blog/2013/01/28/new-rails-poc.html">http://ronin-ruby.github.io/blog/2013/01/28/new-rails-poc.html</a>），不过鉴于他已经提交了这个漏洞，所以我朋友只是私下里让我帮他看看是不是能够深入利用这个线索，扩大漏洞影响，接触Instagram的核心数据。</p>
 
 <h1>0x02 Ruby(Rails)远程命令执行</h1>
 
-<hr />
+<hr>
 
 <p>基于之前朋友的漏洞报告细节，我尝试着查找可以重置这个Ruby应用密码的漏洞。不过初步的测试效果并不理想，一般的登录页面并不接受数值“0”作为密码，而且我也不知道要用什么办法才能发送一封密码重置邮件。我发现，Instagram的这个后台可能是用了开源的Sensu管理系统，于是我谷歌了关键词“Sensu-Admin”，但是一无所获。看起来，貌似我朋友的推测并不行。</p>
 
 <p>不过惊喜的是，我发现了这个应用在Github上面有源代码，在该项目的目录中，我发现了<code>secret_token.rb</code>中泄露了Rails的私钥。我第一反应是，Facebook的程序员不会傻到把在搭建自己后台应用的时候不更改私钥吧？不过我还是想试试，因为如果尝试成功的话，那我就可以伪造seesion cookies，然后登陆后台了。我前面也提到CVE-2013-3221（<a href="http://ronin-ruby.github.io/blog/2013/01/28/new-rails-poc.html">http://ronin-ruby.github.io/blog/2013/01/28/new-rails-poc.html</a>），这篇文章的作者指出，不仅仅cookies可以被伪造，而且因为Ruby Rails的反序列化漏洞，攻击者甚至可以直接构造远程代码执行攻击。</p>
 
-<p>在尝试反序列化漏洞测试Instagram这个业务之前，我首先在本地进行了测试，我是用了下面这个测试框架：<br />
+<p>在尝试反序列化漏洞测试Instagram这个业务之前，我首先在本地进行了测试，我是用了下面这个测试框架：<br>
 <a href="https://github.com/charliesome/charlie.bz/blob/master/posts/rails-3.2.10-remote-code-execution.md">https://github.com/charliesome/charlie.bz/blob/master/posts/rails-3.2.10-remote-code-execution.md</a></p>
 
 <p>结果出人意料的好，我成功在本地复现了漏洞。所以，我使用相同的步骤，结合刚刚在Github上的发现，我向Instagram的Sensu-Admin管理后台服务器发送了如下的cookie:</p>
@@ -47,7 +47,7 @@ _sensu-admin_session=BAhvOkBBY3RpdmVTdXBwb3J0OjpEZXByZWNhdGlvbjo6RGVwcmVjYXRlZEl
 
 <p>所以，我建立了一个监听端口，然后上传了一个远程shell文件，结果如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151221/201512210749409938201.png" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20151221/201512210749409938201.png" alt="p1"></p>
 
 <p>成功让Instagram服务器执行了我发送的命令代码以后，我把该漏洞报告给了Facebook团队。我在报告中提到：</p>
 
@@ -58,19 +58,19 @@ _sensu-admin_session=BAhvOkBBY3RpdmVTdXBwb3J0OjpEZXByZWNhdGlvbjo6RGVwcmVjYXRlZEl
 
 <h1>0x03 致命弱口令</h1>
 
-<hr />
+<hr>
 
 <p>其实，对于我来说，发现一个远程代码执行来说并不是什么大不了的激动人心的事情。但是我想确认一下，我是否还在Facebook漏洞奖励计划的范围内，于是我又去查看了Facebook的漏洞奖励计划说明，说明中提到，虽然Facebook极力反对在测试中可能对业务进行破坏的渗透行为，不过响应团队对，如果测试者明确自己可以接触到更加核心的数据非常感兴趣。嗯，看到这里，我觉得我自己的渗透测试行为还在Facebook授权许可的范围内。</p>
 
 <p>上一章提到，我虽然成功让Facebook的服务器执行了远程代码，获取了服务器的Shell，但是我并没有接触到该后台的UI界面。碰巧的是，Instagram的这个后台把管理用户数据存储在了同一台服务器的Postgres DB内，既然这样，手起刀落，我成功获取了该后台大约60个账户的用户名和密码。不过，很悲催的是，密码被加密了，我正在蛋疼如何解密这些数据呢，好消息就来了。我短时间内就破解出了12个弱口令，这些密码包括"changme","password","instagram"。我的天！赤果果的弱口令啊。所以，我成功登录了<a href="https://sensu.instagram.com">https://sensu.instagram.com</a>的后台界面，截图留念：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151221/201512210749433703502.png" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20151221/201512210749433703502.png" alt="p2"></p>
 
 <p>因为Facebook极力反对在测试中可能对业务进行破坏的渗透行为，所以我就截图留念走人，顺手把这个作为新漏洞提交给了Facebook应急响应团队。</p>
 
 <h1>0x04 渗透内网</h1>
 
-<hr />
+<hr>
 
 <p>在我第一次的漏洞报告邮件中，我询问了Facebook团队是否能够获取渗透内网的授权。因为，这台Sensu-Admin服务器是跑在EC2上面的，在etc/host/文件夹内可以看到大大小小1400个系统的记录。所以这也就意味着，我有很大可能可以攻入Instagram内网。</p>
 
@@ -78,7 +78,7 @@ _sensu-admin_session=BAhvOkBBY3RpdmVTdXBwb3J0OjpEZXByZWNhdGlvbjo6RGVwcmVjYXRlZEl
 
 <h1>0x05 金钥匙</h1>
 
-<hr />
+<hr>
 
 <p>其实渗透到现在这步，我对我之前整个渗透过程感到很满意了。我已经发现了三个确凿的Instagram漏洞，其中有两个我打包提交给了Facebook。当然，故事到这里并没有结束。我在渗透sensu.Instagram.com的时候，发现了服务器下存在这样一个文件: <code>/etc/sensu/config.json</code></p>
 
@@ -92,7 +92,7 @@ _sensu-admin_session=BAhvOkBBY3RpdmVTdXBwb3J0OjpEZXByZWNhdGlvbjo6RGVwcmVjYXRlZEl
 
 <h1>0x06 掌控帝国</h1>
 
-<hr />
+<hr>
 
 <p>有了浏览Instagram存储在亚马逊S3云存储服务上数据的权限后，我浏览下载了几个区块中的内容。</p>
 
@@ -113,16 +113,16 @@ _sensu-admin_session=BAhvOkBBY3RpdmVTdXBwb3J0OjpEZXByZWNhdGlvbjo6RGVwcmVjYXRlZEl
 
 <h1>0x07 后记</h1>
 
-<hr />
+<hr>
 
 <p>最后，我想用一张思维导图总结一下我此次渗透进入Instagram帝国的过程:</p>
 
-<p><img src="http://static.wooyun.org//drops/20151221/201512210749445203003.png" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20151221/201512210749445203003.png" alt="p3"></p>
 
 <p>其实整件事情的起因是，sensu.instagram.com的远程代码执行，从这个漏洞，我又发掘出了后台员工的弱口令。通过sensu.instagram. com服务器上的配置文件，我又获取了AWS keypair，使用这keypair，我又从S3云存储服务器上读取到了EC2 AWS keypair。使用这个keypair我读取到了instagram存储在S3云存储服务上的所有重要敏感数据。 整个渗透测试过程，暴露出了Facebook在安全体系建设上的大量缺陷，是我惊讶的是，在安全体系建设了这么多年以后，竟然还会出现许多低级的安全和规范问题。可见，安全攻防，还会朝着更为纵深的方向持续。</p>
 
-<p>[原文链接]<br />
-<a href="http://exfiltrated.com/research-Instagram-RCE.php">http://exfiltrated.com/research-Instagram-RCE.php</a></p>      </p>
+<p>[原文链接]<br>
+<a href="http://exfiltrated.com/research-Instagram-RCE.php">http://exfiltrated.com/research-Instagram-RCE.php</a></p>      <p></p>
     
 			</body>
 		</html>

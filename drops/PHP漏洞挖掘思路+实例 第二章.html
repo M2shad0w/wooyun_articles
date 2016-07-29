@@ -3,14 +3,14 @@
 			<head>
 			     <title>PHP漏洞挖掘思路+实例 第二章 - lxj616</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/858">http://drops.wooyun.org/tips/858</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>感谢各位的评论与讨论，经过研讨的地方在文章中标出。</p>
 
@@ -37,7 +37,7 @@ display_errors = on ( 自己测试时方便，找错误 )
 
 <h2>0x01 任意文件包含</h2>
 
-<hr />
+<hr>
 
 <p>前提：允许url_include，否则就需要上传到绝对路径</p>
 
@@ -123,7 +123,7 @@ require($app_file);
 
 <h2>0x02 本地文件包含</h2>
 
-<hr />
+<hr>
 
 <p>提示：在windows系统下面我们可以用 "..\" 来代替 "../" 即 "..%5C" ( url编码后 ).</p>
 
@@ -149,7 +149,7 @@ require($app_file);
 
 <h2>0x03 任意文件下载</h2>
 
-<hr />
+<hr>
 
 <p>前提：url_fopen为on时才能打开远程文件，但一般意义上的任意文件下载不是“远程“的</p>
 
@@ -167,7 +167,7 @@ require($app_file);
 
 <h2>0x04 SQL注入</h2>
 
-<hr />
+<hr>
 
 <p>前提：magic&#95;quotes&#95;gpc = off 当然指的是字符型的注射，如果是数字型就仍然可以盲注</p>
 
@@ -190,7 +190,7 @@ password : sirgod
 
 <h2>0x05 命令执行</h2>
 
-<hr />
+<hr>
 
 <p>参考《高级PHP应用程序漏洞审核技术》（Ph4nt0m Security Team），小伙伴们都去百度一下吧</p>
 
@@ -256,7 +256,7 @@ array("check_email("$1", "$2")",
 
 <h2>0x06 跨站脚本漏洞XSS</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!php
 &lt;?php
@@ -293,7 +293,7 @@ http://127.0.0.1/test.php?name="&gt;&lt;script&gt;alert(String.fromCharCode(88,8
 
 <h2>0x07 变量覆盖</h2>
 
-<hr />
+<hr>
 
 <p>前提：需要register_gloabals = on</p>
 
@@ -317,7 +317,7 @@ http://127.0.0.1/test.php?logged=1
 
 <h2>0x08 admin节点可被越权访问</h2>
 
-<hr />
+<hr>
 
 <pre><code>http://127.0.0.1/admin/files.php
 http://127.0.0.1/admin/db_lookup.php
@@ -329,7 +329,7 @@ http://127.0.0.1/admin/db_lookup.php
 
 <h2>0x09 跨站点请求伪造CSRF</h2>
 
-<hr />
+<hr>
 
 <p>前提：没有token 一般结合XSS来做</p>
 
@@ -390,17 +390,17 @@ or die(mysql_error());
 
 <h2>0x10 参考文献</h2>
 
-<hr />
+<hr>
 
-<p>部分内容参考自【英文】 <a href="http://www.exploit-db.com/papers/12871/">http://www.exploit-db.com/papers/12871/</a> Name : Finding vulnerabilities in PHP scripts FULL ( with examples ) Author : SirGod Email : <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="eb9882998c848fdbd3ab8c868a8287c5888486">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
+<p>部分内容参考自【英文】 <a href="http://www.exploit-db.com/papers/12871/">http://www.exploit-db.com/papers/12871/</a> Name : Finding vulnerabilities in PHP scripts FULL ( with examples ) Author : SirGod Email : <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="eb9882998c848fdbd3ab8c868a8287c5888486">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="64081c0e52555224130b0b1d110a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> 引用处进行了翻译</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="64081c0e52555224130b0b1d110a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> 引用处进行了翻译</p>
 
 <p>以下是最新自己发现的例子</p>
 
 <h2>0x11 CSCMS V3.5 最新版 SQL注射（官方站演示+源码详析）</h2>
 
-<hr />
+<hr>
 
 <p> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2013-047363">WooYun: CSCMS V3.5 最新版 SQL注射（官方站演示+源码详析）</a> </p>
 
@@ -426,7 +426,7 @@ $member-&gt;where ( "username ='" . $username . "'" )-&gt;save ( $arr_i ); // �
 
 <h2>0x12 MacCMS 全版本通杀SQL注射（包括最新7.x）</h2>
 
-<hr />
+<hr>
 
 <p> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2014-048553">WooYun: MacCMS 全版本通杀SQL注射（包括最新7.x）</a> </p>
 
@@ -434,7 +434,7 @@ $member-&gt;where ( "username ='" . $username . "'" )-&gt;save ( $arr_i ); // �
 
 <h2>0x13 WanCMS 可修改任意用户密码（源码详析+实例演示）</h2>
 
-<hr />
+<hr>
 
 <p> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2014-049284">WooYun: WanCMS 可修改任意用户密码（源码详析+实例演示）</a> </p>
 
@@ -452,7 +452,7 @@ $reurl = $config ['DOMAIN'] . '/accounts/forget_password_t?vc=' . md5 ( md5 ( $u
 
 <h2>0x14 WanCMS 多处SQL注射（源码详析+实站演示）</h2>
 
-<hr />
+<hr>
 
 <p> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2014-049372">WooYun: WanCMS 多处SQL注射（源码详析+实站演示）</a> </p>
 
@@ -466,7 +466,7 @@ $u_info = $member-&gt;where ( "username ='" . $username . "'" )-&gt;find ();
 
 <h2>0x15 CSCMS V3.5 最新补丁后 又一个SQL注射（源码详析）</h2>
 
-<hr />
+<hr>
 
 <p> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2014-050942">WooYun: CSCMS V3.5 最新补丁后 又一个SQL注射（源码详析）</a> </p>
 
@@ -490,7 +490,7 @@ $fullPath = $path . "/" . $_POST["name"];
 
 <h2>0x17 iSiteCMS发布安全补丁后仍然有几处注射漏洞（源码详析+实站演示）</h2>
 
-<hr />
+<hr>
 
 <p> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2013-046702">WooYun: iSiteCMS发布安全补丁后仍然有几处注射漏洞（源码详析+实站演示）</a> </p>
 
@@ -508,15 +508,15 @@ $tos = explode(',',trim($arr['to']));
 
 <h2>0x18 CSCMS V3.5 最新版 后台命令执行GETSHELL（源码详析）</h2>
 
-<hr />
+<hr>
 
 <p> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2013-046603">WooYun: CSCMS V3.5 最新版 后台命令执行GETSHELL（源码详析）</a> </p>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8462001b6c3426c4edeaf7ede3ecf0a9e8e5e6f7631e00611f1a612009">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>： 框架会有很多很隐蔽的洞，现在还不太清楚怎么具体挖掘。比如双引号导致的代码执行。</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8462001b6c3426c4edeaf7ede3ecf0a9e8e5e6f7631e00611f1a612009">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>： 框架会有很多很隐蔽的洞，现在还不太清楚怎么具体挖掘。比如双引号导致的代码执行。</p>
 
 <p>千奇百怪的洞 的确很头疼 我这个漏洞本是想仿造《Dede后台getshell[过20130715]》原作者不详 结果……不大一样 不过思路是：后台总会有保存设置的地方，而保存设置的地方往往是写config.php保存设置（因为php扩展名可以防止被随意下载ETC）而这样的话如果保存设置时过滤不足，就有可能导致任意文件写入，而且又是php文件，动不动就会来个代码执行 ：）</p>
 
-<p>不过感觉隐蔽的漏洞还是很费脑力的，一般的思考发现不了</p>      </p>
+<p>不过感觉隐蔽的漏洞还是很费脑力的，一般的思考发现不了</p>      <p></p>
     
 			</body>
 		</html>

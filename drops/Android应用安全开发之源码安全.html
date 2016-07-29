@@ -3,20 +3,20 @@
 			<head>
 			     <title>Android应用安全开发之源码安全 - gh0stbo</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/12172">http://drops.wooyun.org/mobile/12172</a></h1>
 				
       <p>
-        <h1>0x00 简介</h1>
+        </p><h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>Android apk很容易通过逆向工程进行反编译，从而是其代码完全暴露给攻击者，使apk面临破解，软件逻辑修改，插入恶意代码，替换广告商ID等风险。我们可以采用以下方法对apk进行保护.</p>
 
 <h1>0x01 混淆保护</h1>
 
-<hr />
+<hr>
 
 <p>混淆是一种用来隐藏程序意图的技术，可以增加代码阅读的难度，使攻击者难以全面掌控app内部实现逻辑，从而增加逆向工程和破解的难度，防止知识产权被窃取。</p>
 
@@ -66,7 +66,7 @@ Java Code(.java) -&gt; Java Bytecode(.class) -&gt; Dalvik Bytecode(classes.dex)
 
 <h1>0x02 二次打包防护</h1>
 
-<hr />
+<hr>
 
 <h3>2.1 Apk签名校验</h3>
 
@@ -136,7 +136,7 @@ private boolean checkcrc(){
 
 <h1>0x03 SO保护</h1>
 
-<hr />
+<hr>
 
 <p>Android so通过C/C++代码来实现，相对于Java代码来说其反编译难度要大很多，但对于经验丰富的破解者来说，仍然是很容易的事。应用的关键性功能或算法，都会在so中实现，如果so被逆向，应用的关键性代码和算法都将会暴露。对于so的保护，可以才有编译器优化技术、剥离二进制文件等方式，还可以使用开源的so加固壳upx进行加固。</p>
 
@@ -160,7 +160,7 @@ private boolean checkcrc(){
 
 <h1>0x04 资源文件保护</h1>
 
-<hr />
+<hr>
 
 <p>如果资源文件没有保护，则会使应用存在两方面的安全风险：</p>
 
@@ -175,7 +175,7 @@ private boolean checkcrc(){
 
 <h1>0x05 反调试技术</h1>
 
-<hr />
+<hr>
 
 <h3>5.1 限制调试器连接</h3>
 
@@ -192,7 +192,7 @@ private boolean checkcrc(){
 
 <p><strong>a.父进程检测</strong></p>
 
-<p>通常，我们在使用gdb调试时，是通过gdb <TARGET>这种方式进行的。而这种方式是启动gdb，fork出子进程后执行目标二进制文件。因此，二进制文件的父进程即为调试器。我们可通过检查父进程名称来判断是否是由调试器fork。示例代码如下</p>
+<p>通常，我们在使用gdb调试时，是通过gdb <target>这种方式进行的。而这种方式是启动gdb，fork出子进程后执行目标二进制文件。因此，二进制文件的父进程即为调试器。我们可通过检查父进程名称来判断是否是由调试器fork。示例代码如下</target></p>
 
 <pre><code>#!cpp
 #include &lt;stdio.h&gt;
@@ -218,7 +218,7 @@ int main(int argc, char *argv[]) {
 
 <p>这里我们通过getppid获得父进程的PID，之后由/proc文件系统获取父进程的命令内容，并通过比较字符串检查父进程是否为gdb。实际运行结果如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/2016012010510132870120.jpg" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160120/2016012010510132870120.jpg" alt="p1"></p>
 
 <p><strong>b.当前运行进程检测</strong></p>
 
@@ -264,7 +264,7 @@ pid_t GetPidByName(const charchar *as_name) {  
 
 <p>State属性值T 表示调试状态，TracerPid 属性值正在调试此进程的pid,在非调试情况下State为S或R, TracerPid等于0</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/2016012010510380203218.jpg" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160120/2016012010510380203218.jpg" alt="p2"></p>
 
 <p>由此，我们便可通过检查status文件中TracerPid的值来判断是否有正在被调试。示例代码如下：</p>
 
@@ -297,7 +297,7 @@ int main(int argc, char *argv[]) {
 
 <p>实际运行结果如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/2016012010510789920310.jpg" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20160120/2016012010510789920310.jpg" alt="p3"></p>
 
 <p>值得注意的是，/proc目录下包含了进程的大量信息。我们在这里是读取status文件，此外，也可通过/proc/self/stat文件来获得进程相关信息，包括运行状态。</p>
 
@@ -305,7 +305,7 @@ int main(int argc, char *argv[]) {
 
 <p>下图中第一个红色框值为非调试状态值，第二个红色框值为调试状态：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/201601201051123415847.jpg" alt="p4" /></p>
+<p><img src="http://static.wooyun.org//drops/20160120/201601201051123415847.jpg" alt="p4"></p>
 
 <pre><code>#!cpp
 static int getWchanStatus(int pid)  
@@ -383,15 +383,15 @@ int main(int argc, char *argv[]) {
 
 <p>在此例中，我们通过<code>__attribute__((constructor))</code>，在程序启动时便设置好定时。实际运行中，当我们使用gdb在main函数下断点，稍候片刻后继续执行时，则触发了SIGALRM，进而检测到调试器。如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/201601201051141430658.jpg" alt="p5" /></p>
+<p><img src="http://static.wooyun.org//drops/20160120/201601201051141430658.jpg" alt="p5"></p>
 
 <p>顺便一提，这种方式可以轻易地被绕过。我们可以设置gdb对signal的处理方式，如果我们选择将SIGALRM忽略而非传递给程序，则alarmHandler便不会被执行，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/201601201051165775369.jpg" alt="p6" /></p>
+<p><img src="http://static.wooyun.org//drops/20160120/201601201051165775369.jpg" alt="p6"></p>
 
 <p><strong>g.检查进程打开的filedescriptor</strong></p>
 
-<p>如2.2中所说，如果被调试的进程是通过gdb <TARGET>的方式启动，那么它便是由gdb进程fork得到的。而fork在调用时，父进程所拥有的fd(file descriptor)会被子进程继承。由于gdb在往往会打开多个fd，因此如果进程拥有的fd较多，则可能是继承自gdb的，即进程在被调试。 </p>
+<p>如2.2中所说，如果被调试的进程是通过gdb <target>的方式启动，那么它便是由gdb进程fork得到的。而fork在调用时，父进程所拥有的fd(file descriptor)会被子进程继承。由于gdb在往往会打开多个fd，因此如果进程拥有的fd较多，则可能是继承自gdb的，即进程在被调试。 </target></p>
 
 <p>具体地，进程拥有的fd会在/proc/self/fd/下列出。于是我们的示例代码如下：</p>
 
@@ -415,7 +415,7 @@ int main(int argc, char *argv[]) {
 
 <p>这里，我们检查/proc/self/fd/中是否包含fd为5。由于fd从0开始编号，所以fd为5则说明已经打开了6个文件。如果程序正常运行则不会打开这么多，所以由此来判断是否被调试。运行结果见下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/201601201051182323977.jpg" alt="p7" /></p>
+<p><img src="http://static.wooyun.org//drops/20160120/201601201051182323977.jpg" alt="p7"></p>
 
 <p><strong>h.防止dump</strong></p>
 
@@ -448,14 +448,14 @@ void __fastcall anitInotify(int flag)  
 }  
 void __fastcall __noreturn inotity_func(const charchar *inotity_file)  
 {  
-      const charchar *name;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="63a1c34c4ca1c311572352a1c3a1c3">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-      signed int fd;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c90b69e6e60b69bbf189f80b690b69">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-      bool flag;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="28ea880707ea88524e681bea88ea88">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-      bool ret;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="965436b9b95436f8f0d6a554365436">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-      ssize_t length;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f83a58d7d73a588ac9c8b8cb3a583a58">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-      ssize_t i;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="10d2b03f3fd2b062295027d2b0d2b0">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-      fd_set readfds;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7bb9db5454b9db3b49b9dbb9db">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-      char event;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="21e3810e0ee3816110e381e381">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+      const charchar *name;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="63a1c34c4ca1c311572352a1c3a1c3">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+      signed int fd;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c90b69e6e60b69bbf189f80b690b69">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+      bool flag;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="28ea880707ea88524e681bea88ea88">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+      bool ret;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="965436b9b95436f8f0d6a554365436">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+      ssize_t length;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f83a58d7d73a588ac9c8b8cb3a583a58">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+      ssize_t i;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="10d2b03f3fd2b062295027d2b0d2b0">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+      fd_set readfds;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7bb9db5454b9db3b49b9dbb9db">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+      char event;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="21e3810e0ee3816110e381e381">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
       name = inotity_file;  
       memset(buffer, 0, 0x400u);  
       fd = inotify_init();  
@@ -541,7 +541,7 @@ int set_SIGTRAP()  
 
 <p>使用一代加固技术以后的apk加载流程发生了变化如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/201601201051212999186.jpg" alt="p8" /></p>
+<p><img src="http://static.wooyun.org//drops/20160120/201601201051212999186.jpg" alt="p8"></p>
 
 <p>应用启动以后，会首先启动保护代码，保护代码会启动反调试、完整性检测等机制，之后再加载真实的代码。</p>
 
@@ -568,7 +568,7 @@ int set_SIGTRAP()  
 
 <p>使用二代加固技术以后，启动流程增加了一个解析函数代码的过程，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/201601201051231768397.jpg" alt="p9" /></p>
+<p><img src="http://static.wooyun.org//drops/20160120/201601201051231768397.jpg" alt="p9"></p>
 
 <p><strong>第三代加固技术：虚拟机指令集</strong></p>
 
@@ -585,7 +585,7 @@ int set_SIGTRAP()  
 <ol>
 <li>具有2.0的所有优点</li>
 <li>破解需要破解自定义的指令格式，复杂度非常高</li>
-</ol>      </p>
+</ol>      <p></p>
     
 			</body>
 		</html>

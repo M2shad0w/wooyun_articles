@@ -3,14 +3,14 @@
 			<head>
 			     <title>Tor隐身大法 —— 用Tor来帮助我们进行渗透测试 - 龙臣</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1226">http://drops.wooyun.org/tips/1226</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>（编者：在这篇文章里，Chris Crowley提供了一些利用Tor来进行渗透测试的方法，他提供的一些细节和脚本配置非常有用，尤其是他对Privoxy 的讨论部分，谢谢！）</p>
 
@@ -36,7 +36,7 @@
 
 <h2>0x01 细节</h2>
 
-<hr />
+<hr>
 
 <p>下面是基本步骤</p>
 
@@ -64,16 +64,16 @@ yum -y install privoxy
 
 <p>Tor的官网（<a href="https://www.torproject.org/">https://www.torproject.org/</a>）是这样介绍她的：Tor最初是美国海军研究实验室设计用来作为第三代洋葱头路由的项目。她最初是美国海军为了保护政府的通信隐私而开发的。今天，全世界所有的普通人都可以用它来做各种各样的事情，比如军人，记者，政府人员，政治分子等等。</p>
 
-<p>这里有Tor的工作背景：<br />
+<p>这里有Tor的工作背景：<br>
 <a href="https://www.torproject.org/about/overview.html.en#thesolution">https://www.torproject.org/about/overview.html.en#thesolution</a></p>
 
-<p>如果它勾起你的好奇心，可以在这里下载安装：<br />
+<p>如果它勾起你的好奇心，可以在这里下载安装：<br>
 <a href="https://www.torproject.org/docs/documentation.html.en">https://www.torproject.org/docs/documentation.html.en</a></p>
 
-<p>这里有Tor的警告和一些局限性：<br />
+<p>这里有Tor的警告和一些局限性：<br>
 <a href="https://www.torproject.org/download/download-easy.html.en#warning">https://www.torproject.org/download/download-easy.html.en#warning</a></p>
 
-<p>对于那些已经熟悉Tor，但是可能因为某些大家都懂的原因，比如被墙了之类的，连接不上Tor的专有网络的人，可以看看这里看如何通过bridge 来连接到Tor网络：<br />
+<p>对于那些已经熟悉Tor，但是可能因为某些大家都懂的原因，比如被墙了之类的，连接不上Tor的专有网络的人，可以看看这里看如何通过bridge 来连接到Tor网络：<br>
 <a href="https://www.torproject.org/docs/bridges.html.en">https://www.torproject.org/docs/bridges.html.en</a></p>
 
 <h3>3、配置Privoxy 指向到Tor</h3>
@@ -212,13 +212,13 @@ tcpdump -Xnnv -i eth0 port 80 or port 443 or port 53
 
 <p>注意我的请求被重定向到了google.fr，因为我是在Tor的匿名节点当中。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101711305831223.png" alt="NewImage" width="640" height="408" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101711305831223.png" alt="NewImage" width="640" height="408" border="0"></p>
 
 <p>现在，你们可以尽情的干坏事了！各位大黑阔们！确保你们的访问都得到了授权哈。。。比如你可以看看那些高大上的软件是如何和自己家庭网络互通的。</p>
 
 <p>现在，你已经具备了一定的匿名性了（前提是你们要有一定的授权哈），你可以用爬虫爬爬目标网站，下一些恶意软件来研究一下，或者跑一些你正在测试的app，与此同时，你不必担心你的源位置会被暴露。</p>
 
-<p>from:http://pen-testing.sans.org/blog/pen-testing/2014/03/16/tor-nonymous-using-tor-for-pen-testing</p>      </p>
+<p>from:http://pen-testing.sans.org/blog/pen-testing/2014/03/16/tor-nonymous-using-tor-for-pen-testing</p>      <p></p>
     
 			</body>
 		</html>

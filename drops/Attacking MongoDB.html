@@ -3,14 +3,14 @@
 			<head>
 			     <title>Attacking MongoDB - 瞌睡龙</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/850">http://drops.wooyun.org/papers/850</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>本文主要来自于HITB Ezine Issue 010中的《Attacking MongoDB》</p>
 
@@ -22,7 +22,7 @@
 
 <h2>0x01 攻击</h2>
 
-<hr />
+<hr>
 
 <h3>1)REST接口</h3>
 
@@ -32,14 +32,14 @@
 
 <p>http://www.shodanhq.com/search?q=port%3A28017</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811030478630.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811030478630.jpeg" alt="enter image description here"></p>
 
 <p>google搜索：</p>
 
 <pre><code>intitle:mongo intext:"listDatabases"
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811030598088.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811030598088.jpeg" alt="enter image description here"></p>
 
 <p>下了最新版本的mongodb默认不是启用rest的，需要在配置文件（/etc/mongod.conf）中加入一行</p>
 
@@ -52,13 +52,13 @@
 
 <p>插入js代码，让管理员执行，利用REST接口，执行mongodb的命令，结果返回到攻击者的服务器上。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811030615821.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811030615821.jpeg" alt="enter image description here"></p>
 
 <p>例如，我利用js代码让管理员访问http://xxx.com:28017/admin/$cmd/?filter_eval=function()%7B%20return%20db.version()%20%7D&amp;limit=1</p>
 
 <p>返回结果：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811030662369.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811030662369.jpeg" alt="enter image description here"></p>
 
 <h3>2)Apache+PHP+MongoDB</h3>
 
@@ -219,7 +219,7 @@ Your password: password
 
 <p>看一下返回结果：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811030754801.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811030754801.jpeg" alt="enter image description here"></p>
 
 <p>带入实际中$q是变为：</p>
 
@@ -282,13 +282,13 @@ $q = "function() { var loginn = user; var passs = '1'; var loginn = db.version()
 
 <p>不过测试最新版的mongodb中，禁止了空字符。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811030731577.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811030731577.jpeg" alt="enter image description here"></p>
 
 <p>当然了 我也觉得此类攻击有点YY。。。</p>
 
 <h2>0x02 总结</h2>
 
-<hr />
+<hr>
 
 <p>本文列举了四种攻击mongodb的方式。</p>
 
@@ -298,7 +298,7 @@ $q = "function() { var loginn = user; var passs = '1'; var loginn = db.version()
 
 <p>还有一些wofeiwo在2011年的时候就已经写过：</p>
 
-<p><a href="http://www.phpweblog.net/GaRY/archive/2011/08/18/Mongodb_secuirty_anaylze.html">Mongodb安全性初探</a></p>      </p>
+<p><a href="http://www.phpweblog.net/GaRY/archive/2011/08/18/Mongodb_secuirty_anaylze.html">Mongodb安全性初探</a></p>      <p></p>
     
 			</body>
 		</html>

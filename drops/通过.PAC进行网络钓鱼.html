@@ -3,14 +3,14 @@
 			<head>
 			     <title>通过.PAC进行网络钓鱼 - Evi1cg</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8638">http://drops.wooyun.org/tips/8638</a></h1>
 				
       <p>
-        <h1>0x00 常见网络钓鱼方式</h1>
+        </p><h1>0x00 常见网络钓鱼方式</h1>
 
-<hr />
+<hr>
 
 <p>攻击者进行网络钓鱼的方式常有以下几种:</p>
 
@@ -57,7 +57,7 @@ C:\Windows\system32&gt;ipconfig /all | findstr 192.168.1.100
 
 <h1>0x01 通过PAC代理</h1>
 
-<hr />
+<hr>
 
 <p>本文主要介绍的是Metasploit中的一个模块<a href="https://github.com/rapid7/metasploit-framework/blob/2bcdb1bec317f7659d1a1d7609db45f98d4d6df2/modules/post/windows/manage/ie_proxypac.rb">ie_proxypac</a>。通过<a href="http://baike.baidu.com/link?url=zxBitLRRy0pS4ux3SF_cWcauZIs2bhd4eETBFtYQz__4GqO0KBvVoBK5Ox-RS0HTn3Ma30AiFnz5aCbsVIOT5_">.PAC(自动配置代理)</a>文件来完全控制IE的用户流量。只需要修改PAC文件，攻击者就能使受害者访问的某个域名指向攻击者的IP。虽然没有修改DNS但是可以达到同样的效果，且这种方式较为隐蔽。<a href="https://www.securelist.com/en/analysis/204792308/PAC_the_Problem_Auto_Config">已经有很多人使用这种方式进行网络钓鱼</a>。</p>
 
@@ -110,7 +110,7 @@ msf post(ie_proxypac) &gt; exploit
 
 <p>之后打开ie，internet选项->连接->局域网设置：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091708415119719proxy.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091708415119719proxy.png" alt="Alt text"></p>
 
 <p>可以看到pac已经使用pac文件进行了代理。</p>
 
@@ -120,11 +120,11 @@ msf post(ie_proxypac) &gt; exploit
 
 <p>现在再访问<code>www.baidu.com</code>,<code>www.wooyun.org</code>，会看到已经转移到了我们制定的ip：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091708420679676test.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091708420679676test.png" alt="Alt text"></p>
 
 <h1>0x02 能做什么</h1>
 
-<hr />
+<hr>
 
 <p>这里我们修改pac文件如下：</p>
 
@@ -140,7 +140,7 @@ if (shExpMatch(host, "www.wooyun.org")) {
 
 <p>打开<a href="http://www.wooyun.org/">wooyun</a>,右键查看源代码，将所有源代码保存为index.html，放在网站根目录下，因为当受害者请求 <code>http://wooyun.org</code>，其host为 <code>wooyun.org</code> 不满足代理条件，就会直接请求，所以我们把源代码中的<code>www.wooyun.org</code>，改为<code>wooyun.org</code>:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091708415571271replace.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091708415571271replace.png" alt="Alt text"></p>
 
 <p>然后找到url，src，href标签，修改为http://wooyun.org/xxxx 的形式，比如</p>
 
@@ -156,7 +156,7 @@ if (shExpMatch(host, "www.wooyun.org")) {
 
 <p>改完以后，基本上就算克隆成功了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091708414489747clone.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091708414489747clone.png" alt="Alt text"></p>
 
 <p>下来要把登陆页面的的源码复制过来，打开<code>http://www.wooyun.org/user.php?action=login</code>，右键复制源码，保存为user.php，放在网站根目录下，修改源码中的url，src，href。修改完之后，打开index.html文件，定位<code>登录</code>，修改href为 <code>user.php?action=login</code>，修改以后此标签为：</p>
 
@@ -183,15 +183,15 @@ if (shExpMatch(host, "www.wooyun.org")) {
 
 <p>当用户登录时：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091708414872540login.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/2015091708414872540login.png" alt="Alt text"></p>
 
 <p>点击登陆以后会跳转到<code>http://wooyun.org/user.php?action=login</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/20150917084135470461441773420790.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/20150917084135470461441773420790.png" alt="Alt text"></p>
 
 <p>查看data.txt:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/20150917084141564101441773646544.png" alt="Alt text" /></p>
+<p><img src="http://static.wooyun.org//drops/20150917/20150917084141564101441773646544.png" alt="Alt text"></p>
 
 <blockquote>
   <p>只是简单地一个示例，具体可以通过修改pac文件来实现控制浏览器是否进行代理。</p>
@@ -199,9 +199,9 @@ if (shExpMatch(host, "www.wooyun.org")) {
 
 <h1>0x03 小结</h1>
 
-<hr />
+<hr>
 
-<p>此种方式进行网络钓鱼，做的细致的话，很难被发现，而且隐蔽性好，缺点就是连接vpn以后代理将会失效。以上是个人的测试结果，请各位大牛指正。</p>      </p>
+<p>此种方式进行网络钓鱼，做的细致的话，很难被发现，而且隐蔽性好，缺点就是连接vpn以后代理将会失效。以上是个人的测试结果，请各位大牛指正。</p>      <p></p>
     
 			</body>
 		</html>

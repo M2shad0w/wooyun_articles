@@ -3,14 +3,14 @@
 			<head>
 			     <title>XSS和字符集的那些事儿 - mramydnei</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1327">http://drops.wooyun.org/papers/1327</a></h1>
 				
       <p>
-        <h2>0x00 前言</h2>
+        </p><h2>0x00 前言</h2>
 
-<hr />
+<hr>
 
 <p>在文章的开头,我想对上次发布了一个结论及其离谱但还算及时被删除了的 文章(关于跨域字符集继承的那篇)道个歉。也希望没有测试就去转载的那些人,可以把那个文章删除了。防止更多人对跨域字符集产生了错误的理解。不过作为谢罪,我也又重新整理了一篇文章,这也是一直以特别想写的一篇。但是觉得这个题目对我来说还是有点大,所以就一直没有下的去手。不过吹过的牛逼早晚都是要兑现的,早死早超生,所以就硬着头皮去写吧<code>&gt;.&lt;</code>。我也不扯 那些字符集是什么之类的了,让我们通过一个接一个的例子一起进入 XSS 和字符集所创造的世界吧。</p>
 
@@ -18,7 +18,7 @@
 
 <!--more-->
 
-<hr />
+<hr>
 
 <p>在开始之前,先对 UTF-7 做一个简单的介绍吧。UTF-7 是可以将所有的 unicode 通过 7bit 来表示的一种字符集。早期多数被利用在邮件环境当中,但现在已经从 Unicode 规格中移除。这个字符集为了通过 7bit 来表示所有的文字, 除去数字和一部分的符号,其它的部分将都以 base64 编码为基础的方式呈现。 比如:</p>
 
@@ -65,7 +65,7 @@
 
 <p>不过遗憾是在,在现在已经没有这种基于 iframe 的跨域字符集继承的漏洞 可利用了。MK 在不久前也指正了某人在 Slide 中这种的错误。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712353913402.png" alt="NewImage" width="622" height="112" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712353913402.png" alt="NewImage" width="622" height="112" border="0"></p>
 
 <p>简短的翻译一下,就是说:『如果在你的 Slide 中所说的通过 iframe 来设定字符集是指,继承 top frame 的字符集,那么现在已经不存在这种问题了。因为这种继承的大前提是必须同域。』</p>
 
@@ -79,7 +79,7 @@
 
 <p>￼ 这种设置方法在以前是无法被浏览器所识别的。换句话来说就和没有设置字符集是一样的。具体利用方法可以参考第一种。</p>
 
-<h3>(3)输出点在<meta /></h3>
+<h3>(3)输出点在<meta></h3>
 
 <p>标签之前,且字符集是由 meta 标签所指定的</p>
 
@@ -101,7 +101,7 @@
 
 <h2>0x02 基于 US-ASCII 的 XSS</h2>
 
-<hr />
+<hr>
 
 <p>其实基于 US-ASCII 的 XSS 和基于 UTF-7 的 XSS 有很多的类似之处。它也同样是通过 7bit 来表示数字和少数符号的字符集。可以用来表示从 0x00 到 0x7F 的 128 种文字。但如果你试图用 Internet Explorer 来打开一个内容是通过 US-ASCII 来记述的文档时,你会发现这个字符集不单是只会解析从 0x00 到 0x7F 的文字。即使是 0x80 到 0xFF 这个范围中无法通过 7bit 来表示的字符,也会通过忽略最上位的bit的方法生成一些和0x00~0x7F等价的字符。</p>
 
@@ -128,11 +128,11 @@
 
 <p>然后,再用 Internet Explorer 打开它,那么最终你会看到小窗口弹起来了。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354023343.png" alt="NewImage" width="257" height="236" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354023343.png" alt="NewImage" width="257" height="236" border="0"></p>
 
 <h2>0x03 利用字符集来绕过 htmlspecialchars()函数</h2>
 
-<hr />
+<hr>
 
 <p>在看完前面的两个字符集后,我们会发现这两个字符集的一个共同点,就是 都没有出现<code>”&lt;”,”&gt;”</code>或双引号。这不难让我们联想到 PHP 中 htmlspecialchars()的 绕过。虽然接下来会提到的 iframe 跨域字符集继承漏洞已经不能再利用了,但是在下文中我会提出可以复现这个漏洞的具体环境。</p>
 
@@ -175,7 +175,7 @@ header("Location: http://path.to/shoutbox.php");
 
 <h2>0x04 不是所有的跨域字符集继承都得用 iframe</h2>
 
-<hr />
+<hr>
 
 <p>在我们对跨域的字符集继承问题的严重性有了一定的了解之后。让我们再看看日本的猥琐流是怎么玩的吧。这是 MK 在完成 ZDResearch 出的一个 XSS 挑战时所用到的一个漏洞。(CVE2013-5612)</p>
 
@@ -201,7 +201,7 @@ header("Location: http://path.to/shoutbox.php");
 
 <h2>0x05 霸道流(MS13-037)</h2>
 
-<hr />
+<hr>
 
 <p>写到这里 iframe 也玩过了,POST 也试过了。还有别的?当然有!还是来自 MK 博客中的一篇文章,【强制唤起 Internet Explorer 的自动检测编码功能】。</p>
 
@@ -225,7 +225,7 @@ function go(){
 
 <h2>0x06 CSP绕过</h2>
 
-<hr />
+<hr>
 
 <p>字符集似乎什么都能干。绕过了 htmlspecialchars 函数,帮助黑客们刷 了一个又一个的 CVE,还顺带完成了一些挑战整了点奶粉钱。但是字符集能做 的还远不及这些。就让我们再来看看这个基于字符集的 CSP 绕过吧。(依然来 自 MK 的博客)</p>
 
@@ -243,7 +243,7 @@ function go(){
 
 <h2>￼0x07 字符中的“幽灵”</h2>
 
-<hr />
+<hr>
 
 <p>有时候字符就像幽灵一样,我们并不能感觉到它的存在。比如老版本的 Firefox 会忽视 0x80,老版本的 IE 会忽视 0x00。这无疑是个让人很头疼的问题, 因为对于过滤器来说 script 可不等于 <code>s[0x00]cript</code>。又比如在 chrome 当中会忽略一些位置上的字符(这个现在也能用):</p>
 
@@ -267,17 +267,17 @@ var q="&lt;?php echo str_replace("&lt;/","&lt;\/",addslashes($_GET["test"])); ?&
 
 <p>如果我们运用宽字节就可以突破这里的限制:</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354046804.png" alt="NewImage" width="832" height="452" border="0" />￼￼</p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354046804.png" alt="NewImage" width="832" height="452" border="0">￼￼</p>
 
 <p>但这种问题,只会出现在 GBK 里面么?其实这样的字符集还有很多。下面就是一个 Shift&#95;JIS 的例子。将上面的代码中的字符集改成 shift&#95;JIS 后的测试结果如下:</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354029890.png" alt="NewImage" width="815" height="446" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354029890.png" alt="NewImage" width="815" height="446" border="0"></p>
 
 <p>有问题的字符集还远远不止这些。在这次东京举行的 OWASP 国际峰会上,日本人 Masato kinugawa 的议题“编码和安全的彻底调查”当中就提交到了很多这样 的问题。下面对这个议题的内容做一下简单的介绍。</p>
 
 <p>(1)各浏览器对字符集支持情况的调查</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354166846.png" alt="NewImage" width="860" height="496" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354166846.png" alt="NewImage" width="860" height="496" border="0"></p>
 
 <p>作者事先收集了将近 2500 个左右像字符集编码名称的文字,并通过测试,对结果进行了三种分类。分别为字符集名,别名和无法识别的字符。其中的调查方法细节可以参考下面的链接:</p>
 
@@ -291,17 +291,17 @@ var q="&lt;?php echo str_replace("&lt;/","&lt;\/",addslashes($_GET["test"])); ?&
 
 <p><a href="http://l0.cm/encodings/table/">http://l0.cm/encodings/table/</a></p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354186576.png" alt="NewImage" width="847" height="537" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354186576.png" alt="NewImage" width="847" height="537" border="0"></p>
 
 <p>由于内容比较多,这里只附上部分贴图(上图为 chrome 的支持情况): 下图为 IE 的支持情况:</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354176020.png" alt="NewImage" width="882" height="526" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354176020.png" alt="NewImage" width="882" height="526" border="0"></p>
 
 <p>就像前面所提及到的 MK 也认为其中最凶残的还是 UTF-7。因为一般的过滤方法根本无法拦截这种 XSS 攻击。而且悲催的是直到 IE11 微软还依然在支持着这个编码。不过好消息是微软正在探讨是否会在接下来的 IE12 当中移除对 UTF-7 的支持。</p>
 
 <p>在完成了对各个浏览器的编码支持情况的调查之后,MK 又对这些编码进行了各种各样的测试。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354294163.png" alt="NewImage" width="881" height="485" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354294163.png" alt="NewImage" width="881" height="485" border="0"></p>
 
 <p>将历史上出现过问题的部分作为参考,对字符集进行下面三种测试:</p>
 
@@ -312,18 +312,18 @@ var q="&lt;?php echo str_replace("&lt;/","&lt;\/",addslashes($_GET["test"])); ?&
 
 <p>TEST1 的部分测试结果:</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354322259.png" alt="NewImage" width="878" height="533" border="0" />￼￼</p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354322259.png" alt="NewImage" width="878" height="533" border="0">￼￼</p>
 
 <p>注释:其中第一列位浏览器,第二列为字符集,第三列为测试的 byte,第四列为呈现的字符。</p>
 
 <p>TEST2 的部分测试结果:</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354357084.png" alt="NewImage" width="878" height="537" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354357084.png" alt="NewImage" width="878" height="537" border="0"></p>
 
-<p>注释:其中第一列位浏览器,第二列为字符集,第三列为具有破坏性的 byte,,第四列具体破 坏的 byte 数。<br />
+<p>注释:其中第一列位浏览器,第二列为字符集,第三列为具有破坏性的 byte,,第四列具体破 坏的 byte 数。<br>
 TEST3 的部分测试结果</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354417584.png" alt="NewImage" width="878" height="529" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354417584.png" alt="NewImage" width="878" height="529" border="0"></p>
 
 <p>注释:其中第一列位浏览器,第二列为字符集,第三列为会被忽视的 byte</p>
 
@@ -335,15 +335,15 @@ TEST3 的部分测试结果</p>
 
 <p>Chrome 的 Anti-XSS 功能绕过实例:</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354410870.png" alt="NewImage" width="878" height="524" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354410870.png" alt="NewImage" width="878" height="524" border="0"></p>
 
 <p>IE 的 Anti-XSS 功能绕过实例:</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354451330.png" alt="NewImage" width="883" height="493" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354451330.png" alt="NewImage" width="883" height="493" border="0"></p>
 
 <h3>(2)基于编码切换的 self-XSS</h3>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354548766.png" alt="NewImage" width="998" height="410" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354548766.png" alt="NewImage" width="998" height="410" border="0"></p>
 
 <p>注释:具体操作方法就是手动切换编码至 shift&#95;jis(具体可以翻阅前面给出的 shift&#95;jis 的例子)</p>
 
@@ -351,13 +351,13 @@ TEST3 的部分测试结果</p>
 
 <h2>0x08 总结</h2>
 
-<hr />
+<hr>
 
 <p>可以看到一个简单的字符集,可能产生各种你意想不到的问题。虽然本文一直在围绕着 XSS 去阐述其可能产生的安全问题。但是我们都知道实际上的影响面可不止这一些。作为厂商我觉得也应该重视起这个问题,尽量在所有的页面都设置 charset,条件允许的情况下最好是通过 HTTP Response Header,而不单是通过 meta 标签。作为用户,向上述的基于编码切换的 XSS 问题也应该引起重视。如果你是 Firefox 用户,建议安装 NoScript 进行防御。不要轻易去听信他人的诱导在一些页面上做切换编码的操作。文中如果出现了错误,还希望大家能指出来。这样可以让我学到更多,也可以防止更多的人学到错误的东西。</p>
 
 <h3>参考文献</h3>
 
-<p>http://gihyo.jp/admin/serial/01/charcode http://blog.kotowicz.net/2010/10/xss-hackme-challenge-solution-part-2.html http://www.slideshare.net/ockeghem/owasp20134021-x https://speakerdeck.com/appsecapac2014/the-complete-investigation-of-encoding-an d-security http://masatokinugawa.l0.cm/2013/12/CVE-2013-5612-encoding-inheritance-xss.htm l http://masatokinugawa.l0.cm/2013/11/MS13-037-encoding-xss.html http://masatokinugawa.l0.cm/2012/12/encoding-self-xss.html http://masatokinugawa.l0.cm/2012/05/utf-16content-security-policy.html</p>      </p>
+<p>http://gihyo.jp/admin/serial/01/charcode http://blog.kotowicz.net/2010/10/xss-hackme-challenge-solution-part-2.html http://www.slideshare.net/ockeghem/owasp20134021-x https://speakerdeck.com/appsecapac2014/the-complete-investigation-of-encoding-an d-security http://masatokinugawa.l0.cm/2013/12/CVE-2013-5612-encoding-inheritance-xss.htm l http://masatokinugawa.l0.cm/2013/11/MS13-037-encoding-xss.html http://masatokinugawa.l0.cm/2012/12/encoding-self-xss.html http://masatokinugawa.l0.cm/2012/05/utf-16content-security-policy.html</p>      <p></p>
     
 			</body>
 		</html>

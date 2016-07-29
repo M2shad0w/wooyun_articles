@@ -3,16 +3,16 @@
 			<head>
 			     <title>当失控的预装行为以非正当手段伸向行货机时_北京鼎开预装刷机数据统计apk（rom固化版）分析 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1169">http://drops.wooyun.org/tips/1169</a></h1>
 				
       <p>
-        <p>作者：395B5B28E44BAAE80F68968A88ADC6CAD702851B</p>
+        </p><p>作者：395B5B28E44BAAE80F68968A88ADC6CAD702851B</p>
 
 <h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>本报告仅代表个人观点，与所在公司、所属团队、所在职务无关。因考虑人身安全，本节选由wooyun知识库代为匿名发布；全文待咨询相关人士后再决定是否公布。</p>
 
@@ -28,7 +28,7 @@
 
 <h2>0x01 应用名称、版本、权限演化历史、渠道区分</h2>
 
-<hr />
+<hr>
 
 <p>com.android.tunkoo.scan一般被放置于/system/app/目录下，故而这类被恶意刷机的的行货无法对其卸载。其名称具有伪装性，目前已经发现两个。</p>
 
@@ -60,19 +60,19 @@
 
 <p>两者所申请的权限如下，其中 “SystemServer”作为高版本，比“SystemScan”多申请了联系人和短信读取权限。从Android 3.1开始，应用要接收Android广播（比如开机自动启动），必须要让用户至少运行一次，并且没有在设置中“强制停止”；但com.android.tunkoo.scan被放置于/system/app，因此即使没有入口让用户启动过，也可以无视该规定，作为系统应用自动开机运行。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405413975754.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405413975754.jpg" alt="enter image description here"></p>
 
 <p>表：com.android.tunkoo.scan所申请的权限列表和演化</p>
 
 <p>为了区分不同的刷机渠道，每个com.android.tunkoo.scan中的AndroidManifest.xml中，使用友盟SDK的UMENG&#95;CHANNEL字段定义了刷机ROM标识字符串，同时还有一个SHOP&#95;ID字段标识推广渠道id。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405213654557.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405213654557.png" alt="enter image description here"></p>
 
 <p>图：两个样本的AndroidManifest.xml值</p>
 
 <h2>0x02 上报分析</h2>
 
-<hr />
+<hr>
 
 <h3>概述</h3>
 
@@ -122,7 +122,7 @@ http://xxxx.xxxx.com/rec.aspx?t=0&amp;iszip=false （SystemScan，SystemServer�
 <pre><code>ROMID={ROMID}||device_IOS={device_IOS}||device_IMEI={device_IMEI}||MAC={MAC}||os_Version={ os_Version }||shop_id={ shop_id }||device_IMSI={device_IMSI}||device_Model={device_Model}||device_Number={device_Number}||device_app_list={device_app_list}||nettype={nettype}||isrooted={isrooted}||postdataindex={postdataindex}||allsendindex={ allsendindex}||TIME1={TIME1}||TIME2={TIME2}||TIME3={TIME3}||
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405413972350.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405413972350.jpg" alt="enter image description here"></p>
 
 <p>表：手机基础信息上报字段名含义和示例值</p>
 
@@ -144,7 +144,7 @@ http://x.xxxx.com/api.aspx?t=3（“SystemScan”）
 
 <p>当用户点击连接网络（GPRS/WiFi）、或手机开机两小时后每两小时，都会进行一次这样的上报。如果上报失败，会将待上报的内容，以数字编号文件形式存入“<code>/data/data/com.android.tunkoo.scan/files/s</code>”目录，并在后续逻辑中按文件顺序重新上报。故如果用户频繁开关机、或者长时间待机，会在此目录积累大量的待上报内容。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405414061068.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405414061068.png" alt="enter image description here"></p>
 
 <p>图： 用户使用行为上报信息缓存文件</p>
 
@@ -153,13 +153,13 @@ http://x.xxxx.com/api.aspx?t=3（“SystemScan”）
 <pre><code>TIME=2013-09-20 18:27:05||IOS=com.android.tunkoo.scan_3_8c81a411||IMEI=477777777777777||IMSI=83333333333333333333||SHOPID=8798||ROMID=8798_201308111529_471.0||MAC=00:0d:08:07:c6:a5||MODEL=Lenovo A820t||IP=172.0.0.1||LA=0||LO=0||APPUSE=com.speedsoftware.rootexplorer,d2481498,2013-09-20 18:25:53,2013-09-20 18:26:26&amp;&amp;||APPFLOW=||NETTYPE=,WIFI,net,2013-09-20 18:25:51,2013-09-20 18:26:26&amp;&amp;||APPINSTALL=||IP=172.0.0.1,2013-09-20 18:25:51&amp;&amp;||
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405213664959.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405213664959.jpg" alt="enter image description here"></p>
 
 <p>表：用户使用行为上报字段名含义和示例值</p>
 
 <p>由于每种用户行为的频率不一样，故部分参数的行为采集频率（定时器设置间隔）、存储位置并不一致。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071410261430431.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071410261430431.jpg" alt="enter image description here"></p>
 
 <p>表：用户使用行为上报部分字段名的采集频率、目的和存放位置</p>
 
@@ -172,7 +172,7 @@ http://x.xxxx.com/api.aspx?t=3（“SystemScan”）
 <pre><code>IMEI=477777777777777||MAC=00:0d:08:07:c6:a5||MODEL=Lenovo A820t||Contact=1,0,0,0,0,0,0,0,0,0,0,||MSGSend=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,||MSGRec=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,||NumberFoldList=555555,||_HDList=AEEE,BEEE,||_THDList=KEEE,LEEE,
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405214027982.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405214027982.jpg" alt="enter image description here"></p>
 
 <p>表：特定信息挖掘上报字段名含义和示例值</p>
 
@@ -187,67 +187,67 @@ http://x.xxxx.com/api.aspx?t=3（“SystemScan”）
 
 <p>由于手机QQ运行时的文件较多，难以放到/data对应的应用目录下，故这些文件都放到了sdcard目录下。但sdcard目录允许被任何应用读取，故导致可被“SystemServer”扫描相关目录并上报。猜测这个目的是为了尝试收集该手机用户的QQ使用习惯和用户喜好。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071410261489012.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071410261489012.png" alt="enter image description here"></p>
 
 <p>图：“SystemServer”扫描手机QQ目录获取所有登录过的QQ号</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405214086535.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405214086535.png" alt="enter image description here"></p>
 
 <p>图：“SystemServer”扫描手机QQ的联系人头像缓存文件名列表</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071410261544180.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071410261544180.png" alt="enter image description here"></p>
 
 <p>图：“SystemServer”扫描手机QQ的群头像缓存文件名列表</p>
 
 <h2>0x03 危害和查杀情况</h2>
 
-<hr />
+<hr>
 
 <p>com.android.tunkoo.scan的危害主要在于持续监测和上报，泄露了用户各种隐私信息和行为。在这个过程中由于大量使用定时器扫描和进行网络连接，故会持续消耗电量和网络流量；特别的，如果没有申请运营商流量套餐又误用GPRS上网，将会出现扣费问题。另外在某些情况下，可能会由于大量的扫描，引起系统缓慢和失去响应。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405414050282.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405414050282.png" alt="enter image description here"></p>
 
 <p>图：百度知道中有关“SystemScan”流量问题的提问</p>
 
 <p>对com.android.tunkoo.scan的查杀情况，则进行了两次验证。第二次验证为2013-9，在测试机上进行了“SystemServer”（原版apk）查杀测试，仍然无法检出。截图从左到右：腾讯手机管家（病毒库20130922B）、金山毒霸（库文件版本2013.9.12.1947 + 启发扫描）、LBE（病毒库20130918.f）、360（病毒库20130922B）。此处对手机毒霸有个疑问，那就是无论扫描结果中的“耗电软件”（后台自启动应用列表）、还是应用行为管理，均找不到“SystemServer”应用可供管理或禁用。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071410261521727.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071410261521727.png" alt="enter image description here"></p>
 
 <p>图：2013-9在测试机上对“SystemServer”的查杀情况</p>
 
 <h2>0x04 鼎开的行货刷机手段</h2>
 
-<hr />
+<hr>
 
 <p>鼎开的恶意刷机，是在/system/vendor/operator/app/内的应用全部删除（此目录下的定制应用可被用户卸载），再在/system/app内放入无法卸载的应用。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071410261690956.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071410261690956.png" alt="enter image description here"></p>
 
 <p>图：联想A820t恶意刷机前后/system/vendor/operator/app/目录对比。左：S115厂商包；右：问题手机</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405214160069.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405214160069.png" alt="enter image description here"></p>
 
 <p>图：高端手机预装联盟服务流程</p>
 
 <p>在新浪微博搜索中，以“鼎开 刷机”进行搜索的结果显示，鼎开似乎成为了行货刷机的公开幕后渠道，日刷机量至少5万，其最初的主要目标是三星行货（但后来也许也兼营其它品牌，比如联想），并且可能有大型互联网公司的参与。而这些信息，至少从去年底就开始存在，但并没有引起很大的反响。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405214110576.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405214110576.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405414061682.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405414061682.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405214219574.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405214219574.png" alt="enter image description here"></p>
 
 <p>图：微博上搜索“鼎开 刷机”信息</p>
 
 <p>根据百度搜索的结果，鼎开至少从2012年开始，在智联招聘、赶集网、58同城等网站发布不同地区的招聘信息，比如广东深圳的rom编辑人员（2013-08-22），还有河南郑州（2012-05-29）、河北石家庄（2013-08-22）、广东深圳（2013-08-05）等地的安卓系统刷机操作专员，其中明显提到，刷机的操作流程需要有“拆包-封包”等破坏和伪造行货包装完整性的行为。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405414133407.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405414133407.png" alt="enter image description here"></p>
 
 <p>图：鼎开在石家庄招聘安卓系统刷机操作专员，其中提到的刷机流程</p>
 
 <p>根据游戏葡萄的文章，除了鼎开之外还有其它的刷机公司，分布在不同的品牌和价位；至于刷机方法，已有一整套成熟的自动化工具。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071410261656818.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071410261656818.png" alt="enter image description here"></p>
 
 <p>图：刷机公司的工具</p>
 
@@ -255,7 +255,7 @@ http://x.xxxx.com/api.aspx?t=3（“SystemScan”）
 
 <h2>0x05 基于网络和实体店的感染情况与分布调查</h2>
 
-<hr />
+<hr>
 
 <p>为了摸清楚受鼎开刷机所影响的范围和分布情况，从2013年8月开始，针对城乡结合部区域进行了持续一周的实体店调查，在后续的周末中，也断续进行零散调查；同时在这个过程中，针对性进行网络搜索。</p>
 
@@ -270,15 +270,15 @@ http://x.xxxx.com/api.aspx?t=3（“SystemScan”）
 
 <h2>0x06 普通用户的解决方法</h2>
 
-<hr />
+<hr>
 
 <p>为了让用户确定自己是否遭受鼎开刷机，作者开发了一个“应用安装信息报告”（com.example.forensics.systemapp）。该应用可安装在Android 2.2及以上机器，在进入应用后点击“收集…”按钮并稍候。如果结果中出现“[重要提示！]发现疑似鼎开刷机的证据”、并且下面列出的安装包中出现“com.android.tunkoo.scan”或者“com.easyandroid.widgets”等（暂不判断是否为系统应用），那么恭喜你，很大概率中招了……</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071410261648133.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071410261648133.png" alt="enter image description here"></p>
 
 <p>图：“应用安装信息报告”运行结果</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405214281160.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405214281160.jpg" alt="enter image description here"></p>
 
 <p>表：“应用安装信息报告”的结果文件夹含义</p>
 
@@ -296,15 +296,15 @@ http://x.xxxx.com/api.aspx?t=3（“SystemScan”）
 
 <h2>0x07 附录：关于利用刷机方式植入“手机预装马” 进行用户信息窃取的情况通报（2014-2-14）（节选）</h2>
 
-<hr />
+<hr>
 
 <p>通过对该手机预装马进行持续监测，截至2014年1月CNCERT发现全国范围内感染该手机预装马的用户数达2167148个。感染用户按照区域分布和运营商分布情况分别如图2和图3所示。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405414151435.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071405414151435.png" alt="enter image description here"></p>
 
 <p>图2 感染“手机预装马”用户按照区域分布情况</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071410261748127.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071410261748127.png" alt="enter image description here"></p>
 
 <p>图3 感染“手机预装马”用户按照运营商分布情况</p>
 
@@ -312,13 +312,13 @@ http://x.xxxx.com/api.aspx?t=3（“SystemScan”）
 
 <p>由于“手机预装马”在运行时具有明显特征，安卓手机用户可通过检查当前手机进程信息中是否含有名为“com.android.tunkoo.scan”的“SystemScan”进程，如果含有该进程则说明手机中已被植入“手机预装马”，用户须及时卸载“SystemScan”应用。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071410261764987.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071410261764987.png" alt="enter image description here"></p>
 
 <p>图4 “手机预装马”所运行的恶意程序信息</p>
 
-<p>同时用户可以通过由CNCERT负责日常运营的中国反网络病毒联盟ANVA（www.anva.org.cn）<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e4035975034f7d026c720c64610d664a034a5589978589948881a487819690ca8b9683ca878a0c5b7f0c4568005c5a026e41">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c82e47582c7653206a632e6c452d4d6d2a48542e41432e5472216a4c206b4d2161642a48552f524c2e41432e54722d56432d477f2c77692e49672d5a442c74682e5a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�信息，以便CNCERT开展处置工作。</p>
+<p>同时用户可以通过由CNCERT负责日常运营的中国反网络病毒联盟ANVA（www.anva.org.cn）<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e4035975034f7d026c720c64610d664a034a5589978589948881a487819690ca8b9683ca878a0c5b7f0c4568005c5a026e41">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c82e47582c7653206a632e6c452d4d6d2a48542e41432e5472216a4c206b4d2161642a48552f524c2e41432e54722d56432d477f2c77692e49672d5a442c74682e5a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�信息，以便CNCERT开展处置工作。</p>
 
-<p>检测APK：<a href="http://static.wooyun.org/20141017/2014101719404351418.zip">com.example.forensics.systemapp.zip</a></p>      </p>
+<p>检测APK：<a href="http://static.wooyun.org/20141017/2014101719404351418.zip">com.example.forensics.systemapp.zip</a></p>      <p></p>
     
 			</body>
 		</html>

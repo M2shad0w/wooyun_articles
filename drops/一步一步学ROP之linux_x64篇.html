@@ -3,14 +3,14 @@
 			<head>
 			     <title>一步一步学ROP之linux_x64篇 - 蒸米</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/7551">http://drops.wooyun.org/papers/7551</a></h1>
 				
       <p>
-        <h1>0x00 序</h1>
+        </p><h1>0x00 序</h1>
 
-<hr />
+<hr>
 
 <p>ROP的全称为Return-oriented programming（返回导向编程），这是一种高级的内存攻击技术可以用来绕过现代操作系统的各种通用防御（比如内存不可执行和代码签名等）。上次我们主要讨论了linux_x86的ROP攻击。</p>
 
@@ -24,7 +24,7 @@
 
 <h1>0x01 Memory Leak &amp; DynELF - 在不获取目标libc.so的情况下进行ROP攻击</h1>
 
-<hr />
+<hr>
 
 <p>注意，这一节是上一篇文章的补充，还是讲的x86的ROP。上次讲到了如何通过ROP绕过x86下DEP和ASLR防护。但是我们要事先得到目标机器上的libc.so或者具体的linux版本号才能计算出相应的offset。那么如果我们在获取不到目标机器上的libc.so情况下，应该如何做呢？这时候就需要通过memory leak(内存泄露)来搜索内存找到system()的地址。</p>
 
@@ -169,7 +169,7 @@ mzheng
 
 <h1>0x02 linux&#95;64与linux&#95;86的区别</h1>
 
-<hr />
+<hr>
 
 <p>linux&#95;64与linux&#95;86的区别主要有两点：首先是内存地址的范围由32位变成了64位。但是可以使用的内存地址不能大于0x00007fffffffffff，否则会抛出异常。其次是函数参数的传递方式发生了改变，x86中参数都是保存在栈上,但在x64中的前六个参数依次保存在RDI, RSI, RDX, RCX, R8和 R9中，如果还有更多的参数的话才会保存在栈上。</p>
 
@@ -271,7 +271,7 @@ p.interactive()
 
 <h1>0x03使用工具寻找gadgets</h1>
 
-<hr />
+<hr>
 
 <p>我们之前提到x86中参数都是保存在栈上,但在x64中前六个参数依次保存在RDI, RSI, RDX, RCX, R8和 R9寄存器里，如果还有更多的参数的话才会保存在栈上。所以我们需要寻找一些类似于<code>pop rdi; ret</code>的这种gadget。如果是简单的gadgets，我们可以通过objdump来查找。但当我们打算寻找一些复杂的gadgets的时候，还是借助于一些查找gadgets的工具比较方便。比较有名的工具有：</p>
 
@@ -431,7 +431,7 @@ mzheng
 
 <h1>0x04 通用gadgets</h1>
 
-<hr />
+<hr>
 
 <p>因为程序在编译过程中会加入一些通用函数用来进行初始化操作（比如加载libc.so的初始化函数），所以虽然很多程序的源码不同，但是初始化的过程是相同的，因此针对这些初始化函数，我们可以提取一些通用的gadgets加以使用，从而达到我们想要达到的效果。</p>
 
@@ -637,7 +637,7 @@ mzheng
 
 <h1>0x05 EDB调试器</h1>
 
-<hr />
+<hr>
 
 <p>我们在学习Linux ROP的过程中一定少不了调试这一环节，虽然gdb的功能很强大，但命令行界面对很多人来说并不友好。很多学习Windows调试的人用惯了ollydbg再接触gdb的话总感觉很难上手。其实在linux下也有类似于ollydbg的调试工具，那就是EDB-debugger。这里给出edb的下载地址，具体的编译请参考readme：</p>
 
@@ -653,21 +653,21 @@ p.send(payload1)
 
 <p>这样的话，当脚本运行起来后，就会在raw_input()这一行停下来，等待用户输入。这时候我们就可以启动EDB进行挂载了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073102531959679.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073102531959679.png" alt="enter image description here"></p>
 
 <p>使用EDB进行挂载非常简单，输入进程名点ok即可。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073102531991344.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073102531991344.png" alt="enter image description here"></p>
 
 <p>挂载上以后就可以设置断点了。首先在调试窗口按”ctrl + g”就可以跳转到目标地址，我们这里将地址设置为<code>0x400610</code>，也就是第一个gadget的地址。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073102531987821.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073102531987821.png" alt="enter image description here"></p>
 
 <p>接着我们在<code>0x400610</code>这个地址前双击，就可以看到一个红点，说明我们已经成功的下了断点。接着按“F9”或者点击”Run”就可以让程序继续运行了。</p>
 
 <p>虽然程序继续运行了，但是脚本还在继续等待用户的输入，这时候只需要在命令行按一下回车，程序就会继续运行，随后会暂停在”0x400610”这个断点。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150731/2015073102531949768.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150731/2015073102531949768.png" alt="enter image description here"></p>
 
 <p>接着我们可以按”F8”或者”F7”进行单步调试，主窗口会显示pc将要执行的指令以及执行后的结果。右边会看到各个寄存器的值。注意，在寄存器（比如说RSP）的值上点击右键，可以选择”follow in dump”，随后就在data dump窗口就能看到这个地址上对应数据是什么了。除此之外，EDB还支持动态修改内存数据，当你选中数据后，可以右键，选择”Edit Bytes”，就可以对选中的数据进行动态修改。</p>
 
@@ -675,13 +675,13 @@ p.send(payload1)
 
 <h1>0x06小结</h1>
 
-<hr />
+<hr>
 
 <p>可以说ROP最大的艺术就是在于gadgets千变万化的组合了。因为篇幅原因我们准备将如何寻找以及组合gadgets的技巧留到随后的文章中去介绍。欢迎大家到时继续学习。</p>
 
 <h1>0x07 参考资料</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li><a href="http://drops.wooyun.org/tips/2288">64位Linux下的栈溢出</a> </li>
@@ -690,9 +690,9 @@ p.send(payload1)
 
 <h1>0xFF 版权声明</h1>
 
-<hr />
+<hr>
 
-<p>本文独家首发于乌云知识库(drops.wooyun.org)。本文并没有对任何单位和个人授权转载。如本文被转载，一定是属于未经授权转载，属于严重的侵犯知识产权，本单位将追究法律责任。</p>      </p>
+<p>本文独家首发于乌云知识库(drops.wooyun.org)。本文并没有对任何单位和个人授权转载。如本文被转载，一定是属于未经授权转载，属于严重的侵犯知识产权，本单位将追究法律责任。</p>      <p></p>
     
 			</body>
 		</html>

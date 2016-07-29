@@ -3,16 +3,16 @@
 			<head>
 			     <title>Google Chrome 开发者工具漏洞利用 - mramydnei</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/974">http://drops.wooyun.org/papers/974</a></h1>
 				
       <p>
-        <p>原文链接:<a href="http://www.hydrantlabs.org/Security/Google/Chrome/">http://www.hydrantlabs.org/Security/Google/Chrome/</a></p>
+        </p><p>原文链接:<a href="http://www.hydrantlabs.org/Security/Google/Chrome/">http://www.hydrantlabs.org/Security/Google/Chrome/</a></p>
 
 <h2>0x00 引言</h2>
 
-<hr />
+<hr>
 
 <p>故事起源于 Chromium 源码里名为 <a href="https://code.google.com/p/chromium/codesearch#chromium/src/third_party/WebKit/Source/core/inspector/InjectedScriptSource.js">InjectedScriptSource.js</a> 的文件，这个文件负责控制台中的命令执行。也许很多人都会这么说:</p>
 
@@ -38,7 +38,7 @@ expression = prefix + "\n" + expression + "\n" + suffix;
 
 <h2>0x01 漏洞 1</h2>
 
-<hr />
+<hr>
 
 <p>一切都将从这里变得有趣。因为我有个想法，可以把ECMAScript 5里的Getters和Setters 利用起来。因为开发者工具总是会在用户输入命令时试图给用户一些命令补全的建议。通过开发者工具的这个特点，我们就可以使用Getters和Setters来构造一个函数，实现在用户输入命令的过程当中就去执行用户的输入。这意味着在用户按下Enter之前命令就已经被执行了。</p>
 
@@ -52,7 +52,7 @@ Object.defineProperty(console, '_commandLineAPI', {
 
 <h2>0x02 简单禁用控制台访问</h2>
 
-<hr />
+<hr>
 
 <p>这里使用的思路和 FaceBook 是差不多的。</p>
 
@@ -68,7 +68,7 @@ throw 'Console Disabled';
 
 <h2>0x03 引言 II</h2>
 
-<hr />
+<hr>
 
 <p>在开始讲解更为有趣的内容之前，我觉得我们有必要先停一下脚步，再来谈谈JavaScript的话题。让我们先来看看下面的例子：</p>
 
@@ -138,7 +138,7 @@ call_Jim_as_Luke(); // 'Hi Luke!'
 
 <h2>0x04 漏洞 II</h2>
 
-<hr />
+<hr>
 
 <p>我们的第二个漏洞将会使用之前提到的arguments.callee.caller。当一个没有父函数的函数在standard context 中被执行时，arguments.callee.calle就会变成null。在这里有一个有趣的现象。当脚本在开发者工具的console里执行的时候，调用的函数是在本文开头说的_evaluate0n函数而并未是所期待的null。如果我们尝试着在控制台输入下面的命令，控制台就会dump出_evaluateOn函数的源代码：</p>
 
@@ -213,7 +213,7 @@ InjectedScriptHost.inspectedObject(0);
 
 <h2>0x05 禁用控制台访问进阶篇</h2>
 
-<hr />
+<hr>
 
 <p>现在让我们试着写一个更完善的控制台访问禁用脚本出来。这次我不希望再看到那些让人恶心的红色错误提示了。让我们从“当用户在控制台输入命令时会发生一些什么”开始吧。函数_evaluateOn会通过一些参数：</p>
 
@@ -270,7 +270,7 @@ Object.defineProperty(console, '_commandLineAPI', {
 
 <h2>0x06 控制台日志记录</h2>
 
-<hr />
+<hr>
 
 <p>我想你大概猜到之前搞了那么多，并不只是为了编写一个不会报错的脚本。让我们来找一些乐子。让我们编写一个可以让命令和预期一样正常执行并能记录所有的命令和执行结果的脚本。这里是我的POC：</p>
 
@@ -327,7 +327,7 @@ Object.defineProperty(console, '_commandLineAPI', {
 
 <h2>0x07 控制台检查</h2>
 
-<hr />
+<hr>
 
 <p>记录控制台命令确实挺有趣的。但是让我们看看能不能不通过查看源代码的方式来访问变量（这个方法还并不完美，但是可以让你理解我们可以做到一些什么）</p>
 
@@ -387,7 +387,7 @@ Object.defineProperty(console, '_commandLineAPI', {
 
 <h2>0x08 通用的跨站脚本攻击</h2>
 
-<hr />
+<hr>
 
 <p>现在让我们来讨论一下这个已经被修复的漏洞。这个漏洞可以在一些用户交互的基础上将恶意站点的A内的脚本或页面植入到站点B当中。它的工作原理很简单。当用户审查元素时，它会被加入到历史数组里。用户可以通过console.$0来访问它。但是遗憾的是，如果它已经通过别的域名被执行，我们就无法访问它。如果想要真正的利用这个exploit，我们至少需要用户右键点击这个iframe，打开控制台并输入命令。</p>
 
@@ -430,11 +430,11 @@ Object.defineProperty(console, '_commandLineAPI', {
 });
 </code></pre>
 
-<p>就如我之前说的那样，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4ea6f1d7aaf6e4a8f2c1a8fad0abf9fca9f5c1a6ece5373b3c373d0e2d263c2123273b2360213c29aaf1e0a6efebaaf4c8adceccabe8cca8d0d2aaf3eeabe1f7a6f1">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�个漏洞或者补丁感兴趣，可以点击这里<a href="http://trac.webkit.org/changeset/138228">here</a>.</p>
+<p>就如我之前说的那样，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4ea6f1d7aaf6e4a8f2c1a8fad0abf9fca9f5c1a6ece5373b3c373d0e2d263c2123273b2360213c29aaf1e0a6efebaaf4c8adceccabe8cca8d0d2aaf3eeabe1f7a6f1">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�个漏洞或者补丁感兴趣，可以点击这里<a href="http://trac.webkit.org/changeset/138228">here</a>.</p>
 
 <h2>0x09 最后</h2>
 
-<hr />
+<hr>
 
 <p>也许你应该留意一下InjectedScriptHost.functionDetails的用法。因为它是很强大的函数。这里是个比较常见的使用例 :</p>
 
@@ -586,7 +586,7 @@ function listScopes() {
 };
 </code></pre>
 
-<p>你可以通过 listScopes() 来在控制台执行它。也许还有一些BUG需要在日后解决。但是我觉得这依然是个不错的方法。</p>      </p>
+<p>你可以通过 listScopes() 来在控制台执行它。也许还有一些BUG需要在日后解决。但是我觉得这依然是个不错的方法。</p>      <p></p>
     
 			</body>
 		</html>

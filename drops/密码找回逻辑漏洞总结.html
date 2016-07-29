@@ -3,14 +3,14 @@
 			<head>
 			     <title>密码找回逻辑漏洞总结 - BMa</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/5048">http://drops.wooyun.org/web/5048</a></h1>
 				
       <p>
-        <h1>0x00 背景介绍</h1>
+        </p><h1>0x00 背景介绍</h1>
 
-<hr />
+<hr>
 
 <p>请注意这两篇文章：</p>
 
@@ -22,7 +22,7 @@
 
 <h1>0x01 密码找回逻辑测试一般流程</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>首先尝试正常密码找回流程，选择不同找回方式，记录所有数据包</li>
@@ -35,17 +35,17 @@
 
 <h1>0x02 脑图</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org/20150309/2015030902491080846.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20150309/2015030902491080846.png" alt="enter image description here"></p>
 
 <h1>0x03 详情</h1>
 
-<hr />
+<hr>
 
 <h2>用户凭证暴力破解</h2>
 
-<hr />
+<hr>
 
 <p>四位或者六位的纯数字 例子</p>
 
@@ -55,7 +55,7 @@
 
 <h2>返回凭证</h2>
 
-<hr />
+<hr>
 
 <p>url返回验证码及token 例子</p>
 
@@ -65,7 +65,7 @@
 
 <h2>密码找回凭证在页面中</h2>
 
-<hr />
+<hr>
 
 <p>通过密保问题找回密码 例子</p>
 
@@ -73,7 +73,7 @@
 
 <h2>返回短信验证码</h2>
 
-<hr />
+<hr>
 
 <p>例子</p>
 
@@ -81,7 +81,7 @@
 
 <h2>邮箱弱token</h2>
 
-<hr />
+<hr>
 
 <p>时间戳的md5 例子</p>
 
@@ -89,13 +89,13 @@
 
 <h2>用户名 &amp; 服务器时间</h2>
 
-<hr />
+<hr>
 
 <p> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2015-090226">WooYun: 中兴某网站任意用户密码重置漏洞（经典设计缺陷案例）</a> </p>
 
 <h2>用户凭证有效性</h2>
 
-<hr />
+<hr>
 
 <p>短信验证码 例子</p>
 
@@ -107,7 +107,7 @@
 
 <h2>邮箱token</h2>
 
-<hr />
+<hr>
 
 <p>例子</p>
 
@@ -115,7 +115,7 @@
 
 <h2>重置密码token</h2>
 
-<hr />
+<hr>
 
 <p>例子</p>
 
@@ -123,7 +123,7 @@
 
 <h2>重新绑定</h2>
 
-<hr />
+<hr>
 
 <p>手机绑定 例子</p>
 
@@ -133,7 +133,7 @@
 
 <h2>邮箱绑定</h2>
 
-<hr />
+<hr>
 
 <p>例子</p>
 
@@ -143,7 +143,7 @@
 
 <h2>服务器验证</h2>
 
-<hr />
+<hr>
 
 <p>最终提交步骤 例子</p>
 
@@ -151,7 +151,7 @@
 
 <h2>服务器验证可控内容</h2>
 
-<hr />
+<hr>
 
 <p>例子</p>
 
@@ -161,7 +161,7 @@
 
 <h2>服务器验证验证逻辑为空</h2>
 
-<hr />
+<hr>
 
 <p>例子</p>
 
@@ -169,7 +169,7 @@
 
 <h2>用户身份验证</h2>
 
-<hr />
+<hr>
 
 <p>账号与手机号码的绑定</p>
 
@@ -177,7 +177,7 @@
 
 <h2>账号与邮箱账号的绑定</h2>
 
-<hr />
+<hr>
 
 <p>例子</p>
 
@@ -187,7 +187,7 @@
 
 <h2>找回步骤</h2>
 
-<hr />
+<hr>
 
 <p>跳过验证步骤、找回方式，直接到设置新密码页面 例子</p>
 
@@ -197,7 +197,7 @@
 
 <h2>本地验证</h2>
 
-<hr />
+<hr>
 
 <p>在本地验证服务器的返回信息，确定是否执行重置密码，但是其返回信息是可控的内容，或者可以得到的内容 例子</p>
 
@@ -207,7 +207,7 @@
 
 <h2>发送短信等验证信息的动作在本地进行，可以通过修改返回包进行控制</h2>
 
-<hr />
+<hr>
 
 <p>例子</p>
 
@@ -217,7 +217,7 @@
 
 <h2>注入</h2>
 
-<hr />
+<hr>
 
 <p>在找回密码处存在注入漏洞 例子</p>
 
@@ -225,7 +225,7 @@
 
 <h2>Token生成</h2>
 
-<hr />
+<hr>
 
 <p>token生成可控 例子</p>
 
@@ -235,7 +235,7 @@
 
 <h2>注册覆盖</h2>
 
-<hr />
+<hr>
 
 <p>注册重复的用户名 例子</p>
 
@@ -243,13 +243,13 @@
 
 <h2>session覆盖</h2>
 
-<hr />
+<hr>
 
 <p>例子</p>
 
 <p> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2014-085843">WooYun: 聚美优品任意修改用户密码(非爆破)</a> </p>
 
-<p>附脑图文件：<a href="http://static.wooyun.org/drops/20150309/2015030903011489919%E5%AF%86%E7%A0%81%E6%89%BE%E5%9B%9E%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98.zip">密码找回漏洞挖掘.zip</a></p>      </p>
+<p>附脑图文件：<a href="http://static.wooyun.org/drops/20150309/2015030903011489919%E5%AF%86%E7%A0%81%E6%89%BE%E5%9B%9E%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98.zip">密码找回漏洞挖掘.zip</a></p>      <p></p>
     
 			</body>
 		</html>

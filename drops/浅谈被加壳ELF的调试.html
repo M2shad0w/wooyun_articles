@@ -3,14 +3,14 @@
 			<head>
 			     <title>浅谈被加壳ELF的调试 - 腾讯电脑管家</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/6162">http://drops.wooyun.org/papers/6162</a></h1>
 				
       <p>
-        <h1>0x00 ELF格式简介：</h1>
+        </p><h1>0x00 ELF格式简介：</h1>
 
-<hr />
+<hr>
 
 <p>注：本文只讨论如何调试被加壳的ELF文件，包括调试中的技巧运用及调试过程中可能遇到的问题的解决方法，不包含如何还原加固的DEX</p>
 
@@ -27,7 +27,7 @@
 
 <h1>0x01 ELF文件加载大概流程：</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>通过Section Header或者Program Header加载需要的镜像数据 和WINDOWS PE加载机制不同，ELF有些文件数据是不会加载到内存镜像中</li>
@@ -43,7 +43,7 @@
 
 <h1>0x03 ARM CPU简介： 1.指令集简介：</h1>
 
-<hr />
+<hr>
 
 <p>ARMCPU采用RISC（精简指令集）架构（X86是CISC，复杂指令集），指令等长，相对CISC架构更加省电，执行效率更高</p>
 
@@ -51,9 +51,9 @@
 
 <p>ARM(4字节等长)，THUMB(2字节等长)，THUMB2(4字节等长)。这三种指令集可以在同一执行程序中切换，切换原则为：</p>
 
-<p>ARM <-->THUMB，THUMB<-->ARM（PC的最高位确定指令集类型：1为THUMB；0为ARM）</p>
+<p>ARM <-->THUMB，THUMB<-->ARM（PC的最高位确定指令集类型：1为THUMB；0为ARM）</--></--></p>
 
-<p>THUMB<-->THUMB2（由27-31位决定）</p>
+<p>THUMB<-->THUMB2（由27-31位决定）</--></p>
 
 <p>thumb2其实就是thumb的扩展，其目的是为了一条4字节指令完成多条2字节指令</p>
 
@@ -67,7 +67,7 @@
 
 <h1>0x04 加壳SO的调试</h1>
 
-<hr />
+<hr>
 
 <p><strong><em>1.ELF代码执行顺序</em></strong></p>
 
@@ -75,9 +75,9 @@
 
 <p>那我们先看下一个被加壳以后的SO，在linux下面用readelf -a命令查看ELF信息</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185261105.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185261105.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185257222.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185257222.png" alt="enter image description here"></p>
 
 <p>在ELF-HEADER里我们看到有Entry，地址为0x22a8</p>
 
@@ -85,7 +85,7 @@
 
 <p>用IDA看看数组的内容</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185215678.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185215678.png" alt="enter image description here"></p>
 
 <p>上面说了，-1为无效，0代表结束，那INIT有效地址仅是0x2418这个地址</p>
 
@@ -93,13 +93,13 @@
 
 <p>我们再来看下某加固的ELF信息</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185247053.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185247053.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185313368.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185313368.png" alt="enter image description here"></p>
 
 <p>在ELF-HEADER里我们看到有Entry，地址为0x3860</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185384941.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185384941.png" alt="enter image description here"></p>
 
 <p>DA打开某加固的文件时，会提示错误，不能打开，后面在Anti Anti Debugger中会讲到为什么</p>
 
@@ -111,13 +111,13 @@
 
 <p>根据linker的代码，当INIT段和INIT&#95;ARRAY段都存在的情况下，先运行INIT段，再运行INIT&#95;ARRAY段，否则单独运行对应指向的函数，最后执行ENTRY</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185327960.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185327960.png" alt="enter image description here"></p>
 
 <p><strong><em>2. 自己准备SO_LOADER</em></strong></p>
 
 <p>调试SO和PE&#95;DLL其实道理是一样的，都需要一个宿主进程，这里要写一个SO&#95;LOADER，参看代码如下，可通过NDK编译。（代码是王晨同学早期提供的）</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185357729.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185357729.png" alt="enter image description here"></p>
 
 <p><strong><em>3.环境准备：</em></strong></p>
 
@@ -125,7 +125,7 @@
 
 <p>第一步：拷贝调试器到安卓手机上</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185324920.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185324920.png" alt="enter image description here"></p>
 
 <p>命令：adb push android_server /data/local/tmp/and</p>
 
@@ -135,7 +135,7 @@
 
 <p>adb shell回车，进入/data/local/tmp/目录，启动调试器，启动后画面</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185438110.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185438110.png" alt="enter image description here"></p>
 
 <p>第三步：重定向调试端口</p>
 
@@ -145,25 +145,25 @@
 
 <p>IDA加载我们自己写的so_loader，在854C处，按F2下断点</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185473792.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185473792.png" alt="enter image description here"></p>
 
 <p>选择菜单栏里面的Debuger-Select Debugger，选择Remote Arm linux/Andoid debugger</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185445450.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185445450.png" alt="enter image description here"></p>
 
 <p>点击OK，然后F9运行</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185436378.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185436378.png" alt="enter image description here"></p>
 
 <p>在配置里面，Hostname里面填入127.0.0.1，点击OK</p>
 
 <p>如果你的手机里面没有这个文件，会提示你COPY，点击确定即可，如果有这个文件，会出现下面的选择，一般选择USE FOUND就可以了，如果你要调试的程序有修改，选择COPY NEW覆盖一个新的进去</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185429631.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185429631.png" alt="enter image description here"></p>
 
 <p>然后一路OK，就出现调试状态了~~，当前PC就是刚才我们F2设置的断点</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185574894.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185574894.png" alt="enter image description here"></p>
 
 <p><strong><em>4.如何断住SO的INIT_ARRAY段和INIT段</em></strong></p>
 
@@ -173,21 +173,21 @@
 
 <p>call&#95;constructors&#95;recursive,双击并查看引用</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185531009.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185531009.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185569095.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185569095.png" alt="enter image description here"></p>
 
 <p>双击第二个引用处，然后往上找blx r3(init段的调用)，b.w xxxxxxxx(init_array段的调用)</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185556260.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185556260.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185540656.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185540656.png" alt="enter image description here"></p>
 
 <p>好了，现在我们找到了地址0x54d0, 0x3af0这两个地方，回到刚才调试的IDA里面，</p>
 
 <p>选择菜单栏debugger-Debugger windows-module list打开进程模块列表</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185525385.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185525385.png" alt="enter image description here"></p>
 
 <p>linker.so的base是40002000,分别对应的两个地址就是</p>
 
@@ -197,45 +197,45 @@
 
 <p>我们在IDA View-PC窗口GO 过去</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185671469.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185671469.png" alt="enter image description here"></p>
 
 <p>在0x74d0处，按C键，变成代码.奇怪，为什么没有反应！！而且在最下面的output window有如下提示</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185674859.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185674859.png" alt="enter image description here"></p>
 
 <p>这里就是我说的很重要的问题了，上面我提到了，被调试的程序可以在3种指令集之间切换，这时的IDA并不知道当前要变成代码的地址是ARM还是THUMB，这时我们需要对照静态的来看，或者你对指令集绝对的熟悉，看到BYTE CODE就知道是哪种指令集</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185672407.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185672407.png" alt="enter image description here"></p>
 
 <p>静态中，显然IDA给的是2字节指令，那必然是THUMB，我们需要把当前地址改成THUMB</p>
 
 <p>方法：按键盘的ALT+G，呼唤出窗口</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185618551.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185618551.png" alt="enter image description here"></p>
 
 <p>T,DS不用管，我们只需要把VALUE改成1就是THUMB指令集了，变成1点击OK以后</p>
 
 <p>在原来的地址上出现了CODE16，这时我们再去C一次</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185659717.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185659717.png" alt="enter image description here"></p>
 
 <p>C完以后，就出现代码了！！！ARM和THUMB就是这么切换的，切记，切记</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185792979.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185792979.png" alt="enter image description here"></p>
 
 <p>再看另外一个地址,0x400a5af0,按照同样的方法再来一次</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185759819.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185759819.png" alt="enter image description here"></p>
 
 <p>问题又来了，奇怪了，为什么下面不是指令？！这个是IDA的BUG，6.6版本对THUMB2指令在调试状态的解析就是有问题。。。。，不过没关系，我们往下看</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185749090.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185749090.png" alt="enter image description here"></p>
 
 <p>这段代码才是最重要的，执行每一个init&#95;array中地址的函数，就在blx r2这句。 至此，如何断住INIT段和INIT&#95;ARRAY段，就讲完了，剩下的大家就自己调试吧</p>
 
 <h1>0x05 Anti Anti Debugger</h1>
 
-<hr />
+<hr>
 
 <p><strong><em>1.Anti IDA</em></strong></p>
 
@@ -243,27 +243,27 @@
 
 <p>用ida打开某加固的so,提示</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185753254.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185753254.png" alt="enter image description here"></p>
 
 <p>这个提示就是说，有个数据描述是无效的，我们来看看，是哪个。</p>
 
 <p>SHT说的就是Section Table，来看看ELF头部数据如下</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185730973.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185730973.png" alt="enter image description here"></p>
 
 <p>shoff就是这个值，我们用16进制编辑器过去看看</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185840045.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185840045.png" alt="enter image description here"></p>
 
 <p>全是0，显然这里有问题，我们首先要把这个值清0，保存文件。</p>
 
 <p>再次加载，还有问题，提示如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185814360.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185814360.png" alt="enter image description here"></p>
 
 <p>这次通过调试IDA的ELF插件，发现当PROGRAM HEADER中的物理偏移大于文件大小时，就会出现该错误。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185878195.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185878195.png" alt="enter image description here"></p>
 
 <p>显然，Program Header中的第一组数据，p_offset超过了文件大小，根据ELF结构，定位到该数据偏移，改成0，IDA加载成功</p>
 
@@ -285,13 +285,13 @@
 
 <p>对策：IDA默认所有的trap都交给调试器处理，所以我们需要修改对应的设置。菜单选择debugger-debugger options,点击edit exceptions按钮</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185845724.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185845724.png" alt="enter image description here"></p>
 
 <p>在trap上，右键编辑改成如下即可</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503185851413.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503185851413.png" alt="enter image description here"></p>
 
-<p>当然，检测调试器，还有很多方法，见招拆招就可以，这里就不详述了</p>      </p>
+<p>当然，检测调试器，还有很多方法，见招拆招就可以，这里就不详述了</p>      <p></p>
     
 			</body>
 		</html>

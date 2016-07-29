@@ -3,16 +3,16 @@
 			<head>
 			     <title>Cuckoo恶意软件自动化分析平台搭建 - kernux</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11367">http://drops.wooyun.org/tips/11367</a></h1>
 				
       <p>
-        <p><strong>Author:kernux Topsec α-lab</strong></p>
+        </p><p><strong>Author:kernux Topsec α-lab</strong></p>
 
 <h1>0x00 cuckoo概述</h1>
 
-<hr />
+<hr>
 
 <p>Cuckoo是一款开源的自动化恶意软件分析系统，目前主要用于分析windows平台下的恶意软件，但其框架同时支持Linux和Mac OS。cuckoo能够自动化获取如下信息：</p>
 
@@ -31,13 +31,13 @@
 
 <p>下图是cuckoo的架构图，非常清晰。Cuckoo依赖于下面的虚拟机进行实际的分析，然后通过虚拟网络将分析结果传输给cuckoo host。所以cuckoo的运行至少需要一个虚拟化环境。目前cuckoo能够支持vmware，virtualbox，kvm，qemu，xen，avd等主流虚拟化平台。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151221/20151221051839512921102.png" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20151221/20151221051839512921102.png" alt="p1"></p>
 
 <p>Cuckoo的架构是高度模块化的，只要我们添加不同的分析模块，cuckoo就能够完成不同系统平台下的分析工作。</p>
 
 <h1>0x01 环境搭建</h1>
 
-<hr />
+<hr>
 
 <p>测试环境是host:kali 2.0 x64，guest：windows xp sp3 en。</p>
 
@@ -114,25 +114,25 @@ sysctl -w net.ipv4.ip_forward=1
 
 <p>Python cuckoo.py 运行cuckoo分析系统。如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151221/2015122105184133989244.png" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20151221/2015122105184133989244.png" alt="p2"></p>
 
 <p>启动后cuckoo开始等待分析任务。添加分析任务使用根目录下的<code>utils/</code>的<code>submit.py</code>。具体用法可以看帮助，这里主要介绍利用web界面来添加任务及查看报告。</p>
 
 <p>在浏览器中打开127.0.0.1:8000</p>
 
-<p><img src="http://static.wooyun.org//drops/20151221/2015122105184235529334.png" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20151221/2015122105184235529334.png" alt="p3"></p>
 
 <p>点击submit添加任务，同时还有一些高级选项，如果需要内存分析，请选中Full Memory Dump。提交后，cuckoo就会开始自动分析，期间virtualbox会启动并运行程序。最终分析结果：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151221/2015122105184489599430.png" alt="p4" /></p>
+<p><img src="http://static.wooyun.org//drops/20151221/2015122105184489599430.png" alt="p4"></p>
 
 <p>最上面就是cuckoo分析的类型，包括静态分析，行为分析，网络分析等。</p>
 
 <h1>0x02 结束语</h1>
 
-<hr />
+<hr>
 
-<p>本文主要介绍了cuckoo的基本特性和安装，配置方法。利用cuckoo能够快速的分析恶意程序的部分行为，提高对恶意程序分析的效率。后续文章会继续分析cuckoo的程序结构及模块开发。</p>      </p>
+<p>本文主要介绍了cuckoo的基本特性和安装，配置方法。利用cuckoo能够快速的分析恶意程序的部分行为，提高对恶意程序分析的效率。后续文章会继续分析cuckoo的程序结构及模块开发。</p>      <p></p>
     
 			</body>
 		</html>

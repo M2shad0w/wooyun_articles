@@ -3,14 +3,14 @@
 			<head>
 			     <title>Cobalt Strike 之团队服务器的搭建与DNS通讯演示 - luom</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/1475">http://drops.wooyun.org/tools/1475</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>Cobalt Strike 一款以metasploit为基础的GUI的框框架式渗透工具，Armitage的商业版，集成了端口发、服务扫描，自动化溢出，多模式端口监听，win exe木马生成，win dll木马生成，java木马生成，office宏病毒生成，木马捆绑，mac os 木马生成，钓鱼攻击包括：站点克隆，目标信息获取，java执行，游览器自动攻击等等。</p>
 
@@ -26,7 +26,7 @@
 
 <h2>0x01 搭建</h2>
 
-<hr />
+<hr>
 
 <h3>1.服务器</h3>
 
@@ -44,7 +44,7 @@
 
 <p>将下载好的Cobalt Strike上传到服务器，解包后会有这些文件</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404364042830.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071404364042830.jpeg" alt="enter image description here"></p>
 
 <p>Cobalt Strike是JAVA写的，服务器还得有JAVA环境，这里我们没必要去下载JAVA来安装，metasploit已经有了JAVA环境，我们只需要配置下环境变量就行了
 打开root目录下的.bashrc文件，建议先备份，在最下面添加：</p>
@@ -63,17 +63,17 @@ source .bashrc
 
 <p>最后看看是否成功</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404364094960.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071404364094960.jpg" alt="enter image description here"></p>
 
 <p>回到Cobalt Strike目录</p>
 
 <p>执行./teamserver 服务器IP 连接密码</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071407073972826.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071407073972826.jpeg" alt="enter image description here"></p>
 
 <p>启动的过程中会有很多警告，不用理会它，大概几分钟后出现这个就OK了</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071409543747990.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071409543747990.jpeg" alt="enter image description here"></p>
 
 <p>这里不要关闭，然后本机启动Cobalt Strike 连接测试</p>
 
@@ -83,11 +83,11 @@ source .bashrc
 密码是:luom  (也就是我们刚才设置的)
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403171425967.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403171425967.jpeg" alt="enter image description here"></p>
 
 <p>点击连接，会弹出一个服务器认证，确认，然后弹出设置你昵称（Cobalt Strike是可以在线聊天的）</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403171517005.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403171517005.jpeg" alt="enter image description here"></p>
 
 <p>回到SSH 你可以看到各种日志，但是这个一关闭团队服务器也就关闭了，这里我们可以把他置于后台来运行</p>
 
@@ -99,7 +99,7 @@ nohup ./teamserver 192.168.10.62 luom &amp;
 注：
 在启动Cobalt Strike的时候报错 如下</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403171543567.jpeg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403171543567.jpeg" alt="enter image description here"></p>
 
 <p>这个原因是你的内存使用超过%50 无法启动java虚拟机。</p>
 
@@ -107,7 +107,7 @@ nohup ./teamserver 192.168.10.62 luom &amp;
 
 <h2>0x02 实例之Cobalt Strike通过DNS控制目标</h2>
 
-<hr />
+<hr>
 
 <p>通过DNS来控制目标和渗透好处不多说把，大家都知道，不开端口，能绕过大部分防火墙，隐蔽性好等等。Cobalt Strike有个beacons的功能，它可以通过DNS,HTTP,SMB来传输数据，下面我以DNS为例演示下。</p>
 
@@ -115,11 +115,11 @@ nohup ./teamserver 192.168.10.62 luom &amp;
 
 <p>首先我们的有个域名，并且创建一条A记录指向我们的metasploit服务器，记住不要用CDN什么的</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403171511552.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403171511552.jpg" alt="enter image description here"></p>
 
 <p>然后再创建2个或3个ns记录指向刚才创建的A记录</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403171655778.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403171655778.jpg" alt="enter image description here"></p>
 
 <p>这样我们就可以通过dns找到我们的metasploit服务器了</p>
 
@@ -127,11 +127,11 @@ nohup ./teamserver 192.168.10.62 luom &amp;
 
 <p>在Cobalt Strike中我们添加一个listener</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404364087820.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071404364087820.jpg" alt="enter image description here"></p>
 
 <p>HOST填写的是metasplit服务的IP，在点击Save的时候会要求填写你的NS记录，这里写入我们刚才创建的3个</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404364062053.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071404364062053.jpg" alt="enter image description here"></p>
 
 <p>监听我们设置好了，接下来创建一个木马测试下。</p>
 
@@ -139,7 +139,7 @@ nohup ./teamserver 192.168.10.62 luom &amp;
 
 <p>在<code>attack-&gt;packages</code>中找到windows木马生成</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403171643660.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403171643660.jpg" alt="enter image description here"></p>
 
 <p>Listener选择我们刚才创建的(有两个，选择有DNS的那个)，输出的有exe，带服务的EXE，dll等。（我测试过连接方式以DNS生成的DLL木马能过掉很大一部分杀毒软件）</p>
 
@@ -147,30 +147,30 @@ nohup ./teamserver 192.168.10.62 luom &amp;
 
 <p>运行前的端口情况</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071407074063721.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071407074063721.jpg" alt="enter image description here"></p>
 
 <p>运行后的端口情况</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404364161269.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071404364161269.jpg" alt="enter image description here"></p>
 
 <p>没有开新的端口，在来抓包看看</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403171770909.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403171770909.jpg" alt="enter image description here"></p>
 
 <p>走的是DNS。</p>
 
 <p>回到Cobalt Strike打开beacons管理器发现有一个服务端响应了我们</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404364171879.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071404364171879.jpg" alt="enter image description here"></p>
 
 <p>右键是管理菜单，选择sleep设置相应的时间，然后选择interact来到操作界面</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071407074058251.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071407074058251.jpg" alt="enter image description here"></p>
 
 <p>首先来设置的是传输的模式，有dns、dns-txt，http,smb四种，我们这里用的是DNS就在dns、dns-txt中选择把，前者传送的数据小后者传送的数据多
 这里我设置为 <code>mode dns-txt</code>（这里可以用TAB补齐命令的）</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404364266423.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071404364266423.jpg" alt="enter image description here"></p>
 
 <p>键入help可以看到支持的命令</p>
 
@@ -215,21 +215,21 @@ upload                    Upload a file
 <pre><code>Getuid  获取当前用户
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403171784244.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071403171784244.jpg" alt="enter image description here"></p>
 
 <p>Execute  运行可执行程序（不能执行shell命令）</p>
 
 <pre><code>Shell  执行shell命令
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404364266053.jpg" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org/20140714/2014071404364266053.jpg" alt="enter image description here"></p>
 
 <pre><code>Meterpreter  返回一个meterpreter会话
 </code></pre>
 
 <p>剩下的命令就等大家自己去看吧。</p>
 
-<p>这东西好处在于比较对控制目标主机比较隐蔽，缺点在每次的命令我返回结果比较慢，在过防火墙方面还是不错的。</p>      </p>
+<p>这东西好处在于比较对控制目标主机比较隐蔽，缺点在每次的命令我返回结果比较慢，在过防火墙方面还是不错的。</p>      <p></p>
     
 			</body>
 		</html>

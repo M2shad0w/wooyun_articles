@@ -3,14 +3,14 @@
 			<head>
 			     <title>前端防御XSS - Black_Hole</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/13009">http://drops.wooyun.org/web/13009</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>我不否认前端在处理XSS的时候没有后端那样方便快捷，但是很多人都在说过滤XSS的事就交给后端来做吧。前端做没什么用。我个人是非常反感这句话的。虽然说前端防御XSS比较麻烦，但是，不是一定不行。他只是写的代码比后端多了而已。而且前端防御XSS比后端防御XSS功能多，虽说后端也可以完成这些功能，但是代码量会比前端代码多很多很多。其实说了那么多，交给nginx||apache||nodeJs||Python会更好处理。但是我不会C，也就没办法写nginx模块了。而且也不在本文章的范围内，等我什么时候学会C再说把。</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 后端数据反馈过滤</h1>
 
-<hr />
+<hr>
 
 <p>现在大部分的网站都是在后端过滤一下后，就交给数据库，然后前端输出，整个流程只有后端做了防护，一般这个防护被绕过或者某个参数的防护没有做，那么网站就会被沦陷了（请别以为XSS只能获取cookie，熟练的程度取决于你的思想和编程） 现在我们来假设一下网站的一个URL参数没有做好过滤，直接导入数据库了，然后在前端反馈结果。代码如下：</p>
 
@@ -111,13 +111,13 @@ mysql_close();
 
 <p>现在我们在浏览器里打开defenderXssTest.html文件:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110362394538130.jpg" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160301/2016030110362394538130.jpg" alt="p1"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110362553621214.jpg" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160301/2016030110362553621214.jpg" alt="p2"></p>
 
 <p>现在我们再看下数据库：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110362716959313.jpg" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20160301/2016030110362716959313.jpg" alt="p3"></p>
 
 <p>已经导入到数据库里了。</p>
 
@@ -125,7 +125,7 @@ mysql_close();
 
 <p>这里我画个前端、Nginx、后端都做了过滤的图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110362844070412.jpg" alt="p4" /></p>
+<p><img src="http://static.wooyun.org//drops/20160301/2016030110362844070412.jpg" alt="p4"></p>
 
 <p>思维导图URL：<a href="https://www.processon.com/view/link/56c486cde4b0e2317a8b6681">https://www.processon.com/view/link/56c486cde4b0e2317a8b6681</a></p>
 
@@ -133,7 +133,7 @@ mysql_close();
 
 <p>这里是新型的过滤机制的图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110363068748512.jpg" alt="p5" /></p>
+<p><img src="http://static.wooyun.org//drops/20160301/2016030110363068748512.jpg" alt="p5"></p>
 
 <p>思维导图URL：<a href="https://www.processon.com/view/link/56c4882ce4b0e5041c35ab53">https://www.processon.com/view/link/56c4882ce4b0e5041c35ab53</a></p>
 
@@ -225,11 +225,11 @@ function xssCheck(str,reg){
 
 <p>现在我们来输入XSS字符串看看：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110363162058612.jpg" alt="p6" /></p>
+<p><img src="http://static.wooyun.org//drops/20160301/2016030110363162058612.jpg" alt="p6"></p>
 
 <p>变成了这个样子。我们再去数据库里看下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110363396298711.jpg" alt="p7" /></p>
+<p><img src="http://static.wooyun.org//drops/20160301/2016030110363396298711.jpg" alt="p7"></p>
 
 <p>的确是完整的XSS字符串，但是前端过滤了，导致此XSS没有用武之地。</p>
 
@@ -237,13 +237,13 @@ function xssCheck(str,reg){
 
 <h1>0x02 前端报警机制</h1>
 
-<hr />
+<hr>
 
 <p>这里的报警机制不能说特别的完整，是可以绕过的。那这个报警机制到底有何用处呢？就是在攻击者测试的时候发现及报警。</p>
 
 <p>我们都知道测试XSS的时候和装逼的时候，攻击者会输入<code>alert()</code>函数，而之前的过滤方式，都是使用正则匹配，从而导致正则过长，匹配不易，运行过慢等问题。而现在我们完全可以重写alert函数来让攻击者在测试的时候，使用的是我们已经重写后的函数，这样做的好处是：当当前的参数不存在XSS的时候，这些函数是不会被触发的。而当当前参数存在XSS的时候，攻击者会依次输入：<code>woaini</code>->查看是否在源码里输出-><code>woaini&lt;&gt;</code>->查看<code>&lt;&gt;</code>有没有被过滤->输入<code>&lt;script&gt;alret(1)&lt;/script&gt;</code>或者<code>&lt;img src="test" onerror="alert(1)" /&gt;</code>->使用了我们重写的函数->触发报警机制。这样说可能有些人看不懂，下面是我画的图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/201603011036342997589.jpg" alt="p8" /></p>
+<p><img src="http://static.wooyun.org//drops/20160301/201603011036342997589.jpg" alt="p8"></p>
 
 <p>思维导图：<a href="https://www.processon.com/view/link/56c55805e4b0e5041c39261f">https://www.processon.com/view/link/56c55805e4b0e5041c39261f</a></p>
 
@@ -263,11 +263,11 @@ window.alert = function(str){       //重写alert函数
 
 <h1>0x03 结语</h1>
 
-<hr />
+<hr>
 
 <p>之前EtherDream已经说了前端防火墙了，只是他做的是防御，而我是不防御直接报警。然后人工修复代码。因为虽然你防御住了，但是后端漏洞还在那，而触发报警机制后就可以进行人工修复。不是说EtherDream写的不好，反之非常好，在他的基础上也可以修改成前端报警机制，不过我还是喜欢让攻击者高兴几十分钟后，就懵逼的样子。在EtherDream的代码中有一个很棒的代码片段，他使用了内联事件监听了onclick等on事件，可以近一步的监听到黑客的操作。因为版权问题，我不方便把代码贴到本文中，毕竟是别人的思想结晶。想了解的话可以去查看：</p>
 
-<p><a href="http://fex.baidu.com/blog/2014/06/xss-frontend-firewall-1/">http://fex.baidu.com/blog/2014/06/xss-frontend-firewall-1/</a></p>      </p>
+<p><a href="http://fex.baidu.com/blog/2014/06/xss-frontend-firewall-1/">http://fex.baidu.com/blog/2014/06/xss-frontend-firewall-1/</a></p>      <p></p>
     
 			</body>
 		</html>

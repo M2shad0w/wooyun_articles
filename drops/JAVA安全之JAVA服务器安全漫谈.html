@@ -3,20 +3,20 @@
 			<head>
 			     <title>JAVA安全之JAVA服务器安全漫谈 - z_zz_zzz</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/16609">http://drops.wooyun.org/web/16609</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>本文主要针对JAVA服务器常见的危害较大的安全问题的成因与防护进行分析，主要为了交流和抛砖引玉。</p>
 
 <h1>0x01 任意文件下载</h1>
 
-<hr />
+<hr>
 
 <h3>示例</h3>
 
@@ -83,13 +83,13 @@ protected void doGet(HttpServletRequest request,
 
 <p>使用DownloadAction下载web应用根目录中的“download/test.txt”文件如下图所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607350320181download-1.png" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607350320181download-1.png" alt="p1"></p>
 
 <p>由于在DownloadAction类中没有对filename参数值进行检查，因此产生了任意文件下载漏洞。</p>
 
 <p>使用DownloadAction下载web应用根目录中的“WEB-INF/web.xml”文件如下图所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607350529845download-2.png" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607350529845download-2.png" alt="p2"></p>
 
 <h3>原因分析</h3>
 
@@ -185,7 +185,7 @@ getCanonicalPath: **/etc/rc.d/init.d/../../hosts /etc/hosts**
 
 <h1>0x02 恶意文件上传</h1>
 
-<hr />
+<hr>
 
 <p>当攻击者利用恶意文件上传漏洞时，通常会向服务器上传jsp木马并访问，可以直接控制服务器。</p>
 
@@ -271,23 +271,23 @@ private String uploadCommon(File file, String fileName) throws Exception {
 
 <p>打开upload.jsp，选择文件“a.jpg”进行上传。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607354212356upload-1.png" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607354212356upload-1.png" alt="p3"></p>
 
 <p>使用fiddler抓包并拦截，将filename参数修改为“a.jsp#.jpg”后的HTTP请求数据如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607354450747upload-2.png" alt="p4" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607354450747upload-2.png" alt="p4"></p>
 
 <p>使用十六进制形式查看HTTP请求数据如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607354569998upload-3.png" alt="p5" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607354569998upload-3.png" alt="p5"></p>
 
 <p>将#对应的字节修改为0x00并发送HTTP请求数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607354710849upload-4.png" alt="p6" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607354710849upload-4.png" alt="p6"></p>
 
 <p>完成文件上传后，查看保存上传文件的目录，可以看到文件上传成功，生成的文件为“a.jsp”。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607354884412upload-5.png" alt="p7" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607354884412upload-5.png" alt="p7"></p>
 
 <h3>原因分析</h3>
 
@@ -319,21 +319,21 @@ public static void main(String[] args) {
 
 <p>在Windows 7，64位环境，使用JDK1.5执行上述代码生成文件的结果如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607351010083file-win-1.5.png" alt="p8" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607351010083file-win-1.5.png" alt="p8"></p>
 
 <p>可以看到使用JDK1.5执行时，除0x00外，冒号“:”（ASCII码十进制为58）也会产生文件名截断问题。</p>
 
 <p>JDK1.6与JDK1.5执行结果相同。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607351233683file-win-1.6.png" alt="p9" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607351233683file-win-1.6.png" alt="p9"></p>
 
 <p>JDK1.7也与JDK1.5执行结果相同。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607351328768file-win-1.7.png" alt="p10" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607351328768file-win-1.7.png" alt="p10"></p>
 
 <p>JDK1.8与JDK1.5执行结果不同，仅有冒号会产生文件名截断问题，0x00不会产生文件名截断问题，可能是JDK1.8已修复该问题。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607351537135file-win-1.8.png" alt="p11" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607351537135file-win-1.8.png" alt="p11"></p>
 
 <p>使用Procmon查看上述过程中java.exe进程执行的写文件操作。</p>
 
@@ -341,17 +341,17 @@ public static void main(String[] args) {
 
 <p>JDK1.5~1.7，当文件名中包含0x00时，java.exe在执行写文件操作时，会将0x00及之后的字符串丢弃，使用0x00之前的字符串作为文件名写文件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607355310665writefile-win-jdk1.57-00.png" alt="p12" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607355310665writefile-win-jdk1.57-00.png" alt="p12"></p>
 
 <p>JDK1.5~1.7，当文件名包含冒号时，java.exe在执行写文件操作时，不会将冒号及之后的字符串丢弃。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607355417650writefile-win-jdk1.57-58.png" alt="p13" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607355417650writefile-win-jdk1.57-58.png" alt="p13"></p>
 
 <p>JDK1.8的监控结果如下。</p>
 
 <p>JDK1.8，当文件名中包含0x00时，java.exe不会执行写文件的操作。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607355615411writefile-win-jdk1.8-00.png" alt="p14" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607355615411writefile-win-jdk1.8-00.png" alt="p14"></p>
 
 <p>与JDK1.5~1.7一样，JDK1.8当文件名包含冒号时，java.exe在执行写文件操作时，不会将冒号及之后的字符串丢弃。截图略。</p>
 
@@ -363,7 +363,7 @@ public static void main(String[] args) {
 
 <p>在Linux RedHat 6.4环境，使用JDK1.6执行上述代码生成文件的结果如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607350873920file-lin-1.6.png" alt="p15" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607350873920file-lin-1.6.png" alt="p15"></p>
 
 <p>JDK1.6，文件名中包含0x00时同样出现了文件名截断问题（文件名中包含ASCII码为92的反斜杠“\”时，生成的文件会产生在子目录中，但不会导致文件类型的变化）。</p>
 
@@ -395,21 +395,21 @@ public static void main(String[] args) {
 
 <p>JDK1.5执行getCanonicalPath方法的结果。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607351737484getCanonicalPath-win-jdk1.5.png" alt="p16" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607351737484getCanonicalPath-win-jdk1.5.png" alt="p16"></p>
 
 <p>JDK1.6执行getCanonicalPath方法的结果。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607351998270getCanonicalPath-win-jdk1.6.png" alt="p17" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607351998270getCanonicalPath-win-jdk1.6.png" alt="p17"></p>
 
 <p>JDK1.7执行getCanonicalPath方法的结果。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607352058869getCanonicalPath-win-jdk1.7.png" alt="p18" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607352058869getCanonicalPath-win-jdk1.7.png" alt="p18"></p>
 
 <p>可以看到JDK1.5~1.7使用getCanonicalPath方法获取文件实际路径时，当文件名中包含0x00时，获取到的文件实际路径中0x00及之后的字符串已被丢弃。</p>
 
 <p>在Windows 7，64位环境，使用JDK1.8执行getCanonicalPath方法的结果如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607352237571getCanonicalPath-win-jdk1.8.png" alt="p19" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607352237571getCanonicalPath-win-jdk1.8.png" alt="p19"></p>
 
 <p>可以看到JDK1.8使用getCanonicalPath方法获取文件实际路径时，当文件名中包含0x00时，会出现java.io.IOException异常，异常信息为“Invalid file path”。</p>
 
@@ -441,7 +441,7 @@ public static void main(String[] args) {
 
 <p>执行结果如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607350790760endsWith.png" alt="p20" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607350790760endsWith.png" alt="p20"></p>
 
 <p>当文件名为“a.jsp[特定字符]a.jpg”形式时，无论[特定字符]是否为0x00，使用String对象的endsWith方法对文件名进行检测，均认为是以“.jpg”结尾。</p>
 
@@ -595,31 +595,31 @@ private String getFileModifiedTime(File file) {
 
 <p>web应用的目录中无upload目录。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607344939026dl-0.png" alt="p21" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607344939026dl-0.png" alt="p21"></p>
 
 <p>文件上传目录“C:/Users/Public”中有以下文件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607345445017dl-1.png" alt="p22" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607345445017dl-1.png" alt="p22"></p>
 
 <p>访问文本文件正常。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607345669368dl-2.png" alt="p23" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607345669368dl-2.png" alt="p23"></p>
 
 <p>访问图片正常。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607345733751dl-3.png" alt="p24" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607345733751dl-3.png" alt="p24"></p>
 
 <p>访问音频文件正常。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607345968809dl-4.png" alt="p25" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607345968809dl-4.png" alt="p25"></p>
 
 <p>访问jsp文件只返回文件本身的内容，不会被编译成class文件并执行。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607350011755dl-5.png" alt="p26" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607350011755dl-5.png" alt="p26"></p>
 
 <p>使用fiddler查看访问记录，浏览器缓存机制正常。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607350225237dl-6.png" alt="p27" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607350225237dl-6.png" alt="p27"></p>
 
 <h3>修改web应用目录权限</h3>
 
@@ -631,7 +631,7 @@ private String getFileModifiedTime(File file) {
 
 <h1>0x03 SQL注入</h1>
 
-<hr />
+<hr>
 
 <h3>PreparedStatement与Statement</h3>
 
@@ -769,29 +769,29 @@ USERNAME[VARCHAR2]  PWD[VARCHAR2]
 
 <p>查找select语句对应的数据包如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607353433191sql-1.png" alt="p28" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607353433191sql-1.png" alt="p28"></p>
 
 <p>db.executeStatement("aaa", "bbb");对应的数据包如下，可以看到查询语句未使用oracle绑定变量方式，使用正常查询条件查询到了数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607353675536sql-2.png" alt="p29" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607353675536sql-2.png" alt="p29"></p>
 
 <p>db.executeStatement("aaa", "' or '2'='2");对应的数据包如下，可以看到查询语句未使用oracle绑定变量方式，利用SQL注入查询到了数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607353823938sql-3.png" alt="p30" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607353823938sql-3.png" alt="p30"></p>
 
 <p>db.executePreparedStatement("aaa", "bbb");对应的数据包如下，可以看到查询语句使用了oracle绑定变量方式，使用正常查询条件查询到了数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607353928982sql-4.png" alt="p31" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607353928982sql-4.png" alt="p31"></p>
 
 <p>db.executePreparedStatement("aaa", "' or '2'='2");对应的数据包如下，可以看到查询语句使用了oracle绑定变量方式，SQL注入未生效，无法查询到对应数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607354045392sql-5.png" alt="p32" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607354045392sql-5.png" alt="p32"></p>
 
 <p>在JAVA中使用PreparedStatement访问oracle数据库时，除了能防止SQL注入外，还能使oracle服务器降低硬解析率，降低系统开销，减少内存碎片，提高执行效率。</p>
 
 <p>刚才执行的sql语句在oracle的v$sql视图中产生的数据如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607355096926vsql-1.png" alt="p33" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607355096926vsql-1.png" alt="p33"></p>
 
 <h3>ibatis</h3>
 
@@ -883,11 +883,11 @@ logger.info("test-list2: " + list2);
 
 <p>执行test_right语句时产生的数据包如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607352330672ibatis-1.png" alt="p34" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607352330672ibatis-1.png" alt="p34"></p>
 
 <p>执行test_wrong语句时产生的数据包如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607352584977ibatis-2.png" alt="p35" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607352584977ibatis-2.png" alt="p35"></p>
 
 <h3>like</h3>
 
@@ -952,11 +952,11 @@ logger.info("test-list4: " + list4);
 
 <p>执行语句时test&#95;like&#95;right产生的数据包如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607352622685ibatis-3.png" alt="p36" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607352622685ibatis-3.png" alt="p36"></p>
 
 <p>执行语句时test&#95;like&#95;wrong产生的数据包如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607352758626ibatis-4.png" alt="p37" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607352758626ibatis-4.png" alt="p37"></p>
 
 <h3>in</h3>
 
@@ -1051,11 +1051,11 @@ logger.info("test-list6: " + list6);
 
 <p>执行test&#95;in&#95;right语句时产生的数据包如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607352946119ibatis-5.png" alt="p38" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607352946119ibatis-5.png" alt="p38"></p>
 
 <p>执行test&#95;in&#95;wrong语句时产生的数据包如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607353056231ibatis-6.png" alt="p39" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607353056231ibatis-6.png" alt="p39"></p>
 
 <p>在ibatis中在执行包含like或in的语句时，使用#也是能正常查询到数据的。</p>
 
@@ -1105,19 +1105,19 @@ logger.info("test-list8: " + list8);
 
 <p>使用正确的查询条件执行test&#95;like&#95;right语句时产生的数据包如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607353265681ibatis-7.png" alt="p40" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607353265681ibatis-7.png" alt="p40"></p>
 
 <p>使用正确的查询条件执行test&#95;in&#95;right语句时产生的数据包如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607353377757ibatis-8.png" alt="p41" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607353377757ibatis-8.png" alt="p41"></p>
 
 <p>上述全部语句执行时在oracle的v$sql视图中产生的数据如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060607355199356vsql-2.png" alt="p42" /></p>
+<p><img src="http://static.wooyun.org//drops/20160606/2016060607355199356vsql-2.png" alt="p42"></p>
 
 <h1>0x04 其他问题</h1>
 
-<hr />
+<hr>
 
 <h3>错误页</h3>
 
@@ -1143,9 +1143,9 @@ logger.info("test-list8: " + list8);
 
 <h1>0x05 后记</h1>
 
-<hr />
+<hr>
 
-<p>以上为本人的一点总结，难免存在错误之处，大牛请轻喷。</p>      </p>
+<p>以上为本人的一点总结，难免存在错误之处，大牛请轻喷。</p>      <p></p>
     
 			</body>
 		</html>

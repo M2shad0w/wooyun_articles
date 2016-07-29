@@ -3,14 +3,14 @@
 			<head>
 			     <title>一步一步学ROP之gadgets和2free篇 - 蒸米</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/10638">http://drops.wooyun.org/binary/10638</a></h1>
 				
       <p>
-        <h1>0x00序</h1>
+        </p><h1>0x00序</h1>
 
-<hr />
+<hr>
 
 <p>ROP的全称为Return-oriented programming（返回导向编程），这是一种高级的内存攻击技术，可以用来绕过现代操作系统的各种通用防御（比如内存不可执行和代码签名等）。上次我们主要讨论了linux_x64的ROP攻击。</p>
 
@@ -26,7 +26,7 @@
 
 <h1>0x01 通用 gadgets part2</h1>
 
-<hr />
+<hr>
 
 <p>上次讲到了<code>__libc_csu_init()</code>的一条万能gadgets，其实不光<code>__libc_csu_init()</code>里的代码可以利用，默认gcc还会有如下自动编译进去的函数可以用来查找gadgets。</p>
 
@@ -115,9 +115,9 @@ gdb-peda$ x/5i 0x0000000000400620
 
 <p>从<code>0x7ffff7def235</code>开始，就是这个通用gadget的地址了。通过这个gadget我们可以控制rdi，rsi，rdx，rcx， r8，r9的值。但要注意的是<code>_dl_runtime_resolve()</code>在内存中的地址是随机的。所以我们需要先用information leak得到<code>_dl_runtime_resolve()</code>在内存中的地址。那么<code>_dl_runtime_resolve()</code>的地址被保存在了哪个固定的地址呢？</p>
 
-<p>通过反编译level5程序我们可以看到<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="84f3f6edf0e1c4f4e8f0">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>()</code>这个函数使用PLT [0] 去查找write函数在内存中的地址，函数jump过去的地址*0x600ff8其实就是<code>_dl_runtime_resolve()</code>在内存中的地址了。所以只要获取到0x600ff8这个地址保存的数据，就能够找到<code>_dl_runtime_resolve()</code>在内存中的地址：</p>
+<p>通过反编译level5程序我们可以看到<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="84f3f6edf0e1c4f4e8f0">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>()</code>这个函数使用PLT [0] 去查找write函数在内存中的地址，函数jump过去的地址*0x600ff8其实就是<code>_dl_runtime_resolve()</code>在内存中的地址了。所以只要获取到0x600ff8这个地址保存的数据，就能够找到<code>_dl_runtime_resolve()</code>在内存中的地址：</p>
 
-<pre><code>0000000000400420 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d7a0a5bea3b297a7bba3fae7afe6e7">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;:
+<pre><code>0000000000400420 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d7a0a5bea3b297a7bba3fae7afe6e7">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;:
   400420:   ff 35 ca 0b 20 00       pushq  0x200bca(%rip)        # 600ff0 &lt;_GLOBAL_OFFSET_TABLE_+0x8&gt;
   400426:   ff 25 cc 0b 20 00       jmpq   *0x200bcc(%rip)        # 600ff8 &lt;_GLOBAL_OFFSET_TABLE_+0x10&gt;
   40042c:   0f 1f 40 00             nopl   0x0(%rax)
@@ -154,7 +154,7 @@ gdb-peda$ x/21i 0x00007ffff7def200
 
 <h1>0x02 利用mmap执行任意shellcode</h1>
 
-<hr />
+<hr>
 
 <p>看了这么多rop后是不是感觉我们利用rop只是用来执行system有点太不过瘾了？另外网上和msf里有那么多的shellcode难道在默认开启DEP的今天已经没有用处了吗？并不是的，我们可以通过mmap或者mprotect将某块内存改成RWX(可读可写可执行)，然后将shellcode保存到这块内存，然后控制pc跳转过去就可以执行任意的shellcode了，比如说建立一个socket连接等。下面我们就结合上一节中提到的通用gadgets来让程序执行一段shellcode。</p>
 
@@ -345,13 +345,13 @@ mzheng
 
 <h1>0x03 堆漏洞利用之double free</h1>
 
-<hr />
+<hr>
 
 <p>讲了那么多stack overflow的例子，我们现在换换口味，先从double free开始讲一下堆漏洞的利用。Double free的意思是一个已经被free的内存块又被free了第二次。正常情况下，如果double free，系统会检测出该内存块已经被free过了，不能被free第二次，程序会报错然后退出。但是如果我们精心构造一个假的内存块就可骗过系统的检测，然后得到内存地址任意写的权限。随后就可以修改got表将接下来会执行的函数替换成system()再将参数改为我们想要执行的指令，比如<code>"/bin/sh"</code>。最后就可以执行<code>system("/bin/sh")</code>了。</p>
 
 <p>想要学习double free，首先要了解什么是free chunk和allocated chunk。这个在网上有大量的资料，请感兴趣的同学自学。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151124/2015112403492645777p1.jpg" alt="picture_p13" /></p>
+<p><img src="http://static.wooyun.org//drops/20151124/2015112403492645777p1.jpg" alt="picture_p13"></p>
 
 <p>然后要了解Fast bin，Unsorted bin，Small bin和Large bin的概念。这个可以看这篇文章学习：</p>
 
@@ -363,7 +363,7 @@ mzheng
 
 <p>等到对堆的基本概念了解的差多了就可以学习如何利用unlink来做到内存写了。在最早版本的unlink中对内存chunk是没有任何检测的，因此我们可以很容易的做到内存任意写。但现在版本的libc中会对free的那个chunk进行检测，这个chunk的前一个chunk的bk指针和这个chunk的后一个chunk的fd指针必须指向这个即将free的chunk才行。为了bypass这个检测，我们必须在内存中找到一个地址X指向P，然后将P的fd和bk指向X。最后再触发double free的unlink，就可以将P地址的值设置为X了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151124/2015112403492885899p2.jpg" alt="picture_p14" /></p>
+<p><img src="http://static.wooyun.org//drops/20151124/2015112403492885899p2.jpg" alt="picture_p14"></p>
 
 <p>我们这次使用0ctf中的freenote这道题来实践一下double free漏洞的利用。执行这个程序我能看到这其实就是一个note记事本程序。通过new note和delete note可以malloc()和free()内存。</p>
 
@@ -486,7 +486,7 @@ mzheng
 
 <h1>0x04 总结</h1>
 
-<hr />
+<hr>
 
 <p>除了64位的freenote，blue-lotus还弄了一个32位版的freenote给大家练习。这些binary和exp都可以在我的github上下载到：</p>
 
@@ -496,12 +496,12 @@ mzheng
 
 <h1>0x05 参考资料</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li><a href="http://v0ids3curity.blogspot.com/2013/07/some-gadget-sequence-for-x8664-rop.html">http://v0ids3curity.blogspot.com/2013/07/some-gadget-sequence-for-x8664-rop.html</a></li>
 <li>掘金ctf</li>
-</ol>      </p>
+</ol>      <p></p>
     
 			</body>
 		</html>

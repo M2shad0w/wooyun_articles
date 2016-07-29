@@ -3,18 +3,18 @@
 			<head>
 			     <title>黑客写Haka-第一部分 - virustracker</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/11009">http://drops.wooyun.org/papers/11009</a></h1>
 				
       <p>
-        <p><a href="http://thisissecurity.net/2015/11/23/hackers-do-the-haka-part-1/">http://thisissecurity.net/2015/11/23/hackers-do-the-haka-part-1/</a></p>
+        </p><p><a href="http://thisissecurity.net/2015/11/23/hackers-do-the-haka-part-1/">http://thisissecurity.net/2015/11/23/hackers-do-the-haka-part-1/</a></p>
 
 <p>Haka是一种开源的以网络安全为导向的语言，可以用于编写安全规则和协议剥离器。在这一部分中，我们的重点是编写安全规则。</p>
 
 <h1>0x00 什么是Haka</h1>
 
-<hr />
+<hr>
 
 <p>Haka是一种开源的以网络安全为导向的语言，可以在捕捉到的活动流量上指定和应用安全策略。Haka基于Lua。这是一种简单、轻量（~200 kB）且快速的（有一个可用的JiT编译器）脚本语言。</p>
 
@@ -26,11 +26,11 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20151203/2015120308545291620110.png" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20151203/2015120308545291620110.png" alt="p1"></p>
 
 <h1>0x01 Haka工具套件</h1>
 
-<hr />
+<hr>
 
 <p>Haka提供了一个包含有4个工具的套件：</p>
 
@@ -79,19 +79,19 @@ module = "alert/syslog"
 <li><p>hakabana.这个工具允许使用Kibana 和 Elasticsearch实时地可视化和监控网络流量。Hakabana由一系列的自定义安全规则组成，这些规则会把流量信息通过Haka推送到一个elastisserach服务器，并让这些流量能通过Kibana控制面板获取到。另外一个控制板也可以可视化Haka警报。</p></li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20151203/201512030854555677022.png" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20151203/201512030854555677022.png" alt="p2"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151203/201512030855076735132.png" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20151203/201512030855076735132.png" alt="p3"></p>
 
 <h1>0x02 编写安全规则</h1>
 
-<hr />
+<hr>
 
 <p>Haka提供了一种简单的方式来编写安全规则，从而过滤，修改，创建，注入数据包和流。当检测到一个恶意流后，用户可以报告一个警报或放弃这个流。用户可以定义更多复杂的方案来应对某次攻击所造成的影响。例如，用户可以报警http请求，强制旧版浏览器更新或伪造特定的数据包来欺骗端口扫描工具。</p>
 
 <h1>0x03 数据包过滤</h1>
 
-<hr />
+<hr>
 
 <p>下面的这个规则是一个基础的数据包过滤规则，能够拦截所有到某个网络地址的连接。</p>
 
@@ -132,13 +132,13 @@ haka.rule{
 
 <p>从这里往下就是Haka的输出，Haka转储了一些关于已加载剥离器和已注册规则的信息。这个输出显示Haka成功拦截了目标地址192.168.101.62的连接：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151203/201512030855091773442.png" alt="p4" /></p>
+<p><img src="http://static.wooyun.org//drops/20151203/201512030855091773442.png" alt="p4"></p>
 
 <p>在上面的例子中，我们已经定义了一个单独的规则来拦截连接。用户可以用关键字haka.group写一个类似于防火墙一样的完整规则集。以这个配置为例，如果没有任何安全规则能认证流量，用户可以选择一种默认行为（如拦截所有的连接）。</p>
 
 <h1>0x04 数据包注入</h1>
 
-<hr />
+<hr>
 
 <p>在Haka中，用户可以创建新的数据包并注入这些数据包。下面的这个规则会制作一个RST数据包，用于欺骗Xmas nmap扫描。最终，nmap会认为目标端上的所有端口都是关闭的。</p>
 
@@ -180,7 +180,7 @@ haka.rule {
 
 <h1>0x05 数据包警报</h1>
 
-<hr />
+<hr>
 
 <p>数据包修改是Haka中最高级的功能之一。Haka会在流和数据包层级上自动处理所有的内部修改：重新设置数据包大小和分段，重置序列号等。下面的例子证明了访问和修改协议字段有多么容易。这个规则会修改一些http协议的标头。更准确的说， user-agent标头会被修改（如果没有设置，添加至标头列表），并移除accept-encoding标头。</p>
 
@@ -199,15 +199,15 @@ haka.rule{
 
 <p><a href="https://www.paulfariello.fr/assets/blurring-the-web.lua">blurring-the-web</a>和<a href="https://thisiscybersec.files.wordpress.com/2015/11/inject-ponies.zip">inject_ponies</a>是非常有意思的脚本，会通过修改http响应流量来分别模糊和污染（注入垃圾）被请求的web页面：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151203/201512030855104782752.png" alt="p5" /></p>
+<p><img src="http://static.wooyun.org//drops/20151203/201512030855104782752.png" alt="p5"></p>
 
 <h1>0x06 流过滤</h1>
 
-<hr />
+<hr>
 
 <p>在讲解流过滤前，我们首先要说明的是Haka如何在内部管理数据包和流。在Haka中，所有的数据包和流都会用虚拟缓冲区（见下图）来表示。虚拟缓冲区是一种非相邻内存块的统一视图。这些虚拟缓冲区能允许简单和有效的修改内存数据。虚拟缓冲区使用分散列表来表示非相邻数据块，避免分配和复制不必要的内存块。Haka提供了迭代器来导航通过这些内存块。这些迭代器可以通过拦截让停用一些函数，然后，比如当流上有更多可用的数据时，透明地恢复这些函数的执行。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151203/201512030855129033762.png" alt="p6" /></p>
+<p><img src="http://static.wooyun.org//drops/20151203/201512030855129033762.png" alt="p6"></p>
 
 <p>下面的规则会收集http流，并在stdout上转储这些流。这个规则等同于Wireshark的follow tcp stream”功能。</p>
 
@@ -234,7 +234,7 @@ haka.rule{
 
 <h1>0x07 交互式数据包过滤</h1>
 
-<hr />
+<hr>
 
 <p>这是我最喜欢的Haka功能。这个功能允许检查每个数据包的流量包。下面的规则会提示每个HTTP POST请求。</p>
 
@@ -261,13 +261,13 @@ haka.rule {
 
 <p>在下面的数据中，Haka会破解第一个POST请求。HTTP数据可以通过可用的输入来获取。在这个例子中，我们在运行中修改了用户凭据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151203/201512030855169111972.png" alt="p7" /></p>
+<p><img src="http://static.wooyun.org//drops/20151203/201512030855169111972.png" alt="p7"></p>
 
 <p>注意，最好在pcap文件上使用交互规则，因为修改会造成额外的延迟。</p>
 
 <h1>0x08 高级流过滤</h1>
 
-<hr />
+<hr>
 
 <p>Haka还有一个模式匹配引擎和一些反汇编模块。这两个模块都是基于流的模块，能让我们检测到分散在多个数据包中的恶意有效载荷。下面的规则使用了一个常规表达来检测nop sled。我们启用了流选项，也就是说，匹配函数会拦截和等待可用的数据来进行匹配。如果检测到nop sled，我们就会发出警告，并转储shellcode指令。注意，模式匹配函数会更新迭代器的位置，之后会指向shellcode。</p>
 
@@ -299,19 +299,19 @@ haka.rule{
 
 <p>我们在著名的网络分析挑战上重播了这条规则，并得到了下面的输出。关于网络流量反汇编为指令的详细信息都可以在这里获得。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151203/201512030855265652782.png" alt="p8" /></p>
+<p><img src="http://static.wooyun.org//drops/20151203/201512030855265652782.png" alt="p8"></p>
 
 <p>未完待续…</p>
 
 <h1>0x09 链接</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>Haka 网站. <a href="http://haka-security.org/">haka-security.org</a></li>
 <li>Haka 源代码. <a href="https://github.com/haka-security/haka">https://github.com/haka-security/haka</a></li>
 <li>Haka twitter. @hakasecurity</li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

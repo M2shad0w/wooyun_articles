@@ -3,7 +3,7 @@
 			<head>
 			     <title>Packrat 攻击南美长达七年的威胁小组 - virustracker</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/11863">http://drops.wooyun.org/papers/11863</a></h1>
 				
@@ -12,9 +12,9 @@
   <p><a href="https://citizenlab.org/2015/12/packrat-report/">https://citizenlab.org/2015/12/packrat-report/</a></p>
 </blockquote>
 
-<h1>0x00 概括</h1>
+</p><h1>0x00 概括</h1>
 
-<hr />
+<hr>
 
 <p>这份报告介绍了一次大规模的木马、钓鱼和虚假信息活动，这一攻击活动的目标是几个拉美国家，包括厄瓜多尔、阿根廷、委内瑞拉和巴西。根据受害者的特征和地理分布来看，这次攻击活动的赞助者对这些地区的政治情况很感兴趣。** Packrat<strong>很关注这些地区的政治反对派，ALBA国家联盟（</strong>美洲玻利瓦联盟&#42;*&#42;||||&#42;）**，以及这些国家境内的独立媒体。ALBA国家联盟通过一项贸易协定建立，这些国家在很多非经济领域都有合作。</p>
 
@@ -26,17 +26,17 @@
 
 <h1>0x01 Packrat的七年行动</h1>
 
-<hr />
+<hr>
 
 <p>本文的作者们仍然独立地调查这些出现在拉美的木马和钓鱼活动。在这份报告中，总结了我们的调查发现。这些攻击活动的主要目标位于拉美国家，包括委内瑞拉，厄瓜多尔，阿根廷和巴西。我们把这些行动的策划者叫做Packrat，因为他们很喜欢用加壳了的RAT木马，在这么多年来，他们也一直在使用相同的域名和服务器。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614041993913119.png" alt="p1" /> 图1-已知的一些Packrat攻击目标和活动类型</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614041993913119.png" alt="p1"> 图1-已知的一些Packrat攻击目标和活动类型</p>
 
 <p>Packrat会利用木马和钓鱼活动来系统性地攻击一些政治高层，记者和外国目标。我们发现Packrat在这7年中，总共使用了12个不同的木马CC域名，超过30个木马样本。另外，Packrat还喜欢利用一种很有趣的攻击策略：首先，成立并运营虚假的反对派组织和新闻组织，然后利用这些组织来传播木马并执行钓鱼攻击。</p>
 
 <p>在这些假冒的组织中， 有的仅仅是一个名字而已，有的会更精心设计在线活动。Packrat还会创办假冒的新闻机构，但是我们并没能在木马或钓鱼活动中发现任何证据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061404214258727.png" alt="p2" /> 图2-Packrat的主要活动</p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061404214258727.png" alt="p2"> 图2-Packrat的主要活动</p>
 
 <p>我们发现Packrat最早的活动可以至少追溯到2008年。通过确定网络基础设施之间的关联，我们发现了几波攻击活动，在这些活动中使用了不同的工具和战术。在这一部分中，我们会简要地介绍Packrat在不同时间使用的一些网络基础设施，以及实施的攻击活动。更详细的木马使用历史，请看“3. Packrat植入木马的进化”。</p>
 
@@ -64,7 +64,7 @@
 
 <p>在公布这一发现后，其他一些遭到攻击的目标也逐渐浮出了水面。著名的调查记者、电视节目主持人Jorge Lanata称自己也遭到了同一个木马的攻击。总统的儿子Maximo Kirchner也声称自己是攻击目标。我们无法证实Kirchner的说法，但是，他公布了一张钓鱼邮件的截图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061404231920737.png" alt="p3" /> 图3- Maximo Kirchner说明自己遭到了攻击</p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061404231920737.png" alt="p3"> 图3- Maximo Kirchner说明自己遭到了攻击</p>
 
 <p>他说，在这份邮件中有一个叫做“Estrictamente Secreto y Confidencial.pdf.jar”(大小67.3kb)的附件，Nisman和Lanata收到的也是这个木马。另外，发件人的邮箱地址(<a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#58;&#x63;l&#97;&#x75;&#100;&#x69;&#111;&#x62;&#111;&#x6e;&#97;&#100;&#x69;&#111;&#x38;&#56;&#x40;&#103;&#x6d;&#97;&#x69;l&#46;&#x63;&#111;&#x6d;">&#x63;l&#97;&#x75;&#100;&#x69;&#111;&#x62;&#111;&#x6e;&#97;&#100;&#x69;&#111;&#x38;&#56;&#x40;&#103;&#x6d;&#97;&#x69;l&#46;&#x63;&#111;&#x6d;</a>)宣称是著名法官Claudio Bonadio。Lanata接收到的邮件也是声称来自Claudio Bonadio (<a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#111;&#58;&#99;&#102;&#101;&#100;.&#x62;&#x6f;&#x6e;&#x61;&#x64;&#x69;&#111;&#64;&#103;&#109;&#97;i&#x6c;&#x2e;&#x63;&#x6f;&#x6d;">&#99;&#102;&#101;&#100;.&#x62;&#x6f;&#x6e;&#x61;&#x64;&#x69;&#111;&#64;&#103;&#109;&#97;i&#x6c;&#x2e;&#x63;&#x6f;&#x6d;</a>)。</p>
 
@@ -84,13 +84,13 @@
 
 <p>Packrat使用的CC基础设施</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/20160106140425219944.jpeg" alt="p4" /> 图4-Packrat的CC基础设施</p>
+<p><img src="http://static.wooyun.org//drops/20160106/20160106140425219944.jpeg" alt="p4"> 图4-Packrat的CC基础设施</p>
 
 <p>通过搜索与<strong>daynews.sytes.net</strong>相关的域名，我们找到了<strong>taskmgr.serveftp.com</strong>，这个域名在2014年8月11日时的IP地址是<strong>190.210.180.181</strong>。这个IP地址属于阿根廷，<strong>daynews.sytes.net</strong>在刚注册的那段时间中使用了这个IP，接着很快就转向了GoDaddy。在2014年10月、2015年5月的几天中，<strong>taskmgr.serveftp.com</strong>域名又重新使用了<strong>190.210.180.181</strong>。在2014年7月23日，<strong>taskmgr.serveftp.com</strong>托管在了<strong>201.52.24.126</strong>上，这是巴西的一个IP地址，这个IP还托管了<strong>taskmgr.servehttp.com</strong>和<strong>taskmgr.redirectme.com</strong>。我们总共发现了15个木马样本不是使用了<strong>taskmgr.servehttp.com</strong>，就是使用了<strong>taskmgr.serveftp.com</strong>作为CC域名（有几个样本同时使用了这两个域名）。样本的最早版本是在2008年12月14日编译的，借此，我们可以知道Packrat最早是在这时候活动的。然而，这个时间戳也可能是假的，我们还没有在其他样本中发现证据能证明这一点。</p>
 
 <p>Packrat使用的CC基础设施</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061404272925956.png" alt="p5" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061404272925956.png" alt="p5"></p>
 
 <p>在2014年7月11日，所有的‘taskmgr’域名都托管在了<strong>186.220.1.84</strong>，这是巴西的一个IP地址。同一时间，这个IP还托管了<strong>ruley.no-ip.org</strong>。我们成功找到一个样本既使用了<strong>ruley.no-ip.org</strong>也使用了<strong>taskmgr.servehttp.com</strong>作为其CC域名。在2012年9月6日，<strong>ruley.no-ip.org</strong>托管在了<strong>189.100.148.188</strong>，这个IP仍然属于巴西，另外还有两个域名<strong>lolinha.no-ip.org</strong>和 <strong>wjwj.no-ip.org</strong>也使用了这个IP。我们发现有两个样本配置了使用这三个域名作为CC服务器，有三个样本使用了<strong>ruley.no-ip.org</strong>和<strong>wjwj.no-ip.org</strong>，有一个样本只使用了<strong>ruley.no-ip.org</strong>。在2014年8月15日，<strong>taskmgr.servehttp.com</strong>托管在了<strong>186.220.11.67</strong>，这个IP同样属于巴西。在相同时间，这个IP还托管了<strong>conhost.servehttp.com</strong>和<strong>dllhost.servehttp.com</strong>。我们发现了两个样本配置使用了<strong>conhost.servehttp.com</strong>和<strong>dllhost.servehttp.com</strong>作为CC服务器。</p>
 
@@ -104,11 +104,11 @@
 
 <h1>0x02 近期在厄瓜多尔出现的木马攻击活动</h1>
 
-<hr />
+<hr>
 
 <p>Packrat活跃在很多国家中，但是我们在厄瓜多尔收集到了大部分活动证据，以及这些活动与目标和受害者之间的关联。在写这篇文章时，我们仍然在跟踪针对厄瓜多尔目标的攻击活动。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061404294384966.png" alt="p6" /> 图5-已知在厄瓜多尔境内Packrat的攻击目标</p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061404294384966.png" alt="p6"> 图5-已知在厄瓜多尔境内Packrat的攻击目标</p>
 
 <p>通过利用邮箱搜索查询，并分析木马的数据库和CC基础设施，我们收集到了大量针对记者、公共任务、政治家等的木马和钓鱼活动。</p>
 
@@ -157,7 +157,7 @@
 
 <p><strong>“Movimento Anti Correista”发送的邮件</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061404305520175.png" alt="p7" /> 图6-“Movimento Anti Correista”发送的邮件</p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061404305520175.png" alt="p7"> 图6-“Movimento Anti Correista”发送的邮件</p>
 
 <p>这份邮件有几个目的，很显然是为了诱使目标下载并浏览文档，但是似乎也是想要确定域名的合法性，以及活动的身份。</p>
 
@@ -169,7 +169,7 @@
 <li>MD5: ea7bcf58a4ccdecb0c64e56b9998a4ac</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061404328813385.png" alt="p8" /> 图7-恶意邮件</p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061404328813385.png" alt="p8"> 图7-恶意邮件</p>
 
 <p>在这个文档中内嵌了一个叫做“<a href="http://adzok.com/">Adzok – Invisible Remote Administrator</a>”的软件。</p>
 
@@ -177,23 +177,23 @@
 
 <p>这次攻击活动旨在引起目标的恐慌和担心，从而诱使目标打开恶意文件。钓鱼邮件是根据目标定制的，并恐吓目标正在SENAIN，厄瓜多尔的国家情报部门监控着。邮件附件宣称是在SENAIN监控下的Twitter用户名单。有趣的是，邮件的发送人是“Guillermo Lasso”，上次总统竞选失败的候选人。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061404339625695.png" alt="p9" /> 图8-发件人号称是“Guillermo Lasso”，上次总统竞选失败的候选人</p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061404339625695.png" alt="p9"> 图8-发件人号称是“Guillermo Lasso”，上次总统竞选失败的候选人</p>
 
 <p>像第一次攻击活动一样，这个木马并没有投递漏洞，但是需要受害者双击文件，并在执行前接受所有的弹窗。</p>
 
 <p><strong>要求目标点击的文档:</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614043566313105.png" alt="p10" /> 图9-要求目标点击的文档</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614043566313105.png" alt="p10"> 图9-要求目标点击的文档</p>
 
 <p>一旦用户双击了图像，目标就会感染AlienSpy木马。通过检查木马的配置文件，我们发现木马使用了C2服务器daynews.sytes.net，Packrat经常在攻击活动中利用这个域名。有趣的是，我们发现在其他的一些攻击活动中也使用了同一个诱饵文档（相同的MD5）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/20160106140436371011110.png" alt="p11" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/20160106140436371011110.png" alt="p11"></p>
 
 <p><strong>2.3.3 攻击活动3: “关于Correa撒谎的独家消息”</strong></p>
 
 <p>这次攻击活动利用了一个设置有恶意内容的虚假政治网站。而恶意邮件会把受害者定向到这个网站上。有意思的是，这次攻击活动会尝试欺骗目标相信这是记者<a href="http://focusecuador.net/">Focus Ecuador</a>的合法网站。Packrat似乎控制了.tk和.info域名。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614043894655123.png" alt="p12" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614043894655123.png" alt="p12"></p>
 
 <p>关于 Correa撒谎的信息，请看视频：<a href="http://focusecuador.tk/">http://focusecuador.tk/</a></p>
 
@@ -203,7 +203,7 @@
 
 <p><strong>虚假的Flash更新通知</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614044041766132.png" alt="p13" /> 图10-虚假的Flash更新</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614044041766132.png" alt="p13"> 图10-虚假的Flash更新</p>
 
 <p>这并不是一个Flash更新，而是一个捆绑了AlienSpy / Adwind的远程访问木马。在执行时，基于Java的木马会与Packrat的CC服务器46.246.89.246 (daynews.sytes.net)通讯。通过分析木马，我们发现了相同配置的LOS TUITEROS ESPIADOS POR SENAIN.docx和Los trinos de Rafael Correa.docx样本。</p>
 
@@ -219,7 +219,7 @@
 
 <p>在我们分析攻击行动3期间，一名Packrat攻击者开始在受感染的机器上用西班牙语和英语与一名Citizen Lab的研究员交流。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614044182510142.png" alt="p14" /> 图11-出现在Citizen Lab研究员屏幕上的威胁和辱骂</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614044182510142.png" alt="p14"> 图11-出现在Citizen Lab研究员屏幕上的威胁和辱骂</p>
 
 <p>这些谩骂会以弹窗或文本的形式显示在IE浏览器中。攻击者威胁了我们的研究员，“你现在在玩火，不小心就死了！”有些信息还不是惯用的西班牙语，借此可以推测攻击者的母语。</p>
 
@@ -231,11 +231,11 @@
 
 <h1>0x03 Packrat植入木马的进化</h1>
 
-<hr />
+<hr>
 
 <p>在过去的七年中，Packrat使用了几种不同类型的木马，大多是可以买到的现成RAT，比如Cybergate, Xtreme, AlienSpy, 和 Adzok。虽然，研究人员都知道这些木马，但是Packrat会使用一系列的工具来混淆这些木马，他们使用的工具有一个未知的VB6 crypter，AutoIt3Wrapper, UPX, PECompact, PEtite, 和Allatori Obfuscator。通过混淆，Packrat的攻击活动就能绕过检测。在这一部分中，我们根据时间分组，介绍了这些工具。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614044376810152.png" alt="p15" /> 图12-Packrat木马家族</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614044376810152.png" alt="p15"> 图12-Packrat木马家族</p>
 
 <h3>3.1 2008-2014: 加壳RAT，主要是CyberGate RAT</h3>
 
@@ -245,11 +245,11 @@
 
 <p>在很多攻击活动中都利用了Office文档作为诱饵，在执行植入木马时，诱饵文档就会打开。在我们发现的诱饵文档中，有的是巴西求职者的简历，有的是巴西律师联合会的支付单据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614044549396161.png" alt="p16" /> 图13-一份简历</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614044549396161.png" alt="p16"> 图13-一份简历</p>
 
 <p>这些攻击活动表明，Packrat在这段时间的攻击目标中有的是说葡萄牙语。有些特定的诱饵文档针对的是巴西境内的目标。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614044732058171.png" alt="p17" /> 图14-支付单据</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614044732058171.png" alt="p17"> 图14-支付单据</p>
 
 <p>我们发现，大量的植入木马都会与CC域名taskmgr.servehttp.com通讯，其他的几个CC还有<strong>ruley.no-ip.org</strong>, <strong>lolinha.no-ip.org</strong>, 和 <strong>taskmgr.serveftp.com</strong>。</p>
 
@@ -273,7 +273,7 @@
 
 <p>木马的感染例程自带了反分析功能，这些功能都打包在一个单独的函数中。CyberGate 会搜索虚拟环境和沙盒环境，并且会通过IsDebuggerPresent API检查调试工具，通过管道来查找SoftICE 和 Syser 。木马会通过检查每个函数的第一个字节是不是“CC”，来判断函数入口上是不是有断点。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614044893606181.png" alt="p18" /> 图15-CyberGate 反分析</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614044893606181.png" alt="p18"> 图15-CyberGate 反分析</p>
 
 <p><strong>CyberGate 进程注入</strong></p>
 
@@ -283,7 +283,7 @@
 
 <p>为了让木马维持的更长久，第二阶段会写入注册表键值，让CyberGate开机启动：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614045091471191.png" alt="p19" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614045091471191.png" alt="p19"></p>
 
 <p><strong>密码收集</strong></p>
 
@@ -293,7 +293,7 @@
 
 <p>CyberGate会运行两个例程。第一个例程是在默认浏览器进程中运行的。同时，explorer.exe例程会作为一个“看门狗”，用于维护木马，并确保磁盘上感染例程的二进制不会被清除</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614045272332201.png" alt="p20" /> 图16-搜索安装了Spy-Net 的标识</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614045272332201.png" alt="p20"> 图16-搜索安装了Spy-Net 的标识</p>
 
 <p>CyberGate植入木马自带了与感染例程相同的凭证窃取功能，并且还可以通过例程来监视Chrome和STEAM凭证。同样是继承自感染例程，CyberGate也使用了相同的反分析例程来拦截沙盒和调试工具。</p>
 
@@ -315,7 +315,7 @@
 
 <p>有趣的是，CyberGate会启动一个硬编码.vbs脚本上的cscript.exe，通过Windows Management Instrumentation (WMI)收集系统上安装的安全产品信息。这个脚本会请求系统上安装的杀毒产品和防火墙解决方案的名称和版本号，并把数据转出到一个文件中：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614045316502212.png" alt="p21" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614045316502212.png" alt="p21"></p>
 
 <p>收集到的数据会储存在磁盘上的转储文件，然后会通过HTTP或FTP发送到远程服务器上。</p>
 
@@ -334,7 +334,7 @@
 <li>通过HTTP下载并执行二进制，应该是安装第二阶段的木马</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614045538977221.png" alt="p22" /> 图17-安装 XTreme RAT 的键盘记录模块</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614045538977221.png" alt="p22"> 图17-安装 XTreme RAT 的键盘记录模块</p>
 
 <p><strong>Xtreme RAT 的操作和键盘记录功能</strong></p>
 
@@ -342,7 +342,7 @@
 
 <p><strong>XTreme RAT 的数据文件</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614045722880231.png" alt="p23" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614045722880231.png" alt="p23"></p>
 
 <p>转储文件会通过FTP传输。XTreme RAT自带了一个预先配置好的FTP服务器凭证占位符(ftpuser/ftppass)，用于登录<em>ftp.ftpserver.com</em>，然后在运行时交换从CC发出的更新值。</p>
 
@@ -370,13 +370,13 @@
 
 <p><strong>Favicon.ico的内容</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614045816066241.png" alt="p24" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614045816066241.png" alt="p24"></p>
 
 <p>一旦找到正确的文件（在这里是0doc.jar），就会把这个文件投放到一个随机命名的临时文件，这个临时文件有一个常量字符串，并且调用Java来运行这个文件。</p>
 
 <p><strong>“Favicon.ico”中的.jar文件</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614050031724251.png" alt="p25" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614050031724251.png" alt="p25"></p>
 
 <p>“Main.class” 使用Allatori进行了混淆，Allatori是AlienSpy使用的来自俄罗斯的一款JVM obfuscator。</p>
 
@@ -386,13 +386,13 @@
 
 <p>在2015年，Packrat开始通过.docx文件发送AlienSpy植入。这种混淆文件的方法更加复杂，但是与先前的技术还是很类似。解压感染后的MS Word文档就能在word/embeddings目录下得到一个“oleObject1.bin”文件。打开这个Jar文件，能获得：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614050124241261.png" alt="p26" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614050124241261.png" alt="p26"></p>
 
 <p>与前面Packrat早期混淆AlienSpy的方法类似，一部分解密秘钥保存在一个.txt文件中。另一半是一个字符串，在解密了<code>abcdefghijk[a,f,j,s,u,z].class</code>文件后获得。</p>
 
 <p>维持机制是通过在注册表中添加下面的注册值实现的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614050381636271.png" alt="p27" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614050381636271.png" alt="p27"></p>
 
 <p><strong>3.2.2 Adzok出现</strong></p>
 
@@ -400,7 +400,7 @@
 
 <h1>0x04 Packrat的长期钓鱼活动</h1>
 
-<hr />
+<hr>
 
 <p>Packrat一直在利用钓鱼活动攻击相同的组织和个人目标。我们发现Packrat在同一时间，既使用木马也钓鱼攻击了这些个人目标。在木马活动中使用的域名和虚假身份也在钓鱼活动中再次使用了，Packrat还维护了一些专门的钓鱼网站和服务器。虽然钓鱼邮件是定期发送的，但是我们还观察到Packrat有时会发送钓鱼邮件来联系目标。</p>
 
@@ -408,13 +408,13 @@
 
 <p>这一部分主要介绍了Packrat的钓鱼活动，包括政治性主题和非政治性主题。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061405078736828.png" alt="p28" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061405078736828.png" alt="p28"></p>
 
 <h3>4.1 非政治性主题的钓鱼内容</h3>
 
 <p>最常用的钓鱼技术就是伪装成来自邮箱服务或社交媒体网站的密码验证请求、非授权登录通知等等。Packrat大范围利用了邮箱提供商的模板，包括Gmail、Yahoo和Hotmail。大部分邮件都使用了西班牙语。邮件的内容也是根据目标定制的，包括他们的名称和邮箱地址。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061405122220629.png" alt="p29" /> 图18-钓鱼邮件样本</p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061405122220629.png" alt="p29"> 图18-钓鱼邮件样本</p>
 
 <p>根据攻击目的，钓鱼邮件中会包含钓鱼URL或使用缩略网站。</p>
 
@@ -432,7 +432,7 @@
 
 <p>大量Packrat的目标还接收到了钓鱼短信。这些钓鱼短信使用了钓鱼邮件类似的语言，有时候还会使用相同的缩略URL。有时候，攻击者还会警告用户如果不点链接，他们的账户就会停用。我们在一次案例中发现了包含有不正常邮箱地址的信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061405131151130.png" alt="p30" /> 图19-非政治主题的钓鱼短信</p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061405131151130.png" alt="p30"> 图19-非政治主题的钓鱼短信</p>
 
 <h3>4.2 政治性主题的钓鱼活动</h3>
 
@@ -464,11 +464,11 @@
 
 <p>在攻击活动中，mgoogle.us伪装成了一个西班牙语的谷歌登录界面。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614051577040311.png" alt="p31" /> 图20-mgoogle.us伪装成了一个西班牙语的谷歌登录界面</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614051577040311.png" alt="p31"> 图20-mgoogle.us伪装成了一个西班牙语的谷歌登录界面</p>
 
 <p>一旦受害者输入自己的登录信息，他们就会看到一个西班牙语的信息，“确认”他们的gmail账号已经解锁，并谢谢“选择我们”。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614051613272321.png" alt="p32" /> 图21-西班牙语的信息，“确认”他们的gmail账号已经解锁</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614051613272321.png" alt="p32"> 图21-西班牙语的信息，“确认”他们的gmail账号已经解锁</p>
 
 <p>在其他情况下，Packrat会发送“确认”邮件到受害者的邮箱，恭喜他们“验证成功”。我们发现，在一些情况下，攻击者在没有入侵钓鱼到的账号前，就会发送这封邮件。</p>
 
@@ -478,15 +478,15 @@
 
 <p>攻击者控制着大范围的域名来钓鱼或传播木马。在这一部分，我们分析了这些基础设施的特点。比如，钓鱼页面mgoogle.us就会解析到好几个IP地址，包括：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614051710911331.png" alt="p33" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614051710911331.png" alt="p33"></p>
 
 <p>在这些IP中，第一个IP (198.12.150.249)非常有意思。我们发现这个IP地址上还托管了一些主题类似的可疑域名。在这些域名中，有的伪装成了登录页面和更新页面（比如sopporte-gmail.com 或 login-office365.com），其他的一些还伪装成了政治网站。</p>
 
 <p><strong>WHOIS</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614051954875341.png" alt="p34" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614051954875341.png" alt="p34"></p>
 
-<p>这个网站的注册人是<a href="https://citizenlab.org/2015/12/packrat-report/enripintos123@outlook.es"><span class="__cf_email__" data-cfemail="05606b776c756c6b716a76343736456a7071696a6a6e2b6076">[email&#160;protected]</span><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a>，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7294fae396c9de97fde395fcc297f7c496c9e495e8f696caf296c8e997eded97e2ff96cbed9bf1cf94eadd9acdeb96cad896c8c894c1da97f4fe95e8f691f2f094fb">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�有这些网站中，除了两个例外，其他的都看起来像是登录页或服务更新，比如Android和Java。而这两个例外就是lavozamericana.info 和pancaliente.info。这两个域名是与另外的钓鱼域名同时注册的。</p>
+<p>这个网站的注册人是<a href="https://citizenlab.org/2015/12/packrat-report/enripintos123@outlook.es"><span class="__cf_email__" data-cfemail="05606b776c756c6b716a76343736456a7071696a6a6e2b6076">[email&#160;protected]</span><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></a>，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7294fae396c9de97fde395fcc297f7c496c9e495e8f696caf296c8e997eded97e2ff96cbed9bf1cf94eadd9acdeb96cad896c8c894c1da97f4fe95e8f691f2f094fb">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�有这些网站中，除了两个例外，其他的都看起来像是登录页或服务更新，比如Android和Java。而这两个例外就是lavozamericana.info 和pancaliente.info。这两个域名是与另外的钓鱼域名同时注册的。</p>
 
 <p><strong>4.3.1 虚假的新闻网站</strong></p>
 
@@ -494,7 +494,7 @@
 
 <p>一名Twitter用户在2015年5月就发现了一个虚假的插件通知。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614052039723351.png" alt="p35" /> 图22-虚假的插件通知</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614052039723351.png" alt="p35"> 图22-虚假的插件通知</p>
 
 <p>类似的，focusecuador.net也是一个合法的新闻网站，但是攻击者控制了类似的域名focusecuador.tk，这个网站会利用虚假的弹窗来传播木马。通过检查focusecuador.tk的IP(193.105.134.27)，我们又发现了很多相似的域名。</p>
 
@@ -508,7 +508,7 @@
 
 <p>有意思的是，这个虚假的twitter身份至少也成功过，下面的一些关注用户就可能上当了。虽然这个网站现在已经不活动了，但是Google cache表明这个网站曾经是一个钓鱼页面。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614052265631361.png" alt="p36" /> 图23-Google cache表明在这个网站上曾就有一个钓鱼页</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614052265631361.png" alt="p36"> 图23-Google cache表明在这个网站上曾就有一个钓鱼页</p>
 
 <p><strong>4.3.3 虚假的反对派活动</strong></p>
 
@@ -516,7 +516,7 @@
 
 <p><strong>另一封反科雷亚活动邮件</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614052377997371.png" alt="p37" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614052377997371.png" alt="p37"></p>
 
 <h3>4.4 了解行动范围的一个窗口</h3>
 
@@ -528,7 +528,7 @@
 
 <p>这个链接是在2014年10月30日创建的。通过检查这个bit.ly链接的统计数据，我们大致了解了这次行动的规模、时间以及点击链接的地理位置分布。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061405257348438.png" alt="p38" /> 图25-行动的规模、时间以及点击链接的地理位置分布</p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061405257348438.png" alt="p38"> 图25-行动的规模、时间以及点击链接的地理位置分布</p>
 
 <p>大部分链接是在厄瓜多尔境内点击的，其他的还有阿根廷、德国、美国、西班牙、乌拉圭和委内瑞拉。其中没有巴西这一点并不意外，因为攻击者如果要攻击巴西，会使用葡萄牙语的网站。借此我们就能够间接地了解Packrat都会攻击哪里的目标。</p>
 
@@ -540,7 +540,7 @@
 
 <h1>0x05 可能是为了欺骗目标</h1>
 
-<hr />
+<hr>
 
 <p>Packrat的域名并不都是为了传播木马，或盗取受害者的密码。有几个域名伪装成了新闻网站的样子，上面的一些政治性内容也是原创的。至少有两个网站是为了针对委内瑞拉，有1个是为了针对厄瓜多尔。</p>
 
@@ -554,11 +554,11 @@
 
 <p>无论如何，这个网站与其他域名有很多联系。虽然这个域名的注册信息被隐藏的，但是其他的钓鱼网站使用了相同的注册邮箱。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061405266565939.png" alt="p39" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061405266565939.png" alt="p39"></p>
 
 <p>虽然pancaliente.info 的WHOIS信息受到保护，但是还可以验证其注册。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061405271342940.png" alt="p40" /> 图26-在2015年10月出现的 Pan caliente 网站</p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061405271342940.png" alt="p40"> 图26-在2015年10月出现的 Pan caliente 网站</p>
 
 <p>通过更细致的检查，我们发现有网站的内容大都是为了吸引反对查韦斯党派的委内瑞拉人，无论是国内还是国外。网站上的有些报道很有意思，因为他们只介绍说这些是个人档案，但是没有透露这些文档的来源。</p>
 
@@ -568,13 +568,13 @@
 
 <p>虽然看似有很多内容，但是PanCaliente的文章中没有署名。虽然这个网站与一个Twitter账户(<a href="https://twitter.com/pancalienteve">https://twitter.com/pancalienteve</a>)的活动很密切，但是相关的Facebook账户(<a href="https://twitter.com/pancalienteve">https://twitter.com/pancalienteve</a>)却很少。通过WayBack Machine就能明白，PanCaliente最近才开始活跃。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614052994526411.png" alt="p41" /> 图27-PanCaliente在Wayback Machine 上的显示</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614052994526411.png" alt="p41"> 图27-PanCaliente在Wayback Machine 上的显示</p>
 
 <p>有趣的是，这个网站上最先公布的一些报道是当这个网站还叫做“Venezuela365.com”的时候编写的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614053052115421.png" alt="p42" /> 图28-网站早期的标志，还可以在网站的目录结构中看到</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614053052115421.png" alt="p42"> 图28-网站早期的标志，还可以在网站的目录结构中看到</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614053210098431.png" alt="p43" /> 图29-现在的PanCaliente 标志</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614053210098431.png" alt="p43"> 图29-现在的PanCaliente 标志</p>
 
 <p>我们还可以在网上看到这个网站更换标志的信息。另外，有一篇报道中还是引用了网站 venezuela365。有趣的是，第一份报道中还提到了一些“秘密”信息，包括重新制作发票，并没有解释其来源。</p>
 
@@ -598,7 +598,7 @@
 
 <p>域名 chavistas24.com似乎是一个支持委内瑞拉前总统查韦斯的网站，在这上面有很多支持查韦斯党派的内容。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614053363634441.png" alt="p44" /> 图30-Chavistas24.com上的图片</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614053363634441.png" alt="p44"> 图30-Chavistas24.com上的图片</p>
 
 <p>Chavistas24.com 同样有相关的Twitter账号来发送推文，主要是引用了网站上发表的文章。</p>
 
@@ -606,7 +606,7 @@
 <li>https://twitter.com/chavistas24/</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614053549656451.png" alt="p45" /> 图31-Chavistas 24的Twitter</p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614053549656451.png" alt="p45"> 图31-Chavistas 24的Twitter</p>
 
 <p>我们没有发现有证据能表明chavistas24.com曾经用于传播木马或执行钓鱼活动。</p>
 
@@ -616,17 +616,17 @@
 
 <p>此前，厄瓜多尔警方就曾经抗议福利太差，他们也是目前对厄瓜多尔总统科雷亚威胁最大的一股力量。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061405379607746.png" alt="p46" /> 图23-Los Desvinculados网站</p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061405379607746.png" alt="p46"> 图23-Los Desvinculados网站</p>
 
 <p>下面是相关的twitter账号 (twitter.com/justdesvincula2)。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061405396954547.png" alt="p47" /> 图33-Desvinculados Twitter 页面</p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061405396954547.png" alt="p47"> 图33-Desvinculados Twitter 页面</p>
 
 <p>和前两次活动一样，我们没有发现有证据能表明Justicia Desvinculados曾经用于传播木马或执行钓鱼活动。</p>
 
 <h1>0x06 归属判断面临的挑战</h1>
 
-<hr />
+<hr>
 
 <p>本文中提出的证据表明，Packrat是一个有组织，有长期执行攻击活动能力，攻击目标有明显地区特征的小组。那么Packrat到底是谁呢？在这里，我们提出了两种假设。</p>
 
@@ -704,7 +704,7 @@
 
 <h1>0x07 总结</h1>
 
-<hr />
+<hr>
 
 <p>在这篇报告中，我们介绍了一次长达七年的活动，这一攻击活动的目标是几个拉美国家。虽然在拉美有很多著名的攻击小组，但是Packrat最显著的特点就是经常攻击政治人物、记者等。Packrat还具备有执行长期活动的能力，能不受媒体报道的影响。</p>
 
@@ -718,47 +718,47 @@
 
 <h1>0x08 附录</h1>
 
-<hr />
+<hr>
 
 <p>附录B 木马样本</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061405412699248.png" alt="p48" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061405412699248.png" alt="p48"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061405438891849.png" alt="p49" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061405438891849.png" alt="p49"></p>
 
 <p>附录C木马配置</p>
 
 <p>CyberGate RAT配置</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061405441837950.png" alt="p50" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061405441837950.png" alt="p50"></p>
 
 <p>Xtreme RAT 配置</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614054590874511.png" alt="p51" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614054590874511.png" alt="p51"></p>
 
 <p>Adzok 配置</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614054712081521.png" alt="p52" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614054712081521.png" alt="p52"></p>
 
 <p>Adwind 变种配置</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614054898242531.png" alt="p53" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614054898242531.png" alt="p53"></p>
 
 <p>附录D：恶意域名</p>
 
 <p>解析到198.12.150.249的域名</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614055087286541.png" alt="p54" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614055087286541.png" alt="p54"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614055165796551.png" alt="p55" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614055165796551.png" alt="p55"></p>
 
 <p>解析到193.105.134.27的域名</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010614055265799561.png" alt="p56" /></p>
+<p><img src="http://static.wooyun.org//drops/20160106/2016010614055265799561.png" alt="p56"></p>
 
 <p><a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#58;&#101;&#110;&#114;&#105;&#112;in&#x74;&#x6f;&#x73;&#x31;&#x32;&#x33;&#64;&#111;&#117;&#116;&#108;&#111;&#111;k&#x2e;&#x65;&#x73;">&#101;&#110;&#114;&#105;&#112;in&#x74;&#x6f;&#x73;&#x31;&#x32;&#x33;&#64;&#111;&#117;&#116;&#108;&#111;&#111;k&#x2e;&#x65;&#x73;</a>注册的域名</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061405543521957.png" alt="57" /></p>      </p>
+<p><img src="http://static.wooyun.org//drops/20160106/201601061405543521957.png" alt="57"></p>      <p></p>
     
 			</body>
 		</html>

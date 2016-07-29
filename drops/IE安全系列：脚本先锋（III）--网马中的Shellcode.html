@@ -3,20 +3,20 @@
 			<head>
 			     <title>IE安全系列：脚本先锋（III）--网马中的Shellcode - blast</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6123">http://drops.wooyun.org/tips/6123</a></h1>
 				
       <p>
-        <p>本文V.1，V.2两节也将尽量只从脚本的角度来解释部分内容，第三部分将从实例中简单总结一下通用SHELLCODE的实现方法。 下一章脚本先锋IV中，将介绍简单的shellcode分析方式。至于与其他系统安全机制结合起来的内容，“脚本先锋”系列中暂时就不提了，而将留在后续章节中介绍。</p>
+        </p><p>本文V.1，V.2两节也将尽量只从脚本的角度来解释部分内容，第三部分将从实例中简单总结一下通用SHELLCODE的实现方法。 下一章脚本先锋IV中，将介绍简单的shellcode分析方式。至于与其他系统安全机制结合起来的内容，“脚本先锋”系列中暂时就不提了，而将留在后续章节中介绍。</p>
 
 <h1>V.1 何为Shellcode，调试工具简单介绍（OD、Windbg）</h1>
 
-<hr />
+<hr>
 
 <p>shellcode本是指获得一个shell的代码，也或者是达到特定目的的代码，网马中利用IE漏洞的“Shellcode”一词，大多数就是指这样的代码集合</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503394976526.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503394976526.png" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -24,9 +24,9 @@
 
 <p>诚如所见，如果要通过机器码实行一段有意义的操作，代码中很可能会包含非可打印字符、扩展字符。其中，特别是扩展字符可能因为用户机器语言环境不同产生歧义。如下图，如果采用明文的方式，4个字节的内容在用户机器上长度会被判断为3（中文系统默认设置为例），这会导致在铺设shellcode时长度无法准确计算，在利用漏洞时会产生大量的不便。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395053075.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395053075.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395067110.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395067110.png" alt="enter image description here"></p>
 
 <p>因此在布置shellcode时通常都会将其escape编码。escape很简单，也即将字符重新改为字符的ASCII值的十六进制形式，并加上百分号。</p>
 
@@ -62,17 +62,17 @@
 
 <p>通过内存喷射覆盖某个已经释放了的对象后，该对象的内存看起来会像：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395088646.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395088646.png" alt="enter image description here"></p>
 
 <p>图：变量0x35fb03是某个class，free后该class的内存重新被nop sled占据，当该对象内的成员函数被重新使用时，EIP将变为<code>0x0c0c0c0c+offset</code>。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395042969.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395042969.png" alt="enter image description here"></p>
 
 <p>而0c0c0c0c处，则安排着有我们的shellcode，当然上面这个只是演示，所以放了一堆A在里面。</p>
 
 <p>由于0x0c0c只是会操作eax，一般不会产生什么大影响，所以就可以任由它这么覆盖下去，而由于它是2个字节的，所以相比非主流的0x0d对齐时“性价比”比较好。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395032422.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395032422.png" alt="enter image description here"></p>
 
 <p>图：在Visual Studio 2008中模拟堆喷覆盖一个已释放的类的虚表</p>
 
@@ -131,21 +131,21 @@ delete p;  (void*)p = (void*)0x00008123;
 
 <p>声明：以下工具限于使用时长和环境等因素，介绍可能带有个人的感情色彩，仅供参考，请根据需要自行选择适合的工具。 OllyDbg：下载地址http://ollydbg.de ,Win7 建议使用OD2。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395138167.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395138167.png" alt="enter image description here"></p>
 
 <p>OD支持插件，在无插件情况下，OD支持解析DLL的导出函数，设置Use Microsoft Symbol Server=1将从微软的Symbol服务器下载符号，但是似乎并不一定能解析成功，而且不支持显示从一个系统函数开始的偏移（但是点击地址行，可以转为$+X这样的相对地址），例如上图中ntdll.77279f72，在Windbg中能解析成如下可能的名称范围：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395119363.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395119363.png" alt="enter image description here"></p>
 
 <p>但是OD中只能显示成地址。</p>
 
 <p>该地址实际属于<code>ntdll!__RtlUserThreadStart</code>，在Windbg中可以方便的看出来：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395175887.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395175887.png" alt="enter image description here"></p>
 
 <p>OD中Ctrl+G也不能显示偏移，跳转过去以后也不知道函数名：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395119590.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395119590.png" alt="enter image description here"></p>
 
 <p>OD会自动给你停在函数入口点（如果设置里面有这么设置的话），Windbg和IDA默认则不会。而且OD的着色系统应该是这三者中最清晰的了，调试操作为：</p>
 
@@ -155,7 +155,7 @@ delete p;  (void*)p = (void*)0x00008123;
 
 <p>F2：设置断点，有断点的地方会显示红色：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395240547.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395240547.png" alt="enter image description here"></p>
 
 <p>调试断点（int3）会让语句在执行到断点处时抛出异常，调试器收到之后就可以停在那条语句上了。这在调试一个LOOP的时候非常有用，毕竟，如果一个LOOP要循环999次，你可不会想F8 999次吧，这时只需在LOOP外设置断点，然后运行程序即可。</p>
 
@@ -178,7 +178,7 @@ ELSE
 
 <p>Windbg是文字界面，也许刚开始有些人会不适应，但是如果你用多了，你会发现这个东西真的是一个神器。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395281772.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395281772.png" alt="enter image description here"></p>
 
 <p>以下是常用命令：</p>
 
@@ -203,19 +203,19 @@ bl，显示断点。
 
 <p>IDA：IDA是一个非常有用的静态动态分析工具，它的静态分析支持显示函数的结构:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395242433.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395242433.png" alt="enter image description here"></p>
 
 <p>同时，插件可以支持生成伪代码（但是并不一定完全正确，仅供参考）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395341225.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395341225.png" alt="enter image description here"></p>
 
 <p>同时其对微软的符号也支持的相当不错，要打开符号支持，编辑<code>cfg/pdb.cfg</code>即可指定符号服务器。如果之前没有设置，IDA最初可能还会提示你使用微软的符号服务器，所以可以不必太在意。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395329039.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395329039.png" alt="enter image description here"></p>
 
 <p>IDA的动态调试功能支持bochs、win32 debugger、gdb、windbg：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395422517.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395422517.png" alt="enter image description here"></p>
 
 <p>Bochs debugger需要bochs安装，然后IDA会使用bochsdbg.exe来完成动态调试。</p>
 
@@ -225,7 +225,7 @@ bl，显示断点。
 
 <p>F2在WinMain设置断点，然后运行：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395483378.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395483378.png" alt="enter image description here"></p>
 
 <pre><code>F8，步过。
 F7，步入。
@@ -235,17 +235,17 @@ F4，断点并运行，相当于F2+F9。
 
 <p>可以看得出来，按键几乎一致，不过它的符号支持要比OD强，加载了微软符号后甚至显示了各个Offset对应的含义：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395426160.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395426160.png" alt="enter image description here"></p>
 
 <p>而在od中结果替换掉的还是偏少：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395594251.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395594251.png" alt="enter image description here"></p>
 
 <p>而且，IDA中很多强悍功能都绝不足以在一节内概括说清楚，具体请参阅参考资料(2]。</p>
 
 <h1>V.2 网马中的shellcode</h1>
 
-<hr />
+<hr>
 
 <p>解密-获取下载地址，通过工具</p>
 
@@ -268,7 +268,7 @@ CALL WinExec
 
 <p>如果不能理解，可以参考下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395585270.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395585270.png" alt="enter image description here"></p>
 
 <p>请看，假设这片内存的初始地址是<code>0x00000000</code>（实际Win32并不可能，不过这里只是演示，不必在意），那么<code>CMD.EXE</code>字符串的位置实际上是<code>0x00000030</code>。</p>
 
@@ -285,39 +285,39 @@ CALL WinExec
 
 <p>所以，让我们回到脚本，观察下列代码</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395535268.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395535268.png" alt="enter image description here"></p>
 
 <p>阅读代码很容易就可以知道SC为最终处理完的Shellcode。</p>
 
 <p>将SC输出，在浏览器中执行一下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395577493.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395577493.png" alt="enter image description here"></p>
 
 <p>即可拿到解密后的shellcode，简单的看一下，代码中出现了大量的重复内容：E2，而直接将内容Unescape也没有看到像样的明文，这时可以经验得出，这段代码是被XOR加密过的，因此可以在工具中填入密钥e2，然后解开即可看到常量部分，这个就是这段代码想要下载的文件</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395642530.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395642530.png" alt="enter image description here"></p>
 
 <p>这段代码的调试放到下章再说，不过并不难，而且这个URL也失效了，所以你也大可参照下一节(V.3)的相关内容，如果觉得一切合适了，可以放心大胆的调试。</p>
 
 <h1>V.3 Shellcode 123</h1>
 
-<hr />
+<hr>
 
 <p>最后，简单介绍一下大家可能会比较在意的内容，这也是SHELLCODE编写的一个必备条件之一，即shellcode如何获得函数地址，更甚之，shellcode如何通用化呢？</p>
 
 <p>先说一下如何手动获得一个系统函数的地址。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395694484.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395694484.png" alt="enter image description here"></p>
 
 <p>图：<code>Dependency Walker</code>显示的<code>ShellExecuteA</code>导出函数的偏移量。用该值加上DLL的 <code>Image Base</code>即可得到本机适用的函数地址（无ASLR情况下）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395774172.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395774172.png" alt="enter image description here"></p>
 
 <p>图：shell32.dll (32bit, 6.1.7601.18762)的Image Base</p>
 
 <p>如上图，无ASLR的环境下，该函数的地址是<code>0x73800000 + 0x247bcd = 0x73a47bcd</code>。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395711782.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395711782.png" alt="enter image description here"></p>
 
 <p>图：TencentDl.exe (32 bit)中的函数地址和模块起始地址。</p>
 
@@ -325,7 +325,7 @@ CALL WinExec
 
 <p>可以试验一下，<code>ShellExecuteExA</code>的偏移是<code>0x247b32</code>，则<code>0x75300000+0x247b32=0x75547b32</code>应该是该函数地址，查阅可知确实如此：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395714100.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395714100.png" alt="enter image description here"></p>
 
 <p>但是除了上面的ASLR的情况，微软的库函数的地址自己也会随着系统变化、补丁更新等会发生变化，因此，硬编码一个地址必然是不行的，那么作为一个网马，如何才能做到让shellcode获取所需API的地址呢？</p>
 
@@ -351,17 +351,17 @@ int main(int argc, char **argv){int (*f)();f = (int (*)())shellcode;(int)(*f)();
 
 <p>作者（Giuseppe D'Amore）提供了以上的代码供检验（代码来源：https://www.exploit-db.com/exploits/33836/）。作用是在所有系统下添加一个用户，效果如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395820334.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395820334.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395845779.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395845779.png" alt="enter image description here"></p>
 
 <p>图：同一个代码在x86 XP SP3、x64 Win7 SP1下均成功地添加了用户BroK3n。</p>
 
 <p>具体是怎么实现的呢，可以手动编译一下上述C++程序，也可以通过工具来生成一个EXE测试：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395825396.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395825396.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395863050.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395863050.png" alt="enter image description here"></p>
 
 <p>图：去除无效字符-生成EXE即可生成调试用程序</p>
 
@@ -517,13 +517,13 @@ ntdll!_PEB_LDR_DATA
    +0x02c ShutdownThreadId : Ptr32 Void
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395922305.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395922305.png" alt="enter image description here"></p>
 
 <p>可以看到</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395968472.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395968472.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395930160.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395930160.png" alt="enter image description here"></p>
 
 <p>这个链表中就存着模块地址</p>
 
@@ -538,7 +538,7 @@ image00400000+0x500d:
 
 <p>所以上述代码就在不断寻找<code>kernel32.dll</code>的地址，<code>edx+8</code>就是地址，<code>edx+20h</code>则为函数名字，<code>ASCII 0x33</code>是字符”3”，因此它在比较第7个字<code>（0xC == 12 (dec)）</code>是否为“3”，因为这些按顺序加载的模块也就<code>kernel32</code>在第七个字上是3了，所以这个还是比较准的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395910951.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395910951.png" alt="enter image description here"></p>
 
 <p>接着，找到所需的导出函数： image00400000+0x501b: 0040501b 89c7 mov edi,eax 0040501d 03783c add edi,dword ptr [eax+3Ch] 00405020 8b5778 mov edx,dword ptr [edi+78h] 00405023 01c2 add edx,eax 00405025 8b7a20 mov edi,dword ptr [edx+20h] 00405028 01c7 add edi,eax 0040502a 31ed xor ebp,ebp</p>
 
@@ -555,7 +555,7 @@ image00400000+0x502c:
 
 <p>然后，只要找到所需函数即可，这里作者需要的是包含<code>0x456e6957</code>的函数，</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503395911441.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503395911441.png" alt="enter image description here"></p>
 
 <p>事实上很简单就能猜到作者想要的是WinExec。</p>
 
@@ -584,13 +584,13 @@ image00400000+0x503a:
 
 <p>这一些就是之前所说的“常量”部分，</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503400052583.png" alt="enter image description here" /></p>
+<p><img src="http://static.wooyun.org//drops/20150625/2015062503400052583.png" alt="enter image description here"></p>
 
 <p>执行一下看看esp上存了啥吧，这样就一目了然了。最终，作者call esi，调用WinExec启动cmd，这样就添加上了用户。可惜作者没处理ExitProcess，最终程序的环境被弄得一塌糊涂，免不了崩溃收场。但是作者的目的达到了，用户都加上了，崩溃也无妨。</p>
 
 <h1>参考资料</h1>
 
-<hr />
+<hr>
 
 <p>(1] http://blogs.microsoft.com/cybertrust/2012/04/24/guarding-against-re-use-of-stale-object-references/</p>
 
@@ -600,7 +600,7 @@ image00400000+0x503a:
 
 <p>(4] https://www.exploit-db.com/shellcode/</p>
 
-<p>(5] 文中提到的相关恶意代码下载，密码 drops.wooyun.org，请在虚拟环境调试。 <a href="http://drops.wooyun.org/wp-content/uploads/2015/05/malicious_v.rar">Downloads</a></p>      </p>
+<p>(5] 文中提到的相关恶意代码下载，密码 drops.wooyun.org，请在虚拟环境调试。 <a href="http://drops.wooyun.org/wp-content/uploads/2015/05/malicious_v.rar">Downloads</a></p>      <p></p>
     
 			</body>
 		</html>

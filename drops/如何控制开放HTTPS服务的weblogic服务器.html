@@ -3,14 +3,14 @@
 			<head>
 			     <title>如何控制开放HTTPS服务的weblogic服务器 - z_zz_zzz</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/13681">http://drops.wooyun.org/web/13681</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>目前在公开途径还没有看到利用JAVA反序列化漏洞控制开放HTTPS服务的weblogic服务器的方法，已公布的利用工具都只能控制开放HTTP服务的weblogic服务器。我们来分析一下如何利用JAVA反序列化漏洞控制开放HTTPS服务的weblogic服务器，以及相应的防护方法。</p>
 
@@ -20,7 +20,7 @@
 
 <h1>0x01 HTTPS服务的架构分析</h1>
 
-<hr />
+<hr>
 
 <p>如果某服务器需要对公网用户提供HTTPS服务，可以在不同的层次实现。</p>
 
@@ -28,7 +28,7 @@
 
 <p>当使用SSL网关提供HTTPS服务时，网络架构如下图所示（无关的设备已省略，下同）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/2016031506270430725120.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160315/2016031506270430725120.png" alt=""></p>
 
 <p>SSL网关只会向后转发HTTP协议的数据，不会将T3协议数据转发至weblogic服务器，因此在该场景中，无法通过公网利用weblogic的JAVA反序列化漏洞。</p>
 
@@ -36,7 +36,7 @@
 
 <p>当使用负载均衡提供HTTPS服务时，网络架构如下图所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/2016031506270762671218.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160315/2016031506270762671218.png" alt=""></p>
 
 <p>安全起见，负载均衡应选择转发HTTP协议而不是TCP协议，因此在该场景中，也无法通过公网利用weblogic的JAVA反序列化漏洞。</p>
 
@@ -44,7 +44,7 @@
 
 <p>当使用web代理（如apache、nginx等）提供HTTPS服务时，网络架构如下图所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/2016031506270966469318.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160315/2016031506270966469318.png" alt=""></p>
 
 <p>web代理只会向后转发HTTP协议的数据，因此在该场景中，也无法通过公网利用weblogic的JAVA反序列化漏洞。</p>
 
@@ -52,7 +52,7 @@
 
 <p>当使用weblogic提供HTTPS服务时，网络架构如下图所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/201603150627104999948.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160315/201603150627104999948.png" alt=""></p>
 
 <p>weblogic能够接收到利用SSL加密后的T3协议数据，因此在该场景中，通过公网能够利用weblogic的JAVA反序列化漏洞。</p>
 
@@ -60,7 +60,7 @@
 
 <h1>0x02 weblogic开放SSL服务时的T3协议格式分析</h1>
 
-<hr />
+<hr>
 
 <p>利用weblogic的JAVA反序列化漏洞时，必须向weblogic发送T3协议头。为了能够利用提供SSL服务的weblogic的JAVA反序列化漏洞，需要首先分析当weblogic提供SSL服务时的T3协议格式。</p>
 
@@ -76,15 +76,15 @@
 
 <p>登录weblogic控制台，将AdminServer的“启用SSL监听端口”钩选，并填入SSL监听端口号。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/201603150627123087556.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160315/201603150627123087556.png" alt=""></p>
 
 <p>查看AdminServer的密钥库配置，确认为“演示标识和演示信任”（Demo Identity and Demo Trust），可以看到演示密钥库的文件名为“DemoIdentity.jks”，演示信任密钥库文件名为“DemoTrust.jks”。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/201603150627136815966.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160315/201603150627136815966.png" alt=""></p>
 
 <p>查看AdminServer的SSL配置，可以看到演示密钥库的私钥别名为“DemoIdentity”。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/201603150627152311076.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160315/201603150627152311076.png" alt=""></p>
 
 <p>使用HTTPS方式登录weblogic控制台，确认可以正常登录。</p>
 
@@ -219,17 +219,17 @@ keytool -genkey -alias %alias% -keyalg RSA -keysize 2048 -keystore %keystore% -s
 
 <p>登录weblogic控制台，在AdminServer的密钥库界面，选择密钥库类型为“定制标识和 Java 标准信任”(Custom Identity and Java Standard Trust)，定制标识密钥库输入“keystore.jks”，定制标识密钥库类型输入“JKS”，定制标识密钥库密码短语与确认定制标识密钥库密码短语输入“123456”，保存上述修改。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/201603150627185954986.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160315/201603150627185954986.png" alt=""></p>
 
 <p>在AdminServer的SSL界面，私有密钥别名输入“server”，私有密钥密码短语与确认私有密钥密码短语输入“123456”。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/201603150627192303396.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160315/201603150627192303396.png" alt=""></p>
 
 <p>使用HTTPS对应的URL打开weblogic控制台，确保可以正常登录，查看证书信息如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/2016031506272110876106.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160315/2016031506272110876106.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/20160315062723102721111.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160315/20160315062723102721111.png" alt=""></p>
 
 <p><strong>将自定义证书导入java信任密钥库中</strong></p>
 
@@ -305,23 +305,23 @@ openssl rsa -in %out_pem% -check &gt; %final_pem%
 
 <p>首先在Wireshark中设置需要使用的私钥文件，打开Wireshark菜单的“Edit->Preferences”，打开“Protocols->SSL”，点击“RSA keys list”旁的“Edit”按钮，如下图。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/2016031506272495624126.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160315/2016031506272495624126.png" alt=""></p>
 
 <p>添加一行配置，IP为weblogic服务器的IP，Port为weblogic的SSL监听端口，Protocol为tcp，Key File为之前已生成的weblogic的SSL证书的私钥文件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/2016031506272657020136.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160315/2016031506272657020136.png" alt=""></p>
 
 <p>使用Wireshark打开抓包文件，可以看到原本为加密形式的通信数据有部分已被解密，找到T3协议头相关数据，可以看到停止脚本向weblogic发送的T3协议头以“t3s”开头。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/2016031506272936985145.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160315/2016031506272936985145.png" alt=""></p>
 
 <p>服务器返回的数据如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/2016031506273233304154.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160315/2016031506273233304154.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/2016031506273340499163.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160315/2016031506273340499163.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/2016031506273530882173.png" alt="" /></p>
+<p><img src="http://static.wooyun.org//drops/20160315/2016031506273530882173.png" alt=""></p>
 
 <p>费了老大的劲，才发现原来<strong>weblogic开放HTTPS服务后，t3协议头的前几个字节由“t3”变成了“t3s”</strong>。</p>
 
@@ -365,7 +365,7 @@ at weblogic.kernel.ExecuteThread.run(ExecuteThread.java:117)
 
 <h1>0x03 如何控制开放HTTPS服务的weblogic服务器</h1>
 
-<hr />
+<hr>
 
 <h3>如何发送T3协议数据</h3>
 
@@ -498,9 +498,9 @@ at weblogic.kernel.ExecuteThread.run(ExecuteThread.java:117)
 
 <h1>0x05 结束</h1>
 
-<hr />
+<hr>
 
-<p>无论weblogic服务器开放HTTP服务还是HTTPS服务，都是有可能利用JAVA反序列化漏洞控制服务器的。JAVA反序列化漏洞的影响，应该会持续很长的时间。</p>      </p>
+<p>无论weblogic服务器开放HTTP服务还是HTTPS服务，都是有可能利用JAVA反序列化漏洞控制服务器的。JAVA反序列化漏洞的影响，应该会持续很长的时间。</p>      <p></p>
     
 			</body>
 		</html>

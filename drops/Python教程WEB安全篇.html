@@ -3,20 +3,20 @@
 			<head>
 			     <title>Python教程WEB安全篇 - lxj616</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2591">http://drops.wooyun.org/tips/2591</a></h1>
 				
       <p>
-        <h2>0x00 概述</h2>
+        </p><h2>0x00 概述</h2>
 
-<hr />
+<hr>
 
 <p>本文从实例代码出发，讲解了Python在WEB安全分析中的作用，以最基础的示例向读者展示了Python如何解析、获取、以及处理各种类型的WEB页面 系统环境：kali + beautifulsoup + mechanize，由于不涉及底层驱动设计，文中的示例代码可以在任意平台使用，当然无论什么平台都要安装好所用的插件。</p>
 
 <h2>0x01 利用python获取WEB页面</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!bash
 Python 2.7.6 (default, Nov 10 2013, 19:24:24) [MSC v.1500 64 bit (AMD64)] on win32
@@ -134,12 +134,12 @@ bdpagetype:1
 
 <h2>0x02 利用python解析html页面</h2>
 
-<hr />
+<hr>
 
 <p>首先安装beautifulsoup ，http://www.crummy.com/software/BeautifulSoup/</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a5d7cacad1e5cec4c9cc">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/beautifulsoup4-4.3.2# python setup.py install
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a5d7cacad1e5cec4c9cc">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/beautifulsoup4-4.3.2# python setup.py install
 running install
 running build
 running build_py
@@ -154,13 +154,13 @@ copying bs4/diagnose.py -&gt; build/lib.linux-x86_64-2.7/bs4
 creating build/lib.linux-x86_64-2.7/bs4/builder
 copying bs4/builder/_lxml.py -&gt; build/lib.linux-x86_64-2.7/bs4/builder
 copying bs4/builder/_htmlparser.py -&gt; build/lib.linux-x86_64-2.7/bs4/builder
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f2809d9d86b299939e9b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/beautifulsoup4-4.3.2#
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f2809d9d86b299939e9b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/beautifulsoup4-4.3.2#
 </code></pre>
 
 <p>下面就可以使用bs4了</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b9cbd6d6cdf9d2d8d5d0">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# python
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b9cbd6d6cdf9d2d8d5d0">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# python
 Python 2.7.3 (default, Jan  2 2013, 13:56:14) 
 [GCC 4.7.2] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
@@ -239,10 +239,10 @@ http://wenku.baidu.com/search?word=&amp;lm=0&amp;od=0
 
 <h2>0x03 利用python+mechanize处理表单</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!python
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3f4d50504b7f545e5356">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# python
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3f4d50504b7f545e5356">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# python
 Python 2.7.3 (default, Jan  2 2013, 13:56:14) 
 [GCC 4.7.2] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
@@ -315,7 +315,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 <h2>0x04 实例分析</h2>
 
-<hr />
+<hr>
 
 <p>以下是一个CMS的管理员密码能被越权找回漏洞，原作者信息均完整保留</p>
 
@@ -403,7 +403,7 @@ print "[+] Second request sended"
 
 print "[+] You should receive an email with credentials soon :) "
 //第二次发送请求完毕后目标已经完成
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

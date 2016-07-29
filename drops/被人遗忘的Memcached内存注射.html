@@ -3,14 +3,14 @@
 			<head>
 			     <title>被人遗忘的Memcached内存注射 - 小飞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/8987">http://drops.wooyun.org/web/8987</a></h1>
 				
       <p>
-        <h1>0x00 写在前面</h1>
+        </p><h1>0x00 写在前面</h1>
 
-<hr />
+<hr>
 
 <p>wooyun主站也有过Memcached相关漏洞，但大多都是未授权访问，其实即使是部署得当的Memcached，如果碰上安全意识差的程序员哥哥，那么同样会出现Memcached安全风险，导致敏感内存泄露。</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 Memcached简介&amp;安全性分析</h1>
 
-<hr />
+<hr>
 
 <p>Memcached 是一个高性能的分布式内存对象缓存系统，用于动态Web应用以减轻数据库负载。</p>
 
@@ -32,7 +32,7 @@
 
 <h1>0x02 Memcached协议</h1>
 
-<hr />
+<hr>
 
 <p>当Memcache被部署之后，我们该如何向其中添加数据？我们通过一个cheat sheet了解一下Memcached的协议。</p>
 
@@ -189,7 +189,7 @@
 
 <h1>0x03 Memcached代码实现</h1>
 
-<hr />
+<hr>
 
 <p>部署好Memcached之后，一个调用Memcached的php代码是这样的。</p>
 
@@ -240,7 +240,7 @@ $m-&gt;set("key1 0 0 1\r\n1\r\nset injected 0 3600 10\r\n1234567890\r\n","123456
 
 <h1>0x04 Memcache Injection实例</h1>
 
-<hr />
+<hr>
 
 <p>最近的一次ctf中，有一个典型的基于CLRF的Memcache注入。（目前该站可以访问）</p>
 
@@ -383,11 +383,11 @@ ITEM 3d1a32800a501fe7387287ba4631ae9318206ef96083a29f35fd1ef42f7a85c5 [19 b; 144
 
 <h1>0x05 参考</h1>
 
-<hr />
+<hr>
 
 <p><strong>Memcache cheat sheet</strong>: <a href="http://lzone.de/cheat-sheet/memcached">http://lzone.de/cheat-sheet/memcached</a></p>
 
-<p><strong>Memcached Injection</strong>: <a href="https://www.blackhat.com/docs/us-14/materials/us-14-Novikov-The-New-Page-Of-Injections-Book-Memcached-Injections-WP.pdf">https://www.blackhat.com/docs/us-14/materials/us-14-Novikov-The-New-Page-Of-Injections-Book-Memcached-Injections-WP.pdf</a></p>      </p>
+<p><strong>Memcached Injection</strong>: <a href="https://www.blackhat.com/docs/us-14/materials/us-14-Novikov-The-New-Page-Of-Injections-Book-Memcached-Injections-WP.pdf">https://www.blackhat.com/docs/us-14/materials/us-14-Novikov-The-New-Page-Of-Injections-Book-Memcached-Injections-WP.pdf</a></p>      <p></p>
     
 			</body>
 		</html>

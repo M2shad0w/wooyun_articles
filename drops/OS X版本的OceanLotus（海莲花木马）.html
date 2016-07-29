@@ -3,12 +3,12 @@
 			<head>
 			     <title>OS X版本的OceanLotus（海莲花木马） - virustracker</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/13046">http://drops.wooyun.org/papers/13046</a></h1>
 				
       <p>
-        <p><a href="https://www.alienvault.com/open-threat-exchange/blog/oceanlotus-for-os-x-an-application-bundle-pretending-to-be-an-adobe-flash-update">https://www.alienvault.com/open-threat-exchange/blog/oceanlotus-for-os-x-an-application-bundle-pretending-to-be-an-adobe-flash-update</a></p>
+        </p><p><a href="https://www.alienvault.com/open-threat-exchange/blog/oceanlotus-for-os-x-an-application-bundle-pretending-to-be-an-adobe-flash-update">https://www.alienvault.com/open-threat-exchange/blog/oceanlotus-for-os-x-an-application-bundle-pretending-to-be-an-adobe-flash-update</a></p>
 
 <p>2015年5月，奇虎360的研究人员公布了一份关于OceanLotus木马的研究报告。在报告中，他们详细的分析了这个攻击了中国组织机构的木马。报告中还介绍了一个针对OS X系统的木马，这个木马样本在几个月前被上传到了VirusTotal上。有意思的是，截至2016年2月8日，VirusTotal上的55种杀毒解决方案仍然无法检测出这个恶意样本。因此，我们决定调查一番这个OS X版本的OceanLotus木马。</p>
 
@@ -16,7 +16,7 @@
 
 <h1>0x00 分析</h1>
 
-<hr />
+<hr>
 
 <p>OS X版本的OceanLotus是一个伪装成Adobe Flash更新的应用程序包（Application Bundle）。在这个应用程序包中有很多不同的文件，下面是我们感兴趣的几个：</p>
 
@@ -28,7 +28,7 @@
 
 <h1>0x01 载入程序（Loader）</h1>
 
-<hr />
+<hr>
 
 <p>如下，EmptyApplication是一个通用二进制（universal binary），既可以在i386架构，也可以在x86_64架构下运行。这是一个非常简单的程序，首先，这个程序会使用ROL3算法解码出两个“文件”： <code>.en_icon</code>和<code>DS_Stores</code>；然后再执行这些文件。</p>
 
@@ -41,17 +41,17 @@ EmptyApplication (for architecture i386): Mach-O executable i386
 
 <p>在混淆算法上，EmptyApplication使用了“xc”作为XOR算法的加密秘钥，混淆了二进制中的字符串。下面是一个简单的解密函数。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160222/2016022205482221511OS1.png" alt="p1" /></p>
+<p><img src="http://static.wooyun.org//drops/20160222/2016022205482221511OS1.png" alt="p1"></p>
 
 <p>在64位版本中，8字节长度以内的字符串会保存成整数值（integer value）。超过8字节长度的字符串会加密储存在相邻变量中，解密函数在读取变量时会以8个字节为界。如下所示，&amp;v34被传递给了解密函数，但是，函数实际上解密了v34和v35组合。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160222/2016022205482487517OS2.png" alt="p2" /></p>
+<p><img src="http://static.wooyun.org//drops/20160222/2016022205482487517OS2.png" alt="p2"></p>
 
 <p>在解码了<code>.en_icon</code>之后，EmptyApplication会将其写到一个名称是“pboard”的临时目录（可能是为了伪装成OS X系统中的粘贴板守护进程），并执行二进制文件。然后，EmptyApplication会删除自身，解码<code>.DS_Stores</code>，并把解码得到的二进制写为“EmptyApplication”-替换掉原来的EmptyApplication可执行文件。最后，通过调用<code>NSTask.launch()</code>就可以启动新的EmptyApplication。解密后的<code>.DS_Stores</code>二进制在功能上与原有的EmptyApplication并没有太多区别，只是新的EmptyApplication不会查找<code>.DS_Stores</code>。</p>
 
 <h1>0x02 木马</h1>
 
-<hr />
+<hr>
 
 <h3>加密字符串</h3>
 
@@ -59,11 +59,11 @@ EmptyApplication (for architecture i386): Mach-O executable i386
 
 <p>还有一点，二进制中的大部分字符串都使用了XOR算法进行加密，但是，这个二进制使用了多个不同的秘钥，并且这些秘钥本身也经过了XOR加密。事实上，这个木马做的第一件事就是解密几个XOR秘钥。有趣的是，用于设置解密秘钥的代码会通过使用C++静态构造器（static constructor）在“main”入口点之前执行。这个代码引用在mach-o二进制文件的<code>__mod_init_func</code>部分。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160222/2016022205482686219OS3.png" alt="p3" /></p>
+<p><img src="http://static.wooyun.org//drops/20160222/2016022205482686219OS3.png" alt="p3"></p>
 
 <p>从上图中可以看出，整个可执行文件主要使用的解密秘钥是“Variable”。但是，这里出现了几个不同的"Variable" 字符串，这样能够方便木马作者使用不同的解密秘钥来更新代码。虽然，XOR解密不难，但是，这种方案能够增加逆向工程的繁琐程度。下面这个解密函数与EmptyApplication使用的函数很类似，只不过，下面这个版本采用了一个变量解密秘钥:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160222/2016022205482724491OS4.png" alt="p4" /></p>
+<p><img src="http://static.wooyun.org//drops/20160222/2016022205482724491OS4.png" alt="p4"></p>
 
 <h3>反调试</h3>
 
@@ -81,7 +81,7 @@ EmptyApplication (for architecture i386): Mach-O executable i386
 
 <p>木马会尝试联系多个CC服务器（C2）来获取命令和其他有效载荷。木马首先会使用HTTP连接端口80上的第一个C2：kiifd[.]pozon7[.]net。下面的例子就是一个check-in请求：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160222/2016022205482958051OS5.png" alt="p5" /></p>
+<p><img src="http://static.wooyun.org//drops/20160222/2016022205482958051OS5.png" alt="p5"></p>
 
 <p>在这里，1AD6A35F4C2D73593912F9F9E1A55097是IOPlatformUUID的MD5哈希。IOPlatformUUID是通过执行下面的OS X命令获取到的：</p>
 
@@ -110,13 +110,13 @@ EmptyApplication (for architecture i386): Mach-O executable i386
 
 <p>除了系统和用户信息，木马会根据www.microsoft.com获取当前时间。为了获取时间信息，木马会发送一个HTTP请求到www.microsoft.com，并解析响应中的Data标头。实际上，在请求中存在一个错误-发送到www.microsoft.com的请求是这样的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160222/2016022205483139448OS6.png" alt="p6" /></p>
+<p><img src="http://static.wooyun.org//drops/20160222/2016022205483139448OS6.png" alt="p6"></p>
 
 <p>你会发现，在请求中没有任何路径，并且服务器响应了一个400。因为木马只关心响应中的Data标头，所以，这个有问题的请求也是可以用的。解析后的数据会转换成epoch时间，并储存在~/Library/Hash/.Hashtag/.hash (或/Library/Hash/.Hashtag/.hash)。在这里，代码中还存在另一个错误，导致木马会从~/Library/Hash/.hash中读取时间信息，而真正的目录中应该有.HashTag。除了时间戳，值“th”和1也储存在这个文件中，所有的内容都使用了XOR加密，秘钥是“camon”。</p>
 
 <p>木马会把系统信息和用户信息发送到C2，并最后创建一个线程来处理C2发来的命令。下面的转储就是加密的C2通讯：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160222/2016022205483342301OS7.png" alt="p7" /></p>
+<p><img src="http://static.wooyun.org//drops/20160222/2016022205483342301OS7.png" alt="p7"></p>
 
 <p>使用秘钥0x1B解码了系统信息块后，我们得到了下面的数据-加粗的部分是产品名称，OS版本，用户名，机器名和IOPlatformUUID的MD5哈希。</p>
 
@@ -126,12 +126,12 @@ EmptyApplication (for architecture i386): Mach-O executable i386
 
 <p>在向C2发送了系统信息和用户信息后，这个线程每秒都会尝试读取C2信息，但是，C2似乎每隔5秒才会发送一次数据。如果C2响应的数据中包含有命令指令，木马就会执行某条命令。下面的这些字符串是从二进制文件中解密获得的，很可能属于C2端的一个交互命令控制台（console）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160222/2016022205483464886OS8.png" alt="p8" /></p>
+<p><img src="http://static.wooyun.org//drops/20160222/2016022205483464886OS8.png" alt="p8"></p>
 
 <p>除了几个命令之外，这些命令的作用都是一目了然的。</p>
 
 <ul>
-<li>“exec”通过调用系统("open <APP Bundle>”)打开一个应用程序包（.app directory）</li>
+<li>“exec”通过调用系统("open <app bundle="">”)打开一个应用程序包（.app directory）</app></li>
 <li>“info”返回关于文件或路径信息</li>
 <li>“recent”返回近期打开的文档列表，通过调用<code>LSSharedFileListCreate(0, kLSSharedFileListRecentDocumentItems, 0)</code>实现；</li>
 <li>“windows”返回系统上当前打开窗口的信息（比如，某个窗口的进程），通过调用<code>CGWindowListCopyWindowInfo()</code>实现</li>
@@ -153,7 +153,7 @@ EmptyApplication (for architecture i386): Mach-O executable i386
 
 <h1>0x03 总结</h1>
 
-<hr />
+<hr>
 
 <p>这个OS X版本的OceanLotus木马很明显是一个专门针对OS X制作的成熟木马。对OS X命令和API的使用证明了木马作者非常精通OS X系统，并且木马作者用了相当多的时间来定制这个木马，以便让木马适应OS X环境。与其他先进的恶意软件类似，二进制混淆的使用表明木马作者想要保护自己的成果，增加逆向工程的难度并降低木马被检测到的概率。VirusTotal上的0检测率事实也说明木马作者做的很成功。</p>
 
@@ -311,7 +311,7 @@ Osquery OceanLotus pack:
     }
   }
 }
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>
