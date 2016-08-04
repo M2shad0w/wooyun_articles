@@ -1,0 +1,24 @@
+{
+  "name": "wooyun_articles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "wooyun.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiji262/wooyun_articles.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jiji262/wooyun_articles/issues"
+  },
+  "homepage": "https://github.com/jiji262/wooyun_articles#readme",
+  "dependencies": {
+    "async": "^2.0.1",
+    "bagpipe": "^0.3.5",
+    "cheerio": "^0.20.0"
+  }
+}
