@@ -45,10 +45,10 @@ fs.readdir('./drops', (err, files) => {
 
 	}, function(err, results) {
 
-		// 		console.log(results);
-		// for (var i = 0; i < imagesLink.length; i++) {
-		// 	console.log("'"+imagesLink[i]+ "',");
-		// }
+		console.log(results);
+		for (var i = 0; i < imagesLink.length; i++) {
+			console.log("'"+imagesLink[i]+ "',");
+		}
 
 	});
 });
