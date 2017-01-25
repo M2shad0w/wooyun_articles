@@ -3,7 +3,7 @@
 			<head>
 			     <title>openresty+lua在反向代理服务中的玩法 - phith0n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6403">http://drops.wooyun.org/tips/6403</a></h1>
 				
@@ -51,7 +51,7 @@ make &amp;&amp; make install
 
 <p>一个简单demo：http://wooyun.jjfly.party ，其配置文件如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503204077003.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503204077003.png" alt="enter image description here"></p>
 
 <p>其中，location / 块即为反代乌云的配置块。</p>
 
@@ -65,15 +65,15 @@ make &amp;&amp; make install
 
 <p>这样，做好了一个完美的“钓鱼网站”：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503204061110.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503204061110.png" alt="enter image description here"></p>
 
 <p>我甚至可以正常登录、修改信息：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503204146263.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503204146263.png" alt="enter image description here"></p>
 
 <p>但是并不是所有网站做反代都这样简单，比如google。谷歌是一个https的站点，所以通常也需要一个https的配置：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503204357178.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503204357178.png" alt="enter image description here"></p>
 
 <p>我申请了一个SSL证书，反代方法和乌云类似。但不同的是，谷歌会检查host，如果host不是谷歌自己的域名就会强制302跳转到www.google.com。</p>
 
@@ -85,11 +85,11 @@ make &amp;&amp; make install
 
 <p>那么，如果我并没有条件购买SSL证书怎么办？其实我们在nginx配置中也是可以将https降成http的。比如http://qq.jjfly.party就是代理的https://mail.qq.com：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503204478925.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503204478925.png" alt="enter image description here"></p>
 
 <p>另外，在xui.qq.jjfly.party（登陆框的frame）中，我利用 <code>subs_filter &lt;/head&gt; "&lt;script&gt;alert('xxx');&lt;/script&gt;&lt;/head&gt;";</code> ，在html的标签前插入了一段javascript，通过这个方式，我可以简单制作一个前端的数据截取。（XSS） 打开即会弹窗：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503204577417.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503204577417.png" alt="enter image description here"></p>
 
 <p>在反代过程中，我们会常常和gzip打交道。熟悉http协议的同学应该知道，如果浏览器发送的数据包头含有Accept-Encoding: gzip，即告诉服务器：“我可以接受gzip压缩过的数据包”。这时后端就会将返回包压缩后发送，并包含返回头Content-Encoding: gzip，浏览器根据是否含有这个头对返回数据包进行解压显示。</p>
 
@@ -101,7 +101,7 @@ make &amp;&amp; make install
 
 <p>但有时候，做反代的时候会发现subs_filter的替换失效或部分失效了，我在做126.com反代的时候就遇到了这个问题。经过一段时间的研究发现，可能和缓存有关系，缓存中的数据包是gzip压缩过的，所以就算发送Accept-Encoding=””也不管用。 如下是http://126.jjfly.party 配置：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503204665409.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503204665409.png" alt="enter image description here"></p>
 
 <p>我设置了很多阻止其缓存的方法，但实际上好像并没有效果。</p>
 
@@ -122,11 +122,11 @@ make &amp;&amp; make install
 
 <p>以上代码解释一下。首先执行cmake来生成编译配置文件。LUA&#95;INCLUDE&#95;DIR指定luajit的include文件夹，LUA&#95;LIBRARIES指定luajit的lib文件夹。USE&#95;LUAJIT=ON和USE_LUA=OFF指定我们使用的是luajit而不是lua：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503204651477.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503204651477.png" alt="enter image description here"></p>
 
 <p>再执行make &amp;&amp; make install即可：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503204761505.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503204761505.png" alt="enter image description here"></p>
 
 <p>这时候已经编译好了zlib.so，拷贝到openresty的lib目录下即可：</p>
 
@@ -201,11 +201,11 @@ end
 
 <p>最后，解压完成后我直接调用callback()函数在其中对数据包进行替换，实际上就是完成之前subs_filter做的那些操作。 这样配置完成后，重启nginx，用浏览器访问将会发现一个问题：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503204771727.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503204771727.png" alt="enter image description here"></p>
 
 <p>提示是：ERR&#95;CONTENT&#95;DECODING_FAILED，但我用burpsuite发包会发现似乎一切正常：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503204730237.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503204730237.png" alt="enter image description here"></p>
 
 <p>其实这个问题我之前都说了，还是和gzip有关。我们看到上图，返回包中含有Content-Encoding: gzip，当我们的浏览器查看到此头后，会认为数据包是gzip压缩过的。</p>
 
@@ -215,11 +215,11 @@ end
 
 <p>在nginx配置中将返回包头中的Content-Encoding设置为空就好了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503204863595.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503204863595.png" alt="enter image description here"></p>
 
 <p>header&#95;filter&#95;by_lua就是在修改返回头的配置。后面可以直接编写lua脚本，将ngx.header["Content-Encoding"]=""。 这时就可以正常访问了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503204848441.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503204848441.png" alt="enter image description here"></p>
 
 <h1>0x05 利用lua截取数据</h1>
 
@@ -257,11 +257,11 @@ end
 
 <p>这时，我访问http://126.jjfly.party/admin/126.jjfly.party.txt 就可以看到实时钓鱼的结果：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503205098982.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503205098982.png" alt="enter image description here"></p>
 
 <p>乌云也一样：http://wooyun.jjfly.party/admin/wooyun.jjfly.party.txt</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503205164860.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503205164860.png" alt="enter image description here"></p>
 
 <p>QQ邮箱那个因为环境太复杂（有至少三个host需要反代），所以我宁愿选择在前端插入脚本进行劫持。</p>
 
@@ -269,7 +269,7 @@ end
 
 <p>比如谷歌，我可以记录访客在谷歌中查询的内容：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503205183566.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503205183566.png" alt="enter image description here"></p>
 
 <p>脚本也很简单：</p>
 
@@ -369,7 +369,7 @@ return
 
 <p>最后效果如图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503205255159.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503205255159.png" alt="enter image description here"></p>
 
 <h1>0x07 总结与引用</h1>
 

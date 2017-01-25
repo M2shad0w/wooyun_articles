@@ -3,7 +3,7 @@
 			<head>
 			     <title>SSL协议安全系列：SSL中弱PRNG带来的安全问题 - GoSSIP_SJTU</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/9144">http://drops.wooyun.org/papers/9144</a></h1>
 				
@@ -30,7 +30,7 @@
 
 <p>Linux系统中PRNG的结构抽象如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092308570289557pic120.png" alt=""></p>
+<p><img src="../images_result/images/2015092308570289557pic120.png" alt=""></p>
 
 <ul>
 <li><p><strong>Pools and counters</strong>：上图描述了LRNG流程。内部状态保持在3个熵池里：primary、secondary、urandom，它们的大小分别为512、128、128字节。熵源向primary池添加数据；它的输出再给到secondary和urandom中，LRNG的输出是从secondary或者urandom中提取的。提取过程中，一个池子的内部状态会根据反馈行为更新。</p>
@@ -65,11 +65,11 @@
 <p>这个脚本是Linux发行包中的一部分，而不是内核的一部分。在KNOPPIX及OpenWRT发行版中没有这个脚本，他们的LRNG初始状态是可预测的，安全性较低。</p></li>
 <li><p>估算熵值 LRNG仅适用一个时间函数估算事件的熵，而与事件类型无关。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092308570463942pic210.png" alt=""></p>
+<p><img src="../images_result/images/2015092308570463942pic210.png" alt=""></p>
 
 <p>事件的熵为：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151010/2015101008402089705pic3ed.png" alt=""></p></li>
+<p><img src="../images_result/images/2015101008402089705pic3ed.png" alt=""></p></li>
 <li><p>更新熵池 熵池的更新机制基于TGFSR（Twisted Generalized Feedback Shift Register）。</p>
 
 <p>TGFSR的唯一输入是状态的初始值（一个p*w bit的种子），每个循环中内部状态被用来生成新的状态。</p>
@@ -78,13 +78,13 @@
 
 <p>熵通过运行add(pool, j, g）算法来增加，g是新的熵word。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092308570765448pic48.png" alt=""></p>
+<p><img src="../images_result/images/2015092308570765448pic48.png" alt=""></p>
 
 <p>每个池子基于一个本原多项式来更新。多项式根据池子大小来选，secondary和urandom用的多项式相同。</p>
 
 <p>从熵池中提取随机bit的方式为：（1）对提取的bit做hash；（2）修改池子状态；（3）减小计数器。 依据如下算法：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092308581331366pic59.png" alt=""></p></li>
+<p><img src="../images_result/images/2015092308581331366pic59.png" alt=""></p></li>
 </ul>
 
 <h1>0x03 弱PRNG对SSL的影响</h1>

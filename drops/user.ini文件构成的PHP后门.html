@@ -3,7 +3,7 @@
 			<head>
 			     <title>.user.ini文件构成的PHP后门 - phith0n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3424">http://drops.wooyun.org/tips/3424</a></h1>
 				
@@ -28,7 +28,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/20141030/2014103002272568560.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103002272568560.png" alt="enter image description here"></p>
 
 <p>其中就提到了，模式为PHP&#95;INI&#95;USER的配置项，可以在ini_set()函数中设置、注册表中设置，再就是.user.ini中设置。 这里就提到了.user.ini，那么这是个什么配置文件？那么官方文档在<a href="http://php.net/manual/zh/configuration.file.per-user.php">这里</a>又解释了：</p>
 
@@ -46,11 +46,11 @@
 
 <p>Php配置项中有两个比较有意思的项（下图第一、四个）：</p>
 
-<p><img src="http://static.wooyun.org/20141030/2014103002272554789.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103002272554789.png" alt="enter image description here"></p>
 
 <p><code>auto_append_file</code>、<code>auto_prepend_file</code>，点开看看什么意思：</p>
 
-<p><img src="http://static.wooyun.org/20141030/2014103002272569525.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103002272569525.png" alt="enter image description here"></p>
 
 <p>指定一个文件，自动包含在要执行的文件前，类似于在文件前调用了require()函数。而auto&#95;append&#95;file类似，只是在文件后面包含。 使用方法很简单，直接写在.user.ini中：</p>
 
@@ -63,19 +63,19 @@
 
 <p>测试一下，我分别在IIS6.0+Fastcgi+PHP5.3和nginx+fpm+php5.3上测试。 目录下有.user.ini，和包含webshell的01.gif，和正常php文件echo.php：</p>
 
-<p><img src="http://static.wooyun.org/20141030/2014103002272563350.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103002272563350.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141030/2014103002272650870.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103002272650870.png" alt="enter image description here"></p>
 
 <p>访问echo.php即可看到后门：</p>
 
-<p><img src="http://static.wooyun.org/20141030/2014103002272652570.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103002272652570.png" alt="enter image description here"></p>
 
 <p>Nginx下同样：</p>
 
-<p><img src="http://static.wooyun.org/20141030/2014103002272682946.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103002272682946.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141030/2014103002272674827.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103002272674827.png" alt="enter image description here"></p>
 
 <p>那么，我们可以猥琐地想一下，在哪些情况下可以用到这个姿势？ 比如，某网站限制不允许上传.php文件，你便可以上传一个.user.ini，再上传一个图片马，包含起来进行getshell。不过前提是含有.user.ini的文件夹下需要有正常的php文件，否则也不能包含了。 再比如，你只是想隐藏个后门，这个方式是最方便的。</p>
 

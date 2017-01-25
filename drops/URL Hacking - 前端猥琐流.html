@@ -3,7 +3,7 @@
 			<head>
 			     <title>URL Hacking - 前端猥琐流 - 0x_Jin</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/750">http://drops.wooyun.org/tips/750</a></h1>
 				
@@ -28,7 +28,7 @@
 
 <p>不知道有多少人思考过这个问题！我们经常输入的格式一般都是www.xxxx.com！</p>
 
-<p>或者再加上协议名 http https 端口以及路径什么的 或者再加上账号密码！如下图： ￼ <img src="http://static.wooyun.org/20140918/2014091813180662058.png" alt="enter image description here"></p>
+<p>或者再加上协议名 http https 端口以及路径什么的 或者再加上账号密码！如下图： ￼ <img src="../images_result/images/2014091813180662058.png" alt="enter image description here"></p>
 
 <pre><code>第一部分：协议名(以单个冒号结束)
 第二部分：用户信息 也就是账号密码！(登陆ftp时常用)
@@ -122,13 +122,13 @@
 
 <p>首先看下这个链接在chrome中的样子：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813180771134.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091813180771134.jpeg" alt="enter image description here"></p>
 
 <p>很明显的看到 这样一个链接在chrome中是会去访问xss1.com的！</p>
 
 <p>现在我们来看下在firefox下的样子：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813180829058.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091813180829058.jpeg" alt="enter image description here"></p>
 
 <p>会提示我们是否要用账号为：xss1.com\的信息去访问www.baidu.com!</p>
 
@@ -177,7 +177,7 @@ var b='://';
 
 <p>如下图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813180996908.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091813180996908.png" alt="enter image description here"></p>
 
 <p>可以看到//后面我们还能输入tab，换行，<code>/ @ \</code> 等等！那我们来测试一下！构造如下链接去访问一下！</p>
 
@@ -190,7 +190,7 @@ var b='://';
 
 <p>等等全部能正常的访问到百度!大家可以自己试一下！最好的话写在a 标签 或者 img script里把！这样更贴近我们平常所遇到的环境！</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091813181033337.png" alt="enter image description here"></p>
+<p>￼<img src="../images_result/images/2014091813181033337.png" alt="enter image description here"></p>
 
 <p>既然我们在文章的标题提到了猥琐 这样够猥琐？No 还不够！这样我们的连接始终还是带着一定的特征！</p>
 
@@ -236,11 +236,11 @@ var b='://';
 
 <p>都设置好 如下图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181129065.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091813181129065.jpg" alt="enter image description here"></p>
 
 <p>下面的小参数可以使用默认的！参数都设置好了，现在我们要标识 我们要测试哪个字符，用:{chr} 代替该字符即可！</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181267163.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091813181267163.jpeg" alt="enter image description here"></p>
 
 <p>好，现在设置好后点击Fuzzing 枪打出头鸟 我们就先测d吧！</p>
 
@@ -250,7 +250,7 @@ var b='://';
 
 <p>现在我们复制他们！然后丢chrome里把他们给还原回来！打开控制台(F12)</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181226492.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091813181226492.jpeg" alt="enter image description here"></p>
 
 <p>输入String.fromCharCode(ASCII码) 回车便出来了！</p>
 
@@ -272,7 +272,7 @@ var b='://';
 
 <p>如果curl的话就不行了！</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181348857.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091813181348857.jpeg" alt="enter image description here"></p>
 
 <p>为什么呢？很简单因为没解析 curl他不会去解析这个字符串！</p>
 
@@ -290,7 +290,7 @@ var b='://';
 
 <p>首先拿一个被腾讯认为是危险网站的红X站</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181472483.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091813181472483.jpeg" alt="enter image description here"></p>
 
 <p>可以看到这个链接发出来是会被当做危险网站的！</p>
 
@@ -298,7 +298,7 @@ var b='://';
 
 <p>(因为你fuzz的字符多了 会被当成符号 让腾讯认为这不是一个链接！然后就不 能一点就会打开网页了 比如这样。。。)</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181436152.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091813181436152.jpg" alt="enter image description here"></p>
 
 <p>可以看到这样带的符号多了 让腾讯这不是一个链接 就不会生成个超链接了！</p>
 
@@ -310,7 +310,7 @@ var b='://';
 
 <p>还是用 http://xsser.me/hf.html 来fuzz</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181530821.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091813181530821.jpeg" alt="enter image description here"></p>
 
 <p>经过fuzz 测试出来 http://laohujijiqiao8.com 的o 可以用以下的字符来代替！ ￼</p>
 
@@ -324,7 +324,7 @@ var b='://';
 
 <p>发出去 看还带没带危险网站的标识！上图： ￼</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181519392.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091813181519392.jpeg" alt="enter image description here"></p>
 
 <p>现在已经没有标识这是个危险网站的 并且还能够正常打开！是不是已经达到我们的目的了呢？</p>
 
@@ -378,7 +378,7 @@ var b='://';
 <pre><code>首先把这四段数字给 转成 16 进制！结果：73 ef d2 1a  然后把 73efd21a 这十六进制一起转换成8进制！
 </code></pre>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091813181665105.jpeg" alt="enter image description here"></p>
+<p>￼<img src="../images_result/images/2014091813181665105.jpeg" alt="enter image description here"></p>
 
 <p>结果：16373751032</p>
 
@@ -387,7 +387,7 @@ var b='://';
 <pre><code>http://0016373751032
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813181777390.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091813181777390.jpeg" alt="enter image description here"></p>
 
 <p>成功解析成我们原来的ip了！</p>
 
@@ -405,7 +405,7 @@ var b='://';
 
 <p>既然解析回来了 那我们看看能不能用这个地址来加载一些资源比如图片 js什么的！</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091813181716006.jpeg" alt="enter image description here"></p>
+<p>￼<img src="../images_result/images/2014091813181716006.jpeg" alt="enter image description here"></p>
 
 <p>可以看到成功加载了图片！那应该也是加载js等等的！</p>
 

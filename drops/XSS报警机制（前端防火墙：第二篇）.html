@@ -3,7 +3,7 @@
 			<head>
 			     <title>XSS报警机制（前端防火墙：第二篇） - Black_Hole</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/13970">http://drops.wooyun.org/web/13970</a></h1>
 				
@@ -24,11 +24,11 @@
 
 <p>前端要做的事情在第一章的时候就已经说了，代码如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160321/2016032113584376310119.jpg" alt="p1"></p>
+<p><img src="../images_result/images/2016032113584376310119.jpg" alt="p1"></p>
 
 <p>现在我们就是针对第38行进行修改，改成我们后台接受的API URL。就像这样：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160321/2016032113584451112211.jpg" alt="p2"></p>
+<p><img src="../images_result/images/2016032113584451112211.jpg" alt="p2"></p>
 
 <p>对，就这一行。没有其他代码。在实际的线上环境中，也只需要上面5行。可以直接copy到您的线上环境中，记得把倒数第二行的url改成自己的地址就行了。难道就那么简单？不，0x05节还有一部分前端代码。0x01~0x04主要是针对于平台。</p>
 
@@ -40,7 +40,7 @@
 
 <p>fecm_user的字段信息如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160321/2016032113584653418311.jpg" alt="p3"></p>
+<p><img src="../images_result/images/2016032113584653418311.jpg" alt="p3"></p>
 
 <ul>
 <li>name：管理员账户名</li>
@@ -54,7 +54,7 @@
 
 <p>fecm_bugdata的字段信息如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160321/2016032113584850395410.jpg" alt="p4"></p>
+<p><img src="../images_result/images/2016032113584850395410.jpg" alt="p4"></p>
 
 <ul>
 <li>url：漏洞的url地址</li>
@@ -165,11 +165,11 @@ var myLine = new Chart(document.getElementById("Statistics").getContext("2d")).L
 
 <p>实际的效果图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160321/2016032113585076946510.jpg" alt="p5"></p>
+<p><img src="../images_result/images/2016032113585076946510.jpg" alt="p5"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160321/201603211358517480868.jpg" alt="p6"></p>
+<p><img src="../images_result/images/201603211358517480868.jpg" alt="p6"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160321/201603211358537314277.jpg" alt="p7"></p>
+<p><img src="../images_result/images/201603211358537314277.jpg" alt="p7"></p>
 
 <h1>0x04 让我们实际测试一下</h1>
 
@@ -177,13 +177,13 @@ var myLine = new Chart(document.getElementById("Statistics").getContext("2d")).L
 
 <p>代码就用0x01节的代码。我们输入<code>&lt;script&gt;alert(1)&lt;/script&gt;</code>。看一下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160321/201603211358586154786.jpg" alt="p8"></p>
+<p><img src="../images_result/images/201603211358586154786.jpg" alt="p8"></p>
 
 <p>我们再去平台看一下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160321/201603211358597252996.jpg" alt="p9"></p>
+<p><img src="../images_result/images/201603211358597252996.jpg" alt="p9"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160321/2016032113590057626105.jpg" alt="p10"></p>
+<p><img src="../images_result/images/2016032113590057626105.jpg" alt="p10"></p>
 
 <p>成功显示了。</p>
 
@@ -239,13 +239,13 @@ for(var i = 0;i &lt; webScript.length;i++){
 
 <p>这里我做了一个测试，加载hi.baidu.com的资源：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160321/20160321135902880691110.jpg" alt="p11"></p>
+<p><img src="../images_result/images/20160321135902880691110.jpg" alt="p11"></p>
 
 <p>刷新后，打开FECM平台，看一下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160321/2016032113590359789126.jpg" alt="p12"></p>
+<p><img src="../images_result/images/2016032113590359789126.jpg" alt="p12"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160321/2016032113590594983135.jpg" alt="p13"></p>
+<p><img src="../images_result/images/2016032113590594983135.jpg" alt="p13"></p>
 
 <h1>0x06 结语</h1>
 

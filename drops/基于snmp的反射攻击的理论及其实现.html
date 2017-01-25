@@ -3,7 +3,7 @@
 			<head>
 			     <title>基于snmp的反射攻击的理论及其实现 - 付弘雪</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2106">http://drops.wooyun.org/tips/2106</a></h1>
 				
@@ -37,7 +37,7 @@
 
 <p>这里oid是获取snmp具体信息内容的一个标识，snmp里面存的信息是一个树状的信息结构。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014052716250940920.jpg" alt="2014052716250940920.jpg"></p>
+<p><img src="../images_result/images/2014052716250940920.jpg" alt="2014052716250940920.jpg"></p>
 
 <p>其实snmpwalk是获取一条oid信息，但是这个oid里面附带了下一个树节点的oid号，然后snmp会通过 snmpget继续访问下一个oid号（在getnext字段里面），来执行一个类似于循环的行为，但是snmpget的协议大家也看到了，只能获取到一条信息，79的信息长度，只能获得279的反馈，这样实现攻击的放大倍数是不给力的。</p>
 
@@ -48,7 +48,7 @@
 
 <p>对应就是获取当前oid后面的70个团体字，这样如果你用snmpwalk跑一个1.3.6的团体字会看到很多信息，而你用bulkget这个一次就可以收到一个包里面包含70条信息的数据包，如图。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014052716263586576.jpg" alt="2014052716263586576.jpg"></p>
+<p><img src="../images_result/images/2014052716263586576.jpg" alt="2014052716263586576.jpg"></p>
 
 <p>这里看到数据包的length大家就会明白了，就是利用这种方式，来获得反射攻击的效果。</p>
 
@@ -67,13 +67,13 @@
 
 <p>下面是效果，这个包就发到本地吧，这里的源地址就是ddos的反射攻击的被攻击者的地址。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014052716275084302.jpg" alt="2014052716275084302.jpg"></p>
+<p><img src="../images_result/images/2014052716275084302.jpg" alt="2014052716275084302.jpg"></p>
 
 <p>这里看到了效果，为下一步工具化进行了铺垫</p>
 
 <p>最后这个图是虚拟机环境搭的，实现反射攻击的整体图</p>
 
-<p><img src="http://static.wooyun.org/201405/2014052716283040757.jpg" alt="2014052716283040757.jpg"></p>
+<p><img src="../images_result/images/2014052716283040757.jpg" alt="2014052716283040757.jpg"></p>
 
 <h2>0x03工具化</h2>
 
@@ -373,7 +373,7 @@ class MonitorPortRunnable implements Runnable {
 }
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201405/2014052716295083031.png" alt="2014052716295083031.png"></p>
+<p><img src="../images_result/images/2014052716295083031.png" alt="2014052716295083031.png"></p>
 
 <p>最后还有一个java写的结果过滤，其实就是一个snmp的信息获取程序，来筛选可利用的主机或者设备，大家可以增加更多的功能，例如看出口的速度等。</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>利用 Python 特性在 Jinja2 模板中执行任意代码 - RickGray</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/13057">http://drops.wooyun.org/web/13057</a></h1>
 				
@@ -35,11 +35,11 @@ print template.render()
 
 <p>为了方便演示，这里直接将命令参数输入拼接为模板内容的一部分并进行渲染输出，这里我们直接输入 <code>{{ 'abcd' }}</code> 使模板直接渲染字符串变量：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160224/2016022408510648597112.png" alt=""></p>
+<p><img src="../images_result/images/2016022408510648597112.png" alt=""></p>
 
 <p>当然上面说了可以在模板中直接调用变量实例的函数，如字符串变量中的 <code>upper()</code> 函数将其字符串转换为全大写形式：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160224/2016022408510811752212.png" alt=""></p>
+<p><img src="../images_result/images/2016022408510811752212.png" alt=""></p>
 
 <p>那么如何在 Jinja2 的模板中执行 Python 代码呢？如官方的说法是需要在模板环境中注册函数才能在模板中进行调用，例如想要在模板中直接调用内置模块 <code>os</code>，即需要在模板环境中对其注册，示例代码二如下：</p>
 
@@ -57,11 +57,11 @@ print template.render()
 
 <p>执行代码，并传入参数 <code>{{ os.popen('echo Hello RCE').read() }}</code>，因为在模板环境中已经注册了 <code>os</code> 变量为 Python <code>os</code> 模块，所以可以直接调用模块函数来执行系统命令，这里执行额系统命令为 <code>echo Hello Command Exection</code>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160224/201602240851102665637.png" alt=""></p>
+<p><img src="../images_result/images/201602240851102665637.png" alt=""></p>
 
 <p>如果使用示例代码一来执行，会得到 <code>os</code> 未定义的异常错误：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160224/201602240851119054243.png" alt=""></p>
+<p><img src="../images_result/images/201602240851119054243.png" alt=""></p>
 
 <h1>0x02 利用 Python 特性直接执行任意代码</h1>
 
@@ -113,7 +113,7 @@ while 1:
 [c 1="c" 2="in" 3="[" language="for"][/c].__class__.__base__.__subclasses__() if c.__name__ == 'catch_warnings'][0].__init__.func_globals['linecache'].__dict__['o'+'s'].__dict__['sy'+'stem']('echo Hello SandBox')
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160224/201602240851131061053.png" alt=""></p>
+<p><img src="../images_result/images/201602240851131061053.png" alt=""></p>
 
 <p>当然通过这种方式不仅仅能够通过 <code>os</code> 模块来执行系统命令，还能进行文件读写等操作，具体的代码请自行构造。</p>
 
@@ -129,7 +129,7 @@ while 1:
 
 <p>使用该 Payload 作为示例代码二的执行参数，最终会执行系统命令 <code>id</code>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160224/201602240851143905263.png" alt=""></p>
+<p><img src="../images_result/images/201602240851143905263.png" alt=""></p>
 
 <p>当然除了遍历找到 <code>os</code> 模块外，还能直接找回 <code>eval</code> 函数并进行调用，这样就能够调用复杂的 Python 代码。</p>
 
@@ -157,7 +157,7 @@ while 1:
 
 <p>使用该 Payload 作为示例代码二的执行参数（注意引号转义），成功执行会使用 <code>eval()</code> 函数动态载入 <code>os</code> 模块并执行命令：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160224/201602240851161335872.png" alt=""></p>
+<p><img src="../images_result/images/201602240851161335872.png" alt=""></p>
 
 <h1>0x03 利用途径和防御方法</h1>
 
@@ -167,7 +167,7 @@ while 1:
 
 <p>在 Jinja2 模板中防止利用 Python 特性执行任意代码，可以使用 Jinja2 自带的沙盒环境 <code>jinja2.sandbox.SandboxedEnvironment</code>，Jinja2 默认沙盒环境在解析模板内容时会检查所操作的变量属性，对于未注册的变量属性访问都会抛出错误。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160224/201602240851185611382.png" alt=""></p>
+<p><img src="../images_result/images/201602240851185611382.png" alt=""></p>
 
 <h1>0x04 参考</h1>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>安卓Bug 17356824 BroadcastAnywhere漏洞分析 - neobyte</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/3912">http://drops.wooyun.org/papers/3912</a></h1>
 				
@@ -16,13 +16,13 @@
 
 <p>在调试这个漏洞的时候，我发现Settings应用还存在一个类似漏洞，并在9月报告给了Android Security Team，标题为，Privilege escalation vulnerability in settings app of android 4.0 to 4.4 (leads to phishing sms), 并且很快得到了确认，Android官方也给了致谢<a href="http://drops.wooyun.org/wp-content/uploads/2014/11/file00013.png">2</a>：</p>
 
-<p><img src="http://static.wooyun.org/20141116/2014111607204453787.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014111607204453787.png" alt="enter image description here"></p>
 
 <!--more-->
 
 <p>这个漏洞的Android ID是17356824，影响4.0.1到4.4.4之间的版本，时间跨度从2011年到2014年，应该说影响面非常广，根据今年11月Google的统计，这个区间的Android设备在全球的占比大约为90%。</p>
 
-<p><img src="http://static.wooyun.org/20141116/2014111607204456821.png" alt="a"></p>
+<p><img src="../images_result/images/2014111607204456821.png" alt="a"></p>
 
 <p>retme给该漏洞起了一个很给力的名字broadcastAnywhere，与launchAnywhere相比，这两个漏洞的相同点在于：</p>
 
@@ -153,11 +153,11 @@ public int fillIn(Intent other, int flags) {
 
 <p>看看安卓4.4.4的Settings中有漏洞的源码：可见一个mPendingIntent是通过new Intent()构造原始Intent的，所以为“双无”Intent，这个PendingIntent最终被通过AccountManager.addAccount方法传递给了恶意APP接口：</p>
 
-<p><img src="http://static.wooyun.org/20141116/2014111607204452658.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014111607204452658.png" alt="enter image description here"></p>
 
 <p>在Android 5.0的源码中，修复方法是设置了一个虚构的Action与Component https://android.googlesource.com/platform/packages/apps/Settings/+/37b58a4%5E%21/#F0</p>
 
-<p><img src="http://static.wooyun.org/20141116/2014111607204434646.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014111607204434646.png" alt="enter image description here"></p>
 
 <p>最初报告这个漏洞给Android时，用的伪造短信的POC，也是retme博客中演示的。例如可以伪造10086发送的短信，这与收到正常短信的表象完全一致（并非有些APP申请了WRITE_SMS权限后直接写短信数据库时无接收提示）。后来又更新了一个Factory Reset的POC，可以强制无任何提示将用户手机恢复到出厂设置，清空短信与通信录等用户数据，恶意APP的接口代码片段如下：</p>
 
@@ -181,7 +181,7 @@ public Bundle addAccount(AccountAuthenticatorResponse response, String accountTy
 
 <p>有意思的是，在小米手机中，如果用户未添加小米账号，那么该攻击需要用户干预才能成功：原因是MIUI修改了Settings程序，当添加账号时，对任意账号类型，除了对应的authenticator外，系统还提供“小米账号”供选择，由于不是单选，系统会弹出一个对话框供用户选择：</p>
 
-<p><img src="http://static.wooyun.org/20141116/2014111607204463615.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014111607204463615.png" alt="enter image description here"></p>
 
 <p>当然如果用户已经添加了小米账号，就只剩下一个选项，攻击就无需人工干预了。这部分的具体流程可以参考Android源码以及MIUI代码中Settings应用的ChooseAccountActivity.java部分，这里不再赘述。</p>
 
@@ -230,19 +230,19 @@ Intent  setAction(String action)
 
 <p>https://android.googlesource.com/platform/frameworks/opt/telephony/+/android-5.0.0_r6/src/java/com/android/internal/telephony/gsm/GsmServiceStateTracker.java</p>
 
-<p><img src="http://static.wooyun.org/20141116/2014111607204560377.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014111607204560377.png" alt="enter image description here"></p>
 
 <p>这里，尽管普通APP无法访问其他APP的notification，但利用AccessiblyService或者 NotificationListenerService，一个APP可能可以获取其他notification中的pendingintent，导致权限泄露。</p>
 
 <p>https://android.googlesource.com/platform/frameworks/base/+/android-5.0.0_r6/keystore/java/android/security/KeyChain.java</p>
 
-<p><img src="http://static.wooyun.org/20141116/2014111607204572987.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014111607204572987.png" alt="enter image description here"></p>
 
 <p>这里，由于该PendingIntent通过一个非显式的Intent发送，恶意APP可以劫持这个Intent，从而导致权限泄露。</p>
 
 <p>另外一种动态分析的方法是通过dumpsys来观察当前系统中的PendingIntent Record，例如5.0修复后，观察到的Settings发送的PendingIntent有了act与cmp属性，而5.0之前的为空。</p>
 
-<p><img src="http://static.wooyun.org/20141116/2014111607204579877.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014111607204579877.png" alt="enter image description here"></p>
 
 <h2>0x04 参考资料</h2>
 

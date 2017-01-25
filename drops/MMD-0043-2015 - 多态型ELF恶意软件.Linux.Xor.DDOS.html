@@ -3,7 +3,7 @@
 			<head>
 			     <title>MMD-0043-2015 - 多态型ELF恶意软件:Linux/Xor.DDOS - 左懒</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/9233">http://drops.wooyun.org/papers/9233</a></h1>
 				
@@ -24,7 +24,7 @@
 
 <p>这篇报告是一个真实的感染事件，一个已知的gang/crook案例，我得以发布如下的攻击日志：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092411484471890picture16.png" alt=""></p>
+<p><img src="../images_result/images/2015092411484471890picture16.png" alt=""></p>
 
 <p>上面的日志是典型的Linux/ Xor.DDOS hostasa.org ssh暴力攻击模式。不久之前我在<a href="http://blog.malwaremustdie.org/2015/06/mmd-0033-2015-linuxxorddos-infection_23.html">这里</a>发布过（同一个攻击者）一个案例还有最近发生的一个<a href="http://www.linuxquestions.org/questions/linux-security-4/if-you-infected-by-any-of-these-recent-elf-malware-cases-please-contact-us-4175546925/">案例</a>。另外，我把这个恶意软件上传到了<a href="https://www.virustotal.com/en/file/8d25feed690c1381f70018f5b905efbc9d8901098371cdeb8f32aa4d358210c7/analysis/1442501628/">virustotal</a>。</p>
 
@@ -51,7 +51,7 @@ lseek(4, 0, SEEK_SET)                   ; set LSET to OFFSET to WRITE
 
 <p>通过逆向ELF恶意软件，以下的操作就是上述恶意软件在寻找安装目录到执行整个过程（大图点击<a href="http://imgur.com/WDzFIvh">这里</a>）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092411484775337picture21.png" alt=""></p>
+<p><img src="../images_result/images/2015092411484775337picture21.png" alt=""></p>
 
 <p>可以看到恶意软件通过级联的方式去寻找一个可以自我拷贝的地方，程序最开始从尝试往/usr/bin目录拷贝，然后尝试往/bin目录拷贝。在我的测试过程中，它最终选择了/tmp/[randomname]。目标文件名是随机的，然后通过返回的全路径执行execve()。我们稍后再讨论这个话题。</p>
 
@@ -106,7 +106,7 @@ write(3, "wlpvpovdvi\0", 11) ; 'size is set to 11'
 
 <p>下图是文件写入前和写入后的对比:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092411485194001picture31.png" alt=""></p>
+<p><img src="../images_result/images/2015092411485194001picture31.png" alt=""></p>
 
 <p>可以看到，文件被多添加了11个字节，这意味着会比自我拷贝之前的恶意软件多出11个字节。</p>
 
@@ -149,25 +149,25 @@ $ ls -l XOR.DDOS.SAMPLE lgjgjmkkgd| awk '{print $5, $6, $7, $9}'
 
 <p>下面是我的恶意样本一部分自我拷贝的过程。注意：自我拷贝级联了几种情况，我大概数了一下有至少四层级联。恶意软件的作者真的计算了所有可能性以确保他的代码能够运行。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092411485464919picture41.png" alt=""></p>
+<p><img src="../images_result/images/2015092411485464919picture41.png" alt=""></p>
 
 <p>跳转到0x804dfc2进行处理下个任务。</p>
 
 <p>下面展示了恶意软件在完成拷贝文件之后修改文件的过程。11个随机字符没有直接使用的，而是跟一个硬编码在0x080cf120（str.Ff4VE.7）的字符串做xor加密运算。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092411485558409picture51.png" alt=""></p>
+<p><img src="../images_result/images/2015092411485558409picture51.png" alt=""></p>
 
 <p>snprintf()函数结果最终被SYS_write系统调用所使用，在逆向静态编译的ELF恶意样本的时候可以看到一些来自libc的函数，后面还可以看到很多调用libc的代码。</p>
 
 <p>上面调试中所看到的timeoftheday()正是被这里的randomid()函数所调用的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092411485737725picture61.png" alt=""></p>
+<p><img src="../images_result/images/2015092411485737725picture61.png" alt=""></p>
 
 <p>很明显，这里调用了timeoftheday()取得系统时间来作为randomid()函数的随机种子。</p>
 
 <p>这里有一个惊讶的信息是（我想这消息对于社区很有帮助）：Linux/XOR.DDoS ELF恶意软件使用非常罕见的执行shell命令方法，它调用了LinuxExec&#95;Argv()和LinuxExec&#95;Argv2()，而这两个函数都是直接使用系统调用（静态编译），这些函数一个典型的特点是：用起来非常简单，而且容易找出哪些是负责调用execve()。下面展示了在解析完路径之后使用execvp()函数进行感染。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092411490226681picture71.png" alt=""></p>
+<p><img src="../images_result/images/2015092411490226681picture71.png" alt=""></p>
 
 <p>关于execvp详细信息可以直接参考man(2)，是的，Unix系统已经提供给我们最好的参考资料。</p>
 
@@ -194,11 +194,11 @@ $ ls -l XOR.DDOS.SAMPLE lgjgjmkkgd| awk '{print $5, $6, $7, $9}'
 
 <p>顺便说一下，CNC现在非常的活跃，下面是一些关于它们活动的截图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092411490411274picture81.png" alt=""></p>
+<p><img src="../images_result/images/2015092411490411274picture81.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092411490698543picture91.png" alt=""></p>
+<p><img src="../images_result/images/2015092411490698543picture91.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092411490898029picture101.png" alt=""></p>
+<p><img src="../images_result/images/2015092411490898029picture101.png" alt=""></p>
 
 <p>最后，希望这篇短文章能够帮助到做安全的朋友。</p>      <p></p>
     

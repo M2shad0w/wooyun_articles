@@ -3,7 +3,7 @@
 			<head>
 			     <title>OAuth 2.0安全案例回顾 - horseluke</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/598">http://drops.wooyun.org/papers/598</a></h1>
 				
@@ -38,10 +38,10 @@
 
 <p>这是OAuth 1.0中几乎唯一定义过的业务场景，主要用于传统客户端和有服务器参与的网站授权。</p>
 
-<p><img src="http://static.wooyun.org/201309/2013091312140589672.png" alt="2013091312140589672.png"><br>
+<p><img src="../images_result/images/2013091312140589672.png" alt="2013091312140589672.png"><br>
 图：rfc6749 第4.1节Authorization Code Grant流程图</p>
 
-<p><img src="http://static.wooyun.org/201309/2013091312152793993.jpg" alt="2013091312152793993.jpg"><br>
+<p><img src="../images_result/images/2013091312152793993.jpg" alt="2013091312152793993.jpg"><br>
 图：Authorization Code Grant常见的实现模式：以网站应用为例</p>
 
 <h4>（B）Implicit Grant（隐式许可）</h4>
@@ -50,20 +50,20 @@
 
 <p>这种场景不验证应用的有效性，主要用于无应用方服务器参与的纯浏览器javascript/HTML5交互。</p>
 
-<p><img src="http://static.wooyun.org/201309/2013091312170299688.png" alt="2013091312170299688.png"><br>
+<p><img src="../images_result/images/2013091312170299688.png" alt="2013091312170299688.png"><br>
 图：rfc6749 第4.2节Implicit Grant流程图</p>
 
-<p><img src="http://static.wooyun.org/201309/2013091312175289681.jpg" alt="2013091312175289681.jpg"><br>
+<p><img src="../images_result/images/2013091312175289681.jpg" alt="2013091312175289681.jpg"><br>
 图：Implicit Grant常见的实现模式：以无应用服务器的浏览器插件为例</p>
 
 <h4>（C）Resource Owner Password Credentials Grant（资源所有者密码凭据许可；XAuth即为此类）</h4>
 
 <p>应用直接向平台方的指定接口（一般为专用的XAuth登录接口；或者为获取Access Token接口）发起请求，直接用用户名和密码获取Access Token。</p>
 
-<p><img src="http://static.wooyun.org/201309/2013091312190147596.png" alt="2013091312190147596.png"><br>
+<p><img src="../images_result/images/2013091312190147596.png" alt="2013091312190147596.png"><br>
 图：rfc6749 第4.3节Resource Owner Password Credentials Grant流程图</p>
 
-<p><img src="http://static.wooyun.org/201309/2013091312200841422.jpg" alt="2013091312200841422.jpg"></p>
+<p><img src="../images_result/images/2013091312200841422.jpg" alt="2013091312200841422.jpg"></p>
 
 <p>图：Resource Owner Password Credentials Grant常见的实现模式：以传统客户端应用为例</p>
 
@@ -112,14 +112,14 @@ Authorization: OAuth2 【Access Token】
 
 <p>无论是OAuth 1.0还是OAuth 2.0，应用场景最多的就是第三方登录（账号打通），其中关键步骤，在于当应用方通过平台方的Access token获取接口得到授权信息（Access Token、uid、expire_time等）后，如何将其作为参数匹配到自己应用方的账号，然后自动登录（或自动注册）。针对这个流程常见的攻击之一是修改授权信息，如果后续的匹配处理逻辑出现纰漏（比如不当参数选择或无验证机制），那么就有可能导致任意登录到任一应用方账号的严重漏洞。</p>
 
-<p><img src="http://static.wooyun.org/201309/2013091312253323212.jpg" alt="2013091312253323212.jpg"><br>
+<p><img src="../images_result/images/2013091312253323212.jpg" alt="2013091312253323212.jpg"><br>
 图：攻击Access token数据的薄弱点</p>
 
 <p>在OAuth 1.0还是Authorization Code Grant一统天下的年代，由于主要用于服务器网站应用，这个问题顶多算是潜在问题，毕竟如果要改授权信息，只能操作服务器或者在服务器所在网站arp——都入侵到那种地步了有啥不可能。不过是世事无绝对，当年已经有开放平台提前实现了Implicit Grant场景，然后有网站错误使用了这种模式，通过javascript获取里面的uid/access token，然后再提交给网站直接进行登录；结果由于这些授权信息可以被攻击者轻易地截包修改，造成安全问题——淘网址的漏洞，就是这么来的。</p>
 
 <p>而OAuth 2.0在对待手机、平板之类应用的授权的问题上，一般都倾向于返回access token；然后由应用将access token上报给服务器，以进行应用自身的账号认证登录。这种场景的变化导致被篡改的难度大大降低（简单的验证方法是使用fiddler2进行截包篡改），但许多手机开发者、乃至手机背后的服务器api开发者并没有意识到，结果错误选择了授权信息作为参数（比如单纯选择uid）、或者没有对授权信息（access token）进行来源验证，从而导致这类漏洞大爆发。</p>
 
-<p><img src="http://static.wooyun.org/201309/2013091312262655743.jpg" alt="2013091312262655743.jpg"><br>
+<p><img src="../images_result/images/2013091312262655743.jpg" alt="2013091312262655743.jpg"><br>
 图：手机开发者引入OAuth 2.0后，常犯的任意登录到应用方账号严重漏洞成因</p>
 
 <p>解决这类漏洞的关键点主要靠应用方，但平台方也必须要参与：</p>
@@ -148,7 +148,7 @@ Authorization: OAuth2 【Access Token】
 
 <p>有关应用方csrf劫持的问题，不得不提2012年11月份的一场大讨论。那场讨论的漏洞场景主要是使用Authorization Code Grant的应用（网站居多），主要的漏洞原因是redirect_uri中的code参数没有和当前客户端的状态绑定，攻击者可以通过发送预先获取好的code参数到受害者电脑，导致导致受害者当前登录的应用方账号被绑定到攻击者指定的平台方（如微博）帐号上。当时我写了篇文章<a href="http://zone.wooyun.org/content/1562">《小议OAuth 2.0的state参数——从开发角度也说《互联网最大规模帐号劫持漏洞即将引爆》》</a>，详细建议用state参数防御这种csrf攻击，此处不再重复。</p>
 
-<p><img src="http://static.wooyun.org/201309/2013091312300733582.jpg" alt="2013091312300733582.jpg"><br>
+<p><img src="../images_result/images/2013091312300733582.jpg" alt="2013091312300733582.jpg"><br>
 图：针对code参数的Authorization Code Grant攻击；以及和rfc6749的流程图关系</p>
 
 <p>应用方要预防这种csrf劫持账号，加入state参数是比较简单的通行方法。根据rfc6749 章节10.12，该值既不可预测，又必须可以证明应用（client）和和当前第三方网站的登录认证状态存在关联（如果存在过期时间更好）。一种简单的方法是：随机算一个字符串，然后保存在session，回调时检查state参数和session里面的值。</p>
@@ -183,23 +183,23 @@ Authorization: OAuth2 【Access Token】
 
 <p>如果平台方可以被xss、或者没有xss但其登录流程有漏洞可以被csrf（比如登录表单没有referer保护），那么就可以让受害者的电脑登录到攻击者指定的平台方账号。这个的作用是干啥？别急，往下看。</p>
 
-<p><img src="http://static.wooyun.org/201309/2013091312342271463.png" alt="2013091312342271463.png"><br>
+<p><img src="../images_result/images/2013091312342271463.png" alt="2013091312342271463.png"><br>
 图：webstersprodigy csrf facebook登录的poc</p>
 
 <p>（2）stackexchange（应用方）csrf发起绑定请求</p>
 
 <p>回想一下作为一个普通用户，在应用方（stackexchange）绑定平台方（facebook）账号的过程：用户到stackexchange绑定页面，提示未绑定facebook，此时当然会点击“开始绑定”。那么有没有想过，“开始绑定”这个动作，其实是没有做csrf保护的？这正是应用方（包括我自己）长期以来忽视的一个问题——在应用点击发起绑定授权时，并不等于向平台方发起授权请求啊，它必须要做一些逻辑判断（包括生成state参数）后才能跳转到平台方的授权页面……</p>
 
-<p><img src="http://static.wooyun.org/201309/2013091312354673507.png" alt="2013091312354673507.png"><br>
+<p><img src="../images_result/images/2013091312354673507.png" alt="2013091312354673507.png"><br>
 图：webstersprodigy展示应用方的绑定页面</p>
 
 <p>因此，结合上面提到的facebook（平台方）可以csrf登录，攻击者首先让受害者电脑登录到指定的facebook账号，然后再csrf stackexchange（应用方）绑定请求，那么就可以达到劫持应用方帐号的目的了。而这两点成因，和state参数所防御的攻击场景有一定区别，所以完全可以bypass掉。</p>
 
-<p><img src="http://static.wooyun.org/201309/2013091312371472745.png" alt="2013091312371472745.png"></p>
+<p><img src="../images_result/images/2013091312371472745.png" alt="2013091312371472745.png"></p>
 
 <p>图：webstersprodigy的csrf应用方绑定请求poc</p>
 
-<p><img src="http://static.wooyun.org/201309/2013091312385341559.jpg" alt="2013091312385341559.jpg"><br>
+<p><img src="../images_result/images/2013091312385341559.jpg" alt="2013091312385341559.jpg"><br>
 图：webstersprodigy的完整攻击流程图</p>
 
 <p><a href="http://weibo.com/1921985135/z4wUOvAon">@渥村万涛 当年的评论</a>，更能说明有关csrf劫持应用方帐号这类问题的本质，只可惜我醒悟得太迟：“其实, 这个漏洞的根本原因, 是违反了RFC6749, 没有任何CSRF保护, 而不是没有使用state参数 (state只是实现CSRF保护的一种). 根据RFC6749<a href="http://t.cn/zlTZyo6">http://t.cn/zlTZyo6</a>state是推荐(SHOULD), 而不是必须(MUST). 但CSRF保护是MUST. 没有用state, 不违反标准, 但没有CSRF保护, 则违反”（发表于2012-11-10 12:50）</p>
@@ -315,7 +315,7 @@ Authorization: OAuth2 【Access Token】
 
 <p>漏洞成因和建议修复方案：</p>
 
-<p><img src="http://static.wooyun.org/201309/2013091312452447715.png" alt="2013091312452447715.png"><br>
+<p><img src="../images_result/images/2013091312452447715.png" alt="2013091312452447715.png"><br>
 图：新浪微博开放平台开发文档<a href="http://open.weibo.com/wiki/%E7%A7%BB%E5%8A%A8%E5%BA%94%E7%94%A8SSO%E6%8E%88%E6%9D%83">移动应用SSO授权</a></p>
 
 <p>手机应用sso登录sdk，一般是指应用方使用该sdk后，当用户点击授权时，如果如果已经安装了平台方的官方手机应用，就会跳到那里，由该官方应用代为授权，免去重新输入用户名和密码。</p>
@@ -346,7 +346,7 @@ Authorization: OAuth2 【Access Token】
 
 <p>但毕竟XAuth是由应用方代为提交用户名和密码到接口，而绕过了平台方本身的授权认证页面，因此从安全来说，在无法确保应用方能力信誉和安全状况的情况下，难以保证用户名和密码不会被泄露。比如如果是网站类应用允许使用XAuth，按照深度整合的流程，一般都会设计成直接在应用方的网站上弹出代理登录界面；用户输入平台方账号和密码后，通过应用方服务器同步登录到平台方和应用方账号。但这种设计流程，很容易在传输到应用方网站的过程、乃至在应用方服务器上就泄露了账号密码等敏感信息。手机类应用也可类比（参见高德低版本微博登录流程）。</p>
 
-<p><img src="http://static.wooyun.org/201309/2013091312480448767.png" alt="2013091312480448767.png"><br>
+<p><img src="../images_result/images/2013091312480448767.png" alt="2013091312480448767.png"><br>
 图：常见的XAuth威胁</p>
 
 <p>另外一点，由于XAuth的高级授权认证，限制通常会放得比较宽，这会导致常规登录的保护流程在XAuth接口处失效，那么攻击者就可以实施撞库扫号攻击。</p>
@@ -409,7 +409,7 @@ Authorization: OAuth2 【Access Token】
 
 <p>例子为腾讯开放平台。由于用户关系是QQ的核心，所以腾讯为反关系数据挖掘，对OAuth标准进行了一些改动，每个client&#95;id获取的用户openid（用户QQ号码转化得到的ID）均不一样，这样，就能够防止攻击者批量调用不同client&#95;id进行数据挖掘和用户骚扰。</p>
 
-<p><img src="http://static.wooyun.org/201309/2013091312511474841.png" alt="2013091312511474841.png"></p>
+<p><img src="../images_result/images/2013091312511474841.png" alt="2013091312511474841.png"></p>
 
 <p>图：腾讯开放平台资料库<a href="http://wiki.open.qq.com/wiki/faq/OpenAPI%E8%B0%83%E7%94%A8%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98">OpenAPI调用相关问题</a></p>
 

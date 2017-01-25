@@ -3,7 +3,7 @@
 			<head>
 			     <title>Spring框架问题分析 - tang3</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2892">http://drops.wooyun.org/tips/2892</a></h1>
 				
@@ -49,7 +49,7 @@
 <p>有了这个思路，利用方法也就呼之欲出了。构造一个带有恶意TLD文件的jar，通过HTTP将jar的地址告诉URLs[]，然后坐等执行。<br>
 利用效果如图所示：</p>
 
-<p><img src="http://static.wooyun.org/201408/2014082810301026119.png" alt="2014082810301026119.png"></p>
+<p><img src="../images_result/images/2014082810301026119.png" alt="2014082810301026119.png"></p>
 
 <h2>0x02 EL表达式注入问题</h2>
 
@@ -96,7 +96,7 @@
 
 <p>效果如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/201408/2014082810354922609.png" alt="此处输入图片的描述"></p>
+<p><img src="../images_result/images/2014082810354922609.png" alt="此处输入图片的描述"></p>
 
 <p>下面我们来看下在Resin环境下的利用方法，先来看个直接的演示，访问链接：</p>
 
@@ -105,7 +105,7 @@
 
 <p>效果如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/201408/2014082810362893782.png" alt="此处输入图片的描述"></p>
+<p><img src="../images_result/images/2014082810362893782.png" alt="此处输入图片的描述"></p>
 
 <p>我曾一度想要写出像Struts那样可以执行命令并回显的利用代码，但是由于EL表达式并没有提供变量和赋值的功能，让我不得不去想可以有相同的效果的方法。初步的思路是，利用EL可以存储任意类型session这个功能，对命令执行的结果流进行存储和处理，最后转换为字符串，打印到页面上。</p>
 
@@ -116,7 +116,7 @@
 
 <p>会返回500错误，在错误中会显示我们的自定义内容：</p>
 
-<p><img src="http://static.wooyun.org/201408/2014082810372256430.png" alt="此处输入图片的描述"></p>
+<p><img src="../images_result/images/2014082810372256430.png" alt="此处输入图片的描述"></p>
 
 <p>下面只要将命令执行的结果流转换为String，输出给println函数即可。下面是按照我之前思路，构造的利用代码：</p>
 

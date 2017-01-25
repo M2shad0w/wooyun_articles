@@ -3,7 +3,7 @@
 			<head>
 			     <title>渗透中寻找突破口的那些事 - HRay</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2915">http://drops.wooyun.org/tips/2915</a></h1>
 				
@@ -36,7 +36,7 @@
 
 <p>结果为如下格式:</p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012324194719.png" alt="2014083012324194719.png"> </p>
+<p><img src="../images_result/images/2014083012324194719.png" alt="2014083012324194719.png"> </p>
 
 <p>其中默认编译的dnsmap存在一个问题，解决方法与其他使用方法请参考</p>
 
@@ -50,11 +50,11 @@
 
 <p>曾检测某站时无意发现一个ntp.nb.xxx.com的域名，进而暴破nb.xxx.com这个域名，结果如下</p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012332478937.jpg" alt="2014083012332478937.jpg"> </p>
+<p><img src="../images_result/images/2014083012332478937.jpg" alt="2014083012332478937.jpg"> </p>
 
 <p>其中zabbix.nb.xxx.com这个站点暴露到了外网，版本较低，使用zabbix的注入漏洞成功获取权限</p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012334836324.jpg" alt="2014083012334836324.jpg"> </p>
+<p><img src="../images_result/images/2014083012334836324.jpg" alt="2014083012334836324.jpg"> </p>
 
 <p>同时子域名也可通过搜索引擎语法site:xxx.com收集(不断增加条件，可获取的更多，如inurl,intitle等等)</p>
 
@@ -81,11 +81,11 @@
 
 <p>注：一般只有大企业才会有as号，并且一个企业可能会有多个as号</p>
 
-<p>3）DNS <img src="http://static.wooyun.org/201408/2014083012343269530.jpg" alt="2014083012343269530.jpg"> </p>
+<p>3）DNS <img src="../images_result/images/2014083012343269530.jpg" alt="2014083012343269530.jpg"> </p>
 
 <p>4）spf记录</p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012350888436.jpg" alt="2014083012350888436.jpg"> </p>
+<p><img src="../images_result/images/2014083012350888436.jpg" alt="2014083012350888436.jpg"> </p>
 
 <p>如何判断cdn？</p>
 
@@ -93,7 +93,7 @@
 
 <p><a href="http://ping.chinaz.com/">http://ping.chinaz.com/</a></p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012353084184.jpg" alt="2014083012353084184.jpg"> </p>
+<p><img src="../images_result/images/2014083012353084184.jpg" alt="2014083012353084184.jpg"> </p>
 
 <h3>2.利用whatweb寻找web入口</h3>
 
@@ -110,27 +110,27 @@
 
 <p>在检测某企业时，whatweb批量识别指纹发现存在一台nginx版本比较低且存在解析漏洞的站点，首页为空白页，对目录结构暴破发现.bash_history文件</p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012360122353.jpg" alt="2014083012360122353.jpg"> </p>
+<p><img src="../images_result/images/2014083012360122353.jpg" alt="2014083012360122353.jpg"> </p>
 
 <p>操作历史中发现有打包文件且放在web目录下</p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012364544754.jpg" alt="2014083012364544754.jpg"> </p>
+<p><img src="../images_result/images/2014083012364544754.jpg" alt="2014083012364544754.jpg"> </p>
 
 <p>下载打包文件，内容如下</p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012371464932.jpg" alt="2014083012371464932.jpg"> </p>
+<p><img src="../images_result/images/2014083012371464932.jpg" alt="2014083012371464932.jpg"> </p>
 
 <p>其中发现有log文件，且log文件会记录user-agent信息</p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012373986307.jpg" alt="2014083012373986307.jpg"> </p>
+<p><img src="../images_result/images/2014083012373986307.jpg" alt="2014083012373986307.jpg"> </p>
 
 <p>使用firefox插件User Agent Switcher更改user-agent信息</p>
 
-<p> <img src="http://static.wooyun.org/201408/2014083012375814489.jpg" alt="2014083012375814489.jpg"></p>
+<p> <img src="../images_result/images/2014083012375814489.jpg" alt="2014083012375814489.jpg"></p>
 
 <p>一句话代码写入log文件后利用解析漏洞直接获取webshell</p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012381959967.jpg" alt="2014083012381959967.jpg"> </p>
+<p><img src="../images_result/images/2014083012381959967.jpg" alt="2014083012381959967.jpg"> </p>
 
 <h3>3.利用nmap寻找可利用服务</h3>
 
@@ -183,7 +183,7 @@
 
 <p><a href="http://www.xxx.com/axis2/services/xxxxx?xsd=../conf/axis2.xml">www.xxx.com/axis2/services/xxxxx?xsd=../conf/axis2.xml</a> xxxxx替换任意服务均可，读取axis2配置文件获取后台账户</p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012385029649.jpg" alt="2014083012385029649.jpg"></p>
+<p><img src="../images_result/images/2014083012385029649.jpg" alt="2014083012385029649.jpg"></p>
 
 <p><a href="http://www.xxx.com/axis2/axis2-admin/">www.xxx.com/axis2/axis2-admin/</a> 登陆管理后台</p>
 
@@ -191,7 +191,7 @@
 
 <p>使用metasploit</p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012392773538.jpg" alt="2014083012392773538.jpg"> </p>
+<p><img src="../images_result/images/2014083012392773538.jpg" alt="2014083012392773538.jpg"> </p>
 
 <p>Resin</p>
 
@@ -199,7 +199,7 @@
 
 <p><a href="http://www.xxx.com/resin-doc/resource/tutorial/jndi-appconfig/test?inputFile=/etc/passwd">http://www.xxx.com/resin-doc/resource/tutorial/jndi-appconfig/test?inputFile=/etc/passwd</a></p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012401614058.png" alt="2014083012401614058.png"> </p>
+<p><img src="../images_result/images/2014083012401614058.png" alt="2014083012401614058.png"> </p>
 
 <p>也可以通过</p>
 
@@ -213,11 +213,11 @@
 
 <p>搜索xml文件，找到data-import.xml</p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012404391496.jpg" alt="2014083012404391496.jpg"> </p>
+<p><img src="../images_result/images/2014083012404391496.jpg" alt="2014083012404391496.jpg"> </p>
 
 <p>访问<a href="http://xxx.org:8080/solr/admin/file/?file=data-import.xml">http://xxx.org:8080/solr/admin/file/?file=data-import.xml</a>获取数据库密码</p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012411280552.jpg" alt="2014083012411280552.jpg"> </p>
+<p><img src="../images_result/images/2014083012411280552.jpg" alt="2014083012411280552.jpg"> </p>
 
 <p>Hudson（jenkins类似）</p>
 
@@ -259,21 +259,21 @@
 
 <p><a href="http://xxx.com:8000/zh-CN/account/login?return_to=/zh-CN/">http://xxx.com:8000/zh-CN/account/login?return_to=%2Fzh-CN%2F</a></p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012413824936.jpg" alt="2014083012413824936.jpg"> </p>
+<p><img src="../images_result/images/2014083012413824936.jpg" alt="2014083012413824936.jpg"> </p>
 
 <p>默认账户admin/changeme  默认端口8000</p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012415718222.jpg" alt="2014083012415718222.jpg"> </p>
+<p><img src="../images_result/images/2014083012415718222.jpg" alt="2014083012415718222.jpg"> </p>
 
 <p>管理器-应用-从文件安装应用处可获得shell</p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012421664684.jpg" alt="2014083012421664684.jpg"> </p>
+<p><img src="../images_result/images/2014083012421664684.jpg" alt="2014083012421664684.jpg"> </p>
 
 <p>msf有利用模块</p>
 
 <p>exploit/multi/http/splunk&#95;upload&#95;app_exec</p>
 
-<p><img src="http://static.wooyun.org/201408/2014083012423574417.jpg" alt="2014083012423574417.jpg"> </p>
+<p><img src="../images_result/images/2014083012423574417.jpg" alt="2014083012423574417.jpg"> </p>
 
 <h2>0x02 结尾</h2>
 

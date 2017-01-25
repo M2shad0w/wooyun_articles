@@ -3,7 +3,7 @@
 			<head>
 			     <title>通过QEMU 和 IDA Pro远程调试设备固件 - cssembly</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4523">http://drops.wooyun.org/tips/4523</a></h1>
 				
@@ -147,15 +147,15 @@ fi
 
 <p>你可以在recvfrom（）调用之前创建一个断点，然后当你向upnpd发送M-SEARCH包时，验证调试器断点。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150107/201501071003241417215999740818_304e9884ff.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/201501071003241417215999740818_304e9884ff.jpg" alt="enter image description here"></p>
 
 <p>然后，在IDA的Debugger菜单中的Process选项中设置“主机名”为你的QEMU系统的IP地址，并设置端口为gdbserver正在监听的端口。我用的是1234。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150107/201501071004057426616186422902_10fb57645a.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/201501071004057426616186422902_10fb57645a.jpg" alt="enter image description here"></p>
 
 <p>接受设置，然后通过IDA的CTRL+8热键连接到远程调试会话。再次按Ctrl+8继续执行。你应该能够发送一个M-SEARCH包<a href="http://static.wooyun.org/drops/20150106/20150106134849501312e25df697d3a76e857f3228a690e9d6e49d681ff.rar">1</a>，可以看到调试器命中断点。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150107/201501071004506615116001185699_f739db521e.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/201501071004506615116001185699_f739db521e.jpg" alt="enter image description here"></p>
 
 <p>显然还有很多需要探索，也会遇到有很多这里未提及的情况，但希望这可以让你开始。</p>
 

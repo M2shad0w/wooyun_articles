@@ -3,7 +3,7 @@
 			<head>
 			     <title>JIT引擎触发RowHammer可行性研究 - xlab</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/6229">http://drops.wooyun.org/papers/6229</a></h1>
 				
@@ -36,9 +36,9 @@
 
 <p>内存中的电压是不能长期保存的,需要不停的对其进行刷新,刷新的速度为 64ms,所以必须在 64ms 内完成 <code>RowHammer</code> 操作。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503391199052.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503391199052.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503391196087.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503391196087.png" alt="enter image description here"></p>
 
 <h2>1.2 RowHammer 触发的方法</h2>
 
@@ -115,9 +115,9 @@
 
 <p>图 2.1 所示为 Java 在不同平台下使用的虚拟机。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503391172897.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503391172897.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503391150247.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503391150247.png" alt="enter image description here"></p>
 
 <p><strong><em>2.1.1 模版解释器触发 RowHammer?</em></strong></p>
 
@@ -143,7 +143,7 @@
 
 <p><code>Hotspot</code> 编译器默认是异步编译,有线程 <code>CompilerThread</code> 负责对特定的方法 进行调用,当方法调用次数达到一定阈值时将会调用 JIT 编译器对方法进行编译, 该阈值默认为 10000 次,可以通过 <code>–XX:+CompileThreshold</code> 参数来设置阈值。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503391186806.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503391186806.png" alt="enter image description here"></p>
 
 <p>图 2.2 从代码级别看,C1 编译器共包含如下几个步骤</p>
 
@@ -315,7 +315,7 @@ __ j(above, &amp;backward);
 
 <p>CoreCLR 是.NET 的执行引擎,RyuJIT 是.NET 的 JIT 实现,目前已经开源。作为 Java 的竞争对手,.NET 大量参考了 Java 的实现机制,从字节码的设计,到编译 器的实现等,都与 Java 有几分相似。在 RyuJIT 的指令集定义中只定义了一些常 见的指令(图 2.3),但是没有 RowHammer 需要的指令,所以无法直接触发。但是 在 CoreCLR 的 gc 中存在 prefetch 操作(表 2.12),然而该指令默认是被置为无效的 (表 2.13)。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503391166555.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503391166555.png" alt="enter image description here"></p>
 
 <p>图 2.3</p>
 

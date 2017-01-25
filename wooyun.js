@@ -9,11 +9,44 @@ var parseData = function(data) {
 	var $ = cheerio.load(data, {
 		decodeEntities: false
 	});
-	var images = $("img");
-	for (var i = 0; i < images.length; i++) {
-		var imageSrc = $(images[i]).attr("src");
-		imagesLink.push(imageSrc);
-	}
+	// var images = $("img");
+	$('img').map(function(i, el) {
+		// try {
+		//   console.log("entering try block");
+		//   throw "thrown message";
+		//   console.log("this message is never seen");
+		// }
+		// catch (e) {
+		//   console.log("entering catch block");
+		//   console.log(e);
+		//   console.log("leaving catch block");
+		// }
+		try {
+			f = $(this).attr("src").split("/");
+			$(this).attr('src', '../images_result/images/' + f[f.length-1])
+			// $(this.src).replaceWith(f[f.length-1])
+			console.log($(this).attr("src"))
+		}
+		catch (e) {
+		  console.log("entering catch block");
+		  console.log(e);
+		  console.log("leaving catch block");
+		}
+
+		// console.log(f)
+	});
+	// f = imagesLink.join(', ');
+	// console.log(f)
+	// $('input[type="text"]').val()
+	// for (var i = 0; i < images.length; i++) {
+	// 	var imageSrc = $(images[i]).attr("src");
+	// 	imagesLink.push(imageSrc);
+	// 	df = imageSrc.split("/")
+	// 	console.log('[repalce:]  ' + imageSrc)
+	// 	console.log(df[df.length-1])
+
+	// }
+
 
 
 	$("head").append('<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style>');

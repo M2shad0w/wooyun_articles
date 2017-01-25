@@ -3,7 +3,7 @@
 			<head>
 			     <title>OSX 攻击框架Empyre简介 - Evi1cg</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/15795">http://drops.wooyun.org/tools/15795</a></h1>
 				
@@ -44,7 +44,7 @@
 
 <p>则可进入主菜单</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414331673369117.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414331673369117.png" alt="Alt text"></p>
 
 <blockquote>
   <p>现在已经包含了43个可使用的模块</p>
@@ -54,7 +54,7 @@
 
 <p>要使用此框架，首先需要创建Listeners，直接输入listeners则可进去Listeners的配置页面，输入help，可以查看帮助，info命令可以查看详细的配置信息，下面截图是一个简单的Listeners配置。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414332113208215.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414332113208215.png" alt="Alt text"></p>
 
 <p>配置监听的ip及端口需要设置Host</p>
 
@@ -70,7 +70,7 @@ set Host http://192.168.74.141:8080
 
 <p>可以开启监听，使用list可以查看开启的listener</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/201605141433249433338.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201605141433249433338.png" alt="Alt text"></p>
 
 <p>如果需要配置HTTPS的listener，需要配置CertPath</p>
 
@@ -82,7 +82,7 @@ set CertPath ./data/empyre.pem
 
 <p>创建好Listeners之后，需要配置Stagers ，Stagers 存放在./lib/stagers 目录下，现在已有的stagers如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/201605141433264142948.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201605141433264142948.png" alt="Alt text"></p>
 
 <p>在listeners下输入usestager+空格之后按TAB键则可看到这些可用的stagers。现在可用的stagers 分别为：</p>
 
@@ -103,45 +103,45 @@ set CertPath ./data/empyre.pem
 
 <p>使用方式如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/201605141433319441958.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201605141433319441958.png" alt="Alt text"></p>
 
 <p>生成宏代码，创建任意office文件。打开宏设置</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/201605141433334664668.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201605141433334664668.png" alt="Alt text"></p>
 
 <p>将宏代码写入：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/201605141433367083677.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201605141433367083677.png" alt="Alt text"></p>
 
 <p>之后再次打开此work会有如下提示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/201605141433386719085.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201605141433386719085.png" alt="Alt text"></p>
 
 <p>点击启用宏，执行代码，受害者被控制：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/201605141433408820795.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201605141433408820795.png" alt="Alt text"></p>
 
 <p><strong>2、safari_launcher</strong></p>
 
 <p>使用方式如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414334657268105.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414334657268105.png" alt="Alt text"></p>
 
 <p>将生成的html代码保存到test.html，放到web服务器上，可以看到代码中的<code>applescript</code> 则为要执行的applescript代码。访问此页面如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414334937178118.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414334937178118.png" alt="Alt text"></p>
 
 <p>按<code>Command+R</code>键以后，弹出如下页面：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414335138218125.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414335138218125.png" alt="Alt text"></p>
 
 <p>点击新脚本，打开脚本编辑器，代码藏在最下面：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414335381478135.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414335381478135.png" alt="Alt text"></p>
 
 <p>一旦点击三角符号的运行按钮，则受害者被控制：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414335859291144.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414335859291144.png" alt="Alt text"></p>
 
 <blockquote>
   <p>其他的就不多介绍了，有兴趣的可以自己尝试一下</p>
@@ -153,7 +153,7 @@ set CertPath ./data/empyre.pem
 
 <p>获取agents怎么使用呢，首先可以查看help:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414340281518154.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414340281518154.png" alt="Alt text"></p>
 
 <p>命令比较简单，要切换到一个agent,使用如下命令即可：</p>
 
@@ -163,21 +163,21 @@ interact PI5M01QWZ4TJAUQA
 
 <p>如果觉得名字不好记，可以执行如下命令对agnet进行重命名：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414340463609162.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414340463609162.png" alt="Alt text"></p>
 
 <p>切换到agent里面之后，可以help查看可执行的命令:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414340743404173.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414340743404173.png" alt="Alt text"></p>
 
 <p>如果要执行系统命令，可使用shell来执行：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414340934988183.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414340934988183.png" alt="Alt text"></p>
 
 <p><strong>2、模块使用</strong></p>
 
 <p>Empyre提供了多个可使用模块，输入usemodule空格之后按TAB键则可列出当前可使用的模块，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414341370599192.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414341370599192.png" alt="Alt text"></p>
 
 <p>包括信息搜集，权限提升，维持权限等多个模块，这里就不一一介绍了，介绍几个比较好玩儿的：</p>
 
@@ -187,15 +187,15 @@ interact PI5M01QWZ4TJAUQA
   <p>此模块可通过社会工程学获取当前用户所用的密码。</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414341766081202.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414341766081202.png" alt="Alt text"></p>
 
 <p>运行以后，会打开AppStore，并询问密码，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414342068312216.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414342068312216.png" alt="Alt text"></p>
 
 <p>当用户输入密码以后，我们就获取到了他输入的密码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414342155325223.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414342155325223.png" alt="Alt text"></p>
 
 <p><em>collection/osx/webcam</em>:</p>
 
@@ -203,7 +203,7 @@ interact PI5M01QWZ4TJAUQA
   <p>此模块可进行摄像头拍照</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414342420348233.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414342420348233.png" alt="Alt text"></p>
 
 <p><em>collection/osx/browser_dum</em>：</p>
 
@@ -211,7 +211,7 @@ interact PI5M01QWZ4TJAUQA
   <p>此模块可获取浏览器历史记录</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414343333075242.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414343333075242.png" alt="Alt text"></p>
 
 <p><em>privesc/multi/sudo_spawn</em></p>
 
@@ -221,15 +221,15 @@ interact PI5M01QWZ4TJAUQA
 
 <p>首先创建一个新的Listener：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414343696743252.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414343696743252.png" alt="Alt text"></p>
 
 <p>切换到agent以后，使用此模块：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414343958652262.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414343958652262.png" alt="Alt text"></p>
 
 <p>可以看到输入密码以后（密码可以通过prompt模块或者信息搜集获得），获取了一个新的agent，并且此agent获取了最高的权限，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160514/2016051414344334137271.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051414344334137271.png" alt="Alt text"></p>
 
 <p>其他模块，我这里就不一一介绍了，有兴趣的小伙伴可以自己去尝试一下，而且维持权限的模块已经有4个了，还是很给力的。</p>
 

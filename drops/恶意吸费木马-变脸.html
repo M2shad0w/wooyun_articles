@@ -3,7 +3,7 @@
 			<head>
 			     <title>恶意吸费木马-变脸 - 腾讯电脑管家</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/13109">http://drops.wooyun.org/mobile/13109</a></h1>
 				
@@ -31,43 +31,43 @@
 
 <p>木马安装到手机后的启动图标:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160225/2016022506391180659116.png" alt="p1"></p>
+<p><img src="../images_result/images/2016022506391180659116.png" alt="p1"></p>
 
 <p>当用户点击该程序后，程序启动:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160225/2016022506391396855216.png" alt="p2"></p>
+<p><img src="../images_result/images/2016022506391396855216.png" alt="p2"></p>
 
 <p>程序启动代码入口，可以看到，在游戏启动的同时，也拉起了恶意代码进行执行:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160225/2016022506391550149310.png" alt="p3"></p>
+<p><img src="../images_result/images/2016022506391550149310.png" alt="p3"></p>
 
 <p>木马首先通过异或运算解密云控制服务器网址:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160225/201602250639167095346.png" alt="p4"></p>
+<p><img src="../images_result/images/201602250639167095346.png" alt="p4"></p>
 
 <p>解密后的服务器域名:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160225/201602250639188368356.png" alt="p5"></p>
+<p><img src="../images_result/images/201602250639188368356.png" alt="p5"></p>
 
 <p>连接服务器并获取从云端获取控制指令:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160225/201602250639201093866.png" alt="p6"></p>
+<p><img src="../images_result/images/201602250639201093866.png" alt="p6"></p>
 
 <p>对从云端获取到的字符串信息进行解析，查找指令内容的特征:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160225/201602250639218611675.png" alt="p7"></p>
+<p><img src="../images_result/images/201602250639218611675.png" alt="p7"></p>
 
 <p>如果格式正确,则解析出号码和内容，开始发送扣费短信:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160225/201602250639237150885.png" alt="p8"></p>
+<p><img src="../images_result/images/201602250639237150885.png" alt="p8"></p>
 
 <p>木马注册了拦截短信的服务:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160225/201602250639254022093.png" alt="p9"></p>
+<p><img src="../images_result/images/201602250639254022093.png" alt="p9"></p>
 
 <p>该服务屏蔽以“10”开头的短信号码，导致中毒手机无法接收到扣费服务运营商发送的短信回执，在用户不知情的情况下,实现扣费。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160225/2016022506392798575103.png" alt="p10"></p>
+<p><img src="../images_result/images/2016022506392798575103.png" alt="p10"></p>
 
 <h1>0x02 查杀和预防</h1>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>威胁聚焦：CRYPTOWALL4 - 武汉大学信息安全协会</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11342">http://drops.wooyun.org/tips/11342</a></h1>
 				
@@ -35,15 +35,15 @@
 
 <p>CryptoWall的经营者用网络钓鱼和drive-by-download来将他们的恶意程序传播给用户。一旦CryptoWall4被成功运行，就会从C2服务去下载一个RSA公钥。然后所有的文件都被暂时地先被AES秘钥加密，之后就会被下载下来的RSA公钥加密。然后会用三种不同的方式告诉用户，你被加密了。第一种是一个文本文件，第二种是一张.png的图，第三种是一个HTML文档。所有的都会自动地从受害者的桌面打开。如下面所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121608372347292168.png" alt="Alt text"> FigureA.1</p>
+<p><img src="../images_result/images/2015121608372347292168.png" alt="Alt text"> FigureA.1</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121608372889806226.png" alt="Alt text"> FigureA.2</p>
+<p><img src="../images_result/images/2015121608372889806226.png" alt="Alt text"> FigureA.2</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121608373280485320.png" alt="Alt text"> FigureA.3</p>
+<p><img src="../images_result/images/2015121608373280485320.png" alt="Alt text"> FigureA.3</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121608373519725419.png" alt="Alt text"> FigureA.4</p>
+<p><img src="../images_result/images/2015121608373519725419.png" alt="Alt text"> FigureA.4</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121608373722017516.png" alt="Alt text"> FigureA.5</p>
+<p><img src="../images_result/images/2015121608373722017516.png" alt="Alt text"> FigureA.5</p>
 
 <p>一个有趣的发现是，一旦CryptoWall4不能从C2 server检索到RSA公钥，它就会不停地循环来下载公钥。只要公钥得不到，CryptoWall就不会破坏受害者的电脑。Talos同样观察到，这个样本也有一些另外的安全检查，比如如果受害者机器上的语言不受支持，就会自动终止感染进程。下面几种语言设置不会被感染：</p>
 
@@ -53,17 +53,17 @@
 
 <p>感染进程就如下图描述的一样：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121608374245939616.png" alt="Alt text"> Figure B</p>
+<p><img src="../images_result/images/2015121608374245939616.png" alt="Alt text"> Figure B</p>
 
 <p>从上图所示的 ”Delete all shadow copies“开始，CrytoWall4已经注入到了svchost进程。注入到这个进程是为了在受害者机器上获得更高的权限，以此来绕过UAC。有权限了才能静默地删除所有的系统备份，不然会有UAC提示用户来处理。</p>
 
 <p>下图C描述的是其网络通讯，用的是HTTP协议，但是对payload进行了加密。如图D和图E</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121608374619412715.png" alt="Alt text"> Figure C</p>
+<p><img src="../images_result/images/2015121608374619412715.png" alt="Alt text"> Figure C</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121608375196457814.png" alt="Alt text"> Figure D</p>
+<p><img src="../images_result/images/2015121608375196457814.png" alt="Alt text"> Figure D</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121608383198801913.png" alt="Alt text"> Figure E</p>
+<p><img src="../images_result/images/2015121608383198801913.png" alt="Alt text"> Figure E</p>
 
 <p>CryptoWall4用了一个新的文件名生成算法来给加密后的文件命名：</p>
 
@@ -96,7 +96,7 @@ help&#95;your&#95;files.txt, help&#95;your&#95;files.html, help&#95;your&#95;fil
 
 <p>生成新文件的文件名后，它的加密算法如图F所示：这也清楚地告诉我们，在CryptoWall4将文件加密之后，如果没有RSA私钥来还原AES秘钥,要还原文件，基本不可能。然而私钥只存在于攻击者的电脑上，而且不会传给用户的电脑。换句话说，用户不支付赎金获得私钥，就没办法还原文件。用户应该备份好自己的重要文件，才能保证遭受这种攻击后，不用支付赎金就能将其恢复。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/20151216083835347751013.png" alt="Alt text"> Figure F</p>
+<p><img src="../images_result/images/20151216083835347751013.png" alt="Alt text"> Figure F</p>
 
 <h1>0x02 主体</h1>
 
@@ -104,7 +104,7 @@ help&#95;your&#95;files.txt, help&#95;your&#95;files.html, help&#95;your&#95;fil
 
 <p>病毒程序主体被压缩，且被不同的壳保护了，壳里面有很多垃圾代码，无用的API调用，还有代码混淆技巧，比如用调用随机的API，参数还很奇怪。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/20151216083838191771117.png" alt="Alt text"> Figure G</p>
+<p><img src="../images_result/images/20151216083838191771117.png" alt="Alt text"> Figure G</p>
 
 <p>第二层保护用的一种交错跳转形式的代码：</p>
 
@@ -172,11 +172,11 @@ s=6975376e7a9b0fd24886fbd0c0de32d3ab4dd97174462ca3b06af16a1c840ae893eddacafbd93e
 <li>base64加密的PNG图片（图片由系统的语言设置决定）</li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20151216/20151216083843958121213.png" alt="Alt text"> Figure H.1</p>
+<p><img src="../images_result/images/20151216083843958121213.png" alt="Alt text"> Figure H.1</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/20151216083848240941311.png" alt="Alt text"> Figure H.2</p>
+<p><img src="../images_result/images/20151216083848240941311.png" alt="Alt text"> Figure H.2</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/20151216083853400271411.png" alt="Alt text"> Figure H.3</p>
+<p><img src="../images_result/images/20151216083853400271411.png" alt="Alt text"> Figure H.3</p>
 
 <p>公钥用CryptStringToBinary API来解密。解密后的数据被存在一个全局变量中。HTML和text文件（用LZ 压缩算法压缩）由dropper释放出来，最终创建好配置文件并被加密，存储在 <code>C:\Users\[Username]\AppData\Roaming\[Random 8 digits]</code>中。</p>
 
@@ -221,7 +221,7 @@ if (!FileExists(pngFilePath) == TRUE) {
 
 <p>最后，一个end announcement包会被创建并发给C&amp;C server。配置文件被删除，进程被终止（用的ZwTerminateProc）</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/20151216083856501281511.png" alt="Alt text"> Figure I</p>
+<p><img src="../images_result/images/20151216083856501281511.png" alt="Alt text"> Figure I</p>
 
 <h1>0x05 加密线程</h1>
 
@@ -325,7 +325,7 @@ else {
 
 <p>从伪代码看得出来，存储原始文件的磁盘区被特殊地重写了，这样能保证数据恢复起来非常困难。这是恶意程序的作者来保证高付款率的新奇有趣的方法。减少数据恢复的可能，这样他们更好赚钱。下图是加密后的文件的结构：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121608385914138169.png" alt="Alt text"> Figure J</p>
+<p><img src="../images_result/images/2015121608385914138169.png" alt="Alt text"> Figure J</p>
 
 <h1>0x06 总结</h1>
 
@@ -339,7 +339,7 @@ else {
 
 <hr>
 
-<p><img src="http://static.wooyun.org//drops/20151216/2015121608410842562178.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2015121608410842562178.png" alt="Alt text"></p>
 
 <ul>
 <li>高等级防护（AMP）能很好地阻止这类恶意程序的执行。</li>

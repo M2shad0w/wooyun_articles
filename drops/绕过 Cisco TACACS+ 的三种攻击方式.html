@@ -3,7 +3,7 @@
 			<head>
 			     <title>绕过 Cisco TACACS+ 的三种攻击方式 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11083">http://drops.wooyun.org/tips/11083</a></h1>
 				
@@ -58,7 +58,7 @@
 
 <p>TACACS+ 服务通常会有一个特殊的服务器，所有的网络设备都会被配置成使用 TACACS+ 服务器进行身份验证。当一个用户在交换机，路由器或其他网络设备上进行认证时，网络设备会发送该用户的凭证到 TACACS+ 服务器进行验证，然后决定分配访问相关设备的权限，并将这些决定的结果包含在应答数据包中并发送到网络设备上，再由网络设备发送到用户终端。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151213/2015121315162049157140.png" alt="p1"> 图 1 ： TACACS＋ 认证过程</p>
+<p><img src="../images_result/images/2015121315162049157140.png" alt="p1"> 图 1 ： TACACS＋ 认证过程</p>
 
 <p>这是一个非常方便和集中化的做法。可以在不同的设备上为用户设置不同的权限。还有就是记录访问和操作均在服务器端。也可以在当前这种模式下再添加一种集中化式的管理方式，如 Active Directory 或 LDAP。不过，思科已将<a href="http://tools.ietf.org/html/draft-grant-tacacs-02"> TACACS+ 协议规范公开</a>，所以现在有了一种 TACACS+ 服务的开源实现。</p>
 
@@ -87,7 +87,7 @@
 
 <p>所以，第一种攻击思路很简单。我们只要对 TACACS+ 服务发动 DoS 攻击，之后连接到 Cisco 设备的本地帐户中（从 TFTP 服务器中下载并破解得到）。由于 TACACS+ 服务遭到 DoS 攻击无法访问，所以网络设备会提供给我们所期望的访问权限。我们可以使用多种 DoS 攻击。例如，我们可以发动临时的 DoS 攻击，对 TACACS+ 服务器创建大量基于 TCP 的连接。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151213/2015121315162261636216.png" alt="p2"> 图 2 ：对 TACACS+ 服务器发动 DoS 攻击</p>
+<p><img src="../images_result/images/2015121315162261636216.png" alt="p2"> 图 2 ：对 TACACS+ 服务器发动 DoS 攻击</p>
 
 <h3>在介绍第二种和第三种攻击方式前需要了解的知识</h3>
 
@@ -124,7 +124,7 @@ MD5_n = MD5{session_id, key, version, seq_no, MD5_n-1}
 
 <p>加密的数据如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151213/2015121315162489653314.png" alt="p3"> 图 3 ：数据包中的加密数据</p>
+<p><img src="../images_result/images/2015121315162489653314.png" alt="p3"> 图 3 ：数据包中的加密数据</p>
 
 <h3>No.2 爆破 PSK 绕过 Cisco TACACS+</h3>
 
@@ -150,7 +150,7 @@ MD5_n = MD5{session_id, key, version, seq_no, MD5_n-1}
 
 <p>我不会去深究每种数据包类型中的技术细节。只是举一个例子以说明这个想法。这是 TACACS+ 服务器响应的第一个数据包(如下图所示)。它由几个具有单一意义的字段和一条 Cisco 设备发送给用户的问候消息组成。由于我们可以任意连接到 Cisco 设备，所以就可以很轻易的得到响应数据包同时也就知道了所有字段的值。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151213/2015121315162655739413.png" alt="p4"> 图 4 : TACACS+ 服务器响应的第一个数据包</p>
+<p><img src="../images_result/images/2015121315162655739413.png" alt="p4"> 图 4 : TACACS+ 服务器响应的第一个数据包</p>
 
 <p>因此，从目前来看，我们几乎总是可以知道任何数据包的前 16 字节解密后的数据。所以我们就可以得到<code>MD5_1</code>，并使用本地离线暴力破解进行攻击。如果爆破成功了，我们就能够解密整个通信的数据。为了简化数据包的接收并解析出<code>MD5_1</code>，我写了一个小脚本 —— tac2cat.py。它是 <a href="https://github.com/GrrrDog/TacoTaco">TacoTaco 项目</a>的一部分。</p>
 
@@ -162,7 +162,7 @@ MD5_n = MD5{session_id, key, version, seq_no, MD5_n-1}
 
 <p>第一个是在 TACACS+ 协议传输过程中并没有检查数据包的完整性。所以，如果我们利用中间人攻击改变了传输中的加密的部分，那么也就改变了解密的结果 (因为它只进行了 XOR 操作)，但 TACACS+ 服务器并不会发现所做的更改，并以正常的方式处理已经被修改过的传输数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151213/2015121315162727046513.png" alt="p5"> 图 5 ： TACACS+ 协议数据包</p>
+<p><img src="../images_result/images/2015121315162727046513.png" alt="p5"> 图 5 ： TACACS+ 协议数据包</p>
 
 <p>第二个特点是关于 TACACS+ 数据包的格式。在身份验证和授权的过程中，应答的数据包中的第一个字节指示了访问权限授予的结果。</p>
 

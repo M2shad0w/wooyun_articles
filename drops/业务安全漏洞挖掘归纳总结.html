@@ -3,7 +3,7 @@
 			<head>
 			     <title>业务安全漏洞挖掘归纳总结 - sm0nk</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/6917">http://drops.wooyun.org/web/6917</a></h1>
 				
@@ -14,11 +14,11 @@
 
 <p>6.30在OWASP的分享，关于业务安全的漏洞检测模型。进一步的延伸科普。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150703/2015070302312847097.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070302312847097.png" alt="enter image description here"></p>
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20150703/2015070302312815571.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070302312815571.png" alt="enter image description here"></p>
 
 <h1>0x01 身份认证安全</h1>
 
@@ -138,7 +138,7 @@
 
 <p>b) 脑图 （详情请参考BMa的《密码找回逻辑漏洞总结》）</p>
 
-<p><img src="http://static.wooyun.org//drops/20150703/2015070302312839779.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070302312839779.png" alt="enter image description here"></p>
 
 <h1>0x06 验证码突破</h1>
 
@@ -228,11 +228,11 @@
 
 <p>点击“获取短信验证码”，并抓取数据包内容，如下图。通过分析数据包，可以发现参数sendData/insrotxt的内容有客户端控制，可以修改为攻击者想要发送的内容</p>
 
-<p><img src="http://static.wooyun.org//drops/20150703/2015070302312854742.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070302312854742.png" alt="enter image description here"></p>
 
 <p>将内容修改“恭喜你获得由xx银行所提供的iphone6一部，请登录http://www.xxx.com领取，验证码为236694”并发送该数据包，手机可收到修改后的短信内容，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150703/2015070302312971068.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070302312971068.png" alt="enter image description here"></p>
 
 <h1>0x10 时效绕过测试</h1>
 

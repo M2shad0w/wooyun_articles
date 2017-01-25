@@ -3,7 +3,7 @@
 			<head>
 			     <title>论PHP常见的漏洞 - ′  雨。</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4544">http://drops.wooyun.org/papers/4544</a></h1>
 				
@@ -256,7 +256,7 @@ if ( isset( $include_file ) &amp;&amp; strtolower( substr( $include_file, -4 ) )
 
 <p>然后把这个.jpg上传上去 然后包含</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011310582363782image0011.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011310582363782image0011.png" alt="enter image description here"></p>
 
 <p>对于一些LFI 找不到上传图片的地方的话 也有很多牛发过了一些不能上传图片LFI的技巧 各种包含日志 环境变量啥的 这里我就也不多说了。</p>
 
@@ -299,29 +299,29 @@ include($_GET[yu]);
 
 <p>首先 allow&#95;url&#95;include &amp;&amp; allow&#95;url&#95;fopen 都为on的时候</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011311021152837image0031.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011311021152837image0031.png" alt="enter image description here"></p>
 
 <p>成功RFI。</p>
 
 <p>然后 allow&#95;url&#95;include 为 on allow&#95;url&#95;fopen 为off</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011311025596714image0051.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011311025596714image0051.png" alt="enter image description here"></p>
 
 <p>直接包含远程文件失败 这时候我们用一下伪协议试试。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011311032528103image0072.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011311032528103image0072.png" alt="enter image description here"></p>
 
 <p>再次成功rfi。</p>
 
 <p>当allow&#95;url&#95;include &amp;&amp; allow&#95;url&#95;fopen 为off的时候。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011311041670237image0091.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011311041670237image0091.png" alt="enter image description here"></p>
 
 <p>伪协议失败。</p>
 
 <p>包含文件</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011311045731325image0111.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011311045731325image0111.png" alt="enter image description here"></p>
 
 <p>URL file-access is disabled in the server configuration 不允许包含。</p>
 
@@ -333,7 +333,7 @@ include($_GET[yu]);
 
 <p>那么这里我们也试试</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011311053411551image0131.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011311053411551image0131.png" alt="enter image description here"></p>
 
 <p>包含共享文件成功。 这里只本地测试了 没具体测试。</p>
 

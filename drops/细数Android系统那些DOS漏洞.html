@@ -3,7 +3,7 @@
 			<head>
 			     <title>细数Android系统那些DOS漏洞 - Guardian</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5272">http://drops.wooyun.org/papers/5272</a></h1>
 				
@@ -79,19 +79,19 @@ $ adb shell cat /d/pc_debug_counter
 
 <p>具体原因不详，Twitter上有人讲是因为arch/arm/mach-msm/msm-pm.c内核驱动文件里msm&#95;pc&#95;debug&#95;counters&#95;copy()里调用的scnprintf()函数引起的。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302534827859.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032302534827859.png" alt="enter image description here"></p>
 
 <p>scnprintf() API说明见<a href="http://drops.wooyun.org/wp-content/uploads/2015/03/image0018.png">1</a>。作用是格式化一个字符串并把它放在buffer里，返回值是写进buffer的字符数量。</p>
 
 <p>在网上找到这个文件的两个版本，旧版本<a href="http://drops.wooyun.org/wp-content/uploads/2015/03/image0037.png">2</a>如下：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302534998781.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032302534998781.png" alt="enter image description here"></p>
 
 <p>漏洞可能是因为MSM&#95;PC&#95;NUM&#95;COUNTERS 值等于4，而counter&#95;name长度为3，循环中j最大取值为3，数组下标越界，counter_name[j]取不到值导致的。</p>
 
 <p>新的版本<a href="http://drops.wooyun.org/wp-content/uploads/2015/03/image0055.png">3</a>如下，发现新文件在循环中做了处理。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302534912624.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032302534912624.png" alt="enter image description here"></p>
 
 <h1>0x04 CVE-2014-7911</h1>
 
@@ -111,7 +111,7 @@ $ adb shell cat /d/pc_debug_counter
 
 <p>android.os.BinderProxy类包含一个finalize方法，这个方法最终会调用native层的android&#95;os&#95;BinderProxy_destroy()<a href="http://drops.wooyun.org/wp-content/uploads/2015/03/image0076.png">4</a>这个方法，可以看到这个方法里会使用序列化对象里的两个字段值，并把这两个值传给了指针。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302534988856.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032302534988856.png" alt="enter image description here"></p>
 
 <p>如果攻击者可以在system&#95;server 的已知内存地址插入数据，那么就可以执行任意代码。 Android有做地址空间随机化ASLR，但是所有的app都是fork自zygote进程，他们都有相同的基本内存布局，因此是可以绕过system&#95;server的ASLR.</p>
 
@@ -153,13 +153,13 @@ $ adb shell cat /d/pc_debug_counter
 
 <p>https://android.googlesource.com/platform/frameworks/native/+/4aaa39358f538d8e06e026385bb8be8088d78c35/libs/ui/GraphicBuffer.cpp</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302534958966.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032302534958966.png" alt="enter image description here"></p>
 
 <p>修复后：</p>
 
 <p>https://android.googlesource.com/platform/frameworks/native/+/38803268570f90e97452cd9a30ac831661829091/libs/ui/GraphicBuffer.cpp</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302534981182.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032302534981182.png" alt="enter image description here"></p>
 
 <p>如果有兴趣，读者也可以自行编译AOSP代码进行patch,可以使用下面这个教程。 https://gist.github.com/Fuzion24/068fe36bb5b762367921</p>
 
@@ -188,17 +188,17 @@ Motorola RAZR HD-Android4.1.2
 
 <p>下面的函数用来处理wpa&#95;supplicant events。这个函数最后通过调用NewStringUTF方法来返回一个jstring。 https://gitorious.org/android-eeepc/base/source/a0332f171e7413f79f156e8685d1147d89bfc5ca:core/jni/android&#95;net&#95;wifi&#95;Wifi.cpp#L127</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302535053471.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032302535053471.png" alt="enter image description here"></p>
 
 <p>WiFi_Direct 规范里定义了P2P的发现过程，使得P2P设备间可以互相交换设备信息，device name是设备信息的一部分。 WifiP2pDevice类位于/wifi/java/android/net/wifi/p2p/WifiP2pDevice.java<a href="http://drops.wooyun.org/wp-content/uploads/2015/03/image0095.png">5</a>文件，它的对象可以表示一个Wi-Fi p2p设备。代码如下，可以看到它的构造函数是通过wpa&#95;supplicant返回的string来初始化的，也就是刚才提到的android&#95;net&#95;wifi&#95;waitForEvent()返回的值。如果这个值，也就是wpa_supplicant event是个异常值，那么就会抛出IllegalArgumentException。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302535044998.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032302535044998.png" alt="enter image description here"></p>
 
 <p>一些Android设备在处理探测响应帧时，如果WiFi-Direct(p2p)信息元素里包含device name属性和一些特定的字节生成的异常的supplicant event字符串,那么就会抛出IllegalArgumentException。然而WiFiMonitor这个系统进程并没有处理这个异常，导致设备重启。</p>
 
 <p>Nexus 5上的部分logcat内容如下:</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302535052129.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032302535052129.png" alt="enter image description here"></p>
 
 <p>Poc：</p>
 

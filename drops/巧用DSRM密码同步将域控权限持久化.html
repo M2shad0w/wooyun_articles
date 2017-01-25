@@ -3,7 +3,7 @@
 			<head>
 			     <title>巧用DSRM密码同步将域控权限持久化 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/9297">http://drops.wooyun.org/tips/9297</a></h1>
 				
@@ -25,7 +25,7 @@
 
 <p>这里使用系统安装域时内置的用于Kerberos验证的普通域账户krbtgt。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100809092753087127.png" alt=""></p>
+<p><img src="../images_result/images/2015100809092753087127.png" alt=""></p>
 
 <!--more-->
 
@@ -33,9 +33,9 @@
 
 <p>同步之后使用法国佬神器（mimikatz）查看krbtgt用户和SAM中Administrator的NTLM值。如下图所示，可以看到两个账户的NTLM值相同，说明确实同步成功了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100809091731138214.png" alt=""></p>
+<p><img src="../images_result/images/2015100809091731138214.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/201510080909197776439.png" alt=""></p>
+<p><img src="../images_result/images/201510080909197776439.png" alt=""></p>
 
 <h1>0x02 修改注册表允许DSRM账户远程访问</h1>
 
@@ -45,7 +45,7 @@
 
 <p>PS：系统默认不存在<code>DSRMAdminLogonBehavior</code>，请手动添加。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/201510080909213032348.png" alt=""></p>
+<p><img src="../images_result/images/201510080909213032348.png" alt=""></p>
 
 <h1>0x03 使用HASH远程登录域控</h1>
 
@@ -59,7 +59,7 @@ sekurlsa::pth /domain:WIN2K8-DC /user:Administrator /ntlm:bb559cd28c0148b7396426
 
 <p>会弹出一个CMD，如下图中右下角的CMD，此CMD有权限访问域控。左下角的CMD是直接Ctrl+R启动的本地CMD，可以看到并无权限访问域控。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151008/2015100809092234342510.png" alt=""></p>
+<p><img src="../images_result/images/2015100809092234342510.png" alt=""></p>
 
 <h1>0x04 一点说明</h1>
 

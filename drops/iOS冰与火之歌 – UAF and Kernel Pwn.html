@@ -3,7 +3,7 @@
 			<head>
 			     <title>iOS冰与火之歌 – UAF and Kernel Pwn - 蒸米</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/16681">http://drops.wooyun.org/tips/16681</a></h1>
 				
@@ -144,15 +144,15 @@ int main(void) {
 
 <p>在运行程序前，我们先用lldb对程序进行调试：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160612/2016061208224528813127.png" alt=""></p>
+<p><img src="../images_result/images/2016061208224528813127.png" alt=""></p>
 
 <p>然后用lldb连接程序并在main函数下一个断点：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160612/2016061208224896075216.png" alt=""></p>
+<p><img src="../images_result/images/2016061208224896075216.png" alt=""></p>
 
 <p>确保程序正常进入main函数后，继续运行程序：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160612/2016061208225254114314.png" alt=""></p>
+<p><img src="../images_result/images/2016061208225254114314.png" alt=""></p>
 
 <p>当程序执行到<code>handleObject(myTalker)</code>的时候，我们就能看到很有意思的error了：程序试图从r0这个地址读取数值到r2，然后<code>blx r2</code>，但是r0的值为0x41414141。这是因为我们在myTalker free后的malloc的内存刚好又重新分配在了myTalker指针指向的地址，随后程序调用了myTalker的的函数，根据c++的机制，程序会从myTalker的vTable里获取函数地址，但是我们已经利用UAF把vTable给填充成了0x41414141，所以才会报错。既然我们可以利用UAF控制r0的内容，只要配合上heap spray，我们就可以做到控制pc并执行rop指令了。Heap Spray的技巧可以参考我之前写的文章：<a href="http://drops.wooyun.org/papers/12355">Objective-C Pwn and iOS arm64 ROP</a>。</p>
 
@@ -164,35 +164,35 @@ int main(void) {
 
 <p>所以我们来看一下有漏洞的代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160612/2016061208225493610414.png" alt=""></p>
+<p><img src="../images_result/images/2016061208225493610414.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160612/201606120822565303856.png" alt=""></p>
+<p><img src="../images_result/images/201606120822565303856.png" alt=""></p>
 
 <p>在<code>terminateDevice()</code>这个函数中，内核服务调用<code>OSSafeRelease()</code>来释放一个device，但我们可以发现，虽然&#95;device这个指针所指向的device被释放了，但是&#95;device并没有置为NULL。如果我们再次调用已经释放后的device的函数的话就会触发UAF漏洞。随后Apple在9.1中修复了该漏洞，可以看一下修复的代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160612/201606120822583695565.png" alt=""></p>
+<p><img src="../images_result/images/201606120822583695565.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160612/201606120822594203875.png" alt=""></p>
+<p><img src="../images_result/images/201606120822594203875.png" alt=""></p>
 
 <p>可以看到<code>OSSafeRelease()</code>已经变成了<code>OSSafeReleaseNULL()</code>，从而修复了UAF漏洞。</p>
 
 <p>那么如何利用这个UAF漏洞呢？首先我们先利用IOKit提供的API创建一个device：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160612/201606120823018817886.png" alt=""></p>
+<p><img src="../images_result/images/201606120823018817886.png" alt=""></p>
 
 <p>然后我们调用<code>terminateDevice()</code>方法将这个device释放掉：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160612/201606120823034804496.png" alt=""></p>
+<p><img src="../images_result/images/201606120823034804496.png" alt=""></p>
 
 <p>然后我们再用释放后的device去调用一些需要用到device的函数，比如说<code>IOHIDResourceDeviceUserClient::handleReport()</code>就会触发UAF漏洞：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160612/2016061208230538544105.png" alt=""></p>
+<p><img src="../images_result/images/2016061208230538544105.png" alt=""></p>
 
 <p>因为&#95;device已经被释放掉了，但是&#95;device这个指针的内容并没有赋值为NULL，所以函数会继续执到<code>_device-&gt;handleReportWithTime(timestamp, report)</code>。接着服务会去&#95;device指向的内存地址查找vtable中的函数，如果我们能够在内存中malloc一段可控的内存并伪造一个fake的vtable，并且让这段内存刚好分配在&#95;device所指向的地址，我们就可以成功的控制内核的PC指针了。</p>
 
 <p>利用这个思路，我们成功的写出了利用程序，运行程序后，手机会重启，随后在<code>~/Library/Logs/CrashReporter/MobileDevice/</code>目录下的panic log中可以看到，我们已经成功的控制了pc指针并指向了0xdeadbeefdeadbeef：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160612/20160612082307170731110.png" alt=""></p>
+<p><img src="../images_result/images/20160612082307170731110.png" alt=""></p>
 
 <p>对越狱来说，控制了内核的PC指针还只是一个开始，随后还要获取KASLR，利用ROP对内核进行读写，然后对内核进行patch，将签名校验disable等等，因为篇幅原因，这里就不一一介绍了，欢迎继续关注我们以后的文章。</p>
 
@@ -238,7 +238,7 @@ IOHIDElementPrivate::createReport(…) {
 
 <p>因此该漏洞可以从任意kalloc zone，达成任意长度的堆溢出。因为该漏洞是利用inpuT report来攻击iOS内核，再加上Tbag是《越狱》中一个非常有名的角色，所以我们将这个漏洞命名为inpuTbag。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160612/2016061208230923770128.png" alt=""></p>
+<p><img src="../images_result/images/2016061208230923770128.png" alt=""></p>
 
 <h1>0x04 One More Thing – iOS 9.2.1越狱</h1>
 
@@ -251,9 +251,9 @@ IOHIDElementPrivate::createReport(…) {
 <!--<embed src="http://player.youku.com/player.php/sid/XMTYwMDEzOTExMg==/v.swf" allowFullScreen="true" quality="high" width="400" height="888" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash">
 </embed>-->
 
-<p><img src="http://static.wooyun.org//drops/20160612/2016061208231268844131.jpeg" width="400" height="710"></p>
+<p><img src="../images_result/images/2016061208231268844131.jpeg" width="400" height="710"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160612/2016061208231533246145.png" width="400" height="710"></p>
+<p><img src="../images_result/images/2016061208231533246145.png" width="400" height="710"></p>
 
 <h1>0x05 总结</h1>
 

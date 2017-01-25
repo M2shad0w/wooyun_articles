@@ -3,7 +3,7 @@
 			<head>
 			     <title>戳戳HackShield Ring0反調試 - 腿骨</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/9403">http://drops.wooyun.org/tips/9403</a></h1>
 				
@@ -47,7 +47,7 @@
 
 <p>HS啟動後的效果:</p>
 
-<p><img src="http://static.wooyun.org//drops/20151005/201510050946255754715.png" alt=""></p>
+<p><img src="../images_result/images/201510050946255754715.png" alt=""></p>
 
 <p>開著SOD的OD找不到遊戲</p>
 
@@ -57,9 +57,9 @@
 
 <p>如果不開 直接鎖定的話的話會跳錯誤</p>
 
-<p><img src="http://static.wooyun.org//drops/20151005/201510050946262263026.png" alt=""></p>
+<p><img src="../images_result/images/201510050946262263026.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20151005/201510050946281637233.png" alt=""></p>
+<p><img src="../images_result/images/201510050946281637233.png" alt=""></p>
 
 <p>到以上基本上可以確定常用的工具都不能用了</p>
 
@@ -69,7 +69,7 @@
 
 <hr>
 
-<p><img src="http://static.wooyun.org//drops/20151005/20151005094629245174.png" alt=""></p>
+<p><img src="../images_result/images/20151005094629245174.png" alt=""></p>
 
 <p>遊戲丟進OD，入口點看是TMD殼，放棄</p>
 
@@ -79,19 +79,19 @@
 
 <p>SSDT表</p>
 
-<p><img src="http://static.wooyun.org//drops/20151005/201510050946319149051.png" alt=""></p>
+<p><img src="../images_result/images/201510050946319149051.png" alt=""></p>
 
 <p>ShadowSSDT表</p>
 
-<p><img src="http://static.wooyun.org//drops/20151005/20151005094632462686.png" alt=""></p>
+<p><img src="../images_result/images/20151005094632462686.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20151005/201510050946345516971.png" alt=""></p>
+<p><img src="../images_result/images/201510050946345516971.png" alt=""></p>
 
 <p>上面三張圖可以看到，HackShield在Ring0的地方加載了他的驅動hook了很多debugger會用到的函數，以及一些未導出的函數</p>
 
 <p>先補提一下windows大概的函數調用過程</p>
 
-<p><img src="http://static.wooyun.org//drops/20151005/201510050946371419881.png" alt=""></p>
+<p><img src="../images_result/images/201510050946371419881.png" alt=""></p>
 
 <p>在SSDT表裡面的函數最後都會透過SSDT表轉發到該函數地址執行</p>
 
@@ -99,7 +99,7 @@
 
 <p>執行過程就變成這樣</p>
 
-<p><img src="http://static.wooyun.org//drops/20151005/201510050946393613491.png" alt=""></p>
+<p><img src="../images_result/images/201510050946393613491.png" alt=""></p>
 
 <p>在調用該函數的時候順便調用了反外掛的檢測</p>
 
@@ -107,15 +107,15 @@
 
 <p>HS加載以前的</p>
 
-<p><img src="http://static.wooyun.org//drops/20151005/2015100509464149106101.png" alt=""></p>
+<p><img src="../images_result/images/2015100509464149106101.png" alt=""></p>
 
 <p>讓HS啟動以後…..</p>
 
-<p><img src="http://static.wooyun.org//drops/20151005/2015100509464359787111.png" alt=""></p>
+<p><img src="../images_result/images/2015100509464359787111.png" alt=""></p>
 
 <p>跟進去剛剛的地址看看</p>
 
-<p><img src="http://static.wooyun.org//drops/20151005/2015100509464670629121.png" alt=""></p>
+<p><img src="../images_result/images/2015100509464670629121.png" alt=""></p>
 
 <p>可以看到他先被jmp到HS的處理函數裡面了</p>
 
@@ -135,17 +135,17 @@
 
 <p>以下用nt!ntWriteVirtualMemory示範</p>
 
-<p><img src="http://static.wooyun.org//drops/20151005/2015100509464890912131.png" alt=""></p>
+<p><img src="../images_result/images/2015100509464890912131.png" alt=""></p>
 
 <p>由於不能直接恢復鉤子,而且HS本身會定期調用自身檢測鉤子在不在</p>
 
 <p>所以在他前幾個byte寫入自己的鉤子</p>
 
-<p><img src="http://static.wooyun.org//drops/20151005/2015100509465079990141.png" alt=""></p>
+<p><img src="../images_result/images/2015100509465079990141.png" alt=""></p>
 
 <p>至於怎麼判斷….(win7_32位元作業系統)</p>
 
-<p><img src="http://static.wooyun.org//drops/20151005/2015100509465240599151.png" alt=""></p>
+<p><img src="../images_result/images/2015100509465240599151.png" alt=""></p>
 
 <p>把所有函數處理掉以後就差不多了!</p>
 
@@ -155,9 +155,9 @@
 
 <p>可以使用OD跟CE了! Enjoy it!</p>
 
-<p><img src="http://static.wooyun.org//drops/20151005/2015100509465514875161.png" alt=""></p>
+<p><img src="../images_result/images/2015100509465514875161.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20151005/2015100509465911529171.png" alt=""></p>
+<p><img src="../images_result/images/2015100509465911529171.png" alt=""></p>
 
 <h1>0x06 番外篇</h1>
 

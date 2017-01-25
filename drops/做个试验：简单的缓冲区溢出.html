@@ -3,7 +3,7 @@
 			<head>
 			     <title>做个试验：简单的缓冲区溢出 - blast</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1421">http://drops.wooyun.org/papers/1421</a></h1>
 				
@@ -175,7 +175,7 @@ Disassembly of section .text:
 
 <p>栈帧是一个函数调用在栈上使用的一片内存，它包含有参数（注：64位下如果系统决定用寄存器传参，那参数这东西也有可能没有）、返回地址和本地变量。我从wikipedia的文章里面偷来一张图，大家可以看看：<a href="http://en.wikipedia.org/wiki/Call_stack">http://en.wikipedia.org/wiki/Call_stack</a></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811183284311.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811183284311.png" alt="enter image description here"></p>
 
 <p>函数名虽然各不相同，但是状况是一样的，栈向下增长，所以一个函数的返回地址在相对于本地变量里更高的位置。我们回到之前的函数看看这对我们来说意味着啥。在函数初始化阶段之后，有一个<code>mov eax，0x0</code>的语句，那之后会调用了我们的<code>getInput()</code>函数。</p>
 

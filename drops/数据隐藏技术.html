@@ -3,7 +3,7 @@
 			<head>
 			     <title>数据隐藏技术 - Gump</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12614">http://drops.wooyun.org/tips/12614</a></h1>
 				
@@ -24,19 +24,19 @@
 
 <p>这里采用Dsfok-tools来对数据进行隐藏，通常这个工具是用来编辑vmdk文件中的描述符。从<a href="http://www.sanbarrow.com/vmdk-tools.html">这里</a>可以下载到该软件。套件里包含了dsfi工具可以对vmdk文件进行嵌入。 我们首先来看下需要隐藏的文件和它的大小</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/20160129035950492810.png" alt="p1"></p>
+<p><img src="../images_result/images/20160129035950492810.png" alt="p1"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/20160129035951220481103.png" alt="p2"></p>
+<p><img src="../images_result/images/20160129035951220481103.png" alt="p2"></p>
 
 <p>按照下载页面的提示输入命令</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012903595371502269.png" alt="p3"></p>
+<p><img src="../images_result/images/2016012903595371502269.png" alt="p3"></p>
 
 <p>嵌入完成后该vmdk文件依然是可以继续使用，而且虚拟机并不会报错。再来对嵌入的文件进行提取。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012903595410999346.png" alt="p4"></p>
+<p><img src="../images_result/images/2016012903595410999346.png" alt="p4"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012903595522811440.png" alt="p5"></p>
+<p><img src="../images_result/images/2016012903595522811440.png" alt="p5"></p>
 
 <p>这里要提醒的是，如果长期运行该虚拟机，隐藏在里面的数据是很有可能被覆盖掉，但是如果仅仅是作为数据隐藏的载体，除了需要提取的那个人外谁又在意这个问题呢，或许别人还巴不得这样。</p>
 
@@ -50,13 +50,13 @@
 
 <p>创建交换数据流是很简单的</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012903595735746535.png" alt="p6"></p>
+<p><img src="../images_result/images/2016012903595735746535.png" alt="p6"></p>
 
 <p>并输入This is hidden file</p>
 
 <p>dir当前目录是找不到刚才编辑的那个文件的，只有一个0字节的visiable.txt</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012903595820615629.png" alt="p7"></p>
+<p><img src="../images_result/images/2016012903595820615629.png" alt="p7"></p>
 
 <p>要用记事本打开打开刚才那个文件直接输入相同的命令就行了</p>
 
@@ -79,13 +79,13 @@
 
 <p>如：绑定cmd.exe到NUL文件</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012903595985959728.png" alt="p8"></p>
+<p><img src="../images_result/images/2016012903595985959728.png" alt="p8"></p>
 
 <p>用wmic来运行即可</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012904000124100825.png" alt="p9"></p>
+<p><img src="../images_result/images/2016012904000124100825.png" alt="p9"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012904000363796926.png" alt="p10"></p>
+<p><img src="../images_result/images/2016012904000363796926.png" alt="p10"></p>
 
 <p>关于ADS在web安全中的利用的资料：<br>
 <a href="http://pan.baidu.com/s/1dDo9iQP">http://pan.baidu.com/s/1dDo9iQP</a> 提取码:1bft</p>
@@ -99,7 +99,7 @@
 
 <p>我们都知道TCP的典型3次握手</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/20160129040006562551027.png" alt="p11"></p>
+<p><img src="../images_result/images/20160129040006562551027.png" alt="p11"></p>
 
 <p>我们可以利用该过程对数据进行隐藏发送，如：</p>
 

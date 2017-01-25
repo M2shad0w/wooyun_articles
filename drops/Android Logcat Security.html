@@ -3,7 +3,7 @@
 			<head>
 			     <title>Android Logcat Security - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3812">http://drops.wooyun.org/tips/3812</a></h1>
 				
@@ -32,20 +32,20 @@
 
 <p>测试方法是非常简单的，可以使用sdk中的小工具monitor或者ADT中集成的logcat来查看日志，将工具目录加入环境变量用起来比较方便。当然如果你想更有bigger也可以使用adb logcat。android整体日志信息量是非常大的，想要高效一些就必须使用filter来过滤一些无关信息，filter是支持正则的，可以做一些关键字匹配比如password、token、email等。本来准备想做个小工具自动化收集，但是觉得这东西略鸡肋没太大必要，故本文的重点也是在如何安全的使用logcat方面。</p>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209filter.jpg" alt=""></p>
+<p><img src="../images_result/images/201411071209filter.jpg" alt=""></p>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209adb.jpg" alt=""></p>
+<p><img src="../images_result/images/201411071209adb.jpg" alt=""></p>
 
 <p>当然也可以自己写个app在直接在手机上抓取logcat，不过前面提到因为android系统原因如果手机是android4.1或者之后版本即使在manifest.xml中加入了如下申请也是无法读取到其他应用的log的。</p>
 
 <pre><code>&lt;uses-permission android:name="android.permission.READ_LOGS"/&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209capture1.jpg" alt=""></p>
+<p><img src="../images_result/images/201411071209capture1.jpg" alt=""></p>
 
 <p>root权限可以随便看logcat，所以“logcat信息泄露”漏洞因谷歌在4.1上的动作变得很鸡肋了。</p>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209capture2.jpg" alt=""></p>
+<p><img src="../images_result/images/201411071209capture2.jpg" alt=""></p>
 
 <h2>0x02 smali注入logcat</h2>
 
@@ -56,9 +56,9 @@
 <pre><code>invoke-static {v0, v0}, Landroid/util/Log;-&gt;e(Ljava/lang/String;Ljava/lang/String;)I
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209smali.jpg" alt=""></p>
+<p><img src="../images_result/images/201411071209smali.jpg" alt=""></p>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209password.jpg" alt=""></p>
+<p><img src="../images_result/images/201411071209password.jpg" alt=""></p>
 
 <h2>0x03 建议</h2>
 
@@ -101,19 +101,19 @@ System.out.println(String.format("Log.v() returned %d. ", i)); //Use the returne
 
 <p>eclipse中配置ProGuard</p>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209ProGuard.jpg" alt=""></p>
+<p><img src="../images_result/images/201411071209ProGuard.jpg" alt=""></p>
 
 <p>开发版所有log都打印出来了。</p>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209development.jpg" alt=""></p>
+<p><img src="../images_result/images/201411071209development.jpg" alt=""></p>
 
 <p>发行版ProGuard移除了d/v的log</p>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209release.jpg" alt=""></p>
+<p><img src="../images_result/images/201411071209release.jpg" alt=""></p>
 
 <p>反编译后查看确实被remove了</p>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209reverse.jpg" alt=""></p>
+<p><img src="../images_result/images/201411071209reverse.jpg" alt=""></p>
 
 <p>5、公开的APK文件应该是release版而不是development版。</p>
 
@@ -236,7 +236,7 @@ return res;
 <li>intent.setData(URL)的URL</li>
 </ul>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209ActivityManager.jpg" alt=""></p>
+<p><img src="../images_result/images/201411071209ActivityManager.jpg" alt=""></p>
 
 <p>5、即使不用System.out/err程序也有可能输出相关信息，如使用 Exception.printStackTrace()</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>一个可大规模悄无声息窃取淘宝/支付宝账号与密码的漏洞 -（埋雷式攻击附带视频演示） - gainover</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1426">http://drops.wooyun.org/papers/1426</a></h1>
 				
@@ -44,7 +44,7 @@
 
 <p>这个有意思的漏洞最初在乌云上由白帽子neobyte报告（ <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2013-039481">WooYun: 一个flash的0day导致的淘宝网存储xss(可形成永久后门)</a> ），该漏洞描述了在一些FLASH应用中，因使用Local Shared Object （以下简称LSO）与ExternalInterface.addCallback而导致的一类XSS漏洞。由于此前并没有见到类似的报告，从开发人员角度来说，并不会 十分去注意并防御此类漏洞。我们来看看，在开发人员的角度，通过js与as的交互来实现读取FLASH本地缓存功能的流程图:</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810424567231.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091810424567231.jpg" alt="enter image description here"></p>
 
 <p>在这个示意图中，红色的箭头表示函数的调用，蓝色的箭头表示用户数据的流向。普通的开发人员仅仅在意功能是否完整的实现；带有一些安全意识的开发人员会注意到，jsGetData所获得的数据需要经过过滤再进入DOM, 如果没有考虑这点会造成什么安全问题呢？乌云上的p.z大神也给我们举了一个好例子（ <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2013-022080">WooYun: 淘宝某处存储型XSS漏洞</a> ）; 但是现在，我们将会遇到一个最糟糕的情况：“不论你是否是一个有安全意识的程序员，你都十分可能掉入这个坑中！”。</p>
 
@@ -52,7 +52,7 @@
 
 <p>我们得先更深入了解下javascript调用FLASH所提供的函数接口时，到底做了哪些事情。下图描述了当我们调用jsGetData函数来获取FLASH本地缓存数据的调用过程：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810424557627.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091810424557627.jpg" alt="enter image description here"></p>
 
 <p>上面是一个正常获取数据的流程，假设LSO中存放的数据是AAAAAAAAAAAA，最终，我们的data变量的值也为AAAAAAAAAAAA，当然，这是理想状态下的情况。</p>
 
@@ -118,7 +118,7 @@ eval('"AAAAAA\\\\";alert(1);//AAAAAA"');
 
 <p>的流程，也就是说，我们可以通过Javascript调用jsSetData来实现修改LSO中的数据。从功能角度上是这么设计的，然而出于安全考虑，FLASH所提供的外部函数接口，并不是什么时候都可以调用的，在默认情况下，只有http://A.com的网页文件才能调用http://A.com下的FLASH文件所提供的函数接口，如下图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810424616382.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091810424616382.jpg" alt="enter image description here"></p>
 
 <p>这样看来，其实在默认的安全设置下，我们并没有直接的办法来修改数据。此外，每个域名下FLASH文件所使用的缓存是独立的，因而正常情况下，我们也无法使用http://B.com的FLASH文件来修改http://A.com下的FLASH缓存（不排除有猥琐的办法哦～）。</p>
 
@@ -132,7 +132,7 @@ Security.allowDomain("*");
 
 <p>这样一来，我们整个漏洞的原理图就可以建立起来了：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810424624331.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091810424624331.jpg" alt="enter image description here"></p>
 
 <p>这个图箭头比较多。当黑客创建了恶意页面后，我们以受害者作为起点，当受害者访问了恶意页面后，会执行一系列操作，从而将恶意数据存入LSO中，这个过程，我们称之为“埋雷”。哪里会被“埋雷”呢？答案是很多地方：</p>
 

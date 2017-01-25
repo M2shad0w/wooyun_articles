@@ -3,7 +3,7 @@
 			<head>
 			     <title>RFID之M1卡数据分析 - 321</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3168">http://drops.wooyun.org/tips/3168</a></h1>
 				
@@ -28,11 +28,11 @@
 
 <p>阅读《RFID安全之某学校水卡破解》可以发现该学校的水卡中数据存储比较简单，按照作者的分析，4号扇区的1、2号数据段（编号从0开始）存储了水卡余额，将已知的余额32.31，换算为分为3231，再转为16进制为C9F，即00000C9F，而0C9F取反为FFFFF360，这时比较下4号扇区的值，很容易发现规律：前四个字节不取反倒序（9F0C0000）存储余额，接下来四个字节取反倒序（60F3FFFF）存储余额，再接下来四个字节不取反倒序（9F0C0000）存储余额。</p>
 
-<p><img src="http://static.wooyun.org/20141010/2014101002584910055.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014101002584910055.png" alt="enter image description here"></p>
 
 <p>上面提到的“倒序”，可以结合计算机数据存储方式来理解：如下图所示，变量a存储的数据对应的16进制为0A112233，变量b存储的数据对应的16进制为0B445566。</p>
 
-<p><img src="http://static.wooyun.org/20141010/2014101002585122809.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014101002585122809.png" alt="enter image description here"></p>
 
 <p>这样就很明显了，5634120A，就是变量a所代表的数据的十六进制0A123456的倒序。 作为入门教程，个人认为《RFID安全之某学校水卡破解》是非常不错的。看完这个教程，并实践结束后，我停下来思考这样一个问题：M1卡的密码破解是傻瓜式的，当然也有文章介绍破解原理，但是作为门外汉，目前我还不是特别关心，我只想找到那种破解成功，可以修改金额的快感！那么在整个M1卡的破解过程中，我自己到底起了什么作用？答案是卡片的数据分析。 《RFID安全之某学校水卡破解》中的数据分析并不难，只要知道水卡的余额就可以定位卡片中余额数据的存储位置，细心的读者肯定可以发现文中的截图5号扇区也存在非0值块，作者在《<a href="http://www.haogongju.net/art/2650730">RFID安全之某学校水卡破解后记——不留后患</a>》中作了进一步分析；《<a href="http://lcx.cc/?i=4217">任意修改学校食堂饭卡余额</a>》这篇文章所描述的卡片和《RFID安全之某学校水卡破解》的分析非常相似；而另一篇《<a href="http://happylyang.com/blog/2013/09/15/rfid-hack/">破解学校水卡&#45;--||||RFID Hack初探</a> 》文中的数据就更简单了，只有余额和消费金额之和，连取反的校验都没做。 分析了几篇图文教程式入门文章，加上自己的实际破解过程，总结了一下数据分析的经验。 首先，需要收集信息，然后可以通过数据比对法定位余额，如果卡片数据采取了校验保护，可以采用试错法进行排查定位，正如《RFID安全之某学校水卡破解后记——不留后患》中所用到的方法。</p>
 
@@ -321,7 +321,7 @@
 
 <p>这条人为构造的数据，余额为613.8元，消费金额为5.72元，消费日期为一个不存在的日期，如果该该数据能够校验通过，那么破解基本就可以结束了。 1E 02 66 83 02 3C 00 00 EF C4 03 FF 09 1E 03 04，如果上一条不能成功，则尝试该日期正确的数据。 经过验证，随意构造的两条数据都成功修改了卡片余额，如下图：</p>
 
-<p><img src="http://static.wooyun.org/20141010/2014101002585115095.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014101002585115095.png" alt="enter image description here"></p>
 
 <p>到此，卡片的破解算是告一段落，虽然遗留了一下问题： 1、整体替换两次实验结果冲突？ 2、第2段中的前四个字节以及最后两个字节的数据是如何产生的？ 第一个问题可能是自己粗心造成的；第二个问题并不影响卡片破解。</p>
 

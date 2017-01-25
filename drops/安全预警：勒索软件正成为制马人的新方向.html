@@ -3,7 +3,7 @@
 			<head>
 			     <title>安全预警：勒索软件正成为制马人的新方向 - 360手机卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/news/15930">http://drops.wooyun.org/news/15930</a></h1>
 				
@@ -30,7 +30,7 @@
 
 <p>经过我们对最新捕获的勒索软件的分析，该木马的运行流程如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/201605170520123374721.jpeg" alt=""></p>
+<p><img src="../images_result/images/201605170520123374721.jpeg" alt=""></p>
 
 <p>图1.1 木马运行流程</p>
 
@@ -46,11 +46,11 @@
 
 <p>我们在分析中发现，样本中涉及到敏感的字符串全部进行了DES加密处理。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705202079259313.png" alt=""></p>
+<p><img src="../images_result/images/2016051705202079259313.png" alt=""></p>
 
 <p>图1.2 木马遍历联系人群发短信的代码片段</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705202153351413.png" alt=""></p>
+<p><img src="../images_result/images/2016051705202153351413.png" alt=""></p>
 
 <p>图1.3密文与明文对应关系</p>
 
@@ -58,25 +58,25 @@
 
 <p>短信中的链接指向http://pre.im/xxxxflaw，Pre.im是一个免费的内测分发、应用托管工具网站，可以用于软件BUG测试和兼容性测试。制马人利用这种第三方网站提供的下载功能，上传恶意样本进行传播。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705202322414512.png" alt=""></p>
+<p><img src="../images_result/images/2016051705202322414512.png" alt=""></p>
 
 <p>图1.4 Pre.im官网介绍</p>
 
 <p>通过浏览器打开短信中的链接显示一个名为“秒赞神器”软件。实际上，经过分析这个“秒赞神器”软件是一个典型的设置PIN码类型的勒索软件，软件运行后会在用户不知情的情况下强制设置手机解锁PIN码，造成用户无法进入手机桌面。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705202541444611.png" alt=""></p>
+<p><img src="../images_result/images/2016051705202541444611.png" alt=""></p>
 
 <p>图1.5 木马下载页面</p>
 
 <p>在“秒赞神器”申请激活设备管理器页面上，制马人留下了自己的QQ联系方式。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705202721204711.png" alt=""></p>
+<p><img src="../images_result/images/2016051705202721204711.png" alt=""></p>
 
 <p>图1.6 木马申请设备管理器页面</p>
 
 <p>同时，在木马签名信息中也发现了同样的QQ号码。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/201605170520293570888.png" alt=""></p>
+<p><img src="../images_result/images/201605170520293570888.png" alt=""></p>
 
 <p>图1.7 木马签名信息</p>
 
@@ -88,17 +88,17 @@
 
 <p>我们通过恶意软件中制马人留下手机号和QQ信息，将其制作的恶意样本与我们捕获到的时间进行关联，回溯了制马人长达半年之久的制马活动。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/201605170520317472999.png" alt=""></p>
+<p><img src="../images_result/images/201605170520317472999.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705203359589108.png" alt=""></p>
+<p><img src="../images_result/images/2016051705203359589108.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/20160517052034721981113.png" alt=""></p>
+<p><img src="../images_result/images/20160517052034721981113.png" alt=""></p>
 
 <p>图2.1 制马人半年的制马活动轨迹</p>
 
 <p>从捕获时间看，包含制马人联系方式的恶意样本首次出现在2015年11月3日，软件名称为“system”。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/20160517052036176991210.png" alt=""></p>
+<p><img src="../images_result/images/20160517052036176991210.png" alt=""></p>
 
 <p>图2.2 “system”恶意软件代码片段</p>
 
@@ -106,19 +106,19 @@
 
 <p>16年1月1日：2016年新年伊始，制马人依然没有停下制马的脚步，元旦这天制马人开始尝试制作勒索软件测试Demo程序。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705203892412137.png" alt=""></p>
+<p><img src="../images_result/images/2016051705203892412137.png" alt=""></p>
 
 <p>图2.3 勒索软件测试Demo程序</p>
 
 <p>1月10日：制马人又开始转向制作钓鱼软件，制作了一个用于窃取QQ账号和密码的钓鱼软件测试Demo程序。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705204087880147.png" alt=""></p>
+<p><img src="../images_result/images/2016051705204087880147.png" alt=""></p>
 
 <p>图2.4 钓鱼软件正在发送QQ账号密码信息</p>
 
 <p>1月12日：制马人通过篡改正常软件，制作了一款全屏不响应触摸事件的形式的勒索软件。从这个样本可以看出制马人从测试阶段逐步开始制作正式的勒索软件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705204258795157.png" alt=""></p>
+<p><img src="../images_result/images/2016051705204258795157.png" alt=""></p>
 
 <p>图2.5 正常软件（图左）和被篡改后的软件（图右）对比</p>
 
@@ -126,7 +126,7 @@
 
 <p>2月4日：与一月相比，二月制马人活动明显减少。制马人在2月4日制作的勒索软件中，加入了所谓的“免杀”手段，通过构造了异常的ZIP包结构，造成分析工具解压时报错，来对抗常见的分析工具分析。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705204580255166.png" alt=""></p>
+<p><img src="../images_result/images/2016051705204580255166.png" alt=""></p>
 
 <p>图2.6 异常的ZIP包结构</p>
 
@@ -134,31 +134,31 @@
 
 <p>2月25日：制马人开始制作新型的勒索软件，新型勒索软件主要是将勒索软件以子包的形式隐藏在另一个软件中，后者安装运行后会通过一些文字提示诱导用户授予Root权限，同时将前者安装到手机系统软件目录中，这种锁机方式被制马人称为“Root锁”。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705204677492177.png" alt=""></p>
+<p><img src="../images_result/images/2016051705204677492177.png" alt=""></p>
 
 <p>图2.7 执行拷贝到系统软件目录的shell命令</p>
 
 <p>3月1日：从制马人活动频率看，三月是制马人近半年内制马最为活跃的月份。在3月1日，制马人制作了名为“QQ百宝箱”的恶意软件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705204899770186.png" alt=""></p>
+<p><img src="../images_result/images/2016051705204899770186.png" alt=""></p>
 
 <p>图2.8 QQ百宝箱安装图标</p>
 
 <p>该恶意软件不仅会在用户不知情的情况下强制设置手机解锁PIN码，造成用户无法进入手机桌面。而且，还会诱导用户输入QQ账号和密码进行钓鱼。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705204954968195.png" alt=""></p>
+<p><img src="../images_result/images/2016051705204954968195.png" alt=""></p>
 
 <p>图2.9 窃取QQ账号密码信息代码片段</p>
 
 <p>另外，值得关注的是，我们发现“QQ百宝箱”恶意软件加入了遍历手机通讯录群发短信的功能，开始进行自我传播。“QQ百宝箱”恶意软件与我们最新捕获的恶意软件，除了短信内容没有进行加密处理外，从代码结构上看，前者与后者几乎完全一样，我们认为这应该是后者的早期版本。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705205174572205.png" alt=""></p>
+<p><img src="../images_result/images/2016051705205174572205.png" alt=""></p>
 
 <p>图2.10 “QQ百宝箱”遍历通讯录群发短信代码片段</p>
 
 <p>3月19日：从3月19日开始在连续一周多的时间里，制马人每天都在制作恶意软件，甚至出现了一天内制作多个恶意软件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/20160517052052507752111.png" alt=""></p>
+<p><img src="../images_result/images/20160517052052507752111.png" alt=""></p>
 
 <p>图2.11 制马人同一天制作的三个恶意软件</p>
 
@@ -179,13 +179,13 @@
 
 <p>我们通过查询恶意软件中制马人留下的QQ信息，这个QQ号码指向一个信息显示仅有15岁的少年。并且发现这个人是QQ群“AIDE – Android lockphone”的群主，该群目前有超过200人。此人群名片显示“赞我十赞截图，送root锁”，所谓的Root锁，就是制马人在二月制作的利用Root的勒索软件恶意样本。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705205474881226.png" alt=""></p>
+<p><img src="../images_result/images/2016051705205474881226.png" alt=""></p>
 
 <p>图2.12 QQ号码查询信息</p>
 
 <p>另外，此人的QQ个性签名历史中曾经出现“flaw的人生”，“flaw”这个词出现在群发的短信链接中，根据这些信息，我们认为此人与制马人为同一人。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705205799783236.png" alt=""></p>
+<p><img src="../images_result/images/2016051705205799783236.png" alt=""></p>
 
 <p>图2.13 制马人历史个性签名信息</p>
 
@@ -197,13 +197,13 @@
 
 <p>我们通过已知的信息，关联出其他有相似行为的勒索软件。这些勒索软件群发的短信链接，主要借助的是网盘和第三方网站进行传播。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705205924592244.png" alt=""></p>
+<p><img src="../images_result/images/2016051705205924592244.png" alt=""></p>
 
 <p>图3.1 关联样本中的短信内容与链接归属</p>
 
 <p>从链接传播的对象看，链接传播的恶意软件不仅是勒索软件自身，还发现了其他恶意木马家族，例如FakeTaobao木马家族。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705210055546254.png" alt=""></p>
+<p><img src="../images_result/images/2016051705210055546254.png" alt=""></p>
 
 <p>图3.2勒索软件传播的FakeTaobao木马家族</p>
 
@@ -211,7 +211,7 @@
 
 <p>经过我们调查，制马人制马方向转变，制马多元化的原因，归根结蒂还是与钱有关。我们从一个制马人的聊天中得知，制马人主要制作“拦截马”即FakeTaobao木马家族，月收益相当可观在1.3万元左右，同时制马人也在制作勒索软件，每月能够多带来1500元收益。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160517/2016051705210255190264.png" alt=""></p>
+<p><img src="../images_result/images/2016051705210255190264.png" alt=""></p>
 
 <p>图3.3制马人的聊天对话内容</p>
 

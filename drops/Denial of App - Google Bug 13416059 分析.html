@@ -3,7 +3,7 @@
 			<head>
 			     <title>Denial of App - Google Bug 13416059 分析 - hqdvista</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2976">http://drops.wooyun.org/tips/2976</a></h1>
 				
@@ -28,13 +28,13 @@
 
 <p>下载安装这个POC，可以看到其实就是指定一个packagename，例如com.taobao.taobao，然后生成了一个malformed的APK并执行安装，由于该APK的dex是非法的，安装的时候会报告INSTALL&#95;FAILED&#95;DEXOPT并安装失败。但如果随后安装真正的com.taobao.taobao时，即使指定了重新安装选项（pm install -r），却会报INSTALL&#95;FAILED&#95;UID_CHANGED，导致后续安装失败，而在被占位的手机上已安装应用中却找不到com.taobao.taobao，自然也无法清除掉占位的幽灵，造成真正的淘宝应用完全无法安装，推而广之可以用在360等杀毒软件上。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810423446993.png" alt="POC"></p>
+<p><img src="../images_result/images/2014091810423446993.png" alt="POC"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810423447566.png" alt="安装之后"></p>
+<p><img src="../images_result/images/2014091810423447566.png" alt="安装之后"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810423470830.png" alt="正常应用无法安装"></p>
+<p><img src="../images_result/images/2014091810423470830.png" alt="正常应用无法安装"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810423473363.png" alt="install -r"></p>
+<p><img src="../images_result/images/2014091810423473363.png" alt="install -r"></p>
 
 <h2>0x03 问题本质：</h2>
 
@@ -50,7 +50,7 @@
 
 <p>通过观察可以发现，第一次安装（所谓“占位”）结束的时候，在/data/data/目录下已经有了com.taobao.taobao目录并分配了一个uid，例如u70(10070)，但第二次安装的时候，PackageManager却出现了UID_CHANGED的error，而没有复用u70，这是为什么？</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810423537579.png" alt="uid"></p>
+<p><img src="../images_result/images/2014091810423537579.png" alt="uid"></p>
 
 <p>INSTALL&#95;FAILED&#95;DEXOPT和UID_CHANGED是在如下代码块中：</p>
 

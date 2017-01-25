@@ -3,7 +3,7 @@
 			<head>
 			     <title>RFID入坑初探——Mifare Classic card破解（一） - redrain有节操</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2065">http://drops.wooyun.org/tips/2065</a></h1>
 				
@@ -49,11 +49,11 @@ FFFFFFFFFFFF、A0B0C0D0E0F0等等都是M1白卡的默认密码，所以当我们
 
 <p>其中ACR122u作为硬件供能，读写的作用，mfoc用来爆破，libnfc用来写入数据。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071410325561854.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071410325561854.png" alt="enter image description here"></p>
 
 <p>可以看到读出了我们的卡类型，下方的keyA keyB就是要我们破解的地方，当然，也可以使用另外一个简化版本，更粗暴简单一些，百度M1卡服务程序即可。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071410325539023.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071410325539023.png" alt="enter image description here"></p>
 
 <p>稍等片刻后就发现上下各16个勾勾都打上了，说明成功爆破了，成功后会在当前目录下生成一个dump文件，这样，这张卡的数据就被完全dump下来了，得到dumpfile1但是只有1k的大小，在win下操作的时候需要用到一个fixdump的工具来填充剩余部分</p>
 
@@ -62,7 +62,7 @@ FFFFFFFFFFFF、A0B0C0D0E0F0等等都是M1白卡的默认密码，所以当我们
 
 <p>即可修复，大小为4k，然后我们去消费一下这张卡（让你要修改的区域的数据改变）</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071410325637369.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071410325637369.png" alt="enter image description here"></p>
 
 <p>其中前6个字节和后6个字节的FF FF FF FF FF FF即为秘钥，中间的几位FF 07 80 69即为控制位。</p>
 
@@ -73,7 +73,7 @@ FFFFFFFFFFFF、A0B0C0D0E0F0等等都是M1白卡的默认密码，所以当我们
 
 <p>就此，我们有了两个样本，然后做hex diff，linux下直接用diff，win下可以使用hexcmp2</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071410325633674.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071410325633674.png" alt="enter image description here"></p>
 
 <p>diff后发现了数据变动的区域。</p>
 
@@ -91,13 +91,13 @@ FFFFFFFFFFFF、A0B0C0D0E0F0等等都是M1白卡的默认密码，所以当我们
 fc-mfclassic.exe w b dumpfile_new dumpfile_old
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071410325741243.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071410325741243.png" alt="enter image description here"></p>
 
 <p>至此，破解差不多就那么完成了（单纯指做数据修改的目的，不包括解决什么后患啊之类的情况）。</p>
 
 <p>最后上一张成功改写后的测试图。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071410325767609.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071410325767609.png" alt="enter image description here"></p>
 
 <p>破解时长共3个小时（来回取样浪费了不少时间）。</p>
 
@@ -105,7 +105,7 @@ fc-mfclassic.exe w b dumpfile_new dumpfile_old
 
 <p>首先我们知道，M1卡的算法是个对等加密算法，读卡器中也保存着同样的密码，也是用同样的算法加密，当卡和机器交互的时候，读卡器首先验证0扇区的密码，卡给读卡器以明文方式发送一个随机序列a（明文），然后读卡器通过跟加密，同时自己产生一个加密的随机序列b(密文)返回，卡用自己的密码解密之后，解密出来的序列如果是自己之前发送的a，则认为正确，然后通过自己加密算法加密读卡器生成的随机序列发送给读卡器，读卡器解密之后，如果跟 自己之前发送的随机数b相同，则认为验证通过，之后所有的数据都通过此算法加密传输。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071410325751486.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071410325751486.png" alt="enter image description here"></p>
 
 <p>在整个过程中，只有a是明文，之后的都是密文，card发送一个a给读卡器之后，读卡器用错误的密码加密之后发送给card，card肯定解密错误，然后验证中断
 但是，我们知道其他扇区的的密码，验证的时候，使用这个扇区验证成功之后，后面所有的数据交互都是密文，读其他扇区数据的时候，也是card首先发送随机数a，这个a是个加密的数据，之前说的每个扇区的密码是独立的，那么加密实际上就是通过card这个扇区的密码相关的算法加密的a，这个数据中就包含了这个扇区的密码信息，所以我们才能 够通过算法漏洞继续分析出扇区的密码是什么。</p>

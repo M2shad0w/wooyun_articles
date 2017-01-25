@@ -3,7 +3,7 @@
 			<head>
 			     <title>struts2最近几个漏洞分析&amp;稳定利用payload - genxor</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/902">http://drops.wooyun.org/papers/902</a></h1>
 				
@@ -34,15 +34,15 @@
 
 <p>首先，这里是devmode的几种模式，</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811002223340.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811002223340.png" alt="enter image description here"></p>
 
 <p>继续跟踪DebuggingInterceptor.java的代码，发现问题出在下面这个逻辑当中</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811002360850.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811002360850.png" alt="enter image description here"></p>
 
 <p>跟踪参数如图</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811002385614.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811002385614.png" alt="enter image description here"></p>
 
 <p>可以看到这里</p>
 
@@ -70,29 +70,29 @@ writer.print(stack.findValue(cmd));
 
 <p>这里以“redirect:”前缀举例，struts2会将“redirect:”前缀后面的内容设置到redirect.location当中，这里我们一步步跟踪，首先是这个getMapping函数跟入</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811002345774.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811002345774.png" alt="enter image description here"></p>
 
 <p>这里一直到这个handleSpecialParameters()，继续跟入</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811002357312.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811002357312.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811002467967.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811002467967.png" alt="enter image description here"></p>
 
 <p>这里真正传入OGNL表达式是在这个parameterAction.execute()中，继续跟入来到DefaultActionMapper.java的代码</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811002437016.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811002437016.png" alt="enter image description here"></p>
 
 <p>这里key.substring(REDIRECT_PREFIX.length())便是前缀后面的内容也就是OGNL表达式，struts2会调用setLocation方法将他设置到redirect.location中。然后这里调用mapping.setResult(redirect)将redirect对象设置到mapping对象中的result里，如图所示</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811002439856.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811002439856.png" alt="enter image description here"></p>
 
 <p>然而上面的过程只是传递OGNL表达式，真正执行是在后面，这里是在FilterDispatcher类中的dispatcher.serviceAction()方法，这里的mapping对象中设置了传入的OGNL</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811002424145.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811002424145.png" alt="enter image description here"></p>
 
 <p>这里跟入方法最终会在TextParseUtil这个类的调用stack.findValue()方法执行OGNL。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811002576663.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811002576663.png" alt="enter image description here"></p>
 
 <h2>0x03 PAYLOAD</h2>
 
@@ -112,7 +112,7 @@ writer.print(stack.findValue(cmd));
 
 <p>同时在之前的struts2exp这个程序基础上修改出一个exp，整合了近几年出现的几个高危漏洞,</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811002557358.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811002557358.png" alt="enter image description here"></p>
 
 <p>程序先不公开放出，大家可以自己用语句测试自己的服务器是否有该问题。</p>      <p></p>
     

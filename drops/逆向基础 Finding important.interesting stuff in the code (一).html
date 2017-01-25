@@ -3,7 +3,7 @@
 			<head>
 			     <title>逆向基础 Finding important/interesting stuff in the code (一) - zing</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/7647">http://drops.wooyun.org/binary/7647</a></h1>
 				
@@ -44,7 +44,7 @@
 
 <p>可导入的MSVC版本和DLL文件如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150803/2015080306092146909.png" alt=""></p>
+<p><img src="../images_result/images/2015080306092146909.png" alt=""></p>
 
 <p>msvcp*.dll包含C++相关函数，因此如果导入了这类dll，便可推测是C++程序。</p>
 
@@ -287,7 +287,7 @@ printf ("Hello, world!\n");
 };
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150803/2015080306092145617.png" alt=""></p>
+<p><img src="../images_result/images/2015080306092145617.png" alt=""></p>
 
 <h4>57.1.2 Borland Delphi</h4>
 
@@ -314,7 +314,7 @@ CODE:00518B00 aPreparingRun__ db 'Preparing run...',0
 
 <p>我们来看看不同语言中的符号在UTF-8中是如何被编码的，在FAR中看上去又是什么样的，使用<a href="http://go.yurichev.com/17304">437内码表</a>:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150803/2015080306092184263.png" alt=""></p>
+<p><img src="../images_result/images/2015080306092184263.png" alt=""></p>
 
 <p>就像你看到的一样，英语字符串看上去和ASCII编码的一样。匈牙利语使用一些拉丁符号加上变音标志。这些符号使用多个字节编码。我用红色下划线标记出来了。对于冰岛语和波兰语也是一样的。我在开始处使用"Euro"通行符号，编码为3个字节。这里剩下的语言系统与拉丁文没有联系。至少在俄语、阿拉伯语、希伯来语和印地语中我们可以看到相同的字节，这并不稀奇：语言系统的所有符号通常位于同一个Unicode表中，所以他们的号码前几个数字相同。</p>
 
@@ -329,11 +329,11 @@ wprintf (L"Hello, world!\n");
 };
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150803/2015080306092228691.png" alt=""></p>
+<p><img src="../images_result/images/2015080306092228691.png" alt=""></p>
 
 <p>在Windows NT系统中经常可以看见这样的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150803/2015080306092362271.png" alt=""></p>
+<p><img src="../images_result/images/2015080306092362271.png" alt=""></p>
 
 <p>在IDA中，占两个字节通常被称为Unicode：</p>
 
@@ -344,13 +344,13 @@ wprintf (L"Hello, world!\n");
 
 <p>下面是俄语字符串在UTF-16LE中如何被编码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150803/2015080306092383325.png" alt=""></p>
+<p><img src="../images_result/images/2015080306092383325.png" alt=""></p>
 
 <p>容易发现的是，符号被插入了方形字符(ASCII码为4).实际上，西里尔符号位于Unicode第四个平面。因此，在UTF-16LE中，西里尔符号的范围为0x400到0x4FF.</p>
 
 <p>我们回到使用多种语言书写的字符串的例子中吧。下面是他们在UTF-16LE中的样子。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150803/2015080306092376144.png" alt=""></p>
+<p><img src="../images_result/images/2015080306092376144.png" alt=""></p>
 
 <p>这里我们也能看到开始处有一个BOM。所有的拉丁字符都被插入了一个0字节。我也给一些带有变音符号的字符标注了红色下划线(匈牙利语和冰岛语)。</p>
 

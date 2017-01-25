@@ -3,7 +3,7 @@
 			<head>
 			     <title>ngx_lua_waf适应多站点情况的研究 - zhangsan</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5796">http://drops.wooyun.org/tips/5796</a></h1>
 				
@@ -22,13 +22,13 @@
 
 <p>流程图如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503554886305.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503554886305.jpg" alt="enter image description here"></p>
 
 <!--more-->
 
 <p>这样做的情况下，如果站点比较多，就会导致nginx配置比较乱，而且当nginx配置多站点的情况下，会出现一些问题。我这里就借用安全宝的一份对比表来说明。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503554819862.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503554819862.jpg" alt="enter image description here"></p>
 
 <p>当然，在实际应用中，一般并不会应用到这么多站点，这里只是做个说明。但是上面说的问题确实是存在的。</p>
 
@@ -46,15 +46,15 @@
 
 <p>针对需求1，流程图如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503554888485.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503554888485.jpg" alt="enter image description here"></p>
 
 <p>nginx.conf关键代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503554929739.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503554929739.jpg" alt="enter image description here"></p>
 
 <p>waf.lua关键代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503554953656.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503554953656.jpg" alt="enter image description here"></p>
 
 <p>访问过程分析：</p>
 
@@ -66,11 +66,11 @@
 
 <p>网址配置代码如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503554911695.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503554911695.jpg" alt="enter image description here"></p>
 
 <p>规则配置代码如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503554984339.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503554984339.jpg" alt="enter image description here"></p>
 
 <p>这样可以给每一个网站单独配置规则集，并在网址配置里面注明即可。</p>
 

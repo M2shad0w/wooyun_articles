@@ -3,7 +3,7 @@
 			<head>
 			     <title>RESTFUL API 安全设计指南 - xxlegend</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/9737">http://drops.wooyun.org/web/9737</a></h1>
 				
@@ -56,11 +56,11 @@ base64编码后：Basic YWRtaW46YWRtaW4=
 
 <p>client端：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151016/2015101611045213385client.png" alt="clint端"></p>
+<p><img src="../images_result/images/2015101611045213385client.png" alt="clint端"></p>
 
 <p>server端：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151016/2015101611045762856server.png" alt="server端"></p>
+<p><img src="../images_result/images/2015101611045762856server.png" alt="server端"></p>
 
 <p>client端向服务端注册，服务端给客户端发送响应的api&#95;key以及security&#95;key，注意保存不要泄露，然后客户端根据api&#95;key,secrity&#95;key,timestrap,rest_uri采用hmacsha256算法得到一个hash值sign，构造途中的url发送给服务端。</p>
 
@@ -76,7 +76,7 @@ base64编码后：Basic YWRtaW46YWRtaW4=
 
 <p>JWT 是JSON Web Token，用于发送可通过数字签名和认证的东西，它包含一个紧凑的，URL安全的JSON对象，服务端可通过解析该值来验证是否有操作权限，是否过期等安全性检查。由于其紧凑的特点，可放在url中或者 HTTP Authorization头中，具体的算法就如下图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151016/2015101611045541381jwt.png" alt="jwt组成图"></p>
+<p><img src="../images_result/images/2015101611045541381jwt.png" alt="jwt组成图"></p>
 
 <h1>0x03 授权</h1>
 

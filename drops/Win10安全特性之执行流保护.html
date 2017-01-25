@@ -3,7 +3,7 @@
 			<head>
 			     <title>Win10安全特性之执行流保护 - 腾讯电脑管家</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4839">http://drops.wooyun.org/tips/4839</a></h1>
 				
@@ -24,13 +24,13 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/drops/20150204/2015020406524370577image001.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015020406524370577image001.png" alt="enter image description here"></p>
 
 <p>这是Mihai Budiu介绍CFI技术时使用的例子。这里通过对二进制可执行文件的改写，对jmp的目的地址前插入一个在改写时约定好的校验ID，在jmp的时候看目的地址前的数据是不是我们约定好的校验ID，如果不是则进入错误处理流程。</p>
 
 <p>同理在call 和 ret的时候也可以进行改写：</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110033123926.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021110033123926.png" alt="enter image description here"></p>
 
 <p>左半部分就是一个对call的改写，右半部分是对ret的一个改写，在call的目的地址和ret的返回地址之前插入校验ID，然后改写的call 和ret中增加了对校验ID的检查，如果不符合预期，进入错误处理流程，这个思路和上边对jmp的处理是完全一样的。</p>
 
@@ -46,25 +46,25 @@
 
 <p>以win10 preview 9926中IE11的Spartan html解析模块为例，看一下CFG的具体情况：</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110033278998.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021110033278998.png" alt="enter image description here"></p>
 
 <p>这里就是被编译器插入的CFG校验函数</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110033255650.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021110033255650.png" alt="enter image description here"></p>
 
 <p>但是静态情况下默认的检测函数是一个直接return的空函数，是微软在和我们开玩笑吗？</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110033245555.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021110033245555.png" alt="enter image description here"></p>
 
 <p>通过动态调试看一下</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110033271761.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021110033271761.png" alt="enter image description here"></p>
 
 <p>从上图我们可以看出，实际运行时的地址和我们通过IDA静态看到的地址是不一样的，这里就涉及到CFG和操作系统相关的那部分。支持CFG版本的操作系统加载器在加载支持CFG的模块时，会把这个地址替换成ntdll中的一个函数地址。不支持CFG版本的操作系统不用理会这个检测，程序执行时直接retn。</p>
 
 <p>这是ntdll中的检测函数</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110033246955.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021110033246955.png" alt="enter image description here"></p>
 
 <p>原理是在进入检测函数之前，把即将call的寄存器值（或者是带偏移的寄存器间接寻址）赋值给ecx，在检测函数中通过编译期间记录的数据，来校验这个值是否有效。</p>
 
@@ -80,17 +80,17 @@
 
 <p>号处的这条指令：mov edx,dword ptr [edx+eax*4] edx是bitmap地址,eax是索引，但如果eax不可信了，这个很有可能，则会导致内存访问异常，并且这个函数并没有异常处理。这是因为微软为了效率考虑（毕竟这个校验函数的调用十分频繁，一个开启CFG的模块可能会有上万个调用处），微软在ntdll! RtlDispatchException中对该地址发生的异常做了一个处理:</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110033282507.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021110033282507.png" alt="enter image description here"></p>
 
 <p>如果异常发生的地址命中LdrpValidateUserCallTargetBitMapCheck，则进行一个单独处理，RtlpHandleInvalidUserCallTarget会校验当前进程的DEP状态和要间接调用的地址(ecx)的内存属性，如果当前进程关闭了DEP并且要间接调用的地址有可执行属性，则触发CFG异常，否则通过修改pContext把EIP修正到ret返回处，并且表明异常已被处理。</p>
 
 <p>最后再说下这个原始的bitmap，在系统初始化的时候，内存管理器初始化中会创建一个Section(MiCfgBitMapSection32)，这个Section在Win8.1上的大小是通过MmSystemRangeStart(32位下是0x80000000)计算的，前面提到过bitmap里面1位代表8字节，计算完后正好是32MB</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110033344571.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021110033344571.jpg" alt="enter image description here"></p>
 
 <p>而在Win10上MiCfgBitMapSection32的大小有了变化，直接写死成了0x3000000(48MB)</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110033326141.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021110033326141.png" alt="enter image description here"></p>
 
 <p>Section创建完成后在每个进程启动的时候会映射进去</p>
 
@@ -113,19 +113,19 @@
 
 <p>下边就是一个由于错位汇编形成的比较常用的栈交换指令</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110033346625.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021110033346625.png" alt="enter image description here"></p>
 
 <p>而实际正常的执行流程是这样的</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110033339477.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021110033339477.png" alt="enter image description here"></p>
 
 <p>以上是没有开启XP防护的情况</p>
 
 <p>开启电脑管家XP防护之后：</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110033330517.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021110033330517.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110033352644.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021110033352644.png" alt="enter image description here"></p>
 
 <p>此时如果攻击者依靠静态分析时得到栈交换指令位置来执行ROP攻击的话，会被执行流保护逻辑发现异常，后续攻击则无法实现。</p>
 

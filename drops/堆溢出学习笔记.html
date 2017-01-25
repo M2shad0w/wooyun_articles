@@ -3,7 +3,7 @@
 			<head>
 			     <title>堆溢出学习笔记 - lxj616</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1621">http://drops.wooyun.org/tips/1621</a></h1>
 				
@@ -138,7 +138,7 @@ int main(int argc,char *argv[])
 
 <p>编译运行，运气好的直接就能跑，不过一般会如下图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810542053285.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091810542053285.png" alt="enter image description here"></p>
 
 <p>显示为：401005（0x00401005），然后修改代码中：</p>
 
@@ -154,7 +154,7 @@ memcpy(c,"\x05\x10\x40\x00",4);
 
 <p>重新编译运行即可，成功后如下图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810542019423.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091810542019423.png" alt="enter image description here"></p>
 
 <p>然后就可以开始正文了。</p>
 
@@ -194,7 +194,7 @@ HeapFree(hHeap,0,b);
 
 <p>（AAAABBBB覆盖了Headers，然后\x20\xf0\xfd\x7f覆盖的是flink）</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810542030653.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091810542030653.jpeg" alt="enter image description here"></p>
 
 <h2>0x06 溢出后发生了什么</h2>
 
@@ -326,7 +326,7 @@ int main(int argc,char *argv[])
 
 <p>也许一遍就能跑通，但是一般来说还是像下面一样</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810542133886.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091810542133886.png" alt="enter image description here"></p>
 
 <p>老规矩，自己改代码（图中12ff64）0x0012ff64</p>
 
@@ -336,7 +336,7 @@ memcpy(a,"XXXXXXXXXXXXXXXXAAAABBBB\x64\xff\x12\x00",28);
 
 <p>注意里面有\x00，所以我换用memcpy了，成功后如下图</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810542176146.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091810542176146.png" alt="enter image description here"></p>
 
 <p>那么，这段代码展示的实际上是内存任意写（没有call anycode的利用），只是把任意内容写到了str里面，即free(b)，再用str地址覆盖b的flink，然后取回b，然后分配c，c被分配到了str地址，然后向c里面写AAAAAAA，然后就写进str里面了。</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>利用 LLMNR 名称解析缺陷劫持内网指定主机会话 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11086">http://drops.wooyun.org/tips/11086</a></h1>
 				
@@ -40,7 +40,7 @@
 
 <p>LLMNR 的协议结构如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151206/2015120612000017242117.png" alt=""></p>
+<p><img src="../images_result/images/2015120612000017242117.png" alt=""></p>
 
 <p>图 1：LLMNR 协议结构</p>
 
@@ -69,7 +69,7 @@
 
 <p><strong>注：假定主机 B 已加入了组播组中。</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151206/201512061200023559126.png" alt=""></p>
+<p><img src="../images_result/images/201512061200023559126.png" alt=""></p>
 
 <p>图 2：一个完整的正常的 LLMNR 名称解析过程</p>
 
@@ -77,7 +77,7 @@
 
 <p>使用 Wireshark 抓取一个完整的 LLMNR 质询/应答过程的数据包，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151206/201512061200044514136.png" alt=""></p>
+<p><img src="../images_result/images/201512061200044514136.png" alt=""></p>
 
 <p>图 3：一个完整的 LLMNR 质询/应答过程数据包</p>
 
@@ -87,13 +87,13 @@
 
 <p>质询的数据包详细结构如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151206/201512061200088824146.png" alt=""></p>
+<p><img src="../images_result/images/201512061200088824146.png" alt=""></p>
 
 <p>图 4：质询的数据包详细结构</p>
 
 <p>应答的数据包详细结构如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151206/201512061200119297756.png" alt=""></p>
+<p><img src="../images_result/images/201512061200119297756.png" alt=""></p>
 
 <p>图 5：应答的数据包详细结构</p>
 
@@ -251,13 +251,13 @@ if __name__ == "__main__":
 
 <p>最终执行后结果如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151206/201512061200143094966.png" alt=""></p>
+<p><img src="../images_result/images/201512061200143094966.png" alt=""></p>
 
 <p>图 6：Python 实现 LLMNR 质询与应答 1</p>
 
 <p>下图为模拟主机查询主机名称为<strong>Wooyun</strong>的结果</p>
 
-<p><img src="http://static.wooyun.org//drops/20151206/201512061200168485176.png" alt=""></p>
+<p><img src="../images_result/images/201512061200168485176.png" alt=""></p>
 
 <p>图 7：Python 实现 LLMNR 质询与应答 2</p>
 
@@ -271,7 +271,7 @@ if __name__ == "__main__":
 
 <p>“恶意”应答过程如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151206/201512061200187531786.png" alt=""></p>
+<p><img src="../images_result/images/201512061200187531786.png" alt=""></p>
 
 <p>图 8： 攻击者进行“恶意”应答过程图示</p>
 
@@ -360,15 +360,15 @@ if __name__ == "__main__":
 
 <p>看图说话，图片信息量较大 ;)</p>
 
-<p><img src="http://static.wooyun.org//drops/20151206/201512061200212982294.png" alt=""></p>
+<p><img src="../images_result/images/201512061200212982294.png" alt=""></p>
 
 <p>图 9 ： 攻击者主机 启动相应的程序，并提供了 WEB 服务</p>
 
-<p><img src="http://static.wooyun.org//drops/20151206/2015120612002278108104.png" alt=""></p>
+<p><img src="../images_result/images/2015120612002278108104.png" alt=""></p>
 
 <p>图 10 ： 当受害者访问<strong><code>win2k3-3a85d681</code></strong> 这台主机的 WEB 服务时被重定向到攻击者主机的 WEB 服务器</p>
 
-<p><img src="http://static.wooyun.org//drops/20151206/2015120612002460171118.png" alt=""></p>
+<p><img src="../images_result/images/2015120612002460171118.png" alt=""></p>
 
 <p>图 11 ： 可以明显的看到受害者原本想访问的 WEB 服务器是 Windows Server 2003 却被攻击者“重定向”到了一台 Linux 主机上</p>
 
@@ -402,11 +402,11 @@ if __name__ == "__main__":
 <li>当然也可以一直启动 Responder 进行监听，不需要其他额外的操作，只要有主机使用计算机名称请求 SMB 或 WEB 服务就可以得到相应主机的 HASH。</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20151206/2015120612002617665123.png" alt=""></p>
+<p><img src="../images_result/images/2015120612002617665123.png" alt=""></p>
 
 <p>图 12：SMB 会话劫持获取 HASH</p>
 
-<p><img src="http://static.wooyun.org//drops/20151206/2015120612002877562133.png" alt=""></p>
+<p><img src="../images_result/images/2015120612002877562133.png" alt=""></p>
 
 <p>图 13：使用 John 破解 SMB 会话劫持到的 HASH</p>
 
@@ -414,11 +414,11 @@ if __name__ == "__main__":
 
 <p>使用 HTTP 401 认证服务器进行钓鱼。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151206/2015120612003056695142.png" alt=""></p>
+<p><img src="../images_result/images/2015120612003056695142.png" alt=""></p>
 
 <p>图 14： HTTP 401 认证服务器钓鱼</p>
 
-<p><img src="http://static.wooyun.org//drops/20151206/2015120612003163047152.png" alt=""></p>
+<p><img src="../images_result/images/2015120612003163047152.png" alt=""></p>
 
 <p>图 15： “钓鱼”攻击获取到了 HASH</p>
 
@@ -449,15 +449,15 @@ if __name__ == "__main__":
 
 <p>OK，看图说话；），攻击效果如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151206/2015120612003357122162.png" alt=""></p>
+<p><img src="../images_result/images/2015120612003357122162.png" alt=""></p>
 
 <p>图 16： 管理员（Win2k8）连接内网服务器（Win2k3），但是被 LLMNR Poison 攻击劫持，重定向到了 XP 上。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151206/2015120612003553684171.png" alt=""></p>
+<p><img src="../images_result/images/2015120612003553684171.png" alt=""></p>
 
 <p>图 17：从攻击者的机器中，也可以看到 Responder 做了“恶意”应答，同时，利用 lcx 转发 3389 也有数据流在跑，可以从 IP 中判断出来</p>
 
-<p><img src="http://static.wooyun.org//drops/20151206/2015120612003710992181.png" alt=""></p>
+<p><img src="../images_result/images/2015120612003710992181.png" alt=""></p>
 
 <p>图 18：在 XP 中已经安装了某记录登录密码的程序，可以记录任何成功或失败的登录信息 :D，上图中可以看到管理员输入的登录信息。</p>
 

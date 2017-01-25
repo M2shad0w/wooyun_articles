@@ -3,7 +3,7 @@
 			<head>
 			     <title>Mimikatz 非官方指南和命令参考_Part1 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/12462">http://drops.wooyun.org/tools/12462</a></h1>
 				
@@ -16,7 +16,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160126/2016012611234434455189.png" alt="p1"></p>
+<p><img src="../images_result/images/2016012611234434455189.png" alt="p1"></p>
 
 <p>Mimikatz 作为当下内网渗透神器之一，看起来似乎很少有人真正关注它的全部功能（Sean Metcalf 在原文开头也表示了这样的疑惑），在一些诸如 <strong>“十大黑客工具”</strong> 的文章中也看不到 Mimikatz 的影子。 Sean Metcalf 大牛将有关 Mimikatz 的相关技术做了系统的整理，遂做粗糙翻译并作分享。译文难免有误，望各位看官及时指正。此文是译文的第一部分，主要阐述了 Mimikatz 的基本信息和检测 Mimikatz 使用的方法，在第二部分中会包含大量常用或不常用的 Mimikatz 命令的具体用法。</p>
 
@@ -95,7 +95,7 @@
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest “UseLogonCredential”(DWORD)
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160126/2016012611234678682219.jpg" alt="p2"></p>
+<p><img src="../images_result/images/2016012611234678682219.jpg" alt="p2"></p>
 
 <p>此注册表项值得你在你的环境中进行监控，因为攻击者可能希望将它设置为 <strong>1</strong> ，启用摘要密码支持，以便在任何版本的 Windows 中，从 Windows 7/2008 R2 到 Windows 10/2012 R2，强制将“明文”密码放置在 LSASS 进程中。在 Windows 8.1/2012 R2 及以后的 Windows 系统中，没有 “UseLogonCredential” 的 DWORD 值，所以必须手动创建。如果在这些系统中存在了该键，可能意味着该系统存在一些问题。</p>
 
@@ -107,7 +107,7 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest �
 
 <p>Benjamin Delpy 在 OneDrive 上传了一个 Excel 图表（如下图所示），显示了在内存（LSASS）中可用的证书数据类型，其中包括了在 Windows 8.1 和 Windows 2012 R2 中增强的“减少保存在内存中的凭证数量和类型”的保护机制。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160126/2016012611234867825334.png" alt="p3"></p>
+<p><img src="../images_result/images/2016012611234867825334.png" alt="p3"></p>
 
 <h1>0x07 Powershell 与 Mimikatz:</h1>
 
@@ -164,7 +164,7 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest �
 
 <p>LSA 保护阻止了一个非受保护的进程与 LSASS 进行交互。但是 Mimikatz 仍然可以使用驱动程序绕过（“!+”）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160126/201601261123505925648.jpg" alt="p4"></p>
+<p><img src="../images_result/images/201601261123505925648.jpg" alt="p4"></p>
 
 <h1>0x0A 检测 Invoke-Mimikatz</h1>
 
@@ -175,7 +175,7 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest �
 <li>开启通过组策略记录 PowerShell 模块运行日志：计算机配置 — 策略 — 管理模板 — Windows组件 — Windows PowerShell，打开模块记录功能。输入“*”，然后单击确定。这将记录所有的 PowerShell 活动，包括所有的 PowerShell 模块。</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160126/201601261123517481059.jpg" alt="p5"></p>
+<p><img src="../images_result/images/201601261123517481059.jpg" alt="p5"></p>
 
 <ul>
 <li>PowerShell 的活动将被记录到 PowerShell 的操作日志中。将这些事件推送到中央日志服务器（通过 Windows 事件转发或类似的方法）或 SIEM。</li>

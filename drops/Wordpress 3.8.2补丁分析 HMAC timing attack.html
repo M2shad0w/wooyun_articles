@@ -3,7 +3,7 @@
 			<head>
 			     <title>Wordpress 3.8.2补丁分析 HMAC timing attack - insight-labs</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1404">http://drops.wooyun.org/papers/1404</a></h1>
 				
@@ -142,13 +142,13 @@ f 0.004887240
 
 <p>等等……这不是差不多么，而且明明第一位是f，但是7的时间最长，这尼玛不是……</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810511434945.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091810511434945.jpg" alt="enter image description here"></p>
 
 <p>但是统计学告诉我们，任何微小的差异在重复多次后都会放大，所以这次我们把每个请求轮流跑500遍，然后都记录下来，注意，要轮流跑，如果先把0跑500遍再把1跑500遍，第二次对比相同内容的时候服务器返回都飞快，似乎有某种缓存机制。</p>
 
 <p>把第一位的0-f轮流跑了500次之后，把记录的时间差做成图:</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810511433517.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091810511433517.png" alt="enter image description here"></p>
 
 <p>可以看出，多次重试增加了误差的统计显著性。</p>
 

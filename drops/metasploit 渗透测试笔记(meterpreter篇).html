@@ -3,7 +3,7 @@
 			<head>
 			     <title>metasploit 渗透测试笔记(meterpreter篇) - DM_</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2227">http://drops.wooyun.org/tips/2227</a></h1>
 				
@@ -27,11 +27,11 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/20140714/2014071404575412140.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404575412140.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404571615614.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404571615614.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404575578332.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404575578332.png" alt="enter image description here"></p>
 
 <p>反向连接shell,使用起来很稳定。需要设置LHOST。</p>
 
@@ -51,7 +51,7 @@
 
 <hr>
 
-<p><img src="http://static.wooyun.org/20140714/2014071406461671665.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071406461671665.png" alt="enter image description here"></p>
 
 <p>常用的有</p>
 
@@ -67,7 +67,7 @@ Resource：执行一个已有的rc脚本。
 
 <hr>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404571680613.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404571680613.png" alt="enter image description here"></p>
 
 <p>meterpreter中不仅有基本命令还有很多扩展库，load/use之后再输入help，就可以看到关于这个模块的命令说明了。</p>
 
@@ -77,27 +77,27 @@ Resource：执行一个已有的rc脚本。
 
 <p>stdapi中有关于文件读写，上传下载，目录切换，截屏，摄像头，键盘记录，和系统相关的命令。 常用的当然就是文件操作及网络有关的命令。 通常我会用upload和download进行文件上传和下载，注意在meterpreter中也可以切换目录，当然也可以编辑文件。所以就不用运行shell再用echo写。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404575583049.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404575583049.png" alt="enter image description here"></p>
 
 <p>使用edit命令时需要注意编辑的是一个存在的文件，edit不能新建文件。 输入edit + 文件后就会调用vi编辑了。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404575670136.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404575670136.png" alt="enter image description here"></p>
 
 <h3>网络相关</h3>
 
 <p>网络命令则有列出ip信息(ipconfig),展示修改路由表(route),还有端口转发(portfwd)。 比如portfwd：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404571761107.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404571761107.png" alt="enter image description here"></p>
 
 <p>在建立规则之后就可以连接本地3344端口，这样远程的3389端口就转发出来了。</p>
 
 <h3>键盘监听</h3>
 
-<p><img src="http://static.wooyun.org/20140714/2014071406470557778.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071406470557778.png" alt="enter image description here"></p>
 
 <p>这里需要注意一下windows会话窗口的概念，windows桌面划分为不同的会话(session)，以便于与windows交互。会话0代表控制台，1，2代表远程桌面。所以要截获键盘输入必须在0中进行。可 以使用getdesktop查看或者截张图试试。否则使用setdesktop切换。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404571723547.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404571723547.png" alt="enter image description here"></p>
 
 <p>如果不行就切换到explorer.exe进程中，这样也可以监听到远程桌面连接进来之后的键盘输入数据。</p>
 
@@ -105,13 +105,13 @@ Resource：执行一个已有的rc脚本。
 
 <p>这个不多介绍，只是因为这样抓到的hash可以存进数据库方便之后调用，不知道有没有什么方法可以快速的用第三方工具抓到hash/明文然后存进数据库。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071406461792463.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071406461792463.png" alt="enter image description here"></p>
 
 <p>这里是因为我的用户本身就没有密码。</p>
 
 <h3>sniffer</h3>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404571857824.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404571857824.png" alt="enter image description here"></p>
 
 <p>就是不知道能不能把包保存在victim上，然后后期再下下来，待实战考证。</p>
 
@@ -121,9 +121,9 @@ Resource：执行一个已有的rc脚本。
 
 <p>这里的脚本可以是rc脚本，也可以是ruby脚本，metasploit已经有很多自定义脚本了。比如上面说过的arp_scanner,hashdump。这些脚本都是用ruby编写，所以对于后期自定义修改来说非常方便，这里介绍一个很常见的脚本scraper，它将目标机器上的常见信息收集起来然后下载保存在本地。推荐这个脚本是因为这个过程非常不错。可以加入自定义的命令等等。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404575670337.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404575670337.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404571869080.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404571869080.png" alt="enter image description here"></p>
 
 <p><code>/.msf4/logs/</code>下保存了所有脚本需要保存的日志记录，当然不只这一个脚本。同样.msf4文件夹下还保存了其他东西，比如输入过的命令，msf运行过程的日志等。 Scraper脚本将保存结果在<code>/.msf4/logs/scripts/scraper/</code>下。</p>
 
@@ -133,15 +133,15 @@ Resource：执行一个已有的rc脚本。
 
 <p>metasploit自带的后门有两种方式启动的，一种是通过服务启动(metsvc)，一种是通过启动项启动(persistence) 优缺点各异:metsvc是通过服务启动，但是服务名是meterpreter,脚本代码见图，</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404571942190.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404571942190.png" alt="enter image description here"></p>
 
 <p>这里需要上传三个文件，然后用metsvc.exe 安装服务。不知道服务名能不能通过修改metsvc.exe达到。 安装过程和回连过程都很简单</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404575614027.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404575614027.png" alt="enter image description here"></p>
 
 <p>下次回连时使用windows/metsvc&#95;bind&#95;tcp的payload就可以。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405061238914.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071405061238914.png" alt="enter image description here"></p>
 
 <h2>0x07 后记</h2>
 

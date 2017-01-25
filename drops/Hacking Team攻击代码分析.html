@@ -3,7 +3,7 @@
 			<head>
 			     <title>Hacking Team攻击代码分析 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/6968">http://drops.wooyun.org/papers/6968</a></h1>
 				
@@ -30,7 +30,7 @@
 
 <p>看起来HackingTeam的远程exploit工具中广泛使用了同一个flash漏洞（攻击目标可以是IE、Chrome、Office系列）:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150707/2015070706045768567.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070706045768567.jpg" alt="enter image description here"></p>
 
 <p>初步分析这个Exploit之后，我们发现这个Exploit在最新版本的Adobe Flash（18.0.0.194）中仍然可以触发，因此这应该是一个0day漏洞。</p>
 
@@ -65,7 +65,7 @@ _ba = a[i];
                     _ba[3] = new Clasz();
 </code></pre>
 
-<p>这一步是触发漏洞的关键，由于ByteArray的元素类型是Byte，当把Clasz类赋值给ByteArray<a href="http://static.wooyun.org//drops/20150707/20150707060301775750000.jpg">3</a>时，AVM会试图将其转化为Byte，此时Clasz的valueOf函数将被调用：</p>
+<p>这一步是触发漏洞的关键，由于ByteArray的元素类型是Byte，当把Clasz类赋值给ByteArray<a href="./drops/20150707/20150707060301775750000.jpg">3</a>时，AVM会试图将其转化为Byte，此时Clasz的valueOf函数将被调用：</p>
 
 <pre><code>#!c++
 prototype.valueOf = function()
@@ -114,7 +114,7 @@ prototype.valueOf = function()
 
 <p>于是我们可以得到一个超长的vector对象：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150707/2015070706045777405.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070706045777405.jpg" alt="enter image description here"></p>
 
 <p>我们可以通过调试来观察漏洞的触发过程：</p>
 
@@ -197,7 +197,7 @@ Flash32_18_0_0_194!IAEModule_IAEKernel_UnloadModule+0x1ba07f:
 
 <p>这个漏洞有个不平凡的故事，今年的Pwn2Own大赛中，前Vupen主力Nicolas Joly正是用这个漏洞拿下了64位Flash插件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150707/20150707060301775750000.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150707060301775750000.jpg" alt="enter image description here"></p>
 
 <p>所以事情就变得很有趣了，一边是Nico用这个漏洞打 Pwn2Own，另一边HackingTeam（从常理推测，应该是通过其它渠道，和Nico无关）也掌握了这个漏洞并将其用于自己的Exploit工具包中。</p>
 

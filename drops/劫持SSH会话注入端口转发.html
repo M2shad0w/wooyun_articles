@@ -3,7 +3,7 @@
 			<head>
 			     <title>劫持SSH会话注入端口转发 - mickey</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5253">http://drops.wooyun.org/tips/5253</a></h1>
 				
@@ -24,7 +24,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/drops/20150318/20150318022727144250.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150318022727144250.png" alt="enter image description here"></p>
 
 <h3>1. 攻击者可以用两种方式来修改ssh客户端，如果有ROOT权限可以直接修改/etc/ssh/ssh_config，如果没有修改ssh_config文件的权限，可以通过在相应用户的.bashrc中封装ssh来实现。主要涉及的项如下：</h3>
 
@@ -33,7 +33,7 @@ ControlMaster auto
 ControlPersist yes　　
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150318/201503180227349229816.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201503180227349229816.png" alt="enter image description here"></p>
 
 <p>如果打开了ControlPersist，表示用户在进行SSH连接后，即使退出了会话，我们也能通过socket劫持，因为这个文件不会删除。</p>
 
@@ -45,7 +45,7 @@ ssh -S <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="
 
 <p>来连接</p>
 
-<p><img src="http://static.wooyun.org/drops/20150318/201503180227325717726.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201503180227325717726.png" alt="enter image description here"></p>
 
 <p>注入命令端口转发的命令如下：</p>
 
@@ -53,7 +53,7 @@ ssh -S <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="
 ssh -O forward -D 8888 -S <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7f500b120f500d10100b3f4e464d514e4947514a49514e4c4e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>\:22 %x
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150318/201503180227309815835.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201503180227309815835.png" alt="enter image description here"></p>
 
 <p>执行完这条命令后，我们就可以使用ssh_user这台机器的8888端口做SOCKS5代理，访问hop_2后的网段了。</p>
 
@@ -74,13 +74,13 @@ ssh ()
 }
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150318/201503180227285988744.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201503180227285988744.png" alt="enter image description here"></p>
 
 <h2>1.2第二种场景：</h2>
 
 <p>这种情景是ssh_user用户使用screen管理ssh会话时的情景，步骤如下：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150318/201503180227248037055.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201503180227248037055.png" alt="enter image description here"></p>
 
 <h3>1. 当ssh_user使用</h3>
 
@@ -116,7 +116,7 @@ ssh     6852 root    8u  IPv6  94302      0t0  TCP *:8888 (LISTEN)
 
 <p>注入screen的ssh会话，会有一个不好的地方，就是你敲的命令，会在当前正在连接的用户那里同时显示，容易被发现。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150318/201503180227222671565.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201503180227222671565.png" alt="enter image description here"></p>
 
 <h1>0x02 参考文章</h1>
 

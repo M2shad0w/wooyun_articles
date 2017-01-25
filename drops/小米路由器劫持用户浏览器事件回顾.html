@@ -3,7 +3,7 @@
 			<head>
 			     <title>小米路由器劫持用户浏览器事件回顾 - lxj616</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6820">http://drops.wooyun.org/tips/6820</a></h1>
 				
@@ -14,7 +14,7 @@
 
 <p>小米路由器开发版固件（并非稳定版固件，不会影响大多数用户，如果你不明白这是什么意思，它不会影响到你）使用黑客技术劫持用户浏览器向用户投送广告，该技术在黑客界广泛用于偷取用户密码甚至可能控制用户电脑和手机，目前小米已经回应该事件，称该事件为“借机炒作恶意煽动”，并解释“所谓的广告”是友好的新功能提示。目前小米官方已经做出相应调整，该功能已经暂时失效。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150629/2015062906330083061.png" alt="ad"></p>
+<p><img src="../images_result/images/2015062906330083061.png" alt="ad"></p>
 
 <p>2015年6月初，有用户举报说最新开发版（2.3.31）的小米路由器固件劫持了用户浏览器，在用户完全不知情的情况下向浏览器发送广告代码并执行，本文以官方提供下载的2.3.5版本进行代码分析，论证其功能的技术实现以及可能影响，并对照小米官方微博的声明进行技术核对和解释。</p>
 
@@ -116,7 +116,7 @@ w_rule  /       *       l       t
 …………………省略……………………
 </code></pre>
 
-<p>这里的rule是指投放JS代码的域名列表，只要在这个列表里，访问时就会注入JS，形象的比喻：小米具有定向打击的能力，它能在任意时间，任意域名下给你投放任意代码，小米官方称这只是友好的新功能提示，网上炒作都是恶意抹黑，然而现在显而易见的是【小米对这段代码有绝对的控制权，友好不友好都是受小米控制的，代码内容是广告还是木马到头来完全听从小米的，而你上网时必须听从这段代码指挥】 <img src="http://static.wooyun.org//drops/20150629/2015062906330046643.png" alt="jsinj"> 该代码是一个动态代码，实时从小米官方服务器上获取指令执行，用户无法干预该指令的执行，并且无法得知该指令的存在 <img src="http://static.wooyun.org//drops/20150629/2015062906330077120.png" alt="00004"> 这就是所谓的广告代码，小米对该代码有绝对控制权，可以在任意时间投放任意代码给用户执行</p>
+<p>这里的rule是指投放JS代码的域名列表，只要在这个列表里，访问时就会注入JS，形象的比喻：小米具有定向打击的能力，它能在任意时间，任意域名下给你投放任意代码，小米官方称这只是友好的新功能提示，网上炒作都是恶意抹黑，然而现在显而易见的是【小米对这段代码有绝对的控制权，友好不友好都是受小米控制的，代码内容是广告还是木马到头来完全听从小米的，而你上网时必须听从这段代码指挥】 <img src="../images_result/images/2015062906330046643.png" alt="jsinj"> 该代码是一个动态代码，实时从小米官方服务器上获取指令执行，用户无法干预该指令的执行，并且无法得知该指令的存在 <img src="../images_result/images/2015062906330077120.png" alt="00004"> 这就是所谓的广告代码，小米对该代码有绝对控制权，可以在任意时间投放任意代码给用户执行</p>
 
 <h1>0x03 到底广告友好不友好</h1>
 
@@ -129,7 +129,7 @@ w_rule  /       *       l       t
 
 <p>host是你访问的网站，uri是你访问网站时浏览的页面【以及你提交的GET查询数据】，该数据可能包含你的账号名称、身份标识，换句话说就是你在网页里输入的东西都有可能被发往小米官方服务器，你看到什么，小米官方就能看到什么。技术上讲，你在访问网页时被跟踪了，这段代码执行时不仅仅是显示广告，而且通俗的讲就是把你浏览器地址栏里面的内容全都发送到了小米服务器上。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150629/2015062906330052452.png" alt="0003"></p>
+<p><img src="../images_result/images/2015062906330052452.png" alt="0003"></p>
 
 <p>从网友提供的图片可以看到，网友正在浏览的网页地址http://movie.douban.com/subject/25718082被小米路由器主动上交给了小米官方服务器（因为该网页并不包含特别机密信息，且网友已经公开本图片，请允许我在此公开该网页地址，请该网友见谅，话说你咋喜欢看这种电影呢，嘻嘻嘻~）</p>
 
@@ -137,7 +137,7 @@ w_rule  /       *       l       t
 
 <hr>
 
-<p><img src="http://static.wooyun.org//drops/20150629/2015062906330091941.jpg" alt="005"></p>
+<p><img src="../images_result/images/2015062906330091941.jpg" alt="005"></p>
 
 <ol>
 <li>小米官方称“开发版试水”情况属实，并不会影响到正常使用稳定版的用户</li>

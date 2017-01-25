@@ -3,7 +3,7 @@
 			<head>
 			     <title>Burpsuite中protobuf数据流的解析 - Vincent</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/12680">http://drops.wooyun.org/tools/12680</a></h1>
 				
@@ -26,17 +26,17 @@
 
 <p>该扩展是基于protobuf和jython实现的。先下载protobuf 2.5.0<sup>【2】</sup>源码进行编译，编译方法请参考其README.txt文件。需求在burpsuite的Extender中配置Jython<sup>【3】</sup>的路径：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/201602030751069811211.jpg" alt="p1"></p>
+<p><img src="../images_result/images/201602030751069811211.jpg" alt="p1"></p>
 
 <p>Burpsuite中添加扩展：</p>
 
 <ol>
 <li><p>在Burpsuite的Extender窗口中点击“Add”按钮，弹出的“Load Burp Extension”窗口中选择如下信息：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/201602030751094116721.jpg" alt="p2"></p></li>
+<p><img src="../images_result/images/201602030751094116721.jpg" alt="p2"></p></li>
 <li><p>然后Next，当看到如下信息时表示扩展加载成功：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/20160203075111668323.jpg" alt="p3"></p></li>
+<p><img src="../images_result/images/20160203075111668323.jpg" alt="p3"></p></li>
 </ol>
 
 <p><strong>Tips：</strong></p>
@@ -108,7 +108,7 @@ f.close()
 
 <p>序列化后的二进制数据流如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/20160203075114635374.jpg" alt="p4"></p>
+<p><img src="../images_result/images/20160203075114635374.jpg" alt="p4"></p>
 
 <p>有关Protobuf的语法网上已有很多文章了，你可以网上搜索或参考其官网<sup>【4】</sup>说明。</p>
 
@@ -120,7 +120,7 @@ f.close()
 
 <p>下图演示了protobuf如何解析两个 bytes。注意到最终计算前将两个 byte 的位置相互交换过一次，这是因为protobuf 字节序采用 little-endian 的方式。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/20160203075115128765.jpg" alt="p5"> <em>(图片来自网络)</em></p>
+<p><img src="../images_result/images/20160203075115128765.jpg" alt="p5"> <em>(图片来自网络)</em></p>
 
 <h3>2.2数值类型</h3>
 
@@ -195,7 +195,7 @@ f.close()
 
 <h3>2.3手动反序列化</h3>
 
-<p><img src="http://static.wooyun.org//drops/20160203/20160203075118511076.jpg" alt="p6"></p>
+<p><img src="../images_result/images/20160203075118511076.jpg" alt="p6"></p>
 
 <p>以上面例子中序列化后的二进制数据流进行反序列化分析：</p>
 
@@ -355,7 +355,7 @@ print 'response:',resp
 
 <p>此时burp中已解析出protobuf数据，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/20160203075121375967.jpg" alt="p7"></p>
+<p><img src="../images_result/images/20160203075121375967.jpg" alt="p7"></p>
 
 <p>但是这个结构的可读性还是比较差，我们可以通过逆向分析逐步猜测字段名称、类型，然后再解析，方便实现协议的逆向、安全测试等。</p>
 
@@ -385,25 +385,25 @@ message Root {
 
 <p>然后使用右键的“Load .proto”加载该文件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/20160203075123484058.jpg" alt="p8"></p>
+<p><img src="../images_result/images/20160203075123484058.jpg" alt="p8"></p>
 
 <p>再看解析结果：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/20160203075125983819.jpg" alt="p9"></p>
+<p><img src="../images_result/images/20160203075125983819.jpg" alt="p9"></p>
 
 <h3>3.2数据篡改</h3>
 
 <p>打开request拦截：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/201602030751289651710.jpg" alt="p10"></p>
+<p><img src="../images_result/images/201602030751289651710.jpg" alt="p10"></p>
 
 <p>运行<code>python overHttp_client.py</code>发送请求。拦截到request后，把<code>sub1_field2</code>改为999。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/2016020307512933236111.jpg" alt="p11"></p>
+<p><img src="../images_result/images/2016020307512933236111.jpg" alt="p11"></p>
 
 <p>“Forward”后看request数据，已被篡改：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160203/201602030751317063912.jpg" alt="p12"></p>
+<p><img src="../images_result/images/201602030751317063912.jpg" alt="p12"></p>
 
 <h1>0x04 参考</h1>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>SQLMAP源码分析Part1:流程篇 - 3xpl0it</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7301">http://drops.wooyun.org/tips/7301</a></h1>
 				
@@ -21,20 +21,20 @@
 
 <h1>0x01 流程图</h1>
 
-<p><img src="http://static.wooyun.org//drops/20150722/2015072207363161009300825593a0e1949b3fc890ccd2abebd" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072207363161009300825593a0e1949b3fc890ccd2abebd" alt="enter image description here"></p>
 
 <h1>0x02 调试方法</h1>
 
 <hr>
 
 <p>1.我用的IDE是PyCharm。<br>
-2.在菜单栏Run->Edit Configurations。点击左侧的“+”，选择Python，Script中选择sqlmap.py的路径，Script parameters中填入注入时的命令，如下图。 <img src="http://static.wooyun.org//drops/20150722/201507220736319065846759eda341ecc794fea9023ca6767a1" alt="enter image description here"></p>
+2.在菜单栏Run->Edit Configurations。点击左侧的“+”，选择Python，Script中选择sqlmap.py的路径，Script parameters中填入注入时的命令，如下图。 <img src="../images_result/images/201507220736319065846759eda341ecc794fea9023ca6767a1" alt="enter image description here"></p>
 
-<p>3.打开sqlmap.py，开始函数是main函数,在main函数处下断点。 <img src="http://static.wooyun.org//drops/20150722/201507220736324460164236e0f7fae8a3f4f2bc712b69f8a6c" alt="enter image description here"></p>
+<p>3.打开sqlmap.py，开始函数是main函数,在main函数处下断点。 <img src="../images_result/images/201507220736324460164236e0f7fae8a3f4f2bc712b69f8a6c" alt="enter image description here"></p>
 
 <p>4.右键Debug 'sqlmap',然后程序就自动跳到我们下断点的main()函数处，后面可以继续添加断点进行调试。如下图，左边红色的代表跳转到下一个断点处，上面红色的表示跳到下一句代码处</p>
 
-<p><img src="http://static.wooyun.org//drops/20150722/20150722073632290634b240bb403ff138fa7ef5f18f75e8773" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150722073632290634b240bb403ff138fa7ef5f18f75e8773" alt="enter image description here"></p>
 
 <p>5.另外，如果要在代码中加中文注释，需要在开始处添加以下语句：#coding:utf-8。</p>
 
@@ -96,7 +96,7 @@ if conf.url and not any((conf.forms, conf.crawlDepth)):
 
 <p>上面代码会把url,methos,data,cookie加入到kb.targets，这些参数就是我们输入的</p>
 
-<p><img src="http://static.wooyun.org//drops/20150722/201507220736328802400d7d330240a39f1d98235e50d8d4706" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507220736328802400d7d330240a39f1d98235e50d8d4706" alt="enter image description here"></p>
 
 <p>接下来从274行的for循环中，可以进入检测环节</p>
 
@@ -143,7 +143,7 @@ if conf.identifyWaf:
 <p>377行checkWaf()是检测是否有WAF,检测方法是NMAP的http-waf-detect.nse，比如页面为index.php?id=1，那现在添加一个随机变量index.php?id=1&amp;aaa=2，设置paoyload类似为<code>AND 1=1 UNION ALL SELECT 1,2,3,table_name FROM information_schema.tables WHERE 2&gt;1-- ../../../etc/passwd</code>，如果没有WAF，页面不会变化，如果有WAF，因为payload中有很多敏感字符，大多数时候页面都会发生改变。<br>
 接下来的conf.identifyWaf代表sqlmap的参数--identify-waf,如果指定了此参数，就会进入identifyWaf()函数，主要检测的waf都在sqlmap的waf目录下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150722/20150722073633758721181a0d3cb99b3114ffc342fbf2309dc" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150722073633758721181a0d3cb99b3114ffc342fbf2309dc" alt="enter image description here"></p>
 
 <p>当然检测的方法都比较简单，都是查看返回的数据库包种是否包含了某些特征字符。如：</p>
 
@@ -244,7 +244,7 @@ kb.heuristicMode = False
 
 <p>上面的代码是从888行开始，DUMMY&#95;XSS&#95;CHECK_APPENDIX = "&lt;'\">"，如果输入的字符串在页面中返回了，会提示可能存在XSS漏洞。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150722/2015072207363391144904cafc95fdbc4a58a8aa22a50684371" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072207363391144904cafc95fdbc4a58a8aa22a50684371" alt="enter image description here"></p>
 
 <p>接下来，我们回到start函数中，继续看下面的代码。</p>
 
@@ -267,7 +267,7 @@ tests = getSortedInjectionTests()
 
 <p>paramType是注入的类型,如GET。tests是要测试的列表，如下图所示，包含了每个测试项的名称，这些数据都是和/sqlmap/xml/payloads/目录下每个xml相对应的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150722/20150722073633937103ae36eaa8aaa07e6f0b1878ad9774773" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150722073633937103ae36eaa8aaa07e6f0b1878ad9774773" alt="enter image description here"></p>
 
 <pre><code>#!python
 if conf.dbms is None:
@@ -293,7 +293,7 @@ if kb.extendTests is None and not conf.testFilter and (conf.level &lt; 5 or conf
 
 <p>101行开始，这段代码主要是判断DBMS类型，首先，如果用户没有手工指定dbms，则会根据页面报错或者bool类型的测试，找出DBMS类型，找出后，会提示是否跳过测试其他的DBMS。然后，对于测试出来的DBMS，是否用所有的payload来测试。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150722/2015072207363429563a29fb772a7b50cba3c1afb485f24ac85" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072207363429563a29fb772a7b50cba3c1afb485f24ac85" alt="enter image description here"></p>
 
 <p>140行if stype == PAYLOAD.TECHNIQUE.UNION:会判断是不是union注入，这个stype就是payload文件夹下面xml文件中的stype，如果是union，就会进入，然后配置列的数量等，今天先介绍流程，union注入以后会介绍。</p>
 
@@ -394,7 +394,7 @@ reqPayload = agent.payload(place, parameter, newValue=boundPayload, where=where)
 <p>组合前缀、后缀、payload等，生成请求的reqPayload。<br>
 这其中有个cleanupPayload()函数，其实就是将一些值进行随机化。如下图，例如kb.chars.start,kb.chars.stop，这两个变量是在基于错误的注入时，随机产生的字符串。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150722/2015072207363418946c4eb1ba209198f4d4832760a7c97a676" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072207363418946c4eb1ba209198f4d4832760a7c97a676" alt="enter image description here"></p>
 
 <p>在398行：</p>
 
@@ -514,7 +514,7 @@ parameter, title)
 
 <p>上面这部分代码非常多，通过for循环遍历payload中的<response>标签，遍历的结果类似于</response></p>
 
-<p><img src="http://static.wooyun.org//drops/20150722/2015072207363443373295c70cb1d927e5dee24f28480697dbb" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072207363443373295c70cb1d927e5dee24f28480697dbb" alt="enter image description here"></p>
 
 <p>所以，上面的代码可以分为：</p>
 
@@ -627,11 +627,11 @@ def hashDBRetrieve(key, unserialize=False, checkConf=False):
 
 <p>此函数用于生成hash的key，生成方法为url+'None'+命令+HASHDB&#95;MILESTONE&#95;VALUE,比如u'http://127.0.0.1:80/biweb/archives/detail.phpNoneDATABASE()JHjrBugdDA'。此key经过int(hashlib.md5(key).hexdigest()[:12], 16)，就是对应session中的id</p>
 
-<p><img src="http://static.wooyun.org//drops/20150722/201507220736346996013d7bcd1768d6893d910ddcd1dcfbbc7" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507220736346996013d7bcd1768d6893d910ddcd1dcfbbc7" alt="enter image description here"></p>
 
 <p>最终在session.sqlite中根据id，就能够找到记录。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150722/20150722073634669323c2e827b80d8ae41d04c5119804f9a43" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150722073634669323c2e827b80d8ae41d04c5119804f9a43" alt="enter image description here"></p>
 
 <p>如上图，获取到的记录其实就是一个网页的源代码，另外可以看到current-db的前后有几个字符串，这个字符串就是kb.chars.start和kb.chars.stop<br>
 回到_oneShotUnionUse中，如果session中没有记录，则会重新进行请求，获取数据</p>

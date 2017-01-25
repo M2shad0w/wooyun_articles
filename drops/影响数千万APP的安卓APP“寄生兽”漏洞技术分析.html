@@ -3,7 +3,7 @@
 			<head>
 			     <title>影响数千万APP的安卓APP“寄生兽”漏洞技术分析 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/6910">http://drops.wooyun.org/mobile/6910</a></h1>
 				
@@ -30,7 +30,7 @@
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150701/2015070106112945810.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070106112945810.png" alt="enter image description here"></p>
 
 <p>可以看到该目录下的文件只有system用户有写权限，只有在拥有system权限的情况下才能对odex文件进行写操作。</p>
 
@@ -62,9 +62,9 @@ parent：父加载器
 
 <p>如图drozer.apk插件在被调用后生成了drozer.dex缓存文件，注意这个文件是odex格式.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150701/2015070106112951176.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070106112951176.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150701/2015070106112970607.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070106112970607.png" alt="enter image description here"></p>
 
 <h1>0x03 插件机制引入的攻击点</h1>
 
@@ -110,7 +110,7 @@ parent：父加载器
 
 <p>下面是一个修改后的odex文件实例，dex&#95;old是修改前的odex文件，dex&#95;new是修改后的dex文件，两个文件的md5不一样，但是crc及modWhen却是一样的，这样就可以绕过DexClassLoader的校验。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150701/2015070106112948852.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070106112948852.png" alt="enter image description here"></p>
 
 <h1>0x05 “寄生兽”漏洞的真正危害</h1>
 
@@ -144,7 +144,7 @@ of the intended destination directory.
 
 <p>这类漏洞主要影响有皮肤功能的APP，如输入法，浏览器类APP .很多app在manifest中做了zip类文件的关联，如果注册的文件格式被点击，对应的app就会启动解压文件。下图是app注册文件关联的一个示例</p>
 
-<p><img src="http://static.wooyun.org//drops/20150701/2015070106112928872.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070106112928872.jpg" alt="enter image description here"></p>
 
 <p>这个app关联了一个ssf格式的文件，其实这个文件的格式是zip压缩格式，用户在手机中下载打开ssf文件时，就会启动对应的app自动解压文件，文件中包含的恶意代码可以覆盖该app的缓存代码。</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>iOS APP安全杂谈 - 高小厨</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6826">http://drops.wooyun.org/tips/6826</a></h1>
 				
@@ -24,23 +24,23 @@
 
 <p>本地存储的敏感数据：首先我们需要一个越狱手机，还需要iTools工具来帮助我们。其实过程很简单，用iTools连接你的iPhone，通过共享文件打开某一APP，里边的结构一目了然。其中Document目录：目录存储用户数据或其他应该定期备份的信息。AppName.app目录：这是应用程序的程序包目录，包括应用程序本身，在AppStore上下载的APP是需要脱壳的才能将程序用IDA反编译的。Library目录：这个目录下有两个子目录Caches和Preference，Caches目录存储应用程序专用的支持文件，保存应用程序再次启动过程中需要的信息，而Preference目录包含程序的偏好设置。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150630/2015063002161368328.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015063002161368328.png" alt="enter image description here"></p>
 
 <p>招商银行IOS客户端目录结构</p>
 
 <p>那么哪些文件是可能透露敏感信息的呢？以plist、db、xml、log、txt为后缀的文件需要重点监控，例如中国银联的银联手机支付APP将用户名和密码居然以明文的方式存储在了unionpay.db的文件中；苏宁的某款理财APP同样的也是将手机号码和密码存储在了以plist为后缀的文件中；当然也见过xml和log文件中存有敏感信息的APP。还有各种的txt或其他文档，光大银行的某款APP里的111.txt文件中就记录了交易明细、转账汇款、手机任意转等多种操作的URL，这给渗透测试人员大大的方便。还有更奇葩的是见过某银行APP中的某文件中记录着“这个项目TMD难做了！”</p>
 
-<p><img src="http://static.wooyun.org//drops/20150630/2015063002161389575.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015063002161389575.png" alt="enter image description here"></p>
 
 <p>银联支付IOS客户端用户名和密码明文存储</p>
 
-<p><img src="http://static.wooyun.org//drops/20150630/2015063002161484994.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015063002161484994.png" alt="enter image description here"></p>
 
 <p>光大银行IOS客户端存在方便渗透测试的文件</p>
 
 <p>还有一些敏感数据是需要一些脚本来处理的，例如Cookie.Binarycookies文件、keychain文件等。例如浦发银行的某款APP和团贷网的APP就是将自己的cookie信息存储于本地的Cookie.binarycookies中的，可以使用<a href="http://www.securitylearn.net/2012/10/27/cookies-binarycookies-reader/">cookies-binarycookies-reader</a>脚本读取里边的详细内容；keychain文件中存储了ios系统及第三方应用的一些信息，keychain数据库是hacker们最关注的数据源头之一，我们可以使用<a href="https://github.com/ptoomey3/keychain-dumper">Keychain-Dumper</a>导出keychain的值。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150630/2015063002161479061.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015063002161479061.png" alt="enter image description here"></p>
 
 <p>团贷网IOS客户端存有cookie信息</p>
 
@@ -48,7 +48,7 @@
 
 <p>网络上的敏感信息泄露：其实这一点本想放到下一节来说的，但是好多APP都有这个问题还是拿到这里来说吧。这里不是拿HTTP说事，而是说一种设计方式的缺陷。曾见过多款APP是这样设计的：每当我在APP上进行一次操作时APP会发数据包给服务端，其中每次发数据包时为了校验身份都会把用户名和密码以明文的方式发出。这是一种什么样的概念呢，我在公共场所连接wifi，使用某APP五分钟，我的明文密码就在网络上明文传输了十几次（因为每次操作都要校验身份）。还有一种情况，苏宁某产品因为涉及资金安全所以有手势密码的功能，尽管使用的是HTTPS协议，但是只要我未注销我的账户再次打开APP时，APP跳转到了输入手势密码的页面，你的用户名和密码已经通过数据包发往了服务端，这样手势密码就形同虚设。详情见：<a href="http://www.wooyun.org/bugs/wooyun-2015-0119249">WooYun-2015-119249</a>。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150630/2015063002161454709.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015063002161454709.png" alt="enter image description here"></p>
 
 <p>苏宁某IOS客户端校验手势密码时存在的问题</p>
 
@@ -62,11 +62,11 @@
 
 <p>虽然使用了HTTP却依然很安全：这里拿华夏银行来说吧，他的APP使用了HTTP协议，我使用Fiddler成功的拦截到了数据包，但是我却发现无从下手。APP发出的数据和服务端发出的数据洋洋洒洒的很长最关键的是加盐加密的，我们不知道哪段是你的用户名，我们不知道哪段是你的转款金额，我们不知道钱要转给谁。我随意更改一个字母，数据包自己的完整性校验都过不去。那好，我转款时重放数据包，会不会有源源不断的钱转到我的钱包里呢？APP设置了时间戳，我们能想到的地方基本上都无法攻破，曾经见过最坑的APP：无论是发出的还是返回的数据从始至终均是密文，除非逆向否则你毫无思路。当然这的确暴漏了一些问题的关键：即在这层面纱的掩护下很有可能存在越权的情况，如果逆向分析得到关键的key，那么后果不堪设想。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150630/2015063002161417200.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015063002161417200.png" alt="enter image description here"></p>
 
 <p>华夏银行某IOS客户端使用HTTP协议</p>
 
-<p><img src="http://static.wooyun.org//drops/20150630/2015063002161588277.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015063002161588277.png" alt="enter image description here"></p>
 
 <p>华住酒店的IOS客户端返回数据的可识别度极低</p>
 
@@ -74,7 +74,7 @@
 
 <p>有人会问那这意味着什么？很简单你的APP信任任何证书，如果你在星巴克连接上了wifi，而又信任了不该信任的证书，那么你在网上的行为早被一览无余。其实说了这么多我一直没有说到重点：好多使用了HTTPS协议的银行IOS客户端其数据都是明文，因为他认为HTTPS足够安全，所以在设计的时候根本就没想到如果数据包在中途被改了怎么办？这样假设某APP的数据在传输过程中转账金额被篡改了，而自己却浑然不知，因为发出的数据没有完整性校验，本想转出10块结果却转出了100块。（此段是从受害者的角度出发的）</p>
 
-<p><img src="http://static.wooyun.org//drops/20150630/2015063002161520626.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015063002161520626.png" alt="enter image description here"></p>
 
 <p>上海某银行的理财客户端使用了AFNetworking通信库</p>
 
@@ -90,21 +90,21 @@
 
 <p>这里可能和上面的内容有些重复，不过这的重点是如何钓鱼。在乌云上看到好多厂商对PC端的中间人攻击漏洞采取了积极处理，而移动端的却总是被忽略，在这里我想为移动端讨些说法。随着时代的变迁wifi已经变得越来越普及了，当然如果你是土豪一直用流量那么我无话可说，但是毕竟土豪总是少数人么，今年的315就现场演示了一把什么是黑wifi。所谓黑wifi并不只是在你和服务器之间有一双眼在偷偷的看着你在干什么，更有甚者他是想在你的移动设备上装些什么，用一个比较专业的词叫中间人攻击。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150630/2015063002161656570.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015063002161656570.png" alt="enter image description here"></p>
 
 <p>2015年315晚会关于wifi的新闻</p>
 
 <p>曾遇到过IOS端的多款APP更新时返回更新链接，当我点击更新时会跳转到AppStore或者自己的APP发放平台那里，如果这里没有对返回数据进行合法性校验的话很容易招到中间人攻击。这里拿58同城的IOS客户端做一个例子，当我打开APP时他会自动检查软件更新，如果存在新版本则立即返回更新提示，这里我修改返回链接为其他APP的下载链接，那么下载的应用就是其他的APP。也可以修改为其他应用的URL Scheme，例如支付宝的URL Scheme（alipass://），这样我点击更新时便直接跳转到了支付宝，如果越狱了可能还会安装一些恶意木马。其实处理这类问题很简单，数据包里加一个完整性的校验，当客户端发现数据包被篡改时可自动注销或提示用户存在风险。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150630/2015063002161692052.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015063002161692052.png" alt="enter image description here"></p>
 
 <p>58同城IOS客户端更新可被劫持</p>
 
 <p>可能有人会说了，我使用HTTPS协议不怕你们的所谓中间人。可是实际上真的是这样么？这里的关键是如何让用户信任一个第三方的证书，现在大多的公共免费wifi连接后需要登录web进行验证，验证过程中需要输入手机号和验证码然后点击下一步。没错，我们可以在下一步的按钮上做文章，钓鱼wifi的名称可以设置为“XXX银行免费WIFI”，当用户连接后跳转到手机认证处，我们将下一步的按钮的链接设置为下载证书的链接（例如：http://localhost:8888/FiddlerRoot.cer），只要用户点击下一步，证书就会自动下载，安装证书则需要用户再次点击。为了能让用户更容易上当，完全可以在验证手机号码的页面上写到“为保证用户的数据安全，使用我银行的免费wifi时请先安装证书，点击下一步即可安装”。可能在从事安全行业的人眼里我们是不会轻易信任任何证书的，但是使用wifi的人大多不懂安全，更不懂得什么是证书，如若用户不小心连接了钓鱼wifi，那么估计也有百分之八十的人会去信任这个非法的证书。而在IOS中，CA颁发的证书被标识为可信，而自签名的证书被标识为不可信，可这在一个着急想蹭免费wifi的人眼里有什么区别么？</p>
 
-<p><img src="http://static.wooyun.org//drops/20150630/2015063002161645406.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015063002161645406.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150630/2015063002161616547.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015063002161616547.png" alt="enter image description here"></p>
 
 <p>这是自签名的证书IOS显示不可信</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>多种针对某亚洲金融机构的恶意软件分析 - P3nro5e</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/news/6457">http://drops.wooyun.org/news/6457</a></h1>
 				
@@ -20,7 +20,7 @@
 
 <p>以文件的创建日期为根据,它的出现早于2015年2月,并已持续了三个多月</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492290918.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492290918.png" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -28,9 +28,9 @@
 
 <p>技术分析</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492256856.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492256856.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492381122.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492381122.jpg" alt="enter image description here"></p>
 
 <h1>0x01 技术分析</h1>
 
@@ -42,7 +42,7 @@
 
 <p>被加密的字符串只在被使用前解密.恶意软件通常将其API字符串分为多个字符串.这也为了躲避heuristic signatures（检测字符串和可疑APIs）.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492382736.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492382736.png" alt="enter image description here"></p>
 
 <p>如果用户有admin特权，则它将其自身副本移动到%Pr0gramFiles%文件夹中.如果不是则不移动 如果具有admin特权:</p>
 
@@ -56,7 +56,7 @@
 
 <p>它作为某种服务（带有”SENSS”服务名）安装自身.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492357557.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492357557.png" alt="enter image description here"></p>
 
 <p>在检查（它是否成功作为某种服务在运行）之后,检查父进程是否为explorer.exe或iexplore.exe.该dll被加密（通过XOR 0x89作为密钥）</p>
 
@@ -68,7 +68,7 @@
 
 <p>通过对比,一旦位于你的系统内，恶意软件将有大量时间来实现它的恶意意图。为了挫败该保护，沙盒系统部署了加速功能， 即如果他们检测到某样本使用某种延迟技术，它将加速该样本的执行.例如，如果它检测到该样本sleeps一分钟那么该系统将其改为sleeps 1秒。不幸的是, 对该恶意软件来说，这种技术已经不起作用了.该恶意软件可通过发布某个sleep以检测到sleep的加速，之后在得到消逝时间的同时检查消逝的时间是否比sleep的时间短</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492328093.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492328093.png" alt="enter image description here"></p>
 
 <p>检测API钩子</p>
 
@@ -82,7 +82,7 @@
 <li>68????????C3 (push retn)</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492337372.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492337372.png" alt="enter image description here"></p>
 
 <p><strong><em>Payload</em></strong></p>
 
@@ -98,13 +98,13 @@ domain.gokickes.com:443
 <pre><code>下载并执行额外的文件
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492336903.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492336903.png" alt="enter image description here"></p>
 
 <pre><code>捕获屏幕截图
 捕获鼠标和键盘事件记录
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492420655.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492420655.png" alt="enter image description here"></p>
 
 <pre><code>更新自身
 打开远程shell
@@ -115,7 +115,7 @@ domain.gokickes.com:443
 最后所有被发送和服务器中接收的数据用0xd5进行异或操作实现加密
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492482293.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492482293.png" alt="enter image description here"></p>
 
 <h2>mslives.exe</h2>
 
@@ -128,7 +128,7 @@ domain.gokickes.com:443
 
 <p>然而，该副本的文件末尾写入了大量垃圾数据，它的大小比自身大小大了100MB。它将对该文件进行1000次的写入100KB操作.为避开沙盒这里做了两件事.首先,该恶意软件不创建自身副本（让该恶意软件的行为不寻常并出现 使该恶意软件行为不寻常并可能因有利操作而出现于沙盒.通常恶意软件操作是为了创建某确切的自身副本。其次,多次写操作事件可能超过沙盒的限制.释放的文件副本的大小让沙盒可信任</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492474892.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492474892.png" alt="enter image description here"></p>
 
 <p>它用CreateProcess执行它的副本接着检查是否作为Iexplore.exe运行，如果不是,它将创建一个被挂起的iexplore.exe进程并将它的代码通过覆盖iexplore.exe的主模块的方式注入其中, 它创建隐藏的windows窗口名和类名“111111”, 然后创建一自启动注册表入口如下（让其在每次机器启动时自动启动）</p>
 
@@ -150,7 +150,7 @@ Cache-Control: no-cache
 
 <p>将下载的文件放入<code>%TEMP%</code>文件夹中并执行它.不幸的是，在我们分析的同时，用于下载的URL没返回任何程序</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492498413.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492498413.png" alt="enter image description here"></p>
 
 <h2>winhost.exe</h2>
 
@@ -170,7 +170,7 @@ Copyright (C) 2013
 
 <p>该后门监听143端口并等待客户端连接和发布命令<code>.143</code>端口是默认的<code>IMAP non-encrypted</code>端口IMAP或（因特网信息通道协议）是邮箱协议的一种（被使用于某本地客户端上访问位于远程web服务器的电子邮箱.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492416681.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492416681.png" alt="enter image description here"></p>
 
 <p>它检查用户是否有admin特权.如果用户有admin特权,它将作为某服务安装自身并将其副本存放在如下目录:</p>
 
@@ -191,7 +191,7 @@ Copyright (C) 2013
 
 <p>  <strong><em>Payload</em></strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492487708.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492487708.png" alt="enter image description here"></p>
 
 <p>它有能力执行如下操作（取决于攻击者的命令）。</p>
 
@@ -268,14 +268,14 @@ http://hud.astringer.com/images/log.gif
 列出文件
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492524045.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492524045.png" alt="enter image description here"></p>
 
 <pre><code>下载文件
 终止文件
 打开 CMD shell
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492518363.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492518363.png" alt="enter image description here"></p>
 
 <h2>Shell64.dll  </h2>
 
@@ -285,7 +285,7 @@ http://hud.astringer.com/images/log.gif
 
 <p>ServiceMan将直接执行某导出表,或是低于Windows操作系统6.0版本的<code>loadFunc</code>或是6.0及以上版本的<code>win7load</code>.表明导出表加载间谍组件，通过某个弹出的rundll32.exe进程（带有有根据的参数集）.第二个二进制程序导出两个函数,’main‘和’lowmain‘,它再次兼容6.0上下的操作系统版本.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492517319.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492517319.png" alt="enter image description here"></p>
 
 <h2>Shell64.dll –间谍组件</h2>
 
@@ -295,7 +295,7 @@ http://hud.astringer.com/images/log.gif
 
 <p>在启动shell64.dll期间创建某命名为mutext的文件,称号为<code>Global\KongQi[TickCount]</code>，TickCount的位置实时记录感染次数。同时恶意软件创建某个命名为view的进程，他被使用于在线程和介入的进程间交换运行时信息,称号为’_kaspersky’.选择该称号毫无疑问是为了提高窃取的隐蔽性</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492554342.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492554342.png" alt="enter image description here"></p>
 
 <p>在启动恶意软件期间,它获取关于被感染系统的信息并将其发到它的远程服务器。信息包括:</p>
 
@@ -311,11 +311,11 @@ Drive geometry for PHYSICALDRIVE0
 
 <p>如下列表所示为： 搜索到的安全产品</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492593205.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492593205.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492685047.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492685047.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492643947.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492643947.jpg" alt="enter image description here"></p>
 
 <p>如下为被枚举到的防火墙安装情况</p>
 
@@ -355,7 +355,7 @@ Rising Firewall                 
 <li>枚举系统属性如操作系统版本,cpu电源或硬盘的内存容量,系统运行时间,处理器数,机器上运行中的安全产品的进程名,计算机名,当前用户的用户名,已附加的驱动器.</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492615645.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492615645.png" alt="enter image description here"></p>
 
 <ul>
 <li>枚举dial-up连接参数,例如电话号码和设备名</li>
@@ -375,7 +375,7 @@ Rising Firewall                 
 
 <p>该恶意软件不会做更多事.它仅试图从<code>blog.softfix.co.kr:80</code>下载东西</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502492644942.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502492644942.png" alt="enter image description here"></p>
 
 <h1>0x02 幕后是谁？</h1>
 

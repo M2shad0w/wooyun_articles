@@ -3,7 +3,7 @@
 			<head>
 			     <title>HITCON CTF 2015 Quals Web 出題心得 - orange.tw</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/9845">http://drops.wooyun.org/web/9845</a></h1>
 				
@@ -11,7 +11,7 @@
         </p><p>作者: <code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3f504d5e51585a7f5c574d50504b11504d58">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></code><br>
 Blog: <a href="http://blog.orange.tw">http://blog.orange.tw</a></p>
 
-<p><img src="http://static.wooyun.org//drops/20151019/2015101913262462493110.jpg" alt="cover"></p>
+<p><img src="../images_result/images/2015101913262462493110.jpg" alt="cover"></p>
 
 <!--more-->
 
@@ -100,10 +100,10 @@ php payload
 <p>名為 Web 實際上卻是 Pwn 的題目<br>
 只提供 binary 並無提供 <code>libcgid.so</code> 所以必須在沒有 library 的狀況下解決這題! 簡單的 <code>Format String</code> 但沒有 <code>output (sprintf)</code>，把 do_job 的 GOT 換成 system 的 PLT 地址就可以</p>
 
-<p>不過唯一要注意的是得先利用 <code>stack guard</code> 覆蓋 <code>stack smashing detected</code> 的 ARGV<a href="http://static.wooyun.org//drops/20151019/2015101913262462493110.jpg">1</a> 的方式達成任意地址洩漏把 password 給洩漏出來才比較好利用<br>
-但是因為 64-bits 且送的東西無法有 NULL Byte 所以在蓋 ARGV<a href="http://static.wooyun.org//drops/20151019/2015101913262462493110.jpg">1</a> 的時候必須用比較迂迴的方式蓋<br>
-先使用 username 把 ARGV<a href="http://static.wooyun.org//drops/20151019/2015101913262462493110.jpg">1</a> 最後一個蓋 NULL<br>
-再使用 username 把 ARGV<a href="http://static.wooyun.org//drops/20151019/2015101913262462493110.jpg">1</a> 倒數第二個蓋 NULL<br>
+<p>不過唯一要注意的是得先利用 <code>stack guard</code> 覆蓋 <code>stack smashing detected</code> 的 ARGV<a href="./drops/20151019/2015101913262462493110.jpg">1</a> 的方式達成任意地址洩漏把 password 給洩漏出來才比較好利用<br>
+但是因為 64-bits 且送的東西無法有 NULL Byte 所以在蓋 ARGV<a href="./drops/20151019/2015101913262462493110.jpg">1</a> 的時候必須用比較迂迴的方式蓋<br>
+先使用 username 把 ARGV<a href="./drops/20151019/2015101913262462493110.jpg">1</a> 最後一個蓋 NULL<br>
+再使用 username 把 ARGV<a href="./drops/20151019/2015101913262462493110.jpg">1</a> 倒數第二個蓋 NULL<br>
 之後 job 蓋記憶體位置(0x601090)三個 bytes 後剩下的五個 bytes 才會剛好是 NULL 以達到任意地址讀取</p>
 
 <p>詳細 Exploit 可以參考</p>

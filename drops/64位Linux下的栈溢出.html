@@ -3,7 +3,7 @@
 			<head>
 			     <title>64位Linux下的栈溢出 - f0r</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2288">http://drops.wooyun.org/tips/2288</a></h1>
 				
@@ -78,7 +78,7 @@ Segmentation fault (core dumped)
 
 <p>好来确认一下我们控制的RIP指令指针</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812470142898.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812470142898.jpg" alt="enter image description here"></p>
 
 <p>你可以通过stepi单步执行来过一遍程序流程译者应该用ni比较合适。 当过了strcpy调用(0x40066c)之后你会发现当前缓冲区指针指向0x7fffffffdc90而不是0x7fffffffdcd0这是gdb的环境变量和其他东西造成的。不过现在我们不关心之后会解决的。 重要的说明* 在之后的内容中当我提到leave指令时就是指的上面的地址0x400685。 最后这是strcpy过后的栈</p>
 

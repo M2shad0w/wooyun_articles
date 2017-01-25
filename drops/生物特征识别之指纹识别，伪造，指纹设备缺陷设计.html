@@ -3,7 +3,7 @@
 			<head>
 			     <title>生物特征识别之指纹识别，伪造，指纹设备缺陷设计 - 海南鸡饭</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2140">http://drops.wooyun.org/tips/2140</a></h1>
 				
@@ -28,7 +28,7 @@
 
 <p>指纹学的历史可以追述到几百年前，1892 年，英国学者高尔顿的《指纹学》（1892），提出了三个影响重大的科学论点：1.指纹终生不变；2.指纹可识别；3.指纹可分类。</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060219564549627.png" alt="2014060219564549627.png"></p>
+<p><img src="../images_result/images/2014060219564549627.png" alt="2014060219564549627.png"></p>
 
 <p>亨利氏指纹分类法依照指纹形状将指纹分成斗形纹、箕形纹和弧形纹三大类。</p>
 
@@ -54,13 +54,13 @@
 
 <p>数字化指纹端点和纹线分叉点(取指纹纹理上类似线段特征).</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060219581469649.png" alt="2014060219581469649.png"></p>
+<p><img src="../images_result/images/2014060219581469649.png" alt="2014060219581469649.png"></p>
 
 <p>（3）特征匹配测量</p>
 
 <p>将指纹端点和叉点集合采集的特征模板与现存的样板进行拓扑结构匹配测量.</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060219590465050.png" alt="2014060219590465050.png"></p>
+<p><img src="../images_result/images/2014060219590465050.png" alt="2014060219590465050.png"></p>
 
 <h2>0x04 技术的大致实现原理</h2>
 
@@ -68,9 +68,9 @@
 
 <p>这里认证技术包括图像处理，特征提取，匹配算法，特征提取又包括Poincare值计算。没有下列图说得这么简单，而且现在设备基本不存图像，而是根据指纹算Key再存储。文章太多写不完，这里标个记，到时候在另起文章写，算法也是可以另写一篇的。</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220002861484.png" alt="2014060220002861484.png"></p>
+<p><img src="../images_result/images/2014060220002861484.png" alt="2014060220002861484.png"></p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220011548532.png" alt="2014060220011548532.png"></p>
+<p><img src="../images_result/images/2014060220011548532.png" alt="2014060220011548532.png"></p>
 
 <p>步骤包括</p>
 
@@ -89,13 +89,13 @@
 
 <p>Fingerprint mask generation 上的“Left”，“Right”，“Top”，“Bottom”操作指纹图像左，右，上，下的轮廓。</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220022232828.png" alt="2014060220022232828.png"></p>
+<p><img src="../images_result/images/2014060220022232828.png" alt="2014060220022232828.png"></p>
 
 <p>背景修改：</p>
 
 <p>“none”，“Optical（光学）”，“Scrapping（刮擦）”。</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220025652689.png" alt="2014060220025652689.png"></p>
+<p><img src="../images_result/images/2014060220025652689.png" alt="2014060220025652689.png"></p>
 
 <p>中间过程总共有10步，大家只要遇到需要进行指纹系统试验的情况，可以用它生成采集图像，里面包括了干燥，图像加噪点等功能。</p>
 
@@ -107,15 +107,15 @@
 
 <p>1.实际上提取指纹的材料非常多,做指模的材料可以使用蜡烛,氰基丙烯酸盐粘合剂,胶带纸等。比方下列我可以直接搞到手的东西。</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220064890937.jpg" alt="2014060220064890937.jpg"></p>
+<p><img src="../images_result/images/2014060220064890937.jpg" alt="2014060220064890937.jpg"></p>
 
 <p>2.关于指模的制作，可以直接选用滴蜡的方式制作指模，比较方便，便于就地随手取材，貌似市面上卖的制作指模的就是这么个办法。当然还有用塑胶产品做还有用橡皮泥做，更多的有取指纹的专业胶带做。</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220072717035.png" alt="2014060220072717035.png"></p>
+<p><img src="../images_result/images/2014060220072717035.png" alt="2014060220072717035.png"></p>
 
 <p>3.成品指模大致上就是下图本大爷指纹的样子，可以过一般的考勤机及光学门禁系统。</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220080388625.png" alt="2014060220080388625.png"></p>
+<p><img src="../images_result/images/2014060220080388625.png" alt="2014060220080388625.png"></p>
 
 <h2>0x07 WHY I HACKED TOUCHID Marc Rogers演讲用的PPT中比较有意思的地方</h2>
 
@@ -131,19 +131,19 @@
 6.最新的系统也会把这种仿真指纹识别为真指纹 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201406/2014060220084943813.png" alt="2014060220084943813.png"></p>
+<p><img src="../images_result/images/2014060220084943813.png" alt="2014060220084943813.png"></p>
 
 <p>2002年论文Impact of Artificial "Gummy" Fingers on Fingerprint Systems也有提到过几种材料(活体，硅胶，明胶)的对比问题，它们之间纹理差别并不是很大，类似于人体活体指纹一样，能够轻易骗过辨识度不是很高的指纹认证产品。</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220103254320.png" alt="2014060220103254320.png"></p>
+<p><img src="../images_result/images/2014060220103254320.png" alt="2014060220103254320.png"></p>
 
 <p>PPT中详细介绍了指纹提取流程，涉及数码照相，阈值色阶调整，打印，方便用来做指模。如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220111911220.png" alt="2014060220111911220.png"></p>
+<p><img src="../images_result/images/2014060220111911220.png" alt="2014060220111911220.png"></p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220120425154.png" alt="2014060220120425154.png"></p>
+<p><img src="../images_result/images/2014060220120425154.png" alt="2014060220120425154.png"></p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220122740739.png" alt="2014060220122740739.png"></p>
+<p><img src="../images_result/images/2014060220122740739.png" alt="2014060220122740739.png"></p>
 
 <p>PPT最后的部分“But, What does this mean?”中提到了几个有趣的观点</p>
 
@@ -161,7 +161,7 @@
 
 <p>这里在软件选型上我找到了规模比较大的中控生物旗下的考勤产品下载，其中有下载量比较大的ZKTime系列的免费版。</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220133172492.png" alt="2014060220133172492.png"></p>
+<p><img src="../images_result/images/2014060220133172492.png" alt="2014060220133172492.png"></p>
 
 <p>介绍里说明几乎支持所有类型的指纹考勤机，指纹门禁及所有同品牌类型的指纹产品类型，如果算连接网络的设备全中国估计会有6位数以上的设备终端。</p>
 
@@ -169,19 +169,19 @@
 
 <p>关于此类设备的认证方面网上都有资料可循，不过有些人说是明文，三次握手部分看不到有此类的数据包，所以应该是加密算法做哈希，尤其说过此密码估计要设备终端和PC终端相同才行。（设备默认开启4370端口，6位数字组合为暴力枚举必破）</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220160246182.png" alt="2014060220160246182.png"></p>
+<p><img src="../images_result/images/2014060220160246182.png" alt="2014060220160246182.png"></p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220170692817.png" alt="2014060220170692817.png"></p>
+<p><img src="../images_result/images/2014060220170692817.png" alt="2014060220170692817.png"></p>
 
 <p>所以这里设备爆破手法1.搞清密码处理流程用数据包骗过去。2,直接扣二次开发SDK或者找开发资料把函数扣出来。</p>
 
 <p>索性SDK做得简单易懂，我看一天左右就可以上手编写破解密码的程序部分了。</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220183670975.jpg" alt="2014060220183670975.jpg"><br></p>
+<p><img src="../images_result/images/2014060220183670975.jpg" alt="2014060220183670975.jpg"><br></p>
 
 <p>指纹考勤联机部分的流程SDK文档如下：</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220192293626.jpg" alt="2014060220192293626.jpg">    </p>
+<p><img src="../images_result/images/2014060220192293626.jpg" alt="2014060220192293626.jpg">    </p>
 
 <p>远程网络认证部分关键函数有两个：</p>
 
@@ -246,7 +246,7 @@ private void CrackerConnect() {
 
 <p>注意先注册SDK里提供的控件再调用里面的接口函数：</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220263466786.jpg" alt="2014060220263466786.jpg"></p>
+<p><img src="../images_result/images/2014060220263466786.jpg" alt="2014060220263466786.jpg"></p>
 
 <p>按照SDK开发的专门入侵的程序可以做到远程开关设备和远程清密码，还有开门禁等等。</p>
 
@@ -276,7 +276,7 @@ private void CrackerConnect() {
 
 <p>成功返回True，否则返回False</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060220272581566.jpg" alt="2014060220272581566.jpg"></p>
+<p><img src="../images_result/images/2014060220272581566.jpg" alt="2014060220272581566.jpg"></p>
 
 <p>还有很多功能，比如鸣叫报警，自动开门,下载整个公司数据库，照片指纹等，甚至可以像游戏Watch dog里一样手机开门，手机关门禁和考勤设备，其实考勤及门禁设备也很重要。</p>
 

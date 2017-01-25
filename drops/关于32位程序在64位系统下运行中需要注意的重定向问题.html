@@ -3,7 +3,7 @@
 			<head>
 			     <title>关于32位程序在64位系统下运行中需要注意的重定向问题 - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14831">http://drops.wooyun.org/tips/14831</a></h1>
 				
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/20160412160211400332-12.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160412160211400332-12.png" alt="Alt text"></p>
 
 <h3>2、获取写入的键值</h3>
 
@@ -110,7 +110,7 @@ void main()
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/20160412160213759542-21.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160412160213759542-21.png" alt="Alt text"></p>
 
 <h3>2、获取写入的文件</h3>
 
@@ -234,7 +234,7 @@ REG query "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "test" &gt;&gt
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/20160412160214691242-31.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160412160214691242-31.png" alt="Alt text"></p>
 
 <p><strong>注：</strong><br>
 也可结合使用<code>Wow64DisableWow64FsRedirection</code>和<code>Wow64RevertWow64FsRedirection</code>关闭和开启重定向，以此来跳过重定向，写入64位的注册表</p>
@@ -353,9 +353,9 @@ dir C:\Windows\Sysnative\test.txt
 
 <p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="83663f1664172bd0f7f6e2f1f7c3f6e8f0f7f6e5f6f0651504642823673b2e641907673b27663a0666183d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，能够帮助大家更清晰的认识其中的细节。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/20160412160217693273-1.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160412160217693273-1.png" alt="Alt text"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/20160412160222946553-2.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160412160222946553-2.png" alt="Alt text"></p>
 
 <p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="33d5b7acdb8391604746524147734658404746554640d4a9b7d6bbb5d78998d0b3b1db9490d6b580d789b5d5bba2d4a9b7daa49dda91ab">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，也让我有了更清楚的认识。</p>
 

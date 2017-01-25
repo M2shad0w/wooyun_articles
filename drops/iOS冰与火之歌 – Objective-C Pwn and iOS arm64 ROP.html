@@ -3,7 +3,7 @@
 			<head>
 			     <title>iOS冰与火之歌 – Objective-C Pwn and iOS arm64 ROP - 蒸米</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/12355">http://drops.wooyun.org/papers/12355</a></h1>
 				
@@ -59,7 +59,7 @@ int main(void) {
 
 <p>因为测试机是ipad mini 4，这里我们只编译一个arm64版本的hello。我们先make一下，然后我们用scp把hello传到我们的ipad上面，然后尝试运行一下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160119/2016011910265956100118.jpg" alt="p1"></p>
+<p><img src="../images_result/images/2016011910265956100118.jpg" alt="p1"></p>
 
 <p>如果我们能够看到”Hello, Ice and Fire!”，那么我们的第一个Objective-C程序就完成了。</p>
 
@@ -69,7 +69,7 @@ int main(void) {
 
 <p>我们接下来看一下用ida对hello进行反汇编后的结果：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160119/2016011910270111391217.jpg" alt="p2"></p>
+<p><img src="../images_result/images/2016011910270111391217.jpg" alt="p2"></p>
 
 <p>我们发现程序中充满了<code>objc_msgSend()</code>这个函数。这个函数可以说是Objective-C的灵魂函数。在Objective-C中，message与方法的真正实现是在执行阶段绑定的，而非编译阶段。编译器会将消息发送转换成对<code>objc_msgSend</code>方法的调用。</p>
 
@@ -79,7 +79,7 @@ int main(void) {
 
 <p>另外每个对象都有一个指向所属类的指针isa。通过该指针，对象可以找到它所属的类，也就找到了其全部父类，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160119/201601191027032108638.jpg" alt="p3"></p>
+<p><img src="../images_result/images/201601191027032108638.jpg" alt="p3"></p>
 
 <p>当向一个对象发送消息时，<code>objc_msgSend</code>方法根据对象的isa指针找到对象的类，然后在类的调度表（dispatch table）中查找selector。如果无法找到selector，<code>objc_msgSend</code>通过指向父类的指针找到父类，并在父类的调度表（dispatch table）中查找selector，以此类推直到NSObject类。一旦查找到selector，<code>objc_msgSend</code>方法根据调度表的内存地址调用该实现。通过这种方式，message与方法的真正实现在执行阶段才绑定。</p>
 
@@ -90,11 +90,11 @@ int main(void) {
 
 <p>为了有更高的效率，objc_msgSend这个函数是用汇编实现的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160119/201601191027062352346.jpg" alt="p4"></p>
+<p><img src="../images_result/images/201601191027062352346.jpg" alt="p4"></p>
 
 <p>首先函数会检测传递进来的第一个对象是否为空，然后计算MASK。随后就会进入缓存函数去寻找是否有selector对应的缓存：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160119/201601191027072009257.jpg" alt="p5"></p>
+<p><img src="../images_result/images/201601191027072009257.jpg" alt="p5"></p>
 
 <p>如果这个selector曾经被调用过，那么在缓存中就会保存这个selector对应的函数地址，如果这个函数再一次被调用，<code>objc_msgSend()</code>会直接跳转到缓存的函数地址。</p>
 
@@ -152,7 +152,7 @@ hello`main:
 
 <p>我们用disas反编译一下main函数：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160119/201601191027098313768.jpg" alt="p6"></p>
+<p><img src="../images_result/images/201601191027098313768.jpg" alt="p6"></p>
 
 <p>接下来我们在0x100063e94和0x100063ea4处下两个断点：</p>
 
@@ -407,7 +407,7 @@ NSLog(@"fake_cache_bucket.cached_function = %p", (void*)fake_cache_bucket.cached
 
 <p>编译完后，我们将hello这个程序传输到iOS上测试一下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160119/201601191027116569276.jpg" alt="p7"></p>
+<p><img src="../images_result/images/201601191027116569276.jpg" alt="p7"></p>
 
 <p>发现<code>/tmp</code>目录下已经成功的创建了IceAndFire这个文件了。</p>
 

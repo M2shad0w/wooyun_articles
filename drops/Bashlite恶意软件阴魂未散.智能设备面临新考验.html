@@ -3,7 +3,7 @@
 			<head>
 			     <title>Bashlite恶意软件阴魂未散:智能设备面临新考验 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/9990">http://drops.wooyun.org/papers/9990</a></h1>
 				
@@ -292,15 +292,15 @@ MD5: c14761119affea9569dd248a0c78d0b4</p>
 
 <p>先清除了老版本使用的配置文件，并杀掉了老版本的进程；</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/20151027031608447761103.png" alt=""></p>
+<p><img src="../images_result/images/20151027031608447761103.png" alt=""></p>
 
 <p>下载并并运行最新的恶意程序，这里使用了curl、lynx、wget等多种方式下载，确保下载成功；</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102703172022287250.png" alt=""></p>
+<p><img src="../images_result/images/2015102703172022287250.png" alt=""></p>
 
 <p>当确认与服务端建立连接后则停止。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102703173563790330.png" alt=""></p>
+<p><img src="../images_result/images/2015102703173563790330.png" alt=""></p>
 
 <p>其它文件：</p>
 
@@ -308,25 +308,25 @@ MD5: c14761119affea9569dd248a0c78d0b4</p>
 
 <p>先简单的strace一下该程序：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102703180440197424.png" alt=""></p>
+<p><img src="../images_result/images/2015102703180440197424.png" alt=""></p>
 
 <p>可以看到该程序先设置了线程名，随后连接了8.8.8.8，然后读取了路由表，之后的操作都是由几个线程完成，我们详细的跟一下：</p>
 
 <p>1.使用prctl修改线程名为[cpuset]</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102703185568777520.png" alt=""></p>
+<p><img src="../images_result/images/2015102703185568777520.png" alt=""></p>
 
 <p>2.连接8.8.8.8来判断用户是否已连接到网络，若连接到网络则通过路由表来获得ip地址并得到设备名称，再由ioctl得到mac地址：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102703190373102619.png" alt=""></p>
+<p><img src="../images_result/images/2015102703190373102619.png" alt=""></p>
 
 <p>3.连接C&amp;C地址(162.248.79.66)</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102703190720766721.png" alt=""></p>
+<p><img src="../images_result/images/2015102703190720766721.png" alt=""></p>
 
 <p>简单对该地址扫描，发现其开放了21,22端口，我们尝试着访问一下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102703191464147823.png" alt=""></p>
+<p><img src="../images_result/images/2015102703191464147823.png" alt=""></p>
 
 <p>可以看到上面有作者用于交叉编译的工具和脚本，还有已生成好的bot文件，从nt2.sh可以看到有新的地址188.209.49.163:443，而且底部有<em>Generated Mon, 26 Oct 2015 10:38:23 GMT by proxy (squid/3.1.23)</em>，由此可见作者可能已经拥有了大量的肉鸡，已经必须使用squid来承受并发的压力，当然也有可能仅仅是为了隐藏自己。</p>
 
@@ -406,11 +406,11 @@ MD5: c14761119affea9569dd248a0c78d0b4</p>
 
 <p>值得一提的是SCANNER指令，执行该指令时会尝试连接大量的随机地址，占用资源明显。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/2015102703192445232920.png" alt=""></p>
+<p><img src="../images_result/images/2015102703192445232920.png" alt=""></p>
 
 <p>若主机存在，则尝试使用telnet方式感染主机，被感染后的主机仍可以继续寻找其它可被感染的目标。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151027/20151027031933615201019.png" alt=""></p>
+<p><img src="../images_result/images/20151027031933615201019.png" alt=""></p>
 
 <h1>0x03 总结</h1>
 

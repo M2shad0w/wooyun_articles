@@ -3,7 +3,7 @@
 			<head>
 			     <title>“道有道”的对抗之路 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/14082">http://drops.wooyun.org/papers/14082</a></h1>
 				
@@ -20,7 +20,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160325/2016032505360065218180.png" alt="p1"></p>
+<p><img src="../images_result/images/2016032505360065218180.png" alt="p1"></p>
 
 <h1>0x01 广告形式</h1>
 
@@ -28,11 +28,11 @@
 
 <p>在道有道的官网上，介绍了其广告SDK的展现形式包括插屏广告、Banner广告和应用推荐广告。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160325/2016032505360219280240.png" alt="p2"></p>
+<p><img src="../images_result/images/2016032505360219280240.png" alt="p2"></p>
 
 <p>其官网展示的插屏广告是在软件内的插屏，实际上在其广告SDK开发文档中，还支持在自身软件外弹插屏广告，这也正是3.15曝光的展现形式。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160325/2016032505360992729337.png" alt="p3"></p>
+<p><img src="../images_result/images/2016032505360992729337.png" alt="p3"></p>
 
 <p>这种外插屏的展现形式，侵犯了用户的知情权，用户不知道是哪个应用弹的广告，并且点击屏幕任何地方都会直接下载推广的应用，除非准确点击ⓧ才能关闭广告。这种匿名且在自身应用外推送的广告展现形式，不但容易造成用户手机流量损失，还影响用户手机正常使用，被我们定义为恶意广告。</p>
 
@@ -42,7 +42,7 @@
 
 <p>360移动安全团队发现，借助道有道广告SDK推广的软件，除了正常软件外，还存在大量的恶意软件，比如3.15曝光的色情视频类恶意软件。我们之前发布的“舞毒蛾”<sup>【1】</sup>和“百脑虫”<sup>【2】</sup>木马分析报告，都是借助色情视频类恶意软件传播、感染用户手机，并且难以清除干净。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160325/2016032505361538143419.png" alt="p4"></p>
+<p><img src="../images_result/images/2016032505361538143419.png" alt="p4"></p>
 
 <p>移动广告平台对推广的应用审核不严，助涨了恶意软件传播，成为了其帮凶，最终造成用户经济损失、隐私泄露。</p>
 
@@ -58,7 +58,7 @@
 
 <p>从静态角度，通过对比嵌入其SDK的两个相似样本的AndroidManifest.xml文件内容，可以发现其声明的activity、service名称都是随机生成的，没有任何含义，这与一般正常软件的声明方式有明显的不同。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160325/2016032505361878447516.png" alt="p5"></p>
+<p><img src="../images_result/images/2016032505361878447516.png" alt="p5"></p>
 
 <p><strong>1.2 方法及字符串变形</strong></p>
 
@@ -66,15 +66,15 @@
 
 <p>最初的版本，方法和字符串均未加密。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160325/2016032505361939463616.png" alt="p6"></p>
+<p><img src="../images_result/images/2016032505361939463616.png" alt="p6"></p>
 
 <p>升级的版本，方法中的字符串进行简单的Base64加密。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160325/2016032505362133355716.png" alt="p7"></p>
+<p><img src="../images_result/images/2016032505362133355716.png" alt="p7"></p>
 
 <p>再后续的版本中，隐藏方式又有所加深，将方法名称及字符串都保存在配置文件里。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160325/2016032505362249612814.png" alt="p8"></p>
+<p><img src="../images_result/images/2016032505362249612814.png" alt="p8"></p>
 
 <p><strong>1.3 核心代码的隐藏</strong></p>
 
@@ -82,11 +82,11 @@
 
 <p>解析assets目录下的资源文件，得到加载的dex文件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160325/2016032505362371976914.png" alt="p9"></p>
+<p><img src="../images_result/images/2016032505362371976914.png" alt="p9"></p>
 
 <p>将dex文件的二进制编码到代码中，在代码运行过程中解码释放。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160325/20160325053625775181013.png" alt="p10"></p>
+<p><img src="../images_result/images/20160325053625775181013.png" alt="p10"></p>
 
 <h3>2.动态对抗</h3>
 
@@ -94,7 +94,7 @@
 
 <p>从动态角度，我们以时间轴和不同颜色的方式来展示其广告联网的URL变化情况。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160325/20160325053626771791118.png" alt="p11"></p>
+<p><img src="../images_result/images/20160325053626771791118.png" alt="p11"></p>
 
 <ul>
 <li>红色部分：URL前面几乎都是以“<code>api</code>”开头，不同时间段后面分别是 “<code>is”、“cp”、“info</code>”；</li>
@@ -114,7 +114,7 @@
 
 <p>360移动安全团队发现，开发者嵌入广告SDK需要的开发门槛极低，甚至有些广告厂商为了方便开发者嵌入自家平台的广告，提供了广告打包器，只要将开发的应用通过打包器，就可以制作出嵌有该平台广告的应用。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160325/20160325053628507251215.png" alt="p12"></p>
+<p><img src="../images_result/images/20160325053628507251215.png" alt="p12"></p>
 
 <p>极低的二次打包成本在一定程度上助涨了盗版软件的滋生。在360发布的《2015年Android手机应用盗版情况调研报告》<sup>【3】</sup>中指出，平均每款正版APP对应92.7个盗版。</p>
 

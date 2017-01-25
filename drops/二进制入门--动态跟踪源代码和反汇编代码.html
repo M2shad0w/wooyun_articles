@@ -3,7 +3,7 @@
 			<head>
 			     <title>二进制入门--动态跟踪源代码和反汇编代码 - quanyechavshuo</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/16667">http://drops.wooyun.org/binary/16667</a></h1>
 				
@@ -32,7 +32,7 @@ eg.
 
 <p>执行call addr时，由于call addr已经执行,所以call addr=push eip+jmp addr中的eip为call addr汇编指令当前所在帧中的下一条指令的地址,这里说的当前所在帧是如下图frame所示在当前图片看到的一片汇编指令代码,如执行0xff77b8d02处的call 0xf77bc2e0时,eip为当前帧的下一条指令的地址为f77b8d07</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061314050149873pic4.png" alt="p1"></p>
+<p><img src="../images_result/images/2016061314050149873pic4.png" alt="p1"></p>
 
 <p><strong>5.leave===>mov esp,ebp + pop ebp</strong></p>
 
@@ -221,7 +221,7 @@ line7,lin8代码：
 <li><p>上面3中说的非0是内存中的非0，如果是键盘上的0键并不是内存中的0,如下图ascii所示</p></li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061314045641961pic3.png" alt="p2"></p>
+<p><img src="../images_result/images/2016061314045641961pic3.png" alt="p2"></p>
 
 <pre><code>#!bash
 line10:(line9是空格行)
@@ -370,7 +370,7 @@ echo '1234567898123456789812345678981234567898123456789812345678981234\x00\x00\x
 
 <p>原题中要求改变modified位，直接输入键盘上的任意大于64位的一串字符即可，因为键盘上的数字0在内存中是0x30,如果将键盘上的0键输入到对应的modified位上，会改变modified</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061314044685323pic2.png" alt="p3"></p>
+<p><img src="../images_result/images/2016061314044685323pic2.png" alt="p3"></p>
 
 <p>该题要求溢出变量modified,也即覆盖栈中的modified所在的内在地址里的值，这里进行扩展，通过栈溢出反弹shell.</p>
 
@@ -673,7 +673,7 @@ Looking gadgets, please wait...
 
 <p>搜到jmp esp地址如下（由于本机kali为64位，所以显示成下图中样式，取其中32位的地址即可）</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061314044215728pic1.png" alt="p4"></p>
+<p><img src="../images_result/images/2016061314044215728pic1.png" alt="p4"></p>
 
 <p>取其中的0xf773813b,替换exploit.py中jmp_esp="\x3b\x81\x73\xf7",上图中选择的/lib/i386-linux-gnu/ld-2.19.so应该是随着操作系统启动加载到系统内存中的可用动态链接库文件</p>
 

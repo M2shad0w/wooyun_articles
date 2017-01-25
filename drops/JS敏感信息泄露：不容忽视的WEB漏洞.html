@@ -3,7 +3,7 @@
 			<head>
 			     <title>JS敏感信息泄露：不容忽视的WEB漏洞 - 我是小号</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/6710">http://drops.wooyun.org/web/6710</a></h1>
 				
@@ -32,13 +32,13 @@
 
 <p>此类问题主要存在于后台登陆页面以及类似网页内引入的JS文件中。在企业渗透测试时如果遇到后台，在SQL注入或者是路径爆破都试过，但是仍然无法进入后台时。根据此类漏洞，说不定登陆页面下引入的js文件暴露的后台路径会成为突破口。如果某台的某一个页面没有对是否登陆状态做验证，攻击者就可以一次未授权访问这些暴露的API，实现篡改前台内容甚至是getshell。 下面这个某大型互联网服务提供商的房产后台页面引入的js文件泄露后台接口信息，就是非常典型的例子：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150707/2015070703005919503.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070703005919503.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150707/2015070703005999411.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070703005999411.png" alt="enter image description here"></p>
 
 <p>（信息泄露源是房产管理登陆后台页面下的common.js）</p>
 
-<p><img src="http://static.wooyun.org//drops/20150707/2015070703005965148.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070703005965148.png" alt="enter image description here"></p>
 
 <p>（js文件中的urlMap对象内容完整的泄露了后台所有功能实现的API，因此攻击者无需登陆就可以进行未授权操作）</p>
 
@@ -48,7 +48,7 @@
 
 <p>因为此类问题利用方式和造成的危害与即将谈论到的第三类问题不同，所以把这类问题单独拿出来讲一讲。XSS常见利用手段是劫持用户cookie并登陆其账户，但添加了http-only标记的cookie客户端脚本无法读取，该项技术已经成为减小XSS带来的危害的重要手段。部分厂商更是因此降低了对XSS的评级。不过千里之堤溃于蚁穴，可爱的程序员直接将受http-only保护的cookie写入页面，导致通过利用crossdoamin.xml配置不当等漏洞，攻击者可以轻松跨域读取到受保护的cookie，攻击者登陆用户账户登录的梦想得以延续。其实在乌云Zone中WEB前端安全大牛EtherDream早已从漏洞成因检测等方面撰文进行了阐述。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150707/2015070703005932622.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070703005932622.png" alt="enter image description here"></p>
 
 <p>(知道首页js内直接输出受保护的BDUSS)</p>
 
@@ -58,15 +58,15 @@
 
 <p>经过以往测试经验的归纳，此类漏洞常见该类型的泄露常见于网站评论功能实现处。其实该类型的漏洞比通过jsonp漏洞收集用户敏感信息来的更加快捷容易。由于程序员疏忽直接在页面的js以及AJAX请求返回的内容中输出参与评论用户的敏感信息，导致攻击者可以轻松获取用户的手机号，真实姓名，注册邮箱，住址甚至有可能获取用户手机的IMEI，和抽奖和抽中的游戏礼包号。泄露内容千奇百怪，遇到此类问题时，看着泄露的内容时常会被雷到。从个人的测试经验来看，涉及的厂商范围广泛，从某搜索服务提供商下的订票网站、在线挂号网站到某公司旗下的大型游戏网站都发现过此类漏洞，其他厂商肯定也存在该类问题。不需要SQL注射脱库，黑产哥通过编写爬虫就能大批量的获取用户的敏感信息，利用难度小，危害却很大。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150707/2015070703005971274.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070703005971274.png" alt="enter image description here"></p>
 
 <p>（某FM类应用评论处泄露匿名评论用户邮箱，手机号）</p>
 
-<p><img src="http://static.wooyun.org//drops/20150707/2015070703010056432.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070703010056432.png" alt="enter image description here"></p>
 
 <p>(某大型游戏网站抽奖页面下泄露获奖用户礼包兑换号码)</p>
 
-<p><img src="http://static.wooyun.org//drops/20150707/2015070703010020825.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070703010020825.png" alt="enter image description here"></p>
 
 <p>(某应用商店获取评论内容ajax请求中泄露用户imei和真实ip)</p>
 

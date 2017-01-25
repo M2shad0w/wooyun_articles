@@ -3,7 +3,7 @@
 			<head>
 			     <title>滥用图片博客做 C&amp;C 配置 - 0xCC</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12613">http://drops.wooyun.org/tips/12613</a></h1>
 				
@@ -28,7 +28,7 @@
 
 <p>针对每一个颜色通道，修改其最低的二进制位，而其余 7 位保持不变，这样细小的差别在肉眼上难以分辨。如下图所示，前后两个色块看上去几乎没有差别。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/20160129034141961371102.png" alt="LSB"></p>
+<p><img src="../images_result/images/20160129034141961371102.png" alt="LSB"></p>
 
 <p>这样就在像素中“开辟”了携带信息的空间。通过将信息嵌入到最低有效位的方式，每个像素就可以携带 3bit 的信息，也就是 23 == 8 种状态。</p>
 
@@ -42,7 +42,7 @@
 
 <p>直接在 EXIF 中出现数据太容易被发现。笔者设计了一个算法，可以将一个不太大的正整数编码成为一个字符串，这个字符串肉眼看上去非常像一个软件的版本号。接着将这个“版本号”放置于 EXIF 的 Software 字段，看上去毫无违和感。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012903414373295268.png" alt="Fake Version"></p>
+<p><img src="../images_result/images/2016012903414373295268.png" alt="Fake Version"></p>
 
 <p>编码非常简单。先将 n 开平方后向下取整得 e；将 n 转换为 e 进制数，每一位得到一个数组 a；将 e 添加到数组 a 的第一个元素；以小数点为分隔符 join 得到字符串 s；最后倒转 s 得到 s' 即为“版本号”。例如 n=1992，开平方取整得到 e=44，1992 转为 44 进制得到<code>1992 = 12 * 442 + 1 * 441 + 1 * 440</code>，即得数组 [44, 12, 1, 1]，最后合并再反转字符得到 1.1.21.44，再加上个胡诌的软件名，真是个版本号的样子……</p>
 
@@ -124,17 +124,17 @@ $pixels = New-Object Byte[] $size
 
 <p>首先准备一张大小适合的图片，小了无法容纳数据，大了不方便网络传输。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012903414437956314.jpg" alt="IMG_7495"></p>
+<p><img src="../images_result/images/2016012903414437956314.jpg" alt="IMG_7495"></p>
 
 <p>执行 <code>python steg.py example.config.json IMG_7495.jpg blend.png</code></p>
 
 <p>得到合成的图片如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012903414694284439.png" alt="blend"></p>
+<p><img src="../images_result/images/2016012903414694284439.png" alt="blend"></p>
 
 <p>粗看上去没有区别。以<code>#ThisIsAnUniqueSecretTag</code>为标签上传，接着换一个机器执行 PowerShell 脚本，可完整地将配置文件 example.config.json 读取出来。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012903414922727534.png" alt="read"></p>
+<p><img src="../images_result/images/2016012903414922727534.png" alt="read"></p>
 
 <h1>0x06 结语</h1>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>WireShark黑客发现之旅—肉鸡邮件服务器 - 聚锋实验室</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6944">http://drops.wooyun.org/tips/6944</a></h1>
 				
@@ -22,9 +22,9 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20150706/2015070602393110091.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070602393110091.jpeg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150706/2015070602393110997.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070602393110997.jpeg" alt="enter image description here"></p>
 
 <p>SMTP协议为邮件为邮件传输协议。正常情况下出现此协议有两种情况：</p>
 
@@ -38,7 +38,7 @@
 
 <p>带着疑问我们统计了一下数据的IP、端口等信息：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150706/2015070602393288016.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070602393288016.jpeg" alt="enter image description here"></p>
 
 <p>统计信息表明：所有通信均是与61.158.163.126（河南三门峡）产生的SMTP协议，且服务器（10.190.214.130）开放了TCP25端口，它的的确确是一台邮件服务器。</p>
 
@@ -46,11 +46,11 @@
 
 <p>职业的敏感告诉我，它不是一台合理的邮件服务器。这个时候需要用到应用层的分析，看一看它的通信行为。继续看看SMTP登陆过程的数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150706/2015070602393283161.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070602393283161.jpeg" alt="enter image description here"></p>
 
 <p>从数据看出，邮箱登陆成功，右键Follow TCPStream可以看见完整登陆信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150706/2015070602393273357.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070602393273357.jpeg" alt="enter image description here"></p>
 
 <pre><code>334 VXNlcm5hbWU6          // Base64解码为：“Username:”
 YWRtaW4=  //用户输入的用户名，Base Base64解码为：“admin”
@@ -80,23 +80,23 @@ MAIL FROM:&lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cf
 
 <p>发现问题了，下一步跟踪其行为，这个肉鸡服务器到底是干什么的。查看Follow TCPStream完整信息可发现：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6981d6f08ff1c68dd1e98cd9e88efdd8080d040007291a101a1d0c0447040800058ed7cd8ce6f88ef3ed80ebc78dd2df">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，收件人包括： <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="aadddddd9c9f9b9e9b939a9c9dea9b989c84c9c5c7492a2bddd3db9a989a9e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fe879f969191d09d9193d09d901d7e7f84969f919d92cfbecfc8cdd09d9193195377cfce1a46541a4444">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>（带QQ的邮箱暂时抹掉，原因见最后），邮件内容不多。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150706/2015070602393276188.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070602393276188.jpeg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150706/2015070602393322209.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070602393322209.jpeg" alt="enter image description here"></p>
 
 <p>为看到完整邮件内容，我们可以点击Save As存为X.eml，用outlook等邮件客户端打开。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150706/2015070602393326555.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070602393326555.jpeg" alt="enter image description here"></p>
 
 <p>一看邮件，所有谜团都解开了。邮件内容就是一封“巧虎”的广告垃圾邮件，该服务器被攻击者控制创建了邮件服务器，用于垃圾邮件发送站。再用同样的方法还原部分其它邮件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150706/2015070602393343648.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070602393343648.jpeg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150706/2015070602393328977.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070602393328977.jpeg" alt="enter image description here"></p>
 
 <p>可以看出邮件内容完全一样，从前面图中可看出短时间的监控中SMTP协议有几十次会话，也就说发送了几十次邮件，涉及邮箱几百人。邮件中的域名http://url7.me/HnhV1打开后会跳转至巧虎商品的广告页面。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150706/2015070602393481059.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070602393481059.jpeg" alt="enter image description here"></p>
 
 <h1>0x03 分析结论</h1>
 
@@ -112,11 +112,11 @@ MAIL FROM:&lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cf
   <p>4、垃圾邮件发送不是随便发的，是很有针对性的。巧虎是幼儿产品，从接受邮件的QQ号码中随便选取4位查询资料发现发送对象可能都为年轻的爸爸妈妈。</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20150706/2015070602393494826.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070602393494826.jpeg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150706/2015070602393485687.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070602393485687.jpeg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150706/2015070602393438487.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070602393438487.jpeg" alt="enter image description here"></p>
 
 <p>申明：文章中出现IP、邮箱地址等信息均为安全监控、攻击防范学习交流所用，切勿用于其它用途，否则责任自负。</p>
 

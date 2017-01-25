@@ -3,7 +3,7 @@
 			<head>
 			     <title>drozer模块的编写及模块动态加载问题研究 - thor</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/13239">http://drops.wooyun.org/tips/13239</a></h1>
 				
@@ -46,7 +46,7 @@ dz&gt; run exp.test.getinteger
 
 <p>运行效果如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160308/2016030813583048133r1.png" alt="1"></p>
+<p><img src="../images_result/images/2016030813583048133r1.png" alt="1"></p>
 
 <p>drozer 通过Module类的metadata来配置和管理每个模块,因此模块编写时需要包含以下 metadata信息:</p>
 
@@ -289,7 +289,7 @@ dz&gt; run exp.work.findport
 
 <p>运行效果如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160308/2016030813583322539r3.png" alt="image"></p>
+<p><img src="../images_result/images/2016030813583322539r3.png" alt="image"></p>
 
 <p>2）app中IP地址扫描模块</p>
 
@@ -400,7 +400,7 @@ dz&gt; run exp.server.findips -a com.dianping.v1
 
 <p>运行效果如下所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160308/2016030813583549341r4.png" alt="image"></p>
+<p><img src="../images_result/images/2016030813583549341r4.png" alt="image"></p>
 
 <h1>0x04 编写dex插件</h1>
 
@@ -470,7 +470,7 @@ self.stdout.write("[color red]get string from dex plugin: %s  [/color]\n" % dext
 
 <p>该测试插件根据提供的部分电话号码去匹配手机通讯录中的联系人，并返回匹配到的联系人姓名，执行效果如下:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160308/2016030813583289216r2.png" alt="2"></p>
+<p><img src="../images_result/images/2016030813583289216r2.png" alt="2"></p>
 
 <p>dex插件是由drozer上传到android手机上加载执行，它的作用还是为drozer模块提供更方便易用的接口，扩展更多的功能。由于dex插件是Java编写的原生android代码，在执行效率上比通过反射调用更高。drozer的modules/common目录下包含了多个dex插件的源码，有兴趣的同学可以自己查看。</p>
 

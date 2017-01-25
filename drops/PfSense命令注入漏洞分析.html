@@ -3,7 +3,7 @@
 			<head>
 			     <title>PfSense命令注入漏洞分析 - mssp299</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/8413">http://drops.wooyun.org/papers/8413</a></h1>
 				
@@ -49,13 +49,13 @@ $dig=`dig "$host" A | grep "$host" | grep -v ";" | awk '{ print 5 }'`;
 
 <p>下面展示的是含有上述输入字符串的HTTP请求，具体如图所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150908/2015090809521015475.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015090809521015475.png" alt="enter image description here"></p>
 
 <p>图1 发送给服务器的恶意请求</p>
 
 <p>当上面所示的请求被执行时，<code>Web</code>浏览器会显示如下所示的内容，其中含有一个错误信息，出错原因是没有提供有效的主机名。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150908/2015090809521024385.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015090809521024385.png" alt="enter image description here"></p>
 
 <p>图2 错误消息：<code>invalid hostname</code></p>
 
@@ -70,7 +70,7 @@ $dig=`dig "$host" A | grep "$host" | grep -v ";" | awk '{ print 5 }'`;
 
 <p>我们会看到，每条命令都会正确执行，其中最重要的命令就是<code>ifconfig</code>了，它已经被注入到了获得输出内容的脚本中了。由于我们无法直接通过响应报文获得这些命令的输出结果，所以必须通过管道命令将其输出到<code>DocumentRoot</code>下的一个文件中，然后才能通过<code>Web</code>浏览器正常访问。下面展示的是<a href="https://pfsense/temp.txt">https://pfsense/temp.txt</a>中的部分请求内容。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150908/2015090809521017777.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015090809521017777.png" alt="enter image description here"></p>
 
 <p>图3 生成的<code>temp.txt</code>文件</p>
 
@@ -119,7 +119,7 @@ usr/local/etc/smartd.conf");
 
 <p>在上面的命令中，第一条和第三条命令只是配角，中间那条命令才是我们想要注入的主角。实际上，我们可以利用<code>shell_exec</code>函数注入任意命令。如果使用浏览器访问<a href="https://pfsense/cmd.txt">https://pfsense/cmd.txt</a>就会发现，这个字符串实际上已经被保存到<code>DocumentRoot</code>下的相应文件中了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150908/2015090809521147978.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015090809521147978.png" alt="enter image description here"></p>
 
 <p>图4 生成的<code>cmd.txt</code>文件</p>
 
@@ -163,7 +163,7 @@ emoving database"),$rrddbpath,$curdatabase));
 
 <p>我们可以在这个命令的尾部添加字符;，以便插入其他在<code>rm</code>命令运行结束以后需要执行的命令。需要说明的是，如果我们使用了命令分隔符;的话，那么只有当<code>rm</code>命令已经成功执行完成之后，后插入的命令才会被执行。如果我们并不关心<code>rm</code>命令的执行结果的话，我们可以使用<code>&amp;&amp;</code>来分隔命令。需要说明的是，我们无法向任意目录中<code>echo</code>文本，因为这里不允许使用正斜杠。为了克服这个问题，我们可以先通过<code>cd</code>命令进入预定目录，然后通过命令管道实现文本传输的目的。首先，我们必须搞清楚被执行代码的当前目录，这里为<code>/var/db/rrd/directory</code>。下面的请求展示了我们是如何执行<code>queues;echo+"CMD+INJECT"&gt;cmd.txt</code>命令的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150908/2015090809521193578.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015090809521193578.png" alt="enter image description here"></p>
 
 <p>图5 执行<code>echo</code>命令的请求</p>
 
@@ -174,13 +174,13 @@ emoving database"),$rrddbpath,$curdatabase));
 
 <p>为了在<code>PfSense</code>安装路径下的<code>DocumentRoot</code>中生成同样的文件，我们可以通过三个<code>cd ..</code>命令返回上层目录，然后切换至 <code>/usr/local/www/ directory</code>目录，并从这里执行<code>echo</code>命令。这样就能够在<code>/usr/local/www/cmd.txt</code>路径生成<code>cmd.txt</code>文件了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150908/2015090809521163179.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015090809521163179.png" alt="enter image description here"></p>
 
 <p>图6 执行<code>echo</code>命令的请求</p>
 
 <p>由于我们当前位于<code>PfSense Web</code>应用的<code>DocumentRoot</code>目录中，所以只要在浏览器中请求<code>cmd.txt</code>，就能知道是否收到了输出<code>CMD INJECT</code>了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150908/2015090809521148247.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015090809521148247.png" alt="enter image description here"></p>
 
 <p>图7 生成的<code>cmd.txt</code>文件</p>
 

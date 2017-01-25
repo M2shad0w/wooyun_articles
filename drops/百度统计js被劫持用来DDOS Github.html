@@ -3,7 +3,7 @@
 			<head>
 			     <title>百度统计js被劫持用来DDOS Github - insight-labs</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5398">http://drops.wooyun.org/papers/5398</a></h1>
 				
@@ -17,7 +17,7 @@
 <pre><code>malicious javascript detected on this domain
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150327/2015032705423060206s1.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032705423060206s1.png" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -29,7 +29,7 @@
 
 <p>之后立刻发现弹窗的js居然是从github加载的：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150327/2015032705423358371s2.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032705423358371s2.png" alt="enter image description here"></p>
 
 <p>可是为什么乌云会从github加载js呢，并且还是从greatfire和纽约时报镜像加载。</p>
 
@@ -104,17 +104,17 @@ alert("WARNING: malicious javascript detected on this domain")
 
 <p>以弹窗的方式阻止了js的循环执行。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150327/2015032705422816608s3.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032705422816608s3.png" alt="enter image description here"></p>
 
 <p>图3 国外ip traceroute到hm.baidu.com的记录</p>
 
 <p>似乎DNS并没有被劫持，看来是像之前一样直接把IP劫持了或者直接在HTTP协议里替换文件。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150327/2015032705422632644s4.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032705422632644s4.png" alt="enter image description here"></p>
 
 <p>扫了下端口，只开了80和443，通过https协议访问后是正常的空页面(只有带referer才会出现js文件)。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150327/2015032705422243412s5.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032705422243412s5.png" alt="enter image description here"></p>
 
 <p>作者要进行抓包分析时劫持已经停止，在<a href="https://twitter.com/mac_zhou/status/581324446058713088">twitter</a>上看到有人已经分析过引用如下：</p>
 
@@ -122,7 +122,7 @@ alert("WARNING: malicious javascript detected on this domain")
   <p>抓包跟踪，正常百度服务器返回给我日本VPS的TTL为51， RESP返回HTTP 200 OK的报文的TTL是47，可以确定的是有中间设备对VPS发了伪造报文。</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org/drops/20150327/2015032706222594535ws.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032706222594535ws.png" alt="enter image description here"></p>
 
 <p>真是无耻，呵呵</p>
 

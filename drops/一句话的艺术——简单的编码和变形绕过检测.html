@@ -3,7 +3,7 @@
 			<head>
 			     <title>"一句话"的艺术——简单的编码和变形绕过检测 - RedFree</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/839">http://drops.wooyun.org/tips/839</a></h1>
 				
@@ -68,7 +68,7 @@
 
 <p>来看一下D盾对原生一句话的查杀情况吧！</p>
 
-<p><img src="http://static.wooyun.org/201312/2013122817573781043.jpg" alt="2013122817573781043.jpg"></p>
+<p><img src="../images_result/images/2013122817573781043.jpg" alt="2013122817573781043.jpg"></p>
 
 <p>Shit!，级别为5(eval后门)全部杀掉！这样也就是说即使你的一句话已经躺在目标网站目录了，访问的时候也会被WAF断掉连接。这样一句话本身也就失去意义了，更别说去使用它了。</p>
 
@@ -76,13 +76,13 @@
 
 <p>开始对我们的一句话做“免杀”吧！在此之前先来了解一句话木马的原理。对比下asp、aspx、php一句话，你发现了什么？</p>
 
-<p><img src="http://static.wooyun.org/201312/2013122818002311061.jpg" alt="2013122818002311061.jpg"></p>
+<p><img src="../images_result/images/2013122818002311061.jpg" alt="2013122818002311061.jpg"></p>
 
 <p>看到了吧，不同语言的一句话构成几乎完全一致！(首先请求客户端数据，然后执行请求到的数据)至于执行数据的来源，可以是Post，也可以是Get、cookies、session等(依然是Post、Get)；如果考虑到数据长度、编码、隐蔽性等诸多因素当然还是使用Post方法最为合适。</p>
 
 <p>那么服务器安全类软件杀的究竟是什么东东呢？前面说过了：“特征”，我们来做如下测试：</p>
 
-<p><img src="http://static.wooyun.org/201312/2013122818021354299.jpg" alt="2013122818021354299.jpg"></p>
+<p><img src="../images_result/images/2013122818021354299.jpg" alt="2013122818021354299.jpg"></p>
 
 <p>我把Request/POST前随便加了一个字符，再扫一扫，结果如上图。可见安全类软件杀掉的不是eval(execute/executeglobal/assert……)，而是eval+"请求数据"。当脚本内有eval字串时仅仅只是提醒而已(如果连执行函数都杀，那“上帝”造它干吗！)。但是上图中的三个脚本没一个是可以正常执行的，哪有srequest呢！</p>
 
@@ -133,7 +133,7 @@ if($mujj!="")
 
 <p>效果呢，如下图：</p>
 
-<p><img src="http://static.wooyun.org/201312/2013122818065476520.jpg" alt="2013122818065476520.jpg"></p>
+<p><img src="../images_result/images/2013122818065476520.jpg" alt="2013122818065476520.jpg"></p>
 
 <p>实测至此与Shell的连接已经不会被断了，而且以上三个一句话都支持我们亲爱的“菜刀”连接。但实际上你用菜刀是连不上的，因为安全类软件还会检测Get、Post、Cookies……的内容，菜刀Post数据包中含有太多的关键字(execute、response.write,base64_decode…… 不信你截包看一看)。这样有什么方法来突破呢？哈哈，两种方法：</p>
 
@@ -156,18 +156,18 @@ if($mujj!="")
 
 <p>看一下效果吧……</p>
 
-<p><img src="http://static.wooyun.org/201312/2013122818143369499.jpg" alt="2013122818143369499.jpg"></p>
+<p><img src="../images_result/images/2013122818143369499.jpg" alt="2013122818143369499.jpg"></p>
 
 <p>D盾已经没有任何提示了！那么该怎么用这个一句话呢？已经说过了无法使用“菜刀连接”。好吧，火狐中选post一段代码到这个一句话试试……</p>
 
-<p><img src="http://static.wooyun.org/201312/2013122818151026774.jpg" alt="2013122818151026774.jpg"></p>
+<p><img src="../images_result/images/2013122818151026774.jpg" alt="2013122818151026774.jpg"></p>
 
 <p>当然不仅限于显示网站路径，任意代码哦！试试：</p>
 
 <pre><code>try{var S="-&gt;|"+Server.Mappath("/")+"\t";var oFso = Server.CreateObject("Scripting.FileSystemObject");var oDrivers = oFso.Drives;for(var x=new Enumerator(oDrivers);!x.atEnd();x.moveNext()) {var oDriver = x.item();S+=oDriver.Path;}S+="|&lt;-";Response.write(S);}catch(e){}
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201312/2013122818165995078.jpg" alt="2013122818165995078.jpg"></p>
+<p><img src="../images_result/images/2013122818165995078.jpg" alt="2013122818165995078.jpg"></p>
 
 <p>这个一句话已经满足我们的所有要求了，但是你会说它依然不完美，因为它不支持Chopper！好吧，那就再费心改造一下吧…… 经过改造后的Shell代码如下：</p>
 
@@ -203,7 +203,7 @@ $x=$_POST['z'];
 <p>当然您不满意的话可以继续搞，连eval都给拆了！使用preg&#95;replace、array&#95;map或是从REQUEST的变量中取得eval、assert……，实没D盾都会有不同等级的报告(提示可疑但不认识，毕竟这些不常用函数都挺有风险……)，我是挺懒，不想搞了……<br>
 看效果：</p>
 
-<p><img src="http://static.wooyun.org/201312/2013122818201195763.jpg" alt="2013122818201195763.jpg"></p>
+<p><img src="../images_result/images/2013122818201195763.jpg" alt="2013122818201195763.jpg"></p>
 
 <p>关于如何玩转一句话已经写的差不多了(本人水平问题ASPX、PHP未能写的更详细！以后补充……)。如果将来一句话因为关键字被杀实再玩不鸟了(可能性不太大)，那就转业自写Customize脚本吧，至少文件读写，数据库连接这些功能是不会被杀的。</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>Linux堆内存管理深入分析(下半部) - 阿里移动安全</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/16063">http://drops.wooyun.org/tips/16063</a></h1>
 				
@@ -58,7 +58,7 @@ mchunkptr的定义：typedef struct malloc_chunk* mchunkptr;
 
 <p>画图更直观：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/2016052304375944518140.png" alt=""></p>
+<p><img src="../images_result/images/2016052304375944518140.png" alt=""></p>
 
 <p>图1-1 bins分类</p>
 
@@ -172,7 +172,7 @@ _int_malloc (mstate av, size_t bytes)
 
 <p>在main arena中Fast bins(即数组fastbinsY)的整体操作示意图如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/2016052304380258824228.png" alt=""></p>
+<p><img src="../images_result/images/2016052304380258824228.png" alt=""></p>
 
 <p>图2-1 fast bin示意图</p>
 
@@ -254,7 +254,7 @@ malloc_init_state (mstate av)
 
 <p>了解上面知识之后，再结合下图5-1，就不难理解各类bins的处理逻辑了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/201605230438044275034.jpg" alt=""></p>
+<p><img src="../images_result/images/201605230438044275034.jpg" alt=""></p>
 
 <h1>0x06 总结</h1>
 

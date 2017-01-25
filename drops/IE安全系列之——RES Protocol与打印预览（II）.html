@@ -3,7 +3,7 @@
 			<head>
 			     <title>IE安全系列之——RES Protocol与打印预览（II） - blast</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/16275">http://drops.wooyun.org/tips/16275</a></h1>
 				
@@ -14,7 +14,7 @@
 
 <p>事情得从一个报告说起，有人说网页map.yahoo.co.jp，在IE中进行打印预览时，使用倍率666%会让IE崩溃（至少2016-5-28为止还是这样），为什么IE中会出现这么6的问题呢？从打印预览这个功能看起吧。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160530/2016053005213723406pic12.jpg" alt="p1"></p>
+<p><img src="../images_result/images/2016053005213723406pic12.jpg" alt="p1"></p>
 
 <!--more-->
 
@@ -343,7 +343,7 @@ HRESULT __fastcall HTMLDocumentSource::Create(int a1, int a2, int a3, char a4)
 
 <p>_Initialize是一个较长的函数，但是逻辑较为清晰，我把所有IDA没有识别出的guid等全部以注释的形式标记了。该函数先获取了IHTMLEventObj2接口，然后识别环境并设置浏览模式为<code>__IE_Immersive</code>（Win8 Immersive Mode），若Immersive Mode生效，再设置成<code>__IE_ShrinkToFit</code>（Shrink to fit模式，该模式下浏览器自动将页面收缩成方便打印的大小）模式。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160530/2016053005214054923pic22.jpg" alt="p2"></p>
+<p><img src="../images_result/images/2016053005214054923pic22.jpg" alt="p2"></p>
 
 <p>然后，调用PrintManagerOptions::Create。这个操作将创建一个PrintManagerOptions对象，并调用其_Initialize方法，干的事情也就是拿到它的IUnkonwn接口，所以这块我们也跳过。</p>
 
@@ -638,7 +638,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 <p>取得窗口的DOM如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160530/2016053005214180823pic31.jpg" alt="p3"></p>
+<p><img src="../images_result/images/2016053005214180823pic31.jpg" alt="p3"></p>
 
 <p>将其输出到文件，自行添上<code>&lt;/BODY&gt;&lt;/HTML&gt;</code>即为完整的内容。不过需要记得的是Layout等元素只在打印预览中有效，所以单独提取出来崩溃不了也不要太疑惑，这里只是为了方便了解预览中最终的DOM分布情况而已。</p>
 

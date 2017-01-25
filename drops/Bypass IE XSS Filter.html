@@ -3,7 +3,7 @@
 			<head>
 			     <title>Bypass IE XSS Filter - livers</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/159">http://drops.wooyun.org/tips/159</a></h1>
 				
@@ -24,11 +24,11 @@
 
 <p>IE xss filter工作原理</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810452690579.png" alt="20130702203010_17247.png"></p>
+<p><img src="../images_result/images/2014091810452690579.png" alt="20130702203010_17247.png"></p>
 
 <p>其流程</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810452784488.png" alt="20130702203042_19772.png"></p>
+<p><img src="../images_result/images/2014091810452784488.png" alt="20130702203042_19772.png"></p>
 
 <p>这里有很多环节可以bypass 例如验证同源80sec发现的问题。</p>
 
@@ -46,15 +46,15 @@
 
 <p>查找很简单 可以使用notepad++ textfx 16进制查看。（搜索‘sc{’）</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810452774284.png" alt="20130702203129_11721.png"></p>
+<p><img src="../images_result/images/2014091810452774284.png" alt="20130702203129_11721.png"></p>
 
 <p>或者使用 winhex(作者喜欢的工具) （搜索‘sc{’）</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810452730843.png" alt="20130702203156_31657.png"></p>
+<p><img src="../images_result/images/2014091810452730843.png" alt="20130702203156_31657.png"></p>
 
 <p>不过这里强烈建议大家熟悉下IDApro(原因：后面你研究webkit 或者andriod等其他应用时，IDApro是非常好用的利器)</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810452820075.png" alt="20130702203236_24352.png"></p>
+<p><img src="../images_result/images/2014091810452820075.png" alt="20130702203236_24352.png"></p>
 
 <p>这里给出一个老外blog 的一条 console 命令 非常实用。</p>
 
@@ -162,7 +162,7 @@ Bypass : "+{valueOf:location, toString: [].join,0:'jav\x61script:alert\x280)',le
 
 <p>用法。IEfilter.txt 是IE的正则。Bypasstest.txt是绕过语句，result和console界面程序会保存输出结果。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810452879897.png" alt="20130702203334_32890.png"></p>
+<p><img src="../images_result/images/2014091810452879897.png" alt="20130702203334_32890.png"></p>
 
 <p>downloadlink:<a href="http://pan.baidu.com/share/link?shareid=1243023532&amp;uk=1259968226">http://pan.baidu.com/share/link?shareid=1243023532&amp;uk=1259968226</a></p>
 

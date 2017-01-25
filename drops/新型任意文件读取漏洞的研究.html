@@ -3,7 +3,7 @@
 			<head>
 			     <title>新型任意文件读取漏洞的研究 - phith0n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5040">http://drops.wooyun.org/papers/5040</a></h1>
 				
@@ -31,7 +31,7 @@
 
 <p>一般也会有一些区分，一些要求比较高的应用，多是采用了CDN缓存或负载均衡，nginx作为负载分配的处理器。当发现我们请求的url是一个静态文件的话，就直接由CDN或nginx返回相应文件。如下图：</p>
 
-<p><img src="http://static.wooyun.org/20150304/2015030401212143740.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015030401212143740.png" alt="enter image description here"></p>
 
 <p>那么这之中也存在这一个定义问题，什么请求才说明是要请求“静态文件”？只要以.css、.js结尾就可以吗？当然这也是一种方法，但一般应用会定义一个目录，如/static/，所有请求匹配“<code>/static/(.*)</code>”的会被认为是静态文件，所以开发者一般将静态文件放在这个目录下，我们用户就能够直接请求到他了。</p>
 
@@ -74,7 +74,7 @@ def do_GET(self):
 
 <p>web.py的Server其实就是对SimpleHTTPServer的一个继承与重写，这里它简单的把这个请求交给父类SimpleHTTPServer处理，而这个HTTP Server当然不会允许请求到web目录（也就是./static/）以外的地方去，所以得到的回复是404：</p>
 
-<p><img src="http://static.wooyun.org/20150304/2015030401212152015.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015030401212152015.png" alt="enter image description here"></p>
 
 <p>框架本身保证了静态文件不会造成任意文件读取。但复杂的逻辑关系应用中，开发者往往不满足于/static/一种静态目录。比如，网站允许用户上传、下载文件，可能我们会新建一个uploadfile目录，按日期、时间专门保存上传的文件。</p>
 
@@ -113,11 +113,11 @@ if __name__ == "__main__":
 
 <p>我们请求一个正常的文件/uploadfile/01.txt，是可以得到它的内容的：</p>
 
-<p><img src="http://static.wooyun.org/20150304/2015030401212283650.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015030401212283650.png" alt="enter image description here"></p>
 
 <p>但我们请求一个非uploadfile目录下的文件，却发现也能读取，导致了一个任意文件读取漏洞：</p>
 
-<p><img src="http://static.wooyun.org/20150304/2015030401212244694.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015030401212244694.png" alt="enter image description here"></p>
 
 <p>这就是由于开发者的失误，并没有检查我们传入的path是否合法而导致，与框架无关。</p>
 
@@ -172,7 +172,7 @@ def validate_absolute_path(self, root, absolute_path):
 
 <p>这样，一旦请求不在我们定义的静态目录下，就会抛出“is not in root static directory”错误：</p>
 
-<p><img src="http://static.wooyun.org/20150304/2015030401212211169.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015030401212211169.png" alt="enter image description here"></p>
 
 <p>那么如果tornado中，也需要定义一个"<code>/uploadfile/</code>"作为用户上传目录，那么我们怎么做？</p>
 
@@ -200,7 +200,7 @@ application = web.Application([
 
 <p><a href="https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2009-2659">https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2009-2659</a></p>
 
-<p><img src="http://static.wooyun.org/20150304/2015030401212396741.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015030401212396741.png" alt="enter image description here"></p>
 
 <p>正如我在web.py中说到的，如果django也单纯使用open、read来读取文件，而不检查PATH的合法性，同样能够造出任意文件读取。</p>
 
@@ -220,7 +220,7 @@ def index(request, path):
 
 <p>没有验证path的合法性，依旧可以出现任意文件读取的现象：</p>
 
-<p><img src="http://static.wooyun.org/20150304/2015030401212353218.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015030401212353218.png" alt="enter image description here"></p>
 
 <p>如上图，直接读取了sqlite数据库内容，拿下管理员账号密码。</p>
 
@@ -296,7 +296,7 @@ if (isset($_SERVER['SERVER_SOFTWARE']) &amp;&amp; (strpos($_SERVER['SERVER_SOFTW
 
 <p>但我们这里很明显的可以发现，zblog的开发者也没有检查这个$url是否在网站目录内，或是否在静态文件目录内，也是直接读取显示了。导致我们请求<a href="http://10.211.55.3/zblog/index.php?action=&amp;rewrite=1">http://10.211.55.3/zblog/index.php?action=&amp;rewrite=1</a>是可以读取index.php的源码的（因为我没有IIS环境，我手工将SERVER_SOFTWARE改成IIS了~）：</p>
 
-<p><img src="http://static.wooyun.org/20150304/2015030401212379345.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015030401212379345.png" alt="enter image description here"></p>
 
 <p>所以，传统PHP应用下是否可能存在这样的安全漏洞，这个问题还是有待继续研究的。理论上，我们如果写出一个这样的rewrite规则：将所有请求都交给index.php处理。那么，index.php的功能实际上就和之前的python框架主文件功能类似了。</p>
 

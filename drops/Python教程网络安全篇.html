@@ -3,7 +3,7 @@
 			<head>
 			     <title>Python教程网络安全篇 - lxj616</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2568">http://drops.wooyun.org/tips/2568</a></h1>
 				
@@ -20,7 +20,7 @@
 
 <p>以下面代码为例进行说明</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812462971056.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812462971056.png" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -34,19 +34,19 @@
 
 <p>以太网帧结构：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812463068786.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812463068786.jpg" alt="enter image description here"></p>
 
 <p>我们可以看到解出的第一部分（目的地址）为080027bc6ecc 我们可以看到解出的第二部分（源地址）为525400123502 我们可以看到解出的第三部分（长度\类型）为0800 图片来自网络，注意图中说的4字节VLAN是不存在的 - -</p>
 
 <p>下面看看自己的mac（eth1） 为080027bc6ecc，与上文结论相符</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812463058459.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812463058459.png" alt="enter image description here"></p>
 
 <p>同理解出IP包头里的源IP和目的IP，如第一张图所示</p>
 
 <p>IP包头结构：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812463056716.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812463056716.jpg" alt="enter image description here"></p>
 
 <p>本节所用代码如下：</p>
 
@@ -138,7 +138,7 @@ packet = struct.pack("!6s6s2s",'\xaa\xaa\xaa\xaa\xaa\xaa','\xbb\xbb\xbb\xbb\xbb\
 rawSocket.send(packet+"Hello there")
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812463183391.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812463183391.png" alt="enter image description here"></p>
 
 <p>首先socket类型选择raw，然后bind一个interface就可以发包了，由于发送的是原始的数据包，因此数据包需要自己通过struct.pack包装好</p>
 
@@ -324,7 +324,7 @@ efOCKAYBQSFhEVExcQlJKWkZWTl5BUUlZRVVNXUNTS1tHV09fQNDI2MTUzPzQkY9AMQIFOY=
 
 <p>接下来就是利用scapy发送数据包了</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812463162979.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812463162979.png" alt="enter image description here"></p>
 
 <p>首先Ether/ARP构造一个ARP数据包，之后srp1发送出去，从wireshark中看发现数据包已经成功发送了，不过在这里理论上是可以收到response的，测试时由于不明原因没有收到</p>
 

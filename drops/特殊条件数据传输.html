@@ -3,7 +3,7 @@
 			<head>
 			     <title>特殊条件数据传输 - Beta-TNT</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14568">http://drops.wooyun.org/tips/14568</a></h1>
 				
@@ -14,13 +14,13 @@
 
 <p>有什么东西想拿却拿不出来？不妨开开脑洞。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160407/2016040707070681877120.png" alt=""></p>
+<p><img src="../images_result/images/2016040707070681877120.png" alt=""></p>
 
 <!--more-->
 
 <p>缘起是2014年底的时候看到金山做的在线恶意代码分析系统“Fire eye”（<code>https://fireeye.ijinshan.com/</code>）。感觉很新鲜，丢了自己攒的几个样本丢了上去，分析的结果还算可以。从分析报告来看，它也是一类沙箱检测工具，把样本丢到虚拟机里跑，再在虚拟机内外布控，监测样本的各种行为，最后生成分析报告并给出判断是否恶意样本，分析报告里还包含样本运行时的截图。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160407/2016040707070850004216.png" alt=""></p>
+<p><img src="../images_result/images/2016040707070850004216.png" alt=""></p>
 
 <h1>0x01 柳暗</h1>
 
@@ -50,7 +50,7 @@
 
 <p>思路有了，东西直接就搞出来了。由于FE只能上传单个可执行文件样本，于是把所有用到的东西打包成一个自解压RAR，并附带解压后执行脚本，先绕过保护读取到FEKERNEL里的所有内容并复制到另外的位置，然后用自带的WINRAR.EXE通过命令行将其压缩，最后把压缩包以二进制打开，把内容“画”在自己窗体上。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160407/2016040707071196665315.png" alt=""></p>
+<p><img src="../images_result/images/2016040707071196665315.png" alt=""></p>
 
 <p>这样我就顺利拿到了FEKERNEL里的所有东西。当然这还得感谢FE在处理样本截图的时候没有做任何有损压缩，虽然是JPEG格式。</p>
 

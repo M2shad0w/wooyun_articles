@@ -3,7 +3,7 @@
 			<head>
 			     <title>修复weblogic的JAVA反序列化漏洞的多种方法 - z_zz_zzz</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/13470">http://drops.wooyun.org/web/13470</a></h1>
 				
@@ -79,15 +79,15 @@
 
 <p>已知JAVA序列化数据的前4个字节为“AC ED 00 05”，使用“tcp contains ac:ed:00:05”条件过滤出包含JAVA序列化数据的数据包，并在第一条数据包点击右键选择“Follow TCP Stream”，如下图。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/2016030710373939024112.png" alt="pic"></p>
+<p><img src="../images_result/images/2016030710373939024112.png" alt="pic"></p>
 
 <p>使用十六进制形式查看数据包，查找“ac ed 00 05”，可以找到对应的数据，可以确认抓包数据中包含JAVA序列化数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/2016030710374132688211.png" alt="pic"></p>
+<p><img src="../images_result/images/2016030710374132688211.png" alt="pic"></p>
 
 <p>取消对"ac ed 00 05"的过滤条件，使用ASCII形式查看第一个数据包，内容如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/2016030710374345968311.png" alt="pic"></p>
+<p><img src="../images_result/images/2016030710374345968311.png" alt="pic"></p>
 
 <p>可以看到当weblogic客户端向weblogic服务器发送序列化数据时，发送的第一个包为T3协议头，本文测试时发送的T3协议头为“t3 9.2.0\nAS:255\nHL:19\n\n”，第一行为“t3”加weblogic客户端的版本号。weblogic服务器的返回数据为“HELO:10.0.2.0.false\nAS:2048\nHL:19\n\n”，第一行为“HELO:”加weblogic服务器的版本号。weblogic客户端与服务器发送的数据均以“\n\n”结尾。</p>
 
@@ -99,7 +99,7 @@
 
 <p>使用C数组形式查看第一个数据包，peer0&#95;x数组为Packet 1，将peer0&#95;x数组复制为一个C语言形式的数组，格式如“<code>char peer0_0[] = { 0x01, 0x02 ...};</code>”，将上述数据的“char”修改为“byte”，“0x”替换为“(byte)0x”，可以转换为能直接在JAVA代码中使用的形式，格式如“<code>byte peer0_0[] = {(byte)0x00, (byte)0x02 ...}</code>”。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/201603071037461246842.png" alt="pic"></p>
+<p><img src="../images_result/images/201603071037461246842.png" alt="pic"></p>
 
 <h3>对JAVA序列化数据进行解析</h3>
 
@@ -107,7 +107,7 @@
 
 <p>使用ObjectInputStream.readObject方法解析weblogic调用停止脚本时发送的JAVA序列化数据的结构，代码如下。执行下面的代码时需要将weblogic.jar添加至JAVA执行的classpath中，否则会抛出ClassNotFoundException异常。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/201603071037508668452.png" alt="pic"></p>
+<p><img src="../images_result/images/201603071037508668452.png" alt="pic"></p>
 
 <p>上述代码的执行结果如下。</p>
 
@@ -131,11 +131,11 @@ size: 6 start: 1634 end: 1711
 
 <p>可以看到weblogic发送的JAVA序列化数据分为7个部分，第一部分的前四个字节为整个数据包的长度(1711=0x6AF)，第二至七部分均为JAVA序列化数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/201603071037547164162.png" alt="pic"></p>
+<p><img src="../images_result/images/201603071037547164162.png" alt="pic"></p>
 
 <p>weblogic发送的JAVA序列化数据格式如下图。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/201603071037573347672.png" alt="pic"></p>
+<p><img src="../images_result/images/201603071037573347672.png" alt="pic"></p>
 
 <h2>利用weblogic的JAVA反序列化漏洞</h2>
 
@@ -149,13 +149,13 @@ size: 6 start: 1634 end: 1711
 
 <p>采用第一种方式生成JAVA序列化数据时，数据格式如下图。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/201603071037591979382.png" alt="pic"></p>
+<p><img src="../images_result/images/201603071037591979382.png" alt="pic"></p>
 
 <p>第二种生成方式为，将前文所述的weblogic发送的JAVA序列化数据的第一部分与恶意的序列化数据进行拼接。</p>
 
 <p>采用第二种方式生成JAVA序列化数据时，数据格式如下图。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/201603071038028496692.png" alt="pic"></p>
+<p><img src="../images_result/images/201603071038028496692.png" alt="pic"></p>
 
 <p>恶意序列化数据的生成过程可参考<a href="http://drops.wooyun.org/papers/13244" title="JAVA反序列化漏洞完整过程分析与调试">http://drops.wooyun.org/papers/13244</a>。</p>
 
@@ -273,7 +273,7 @@ out.println(path);
 
 <p>通过上述方法查找“org.apache.commons.collections.map.TransformedMap”所在的jar包，示例如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/2016030710380416208102.png" alt="pic"></p>
+<p><img src="../images_result/images/2016030710380416208102.png" alt="pic"></p>
 
 <h2>不同版本的weblogic对Apache Commons Collections组件的使用</h2>
 
@@ -353,7 +353,7 @@ out.println(path);
 
 <p>AdminServer是weblogic默认的管理Server，添加一个名为“Server-test”的非管理Server后，weblogic的服务器信息如下。管理Server与非管理Server使用不同的监听端口，可将j2ee应用部署在非管理Server中，这样可以使weblogic控制台与应用使用不同的端口提供服务。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/2016030710380618694113.png" alt="pic"></p>
+<p><img src="../images_result/images/2016030710380618694113.png" alt="pic"></p>
 
 <p>经测试，新增的非管理Server的监听端口也提供了T3协议的服务，也存在JAVA反序列化漏洞。因此这种修复方式对于JAVA反序列化漏洞无效，但可将weblogic控制台端口与应用端口分离，可以使用防火墙禁止通过公网访问weblogic的控制台。</p>
 
@@ -361,13 +361,13 @@ out.println(path);
 
 <p>我们来看另一款使用广泛的企业级JAVA中间件：websphere的服务端口情况。从下图可以看到，websphere的应用默认HTTP服务端口为9080，应用默认HTTPS服务端口为9443，控制台默认HTTP服务端口为9060，控制台默认HTTPS服务端口为9043，接收JAVA序列化数据的端口为8880。因此只要通过防火墙使公网无法访问websphere服务器的8880端口，就可以防止通过公网利用websphere的JAVA反序列化漏洞。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/2016030710380810425122.png" alt="pic"></p>
+<p><img src="../images_result/images/2016030710380810425122.png" alt="pic"></p>
 
 <h2>网络设备对数据包的影响</h2>
 
 <p>对安全有一定要求的公司，在部署需要向公网用户提供服务的weblogic服务器时，可能选择下图的部署架构(内网中不同网络区域间的防火墙已省略)。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/2016030710381267807132.png" alt="pic"></p>
+<p><img src="../images_result/images/2016030710381267807132.png" alt="pic"></p>
 
 <p>上述网络设备对数据包的影响如下。</p>
 
@@ -451,7 +451,7 @@ out.println(path);
 
 <p>在weblogic控制台中修改weblogic的监听端口，如下图。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/2016030710381423709141.png" alt="pic"></p>
+<p><img src="../images_result/images/2016030710381423709141.png" alt="pic"></p>
 
 <p>在weblogic所在服务器安装web代理应用，如apache、nginx等，使web代理监听原有的weblogic监听端口，并将HTTP请求转发给本机的weblogic，可以修复JAVA反序列化漏洞。</p>
 
@@ -481,7 +481,7 @@ out.println(path);
 
 <p>在weblogic控制台中修改weblogic的监听端口，并将监听地址修改为“127.0.0.1”或“localhost”，如下图。经过上述修改后，只有weblogic服务器本机才能访问weblogic服务。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/2016030710381634193151.png" alt="pic"></p>
+<p><img src="../images_result/images/2016030710381634193151.png" alt="pic"></p>
 
 <p>在weblogic所在服务器安装web代理应用，如apache、nginx等，使web代理监听原有的weblogic监听端口，并将HTTP请求转发给本机的weblogic，可以修复JAVA反序列化漏洞。web代理的监听IP需设置为“0.0.0.0”，否则其他服务器无法访问。</p>
 
@@ -515,7 +515,7 @@ out.println(path);
 
 <p>使用eclipse或其他IDE创建java工程，创建weblogic.rjvm.t3包，并在其中创建MuxableSocketT3.java文件。在定位到“weblogic.rjvm.t3.MuxableSocketT3”类所在的weblogic的jar包后，对其进行反编译，将对应的jar包加入到创建的java工程的classpath中。将原始MuxableSocketT3类的反编译代码复制到创建的java工程的MuxableSocketT3.java中，若其中引入了其他jar包中的类，需要将对应的jar包也加入到java工程的classpath中。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/2016030710381816658161.png" alt="pic"></p>
+<p><img src="../images_result/images/2016030710381816658161.png" alt="pic"></p>
 
 <p>weblogic处理T3协议时会调用MuxableSocketT3类的dispatch方法，weblogic 12.1.3的dispatch方法原始代码如下。</p>
 
@@ -561,7 +561,7 @@ public final void dispatch(Chunk list) {
 
 <p>停止weblogic，将编译生成的MuxableSocketT3*.class文件替换至MuxableSocketT3所在的jar包中，启动weblogic，再次向weblogic发送T3协议数据包，可以看到如下输出。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/2016030710382019401171.png" alt="pic"></p>
+<p><img src="../images_result/images/2016030710382019401171.png" alt="pic"></p>
 
 <p>上图说明上文增加的代码已正确运行，对weblogic的正常功能没有影响，且能够限制发送T3数据的客户端IP，能够修复反序列化漏洞。</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>智能设备逆向工程之外部Flash读取与分析篇 - 唐朝实验室</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/9797">http://drops.wooyun.org/mobile/9797</a></h1>
 				
@@ -31,11 +31,11 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20151018/2015101808591757043160.png" alt=""></p>
+<p><img src="../images_result/images/2015101808591757043160.png" alt=""></p>
 
 <p>正面，其中红圈所在的黑色小板是Wi-Fi模块，上面的8脚Flash的芯片已通过吹焊台的热风机取下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151018/2015101808591994814237.png" alt=""></p>
+<p><img src="../images_result/images/2015101808591994814237.png" alt=""></p>
 
 <p>反面图</p>
 
@@ -43,7 +43,7 @@
 
 <p>本篇关注外部Flash上的逻辑获取，通过SWD方式读取MCU内部Flash和调试等方法会在后续章节介绍。智能家居设备上一般的外部Flash为SOP8宽体芯片。见下图插座上的8脚芯片：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151018/2015101808592135768322.png" alt=""></p>
+<p><img src="../images_result/images/2015101808592135768322.png" alt=""></p>
 
 <p>图中红圈的芯片就是从设备Wi-Fi模块上取下的Flash</p>
 
@@ -61,7 +61,7 @@
 
 <p>一般连接PC后，编程器配套的软件会自动识别出芯片类型和大小等信息。如果没有可手工尝试选择近似的型号（根据芯片名称）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151018/2015101808592744199416.png" alt=""></p>
+<p><img src="../images_result/images/2015101808592744199416.png" alt=""></p>
 
 <p>点击读取，待读取结束后，可以将读出的内容保存为bin文件。至此就获取到了Wi-Fi模块上Flash中的二进制内容。</p>
 
@@ -75,15 +75,15 @@
 
 <p>将bin文件放入IDA，在加载的第一步中设置CPU类型为ARM Little End（根据该款设备的CPU类型）。之后会出现内存选项，如下图。这里可选设置RAM的起始位置和大小，这一步将方便之后设置RAM中的变量名，建议根据芯片实际情况进行设置。这里RAM是128KB，起始位置是0x20000000。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151018/2015101808592864213512.png" alt=""></p>
+<p><img src="../images_result/images/2015101808592864213512.png" alt=""></p>
 
 <p>现在需要分析bin中包含的逻辑。在HF官网上提供了SDK的下载(基于Keil开发环境)。通过查看SDK包含的文档，得到如下针对ROM内容的结构描述。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151018/2015101808592994391610.png" alt=""></p>
+<p><img src="../images_result/images/2015101808592994391610.png" alt=""></p>
 
 <p>这时可以建立一个ida py脚本，将得到的信息添加其中，在IDA中标注出各个segment：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151018/2015101808593135638712.png" alt=""></p>
+<p><img src="../images_result/images/2015101808593135638712.png" alt=""></p>
 
 <p>当然也可以直接按长度，提取出各个段，例如提取出bin文件前512KB的app_main内容（见下面的附件）。</p>
 
@@ -113,9 +113,9 @@
 
 <p>在IDA界面中通过Load File -> FLIRT signature file方式加载通过上面步骤生成的sig文件。之后就能生成如下效果了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151018/2015101808593347237814.png" alt=""></p>
+<p><img src="../images_result/images/2015101808593347237814.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20151018/2015101808593693109912.png" alt=""></p>
+<p><img src="../images_result/images/2015101808593693109912.png" alt=""></p>
 
 <p>除了SDK中的库文件，Keil自带的C基础库在Keil安装目录下的ARMCC\arm\lib\中，可以按照同样过程生成sig文件，并加载至分析文件中。这样mem，str等基本的函数调用也会匹配上。</p>
 

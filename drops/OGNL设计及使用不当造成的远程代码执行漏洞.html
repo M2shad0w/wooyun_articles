@@ -3,7 +3,7 @@
 			<head>
 			     <title>OGNL设计及使用不当造成的远程代码执行漏洞 - 紫气东来</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/340">http://drops.wooyun.org/papers/340</a></h1>
 				
@@ -45,7 +45,7 @@ System.out.println(user2.getDepartment().getName());
 
 <p>Struts 2中的OGNL Context实现者为ActionContext，它结构示意图如下:</p>
 
-<p> <img src="http://static.wooyun.org/201307/2013071900034178341.png" alt="2013071900034178341.png"></p>
+<p> <img src="../images_result/images/2013071900034178341.png" alt="2013071900034178341.png"></p>
 
 <p>当Struts2接受一个请求时，会迅速创建ActionContext，ValueStack，action 。然后把action存放进ValueStack，所以action的实例变量可以被OGNL访问</p>
 

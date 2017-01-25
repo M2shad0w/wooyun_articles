@@ -3,7 +3,7 @@
 			<head>
 			     <title>31C3 CTF web关writeup - ∑-TEAM</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4525">http://drops.wooyun.org/papers/4525</a></h1>
 				
@@ -31,7 +31,7 @@
 <pre><code>http://188.40.18.69/pCRAPp.php?a={%22a1%22:%221337a%22,%22a2%22:[[1],1,2,3,0]}&amp;b=0001&amp;c[0]=0031c3&amp;c[1][]=1111&amp;d=%00 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110173374300.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021110173374300.jpg" alt="enter image description here"></p>
 
 <p>逐步分析一下每个知识点，其实很多技巧在http://drops.wooyun.org/tips/4483这篇文章有讲到。</p>
 
@@ -241,7 +241,7 @@ http://188.40.18.89/
 <pre><code>http://188.40.18.89/?page=pic&amp;id=9 union select * from pictures  where id=9 -- a
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150107/2015010700373964607QQ%E6%88%AA%E5%9B%BE20150107083612.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010700373964607QQ%E6%88%AA%E5%9B%BE20150107083612.jpg" alt="enter image description here"></p>
 
 <h1>0x05 Devilish</h1>
 
@@ -354,11 +354,11 @@ if __name__=='__main__':
 
 <p>研究一下代码可以发现，这两个系统其实使用同一套session,我们可以先在默认的系统登录，这里要在POST数据里提交is&#95;ExclusiveMember=1，因为$&#95;SESSION=$_POST，会被同步到Session之中。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150107/20150107005232855891.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150107005232855891.jpg" alt="enter image description here"></p>
 
 <p>再去访问devilish.local,即可得到flag</p>
 
-<p><img src="http://static.wooyun.org/drops/20150107/20150107005257232662.jpg" alt="enter image description here"></p>      <p></p>
+<p><img src="../images_result/images/20150107005257232662.jpg" alt="enter image description here"></p>      <p></p>
     
 			</body>
 		</html>

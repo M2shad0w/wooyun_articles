@@ -3,7 +3,7 @@
 			<head>
 			     <title>记一次混淆算法逆向分析 - ThomasKing</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/11326">http://drops.wooyun.org/mobile/11326</a></h1>
 				
@@ -211,7 +211,7 @@ seg013:80A06620                 B               sub_80A01364
 
 <p>但存在问题，当IDA并没有识别出指令时，无法通过GetMnem等API获取信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151218/2015121801460023413189.png" alt="p1"></p>
+<p><img src="../images_result/images/2015121801460023413189.png" alt="p1"></p>
 
 <p>由于混淆对IDA指令识别的影响，致使IDA无法自动将指令反汇编出来。可能已经有读者意识到，遇到这种情况直接调用MakeCode将数据转化为指令即可。然而，实际使用MakeCode自动处理时，并不能完成手动按'C'识别指令的功能。那么，是否遇到这种情况后，就手动去完成指令反汇编呢？答案是否定的。由于存在很多这种情况，手动转化也很费时(测试环境IDA6.8)。</p>
 

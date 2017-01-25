@@ -3,7 +3,7 @@
 			<head>
 			     <title>也来看看Android的ART运行时 - zyq8709</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/10841">http://drops.wooyun.org/tips/10841</a></h1>
 				
@@ -20,7 +20,7 @@
 
 <p>下面这张图是ART的源码目录结构：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011234149067518.jpg" alt="p1"></p>
+<p><img src="../images_result/images/201512011234149067518.jpg" alt="p1"></p>
 
 <!--more-->
 
@@ -50,31 +50,31 @@
 
 <p>整个启动过程是从<code>app_processs（/frameworks/base/cmds/app_process/app_main.cpp）</code>开始的，创建了一个对象AppRuntime runtime，这个是一个单例，整个系统运行时只有一个。随着zygote的fork过程，只是在不断地复制指向这个对象的指针个每个子进程。然后就开始执行runtime.start方法。这个方法里先调用startVm启动虚拟机。是由<code>JNI_CreateJavaVM</code>方法具体执行的的，即<code>/art/runtime/jni_internal.cc</code>的 <code>extern "C" jintJNI_CreateJavaVM(JavaVM** p_vm, JNIEnv** p_env, void* vm_args)</code>。然后调用startReg注册一些native的method。在最后比较重要的是查找到要执行的java代码的main方法，然后执行进入托管代码的世界，这也是我们感兴趣的地方。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011234208443224.jpg" alt="p2"></p>
+<p><img src="../images_result/images/201512011234208443224.jpg" alt="p2"></p>
 
 <p>如图，最后调用的是CallStaticVoidMethod，去看看它的实现：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011234214649736.jpg" alt="p3"></p>
+<p><img src="../images_result/images/201512011234214649736.jpg" alt="p3"></p>
 
 <p>再去寻找InvokeWithVarArgs：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011234236274744.jpg" alt="p4"></p>
+<p><img src="../images_result/images/201512011234236274744.jpg" alt="p4"></p>
 
 <p>跳到InvokeWithArgArray：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011234241317355.jpg" alt="p5"></p>
+<p><img src="../images_result/images/201512011234241317355.jpg" alt="p5"></p>
 
 <p>可以看到一个很关键的class：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011234329162162.jpg" alt="p6"></p>
+<p><img src="../images_result/images/201512011234329162162.jpg" alt="p6"></p>
 
 <p>即ArtMethod，它的一个成员方法就是负责调用oat文件中的native code的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011234351494872.jpg" alt="p7"></p>
+<p><img src="../images_result/images/201512011234351494872.jpg" alt="p7"></p>
 
 <p>最后这就是最终的入口：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011234387241081.jpg" alt="p8"></p>
+<p><img src="../images_result/images/201512011234387241081.jpg" alt="p8"></p>
 
 <p>283行的blxip指令就是最终进入native code的位置。可以大致得到结论，通过查找相关的oat文件，得到所需要的类和方法，并将其对应的native code的位置放入ArtMethod结构，最后通过Invoke成员完成调用。下一步的工作需要着重关注的便是native code代码调用其他的java方法时如何去通过运行时定位和跳转的。</p>
 
@@ -86,7 +86,7 @@
 
 <p>类加载的任务主要由ClassLinker类来负责，先看一下这个过程的顺序图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011234404660691.jpg" alt="p9"></p>
+<p><img src="../images_result/images/201512011234404660691.jpg" alt="p9"></p>
 
 <p>顺序图中以静态成员的初始化和虚函数的初始化为例，描述了调用的逻辑。下面进行详细的叙述。</p>
 
@@ -315,7 +315,7 @@ size_tclass_size_;
 
 <p>可以以图形来展示一下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/2015120112344185846102.jpg" alt="p10"></p>
+<p><img src="../images_result/images/2015120112344185846102.jpg" alt="p10"></p>
 
 <p>看一下最后调用的这个函数：</p>
 
@@ -337,7 +337,7 @@ returnobj;
 
 <p>这样的话一个完整的类的实例化的内存结构就如图所示了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/2015120112344636733112.jpg" alt="p11"></p>
+<p><img src="../images_result/images/2015120112344636733112.jpg" alt="p11"></p>
 
 <h1>0x04 编译过程</h1>
 
@@ -345,11 +345,11 @@ returnobj;
 
 <p>关于ART的编译过程，主要是由dex2oat程序启动的，所以可以从dex2oat入手，先画出整个过程的顺序图。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/2015120112345086093122.jpg" alt="p12"></p>
+<p><img src="../images_result/images/2015120112345086093122.jpg" alt="p12"></p>
 
 <p>上图是第一阶段的流程，主要是由dex2oat调用编译器的过程。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/2015120112345287746132.jpg" alt="p13"></p>
+<p><img src="../images_result/images/2015120112345287746132.jpg" alt="p13"></p>
 
 <p>第二阶段主要是进入编译器的处理流程，通过对dalvik指令进行一次编译为MIR，然后二次编译为LIR，最后编译成ARM指令。</p>
 
@@ -526,7 +526,7 @@ opcode = inst-&gt;Opcode();
 
 <p>这几个数据结构的关系如图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/2015120112345525410141.jpg" alt="p14"></p>
+<p><img src="../images_result/images/2015120112345525410141.jpg" alt="p14"></p>
 
 <p>简单地说，一个MIRGraph对应着一个编译单元即一个方法，对一个方法进行控制流分析，划分出BasicBlock，并在BasicBlock中的fall_through和taken域中指向下一个BasicBlock（适用于分支出口）。每一个BasicBlock包含若干dalvik指令，每一天dalvik指令被翻译为若干MIR语句，这些MIR结构体之间形成双向链表。每一个BasicBlock也指示了第一条和最后一条MIR语句。</p>
 

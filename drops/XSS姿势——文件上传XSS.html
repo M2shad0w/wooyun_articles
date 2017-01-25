@@ -3,7 +3,7 @@
 			<head>
 			     <title>XSS姿势——文件上传XSS - Zeroyu</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14915">http://drops.wooyun.org/tips/14915</a></h1>
 				
@@ -28,7 +28,7 @@
 
 <p>文件名本身可能会反映在页面所以一个带有XSS命名的文件便可以起到攻击作用。</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201604/2016041510130259461.gif" alt="p1"></p>
+<p><img src="../images_result/images/2016041510130259461.gif" alt="p1"></p>
 
 <p>虽然我没有准备靶场，但是你可以选择在<a href="http://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_fileupload_value">W3Schools</a>练习这种XSS 。</p>
 
@@ -46,7 +46,7 @@ $ exiftool -field = XSS FILE
 $ exiftool -Artist=’ “&gt;&lt;img src=1 onerror=alert(document.domain)&gt;’ brute.jpeg
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160414/2016041415305935841.jpg" alt="p2"></p>
+<p><img src="../images_result/images/2016041415305935841.jpg" alt="p2"></p>
 
 <h3>姿势三：Content</h3>
 
@@ -62,7 +62,7 @@ $ exiftool -Artist=’ “&gt;&lt;img src=1 onerror=alert(document.domain)&gt;�
 
 <p>建立一个携带有JavaScript payload的GIF图像用作一个脚本的源。这对绕过CSP（内容安全策略）保护“script-src ‘self’”（即不允许使用示例的这种xss方式进行攻击<code>&lt;script&gt;alert(1)&lt;/script&gt;</code>）是很有用的，但前提是我们能够成功地在相同的域注入，如下所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160415/2016041501523324712.gif" alt="p3"></p>
+<p><img src="../images_result/images/2016041501523324712.gif" alt="p3"></p>
 
 <p>要创建这样的图像需要这个作为content 和 name，并使用.gif扩展名：</p>
 
@@ -74,7 +74,7 @@ GIF89a/*&lt;svg/onload=alert(1)&gt;*/=alert(document.domain)//;
 
 <p>正如我们下面看到的，文件类unix命令和PHP函数中的exif_imagetype（）和getimagesize（）会将其识别为一个GIF文件。所以如果一个应用程序仅仅是使用这些方式验证是否是一个图像，那么该文件将可以上传成功（但可能在上传后被杀掉）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160414/2016041415280360223pic42.png" alt="p4"></p>
+<p><img src="../images_result/images/2016041415280360223pic42.png" alt="p4"></p>
 
 <h1>0x03 最后</h1>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>广告联盟变身挂马联盟 HackingTeam漏洞武器袭击百万网民 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/10597">http://drops.wooyun.org/papers/10597</a></h1>
 				
@@ -26,13 +26,13 @@
 
 <p>例如，像下面这种，利用网站对发帖内容审核不严的问题，在帖子中加入其它站点的Flash元素，对网站进行挂马。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305241215948128.png" alt=""></p>
+<p><img src="../images_result/images/2015112305241215948128.png" alt=""></p>
 
 <p>攻击者只需要在用户访问的页面中插入一个攻击者设定的Flash元素，即可完成攻击。而Flash内容，做为网页的富媒体内容，在互联网中有广泛应用，如果平台对媒体内容审核不严，极有可能出现被恶意利用，网站挂马的情况。</p>
 
 <p>挂马网站攻击流程：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305241487053224.png" alt=""></p>
+<p><img src="../images_result/images/2015112305241487053224.png" alt=""></p>
 
 <h1>0x02 案例分析</h1>
 
@@ -46,39 +46,39 @@
 
 <p>首页，PConline的主站，使用了自己站点pcauto下的内容：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305241695454324.png" alt=""></p>
+<p><img src="../images_result/images/2015112305241695454324.png" alt=""></p>
 
 <p>Pcauto使用vamaker（万流客）管理其广告流量：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305242443225420.png" alt=""></p>
+<p><img src="../images_result/images/2015112305242443225420.png" alt=""></p>
 
 <p>之后可以看到，vamaker引入了qtmojo（宽通广告）的代码，而宽通广告带入了出问题的“海云互通”（haiyunx）广告联盟内容：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305242684415514.png" alt=""></p>
+<p><img src="../images_result/images/2015112305242684415514.png" alt=""></p>
 
 <p>最终，我们在“海云互通”的代码中发现了接入木马服务器zyxtx.cn的代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305242879347611.png" alt=""></p>
+<p><img src="../images_result/images/2015112305242879347611.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305242956522710.png" alt=""></p>
+<p><img src="../images_result/images/2015112305242956522710.png" alt=""></p>
 
 <p>攻击者对其代码进行了重新编码，如图所示数组，即为其引入木马的隐藏代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/201511230524315775088.png" alt=""></p>
+<p><img src="../images_result/images/201511230524315775088.png" alt=""></p>
 
 <p><strong>对这段代码进行解码之后，可以看到。攻击者为了达到隐藏攻击代码的意图，会在页面中引入一个游戏的Flash资源，将攻击代码伪装成“正常的游戏Flash页面”，在后面又悄悄引入了一个挂马Flash资源：</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/201511230524334861396.png" alt=""></p>
+<p><img src="../images_result/images/201511230524334861396.png" alt=""></p>
 
 <p>在打开这个页面时，将展示一个正常的游戏页面，攻击代码则会在后台悄悄执行：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305243732704104.png" alt=""></p>
+<p><img src="../images_result/images/2015112305243732704104.png" alt=""></p>
 
 <p>在对此攻击进行分析时，这个木马服务器还挂着其它木马：</p>
 
 <p><code>218.186.59.89:8888</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/20151123052448522121111.png" alt=""></p>
+<p><img src="../images_result/images/20151123052448522121111.png" alt=""></p>
 
 <p><strong>通过这种对页面代码做编码和伪装的方法，攻击者成功绕过了广告联盟和各大网站的审核（如果有的话~~），加挂马的代码通过各大网站展示给了普通计算机用户。如果用户访问到了这些网站，而又没打好补丁的话，就极有可能感染木马。</strong></p>
 
@@ -86,33 +86,33 @@
 
 <p>此次挂马，攻击者使用的仍然是之前Hacking Team泄露的CVE-2015-5122Flash漏洞，如果用户计算机中的Flash版本仍然是18.0.0.209之前的版本，就会触发漏洞执行。对应的挂马Flash文件在一个月内，更新了超过20次：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305245089382129.png" alt=""></p>
+<p><img src="../images_result/images/2015112305245089382129.png" alt=""></p>
 
 <p>此挂马文件在VirusTotal上只有McAfee和360能够检出：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305245856321135.png" alt=""></p>
+<p><img src="../images_result/images/2015112305245856321135.png" alt=""></p>
 
 <p>swf样本用doswf加密过，解密之后，可以看到该样本的源码如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305250091426144.png" alt=""></p>
+<p><img src="../images_result/images/2015112305250091426144.png" alt=""></p>
 
 <p>漏洞触发代码如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305250219767153.png" alt=""></p>
+<p><img src="../images_result/images/2015112305250219767153.png" alt=""></p>
 
 <p>通过对源码的跟踪，便能发现是cve-2015-5122的样本。</p>
 
 <p>在漏洞触发后使用的payload如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305250430345163.png" alt=""></p>
+<p><img src="../images_result/images/2015112305250430345163.png" alt=""></p>
 
 <p>反汇编出来的shellcode如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305250662278173.png" alt=""></p>
+<p><img src="../images_result/images/2015112305250662278173.png" alt=""></p>
 
 <p>通过对shellcode进行调试分析发现该样本将会从file.nancunshan.com下载木马到本地浏览器临时目录，生成文件wecha&#95;159&#95;a.exe，并执行</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305250725316182.png" alt=""></p>
+<p><img src="../images_result/images/2015112305250725316182.png" alt=""></p>
 
 <p>关于漏洞的详细分析，可以看我们之前的分析《Hacking Team攻击代码分析Part 4: Flash 0day漏洞第二弹 – CVE-2015-5122》（<a href="http://blogs.360.cn/360safe/2015/07/11/hacking-team-part4-Flash-2/">http://blogs.360.cn/360safe/2015/07/11/hacking-team-part4-Flash-2/</a>）</p>
 
@@ -128,23 +128,23 @@
 
 <p>木马的统计和下载域名：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305250915677192.png" alt=""></p>
+<p><img src="../images_result/images/2015112305250915677192.png" alt=""></p>
 
 <p>木马的功能选项，包括弹广告，下载文件，重启程序，自删除等：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305251057190202.png" alt=""></p>
+<p><img src="../images_result/images/2015112305251057190202.png" alt=""></p>
 
 <p>木马会枚举当前系统的进程列表，如果遇到虚拟机，影子系统，网吧等时，不执行下载者的功能。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/20151123052512521612110.png" alt=""></p>
+<p><img src="../images_result/images/20151123052512521612110.png" alt=""></p>
 
 <p>木马的下载列表也进行了编码，用来对抗分析：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305251377402225.png" alt=""></p>
+<p><img src="../images_result/images/2015112305251377402225.png" alt=""></p>
 
 <p>对这份列表进行解码，可以看到国内多款知名软件在列：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305251546413233.png" alt=""></p>
+<p><img src="../images_result/images/2015112305251546413233.png" alt=""></p>
 
 <p>下载者运行的进程树情况：</p>
 
@@ -187,19 +187,19 @@
 
 <p>注入系统进程，后台隐藏执行：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305251646179244.png" alt=""></p>
+<p><img src="../images_result/images/2015112305251646179244.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305251828426253.png" alt=""></p>
+<p><img src="../images_result/images/2015112305251828426253.png" alt=""></p>
 
 <p>创建虚假浏览器快捷方式，篡改用户首页：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305251921886263.png" alt=""></p>
+<p><img src="../images_result/images/2015112305251921886263.png" alt=""></p>
 
 <p>安装广告插件，在用户计算机不断弹出各类广告：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305252113057274.png" alt=""></p>
+<p><img src="../images_result/images/2015112305252113057274.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305252295983284.png" alt=""></p>
+<p><img src="../images_result/images/2015112305252295983284.png" alt=""></p>
 
 <p>此类下载者木马，由于其推广列表云控，推广内容也在不断免杀更新。攻击者通过不断向用户计算机推广各类软件，疯狂榨取用户计算机资源，赚取推广费。</p>
 
@@ -211,15 +211,15 @@
 
 <p>近期CVE-2015-5122挂马页面拦截量：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305252416018294.png" alt=""></p>
+<p><img src="../images_result/images/2015112305252416018294.png" alt=""></p>
 
 <p>20日，单日木马拦截量变动</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/2015112305252541927304.png" alt=""></p>
+<p><img src="../images_result/images/2015112305252541927304.png" alt=""></p>
 
 <p>受影响用户，分布情况：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151123/20151123052439442223110.png" alt=""></p>
+<p><img src="../images_result/images/20151123052439442223110.png" alt=""></p>
 
 <h1>0x04 解决方案</h1>
 

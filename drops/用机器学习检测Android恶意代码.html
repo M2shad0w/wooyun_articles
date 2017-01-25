@@ -3,7 +3,7 @@
 			<head>
 			     <title>用机器学习检测Android恶意代码 - runner</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/13428">http://drops.wooyun.org/mobile/13428</a></h1>
 				
@@ -93,13 +93,13 @@ java -jar apktool.jar d   D:\drebin\The_Drebin_Dataset\set\apk\DroidKungFu\xyz.a
 
 <p>由于Dalvik指令有两百多条，对此需要进行了分类与精简，去掉了无关的指令，只留下了M、R、G、I、T、P、V七大类核心的指令集合，并且只保留操作码字段，去掉了参数。M、R、G、I、T、P、V七大类指令集合分别代表了移动、返回、跳转、判断、取数据、存数据、调用方法七种类型的指令，对指令进行了一次分类与描述。具体见下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/20160304051242278051.jpg" alt="p1"></p>
+<p><img src="../images_result/images/20160304051242278051.jpg" alt="p1"></p>
 
 <h3>OpCode N-gram</h3>
 
 <p>n-gram是自然语言处理领域的概念，但是它也经常用来处理恶意代码的分析。OpCode N-gram就是对指令操作码字段提取N-gram特征，n可以取值为2，3，4等。对一个smali格式的汇编文件的OpCode N-gram如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/20160304051246669462.jpg" alt="p2"></p>
+<p><img src="../images_result/images/20160304051246669462.jpg" alt="p2"></p>
 
 <h1>0x03 系统设计与实现</h1>
 
@@ -109,7 +109,7 @@ java -jar apktool.jar d   D:\drebin\The_Drebin_Dataset\set\apk\DroidKungFu\xyz.a
 
 <p>建立恶意代码检测模型如下所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/20160304051250875783.jpg" alt="p3"></p>
+<p><img src="../images_result/images/20160304051250875783.jpg" alt="p3"></p>
 
 <p>用C++写了几个程序，对模型建立过程中的数据进行处理：</p>
 
@@ -122,7 +122,7 @@ java -jar apktool.jar d   D:\drebin\The_Drebin_Dataset\set\apk\DroidKungFu\xyz.a
 
 <p>测试恶意代码检测模型如下所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/20160304051253545434.jpg" alt="p4"></p>
+<p><img src="../images_result/images/20160304051253545434.jpg" alt="p4"></p>
 
 <p>用机器学习工具Weka进行模型测试，检测模型的准确度。得到准确度高的模型可以用来预测未知Android代码是否为恶意代码。</p>
 
@@ -134,7 +134,7 @@ java -jar apktool.jar d   D:\drebin\The_Drebin_Dataset\set\apk\DroidKungFu\xyz.a
 
 <p>实验数据分为恶意代码样本与正常代码样本。正常代码样本从安卓市场下载；恶意代码样本数据来源于<a href="http://user.informatik.uni-goettingen.de/~darp/drebin/">Drebin项目</a>，该病毒库收集了2010年8月至2012年10月178种共5560份APK样本文件。178种恶意代码家族的数据量分布如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/20160304051258606195.jpg" alt="p5"></p>
+<p><img src="../images_result/images/20160304051258606195.jpg" alt="p5"></p>
 
 <h3>实验结果</h3>
 
@@ -142,12 +142,12 @@ java -jar apktool.jar d   D:\drebin\The_Drebin_Dataset\set\apk\DroidKungFu\xyz.a
 
 <p>准确率如下图所示，1045个样本得到正确分类，5个样本分类失败。对于malware，其中TPR（真阳性率）=0.981，FPR（假阳性率)=0.08，Precision(查准率) =0.922</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/20160304051303390426.jpg" alt="p6"></p>
+<p><img src="../images_result/images/20160304051303390426.jpg" alt="p6"></p>
 
 <p>ROC曲线效果如下，AUC=0.9923<br>
 ROC（Receiver Operating Characteristic）曲线和AUC常被用来评价一个二值分类器（binary classifier）的优劣,具体关于AUC相关知识请参见<a href="https://en.wikipedia.org/wiki/Area_under_the_curve_(pharmacokinetics)">https://en.wikipedia.org/wiki/Area&#95;under&#95;the&#95;curve&#95;(pharmacokinetics)</a></p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/20160304051308109937.jpg" alt="p7"></p>
+<p><img src="../images_result/images/20160304051308109937.jpg" alt="p7"></p>
 
 <h1>0x05 总结与展望</h1>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>在SQL注入中使用DNS获取数据 - Knight</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5283">http://drops.wooyun.org/tips/5283</a></h1>
 				
@@ -62,7 +62,7 @@
 <li><p>DNS服务器也可以转发查询给代表所请求的客户端的其他DNS服务器以全面解析名称，然后将回应发送回客户端 - 这个过程被称为递归。</p></li>
 </ul>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302535285631.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032302535285631.png" alt="enter image description here"></p>
 
 <p>例如，使用递归过程解析名称test.example.com。这种情况发生于DNS服务器和客户端都是第一次启动且没有能用来解析域名查询的本地缓存信息。此外，假设客户端发起的域名查询是一个本地没有其配置区域信息的域名。</p>
 
@@ -277,7 +277,7 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 <p>这种方式使得最终一切非单词字符都能被保留。此外，表示较长的SQL查询结果的十六进制被分割。这是必须做的，因为整个域名内的节点标签（如.example.）被限制在63个字符长度大小。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302535229201.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032302535229201.png" alt="enter image description here"></p>
 
 <h1>0x06 实验设置和结果</h1>
 
@@ -362,7 +362,7 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 <p>总而言之，DNS渗出技术的数值看起来更好一点，使其成为inference方法的一个完美的替代品。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302535223898.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032302535223898.png" alt="enter image description here"></p>
 
 <p>图3： 捕获到的SqlMap使用DNS渗出时的流量</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>IIS WebDAV安全配置 - 瞌睡龙</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/238">http://drops.wooyun.org/papers/238</a></h1>
 				
@@ -54,11 +54,11 @@
 
 <p>开启WebDAV之后，IIS就支持<code>PROPFIND</code>、<code>PROPPATCH</code>、<code>MKCOL</code>、<code>DELETE</code>、<code>PUT</code>、<code>COPY</code>、<code>MOVE</code>、<code>LOCK</code>、<code>UNLOCK</code>等方法了。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071411022117223.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071411022117223.jpeg" alt="enter image description here"></p>
 
 <p>当IIS中的配置允许写入的时候就可以直接PUT文件上去，由此可能引发非常严重的安全问题，强烈建议禁制</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071411022191372.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071411022191372.jpeg" alt="enter image description here"></p>
 
 <h3>0x02 危害</h3>
 
@@ -149,7 +149,7 @@ Destination: http://www.test.com/test.asp;.jpg
 
 <p>不要选取“启用匿名访问”，以免招致攻击。选择安全的验证方法，选择“集成Windows身份验证”。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071411022225796.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071411022225796.jpeg" alt="enter image description here"></p>
 
 <p>参考：</p>
 

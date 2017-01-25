@@ -3,7 +3,7 @@
 			<head>
 			     <title>一步一步学ROP之gadgets和2free篇 - 蒸米</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/10638">http://drops.wooyun.org/binary/10638</a></h1>
 				
@@ -351,7 +351,7 @@ mzheng
 
 <p>想要学习double free，首先要了解什么是free chunk和allocated chunk。这个在网上有大量的资料，请感兴趣的同学自学。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151124/2015112403492645777p1.jpg" alt="picture_p13"></p>
+<p><img src="../images_result/images/2015112403492645777p1.jpg" alt="picture_p13"></p>
 
 <p>然后要了解Fast bin，Unsorted bin，Small bin和Large bin的概念。这个可以看这篇文章学习：</p>
 
@@ -363,7 +363,7 @@ mzheng
 
 <p>等到对堆的基本概念了解的差多了就可以学习如何利用unlink来做到内存写了。在最早版本的unlink中对内存chunk是没有任何检测的，因此我们可以很容易的做到内存任意写。但现在版本的libc中会对free的那个chunk进行检测，这个chunk的前一个chunk的bk指针和这个chunk的后一个chunk的fd指针必须指向这个即将free的chunk才行。为了bypass这个检测，我们必须在内存中找到一个地址X指向P，然后将P的fd和bk指向X。最后再触发double free的unlink，就可以将P地址的值设置为X了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151124/2015112403492885899p2.jpg" alt="picture_p14"></p>
+<p><img src="../images_result/images/2015112403492885899p2.jpg" alt="picture_p14"></p>
 
 <p>我们这次使用0ctf中的freenote这道题来实践一下double free漏洞的利用。执行这个程序我能看到这其实就是一个note记事本程序。通过new note和delete note可以malloc()和free()内存。</p>
 

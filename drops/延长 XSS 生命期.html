@@ -3,7 +3,7 @@
 			<head>
 			     <title>延长 XSS 生命期 - EtherDream</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/5049">http://drops.wooyun.org/web/5049</a></h1>
 				
@@ -28,7 +28,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/20150303/2015030303380094938.png" alt=""></p>
+<p><img src="../images_result/images/2015030303380094938.png" alt=""></p>
 
 <p>XSS 一旦感染到父页面里，战斗力就大幅提升了。</p>
 
@@ -38,7 +38,7 @@
 
 <p>我们可以顺着 opener.opener.opener... 一直往上试探，只要是和当前页面同源的，仍然能够进行操控 —— 尽管中间隔着其他不同源的页面。</p>
 
-<p><img src="http://static.wooyun.org/20150303/2015030303380046902.png" alt=""></p>
+<p><img src="../images_result/images/2015030303380046902.png" alt=""></p>
 
 <p>网站的主页面显然比详细页更受用户的信任，停留的时间也会更长，因此攻击力可成倍的增加。</p>
 
@@ -54,11 +54,11 @@
 
 <p>因此，我们可以在用户的点击瞬间，屏蔽掉默认的超链接行为，用弹框页取而代之，即可把 XSS 注入到 window.open 返回的新页面里了。</p>
 
-<p><img src="http://static.wooyun.org/20150303/2015030303380025432.png" alt=""></p>
+<p><img src="../images_result/images/2015030303380025432.png" alt=""></p>
 
 <p>类似的，通过子页面递归打开的新页面，同样也无法逃脱。于是子子孙孙尽在我们的掌控之中。</p>
 
-<p><img src="http://static.wooyun.org/20150303/2015030303380116408.png" alt=""></p>
+<p><img src="../images_result/images/2015030303380116408.png" alt=""></p>
 
 <p>反向注入，让我们占据已有的地盘；正向注入，把我们的势力扩大蔓延出去。两者结合，即可占据半壁江山了。</p>
 
@@ -76,17 +76,17 @@
 
 <p>相比进攻，防守则更为困难。我们不知何时会失去，因此必须定时去检查。</p>
 
-<p><img src="http://static.wooyun.org/20150303/2015030303380145418.png" alt=""></p>
+<p><img src="../images_result/images/2015030303380145418.png" alt=""></p>
 
 <p>一旦发现对方已摆脱我们的控制，那么必须立即重新注入，以恢复我们的势力。</p>
 
-<p><img src="http://static.wooyun.org/20150303/2015030303380291040.png" alt=""></p>
+<p><img src="../images_result/images/2015030303380291040.png" alt=""></p>
 
 <p>对于新页面的 XSS 来说，当然是注入的越早越好。越前面拥有越高的优先级，甚至可以拦截页面的正常业务功能。</p>
 
 <p>为了能尽快获知页面刷新、跳转等行为，我们还可跟踪 <code>unload</code> 事件，在页面即将丢失的瞬间，将消息通知出去，让对方尽快来拯救自己。</p>
 
-<p><img src="http://static.wooyun.org/20150303/2015030303380337271.png" alt=""></p>
+<p><img src="../images_result/images/2015030303380337271.png" alt=""></p>
 
 <p>这样，就不必等待定时器了，可以最快的速度恢复。甚至能赶在页面的第一个脚本之前，运行我们的 XSS。</p>
 
@@ -94,7 +94,7 @@
 
 <p>尽管页面已经和我们分道扬镳了，但所在的窗体仍然被我们掌控。我们可以跳转、关闭它，甚至还有可能出现奇迹：<strong>只要页面跳转回我们的站点，又可被我们所收复！</strong></p>
 
-<p><img src="http://static.wooyun.org/20150303/2015030303380317274.png" alt=""></p>
+<p><img src="../images_result/images/2015030303380317274.png" alt=""></p>
 
 <h2>0x04 互相联结</h2>
 
@@ -104,13 +104,13 @@
 
 <p>当有新成员加入时，通知给大家，记录在各自的页面里。</p>
 
-<p><img src="http://static.wooyun.org/20150303/2015030303380377713.png" alt=""></p>
+<p><img src="../images_result/images/2015030303380377713.png" alt=""></p>
 
 <p>这样即使其中一个页面意外关闭了，也不会丢失重要的信息 —— 信息已被分布储存在各个页面里了。</p>
 
 <p>因此，页面开的越多，相互联结就越牢固。</p>
 
-<p><img src="http://static.wooyun.org/20150303/2015030303380450761.png" alt=""></p>
+<p><img src="../images_result/images/2015030303380450761.png" alt=""></p>
 
 <p>如果只剩最后一个页面，那么一旦刷新之后就没人来拯救了，于是就会消亡。</p>
 
@@ -124,7 +124,7 @@
 
 <p>因此，遇到不同源的页面，可以尝试降低自身的域，再次发起操作，或许就能成功注入了。</p>
 
-<p><img src="http://static.wooyun.org/20150303/2015030303380430004.png" alt=""></p>
+<p><img src="../images_result/images/2015030303380430004.png" alt=""></p>
 
 <h2>0x06 表单劫持</h2>
 
@@ -144,15 +144,15 @@
 
 <p>也许，XSS 位于页面中某个小框架。如果只局限于自身页面，那么是毫无发展空间的。因此得跳出圈子，向更广阔的 parent 页面注入。</p>
 
-<p><img src="http://static.wooyun.org/20150303/2015030303380448674.png" alt=""></p>
+<p><img src="../images_result/images/2015030303380448674.png" alt=""></p>
 
 <p>类似的，如果主页面仅仅是个外壳，实际内容运行在某个框架里，那么得注入到子框架中，才能获取更有意义的信息。</p>
 
-<p><img src="http://static.wooyun.org/20150303/2015030303380454299.png" alt=""></p>
+<p><img src="../images_result/images/2015030303380454299.png" alt=""></p>
 
 <p>同样，我们还可以将上下注入结合，即可让 XSS 从某个框架页里破壳而出，感染到所有的框架页里。</p>
 
-<p><img src="http://static.wooyun.org/20150303/2015030303380524201.png" alt=""></p>
+<p><img src="../images_result/images/2015030303380524201.png" alt=""></p>
 
 <h2>0x08 后记</h2>
 

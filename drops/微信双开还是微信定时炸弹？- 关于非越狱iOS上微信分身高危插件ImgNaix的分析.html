@@ -3,7 +3,7 @@
 			<head>
 			     <title>微信双开还是微信定时炸弹？- 关于非越狱iOS上微信分身高危插件ImgNaix的分析 - 蒸米</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/15406">http://drops.wooyun.org/mobile/15406</a></h1>
 				
@@ -24,19 +24,19 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160426/201604260940071405014.jpeg" height="500" width="368"></p>
+<p><img src="../images_result/images/201604260940071405014.jpeg" height="500" width="368"></p>
 
 <p>app安装完后的图标和微信的一模一样，只是名字变成了“倍推微信分身”：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/2016042609402596924238.png" alt=""></p>
+<p><img src="../images_result/images/2016042609402596924238.png" alt=""></p>
 
 <p>下载完倍推微信分身，并登陆后，可以看到首页与原版微信并没有太大的变化，只是左上角多了一个VIP的标志：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/20160426094044640383.jpeg" alt=""></p>
+<p><img src="../images_result/images/20160426094044640383.jpeg" alt=""></p>
 
 <p>我们知道，根据苹果的系统机制，一台iOS设备上不允许存在多个Bundle ID一样的app。因此，我们猜测这个微信分身app是修改过Bundle ID的。于是我们查看一下Info.plist，果然Bundle ID已经做了修改：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/2016042609404797243428.png" alt=""></p>
+<p><img src="../images_result/images/2016042609404797243428.png" alt=""></p>
 
 <p>但是研究过iOS上微信分身的人一定知道，微信app在启动以及发送消息的时候会对Bundle ID做校验的，如果不是” com.tencent.xin”就会报错并退出。那么”倍推微信分身”是怎么做到的呢？经过分析，原来”倍推微信分身”是通过hook的手段，在app启动的时候对BundleID做了动态修改。至于怎么进行非越狱iOS上的hook可以参考我之前写的两篇文章：</p>
 
@@ -46,15 +46,15 @@
 
 <p>于是我们对”倍推微信分身”的binary进行分析，发现这个binary在启动的时候会load一个伪装成一个png文件的第三方的dylib – wanpu.png：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/2016042609410264504516.png" alt=""></p>
+<p><img src="../images_result/images/2016042609410264504516.png" alt=""></p>
 
 <p>用file指令可以看到这个伪png文件其实是一个包含了armv7和arm64的dylib：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/2016042609410955491614.png" alt=""></p>
+<p><img src="../images_result/images/2016042609410955491614.png" alt=""></p>
 
 <p>我们看到这个伪图片就像是一个寄生虫一样存在于微信app的体内，特别像dota里的Naix（俗称小狗）的终极技能 - 寄生，因此我们把这个高危样本称之为ImgNaix。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/2016042609412137866714.png" alt=""></p>
+<p><img src="../images_result/images/2016042609412137866714.png" alt=""></p>
 
 <h1>0x02 wanpu.png分析</h1>
 
@@ -62,29 +62,29 @@
 
 <p>用ida打开wanpu.png，可以看到这个dylib分别对BundleID，openURL和NewMainFrameViewController进行了hook：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/2016042609413137524814.png" alt=""></p>
+<p><img src="../images_result/images/2016042609413137524814.png" alt=""></p>
 
 <p>BundleID不用说，是为了让app在运行的时候改回”com.tencent.xin”。</p>
 
 <p>NewMainFrameViewController的hook函数就是在微信主页上显示VIP的图片，以及传输一些非常隐私的用户数据（ssid, mac, imei等）到开发者自己的服务器上：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/2016042609414464579914.png" alt=""></p>
+<p><img src="../images_result/images/2016042609414464579914.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/20160426094155527281014.png" alt=""></p>
+<p><img src="../images_result/images/20160426094155527281014.png" alt=""></p>
 
 <p>OpenURL这个hook就很有意思了，这个函数本身是用来处理调用微信的URL Schemes的。看过我之前写过的《iOS URL Scheme 劫持》的文章的人一定知道这个”倍推微信分身”是有能力进行URL Scheme劫持的，如果在Info.plist里进行了声明，手机上所有使用的URL Schemes的应用都有可能被hijack。</p>
 
 <p>除了这些hook以外，我们在竟然在”倍推微信分身”的逆向代码里，发现了Alipay的SDK！一个没想到，在”倍推微信分身”的帮助下，支付宝和微信支付终于走到了一起：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/20160426094200531261116.png" alt=""></p>
+<p><img src="../images_result/images/20160426094200531261116.png" alt=""></p>
 
 <p>因为捆绑了支付宝的SDK，”倍推微信分身”可以调用支付宝的快捷支付功能：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/20160426094204796001214.png" alt=""></p>
+<p><img src="../images_result/images/20160426094204796001214.png" alt=""></p>
 
 <p>通过网络抓包分析，我们可以看到”倍推微信分身”会发送一些服务收费的数据到手机上：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/20160426094206181281313.png" alt=""></p>
+<p><img src="../images_result/images/20160426094206181281313.png" alt=""></p>
 
 <p>经分析，”倍推微信分身”之所以加入支付宝sdk是为了对这个微信多开app进行收费。因为天下没有免费的午餐，软件开发者之所以制作腾讯的盗版软件”倍推微信分身”就是为了能够获取到一定的收入，所以才会接入支付SDK的。</p>
 
@@ -96,45 +96,45 @@
 
 <p>这里我们进行DNS劫持并修改了推送的内容，同时我们把URL替换成了另一个企业应用的下载plist：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160428/20160428025126647011B84F3AF-B5A3-4F85-B3E0-6BA5A31AF126.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/20160428025126647011B84F3AF-B5A3-4F85-B3E0-6BA5A31AF126.png" alt="enter image description here"></p>
 
 <p>可以看到我们在启动”倍推微信分身”的时候弹出了更新对话框,还无法取消:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160428/20160428025248734080E2AC89E-B438-48F2-804B-7B0B5AFCDB4A.png" alt="enter image description here" height="667" width="375"></p>
+<p><img src="../images_result/images/20160428025248734080E2AC89E-B438-48F2-804B-7B0B5AFCDB4A.png" alt="enter image description here" height="667" width="375"></p>
 
 <p>点击后,”倍推微信分身”下载了我们替换后的企业应用,一个伪装成微信的假 app:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160428/2016042802582383424DB2C890A-1260-497E-80C3-B1D5B2223213.png" alt="enter image description here" height="500" width="280"></p>
+<p><img src="../images_result/images/2016042802582383424DB2C890A-1260-497E-80C3-B1D5B2223213.png" alt="enter image description here" height="500" width="280"></p>
 
 <p>除此之外,在分析的过程中,我们还发现”倍推微信分身”app 还存在非常多的高危接口,并 且可以利用第三方服务器的控制进行远程调用:</p>
 
 <p>(1). “倍推微信分身”app利用动态加载的方式调用了很多私有API。比如app使用了MobileCoreServices里的<code>[LSApplicationWorkspace allInstalledApplications]</code>来获取手机上安装的应用：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/20160426094211964061511.png" alt=""></p>
+<p><img src="../images_result/images/20160426094211964061511.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/20160426094218386931612.png" alt=""></p>
+<p><img src="../images_result/images/20160426094218386931612.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/20160426094224567211711.png" alt=""></p>
+<p><img src="../images_result/images/20160426094224567211711.png" alt=""></p>
 
 <p>比如app使用了SpringBoardServices的SBSLaunchApplicationWithIdentifier。这个API 可以在不需要url scheme的情况下调起目标app：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/20160426094226119861811.png" alt=""></p>
+<p><img src="../images_result/images/20160426094226119861811.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/2016042609422990140199.png" alt=""></p>
+<p><img src="../images_result/images/2016042609422990140199.png" alt=""></p>
 
 <p>比如app加载了和应用安装有关的私有Framework MobileInstallation以及预留了通过URL Scheme安装企业app的接口：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/2016042609423192652208.png" alt=""></p>
+<p><img src="../images_result/images/2016042609423192652208.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/20160426094237677952115.png" alt=""></p>
+<p><img src="../images_result/images/20160426094237677952115.png" alt=""></p>
 
 <p>(2). “倍推微信分身”app预留了一整套文件操作的高危接口，可以直接对微信app内的所有文件进行操作，这些文件包括好友列表，聊天记录，聊天图片等隐私信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/20160426094300314622212.png" alt=""></p>
+<p><img src="../images_result/images/20160426094300314622212.png" alt=""></p>
 
 <p>要知道在iOS上，聊天记录等信息都是完全没有加密的保存在MM.sqlite文件里的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/2016042609430148717239.png" alt=""></p>
+<p><img src="../images_result/images/2016042609430148717239.png" alt=""></p>
 
 <h1>0x04 总结</h1>
 

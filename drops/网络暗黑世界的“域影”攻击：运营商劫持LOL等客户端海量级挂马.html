@@ -3,7 +3,7 @@
 			<head>
 			     <title>网络暗黑世界的“域影”攻击：运营商劫持LOL等客户端海量级挂马 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/13595">http://drops.wooyun.org/papers/13595</a></h1>
 				
@@ -28,7 +28,7 @@
 
 <p>网上的用户反馈：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010453694164115.png" alt=""></p>
+<p><img src="../images_result/images/2016031010453694164115.png" alt=""></p>
 
 <h1>0x01 挂马过程分析</h1>
 
@@ -38,41 +38,41 @@
 
 <p>从联系到的用户那里来看，用户的出口IP属于河南郑州移动网络：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010462479002213.png" alt=""></p>
+<p><img src="../images_result/images/2016031010462479002213.png" alt=""></p>
 
 <p>在联系用户追查问题的时候，发现用户打开任何网页的时候都有可能中毒，显然并不是特定网站被挂马导致的。该用户在打开了一个凤凰网新闻页面的时候便触发了木马，于是我们查看该网页，发现了如下代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010462736699313.png" alt=""></p>
+<p><img src="../images_result/images/2016031010462736699313.png" alt=""></p>
 
 <p>很显然，在一个itemscope的div元素下，出现了一个指向majore.b0.upayun.com的脚本元素和一段iframe嵌入页面。</p>
 
 <p>而在分析人员自己的机器中（北京市电信）访问相同的页面，则显然没有这两个元素：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/201603101046299655644.png" alt=""></p>
+<p><img src="../images_result/images/201603101046299655644.png" alt=""></p>
 
 <p>更为关键的是iframe中又嵌入了一层iframe指向muhlau.cn这个域名。为了方便查看，我们单独打开了这个页面，呈现出来的是一个看似正常的flash广告动画，但仔细看代码发现——这里面还有两层iframe嵌套，而在最里层的，是一个根本看不到的flash文件（截图中红框圈出来的就是这个看不见的flash文件的位置）</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/201603101046319772053.png" alt=""></p>
+<p><img src="../images_result/images/201603101046319772053.png" alt=""></p>
 
 <p>同时，查看浏览器的Network监控，也确认确实加载了这个swf文件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/201603101046323456863.png" alt=""></p>
+<p><img src="../images_result/images/201603101046323456863.png" alt=""></p>
 
 <p>拿到swf文件后分析来看，本身并没有什么实质性的动画内容，反倒是含有一段经过doswf加密的脚本：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/201603101046371111373.png" alt=""></p>
+<p><img src="../images_result/images/201603101046371111373.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/201603101046399492283.png" alt=""></p>
+<p><img src="../images_result/images/201603101046399492283.png" alt=""></p>
 
 <p>通过抓取内存dump可以看到明显的shellcode字串以及加载shellcode的代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/201603101046411238593.png" alt=""></p>
+<p><img src="../images_result/images/201603101046411238593.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010464291777103.png" alt=""></p>
+<p><img src="../images_result/images/2016031010464291777103.png" alt=""></p>
 
 <p>含有恶意代码的flash文件一旦被带有漏洞的flash插件展示，便会触发木马下载动作，从3g4s.net域名下获取一个可执行文件，下载到本地并执行。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010464458712116.png" alt=""></p>
+<p><img src="../images_result/images/2016031010464458712116.png" alt=""></p>
 
 <h1>0x02 挂马数据展示</h1>
 
@@ -97,23 +97,23 @@
 
 <p>截至我们发稿时，flash攻击代码已经有超过1000W次的独立用户访问。单在3月9号一天，就有<strong>534W</strong>独立用户访问到了挂马页面。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010464574614123.png" alt=""></p>
+<p><img src="../images_result/images/2016031010464574614123.png" alt=""></p>
 
 <p>一分钟内，有超过6800次的访问。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010464831530133.png" alt=""></p>
+<p><img src="../images_result/images/2016031010464831530133.png" alt=""></p>
 
 <p>挂马页面的引用来源，主要是广告主的广告跳转页面：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010465082354142.png" alt=""></p>
+<p><img src="../images_result/images/2016031010465082354142.png" alt=""></p>
 
 <p>地区分布可以看出，河南占65%以上：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010465248716152.png" alt=""></p>
+<p><img src="../images_result/images/2016031010465248716152.png" alt=""></p>
 
 <p>防护中心3月9日，单天统计到的木马传播趋势：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010465373848162.png" alt=""></p>
+<p><img src="../images_result/images/2016031010465373848162.png" alt=""></p>
 
 <h1>0x03 木马分析</h1>
 
@@ -123,45 +123,45 @@
 
 <p>客户端被flash挂马之后下载执行木马的情况截图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010465570191172.png" alt=""></p>
+<p><img src="../images_result/images/2016031010465570191172.png" alt=""></p>
 
 <p>捕获的各种挂马程序：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010465768550181.png" alt=""></p>
+<p><img src="../images_result/images/2016031010465768550181.png" alt=""></p>
 
 <p>360安全卫士拦截木马启动：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010465872650191.png" alt=""></p>
+<p><img src="../images_result/images/2016031010465872650191.png" alt=""></p>
 
 <p>被恶意flash文件下载到本地后以ad为参数执行；而广告程序通过判断启动参数来决定执行什么行为：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010470070639201.png" alt=""></p>
+<p><img src="../images_result/images/2016031010470070639201.png" alt=""></p>
 
 <p>同时，还会检查当前系统环境来判断自己是否在虚拟机环境中：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010470121348214.png" alt=""></p>
+<p><img src="../images_result/images/2016031010470121348214.png" alt=""></p>
 
 <p>在确认可以正常运行后，广告程序会先访问指定的推广服务器获取推广列表：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010470719271221.png" alt=""></p>
+<p><img src="../images_result/images/2016031010470719271221.png" alt=""></p>
 
 <p>之后则根据推广列表的内容打开一个淘宝页面来推广其淘宝店并弹出广告弹窗：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010470864984231.png" alt=""></p>
+<p><img src="../images_result/images/2016031010470864984231.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010471041654241.png" alt=""></p>
+<p><img src="../images_result/images/2016031010471041654241.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010471267804251.png" alt=""></p>
+<p><img src="../images_result/images/2016031010471267804251.png" alt=""></p>
 
 <p>写入开机启动项：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010471463370261.png" alt=""></p>
+<p><img src="../images_result/images/2016031010471463370261.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010471582851271.png" alt=""></p>
+<p><img src="../images_result/images/2016031010471582851271.png" alt=""></p>
 
 <p>安装大批推广程序：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010471733175281.png" alt=""></p>
+<p><img src="../images_result/images/2016031010471733175281.png" alt=""></p>
 
 <h1>0x04 木马作者追踪</h1>
 
@@ -194,11 +194,11 @@ hxxp://tj.take1788.com
 
 <p>对这些服务器whois查询发现，服务器均为今年2月左右新注册域名，并且均作了隐私保护，可谓非常之狡猾。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010471837422291.png" alt=""></p>
+<p><img src="../images_result/images/2016031010471837422291.png" alt=""></p>
 
 <p>木马作者使用的是微软IIS+ASP的服务器：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010471997421301.png" alt=""></p>
+<p><img src="../images_result/images/2016031010471997421301.png" alt=""></p>
 
 <p>通过挂马服务器后台发现，攻击者来自四川省南充市</p>
 
@@ -211,21 +211,21 @@ hxxp://tj.take1788.com
 
 <p>通过网上信息，可以看做作者已经从事黑产很多年了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010472034133314.png" alt=""></p>
+<p><img src="../images_result/images/2016031010472034133314.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010472252406321.png" alt=""></p>
+<p><img src="../images_result/images/2016031010472252406321.png" alt=""></p>
 
 <p><strong>还有这个团伙使用的商务推广联盟 QQ1062790099</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010472345431331.png" alt=""></p>
+<p><img src="../images_result/images/2016031010472345431331.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010472524091341.png" alt=""></p>
+<p><img src="../images_result/images/2016031010472524091341.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010472676594351.png" alt=""></p>
+<p><img src="../images_result/images/2016031010472676594351.png" alt=""></p>
 
 <p><strong>商务合作渠道QQ2797719791</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160310/2016031010472844222361.png" alt=""></p>
+<p><img src="../images_result/images/2016031010472844222361.png" alt=""></p>
 
 <p>通过获取到的各方面信息，我们分析出了这个推广团伙的策略手段。首先他们会通过广告商购买渠道的广告展示量，这个过程中，他们会选择一些监管不严的广告商，使自己带有木马的广告不至于被发现。其次会选取客户端软件来展示广告，由于大多数浏览器会升级flash插件，会影响其木马传播。攻击者更青睐于防护脆弱的客户端软件，最后通过传播的下载者推广软件和广告变现。</p>
 

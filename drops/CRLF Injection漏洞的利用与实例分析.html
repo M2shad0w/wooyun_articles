@@ -3,7 +3,7 @@
 			<head>
 			     <title>CRLF Injection漏洞的利用与实例分析 - phith0n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/2466">http://drops.wooyun.org/papers/2466</a></h1>
 				
@@ -95,11 +95,11 @@ Location:
 
 <p>的时候，发现图片已经输出在页面中了，说明CRLF注入成功了：</p>
 
-<p><img src="http://static.wooyun.org/201406/2014062816583715642.jpg" alt="2014062816583715642.jpg"></p>
+<p><img src="../images_result/images/2014062816583715642.jpg" alt="2014062816583715642.jpg"></p>
 
 <p>那么我们试试XSS看看：</p>
 
-<p><img src="http://static.wooyun.org/201406/2014062816585822978.jpg" alt="2014062816585822978.jpg"></p>
+<p><img src="../images_result/images/2014062816585822978.jpg" alt="2014062816585822978.jpg"></p>
 
 <p>看控制台，果然被XSS Filter拦截了。</p>
 
@@ -110,14 +110,14 @@ Location:
 
 <p>到数据包中，看看什么效果：</p>
 
-<p><img src="http://static.wooyun.org/201406/2014062816593849016.jpg" alt="2014062816593849016.jpg"></p>
+<p><img src="../images_result/images/2014062816593849016.jpg" alt="2014062816593849016.jpg"></p>
 
 <p>@mramydnei 还想到了一个利用字符编码来绕过XSS Filter的方法，当编码是is-2022-kr时浏览器会忽略%0f，这样我们在onerror后面加个%0f就能绕过filter，前提是注入一个</p>
 
 <pre><code>&lt;meta charset=ISO-2022-KR&gt; 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201406/2014062817010832293.jpg" alt="2014062817010832293.jpg"></p>
+<p><img src="../images_result/images/2014062817010832293.jpg" alt="2014062817010832293.jpg"></p>
 
 <p>当然，在Location:这里注入只有webkit内核浏览器才能够利用，其他浏览器可能会跳转、出错。不过对于chrome的使用量来说，危害已经足够了。</p>
 

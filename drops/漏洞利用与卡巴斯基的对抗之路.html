@@ -3,7 +3,7 @@
 			<head>
 			     <title>漏洞利用与卡巴斯基的对抗之路 - 夜未央</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2903">http://drops.wooyun.org/tips/2903</a></h1>
 				
@@ -230,7 +230,7 @@ mov ebp, [ eax + 0x10 ]    ; // get the 3rd entries base address                
 
 <p>每种漏洞都有其明显的特征，卡巴斯基定位出漏洞特征之后，就能够爆出精确的CVE编号，这对用户来说非常有帮助，如下图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810511312050.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091810511312050.jpg" alt="enter image description here"></p>
 
 <p>图1:卡巴斯基告警图</p>
 
@@ -238,7 +238,7 @@ mov ebp, [ eax + 0x10 ]    ; // get the 3rd entries base address                
 
 <p>通过简单的查找，就可以定位出，卡巴斯基定位的特征码也是此漏洞触发的关键位置：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810511372150.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091810511372150.jpg" alt="enter image description here"></p>
 
 <p>图2:Cobj为漏洞的关键位置</p>
 

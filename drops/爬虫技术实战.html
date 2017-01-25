@@ -3,7 +3,7 @@
 			<head>
 			     <title>爬虫技术实战 - Manning</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5462">http://drops.wooyun.org/tips/5462</a></h1>
 				
@@ -34,11 +34,11 @@
 
 <p>举个例子，如果爬行的目的是爬取乌云已知漏洞列表，那么一般类型的爬虫是无法满足的，一般爬虫会进行如下形式的爬取。爬取的URL是杂乱的。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040301222360818.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040301222360818.png" alt="enter image description here"></p>
 
 <p>聚焦爬虫爬取的URL是符合预期的。如下图展示。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040301222421494.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040301222421494.png" alt="enter image description here"></p>
 
 <p>可以看出来，聚焦爬虫和非聚焦爬虫都是从www.wooyun.org开始爬取，聚焦爬虫可以按照一定策略尽量控制URL爬取策略，而非聚焦爬虫却完成不了这种特定需求。</p>
 
@@ -50,15 +50,15 @@
 
 <p>URL相似度算法在爬虫里不言而喻，这个算法直接决定着爬虫的爬行效率，我将讲解一下我的算法，算是抛砖引玉。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040301222484771.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040301222484771.png" alt="enter image description here"></p>
 
 <p>这个算法主要是依靠对URL的拆解与对拆解对象的HASH，这个算法适用类似的需求常见。这个算法是将一个URL拆解为三个维度，第一个维度是netloc，第二个维度是path的各项长度，第三个维度是query对象的参数排序后列表。通过一个数据结构对以上三个维度组合，构建一个可hash的对象。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040301222446253.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040301222446253.png" alt="enter image description here"></p>
 
 <p>利用集合数据结构进行去重，这个能大幅减小普通URL相似度算法对于hash后结果冲突的问题。实际效果如下图。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040301222436130.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040301222436130.png" alt="enter image description here"></p>
 
 <p>当爬取了875个链接时，实际相似页面已达到了269849个，因此对于爬虫效率来讲，是个很好的提升。</p>
 
@@ -72,15 +72,15 @@
 
 <p>下面图中的数字显示了深度优先搜索顶点被访问的顺序。  </p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040301222421212.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040301222421212.png" alt="enter image description here"></p>
 
 <p>下面图中的数字显示了广度优先搜索顶点被访问的顺序。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040301222445530.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040301222445530.png" alt="enter image description here"></p>
 
 <p>Mspider中实现爬行策略，这三种搜索方式都是通过对URL队列的排序方式进行调整，通过队列中URL结点的深度参数进行调整，来达到需求目的，爬行策略根据不同需求设置，能更快的发现可疑URL链接。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040301222542004.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040301222542004.png" alt="enter image description here"></p>
 
 <p>上图当爬行了810个链接时，实际爬行的深度已达到了15层。在实际测试过程中，深度优先爬行能更好的发现可疑链接。</p>
 
@@ -90,15 +90,15 @@
 
 <p>Mspider是本人开发的一个以CLI方式运行的爬虫工具。此爬虫实现了如下功能。希望大家多多star和fork。也欢迎大家随时给我邮箱发送邮件提bug。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040301222569951.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040301222569951.png" alt="enter image description here"></p>
 
 <p>CLI下展示如下：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040301222599707.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040301222599707.png" alt="enter image description here"></p>
 
 <p>此爬虫还可以通过文件的config.py进行更详细的配置，比如爬行间隔，忽略标签列表，动静分配比例，user-agent字典等。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040301222579983.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040301222579983.png" alt="enter image description here"></p>
 
 <p>提供几个测试场景：</p>
 
@@ -112,7 +112,7 @@ python run.py -u "http://www.wooyun.org" -k "wooyun.org" --focus "whitehats" --s
 
 <p>效果：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040301222547450.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040301222547450.png" alt="enter image description here"></p>
 
 <h2>深度优先爬行edu站点，进行url相似度过滤，爬行个数为500个</h2>
 
@@ -124,7 +124,7 @@ python -u run.py "http://www.njtu.edu.cn/" -k "edu.cn" --policy 1 --storage 0 --
 
 <p>效果：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040301222683467.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040301222683467.png" alt="enter image description here"></p>
 
 <h2>爬行联想域名内连接，域名过滤bbs关键字，动态爬行网页，随机优先策略</h2>
 
@@ -136,7 +136,7 @@ python run.py -u "lenovo" -k "lenovo" --ignore "bbs" --model 1 --policy 2
 
 <p>效果：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150403/2015040301222684791.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040301222684791.png" alt="enter image description here"></p>
 
 <h1>0x05 Mspider的头脑风暴</h1>
 

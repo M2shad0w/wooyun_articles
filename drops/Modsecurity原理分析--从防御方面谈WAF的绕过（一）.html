@@ -3,7 +3,7 @@
 			<head>
 			     <title>Modsecurity原理分析--从防御方面谈WAF的绕过（一） - Sd_red</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3804">http://drops.wooyun.org/tips/3804</a></h1>
 				
@@ -27,11 +27,11 @@
 <ol>
 <li><p>问过圈内的好多朋友“知道WAF吗？”，他们会明确告诉我，“知道”。但是当我给他们说起，Modsecurity这个Apache的模块的时候，他们就开始摇头。其实WAF的事实标准就是开源的Modsecurity。并且Modsecurity已经被开发成了Apache的一个模块，而且这个模块在反向代理的工作状态下，实际上是可以保护任何Web程序的。</p></li>
 <li><p>其实，Modsecurity的威力就在于它的规则语言上，这种语言是配置指令和应用到HTTP请求和响应的一种简单编程语言的组合，其实按理说这种语言应当被称作Lua。一般情况下，Modsecurity的最终结果都是具体到一个动作的执行，比如允许请求通过，或者将日志记录到Modsecurity_audit.log或者httpd的log文件中。</p></li>
-<li><p>以下就是我本地的Modsecurity模块，具体如下图所示 <a href="http://drops.wooyun.org/wp-content/uploads/2014/11/12.jpg"><img src="http://static.wooyun.org/20141107/2014110709383980035.jpg" alt="" title="1" width="569" height="130" class="alignnone size-full wp-image-3805"></a></p></li>
+<li><p>以下就是我本地的Modsecurity模块，具体如下图所示 <a href="http://drops.wooyun.org/wp-content/uploads/2014/11/12.jpg"><img src="../images_result/images/2014110709383980035.jpg" alt="" title="1" width="569" height="130" class="alignnone size-full wp-image-3805"></a></p></li>
 <li><p>从上图就可以得知，这些规则库（只是截取了一部分）几乎构成了Modsecurity的全部，其中红箭头所指的方向，就是防止我们SQL注入的一些规则，其中的规则多达100多条，我们先大体看下他的规则，从宏观上有个大体的认识，为后期的SQL注入绕过储备必要的知识。</p></li>
 </ol>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/219.png"><img src="http://static.wooyun.org/20141107/2014110709384016298.png" alt="" title="2" width="367" height="411" class="alignnone size-full wp-image-3806"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/219.png"><img src="../images_result/images/2014110709384016298.png" alt="" title="2" width="367" height="411" class="alignnone size-full wp-image-3806"></a></p>
 
 <ol>
 <li>从上图中我们也可以轻易看到，我们进行SQL注入攻击时常用的payload，不好意思这些都在规则库考虑之内。下面先说下Modsecurity的规则库吧。</li>
@@ -61,7 +61,7 @@
 <li><p>为了更加直观的展示Apache加载上Modsecurity模块后，运行阶段，我做了一个流程图：</p></li>
 </ol>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/31.jpg"><img src="http://static.wooyun.org/20141107/2014110709384010406.jpg" alt="" title="3" width="523" height="435" class="alignnone size-full wp-image-3807"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/31.jpg"><img src="../images_result/images/2014110709384010406.jpg" alt="" title="3" width="523" height="435" class="alignnone size-full wp-image-3807"></a></p>
 
 <h2>0x03 Modsecurity的Rule规则详解</h2>
 
@@ -76,7 +76,7 @@
 
 <p>2.1 该规则请求的参数包括所有的Cookie信息（Request&#95;Cookies以及!Request&#95;Cookies）以及cookie的名称（Request&#95;name）,Post参数（Args）以及Post参数的名称（Args&#95;names）,当然还有其中的XML文件（XMLL：/*）</p>
 
-<p>2.2 其中最多的还是那一堆的正则表达式，正则表达式我就不给大家分析了。算了还是贴个图吧： <a href="http://drops.wooyun.org/wp-content/uploads/2014/11/5.jpg"><img src="http://static.wooyun.org/20141107/2014110709384047288.jpg" alt="" title="5" width="431" height="330" class="aligncenter size-full wp-image-3808"></a></p>
+<p>2.2 其中最多的还是那一堆的正则表达式，正则表达式我就不给大家分析了。算了还是贴个图吧： <a href="http://drops.wooyun.org/wp-content/uploads/2014/11/5.jpg"><img src="../images_result/images/2014110709384047288.jpg" alt="" title="5" width="431" height="330" class="aligncenter size-full wp-image-3808"></a></p>
 
 <p>2.3 使用到请求体阶段“Phase2”阶段</p>
 

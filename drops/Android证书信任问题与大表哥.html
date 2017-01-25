@@ -3,7 +3,7 @@
 			<head>
 			     <title>Android证书信任问题与大表哥 - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3296">http://drops.wooyun.org/tips/3296</a></h1>
 				
@@ -54,7 +54,7 @@
 
 <p>如果自己简单的实现android webview加载网页，如果直接访问可信证书的站点是可以正常显示，但是如果访问自签名的证书的站点就会显示notfound的页面。(写本文时apple.com以及apple.com.cn处于劫持状态)</p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115732webview.jpg" alt=""></p>
+<p><img src="../images_result/images/20141023115732webview.jpg" alt=""></p>
 
 <p>logcat会输出网页显示不安全的内容</p>
 
@@ -63,11 +63,11 @@
 
 <p>功能健全的手机浏览器访问自签名证书的站点会如下提醒</p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115731mUC.jpg" alt=""></p>
+<p><img src="../images_result/images/20141023115731mUC.jpg" alt=""></p>
 
 <p>在PC端如果访问自签名证书的站点则会出现如下图左侧的提醒</p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115731360.jpg" alt=""></p>
+<p><img src="../images_result/images/20141023115731360.jpg" alt=""></p>
 
 <p>为解决<code>javax.net.ssl.SSLPeerUnverifiedException: No peer certificate</code>的异常，开发者往往会采用以下的错误解决方案。如此是浏览器应用采用此类解决方案，那么风险就更大了。</p>
 
@@ -158,25 +158,25 @@ return true;
 
 <p>百度和遨游轻松检测出证书异常</p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115732baidu.jpg" alt=""></p>
+<p><img src="../images_result/images/20141023115732baidu.jpg" alt=""></p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115731aoyou.jpg" alt=""></p>
+<p><img src="../images_result/images/20141023115731aoyou.jpg" alt=""></p>
 
 <p>而360和搜狗直接加载进入了被劫持的网站。</p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115731m360.jpg" alt=""></p>
+<p><img src="../images_result/images/20141023115731m360.jpg" alt=""></p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115732sougou.jpg" alt=""></p>
+<p><img src="../images_result/images/20141023115732sougou.jpg" alt=""></p>
 
 <p>反编译查看遨游浏览器的代码，针对证书异常做了处理</p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115732true.jpg" alt=""></p>
+<p><img src="../images_result/images/20141023115732true.jpg" alt=""></p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115731mismatch.jpg" alt=""></p>
+<p><img src="../images_result/images/20141023115731mismatch.jpg" alt=""></p>
 
 <p>而搜狗浏览器则是做了证书信任所有主机名不当处理</p>
 
-<p><img src="http://static.wooyun.org/drops/20141023/20141023115732trust.jpg" alt=""></p>
+<p><img src="../images_result/images/20141023115732trust.jpg" alt=""></p>
 
 <p>关键字：checkServerTrusted、setHostnameVerifier、ALLOW&#95;ALL&#95;HOSTNAME_VERIFIER、X509TrustManager、onReceivedSslError</p>
 

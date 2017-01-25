@@ -3,7 +3,7 @@
 			<head>
 			     <title>Hacking Team攻击代码分析Part 3 : Adobe Font Driver内核驱动权限提升漏洞 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/6998">http://drops.wooyun.org/papers/6998</a></h1>
 				
@@ -127,7 +127,7 @@
 
 <p>我们可以通过T2F Analyzer来观察这个被加载的OTF字体文件的格式。见下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150708/2015070805014979392.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070805014979392.png" alt="enter image description here"></p>
 
 <p>显而易见，样本OTF文件中构造了超长的Charset，然后通过NamedEscape函数的0x2514命令来获取Charset的时候，就会触发到上面描述的触发点，引发符号溢出。</p>
 
@@ -218,7 +218,7 @@
 
 <p>这样在最终符号溢出时，就会写入到这块Buffer上面未被释放的Bitmap对象中，这就通过精确地堆操作完成了将这个符号溢出导致的缓存上溢转换到对已控制的Bitmap对象的写入。 这个转化的流程如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150708/2015070805014940237.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070805014940237.png" alt="enter image description here"></p>
 
 <p>3 将Bitmap写入转换为内核任意地址读写</p>
 
@@ -251,7 +251,7 @@
 
 <p>也就是说，我们通过对Bitmap2进行 SetBitmapBits,设置实际读写的 Bitmap的pBitsBuffer为我们想要读写的地址，然后就可以通过进行实际读写的Bitmap的GetBitmapBits和SetBitmapBits来实现对指定地址的读写了，如图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150708/2015070805014963473.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070805014963473.png" alt="enter image description here"></p>
 
 <p>我们看到，在攻击代码中，首先创建了一个假的Bitmap对象，然后将这个对象写到字体的Charset中：</p>
 

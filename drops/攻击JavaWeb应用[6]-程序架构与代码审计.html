@@ -3,7 +3,7 @@
 			<head>
 			     <title>攻击JavaWeb应用[6]-程序架构与代码审计 - 园长</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/429">http://drops.wooyun.org/tips/429</a></h1>
 				
@@ -42,33 +42,33 @@
 
 <p>前几天在Iteye看到一款不错的生成项目依赖图的工具- Structure101，试用了下Structure101感觉挺不错的，不过是收费的而且价格昂贵。用Structure101生成Jeebbs的项目架构图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811460521770.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811460521770.png" alt="enter image description here"></p>
 
 <p>Structure101导入jeebss架构图-包调用： ￼</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811460722220.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811460722220.png" alt="enter image description here"></p>
 
 <p>Structure101包调用详情：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811460720033.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811460720033.png" alt="enter image description here"></p>
 
 <p>Structure101可以比较方便的去生成类关系图、调用图等。Jeebbs项目比较大，逻辑相对复杂，不过可以看下我的半成品的博客系统。</p>
 
 <p>项目图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811460867934.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811460867934.png" alt="enter image description here"></p>
 
 <p>架构图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811460870421.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811460870421.png" alt="enter image description here"></p>
 
 <p>控制层：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811460922702.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811460922702.png" alt="enter image description here"></p>
 
 <p>调用流程（demo还没处理异常，最好能try catch下用上面的logger记录一下）： ￼</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811460948612.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811460948612.png" alt="enter image description here"></p>
 
 <h2>漏洞发掘基础</h2>
 
@@ -80,7 +80,7 @@
 
 <p>调试开源的项目需下载源码到本地然后导入部署，如果没有源代码怎么办？一般情况下JavaWeb程序不会去混淆代码，所以通过之前的反编译工具就能够比较轻松的拿到源代码。但是反编译过来的源代码并不能够直接作用于debug。不过对我们了解程序逻辑和结构有了非常大的帮助，根据逻辑代码目测基本上也能完成debug。 ￼</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461041692.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461041692.png" alt="enter image description here"></p>
 
 <p>在上一节已经讲过了一个客户端的请求到达服务器端后，后端会去找到这个URL所在的类，然后调用业务相关代码完成请求的处理，最后返回处理完成后的内容。跟踪请求的方式一般是先找到对应的控制层，然后深入到具体的逻辑代码当中。另一种方法是事先到dao或业务逻辑层去找漏洞，然后逆向去找对应的控制层。最直接的如model1、model2并不用那么费劲直接代码在jsp、servlet代码里面就能找到一大堆业务逻辑。</p>
 
@@ -94,17 +94,17 @@
 
 <p>现在知道了包和分层规范要找到控制层简直就是轻而易举了，一般来说找到Controller或者Action所在的包的路径就行了。左边是jeebbs右边是我的blog，其中的action下和controller下的都是控制层的方法。<code>@RequestMapping("/top.do")</code>表示了直接把请求映射到该方法上，Struts2略有不同，需要在xml配置一个action对应的处理类方法和返回的页面。不过这暂时不是我们讨论的话题，我们需要知道隐藏在框架背后的请求入口的类和方法在哪。 ￼</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461013670.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461013670.png" alt="enter image description here"></p>
 
 <p>用例图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461089935.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461089935.png" alt="enter image description here"></p>
 
 <h3>用户注册问题</h3>
 
 <p>用户逻辑图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461157954.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461157954.png" alt="enter image description here"></p>
 
 <p>容易出现的问题:</p>
 
@@ -122,41 +122,41 @@
 
 <h4>Tips：Eclipse全局搜索关键字方法 ￼</h4>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461144154.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461144154.png" alt="enter image description here"></p>
 
 <p>根据搜索结果找到对应文件：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461152325.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461152325.png" alt="enter image description here"></p>
 
 <p>根据结果找到对应的<code>public class RegisterAct</code>类，并查看对应逻辑代码： ￼</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461287653.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461287653.png" alt="enter image description here"></p>
 
 <p>找到控制层的入口后即可在对应的方法内设上断点，然后发送请求到控制层的URL进入Debug模式。 注册发送数据包时用Tamper data拦截并修改请求当中的email为xss攻击代码。 ￼</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091811461219130.png" alt="enter image description here"></p>
+<p>￼<img src="../images_result/images/2014091811461219130.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461369344.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461369344.png" alt="enter image description here"></p>
 
 <p>选择任意对象右键Watch即可查看对应的值（任意完整的，有效的对象包括方法执行）。 F6单步执行。</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091811461374812.png" alt="enter image description here"></p>
+<p>￼<img src="../images_result/images/2014091811461374812.png" alt="enter image description here"></p>
 
 <p>F5进入validateSubmit：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461466522.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461466522.png" alt="enter image description here"></p>
 
 <p>F6跟到125行注册调用：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461491239.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461491239.png" alt="enter image description here"></p>
 
 <p>F3可以先点开registerMember类看看：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461550795.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461550795.png" alt="enter image description here"></p>
 
 <p>找到接口实现类即最终的注册逻辑代码：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461557831.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461557831.png" alt="enter image description here"></p>
 
 <h3>Jeebbs危险的用户名注册漏洞</h3>
 
@@ -167,29 +167,29 @@
 
 <p>这会让你想到了什么？</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461513933.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461513933.png" alt="enter image description here"></p>
 
 <p>当用户名的输入框失去焦点后会发送Ajax请求校验用户名唯一性。请输入一个长度介于 3 和 20 之间的字符串。也就是说满足这个条件并且用户名不重复就行了吧？前端是有用户名长度判断的，那么后端代码呢？因为我已经知道了用户名长度可以存100个字符，所以如果没有判断格式的话直接可以注册100个字符的用户名。首先输入一个合法的用户名完成客户端的唯一性校验请求，然后在点击注册发送数据包的时候拦截请求修改成需要注册的xss用户名，逻辑就不跟了跟上面的邮箱差不多，想像一下用户名可以xss是多么的恐怖。任何地方只要出现粗线下xss用户名就可以轻易拿到别人的cookie。 ￼</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461666699.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461666699.png" alt="enter image description here"></p>
 
 <h3>Cookie明文存储安全问题： ￼</h3>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461682599.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461682599.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461777858.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461777858.png" alt="enter image description here"></p>
 
 <p>代码没有任何加密就直接setCookie了，如果说cookie明文储存用户帐号密码不算漏洞的话等会弹出用户明文密码不知道是算不算漏洞。</p>
 
 <h3>个性签名修改为xss,发帖后显示个性签名处可xss ￼</h3>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461798857.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461798857.png" alt="enter image description here"></p>
 
 <p>因为个性签名会在帖子里显示，所以回帖或者发帖就会触发JS脚本了。这里说一下默认不记住密码的情况下（不设置cookie）不能够拿到cookie当中的明文密码，这个漏洞用来打管理员PP挺不错的。不应该啊，起码应该过滤下。</p>
 
 <h3>不科学的积分漏洞</h3>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461717694.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461717694.png" alt="enter image description here"></p>
 
 <p>积分兑换方法如下：</p>
 
@@ -213,7 +213,7 @@ public void creditExchange(Integer creditIn, Integer creditOut, Integer creditOu
 
 <p>从User对象里面取出积分的数值，而积分兑换威望具体需要多少是在确定兑换关系后由ajax去后台计算出来的，提交的时候也没有验证计算的结果有没有被客户端改过。其中的creditOut和miniBalance都是我们可控的。所以这个等式不管在什么情况下我们都可以让它成立。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461833231.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461833231.png" alt="enter image description here"></p>
 
 <h3>打招呼XSS 逻辑有做判断：</h3>
 
@@ -224,11 +224,11 @@ public void creditExchange(Integer creditIn, Integer creditOut, Integer creditOu
 
 <p>在控制层并没有做过滤： ￼</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091811461891075.png" alt="enter image description here"></p>
+<p>￼<img src="../images_result/images/2014091811461891075.png" alt="enter image description here"></p>
 
 <p>在调用com.jeecms.bbs.manager.impl. BbsMessageMngImpl.java的sendMsg方法的时候依旧没有过滤。到最终的BbsMessageDaoImpl 的save方法还是没有过滤就直接储存了; 一般性的做法，关系到用户交互的地方最好做referer和xss过滤检测，控制层负责收集数据的同时最好处理下用户的请求，就算controller不处理起码在service层做下处理吧。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461910759.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461910759.png" alt="enter image description here"></p>
 
 <h4>发布投票贴xss发布一片投票帖子，标题xss内容。</h4>
 
@@ -252,7 +252,7 @@ public void creditExchange(Integer creditIn, Integer creditOut, Integer creditOu
 
 <p>比如搜索51javacms项目当中的SQL语句： ￼</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811461961191.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811461961191.png" alt="enter image description here"></p>
 
 <h4>Tips:ORM框架特殊性</h4>
 
@@ -276,29 +276,29 @@ Query q = session.createQuery(hql);
 Query q = session.createQuery(hql);
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811462012845.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811462012845.png" alt="enter image description here"></p>
 
 <h3>Mybatis(Ibatis3.0后版本叫Mybatis)：</h3>
 
 <p>Ibatis、Mybatis的SQL语句可以基于注解的方式写在类方法上面，更多的是以xml的方式写到xml文件。</p>
 
-<p>￼<img src="http://static.wooyun.org/20140918/2014091811462022979.png" alt="enter image description here"></p>
+<p>￼<img src="../images_result/images/2014091811462022979.png" alt="enter image description here"></p>
 
 <p>在当前项目下搜索SQL语句关键字，查找疑似SQL注入的调用：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811462071225.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811462071225.png" alt="enter image description here"></p>
 
 <p>进入搜索结果的具体逻辑代码：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811462170779.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811462170779.png" alt="enter image description here"></p>
 
 <p>最外层的Contrller： ￼</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811462283400.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811462283400.png" alt="enter image description here"></p>
 
 <p>“逆向”找到控制层URL以后构建的SQL注入请求：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811462283928.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811462283928.png" alt="enter image description here"></p>
 
 <p>可能大家关注的代码审计最核心的怎么去发掘SQL注入这样高危的漏洞，其次是XSS等类型的漏洞。</p>
 
@@ -315,13 +315,13 @@ Query q = session.createQuery(hql);
 
 <h4>1、没有做任何限制的上传漏洞：</h4>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811462319392.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811462319392.png" alt="enter image description here"></p>
 
 <p>这一种是不需要任何绕过直接就可以上传任意脚本威胁性可想而知。</p>
 
 <h4>2、Bypass白名单和黑名单限制</h4>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811462325093.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811462325093.png" alt="enter image description here"></p>
 
 <p>某些时候就算做了后缀验证我们一样可以通过查看验证的逻辑代码找到绕过方式。第35、36行分别定义了白名单和黑名单后缀列表。41到46行是第一种通过黑名单方式校验后缀合法性。47到57行代码是第二种通过白名单方式去校验后缀合法性。现在来瞧下上诉代码都有那些方式可以Bypass。</p>
 
@@ -342,21 +342,21 @@ Query q = session.createQuery(hql);
 
 <p>51JavaCms典型的文件下载漏洞，我们不妨看下其逻辑为什么会存在漏洞。51javacms并没有用流行的SSH框架而是用了Servlert3.0自行做了各种封装，实现了各种漏洞。Ctrl+H搜索DownLoadFilePage找到下载的Servlet：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811462487598.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811462487598.png" alt="enter image description here"></p>
 
 <p>改装了下51javacms的垃圾代码： ￼</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811462599328.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811462599328.png" alt="enter image description here"></p>
 
 <p>请求不存在的文件：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811462573047.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811462573047.png" alt="enter image description here"></p>
 
 <p>跨目录请求一个存在的文件：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811462631752.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811462631752.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811462651653.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811462651653.png" alt="enter image description here"></p>
 
 <h3>文件编辑漏洞</h3>
 
@@ -370,7 +370,7 @@ Query q = session.createQuery(hql);
 
 <p>JUnit是由 Erich Gamma 和 Kent Beck 编写的一个回归测试框架（regression testing framework）。Junit测试是程序员测试，即所谓白盒测试，因为程序员知道被测试的软件如何（How）完成功能和完成什么样（What）的功能。Junit是一套框架，继承TestCase类，就可以用Junit进行自动测试了。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811462760700.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811462760700.png" alt="enter image description here"></p>
 
 <h2>其他</h2>
 
@@ -380,17 +380,17 @@ Query q = session.createQuery(hql);
 
 <p>比如直接打开lerxCms的lib目录：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811462740883.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811462740883.png" alt="enter image description here"></p>
 
 <h3>2、报错信息快速确认Server框架</h3>
 
 <p>类型转换错误：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811462820998.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811462820998.png" alt="enter image description here"></p>
 
 <p>Struts2：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811462935513.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811462935513.png" alt="enter image description here"></p>
 
 <h3>3、二次校验逻辑漏洞</h3>
 
@@ -402,13 +402,13 @@ Query q = session.createQuery(hql);
 
 <p>Discuz select下拉框存储也有类型的问题，但Discuz对Xss过滤较严未造成xss：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811462997405.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811462997405.jpeg" alt="enter image description here"></p>
 
 <p>下拉框的Sql注入： ￼</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811463012237.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811463012237.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811463076308.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811463076308.png" alt="enter image description here"></p>
 
 <p>小结： 本节不过是漏洞发掘审计的冰山一角，很多东西没法一次性写出来跟大家分享。本系列完成后公布ylog博客源码。本节源代码暂不发布，如果需要源码站内。</p>      <p></p>
     

@@ -3,7 +3,7 @@
 			<head>
 			     <title>黑客写Haka-第一部分 - virustracker</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/11009">http://drops.wooyun.org/papers/11009</a></h1>
 				
@@ -26,7 +26,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20151203/2015120308545291620110.png" alt="p1"></p>
+<p><img src="../images_result/images/2015120308545291620110.png" alt="p1"></p>
 
 <h1>0x01 Haka工具套件</h1>
 
@@ -79,9 +79,9 @@ module = "alert/syslog"
 <li><p>hakabana.这个工具允许使用Kibana 和 Elasticsearch实时地可视化和监控网络流量。Hakabana由一系列的自定义安全规则组成，这些规则会把流量信息通过Haka推送到一个elastisserach服务器，并让这些流量能通过Kibana控制面板获取到。另外一个控制板也可以可视化Haka警报。</p></li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20151203/201512030854555677022.png" alt="p2"></p>
+<p><img src="../images_result/images/201512030854555677022.png" alt="p2"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151203/201512030855076735132.png" alt="p3"></p>
+<p><img src="../images_result/images/201512030855076735132.png" alt="p3"></p>
 
 <h1>0x02 编写安全规则</h1>
 
@@ -132,7 +132,7 @@ haka.rule{
 
 <p>从这里往下就是Haka的输出，Haka转储了一些关于已加载剥离器和已注册规则的信息。这个输出显示Haka成功拦截了目标地址192.168.101.62的连接：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151203/201512030855091773442.png" alt="p4"></p>
+<p><img src="../images_result/images/201512030855091773442.png" alt="p4"></p>
 
 <p>在上面的例子中，我们已经定义了一个单独的规则来拦截连接。用户可以用关键字haka.group写一个类似于防火墙一样的完整规则集。以这个配置为例，如果没有任何安全规则能认证流量，用户可以选择一种默认行为（如拦截所有的连接）。</p>
 
@@ -199,7 +199,7 @@ haka.rule{
 
 <p><a href="https://www.paulfariello.fr/assets/blurring-the-web.lua">blurring-the-web</a>和<a href="https://thisiscybersec.files.wordpress.com/2015/11/inject-ponies.zip">inject_ponies</a>是非常有意思的脚本，会通过修改http响应流量来分别模糊和污染（注入垃圾）被请求的web页面：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151203/201512030855104782752.png" alt="p5"></p>
+<p><img src="../images_result/images/201512030855104782752.png" alt="p5"></p>
 
 <h1>0x06 流过滤</h1>
 
@@ -207,7 +207,7 @@ haka.rule{
 
 <p>在讲解流过滤前，我们首先要说明的是Haka如何在内部管理数据包和流。在Haka中，所有的数据包和流都会用虚拟缓冲区（见下图）来表示。虚拟缓冲区是一种非相邻内存块的统一视图。这些虚拟缓冲区能允许简单和有效的修改内存数据。虚拟缓冲区使用分散列表来表示非相邻数据块，避免分配和复制不必要的内存块。Haka提供了迭代器来导航通过这些内存块。这些迭代器可以通过拦截让停用一些函数，然后，比如当流上有更多可用的数据时，透明地恢复这些函数的执行。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151203/201512030855129033762.png" alt="p6"></p>
+<p><img src="../images_result/images/201512030855129033762.png" alt="p6"></p>
 
 <p>下面的规则会收集http流，并在stdout上转储这些流。这个规则等同于Wireshark的follow tcp stream”功能。</p>
 
@@ -261,7 +261,7 @@ haka.rule {
 
 <p>在下面的数据中，Haka会破解第一个POST请求。HTTP数据可以通过可用的输入来获取。在这个例子中，我们在运行中修改了用户凭据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151203/201512030855169111972.png" alt="p7"></p>
+<p><img src="../images_result/images/201512030855169111972.png" alt="p7"></p>
 
 <p>注意，最好在pcap文件上使用交互规则，因为修改会造成额外的延迟。</p>
 
@@ -299,7 +299,7 @@ haka.rule{
 
 <p>我们在著名的网络分析挑战上重播了这条规则，并得到了下面的输出。关于网络流量反汇编为指令的详细信息都可以在这里获得。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151203/201512030855265652782.png" alt="p8"></p>
+<p><img src="../images_result/images/201512030855265652782.png" alt="p8"></p>
 
 <p>未完待续…</p>
 

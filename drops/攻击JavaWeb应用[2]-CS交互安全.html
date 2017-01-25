@@ -3,7 +3,7 @@
 			<head>
 			     <title>攻击JavaWeb应用[2]-CS交互安全 - 园长</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/164">http://drops.wooyun.org/tips/164</a></h1>
 				
@@ -24,13 +24,13 @@
 
 <p>浏览器为FireFox，操作系统为Win7等信息，这些是客户端的请求行为，也就是Request。 ￼ </p>
 
-<p><img src="http://static.wooyun.org/20131009/2013100901084913564.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013100901084913564.png" alt="enter image description here"></p>
 
 <p>当客户端发送一个Http请求到达服务器端之后，服务器端会接受到客户端提交的请求信息(HttpServletRequest)，然后进行处理并返回处理结(HttpServletResopnse)。</p>
 
 <p>下图演示了服务器接收到客户端发送的请求头里面包含的信息： ￼</p>
 
-<p><img src="http://static.wooyun.org/20131009/2013100901085074937.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013100901085074937.png" alt="enter image description here"></p>
 
 <p>  页面输出的内容为：</p>
 
@@ -50,15 +50,15 @@ connection=keep-alive
 
 <p>用FireFox的Tamper Data和Moify Headers（FireFox扩展中心搜Headers和Tamper Data都能找到） 插件修改下就实现了，请先安装FireFox和Tamper Data：  ￼    点击Start Tamper 然后请求Web页面，会发现请求已经被Tamper Data拦截下来了。选择Tamper：</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808424214195.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101808424214195.png" alt="enter image description here"></p>
 
 <p>点击Start Tamper 然后请求Web页面，会发现请求已经被Tamper Data拦截下来了。选择Tamper：</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808424451076.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101808424451076.png" alt="enter image description here"></p>
 
 <p>修改请求头信息： ￼</p>
 
-<p><img src="http://static.wooyun.org/20131009/2013100901085366808.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013100901085366808.png" alt="enter image description here"></p>
 
 <p> Servlet Request接受到的请求：</p>
 
@@ -70,17 +70,17 @@ while (e.hasMoreElements()) {
 }     
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808424520680.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101808424520680.png" alt="enter image description here"></p>
 
 <p>源码下载：<a href="http://pan.baidu.com/share/link?shareid=166499&amp;uk=2332775740">http://pan.baidu.com/share/link?shareid=166499&amp;uk=2332775740</a></p>
 
 <p>使用Moify Headers自定义的修改Headers:</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808424610822.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101808424610822.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808424646421.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101808424646421.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808424742888.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101808424742888.png" alt="enter image description here"></p>
 
 <p>修改请求头的作用是在某些业务逻辑下程序猿需要去记录用户的请求头信息到数据库，而通过伪造的请求头一旦到了数据库可能造成xss，或者在未到数据库的时候就造成了SQL注入，因为对于程序员来说，大多数人认为一般从Headers里面取出来的数据是安全可靠的，可以放心的拼SQL(记得好像Discuz有这样一个漏洞)。今年一月份的时候我发现xss.tw也有一个这样的经典案例，Wdot那哥们在记录用户的请求头信息的时候没有去转意特殊的脚本，导致我们通过伪造的请求头直接存储到数据库。</p>
 
@@ -88,11 +88,11 @@ while (e.hasMoreElements()) {
 
 <p>Xss.tw由于ID很容易预测，所以很轻易的就能够影响到所有用户：</p>
 
-<p>￼<img src="http://static.wooyun.org/20131018/2013101808425163029.png" alt="enter image description here"></p>
+<p>￼<img src="../images_result/images/2013101808425163029.png" alt="enter image description here"></p>
 
 <p>于是某一天就有了所有的xss.tw用户被随风那2货全部弹了www.gov.cn: ￼</p>
 
-<p><img src="http://static.wooyun.org/20131009/2013100901085997383.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013100901085997383.png" alt="enter image description here"></p>
 
 <h4>Java里面伪造Http请求头</h4>
 
@@ -107,11 +107,11 @@ connection.setRequestProperty("connection", "Keep-Alive");
 (………………………..)
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20131009/2013100901090047843.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013100901090047843.png" alt="enter image description here"></p>
 
 <p>Test Servlet:</p>
 
-<p><img src="http://static.wooyun.org/20131009/2013100901090326752.png" alt="enter image description here"> ￼</p>
+<p><img src="../images_result/images/2013100901090326752.png" alt="enter image description here"> ￼</p>
 
 <h3>0x01 Session</h3>
 
@@ -126,13 +126,13 @@ connection.setRequestProperty("connection", "Keep-Alive");
 out.println("Session 设置成功.");
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808425297246.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101808425297246.png" alt="enter image description here"></p>
 
 <p>直接获取session如下图可以看到我们用FireFox和Chrome请求同一个URL得到的SessionId并不一样，说明SessionId是唯一的。一旦Session在服务器端设置成功那么我们在此次回话当中就可以一直共享这个SessionId对应的session信息，而session是有有效期的，一般默认在20-30分钟，你会看到xss平台往往有一个功能叫keepSession，每过一段时间就带着sessionId去请求一次，其实就是在保持session的有效不过期。</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808425697785.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101808425697785.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20131009/2013100901090588315.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013100901090588315.png" alt="enter image description here"></p>
 
 <h4>Session 生命周期(从创建到销毁)</h4>
 
@@ -150,15 +150,15 @@ out.println("Session 设置成功.");
 
 <p>同时开启FireFox和Chrome浏览器设置两个Session：  ￼   </p>
 
-<p><img src="http://static.wooyun.org/20131009/2013100901090654012.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013100901090654012.png" alt="enter image description here"></p>
 
 <p>我们来看下当前用户的请求头分别是怎样的：  ￼ </p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808425769595.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101808425769595.png" alt="enter image description here"></p>
 
 <p>  我们依旧用TamperData来修改请求的Cookie当中的jsessionId，下面是见证奇迹的时刻：  ￼</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808425817952.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101808425817952.png" alt="enter image description here"></p>
 
 <p>我要说的话都已经在图片当中的文字注释里面了，伟大的Xss黑客们看明白了吗？你盗取的也许是jsessionId(Java里面叫jsessionId)，而不只是cookie。那么假设我们的Session被设置得特别长那么这个SessionId就会长时间的保留，而为Xss攻击提供了得天独厚的条件。而这种Session长期存在会浪费服务器的内存也会导致：SessionFixation攻击！  </p>
 
@@ -176,7 +176,7 @@ out.println("Session 设置成功.");
 
 <p>Cookie是以文件形式[缓存在客户端]的凭证(精简下为了通俗易懂)，cookie的生命周期主要在于服务器给设置的有效时间。如果不设置过期时间，则表示这个cookie生命周期为浏览器会话期间，只要关闭浏览器窗口，cookie就消失了。 这次我们以IE为例：</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808425852714.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101808425852714.png" alt="enter image description here"></p>
 
 <p> 我们来创建一个Cookie：  </p>
 
@@ -193,26 +193,26 @@ out.println("Session 设置成功.");
 
 <p>有些大牛级别的程序员直接把帐号密码明文存储到客户端的cookie里面去，不得不佩服其功力深厚啊。客户端直接记事本打开就能看到自己的帐号密码了。</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808425986274.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101808425986274.png" alt="enter image description here"></p>
 
 <p> 继续读取Cookie：</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808430042363.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101808430042363.png" alt="enter image description here"></p>
 
 <p>我想cookie以明文的形式存储在客户端我就不用解释了吧？文件和数据摆在面前！ 盗取cookie的最直接的方式就是xss，利用IE浏览器输出当前站点的cookie：</p>
 
 <pre><code>javascript:document.write(document.cookie)          ￼
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808430122339.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101808430122339.png" alt="enter image description here"></p>
 
 <p>  首先我们用FireFox创建cookie： ￼</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808430225384.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101808430225384.png" alt="enter image description here"></p>
 
 <p>然后TamperData修改Cookie：</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101808430272707.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101808430272707.png" alt="enter image description here"></p>
 
 <p>一般来说直接把cookie发送给服务器服务器，程序员过度相信客户端cookie值那么我们就可以在不用知道用户名和密码的情况下登录后台，甚至是cookie注入。jsessionid也会放到cookie里面，所以拿到了cookie对应的也拿到了jsessionid，拿到了jsessionid就拿到了对应的会话当中的所有信息，而如果那个jsessionid恰好是管理员的呢？</p>
 
@@ -243,11 +243,11 @@ out.println("Session 设置成功.");
 
 <p>（参考YearOfSecurityforJava）</p>
 
-<p>在JAVAEE6的API里面已经有了直接设置HttpOnly的方法了： ￼ <img src="http://static.wooyun.org/20131018/2013101808430318865.png" alt="enter image description here"></p>
+<p>在JAVAEE6的API里面已经有了直接设置HttpOnly的方法了： ￼ <img src="../images_result/images/2013101808430318865.png" alt="enter image description here"></p>
 
 <p>API的对应说明：</p>
 
-<p>大致的意思是：如果isHttpOnly被设置成true，那么cookie会被标识成HttpOnly.能够在一定程度上解决跨站脚本攻击。 ￼ <img src="http://static.wooyun.org/20131018/2013101808430561854.png" alt="enter image description here"></p>
+<p>大致的意思是：如果isHttpOnly被设置成true，那么cookie会被标识成HttpOnly.能够在一定程度上解决跨站脚本攻击。 ￼ <img src="../images_result/images/2013101808430561854.png" alt="enter image description here"></p>
 
 <p>在servlet3.0开始才支持直接通过setHttpOnly设置,其实就算不是JavaEE6也可以在set Cookie的时候加上HttpOnly; 让浏览器知道你的cookie需要以HttpOnly方式管理。而ng a 在新的Servlet当中不只是能够通过手动的去setHttpOnly还可以通过在web.xml当中添加cookie-config(HttpOnly默认开启,注意配置的是web-app&#95;3&#95;0.xsd):</p>
 

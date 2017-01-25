@@ -3,7 +3,7 @@
 			<head>
 			     <title>WebShell系列(一)---XML - zcgonvh</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5799">http://drops.wooyun.org/tips/5799</a></h1>
 				
@@ -54,7 +54,7 @@
 
 <p>asp中最常见的就是vbscript和jscript两种语言，可通过创建MSXML2.DOMDocument COM对象获取一个xml解析器。 通过oleview可以看到，此对象公开了一个transformNode方法来进行XSL转换:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503203557213.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503203557213.png" alt="enter image description here"></p>
 
 <p>具体的调用代码大致如下：</p>
 
@@ -95,7 +95,7 @@ response.write xmldoc.TransformNode(xsldoc)
 &lt;root&gt;cmd /c dir&lt;/root&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503203522297.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503203522297.png" alt="enter image description here"></p>
 
 <p>可见成功执行了命令，其结果中的特殊字符都被转换成了xml实体，需要进一步进行处理。</p>
 
@@ -207,7 +207,7 @@ xct.Transform(xmldoc,null,new MemoryStream());
 
 <p>此时可使用菜刀直接进行连接，功能与aspx(eval)完全相同：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503203527758.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503203527758.png" alt="enter image description here"></p>
 
 <p>最后要注意：xml的内嵌脚本块需要FullTrust信任等级，在安全模式下不能运行。当然，安全模式下正常的aspx一句话也不能运行，所以并不能算是一个缺点。</p>
 
@@ -236,7 +236,7 @@ xct.Transform(xmldoc,null,new MemoryStream());
 
 <p>由于php并没有上下文的概念，所有的代码都是在同一代码空间中执行，在xsl中可直接访问GPCS，于是可以直接使用菜刀连接：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503203581131.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503203581131.png" alt="enter image description here"></p>
 
 <p>同样的功能齐全。</p>
 

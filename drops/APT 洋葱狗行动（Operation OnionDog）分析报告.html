@@ -3,7 +3,7 @@
 			<head>
 			     <title>APT 洋葱狗行动（Operation OnionDog）分析报告 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/news/15658">http://drops.wooyun.org/news/15658</a></h1>
 				
@@ -89,23 +89,23 @@
 
 <p>表 1 部分诱饵文档列表</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110221582080015.png" alt=""></p>
+<p><img src="../images_result/images/201605110221582080015.png" alt=""></p>
 
 <p>图 1“韩国铁路事故调查报告书”诱饵文档</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222008551523.png" alt=""></p>
+<p><img src="../images_result/images/201605110222008551523.png" alt=""></p>
 
 <p>图 2“全国重要港湾,VTS 安装现状”诱饵文档</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222025462933.png" alt=""></p>
+<p><img src="../images_result/images/201605110222025462933.png" alt=""></p>
 
 <p>图 3《防止信息泄露应对方案》诱饵文档</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222049143943.png" alt=""></p>
+<p><img src="../images_result/images/201605110222049143943.png" alt=""></p>
 
 <p>图 4《2015 年对比“乙支训练”安全检查计划》诱饵文档</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222065906653.png" alt=""></p>
+<p><img src="../images_result/images/201605110222065906653.png" alt=""></p>
 
 <p>图 5 典型 HWP 诱饵文档属性截图</p>
 
@@ -154,7 +154,7 @@
 
 <h2>2. 攻击流程</h2>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222078407563.png" alt=""></p>
+<p><img src="../images_result/images/201605110222078407563.png" alt=""></p>
 
 <p>图 6 攻击流程图</p>
 
@@ -296,17 +296,17 @@
 
 <p>联网成功时,发送当前时间、计算机名称、 IP 地址、 mac 地址、盘符、设备名称、 USB 감염성공 ( USB 感 染 成 功 ) 或 USB 감염 실패 ( USB 感 染 失 败 ) 等 到 指 定 的 服 务 器(hXXp://strj3ya55r367jqd.onion.city/main.php,端口为 80),如果有 USB 连接日志,文件名称为盘符\设备 ID,则以行为单位发送到服务器。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222099711672.png" alt=""></p>
+<p><img src="../images_result/images/201605110222099711672.png" alt=""></p>
 
 <p>图 7 USB 蠕虫具体执行流程(USBman.dll)</p>
 
 <p>当 usbrun.exe 被激活运行时,,如果联网成功则发送当前时间、计算机名称、 mac 地址、ip 地址、设备名称、盘符、PC 감염 성공(PC 感染成功)到服务器,如果没有联网,则保持 usb 连接日志到盘符\设备 ID 文件,等联网成功时再发送。然后释放 106 资源为 test.dll,写入配置,载入 DLL 继续执行 usb 感染.test.dll 的功能和 Dropper 相同。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222114892381.png" alt=""></p>
+<p><img src="../images_result/images/201605110222114892381.png" alt=""></p>
 
 <p>图 8 usbrun.exe 执行流程</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222126702091.png" alt=""></p>
+<p><img src="../images_result/images/201605110222126702091.png" alt=""></p>
 
 <p>图 9 USB 感染成功/感染失败</p>
 
@@ -316,7 +316,7 @@
 
 <h2>3. 长期监控、集中攻击</h2>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051102221430433101.png" alt=""></p>
+<p><img src="../images_result/images/2016051102221430433101.png" alt=""></p>
 
 <p>图 10 攻击时间轴</p>
 
@@ -384,7 +384,7 @@
 </tbody>
 </table>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051102221688213111.png" alt=""></p>
+<p><img src="../images_result/images/2016051102221688213111.png" alt=""></p>
 
 <p>图 11 检查截至日期相关代码</p>
 
@@ -479,13 +479,13 @@
 
 <p>HWP 支持 hwp、doc、wps、ppt 等格式。其中 hwp 包括 hwp2.0、hwp3.0、hwp5.0 三个版本、 hwp2.0 是比较老的格式。 hwp 程序打开 hwp2.0 的文档时会自动转换为 hwp3.0 格式。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051102221884239121.png" alt=""></p>
+<p><img src="../images_result/images/2016051102221884239121.png" alt=""></p>
 
 <p>图 12 HWP 漏洞文档文档格式</p>
 
 <p>Hwp2.0 偏移 0x48E 的位置开始是字体结构,前两个字节是字体名称数量,每个字体名称长度为 0x28 。 程序处理 hwp2.0 文档时 , 调用 CHwp20ToHwp30FilterLibrary 类的ConvertFilterFileToWorkFile 函数转换为 hwp3.0 格式,处理字体结构调用 Set20FontList 子函数。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051102221961114131.png" alt=""></p>
+<p><img src="../images_result/images/2016051102221961114131.png" alt=""></p>
 
 <p>图 13 Set20FontList 函数</p>
 
@@ -493,29 +493,29 @@
 
 <p>而在内存中,arySrc 数组后面紧接着就是 aryDest,当拷贝到 arySrc 最后一个字符 0x3C时由于不是 0,继续取下一个字符,取到了 aryDest 的第一个字符。如此反复直至触发C0000005 访问异常。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051102222153369141.png" alt=""></p>
+<p><img src="../images_result/images/2016051102222153369141.png" alt=""></p>
 
 <p>图 14 arySrc aryDest 内存结构</p>
 
 <p>覆盖的地址里面包括 CHwp20ToHwp30FilterLibrary::ConvertFilterFileToWorkFile 函数设置的 SEH 记录。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051102222457828151.png" alt=""></p>
+<p><img src="../images_result/images/2016051102222457828151.png" alt=""></p>
 
 <p>图 15 SEH 记录被覆盖后</p>
 
 <p>接下来当拷贝到 00130000 时,触发 C0000005 异常,来到 windows 异常处理流程,调用 SEH Handler(7FFAC1B1),此时第二个参数指向 12E4B8。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222264146616.png" alt=""></p>
+<p><img src="../images_result/images/201605110222264146616.png" alt=""></p>
 
 <p>图 16 调用 SEH 处理函数</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222281518717.png" alt=""></p>
+<p><img src="../images_result/images/201605110222281518717.png" alt=""></p>
 
 <p>图 17 pop pop ret 指令串</p>
 
 <p>来到 ntdll.7FFAC1B1,,是一个 pop pop ret 指令串。经过两个 pop 指令后,此时 esp 指向 12E4B8,shellcode 代码起始位置,Retn 执行后就来到了 shellcode。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222308828418.png" alt=""></p>
+<p><img src="../images_result/images/201605110222308828418.png" alt=""></p>
 
 <p>图 18 开始执行 shellcode</p>
 
@@ -527,9 +527,9 @@
 
 <p>“洋葱狗”行动中相关样本进行通信主要分为两种,这也是我们区分“洋葱狗”版本的 主要依据,主要是 2014 年基于硬编码 IP 进行通信和 2015 年基于暗网网桥(Onion.City)进行通信。下图是“洋葱狗”相关样本和 C&amp;C 直接的对应关系。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222311252319.png" alt=""></p>
+<p><img src="../images_result/images/201605110222311252319.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222345309620.png" alt=""></p>
+<p><img src="../images_result/images/201605110222345309620.png" alt=""></p>
 
 <p>图 19 样本文件与 C&amp;C 之间的关系</p>
 
@@ -626,7 +626,7 @@
 
 <p>在分析追溯“洋葱狗”攻击行动中,我们主要基于 360 威胁情报中心相关数据,目的是 发现不同资源直接的关联性。期间主要发现了伪装 HWP 文档文件的 PE 恶意木马和 HWP 漏洞文档文件, HWP 漏洞文档除了包含诱饵文档和“洋葱狗”样本以外,比伪装 HWP 文档类型还多一个后门程序,如下图所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051102223552178211.png" alt=""></p>
+<p><img src="../images_result/images/2016051102223552178211.png" alt=""></p>
 
 <p>图 20 HWP 漏洞文档释放 3 类衍生物</p>
 
@@ -826,7 +826,7 @@ c、 攻击组织使用其他组织特有的技术和资源,目的是嫁祸其�
 
 <p>进一步我们带着以上这些疑点,将 HWP 漏洞文档相关资源进行深入的梳理,如下时间轴。除了以上我们分析到的 ICEFOG 本身时间戳和卡巴斯基曝光时间,以及 HWP 漏洞文档、“洋葱狗”相关样本相关活跃时间以外。下图中还有两个重要的时间节点,是关于 C&amp;C 域名“www.sejonng.org”的域名状态。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051102223711520221.png" alt=""></p>
+<p><img src="../images_result/images/2016051102223711520221.png" alt=""></p>
 
 <p>图 21 HWP 漏洞文档相关资源时间轴</p>
 
@@ -834,7 +834,7 @@ c、 攻击组织使用其他组织特有的技术和资源,目的是嫁祸其�
 
 <p>另外关于“www.sejonng.org”域名最新的 WHOIS 记录 <a href="https://whois.domaintools.com/sejonng.org">【17】</a> 是已经被 virustracker.info 接管进行 sinkhole 了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051102223987847231.png" alt=""></p>
+<p><img src="../images_result/images/2016051102223987847231.png" alt=""></p>
 
 <p>图 22“www.sejonng.org”相关历史页面截图(domaintools 数据)</p>
 
@@ -842,7 +842,7 @@ c、 攻击组织使用其他组织特有的技术和资源,目的是嫁祸其�
 
 <p>其实在以往的 APT 攻击中,APT 组织构造一些虚假信息(假情报)来误导安全研究人员的情况也出现过,比如:卡巴斯基安全研究人员在分析 duqu2.0 的时候,发现了攻击者在代码中添加了一些虚假标识和使用罕见的压缩算法,目的是误导研究人员以为是与 APT1 或MiniDuke 有关的恶意代码。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222417270424.png" alt=""></p>
+<p><img src="../images_result/images/201605110222417270424.png" alt=""></p>
 
 <p>图 23 引自卡巴斯基 duqu2.0 技术报告 <a href="https://cdn.securelist.com/files/2015/06/The_Mystery_of_Duqu_2_0_a_sophisticated_cyberespionage_actor_returns.pdf">【18】</a></p>
 
@@ -930,19 +930,19 @@ c、 攻击组织使用其他组织特有的技术和资源,目的是嫁祸其�
 
 <p>通过分析我们发现恶意代码中出现了大量韩文信息,相关韩文信息是作为最终发送给 C&amp;C 服务器数据包中的内容出现。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222429458825.png" alt=""></p>
+<p><img src="../images_result/images/201605110222429458825.png" alt=""></p>
 
 <p>图 24 USB 感染成功/感染失败</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222449968726.png" alt=""></p>
+<p><img src="../images_result/images/201605110222449968726.png" alt=""></p>
 
 <p>图 25 感染 Agent 运行成功</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222456979427.png" alt=""></p>
+<p><img src="../images_result/images/201605110222456979427.png" alt=""></p>
 
 <p>图 26 USB 连接日志</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605110222499411328.png" alt=""></p>
+<p><img src="../images_result/images/201605110222499411328.png" alt=""></p>
 
 <p>图 27 PC 感染成功</p>
 

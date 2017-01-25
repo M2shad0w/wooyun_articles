@@ -3,7 +3,7 @@
 			<head>
 			     <title>Shodan搜索引擎介绍 - 修码的马修</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2469">http://drops.wooyun.org/tips/2469</a></h1>
 				
@@ -115,17 +115,17 @@ nginx after:1/01/2014
 2.选择 ‘transforms’ 然后是‘advanced’  
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403212064893.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403212064893.jpeg" alt="enter image description here"></p>
 
 <pre><code>3.现在可以添加Shodan的链接https://cetas.paterva.com/TDS/runner/showseed/Shodan  
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403122049891.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403122049891.jpeg" alt="enter image description here"></p>
 
 <pre><code>4.最后我们可以看到安装成功的窗口
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403122022832.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403122022832.jpeg" alt="enter image description here"></p>
 
 <p>注意：需要你有Shodan的API keys，可以在maltgo进行Shodan的使用，API keys在你登陆Shodan账户时候是可以获得的。</p>
 
@@ -136,29 +136,29 @@ nginx after:1/01/2014
 <pre><code>1.在Kail/Backtrack Box中打开Metasploit framework
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403122091057.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403122091057.jpeg" alt="enter image description here"></p>
 
 <pre><code>2.在命令行中输入show auxiliary
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403211470881.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403211470881.jpeg" alt="enter image description here"></p>
 
 <pre><code>3.使用 auxiliary/gather/Shodansearch 模块
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403122162435.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403122162435.jpeg" alt="enter image description here"></p>
 
 <pre><code>4.现在，你可以用show options命令来查看模块需要的参数
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403244589663.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403244589663.jpeg" alt="enter image description here"></p>
 
 <pre><code>5.我们需要指定iis来搜索iis服务器，还需要登陆Shodan账户后得到的API key。现在我们可以用Run command 来执行命令。
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403211540477.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403211540477.jpeg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403122196907.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403122196907.jpeg" alt="enter image description here"></p>
 
 <p>一般来说 auxiliary/gather/Shodan_search模块通过API向数据库查询前50个ip 地址。50个ip地址的限制可以通过购买无限制API key来扩大到查询10000个ip地址</p>
 
@@ -168,11 +168,11 @@ nginx after:1/01/2014
 
 <p>1.Exploits：Shodan Exploits 能够用于在ExploitDB 或Metasploit寻找针对不同系统、服务器、平台、应用的的exploits。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403241717150.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403241717150.jpeg" alt="enter image description here"></p>
 
 <p>2.Maps：这是个付费功能，我们能在地图上直观地看到Shodan提供的结果。提供三种视图：卫星，街景（浅），街景（深）。可以同时在屏幕展示超过1000个结果。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403211515317.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403211515317.jpeg" alt="enter image description here"></p>
 
 <p>3.)Scanhub：Shodan Scanhubs可以用于创建陌生网络的搜索，它支持Nmap 和 Masscan类似的工具。要使用Scanhub，我们首先要设置好工具，输出一个XML格式的文件并上传到Scanhub的库里以获得结果。不幸的是这也是一个付费功能。</p>
 
@@ -182,27 +182,27 @@ nginx after:1/01/2014
 
 <h3>1. Netgear设备</h3>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403211691712.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403211691712.jpeg" alt="enter image description here"></p>
 
 <h3>2. 网络摄像头</h3>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403122252705.jpeg" alt="enter link description here"></p>
+<p><img src="../images_result/images/2014071403122252705.jpeg" alt="enter link description here"></p>
 
 <h3>3. 比特币服务器</h3>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403401723724.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403401723724.jpeg" alt="enter image description here"></p>
 
 <h3>4. Ruby on Rails Vulnerable Server(CVE-2013-0156 and CVE-2013-0155)</h3>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403211651905.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403211651905.jpeg" alt="enter image description here"></p>
 
 <h3>5. Windfarms:</h3>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403211778189.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403211778189.jpeg" alt="enter image description here"></p>
 
 <h3>6. DNS 服务:</h3>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403122237193.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403122237193.jpeg" alt="enter image description here"></p>
 
 <h2>0x06 一些另外的cheat sheet 链接</h2>
 

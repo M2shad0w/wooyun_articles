@@ -3,7 +3,7 @@
 			<head>
 			     <title>Android Linker学习笔记 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12122">http://drops.wooyun.org/tips/12122</a></h1>
 				
@@ -907,7 +907,7 @@ void soinfo::CallArray(const char* array_name UNUSED, linker_function_t* functio
 
 <p>首先是<code>init_array</code>节区的数据结构。该节中包含指针，这些指针指向了一些初始化代码。这些初始化代码一般是在main函数之前执行的。在C++程序中，这些代码用来运行静态构造函数。另外一个用途就是有时候用来初始化C库中的一些IO系统。使用IDA查看具有<code>init_array</code>节区的so库文件就可以找到如下数据：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160112/2016011210472471936113.jpg" alt="p1"></p>
+<p><img src="../images_result/images/2016011210472471936113.jpg" alt="p1"></p>
 
 <p>这里共三个函数指针，每个指针指向一个函数地址。值得注意的是，上图中每个函数指针的值都加了1，这是因为地址的最后1位置1表明需要使得处理器由ARM转为Thumb状态来处理Thumb指令。将目标地址处的代码解释为Thumb代码来执行。</p>
 

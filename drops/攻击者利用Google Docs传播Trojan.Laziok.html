@@ -3,7 +3,7 @@
 			<head>
 			     <title>攻击者利用Google Docs传播Trojan.Laziok - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/news/15586">http://drops.wooyun.org/news/15586</a></h1>
 				
@@ -34,17 +34,17 @@
 
 <p>攻击者在波兰域名的主机地址存放了攻击的第一阶段。正如下图所示，第一阶段通过从这个主机地址运行混淆后的JavaScript代码来启动攻击。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051106002480484.jpg" alt=""></p>
+<p><img src="../images_result/images/2016051106002480484.jpg" alt=""></p>
 
 <p>图1 response中的被混淆的代码</p>
 
 <p>一旦被解码，JavaScript代码就会打开并通过VBScript在IE（从第3到第11版本）内运行的时候执行CVE-2014-6332漏洞，利用windows OLE的内存崩溃漏洞来自动化的bypass操作系统安全设施以及其他的保护措施，这样就会确保攻击者进入“上帝”模式。CVE-2014-6332的使用，以及被滥用的“上帝”模式，早在2014年底就借助一个已知的PoC<a href="http://blog.trendmicro.com/trendlabs-security-intelligence/a-killer-combo-critical-vulnerability-and-godmode-exploitation-on-cve-2014-6332/">[2]</a>作为一个组合技被使用，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051106002552041.jpg" alt=""></p>
+<p><img src="../images_result/images/2016051106002552041.jpg" alt=""></p>
 
 <p>图2a CVE-2014-6332的使用</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051106002640052.jpg" alt=""></p>
+<p><img src="../images_result/images/2016051106002640052.jpg" alt=""></p>
 
 <p>图2b 在“上帝模式”改变了安全模式标志之后的runmumaa()函数调用。</p>
 
@@ -52,7 +52,7 @@
 
 <p>PowerShell在bypass反病毒软件方面也很有用，因为它可以直接在内存中注入payloads。我们之前讨论过俄罗斯的活跃的数据窃取活动<a href="https://www.fireeye.com/blog/threat-research/2015/12/uncovering_activepower.html">[3]</a>。看起来这个技术在牵涉到恶意程序的时候仍然很流行，并且这个技术可以逃避Google Docs的安全检查。这个payload会从Google Docs上下载链接——如图3中去混淆后的代码所示——最终会从上述的波兰网站上获取活动的恶意软件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051106002734746.jpg" alt=""></p>
+<p><img src="../images_result/images/2016051106002734746.jpg" alt=""></p>
 
 <p>图3 使用Powershell获得在Google Docs链接上的payload</p>
 

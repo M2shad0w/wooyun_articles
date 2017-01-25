@@ -3,7 +3,7 @@
 			<head>
 			     <title>分析“蜜罐NS”上的查询，提升DNS日志的质量 - virustracker</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5300">http://drops.wooyun.org/tips/5300</a></h1>
 				
@@ -52,7 +52,7 @@
 
 <p>如果我们根据这些数据映射查询，我们就会发现，在1月15日和1月20日、1月末和2月初，查询量猛增。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503243349369.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032503243349369.png" alt="enter image description here"></p>
 
 <p>通过进一步的调查，我们发现这些查询都是由一个IP地址引起的；这个IP地址属于德国波鸿鲁尔大学。在波鸿鲁尔大学的校网站上解释说明了一个“<a href="http://scanresearch.syssec.ruhr-uni-bochum.de/">DDos放大攻击追踪者项目</a> （Amplification DDoS Tracker Project）”。这个网站通过获取扫描数据，提醒网络所有者可能出现的问题。我们发现有两个IP地址进行了这些扫描：其中一个属于德国波鸿鲁尔大学，另一个属于德国萨尔大学。</p>
 
@@ -64,13 +64,13 @@
 
 <p>我提取出了日志中的IP地址，然后使用<a href="http://asn.cymru.com/">Team Cymru</a> 公司的ASN，获取了这些IP的对应国家。自治系统（AS）可以告诉我们IP地址所属的网络区段。在<a href="https://github.com/cudeso/cudeso-honeypot/tree/master/elk">Github</a> 网站上也可以找到这个脚本。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503243497506.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032503243497506.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503243539413.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032503243539413.png" alt="enter image description here"></p>
 
 <p>扫描主要来自德国，美国和中国这三个国家。其中，DFN（德国）和湖南Chinanet这两个AS的查询较多。有超过半数的查询来自欧洲（RIPE）。考虑到这中间有大量的请求来自德国鲁尔大学，出现这样的结果也就不足为奇了。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503243742995.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032503243742995.png" alt="enter image description here"></p>
 
 <h1>0x06 他们在找什么？</h1>
 
@@ -78,13 +78,13 @@
 
 <p>多数查询都是为了获得域名的A记录，18%以上的查询是为了获得域名的ANY记录。TXT请求主要是为了获取DNS服务器的版本。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503243837944.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032503243837944.png" alt="enter image description here"></p>
 
 <p>这些查询是为了获取Google和Shadowsever的IP地址，或者是Bind NS的版本。不出意外，最普遍的<a href="http://en.wikipedia.org/wiki/Top-level_domain">TLD</a> 是.com和.org。在你创办企业时，<a href="http://securityintelligence.com/malicious-domains-can-give-you-the-biz/">要谨慎选择域名</a> 和TLD。这份数据中，最有趣的部分是.ru和.cn这两个TLD所占的比例。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503243962264.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032503243962264.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503244045129.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032503244045129.png" alt="enter image description here"></p>
 
 <h1>0x07 open resolver扫描</h1>
 
@@ -92,7 +92,7 @@
 
 <p>如上文所述，open resolver项目导致了大量的请求。事实上，大约56%的查询都是来自一些参与open resolver的组织。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503244041454.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032503244041454.png" alt="enter image description here"></p>
 
 <p>虽然，这类查询的数量很大，但是在日志中可以很容易地辨别。</p>
 
@@ -109,17 +109,17 @@
 
 <p>在过滤了open resolver查询后，得到了下列结果：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503244197351.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032503244197351.png" alt="enter image description here"></p>
 
 <p>在这些时间范围中，并没有显著地突增。多数查询都是来自美国和中国。RISs Ripe，Arin和Apnic之间的查询分布也都大致相当。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503244232674.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032503244232674.png" alt="enter image description here"></p>
 
 <p>在这一类别中，请求类型不是A记录查询就是ANY资源查询。多数都是谷歌域名查询。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503244240672.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032503244240672.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150325/2015032503244355710.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032503244355710.png" alt="enter image description here"></p>
 
 <p>在剔除了open resolver的干扰后，数据集揭露了两个特别主机的行为：一个来自中国(AS 63835)，另一个来自俄罗斯(AS 2848)。</p>
 

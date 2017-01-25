@@ -3,7 +3,7 @@
 			<head>
 			     <title>WireShark黑客发现之旅（6）—“Lpk.dll劫持+ 飞客蠕虫”病毒 - 聚锋实验室</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/9106">http://drops.wooyun.org/tips/9106</a></h1>
 				
@@ -18,13 +18,13 @@
 
 <p>在对客户网络内网进行流量监控时发现，一台主机172.25.112.96不断对172.25.112.1/24网段进行TCP445端口扫描，这个行为目的在于探测内网中哪些机器开启了SMB服务，这种行为多为木马的通信特征。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092306390778585pic14.jpg" alt=""></p>
+<p><img src="../images_result/images/2015092306390778585pic14.jpg" alt=""></p>
 
 <!--more-->
 
 <p>过滤这个主机IP的全部数据，发现存在大量ARP协议，且主机172.25.112.96也不断对内网网段进行ARP扫描。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092306391061575pic23.jpg" alt=""></p>
+<p><img src="../images_result/images/2015092306391061575pic23.jpg" alt=""></p>
 
 <p>发现问题后，我们就开启对这台主机的深入分析了。</p>
 
@@ -34,19 +34,19 @@
 
 <p>第一步，DNS协议分析。过滤这台主机的DNS协议数据，从域名、IP、通信时间间隔综合判断，初步找出可疑域名。如域名yuyun168.3322.org，对应IP为61.160.213.189。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092306391470719pic32.jpg" alt=""></p>
+<p><img src="../images_result/images/2015092306391470719pic32.jpg" alt=""></p>
 
 <p>过滤IP为61.160.213.189的全部数据可以看到主机172.25.112.96不断向IP地址61.160.213.189发起TCP7000端口的请求，并无实际通信数据，时间间隔基本为24秒。初步判断为木马回联通信。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092306391614978pic42.jpg" alt=""></p>
+<p><img src="../images_result/images/2015092306391614978pic42.jpg" alt=""></p>
 
 <p>再发现可疑域名gcnna456.com，对应IP为115.29.244.159。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092306391854256pic53.jpg" alt=""></p>
+<p><img src="../images_result/images/2015092306391854256pic53.jpg" alt=""></p>
 
 <p>过滤IP为115.29.244.159的全部数据可以看到主机172.25.112.96不断向IP地址115.29.244.159发起TCP3699端口的请求，并无实际通信数据，时间间隔也基本为24秒。初步判断也为木马通信数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092306392048365pic61.jpg" alt=""></p>
+<p><img src="../images_result/images/2015092306392048365pic61.jpg" alt=""></p>
 
 <p>把这两个域名请求的DNS信息都提取出来（当然，这里仅用WireShark实现就比较困难了，可以开发一些工具或利用设备），部分入库后可看见：</p>
 
@@ -1082,7 +1082,7 @@
 
 <p>为探明事实真相，我们对这台电脑进程进行监控，发现了两个可疑进程，名称都是hrl7D7.tmp，从通信IP和端口发现与前面分析完全吻合。也就是说，域名yuyun168.3322.org和gcnna456.com的DNS请求数据和回联数据都是进程hrl7D7.tmp产生的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092306392441483pic81.jpg" alt=""></p>
+<p><img src="../images_result/images/2015092306392441483pic81.jpg" alt=""></p>
 
 <p>进一步查询资料和分析确认，这个恶意进程为Lpk.dll劫持病毒。</p>
 
@@ -1094,23 +1094,23 @@
 
 <p>如IP为95.211.230.75的请求如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092306392441483pic81.jpg" alt=""></p>
+<p><img src="../images_result/images/2015092306392441483pic81.jpg" alt=""></p>
 
 <p>Follow TCPStream提取请求信息如下，请求完整Url地址为：95.211.230.75/search?q=1，返回HTTP404，无法找到页面。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092306392630444pic91.jpg" alt=""></p>
+<p><img src="../images_result/images/2015092306392630444pic91.jpg" alt=""></p>
 
 <p>通过请求特征“/search?q=1”继续分析，如IP地址221.8.69.25，请求时间不固定，大约在20秒至1分钟。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092306392897314pic10.jpg" alt=""></p>
+<p><img src="../images_result/images/2015092306392897314pic10.jpg" alt=""></p>
 
 <p>再如IP地址38.102.150.27，请求时间也不是很固定。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092306393074988pic111.jpg" alt=""></p>
+<p><img src="../images_result/images/2015092306393074988pic111.jpg" alt=""></p>
 
 <p>再如IP地址216.66.15.109，请求时间也不是很固定。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092306393329005pic122.jpg" alt=""></p>
+<p><img src="../images_result/images/2015092306393329005pic122.jpg" alt=""></p>
 
 <p>把含此特征的请求IP、域名以及HTTP返回状态码进行统计，如下表：</p>
 
@@ -1284,7 +1284,7 @@
 
 <p>可以看出6个域名名称都很像随机生成的。对DNS进一步分析时还发现大量无法找到地址的域名请求，如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092306393596489pic131.jpg" alt=""></p>
+<p><img src="../images_result/images/2015092306393596489pic131.jpg" alt=""></p>
 
 <p>将此错误请求进行统计，仅在监控期间就请求过148个错误的域名。通过这些域名名称可以初步判断，该病毒请求采用了DGA算法随机生成的C&amp;C域名（详细了解可移步：&#91;http://drops.wooyun.org/tips/6220&#93;&#91;用机器学习识别随机生成的C&amp;C域名&#93;）。大量随机生成的域名不存在或控制端服务器已注销关机，导致大量请求失败。</p>
 
@@ -2264,7 +2264,7 @@
 &lt;/body&gt;&lt;/html&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092306393783295pic141.jpg" alt=""></p>
+<p><img src="../images_result/images/2015092306393783295pic141.jpg" alt=""></p>
 
 <p>通过HTTP响应可以推断，该机器可能感染了飞客（Conficker）蠕虫病毒，进一步我们推断国家互联网应急中心（CNCERT/CC）已得知此域名被飞客病毒所用，并将该域名放入飞客病毒域名污水池（Sinkhole）以缓解该病毒带来的风险。</p>
 

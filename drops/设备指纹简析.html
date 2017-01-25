@@ -3,7 +3,7 @@
 			<head>
 			     <title>设备指纹简析 - 阿里巴巴云誉</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14727">http://drops.wooyun.org/tips/14727</a></h1>
 				
@@ -32,7 +32,7 @@
 
 <p>它们所使用的方法与“水哥”基本一致：每个人根据其综合特征进行辨识，都是可唯一的。通过对这些综合特征的识别，就可以把你从千万人中识别出来。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041115444867369DraggedImage.png" alt=""></p>
+<p><img src="../images_result/images/2016041115444867369DraggedImage.png" alt=""></p>
 
 <h2>设备指纹是什么</h2>
 
@@ -101,7 +101,7 @@
 
 <p>首先，基于相关技术的时间点和其对抗的难度，整理如下图所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041115445334006DraggedImage-1.png" alt=""></p>
+<p><img src="../images_result/images/2016041115445334006DraggedImage-1.png" alt=""></p>
 
 <h3>session/cookie</h3>
 
@@ -131,7 +131,7 @@
 
 <p>这里先贴一个2010的css历史记录嗅探的问题：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041115445777199DraggedImage-2.png" alt=""> </p>
+<p><img src="../images_result/images/2016041115445777199DraggedImage-2.png" alt=""> </p>
 
 <h3>持久化cookie/Flash cookie/evercookie/h5 stroage/webDB</h3>
 
@@ -141,17 +141,17 @@
 
 <p>如果用户不能事无巨细的清理干净。一旦有一个地方未清理完，就会把清理的部分完全覆盖回来。</p>
 
-<p>简单流程图如下： <img src="http://static.wooyun.org//drops/20160411/2016041115445950656DraggedImage-3.png" alt=""></p>
+<p>简单流程图如下： <img src="../images_result/images/2016041115445950656DraggedImage-3.png" alt=""></p>
 
 <h3>帆布指纹</h3>
 
 <p>这是较新的一种技术，是利用不同浏览器不同的设别实现会在canvas绘图这以功能中，同样的内容，会绘制出具有细小细节差别的图片。 通过对这些图片数据进行hash，可以得到一个粗略的指纹。该指纹能够识别出了某种GPU在安装了某种字体下的群体。但是单一使用该数据进行判断误判较高，一般还会结合其他技术综合判断。 如下，即是对同样的一段带表情带背景文字在不同设备上渲染出的图像显示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041115450090255DraggedImage-4.png" alt=""></p>
+<p><img src="../images_result/images/2016041115450090255DraggedImage-4.png" alt=""></p>
 
 <p>利用不同设备上的默认字体和显示的不同，笑脸表情在各个系统上作图如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041115450213023DraggedImage-5.png" alt=""></p>
+<p><img src="../images_result/images/2016041115450213023DraggedImage-5.png" alt=""></p>
 
 <p>具体生成方法如下：</p>
 
@@ -162,7 +162,7 @@
 <li>将这个hash即可作为该设备设备指纹的一个组成部分。 </li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041115450460613DraggedImage-6.png" alt=""></p>
+<p><img src="../images_result/images/2016041115450460613DraggedImage-6.png" alt=""></p>
 
 <h3>Flash/Java/JAVASCRIPT等 基本数据采集</h3>
 
@@ -188,7 +188,7 @@
 
 <p>最后，还是表达下我对“水哥”的憧憬，附上我喜欢的一个图： </p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041115450644936DraggedImage-7.png" alt=""></p>
+<p><img src="../images_result/images/2016041115450644936DraggedImage-7.png" alt=""></p>
 
 <h1>0x02 refer</h1>
 

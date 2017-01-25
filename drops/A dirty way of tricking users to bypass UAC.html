@@ -3,7 +3,7 @@
 			<head>
 			     <title>A dirty way of tricking users to bypass UAC - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/15691">http://drops.wooyun.org/tips/15691</a></h1>
 				
@@ -20,7 +20,7 @@
 
 <p>演示如下：</p>
 
-<p><img src="https://public.lightpic.info/image/06C7_57350F0D1.gif" alt="Alt text"></p>
+<p><img src="../images_result/images/06C7_57350F0D1.gif" alt="Alt text"></p>
 
 <p>下面就结合这个演示来介绍其中相关的技巧。</p>
 
@@ -112,11 +112,11 @@ signtool sign /f Root.pfx /p test test.exe
 
 <p>执行后如图，生成Root.cer、Root.pfx、Root.pvk、Root.spc四个文件</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222592432130212.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051222592432130212.png" alt="Alt text"></p>
 
 <p>test.exe被加上数字签名，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122259267801536.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201605122259267801536.png" alt="Alt text"></p>
 
 <h3>2、证书注册</h3>
 
@@ -140,7 +140,7 @@ certmgr.exe -add -c RootIssuer.cer -s -r currentUser root
 
 <p>会弹框提示，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122259281634546.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201605122259281634546.png" alt="Alt text"></p>
 
 <p>管理员权限cmd，将证书添加到localmachine，不会弹框：</p>
 
@@ -170,7 +170,7 @@ certmgr.exe -add -c Root.cer -s -r localmachine root
 
 <p>如图，test.exe的数字签名已被正常识别</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122259291096656.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201605122259291096656.png" alt="Alt text"></p>
 
 <h3>4、数字签名的作用</h3>
 
@@ -180,11 +180,11 @@ certmgr.exe -add -c Root.cer -s -r localmachine root
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122259312772866.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201605122259312772866.png" alt="Alt text"></p>
 
 <p>如果加上数字签名再运行，会显示已验证的发布者为：Microsoft Windows，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122259322164675.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201605122259322164675.png" alt="Alt text"></p>
 
 <p><strong>注：</strong><br>
 发布者名称：Microsoft Windows是通过上述方法伪造的</p>
@@ -242,27 +242,27 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122259342776583.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201605122259342776583.png" alt="Alt text"></p>
 
 <p>设置为requireAdministrator</p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122259355045793.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201605122259355045793.png" alt="Alt text"></p>
 
 <p>重新生成，产生新文件，图标上会添加uac的标志，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222593783539103.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051222593783539103.png" alt="Alt text"></p>
 
 <p>将程序后缀名修改为com，图标消失</p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222593911566114.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051222593911566114.png" alt="Alt text"></p>
 
 <p>双击运行，弹出uac拦截框，提示发布者：未知，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222594064014123.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051222594064014123.png" alt="Alt text"></p>
 
 <p>接下来为程序添加数字签名，再次运行，成功解决发布者未知的问题</p>
 
@@ -270,7 +270,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222594212623133.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051222594212623133.png" alt="Alt text"></p>
 
 <p><strong>解决方法：</strong></p>
 
@@ -282,17 +282,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222594356112142.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051222594356112142.png" alt="Alt text"></p>
 
 <p>再次重新生成文件并签名，后缀名改为com</p>
 
 <p>执行，已经同正常的regedit.exe相似，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222594545063152.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051222594545063152.png" alt="Alt text"></p>
 
 <p>完整的演示如图，此时弹出的cmd权限为管理员权限</p>
 
-<p><img src="https://public.lightpic.info/image/633E_57350F0D1.gif" alt="Alt text"></p>
+<p><img src="../images_result/images/633E_57350F0D1.gif" alt="Alt text"></p>
 
 <h1>0x05 from admin to system</h1>
 
@@ -361,7 +361,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 <p>按照上述流程就可以实现劫持用户通过win+r执行regedit的输入，在启动正常regedit.exe的同时在后台运行一个system权限的calc.exe</p>
 
-<p><img src="https://public.lightpic.info/image/06C7_57350F0D1.gif" alt="Alt text"></p>
+<p><img src="../images_result/images/06C7_57350F0D1.gif" alt="Alt text"></p>
 
 <h1>0x06 防御</h1>
 
@@ -387,11 +387,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 <p>正常的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222594925864171.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051222594925864171.png" alt="Alt text"></p>
 
 <p>伪造的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222595125598181.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016051222595125598181.png" alt="Alt text"></p>
 
 <h3>4、服务管理</h3>
 

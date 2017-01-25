@@ -3,7 +3,7 @@
 			<head>
 			     <title>雅虎某分站的XSS导致雅虎邮箱沦陷 - mramydnei</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1024">http://drops.wooyun.org/papers/1024</a></h1>
 				
@@ -22,7 +22,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/20140714/2014071403432831548.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403432831548.png" alt="enter image description here"></p>
 
 <p>就如同你从请求日志中当中所看到的， 有些东西正在尝试跨域请求其它域名下的数据。</p>
 
@@ -31,9 +31,9 @@
 
 <p>跨域代理对于挖洞的人来说，就像是金矿般的存在。我们总能从它身上找到一些漏洞，这一个也不例外。不得不说，我们很幸运。因为这里并没有用白名单来限制URL所指向的域名。而且这个代理居然没有在Response上设置content-type。这意味着？嗯，我们找到了一个XSS。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404300830966.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404300830966.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404300871796.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404300871796.png" alt="enter image description here"></p>
 
 <p>但这个XSS并不能让我兴奋起来。因为它只不过是一个在几乎可以看作是静态网站上的XSS。换句话来说，它根本就没有任何价值。</p>
 
@@ -79,15 +79,15 @@
 
 <p>现在一切都已经很明了了。我们可以借助我们构造的swf文件来和ca-mg5.mail.yahoo.com 进行通讯。使用工具<a href="https://github.com/borisreitman/CrossXHR">SWF<->JS XHR proxy</-></a>，让我们尝试着来搞点邮件吧！我们先尝试通过这个swf里的JavaScript来发送一些跨域的请求：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403433087304.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403433087304.png" alt="enter image description here"></p>
 
 <p>看上去一些都很顺利。我们可以从response中看到收获的auth tokens和一些个人信息。然而借助其中的一个token我们可以列出邮件的列表</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404300947589.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404300947589.png" alt="enter image description here"></p>
 
 <p>进一步我们可以通过使用这些message id来阅读邮件的内容</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403433126699.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403433126699.png" alt="enter image description here"></p>
 
 <p>当然，因为我们可以读取那些具有CSRF tokens的页面，所以我们也可以试着删除一些邮件或者以当前用户的身份来发送邮件。当然可能更加有趣的是我们可以控制所有绑定了这个邮箱的帐号，重置那些帐号的密码并偷偷的删除那些重置邮件。</p>
 

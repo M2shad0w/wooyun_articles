@@ -3,7 +3,7 @@
 			<head>
 			     <title>360hackgame writeup - AppLeU0</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1666">http://drops.wooyun.org/tips/1666</a></h1>
 				
@@ -22,7 +22,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/201405/2014050416151772962.jpg" alt="2014050416151772962.jpg"></p>
+<p><img src="../images_result/images/2014050416151772962.jpg" alt="2014050416151772962.jpg"></p>
 
 <p>第二关需要从hack.360.cn进入，直接点击按钮可行不通哦!~~</p>
 
@@ -33,7 +33,7 @@
 
 <p>然后发包就进入了第二关，顺便说下另外两个和ip啊域名啊相关的http header 是Host还有X-Forwarded-For，如果Referer测不对，就会去测测这两个东西。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416161664573.jpg" alt="2014050416161664573.jpg"></p>
+<p><img src="../images_result/images/2014050416161664573.jpg" alt="2014050416161664573.jpg"></p>
 
 <h2>0x02 web2 javascript</h2>
 
@@ -41,13 +41,13 @@
 
 <p><a href="http://attack.onebox.so.com/jaa60cjse-main.html">http://attack.onebox.so.com/jaa60cjse-main.html</a></p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416174359639.jpg" alt="2014050416174359639.jpg"></p>
+<p><img src="../images_result/images/2014050416174359639.jpg" alt="2014050416174359639.jpg"></p>
 
 <p>需要我们自己找到密码，那么我们先查看一下源代码，然后再抓包看看有没有什么密码或者是什么异常。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416192997203.jpg" alt="2014050416192997203.jpg"></p>
+<p><img src="../images_result/images/2014050416192997203.jpg" alt="2014050416192997203.jpg"></p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416201462318.jpg" alt="2014050416201462318.jpg"></p>
+<p><img src="../images_result/images/2014050416201462318.jpg" alt="2014050416201462318.jpg"></p>
 
 <p>在源码中发现了这一行，抓包也可以看见encode.js这个javascript代码，发现有一些加密、代码混淆什么的，保存到本地来调试一下。代码首末加上在源码中发现了这一行，抓包也可以看见encode.js这个javascript代码，发现有一些加密、代码混淆什么的，保存到本地来调试一下。代码首末加上<code>&lt;script&gt; &lt;/script&gt;</code>，保存成html。</p>
 
@@ -74,7 +74,7 @@ var _$=["\x28\x5b\x21\x5b\x5d\x5d\x2b\x5b\x5d\x5b\x5b\x5d\x5d\x29\x5b\x2b\x21\x2
 
 <p>还有一种方法是使用了谷歌浏览器的控制台。F12呼出选择Console</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416213618431.jpg" alt="2014050416213618431.jpg"></p>
+<p><img src="../images_result/images/2014050416213618431.jpg" alt="2014050416213618431.jpg"></p>
 
 <p>输入i360进入第三关。</p>
 
@@ -84,7 +84,7 @@ var _$=["\x28\x5b\x21\x5b\x5d\x5d\x2b\x5b\x5d\x5b\x5b\x5d\x5d\x29\x5b\x2b\x21\x2
 
 <p><a href="http://attack.onebox.so.com/je4cd0jsk-main.html">http://attack.onebox.so.com/je4cd0jsk-main.html</a></p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416223253604.jpg" alt="2014050416223253604.jpg"></p>
+<p><img src="../images_result/images/2014050416223253604.jpg" alt="2014050416223253604.jpg"></p>
 
 <p>要求解码这下面的代码</p>
 
@@ -102,7 +102,7 @@ var _$=["\x28\x5b\x21\x5b\x5d\x5d\x2b\x5b\x5d\x5b\x5b\x5d\x5d\x29\x5b\x2b\x21\x2
 
 <p>神器打开，Number——Convert——Number To Ascii</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416270352897.jpg" alt="2014050416270352897.jpg"></p>
+<p><img src="../images_result/images/2014050416270352897.jpg" alt="2014050416270352897.jpg"></p>
 
 <pre><code>%4D%54%45%35%49%44%45%77%4D%53%41%78%4D%44%67%67%4F%54%6B%67%4D%54%45%78%49%44%45%77%4F%53%41%78%4D%44%45%67%4D%54%45%32%49%44%45%78%4D%53%41%31%4D%53%41%31%4E%43%41%30%4F%43%41%3D  
 </code></pre>
@@ -111,7 +111,7 @@ var _$=["\x28\x5b\x21\x5b\x5d\x5d\x2b\x5b\x5d\x5b\x5b\x5d\x5d\x29\x5b\x2b\x21\x2
 
 <p>神器接着来一发Ascii——Decode——Unescape</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416272186547.jpg" alt="2014050416272186547.jpg"></p>
+<p><img src="../images_result/images/2014050416272186547.jpg" alt="2014050416272186547.jpg"></p>
 
 <pre><code>MTE5IDEwMSAxMDggOTkgMTExIDEwOSAxMDEgMTE2IDExMSA1MSA1NCA0OCA=  
 </code></pre>
@@ -120,7 +120,7 @@ var _$=["\x28\x5b\x21\x5b\x5d\x5d\x2b\x5b\x5d\x5b\x5b\x5d\x5d\x29\x5b\x2b\x21\x2
 
 <p>神器再来，Ascii——Decode——Base64</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416274791411.jpg" alt="2014050416274791411.jpg"></p>
+<p><img src="../images_result/images/2014050416274791411.jpg" alt="2014050416274791411.jpg"></p>
 
 <pre><code>119 101 108 99 111 109 101 116 111 51 54 48  
 </code></pre>
@@ -129,11 +129,11 @@ var _$=["\x28\x5b\x21\x5b\x5d\x5d\x2b\x5b\x5d\x5b\x5b\x5d\x5d\x29\x5b\x2b\x21\x2
 
 <p>这里先将进制修改成10进制的 InRadix OutRadix都改成10</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416280172745.jpg" alt="2014050416280172745.jpg"></p>
+<p><img src="../images_result/images/2014050416280172745.jpg" alt="2014050416280172745.jpg"></p>
 
 <p>然后再Number——Convert——Number To Ascii</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416260516756.jpg" alt="2014050416260516756.jpg"></p>
+<p><img src="../images_result/images/2014050416260516756.jpg" alt="2014050416260516756.jpg"></p>
 
 <p><code>welcometo360</code> 这个就是过关的密码了。</p>
 
@@ -143,11 +143,11 @@ var _$=["\x28\x5b\x21\x5b\x5d\x5d\x2b\x5b\x5d\x5b\x5b\x5d\x5d\x29\x5b\x2b\x21\x2
 
 <p><a href="http://attack.onebox.so.com/d971abpic-main.html">http://attack.onebox.so.com/d971abpic-main.html</a></p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416283391280.jpg" alt="2014050416283391280.jpg"></p>
+<p><img src="../images_result/images/2014050416283391280.jpg" alt="2014050416283391280.jpg"></p>
 
 <p>一个图片的隐写题，先下载下来，发现是一个JPG，jpg的图片隐写的方法就几种吧，还是比较简单的。一开始的脑洞比较大，还在想会不会是右上角的标志，还去找了高清大图。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416285879868.jpg" alt="2014050416285879868.jpg"></p>
+<p><img src="../images_result/images/2014050416285879868.jpg" alt="2014050416285879868.jpg"></p>
 
 <p>WWWCN肯定是这样子的，我太机智了。</p>
 
@@ -155,7 +155,7 @@ var _$=["\x28\x5b\x21\x5b\x5d\x5d\x2b\x5b\x5d\x5b\x5b\x5d\x5d\x29\x5b\x2b\x21\x2
 
 <p>下载的链接是www.caesum.com/handbook/Stegsolve.jar</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416291535459.jpg" alt="2014050416291535459.jpg"></p>
+<p><img src="../images_result/images/2014050416291535459.jpg" alt="2014050416291535459.jpg"></p>
 
 <p>然后Analyse——File Format</p>
 
@@ -163,17 +163,17 @@ var _$=["\x28\x5b\x21\x5b\x5d\x5d\x2b\x5b\x5d\x5b\x5b\x5d\x5d\x29\x5b\x2b\x21\x2
 
 <p>在本来图片应该结束的地方，却出现了大量的数据。查看一下ascii，确定是什么东西。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416293371874.jpg" alt="2014050416293371874.jpg"></p>
+<p><img src="../images_result/images/2014050416293371874.jpg" alt="2014050416293371874.jpg"></p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416295592984.jpg" alt="2014050416295592984.jpg"></p>
+<p><img src="../images_result/images/2014050416295592984.jpg" alt="2014050416295592984.jpg"></p>
 
 <p>可以发现JFIF这个敏感的幻数。这个函数是jpg文件的幻数。所以判断在原图后面还有一张jpg图片。</p>
 
 <p>这个时候我们可以使用Winhex来把这个后面的图扣下来。Offset:00003B30到文件的末尾，然后复制选块，置入新文件。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416301755642.jpg" alt="2014050416301755642.jpg"></p>
+<p><img src="../images_result/images/2014050416301755642.jpg" alt="2014050416301755642.jpg"></p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416304113693.jpg" alt="2014050416304113693.jpg"></p>
+<p><img src="../images_result/images/2014050416304113693.jpg" alt="2014050416304113693.jpg"></p>
 
 <p>打开就可以看到BLACK HAT WORLD，这些大写的就是key了(不加空格)。</p>
 
@@ -197,7 +197,7 @@ BMP = BMF? (424D)
 
 <p><a href="http://attack.onebox.so.com/cca5e5bas-main.html">http://attack.onebox.so.com/cca5e5bas-main.html</a></p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416313135040.jpg" alt="2014050416313135040.jpg"></p>
+<p><img src="../images_result/images/2014050416313135040.jpg" alt="2014050416313135040.jpg"></p>
 
 <p>从这个题开始，感觉到了360要靠猜的地方了，知道了方法都要尝试很多很多次，比较坑爹，这个题我就模糊的记得jsp spy的密码是ninty，也不是太确定。这个时候度娘就是神器了。各种搜索，各种搜索。其实有个方法才是比较便捷的，就是去下到这些webshell的官方的版本，上面的密码肯定就是对的了。</p>
 
@@ -218,13 +218,13 @@ jsp spy: ninty
 
 <p><a href="http://attack.onebox.so.com/c47e92bak-main.html">http://attack.onebox.so.com/c47e92bak-main.html</a></p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416320825652.jpg" alt="2014050416320825652.jpg"></p>
+<p><img src="../images_result/images/2014050416320825652.jpg" alt="2014050416320825652.jpg"></p>
 
 <p>我觉得这个题出得不好，是个坑。</p>
 
 <p>一开始提到备份文件，我想到的方向就是www.rar类似于这种的整站打包的备份文件，然后既然是要找到这种备份文件，那么我们就需要去扫他出来，常见的一些压缩文件后缀有:rar、zip、7z、tar.gz这几种，然后我就去配合一个扫目录扫文件的工具Pker去扫备份去了。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416323538393.jpg" alt="2014050416323538393.jpg"></p>
+<p><img src="../images_result/images/2014050416323538393.jpg" alt="2014050416323538393.jpg"></p>
 
 <p>到后来各种后缀都试过了之后发现，没办法，扫不出来东西。</p>
 
@@ -269,26 +269,26 @@ md5计算后：584AFD9177ED1005B0D255ECFD8BE9A8</p>
 
 <p><a href="http://attack.onebox.so.com/s56410sense-main.html">http://attack.onebox.so.com/s56410sense-main.html</a></p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416334849245.jpg" alt="2014050416334849245.jpg"></p>
+<p><img src="../images_result/images/2014050416334849245.jpg" alt="2014050416334849245.jpg"></p>
 
 <p>看到这个题，槽点满满的。和西电xdctf的那个题有点像，舞动旋律那题。是给出了一些信息，需要我们去组合，猜测密码。手工猜了几个猜不动。那种组字典的工具去组个字典爆破试试看吧，N.C.P.H社会工程学字典生成器，比较爱用这个工具。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416341673013.jpg" alt="2014050416341673013.jpg"></p>
+<p><img src="../images_result/images/2014050416341673013.jpg" alt="2014050416341673013.jpg"></p>
 
 <p>生成了字典之后，输入那个验证码，并不会刷新的，所以可以用来爆破，后来上了WAF我就不知道还能不能爆破了。总之最后的结果是爆破失败了，什么都没做出来。<br>
 那个验证码看着也很别扭，生怕他是错的，给个这样子的提示，真难啊。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416343597361.jpg" alt="2014050416343597361.jpg"></p>
+<p><img src="../images_result/images/2014050416343597361.jpg" alt="2014050416343597361.jpg"></p>
 
 <p>后来之后自己慢慢，手动试了，验证码在firefox里不会刷新，也不用太担心效率的问题。试了好久好久，直到试到了Lilei20140305这个 才出现了奇迹。原来还要大小写，这题真是淫荡。越来越有360有奖竞猜大赛的味道。。。欲哭无泪</p>
 
 <p>91199faddb0f5abe576ea087ea708172这个加密串要去解密</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416350767467.jpg" alt="2014050416350767467.jpg"></p>
+<p><img src="../images_result/images/2014050416350767467.jpg" alt="2014050416350767467.jpg"></p>
 
 <p>在陆羽的博客中看到了这一篇，其实3月挂出来的，之前我也有看到过，还去破解过呢，运气真好，google一下就能解出来了。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416353038131.jpg" alt="2014050416353038131.jpg"></p>
+<p><img src="../images_result/images/2014050416353038131.jpg" alt="2014050416353038131.jpg"></p>
 
 <p>91199faddb0f5abe576ea087ea708172:360-hackgame-8-hello-world.php</p>
 
@@ -300,7 +300,7 @@ md5计算后：584AFD9177ED1005B0D255ECFD8BE9A8</p>
 
 <p><a href="http://attack.onebox.so.com/eda63b0faudit-main.html">http://attack.onebox.so.com/eda63b0faudit-main.html</a></p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416360234863.jpg" alt="2014050416360234863.jpg"></p>
+<p><img src="../images_result/images/2014050416360234863.jpg" alt="2014050416360234863.jpg"></p>
 
 <p>这个题又是那种很恶心的题目，要勾选有漏洞的代码，有很多种组合。要试很多很多很多很多遍才能试出来的。而且还没法爆破，每次出现的函数的顺序会变化。<br>
 7个函数，慢慢分析吧</p>
@@ -391,7 +391,7 @@ public function Upload($filename)
 
 <p><a href="http://attack.onebox.so.com/x2a9ef99cd0xs-main.html">http://attack.onebox.so.com/x2a9ef99cd0xs-main.html</a></p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416363996837.jpg" alt="2014050416363996837.jpg"></p>
+<p><img src="../images_result/images/2014050416363996837.jpg" alt="2014050416363996837.jpg"></p>
 
 <p>xss的一道题，需要拿到cookie，要使用到xss平台。先去配置一个xss平台来获取cookie先，我是用的冷总的xss平台。</p>
 
@@ -405,11 +405,11 @@ public function Upload($filename)
 
 <p>其实所谓的html5，也只有他提示的svg标签，使用其他的html5标签没法绕过。比如video audio，比较郁闷，其实这里就应该想到后台对留言板的处理什么的，当时并没有想到，结果卡了一夜。然后就是测试了想要去构造个标签，还看到网上的一些使用了什么的，就去想要绕过，这里又坑了。后来fuzz的时候才发现的。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416371016719.jpg" alt="2014050416371016719.jpg"></p>
+<p><img src="../images_result/images/2014050416371016719.jpg" alt="2014050416371016719.jpg"></p>
 
 <p>使用了burp fuzz测试非法字符，提交类似于 svg "这样子的内容，burp测试</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416372592310.jpg" alt="2014050416372592310.jpg"></p>
+<p><img src="../images_result/images/2014050416372592310.jpg" alt="2014050416372592310.jpg"></p>
 
 <p>发现了3个非法的，<code>" &gt; \</code>这三个字符，还会过滤其他的。测试到这里的时候才发现自己之前的想法不对，不是要去想办法绕过，然后闭合上<code>&lt;svg&gt;</code>，而是 <code>&gt;</code>直接就是在黑名单中的，应该要想办法利用后台的代码去闭合。思路明确之后，就是在属性、事件中去编码绕过或者是不使用一些被过滤的字符比如"。然后就是构造测试、构造测试..<br>
 最后是这样子的xss payload onload页面载入是执行js脚本</p>
@@ -422,13 +422,13 @@ public function Upload($filename)
 
 <p>就是之前我们生成的xss地址。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416374697061.jpg" alt="2014050416374697061.jpg"></p>
+<p><img src="../images_result/images/2014050416374697061.jpg" alt="2014050416374697061.jpg"></p>
 
 <p>提交成功之后，发现cookie来了。好开心，去xss平台查看一下。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416380611290.jpg" alt="2014050416380611290.jpg"></p>
+<p><img src="../images_result/images/2014050416380611290.jpg" alt="2014050416380611290.jpg"></p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416382860616.jpg" alt="2014050416382860616.jpg"></p>
+<p><img src="../images_result/images/2014050416382860616.jpg" alt="2014050416382860616.jpg"></p>
 
 <p>cookie的最后的一个是 xss-key=cc4b0a94f5a2e5a244a1cc44a7fb4cb3</p>
 
@@ -440,14 +440,14 @@ public function Upload($filename)
 
 <p><a href="http://attack.onebox.so.com/jdad3f8fasd0d-main.html">http://attack.onebox.so.com/jdad3f8fasd0d-main.html</a></p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416390225061.jpg" alt="2014050416390225061.jpg"></p>
+<p><img src="../images_result/images/2014050416390225061.jpg" alt="2014050416390225061.jpg"></p>
 
 <p>这个题我输了T T，第一步一直没做出来，死猫做出来的时候，我还没有思路。</p>
 
 <p>这个题我的思路是各种飘，各种跑偏，蛋疼。这个题一来就和别的题不一样，没有提交框，我们需要先想办法找到那个提交框，还有题目的描述什么的。抓包看看。<br>
 burp可以看到</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416392672719.jpg" alt="2014050416392672719.jpg"></p>
+<p><img src="../images_result/images/2014050416392672719.jpg" alt="2014050416392672719.jpg"></p>
 
 <pre><code>Set-Cookie: display=5842b0a0df2d52533c241c6ec26089a8; expires=Sun, 27-Apr-2014 10:37:15 GMT; secure  
 </code></pre>
@@ -476,7 +476,7 @@ burp可以看到</p>
 
 <p>http://attack.onebox.so.com/jdad3f8fasd0d-main.html?display= 5842b0a0df2d52533c241c6ec26089a8</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416395546227.jpg" alt="2014050416395546227.jpg"></p>
+<p><img src="../images_result/images/2014050416395546227.jpg" alt="2014050416395546227.jpg"></p>
 
 <p>菊花一紧，没有这样子玩的，居然把cookie拿去get提交。桑心了。</p>
 
@@ -484,7 +484,7 @@ burp可以看到</p>
 
 <p>google hacking一发：site:wooyun.org thinkphp 读取源码</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416402398457.jpg" alt="2014050416402398457.jpg"></p>
+<p><img src="../images_result/images/2014050416402398457.jpg" alt="2014050416402398457.jpg"></p>
 
 <p>百度出来的第一条就是了，我真是有特殊的搜索技巧啊。</p>
 
@@ -498,7 +498,7 @@ burp可以看到</p>
 
 <p>成功读取对应内容。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416405380109.jpg" alt="2014050416405380109.jpg"></p>
+<p><img src="../images_result/images/2014050416405380109.jpg" alt="2014050416405380109.jpg"></p>
 
 <p>那么我们也来仿照他的。</p>
 
@@ -514,7 +514,7 @@ burp可以看到</p>
 
 <p>这样子的字符串，整个拿去提交就可以了。</p>
 
-<p><img src="http://static.wooyun.org/201405/2014050416411431075.jpg" alt="2014050416411431075.jpg"></p>
+<p><img src="../images_result/images/2014050416411431075.jpg" alt="2014050416411431075.jpg"></p>
 
 <h2>0x0B 后记</h2>
 

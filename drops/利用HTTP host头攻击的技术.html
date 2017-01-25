@@ -3,7 +3,7 @@
 			<head>
 			     <title>利用HTTP host头攻击的技术 - 龙臣</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1383">http://drops.wooyun.org/papers/1383</a></h1>
 				
@@ -42,7 +42,7 @@ $message -&gt; confirm_url = url::abs_site("password/do_reset?key=$user-&gt;hash
 
 <p>当用户点击重置密码的链接时，肯定可以说明点的是自己的账户。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811183018026.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811183018026.png" alt="enter image description here"></p>
 
 <p>这个地方的漏洞是： <code>url::abs_site</code> 这一部分使用的Host header是来自用户重置密码的请求，那么攻击者可以通过一个受他控制的链接来污染密码重置的邮件。</p>
 

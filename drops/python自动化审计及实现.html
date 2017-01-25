@@ -3,7 +3,7 @@
 			<head>
 			     <title>python自动化审计及实现 - xxlegend</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7505">http://drops.wooyun.org/tips/7505</a></h1>
 				
@@ -76,7 +76,7 @@ res = cur.execute(sql)
 
 <p>函数的作用就不用多说了，django的view层基本都是以函数为单位的。下面来看一个函数的语法树，如图1</p>
 
-<p><img src="http://static.wooyun.org//drops/20150729/2015072910161284588.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072910161284588.png" alt="enter image description here"></p>
 
 <p>我们简单分析一下这个结构，首先是type，这里是FunctionDef，说明这个结构体是一个函数，_fields中的<code>name，args，body，decorator_list</code>等是函数的基本组成单位。name是函数名称，上述函数名为<code>is_this_subdomain</code>；args是函数的参数，它包含普通参数args，默认参数kwarg；lineno是标明该语句所在的文件的行数；<code>decorator_list</code>则是函数的修饰器，上述为空。</p>
 
@@ -88,7 +88,7 @@ res = cur.execute(sql)
 
 <p>接下来我们将以一个if结构片段代码作为示例，来解释Python源码到其语法树的对应关系。片段代码：<code>if type not in ["RSAS", "BVS"]:return HttpResponse("2")</code>，得到的语法树如图2：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150729/2015072910161276700.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072910161276700.png" alt="enter image description here"></p>
 
 <p>在这个语法树结构中，body里包含着if结构中的语句<code>return HttpResponse("2")</code>,type为Compare表示该结构体为判断语句，left表示左值即源码中的type，test结构体中则是用来进行if判断，test中的ops对应着源码中的not in，表示比较判断，comparators则是被比较的元素。这样源码就和Python语法树一一对应起来，有了这些一一对应的基础，就有了判断Python注入问题的原型。</p>
 
@@ -107,7 +107,7 @@ res = cur.execute(sql)
 
 <p>对外层函数中的所有代码行进行分析，判断是否是赋值类型，如果赋值类型的操作属于以上五种情况中任意一种，则将该赋值后的值放入可变参数列表中，具体的流程如图3：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150729/2015072910161292846.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072910161292846.png" alt="enter image description here"></p>
 
 <p>另外在分析的过程中还得排除下列情况，提前结束分析。第一种情况是 if语句中有<code>os.path.exitst,isdigit</code>带可控参数并且含有return语句，如<code>（if not os.path.isdir(parentPath)：return None）</code>；第二种情况是将可控参数锁定在某个定值范围并直接返回的，如（<code>if type not in ["R", "B"]：return HttpResponse("2")</code>)。</p>
 

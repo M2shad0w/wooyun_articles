@@ -3,7 +3,7 @@
 			<head>
 			     <title>利用 PHP7 的 OPcache 执行 PHP 代码 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/15450">http://drops.wooyun.org/web/15450</a></h1>
 				
@@ -22,7 +22,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160428/2016042810100631467confoo_cache_opcode-1024x621.png" alt=""></p>
+<p><img src="../images_result/images/2016042810100631467confoo_cache_opcode-1024x621.png" alt=""></p>
 
 <p><a href="http://talks.php.net/confoo16#/php7pcache1">使用 PHP7 加速 Web 应用</a></p>
 
@@ -64,7 +64,7 @@ opcache.file_cache = /tmp/opcache
 
 <p>此时，我们可以利用上传漏洞将文件上传到 Web 目录，但是发现 Web 目录没有读写权限。这个时候，就可以通过替换 /tmp/opcache/[system_id]/var/www/index.php.bin 为一个 webshell的二进制缓存文件运行 webshell。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160428/2016042810101282250vulnerable_demo-700x380.png" alt=""></p>
+<p><img src="../images_result/images/2016042810101282250vulnerable_demo-700x380.png" alt=""></p>
 
 <ol>
 <li><p>在本地创建 webshell 文件 index.php ，代码如下：</p>
@@ -79,11 +79,11 @@ opcache.file_cache = /tmp/opcache
 <li><p>打开你所设置的缓存目录，index.php.bin 文件即为编译后的 webshell 二进制缓存文件。</p></li>
 <li><p>修改 index.php.bin 文件头里的 <strong>system_id</strong> 为目标站点的<strong>system_id</strong>。在文件头里的签名部分的后面就是<strong>system_id</strong>的值。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160428/2016042810100971743Screen-Shot-2016-04-21-at-11.06.50-AM-700x78.png" alt=""></p></li>
+<p><img src="../images_result/images/2016042810100971743Screen-Shot-2016-04-21-at-11.06.50-AM-700x78.png" alt=""></p></li>
 <li><p>通过上传漏洞将修改后的 index.php.bin 上传至 /tmp/opcache/[system_id]/var/www/index.php.bin ，覆盖掉原来的 index.php.bin</p></li>
 <li><p>重新访问 index.php ，此时就运行了我们的 webshell</p>
 
-<p><img src="http://static.wooyun.org//drops/20160428/2016042810100843503poc-700x224.png" alt=""></p></li>
+<p><img src="../images_result/images/2016042810100843503poc-700x224.png" alt=""></p></li>
 </ol>
 
 <p>针对这种攻击方式，在 php.ini 至少有两种配置方式可以防御此类攻击。</p>
@@ -112,11 +112,11 @@ opcache.file_cache = /tmp/opcache
 <p>如果服务器启用了时间戳校验，OPcache 会将被请求访问的 php 源文件的时间戳与对应的缓存文件的时间戳进行对比校验。如果两个时间戳不匹配，缓存文件将被丢弃，并且重新生成一份新的缓存文件。要想绕过此限制，攻击者必须知道目标源文件的时间戳。<br>
 如上面所说的，在 WordPress 这类框架里面，很多源文件的时间戳在解压 zip 或 tar 包的时候都是不会变的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160428/2016042810101477672wordpress-archive-700x229.png" alt=""></p>
+<p><img src="../images_result/images/2016042810101477672wordpress-archive-700x229.png" alt=""></p>
 
 <p>注意观察上图，你会发现有些文件从2012年之后从没有被修改过，如：registration-functions.php 和 registration.php 。因此，这些文件在 WordPress 的多个版本中都是一样的。知道了时间戳，攻击者就可以绕过 validate_timestamps 限制，成功覆盖缓存文件，执行 webshell。二进制缓存文件的时间戳在 34字节偏移处。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160428/2016042810101081011timestamp-700x329.png" alt=""></p>
+<p><img src="../images_result/images/2016042810101081011timestamp-700x329.png" alt=""></p>
 
 <h1>0x04 总结</h1>
 

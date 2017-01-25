@@ -3,7 +3,7 @@
 			<head>
 			     <title>浅析Windows的访问权限检查机制 - DanielKing</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11803">http://drops.wooyun.org/tips/11803</a></h1>
 				
@@ -18,7 +18,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051056272672111.jpg" alt="模拟线程"></p>
+<p><img src="../images_result/images/201601051056272672111.jpg" alt="模拟线程"></p>
 
 <h1>0x01 访问权限检查</h1>
 
@@ -30,7 +30,7 @@
 
 <p>DACL（自主访问控制表，Discretionary Access Control List）检查是最基本的访问权限检查。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051056304916021.jpg" alt="安全描述符"></p>
+<p><img src="../images_result/images/201601051056304916021.jpg" alt="安全描述符"></p>
 
 <p>在安全描述符中存在着一个DACL表（见安全描述符图解），里面描述了拥有何种身份的主体申请的何种访问权限会被允许或者拒绝。DACL表中的每个表项拥有如下的结构：</p>
 
@@ -163,7 +163,7 @@ kd&gt; dt nt!_TOKEN
 
 <p>我们比较关注其中的特权位图和三个代表主体身份的Sid数组：UserAndGroups，RestrictedSids，Capabilities。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/20160105105631376043.jpg" alt="_TOKEN结构体"></p>
+<p><img src="../images_result/images/20160105105631376043.jpg" alt="_TOKEN结构体"></p>
 
 <h3>Privileges位图</h3>
 
@@ -252,7 +252,7 @@ RtlSidHashInitialize
 
 <p>关联令牌是通过Logon Session来实现的，下图展示了其大致原理：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/20160105105633486114.jpg" alt="关联令牌"></p>
+<p><img src="../images_result/images/20160105105633486114.jpg" alt="关联令牌"></p>
 
 <p>并非所有的令牌都有关联令牌，比如一直运行在较高权限下不需要进行提权操作的令牌。</p>
 
@@ -292,7 +292,7 @@ nt!_OBJECT_HEADER
    +0x030 Body             : _QUAD
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160105/20160105105635452845.jpg" alt="对象头"></p>
+<p><img src="../images_result/images/20160105105635452845.jpg" alt="对象头"></p>
 
 <p>对象的头部包含着指向安全描述符的指针。</p>
 
@@ -327,19 +327,19 @@ nt!_SECURITY_DESCRIPTOR_RELATIVE
 
 <p>对象除了拥有共同的固定头部外，还可以有可选的头部，保存着名称等可选信息。通过固定头部的InfoMask成员查表可以得到可选头部的位置，如图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/20160105105637417526.jpg" alt="可选头部"></p>
+<p><img src="../images_result/images/20160105105637417526.jpg" alt="可选头部"></p>
 
 <h3>对象目录</h3>
 
 <p>只有部分对象拥有名称信息，它们被称为命名对象。命名对象的主要作用是方便对象在不同的进程中共享，它们被按类别编纂成对象目录，因此可以通过在对象目录中的路径信息找到该对象。对象目录的实现如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/20160105105639819617.jpg" alt="对象目录"></p>
+<p><img src="../images_result/images/20160105105639819617.jpg" alt="对象目录"></p>
 
 <h3>对象类型</h3>
 
 <p>对象类型是对象中非常重要的信息，Windows将对象的类型信息从同一类对象中抽象出来，保存成一个单独的类型对象。系统中全部的类型对象被集中放置在一个表中，对象通过维护一个指向该表的索引（TypeIndex）来表明当前对象的类型。这个索引值直接保存在对象的头部，而对象体与对象头部直接相邻，如果对象体被损坏，有可能导致头部的索引值被改变，使所谓的类型混淆（Type Confusion）利用成为可能。为了缓解这一问题，Windows 10对该索引值做了特殊保护，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/20160105105640456008.jpg" alt="类型索引保护"></p>
+<p><img src="../images_result/images/20160105105640456008.jpg" alt="类型索引保护"></p>
 
 <p>这种保护方式简单而强大，新的索引值由3部分经过异或操作得到：类型对象在类型对象表中的真实索引值，对象头部地址的第二个字节（即第8到第15位），保存在ObHeaderCookie全局变量中的因每次系统启动而异的Cookie字节。其中，ObHeaderCookie的引入，使同一类型的对象在不同机器上，甚至是同一机器上两次启动之间的索引值不同，然而这样并不足以缓解类型混淆利用，我们还可以利用信息泄露（Info Leak）来绕过（Bypass）该保护，因此还引入了对象头部地址，使得在同一时刻、同一系统中的两个相同类型对象的不同实例间的索引值也不相同，从而有效地缓解类型混淆利用。</p>
 
@@ -410,7 +410,7 @@ RTL_PROTECTED_ACCESS RtlProtectedAccess[] =
 
 <p>其中，Process Restrictions以及Thread Restrictions分别代表着进程和线程的权限限制，详解如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/20160105105642672669.jpg" alt="保护进程与线程的权限限制"></p>
+<p><img src="../images_result/images/20160105105642672669.jpg" alt="保护进程与线程的权限限制"></p>
 
 <p>我们可以通过NtDebugActiveProcess以及NtCreateUserProcess的演示代码来理解保护进程及其限制的逻辑：</p>
 

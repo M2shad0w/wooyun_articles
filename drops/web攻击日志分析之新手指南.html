@@ -3,7 +3,7 @@
 			<head>
 			     <title>web攻击日志分析之新手指南 - 奔跑的小胖子</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/5411">http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/5411</a></h1>
 				
@@ -39,7 +39,7 @@
 <pre><code>service apache2 start
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033003005920442.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033003005920442.png" alt="enter image description here"></p>
 
 <h2>MySQL</h2>
 
@@ -50,7 +50,7 @@
 <pre><code>service mysql start
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033003010056829.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033003010056829.png" alt="enter image description here"></p>
 
 <h2>使用PHP-MySQL创建一个有漏洞的web应用</h2>
 
@@ -76,11 +76,11 @@
 
 <p>在下图中，我们在URL中试图搜寻所有关键词为“union”的请求。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033003010011634.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033003010011634.png" alt="enter image description here"></p>
 
 <p>从上图中，我们可以看到URL中的“union select 1,2,3,4,5”请求。很明显，ip地址为 192.168.56.105的某人尝试了SQL注入。 类似地，当我们有自己的关键词时可以搜索特殊的关键词。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033003010062720.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033003010062720.png" alt="enter image description here"></p>
 
 <p>在下图中，我们正在搜索试图读取“/etc/passwd”的请求，很明显是本地文件包含尝试。</p>
 
@@ -96,7 +96,7 @@
 
 <p>除了这些关键词，在分析期间要了解HTTP状态代码的基础知识。以下是关于HTTP状态代码的高级信息的表格。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033003010029233.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033003010029233.jpg" alt="enter image description here"></p>
 
 <h1>0x03 Web shells</h1>
 
@@ -108,7 +108,7 @@
 
 <p>以下截图显示了Microsoft Excel 中开启相同的access.log文件。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033003010062287.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033003010062287.png" alt="enter image description here"></p>
 
 <p>我们清楚地看到有一个叫“b374k.php”的文件被访问了。“b374k”是一个流行的webshell，因此这个文件是很可疑的。</p>
 
@@ -129,11 +129,11 @@
 
 <p>%27是单引号的URL编码。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033003010015238.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033003010015238.png" alt="enter image description here"></p>
 
 <p>出于管理目的，我们还可以运行查询监视来查看数据库中的哪个请求被执行了。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033003010111301.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033003010111301.png" alt="enter image description here"></p>
 
 <p>如果我们观察以上图片，传递一个单引号给参数“user”的SQL语句被执行了。</p>
 
@@ -155,7 +155,7 @@
 
 <p>以下图片显示该工具的帮助。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033003010142838.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033003010142838.png" alt="enter image description here"></p>
 
 <p>如我们在上图所见，我们需要使用标志-l来提供要分析的日志文件。</p>
 
@@ -193,13 +193,13 @@
 python scalp-0.4.py –l /var/log/apache2/access.log –f filter.xml –o output –html
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033003010114177.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033003010114177.png" alt="enter image description here"></p>
 
 <p>“output”是报告保存的目录。如果不存在的话，由Scalp自动创建。-html是用来生成HTML格式的报告。 如我们在上图看到的那样，Scalp结果表明它分析了4001行，超过4024并发现了296个攻击模式。</p>
 
 <p>运行上述命令后在输出目录内生成报告。我们可以在浏览器内打开它并查看结果。 下面截图显示的输出显示了目录遍历攻击尝试的一小部分。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033003010124637.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033003010124637.png" alt="enter image description here"></p>
 
 <h2>MySQL中的日志记录</h2>
 
@@ -209,11 +209,11 @@ python scalp-0.4.py –l /var/log/apache2/access.log –f filter.xml –o output
 
 <p>第一步是查看设置了什么变量。我们可以使用“show variables;”完成，如下所示。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033003010195643.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033003010195643.png" alt="enter image description here"></p>
 
 <p>接下来显示了上述命令的输出。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033003010224611.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033003010224611.png" alt="enter image description here"></p>
 
 <p>如我们在上图中看到的，日志记录已开启。该值默认为OFF。</p>
 
@@ -235,19 +235,19 @@ python scalp-0.4.py –l /var/log/apache2/access.log –f filter.xml –o output
 
 <p>我正在使用VIM编辑器打开位于/etc/mysql目录内的“my.cnf”文件。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033003010282813.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033003010282813.png" alt="enter image description here"></p>
 
 <p>如果我们向下滚动，可以看见日志正被写入一个称为“mysql.log”的文件内。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033003010287852.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033003010287852.png" alt="enter image description here"></p>
 
 <p>我们还能看到记录“log&#95;slow&#95;queries” ，是记录SQL语句执行花了很长时间的日志。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033003010220270.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033003010220270.png" alt="enter image description here"></p>
 
 <p>现在一切就绪。如果有人用恶意查询数据库，我们可以在这些日志中观察到。如下所示：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033003010258236.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033003010258236.png" alt="enter image description here"></p>
 
 <p>上图显示了查询命中了名为“webservice”的数据库并试图使用SQL注入绕过认证。</p>
 

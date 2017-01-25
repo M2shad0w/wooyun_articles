@@ -3,7 +3,7 @@
 			<head>
 			     <title>三位一体的漏洞分析方法-web应用安全测试方法 - BMa</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/5154">http://drops.wooyun.org/web/5154</a></h1>
 				
@@ -28,7 +28,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/20150313/2015031302073521415.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031302073521415.jpg" alt="enter image description here"></p>
 
 <p>• 局限：  • 难以处理高交互式应用  • 只能发现暴露给用户（搜索引擎）的链接，难以覆盖100%的业务链接  • 解决方法：引入半被动式漏洞分析方法  • 在人工未参与的情况下，50%以上的Web应用系统存在高危漏洞 </p>
 
@@ -52,7 +52,7 @@
 
 <p>  检测逻辑漏洞：  •水平权限绕过  •订单修改  •隐藏域修改 </p>
 
-<p><img src="http://static.wooyun.org/20150313/2015031302073650604.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031302073650604.jpg" alt="enter image description here"></p>
 
 <h2>2. 方法二： 手工记录</h2>
 
@@ -69,9 +69,9 @@
 <li>从Fiddler2、 burpsuite 导出Url日志 再导入到漏洞扫描器扫描</li>
 </ol>
 
-<p><img src="http://static.wooyun.org/20150313/2015031302073697295.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031302073697295.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20150313/2015031302073625924.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031302073625924.png" alt="enter image description here"></p>
 
 <p>2.获取Apache、Nginx、Tomcat的access日志 </p>
 
@@ -85,7 +85,7 @@
 <li>从旁路镜像中提取url日志 （安全人员不用再被动等待应用 的上线通知）  如：jnstniffer、 360鹰眼、各大IT公司等</li>
 </ol>
 
-<p><img src="http://static.wooyun.org/20150313/2015031302073721296.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031302073721296.jpg" alt="enter image description here"></p>
 
 <p>• 从旁路镜像中获取url列表，能高效地检出大量的漏洞，不需要运维人员通知，便可以获知业务系统的上线情况并执行漏洞扫描任务。</p>
 
@@ -101,7 +101,7 @@
 
 <p>  国外产品：Nessus PVS被动扫描 </p>
 
-<p><img src="http://static.wooyun.org/20150313/2015031302073792812.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031302073792812.jpg" alt="enter image description here"></p>
 
 <h2>全被动式漏洞分析（不发送任何数据包) </h2>
 
@@ -111,7 +111,7 @@
 <li>全被动式扫描VS主动式漏洞扫描器  相同点：都是根据双向数据包的内容，判断漏洞是否存在  不同点：  检测方式：被动式扫描不需要联网，不会主动发出url请求，也不发出任何数据包 PVS和IDS的区别：  • 更关注漏洞感知，而不是入侵，如页面出现sql错误信息，可触发pvs报警，但不会触发ids报警。  • 报警结果不一样：pvs按照漏洞的风险等级，ids按照黑客的攻击手段报警  • 双向分析数据报文  • 更关注于web应用，OWASP TOP10的攻击手段  • 按攻击影响报警（分析双向报文），而不是按攻击手段去报警（分析单向报文） Nessus的PVS只是一个思路，它专注及网络及主机漏洞，对Web应用的检测能力有限，需要重新设计一个针对web的PVS出来:WebPVS，同步接受用户提交的所有业务请求，通过扫描引擎识别请求，一旦发现恶意请求或者该请求返回数据，触发报警处理</li>
 </ul>
 
-<p><img src="http://static.wooyun.org/20150313/2015031302073792421.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031302073792421.jpg" alt="enter image description here"></p>
 
 <p>• WebPVS的优点：    • 虽然依然难以覆盖100%的业务链接，但是能覆盖100%已经发生的业务链接。  • 能与黑客同步发现各种漏洞 • 由于HTTP协议是固定，因此能够根据回包情况发现0day攻击。 </p>      <p></p>
     

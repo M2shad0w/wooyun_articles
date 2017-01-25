@@ -3,7 +3,7 @@
 			<head>
 			     <title>Powershell tricks::Powershell Remoting - DM_</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3473">http://drops.wooyun.org/tips/3473</a></h1>
 				
@@ -16,7 +16,7 @@
 
 <p>Windows 远程管理(WinRM)是 WS-Management 协议的 Microsoft 实现，该协议为使用 Web 服务的本地计算机和远程计算机之间的通信提供了一种安全的方式。 也就是说在WS-MAN协议基础上，客户端运行环境可以多样化。 比如<a href="https://github.com/Openwsman/openwsman">openwsman</a>。</p>
 
-<p><img src="http://static.wooyun.org/20141102/2014110214404218842.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110214404218842.png" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -28,7 +28,7 @@
 
 <p>Powershell Remoting在windows server 2008以前默认是不开启的，需要通过administrator用户执行Enable-PSRemoting命令开启。</p>
 
-<p><img src="http://static.wooyun.org/20141102/2014110214404379549.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110214404379549.png" alt="enter image description here"></p>
 
 <p>在windows server 2012中，Powershell Remoting默认开启。</p>
 
@@ -78,13 +78,13 @@ $cred = New-Object System.Management.Automation.PSCredential($UserName,$Password
 invoke-command -ComputerName localhost -Credential $cred -ScriptBlock { ipconfig }
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141102/2014110214404379552.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110214404379552.png" alt="enter image description here"></p>
 
 <p>使用<code>help * -Parameter computername</code>命令可以列出所有默认可以远程使用的命令。并且认证过程都可以像上面的代码一样传递$cred。</p>
 
 <p>之后写个for循环就可以一对多的执行了。</p>
 
-<p><img src="http://static.wooyun.org/20141102/2014110214404397651.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110214404397651.png" alt="enter image description here"></p>
 
 <p>如果输出内容过于冗杂，还可以使用<code>ConvertTo-Csv</code>或者<code>ConvertTo-Html</code>将powershell对象的输出转换为html或者csv。</p>
 
@@ -93,7 +93,7 @@ invoke-command -ComputerName localhost -Credential $cred -ScriptBlock { ipconfig
 <pre><code>Enter-PSSession -ComputerName 192.168.200.161 -Credential $cred
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141102/2014110214404344302.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110214404344302.png" alt="enter image description here"></p>
 
 <h2>0x03 多任务分发</h2>
 
@@ -106,7 +106,7 @@ invoke-command -ComputerName localhost -Credential $cred -ScriptBlock { ipconfig
 
 <p>得到<code>child job id</code>之后，再用 <code>receive-job</code> 接收回显结果。</p>
 
-<p><img src="http://static.wooyun.org/20141102/2014110214404324710.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110214404324710.png" alt="enter image description here"></p>
 
 <h2>0x04 域内信息搜集</h2>
 
@@ -127,17 +127,17 @@ invoke-command -ComputerName localhost -Credential $cred -ScriptBlock { ipconfig
 
 <p>两种不同的脚本都通过调用OpenSCManagerA API连接远程主机测试是否成功。</p>
 
-<p><img src="http://static.wooyun.org/20141102/2014110214404415226.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110214404415226.png" alt="enter image description here"></p>
 
 <p>Local&#95;admin&#95;search.rb</p>
 
-<p><img src="http://static.wooyun.org/20141102/2014110214404469059.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110214404469059.png" alt="enter image description here"></p>
 
 <p>Invoke-CheckLocalAdminAccess</p>
 
 <p>附<a href="http://www.harmj0y.net/blog/penetesting/finding-local-admin-with-the-veil-framework/">veil-powerview作者博客中</a>的测试截图：</p>
 
-<p><img src="http://static.wooyun.org/20141102/2014110214404418548.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110214404418548.png" alt="enter image description here"></p>
 
 <h2>0x05 参考</h2>
 

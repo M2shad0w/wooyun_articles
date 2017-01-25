@@ -3,7 +3,7 @@
 			<head>
 			     <title>对移动支付的一些简单安全探测 - p0di</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/947">http://drops.wooyun.org/tips/947</a></h1>
 				
@@ -35,7 +35,7 @@
 
 <p>1.初次绑定卡：</p>
 
-<p><img src="http://static.wooyun.org/201402/2014021722074747557.jpg" alt="2014021722074747557.jpg"></p>
+<p><img src="../images_result/images/2014021722074747557.jpg" alt="2014021722074747557.jpg"></p>
 
 <p>再次绑定其他卡相对简单只需要，预留手机、手机验证码。（这时候你会发现该微信只能绑定以第一张开户的户主的其他卡片，想绑定其他人卡与该微信对不起客官，不可以）。当以上信息同时满足时，银行卡便被微信绑定，支付时只需要</p>
 
@@ -58,7 +58,7 @@
 
 <p>仍用一张图说明3种支付方式的依赖关系:</p>
 
-<p><img src="http://static.wooyun.org/201402/2014021722251656217.jpg" alt="2014021722251656217.jpg"></p>
+<p><img src="../images_result/images/2014021722251656217.jpg" alt="2014021722251656217.jpg"></p>
 
 <h2>0x02 探测结果及比对</h2>
 
@@ -73,21 +73,21 @@
 
 <p>一个图说明下银行卡和微信直接多对多（一个微信可以绑定多个第一个卡片户主下的其他卡片）的关系：</p>
 
-<p><img src="http://static.wooyun.org/201402/2014021722512821935.jpg" alt="2014021722512821935.jpg"></p>
+<p><img src="../images_result/images/2014021722512821935.jpg" alt="2014021722512821935.jpg"></p>
 
 <p>那么支付宝钱包为什么不可以呢？我们都知道，注册支付宝的时候会有实名验证，而且你一但注册是不能二次注册的。而后期的消费过程中密码设置更是逐层要求相加。例如你想小额免密支付，必须有以上两个密码设置。支付宝安全首先从，根本抑制了以上微信中的问题。当然Tencent注册的底层基数已经不可能抑制，那么是不是从安全角度去思考是不是该比阿里做的好点呢？为了表明本次探测的真实性，贴几张探测过程中的图片证明：</p>
 
 <p>同一张卡被不同微信绑定:</p>
 
-<p><img src="http://static.wooyun.org/201402/2014021723042841558.jpg" alt="2014021723042841558.jpg"></p>
+<p><img src="../images_result/images/2014021723042841558.jpg" alt="2014021723042841558.jpg"></p>
 
-<p><img src="http://static.wooyun.org/201402/2014021723044869418.jpg" alt="2014021723044869418.jpg"></p>
+<p><img src="../images_result/images/2014021723044869418.jpg" alt="2014021723044869418.jpg"></p>
 
 <p>两个手机最后消费成功的证明：</p>
 
-<p><img src="http://static.wooyun.org/201402/2014021723062713981.jpg" alt="2014021723062713981.jpg"></p>
+<p><img src="../images_result/images/2014021723062713981.jpg" alt="2014021723062713981.jpg"></p>
 
-<p><img src="http://static.wooyun.org/201402/2014021723064957054.jpg" alt="2014021723064957054.jpg"></p>
+<p><img src="../images_result/images/2014021723064957054.jpg" alt="2014021723064957054.jpg"></p>
 
 <p>根据上面的图标我们可以清晰的分辨事实的可行性。</p>
 

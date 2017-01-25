@@ -3,7 +3,7 @@
 			<head>
 			     <title>Android平台下二维码漏洞攻击杂谈 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/10775">http://drops.wooyun.org/mobile/10775</a></h1>
 				
@@ -22,7 +22,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011130233308817.jpg" alt="p1"></p>
+<p><img src="../images_result/images/201512011130233308817.jpg" alt="p1"></p>
 
 <p>通过程序的崩溃日志可以看出是个数组越界：</p>
 
@@ -55,11 +55,11 @@ alert(x.responseText);
 &lt;/script&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011130248147023.jpg" alt="p2"></p>
+<p><img src="../images_result/images/201512011130248147023.jpg" alt="p2"></p>
 
 <p>用快拍扫描之后，就能读取本地文件内容：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011130263480235.jpg" alt="p3"></p>
+<p><img src="../images_result/images/201512011130263480235.jpg" alt="p3"></p>
 
 <h1>0x03 UXSS</h1>
 
@@ -69,7 +69,7 @@ alert(x.responseText);
 
 <p>Webview组件几乎存在于所有Android App中，用来渲染网页。如果扫描二维码得到的结果是个网址，大部分App会直接用Webview来打开，由于Webview存在UXSS漏洞，很容易导致资金被窃、帐号被盗或者隐私泄露。漏洞介绍可参考TSRC博文：<a href="http://security.tencent.com/index.php/blog/msg/70">Android Webview UXSS 漏洞攻防</a></p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011130277386842.jpg" alt="p4"></p>
+<p><img src="../images_result/images/201512011130277386842.jpg" alt="p4"></p>
 
 <h1>0x04 远程命令执行</h1>
 
@@ -103,15 +103,15 @@ android:targetSdkVersion="14"
 
 <p>苏宁易购Android版首页有个扫描二维码的功能：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011130293469854.jpg" alt="p5"></p>
+<p><img src="../images_result/images/201512011130293469854.jpg" alt="p5"></p>
 
 <p>扫描二维码时，如果二维码是个网页链接，就会调用上面的Webview组件打开恶意网页：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011130308086161.jpg" alt="p6"></p>
+<p><img src="../images_result/images/201512011130308086161.jpg" alt="p6"></p>
 
 <p>恶意二维码如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011130368499371.jpg" alt="p7"></p>
+<p><img src="../images_result/images/201512011130368499371.jpg" alt="p7"></p>
 
 <h1>0x05 总结</h1>
 

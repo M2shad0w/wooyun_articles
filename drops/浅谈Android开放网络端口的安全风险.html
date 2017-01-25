@@ -3,7 +3,7 @@
 			<head>
 			     <title>浅谈Android开放网络端口的安全风险 - 小荷才露尖尖角</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/6973">http://drops.wooyun.org/mobile/6973</a></h1>
 				
@@ -22,7 +22,7 @@
 
 <p>简单地利用命令netstat就可以发现Android开放了许多socket端口，如图。但这些开放端口本后的应用却不得而知。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150709/2015070902353156806.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070902353156806.png" alt="enter image description here"></p>
 
 <p>此时可以通过三步定位法进行寻找（<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="dd3b5942356d7f9d3a457b3546423555433a4759">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script><a href="http://zone.wooyun.org/content/20410">帖子</a>），支持非root手机。</p>
 
@@ -30,13 +30,13 @@
 
 <p>第二步，将端口转换为十六进制值，查看位于/proc/net/目录下对应的socket套接字状态文件，在其中找到使用该socket的应用的uid。如15555的十六进制表示为1cc3，协议类型为tcp6，那么查看/proc/net/tcp6文件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150709/2015070902353152015.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070902353152015.png" alt="enter image description here"></p>
 
 <p>注意上面的10115，就是使用该socket的应用的uid。通过这个uid可以得知应用的用户名为u0_a115。</p>
 
 <p>第三步，根据用户名就可以找到应用了</p>
 
-<p><img src="http://static.wooyun.org//drops/20150709/2015070902353142425.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070902353142425.png" alt="enter image description here"></p>
 
 <p>至此，我们就知道开放15555端口的应用为com.qiyi.video，尽管我们还不能分辨出开放该端口的准确进程，但仍然为进一步的漏洞挖掘打下基础。</p>
 
@@ -107,13 +107,13 @@ if __name__ == '__main__':
 
 <p>运行结果如下</p>
 
-<p><img src="http://static.wooyun.org//drops/20150709/2015070902353167142.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070902353167142.png" alt="enter image description here"></p>
 
 <p>除了PF&#95;INET套接字外，PF&#95;UNIX、PF_NETLINK套接字的状态文件分别位于/proc/net/unix和/proc/net/netlink。</p>
 
 <p>当然，如果手机已root，可直接使用busybox安装目录下带p参数的netstat命令，可以显示pid和不完整的program name。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150709/2015070902353299135.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070902353299135.png" alt="enter image description here"></p>
 
 <h1>0x02 漏洞挖掘实例</h1>
 
@@ -209,7 +209,7 @@ if __name__ == '__main__':
 
 <p>可获取手机的敏感信息和实现命令执行。其中command为getpackageinfo、androidamap、geolocation中的其一，见如下代码片段。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150709/2015070902353258460.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070902353258460.png" alt="enter image description here"></p>
 
 <p>（1）当command为geolocation时，可返回安装该应用手机地理位置信息；</p>
 
@@ -217,7 +217,7 @@ if __name__ == '__main__':
 
 <p>（3）当command为androidamap时，设置Intent并将其广播出去，查看对应的OnReceive方法</p>
 
-<p><img src="http://static.wooyun.org//drops/20150709/2015070902353353500.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070902353353500.png" alt="enter image description here"></p>
 
 <p>发现需要指定参数param1为action,即请求</p>
 
@@ -262,7 +262,7 @@ Uri v0_2 = Uri.parse("androidamap://openFeature?featureName=OpenURL&amp;sourceAp
 
 <p>叙述之前，我们先对典型的移动通信网络架构进行简单的科普，一般教科书上的3G网络架构（WCDMA）如图。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150709/2015070902353322435.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070902353322435.jpg" alt="enter image description here"></p>
 
 <p>包括以下组成部分：</p>
 
@@ -287,7 +287,7 @@ Uri v0_2 = Uri.parse("androidamap://openFeature?featureName=OpenURL&amp;sourceAp
 
 <p>使用联通3G网络，查看当前IP地址。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150709/2015070902353398307.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070902353398307.png" alt="enter image description here"></p>
 
 <p>在相邻C段进行扫描，扫描到开放端口的手机</p>
 
@@ -296,7 +296,7 @@ Uri v0_2 = Uri.parse("androidamap://openFeature?featureName=OpenURL&amp;sourceAp
 
 <p>发现如下结果</p>
 
-<p><img src="http://static.wooyun.org//drops/20150709/2015070902353476966.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015070902353476966.png" alt="enter image description here"></p>
 
 <p>这证明在移动网络中，不同的UE可以互访。因此如果开放上述socket端口的app存在漏洞，在移动网络中也是可以利用的。</p>
 

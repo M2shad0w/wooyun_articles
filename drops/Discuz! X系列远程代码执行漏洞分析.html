@@ -3,7 +3,7 @@
 			<head>
 			     <title>Discuz! X系列远程代码执行漏洞分析 - tang3</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/7830">http://drops.wooyun.org/papers/7830</a></h1>
 				
@@ -100,11 +100,11 @@ if(!defined('IN_UC')) {
 
 <p>我们在后台中站长<code>-&gt;UCenter</code>设置中发现有“<code>UCenter 通信密钥</code>”这个字段，这是用于操控discuz和uc连接的app key，而非高级的uc_server key，不过对于我们getshell来说足够了。在这里修改为任意值，这样我们就获取到了加密用的key值了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081006105261769.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081006105261769.png" alt="enter image description here"></p>
 
 <p>从下图我们可以看到，配置文件已经被修改了:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081006105247962.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081006105247962.png" alt="enter image description here"></p>
 
 <p>然后我们在自己搭建的discuz的<code>api/uc.php</code>文件中添加两行代码，来加密get请求所需要的内容：</p>
 
@@ -116,7 +116,7 @@ $a = 'time='.time().'&amp;action=updatebadwords';
 
 <p>这样我们就可以获取到加密后的code值了！</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081006105368463.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081006105368463.png" alt="enter image description here"></p>
 
 <p>然后用post方法向api/uc.php发送带有正则表达式信息的xml数据包，请求头中有两个地方需要注意，一个是formhash，一个是刚才获取的code需要进行一次url编码，否则解密会出现问题。我使用的数据包如下图所示：</p>
 
@@ -145,13 +145,13 @@ Cookie: FPDO_2132_saltkey=Z777zGG4; FPDO_2132_lastvisit=1432691505; FPDO_2132_ul
 
 <p>发送后可以发现<code>uc_client/data/cache</code>目录下的<code>badwords.php</code>内容变为了我们刚刚设定的正则表达式的样子：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081006105364148.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081006105364148.png" alt="enter image description here"></p>
 
 <p>之后利用方法就有很多种了，可以通过增加一个用户来实现代码执行，也可以通过发消息的方式来触发，这里我以添加一个用户为例。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081006105355692.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081006105355692.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081006105493258.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081006105493258.png" alt="enter image description here"></p>
 
 <h1>0x04 漏洞总结</h1>
 

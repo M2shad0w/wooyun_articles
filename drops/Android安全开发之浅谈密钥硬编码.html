@@ -3,7 +3,7 @@
 			<head>
 			     <title>Android安全开发之浅谈密钥硬编码 - 阿里移动安全</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/15870">http://drops.wooyun.org/tips/15870</a></h1>
 				
@@ -30,23 +30,23 @@
 
 <p>反编译APP，发现DES算法：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160516/2016051607081980703120.png" alt=""></p>
+<p><img src="../images_result/images/2016051607081980703120.png" alt=""></p>
 
 <p>发现DES算法的密钥，硬编码为“yrdAppKe”，用来加密手势密码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160516/2016051607082438915219.png" alt=""></p>
+<p><img src="../images_result/images/2016051607082438915219.png" alt=""></p>
 
 <p>将手势密码用DES加密后存放在本地LocusPassWordView.xml文件中：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160516/2016051607082949798310.png" alt=""></p>
+<p><img src="../images_result/images/2016051607082949798310.png" alt=""></p>
 
 <p>知道了密文和加密算法以及密钥，通过解密操作，可以从文件中恢复出原始的手势密码。或者使用新的生成新的手势密码</p>
 
 <p>而与服务器通信时接口中的Jason字段也用了DES算法和密钥硬编码为“yRdappKY”：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160516/2016051607083052341410.png" alt=""></p>
+<p><img src="../images_result/images/2016051607083052341410.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160516/2016051607083216871510.png" alt=""></p>
+<p><img src="../images_result/images/2016051607083216871510.png" alt=""></p>
 
 <p>和服务器通信采用http传输，没有使用https来加密通信，如果采用中间人攻击或者路由器镜像，获得流量数据，可以破解出用户的通信内容。</p>
 
@@ -56,41 +56,41 @@
 
 <p>和服务器通信时的数据为：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160516/20160516070834429646.jpeg" alt=""></p>
+<p><img src="../images_result/images/20160516070834429646.jpeg" alt=""></p>
 
 <p>q字段是加密后的内容。逆向APP，从登录Activity入手：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160516/201605160708366405879.png" alt=""></p>
+<p><img src="../images_result/images/201605160708366405879.png" alt=""></p>
 
 <p>分析登录流程：v1是用户名，v2是密码，v3是PushId，在用户名和密码不为空并且长度不小于11情况下，执行LoginOperate相关操作，追踪LoginOperate的实现，发现继承自BaseOperate，继续追踪BaseOperate的实现：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160516/201605160708385172187.png" alt=""></p>
+<p><img src="../images_result/images/201605160708385172187.png" alt=""></p>
 
 <p>在BaseOperate的initUrl()方法中，找到了APP是怎么生成请求数据的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160516/201605160708396491497.png" alt=""></p>
+<p><img src="../images_result/images/201605160708396491497.png" alt=""></p>
 
 <p>继续追踪上图中的initJsonUrl()方法，发现其调用了AES加密：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160516/201605160708414740310.jpeg" alt=""></p>
+<p><img src="../images_result/images/201605160708414740310.jpeg" alt=""></p>
 
 <p>继续追踪aes.onEncrypt()函数：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160516/20160516070842215531111.png" alt=""></p>
+<p><img src="../images_result/images/20160516070842215531111.png" alt=""></p>
 
 <p>在onEncrypt()函数中调用了encrypt()函数用来加密数据，追踪encrypt()函数的实现，发现其使用AES算法，并且密钥硬编码在java代码中为“shenzhoucar123123”</p>
 
-<p><img src="http://static.wooyun.org//drops/20160516/2016051607084466968127.png" alt=""></p>
+<p><img src="../images_result/images/2016051607084466968127.png" alt=""></p>
 
 <p>到现在请求中的数据加密如何实现的就清晰了，另外由于服务器权限控制不严，就可以构造订单id的请求，达到越权访问到其他用户的订单。 </p>
 
 <p>构造{“id”:”11468061”}的请求:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160516/201605160708468503113.jpeg" alt=""></p>
+<p><img src="../images_result/images/201605160708468503113.jpeg" alt=""></p>
 
 <p>其中uid设置为你自己的uid即可，可以成功看到其他人的订单:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160516/2016051607084712830146.png" alt=""></p>
+<p><img src="../images_result/images/2016051607084712830146.png" alt=""></p>
 
 <p>攻击者完全可以做到使用其他脚本重新实现相同的加密功能并拼接出各个接口请求，批量的刷取订单信息和用户其他信息。</p>
 
@@ -100,11 +100,11 @@
 
 <p>APP和服务器通信的原始包如下图，可以看到有加签字段sign：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160516/2016051607084921623156.png" alt=""></p>
+<p><img src="../images_result/images/2016051607084921623156.png" alt=""></p>
 
 <p>逆向APP定位到加密算法的逻辑代码，com.htinns.biz.HttpUtils.class，其实现逻辑为：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160516/2016051607085189570164.png" alt=""></p>
+<p><img src="../images_result/images/2016051607085189570164.png" alt=""></p>
 
 <p>原始数据是unSignData，使用RC4算法加密，密钥为KEY变量所代表的值，加密后的数据为signData，传输的数据时的data字段为signData。 </p>
 
@@ -114,7 +114,7 @@
 
 <p>可以使用IDA逆向分析so库，找到sendSign()方法</p>
 
-<p><img src="http://static.wooyun.org//drops/20160516/2016051607085273879175.png" alt=""></p>
+<p><img src="../images_result/images/2016051607085273879175.png" alt=""></p>
 
 <p>而乌云漏洞提交者采用的是分析sign和getSign(sign)的数据，做一个算法破解字典。其实还有种方法直接调用此so库，来生成字典。</p>
 

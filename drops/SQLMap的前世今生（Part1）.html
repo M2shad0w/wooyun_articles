@@ -3,7 +3,7 @@
 			<head>
 			     <title>SQLMap的前世今生（Part1） - 猎豹科学院</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8614">http://drops.wooyun.org/tips/8614</a></h1>
 				
@@ -129,7 +129,7 @@ SELECT tableid FROM ".DB::table('forum_attachment')." WHERE pid='' AND 'test' = 
 
 <p>其中要注意的是,Payload中的字符串会根据当前Payload所适用的数据库类型对字符串进行处理，其处理的代码位于\plugins\dbms下对应数据库文件夹中的syntax.py脚本中。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107311141296.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015091107311141296.png" alt="enter image description here"></p>
 
 <p>所以最终的payload是根据test的payload子节点和boundary的prefix（前缀）、suffix（后缀）子节点的值组合而成的，即：最终的<code>payload =  url参数 + boundary.prefix+test.payload+boundary.suffix</code></p>
 
@@ -169,7 +169,7 @@ http://127.0.0.1/search-result.php?keyword=&amp;ad_id=' AND (SELECT 2214 FROM(SE
 
 <p>如下为返回的页面信息</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091107311183851.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015091107311183851.png" alt="enter image description here"></p>
 
 <p>后根据grep中的正规来匹配当前页面。</p>
 

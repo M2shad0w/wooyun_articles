@@ -3,7 +3,7 @@
 			<head>
 			     <title>JAVA反序列化漏洞完整过程分析与调试 - z_zz_zzz</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/13244">http://drops.wooyun.org/papers/13244</a></h1>
 				
@@ -71,11 +71,11 @@
 
 <p>String实现了Serializable接口，可进行序列化。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110521282492String.png" alt=""></p>
+<p><img src="../images_result/images/2016030110521282492String.png" alt=""></p>
 
 <p>以下测试代码会对String类的对象进行序列化，将序列化的数据保存在文件中，再从文件读取序列化的数据进行反序列化。执行上述代码后，能够正确输出原String类的对象的值。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110521128800SerializeString.png" alt=""></p>
+<p><img src="../images_result/images/2016030110521128800SerializeString.png" alt=""></p>
 
 <h3>JAVA序列化数据的magic number</h3>
 
@@ -108,13 +108,13 @@ final static short STREAM_VERSION = 5;
 
 <p>查看上一步骤生成的保存了序列化数据的文件，文件内容开头为“AC ED 00 05”，与上述描述相符。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110521367301String_data.png" alt=""></p>
+<p><img src="../images_result/images/2016030110521367301String_data.png" alt=""></p>
 
 <h3>对自定义类的序列化与反序列化测试</h3>
 
 <p>以下测试代码为test.SerializeMyClass类，在其中定义了内部类MyObject。MyObject类实现了Serializable接口，SerializeMyClass类会对MyObject类的对象进行序列化，将序列化的数据保存在文件中，再从文件读取序列化的数据进行反序列化。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110520925372SerializeMyClass.png" alt=""></p>
+<p><img src="../images_result/images/2016030110520925372SerializeMyClass.png" alt=""></p>
 
 <p>执行结果如下</p>
 
@@ -128,7 +128,7 @@ tttest!
 
 <p>生成的保存了序列化数据的文件，文件内容开头也为“AC ED 00 05”，可以看到文件内容包含了包名与类名、类中包含的变量名称、类型及变量的值。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110520591927MyClass_data.png" alt=""></p>
+<p><img src="../images_result/images/2016030110520591927MyClass_data.png" alt=""></p>
 
 <h2>JAVA反射机制</h2>
 
@@ -143,7 +143,7 @@ fos.write("abc".getBytes());
 
 <p>若需要使用JAVA反射机制调用FileOutputStream类写文件，且只允许调用Class.getMethod与Method.invoke方法，上述代码需修改为如下形式。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110520473350FileOutputStream.png" alt=""></p>
+<p><img src="../images_result/images/2016030110520473350FileOutputStream.png" alt=""></p>
 
 <h3>使用JAVA反射机制调用Runtime类执行程序</h3>
 
@@ -156,7 +156,7 @@ runtime.exec("calc");
 
 <p>若需要使用JAVA反射机制调用Runtime类执行程序件，且只允许调用Class.getMethod与Method.invoke方法，上述代码需修改为如下形式。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110520779916Runtime.png" alt=""></p>
+<p><img src="../images_result/images/2016030110520779916Runtime.png" alt=""></p>
 
 <h3>JAVA反射机制与序列化</h3>
 
@@ -164,7 +164,7 @@ runtime.exec("calc");
 
 <p>以下测试代码为testReflection.TestReflection类，与前文中的test.MyObject类不在同一个包中，在TestReflection类中对MyObject类进行序列化时，需要使用JAVA的反射机制。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110521442525TestReflection.png" alt=""></p>
+<p><img src="../images_result/images/2016030110521442525TestReflection.png" alt=""></p>
 
 <p>以下为执行结果，可以看到使用JAVA的反射机制后，能够对无法直接访问的类进行序列化。</p>
 
@@ -295,7 +295,7 @@ public class InvokerTransformer implements Transformer, Serializable {
 
 <p>以下为利用org.apache.commons.collections.functors.ChainedTransformer类执行任意代码的示例，当执行最后的“chain.transform(chain);”后，会执行传入的Transformer数组指定的代码。在该示例中，会启动计算器程序。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110520165315ExecuteChainedTransformer.png" alt=""></p>
+<p><img src="../images_result/images/2016030110520165315ExecuteChainedTransformer.png" alt=""></p>
 
 <p>ConstantTransformer与InvokerTransformer数组可被转换为org.apache.commons.collections.functors.ChainedTransformer对象。在ChainedTransformer类的带参数构造函数中，会将参数中的ConstantTransformer与InvokerTransformer数组保存为this.iTransformers对象。在ChainedTransformer类的transform方法中，会依次调用this.iTransformers对应的ConstantTransformer与InvokerTransformer数组的transform方法，且前一次执行transform方法的返回值object，会作为下一次执行transform方法的参数object。ChainedTransformer类的相关代码如下。</p>
 
@@ -318,7 +318,7 @@ public class ChainedTransformer implements Transformer, Serializable {
 
 <p>对于上述的示例代码，在执行最后的“chain.transform(chain);”方法时，会首先调用ConstantTransformer.transform方法获取其构造函数中传入的类，再依次调用InvokerTransformer.transform方法执行其构造函数中传入的方法，等价于下面的代码。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110515830579ChainedTransformer_Runtime.png" alt=""></p>
+<p><img src="../images_result/images/2016030110515830579ChainedTransformer_Runtime.png" alt=""></p>
 
 <p>上述代码与前文“使用JAVA反射机制调用Runtime类执行程序”中的代码相同，已经过验证可以成功执行，能够调用指定的程序。ChainedTransformer也能够调用FileOutputStream类进行写文件操作，相关代码见前文“使用JAVA反射机制调用FileOutputStream类写文件”部分。由此可见，利用ChainedTransformer类能够执行指定的代码。</p>
 
@@ -326,7 +326,7 @@ public class ChainedTransformer implements Transformer, Serializable {
 
 <p>以下为通过org.apache.commons.collections.map.TransformedMap类执行任意代码的示例，当执行最后的“localEntry.setValue(null);”后，会执行传入的Transformer数组指定的代码。在该示例中，会启动计算器程序。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110520370766ExecuteTransformedMap.png" alt=""></p>
+<p><img src="../images_result/images/2016030110520370766ExecuteTransformedMap.png" alt=""></p>
 
 <h3>涉及的变量及类型</h3>
 
@@ -801,7 +801,7 @@ public abstract class AbstractMapEntryDecorator implements Map.Entry, KeyValue {
 
 <p>以下为通过TransformedMap与AnnotationInvocationHandler类执行任意代码的示例，当执行第57行的“ois.readObject();”后，会执行传入的Transformer数组指定的代码。在该示例中，会启动计算器程序。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160301/2016030110520077925ExecuteAnnotationInvocationHandler.png" alt=""></p>
+<p><img src="../images_result/images/2016030110520077925ExecuteAnnotationInvocationHandler.png" alt=""></p>
 
 <p>sun.reflect.annotation.AnnotationInvocationHandler类无法直接访问，因此在构造需要序列化的对象时，需要使用JAVA反射机制。</p>
 

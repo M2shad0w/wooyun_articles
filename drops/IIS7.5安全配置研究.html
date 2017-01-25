@@ -3,7 +3,7 @@
 			<head>
 			     <title>IIS7.5安全配置研究 - zhangsan</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1019">http://drops.wooyun.org/papers/1019</a></h1>
 				
@@ -20,7 +20,7 @@
 
 <hr>
 
-<p><img src="http://static.wooyun.org/201403/2014030611270847744.jpg" alt="2014030611270847744.jpg"></p>
+<p><img src="../images_result/images/2014030611270847744.jpg" alt="2014030611270847744.jpg"></p>
 
 <p><strong>http 常见功能：</strong>开启静态内容，默认文档，HTTP错误；目录浏览，WebDAV发布如无特殊要求，不要开启；HTTP重定向可根据需要开启。</p>
 
@@ -72,11 +72,11 @@
 
 <p>可以在IIS中设置需要上传文件的目录，处理程序映射中的编辑功能权限中的脚本去掉，这样即使上传了木马文件在此目录，也是无法执行的。</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030611273098478.jpg" alt="2014030611273098478.jpg"></p>
+<p><img src="../images_result/images/2014030611273098478.jpg" alt="2014030611273098478.jpg"></p>
 
 <p>上传目录取消应用程序池账户的执行权限</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030611274922035.png" alt="2014030611274922035.png"></p>
+<p><img src="../images_result/images/2014030611274922035.png" alt="2014030611274922035.png"></p>
 
 <h4>3. 防止木马执行后看到网站目录之外的文件</h4>
 
@@ -98,15 +98,15 @@
 
 <h4>1. 匿名账户使用默认的IUSR。</h4>
 
-<p><img src="http://static.wooyun.org/201403/2014030611280328764.jpg" alt="2014030611280328764.jpg"></p>
+<p><img src="../images_result/images/2014030611280328764.jpg" alt="2014030611280328764.jpg"></p>
 
 <h4>2. 应用程序池使用默认的标识，对于的账户为IIS AppPool\应用程序池名称。</h4>
 
-<p><img src="http://static.wooyun.org/201403/2014030611281563141.jpg" alt="2014030611281563141.jpg"></p>
+<p><img src="../images_result/images/2014030611281563141.jpg" alt="2014030611281563141.jpg"></p>
 
 <h4>3.IIS中对上传目录设置为脚本不可执行</h4>
 
-<p><img src="http://static.wooyun.org/201403/2014030611282823501.png" alt="2014030611282823501.png"></p>
+<p><img src="../images_result/images/2014030611282823501.png" alt="2014030611282823501.png"></p>
 
 <h3>加强安全配置：</h3>
 

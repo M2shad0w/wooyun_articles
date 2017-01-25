@@ -3,7 +3,7 @@
 			<head>
 			     <title>恶意软件PE文件重建指南 - 左懒</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/8814">http://drops.wooyun.org/papers/8814</a></h1>
 				
@@ -24,7 +24,7 @@
 
 <p>IAT(Import Address Table)是PE文件里面的一种结构，它包含了Windows loader加载动态链接库和导入API函数地址的信息。查看PE文件的时候你应该注意到IMAGE&#95;OPTIONAL&#95;HEADER结构里面的两个指针：一个指向IMAGE&#95;IMPORT&#95;DESCRIPTOR，另一个指向导入函数地址的数组。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091706513164301picture1.png" alt=""></p>
+<p><img src="../images_result/images/2015091706513164301picture1.png" alt=""></p>
 
 <!--more-->
 
@@ -34,7 +34,7 @@
 
 <p>上图显示了一个kernel32.dll的导入函数GetProcAddress()的例子。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091706513531279picture2.png" alt=""></p>
+<p><img src="../images_result/images/2015091706513531279picture2.png" alt=""></p>
 
 <p>加壳程序通常会破坏IAT表的原始形式，由壳代码自己解决函数导入而不是依靠Windows loader。因此脱壳后需要重建程序的IAT表，下面我们将使用Scylla v0.9.6b这个工具来重建IAT。</p>
 
@@ -44,11 +44,11 @@
 
 <p>一些加壳程序会使用“stolen code”技术防止逆向人员重建IAT表。“stolen code”重新把跳转到API函数的指令在某个内存区域被重新仿真。所以使用扫描器扫描这些导入函数的时候得到的是一些无效的API指针。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091706514097696picture3.png" alt=""></p>
+<p><img src="../images_result/images/2015091706514097696picture3.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091706514395981picture4.png" alt=""></p>
+<p><img src="../images_result/images/2015091706514395981picture4.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091706514654078picture5.png" alt=""></p>
+<p><img src="../images_result/images/2015091706514654078picture5.png" alt=""></p>
 
 <p>使用“stolen API code”技术的情况下，Scylla是无法自动重建IAT表的。我们需要写一个Scylla插件方便获得正确的偏移然后重建IAT表。</p>
 
@@ -64,7 +64,7 @@
 
 <p>通过ScyllaPluginExchange可以获取到以下的信息：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091706515251961picture6.png" alt=""></p>
+<p><img src="../images_result/images/2015091706515251961picture6.png" alt=""></p>
 
 <p>UNRESOLVED&#95;IMPORT结构体通过SCYLLA&#95;EXCHANGE.offsetUnresolvedImportsArray成员取得。</p>
 
@@ -105,7 +105,7 @@ typedef struct _UNRESOLVED_IMPORT {       // Scylla Plugin exchange format
 
 <p>ImportTableAddressPointer指针指向有效的API地址。InvalidApiAddress指针指向未决断的API函数地址，在本文例子中，这是一块动态分配的内存区域，那些被偷的代码（stolen code）就是在这里进行仿真。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091706515573665picture7.png" alt=""></p>
+<p><img src="../images_result/images/2015091706515573665picture7.png" alt=""></p>
 
 <p>可以看到我们需要计算每个ImportTableAddressPointer到jmp指令有多少个字节，然后取出JMP指令所跳转的目标地址减去这个字节数得到原来的API基地址：</p>
 
@@ -155,15 +155,15 @@ unresolvedImport-&gt;InvalidApiAddress = ((unsigned int)strtol(strstr(buffer, �
 
 <p>在修复整个IAT表之后可能还会有一些无效的导入地址，这些无效的导入地址需要手动把它们删除掉。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091706515950434picture8.png" alt=""></p>
+<p><img src="../images_result/images/2015091706515950434picture8.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091706520390737picture9.png" alt=""></p>
+<p><img src="../images_result/images/2015091706520390737picture9.png" alt=""></p>
 
 <p>运行上面编写的插件之后还有一些残留的无效地址，现在手动把它们删掉：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091706520722840picture10.png" alt=""></p>
+<p><img src="../images_result/images/2015091706520722840picture10.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091706521211052picture11.png" alt=""></p>
+<p><img src="../images_result/images/2015091706521211052picture11.png" alt=""></p>
 
 <h1>0x04 导出RunPE加壳后的程序</h1>
 
@@ -175,13 +175,13 @@ unresolvedImport-&gt;InvalidApiAddress = ((unsigned int)strtol(strstr(buffer, �
 
 <p>磁盘上的PE文件是根据IMAGE&#95;OPTIONAL&#95;HEADER64.FileAlignment进行对齐的，因此从内存中导出PE文件之后还需要根据IMAGE&#95;OPTIONAL&#95;HEADER64.FileAlignment对PE文件进行对齐。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091706521793646picture12.png" alt=""></p>
+<p><img src="../images_result/images/2015091706521793646picture12.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091706522112179picture13.png" alt=""></p>
+<p><img src="../images_result/images/2015091706522112179picture13.png" alt=""></p>
 
 <p>用IDA加载导出的PE文件时提示无法找到正确的虚拟地址，因为它的PE文件不对齐。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091706522849325picture14.png" alt=""></p>
+<p><img src="../images_result/images/2015091706522849325picture14.png" alt=""></p>
 
 <p>这个问题很好解决，我们先取出PE+文件结构：</p>
 
@@ -242,9 +242,9 @@ fread(&amp;OptHdr, sizeof(IMAGE_OPTIONAL_HEADER64), 1, fp);
 
 <p>全部修复完成之后就可以得到一个正确的PE文件，下面是IDA加载那个修复好的PE文件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091706523558166picture15.png" alt=""></p>
+<p><img src="../images_result/images/2015091706523558166picture15.png" alt=""></p>
 
-<p><strong>附</strong>：<a href="http://static.wooyun.org//drops/20150917/2015091707105261567sample_plugin.rar">sample_plugin.rar</a></p>      <p></p>
+<p><strong>附</strong>：<a href="./drops/20150917/2015091707105261567sample_plugin.rar">sample_plugin.rar</a></p>      <p></p>
     
 			</body>
 		</html>

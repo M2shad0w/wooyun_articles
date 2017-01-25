@@ -3,7 +3,7 @@
 			<head>
 			     <title>TLS扩展的那些事 - GoSSIP_SJTU</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11232">http://drops.wooyun.org/tips/11232</a></h1>
 				
@@ -16,7 +16,7 @@
 
 <p>实际使用中，扩展以扩展块的形式出现在ClientHello和ServerHello消息的最后，例如我们访问百度网站时，ClientHello数据包如下图所示，其中<code>Extensions Length</code>之后的字段都是扩展字段。在这一讲中，我们对这些比较常见的扩展进行详细的介绍。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151209/201512091152458287318.jpg" alt="p1"></p>
+<p><img src="../images_result/images/201512091152458287318.jpg" alt="p1"></p>
 
 <!--more-->
 
@@ -105,11 +105,11 @@ struct {
 
 <p>最初设计的重协商机制无法抵御如下图所示的中间人攻击。攻击者可以在客户端连接的开始注入任意的明文，无法保证TLS传输数据的完整性。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151209/201512091152472138222.jpg" alt="p2"></p>
+<p><img src="../images_result/images/201512091152472138222.jpg" alt="p2"></p>
 
 <p>renegotiation&#95;info扩展的提出就是为了阻止这种中间人攻击，保证重协商是发生在之前已完成握手的双方之间。一次由客户端发起的重协商如下图所示，在第一次握手中ClientHello消息中包含一个没有数据的renegotiation&#95;info扩展，表明客户端支持重协商，服务器在ServerHello中也包含一个没有数据的renegotiation&#95;info扩展表明支持，并且在握手协商完成后，双方将Finished消息中的verify&#95;data存在本地。之后客户端要发起重协商时，发送一个包含客户端verify&#95;data扩展的ClientHello消息到服务器，服务器回复一个包含客户端和服务器verify&#95;data重协商扩展的ServerHello消息表明愿意重协商上一次的握手，之后重新协商通信安全参数。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151209/201512091152498440331.jpg" alt="p3"></p>
+<p><img src="../images_result/images/201512091152498440331.jpg" alt="p3"></p>
 
 <p>对于不支持扩展的SSL3，客户端可以在密码套件列表中加入TLS&#95;EMPTY&#95;RENEGOTIATION&#95;INFO&#95;SCSV (0xff)表明对重协商的支持。</p>
 
@@ -117,7 +117,7 @@ struct {
 
 <p>SNI提供了一种机制，可以让客户端指明它想要连接的服务器的名称。也就是说<code>server_name</code>这个扩展提供了对虚拟服务器的支持，可以让服务器在众多虚拟主机中找到相应的证书。比如一台服务器中有两个虚拟主机，分别是alipay.com和baidu.com，若客户端不指明其要访问的主机名，则服务器无法判断应该回复支付宝还是百度的证书，那么一个IP地址就只能有一个证书。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151209/201512091152516462441.jpg" alt="p4"></p>
+<p><img src="../images_result/images/201512091152516462441.jpg" alt="p4"></p>
 
 <p><strong>3.Session Tickets</strong></p>
 
@@ -127,9 +127,9 @@ struct {
 
 <p>而通过Session Tickets引入的这种会话恢复机制，则不需要服务器端存储任何数据。服务器只需将恢复会话所需的信息加密以ticket的形式发送给客户端。在第一次握手中，session ticket包含在New Session Ticket消息中发给客户端。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151209/201512091152538741151.jpg" alt="p5"></p>
+<p><img src="../images_result/images/201512091152538741151.jpg" alt="p5"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151209/201512091152542559161.jpg" alt="p6"></p>
+<p><img src="../images_result/images/201512091152542559161.jpg" alt="p6"></p>
 
 <p>在客户端想要恢复前面的某一会话时，就在ClientHello中包含那次会话的Session Ticket，服务器决定接收后发送ServerHello并继续发送ChangeCipherSpec。</p>
 
@@ -137,17 +137,17 @@ struct {
 
 <p><code>signature_algorithms</code>这个扩展是在TLS1.2中定义的，用于表明客户端支持的签名和哈希算法。这个扩展可有可无，若没有，则服务器从客户端提供的密码套件列表里推断支持的签名算法（比如RSA密码套件就表明支持RSA签名算法），而直接假设支持的哈希算法是SHA1.</p>
 
-<p><img src="http://static.wooyun.org//drops/20151209/201512091152566238471.jpg" alt="p7"></p>
+<p><img src="../images_result/images/201512091152566238471.jpg" alt="p7"></p>
 
 <p><strong>5.OCSP Stapling</strong></p>
 
 <p><code>status_request</code>这个扩展用于表明客户端支持OCSP stapling。OCSP是一个检查证书吊销信息的协议，OCSP stapling机制可以使服务器向客户端发送最新的证书吊销信息，而无需客户端去访问CA的证书吊销列表。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151209/201512091152588203081.jpg" alt="p8"></p>
+<p><img src="../images_result/images/201512091152588203081.jpg" alt="p8"></p>
 
 <p>如上图所示，在客户端和服务器都表明支持OCSP stapling后，服务器在发送完Certificate消息后紧跟着发送Certificate Status消息，提供关于证书吊销的必要信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151209/201512091153005755291.jpg" alt="p9"></p>
+<p><img src="../images_result/images/201512091153005755291.jpg" alt="p9"></p>
 
 <p><strong>6.Certicate Transparency</strong></p>
 
@@ -157,7 +157,7 @@ struct {
 
 <p><code>application_layer_protocol_negotiation</code>扩展可以让通信双方协商运行在TLS连接之上的应用层协议，比如SPDY，HTTP2.0等。客户端在ClientHello中包含扩展字段，里面的内容是其支持的协议列表，服务器在ServerHello中回复的扩展字段包含其选择的协议。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151209/2015120911530165145101.jpg" alt="p10"></p>
+<p><img src="../images_result/images/2015120911530165145101.jpg" alt="p10"></p>
 
 <p>值得注意的是客户端支持的协议列表和服务器最终选择的结果都没有被加密，任何可以看到流量的中间人都可以得知这些信息。</p>
 

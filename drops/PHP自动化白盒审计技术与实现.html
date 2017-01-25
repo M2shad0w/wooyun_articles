@@ -3,7 +3,7 @@
 			<head>
 			     <title>PHP自动化白盒审计技术与实现 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6261">http://drops.wooyun.org/tips/6261</a></h1>
 				
@@ -22,7 +22,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502384893512.png" alt=""></p>
+<p><img src="../images_result/images/2015062502384893512.png" alt=""></p>
 
 <p>静态分析工作所要做的第一件事情就是将源码进行建模，通俗一点讲，就是将字符串的源码转为方便于我们后续漏洞分析的中间表示形式，即一组代表此代码的数据结构。建模工作中一般会采用编译技术领域中的方法，如词法分析生成token，生成抽象语法树，生成控制流程图等。建模工作的优劣，直接影响到后续污染传播分析和数据流分析的效果。</p>
 
@@ -34,7 +34,7 @@
 
 <p>经过一段时间的努力，笔者和小伙伴也大致实现了一款针对自动化的静态分析工具。具体实现思路正是采用了静态分析技术，如果想深入了解实现思路，可以阅读之前发过的<a href="http://blog.csdn.net/u011721501/article/details/44982111">文章</a>。 在工具中，自动化审计流程如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502384998416.png" alt=""></p>
+<p><img src="../images_result/images/2015062502384998416.png" alt=""></p>
 
 <blockquote>
   <ul>
@@ -59,7 +59,7 @@
 
 <p>对于类信息和方法信息的搜集，应该作为框架初始化的一部分完成，存储在单例上下文中：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502384944528.png" alt=""></p>
+<p><img src="../images_result/images/2015062502384944528.png" alt=""></p>
 
 <p>同时，需要识别分析的PHP文件是否是真正处理用户请求的文件，因为有些CMS中，一般会将封装好的类写入单独的文件中，比如将数据库操作类或者文件操作类封装到文件中。对于这些文件，进行污染传播分析是没有意义的，所以在框架初始化的时候需要进行识别，原理很简单，分析调用类型语句和定义类型语句的比例，根据阈值进行判别，错误率很小。</p>
 
@@ -108,7 +108,7 @@ mysql_query($a) ;
 
 <p>上面的代码片段看起来有些怪异，但只是作为演示使用。从代码片段可以看出，变量a经过了intval和htmlspecialchars两个净化处理，根据配置文件，我们顺利的收集到了这些信息。这时，要进行一次回溯，目的是将当前代码行向上的净化和编码信息进行归并。 比如在第三行时，变量a的净化信息只有一条intval，但是第五行时，要求将变量a的净化信息归并，收集为一个list集合intval和htmlspecialchars，方法就是收集到前驱代码中的所有数据流的信息，并进行回溯。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502384927913.png" alt=""></p>
+<p><img src="../images_result/images/2015062502384927913.png" alt=""></p>
 
 <p>细节部分是，当用户同时对同一个变量调用了如base64&#95;encode和base64&#95;decode两个函数，那么这个变量的base64编码会被消除。同样，如果同时进行转义和反转义也要进行消除。但是如果调用顺序不对或者只进行了decode，那么你懂的，相当危险。</p>
 
@@ -147,13 +147,13 @@ mysql_query($a) ;
   </ul>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502385056629.png" alt=""></p>
+<p><img src="../images_result/images/2015062502385056629.png" alt=""></p>
 
 <h1>0x07 目前的效果</h1>
 
 <hr>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502385095172.png" alt="此处输入图片的描述"></p>
+<p><img src="../images_result/images/2015062502385095172.png" alt="此处输入图片的描述"></p>
 
 <p>我们对<code>simple-log_v1.3.12</code>进行了测试性扫描，结果是：</p>
 

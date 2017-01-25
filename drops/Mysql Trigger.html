@@ -3,7 +3,7 @@
 			<head>
 			     <title>Mysql Trigger - darksn0w</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3435">http://drops.wooyun.org/tips/3435</a></h1>
 				
@@ -59,19 +59,19 @@
 
 <p>root执行show databases;的结果：</p>
 
-<p><img src="http://static.wooyun.org/20141031/2014103102220451494.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103102220451494.png" alt="enter image description here"></p>
 
 <p>root执行select User,Host from mysql.user;的结果：</p>
 
-<p><img src="http://static.wooyun.org/20141031/2014103102220461871.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103102220461871.png" alt="enter image description here"></p>
 
 <p>test执行show databases;</p>
 
-<p><img src="http://static.wooyun.org/20141031/2014103102220471473.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103102220471473.png" alt="enter image description here"></p>
 
 <p>test执行use cms;并查询此数据库上存在的触发器show triggers;</p>
 
-<p><img src="http://static.wooyun.org/20141031/2014103102220451218.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103102220451218.png" alt="enter image description here"></p>
 
 <h2>0x04 实验过程</h2>
 
@@ -97,7 +97,7 @@ mysql&gt; //      /** 操作块结束标志，闭合开头定义的操作块 **/
 
 <p>b)使用test用户登陆Mysql，并查询此数据库上存在的触发器：</p>
 
-<p><img src="http://static.wooyun.org/20141031/2014103102220552954.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103102220552954.png" alt="enter image description here"></p>
 
 <p>经过查询触发器为空，我们把前面我们本地生成好的触发器文件上传到对应的数据库目录下，即cms目录下：</p>
 
@@ -108,23 +108,23 @@ mysql&gt; //      /** 操作块结束标志，闭合开头定义的操作块 **/
 /**   SELECT 'TYPE=TRIGGERNAMEntrigger_table=rootme;' into outfile 'C:wampbinmysqlmysql5.5.24datacmscms_users.TNG';   **/
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141031/2014103102220511028.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103102220511028.png" alt="enter image description here"></p>
 
 <p>再次查询Triggers：</p>
 
-<p><img src="http://static.wooyun.org/20141031/2014103102220588433.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103102220588433.png" alt="enter image description here"></p>
 
 <p>发现触发器已经写入，前面我们写的触发类型是after update，作用于表cms&#95;users，所以我们这里我们update cms&#95;users这个表来触发。 触发之前mysql.user表：</p>
 
-<p><img src="http://static.wooyun.org/20141031/2014103102220544938.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103102220544938.png" alt="enter image description here"></p>
 
 <p>update cms_users这个表触发执行：</p>
 
-<p><img src="http://static.wooyun.org/20141031/2014103102220563398.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103102220563398.png" alt="enter image description here"></p>
 
 <p>触发之后mysql.user表：</p>
 
-<p><img src="http://static.wooyun.org/20141031/2014103102220631015.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103102220631015.png" alt="enter image description here"></p>
 
 <p>至此，"test"用户所拥有的权限跟"root"用户拥有的权限一致。</p>
 

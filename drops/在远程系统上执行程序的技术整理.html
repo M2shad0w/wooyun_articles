@@ -3,7 +3,7 @@
 			<head>
 			     <title>在远程系统上执行程序的技术整理 - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7358">http://drops.wooyun.org/tips/7358</a></h1>
 				
@@ -95,11 +95,11 @@
 
 <p>使用用户名口令远程登陆192.168.40.137，如图1</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072404450281890.net/20150722165932480" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20150722165932480" alt="这里写图片描述"></p>
 
 <p>查看目标主机共享资源，如图1-2</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072404450274736.net/20150722165949205" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20150722165949205" alt="这里写图片描述"></p>
 
 <h2>1、at&amp;schtasks</h2>
 
@@ -110,7 +110,7 @@
 
 <p>如图2</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072404450352052.net/20150722170001122" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20150722170001122" alt="这里写图片描述"></p>
 
 <h2>2、psexec</h2>
 
@@ -121,7 +121,7 @@
 
 <p>如图3</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072404450373059.net/20150722170011791" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20150722170011791" alt="这里写图片描述"></p>
 
 <h2>3、WMIC</h2>
 
@@ -132,7 +132,7 @@
 
 <p>如图4</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072404450350419.net/20150722170022309" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20150722170022309" alt="这里写图片描述"></p>
 
 <h2>4、wmiexec</h2>
 
@@ -143,7 +143,7 @@
 
 <p>如图5</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072404450466305.net/20150722170033093" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20150722170033093" alt="这里写图片描述"></p>
 
 <h1>0x05 分析</h1>
 
@@ -226,13 +226,13 @@ execserver.exe：实现注册安装服务的辅助程序
 
 <p>如图6</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072404450423749.net/20150722170051721" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20150722170051721" alt="这里写图片描述"></p>
 
 <p><strong>最终我们通过改造的smbexec，突破目标主机限制，成功远程执行程序。</strong></p>
 
 <p><em>程序源码下载链接：</em></p>
 
-<p><a href="http://static.wooyun.org//drops/20150724/2015072404442894558smbexec_source.zip">smbexec_source.zip</a></p>
+<p><a href="./drops/20150724/2015072404442894558smbexec_source.zip">smbexec_source.zip</a></p>
 
 <h1>0x08 补充</h1>
 

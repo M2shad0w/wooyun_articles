@@ -3,7 +3,7 @@
 			<head>
 			     <title>SSL/TLS协议安全系列：SSL/TLS概述 - GoSSIP_SJTU</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6002">http://drops.wooyun.org/tips/6002</a></h1>
 				
@@ -51,7 +51,7 @@
 
 <p>SSL/TLS协议有一个高度模块化的架构，分为很多子协议，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502471860621.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502471860621.png" alt="enter image description here"></p>
 
 <p>Handshake协议：包括协商安全参数和密码套件、服务器身份认证（客户端身份认证可选）、密钥交换；</p>
 
@@ -67,7 +67,7 @@
 
 <p>本节对SSL/TLS协议的流程进行详细介绍。一个典型的TLS 1.0协议交互流程如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502471939085.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502471939085.png" alt="enter image description here"></p>
 
 <p>每一个SSL/TLS链接都是从握手开始的，握手过程包含一个消息序列，用以协商安全参数、密码套件，进行身份认证以及密钥交换。握手过程中的消息必须严格按照预先定义的顺序发生，否则就会带来潜在的安全威胁。今年顶级安全会议CCS 有文章提出了建立综合状态机来检查SSL链接中消息序列……</p>
 
@@ -81,27 +81,27 @@
 
 <p>另外，ClientHello中还可能包含客户端支持的TLS扩展。（TLS扩展可以被用来丰富TLS协议的功能或者增强协议的安全性）</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502471954630.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502471954630.png" alt="enter image description here"></p>
 
 <p>ServerHello：服务器接受到ClientHello后，会返回ServerHello。服务器从客户端在ClientHello中提供的密码套件、SSL/TLS版本、压缩算法列表里选择它所支持的项，并把它的选择包含在ServerHello中告知客户端。接下来SSL协议的建立就基于服务器选择的密码套件类型、SSL/TLS协议版本以及压缩算法。</p>
 
 <p>ServerHello中同样会包含一个随机数，同样4+28 字节类型，由服务器生成。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502471938393.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502471938393.png" alt="enter image description here"></p>
 
 <p>Certificate：客户端和服务器都可以发送证书消息来证明自己的身份，但是通常客户端证书不被使用。 服务器一般在ServerHello后会接一条Certificate消息，Certificate消息中会包含一条证书链，从服务器证书开始，到Certificate authority（CA）或者最新的自签名证书结束。下图形象地描述了证书链：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502471970247.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502471970247.png" alt="enter image description here"></p>
 
 <p>SSL中使用的证书通常是X.509类型证书，X.509证书的内容如下表所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502471942626.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502471942626.png" alt="enter image description here"></p>
 
 <p>在用的X.509证书包含Version 1和Version 3两种版本，其中v1版本的证书存在安全隐患，同时不支持TLS扩展，被逐渐弃用。现在大多数在用的SSL证书都是V3版本。</p>
 
 <p>同时证书会附带与协商好的密钥交换算法对应的密钥。密钥交换算法以及它们所要求的密钥类型如下表所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502472078396.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502472078396.png" alt="enter image description here"></p>
 
 <p>ServerKeyExchange：该消息仅当以下密钥交换算法被使用时由服务器发出：</p>
 
@@ -109,7 +109,7 @@
 
 <p>ServerkeyExchange消息会携带这些密钥交换算法所需要的额外参数，以在后续步骤中协商PreMasterSecret。这些参数需要被签过名。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502472083908.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502472083908.png" alt="enter image description here"></p>
 
 <p>CertificateRequest：这个消息通常在要求认证客户端身份时才会有。消息中包含了证书类型以及可接受的CA列表。</p>
 
@@ -144,17 +144,17 @@
 
 <p>TLS-RSA：在这个场景下，PreMasterSecret是由客户端指定的，并用RSA公钥加密发送给服务器。服务器不影响PReMasterSecret的生成。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502472032979.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502472032979.png" alt="enter image description here"></p>
 
 <p>TLS-DH：基于DH的密钥交换也被称为静态Diffie-Hellman。在这种场景下，可能是双方各自提交一个证书包含DH公开值，或者服务器端提交证书包含DH公开值，客户端在每次会话中选择一个值。协商好的DH值被用作PreMasterSecret。显然证书中的参数是固定的，那么每次链接的PreMasterSecret也是相同的。</p>
 
 <p>TLS-DH不能提供前向安全性。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502472059305.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502472059305.png" alt="enter image description here"></p>
 
 <p>TLS-DHE：基于DHE的TLS握手中会有ServerKeyExchange消息。握手过程中交换参数的认证通过数字签名来实现，支持的签名算法包括RSA和DSS。DH参数会有它的数字签名一起被包含在ServerKeyExchange中被发送出去。客户端在ClientKeyExchange中返回它的公开DH参数，但没有签名保护。同样协商出来的DH密钥被用作PreMasterSecret。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502472053091.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502472053091.png" alt="enter image description here"></p>
 
 <h2>3.3 密钥生成</h2>
 
@@ -162,7 +162,7 @@
 
 <p>Pseudo-random Function（PRF）：伪随机函数是SSL协议中的一个重要组成部分，它被用来秘密扩展以及生成密钥。在3.1节讲解Finished消息时已经简单提及PRF，在这里我们详细讨论PRF的工作原理。SSL/TLS协议中的PRF如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502472188306.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502472188306.png" alt="enter image description here"></p>
 
 <p>这个PRF基于两个hash函数：MD5和SHA-1，它有3个输入，一个Secret（比如PreMasterSecret），一个标志符（比如”client finished”, “server finished”），还有一个种子值（比如客户端随机数+服务器端随机数）。</p>
 
@@ -181,7 +181,7 @@ HMAC hash(secret , A( 3 ) + seed ) + . . .
 
 <p>其中A(0) = seed, A(i) = HMAC hash( secret, A( i −1) )</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502472122560.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502472122560.png" alt="enter image description here"></p>
 
 <p>这个秘密扩展会一直进行直到得到足够多的扩展数据。 Key Derivation：主密钥（MasterSecret）是利用上述PRF从预备主密钥（PreMasterSecret）生成的。每个MasterSecret为48字节，生成方式如下：</p>
 
@@ -201,7 +201,7 @@ SecurityParameters.client random ) ;
 
 <p>下图完整阐述了SSL/TLS协议中的密钥生成过程。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502472168972.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502472168972.png" alt="enter image description here"></p>
 
 <h1>四 从SSL到TLS</h1>
 
@@ -254,7 +254,7 @@ SecurityParameters.client random ) ;
 
 <p>TLS 1.2：这是最新的版本，部署的还比较少。这个版本禁用了PRF中的MD5和SHA-1，而用一个可配置的hash函数取代了它们，这样的修改简化了计算过程。修改后的PRF风格如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502472159659.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502472159659.png" alt="enter image description here"></p>
 
 <p>此外，TLS 1.2的一个重要变化是支持认证加密模式（支持GCM等）。但是由于一些AEAD（Authenticated Encryption with Associated Data）密码算法要求IV为隐式的，所以IV又恢复到由MasterSecret生成，即TLS 1.0以前的风格。</p>
 
@@ -292,7 +292,7 @@ SecurityParameters.client random ) ;
 
 <p>下表是一些常见软件以及它们所使用的SSL/TLS实现库的情况：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502472296754.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502472296754.png" alt="enter image description here"></p>
 
 <p>其它还有一些常用的SSL实现库，如cryptlib、CyaSSL、MatrixSSL、PolarSSL等，由于市场占有率不高，我们这里就不多做介绍了。</p>
 

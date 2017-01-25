@@ -3,7 +3,7 @@
 			<head>
 			     <title>IE沙箱拖拽安全策略解析 - xlab</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11329">http://drops.wooyun.org/tips/11329</a></h1>
 				
@@ -29,7 +29,7 @@
 
 <p>如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151215/2015121513284826712159.png" alt="p1"></p>
+<p><img src="../images_result/images/2015121513284826712159.png" alt="p1"></p>
 
 <p>DragDrop Policy值的含义如下：</p>
 
@@ -41,7 +41,7 @@
 
 <p>在一个干净的Windows 8.1系统上，DragDrop目录下默认有三个程序：iexplore.exe, explorer.exe, notepad.exe，它们的Policy值都是3。当目标程序的Policy值为2时，向目标程序窗口拖拽文件，IE会弹出一个提示框，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151215/2015121513285074935220.png" alt="p2"></p>
+<p><img src="../images_result/images/2015121513285074935220.png" alt="p2"></p>
 
 <h1>0x02 Explorer进程的拖拽问题</h1>
 
@@ -49,7 +49,7 @@
 
 <p>在从IE往Explorer上拖拽文件时，虽然DragDrop Policy值设置为了3，IE不会弹框，但是Explorer进程会会弹一个提示框，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151215/2015121513285276184318.png" alt="p3"></p>
+<p><img src="../images_result/images/2015121513285276184318.png" alt="p3"></p>
 
 <p>然而，当我们从IE中向Explorer侧边栏的树形文件夹结构中拖拽文件时，并不会弹框。这应该是Explorer程序实现上的一个疏漏。进一步设想，如果我们能够在IE沙箱中通过程序模拟鼠标的拖拽操作，那么就能够利用Explorer的这个问题跨越IE沙箱的安全边界。</p>
 
@@ -67,7 +67,7 @@
 
 <p>下图描述了一个完整的OLE拖拽操作需要实现的关键组件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151215/2015121513285492869417.png" alt="p4"></p>
+<p><img src="../images_result/images/2015121513285492869417.png" alt="p4"></p>
 
 <p>我们要模拟鼠标拖拽，则只需要实现<code>IDropSource</code>和<code>IDataObject</code>接口。正常的OLE拖拽操作的核心是调用<code>ole32!DoDragDrop</code>函数，该函数原型如下：</p>
 

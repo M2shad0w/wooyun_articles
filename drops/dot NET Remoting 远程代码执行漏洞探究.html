@@ -3,7 +3,7 @@
 			<head>
 			     <title>.NET Remoting 远程代码执行漏洞探究 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/15138">http://drops.wooyun.org/tips/15138</a></h1>
 				
@@ -147,7 +147,7 @@ namespace RemotingSample
 
 <p>如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116201856056p1.png" alt="p1"></p>
+<p><img src="../images_result/images/2016042116201856056p1.png" alt="p1"></p>
 
 <p>现在可以启动 RawCap 对本地网卡进行抓包。</p>
 
@@ -157,19 +157,19 @@ namespace RemotingSample
 
 <p>启动服务端程序进行初始化，将会弹出 Windows 防火墙例外提示。由于客户端和服务端都运行在本地，所以这里你可以安全的选择“拒绝”。此处的设置也是大多数 .NET Remoting 应用程序出现漏洞的原因。使用 netstat 命令（如下图所示）可以看到服务端监听的地址为 0.0.0.0 。这意味着任何人都可以连接到服务端并且在服务端本地执行暴露的功能。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116202064098p2.png" alt="p2"></p>
+<p><img src="../images_result/images/2016042116202064098p2.png" alt="p2"></p>
 
 <p>现在运行客户端和服务端，并观察执行结果。我们可以看到，客户端调用了上述两个方法并且打印出了结果。如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116202594306p3.png" alt="p3"></p>
+<p><img src="../images_result/images/2016042116202594306p3.png" alt="p3"></p>
 
 <p>同时，我们可以清楚的看到上述方法已经在服务端应用程序的上下文中执行，因为服务端打印出了 RemotingLibrary.dll 中的详细信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116202936381p4.png" alt="p4"></p>
+<p><img src="../images_result/images/2016042116202936381p4.png" alt="p4"></p>
 
 <p>在 Wireshark 中设置过滤器并观察在 8888 端口中传输的数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116203115170p5.png" alt="p5"></p>
+<p><img src="../images_result/images/2016042116203115170p5.png" alt="p5"></p>
 
 <p>可以在下面的两个文档了解 .NET Remoting 传输协议的格式结构：</p>
 
@@ -180,7 +180,7 @@ namespace RemotingSample
 
 <p>在 TCP 握手之后，我们可以看到客户端发送给服务端的第一个数据包。根据 [MS-NRTP] 文档中的 2.2.3.3 小节 （消息帧结构）的描述，每一个消息的起始信息指示为 ProtocolId ，这是一个 4 字节的数据结构，通常为 0x54454E2E 对应的字符为 .NET。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116203274206p6.jpg" alt="p6"></p>
+<p><img src="../images_result/images/2016042116203274206p6.jpg" alt="p6"></p>
 
 <p>之后的信息取决于 .NET Remoting 的信道并指明了客户端将会使用 rMath 访问服务端所暴露的类。接下来是第一个消息的第二部分。</p>
 
@@ -246,16 +246,16 @@ OperationType: 0x0002 or Response
 <p>运行 Server.exe 和 dnSpy（x86 平台执行 dnSpy-x86.exe）。把 Client.exe 拖到 dnSpy 中，然后定位到 Main 方法。dnSpy 会自动加载引用的 DLL 文件，包括 RemotingLibrary.dll。dnSpy 的反编译代码与原始代码一样，只是没有了注释。<br>
 如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116203448956p7.png" alt="p7"></p>
+<p><img src="../images_result/images/2016042116203448956p7.png" alt="p7"></p>
 
 <p>现在我们可以在 dnSpy 里面运行客户端。点击 Start 按钮，选择客户端程序。之后可以指定参数和下断点的顺序及断点事件。使用默认的选项运行 Client.exe ，dnSpy 将会在 main 函数下断。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116203557141p8.png" alt="p8"></p>
+<p><img src="../images_result/images/2016042116203557141p8.png" alt="p8"></p>
 
 <p>现在我们可以使用快捷键进行调试或者点击右侧的 Continue 按钮。<br>
 可以通过 F2 来设置断点，如下图，是在第 16 行下了一个断点。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116203799833p9.png" alt="p9"></p>
+<p><img src="../images_result/images/2016042116203799833p9.png" alt="p9"></p>
 
 <h3>找到被调用的函数</h3>
 
@@ -263,7 +263,7 @@ OperationType: 0x0002 or Response
 
 <p>在上述传输的数据里面，我们可以看到函数名为 Add ，它在类 RemotingSample.Remotemath 中，并且被放在 RemotingLibrary.dll 文件中。通过这些条件，我们可以在 dnSpy 中快速找到 Add 函数。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116203852147p10.png" alt="p10"></p>
+<p><img src="../images_result/images/2016042116203852147p10.png" alt="p10"></p>
 
 <p>这种情况下，我们会本能的在 Add 函数处下个断点，并继续运行 Client.exe 。但是，要注意，这个断点永远不会被触发。因为在 .NET Remoting 机制中，调用函数的实例是在客户端创建的，但是是在服务端运行的。</p>
 
@@ -271,7 +271,7 @@ OperationType: 0x0002 or Response
 
 <p>现在我们可以使用 dnSpy 的分析功能继续分析，右击 Add 函数点击 Analyze。此时会出现一个新的面板，有两个重要的功能， Uses 和 Used By。 Uses 功能可以列出 Add 函数所调用的函数。Used By 功能会列出调用 Add 函数的其他函数。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116204073767p11.png" alt="p11"></p>
+<p><img src="../images_result/images/2016042116204073767p11.png" alt="p11"></p>
 
 <p>从图中我们可以看到 Main 函数调用了 Add 函数，双击 Main 函数会跳回原始的入口点。</p>
 
@@ -279,11 +279,11 @@ OperationType: 0x0002 or Response
 
 <p>接下来可以单步进入（Setp Into）调用 Add 函数的地方，如果你没有改变默认的设置，将会进入 mscorlib.dll 准确的说是 CommonLanguageRuntimeLibrary.System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke() 函数中。dnSpy 的默认设置会跳过一些其他的代码（如设置/获取属性的 set/get 操作等等）。可以在菜单 View (menu) > Options (menu item) > Debugger (tab) > DebuggerBrowsable 和 Call string-conversion 里面设置。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116204188082p12.png" alt="p12"></p>
+<p><img src="../images_result/images/2016042116204188082p12.png" alt="p12"></p>
 
 <p>可以按下 Alt+4 快捷键打开 Locals 窗口，查看本地变量的值。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116204524698p13.png" alt="p13"></p>
+<p><img src="../images_result/images/2016042116204524698p13.png" alt="p13"></p>
 
 <p>跟踪 .NET Remoting 的调用过程最终都会跳到此处。因为此处刚好是消息被发送的地方，因此我们能看到发送的内容。在 dnSpy 1.3 版本中，在此处下断点是不会被触发的。在第 404 行（RemotingProxy remotingProxy = null;）处下断点，也就是 if (1 == type) 语句之前下断点，之后就可以跟踪调试查看消息内容。</p>
 
@@ -307,11 +307,11 @@ if (1 == type)
 
 <p>在第 409 行（<code>num = message = expr_14;</code>）处下个断点，可以单步步过中间的调用过程，直接运行到 410 行，此时就可以看到 message 变量的值了。由于在启动 dnSpy 时没有改变默认的设置，所以在此处下断点是会触发的。 按下 Alt+4 可以查看 message 变量的值。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116204678865p14.png" alt="p14"></p>
+<p><img src="../images_result/images/2016042116204678865p14.png" alt="p14"></p>
 
 <p>此时,我们可以看到 message 的很多信息。转到 474 行（ RealProxy.HandleReturnMessage(message, message2);） ，在第 475 行处下个断点，点击 Continue。此时可以看到服务端打印出来函数中的文本信息。在 message2 变量中保存了返回值。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116204873959p15.png" alt="p15"></p>
+<p><img src="../images_result/images/2016042116204873959p15.png" alt="p15"></p>
 
 <p>此时执行 Setp Out ,跳过子函数的执行过程后,返回到了 Main 函数中。可以同样的方法对 Sub 函数进行调试分析。</p>
 
@@ -360,7 +360,7 @@ namespace RemotingLibraryExpanded
 
 <p>修改调用 StartProcess 的代码的方式很简单，可以直接修改为运行一个指定的程序（如：C:\Windows\System32\calc.exe）。在 dnSpy 中打开客户端程序，右击调用 Add 函数的地方。选择 “编辑 IL 指令”。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116205286823p16.png" alt="p16"></p>
+<p><img src="../images_result/images/2016042116205286823p16.png" alt="p16"></p>
 
 <p>CIL(通用中间语言)也被称作 IL 和 Java 的字节码类似。修改细节如下：</p>
 
@@ -396,11 +396,11 @@ namespace RemotingLibraryExpanded
 <p>现在需要把 Add 改为 StartProcess。单击 Add 会出现右键菜单。<br>
 选择 方法（Method）会弹出一个新的标签页，此时你可以将它修改为任意一个已经加载的程序集里的方法。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116205527408p17.png" alt="p17"></p>
+<p><img src="../images_result/images/2016042116205527408p17.png" alt="p17"></p>
 
 <p>方法名称已经修改了，但是 Add 方法有两个整数类型的参数，而 StartProcess 方法只有一个字符串类型的参数。如果不做修改， 在“新”方法调用前，Int32 将被压入堆中。此时点击 OK，可以看到下图的糟糕情况：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116205913282p18.png" alt="p18"></p>
+<p><img src="../images_result/images/2016042116205913282p18.png" alt="p18"></p>
 
 <p>不要紧，我们可以编辑 IL 指令修复它。在了解了 IL 指令后，可以这样修改它，删掉 Console.WriteLine ，因为 StartProcess 没有返回值。</p>
 
@@ -414,7 +414,7 @@ namespace RemotingLibraryExpanded
 16  0034    nop
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116210194564p19.png" alt="p19"></p>
+<p><img src="../images_result/images/2016042116210194564p19.png" alt="p19"></p>
 
 <p>在这可以用另外一个工具——<a href="https://www.linqpad.net/Download.aspx">LINQPad 5.0</a> 进行修改。只有标准版是免费的，但是也满足需求了。将客户端的代码复制到工具里面，像在 VS 里面一样添加引用并导入命名空间。</p>
 
@@ -429,17 +429,17 @@ namespace RemotingLibraryExpanded
 <li>选择 System.Runtime.Remoting.dll 并添加 System.Runtime.Remoting.Channels 和 System.Runtime.Remoting.Channels.Tcp</li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116210273752p20.png" alt="p20"></p>
+<p><img src="../images_result/images/2016042116210273752p20.png" alt="p20"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116210465028p21.png" alt="p21"></p>
+<p><img src="../images_result/images/2016042116210465028p21.png" alt="p21"></p>
 
 <p>现在就可以在 LINQPad 里面修改代码了，修改 Console.WriteLine 为 StartProcess("c:\windows\system32\calc.exe")，并点击 执行 。如果运行失败，不用管它。点击 IL 按钮，可以在下面看到生成的 IL 代码，和前面在 dnSpy 中编写的一样。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116210525536p22.png" alt="p22"></p>
+<p><img src="../images_result/images/2016042116210525536p22.png" alt="p22"></p>
 
 <p>使用 dnSpy 保存已修改过的模块，使用菜单 File (menu) > Save Module 保存为新的可执行程序 Client1.exe。 运行 Client1.exe。可以看到成功运行了前面指定的程序（calc.exe）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116210935000p23.png" alt="p23"></p>
+<p><img src="../images_result/images/2016042116210935000p23.png" alt="p23"></p>
 
 <p>此程序现在有两个缺陷：</p>
 
@@ -495,7 +495,7 @@ TcpChannel remotingChannel = new TcpChannel(tcpChannelProperties, null, null);
 
 <p>如果只把服务端的 secure 设置为 true ，抓取的数据包如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116211072485p24.png" alt="p24"></p>
+<p><img src="../images_result/images/2016042116211072485p24.png" alt="p24"></p>
 
 <p>客户端建立了 TCP 连接，发送的消息为纯文本，但是服务端未作任何响应。对客户端做如下设置：</p>
 
@@ -512,7 +512,7 @@ tcpChannelProperties["secure"] = true;
 
 <p>此时抓取数据包，信道就被加密了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116211247480p25.png" alt="p25"></p>      <p></p>
+<p><img src="../images_result/images/2016042116211247480p25.png" alt="p25"></p>      <p></p>
     
 			</body>
 		</html>

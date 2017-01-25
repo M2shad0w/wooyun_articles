@@ -3,7 +3,7 @@
 			<head>
 			     <title>漏扫工具AWVS命令执行 - livers</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1501">http://drops.wooyun.org/papers/1501</a></h1>
 				
@@ -26,7 +26,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/20140714/2014071403310186324.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403310186324.png" alt="enter image description here"></p>
 
 <p>这一点让作者产生了兴趣，通过分析得出wvs 在解析http response时，提取一些资源请求 类似:</p>
 
@@ -43,7 +43,7 @@ Etc...
 
 <p>用Immunity Debugger（OD是这工具的母板）附加挂载到wvs访问网站： Edx被0x41(A)覆盖 ，然后取数据段内存越权访问崩溃了：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404372330317.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404372330317.png" alt="enter image description here"></p>
 
 <p>作者本打算利用SHE溢出执行shellcode但是比较麻烦。</p>
 
@@ -77,7 +77,7 @@ MOVE ECX, DWORD PTR DS: [EDX-8];
 
 <p>用wvs扫描</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403310171338.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403310171338.png" alt="enter image description here"></p>
 
 <p>Ret之后，看到eip 被覆盖BBBB 0x42424242。</p>
 
@@ -99,7 +99,7 @@ MOVE ECX, DWORD PTR DS: [EDX-8];
 
 <p>作者这里搞的非常好玩，因为这个点必须要用wvs人选择下面这个才会有效。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071409012944622.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071409012944622.png" alt="enter image description here"></p>
 
 <p>So,作者很猥琐构造了一些很诱惑的外部域名</p>
 
@@ -124,7 +124,7 @@ And so on…
 
 <p>如下图：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403310274194.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071403310274194.png" alt="enter image description here"></p>
 
 <h2>0x03 总结</h2>
 
@@ -138,7 +138,7 @@ And so on…
 
 <p>都不存在此问题。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404372466900.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404372466900.png" alt="enter image description here"></p>
 
 <p>作者给出的 <a href="http://static.wooyun.org/20141017/2014101715304818610.zip">exp下载</a>。</p>      <p></p>
     

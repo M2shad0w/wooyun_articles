@@ -3,7 +3,7 @@
 			<head>
 			     <title>一例针对中国政府机构的准APT攻击中所使用的样本分析 - SwordLea</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/6332">http://drops.wooyun.org/papers/6332</a></h1>
 				
@@ -61,13 +61,13 @@ MD5 44BCF2DD262F12222ADEAB6F59B2975B
 
 <p>该PE样本中嵌入的脚本，与安天获取到的Shellcode脚本功能代码完全相同，但加密数据存在差异，该PE样本曾在2015年5月2日被首次上传到Virustotal。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503012999353.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503012999353.png" alt="enter image description here"></p>
 
 <p>图1 PE文件内嵌的使用powershell.exe加载加密数据</p>
 
 <p>该PE样本使用WinExec运行嵌入的恶意代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503012926176.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503012926176.png" alt="enter image description here"></p>
 
 <p>图2使用WinExec函数调用powershell.exe加载加密数据</p>
 
@@ -79,7 +79,7 @@ MD5 44BCF2DD262F12222ADEAB6F59B2975B
 
 <p>APT-TOCS攻击远控的核心部分是依托PowerShell加载的加密数据脚本（以下简称Sample_B），图1为脚本各模块之间的衍生关系和模块主要功能：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013045084.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503013045084.png" alt="enter image description here"></p>
 
 <h2>2.3 APT-TOCS的主样本（SampleB）分析</h2>
 
@@ -87,7 +87,7 @@ MD5 44BCF2DD262F12222ADEAB6F59B2975B
 
 <p>Sample B文件的内容（base64的内容已经省略）如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013079242.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503013079242.png" alt="enter image description here"></p>
 
 <p>图4 Sample B的内容</p>
 
@@ -99,7 +99,7 @@ MD5 44BCF2DD262F12222ADEAB6F59B2975B
 
 <p>脚本1的内容（base64的内容已经省略）如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013183122.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503013183122.png" alt="enter image description here"></p>
 
 <p>图5脚本1的内容</p>
 
@@ -111,7 +111,7 @@ MD5 44BCF2DD262F12222ADEAB6F59B2975B
 
 <p>该模块的主要功能是调用wininet模块的函数，进行连接网络，下载模块2的操作；并加载到内存中执行。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013150165.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503013150165.png" alt="enter image description here"></p>
 
 <p>图6HTTP GET请求</p>
 
@@ -123,19 +123,19 @@ MD5 44BCF2DD262F12222ADEAB6F59B2975B
 
 <p>模块2创建并挂起系统进程rundll32.exe：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013148415.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503013148415.png" alt="enter image description here"></p>
 
 <p>图7创建挂起系统进程rundll32.exe</p>
 
 <p>写入模块3的数据：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013257201.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503013257201.png" alt="enter image description here"></p>
 
 <p>图8写入模块3的数据</p>
 
 <p>模块3的数据虽然是以"MZ"开头，但并非为PE文件，而是具有后门功能的Shellcode。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013349647.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503013349647.png" alt="enter image description here"></p>
 
 <p>图9以MZ（4D 5A）开头的Shellcode</p>
 
@@ -152,25 +152,25 @@ dc.******69.info (146.0.***.***)    （罗马尼亚）
 
 <p>发送请求数据，接收返回数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013453849.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503013453849.png" alt="enter image description here"></p>
 
 <p>图10发送请求数据</p>
 
 <p>上述IP、域名和访问地址的解密方式是"异或0x69"。 从该模块的字符串与所调用的系统函数来判断，该模块为后门程序，会主动向指定的地址发送GET请求，使用Cookie字段来发送心跳包，间隔时间为60秒。心跳包数据包括校验码、进程ID、系统版本、IP地址、计算机名、用户名、是否为64位进程，并将该数据使用RSA、BASE64加密及编码。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013479544.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503013479544.png" alt="enter image description here"></p>
 
 <p>图11心跳包原始数据</p>
 
 <p>由于进程ID与校验码的不同，导致每次传输的心跳包数据不相同。校验码是使用进程ID和系统开机启动所经过的毫秒数进程计算得出的。算法如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013559672.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503013559672.png" alt="enter image description here"></p>
 
 <p>图12校验码算法</p>
 
 <p>加密后的心跳包使用Cookie字段进行传输：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503013643606.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503013643606.png" alt="enter image description here"></p>
 
 <p>图13数据包内容</p>
 
@@ -188,13 +188,13 @@ dc.******69.info (146.0.***.***)    （罗马尼亚）
 
 <p>我们将模块1与使用Beacon生成的Payload进行比较，发现只有三处数据不同，分别为：Get请求时所发送的Head数据、请求的文件名称和IP地址。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505002414038.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062505002414038.png" alt="enter image description here"></p>
 
 <p>图14模块1对比</p>
 
 <p>左侧为样本模块1，右侧为由Beacon所生成的模块，从图中对比来看，可以得出结论，模块1是由Beacon所生成。 在请求时的数据包截图如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014025287.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503014025287.png" alt="enter image description here"></p>
 
 <p>图15模块1发包数据对比</p>
 
@@ -206,23 +206,23 @@ dc.******69.info (146.0.***.***)    （罗马尼亚）
 
 <p>样本模块2</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014089939.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503014089939.png" alt="enter image description here"></p>
 
 <p>Beacon相关文件</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014050932.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503014050932.png" alt="enter image description here"></p>
 
 <p>入口处异或解密（使用x86/shikata&#95;ga&#95;nai变形）</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014117156.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503014117156.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014193825.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503014193825.png" alt="enter image description here"></p>
 
 <p>解密后入口处代码</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014149590.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503014149590.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014120436.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503014120436.png" alt="enter image description here"></p>
 
 <p>函数调用</p>
 
@@ -232,7 +232,7 @@ dc.******69.info (146.0.***.***)    （罗马尼亚）
 
 <p>下面是样本模块3与Beacon所生成模块的Get请求比较，可以看出，两者都是使用Cookie来传输信息，该信息进行了加密，每间隔60秒主动发送请求，该数据为上线包/心跳包。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505002697402.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062505002697402.png" alt="enter image description here"></p>
 
 <p>图16模块3数据包对比</p>
 
@@ -270,11 +270,11 @@ dc.******69.info (146.0.***.***)    （罗马尼亚）
 
 <p>Cobalt Strike是Armitage的商业版本。Armitage是一款Java写的Metasploit图形界面的渗透测试软件，可以用它结合Metasploit已知的exploit来针对存在的漏洞自动化攻击。bt5、kali linx下集成免费版本Armitage，最强大的功能是多了个Beacon的Payload。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014417754.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503014417754.jpg" alt="enter image description here"></p>
 
 <p>Cobalt Strike作者：Raphael Mudge（美国），他是Strategic Cyber LLC（战略网络有限责任公司）创始人，基于华盛顿的公司为RED TEAM开发软件，他为Metaslpoit创造了Armitage，sleep程序语言和IRC客户端jIRCii。此前作为美国空军的安全研究员，渗透实验的测试者。他设置发明了一个语法检测器卖给了Automattic。发表多篇文章，定期进行安全话题的演讲。给许多网络防御竞赛提供RED TEAM，参加2012-2014年黑客大会。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014489029.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503014489029.png" alt="enter image description here"></p>
 
 <p>教育背景：Syracuse University 美国雪城大学，密歇根科技大学</p>
 
@@ -282,7 +282,7 @@ dc.******69.info (146.0.***.***)    （罗马尼亚）
 
 <p>技能：软件开发信息安全面向对象的设计分布式系统图形界面计算机网络设计博客系统社会工程学安全研究等等</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503014538091.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503014538091.jpg" alt="enter image description here"></p>
 
 <p>支持的组织机构：</p>
 

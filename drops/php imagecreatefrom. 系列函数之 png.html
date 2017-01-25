@@ -3,7 +3,7 @@
 			<head>
 			     <title>php imagecreatefrom* 系列函数之 png - janes</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/16034">http://drops.wooyun.org/tips/16034</a></h1>
 				
@@ -252,19 +252,19 @@ imagepng($im,$newpngfile);
 <li>索引图像</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160519/2016051907314369458index_hex.png" alt="索引图像"></p>
+<p><img src="../images_result/images/2016051907314369458index_hex.png" alt="索引图像"></p>
 
 <p>读 IHDR 数据块信息，色深为8bits, color type=0x03, 为索引图像类型，改变其 PLTE 数据块如下，修改数据为 <code>&lt;?php phpinfo();?&gt;</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20160519/2016051907314612384index_phpinfo.png" alt="修改数据为php代码"></p>
+<p><img src="../images_result/images/2016051907314612384index_phpinfo.png" alt="修改数据为php代码"></p>
 
 <p>计算 CRC 过程如下</p>
 
-<p><img src="http://static.wooyun.org//drops/20160519/2016051907313646251crc.png" alt="计算 CRC "></p>
+<p><img src="../images_result/images/2016051907313646251crc.png" alt="计算 CRC "></p>
 
 <p>imagecreatefrompng() 重建的图片如下</p>
 
-<p><img src="http://static.wooyun.org//drops/20160519/2016051907314457725index_new.png" alt="new png "></p>
+<p><img src="../images_result/images/2016051907314457725index_new.png" alt="new png "></p>
 
 <p>可以看出重建的图片中 PLTE 数据块保留了 php 代码，重建也增加了 pHYs 数据块，对我们所关心的结果并没有影响。说明插入 php 代码成功。</p>
 
@@ -274,15 +274,15 @@ imagepng($im,$newpngfile);
 
 <p>原始图像， 不含 PLTE 数据块， 如下所示</p>
 
-<p><img src="http://static.wooyun.org//drops/20160519/2016051907313850346grayscale_hex.png" alt="灰度图像"></p>
+<p><img src="../images_result/images/2016051907313850346grayscale_hex.png" alt="灰度图像"></p>
 
 <p>插入 PLTE 数据块，并写入 php 代码</p>
 
-<p><img src="http://static.wooyun.org//drops/20160519/2016051907314162584grayscale_phpinfo.png" alt="add PLTE chunk"></p>
+<p><img src="../images_result/images/2016051907314162584grayscale_phpinfo.png" alt="add PLTE chunk"></p>
 
 <p>重建后的图片如下</p>
 
-<p><img src="http://static.wooyun.org//drops/20160519/2016051907314080603grayscale_new.png" alt="new png"></p>
+<p><img src="../images_result/images/2016051907314080603grayscale_new.png" alt="new png"></p>
 
 <p>可以看出重建的图片转换为 索引图像类型，并且重写了 PLTE 数据块，写入 php 代码失败</p>
 
@@ -292,15 +292,15 @@ imagepng($im,$newpngfile);
 
 <p>原始图像， 不含 PLTE 数据块， 如下所示</p>
 
-<p><img src="http://static.wooyun.org//drops/20160519/2016051907314777684truecolor_hex.png" alt="真彩色图像"></p>
+<p><img src="../images_result/images/2016051907314777684truecolor_hex.png" alt="真彩色图像"></p>
 
 <p>插入 PLTE 数据块，并写入 php 代码</p>
 
-<p><img src="http://static.wooyun.org//drops/20160519/2016051907315071664truecolor_pnpinfo.png" alt="add PLTE chunk "></p>
+<p><img src="../images_result/images/2016051907315071664truecolor_pnpinfo.png" alt="add PLTE chunk "></p>
 
 <p>重建后的图片如下</p>
 
-<p><img src="http://static.wooyun.org//drops/20160519/2016051907314922312truecolor_new.png" alt="new png"></p>
+<p><img src="../images_result/images/2016051907314922312truecolor_new.png" alt="new png"></p>
 
 <p>可以看出真彩色类型图片重建后的图片不含 PLTE 数据块，写入 php 代码失败</p>
 

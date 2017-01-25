@@ -3,7 +3,7 @@
 			<head>
 			     <title>Hacking the D-Link DIR-890L - ccSec</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5601">http://drops.wooyun.org/papers/5601</a></h1>
 				
@@ -16,7 +16,7 @@
 
 <p>之前的6个月，D-Link都不断使坏，把我整的晕头转向。今天我想找些乐子，登陆他们的网站，结果就看到了惨不忍睹的一幕：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150413/2015041301420456883.png" alt=""></p>
+<p><img src="../images_result/images/2015041301420456883.png" alt=""></p>
 
 <!--more-->
 
@@ -67,21 +67,21 @@ lrwxrwxrwx 1 eve eve 14 Mar 31 22:46 htdocs/web/webfa_authentication_logout.cgi 
 <p>这玩意错综复杂，不过没关系，有了字符串就可以找到每个功能对应的函数了。<br>
 程序首先会把argv[0]参数和软连接的名称作比较，来决定要执行什么样的动作。（<code>argv[0]</code>是由软链接的名称来决定的，比如WEB服务器执行htdocs/web/captcha.cgi -> /htdocs/cgibin的话，cgibin获得到的<code>argv[0]</code>就会包含catpcha.cgi，那么程序就可以跳到catpcha的功能函数当中执行）</p>
 
-<p><img src="http://static.wooyun.org/drops/20150413/2015041301443011981.png" alt=""></p>
+<p><img src="../images_result/images/2015041301443011981.png" alt=""></p>
 
 <pre><code>“Staircase” code graph, typical of if-else statements
 </code></pre>
 
 <p>每个软连接名称都是通过strcmp函数来比较的：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150413/2015041301402220348.png" alt=""></p>
+<p><img src="../images_result/images/2015041301402220348.png" alt=""></p>
 
 <pre><code>Function handlers for various symlinks
 </code></pre>
 
 <p>这样一来， 我们很容易就可以通过符号链接的名称来找到对应的函数功能代码，然后给它重新起个合适的名字：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150413/2015041301381244178.png" alt=""></p>
+<p><img src="../images_result/images/2015041301381244178.png" alt=""></p>
 
 <pre><code>Renamed symlink function handlers
 </code></pre>
@@ -116,14 +116,14 @@ SOAPAction: "http://purenetworks.com/HNAP1/AddPortMapping"
 <p>SOAPAction头在HNAP请求中特别重要，因为它指定了HNAP所要进行的操作。（以上这个请求执行的是AddPortMapping这个功能）<br>
 由于web服务器将cgibin作为CGI来执行，所以hnap_main函数可以通过环境变量访问到HNAP的请求数据，比如SOAPAction头：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150413/201504130227351251011.png" alt=""></p>
+<p><img src="../images_result/images/201504130227351251011.png" alt=""></p>
 
 <pre><code>SOAPAction = getenv(“HTTP_SOAPACTION”);
 </code></pre>
 
 <p>在接近函数末尾的部分，程序使用了sprintf函数动态构造一条shell命令，这条命令将被传入system函数执行：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150413/2015041302105938070.png" alt=""></p>
+<p><img src="../images_result/images/2015041302105938070.png" alt=""></p>
 
 <pre><code>sprintf(command, “sh %s%s.sh &gt; /dev/console”, “/var/run/”, SOAPAction);
 </code></pre>
@@ -132,7 +132,7 @@ SOAPAction: "http://purenetworks.com/HNAP1/AddPortMapping"
 
 <p>回到hnap_main函数的开头，程序首先检查SOAPAction头是否为http://purenetworks.com/HNAP1/GetDeviceSettings，如果是，则跳过认证。这是我们预料之中的，并且我们已经确定，GetDeviceSettings功能是不需要认证的。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150413/2015041301570699984.png" alt=""></p>
+<p><img src="../images_result/images/2015041301570699984.png" alt=""></p>
 
 <pre><code>if(strstr(SOAPAction, “http://purenetworks.com/HNAP1/GetDeviceSettings”) != NULL)
 </code></pre>
@@ -140,7 +140,7 @@ SOAPAction: "http://purenetworks.com/HNAP1/AddPortMapping"
 <p>然而，可以注意到，strstr被用于字符串检查，这就表明了，SOAPAction头只要包含http://purenetworks.com/HNAP1/GetDeviceSettings字符串，就可以通过检查，绕过认证。<br>
 所以，如果SOAPAction头包含字符串http://purenetworks.com/HNAP1/GetDeviceSettings，代码将会从请求头中解析出Action的名称（例如GetDeviceSettings）并且会移除字符串最后的双引号。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150413/2015041302085766740.png" alt=""></p>
+<p><img src="../images_result/images/2015041302085766740.png" alt=""></p>
 
 <pre><code>SOAPAction = strrchr(SOAPAction, ‘/’);
 </code></pre>

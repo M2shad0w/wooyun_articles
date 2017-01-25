@@ -3,7 +3,7 @@
 			<head>
 			     <title>利用cache特性检测Android模拟器 - leonnewton</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/13245">http://drops.wooyun.org/tips/13245</a></h1>
 				
@@ -24,7 +24,7 @@
 
 <p>由于现在大部分的Android手机都是ARM架构的，因此首先看一下ARM架构和x86架构在cache上的区别。两者简明的区别如下图所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160229/2016022914015914007127.png" alt=""></p>
+<p><img src="../images_result/images/2016022914015914007127.png" alt=""></p>
 
 <p>图1：ARM和x86 cache区别</p>
 
@@ -42,7 +42,7 @@
 
 <p>先看下思路的流程图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160229/2016022914020048464223.png" alt=""></p>
+<p><img src="../images_result/images/2016022914020048464223.png" alt=""></p>
 
 <p>图2：检测思路</p>
 
@@ -134,19 +134,19 @@ __asm __volatile (
 
 <p>在进入10000000前下断点，然后F7进去。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160229/2016022914020239919315.png" alt=""></p>
+<p><img src="../images_result/images/2016022914020239919315.png" alt=""></p>
 
 <p>进入以后，在mov r0,r4的时候下断，F9执行，这时候看到r4的值是10，这是在真机上测试的结果。可以看到原先add r4,#1 已经变成了add r7,#1，但是实际执行的还是add r4,#1。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160229/2016022914020366987410.png" alt=""></p>
+<p><img src="../images_result/images/2016022914020366987410.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160229/2016022914020731880610.png" alt=""></p>
+<p><img src="../images_result/images/2016022914020731880610.png" alt=""></p>
 
 <p>在模拟器执行的结果如下,可以看到r4的值是1，r7是10,所以执行的是新指令，是在模拟器上：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160229/2016022914020515577510.png" alt=""></p>
+<p><img src="../images_result/images/2016022914020515577510.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160229/201602291402088802178.png" alt=""></p>
+<p><img src="../images_result/images/201602291402088802178.png" alt=""></p>
 
 <h1>0x05 测试</h1>
 

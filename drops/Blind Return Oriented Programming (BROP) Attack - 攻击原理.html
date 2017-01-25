@@ -3,7 +3,7 @@
 			<head>
 			     <title>Blind Return Oriented Programming (BROP) Attack - 攻击原理 - mctrain</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3071">http://drops.wooyun.org/tips/3071</a></h1>
 				
@@ -59,7 +59,7 @@
 
 <p>将这条系统调用转换成4条汇编指令，如图所示：</p>
 
-<p><img src="http://static.wooyun.org/20140927/2014092705033845154.png" alt="write gadgets" title="write gadgets"></p>
+<p><img src="../images_result/images/2014092705033845154.png" alt="write gadgets" title="write gadgets"></p>
 
 <p>所以从ROP攻击的角度来看，我们只需要找到四个相应的gadget，然后在栈上构造好这4个gadget的内存地址，依次进行顺序调用就可以了。</p>
 
@@ -75,11 +75,11 @@
 
 <p>假设这是我们想要overflow的栈的布局：</p>
 
-<p><img src="http://static.wooyun.org/20140927/2014092705033845847.png" alt="stack layout" title="stack layout"></p>
+<p><img src="../images_result/images/2014092705033845847.png" alt="stack layout" title="stack layout"></p>
 
 <p>我们可以尝试任意多次来判断出overflow的长度（直到进程由于canary被破坏crash了，在这里即为<code>4096+8=4104</code>个字节），之后我们将这4096个字节填上任意值，然后一个一个字节顺序地进行尝试来还原出真实的canary，比如说，我们将第4097个字节填为<code>x</code>，如果<code>x</code>和原来的canary中的第一个字节是一样的话，那么进程不会crash，否则我们尝试下一个<code>x</code>的可能性，在这里，由于一个字节只有256种可能，所以我们只要最多尝试256次就可以找到canary的某个正确的字节，直到我们得到8个完整的canary字节，该流程如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20140927/2014092705033933227.png" alt="stack reading" title="stack reading"></p>
+<p><img src="../images_result/images/2014092705033933227.png" alt="stack reading" title="stack reading"></p>
 
 <p>我们同样可以用这种方法来得到保存好的<code>frame pointer</code>和<code>return address</code>。</p>
 
@@ -97,11 +97,11 @@
 
 <p>到目前为止我们还是只能对栈进行操作，而且只能通过覆盖<code>return address</code>来进行后续的操作。假设现在我们猜到某个<code>useful gadget</code>，比如<code>pop rdi; ret</code>, 但是由于在执行完这个gadget之后进程还会跳到栈上的下一个地址，如果该地址是一个非法地址，那么进程最后还是会crash，在这个过程中攻击者其实并不知道这个<code>useful gadget</code>被执行过了（因为在攻击者看来最后的效果都是进程crash了），因此攻击者就会认为在这个过程中并没有执行到任何的<code>useful gadget</code>，从而放弃它，这个步骤如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20140927/2014092705033985879.png" alt="useful gadget but crash" title="useful gadget but crash"></p>
+<p><img src="../images_result/images/2014092705033985879.png" alt="useful gadget but crash" title="useful gadget but crash"></p>
 
 <p>但是，如果我们有了<code>stop gadget</code>，那么整个过程将会很不一样. 如果我们在需要尝试的<code>return address</code>之后填上了足够多的<code>stop gadgets</code>，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20140927/2014092705033980326.png" alt="stop gadgets usage" title="stop gadgets usage"></p>
+<p><img src="../images_result/images/2014092705033980326.png" alt="stop gadgets usage" title="stop gadgets usage"></p>
 
 <p>那么任何会造成进程crash的gadget最后还是会造成进程crash，而那些<code>useful gadget</code>则会进入block状态。尽管如此，还是有一种特殊情况，即那个我们需要尝试的gadget也是一个<code>stop gadget</code>，那么如上所述，它也会被我们标识为<code>useful gadget</code>。不过这并没有关系，因为之后我们还是需要检查该<code>useful gadget</code>是否是我们想要的gadget.</p>
 
@@ -109,7 +109,7 @@
 
 <p>到目前为止，似乎准备工作都做好了，我们已经可以绕过canary防护，并且得到很多不会造成进程crash的“potential useful gadget”了，那么接下来就是该如何找到我们之前所提到的那四个gadgets呢？</p>
 
-<p><img src="http://static.wooyun.org/20140927/2014092705033962159.png" alt="find write gadgets" title="find write gadgets"></p>
+<p><img src="../images_result/images/2014092705033962159.png" alt="find write gadgets" title="find write gadgets"></p>
 
 <p>如上图所示，为了找到前两个gadgets：<code>pop %rsi; ret</code>和<code>pop %rdi; ret</code>，我们只需要找到一种所谓的<code>BROP gadget</code>就可以了，这种gadget很常见，它做的事情就是恢复那些<code>callee saved registers</code>. 而对它进行一个偏移就能够生成<code>pop %rdi</code>和<code>pop %rsi</code>这两个gadgets.</p>
 
@@ -126,7 +126,7 @@
 
 <p>事实上<code>BROP gadgets</code>特别特殊，因为它需要顺序地从栈上<code>pop</code> 6个值然后执行<code>ret</code>。所以如果我们利用之前提到的<code>stop gadget</code>的方法就可以很容易找到这种特殊的gadget了，我们只需要在<code>stop gadget</code>之前填上6个会造成crash的地址:</p>
 
-<p><img src="http://static.wooyun.org/20140927/2014092705033914228.png" alt="find brop gadget" title="find brop gadgets"></p>
+<p><img src="../images_result/images/2014092705033914228.png" alt="find brop gadget" title="find brop gadgets"></p>
 
 <p>如果任何<code>useful gadget</code>满足这个条件且不会crash的话，那么它基本上就是<code>BROP gadgets</code>了。</p>
 
@@ -134,7 +134,7 @@
 
 <p><a href="http://en.wikipedia.org/wiki/Dynamic_linking">PLT</a>是一个跳转表，它的位置一般在可执行程序开始的地方，该机制主要被用来给应用程序调用外部函数（比如libc等），具体的细节可以看相关的Wiki。它有一个非常独特的signature：每一个项都是16个字节对齐，其中第0个字节开始的地址指向改项对应函数的fast path，而第6个字节开始的地址指向了该项对应函数的slow path：</p>
 
-<p><img src="http://static.wooyun.org/20140927/2014092705034043822.png" alt="plt structure" title="plt structure"></p>
+<p><img src="../images_result/images/2014092705034043822.png" alt="plt structure" title="plt structure"></p>
 
 <p>另外，大部分的PLT项都不会因为传进来的参数的原因crash，因为它们很多都是系统调用，都会对参数进行检查，如果有错误会返回EFAULT而已，并不会造成进程crash。所以攻击者可以通过下面这个方法找到PLT：如果攻击者发现好多条连续的16个字节对齐的地址都不会造成进程crash，而且这些地址加6得到的地址也不会造成进程crash，那么很有可能这就是某个PLT对应的项了。</p>
 

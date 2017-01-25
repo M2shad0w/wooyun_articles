@@ -3,7 +3,7 @@
 			<head>
 			     <title>burpsuite扩展开发之Python - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/5751">http://drops.wooyun.org/tools/5751</a></h1>
 				
@@ -28,19 +28,19 @@
 
 <p>安装python开发的扩展需要配置Jython环境。<a href="http://www.jython.org/downloads.html">Jython下载</a>直接下载Standalone Jar版本就可以。在extender标签页中选择options标签。在python environment中选中刚刚下载的jython standalon jar。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503012710862.png" alt="images"></p>
+<p><img src="../images_result/images/2015062503012710862.png" alt="images"></p>
 
-<p>如果下载的是jython installer。需要在安装的时候选择standlone类型。之后再在burpsuite中选择安装目录下的jython.jar. <img src="http://static.wooyun.org//drops/20150625/2015062503012865924.png" alt=""></p>
+<p>如果下载的是jython installer。需要在安装的时候选择standlone类型。之后再在burpsuite中选择安装目录下的jython.jar. <img src="../images_result/images/2015062503012865924.png" alt=""></p>
 
-<p>如果没有配置好jython环境。添加python编写的扩展会报错。 <img src="http://static.wooyun.org//drops/20150625/2015062503012899488.png" alt=""></p>
+<p>如果没有配置好jython环境。添加python编写的扩展会报错。 <img src="../images_result/images/2015062503012899488.png" alt=""></p>
 
 <h1>0x03 常用接口介绍</h1>
 
 <hr>
 
-<p>burpsuite的文档中给了多个样例以及详细的<a href="http://portswigger.net/burp/extender/api/index.html">API文档</a>。 <img src="http://static.wooyun.org//drops/20150625/2015062503012889998.png" alt=""></p>
+<p>burpsuite的文档中给了多个样例以及详细的<a href="http://portswigger.net/burp/extender/api/index.html">API文档</a>。 <img src="../images_result/images/2015062503012889998.png" alt=""></p>
 
-<p>个人觉得最快的方法还是阅读现成的扩展代码。很多需求稍微修改现成的扩展就可以完成。Burp的Bapp store里的扩展安装之后默认是在burpsuite同目录下的bapps的文件夹内。 <img src="http://static.wooyun.org//drops/20150625/2015062503012877419.png" alt=""></p>
+<p>个人觉得最快的方法还是阅读现成的扩展代码。很多需求稍微修改现成的扩展就可以完成。Burp的Bapp store里的扩展安装之后默认是在burpsuite同目录下的bapps的文件夹内。 <img src="../images_result/images/2015062503012877419.png" alt=""></p>
 
 <p>简单介绍一下几个最常用的接口：</p>
 
@@ -65,19 +65,19 @@
 
 <p>首先引入所需要的模块，在BurpExtender类中定义我们需要的方法。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503012873987.png" alt=""></p>
+<p><img src="../images_result/images/2015062503012873987.png" alt=""></p>
 
 <p>toolFlag是burpsuite中对工具进行识别的方式，proxy是4，repeater是64.可以在<a href="http://portswigger.net/burp/extender/api/constant-values.html#burp.IBurpExtenderCallbacks">文档</a>里查看所有工具对应的flag值。这里几行代码就是先解码返回值，查找unicode明文，进行解码，之后再更新响应的body。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503012921464.png" alt=""></p>
+<p><img src="../images_result/images/2015062503012921464.png" alt=""></p>
 
 <p>加载扩展之前，repeater看到的返回：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503012910153.png" alt=""></p>
+<p><img src="../images_result/images/2015062503012910153.png" alt=""></p>
 
 <p>加载扩展之后：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503012920748.png" alt=""></p>
+<p><img src="../images_result/images/2015062503012920748.png" alt=""></p>
 
 <p>代码下载地址:<a href="https://github.com/stayliv3/burpsuite-changeU">github</a></p>
 

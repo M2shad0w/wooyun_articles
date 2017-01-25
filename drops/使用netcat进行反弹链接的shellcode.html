@@ -3,7 +3,7 @@
 			<head>
 			     <title>使用netcat进行反弹链接的shellcode - ∑-TEAM</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1376">http://drops.wooyun.org/tips/1376</a></h1>
 				
@@ -137,7 +137,7 @@ mov eax,0
 
 <p>因为null在shellcode中是不允许出现的。最后我们吧，命令字符串分开存放到内存之中。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811003259310.png" alt="1396093148.png"></p>
+<p><img src="../images_result/images/2014091811003259310.png" alt="1396093148.png"></p>
 
 <p>在第5行到第9行，我们把寄存器中的0移动到字符串的末尾，使用替代<code>#</code>（取自eax寄存器，其中的0使用xor生成）之后我们需要一个各个字符串地址的数组，作为execve()的第二个参数。</p>
 
@@ -190,7 +190,7 @@ gcc shellcode.c -fno-stack-protector -z execstack -o shellcode
 
 <p>在另一个shell中运行<code>netcat -lvp 9999</code>，然后运行这个c程序<code>./shellcode</code>如果一切正确的话你就可以得到一个反弹链接的shell了。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811003627172.png" alt="1396096315.png"></p>
+<p><img src="../images_result/images/2014091811003627172.png" alt="1396096315.png"></p>
 
 <p>happy hacking!</p>      <p></p>
     

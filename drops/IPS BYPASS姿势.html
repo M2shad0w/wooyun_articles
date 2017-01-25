@@ -3,7 +3,7 @@
 			<head>
 			     <title>IPS BYPASS姿势 - MayIKissYou</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4323">http://drops.wooyun.org/papers/4323</a></h1>
 				
@@ -32,17 +32,17 @@
 
 <p>在网络基础中有五元组的概念，即为源地址，目的地址，源端口，目的端口以及协议号，五元组相同即认为是一条同样的会话，当你在浏览器中访问www.wooyun.org的时候，打开wireshark抓包工具抓包，然后follow下这一条stream可以发现如下内容。这也就是所描述的会话和流。</p>
 
-<p><img src="http://static.wooyun.org/20141216/2014121608180749736.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014121608180749736.png" alt="enter image description here"></p>
 
 <p>IPS中一般是通过会话，流来进行检测的。如何来通过会话来检测呢，这里有第二个概念需要了解，第二个概念为重组：</p>
 
 <p>为什么要重组，一个以太网包的最大长度为1518字节，譬如我们这时候发送一个大附件出去，此时就会把数据分成多个数据包发送出去，数据包在internet上转发的时候会被路由转发，在整个internet中转发的时候会出现乱序，导致有些数据包先到IPS设备，有些数据包后到IPS设备，此时就需要IPS将发送的数据包，完整的组合起来。因为组合起来之后才可以方便后面的数据分析，提取内容。如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20141216/2014121608180815249.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014121608180815249.png" alt="enter image description here"></p>
 
 <p>现在问题就来了，如果对于每条数据流的所有内容都做检测应该就没问题了，但是每条数据流的所有内容都进行检测，肯定所耗费的资源也就越多，应该大部分厂商不会检测数据流的所有包。因此就会出现个问题，到底检测多大的大小呢？在处理这个问题的时候有些使用的是包数，有些使用的是流大小的方法。但是这都会导致所说的一个问题，就是性能优化导致的bypass。如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20141216/2014121608180829340.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014121608180829340.png" alt="enter image description here"></p>
 
 <p>在该数据流中，前面多个包如20个包没有发现特征，20个包之后的内容不再做ips检测，这样后面的包里的特征就没有受到IPS引擎的检测。</p>
 
@@ -60,7 +60,7 @@
 
 <p>协议解析为啥？即将上面重组过后的信息，提取相应的内容赋值给协议变量。打个比方，如http协议，在重组完成之后肯定会出现http标准的内容，http的cookie，header，method等等，因此IPS会根据标准的内容解析，然后将解析的内容赋值给类似http&#95;cookie,http&#95;method的变量。有了这些变量就可以对数据流进行IPS特征匹配了。效果如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20141216/2014121608180821244.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014121608180821244.png" alt="enter image description here"></p>
 
 <p>解析出来各种http的相关内容，当然不同的协议解析出来的内容不相同，有的可能是smtp，tcp等等。</p>
 
@@ -80,7 +80,7 @@
 
 <p>之前碰到了一个例子，在IPS规则中，书写特征的人员使用了未解码的协议变量书写特征，如特征为包含search关键字，此时我们可以这样bypass规则，将search书写为%73earch，这样当数据包经过IPS设备的时候，内容未作解码还是为%73earch，未匹配上规则，而到服务器端时候，被解码为search。</p>
 
-<p><img src="http://static.wooyun.org/20141216/2014121608180870620.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014121608180870620.png" alt="enter image description here"></p>
 
 <p>因此这里说，在做web测试的时候，尽量编码一些英文字符提交，可能会有惊喜。</p>
 

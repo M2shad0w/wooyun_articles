@@ -3,7 +3,7 @@
 			<head>
 			     <title>小议Linux安全防护(二) - Blood_Zero</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/12119">http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/12119</a></h1>
 				
@@ -16,13 +16,13 @@
 
 <p>首先说一下关于文件的命令：ls more cat less head touch rm rmdir cd mkdir等等 对于一些文件我们希望它只有特定的用户可以访问，其他用户不可以访问，或者一个文件只能拥有着可以操作其他用户就不能操作这个时候我们应该怎么办?在linux系统中，对于文件和文件夹有一个s、t、i、a的权限，可以帮助我们做到这些；</p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/2016011806581993558115.jpg" alt="p1"></p>
+<p><img src="../images_result/images/2016011806581993558115.jpg" alt="p1"></p>
 
 <p>例如这里的passwd命令，它的拥有者有一个s的权限，这个权限是什么意思呢！它代表普通用户在执行passwd这个命令时暂时拥有这个文件本身所属用户的权限。</p>
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160118/2016011806583287349213.jpg" alt="p2"></p>
+<p><img src="../images_result/images/2016011806583287349213.jpg" alt="p2"></p>
 
 <p>我这里解释一下SUID 与 SGID</p>
 
@@ -78,17 +78,17 @@
 
 <p>针对文件以及文件夹我们在新建的时候，通常会有一个默认的权限：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/201601180658343517436.jpg" alt="p3"></p>
+<p><img src="../images_result/images/201601180658343517436.jpg" alt="p3"></p>
 
 <p>我们会发现文件夹是755，而我们的文件是644，这是为什么呢，原因就是在linux中默认的umask权限，这个umask一般在我们的/etc/profile</p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/201601180658372240444.jpg" alt="p4"></p>
+<p><img src="../images_result/images/201601180658372240444.jpg" alt="p4"></p>
 
 <p>umask值：022代表什么意思呢，umask其实是权限的补码，就是在777权限上减去的值，所以我们文件夹的权限是<code>7-0/7-2/7-2=755</code>，那为什么我们文件的是644呢，因为创建文件的时候还需要减去一个默认的执行权限1，所以文件的权限就是<code>7-1/7-3/7-3=644</code></p>
 
 <p>平时我们修改文件权限的常用命令有这些：<code>chmod</code>、<code>chown</code>、<code>chattr</code>等，但是对于文件还有一个ACL(访问控制列表)机制，下面就以Centos7中来介绍一下文件的访问控制，对于ACL常见的命令有3个：<code>setfacl</code>、<code>getfacl</code>、<code>chacl</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/201601180658404720654.jpg" alt="p5"></p>
+<p><img src="../images_result/images/201601180658404720654.jpg" alt="p5"></p>
 
 <p>通过上图我们可以发现对文件的描述是一样的，文件名、拥有着、所属组、以及他们对应的权限；对于getfacl获取文件的权限没有什么可说的，这里详细说一下对文件权限的设置：</p>
 
@@ -114,15 +114,15 @@ setfacl [-bkndRLP] { -m|-M|-x|-X ... } file ...
 
 <p>下面看实例：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/201601180658426058665.jpg" alt="p6"></p>
+<p><img src="../images_result/images/201601180658426058665.jpg" alt="p6"></p>
 
 <p>我们再设置一个对其他用户完全没有权限的acl</p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/2016011806584433883716.png" alt="p7"></p>
+<p><img src="../images_result/images/2016011806584433883716.png" alt="p7"></p>
 
 <p>这里再添加一个可以读可执行却没有写权限的用户acl，</p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/2016011806584686179816.png" alt="p8"></p>
+<p><img src="../images_result/images/2016011806584686179816.png" alt="p8"></p>
 
 <p>这就是文件访问控制的魅力，你希望这个文件对那些用户有什么权限都可以通过这样来进行设置；</p>
 
@@ -130,23 +130,23 @@ setfacl [-bkndRLP] { -m|-M|-x|-X ... } file ...
 
 <p>提供文件共享的服务Samba、NFS、Ftp等等，这些都可以作为Linux中文件的共享功能；提供服务时需要注意目录的权限控制，这里我们将一下Linux中与cp命令相对应的一个命令scp，它可以远程来传输文件，并且基于ssh登录是一个安全的文件传输通道；常常用于我们的两台服务器之间的文件传输，比如我们的备份日志(通过crontab来实现)</p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/2016011806584947474915.png" alt="p9"></p>
+<p><img src="../images_result/images/2016011806584947474915.png" alt="p9"></p>
 
 <p>传一个文件到我们的远程服务器上面：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/20160118065851121831017.png" alt="p10"></p>
+<p><img src="../images_result/images/20160118065851121831017.png" alt="p10"></p>
 
 <p>从远程服务器上面获取一个文件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/20160118065853872651119.png" alt="p11"></p>
+<p><img src="../images_result/images/20160118065853872651119.png" alt="p11"></p>
 
 <p>如果我们不想在每次获取文件或者传输文件的时候输入密码，我们可以使用ssh建立密钥认证来进行传输，一般在我们备份日志文件中也是通过这样的方式来进行备份；</p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/20160118065858526001214.png" alt="p12"></p>
+<p><img src="../images_result/images/20160118065858526001214.png" alt="p12"></p>
 
 <p>制定一个定时任务<code>crontab -e</code>每2分钟向服务器发送一个test.txt的文件</p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/20160118065859923071314.png" alt="p13"></p>
+<p><img src="../images_result/images/20160118065859923071314.png" alt="p13"></p>
 
 <p>我们这么做的目的或者说这么做了对服务器有什么安全性嘛，其实scp命令就是一个通过ssh的传输功能，我们可以在ssh结合firewall做一些限制，比如只允许哪些IP或IP段访问我们的服务器，这样我们就可以控制哪些可信的pc或服务器访问；</p>
 
@@ -207,15 +207,15 @@ export HISTTIMEFORMAT="[%Y.%m.%d %H:%M:%S]"
 chmod 600 $HISTDIR/${LOGNAME}/*.history* 2&gt;/dev/null
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160118/20160118065903784011412.png" alt="p14"></p>
+<p><img src="../images_result/images/20160118065903784011412.png" alt="p14"></p>
 
 <p>如果我们是想给不同的用户设置history配置，我们就可以在相对应的账户家目录中的<code>.bash_profile</code>文件中进行编辑，然后重新登录系统就修改成功；</p>
 
 <p>当然在Linux系统中其实还有一个命令可以帮助我们记录我们所操作过的命令：script</p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/20160118065906557411511.png" alt="p15"></p>
+<p><img src="../images_result/images/20160118065906557411511.png" alt="p15"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/2016011806591342320168.png" alt="p16"></p>
+<p><img src="../images_result/images/2016011806591342320168.png" alt="p16"></p>
 
 <p>script这个命令不但可以记录我们执行的命令，还可以记录我们执行命令后的返回结果，但是随着命令的执行这个文件会越来越大，所以这个命令使用的很少；</p>
 

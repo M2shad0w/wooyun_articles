@@ -3,7 +3,7 @@
 			<head>
 			     <title>Python编写简易木马程序 - light</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4751">http://drops.wooyun.org/papers/4751</a></h1>
 				
@@ -22,13 +22,13 @@
 
 <p>下载安装python hook</p>
 
-<p><img src="http://static.wooyun.org/drops/20150125/2015012510071643238image0034.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012510071643238image0034.png" alt="enter image description here"></p>
 
 <p>下载安装pythoncom模块：</p>
 
 <p>http://sourceforge.net/projects/pywin32/files/pywin32/Build%20219/pywin32-219.win32-py2.7.exe/download</p>
 
-<p><img src="http://static.wooyun.org/drops/20150125/2015012510075829728image0054.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012510075829728image0054.png" alt="enter image description here"></p>
 
 <p>如果觉得麻烦，你可以直接使用集成了所有我们所需要的python库的商业版Activepython（我们可以用他的免费版）：</p>
 
@@ -127,15 +127,15 @@ pythoncom.PumpMessages()
 
 <p>撸代码时一定要注意严格区分大小写。检查无误后启动keylogger：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150125/2015012510114996484image0075.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012510114996484image0075.png" alt="enter image description here"></p>
 
 <p>然后可以尝试打开记事本写点东西，过程中可以看到我们的keylogger窗口正在对我们的输入实时记录：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150125/2015012510124296457image0094.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012510124296457image0094.png" alt="enter image description here"></p>
 
 <p>切换窗口时会自动跟踪到新窗口（众：这点功能都没有还敢叫keylogger吗！），light教授趁机骚扰一下疯狗，可以看到我们的keylogger已经跟踪到QQ聊天窗口，并忠实的记录下我输入的一切。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150125/2015012510135828152image0141.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012510135828152image0141.png" alt="enter image description here"></p>
 
 <h1>0x02 看看你在干什么：编写一个screenshotter</h1>
 
@@ -184,7 +184,7 @@ win32gui.DeleteObject(screenshot.GetHandle())
 
 <p>看看效果如何：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150125/2015012510171331177image0161.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012510171331177image0161.png" alt="enter image description here"></p>
 
 <h1>0x03 综合运用：完成一个简易木马</h1>
 
@@ -259,11 +259,11 @@ while True:
 
 <p>开启服务端监听：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150125/2015012510194755999image018.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012510194755999image018.png" alt="enter image description here"></p>
 
 <p>客户端执行：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150125/2015012510202946933image020.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012510202946933image020.png" alt="enter image description here"></p>
 
 <p>服务端接收到客户端的请求并作出响应：</p>
 

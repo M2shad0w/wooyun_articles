@@ -3,7 +3,7 @@
 			<head>
 			     <title>WooYun WIFI 成长史 - lxj616</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3248">http://drops.wooyun.org/tips/3248</a></h1>
 				
@@ -36,7 +36,7 @@
 
 <p>先展示一下WooyunWifi的架构图（Wooyun Wifi简称Woofi）：</p>
 
-<p><img src="http://static.wooyun.org/20141019/2014101912594821522.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014101912594821522.png" alt="enter image description here"></p>
 
 <p>1、 PHP+Bootstrap的组合大家已经在乌云靶场项目中见过了，不过由于路由器环境限制和开源工具数据存储特性，经过考虑不使用Mysql数据库存储数据，直接使用文本方式保存数据内容。</p>
 
@@ -86,13 +86,13 @@
 
 <p>首先Karma需要建立一个能够用来劫持用户的AP（比如说利用hostapd），然后对hostapd源码进行patch，使之可以无视请求中的ssid提供服务</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102002282025138.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102002282025138.png" alt="enter image description here"></p>
 
 <p>（默认情况下，若ssid不一致，hostapd会报告异常，因此为了实现karma功能需要hostapd去除ssid检查）</p>
 
 <p>部分重要patch如下：</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102002282065428.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102002282065428.png" alt="enter image description here"></p>
 
 <p>即如果karma&#95;beacon&#95;respond选项开启则无视ssid的检查，补丁原作者在截图中有显示，我只是把他的针对hostapd 2.0补丁重新做到了hostapd最新版20140603上而已</p>
 
@@ -167,11 +167,11 @@
 
 <p>进行配置</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102007151784128.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102007151784128.png" alt="enter image description here"></p>
 
 <p>第一项是目标芯片型号，不知道自己路由器芯片型号的Google去吧，第二项选项是NAND什么的设置视情况选择，第三项是你的路由器型号，我这里选择了极路由，只有在选对了芯片类型后才会可选，其它选项都比较易懂，如果用到再说</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102002282122997.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102002282122997.png" alt="enter image description here"></p>
 
 <p>选择编译的软件包时，星号代表编译进固件，M代表编译安装包但不放进固件，内置某些软件包时会自动选中依赖项</p>
 
@@ -253,7 +253,7 @@ elif (key.lower() == 'set-cookie'):
 
 <p>修改sslstrip的Makefile，改为从本地下载（我搭了个nginx），别忘改md5校验哦</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102002282286694.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102002282286694.png" alt="enter image description here"></p>
 
 <p>然后把修复后的ServerConnection.py打进压缩包，放在自己nginx即可</p>
 
@@ -357,11 +357,11 @@ $(eval $(call BuildPackage,wooyunwifi))
 
 <p>我曾经考虑，可不可以只用html+cgi实现所有的功能，但考虑到WEB管理的业务需求比较宽松，因此采用PHP敏捷开发更加快速。 Menuconfig时，额外选择<code>language – PHP – php-mod-session</code>用作登录控制，同理可集成其它所需插件 为了使uhttpd支持PHP，修改<code>package/network/services/uhttpd/files/uhttpd.config</code> 去掉<code>list interpreter php</code> 的注释符号，其它配置同理</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102002282219283.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102002282219283.png" alt="enter image description here"></p>
 
 <p>以sslstrip插件的设计为例进行说明</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102002282243021.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102002282243021.png" alt="enter image description here"></p>
 
 <pre><code>/WooyunWifi/sslstrip.inc
 
@@ -429,7 +429,7 @@ kill $(ps|grep "php-cgi"|awk '{print $1}') &amp;
 
 <p><a href="http://www.layoutit.com/build?r=35144450">在线</a>画了个框架，然后放在路由器上一边vi一边刷新浏览器</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102002282337431.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102002282337431.png" alt="enter image description here"></p>
 
 <h2>0x03 MITM功能设计：</h2>
 
@@ -476,7 +476,7 @@ kill $(ps|grep "php-cgi"|awk '{print $1}') &amp;
 
 <p>感想：写一句代码只需要一分钟，但知道这行代码写在哪需要一天</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102002282353850.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102002282353850.png" alt="enter image description here"></p>
 
 <p>既然WEB控制端设计好了，开始做model层的数据处理工具吧！</p>
 

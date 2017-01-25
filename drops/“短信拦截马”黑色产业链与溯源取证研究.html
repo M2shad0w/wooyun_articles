@@ -3,7 +3,7 @@
 			<head>
 			     <title>“短信拦截马”黑色产业链与溯源取证研究 - 猎豹科学院</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/8566">http://drops.wooyun.org/papers/8566</a></h1>
 				
@@ -26,17 +26,17 @@
 
 <p>在我们近期的云端监控中有一类“短信拦截马”变种非常活跃，占据总体样本量的15%左右。该样本使用“<code>stalker</code>”作为配置信息的加密密钥，所以我们将其命名为“潜行者”，下面我们就以它为例对典型“短信拦截马”进行简单的技术分析。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150909/2015090912392390091pic1.png" alt=""></p>
+<p><img src="../images_result/images/2015090912392390091pic1.png" alt=""></p>
 
 <p>从上图可以看出一个“短信拦截马”的典型功能结构，在我们对“潜行者”样本的分析过程中也发现一些比较有意思的细节，如下：</p>
 
 <ol>
 <li><p>出于兼容性考虑，木马同时使用了“广播机制”和“观察者模式”两种方法进行短信拦截。从木马启动的时候检查授权时间也可以看出这个变种是由木马作者开发以后进行外部出售的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150909/2015090912392620965pic2.png" alt=""></p></li>
+<p><img src="../images_result/images/2015090912392620965pic2.png" alt=""></p></li>
 <li><p>木马在向控制手机回传部分短信时对敏感关键词进行了过滤替换，防止手机安全软件进行监控拦截。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150909/2015090912392978406pic3.png" alt=""></p></li>
+<p><img src="../images_result/images/2015090912392978406pic3.png" alt=""></p></li>
 </ol>
 
 <h1>0x02 黑色产业链结构</h1>
@@ -45,11 +45,11 @@
 
 <p>如下图所示，“拦截马”黑色产业链条从整体分工层次上看相对比较清晰，木马作者、分发传播、出料、洗拦截料、转账洗钱构成了黑色产业链的关键环节，其中握有大量“拦截料”的料主在整个链条中处于相对核心的地位。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150909/2015090912393297963pic4.png" alt=""></p>
+<p><img src="../images_result/images/2015090912393297963pic4.png" alt=""></p>
 
 <p>另一方面从实际运作来看整个圈子又具有一定程度的复杂性，除了上述几个重要参与角色，每个产业链环节还会有一些其他黑产人员参与其中，比如盗卖个人信息、黑卡买卖、钓鱼后台维护、木马免杀处理等等，甚至还包括一些境外洗钱组织的身影；黑产圈子内部也充满了欺诈，“黑料”这样的事情也成为常态，具有一定技术实力的团伙才是暴利所得者；另外某些技术、资源实力强大的团伙，可能会包揽整个链条的多个甚至是全部环节，其暴利收益自然也是最高的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150909/2015090912393792615pic5.png" alt=""></p>
+<p><img src="../images_result/images/2015090912393792615pic5.png" alt=""></p>
 
 <h1>0x03 传播渠道</h1>
 
@@ -57,15 +57,15 @@
 
 <p>伴随着“短信拦截”黑色产业链的发展，技术门槛低、回报收益高的特点吸引着众多的各路黑产从业人员相继加入，拦截马的传播渠道也随之日渐丰富，各种钓鱼诱骗手段层出不穷，从伪基站、短信猫等硬件设备群发、色情钓鱼网站诱导以及鱼龙混杂的第三方app分发渠道均有介入。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150909/2015090912394365727pic6.png" alt=""></p>
+<p><img src="../images_result/images/2015090912394365727pic6.png" alt=""></p>
 
 <p>我们从近期拦截的“短信拦截马”中抽取了2000个活跃样本，对其传播使用的文件名和部分钓鱼短信内容进行了关键词提取，统计结果如下图所示，从中我们可以看出利用“相册相片”、“文件资料”等关键词的钓鱼手法占据了一半以上，这类关键词一般用于通讯录群发这样的病毒式传播手段，拦截量相对较高；其次是伪基站类的钓鱼手法，常见类型如10086积分兑换、银行升级等；还有一部分是针对特定人群的钓鱼攻击，比如车辆违章、校园通、成绩单等，这些往往是由于车主或者家长信息泄漏导致的；最后还有一些是利用社会热点进行传播的，比如前段时间很火的“优衣库”事件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150909/2015090912394753708pic7.png" alt=""></p>
+<p><img src="../images_result/images/2015090912394753708pic7.png" alt=""></p>
 
 <p>如下图所示，传播渠道的变化还表现出一个重要趋势，从早期“普遍撒网”的暴力传播模式开始向定向精准化钓鱼攻击转变。尤其是近年来个人信息数据的泄漏买卖行为日益活跃，成为拦截马定向传播的一大帮凶，黑产团伙通过购买商业贷款、信用卡办理、网购用户等具有较高目标价值的个人数据，然后根据相关情景去精心构造钓鱼短信，由于短信中包含用户姓名、身份证号或者银行卡号等个人数据，而且短信的情景也符合近期办理的业务，收到钓鱼短信的用户往往放松了安全警惕导致中招；又例如出现一些“背包客”随身携带伪基站设备群发钓鱼短信，他们主要在大型购物商场、高端写字楼等区域活动，这些地方人流量足够大，更重要的是在此类区域活动的人群具有更高的“经济附加值”。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150909/2015090912395249487pic8.png" alt=""></p>
+<p><img src="../images_result/images/2015090912395249487pic8.png" alt=""></p>
 
 <h1>0x04 洗料通道</h1>
 
@@ -75,7 +75,7 @@
 
 <p>黑产团伙“洗拦截料”的方式多种多样，不同“洗料通道”的转账限额也有差异。黑产团伙一般是通过银行、商户或者第三方支付的各类快捷支付渠道将用户卡内资金转走，从部分受害用户追查的消费记录来看，资金流向也五花八门，包括购买游戏币、彩票、话费充值、机票门票等多种多样的洗料方法。有些信用卡cvv码泄漏的用户还发现通过境外消费渠道被划走资金。有些被感染手机可能还会被订阅一些恶意扣费服务或者使用手机话费支付购买游戏点卡后再进行销赃。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150909/2015090912395751763pic9.png" alt=""></p>
+<p><img src="../images_result/images/2015090912395751763pic9.png" alt=""></p>
 
 <p>越来越多的认证绑定、安全验证被转移到用户手机上，作为个人信息中心的智能手机扮演了基础通讯之外更多的角色。一方面确实带来了非常多的便捷，但另一方面在手机中毒这样的特定场景下，用户的安全防线往往变得脆弱不堪。在保持手机支付便捷性的同时，我们需要一些更安全可靠的认证方式，比如指纹认证。安全对抗可能永远都不会止步，但是我们相信未来可以做得更好。</p>
 
@@ -100,7 +100,7 @@
 
 <p>我们对其中的活跃钓鱼网站进行了分类和安全测试，也对从其他渠道收集到的伪基站钓鱼网站源码进行了分析，发现了包括sql注入、存储型xss、后台越权等多类安全漏洞，由于这些常见伪基站钓鱼站点大多基于几类固定模版开发编写，所以这些安全漏洞通用性相对较高。这些漏洞相对都比较简单，今年在乌云等安全平台也多有披露，这里就不再赘述技术细节。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150909/2015090912400017871pic10.png" alt=""></p>
+<p><img src="../images_result/images/2015090912400017871pic10.png" alt=""></p>
 
 <p>活跃度高的伪基站钓鱼网站会自动加入我们的取证系统中，通过对上述漏洞的批量自动利用我们可以对全国范围内的活跃黑产团伙进行长期监控。综合受害者分布、钓鱼后台登录IP等数据分析，我们对全国伪基站钓鱼黑产的规模和运作有了更深入的了解。</p>
 
@@ -109,7 +109,7 @@
 <li>黑产团伙和受害用户的分布都存在地域聚集的特点。黑产团伙集中在广东、福建、海南、广西等地区，比例超过80%；受害用户分布较多的为广东、湖南、湖北、河南4大省份，比例超过60%。</li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20150909/2015090912400516585pic11.png" alt=""></p>
+<p><img src="../images_result/images/2015090912400516585pic11.png" alt=""></p>
 
 <p>从14年下半年开始我们加强了对“伪基站钓鱼”传播渠道的监控力度，共筛选梳理出20余个高度活跃的黑产团伙，我们将掌握的部分犯罪证据和追踪定位信息反馈给全国多地警方，配合打击了这批黑产犯罪团伙。目前其中的部分涉案团伙已经抓捕归案，涉案金额最少都在百万级别，希望更多的受害用户在结案以后能追回自己被盗的资金。</p>
 
@@ -117,17 +117,17 @@
 
 <p>在本文的开始也提到了近两年“短信拦截马”样本变种的拦截量增长非常迅猛。“短信拦截马”样本中相当一部分使用邮箱收信，同时使用手机短信进行远程控制，这些特点都可以作为溯源取证的常见入手点；当然也有部分样本使用一些web程序进行收信管理，在我们的实际测试过程中同样发现了多类安全漏洞，可以用来辅助实现自动化的安全取证；另一方面，针对“短信拦截马”的特点和传播场景，我们也尝试过“以彼之道还施彼身”的“反向钓鱼”，后面会讲到如何使用“反向钓鱼”手段去追踪黑产团伙。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150909/2015090912401181350pic12.png" alt=""></p>
+<p><img src="../images_result/images/2015090912401181350pic12.png" alt=""></p>
 
 <p>我们的安全监控系统会对入库的“短信拦截马”样本进行解包分析，根据辅助特征自动从反编译代码中提取出黑产团伙使用的邮箱帐号密码和控制手机号码，对其中拦截量较大的变种类型我们也会相应加强后续的监控跟踪。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150909/2015090912401755338pic13.png" alt=""></p>
+<p><img src="../images_result/images/2015090912401755338pic13.png" alt=""></p>
 
 <p>另一方面，基于“短信拦截马”的特殊传播场景，我们可以伪装为受害者，使用样本收信的邮箱帐号密码或者后台接口向黑产团伙投递一封精心构造的“反向钓鱼”诱饵，诱导其打开钓鱼链接从而获取到对方的IP地址。甚至更进一步诱导其安装我们的钓鱼app，然后使用GPS定位、前置摄像头拍照等功能获取更多的取证信息。</p>
 
 <p>“反向钓鱼”的取证思路并不复杂，重点在于“诱饵”短信要恰到好处的引起目标的兴趣，同时也不能太过突兀引起目标警觉，最好是和部分正常短信信息融合到一起，做到“真中有假、假中有真”；另一方面，目标的注意力大多集中在如何从用户短信中寻找到更多有价值的目标信息，所以往往会忽略“诱饵”的真假，这种心理特点也是“反向钓鱼”手段能够成功的一个重要因素。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150909/2015090912402156348pic14.png" alt=""></p>
+<p><img src="../images_result/images/2015090912402156348pic14.png" alt=""></p>
 
 <h1>0x06 更多思考</h1>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>iPhone蓝屏0day漏洞分析：播放视频触发内核拒绝服务 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/7435">http://drops.wooyun.org/papers/7435</a></h1>
 				
@@ -22,7 +22,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325698397.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072406325698397.png" alt="enter image description here"></p>
 
 <h1>0x01 漏洞影响</h1>
 
@@ -41,7 +41,7 @@
 
 <p>这个程序很简单，运行起来的界面如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325657368.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072406325657368.png" alt="enter image description here"></p>
 
 <p>只要点击“Play Video”就会调起播放器播放相应视频，进而引起系统崩溃。这里遇到个小问题，之前播放视频都是使用 MPMoviePlayerController，但是 MPMoviePlayerController 在播放有问题的视频时一直处于加载状态，于是换 AVPlayer 来播放视频，为了方便大家构建 Demo 进行测试，给出 “Play Video”的相应代码：</p>
 
@@ -93,7 +93,7 @@
 
 <p>首先播放视频，系统会发生崩溃，在设备重启后，从设备上读取崩溃日志，崩溃日志的主要内容如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325685607.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072406325685607.png" alt="enter image description here"></p>
 
 <p>上图中比较重要的值已经被圈出来了，其中 pc 与 lr 用来定位崩溃点。另外 kernel slide 也非常重要，因为上图中的寄存器值都是经过 slide 后的值，且这个 slide 每次启动都会变化（KASLR），我们首先需要换算出真实的地址：</p>
 
@@ -116,11 +116,11 @@ lr = 0xffffff8005043a58 = 0xffffff8003043a58 + 0x2000000
 
 <p>然后在 IDA Pro 定位到相应的地址， PC指向如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325778786.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072406325778786.png" alt="enter image description here"></p>
 
 <p>LR 指向如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325814467.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072406325814467.png" alt="enter image description here"></p>
 
 <p>从崩溃日志中可以知道崩溃时 <code>x0 = 0x0000000000000000</code>，可以确定崩溃的原因是由于对空指针解引用，即：没有校验入口参数的合法性。</p>
 
@@ -128,13 +128,13 @@ lr = 0xffffff8005043a58 = 0xffffff8003043a58 + 0x2000000
 
 <p>比较幸运的是， LR 指向的地址周围包含了内核扩展的信息：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325874241.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072406325874241.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325875426.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072406325875426.png" alt="enter image description here"></p>
 
 <p>我们获取运行时内核扩展信息，看看有没有与 AppleVXD393 相关的内核扩展，结果如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325917569.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072406325917569.png" alt="enter image description here"></p>
 
 <p>可以看到我们找到了相关的内核扩展。</p>
 
@@ -161,7 +161,7 @@ Binary file VideoDecoders/MP4VH6.videodecoder matches
 
 <p>结合对 VideoToolBox 的反汇编分析，可以知道 VideoToolBox 利用 MP4VH6.videodecoder 来做 MP4 解码，将 MP4VH6.videodecoder 拖到 IDA Pro 中，查看导出表：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325942336.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072406325942336.png" alt="enter image description here"></p>
 
 <p>可以看到与 AppleVXD393 相关的函数，MP4VH6.videodecoder 应该封装了内核扩展 com.apple.driver.AppleVXD393 的用户空间接口。</p>
 
@@ -230,19 +230,19 @@ com.apple.audio.SystemSounds
 
 <p>为了确定可控性，于是编写了一个 Tweak 来 Hook mediaserverd，并 Hook IOConnectCallStructMethod，在发现待解码的视频帧序号与引起内核崩溃的视频帧序号一致时，修改交由内核解码的数据，查看、对比崩溃日志，总结输入对崩溃时寄存器值的影响。 对缓冲区一共进行如下几个填充测试：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325945778.png" alt="enter code here"></p>
+<p><img src="../images_result/images/2015072406325945778.png" alt="enter code here"></p>
 
 <p>缓冲区填充测试，0x00 vs. 0x01：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406325934729.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072406325934729.png" alt="enter image description here"></p>
 
 <p>可以看到 PC 寄存器有差别，说明走的不是相同的代码路径。在对缓冲填充 0x01 时，内核的崩溃点为：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406330047396.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072406330047396.png" alt="enter image description here"></p>
 
 <p>缓冲区填充测试，0x01 vs. 0x02：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072406330043662.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072406330043662.png" alt="enter image description here"></p>
 
 <p>可以看到 x0 的部分位是可控的，x12, x13 是从 x1 指向的地址处加载的。至此已经完成了对问题的分析，至于利用，就大家各显神通吧。</p>
 

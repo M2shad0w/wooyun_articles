@@ -3,7 +3,7 @@
 			<head>
 			     <title>某僵尸网络被控端恶意样本分析 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/11805">http://drops.wooyun.org/papers/11805</a></h1>
 				
@@ -32,7 +32,7 @@
 
 <p>通过readelf得到的源代码文件名共有44个，从源文件名猜测此程序有较多工作线程。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/2016010510244724780113.png" alt="p1"></p>
+<p><img src="../images_result/images/2016010510244724780113.png" alt="p1"></p>
 
 <p>静态分析后发现此样本不同部分间的代码风格差异较大：main函数的代码比较简单粗糙，而主功能类CManager及附属类部分却展现出病毒作者对C++的熟练应用。</p>
 
@@ -42,9 +42,9 @@
 
 <p>程序使用自定义算法从.rodata段解密出配置信息并保存，获取程序文件大小与配置信息中的对应值进行对比实现简单的自校验，然后在父进程路径中查找gdb实现反调试。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051024497092723.png" alt="p2"></p>
+<p><img src="../images_result/images/201601051024497092723.png" alt="p2"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051024509207833.png" alt="p3"></p>
+<p><img src="../images_result/images/201601051024509207833.png" alt="p3"></p>
 
 <p>调用自定义解密函数，获取硬编码数据进行拼接，得到如DbSecuritySpt、selinux、getty、/tmp/moni.lod、/tmp/gates.lod等字符串并存储到全局变量。检查当前程序路径确定要执行的功能。 路径和功能的关系如下:</p>
 
@@ -95,13 +95,13 @@
 
 <p>执行对应的功能函数。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051024522799442.png" alt="p4"></p>
+<p><img src="../images_result/images/201601051024522799442.png" alt="p4"></p>
 
 <p><strong>MainMonitor(守护进程)：</strong></p>
 
 <p>进入daemon，产生pid文件<code>/tmp/moni.lod</code>，读取<code>/tmp/notify.file</code>内容并保存，创建线程类CThreadMonGates并启动监视线程，主线程循环sleep挂起。监视线程每分钟判断一下<code>/tmp/gates.lod</code>文件(MainBackdoor功能进程的pid file)， 若文件不存在则复制自身到从notify.file中获取到的文件路径并执行新路径下的程序。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051024546301252.png" alt="p5"></p>
+<p><img src="../images_result/images/201601051024546301252.png" alt="p5"></p>
 
 <p><strong>MainBeikong(程序安装)：</strong></p>
 
@@ -113,19 +113,19 @@
 
 <p>由于之前以字母O分隔的两串hex顺序搞反了，导致2类后门(木马功能主体)得到的是fk.appledoesnt.com这一无效域名，而1类后门(安装程序)却能得到173.254.230.84:3411这个有效IP，所以在没有找到问题原因的情况下在安装函数最后加入主功能函数(MainProcess)也不失为一种临时解决方案。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051024556608762.png" alt="p6"></p>
+<p><img src="../images_result/images/201601051024556608762.png" alt="p6"></p>
 
 <p><strong>MainSystool(系统工具替换)：</strong></p>
 
 <p>获取当前程序名及参数，调用<code>/usr/bin/dpkgd/</code>下对应的原始系统程序(netstat 、lsof、ps、ss)。从原始系统程序的输出中过滤掉包含木马所在目录、服务端通信端口等信息的行。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051024585246172.png" alt="p7"></p>
+<p><img src="../images_result/images/201601051024585246172.png" alt="p7"></p>
 
 <p><strong>MainBackdoor(木马功能主体)：</strong></p>
 
 <p>进入daemon，设置pid文件，以 S99selinux为服务名创建启动项。移动系统程序ps、ss、netstat、lsof到<code>/usr/bin/dpkgd/</code>目录，复制自身到<code>/bin</code>、<code>/usr/bin</code>、<code>/usr/sbin</code>下替换ps、ss、netstat、lsof等系统程序，执行主功能函数MainProcess。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051024595536282.png" alt="p8"></p>
+<p><img src="../images_result/images/201601051024595536282.png" alt="p8"></p>
 
 <p><strong>MainProcess函数：</strong></p>
 
@@ -133,7 +133,7 @@
 
 <p>初始化<code>g_cnfgDoing</code>(尝试读取conf.n文件)、<code>g_cmdDoing</code>(尝试读取cmd.n文件)、<code>g_statBase</code>类实例，将<code>g_sProvinceDns</code>中330个IP转为数字形式存入<code>g_provinceDns</code>对象。尝试通过insmod加载当前目录下的xpacket.ko驱动(未发现此文件)。从<code>/usr/lib/libamplify.so</code>中读取IP存入<code>g_AmpResource</code>结构(未发现此文件)。初始化CManager(1076字节)，设置信号处理函数，无限循环sleep。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051025015057092.png" alt="p9"></p>
+<p><img src="../images_result/images/201601051025015057092.png" alt="p9"></p>
 
 <h3>B.CManager类(画风突变)：</h3>
 
@@ -227,7 +227,7 @@
 
 <p>CThreadFXConnection线程类最终调用<code>CManager::FXConnectionProcess</code>建立与控制服务器的TCP连接，连接建立后调用<code>CManager::ConnectionProcess</code>初始化CInitResponse对象并发送一个通知数据包：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/2016010510250223086102.png" alt="p10"></p>
+<p><img src="../images_result/images/2016010510250223086102.png" alt="p10"></p>
 
 <p>其中CInitResponse中包含IP(c0 a8 7a 87) 192.168.122.135，系统版本信息，Cpu及内存等信息。</p>
 
@@ -280,9 +280,9 @@
 
 <p>CManager类大致结构如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/2016010510250466930114.png" alt="p11"></p>
+<p><img src="../images_result/images/2016010510250466930114.png" alt="p11"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/2016010510250685765122.png" alt="p12"></p>
+<p><img src="../images_result/images/2016010510250685765122.png" alt="p12"></p>
 
 <p>DDoS攻击最终通过<code>CManager::DoAtkStartCommand</code>实现，这个函数读取CCmdMsg中的CTask对象，根据CConfigDoing(conf.n)全局配置设置CThreadAtkCtrl线程对象。<code>CThreadAtkCtrl::ProcessMain</code>会根据配置执行普通攻击或内核级攻击。普通攻击通过<code>CThreadAtkCtrl::DoNormalSubTask</code>执行，该函数最终调用<code>CThreadAtkCtrl::StartNormalSubTask</code>，根据每个任务初始化一个CThreadNormalAtkExcutor线程类。最终线程函数为<code>CThreadNormalAtkExcutor::ProcessMain</code>，此函数会根据CSubTask.taskType的值初始化一个CPacketAttack的子类用于执行相应的攻击，type值与攻击类型的对应关系如下：</p>
 
@@ -366,15 +366,15 @@
 
 <p>修改bot的控制服务器IP到本机并编写简单的控制端脚本，在虚拟机中进行tcp rst攻击实验：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/2016010510250734166131.png" alt="p13"></p>
+<p><img src="../images_result/images/2016010510250734166131.png" alt="p13"></p>
 
 <p>在设置攻击目标为192.168.122.1:9876，数据包大小范围为128-500，线程数目为200，攻击次数100并关闭Cpu负载均衡开关后得到的攻击数据包如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/2016010510250984287141.png" alt="p14"></p>
+<p><img src="../images_result/images/2016010510250984287141.png" alt="p14"></p>
 
 <p>可以看到单个bot在此次攻击中共发送了21268252个攻击数据包，数量惊人。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/2016010510251043147151.png" alt="p15"></p>
+<p><img src="../images_result/images/2016010510251043147151.png" alt="p15"></p>
 
 <p>由于Cpu使用率限制选项设为关闭，bot最大化使用系统资源，双核cpu达到192.4%的利用率。</p>
 

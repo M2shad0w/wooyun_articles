@@ -3,7 +3,7 @@
 			<head>
 			     <title>某CCTV摄像头漏洞分析 - mickey</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/12945">http://drops.wooyun.org/papers/12945</a></h1>
 				
@@ -22,13 +22,13 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160218/201602180238025274012.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201602180238025274012.png" alt="enter image description here"></p>
 
 <h3>2. WEB认证绕过</h3>
 
 <p>当你第一次访问的时候，index.html会要求你输入用户名和密码，输入正确，则跳转到view2.html。如果你直接访问view2.html，会被重定向到index.html，要求你输入帐户信息。下载固件用binwalk解压，如图2：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160218/201602180238088994821.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201602180238088994821.png" alt="enter image description here"></p>
 
 <p>查看view2.js，发现以下内容：</p>
 
@@ -78,18 +78,18 @@ function goto_open_all()
 
 <p>原文说dvr_camcnt只能设置2，4，8，24这几个值。实际测试，输入其他值都可以的。绕过登陆认证的证明如图3</p>
 
-<p><img src="http://static.wooyun.org//drops/20160218/201602180237593929031.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201602180237593929031.png" alt="enter image description here"></p>
 
 <h3>3.内建的webshell</h3>
 
 <p>通过查看解压后的固件目录，我们发现dvr_app包含了web服务，使用strings查看<code>dvr_app</code>二进制，可以看到
 <code>/moo,/whoami,/shell,/snapshot</code> 等字符，尝试访问，发现没有任何验证就可以访问这些功能，如图4，</p>
 
-<p><img src="http://static.wooyun.org//drops/20160218/20160218023744661954.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/20160218023744661954.png" alt="enter image description here"></p>
 
 <p>访问<code>/shell</code>的时候，卡住了，把<code>dvr_app</code>拖入ida，查看shell功能相应的处理逻辑，因为是固件是ARM小端的架构，可以直接在IDA里F5看伪代码。如图5</p>
 
-<p><img src="http://static.wooyun.org//drops/20160218/20160218023740183685.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/20160218023740183685.png" alt="enter image description here"></p>
 
 <p>这里利用有2个方式，一个是直接telnetd绑定/bin/sh到任意端口，然后telnet连接过去，不需要认证就可以telnet登录，这个利用方式在你不知道固件本身TELNET的账户信息的时候，是个很常见的利用方法。命令如下：</p>
 
@@ -98,7 +98,7 @@ function goto_open_all()
 
 <p>但是实际测试还要考虑防火墙/NAT的问题，好多设备仅仅映射80出来，你开通的其他端口，虽然设备打开了，但是你连接不上去。如图6.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160218/20160218023730709756.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/20160218023730709756.png" alt="enter image description here"></p>
 
 <p>这时候你可以用nc反弹shell出来，估计是因为固件版本不一样，我测试的目标busybox里是自带nc的，所以通过执行</p>
 
@@ -107,7 +107,7 @@ function goto_open_all()
 
 <p>就可以获取到反弹的cmdshell了，如图7</p>
 
-<p><img src="http://static.wooyun.org//drops/20160218/20160218023805143787.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/20160218023805143787.png" alt="enter image description here"></p>
 
 <p>文章说他的固件的busybox没有带nc，所以他静态编译了一个busybox，然后通过wget下载到一个可写的目录，然后赋予busybox可执行权限，最后运行nc命令。他已经提供了编译好的busybox，可以通过<code>http://212.111.43.161/busybox</code>来下载。</p>
 
@@ -134,7 +134,7 @@ function goto_open_all()
 
 <p>因为是运行的自定义的web服务器，HTTP服务器头包含明显的“JAWS/1.0”特征，最近sans比较关注国内的漏洞扫描（https://isc.sans.edu/forums/diary/Scanning+for+Fortinet+ssh+backdoor/20635/），所以我就直接用shodan的结果了。如图10</p>
 
-<p><img src="http://static.wooyun.org//drops/20160218/201602180238248775910.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201602180238248775910.png" alt="enter image description here"></p>
 
 <p>可以看到这款廉价的CCTV摄像头对公网开放的全球大概有42545台，最常用的端口是80/8080，用的最多的国家是土耳其，印度，越南。 ：）</p>
 

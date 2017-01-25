@@ -3,7 +3,7 @@
 			<head>
 			     <title>estools 辅助反混淆 Javascript - 0xCC</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7713">http://drops.wooyun.org/tips/7713</a></h1>
 				
@@ -26,7 +26,7 @@
 
 <p>这类混淆的关键思想在于将需要执行的代码进行一次编码，在执行的时候还原出浏览器可执行的合法的脚本，然后执行之。看上去和可执行文件的加壳有那么点类似。Javascript 提供了将字符串当做代码执行（evaluate）的能力，可以通过<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function">Function 构造器</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/eval">eval</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/setTimeout">setTimeout</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/setInterval">setInterval</a>将字符串传递给 js 引擎进行解析执行。最常见的是<a href="http://dean.edwards.name/packer/">base62 编码</a>——其最明显的特征是生成的代码以<code>eval(function(p,a,c,k,e,r))</code>开头。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150806/2015080608153517639.png" alt="base62 编码的 Javascript"></p>
+<p><img src="../images_result/images/2015080608153517639.png" alt="base62 编码的 Javascript"></p>
 
 <p>无论代码如何进行变形，其最终都要调用一次 eval 等函数。解密的方法不需要对其算法做任何分析，只需要简单地找到这个最终的调用，改为 <code>console.log</code> 或者其他方式，将程序解码后的结果按照字符串输出即可。自动化的实现方式已经有许多文章介绍过，此处就不再赘述。</p>
 
@@ -36,7 +36,7 @@
 
 <p>比如这个耸人听闻的议题：<a href="http://www.freebuf.com/news/69106.html">[一张图片黑掉你：在图片中嵌入恶意程序]</a>，<a href="https://conference.hitb.org/hitbsecconf2015ams/wp-content/uploads/2015/02/D1T1-Saumil-Shah-Stegosploit-Hacking-with-Pictures.pdf">PPT</a>放出来一看，正是使用了最低有效位平面算法。结合 HTML5 的 canvas 或者处理二进制数据的 TypeArray，脚本可以抽取出载体中隐藏的数据（如代码）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150806/2015080608153543806.png" alt="最低有效位"></p>
+<p><img src="../images_result/images/2015080608153543806.png" alt="最低有效位"></p>
 
 <p>隐写的方式同样需要解码程序和动态执行，所以破解的方式和前者相同，在浏览器上下文中劫持替换关键函数调用的行为，改为文本输出即可得到载体中隐藏的代码。</p>
 
@@ -79,7 +79,7 @@ var c = addA(2) + b;</code></p>
 
 <p>对应的语法树如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150806/2015080608202261429.png" alt="抽象语法树"></p>
+<p><img src="../images_result/images/2015080608202261429.png" alt="抽象语法树"></p>
 
 <p>（由 <a href="http://jointjs.com/demos/javascript-ast">JointJS</a>的在线工具生成）</p>
 
@@ -111,7 +111,7 @@ var c = addA(2) + b;</code></p>
 
 <p>从实际遇到的代码入手。最近在研究一些 XSS 蠕虫的时候遇到了类似如下代码混淆：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150806/2015080608153676562.png" alt="代码样本"></p>
+<p><img src="../images_result/images/2015080608153676562.png" alt="代码样本"></p>
 
 <p>观察其代码风格，发现这个混淆器做了这几件事：</p>
 
@@ -150,11 +150,11 @@ var c = addA(2) + b;</code></p>
 
 <p>从  <a href="http://youmightnotneedjquery.com/">YOU MIGHT NOT NEED JQUERY</a>上摘抄了一段代码，放入 <a href="https://javascriptobfuscator.com/Javascript-Obfuscator.aspx">javascriptobfuscator.com</a> 测试混淆：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150806/2015080608153648689.png" alt="jsobfuscate.com 混淆样例"></p>
+<p><img src="../images_result/images/2015080608153648689.png" alt="jsobfuscate.com 混淆样例"></p>
 
 <p>将混淆结果<a href="https://github.com/ChiChou/etacsufbo/blob/master/tests/cases/jsobfuscator.com.js">https://github.com/ChiChou/etacsufbo/blob/master/tests/cases/jsobfuscator.com.js</a>进行解开，结果如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150806/2015080608153615175.png" alt="6-deobfuscated"></p>
+<p><img src="../images_result/images/2015080608153615175.png" alt="6-deobfuscated"></p>
 
 <p>虽然变量名可读性依旧很差，但已经可以大体看出代码的行为了。</p>
 

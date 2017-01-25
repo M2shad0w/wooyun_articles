@@ -3,7 +3,7 @@
 			<head>
 			     <title>一比特控制所有：通过一比特绕过Windows 10保护 - cssembly</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4918">http://drops.wooyun.org/papers/4918</a></h1>
 				
@@ -64,7 +64,7 @@
 
 <p>WIN32K模块实际上管理着windows滚动条。这些滚动条 - 无论是水平或垂直 – 都是为每个窗口设置的。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021115164172356.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021115164172356.jpg" alt="enter image description here"></p>
 
 <p>图1</p>
 
@@ -80,7 +80,7 @@
 
 <p>xxxEnableWndSBArrows原型如下：</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021115164138565.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021115164138565.jpg" alt="enter image description here"></p>
 
 <p>wnd - 一个指向相关窗口的指针</p>
 
@@ -98,7 +98,7 @@
 
 <p>从技术上讲，该函数读取pSBInfo域（这个字段指向tagSBINFO结构），测试指针是否为NULL。如果该字段为null和wArrows参数不是NULL，则为窗口分配一个tagSBINFO结构，滚动条的旧标志被设置为0，否则从现有的窗口滚动条的信息中复制旧的标志。该代码可以在图2中找到。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021115164181111.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021115164181111.jpg" alt="enter image description here"></p>
 
 <h2>2. 设置水平滚动条的状态</h2>
 
@@ -108,7 +108,7 @@
 
 <p>根据设定的wArrows参数是什么，函数启用或禁用的箭头（图3）。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021115164182843.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021115164182843.jpg" alt="enter image description here"></p>
 
 <h2>3. 测试滚动箭头的状态</h2>
 
@@ -122,7 +122,7 @@
 
 <p>当深入研究代码，似乎xxxDrawScrollBar可能会导致用户模式回调（图4）。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021115164210486.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021115164210486.jpg" alt="enter image description here"></p>
 
 <p>调用链中的关键函数是ClientLoadLibrary。这个函数执行回调到用户模式函数__ClientLoadLibrary。</p>
 
@@ -130,7 +130,7 @@
 
 <p>我们的检查表明tagSBINFO指针在回调后，不任何验证就使用了。最终，这可能会导致使用后释放（UAF）漏洞，因为该函数可能继续使用被释放了的滚动条信息（图5）。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021115164260445.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021115164260445.jpg" alt="enter image description here"></p>
 
 <h1>0x04 漏洞利用：操纵窗户属性</h1>
 
@@ -140,7 +140,7 @@
 
 <p>在这个阶段中，函数试图启用或禁止标志。然而，由于该结构已经被释放，我们可以用它来将位于释放的缓冲区的第一个DWORD与0xC按位或（如果我们禁止箭头）或者清除第3位和第4（如果启用箭头）。见图6。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021115164290952.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021115164290952.jpg" alt="enter image description here"></p>
 
 <p>为了简便起见，我们将展示如何操纵2个比特位来完全控制系统。其实，操纵其中之一就足够了。</p>
 
@@ -154,13 +154,13 @@
 
 <p>每个窗口都有一个属性列表。通常GUI应用程序可以使用这些属性来存储任意值， Win32K也使用属性列表以便存储内部数据。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021115164278532.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021115164278532.jpg" alt="enter image description here"></p>
 
 <p>用于保存窗口的属性的数据结构可以在图7中看到。第一个域cEntries，是属性数组中的条目数; iFirstFree是属性列表中的第一空闲单元的索引;和props 是PROP数组。</p>
 
 <p>应用程序可以使用SetProp API设置窗口的属性。该函数的原型如下：</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021115164313107.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021115164313107.jpg" alt="enter image description here"></p>
 
 <p>hWnd -窗口句柄。</p>
 
@@ -172,7 +172,7 @@
 
 <p>如图8所示它的分配算法是相当简单的。如果没有空间可用于属性列表中的新条目，则函数分配多一个条目的新列表。该函数然后将旧属性的缓冲区复制到新的缓冲区，释放旧的缓冲区，并增加条目计数。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021115164324034.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021115164324034.jpg" alt="enter image description here"></p>
 
 <p>这段代码中还有几个重要的点要注意： 首先，属性是从桌面堆中分配（使用DesktopAlloc）。tagSBINFO也从该堆中分配。如果我们想用UAF漏洞来改变属性结构，这是至关重要的。 第二，每一个新的条目都触发缓冲区的重新分配。这意味着我们可以很容易地触发缓冲区的重新分配，来达到tagSBINFO结构的大小。这样做增加了缓冲区将被分配在释放了的tagSBINFO结构的地址的机会。 第三，也是最重要的是，cEntries域位于该结构的第一个DWORD。这意味着我们可以增加它的大小（用按位OR）。增加属性数组的大小后，我们基本上实现了经典的缓冲区溢出。</p>
 
@@ -202,7 +202,7 @@
 
 <p>但是，在深入研究代码之后，很快就明白，在代码中的横向滚动条部分调用xxxWindowEvent实际上是死代码（图9）。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021115164380646.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015021115164380646.jpg" alt="enter image description here"></p>
 
 <p>看代码，有两个条件调用xxxWindowEvent函数。仅当滚动条信息的旧标记与新的标志不同时，这些调用才执行。然而，在这些条件出现时，旧的标志的值与新的标志总是相等的。因此，调用xxxWindowEvent的条件是永远不会满足的。这实际上意味着，这个死码在那里大约15年没有做任何事。</p>      <p></p>
     

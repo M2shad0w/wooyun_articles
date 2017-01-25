@@ -3,7 +3,7 @@
 			<head>
 			     <title>Hacking Team 新 Flash 0day分析 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/7031">http://drops.wooyun.org/papers/7031</a></h1>
 				
@@ -28,55 +28,55 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20150711/20150711035900589042.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150711035900589042.png" alt="enter image description here"></p>
 
 <p>而<code>opeaqueBackground</code>属性接受数值型，故如果传入一个类，会显示调用该类的<code>valueOf</code>一次，这个也是之前的一个UAF用的一个技巧。所以，在第一次走到下列语句设置<code>opaqueBackground</code>的时候走到了<code>valueOf1</code>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150711/20150711035902603645.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150711035902603645.png" alt="enter image description here"></p>
 
 <p>在<code>valueOf1</code>中，攻击者使用<code>recreateTextLine</code>重用<code>_tl</code>这个<code>textLine</code>，随之，原始<code>TextBlock（_tb）</code>中的内部<code>TextLine</code>对象被释放。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150711/20150711035904473948.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150711035904473948.png" alt="enter image description here"></p>
 
 <p>-----></p>
 
-<p><img src="http://static.wooyun.org//drops/20150711/201507110359053110911.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507110359053110911.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150711/201507110359071528114.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507110359071528114.png" alt="enter image description here"></p>
 
 <p>然后，在valueOf中使用</p>
 
-<p><img src="http://static.wooyun.org//drops/20150711/201507110359095928617.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507110359095928617.png" alt="enter image description here"></p>
 
 <p>占住这片被释放的内存，1016是<code>TextLine</code>对象在内存中的大小，1344相当于多分配了一块内存（1016/4-8）。函数<code>return 1</code>，写入到这片内存中。</p>
 
 <p><code>valueOf</code>返回后，程序搜索<code>_ar</code>，找到值为1的一项，根据该项的位置判断是32还是64位系统：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150711/201507110359119751420.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507110359119751420.png" alt="enter image description here"></p>
 
 <p>随后，程序调用<code>TryExpl()</code>，这里使用了类似的方式：</p>
 
 <p>先分配特殊长度的Vector和TextLine留待后用，接着将<code>MyClass</code>的<code>valueOf</code>也设置为<code>valueOf2</code>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150711/201507110359148723723.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507110359148723723.png" alt="enter image description here"></p>
 
 <p>然后设置<code>opaqueBackground</code>属性，<code>_mc</code>是<code>MyClass</code>的实例，因此触发<code>valueOf2</code>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150711/201507110359152273726.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507110359152273726.png" alt="enter image description here"></p>
 
 <p>在<code>valueOf2</code>中使用和之前一样的方式给<code>_ar</code>的所有元素全部做一次内存破坏，<code>vLen</code>的值是98。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150711/201507110359176706529.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507110359176706529.png" alt="enter image description here"></p>
 
 <p>返回后，程序在<code>_ar</code>中搜索被破坏的块，并设置下一个<code>Vector</code>的<code>Length</code>为<code>0x40000000</code>，后续就是经典的<code>Vector</code>操作了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150711/201507110359199435032.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507110359199435032.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150711/201507110359219687835.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507110359219687835.png" alt="enter image description here"></p>
 
 <p>在<code>IE11+Flash Player 17</code>中，跟踪可发现<code>length</code>被覆盖后的<code>Vector</code>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150711/201507110359237190238.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507110359237190238.png" alt="enter image description here"></p>
 
 <h1>0x02 使用的shellcode</h1>
 
@@ -156,21 +156,21 @@ Flow analysis was incomplete, some code may be missing
 0603b250 c3              ret
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150711/201507110359254503641.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507110359254503641.png" alt="enter image description here"></p>
 
 <h1>0x03 效果</h1>
 
 <hr>
 
-<p><img src="http://static.wooyun.org//drops/20150711/201507110359279151644.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507110359279151644.png" alt="enter image description here"></p>
 
 <p>在IE11中成功地启动了<code>calc.exe</code></p>
 
 <p>桌面截图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150711/2015071104160561525ff.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071104160561525ff.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150711/2015071104162542484ie.jpg" alt="enter image description here"></p>      <p></p>
+<p><img src="../images_result/images/2015071104162542484ie.jpg" alt="enter image description here"></p>      <p></p>
     
 			</body>
 		</html>

@@ -3,7 +3,7 @@
 			<head>
 			     <title>被忽视的大型互联网企业安全隐患：第三方开源WiKi程序 - 我是小号</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/7884">http://drops.wooyun.org/web/7884</a></h1>
 				
@@ -24,7 +24,7 @@
 
 <p>1)使用百度或者是谷歌等搜索引擎，关键词”<code>site:XXXX.com inurl:wiki</code>”，可以轻松获取很多目标，</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081307112785362.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081307112785362.jpg" alt="enter image description here"></p>
 
 <p>2）使用子域名爆破工具，批量收集企业子域名，然后分离出wiki站点</p>
 
@@ -34,19 +34,19 @@
 
 <p><strong>渗透Mediawiki系统思路：</strong> 如果你看到地址栏中有如下结构的wiki程序，那一定就是Meidawiki没错了，接下来您只需要三步就能渗透进入目标了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081307112743981.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081307112743981.png" alt="enter image description here"></p>
 
 <p>Step1: 通过MediaWiki默认携带的搜索功能查找，搜索“用户创建日志”，MediaWiki系统中的用户列表： Expolit:<code>http://www.xxx.com/index.php?title=%E7%89%B9%E6%AE%8A%3A%E6%97%A5%E5%BF%97&amp;type=newusers&amp;user=&amp;page=&amp;year=&amp;month=-1</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081307112740443.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081307112740443.jpg" alt="enter image description here"></p>
 
 <p>Step2: 通过MediaWiki默认携带的搜索功能，搜索“权限变更日志”，帮助我们快速分离出系统中的管理员进一步获得用户名： Expolit: <code>http://www.xxx.com/index.php?title=%E7%89%B9%E6%AE%8A%3A%E6%97%A5%E5%BF%97&amp;type=rights&amp;user=&amp;page=&amp;year=&amp;month=-1</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081307112849579.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081307112849579.png" alt="enter image description here"></p>
 
 <p>Step3: MediaWiki系统默认登录入口，没有任何次数验证和验证码，所以最后一步就是直接载入之前用户名和字典进行弱口令爆破： Expolit: <code>http://www.xx.com/index.php?title=Special:UserLogin</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081307112860669.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081307112860669.png" alt="enter image description here"></p>
 
 <p>如果运气好的话管理员存在常见弱口令就可以登录后台，修改WiKi的内容，由于MediaWiki管理员后台上传权限并不高，并不能上传php文件，getshell可能有些困难，不过现在您已经足以可以修改整个企业业务介绍网站的内容了，这些业务以企业重点开放平台居多，影响已经足够大了。</p>
 
@@ -54,7 +54,7 @@
 
 <p>如果您看到下面UI风格的WIKI程序，那它就是Dokuwiki没错了，接下来只需要三步就能渗透进入目标了。值得注意的是，因为Dokuwiki后台的设计缺陷，只要能够登录管理员账户就意味着可以getshell接着渗透内网：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081307112889302.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081307112889302.png" alt="enter image description here"></p>
 
 <p>Step1: 查找DoKuWiki系统中用户列表：</p>
 
@@ -75,11 +75,11 @@
 <pre><code>http://www.xxx.com/doku.php?id=start&amp;do=login
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081307112855231.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081307112855231.png" alt="enter image description here"></p>
 
 <p>Step3：登录管理后台，利用Dokuwiki的插件管理功能Getshell<code>http://www.xxx.com/doku.php?id=start&amp;do=admin&amp;page=extension</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081307112946377.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081307112946377.png" alt="enter image description here"></p>
 
 <h1>0x02 真实案例</h1>
 
@@ -100,7 +100,7 @@
 
 <p>3.GitBook 是一个基于 Node.js 的命令行工具，可使用 Github/Git 和 Markdown 来制作精美的电子书，如果产品需要做说明介绍的话，完全可以用Gitbook替代这些第三方Wiki，不失Wiki的美观和简洁方便。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081307112988618.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081307112988618.png" alt="enter image description here"></p>
 
 <p>官网：<a href="https://www.gitbook.com/">https://www.gitbook.com/</a></p>      <p></p>
     

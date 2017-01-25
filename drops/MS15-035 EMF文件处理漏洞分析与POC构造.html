@@ -3,7 +3,7 @@
 			<head>
 			     <title>MS15-035 EMF文件处理漏洞分析与POC构造 - cssembly</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5731">http://drops.wooyun.org/papers/5731</a></h1>
 				
@@ -12,7 +12,7 @@
 
 <p>通过补丁比对，可以看到主要是修补了一些可能存在整形溢出的位置，但是这些位置，我尝试了很多方法都无法执行到。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062517052458394.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062517052458394.png" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -24,11 +24,11 @@ int __thiscall MRSETDIBITSTODEVICE::bPlay(EMRSETDIBITSTODEVICE *this, HDC hdc, s
 
 <p>的修补是个例，补丁前的代码如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062517052538319.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062517052538319.png" alt="enter image description here"></p>
 
 <p>打补丁后，代码如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062517052562370.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062517052562370.png" alt="enter image description here"></p>
 
 <p>显然补丁后的代码对LocalAlloc分配的内存空间的最小值进行了限制，而打补丁之前并没有限制，因此猜测这里可能存在一个缓冲区越界写入问题。</p>
 
@@ -46,7 +46,7 @@ typedef struct tagENHMETARECORD {
 
 <p>SDK中定义了不同的iType类型，如下所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062517052543135.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062517052543135.png" alt="enter image description here"></p>
 
 <p>根据iType类型的不同，dParm是不同的结构，EMR_SETDIBITSTODEVICE对应的结构是EMRSETDIBITSTODEVICE。</p>
 
@@ -96,7 +96,7 @@ CloseEnhMetaFile(hEmf);
 DeleteObject(hEmf);
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062517052912384.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062517052912384.png" alt="enter image description here"></p>
 
 <p>由于我在Win7下，浏览存放EMF文件的目录并没有触发EMF文件的解析，因此通过mspaint.exe加载1.emf文件，执行到</p>
 
@@ -106,29 +106,29 @@ int __thiscall MRSETDIBITSTODEVICE::bPlay(EMRSETDIBITSTODEVICE *this, HDC hdc, s
 
 <p>函数时，可以看到ecx指向的数据与文件中的数据一致。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062517052988749.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062517052988749.png" alt="enter image description here"></p>
 
 <p>为了实现之前的猜想，实现越界写操作，假定在<em>((_DWORD *)v8 + 5) = v4->cbBitsSrc处实现了越界写，这就要求v4->cbBmiSrc小于（6</em>4）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062517053085376.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062517053085376.png" alt="enter image description here"></p>
 
 <p>由于MRSETDIBITSTODEVICE::bCheckRecord实现了对EMRSETDIBITSTODEVICE结构的合法性检查。函数如下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062517053075194.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062517053075194.png" alt="enter image description here"></p>
 
 <p>根据检查的内容，对emf文件进行修改，使其满足MRSETDIBITSTODEVICE::bCheckRecord检查的各项条件，同时使v4->cbBmiSrc小于（6*4），最终得到如下文件内容。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062517053435576.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062517053435576.png" alt="enter image description here"></p>
 
 <p>用mspaint.exe加载emf文件，通过windbg可以观察到所有的检查都被绕过，同时LocalAlloc分配的内存大小为2。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062517053445193.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062517053445193.png" alt="enter image description here"></p>
 
 <p>之后的<em>((_DWORD *)v8 + 2) = v9与</em>((_DWORD *)v8 + 5) = v4->cbBitsSrc都将实现缓冲区越界写入操作。</p>
 
 <p>如果可以通过脚本在浏览器上显示emf文件，则有可能利用该漏洞实现远程代码执行。另外值得一提的是补丁中修补的其他如MF16_*的函数，这些函数的调用点都存在如下的代码段。这是对HDC的类型进行验证，只有类型是0x660000时，才会执行这些函数，而我只在调用CreateMetaFile后才得到了类型是0x660000的HDC，屏幕上显示时使用的HDC类型为0x10000。当HDC类型是0x660000时，调用PlayEnhMetaFile，最终不会执行PlayEnhMetaFileRecord。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062517053424210.png" alt="enter image description here"></p>      <p></p>
+<p><img src="../images_result/images/2015062517053424210.png" alt="enter image description here"></p>      <p></p>
     
 			</body>
 		</html>

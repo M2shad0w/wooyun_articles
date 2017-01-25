@@ -3,7 +3,7 @@
 			<head>
 			     <title>漏洞挖掘基础之格式化字符串 - 珈蓝夜宇</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/9426">http://drops.wooyun.org/papers/9426</a></h1>
 				
@@ -60,7 +60,7 @@ int main (int argc, char **argv, char **envp)
 
 <p>程序的执行过程如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151014/20151014060828105082015-10-03_171444.jpg" alt="Alt text"></p>
+<p><img src="../images_result/images/20151014060828105082015-10-03_171444.jpg" alt="Alt text"></p>
 
 <p>通过上图我们可以看到程序执行的流程：<code>main--func_A--func_B--func_A--main</code>，CPU在执行程序时是如何知道各个函数之间的调用关系呢，接下来我们将介绍一个新的名词：栈帧。当函数被调用时，系统栈会为这个函数开辟一个新的栈帧，这个栈帧中的内存空间被它所属的函数独占，当函数返回时，系统栈会弹出该函数所对应的栈帧。32位系统下提供了两个特殊的寄存器（ESP和EBP）识栈帧。</p>
 
@@ -107,11 +107,11 @@ int main (int argc, char **argv, char **envp)
 
 <p>func_A栈帧如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151014/20151014060825922302015-10-03_171313.jpg" alt="Alt text"></p>
+<p><img src="../images_result/images/20151014060825922302015-10-03_171313.jpg" alt="Alt text"></p>
 
 <p>我们将通过以下图例对本次函数调用做一个总结：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151014/20151014060830928522015-10-03_183702.jpg" alt="Alt text"></p>
+<p><img src="../images_result/images/20151014060830928522015-10-03_183702.jpg" alt="Alt text"></p>
 
 <p>通过前面的函数调用细节以及栈中数据的分布情况，我们可以发现局部变量是在栈中挨个排放的，如果这些局部变量中有数组之类的缓冲区，并且程序存在数组越界的问题，那么越界的数组元素就有可能破坏栈中相邻变量的值，进而破坏EBP的值、返回地址等重要数据。</p>
 
@@ -300,7 +300,7 @@ arg format = 0x8048510 "%s %d %d %d %x\n"
 0xbffff04c: 0x00000001  0xb7fc13c4  0xbffff070  0x00000000
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151014/20151014060831430571444187955740.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20151014060831430571444187955740.png" alt="Alt text"></p>
 
 <p>看了上面的图，相信大家已经很明白了吧，只要我们能够控制format的，我们就可以一直读取内存数据。</p>
 
@@ -455,7 +455,7 @@ if(flag == 2000)
 
 <p>我们继续在gdb调试，执行get()函数后随便输入AAAAAAA，执行到printf()的时候观察栈区：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151014/20151014060833120791444223826739.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20151014060833120791444223826739.png" alt="Alt text"></p>
 
 <p>我们如果只输入%x的话就可以读出esp+4地址上的数据，也就是0xbfffefe4，而我们需要修改的地址为0xbffff048，这两个地址的偏移为0x64。</p>
 

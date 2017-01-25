@@ -3,7 +3,7 @@
 			<head>
 			     <title>深入理解JPEG图像格式Jphide隐写 - 4ido10n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/15661">http://drops.wooyun.org/tips/15661</a></h1>
 				
@@ -24,7 +24,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051202251796547.png" alt=""></p>
+<p><img src="../images_result/images/2016051202251796547.png" alt=""></p>
 
 <h1>0x02 隐写实现</h1>
 
@@ -38,45 +38,45 @@
 
 <p>而这里介绍另一款JPEG图像的信息隐藏软件<a href="http://io.acad.athabascau.ca/~grizzlie/Comp607/programs.htm">JPHS</a>，它是由Allan Latham开发设计实现在Windows和Linux系统平台针对有损压缩JPEG文件进行信息加密隐藏和探测提取的工具。软件里面主要包含了两个程序JPHIDE和JPSEEK， JPHIDE程序主要是实现将信息文件加密隐藏到JPEG图像功能，而JPSEEK程序主要实现从用JPHIDE程序加密隐藏得到的JPEG图像探测提取信息文件，Windows版本的JPHS里的JPHSWIN程序具有图形化操作界面且具备JPHIDE和JPSEEK的功能。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051202251956594.png" alt=""></p>
+<p><img src="../images_result/images/2016051202251956594.png" alt=""></p>
 
 <p>1.Windows用户请下载<a href="http://io.acad.athabascau.ca/~grizzlie/Comp607/jphs05.zip">JPHS-05 for Windows</a>,同时也提供下载<a href="http://linux01.gwdg.de/~alatham/stego.html">Linux版本</a>。</p>
 
 <p>2.分别准备一个JPEG格式的图片（example.jpg）和一个文本文件（flag.txt）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051202252025413.png" alt=""></p>
+<p><img src="../images_result/images/2016051202252025413.png" alt=""></p>
 
 <p>由于JPEG文件使用的数据存储方式有多种不能一一演示，这里用最常用的JPEG格式-JPEG文件交换格式（JPEG File Interchange Format，JFIF）作为示例。</p>
 
 <p>这里简单介绍JPEG文件交换格式的JPEG图片的图像开始标记SOI（Start of Image）和应用程序保留标记APP0（Application 0），JPEG文件交换格式的JPEG图片开始前2个字节是图像开始标记为0xFFD8，之后2个字节接着便是应用程序保留标记为0xFFE0，应用程序保留标记APP0包含9个具体字段，这里介绍前三个字段，第一个字段是数据长度占2个字节，表示包括本字段但不包括标记代码的总长度，这里为10个字节，第二个字段是标识符占5个字节0x4A46494600表示“JFIF0”字符串，第三个字段是版本号占2个字节，这里是0X0101，表示JFIF的版本号为1.1，但也可能为其它数值，从而代表了其它版本号。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051202252164921.png" alt=""></p>
+<p><img src="../images_result/images/2016051202252164921.png" alt=""></p>
 
 <p>3.Windows版本可以使用具有图形化操作界面的Jphswin，选择“Open jpeg”打开示例JPEG格式图片example.jpg</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051202252234299.png" alt=""></p>
+<p><img src="../images_result/images/2016051202252234299.png" alt=""></p>
 
 <p>如果你选择的不是JPEG格式的图片程序会自动退出，你可以16进制编辑器如Winhex查看图片的图像开始标记SOI和应用程序保留标记APP0，当载入JPEG格式图片会显示一些图片的属性。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051202252398737.png" alt=""></p>
+<p><img src="../images_result/images/2016051202252398737.png" alt=""></p>
 
 <p>4.选择“Hide”选项之后在两次文本框输入相同的密码，这里以输入flag作为密码为例，然后输入要包含隐藏信息的文本。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051202252370696.png" alt=""></p>
+<p><img src="../images_result/images/2016051202252370696.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051202252621806.png" alt=""></p>
+<p><img src="../images_result/images/2016051202252621806.png" alt=""></p>
 
 <p>6.选择“Save jpeg as”选项将图片另存为jpeg格式并输入文件的名称为新的图像文件如C4n-u-find-f14g.jpg。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051202332238058.png" alt=""></p>
+<p><img src="../images_result/images/2016051202332238058.png" alt=""></p>
 
 <p>7.之后便可以看到生成结果和相关信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051202253033301.png" alt=""></p>
+<p><img src="../images_result/images/2016051202253033301.png" alt=""></p>
 
 <p>8.第2步到第7步做的是Jhide方式信息隐藏，接下来我们从C4n-u-find-f14g.jpg图片提取出隐藏信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051202253145814.jpg" alt=""></p>
+<p><img src="../images_result/images/2016051202253145814.jpg" alt=""></p>
 
 <p>9.如果之前你并不知道图片是基于什么方式进行信息隐藏，你可以使用Stegdetect先进行探测。</p>
 
@@ -107,15 +107,15 @@
 
 <p>从下图可以看出很可能是Jphide的信息隐藏方式：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051202253367728.png" alt=""></p>
+<p><img src="../images_result/images/2016051202253367728.png" alt=""></p>
 
 <p>10.在知道隐藏方式之后可以开始进行信息提取，和使用JPHS进行信息隐藏过程类似，打开需要提取隐藏信息的图片C4n-u-find-f14g.jpg，输入对应密码（在不知道密码的情况不可以尝试Stegdetect工具里的Stegbreak程序进行基于字典的暴力攻击）flag，密码验证通过JPHS会自动提取隐藏信息，之后便可以另存提取出的信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051202253335598.png" alt=""></p>
+<p><img src="../images_result/images/2016051202253335598.png" alt=""></p>
 
 <p>11.打开提取得到的find.txt便可以得到我们想要的隐藏信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051202332399775.png" alt=""></p>
+<p><img src="../images_result/images/2016051202332399775.png" alt=""></p>
 
 <h1>0x03 参考资料</h1>
 

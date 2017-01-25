@@ -3,7 +3,7 @@
 			<head>
 			     <title>不修改加密文件名的勒索软件TeslaCrypt 4.0 - SwordLea</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/14671">http://drops.wooyun.org/papers/14671</a></h1>
 				
@@ -26,7 +26,7 @@
 
 <p>勒索软件TeslaCrypt 4.0利用网站挂马和电子邮件进行传播，在国内网站挂马发现的较少，通常利用浏览器漏洞（Chrome、Firefox、Internet Explorer）、Flash漏洞和Adobe Reader漏洞进行传播；而利用电子邮件传播的数量较多，安天CERT发现的多起勒索软件事件也都是通过电子邮件传播的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/2016040804572441139115.jpg" alt="p1"> 图 1 利用电子邮件传播勒索软件</p>
+<p><img src="../images_result/images/2016040804572441139115.jpg" alt="p1"> 图 1 利用电子邮件传播勒索软件</p>
 
 <p>在分析TeslaCrypt的下载地址时，安天CERT研究人员发现，相同域名下存放多个TeslaCrypt 4.0程序，且文件HASH各不相同。例如：域名http://&#42;**|||pasqq.com，可以下载TeslaCrypt 4.0的地址如下：</p>
 
@@ -191,23 +191,23 @@
 
 <p>该样本运行后复制自身至%Application Data%文件夹中，重命名为wlrmdr.exe，设置自身属性为隐藏，然后使用CreateProcessW为其创建进程。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/2016040804572658553212.jpg" alt="p2"> 图 2 创建wlrmdr.exe进程</p>
+<p><img src="../images_result/images/2016040804572658553212.jpg" alt="p2"> 图 2 创建wlrmdr.exe进程</p>
 
 <p>样本在新创建的进程中使用CreateThread开启线程，对全盘文件进行加密。首先样本使用GetLogicalDriveStringsW获取所有逻辑驱动器，成功后使用FindFirstFileW与FindNextFileW遍历全盘所有文件，进行加密。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/201604080457288157633.jpg" alt="p3"> 图 3 遍历磁盘文件</p>
+<p><img src="../images_result/images/201604080457288157633.jpg" alt="p3"> 图 3 遍历磁盘文件</p>
 
 <p>加密函数地址为0x0040190A。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/201604080457299159843.jpg" alt="p4"> 图 4 调用加密函数对遍历到的文件加密</p>
+<p><img src="../images_result/images/201604080457299159843.jpg" alt="p4"> 图 4 调用加密函数对遍历到的文件加密</p>
 
 <p>利用RSA4096算法加密后，调用WriteFile将加密后的数据由内存写入文件，没有对文件名做修改。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/201604080457312293554.jpg" alt="p5"> 图 5 将加密后的数据写入文件</p>
+<p><img src="../images_result/images/201604080457312293554.jpg" alt="p5"> 图 5 将加密后的数据写入文件</p>
 
 <p>加密前后的文件对比：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/201604080457338411465.jpg" alt="p6"> 图 6加密前后的文件对比</p>
+<p><img src="../images_result/images/201604080457338411465.jpg" alt="p6"> 图 6加密前后的文件对比</p>
 
 <h3>2.3 对抗安全工具</h3>
 
@@ -265,31 +265,31 @@
   </tr>
 </table>
 
-<p><img src="http://static.wooyun.org//drops/20160408/201604080457345289275.jpg" alt="p7"> 图 7 隐藏cmd界面</p>
+<p><img src="../images_result/images/201604080457345289275.jpg" alt="p7"> 图 7 隐藏cmd界面</p>
 
 <h3>2.4 具有PDB信息</h3>
 
 <p>样本具有PDB信息，其文件名为“<code>wet problem i yuoblem i_x.pdb</code>”</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/201604080457356953783.jpg" alt="p8"> 图 8 样本的调试信息中包含PDB信息</p>
+<p><img src="../images_result/images/201604080457356953783.jpg" alt="p8"> 图 8 样本的调试信息中包含PDB信息</p>
 
 <h3>2.5利用CMD自启动</h3>
 
 <p>样本调用RegCreateKeyExW，将使用CMD启动自身的代码写入至注册表中，使其随系统开机启动。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/201604080457372782093.jpg" alt="p9"> 图 9 利用CMD达到随系统开机启动的目的</p>
+<p><img src="../images_result/images/201604080457372782093.jpg" alt="p9"> 图 9 利用CMD达到随系统开机启动的目的</p>
 
 <h3>2.6使用非常规的函数调用和跳转</h3>
 
 <p>样本使用了很多非常规的函数调用和跳转，用来阻止安全人员分析该病毒。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/2016040804573911922103.jpg" alt="p10"> 图 10　非常规的函数调用</p>
+<p><img src="../images_result/images/2016040804573911922103.jpg" alt="p10"> 图 10　非常规的函数调用</p>
 
-<p><img src="http://static.wooyun.org//drops/20160408/2016040804574037165116.jpg" alt="p11"> 图 11　非常规的跳转</p>
+<p><img src="../images_result/images/2016040804574037165116.jpg" alt="p11"> 图 11　非常规的跳转</p>
 
 <h3>2.7 TeslaCrypt 4.0加密的文件格式</h3>
 
-<p><img src="http://static.wooyun.org//drops/20160408/2016040804574274626124.jpg" alt="p12"> 图 12 TeslaCrypt 4.0加密的文件格式</p>
+<p><img src="../images_result/images/2016040804574274626124.jpg" alt="p12"> 图 12 TeslaCrypt 4.0加密的文件格式</p>
 
 <h1>0x03 总结</h1>
 

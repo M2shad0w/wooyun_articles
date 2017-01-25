@@ -3,7 +3,7 @@
 			<head>
 			     <title>windows安全日志分析之logparser篇 - 封停</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7462">http://drops.wooyun.org/tips/7462</a></h1>
 				
@@ -22,7 +22,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711135537587.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072711135537587.jpg" alt="enter image description here"></p>
 
 <p>简而言之就是我们的输入源（多种格式的日志源）经过 SQL语句（有SQL引擎处理）处理后，可以输出我们想要的格式。</p>
 
@@ -30,15 +30,15 @@
 
 <p>从这里可以看出它的基本处理逻辑，首先是输入源是某一种固定的格式，比如EVT（事件），Registry（注册表）等，对于每一种输入源，它所涵盖的字段值是固定的，可以使用logparser –h –i:EVT查出（这里以EVT为例）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711135665188.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072711135665188.jpg" alt="enter image description here"></p>
 
 <p>这里是一些可选参数，在进行查询的时候，可对查询结果进行控制，不过我们需要重点关注的是某一类日志结构里含有的字段值（在SQL查询中匹配特定的段）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711135643453.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072711135643453.jpg" alt="enter image description here"></p>
 
 <p>对于每一类字段值的详细意义，我们可以参照logparser的自带文档的参考部分，这里以EVT（事件）为例：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711135623150.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072711135623150.png" alt="enter image description here"></p>
 
 <p><strong>2、输出源</strong> 输出可以是多种格式，比如文本（CSV等）或者写入数据库，形成图表，根据自己的需求，形成自定的文件（使用TPL）等，比较自由</p>
 
@@ -55,7 +55,7 @@
 
 <p>这是一则基本的查询，输入格式是EVT（事件），输出格式是DATAGRID（网格），然后是SQL语句，查询E:\logparser\xx.evtx的所有字段，结果呈现为网格的形式:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711135774820.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072711135774820.png" alt="enter image description here"></p>
 
 <p>看到这里，想必你已经明白了，对于windows的安全日志分析，我们只需要取出关键进行判断或者比对，就可以从庞大的windows安全日志中提取出我们想要的信息。</p>
 
@@ -227,7 +227,7 @@
 
 <p>查询结果如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711135769949.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072711135769949.png" alt="enter image description here"></p>
 
 <p>如果需要对于特定IP进行统计，我们可以这么写（默认是NAT输出）：</p>
 
@@ -246,13 +246,13 @@
 
 <p>查询结果为：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711135748462.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072711135748462.png" alt="enter image description here"></p>
 
 <p>怎么样？是不是一目了然呢？根据特定登陆事件，直接定位到异常IP，异常时间段内的连接情况。</p>
 
 <p>同样我们也可以选择其他输出格式，对日志分析和统计。上述所有操作都是在命令行下完成的，对于喜欢图形界面的朋友，We also have choices！这里我们可以选择使用LogParser Lizard。 对于GUI环境的Log Parser Lizard，其特点是比较易于使用，甚至不需要记忆繁琐的命令，只需要做好设置，写好基本的SQL语句，就可以直观的得到结果，这里给大家简单展示一下 首先选取查询类型</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711135893815.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072711135893815.png" alt="enter image description here"></p>
 
 <p>这里我们选择windows event log，然后输入刚才的查询语句： 比如：</p>
 
@@ -261,7 +261,7 @@
 
 <p>得到的查询结果为（并且这里我们可以有多种查询格式）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072711135811466.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072711135811466.png" alt="enter image description here"></p>
 
 <p>具体其他功能，大家可以去尝试一下~</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>LDAP注入与防御剖析 - r00tgrok</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/967">http://drops.wooyun.org/tips/967</a></h1>
 				
@@ -69,11 +69,11 @@ objectclasses=( 2.5.6.6 NAME 'person' DESC 'Defines entries that generically rep
 
 <p>LDAP以目录信息树形式存储信息，包含入口、对象、属性，关系图如下：</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022609042766867.jpg" alt="2014022609042766867.jpg"></p>
+<p><img src="../images_result/images/2014022609042766867.jpg" alt="2014022609042766867.jpg"></p>
 
 <p>入口点和属性之间的关系为：</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022609051568709.jpg" alt="2014022609051568709.jpg"></p>
+<p><img src="../images_result/images/2014022609051568709.jpg" alt="2014022609051568709.jpg"></p>
 
 <p>上述就是笔者对LDAP数据结构的简单介绍了，LDAP既然主要用于搜索查询，那它是怎么查询的呢？</p>
 
@@ -165,7 +165,7 @@ Final = assertion value
 
 <p>由于LDAP服务对于公司网络的重要性，LDAP服务器通常和其他数据库服务器一起放置于后端。图一展示了部署公司网络的典型场景，记住这个场景对于理解后面展示的注入技术的含义是很有用的。</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022610311520103.png" alt="2014022610311520103.png"></p>
+<p><img src="../images_result/images/2014022610311520103.png" alt="2014022610311520103.png"></p>
 
 <p>图一</p>
 
@@ -201,7 +201,7 @@ Final = assertion value
 <pre><code>(&amp;(USER=Uname)(PASSWORD=Pwd)) 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201402/2014022610353563170.png" alt="2014022610353563170.png"></p>
+<p><img src="../images_result/images/2014022610353563170.png" alt="2014022610353563170.png"></p>
 
 <p>图二</p>
 
@@ -214,7 +214,7 @@ Final = assertion value
 
 <p>LDAP服务器只处理第一个过滤器，即仅查询<code>(&amp;(USER=slidberger)(&amp;))</code>得到了处理。这个查询永真，因而攻击者无需有效地密码就能获取对系统的访问(图三)。</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022610360414400.png" alt="2014022610360414400.png"></p>
+<p><img src="../images_result/images/2014022610360414400.png" alt="2014022610360414400.png"></p>
 
 <p>图三</p>
 
@@ -247,11 +247,11 @@ Final = assertion value
 
 <p>则会被忽略。结果就是，所有安全等级的可用文档都会列举给攻击者，尽管他没有权限查看它们。</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022610403828571.png" alt="2014022610403828571.png"></p>
+<p><img src="../images_result/images/2014022610403828571.png" alt="2014022610403828571.png"></p>
 
 <p>图四 低安全等级的文档</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022610412439110.png" alt="2014022610412439110.png"></p>
+<p><img src="../images_result/images/2014022610412439110.png" alt="2014022610412439110.png"></p>
 
 <p>图五 所有安全等级的文档</p>
 
@@ -273,7 +273,7 @@ Final = assertion value
 
 <p>Rsc1和Rsc2表示系统中不同种类的资源，在图六中，Rsc1=printer，Rsc2=scanner用于列出系统中所以可用的打印机和扫描器。</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022610431478470.png" alt="2014022610431478470.png"></p>
+<p><img src="../images_result/images/2014022610431478470.png" alt="2014022610431478470.png"></p>
 
 <p>图六</p>
 
@@ -284,7 +284,7 @@ Final = assertion value
 
 <p>LDAP服务器会响应所有的打印机和用户对象，见图七</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022610474322048.png" alt="2014022610474322048.png"></p>
+<p><img src="../images_result/images/2014022610474322048.png" alt="2014022610474322048.png"></p>
 
 <p>图七</p>
 
@@ -352,11 +352,11 @@ Final = assertion value
 
 <p>LDAP盲注技术可以通过利用Web应用中内建的搜索过滤器首部的AND操作符，获得LDAP目录服务的敏感信息。例如，给出图八中为打印机对象定义的属性和图九中找个查询的响应页面，这里<code>value1=HPLaserJet2100</code></p>
 
-<p><img src="http://static.wooyun.org/201402/2014022610532370392.png" alt="2014022610532370392.png"></p>
+<p><img src="../images_result/images/2014022610532370392.png" alt="2014022610532370392.png"></p>
 
 <p>图八</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022610535611355.png" alt="2014022610535611355.png"></p>
+<p><img src="../images_result/images/2014022610535611355.png" alt="2014022610535611355.png"></p>
 
 <p>图九</p>
 
@@ -366,11 +366,11 @@ Final = assertion value
 (&amp;(idprinter=HPLaserJet2100)(departments=*))(objectclass=printer)
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201402/2014022610554046291.png" alt="2014022610554046291.png"></p>
+<p><img src="../images_result/images/2014022610554046291.png" alt="2014022610554046291.png"></p>
 
 <p>图十 属性不存在时的响应</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022610560674210.png" alt="2014022610560674210.png"></p>
+<p><img src="../images_result/images/2014022610560674210.png" alt="2014022610560674210.png"></p>
 
 <p>图十一 属性存在时的响应</p>
 
@@ -380,7 +380,7 @@ Final = assertion value
 
 <p>攻击者可以使用字母、数字搜索提取属性的值，这个想法的关键在于将一个复杂的值转化为TRUE/FALSE列表。这个机制，通常称为booleanization，大意是二值化吧，图十二概括了该机制，可用于不同的方式。</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022610583465159.png" alt="2014022610583465159.png"></p>
+<p><img src="../images_result/images/2014022610583465159.png" alt="2014022610583465159.png"></p>
 
 <p>假设攻击者想知道department属性的值，处理如下：</p>
 
@@ -389,11 +389,11 @@ Final = assertion value
 (&amp;(idprinter=HPLaserJet2100)(department=fa*))(object=printer))
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201402/2014022611012635926.png" alt="2014022611012635926.png"></p>
+<p><img src="../images_result/images/2014022611012635926.png" alt="2014022611012635926.png"></p>
 
 <p>图十三 值不是以’a’开始</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022611021776331.png" alt="2014022611021776331.png"></p>
+<p><img src="../images_result/images/2014022611021776331.png" alt="2014022611021776331.png"></p>
 
 <p>图十四 值以’fi’开始</p>
 
@@ -407,11 +407,11 @@ Final = assertion value
 (&amp;(idprinter=HPLaserJet2100)(department=*n*))(object=printer))
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201402/2014022611044543968.png" alt="2014022611044543968.png"></p>
+<p><img src="../images_result/images/2014022611044543968.png" alt="2014022611044543968.png"></p>
 
 <p>图十五 department的之中没有字母”b”</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022611050380005.png" alt="2014022611050380005.png"></p>
+<p><img src="../images_result/images/2014022611050380005.png" alt="2014022611050380005.png"></p>
 
 <p>图十六 department的之中没有字母”n”</p>
 
@@ -437,7 +437,7 @@ Final = assertion value
 
 <p>左边的字符在正常情况下是不会用到的，如果在用户的输入中出现了需要用反斜杠转义处理。而右边的圆括号这些如果不过滤的话就会导致过滤器闭合而生产攻击者需要的filter，这里看到不仅是用反斜杠处理，还将字符变成了相应的ASCII码值，这些符号本不该出现。</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022611091750993.png" alt="2014022611091750993.png"></p>
+<p><img src="../images_result/images/2014022611091750993.png" alt="2014022611091750993.png"></p>
 
 <p>图十七</p>
 
@@ -457,7 +457,7 @@ function ldapspecialchars($string) {
 
 <p>对LDAP服务而言防御注入并不像SQL注入那么复杂，只要把守好数据的入口和出口就能有效的防御攻击 ，图十八是转义前后对比的例子</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022611145262924.png" alt="2014022611145262924.png"></p>
+<p><img src="../images_result/images/2014022611145262924.png" alt="2014022611145262924.png"></p>
 
 <h2>0x05 本文小结</h2>
 

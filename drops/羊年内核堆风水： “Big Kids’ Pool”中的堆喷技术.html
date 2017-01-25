@@ -3,7 +3,7 @@
 			<head>
 			     <title>羊年内核堆风水： “Big Kids’ Pool”中的堆喷技术 - Chuck</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4766">http://drops.wooyun.org/tips/4766</a></h1>
 				
@@ -217,7 +217,7 @@ for (entry = bigPoolInfo-&gt;AllocatedInfo;
 
 <p>下图是WinDBG中的截图证明。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150127/2015012710572374731image0014.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012710572374731image0014.png" alt="enter image description here"></p>
 
 <p>看吧！将程序打包成一个简单的“kmalloc”帮助函数，然后你也可以分配可执行的且已知地址的内核态内存空间了。那么这种分配最多可以多大？根据我做过的实验，128MB是完全没有问题的，但是因为这种分配是非分页的内存，你还必须考虑你的RAM内存是否足够大。这里的链接指向一段部署了该分配功能的例子代码（没有链接）。</p>
 
@@ -225,7 +225,7 @@ for (entry = bigPoolInfo-&gt;AllocatedInfo;
 
 <p>下图是RAMMap的截图，展示了另一个已分配载荷的虚拟地址以及实地址（注意下图中有0x1000的差异是因为命令行PoC代码使指针产生了一个页的偏移，如代码中所写：加了一个PAGE_SIZE）。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150127/2015012710575588899image0035.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012710575588899image0035.png" alt="enter image description here"></p>
 
 <h1>0x04 结语</h1>
 

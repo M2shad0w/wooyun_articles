@@ -3,7 +3,7 @@
 			<head>
 			     <title>Hacking Team攻击代码分析Part5 Adobe Font Driver内核权限提升漏洞第二弹+Win32k KALSR绕过漏洞 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/7116">http://drops.wooyun.org/papers/7116</a></h1>
 				
@@ -140,11 +140,11 @@ win32k!NtGdiAddFontResourceW
 
 <p>首先，我们打开这个字体文件，找到<code>Advanced Typography Tables-&gt;GPOS Table</code>，打开FeatureList,可以看到FeatureTag是”kern”的FeatureRecord，这个FeatureRecord的<code>LookupCount = 1</code> ，它的<code>LookupIndex = 1</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071402325177550.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071402325177550.png" alt="enter image description here"></p>
 
 <p>我们打开LookupList，查看这个Index = 1的Lookup：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071402325147899.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071402325147899.png" alt="enter image description here"></p>
 
 <p>正如我们前面推测的，这里的<code>Class1Count</code>就是=0 ， 也就是触发这个漏洞的根本原因。</p>
 
@@ -170,7 +170,7 @@ win32k!NtGdiAddFontResourceW
 
 <p>整个内核池的布局操控过程如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071402325121179.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071402325121179.png" alt="enter image description here"></p>
 
 <p>由于Windows8以后微软已经移除了很多Win32k中的结构信息，因此<code>CHwndTargetProp</code>的数据结构只能通过猜测来分析，我们使用内核调试器分析一个<code>CHwndTargetProp</code>对象:</p>
 

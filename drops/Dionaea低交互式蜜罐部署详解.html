@@ -3,7 +3,7 @@
 			<head>
 			     <title>Dionaea低交互式蜜罐部署详解 - Eoh</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/640">http://drops.wooyun.org/tips/640</a></h1>
 				
@@ -27,7 +27,7 @@
 <p>Dionaea是运行于Linux上的一个应用程序，将程序运行于网络环境下，它开放Internet上常见服务的默认端口，当有外来连接时，模拟正常服务给予反馈，同时记录下出入网络数据流。网络数据流经由检测模块检测后按类别进行处理，如果有 shellcode 则进行仿真执行；程序会自动下载 shellcode 中指定下载或后续攻击命令指定下载的恶意文件。从捕获数据到下载恶意文件，整个流程的信息都被保存到数据库中，留待分析或提交到第三方分析机构。<br>
 Dionaea 整体结构和工作机制如图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091815270337100.png" alt="Dionaea-%E6%95%B4%E4%BD%93%E7%BB%93%E6%9"></p>
+<p><img src="../images_result/images/2014091815270337100.png" alt="Dionaea-%E6%95%B4%E4%BD%93%E7%BB%93%E6%9"></p>
 
 <h2>0x02 Dionaea 蜜罐安装过程</h2>
 
@@ -297,9 +297,9 @@ python manage.py collectstatic python manage.py runserver 0.0.0.0:8000
 
 <p>浏览器访问：http://你的IP:8000</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091815270452976.png" alt="DionaeaFR.png"></p>
+<p><img src="../images_result/images/2014091815270452976.png" alt="DionaeaFR.png"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091815270520626.png" alt="DionaeaFR_ATTACKERS.png"></p>
+<p><img src="../images_result/images/2014091815270520626.png" alt="DionaeaFR_ATTACKERS.png"></p>
 
 <h2>0x05 结束</h2>
 

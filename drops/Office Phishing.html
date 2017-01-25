@@ -3,12 +3,12 @@
 			<head>
 			     <title>Office Phishing - Evi1cg</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/13246">http://drops.wooyun.org/tips/13246</a></h1>
 				
       <p>
-        </p><p><img src="http://static.wooyun.org//drops/20160302/2016030204594956028p1.png" alt="Alt text"></p>
+        </p><p><img src="../images_result/images/2016030204594956028p1.png" alt="Alt text"></p>
 
 <p>Office作为Windows平台下一种非常流行的办公软件，越来越多的APT攻击通过构造恶意Office文件来进行实施，这也是成功率也是比较高的一种攻击方式。当然最隐蔽，最有效的攻击方式就是通过Office办公套件的一些0day来实施攻击，但是这也同样存在一些弊端，首先不是所有人都拥有0day，其次那些已经公布的Xday可能只能针对某些固定版本的Office，所以本文重点不在如果使用Xday，而是对现在已知的一些构造Office Phishing File的方式及方法进行总结，希望对学习Hack的同学有所帮助，当然也希望，通过此文，小伙伴能避免遭受此类攻击。</p>
 
@@ -26,11 +26,11 @@
 
 <p>测试使用powershell/shellcode_inject/virtual，选择以后直接generate</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030204595367049p2.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030204595367049p2.png" alt="Alt text"></p>
 
 <p>随便输入一个名字之后成功生成：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030204595639279p3.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030204595639279p3.png" alt="Alt text"></p>
 
 <p>然后需要下载一个转换脚本：</p>
 
@@ -44,11 +44,11 @@
 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d3a1bcbca793b8b2bfba">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/script/MacroShop# python macro_safe.py /usr/share/veil-output/source/test.bat
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205000037653p4.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030205000037653p4.png" alt="Alt text"></p>
 
 <p>之后将生成的内容添加到OFFice文件宏里面。创建宏，<code>注意选择宏的位置</code>为当前文档:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205004042048p25.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030205004042048p25.png" alt="Alt text"></p>
 
 <p>接下来选择Project 下面的Microsoft Word对象，选择Document->open,然后将生成的代码粘进去。要保存的代码如下图</p>
 
@@ -56,7 +56,7 @@
   <p>这里注意一点，脚本生成的默认是打开表格的宏，所以，这里只要函数内容，注意打钩的。</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205000262837p5.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030205000262837p5.png" alt="Alt text"></p>
 
 <p>之后保存为启用宏的Word文档或者doc文档。</p>
 
@@ -68,11 +68,11 @@
 
 <p>打开word文档会有此提示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205000446213p6.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030205000446213p6.png" alt="Alt text"></p>
 
 <p>点击启用，则生成meterpreter会话。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205000695022p7.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030205000695022p7.png" alt="Alt text"></p>
 
 <h3>2、 Nishang</h3>
 
@@ -102,7 +102,7 @@
 
 <p>将代码写入宏，执行可成功返回会话：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205000879147p8.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030205000879147p8.png" alt="Alt text"></p>
 
 <h3>5、 Scripts</h3>
 
@@ -136,15 +136,15 @@ Saved to file C:\Users\Evi1cg\Desktop\Macro.xls
 Clean-up Script located at C:\Users\Evi1cg\Desktop\RegistryCleanup.ps1
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205001017842p9.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030205001017842p9.png" alt="Alt text"></p>
 
 <p>运行Excel以后则生成meterpreter会话：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205001295612p10.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030205001295612p10.png" alt="Alt text"></p>
 
 <p>同时生成自启动后门：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205001368006p11.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030205001368006p11.png" alt="Alt text"></p>
 
 <blockquote>
   <p>具体键值为<code>HKCU\Software\Microsoft\Windows NT\CurrentVersion\Windows\Load</code></p>
@@ -184,33 +184,33 @@ PS C:\Users\Evi1cg\Desktop&gt; . .\RegistryCleanup.ps1
 <ol>
 <li><p>新建邮件，在设置文本格式处选择RTF：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205001561712p12.png" alt="Alt text"></p></li>
+<p><img src="../images_result/images/2016030205001561712p12.png" alt="Alt text"></p></li>
 <li><p>选择插入->对象->Package，选择显示为图标：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205001839171p13.png" alt="Alt text"></p></li>
+<p><img src="../images_result/images/2016030205001839171p13.png" alt="Alt text"></p></li>
 <li><p>然后将图标换为Word图标，并修改题注为迷惑性名称：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205001933441p14.png" alt="Alt text"></p></li>
+<p><img src="../images_result/images/2016030205001933441p14.png" alt="Alt text"></p></li>
 <li><p>绑定指定程序或脚本；</p></li>
 <li><p>将RTF再改为HTML ；</p></li>
 <li><p>添加其他迷惑内容 ：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205002117929p15.png" alt="Alt text"></p></li>
+<p><img src="../images_result/images/2016030205002117929p15.png" alt="Alt text"></p></li>
 <li><p>保存为test.msg ；</p></li>
 <li><p>发送给受害者。</p></li>
 </ol>
 
 <p>受害者运行以后会有以下提示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205002327238p16.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030205002327238p16.png" alt="Alt text"></p>
 
 <p>点击是以后会弹：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205002532569p17.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030205002532569p17.png" alt="Alt text"></p>
 
 <p>点击打开，成功执行：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205002699249p18.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030205002699249p18.png" alt="Alt text"></p>
 
 <h3>2、 PowerPoint OLE</h3>
 
@@ -226,13 +226,13 @@ Msgbox("test")
 <li><p>将VBS拖入PPT；</p></li>
 <li><p>为VBS添加动画->OLE操作动作并选择激活，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205002869392p19.png" alt="Alt text"></p></li>
+<p><img src="../images_result/images/2016030205002869392p19.png" alt="Alt text"></p></li>
 <li><p>选择动画窗格->效果选项：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205003032622p20.png" alt="Alt text"></p></li>
+<p><img src="../images_result/images/2016030205003032622p20.png" alt="Alt text"></p></li>
 <li><p>选择计时->与上一动画同时：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205003240105p21.png" alt="Alt text"></p></li>
+<p><img src="../images_result/images/2016030205003240105p21.png" alt="Alt text"></p></li>
 <li><p>为PPT添加内容；</p></li>
 <li><p>另存为放映文件pps或者ppsx；</p></li>
 <li><p>发送给受害者。</p></li>
@@ -240,7 +240,7 @@ Msgbox("test")
 
 <p>受害者打开会弹出如下提示框：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205003412813p22.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030205003412813p22.png" alt="Alt text"></p>
 
 <p>点击打开，执行脚本。</p>
 
@@ -258,11 +258,11 @@ Msgbox("test")
 <li>你可以教育你的员工不要点启用宏，不要随便乱点确定，不要随便下载不明文件等。</li>
 <li><p>配置组策略，如果在域下，可以批量配置管理模板。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205003652176p23.jpg" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030205003652176p23.jpg" alt="Alt text"></p>
 
 <p>设置 Disable all except digitally signed macros：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160302/2016030205003832844p24.jpeg" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030205003832844p24.jpeg" alt="Alt text"></p>
 
 <blockquote>
   <p>更多细节请看<a href="https://technet.microsoft.com/en-us/library/cc179039.aspx">这里</a></p>

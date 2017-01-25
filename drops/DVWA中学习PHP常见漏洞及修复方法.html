@@ -3,7 +3,7 @@
 			<head>
 			     <title>DVWA中学习PHP常见漏洞及修复方法 - erevus</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/483">http://drops.wooyun.org/papers/483</a></h1>
 				
@@ -72,7 +72,7 @@ if(isset($_GET['Submit'])){
 
 <p>这样导致了数据库中其他数据被黑客查询。 ￼</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811393657444.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811393657444.png" alt="enter image description here"></p>
 
 <pre><code>#!php
 //medium.php中
@@ -102,7 +102,7 @@ if (isset($_GET['Submit'])) {
 <pre><code>SELECT first_name, last_name FROM users WHERE user_id = 1 union select user,password from users ￼
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811393715050.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811393715050.png" alt="enter image description here"></p>
 
 <h3>SQL注入修补方法</h3>
 
@@ -136,7 +136,7 @@ $num = mysql_numrows($result);
 
 <h3>修补后进行SQL注入</h3>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811393872893.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811393872893.png" alt="enter image description here"></p>
 
 <p>但是addslashes()和mysql&#95;real&#95;escape_string()在数据库字符集设为GBK时是可能被绕过的。</p>
 
@@ -171,7 +171,7 @@ $num = mysql_numrows($result);
 
 <p>修补后效果</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811393913065.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811393913065.png" alt="enter image description here"></p>
 
 <h3>XSS漏洞原理</h3>
 
@@ -219,7 +219,7 @@ if(isset($_POST['btnSign']))
 
 <p>￼ <br></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811393951601.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811393951601.jpeg" alt="enter image description here"></p>
 
 <pre><code>#!php
 &lt;?php
@@ -286,7 +286,7 @@ if(isset($_POST['btnSign']))
 
 <p>修补后效果，可以看到尖括号已经被转义了，html代码已经不执行</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811394037672.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811394037672.jpeg" alt="enter image description here"></p>
 
 <h3>任意命令执行漏洞原理</h3>
 
@@ -326,7 +326,7 @@ if( isset( $_POST[ 'submit' ] ) ) {
 
 <p>那么执行的命令的命令就是 ping -c 0 | dir</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811394044689.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811394044689.jpeg" alt="enter image description here"></p>
 
 <p>假如黑客在利用时输入的是</p>
 
@@ -354,19 +354,19 @@ if( isset( $_POST[ 'submit' ] ) ) {
 
 <p>祭上神器Burp Suite，Burp suite运行后，Burp suite,Proxy 开起默认的8080 端口作为本地代理接口。</p>
 
-<p>使用Burp suite通过置一个web 浏览器使用其代理服务器，见下图 ￼ <img src="http://static.wooyun.org/20140918/2014091811394131639.jpeg" alt="enter image description here"></p>
+<p>使用Burp suite通过置一个web 浏览器使用其代理服务器，见下图 ￼ <img src="../images_result/images/2014091811394131639.jpeg" alt="enter image description here"></p>
 
-<p>然后打开你要暴力破解的后台，随便输入一个账号密码…把抓到的包send to intruder ￼ ￼<img src="http://static.wooyun.org/20140918/2014091811394151830.png" alt="enter image description here"></p>
+<p>然后打开你要暴力破解的后台，随便输入一个账号密码…把抓到的包send to intruder ￼ ￼<img src="../images_result/images/2014091811394151830.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811394266140.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811394266140.jpeg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811394215497.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811394215497.jpeg" alt="enter image description here"></p>
 
 <p>Start attack~~~</p>
 
 <p>然后就对面返回包的大小，知道密码</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811394271364.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811394271364.jpeg" alt="enter image description here"></p>
 
 <h3>暴力破解漏洞修补方法</h3>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>Cisco ASA Software远程认证绕过漏洞 - 百度安全攻防实验室</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/3459">http://drops.wooyun.org/papers/3459</a></h1>
 				
@@ -21,7 +21,7 @@
 <p>默认情况下，ASA的管理接口通过basic auth+cookie的方式进行认证，如下图：</p>
 
 <p><!--more-->
-<img src="http://static.wooyun.org/20141101/2014110104595522650.png" alt="enter image description here"></p>
+<img src="../images_result/images/2014110104595522650.png" alt="enter image description here"></p>
 
 <p>漏洞存在于Configuration选项卡的Customization页面的preview功能。此页面用于修改webvpn的用户登录页面。但Preview的管理请求处理逻辑缺乏Basic Auth认证，仅仅通过验证cookie的有效性来进行判定。但Cookie验证逻辑上存在问题， Lua代码如下：</p>
 
@@ -37,15 +37,15 @@ end
 
 <p>可以看出，在CheckAsdmSession 函数中，仅仅校验该函数cookie传入的文件存在与否。通过修改Cookie中ced的值，设置为设备上存在的文件，如 <code>Ced=../../locale/ru/LC_MESSAGES/webvpn.mo</code>，即可达到绕过验证的效果。</p>
 
-<p><img src="http://static.wooyun.org/20141101/2014110104595568101.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110104595568101.png" alt="enter image description here"></p>
 
 <p>我们可以通过对<code>/+CSCOE+/cedf.html</code>页面的请求查看preview页面的修改结果。</p>
 
-<p><img src="http://static.wooyun.org/20141101/2014110104595613359.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110104595613359.png" alt="enter image description here"></p>
 
 <p>现有系统对于preview页面的生效需要进行basic auth校验的，但固件版本保留了老的生效接口/+CSCOE+/cedsave.html（老接口不需要进行basic auth认证），通过调用此接口，即可完成对login page的html代码的修改。如下：</p>
 
-<p><img src="http://static.wooyun.org/20141101/2014110104595622670.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110104595622670.png" alt="enter image description here"></p>
 
 <p>通过修改登录页的代码，攻击者截获用于登录VPN的账号密码，也可以进行诸如劫持、挂马等操作。</p>
 

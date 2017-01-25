@@ -3,7 +3,7 @@
 			<head>
 			     <title>深入理解 glibc malloc - 新一葛格</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6595">http://drops.wooyun.org/tips/6595</a></h1>
 				
@@ -289,7 +289,7 @@ For 64 bit systems:
 
 <p>thread arena 的形象化视图（多个堆分段）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150614/2015061423215359015CA24BECA-D95B-4587-8230-6F841164E8D9.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015061423215359015CA24BECA-D95B-4587-8230-6F841164E8D9.png" alt="enter image description here"></p>
 
 <p>Chunk ：在堆里的块可以是以下几种类型中的一种：</p>
 
@@ -304,7 +304,7 @@ For 64 bit systems:
 
 <hr>
 
-<p><img src="http://static.wooyun.org//drops/20150614/20150614232417514417B132109-7AB2-4F1B-AA66-604646E73A7A.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150614232417514417B132109-7AB2-4F1B-AA66-604646E73A7A.png" alt="enter image description here"></p>
 
 <p><a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L1111">size</a>: 这部分包含了此处 Allocated 块的容量大小，该部分最后 3 bits 包含了关键信息。 <a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L1267">PREV_INUSE (P)</a> – 这一 bit 在前一个块被分配时就被设置。 <a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L1274">IS_MMAPPED</a> (M) – 这一 bit 在块即在 mmap 时被设置。 <a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L1283">NON&#95;MAIN&#95;ARENA</a> (N) – 这一 bit 在块分配给 thread arena 时设置。</p>
 
@@ -316,7 +316,7 @@ For 64 bit systems:
 
 <p>Free Chunk（空闲块）:</p>
 
-<p><a href="http://static.wooyun.org//drops/20150614/2015061423255856482D8A13550-4F52-48E1-B668-32DBD8003BAE.png">enter link description here</a></p>
+<p><a href="./drops/20150614/2015061423255856482D8A13550-4F52-48E1-B668-32DBD8003BAE.png">enter link description here</a></p>
 
 <p><a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L1110">prev_size</a>： 两个空闲块是不能毗连在一起的。当两个块都空闲时，它就会与一个单独的空闲块连接。因此前一个块及当前这个释放的块会被分配，同时 prev_size 包含前一个块的用户数据。 <a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L1111">size</a>: 这个部分包含有空闲块的 size。 <a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L1113">fd</a>: 前指针 – 同一容器里指向下一块的指针（不是指向物理内存内的下一块）。 Bins：Bins 是 freelist 数据结构。用以支持 Free Chunk。基于块的大小，有几种可用的 bins：</p>
 
@@ -348,7 +348,7 @@ For 64 bit systems:
 
 <p><a href="https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L3887">计算</a> Fast bin 目录以检索其对应的 binlist。 该空闲块被添加到以上检索 binlist 的最前位置。</p>
 
-<p><a href="http://static.wooyun.org//drops/20150614/2015061423321545199D2D7F63D-CE36-42B8-A1D7-20CF95227669.png">enter link description here</a></p>
+<p><a href="./drops/20150614/2015061423321545199D2D7F63D-CE36-42B8-A1D7-20CF95227669.png">enter link description here</a></p>
 
 <p>Unsorted Bin: 当小或者大的块被释放而非把他们添加到各自 bin 里时，它会被添加到 unsorted bin 里。 该途径给了 "glibc malloc" 第二个机会再次利用最近释放的块。因此内存分配以及回收的速度都会有所提升（因为 unsorted bin）由于排除了用于查找合适容器的时间。</p>
 
@@ -356,7 +356,7 @@ For 64 bit systems:
 
 <p>Unsorted bin 包含空闲块的一个循环双向链表（也称为 binlist 容器列表）。 块的大小 - 没有大小限制，任何大小的块都属于此容器。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150614/20150614233302341567E826E78-54CF-48AC-8917-19B5C2F6A530.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150614233302341567E826E78-54CF-48AC-8917-19B5C2F6A530.png" alt="enter image description here"></p>
 
 <p>Small Bin: 小于 512 bytes 的块叫做 small chunk。 支持 small chunks 的容器叫做 small bins。 Small bins 在内存分配和回收时比 large bins 快（比 fast bins 慢）。</p>
 

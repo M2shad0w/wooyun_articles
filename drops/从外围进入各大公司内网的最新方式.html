@@ -3,7 +3,7 @@
 			<head>
 			     <title>从外围进入各大公司内网的最新方式 - boooooom</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7831">http://drops.wooyun.org/tips/7831</a></h1>
 				
@@ -40,13 +40,13 @@
 
 <p>我们先来看一张图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081008175798155.png" alt=""></p>
+<p><img src="../images_result/images/2015081008175798155.png" alt=""></p>
 
 <p>从图中我们可以看到当我对一个公网ip的80端口发起http请求时，他会返回一段js代码，这段js执行以后会直接跳转到http://passport.oa.com/passport/... 这样一个地址，但是我却发现passport.oa.com这样一个地址实际上是无法访问的，因为他指向了一个内网IP。那这样看起来就是一个很奇怪的问题了。为什么访问一个公网IP却要跳转到一个内网的地址，我们在仔细看这个域名的是passport.oa.com;从命名来看似乎是说oa（办公网）的统一登陆认证地址？这意味着什么呢？我们大胆的猜想一下，是不是因为这个公网ip对应的服务器实际上是部署着一个内部的业务，这样解释起来貌似比较靠谱啊？为了验证我的想法，我对该公司的所有C段开放http服务的IP进行了批量的探测，发现了一些同样有意思的东西：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081008175853504.png" alt=""></p>
+<p><img src="../images_result/images/2015081008175853504.png" alt=""></p>
 
-<p>这个返回同样是一段js判断，很直接的逻辑，如果你访问的host是指向内网（.oa.com）那么他会跳转到一个内部的服务地址，如果你访问的host的是指向外网（.qq.com）;那么他会跳转到一个外部的服务地址。那么我接下来很简单，只需要对这个ip进行绑定host来测试即可： <img src="http://static.wooyun.org//drops/20150810/2015081008175877623.png" alt=""></p>
+<p>这个返回同样是一段js判断，很直接的逻辑，如果你访问的host是指向内网（.oa.com）那么他会跳转到一个内部的服务地址，如果你访问的host的是指向外网（.qq.com）;那么他会跳转到一个外部的服务地址。那么我接下来很简单，只需要对这个ip进行绑定host来测试即可： <img src="../images_result/images/2015081008175877623.png" alt=""></p>
 
 <p>从返回内容来看确实是一个内网业务。</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>D-LinkDSP-W215智能插座远程命令执行 - livers</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/2015">http://drops.wooyun.org/papers/2015</a></h1>
 				
@@ -24,7 +24,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481247184.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812481247184.png" alt="enter image description here"></p>
 
 <p>Lzma 压缩，linux文件系统，uimage 内核压缩镜像。</p>
 
@@ -32,7 +32,7 @@
 
 <p>HNAP是基于soap 协议，其req/res如下：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481231820.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812481231820.png" alt="enter image description here"></p>
 
 <p>更多查看<a href="http://www.cisco.com/web/partners/downloads/guest/hnap_protocol_whitepaper.pdf">http://www.cisco.com/web/partners/downloads/guest/hnap_protocol_whitepaper.pdf</a></p>
 
@@ -47,17 +47,17 @@ alias.url += ( "/HNAP1/" =&gt; "/www/my_cgi.cgi",
 
 <p>HNAP虽然是需要进行认证的协议，但是某些行为是不需要的，如获取设备信息设置之类。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481352053.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812481352053.png" alt="enter image description here"></p>
 
 <p>HNAP请求数据是由在my_cgi.cgi的do_hnap函数处理。do_hnap会首先处理POST请求中指定的Content-Length头。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481563599.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812481563599.png" alt="enter image description here"></p>
 
 <p>转换长度（str）为int.</p>
 
 <p>然后，它读取上述长度字节的数据放入一个分配了固定大小的栈中。（500,000字节）</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481624130.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812481624130.png" alt="enter image description here"></p>
 
 <p>F5转换成c代码为：</p>
 
@@ -89,13 +89,13 @@ perl -e 'print "D"x1000020; print "A"x4' &gt; overflow.txt
 wget --post-file=overflow.txt http://192.168.0.60/HNAP1/
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481696922.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812481696922.png" alt="enter image description here"></p>
 
 <p>Arm寄存器真蛋疼。</p>
 
 <p>由于是getc获取的数据，所以可以传入空字节。作者测试自己my_cgi.cgi进程中执行system地址0x00405CAC需要读入空字节。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481778093.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812481778093.png" alt="enter image description here"></p>
 
 <p>所以 ，只需要把返回地址覆盖成0x00405CAC，并把栈的偏移28位处加入需要执行的指令代码。</p>
 

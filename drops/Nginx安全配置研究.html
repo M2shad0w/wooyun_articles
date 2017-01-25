@@ -3,7 +3,7 @@
 			<head>
 			     <title>Nginx安全配置研究 - zhangsan</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1323">http://drops.wooyun.org/tips/1323</a></h1>
 				
@@ -128,19 +128,19 @@ deny all;
 chown -R root:root html/ 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201403/2014032713413545690.png" alt="2014032713413545690.png"></p>
+<p><img src="../images_result/images/2014032713413545690.png" alt="2014032713413545690.png"></p>
 
 <h3>2. 修改nginx及php-fpm的运行账户及组为nobody</h3>
 
 <pre><code>nginx.conf
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201403/2014032713415348030.png" alt="2014032713415348030.png"></p>
+<p><img src="../images_result/images/2014032713415348030.png" alt="2014032713415348030.png"></p>
 
 <pre><code>Php-fpm.conf
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201403/2014032713421181020.png" alt="2014032713421181020.png"></p>
+<p><img src="../images_result/images/2014032713421181020.png" alt="2014032713421181020.png"></p>
 
 <h3>3. 取消nobody对所有目录的的读取权限，然后添加对网站目录的读取权限</h3>
 

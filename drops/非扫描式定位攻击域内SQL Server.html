@@ -3,7 +3,7 @@
 			<head>
 			     <title>非扫描式定位攻击域内SQL Server - DM_</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/pentesting/2134">http://drops.wooyun.org/pentesting/2134</a></h1>
 				
@@ -45,14 +45,14 @@
 <pre><code>Import-Module c:\temp\Get-SQLServerAccess.psm1
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812225210534.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812225210534.png" alt="enter image description here"></p>
 
 <p>同样你可以通过下面的语句判断是否导入成功</p>
 
 <pre><code>Get-Command Get-SQLServerAcess
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812225221238.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812225221238.png" alt="enter image description here"></p>
 
 <p>防御者使用示例 数据库管理员通常都会给所有域成员登录SQLServer的权限，因为实际上他们也不确定哪个域用户组成员需要权限，另外SQL Server的老版本默认允许域用户登陆，这是因为一个权限继承的问题(见之前的文章<a href="https://www.netspi.com/blog/entryid/228/privilegeinheritance">here</a>)。这些错误配置导致未认证的域用户获取数据和系统的权限，作为一个防御者快速的发现这些错误配置并修正是极好的。 Get-SQLServerAccess默认输出允许当前域用户登陆的SQL Server，另外输出也会显示SQL Server实例的名称。如果用户有SQL Serversy的sadmin权限，并且运行SQL Server服务的是域管理员权限，那么下面的几个示例，我想对于防御者是非常方便的。 通过LDAP从ADS获取SQL Server的列表，然后试图用当前域用户登陆每一个SQL Server。这是默认的输出显示。</p>
 
@@ -102,7 +102,7 @@
 
 <p>下面是一个上例中输出的截图。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812225327015.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812225327015.png" alt="enter image description here"></p>
 
 <p>上面的例子只是展示了我实验室中测试的结果，但是在真实环境中我通常看到成百上千的服务器。Just for fun，我同样建议你以一个域用户权限去运行这个脚本，通过使用”psexec.exe –s –I cmd.exe”之后可以获取一个本地system权限的shell。然后向上述的一样运行脚本。我想你会惊讶于登陆进了多少台SQL server,我记得我当时的样子。不管怎么说，到了攻击的例子了。 攻击者使用示例 对于SQL server来说有很多的攻击方法。下面我将介绍在脚本帮助下的五种攻击技术。</p>
 
@@ -234,7 +234,7 @@ CompanySecrects
 
 <p>在这个例子中，你可以看到其中有三个都在使用同一个域共享服务账户。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812225351306.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812225351306.png" alt="enter image description here"></p>
 
 <p><strong>5，爬取数据库链接执行sysadmin权限查询</strong>也是一个几乎在所有场景中应用的技术。Antti Rantasaari在他博客里发表过一个关于数据库链接非常不错的概述(<a href="https://www.netspi.com/blog/entryid/197/how-to-hack-database-links-in-sql-server">How to Hack Database Links in SQL Server</a>)，在不久前我们同样也写过一个用来攻击的metasploit模块(<a href="https://github.com/rapid7/metasploit-framework/blob/master/modules/exploits/windows/mssql/mssql_linkcrawler.rb">here</a>)。尽管你可以盲目的枚举数据库链接，但是我想用脚本来抓取每一个可登陆的SQL Server的链接数会变得更方便。你可以用”-showsnum”和”-showsatus”选项来显示它们。和上一个例子相似，同样也可以输出至csv文件中。下面是上一个的例子。</p>
 
@@ -261,7 +261,7 @@ CompanySecrects
 
 <p>正如你在示例所见，其中两个服务器存在链接，有可被攻击的潜在可能。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812225466101.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091812225466101.png" alt="enter image description here"></p>
 
 <h2>0x04 小结</h2>
 

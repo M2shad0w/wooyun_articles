@@ -3,7 +3,7 @@
 			<head>
 			     <title>iOS冰与火之歌 – 利用XPC过App沙盒 - 蒸米</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/14170">http://drops.wooyun.org/papers/14170</a></h1>
 				
@@ -73,11 +73,11 @@ xpc_connection_t client = xpc_connection_create_mach_service("com.apple.xpc.exam
 
 <p>我们知道，xpc传输的其实就是一段二进制数据。比如我们传输的xpc_dictionary是这样的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160329/2016032914530637423129.jpg" height="480" width="470"></p>
+<p><img src="../images_result/images/2016032914530637423129.jpg" height="480" width="470"></p>
 
 <p>实际传输的数据确是这样的（通过lldb，然后<code>break set --name _xpc_serializer_get_dispatch_mach_msg</code>就可以看到）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160329/2016032914530923593215.jpg" alt="p2"></p>
+<p><img src="../images_result/images/2016032914530923593215.jpg" alt="p2"></p>
 
 <p>可以看到这些传输的数据都经过序列化转换成二进制data，然后等data传递到系统service的服务端以后，再通过反序列化函数还原回原始的数据。</p>
 
@@ -89,17 +89,17 @@ xpc_connection_t client = xpc_connection_create_mach_service("com.apple.xpc.exam
 
 <p>Com.apple.networkd 是一个app沙盒内可达的xpc系统服务。这个服务对应的binary是/usr/libexec/networkd。我们可以通过ps看到这个服务的权限是_networkd：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160329/2016032914531277286314.jpg" alt="p3"></p>
+<p><img src="../images_result/images/2016032914531277286314.jpg" alt="p3"></p>
 
 <p>虽然没有root权限，但是也几乎可以做到沙盒外任意文件读写了。在iOS 8.1.3及之前版本，这个XPC系统服务存在Object Dereference漏洞，这个漏洞是由Google Project Zero的IanBeer发现的，但他给的poc只是Mac OS X上的，并且hardcode了很多地址。而本篇文章将以iphone 4s, arm32, 7.1.1为测试机，一步一步讲解如何找到这些hardcode的地址和gadgets，并利用这个漏洞做到app的沙盒逃逸。</p>
 
 <p>问题出在com.apple.networkd这个服务的<code>char *__fastcall sub_A878(int a1)</code>这个函数中，对传入的”<code>effective_audit_token</code>”这个值没有做类型校验，就直接当成xpc_data这种数据类型进行解析了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160329/2016032914531628660412.jpg" alt="5"></p>
+<p><img src="../images_result/images/2016032914531628660412.jpg" alt="5"></p>
 
 <p>然而如果我们传过去的值并不是一个xpc&#95;data，networkd也会当这个值是一个xpc&#95;data，并传给<code>_xpc_data_get_bytes_ptr()</code>来进行解析：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160329/2016032914531889411513.jpg" height="480" width="470"></p>
+<p><img src="../images_result/images/2016032914531889411513.jpg" height="480" width="470"></p>
 
 <p>解析完成后，无论这个对象是否符合service程序的预期，程序都会调用<code>_dispatch_objc_release()</code>这个函数来release这个对象。因此，我们就想到了是否可以伪造一个objective-C的对象，同时将这个对象的release()函数给加入到cache里，这样的话，在程序release这个对象的时候，就可以控制pc指针指向我们想要执行的ROP指令了。</p>
 
@@ -135,7 +135,7 @@ xpc_dictionary_set_value(dict, "state", state);
 
 <p>随后我们可以使用<code>NSLog(@"%@",dict);</code>将我们构造好以后的xpc数据打印出来：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160329/2016032914532349394611.jpg" alt="p6"></p>
+<p><img src="../images_result/images/2016032914532349394611.jpg" alt="p6"></p>
 
 <p>除了effective&#95;audit&#95;token以外的其他数据都是正常的。为了攻击这个系统服务，我们把<code>effective_audit_token</code>的值用<code>xpc_dictionary_set_uuid</code>设置为<code>{0x0, 0x1fec000};</code>。0x1fec000这个地址保存的将会是我们伪造的Objective-C对象。构造完xpc数据后，我们就可以将数据发送到networkd服务端触发漏洞了。但如何构造一个伪造的ObjectC对象，以及如何将伪造的对象保存到这个地址呢？请继续看下一章。</p>
 
@@ -240,7 +240,7 @@ struct heap_spray {
 
 <p>虽然我们可以利用一个伪造的Objective-C对象来控制networkd。但是我们需要将这个对象保存在networkd的内存空间中才行，并且因为ASLR（地址随机化）的原因，我们就算能把伪造的对象传输过去，也很难计算出这个对象在内存中的具体位置。那么应该怎么做呢？方法就是堆喷(Heap Spray)。虽然ASLR意味着每次启动服务，program image，library，堆和栈等都是随机。但实际上这个随机并不是完全的随机，只是在某个地址范围内的随机罢了。因此我们可以利用堆喷在内存中喷出一部分空间(尽可能的大，为了能覆盖到随机地址的范围)，然后在里面填充n个fake Object就可以了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160329/201603291453283303779.jpg" alt="p7"></p>
+<p><img src="../images_result/images/201603291453283303779.jpg" alt="p7"></p>
 
 <p>我进行漏洞测试的环境是，iPhone4s (arm 32位) 7.1.2，我们选择了0x1fec000这个地址，因为经过多次堆喷测试，这个地址可以达到将近100%的喷中率。堆喷的代码如下：</p>
 
@@ -278,9 +278,9 @@ xpc_connection_send_message(client, dict);
 
 <p>随后我们编译执行我们的app，app会将fake ObjectiveC对象用堆喷的方式填充到networkd的内存中，随后app会触发object dereference漏洞来控制pc，随后app会利用rop执行<code>system("touch /tmp/iceandfire")</code>指令。运行完app后，我们发现在/tmp/目录下已经出现了iceandfire这个文件了，说明我们成功突破了沙盒并执行了system指令：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160329/201603291453294678288.jpg" alt="p8"></p>
+<p><img src="../images_result/images/201603291453294678288.jpg" alt="p8"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160329/201603291453316834698.jpg" alt="p9"></p>
+<p><img src="../images_result/images/201603291453316834698.jpg" alt="p9"></p>
 
 <h1>0x05 总结</h1>
 

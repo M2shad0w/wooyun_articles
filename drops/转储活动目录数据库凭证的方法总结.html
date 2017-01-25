@@ -3,7 +3,7 @@
 			<head>
 			     <title>转储活动目录数据库凭证的方法总结 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/pentesting/12020">http://drops.wooyun.org/pentesting/12020</a></h1>
 				
@@ -76,7 +76,7 @@ New-PSSession -Name PSCOMPUTER –ComputerName $COMPUTER; Enter-PSSession -Name 
 
 <p>Active Directory 域数据库存储在 <a href="https://technet.microsoft.com/en-us/library/cc961761.aspx">Ntds.dit</a> 文件中（默认存放在 C:\WINDOWS\NTDS 中，但一般是在不同的逻辑驱动器上的）。 AD 数据库是一个使用了<a href="https://en.wikipedia.org/wiki/Extensible_Storage_Engine">可扩展存储引擎（ESE）</a> 的 <a href="https://en.wikipedia.org/wiki/Microsoft_Jet_Database_Engine">Jet 数据库引擎</a>，它提供了数据存储和索引服务; ESE 级别的索引使得对象的属性能够快速定位。 ESE 确保数据库符合 <a href="https://en.wikipedia.org/wiki/ACID">ACID</a>（原子性，一致性，隔离性和持久性）即 在一个事务中的所有操作要么全部完成要么全部不完成。AD 的 ESE 数据库是非常快速且可靠的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/20160110152710438951.gif" alt="p1"></p>
+<p><img src="../images_result/images/20160110152710438951.gif" alt="p1"></p>
 
 <p>注：微软同样使用了 Jet 数据库作为 Exchange 的邮箱数据库。</p>
 
@@ -126,7 +126,7 @@ Active Directory 包括<a href="https://technet.microsoft.com/en-us/library/cc96
 
 <p>该字段的值的长度是 76 个字节（二进制数据）。值的结构如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015271241906223.png" alt="p2"></p>
+<p><img src="../images_result/images/2016011015271241906223.png" alt="p2"></p>
 
 <p>解密后得到的 PEK 的值可以分为两部分。跳过前 36 字节（因此实际上 PEK 密钥的长度只有 16 个字节）。</p>
 
@@ -170,23 +170,23 @@ hash = d1.decrypt(denc_hash[:8]) + d2.decrypt(denc_hash[8:])
 
 <p>利用 WMIC （或者是 PowerShell 远程管理）创建（或 copy 已存在的）VSS。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015271362254317.png" alt="p3"></p>
+<p><img src="../images_result/images/2016011015271362254317.png" alt="p3"></p>
 
 <p>当 VSS 快照完成后，我们就可以从 VSS 中将 NTDS.dit 文件和 注册表中的 System hive 复制到域控制器的 C 盘中。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015271586585419.png" alt="p4"></p>
+<p><img src="../images_result/images/2016011015271586585419.png" alt="p4"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015271644814516.png" alt="p5"></p>
+<p><img src="../images_result/images/2016011015271644814516.png" alt="p5"></p>
 
 <p>之后就可以将域控制器中 <code>c:\\temp</code> 目录的文件复制到本地的计算机中。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015271878646613.png" alt="p6"></p>
+<p><img src="../images_result/images/2016011015271878646613.png" alt="p6"></p>
 
 <p>上图中显示了攻击者使用 Mimikatz 获取的明文密码，进行远程连接操作。不过，就算我们没有密码又有什么关系呢？</p>
 
 <p>攻击者可以通过 WMIC 传递 Kerberos 票证同样可以进行远程连接操作。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015271955729712.png" alt="p7"></p>
+<p><img src="../images_result/images/2016011015271955729712.png" alt="p7"></p>
 
 <p>需要注意的是在较新版本的 Windows 中 WMIC 已经有些过时了。 PowerShell 提供了 Invoke-WMIMethod cmdlet 可以执行相同的功能。</p>
 
@@ -206,7 +206,7 @@ ntdsutil “ac i ntds” “ifm” “create full c:\temp” q q
 
 <p>该文件可能存储在一个正在 promot 的新的 DC 的共享文件夹中，也可能出现在还没有 promot 的新的服务器上。此服务器可能无法确保IFM 数据的安全，包括复制 Ntds.dit 文件并提取凭证数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015272095138812.png" alt="p8"></p>
+<p><img src="../images_result/images/2016011015272095138812.png" alt="p8"></p>
 
 <p>这个命令也可以通过 WMI 或 PowerShell 远程执行。</p>
 
@@ -250,7 +250,7 @@ Invoke-NinjaCopy -Path “c:\windows\ntds\ntds.dit” -ComputerName “RDLABDC02
 
 <p>从正在运行的系统中抓取文件时，我必须对 Ntds.dit 文件进行“拍摄快照”以便纠正错误。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/201601101527225858894.jpg" alt="p9"></p>
+<p><img src="../images_result/images/201601101527225858894.jpg" alt="p9"></p>
 
 <p>注意:</p>
 
@@ -280,7 +280,7 @@ mimikatz lsadump::lsa /inject exit
 
 <p>UID 为 502 的帐户是 KRBTGT 帐户 与 RID 为 500 的帐户一样都是域中默认的管理员。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/20160110152723794021013.png" alt="p10"></p>
+<p><img src="../images_result/images/20160110152723794021013.png" alt="p10"></p>
 
 <h1>0x09 在 DC 中使用 Invoke-Mimikatz 转储 Active Directory 凭据</h1>
 
@@ -313,7 +313,7 @@ Invoke-Mimikatz -Command ‘”privilege::debug” “LSADump::LSA /inject” ex
 <p>注意：<br>
 UID 为 502 的帐户是 KRBTGT 帐户 与 RID 为 500 的帐户一样都是域中默认的管理员。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015272562421112.jpg" alt="p11"></p>
+<p><img src="../images_result/images/2016011015272562421112.jpg" alt="p11"></p>
 
 <h1>0x0A 使用 Invoke-Mimikatz 远程转储 Active Directory 凭据 ( 通过 PowerShell 远程管理)</h1>
 
@@ -327,7 +327,7 @@ Invoke-Mimikatz -Command '"privilege::debug" "LSADump:LSA /inject"' -Computer RD
 
 <p>下面这个这个示例是从外网下载并完全是在内存中执行代码，然后执行 Invoke-Mimikatz 。如果攻击者已经拿到了域管理员已登录的主机，那么在这种情况下会很有效，从而使攻击者可以将 Active Directory 数据库文件从域控制器复制到主机中，然后上传到外网。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015272726246123.jpg" alt="p12"></p>
+<p><img src="../images_result/images/2016011015272726246123.jpg" alt="p12"></p>
 
 <h1>0x0B 使用 Mimikatz 的 DCSync 功能远程转储 Active Directory 凭据</h1>
 
@@ -386,11 +386,11 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:rd.adsecurity.org /user:Adm
 Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:adsdc03$" exit
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015272915776132.jpg" alt="p13"></p>
+<p><img src="../images_result/images/2016011015272915776132.jpg" alt="p13"></p>
 
 <p>如果帐户启用了 “可逆加密”，则会显示明文密码。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015273257278141.jpg" alt="p14"></p>
+<p><img src="../images_result/images/2016011015273257278141.jpg" alt="p14"></p>
 
 <h1>0x0C 参考及引用</h1>
 

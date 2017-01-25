@@ -3,7 +3,7 @@
 			<head>
 			     <title>Android Service Security - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4907">http://drops.wooyun.org/tips/4907</a></h1>
 				
@@ -22,7 +22,7 @@
 
 <!--more -->
 
-<p><img src="http://static.wooyun.org/drops/20150211/2015021104391895764service_lifecycle.png" alt=""></p>
+<p><img src="../images_result/images/2015021104391895764service_lifecycle.png" alt=""></p>
 
 <p>左图是startService()创建service，右图是bindService()创建service。 startService与bindService都可以启动Service，那么它们之间有什么区别呢？它们两者的区别就是使Service的周期改变。由startService启动的Service必须要有stopService来结束Service，不调用stopService则会造成Activity结束了而Service还运行着。bindService启动的Service可以由unbindService来结束，也可以在Activity结束之后(onDestroy)自动结束。</p>
 
@@ -107,7 +107,7 @@
 
 <p><strong>service分类</strong></p>
 
-<p><img src="http://static.wooyun.org/drops/20150211/2015021104391996450type.png" alt=""></p>
+<p><img src="../images_result/images/2015021104391996450type.png" alt=""></p>
 
 <pre><code>私有service:不能被其他应用调用,相对安全
 公开service:可以被任意应用调用
@@ -117,7 +117,7 @@
 
 <p><strong>intent-filter与exported组合建议</strong></p>
 
-<p><img src="http://static.wooyun.org/drops/20150211/2015021104391915436intent.png" alt=""></p>
+<p><img src="../images_result/images/2015021104391915436intent.png" alt=""></p>
 
 <p>总结:</p>
 
@@ -169,7 +169,7 @@
 
 <p>攻击模型</p>
 
-<p><img src="http://static.wooyun.org/drops/20150211/2015021104392094331hijack.png" alt=""></p>
+<p><img src="../images_result/images/2015021104392094331hijack.png" alt=""></p>
 
 <p><strong>案例3:拒绝服务</strong></p>
 

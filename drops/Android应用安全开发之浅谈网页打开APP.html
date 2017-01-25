@@ -3,7 +3,7 @@
 			<head>
 			     <title>Android应用安全开发之浅谈网页打开APP - 阿里移动安全</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/15202">http://drops.wooyun.org/mobile/15202</a></h1>
 				
@@ -20,11 +20,11 @@
 
 <p>第一种用户自定义的URI scheme形式如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/2016042209202214629140.jpg" alt="p1"></p>
+<p><img src="../images_result/images/2016042209202214629140.jpg" alt="p1"></p>
 
 <p>第二种的Intent-based URI的语法形式如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/2016042209202650760228.jpg" alt="p2"></p>
+<p><img src="../images_result/images/2016042209202650760228.jpg" alt="p2"></p>
 
 <p>因为第二种形式大体是第一种形式的特例，所以很多文章又将第二种形式叫Intent Scheme URL，但是在Google的官方文档并没有这样的说法。</p>
 
@@ -42,23 +42,23 @@
 
 <p>如自定义的Scheme为：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/2016042209202847271319.jpg" alt="p3"></p>
+<p><img src="../images_result/images/2016042209202847271319.jpg" alt="p3"></p>
 
 <p><strong>注意：</strong>uri要用UTF-8编码和URI编码。</p>
 
 <p>网页端的写法如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/2016042209202951459413.jpg" alt="p4"></p>
+<p><img src="../images_result/images/2016042209202951459413.jpg" alt="p4"></p>
 
 <p>APP端接收来自网页信息的Activity，要在Androidmanifest.xml文件中Activity的intent-filter中声明相应action、category和data的scheme等。 </p>
 
 <p>如在MainActivity中接收从网页来的信息，其在AndroidManifest.xml中的内容如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/2016042209203180208513.jpg" alt="p5"></p>
+<p><img src="../images_result/images/2016042209203180208513.jpg" alt="p5"></p>
 
 <p>在MainActivity中接收intent并且获取相应参数的代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/2016042209203319298614.jpg" alt="p6"></p>
+<p><img src="../images_result/images/2016042209203319298614.jpg" alt="p6"></p>
 
 <p>另外还有以下几个API来获取相关信息： </p>
 
@@ -76,23 +76,23 @@ getIntent().getHost(); //获得host
 
 <p>接2.1的示例，新建一个WebviewActivity组件，从intent里面获取load_url，然后使用Webview加载url：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/2016042209203478610714.jpg" alt="p7"></p>
+<p><img src="../images_result/images/2016042209203478610714.jpg" alt="p7"></p>
 
 <p>修改MainActivity组件，从网页端的URL中获取load_url参数的值，生成新的intent，并传给WebviewActivity：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/2016042209203674488812.jpg" alt="p8"></p>
+<p><img src="../images_result/images/2016042209203674488812.jpg" alt="p8"></p>
 
 <p>网页端：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/2016042209203928263910.jpg" alt="p9"></p>
+<p><img src="../images_result/images/2016042209203928263910.jpg" alt="p9"></p>
 
 <p>钓鱼页面：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/2016042209204215545109.jpg" alt="p10"></p>
+<p><img src="../images_result/images/2016042209204215545109.jpg" alt="p10"></p>
 
 <p>点击“打开钓鱼网站”，进入APP，并且APP加载了钓鱼网站：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/20160422092044681191114.jpg" alt="p11"></p>
+<p><img src="../images_result/images/20160422092044681191114.jpg" alt="p11"></p>
 
 <p><strong>本例建议：</strong><br>
 在Webview加载load_url时，结合APP的自身业务采用白名单机制过滤网页端传过来的数据，黑名单容易被绕过。</p>
@@ -112,7 +112,7 @@ getIntent().getHost(); //获得host
 
 <p>Intent-based URI语法：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/20160422092045385601211.jpg" alt="p12"></p>
+<p><img src="../images_result/images/20160422092045385601211.jpg" alt="p12"></p>
 
 <p><strong>注意：</strong>第二个Intent的第一个字母一定要大写，不然不会成功调用APP。</p>
 
@@ -122,11 +122,11 @@ getIntent().getHost(); //获得host
 
 <p>如：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/20160422092047772571310.jpg" alt="p13"></p>
+<p><img src="../images_result/images/20160422092047772571310.jpg" alt="p13"></p>
 
 <p>结果：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/2016042209205169242148.jpg" alt="p14"></p>
+<p><img src="../images_result/images/2016042209205169242148.jpg" alt="p14"></p>
 
 <p>S.load_url是跟的是intent对象的putExtra()方法中的数据。其他类型的数据可以一个个试。</p>
 
@@ -140,21 +140,21 @@ getIntent().getHost(); //获得host
 
 <p>如对于：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/2016042209205383294158.jpg" alt="p15"></p>
+<p><img src="../images_result/images/2016042209205383294158.jpg" alt="p15"></p>
 
 <p>在APP中获取数据：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/2016042209205421707167.jpg" alt="p16"></p>
+<p><img src="../images_result/images/2016042209205421707167.jpg" alt="p16"></p>
 
 <p>结果是：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/2016042209205810120179.jpg" alt="p17"></p>
+<p><img src="../images_result/images/2016042209205810120179.jpg" alt="p17"></p>
 
 <p>由上图可知Android系统自动为Custom URI scheme添加了默认的intent。 </p>
 
 <p>要想正确的解析，还需使用Intent的parseUri()方法对getDataString()获取到的数据进行解析，如：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/2016042209210067503188.jpg" alt="p18"></p>
+<p><img src="../images_result/images/2016042209210067503188.jpg" alt="p18"></p>
 
 <h3>2.2 风险示例</h3>
 
@@ -164,7 +164,7 @@ getIntent().getHost(); //获得host
 
 <p>上面两篇文章中都给出了安全使用Intent Scheme URL的方法：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/2016042209210170821196.jpg" alt="p19"></p>
+<p><img src="../images_result/images/2016042209210170821196.jpg" alt="p19"></p>
 
 <p>除了以上的做法，还是不要信任来自网页端的任何intent，为了安全起见，使用网页传过来的intent时，还是要进行过滤和检查。</p>
 

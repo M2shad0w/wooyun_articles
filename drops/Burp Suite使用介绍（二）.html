@@ -3,7 +3,7 @@
 			<head>
 			     <title>Burp Suite使用介绍（二） - 小乐天</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/1629">http://drops.wooyun.org/tools/1629</a></h1>
 				
@@ -22,9 +22,9 @@
 
 <!--more-->
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image001.png" src="http://static.wooyun.org/20141017/2014101712084838980.png" alt="Image001" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image001.png" src="../images_result/images/2014101712084838980.png" alt="Image001" border="0"></p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image003.png" src="http://static.wooyun.org/20141017/2014101712084978607.png" alt="Image003" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image003.png" src="../images_result/images/2014101712084978607.png" alt="Image003" border="0"></p>
 
 <pre><code>1)可以从Proxy history、site map、Scanner result里地项目地址详情发送到repeater，可以对页面数据进行修改。  
 2)点击go，发送请求，右边响应请求。  
@@ -67,7 +67,7 @@
 
 <p>直放站菜单控制的burpRepeater的行为方面。下列选项可用：</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image005.png" src="http://static.wooyun.org/20141017/2014101712084995210.png" alt="Image005" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image005.png" src="../images_result/images/2014101712084995210.png" alt="Image005" border="0"></p>
 
 <h3>Update Content-length</h3>
 
@@ -116,16 +116,16 @@
 3)转到Sequencer选项卡，然后再选择“live capture(现场捕获请求)”，选择你刚才发送的项目。
 </code></pre>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image007.png" src="http://static.wooyun.org/20141017/2014101712084913630.png" alt="Image007" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image007.png" src="../images_result/images/2014101712084913630.png" alt="Image007" border="0"></p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image009.png" src="http://static.wooyun.org/20141017/2014101712085043686.png" alt="Image009" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image009.png" src="../images_result/images/2014101712085043686.png" alt="Image009" border="0"></p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image011.png" src="http://static.wooyun.org/20141017/2014101712085025303.png" alt="Image011" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image011.png" src="../images_result/images/2014101712085025303.png" alt="Image011" border="0"></p>
 
 <pre><code>4)在“Token Location Within Response(tokens位置在回应)”部分，选择在tokens出现的响应的位置。如果标记出现在自定义位置（即不是在一个Set-Cookie头或表单域） ，然后选择“Custon location(自定义位置)”选项，然后在对话框中，选择响应tokens，然后单击“确定” 。
 </code></pre>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image013.png" src="http://static.wooyun.org/20141017/2014101712085044724.png" alt="Image013" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image013.png" src="../images_result/images/2014101712085044724.png" alt="Image013" border="0"></p>
 
 <pre><code>5)在“Select live Captrue Request(选择现场捕获请求)”部分中，单击“Start live capture(开始实时捕获)”按钮。这将导致Burp反复发出原始请求，并extract(提取)所有在响应收到的tokens。实时捕获会话打开一个新窗口，显示捕获的进度，并已获得的tokens数量。当几百tokens已获得，暂停实时捕获会话，然后单击“Analyze now(立即分析)”按钮。  
 6)当分析完成后，会显示出随机性测试的结果。这表明样品中整体摘要，并附有详细的结果为每种类型进行了测试。有简短的文档，结果自己在每个测试。在某些情况下，你可能已经获得tokens的一个合适的样本。您可以手动加载此样品为Sequnecer，并执行相同的分析。要做到这一点，在主burp的UI ，转到序选项卡，然后手动加载子选项卡。您可以从剪贴板粘贴标记，或从文件中加载它们，并使用“Analyze now(立即分析)”按钮，开始装载样品的分析。
@@ -148,7 +148,7 @@
 
 <p>Bit-level test(位级测试)是比字符级测试功能更强大。启用位级的分析，每个tokens被转换成一组比特，与由字符集的每个字符位置的大小来确定的比特的总数。如果任何职位聘用，其大小不是2的圆形电源的字符集，在该位置的样本数据被转换成其大小是两个最接近的较小的圆形电源的字符集。在该位置的数据的部分比特被有效地合并成从该位置所产生的全部位。这个翻译是在被设计为保留原始样本的随机性特点，不会引入或移除任何偏见的方式进行。然而，这种类型的没有进程可以是完美的，它很可能与分析非圆字符集大小的样本将介绍一些不准确到分析结果的过程。当每个tokens已被转换成一个比特序列，下面的测试是在每个位的位置进行：</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image015.png" src="http://static.wooyun.org/20141017/2014101712085196363.png" alt="Image015" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image015.png" src="../images_result/images/2014101712085196363.png" alt="Image015" border="0"></p>
 
 <p><strong>FIPS monobit test</strong> - 此测试分析的1和0的每个位的位置分布。如果样品是随机产生的，1和0中的数量很可能是近似相等的。在每个位置上测试计算，如果tokens是随机产生所观察到的分布的概率。对于每一个进行的，除了报告中出现的观测数据的概率FIPS测试，Burp Sequncer也记录是否每一位通过或失败的FIPS测试。请注意，通过FIPS标准重新调整Burp Sequencer内任意样本量的工作，而正式规范的FIPS测试假定恰好20,000tokens的样本。因此，如果你希望得到的结果是严格符合FIPS规范，你应该确保你使用的20,000tokens的样本。</p>
 
@@ -259,7 +259,7 @@ Base64-decode before analyzing(base64解码分析之前) - 如果令牌是Base64
 
 <p>您可以将数据加载到解码器在两个方面：</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image017.png" src="http://static.wooyun.org/20141017/2014101712085128458.png" alt="Image017" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image017.png" src="../images_result/images/2014101712085128458.png" alt="Image017" border="0"></p>
 
 <p>键入或直接粘贴到顶部编辑器面板。</p>
 
@@ -329,18 +329,18 @@ Base64-decode before analyzing(base64解码分析之前) - 如果令牌是Base64
 2.在Burp extensions 下单击add添加
 </code></pre>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image019.png" src="http://static.wooyun.org/20141017/2014101712085121460.png" alt="Image019" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image019.png" src="../images_result/images/2014101712085121460.png" alt="Image019" border="0"></p>
 
 <pre><code>3.选择查找.jar后缀插件，点击确定之后下一步就是安装了  
 4.安装好了会提示安装成功，并且在如下图中显示
 </code></pre>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image021.png" src="http://static.wooyun.org/20141017/2014101712085125497.png" alt="Image021" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image021.png" src="../images_result/images/2014101712085125497.png" alt="Image021" border="0"></p>
 
 <pre><code>5.如果是python扩展的话需要先到options中配置好python环境并且安装jython环境
 </code></pre>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image023.png" src="http://static.wooyun.org/20141017/2014101712085147917.png" alt="Image023" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image023.png" src="../images_result/images/2014101712085147917.png" alt="Image023" border="0"></p>
 
 <h3>Loading and managing extensions</h3>
 
@@ -521,7 +521,7 @@ Burp工具发出的请求。<br>
 
 <p>设置允许您控制HTTP消息会显示在原始的HTTP消息编辑器中。您可以设定字体和点大小和字体平滑是否被使用。您还可以配置为请求参数和响应语法语法彩色化是否完成。有很多小伙伴说乱码，就在这里设置。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image025.png" src="http://static.wooyun.org/20141017/2014101712085271093.png" alt="Image025" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image025.png" src="../images_result/images/2014101712085271093.png" alt="Image025" border="0"></p>
 
 <h3>Character Sets</h3>
 
@@ -533,7 +533,7 @@ Burp工具发出的请求。<br>
 4)对所有消息使用一个特定的字符集。
 </code></pre>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image027.png" src="http://static.wooyun.org/20141017/2014101712085231193.png" alt="Image027" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image027.png" src="../images_result/images/2014101712085231193.png" alt="Image027" border="0"></p>
 
 <p>HTTP头始终显示在原料的形式 - 字符集编码选项只适用于邮件正文中。<br>
 需要注意的是所需的一些字符集的字形不支持的所有字体。如果你需要使用一个扩展的或不寻常的字符集，你应该首先尝试进行系统的字体，如宋体或Dialog。</p>
@@ -542,7 +542,7 @@ Burp工具发出的请求。<br>
 
 <p>Html rendering是html转义的意思，渲染HTTP消息编辑器显示HTML内容中标签约，因为它会出现在你的浏览器。该选项控制Burp是否会作出所需要的完全呈现HTML内容（例如，用于嵌入式图像）的任何额外的HTTP请求。使用此选项涉及的速度和HTML渲染质量之间的权衡，以及您是否希望避免作出任何进一步的请求到目标应用程序。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image029.png" src="http://static.wooyun.org/20141017/2014101712085262418.png" alt="Image029" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image029.png" src="../images_result/images/2014101712085262418.png" alt="Image029" border="0"></p>
 
 <h3>Misc</h3>
 
@@ -559,7 +559,7 @@ Burp工具发出的请求。<br>
 
 <p>一些热键的默认配置。需要注意的是如果你使用它们频繁，可以给它们分配一个快捷键。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image031.png" src="http://static.wooyun.org/20141017/2014101712085215878.png" alt="Image031" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image031.png" src="../images_result/images/2014101712085215878.png" alt="Image031" border="0"></p>
 
 <p>所有的快捷键必须使用控制键（或在OSX上的Command键），也可以使用Shift和其他可用的修饰符。请注意，在某些Windows安装中的Ctrl + Alt组合是由Windows视为等同于键AltGr，并可能导致输入的字符时，在文本字段中压显现出来。</p>
 
@@ -567,19 +567,19 @@ Burp工具发出的请求。<br>
 
 <p>设置控制HTTP请求和响应的记录。可以记录每个工具或所有Burp流量进行配置。选择你要记录的，会弹出一个框让你选择保存的地方，可以在扫描的时候把扫描的一些扫描记录下来，然后放到sqlmap里进行跑，很淫荡的想法。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image033.png" src="http://static.wooyun.org/20141017/2014101712085218049.png" alt="Image033" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image033.png" src="../images_result/images/2014101712085218049.png" alt="Image033" border="0"></p>
 
 <h3>Temporary Files Location</h3>
 
 <p>保存一些零时文件的地方，可以设置系统默认，也可以自定义路径。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image035.png" src="http://static.wooyun.org/20141017/2014101712085220116.png" alt="Image035" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image035.png" src="../images_result/images/2014101712085220116.png" alt="Image035" border="0"></p>
 
 <h3>Automatic backup</h3>
 
 <p>自动备份功能。设置允许您配置Burp保存的所有工具'的状态和配置的备份每隔多少分钟，并且还可以选择退出。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image037.png" src="http://static.wooyun.org/20141017/2014101712085371527.png" alt="Image037" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image037.png" src="../images_result/images/2014101712085371527.png" alt="Image037" border="0"></p>
 
 <p>使用这些选项意味着你一般都会有你的工作，最近的备份副本在Burp异常退出的事件。如果您已配置目标范围为你的工作，你可以使用“include in-scope items only(仅仅包括在范围内的项目)”以减少数据必须保存量。</p>
 
@@ -606,9 +606,9 @@ Burp工具发出的请求。<br>
 
 <p>[专业版]此功能可用于生成一个证明了概念验证（PoC ）跨站点请求伪造（CSRF ）攻击对于一个给定的请求。要使用此功能，请选择在Burp的任何地方URL或HTTP请求，并选择上下文菜单中的“Engagement tools(参与工具)”中的“Generate CSRF Poc(生成CSRF的一键通)”。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image039.png" src="http://static.wooyun.org/20141017/2014101712085352303.png" alt="Image039" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image039.png" src="../images_result/images/2014101712085352303.png" alt="Image039" border="0"></p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image041.png" src="http://static.wooyun.org/20141017/2014101712085425721.png" alt="Image041" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image041.png" src="../images_result/images/2014101712085425721.png" alt="Image041" border="0"></p>
 
 <p>Burp显示了在顶部面板中选择的完整的请求，并将生成的HTML CSRF在较低的面板。在HTML使用的形式和/或JavaScript来生成在浏览器中所要求的请求。您可以手动编辑的要求，并单击“regenerate(重新生成)”按钮，根据更新的要求来重新生成CSRF的HTML 。你可以测试生成的PoC的效果在浏览器中，使用“测试中的浏览器”按钮。当您选择此选项，可以粘贴到浏览器（配置为使用Burp的当前实例作为其代理）一个唯一的URL 。由此产生的浏览器请求由服务Burp与当前显示的HTML，然后你可以决定的PoC是否是通过监测得到的请求（ s）表示，通过代理服务器进行了卓有成效的。</p>
 
@@ -621,11 +621,11 @@ Burp工具发出的请求。<br>
 <p>此功能可用于发现内容并不会从您可以浏览或蜘蛛可见内容链接功能。<br>
 要使用此功能，请选择在Burp的任何地方一个HTTP请求，或任何部分目标站点地图，并在上下文菜单中的“参与工具”中选择“查找内容”。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image043.png" src="http://static.wooyun.org/20141017/2014101712085426974.png" alt="Image043" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image043.png" src="../images_result/images/2014101712085426974.png" alt="Image043" border="0"></p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image045.png" src="http://static.wooyun.org/20141017/2014101712085427081.png" alt="Image045" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image045.png" src="../images_result/images/2014101712085427081.png" alt="Image045" border="0"></p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image047.png" src="http://static.wooyun.org/20141017/2014101712085436131.png" alt="Image047" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image047.png" src="../images_result/images/2014101712085436131.png" alt="Image047" border="0"></p>
 
 <p>Burp使用各种技术来发现内容，包括姓名猜测，网络蜘蛛，并且从命名的应用程序中使用的观测约定外推。发现的内容被显示在一个特殊的网站地图是特定的发现会话，并且还可以任选地加入到suite site map。</p>
 
@@ -633,7 +633,7 @@ Burp工具发出的请求。<br>
 
 <p>此选项卡显示您发现会话的当前状态。切换按钮指示是否会话正在运行，并允许您暂停和重新启动会话。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image049.png" src="http://static.wooyun.org/20141017/2014101712085493754.png" alt="Image049" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image049.png" src="../images_result/images/2014101712085493754.png" alt="Image049" border="0"></p>
 
 <p>下面的信息则显示该发现会话的进展：提出的要求数在服务器响应传输的字节数网络错误数排队的发现任务数蜘蛛排队的请求数排队分析响应数排队的个人发现任务都显示在表格中。发现引擎的工作原理递归，当一个新的目录或文件被发现，进一步的任务是源于此，这取决于配置。</p>
 
@@ -678,7 +678,7 @@ Discover(发现) - 此选项确定会话是否将寻找文件或目录，或两�
 
 <p>用来显示当前Burp的扫描代理的一些状态，这个没什么介绍的。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image051.png" src="http://static.wooyun.org/20141017/2014101712085422622.png" alt="Image051" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image051.png" src="../images_result/images/2014101712085422622.png" alt="Image051" border="0"></p>
 
 <h2>Burp Sqlmap插件</h2>
 
@@ -686,7 +686,7 @@ Discover(发现) - 此选项确定会话是否将寻找文件或目录，或两�
 
 <p>SqlMap是一个开源渗透测试工具，它可以自动检测和利用SQL注入漏洞和接管数据库服务器的过程。它配备了一个功能强大的检测引擎，许多利基功能，为最终的渗透测试和广泛的交换机从数据库中指纹持久的，在数据从数据库中获取，通过访问底层文件系统和操作系统上执行命令的输出带外连接。如图效果图</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image053.png" src="http://static.wooyun.org/20141017/2014101712085481646.png" alt="Image053" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image053.png" src="../images_result/images/2014101712085481646.png" alt="Image053" border="0"></p>
 
 <h3>0x01 环境及工具</h3>
 
@@ -700,19 +700,19 @@ Discover(发现) - 此选项确定会话是否将寻找文件或目录，或两�
 
 <h4>1）选择Burp Extender扩展添加</h4>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image055.png" src="http://static.wooyun.org/20141017/2014101712085529316.png" alt="Image055" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image055.png" src="../images_result/images/2014101712085529316.png" alt="Image055" border="0"></p>
 
 <h4>2）添加成功会提示加载成功，然后在任意的Burp请求地址的详情里右击</h4>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image057.png" src="http://static.wooyun.org/20141017/2014101712085637348.png" alt="Image057" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image057.png" src="../images_result/images/2014101712085637348.png" alt="Image057" border="0"></p>
 
 <h4>3）接下来会出现gui 界面，要是用还必须加载sqlmap.py的路径</h4>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image059.png" src="http://static.wooyun.org/20141017/2014101712085666464.png" alt="Image059" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image059.png" src="../images_result/images/2014101712085666464.png" alt="Image059" border="0"></p>
 
 <p>图形界面挺不错的，对于使用sqlmap新手挺好的，有时候使用命令界面的时候不知道命令了可以用这个图形界面查看命令怎样使用，比如：我不知道怎么在后面加数据库参数，则可以如下图所示</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image061.png" src="http://static.wooyun.org/20141017/2014101712085640119.png" alt="Image061" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image061.png" src="../images_result/images/2014101712085640119.png" alt="Image061" border="0"></p>
 
 <h3>0x03 使用</h3>
 
@@ -735,13 +735,13 @@ Discover(发现) - 此选项确定会话是否将寻找文件或目录，或两�
 
 <p>界面如下：</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image063.png" src="http://static.wooyun.org/20141017/2014101712085766328.png" alt="Image063" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image063.png" src="../images_result/images/2014101712085766328.png" alt="Image063" border="0"></p>
 
 <h3>0x02 安装</h3>
 
 <p>在Burp主界面Extender>>Extensions>>Burp Extensions下的add按钮</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image065.png" src="http://static.wooyun.org/20141017/2014101712085745072.png" alt="Image065" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image065.png" src="../images_result/images/2014101712085745072.png" alt="Image065" border="0"></p>
 
 <h4>0x03 使用</h4>
 
@@ -763,7 +763,7 @@ Discover(发现) - 此选项确定会话是否将寻找文件或目录，或两�
 2）点击Extender&gt;&gt;add选择jsbeautifier.jar
 </code></pre>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image067.png" src="http://static.wooyun.org/20141017/2014101712085835329.png" alt="Image067" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="image067.png" src="../images_result/images/2014101712085835329.png" alt="Image067" border="0"></p>
 
 <h3>0x03 使用</h3>
 

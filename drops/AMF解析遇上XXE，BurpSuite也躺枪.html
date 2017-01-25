@@ -3,7 +3,7 @@
 			<head>
 			     <title>AMF解析遇上XXE，BurpSuite也躺枪 - gainover</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/11623">http://drops.wooyun.org/web/11623</a></h1>
 				
@@ -269,15 +269,15 @@ jetty:x:131:143::/usr/share/jetty:/bin/false
 
 <p>原作者在文中提到了，一些软件产品中也使用了BlazeDS，这些产品如果没有升级打补丁，同样也会受到影响。这些软件包括来自Adobe的ColdFusion 和 LiveCycle Data Services，Vmware的vCenter Server, vCloud Director 和Horizon View。为了对这一说法进行验证，我搜索了一台LiveCycle Data Services的服务器，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151224/20151224000824166481106.png" alt="p1"></p>
+<p><img src="../images_result/images/20151224000824166481106.png" alt="p1"></p>
 
 <p>抓包得到amf的接口地址，使用利用脚本对该接口进行测试，结果如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151224/2015122400082639201249.png" alt="p2"></p>
+<p><img src="../images_result/images/2015122400082639201249.png" alt="p2"></p>
 
 <p>同样，我又找到一台Vmware的vCloud Director，同样发现存在问题：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151224/2015122400082789429338.png" alt="p3"></p>
+<p><img src="../images_result/images/2015122400082789429338.png" alt="p3"></p>
 
 <h1>0x05 漏洞利用之四（使用了BlazeDS的客户端软件）</h1>
 
@@ -321,7 +321,7 @@ print(amf_exploit());
 
 <p>接着，我们打开BurpSuite，访问我们精心构造的页面进行抓包。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151224/2015122400082971169436.png" alt="p4"></p>
+<p><img src="../images_result/images/2015122400082971169436.png" alt="p4"></p>
 
 <p>可以看到，我们打开fortest.html后，burp会访问<code>amf_win.php</code>，在Wireshark中，我们可以看到我本机的C:\testfile.txt的内容this is a secret!被发送至服务器端。</p>
 
@@ -332,7 +332,7 @@ print(amf_exploit());
 <ol>
 <li><p>对于BlazeDS，你可以通过 %foo; ]><x>Parameter entity 3</x>的方法来快速暴露出其所在的程序路径，接着就可以继续通过前面所述的方法来进行目录文件列举，寻找我们感兴趣的文件。如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151224/2015122400083140285527.png" alt="p5"></p></li>
+<p><img src="../images_result/images/2015122400083140285527.png" alt="p5"></p></li>
 <li><p>XXE读取文件内容上的限制使得我们能读取的敏感内容受到限制，具体如何利用该漏洞进行下一步，就看各自的发挥了。</p></li>
 <li><p>在一些对实际案例的测试（包括腾讯某服务器或是一些vCloud Director服务器）中发现，如果使用外部的DTD，一些服务器返回的错误信息是如下的样子：</p>
 

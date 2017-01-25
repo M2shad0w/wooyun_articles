@@ -3,7 +3,7 @@
 			<head>
 			     <title>Frida-跨平台注入工具基础篇 - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/5602">http://drops.wooyun.org/tools/5602</a></h1>
 				
@@ -263,21 +263,21 @@ Dalvik.perform(function () {
 
 <p>现在已经掌握frida的基础知识,现在可以实战演练如何破解<a href="https://github.com/OrangeGangsters/LolliPin">LolliPin</a>锁屏库.我们创建一个使用<code>LolliPin</code>的app截图如下:</p>
 
-<p><img src="http://static.wooyun.org/drops/20150412/2015041211275631118.png" alt=""></p>
+<p><img src="../images_result/images/2015041211275631118.png" alt=""></p>
 
 <p>PIN码生效后,可以使用插桩暴力破击.要达到这个目的首先要了解pin码验证是如何实现的.AppLockImpl类中验证方法如下:</p>
 
-<p><img src="http://static.wooyun.org/drops/20150412/2015041211275636961.png" alt=""></p>
+<p><img src="../images_result/images/2015041211275636961.png" alt=""></p>
 
 <p>现在咱们忽略LolliPin的其他漏洞,就搞PIN码的暴露破解,这是客户端认证通过都会受到的分析.</p>
 
 <p>可以创建一个AppLockImpl的实例,但是为了节约内存我们直接调用已有的.分析发现AppLockImpl被调用在LockManager的getAppLock()中,这个就仅仅返回了AppLock对象.而AppLock是抽象类AppLockImpl的具现.</p>
 
-<p><img src="http://static.wooyun.org/drops/20150412/2015041211275755121.png" alt=""></p>
+<p><img src="../images_result/images/2015041211275755121.png" alt=""></p>
 
 <p>LockManager有一个帮助方法用于返回自己的实例.</p>
 
-<p><img src="http://static.wooyun.org/drops/20150412/2015041211275783862.png" alt=""></p>
+<p><img src="../images_result/images/2015041211275783862.png" alt=""></p>
 
 <p>结合上面的分析,咱们可以通过LockManager.getInstance()得到LockManager的实例,再调用getAppLock()得到AppLock.最后就可以调用AppLock的 checkPasscode()方法了.</p>
 

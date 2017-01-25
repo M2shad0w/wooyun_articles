@@ -3,7 +3,7 @@
 			<head>
 			     <title>WIFI渗透从入门到精通 - 末笔丶</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/pentesting/3390">http://drops.wooyun.org/pentesting/3390</a></h1>
 				
@@ -30,15 +30,15 @@
 
 <p>Pin码会分成前半四码和后半四码。前四码如果错误的话，那路由器就会直接送出错误讯息，而不会继续看后四码，意味着试到正确的前四码，最多只需要试 10000 组号码。一旦没有错误讯息，就表示前四码是正确的，而我们便可以开始尝试后四码。 后四码比前四码还要简单，因为八码中的最后一码是检查码，由前面七个数字产生，因此实际上要试的只有三个数字，共一千个组合。这使得原本最高应该可达一千万组的密码组合（七位数+检查码），瞬间缩减到仅剩 11,000 组，大幅降低破解所需的时间.</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593228535.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807593228535.png" alt="enter image description here"></p>
 
 <p><strong>根据路由MAC地址算出默认pin码</strong></p>
 
 <p>另外有种更快破解wifi的方法就是根据路由MAC地址（MAC是路由器的物理地址，是唯一的识别标志）算出默认出产时的pin码例如以下软件 还可以通过别人共享的找到pin码！http://mac-pin.456vv.net/</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593256313.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807593256313.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593361248.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807593361248.png" alt="enter image description here"></p>
 
 <p><strong>抓取握手包破解</strong></p>
 
@@ -56,9 +56,9 @@
 
 <p>另外也提下关于这行的黑色产业.当我们抓到带数据的握手包时.这时候黑色产业往往会帮我们很大的忙.GPU速度也是我们普通设备跑密码的速度上百倍.所以我是不建议自己跑密码的！吧包发给那些团队,跑的出密码才收10-30rmb不等的费用(根据需要跑的密码定价分普通包还有金刚包，普通包的字典只使用十个G的字典.金刚包会使用五十G以上的字典收费也会偏贵些)不过也有一些团队会收取电费(既跑不跑的出密码都会收取一定的费用)...另外这样的设备非常耗电不是一般人的消耗的起的哦.一般闲置的时候会利用这样的机器挖矿</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593373045.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807593373045.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593364777.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807593364777.jpg" alt="enter image description here"></p>
 
 <p><strong>分布式破解</strong></p>
 
@@ -92,28 +92,28 @@
 
 <p>网卡的选择也十分重要.一般使用笔记本内置网卡破解的话一定要看一下网卡型号kali有没有驱动.我用的是8187卡,kali自带驱动我就不说了。 本次的实例是根据抓握手包破解进行的</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593391202.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807593391202.png" alt="enter image description here"></p>
 
 <pre><code>Airmon-ng start wlan0
 </code></pre>
 
 <p>意思是启动网卡的监听模式.敲完这条命令后设备名 wlan=mon0 一般命令后都是要跟上设备名</p>
 
-<p><img src="http://static.wooyun.org/20141031/2014103103083272119.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014103103083272119.jpg" alt="enter image description here"></p>
 
 <pre><code>Airodump-ng mon0 
 </code></pre>
 
 <p>在抓包前肯定是要先选择目标.这条命令的意思是探测无线网络.选好目标,首选是客户端连接多的.复制好BSSID即MAC地址.记住信道（CH）</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593486306.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807593486306.png" alt="enter image description here"></p>
 
 <pre><code>Airodump-ng -c 1 --bssid XX:XX:XX:XX:XX -w mobi mon0
 </code></pre>
 
 <p><code>-C</code>参数是选择目标信道.如果该信道就目标一个AP使用的话不用加上<code>--bssid</code>,这个参数是为了跟精准的锁定目标~~ <code>-w</code> 是保存握手包的名字.获取后会在当前目录生成一个<code>mobi-01.cap</code>的握手包。这时就不用关闭这条shell而是另外打开一个shell</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593885110.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807593885110.png" alt="enter image description here"></p>
 
 <pre><code>Aireplay-ng -0 10 -a (AP的mac) -c (客户端的mac) 
 </code></pre>
@@ -126,7 +126,7 @@
   <p>-c 即STATION下客户机的MAC地址(这条为可选项)</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593896330.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807593896330.png" alt="enter image description here"></p>
 
 <pre><code>Aircrack-ng -w /pentest/passwords/sxsx.lst mobi-01.cap
 </code></pre>
@@ -139,7 +139,7 @@
 
 <p>Airodump-ng mon0 查看附近无线情况。在MB这行带点的“.”表示能跑出pin码。使用wash -i mon0 -C可查看是否开启了wps功能</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807593880370.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807593880370.jpg" alt="enter image description here"></p>
 
 <pre><code>Reaver -i mon0 -b xx:xx:xx:xx -vv
 </code></pre>
@@ -188,39 +188,39 @@
 
 <hr>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594072238.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807594072238.jpg" alt="enter image description here"></p>
 
 <p>看我任何突MAC封锁！</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594030634.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807594030634.png" alt="enter image description here"></p>
 
 <p>客户机的截图模拟主人使用MAC过滤功能！.</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594064926.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807594064926.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594160875.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807594160875.png" alt="enter image description here"></p>
 
 <p>在路由器上使用mac过滤.黑客就一点办法的没有了么？.no！</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594164765.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807594164765.png" alt="enter image description here"></p>
 
 <p>由于路由器只接受白名单的数据包.所以kali无法从dns服务器获取到域名IP</p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594157829.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807594157829.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594112993.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807594112993.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594149295.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807594149295.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594189235.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807594189235.jpg" alt="enter image description here"></p>
 
 <p>伪装MAC地址上网由于有两个无线客户端.所有的数据包都会发送至两个客户端.难免会出现数据包丢失的！</p>
 
 <p><strong>关闭dhcp真的有用么?</strong></p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594240732.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807594240732.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141028/2014102807594211588.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102807594211588.jpg" alt="enter image description here"></p>
 
 <p>首先我先模拟WIFI的管理员.吧DHCP关了.并且设置了一个只有自己知道的网关IP.</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>如何玩转andriod远控（androrat） - ╰╃清風</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/572">http://drops.wooyun.org/tips/572</a></h1>
 				
@@ -35,11 +35,11 @@
 
 <p>导入完成后看见2个工程如图：</p>
 
-<p><img src="http://static.wooyun.org/201309/2013090815203427803.jpg" alt="2013090815203427803.jpg"></p>
+<p><img src="../images_result/images/2013090815203427803.jpg" alt="2013090815203427803.jpg"></p>
 
 <p>刚导入进来时肯定会编译报错，这时需将2个jra包引用进来 如图：</p>
 
-<p><img src="http://static.wooyun.org/201309/2013090815230469611.jpg" alt="2013090815230469611.jpg">  </p>
+<p><img src="../images_result/images/2013090815230469611.jpg" alt="2013090815230469611.jpg">  </p>
 
 <p>其他报错如import 缺少对应包可到<a href="http://www.findjar.com/index.x">http://www.findjar.com/index.x</a>查找并引用</p>
 
@@ -51,35 +51,35 @@
 
 <p>先运行我们的服务端开启监听 默认config.txt配置端口</p>
 
-<p><img src="http://static.wooyun.org/201309/2013090815334573925.jpg" alt="2013090815334573925.jpg"></p>
+<p><img src="../images_result/images/2013090815334573925.jpg" alt="2013090815334573925.jpg"></p>
 
 <p>运行成功后出现服务端如下：</p>
 
-<p><img src="http://static.wooyun.org/201309/2013090815353936194.jpg" alt="2013090815353936194.jpg"></p>
+<p><img src="../images_result/images/2013090815353936194.jpg" alt="2013090815353936194.jpg"></p>
 
 <p>接着运行客户端，使用usb链接我们的手机安装app查看</p>
 
-<p><img src="http://static.wooyun.org/201309/2013090815295584722.jpg" alt="2013090815295584722.jpg"></p>
+<p><img src="../images_result/images/2013090815295584722.jpg" alt="2013090815295584722.jpg"></p>
 
 <p>安装好后应用列表会有一个叫LogsProvider的应用，可以在如下文件里修改name</p>
 
-<p><img src="http://static.wooyun.org/201309/2013090815434447913.jpg" alt="2013090815434447913.jpg"></p>
+<p><img src="../images_result/images/2013090815434447913.jpg" alt="2013090815434447913.jpg"></p>
 
 <p>接着修改LauncherActivity.class代码让程序默认情动并运行后自动black</p>
 
-<p><img src="http://static.wooyun.org/201309/2013090815490412471.jpg" alt="2013090815490412471.jpg"></p>
+<p><img src="../images_result/images/2013090815490412471.jpg" alt="2013090815490412471.jpg"></p>
 
 <p>Manifest修改，使其不在home最近应用里显示</p>
 
-<p><img src="http://static.wooyun.org/201309/2013090816033950681.jpg" alt="2013090816033950681.jpg"></p>
+<p><img src="../images_result/images/2013090816033950681.jpg" alt="2013090816033950681.jpg"></p>
 
 <p>布局文件位置，可以自定义修改布局</p>
 
-<p><img src="http://static.wooyun.org/201309/2013090815511471104.jpg" alt="2013090815511471104.jpg"></p>
+<p><img src="../images_result/images/2013090815511471104.jpg" alt="2013090815511471104.jpg"></p>
 
 <p>adb 安装运行客户端后，服务端如图，-手机安装程序后会自动返回到桌面，长按home也看不到该程序。</p>
 
-<p><img src="http://static.wooyun.org/201309/2013090815541350530.jpg" alt="2013090815541350530.jpg"></p>
+<p><img src="../images_result/images/2013090815541350530.jpg" alt="2013090815541350530.jpg"></p>
 
 <p>此时整个程序可以使用了，功能挺多的就不列举了</p>
 

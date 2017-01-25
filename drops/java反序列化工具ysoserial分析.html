@@ -3,7 +3,7 @@
 			<head>
 			     <title>java反序列化工具ysoserial分析 - angelwhu</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/14317">http://drops.wooyun.org/papers/14317</a></h1>
 				
@@ -51,7 +51,7 @@
 
 <p>导入后，可以看到里面有8个payload。其中<code>ObjectPayload</code>是定义的接口，所有的Payload需要实现这个接口的<code>getObject</code>方法。下面就开始对这些payload进行简要的分析。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160401/20160401022701815633.png" alt=""></p>
+<p><img src="../images_result/images/20160401022701815633.png" alt=""></p>
 
 <h1>0x02 payload分析</h1>
 
@@ -131,7 +131,7 @@ public void testClassPool() throws CannotCompileException, NotFoundException, IO
 
 <p>这段代码运行后，会在当前目录生成字节码(class文件)。使用<code>java</code>反编译器可看到源码，在原始模板类中插入了恶意静态代码，而且以字节码的形式直接存储。命令行直接运行，可以执行弹出计算器的命令：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160401/20160401022700321562.png" alt=""></p>
+<p><img src="../images_result/images/20160401022700321562.png" alt=""></p>
 
 <p>现在看看老外工具中，生成字节码的代码为：</p>
 
@@ -212,7 +212,7 @@ throws TransformerConfigurationException {
 
 <p>在<code>defineTransletClasses()</code>方法中，会加载我们之前存储在<code>_bytecodes</code>属性中的字节码(可以看做类文件)，进而返回类的<code>Class</code>对象，存储在<code>_class</code>数组中。下面是调试时候的截图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160401/20160401022703579934.png" alt=""></p>
+<p><img src="../images_result/images/20160401022703579934.png" alt=""></p>
 
 <p>可以看到在<code>defineTransletClasses()</code>后，得到类的<code>Class</code>对象。然后会执行<code>newInstance()</code>操作，新建一个实例，这样便触发了我们插入的静态恶意java代码。如果接着单步执行，便会弹出计算器。</p>
 
@@ -297,7 +297,7 @@ public int compare( T o1, T o2 ) {
 后面使用反射机制，将<code>comparator</code>中的属性和<code>queue</code>容器存储的对象都改成我们需要的属性和对象。<br>
 否则，在生成<code>payload</code>时，便会弹出计算器，抛出异常，无法正常执行了。测试如下:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160401/20160401022705470435.png" alt=""></p>
+<p><img src="../images_result/images/20160401022705470435.png" alt=""></p>
 
 <h2>2. Jdk7u21</h2>
 
@@ -424,7 +424,7 @@ private int hashCodeImpl() {
 
 <p>这里的<code>memberValues</code>就是<code>payload</code>代码一开始传进去的<code>map("f5a5a608",templates)</code>。简要画图说明为:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160401/20160401022706996326.png" alt=""></p>
+<p><img src="../images_result/images/20160401022706996326.png" alt=""></p>
 
 <p>因此，通过动态代理机制加上<code>"f5a5a608".hashCode()=0</code>的特殊性，使<code>e.hash == hash</code>成立。<br>
 这样便可以执行<code>key.equals(k)</code>，即：<code>proxy.equals(templates)</code>语句。</p>
@@ -512,7 +512,7 @@ private void readObject(ObjectInputStream inputStream) throws IOException, Class
 <li>由于流程可能比较错综复杂，画个简单的图表示下几个对象之间的关系: </li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160401/20160401022708108847.png" alt=""></p>
+<p><img src="../images_result/images/20160401022708108847.png" alt=""></p>
 
 <ul>
 <li><p>在执行<code>ReflectionUtils.invokeMethod(method, this.provider.getType())</code>语句时，整个执行流程如下：</p>

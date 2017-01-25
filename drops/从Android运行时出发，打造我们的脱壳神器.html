@@ -3,7 +3,7 @@
 			<head>
 			     <title>从Android运行时出发，打造我们的脱壳神器 - zyq8709</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/9335">http://drops.wooyun.org/tips/9335</a></h1>
 				
@@ -24,7 +24,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20151001/2015100116553581547126.png" alt=""></p>
+<p><img src="../images_result/images/2015100116553581547126.png" alt=""></p>
 
 <p>图1 Dex文件结构</p>
 
@@ -32,7 +32,7 @@
 
 <p>class&#95;defs包含了所有的类，用class&#95;def&#95;item来描述。图2是对class&#95;def_item展开的一个示意图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151001/2015100116553741932213.png" alt=""></p>
+<p><img src="../images_result/images/2015100116553741932213.png" alt=""></p>
 
 <p>图2 class&#95;def&#95;item结构</p>
 
@@ -40,7 +40,7 @@
 
 <p>对于ART下，安装后的dex文件会被编译为oat文件，这个oat文件其实是一个ELF文件，图3是它的一个结构：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151001/201510011655391346738.png" alt=""></p>
+<p><img src="../images_result/images/201510011655391346738.png" alt=""></p>
 
 <p>图3 OAT文件结构</p>
 
@@ -62,9 +62,9 @@
 
 <p>运行时读取存储在Dex中的每个class，并用来填充一个生成的Class对象，其中包含了class的所有成员，这样一个class才能被使用；图4表示了ART和DVM下的Class对象的结构</p>
 
-<p><img src="http://static.wooyun.org//drops/20151001/20151001165541911034-1.png" alt=""></p>
+<p><img src="../images_result/images/20151001165541911034-1.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20151001/20151001165542402744-2.png" alt=""></p>
+<p><img src="../images_result/images/20151001165542402744-2.png" alt=""></p>
 
 <p>图4 Class的结构</p></li>
 <li><p>初始化Class</p>
@@ -97,7 +97,7 @@
 
 <p>图5表述了这个关系：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151001/201510011655455475859.png" alt=""></p>
+<p><img src="../images_result/images/201510011655455475859.png" alt=""></p>
 
 <p>图5 ART中的实现</p>
 
@@ -115,7 +115,7 @@
 
 <p>图6是DVM中的实现表示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151001/201510011655481164567.png" alt=""></p>
+<p><img src="../images_result/images/201510011655481164567.png" alt=""></p>
 
 <p>图6 DVM中的实现</p>
 
@@ -135,7 +135,7 @@
 
 <p>图7就是DexHunter的一个工作流程：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151001/201510011655491005477.png" alt=""></p>
+<p><img src="../images_result/images/201510011655491005477.png" alt=""></p>
 
 <p>图7 DexHunter原理</p>
 

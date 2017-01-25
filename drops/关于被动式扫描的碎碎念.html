@@ -3,7 +3,7 @@
 			<head>
 			     <title>关于被动式扫描的碎碎念 - pr0mise</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12681">http://drops.wooyun.org/tips/12681</a></h1>
 				
@@ -95,7 +95,7 @@
 
 <p>定位到<code>/sqlmap/lib/utils/api.py</code> 的server函数</p>
 
-<p><img src="http://static.wooyun.org//drops/20160204/2016020406483041689113.jpg" alt="p1"></p>
+<p><img src="../images_result/images/2016020406483041689113.jpg" alt="p1"></p>
 
 <p>看到644行的os.urandom,直接改成一个固定字符串就行了</p>
 
@@ -105,9 +105,9 @@
 
 <p>还有个更简单的办法</p>
 
-<p><img src="http://static.wooyun.org//drops/20160204/201602040648316191123.jpg" alt="p2"></p>
+<p><img src="../images_result/images/201602040648316191123.jpg" alt="p2"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160204/201602040648332755932.jpg" alt="p3"></p>
+<p><img src="../images_result/images/201602040648332755932.jpg" alt="p3"></p>
 
 <p>return True</p>
 
@@ -139,7 +139,7 @@
 
 <p>“data”存放了sqlmapapi检测时用的payload, “data”非空就代表当前任务是可注入的,sqlmapapi并没有自带回调方式…轮询浪费开销,这里我选择修改源码</p>
 
-<p><img src="http://static.wooyun.org//drops/20160204/201602040648341046642.jpg" alt="p4"></p>
+<p><img src="../images_result/images/201602040648341046642.jpg" alt="p4"></p>
 
 <p>定位到<code>scan_data</code>函数 ,可以看到,假如可注入,就会从data表检索数据并写入到<code>json_data_message</code>,表名为data, 代码向上翻,定位到将数据入库的代码</p>
 
@@ -182,7 +182,7 @@ Response:
     }
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160204/201602040648374749052.jpg" alt="p5"></p>
+<p><img src="../images_result/images/201602040648374749052.jpg" alt="p5"></p>
 
 <h1>0x03 inject.js code</h1>
 
@@ -358,7 +358,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 
 <p>Sqlmap能用的选项都可以在<code>http://ip:port/option/taskid/list</code>里查看,用到哪项写到payload里就行了,最好是做成实时刷新代理,之前写过爬虫的时候写过一个python版的，有空的话会改成js加入到inject.js里.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160204/201602040648396999862.jpg" alt="p6"></p>
+<p><img src="../images_result/images/201602040648396999862.jpg" alt="p6"></p>
 
 <h1>0x04 参考文献</h1>
 
@@ -371,7 +371,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 
 <hr>
 
-<p><img src="http://static.wooyun.org//drops/20160204/201602040648413765472.jpg" alt="p7"></p>
+<p><img src="../images_result/images/201602040648413765472.jpg" alt="p7"></p>
 
 <p>马上2016了,希望在年前把上个坑填完</p>
 

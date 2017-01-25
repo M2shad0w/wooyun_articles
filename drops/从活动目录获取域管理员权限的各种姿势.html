@@ -3,7 +3,7 @@
 			<head>
 			     <title>从活动目录获取域管理员权限的各种姿势 - 修码的马修</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12021">http://drops.wooyun.org/tips/12021</a></h1>
 				
@@ -32,15 +32,15 @@
 
 <p>除了Windows 2012之前的某些系统，微软在MSDN中提供了<a href="">解密所需要的AES私钥</a>。因为认证用户（信任域中的用户）都具有SYSVOL的读权限，任何人都可以搜索包含“cpassword”字段的XML文件，而里面正好有AES加密后的密码。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015031595296140.png" alt="GroupPolicyPreferences-Password-XMLFileContents"></p>
+<p><img src="../images_result/images/2016011015031595296140.png" alt="GroupPolicyPreferences-Password-XMLFileContents"></p>
 
 <p>有了这类XML的访问权限，攻击者可以用AES私钥解密GPP密码。PowerSploit的<code>Get-GPPPassword</code>函数被认为最好用的攻击实现，下面的截图展示了一个类似的PowerShell函数正在解密在SYSVOL中找到的XML文件中包含的密码。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015031749444220.png" alt="GroupPolicyPreferences-Decrypted-Password"></p>
+<p><img src="../images_result/images/2016011015031749444220.png" alt="GroupPolicyPreferences-Decrypted-Password"></p>
 
 <p>其他文件类型，例如<code>.vbs</code>和<code>.bat</code>也可能包含嵌入的密码（经常是明文）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/201601101503186219934.jpg" alt="VBS-Scripts-In-SYSVOL"></p>
+<p><img src="../images_result/images/201601101503186219934.jpg" alt="VBS-Scripts-In-SYSVOL"></p>
 
 <p>你可能会觉得已经发布的补丁能够防止用户凭证被放置在组策略配置文件中，所以这个问题得到了证明。事实证明，笔者在渗透测试中仍然能在SYSVOL目录中中找到用户凭证。</p>
 
@@ -62,13 +62,13 @@
 
 <p>感谢Gavin Milard（@gmillard on Twitter）,我们有了以下的图，很好地解释这个漏洞。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015032093988418.png" alt="Kerb-MS14-068-twitterpic-BoardingPass-Pilot"></p>
+<p><img src="../images_result/images/2016011015032093988418.png" alt="Kerb-MS14-068-twitterpic-BoardingPass-Pilot"></p>
 
 <p>简单来讲，通过MS14-048，攻击者可以在五分钟内重写有效的Kerberos TGT 认证票据并且成为域管理员（企业管理员）。攻击原理就像上面的机票一样，随便写上“飞行员”字样就能通过认证，登上飞机就能理所当然地坐到驾驶舱冒充飞行员享受咖啡福利。</p>
 
 <p>第一个EXP在补丁发布后的两周后被公布，叫做PyKEK，作者是Sylvain Monné (@BiDOrD). PyKEK是一个能在所有安装了python的机器（Raspberry Pi？）上运行的脚本，只要机器能连接到一台没打补丁的域控就能发挥作用。它会生成一个ccache文件。用Mimikatz可以把这个生成的ccache文件注入到内存当中，攻击者就能成为域管理员！有了这个票据，就能被允许访问域控上面的admin$共享！</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/201601101503228677353.jpg" alt="Mimikatz-PTC-PyKEK-ccacheFile"></p>
+<p><img src="../images_result/images/201601101503228677353.jpg" alt="Mimikatz-PTC-PyKEK-ccacheFile"></p>
 
 <p>限制条件：打了补丁或者域中有Win2012/2012R2 域控</p>
 
@@ -84,7 +84,7 @@
 
 <p>Benjamin Delpy(Mimikatz 的作者)写了一个MS14-068的利用工具，叫Kekeo，是PyKEK的升级版。它能够找到并定位有漏洞的域控，在打了补丁和有2012/2012R2域控的情况下仍能奏效。实现的步骤和PyKEK基本相同，不过在最后加了一个步骤，以此获得一个能在域中所有域控利用的TGT。它利用攻击生成的TGT来获取一个到处都能用的TGT。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015032638731612.png" alt="MS14068-01"></p>
+<p><img src="../images_result/images/2016011015032638731612.png" alt="MS14068-01"></p>
 
 <p>对策：</p>
 
@@ -109,7 +109,7 @@
   <p><strong>注意：获得服务票据不需要提权，同时也不会发送数据到目标机器。</strong></p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20160110/201601101503276555673.jpg" alt="Kerberoast-03"></p>
+<p><img src="../images_result/images/201601101503276555673.jpg" alt="Kerberoast-03"></p>
 
 <p>Tim Medin 在 DerbyCon 2014 上作了相关的报告：“Attacking Microsoft Kerberos Kicking the Guard Dog of Hades” (<a href="https://files.sans.org/summit/hackfest2014/PDFs/Kicking%20the%20Guard%20Dog%20of%20Hades%20-%20Attacking%20Microsoft%20Kerberos%20%20-%20Tim%20Medin%281%29.pdf">幻灯片</a> &amp; <a href="https://www.youtube.com/watch?v=PUyhlN-E5MU&amp;feature=youtu.be">视频</a>),同时也发布了<a href="https://github.com/nidem/kerberoast">Kerberoast Python TGS cracker</a>。</p>
 
@@ -191,7 +191,7 @@
 <li>配置组策略来放置本地管理员账户通过网络来认证登陆。下面几条简单的GPO就能阻止本地账户在通过网络登陆(包括RDP)，同时也能阻止域管理员和企业管理员登陆到本地。GPO有一些几条： *禁止以下用户组从网络登陆到这台电脑：本地账户，企业管理员，域管理员 *禁止以下用户组从远程桌面登陆：本地账户，企业管理员，域管理员 *禁止以下用户组本地登陆：企业管理员，域管理员</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160110/201601101503286898883.jpg" alt="GroupPolicy-Prevent-LocalAccount-LogonOverNetwork"></p>
+<p><img src="../images_result/images/201601101503286898883.jpg" alt="GroupPolicy-Prevent-LocalAccount-LogonOverNetwork"></p>
 
 <h3>获取访问活动目录数据库文件的权限(ntds.dit)</h3>
 
@@ -225,7 +225,7 @@
 
 <p>在活动目录中有几个组不应该有登陆域控的默认权限。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015033051826911.png" alt="Default-DC-LogOnLocallyGroups"></p>
+<p><img src="../images_result/images/2016011015033051826911.png" alt="Default-DC-LogOnLocallyGroups"></p>
 
 <p>以下是默认有权登陆域控的用户组：</p>
 
@@ -256,19 +256,19 @@
 
 <p>神器Mimikatz能够从域控中到存储域中的所有用户凭证。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/20160110150331819351012.png" alt="Mimikatz-LSADump-LSA"></p>
+<p><img src="../images_result/images/20160110150331819351012.png" alt="Mimikatz-LSADump-LSA"></p>
 
 <p><strong>用Mimitaz导出LSASS内存信息(获得域管理员凭证)</strong></p>
 
 <p>Mimikatz能够在不同系统中的<code>LSASS.dmp</code>中导出LSASS然后提取出登陆过的用户凭证。在域控上，这样总能拿到域管理员的凭证。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/20160110150333453721115.png" alt="Mimikatz-Sekurlsa-Minidump"></p>
+<p><img src="../images_result/images/20160110150333453721115.png" alt="Mimikatz-Sekurlsa-Minidump"></p>
 
 <p><strong>用任务管理器来导出LSASS内存信息(获得域管理员凭证)</strong></p>
 
 <p>一旦LSASS被导出来，Mimikatz就能提取到登陆过的用户凭证。在域控上，这也总能拿到域管理员的凭证。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015033564588122.jpg" alt="TaskManager-DumpLSASS"></p>
+<p><img src="../images_result/images/2016011015033564588122.jpg" alt="TaskManager-DumpLSASS"></p>
 
 <p><strong>用NTDSUtil创建媒体安装集(IFM) (抓取NTDS.dit文件)</strong></p>
 
@@ -276,7 +276,7 @@
 
 <p>此文件可能出现在为新域控准备的共享目录中，也可能在还没配置成域控的服务器上找到，这样的服务器就是不安全的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/20160110150337759731310.png" alt="NTDSUtil-CreateIFM"></p>
+<p><img src="../images_result/images/20160110150337759731310.png" alt="NTDSUtil-CreateIFM"></p>
 
 <p><strong>从NTDS.dit文件中提取活动目录域凭证(注册表系统单元)</strong></p>
 
@@ -284,7 +284,7 @@
 
 <p>一旦攻击者有了注册表系统单一和NTDS.dit 文件，他就能获取所有的活动目录凭证！下面的截图来自安装有Impacket python工具的Kali系统。DIT通过Impacket中的<code>secrectdump.py</code>脚本被导出。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015034186121147.png" alt="IMPacket-Dump-Credentials-NTDSdit"></p>
+<p><img src="../images_result/images/2016011015034186121147.png" alt="IMPacket-Dump-Credentials-NTDSdit"></p>
 
 <p>在2015年十月，<a href="https://www.dsinternals.com/en/dumping-ntds-dit-files-using-powershell/">DSInternals.com发布了一个用于从NTDS.dit导出用户凭证(注册表系统单元)的PowerShell方法</a>，叫做<code>Get-ADDBAcount</code>(尽管只能用于Windows 8和Windows 2012系统以上，因为早前的系统有bug)。</p>
 

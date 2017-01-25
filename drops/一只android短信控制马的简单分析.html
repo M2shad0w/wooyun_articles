@@ -3,7 +3,7 @@
 			<head>
 			     <title>一只android短信控制马的简单分析 - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/3030">http://drops.wooyun.org/papers/3030</a></h1>
 				
@@ -24,23 +24,23 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/20140918/2014091810415797941.jpg" alt="pic"></p>
+<p><img src="../images_result/images/2014091810415797941.jpg" alt="pic"></p>
 
 <p>之后跳转到<em>要激活设备管理器吗？</em>的界面，如果不小心点了激活那卸载就将需要点手法了。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810415764918.jpg" alt="pic"></p>
+<p><img src="../images_result/images/2014091810415764918.jpg" alt="pic"></p>
 
 <p>不root的话需要到设备管理器里取消勾选才能正常卸载，如果root也可以直接删文件。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810415857629.jpg" alt="pic"></p>
+<p><img src="../images_result/images/2014091810415857629.jpg" alt="pic"></p>
 
 <p>当受害者点击激活后还会发送短信通知黑客</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810415839047.jpg" alt="pic"></p>
+<p><img src="../images_result/images/2014091810415839047.jpg" alt="pic"></p>
 
 <p>当然你点取消同样也发送短信黑客</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810415850046.jpg" alt="pic"></p>
+<p><img src="../images_result/images/2014091810415850046.jpg" alt="pic"></p>
 
 <p>当完成这一系列动作后发现木马程序图片消失，并且无法通过系统自带应用管理直接卸载。</p>
 
@@ -67,7 +67,7 @@ the dexfile data save to =/data/data/com.oliuyht.iujyhtgr.m/files/dexfile.dex
 
 <p>之后在用JEB或dex2jar反编译，然后就可以静态分析app了。文件较少功能肯定不会太复杂，之前有提到过程序采用了apkprotect防护。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810415878014.jpg" alt="pic"></p>
+<p><img src="../images_result/images/2014091810415878014.jpg" alt="pic"></p>
 
 <p>查看配置申请权限如下（到这里目测是个短信劫持马）</p>
 
@@ -82,27 +82,27 @@ the dexfile data save to =/data/data/com.oliuyht.iujyhtgr.m/files/dexfile.dex
 
 <p>再看主界面代码，当主界面被第一次调用后就禁用此组件相应桌面图片也会消失。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810415944080.jpg" alt="pic"></p>
+<p><img src="../images_result/images/2014091810415944080.jpg" alt="pic"></p>
 
 <p>然后执行发送短信<em>软件已安装，但未被jh。n当前手机型号Build.MODEL</em>，通知黑客。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810420055096.jpg" alt="pic"></p>
+<p><img src="../images_result/images/2014091810420055096.jpg" alt="pic"></p>
 
 <p>启动“激活设备管理”界面等待用户点击（一定程度防卸载）。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810420116938.jpg" alt="pic"></p>
+<p><img src="../images_result/images/2014091810420116938.jpg" alt="pic"></p>
 
 <p>程序总共发了7条短信6条是发给15501730287其中四条是<em>安装成功，激活成功，发送成功</em>这类消息用来判断受害者状态，剩余两条是用来窃验证码之类的机密短信。只有一条短信是根据黑客发送的短信提取出号码以及内容再发送。就是说黑客可以用短信控制你发送指定短信到指定号码。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810420294394.jpg" alt="pic"></p>
+<p><img src="../images_result/images/2014091810420294394.jpg" alt="pic"></p>
 
 <p><em>kigdgc</em>类中硬编码了黑客接收短信的号码</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810420220710.jpg" alt="pic"></p>
+<p><img src="../images_result/images/2014091810420220710.jpg" alt="pic"></p>
 
 <p>整个app大致功能如下</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810420337801.jpg" alt="pic"></p>
+<p><img src="../images_result/images/2014091810420337801.jpg" alt="pic"></p>
 
 <h2>0x03 总结</h2>
 
@@ -116,11 +116,11 @@ the dexfile data save to =/data/data/com.oliuyht.iujyhtgr.m/files/dexfile.dex
 
 <p>LBE正常查杀(安装时就拦截到了)</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810420511166.jpg" alt="pic"></p>
+<p><img src="../images_result/images/2014091810420511166.jpg" alt="pic"></p>
 
 <p>腾讯手机管家未检测到</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810420532940.jpg" alt="pic"></p>      <p></p>
+<p><img src="../images_result/images/2014091810420532940.jpg" alt="pic"></p>      <p></p>
     
 			</body>
 		</html>

@@ -3,7 +3,7 @@
 			<head>
 			     <title>Dalvik字节码自篡改原理及实现 - leonnewton</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/16677">http://drops.wooyun.org/mobile/16677</a></h1>
 				
@@ -30,7 +30,7 @@
 
 <p>而在应用程序的进程空间，有一段是加载的odex文件，odex的0x28偏移开始的地方就是Dex文件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061311430664294130.png" alt="1.png"></p>
+<p><img src="../images_result/images/2016061311430664294130.png" alt="1.png"></p>
 
 <p>在得到Dex文件在内存中的地址之后，通过查找Dex一系列相应的结构，最终找到存放指令的地址，把新的指令覆盖原来的指令即可。</p>
 
@@ -40,7 +40,7 @@
 
 <p>找到了Dex文件的位置，需要经过几个查找步骤，最终定位到method存放指令的位置。具体的过程如图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061311430754978218.png" alt="2.png"></p>
+<p><img src="../images_result/images/2016061311430754978218.png" alt="2.png"></p>
 
 <ol>
 <li>首先是需要确定method的名字，也就是method字符串，再确定method所在class的名字，也就是class字符串。这确定了要修改的方法。</li>
@@ -287,7 +287,7 @@ memcpy(code_insns_address,&amp;inject,6);//将字节码复制过去
 
 <p>可以看到各个字段读取的结果，本来应该是1*2=2，修改字节码之后为1+2=3了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061311430935785316.png" alt="3.png"></p>      <p></p>
+<p><img src="../images_result/images/2016061311430935785316.png" alt="3.png"></p>      <p></p>
     
 			</body>
 		</html>

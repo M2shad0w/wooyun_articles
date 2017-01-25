@@ -3,7 +3,7 @@
 			<head>
 			     <title>Windows Media Center .MCL文件代码执行漏洞(MS16-059) - blast</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/16935">http://drops.wooyun.org/papers/16935</a></h1>
 				
@@ -122,7 +122,7 @@ kernel32!CreateFileW:
 
 <p>由于MediaCenter以及ehshell.dll都是C# DLL，因此WinDbg看就显得比较捉急了，我们将其反编译，生成源代码直接看：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061905533426094pic11.jpg" alt="pic1"></p>
+<p><img src="../images_result/images/2016061905533426094pic11.jpg" alt="pic1"></p>
 
 <p>工程十分庞大，在漫长的生成过程后，搜索关键字可以看到这样的逻辑：在加载MCL之后，首先程序解析.MCL文件（通过System.XML），并在InternalExtensibilityAppInfo中为包含有Run属性的MCL创建一个特殊的“AppEntryPoint”。</p>
 
@@ -167,7 +167,7 @@ catch (Exception exception)
 
 <p>简单粗暴，所有包含Run/Url的全部弹窗二次确认。这也是微软对前几个严重问题所做的非常暴力的“折中”处理。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061905533673989pic2.jpg" alt="pic2"></p>
+<p><img src="../images_result/images/2016061905533673989pic2.jpg" alt="pic2"></p>
 
 <h1>0x06 十年以上的漏洞</h1>
 

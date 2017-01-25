@@ -3,7 +3,7 @@
 			<head>
 			     <title>一次app抓包引发的Android分析记录 - 绿盟科技</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2871">http://drops.wooyun.org/tips/2871</a></h1>
 				
@@ -45,14 +45,14 @@ apktool d XXX.apk -o ./doc
 apktooldXXX.apk-o./doc
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140826/2014082604561152481.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014082604561152481.png" alt="enter image description here"></p>
 
 <p>然后用的<a href="https://code.google.com/p/dex2jar/">dex2jar</a>工具将apk反编译为jar，并通过<a href="http://jd.benow.ca/">JD-GUI</a>来查看java源码：</p>
 
 <pre><code>dex2jar.shXXX.apk
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140826/2014082604561294978.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014082604561294978.png" alt="enter image description here"></p>
 
 <p>在apktool反编译的目录中我们可以翻看AndroidManifest.xml来了解apk文件的基本结构，我从中首先找到主Activity的所在：</p>
 
@@ -61,7 +61,7 @@ apktooldXXX.apk-o./doc
 
 <p>可以从上面的内容看出主Activity是com.XXX.NoteActivity这个类所定义的，然后通过JD-GUI打开dex2jar反编译后的jar包，查看NoteActivity。</p>
 
-<p><img src="http://static.wooyun.org/20140826/2014082604561238647.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014082604561238647.png" alt="enter image description here"></p>
 
 <p>先来看onCreate中的操作，发现使用produard对apk进行了混淆了。这种混淆虽然不会影响我们反编译出来的代码内容，但是由于对类名、函数名、变量名进行了随机命名，导致我们阅读代码的过程比较痛苦。</p>
 
@@ -73,9 +73,9 @@ apktooldXXX.apk-o./doc
 
 <p>我的运气还是不错，网络传输部分的代码并没有被混淆。大体看了一下这些代码，发现和一般的app一样，客户端和服务端的数据交互也是使用json的格式进行的，并且使用了阿里开源的<a href="https://github.com/alibaba/fastjson">fastjson</a>类来处理json内容。</p>
 
-<p><img src="http://static.wooyun.org/20140826/2014082604561282143.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014082604561282143.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140826/2014082604561311100.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014082604561311100.png" alt="enter image description here"></p>
 
 <p>了解了以上的这些情况，我决定通过跟踪JSONObject这个类来定位处理提交数据的位置。</p>
 
@@ -86,14 +86,14 @@ apktooldXXX.apk-o./doc
 <pre><code>adb shell ps
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140826/2014082604561386982.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014082604561386982.png" alt="enter image description here"></p>
 
 <p>进程ID 445，使用<a href="https://github.com/swdunlop/AndBug">Andbug</a>挂载该进程，并使用classes命令查找<a href="https://github.com/alibaba/fastjson">fastjson</a>类的全路径：</p>
 
 <p>andbug shell -p 435 classes JSONObject
 andbug shell -p435 classes JSONObject</p>
 
-<p><img src="http://static.wooyun.org/20140826/2014082604561356486.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014082604561356486.png" alt="enter image description here"></p>
 
 <blockquote>
   <p>这里提示一个使用classes和method命令查找的小技巧。我们在Andbug的shell环境下使用classes时很容易由于class过多而导致没办法看到所有的class。这是我们可以在终端环境下使用classes命令配合more来一点点的查看，就像这样：
@@ -105,11 +105,11 @@ andbug shell -p435 classes JSONObject</p>
 <pre><code>class-trace com.alibaba.fastjson.JSONObject
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140826/2014082604561392329.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014082604561392329.png" alt="enter image description here"></p>
 
 <p>在app中随便触发一个会提交请求的事件，调用过程在终端中完美的呈现了出来：</p>
 
-<p><img src="http://static.wooyun.org/20140826/2014082604561481337.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014082604561481337.png" alt="enter image description here"></p>
 
 <p>可以看到调用过程都用到了com.XXX.net.task.CommonTask中的方法，打开这个类的java源码第一眼就看到这段代码：</p>
 
@@ -264,7 +264,7 @@ Stringtest=Goblin.d(c,p2);
 System.out.println(test);
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140826/2014082604561515469.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014082604561515469.png" alt="enter image description here"></p>
 
 <p>天不遂人愿啊！解密出错，看来真的要去看ARM汇编了。。。。。。</p>
 
@@ -292,7 +292,7 @@ System.out.println(test);
 
 <p>通过反复的动态跟踪，确定下面这个循环是加密的关键：</p>
 
-<p><img src="http://static.wooyun.org/20140826/2014082604561573283.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014082604561573283.png" alt="enter image description here"></p>
 
 <p>可以看出加密方法比较简单，对于源数据的每一个字符与0×45进行异或，然后jia0x24，最后再加上硬编码在so文件的一串key中的一个字符。根据汇编逆向出来的python代码如下：</p>
 

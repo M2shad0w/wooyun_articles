@@ -3,7 +3,7 @@
 			<head>
 			     <title>Python网络攻防之第二层攻击 - Larry</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8547">http://drops.wooyun.org/tips/8547</a></h1>
 				
@@ -75,11 +75,11 @@ while True:
 
 <p>如果你只是用<code>fake_ip</code>来处理客户端的<code>ARP</code>缓存，那么你只会得到客户端的数据包，而无法接收到服务端的响应。如下图所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150914/2015091406295823477.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015091406295823477.png" alt="enter image description here"></p>
 
 <p>如下图所示，要强制通过攻击者的主机进行双向连接，攻击者就必须使用他的<code>MAC</code>地址，来伪造客户端和服务端的相关目的地址。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150914/2015091406295940612.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015091406295940612.png" alt="enter image description here"></p>
 
 <p>我们的第一段代码有些粗糙，它发送了大量的<code>ARP</code>报文，不仅产生了所需要的流量，而且也比较暴露。隐蔽的攻击者会采取另一种策略。</p>
 
@@ -87,7 +87,7 @@ while True:
 
 <p>如下图所示，欺骗性的响应数据包和真实主机的响应数据包被并行发送。谁的数据包先被受害者的网卡接收到，则谁获胜。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150914/2015091406295944994.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015091406295944994.png" alt="enter image description here"></p>
 
 <pre><code>#!python
 #!/usr/bin/python    

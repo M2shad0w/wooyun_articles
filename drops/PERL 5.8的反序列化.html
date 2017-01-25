@@ -3,7 +3,7 @@
 			<head>
 			     <title>PERL 5.8的反序列化 - mickey</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/12933">http://drops.wooyun.org/papers/12933</a></h1>
 				
@@ -30,7 +30,7 @@ $ echo  'BAcIMTIzNDU2NzgECAgIAwMAAAAEAwAAAAAGAAAAcGFyYW1zCIIEAAAAc3RlcAQDAQAAAAi
 
 <p>我打开了burpsuite的Intruder,做"Character frobber" fuzzing测试。通过返回的结果，我发现了一些有趣的东西。如图1：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160216/201602160921017721911.png" alt="p1"></p>
+<p><img src="../images_result/images/201602160921017721911.png" alt="p1"></p>
 
 <p>页面返回的结果里暴露了目标使用Perl和Storable 2.7，经过Google搜索，我知道Storable是Perl的一个模块，是用来做数据序列化的。查看Storable的官方文档我们可以看到有个很大的安全提示：</p>
 
@@ -147,13 +147,13 @@ print "BASE64:$frozen\n";
 
 <p>如果只是本地测试，可以使用perlbrew来切换perl5.8.9和kali 1.10自带的perl 5.14.2,测试结果如图2所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160216/20160216092103371692.png" alt="p2"></p>
+<p><img src="../images_result/images/20160216092103371692.png" alt="p2"></p>
 
 <p>可以看到perl 5.8.9是受漏洞影响的，而perl 5.14.2没有受影响。</p>
 
 <p>接下来在测试下perl cgi,代码就用作者提供的<a href="http://www.agarri.fr/docs/victim">http://www.agarri.fr/docs/victim</a>，作者提供的POC需要稍微改改，要不然获取不到命令执行结果，测试结果如图3所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160216/20160216092105182643.png" alt="p3"></p>
+<p><img src="../images_result/images/20160216092105182643.png" alt="p3"></p>
 
 <h1>0x02 参考文档：</h1>
 

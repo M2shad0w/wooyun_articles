@@ -3,7 +3,7 @@
 			<head>
 			     <title>Embedded devices hacking - redrain有节操</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5157">http://drops.wooyun.org/papers/5157</a></h1>
 				
@@ -42,7 +42,7 @@ IDA<br>
 <pre><code>binwalk xxx.bin --dd=类型:保存下来的扩展名
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150310/28a33874662971b3.png" alt=""></p>
+<p><img src="../images_result/images/28a33874662971b3.png" alt=""></p>
 
 <p>这样,会把gzip的文件保存到本地以.gzip命名</p>
 
@@ -59,7 +59,7 @@ IDA<br>
 
 <p>通过svn安装fmk,我们来认识一下这个套件用到的东西</p>
 
-<p><img src="http://static.wooyun.org/drops/20150310/836f30cee3c9fa8e.png" alt=""></p>
+<p><img src="../images_result/images/836f30cee3c9fa8e.png" alt=""></p>
 
 <p>extract-firmware.sh使用来解包固件<br>
 build-firmware.sh使用来重新封包<br>
@@ -72,13 +72,13 @@ unsquashfs_all.sh使用来解包提取出来的squashfs文件</p>
 
 <p>可以很方便的帮我们提取文件</p>
 
-<p><img src="http://static.wooyun.org/drops/20150310/df514fb1dd5dbc77.png" alt=""></p>
+<p><img src="../images_result/images/df514fb1dd5dbc77.png" alt=""></p>
 
 <p>之后,我们可以在当前目录的fmk下找到提取出来的文件</p>
 
 <p>logs目录下还给我们提供了binwalk的log</p>
 
-<p><img src="http://static.wooyun.org/drops/20150310/c6a8f00858b800dc.png" alt=""></p>
+<p><img src="../images_result/images/c6a8f00858b800dc.png" alt=""></p>
 
 <p>rootfs下就是固件解包提取的文件了</p>
 
@@ -93,11 +93,11 @@ unsquashfs_all.sh使用来解包提取出来的squashfs文件</p>
 <p>将httpd丢入IDA<br>
 很快看到有奇怪的东西乱入了...system.anonymousptz....why are u so diao</p>
 
-<p><img src="http://static.wooyun.org/drops/20150310/cd072912922645b0.png" alt=""></p>
+<p><img src="../images_result/images/cd072912922645b0.png" alt=""></p>
 
 <p>官方后门get,shodan上搜一搜发现在今年上半年已经有老外发过了,但是貌似这个后门至今3s公司依旧在其他的摄像头型号里使用...给跪</p>
 
-<p><img src="http://static.wooyun.org/drops/20150310/df27b4e9875c21de.png" alt=""></p>
+<p><img src="../images_result/images/df27b4e9875c21de.png" alt=""></p>
 
 <p>影响所有N10xx到N50xx型号的摄像头</p>
 
@@ -113,13 +113,13 @@ unsquashfs_all.sh使用来解包提取出来的squashfs文件</p>
 
 <p>records.cgi使用来做删除操作,会先交由函数do_records检查是否存在文件</p>
 
-<p><img src="http://static.wooyun.org/20150310/2015031003360835342.png" alt=""></p>
+<p><img src="../images_result/images/2015031003360835342.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org/20150310/2015031003360981713.png" alt=""></p>
+<p><img src="../images_result/images/2015031003360981713.png" alt=""></p>
 
 <p>如果文件存在,那么就会抛给sprintf去做字符串格式化然后执行rm命令删除,如图:</p>
 
-<p><img src="http://static.wooyun.org/20150310/2015031003361033333.png" alt=""></p>
+<p><img src="../images_result/images/2015031003361033333.png" alt=""></p>
 
 <p>那么,问题就来了,上学老师就告诉过,sprintf要不得,一点过滤都没有而且这里还是用的system function<br>
 (web狗表示这里能够搞定很开心~)</p>
@@ -134,13 +134,13 @@ curl -d "user=3sadmin&amp;password=27988303" http://*.*.*.*/records.cgi?action=r
 
 <hr>
 
-<p><img src="http://static.wooyun.org/20150310/2015031003361128762.png" alt=""></p>
+<p><img src="../images_result/images/2015031003361128762.png" alt=""></p>
 
 <p>执行poweroff后~</p>
 
-<p><img src="http://static.wooyun.org/20150310/2015031003361384421.png" alt=""></p>
+<p><img src="../images_result/images/2015031003361384421.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org/20150310/2015031003361466122.png" alt=""></p>
+<p><img src="../images_result/images/2015031003361466122.png" alt=""></p>
 
 <h1>0x04 IPCAM&amp;&amp;videorecorders</h1>
 
@@ -150,9 +150,9 @@ curl -d "user=3sadmin&amp;password=27988303" http://*.*.*.*/records.cgi?action=r
 
 <p>一般大楼内都有许多摄像头，它们通常区分为网络摄像头和录像机，录像机是可以保存画面数据的，先来大致了解一下他们是如何工作的：</p>
 
-<p><img src="http://static.wooyun.org/20150310/2015031003361580214.png" alt="image"></p>
+<p><img src="../images_result/images/2015031003361580214.png" alt="image"></p>
 
-<p><img src="http://static.wooyun.org/20150310/2015031003371614588.png" alt="image"></p>
+<p><img src="../images_result/images/2015031003371614588.png" alt="image"></p>
 
 <p>如上图，管理界面可以分屏查看当前在线的所有cam画面</p>
 
@@ -234,7 +234,7 @@ cat ztzsb.jpg
 
 <p>多说一句的是，我比较推荐的是备份原始cgi，用新的脚本来执行欺骗，这样有个好处是可以针对普遍情况的设备，避免二次开发或者不同设备对原始cgi的依赖问题，避免错误</p>
 
-<p><img src="http://static.wooyun.org/20150310/2015031003361944509.png" alt="image"></p>
+<p><img src="../images_result/images/2015031003361944509.png" alt="image"></p>
 
 <h1>0x07 我是如何劫持你的摄像头的</h1>
 
@@ -301,11 +301,11 @@ Content-Length: 17561
 
 <p>通过使用fmk对固件分离，grep找到了videostream.cgi是写在handle&#95;cgi&#95;requests这个bin文件中的</p>
 
-<p><img src="http://static.wooyun.org/20150310/2015031003362162065.png" alt="image"></p>
+<p><img src="../images_result/images/2015031003362162065.png" alt="image"></p>
 
 <p>通过鼠标滚轮大法，我发现除了videostream.cgi这个文件控制画面传输功能之外，还有videostream.asf，这在之前的黑盒测试中是无法发现的</p>
 
-<p><img src="http://static.wooyun.org/20150310/2015031003362134094.png" alt="image"></p>
+<p><img src="../images_result/images/2015031003362134094.png" alt="image"></p>
 
 <p>所以我们一会儿分析的时候除了videostream.cgi还有videostream.asf</p>
 
@@ -317,7 +317,7 @@ Content-Length: 17561
 
 <p>因为这个固件是将功能写入到bin文件中的，所以找到其实现的函数也是在bin中找（web狗压力好大。。。）</p>
 
-<p>通过跟踪videostream.cgi和videostream.asf，可以找到这样一个函数 <img src="http://static.wooyun.org/20150310/2015031003362246525.png" alt="image"></p>
+<p>通过跟踪videostream.cgi和videostream.asf，可以找到这样一个函数 <img src="../images_result/images/2015031003362246525.png" alt="image"></p>
 
 <p>函数功能用于接收摄像头捕捉到的画面并且会返回一个相应的包头和jpg的数据</p>
 

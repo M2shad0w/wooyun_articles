@@ -3,7 +3,7 @@
 			<head>
 			     <title>BurpSuite在非Web应用测试中的应用 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/14980">http://drops.wooyun.org/tools/14980</a></h1>
 				
@@ -32,19 +32,19 @@
 
 <p>有时候为了手动修改你不得不拦截响应数据包。设置在Proxy > Options > Intercept responses based。将第一条规则的复选框取消，否则二进制payload有可能不被拦截。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007130267506.png" alt="拦截请求"></p>
+<p><img src="../images_result/images/2016042007130267506.png" alt="拦截请求"></p>
 
 <h2>1.2 拦截请求/响应规则</h2>
 
 <p>Burp支持为拦截请求/响应数据包制定规则。当有多重流量经过Burp时，你只想将某些特定节点的流量拦截下来时，这将非常有用。在Proxy > Options 中可以看到规则Intercept Client / Server Requests。这个预定义的规则只能拦截域内的请求。你也可以添加你自己的规则，规则支持正则表达式来匹配内容和包头。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007130434246.png" alt="拦截规则"></p>
+<p><img src="../images_result/images/2016042007130434246.png" alt="拦截规则"></p>
 
 <h2>1.3 匹配和替换</h2>
 
 <p>你可以在Proxy > Options > Match and Replace 中找到匹配与替换。这意味着你可以在请求/响应数据包中按照你的要求进行替换。我通常用用来替换User-Agent。另一种方法不需要打补丁就能绕过客户端控件在响应数据包中自动进行更改。例如，如果服务器响应登录是否成功，我定义了一条规则来将登录失败响应修改为成功响应，来绕过登录（这只有在服务器不关心你的登录是否成功时起作用）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007130556979.png" alt="匹配和替换规则"></p>
+<p><img src="../images_result/images/2016042007130556979.png" alt="匹配和替换规则"></p>
 
 <h2>1.4 SSL流量</h2>
 
@@ -64,7 +64,7 @@
 
 <p>Convert HTTPS links to HTTP 和 Remove secure flag from cookies 和Force use of SSL都是Request Handling中的好工具。如果在应用或者浏览器和Burp之间禁用TLS，设置为Secure的Cookie将不会再传输，app也会停止工作。当使用Cookie设置响应头时，Burp可以移除Secure标识。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007130761980.png" alt="响应修改"></p>
+<p><img src="../images_result/images/2016042007130761980.png" alt="响应修改"></p>
 
 <h2>1.6 在启动时禁用拦截和混淆</h2>
 
@@ -72,7 +72,7 @@
 
 <p>Proxy > Options > Scroll all the way to the bottom > Under Miscellaneous > Enable interception at startup > Always disable.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007130999580.png" alt="拦截启动设置"></p>
+<p><img src="../images_result/images/2016042007130999580.png" alt="拦截启动设置"></p>
 
 <h1>0x02 代理监听</h1>
 
@@ -82,13 +82,13 @@
 
 <p>代理监听可以在Proxy > Option > Proxy Listeners设置。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007131074693.png" alt="代理监听"></p>
+<p><img src="../images_result/images/2016042007131074693.png" alt="代理监听"></p>
 
 <h2>2.1 绑定</h2>
 
 <p>添加一个新的监听很容易，只需要点击Add即可。本地环回是127.0.0.1或localhost。如果你想让Burp监听另一个网口，就可以在这里进行选择。如果想代理移动设备这就非常有用了。在这种情况下，我会创建一个监听为0.0.0.0或者选择All interfaces，这些和移动设备共享的网口（例如Windows hostednetwork）</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007131228113.png" alt="代理绑定"></p>
+<p><img src="../images_result/images/2016042007131228113.png" alt="代理绑定"></p>
 
 <p>我们可以在Import/export CA certificate 或Regenerate CA certificate来导入/导出一个新的呃Burp的根证书。更多信息请<a href="http://parsiya.net/blog/2016-02-21-installing-burp-certificate-authority-in-windows-certificate-store/">参考</a>。如果你重新生成根证书，你必须在操作系统或浏览器的证书存储区使用新证书替代旧证书。</p>
 
@@ -96,7 +96,7 @@
 
 <p>这个功能对于非Web应用非常有用。假设传统客户端使用hosts文件连接www.google.com:8000，而且我开启了代理。在这个文件中，www.google.com被重定向到127.0.0.1，我又创建了一个Burp监听在8000端口。现在我需要将全部流量重定向到原始状态（www.google.com:8000）。一种方法是在Redirect to host 和 Redirect to port中分别指定为www.google.com 和 8000。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007131420683.png" alt="重定向流量"></p>
+<p><img src="../images_result/images/2016042007131420683.png" alt="重定向流量"></p>
 
 <p>如果应用在同一端口连接不同的节点（例如，我们想代理流量通过80端口或者443端口），我们就不能重定向流量了吗？我们需要在Options > Connections > Hostname Resolution中设置，在下一个部分我将会解释。</p>
 
@@ -114,7 +114,7 @@
 
 <p>可以在Proxy > Options开启。选择代理监听，点击编辑，在Request Handling 中选择Support invisible proxying (enable only if needed)。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007131526659.png" alt="透明代理"></p>
+<p><img src="../images_result/images/2016042007131526659.png" alt="透明代理"></p>
 
 <p>我经常用它来捕获应用和Burp之间的本地流量，判断应用是否发送连接请求。另一种方法是都尝试一下，看哪个好使。</p>
 
@@ -147,11 +147,11 @@
 
 <p>只有你指定的那个URL才能进入Scope中，这很方便。例如，我选择使用GET请求得到Google的图标，并且添加其到Scope中。Google.com剩下的数据包将不会包含在Scope中，你必须手动添加。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007235146149.gif" alt="添加Google Logo"></p>
+<p><img src="../images_result/images/2016042007235146149.gif" alt="添加Google Logo"></p>
 
 <p>另一种方法是复制URL粘贴过来。如果我们右键点击任何位置的任何请求，我们都能通过点击右键菜单中的Copy URL来复制这个请求的URL地址。我们可以在Scope中点击Paste URL来把这个请求置入Scope。这个按钮在其他位置出现也具有类似的功能。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007151947600.gif" alt="粘贴URL"></p>
+<p><img src="../images_result/images/2016042007151947600.gif" alt="粘贴URL"></p>
 
 <p>我们通常不止是需要一个请求。通常是整个节点，或者确定的整个目录。幸运的是，在指定Scope时，我们可以使用正则表达式。我通常使用上述方法之一将URL添加进Scope中，然后通过编辑按钮来对其修改。</p>
 
@@ -166,7 +166,7 @@
 
 <p>如果我们想要添加Google和它的所有子域到Scope中，我们要添加这个Logo（或者任何Google的东西）到Scope中，然后编辑这个请求。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007132386381.png" alt="添加Google.com的子域名"></p>
+<p><img src="../images_result/images/2016042007132386381.png" alt="添加Google.com的子域名"></p>
 
 <h1>0x05 HTTP历史</h1>
 
@@ -174,11 +174,11 @@
 
 <p>在Proxy > HTTP History中可以看到Burp所有捕获的请求和响应。我几乎一半的时间都花在了这儿。我们可以使用过滤器来筛选数据包，过滤器的设置可以在Filter: Showing all items调整，你可以根据你不同的需求来调整你的设置。我一般都是清空这些状态重新开始。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007132560283.png" alt="过滤设置"></p>
+<p><img src="../images_result/images/2016042007132560283.png" alt="过滤设置"></p>
 
 <p>最有效的过滤是Show Only in-scope items，这将会把不在Scope里的数据包都清除掉。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042008011232505.gif" alt="过滤"></p>
+<p><img src="../images_result/images/2016042008011232505.gif" alt="过滤"></p>
 
 <p>正如你在上图中看到的，过滤器具有很多设置选项。大部分的设置都非常简单易用，我要讲解的是那些我在非Web应用中常用的设置。</p>
 
@@ -212,7 +212,7 @@
 <li>设置Live Passive Scanning为Scan everything可以增强扫描效果，但是会在结果中引入噪声。如果你设置了Scope，你可以将扫描范围限定在suite scope中。你还可以选择Use custom scope来自己根据需要进行定制Scope。</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007152539381.png" alt="实时扫描设置"></p>
+<p><img src="../images_result/images/2016042007152539381.png" alt="实时扫描设置"></p>
 
 <h2>6.2 设置选项</h2>
 
@@ -236,7 +236,7 @@
 
 <p>发送载荷到入侵模块后，在Intruder > Positions标签页中看得到注入点。我通常先Clear掉所有设置，然后使用Add来对自己设置的注入点进行标记。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007152615149.gif" alt="入侵模块"></p>
+<p><img src="../images_result/images/2016042007152615149.gif" alt="入侵模块"></p>
 
 <p>正如你所见，我选择之前用过的Google的Logo再次发送到入侵模块。然后清除掉所有的预定义的注入点和已经添加的文件名。现在我们可以右键点击并选择Actively scan defined insertion points来将其发送到扫描模块，不仅扫描注入点还可以使用Start Attack来用我自己设计的载荷进行注入。因为我没有选择任何载荷，第二项是不会起效果的。</p>
 
@@ -252,11 +252,11 @@
 
 <p>Runtime File通过点击Load按钮来加载一个文件。你也可以使用Burp自带的负载列表，但似乎只有Pro版本才有。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007133740866.png" alt="内置简单列表"></p>
+<p><img src="../images_result/images/2016042007133740866.png" alt="内置简单列表"></p>
 
 <p>Custom iterator（自定义迭代器）可以让Burp生成更加复杂的载荷。如果我想要模拟两个自己的十六进制（四个字符），我可以在一个位置上设置0-9和a-f在其他位置上也类似的设置。Burp允许你设置八个位置。如果你想添加用户名，可以选择五个位置，添加自己的用户名列表。Burp也支持位置间使用分隔符。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007133961616.png" alt="自定义迭代器"></p>
+<p><img src="../images_result/images/2016042007133961616.png" alt="自定义迭代器"></p>
 
 <p>一个流行的载荷列表是<a href="https://github.com/fuzzdb-project/fuzzdb">FuzzDB</a>。需要注意的是，这些载荷基本都会触发反病毒软件的报警。</p>
 
@@ -264,7 +264,7 @@
 
 <p>在进行测试之前，你可以对载荷进行转换处理。例如，你可以将载荷进行base64编码再发送，或者发送其hash。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007134043292.png" alt="载荷处理"></p>
+<p><img src="../images_result/images/2016042007134043292.png" alt="载荷处理"></p>
 
 <h2>7.3 设置</h2>
 
@@ -290,7 +290,7 @@
 
 <p>我选择Google的Logo的GET请求，发送到重放模块然后发送它。我们可以对其进行修改，然后查看其404响应和一些无效文件。用Ctrl+Z可以撤销这次更改。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007404278833.gif" alt="重放模块"></p>
+<p><img src="../images_result/images/2016042007404278833.gif" alt="重放模块"></p>
 
 <p>你可以将修改过的数据包发送到扫描模块或者入侵模块进行进一步扫描。</p>
 
@@ -298,7 +298,7 @@
 
 <p>允许使用不同的格式进行编码或解码。也支持创建其哈希。双击任何一个参数右键发送至解码模块。你也可以使用Ctrl+C复制其到解码模块。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007240238249.gif" alt="解码模块"></p>
+<p><img src="../images_result/images/2016042007240238249.gif" alt="解码模块"></p>
 
 <h2>8.3 比对</h2>
 
@@ -320,7 +320,7 @@
 
 <p>你可以重定向你其他工具的流量到Burp，让Burp承担起这个责任。我不是暗示它们会生成大量的流量，但是形势所迫，你必须使用Appscan。如果验证失败，错误消息将显示在Alerts选项卡中。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007134817208.png" alt="平台认证"></p>
+<p><img src="../images_result/images/2016042007134817208.png" alt="平台认证"></p>
 
 <p>开启Prompt for credentials on platform authentication failure，保证在认证失败时可以迅速传递给浏览器。</p>
 
@@ -328,7 +328,7 @@
 
 <p>我已经讲了很多关于Burp如何作为一个代理链中的一部分。我们要在这里对经过Burp转发的请求进行设置。这对联合代理服务器环境下的Burp使用是非常有帮助的。通常情况下，这些代理服务器是自动配置的。这些设置可以访问Tools (menu) > Internet Options (menu item)> Connections (tab) > LAN settings (button)来更改IE的代理设置。通常在Use automatic configuration script中能够对proxy auto-config和pac文件进行配置。检索PAC文件并且在文本编辑器中查看，应该能看到代理地址:端口格式的配置。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007134928533.png" alt="上游代理服务器"></p>
+<p><img src="../images_result/images/2016042007134928533.png" alt="上游代理服务器"></p>
 
 <p>使用SOCKS代理是类似的。根据细则，这将会覆盖之前的代理设置。就我个人而言，我从来没有对Burp的Socks代理进行配置。</p>
 
@@ -336,7 +336,7 @@
 
 <p>对老服务器进行测试，应该增加超时设置，如果Burp是代理链中的一部分，就要增加超时的设定，以修正延误。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007135142970.png" alt="超时设置"></p>
+<p><img src="../images_result/images/2016042007135142970.png" alt="超时设置"></p>
 
 <h3>9.1.4 主机解析</h3>
 
@@ -358,7 +358,7 @@
 
 <p>总之，下面是流程：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007135225983.png" alt="GET流程"></p>
+<p><img src="../images_result/images/2016042007135225983.png" alt="GET流程"></p>
 
 <ol>
 <li>Hipchat creates a TCP connection to Burp.</li>
@@ -405,7 +405,7 @@
 
 <p>在这里大多数项目不需要任何解释。如果你有Pro版，我建议你开启Automatic Backup。我通常将其设置为每小时存档并且退出时存档。因为，我希望可以每天保存状态的备份，我也开启了Include in-scope items only，这大大减少了保存数据的体积。 如果你需要在测试期结束时回头检查一些东西，或者你的账户被锁定时，你可以回档。 计划任务会允许你做一些计划。例如你可以设置扫描模块在何时启动。如果你不想或者不能每天扫描，那就让它在特定的时间进行扫描吧。不幸的是，作为计划任务不允许运行宏，并且可选项也非常有限</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007135418958.png" alt="计划任务"></p>
+<p><img src="../images_result/images/2016042007135418958.png" alt="计划任务"></p>
 
 <h3>9.6.1 Burp默认服务器</h3>
 
@@ -431,11 +431,11 @@
 
 <p>在Burp的app store中安装插件是一件轻而易举的事情。只需要切换到该选项卡，选择扩展名然后单击安装。如果该扩展是用Python编写的，你必须安装Jython才能运行。如果不方便安装，Burp很方便的提供了下载Jython按钮。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007135640785.png" alt="Jython"></p>
+<p><img src="../images_result/images/2016042007135640785.png" alt="Jython"></p>
 
 <p>单击下载按钮打开此页，下载最新的Standalone Jar。我通常把它放在和Burp相同的目录中。之后在Extender > Options中，可以选择Python Environment > Location of the Jython standalone JAR file其作为你的运行环境。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007135969136.png" alt="Jython路径"></p>
+<p><img src="../images_result/images/2016042007135969136.png" alt="Jython路径"></p>
 
 <p>现在就可以点击安装按钮进行安装了。</p>
 
@@ -473,7 +473,7 @@
 
 <p>我要用再次使用GET请求再一次来取回Google的Logo。使用Burp模拟一些Curl命令来完成这个最简单的任务。重定向浏览器的流量到Burp，并访问Google首页。确保你清除了浏览器缓存，否则将不会发送请求，你也看不到请求了。选择Logo图片的那个请求，右键点击Copy as curl command。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007140073234.gif" alt="拷贝Curl命令"></p>
+<p><img src="../images_result/images/2016042007140073234.gif" alt="拷贝Curl命令"></p>
 
 <p>结果应该与下面类似：</p>
 
@@ -495,7 +495,7 @@
 <p><code>export  http_proxy=http://127.0.0.1:8080
 export https_proxy=http://127.0.0.1:8080</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007140311535.gif" alt="重定向"></p>
+<p><img src="../images_result/images/2016042007140311535.gif" alt="重定向"></p>
 
 <h2>12.3 IBM Appscan Standard</h2>
 
@@ -505,13 +505,13 @@ export https_proxy=http://127.0.0.1:8080</code></p>
 
 <p>在Appscan中，我们可以在Scan Configuration > Connection > Communication and Proxy设置代理。这和Firefox的代理设置类似，我们也可以使用IE的代理，或是为Appscan指定一个特定的代理。我们有两种方法，第一种是通过IE代理，第二种是直接设置代理。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007140591744.png" alt="Appscan代理设置"></p>
+<p><img src="../images_result/images/2016042007140591744.png" alt="Appscan代理设置"></p>
 
 <p>现在，我们可以重定向Appscan的流量到Burp了，也可以进行一些手动探索了。试用版软件可以让我们这样做，但是不要把它添加进扫描中。如果我们有Appscan的授权版本，我们可以运行一个扫描。在Burp中可以看得到扫描的流量经过。</p>
 
 <p>或者，你也有可能想把其他的流量导入Appscan中。例如，使用额外的浏览器或者其他工具，你可以在Tools (menu) > Options > Recording Proxy (tab) > Appscan proxy port中设置导入端口。你也可以通过选择，来指定你自己设置的端口。在手动探索时Appscan只是起到监听功能。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007140740741.png" alt="代理设置"></p>
+<p><img src="../images_result/images/2016042007140740741.png" alt="代理设置"></p>
 
 <p>你可以安装导入Appscan的根证书了。</p>
 
@@ -527,17 +527,17 @@ export https_proxy=http://127.0.0.1:8080</code></p>
 
 <p>首先你要在Proxy (menu) > Windows Proxy关闭Charles的自动代理设置。如果系统代理是开启的，就会在下拉菜单中有一个小小的标记。在Proxy (menu) > SSL Proxying Settings (sub-menu) > SSL Proxying (tab)中确保Enable SSL Proxying是被选中的。点击添加，在HOST和PORT上填入*。在Proxy (menu) > Proxy Setting (sub-menu) > Proxies (tab)里我们可以查看HTTP代理端口，默认是8888端口，我们也可以指定其他端口。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007140935781.png" alt="Charles SSL代理"></p>
+<p><img src="../images_result/images/2016042007140935781.png" alt="Charles SSL代理"></p>
 
 <p>试用版本会每隔三十分钟重新启动，就会再次开启自动代理。确保每次启动后你都要禁用它。你也可以使用Firefox来代替IE代理设置。</p>
 
 <p>在Burp中，可以在Options > Upstream Proxy Servers添加上行代理服务器为127.0.0.1:8888</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007141148724.png" alt="配置Charles作Burp的上行代理"></p>
+<p><img src="../images_result/images/2016042007141148724.png" alt="配置Charles作Burp的上行代理"></p>
 
 <p>现在可以在IE中打开Google的主页了，可以看到流量经过了Burp和Charles。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007141392721.png" alt="流量展示"></p>
+<p><img src="../images_result/images/2016042007141392721.png" alt="流量展示"></p>
 
 <h3>12.4.2 IE -> Charles -> Burp</h3>
 
@@ -545,11 +545,11 @@ export https_proxy=http://127.0.0.1:8080</code></p>
 
 <p>Charles要在Proxy (menu) > External Proxy Settings (sub-menu)确保开启了Use external proxy servers。要将Web Proxy (HTTP)和Secure Web Proxy (HTTPS)都输入Burp的代理监听（127.0.0.1:8080）</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007141735362.png" alt="外部代理设置"></p>
+<p><img src="../images_result/images/2016042007141735362.png" alt="外部代理设置"></p>
 
 <p>设置完成，可以打开主页了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007141923418.png" alt="流量展示"></p>
+<p><img src="../images_result/images/2016042007141923418.png" alt="流量展示"></p>
 
 <h2>12.5 Fiddler</h2>
 
@@ -559,19 +559,19 @@ export https_proxy=http://127.0.0.1:8080</code></p>
 
 <p>首先，我们要在Tools (menu) > Fiddler Options (sub-menu) > HTTPS (tab) > Decrypt HTTPS traffic设置Fiddler可以捕获HTTPS流量。这将会在Windows证书存储区安装Fiddler的根证书。这将会让Fiddler捕获并且解密全部经过代理的流量。还要确保Ignore server certificate errors (unsafe)，因为Burp可能是不被承认的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007142120835.png" alt="Fiddler HTTPS选项"></p>
+<p><img src="../images_result/images/2016042007142120835.png" alt="Fiddler HTTPS选项"></p>
 
 <p>切换到Gateway标签页，选择Manual Proxy Configuration并且在上面的输入框中输入http=127.0.0.1:8080;https=127.0.0.1:8080，这将会将Fiddler的流量导入到Burp。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007142346046.png" alt="重定向流量"></p>
+<p><img src="../images_result/images/2016042007142346046.png" alt="重定向流量"></p>
 
 <p>现在设置完成，可以访问首页了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007142440078.png" alt="流量展示"></p>
+<p><img src="../images_result/images/2016042007142440078.png" alt="流量展示"></p>
 
 <p>你也可以在Tools > Fiddler Options > Connections (tab)手动更改Fiddler的代理设置。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160420/2016042007142629301.png" alt="Fiddler设置"></p>
+<p><img src="../images_result/images/2016042007142629301.png" alt="Fiddler设置"></p>
 
 <h3>12.5.2 IE -> Burp -> Fiddler</h3>
 

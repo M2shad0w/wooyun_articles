@@ -3,7 +3,7 @@
 			<head>
 			     <title>Windows更新+中间人=远程命令执行 - 小飞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/10558">http://drops.wooyun.org/tips/10558</a></h1>
 				
@@ -31,11 +31,11 @@
 
 <p>wsus利用SOAP XML实现c/s之间的通信，当client主机首次连入wsus-server的时候，会有一个这样的注册过程。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151121/2015112106260576738.jpg" alt=""></p>
+<p><img src="../images_result/images/2015112106260576738.jpg" alt=""></p>
 
 <p>一旦完成了这样的注册流程，client主机就能进行定时更新检查了。(只要上述的cookies不过期)</p>
 
-<p><img src="http://static.wooyun.org//drops/20151121/2015112106260538931.jpg" alt=""></p>
+<p><img src="../images_result/images/2015112106260538931.jpg" alt=""></p>
 
 <p>这里我们详细分析一下每一个请求</p>
 
@@ -189,7 +189,7 @@ PackageIdentity="InternetExplorer-Package~11.2.9600.16428" /&gt; &lt;/Not&gt;
 
 <p>而http协议在内网中简直就是毒药。 最令人遗憾的是，截止到最新的版本，wsus依然使用http作为默认的同学协议，只是在安装完毕的wizard界面向管理员建议部署ssl通信（谁会去看那个？）</p>
 
-<p><img src="http://static.wooyun.org//drops/20151121/2015112106260658488.jpg" alt=""></p>
+<p><img src="../images_result/images/2015112106260658488.jpg" alt=""></p>
 
 <p>所以我们完全有能力在内网中通过中间人篡改metadata实现攻击（以system权限）。而且<strong>攻击一定会奏效</strong>，因为wsus部署好之后，client的update check是定期的，所以肯定能够伪造一个新更新，迫使用户安装。</p>
 

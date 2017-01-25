@@ -3,7 +3,7 @@
 			<head>
 			     <title>Laravel cookie伪造,解密,和远程命令执行 - fate0</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1515">http://drops.wooyun.org/papers/1515</a></h1>
 				
@@ -35,11 +35,11 @@
 
 <h3>下图为CBC模式加密过程</h3>
 
-<p><img src="http://static.wooyun.org/20140918/2014091814183850698.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091814183850698.png" alt="enter image description here"></p>
 
 <h3>下图为CBC模式解密过程</h3>
 
-<p><img src="http://static.wooyun.org/20140918/2014091814183849766.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091814183849766.png" alt="enter image description here"></p>
 
 <ul>
 <li>Plaintext: 明文(P)</li>
@@ -48,7 +48,7 @@
 <li>Key: 密钥(K)</li>
 </ul>
 
-<p><img src="http://static.wooyun.org/20140918/2014091814183929055.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091814183929055.jpg" alt="enter image description here"></p>
 
 <p><a name="introduction"></a></p>
 
@@ -91,7 +91,7 @@ $plaintext = unserialize($this-&gt;stripPadding($this-&gt;mcryptDecrypt($value, 
 
 <p>如果我们想伪造ID为1的用户，也就是cookie明文为<code>s:1:"1";后接24byte的补充</code>，为了能够使服务器端成功解密出ID为1的明文， 需要按照以下步骤生成IV:</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091814183978745.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091814183978745.jpg" alt="enter image description here"></p>
 
 <p>就获得了Pb 相对应的IVb，提交新的cookie，我们就成了ID为1的用户，也可以用同样的方法来登录其他ID。 对攻击者来说，能够登录任意用户也是相当牛逼的，但你能牛逼的程度取决于应用程序傻逼的程度。有没有一种方法， 能够通杀使用Laravel的应用呢？</p>
 
@@ -139,7 +139,7 @@ var_dump('2abcdef' == 2); // true
 
 <p>既然有了个CBC decryption oracle，那就很有可能利用<a href="https://www.usenix.org/legacy/events/woot10/tech/full_papers/Rizzo.pdf">CBC-R</a>技术来加密任意明文。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091814184020140.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091814184020140.png" alt="enter image description here"></p>
 
 <p>CBC模式的解密过程为 Pi=DK(Ci) xor Ci−1,C0=IV ，如果攻击者能够控制或者知晓 DK(Ci) 和Ci−1 ， 他就能够生成他想要的明文块。既然这里有个选择密文攻击，很显然攻击者能够控制 Ci 和 Ci−1 ， 至于DK(Ci)</p>
 
@@ -233,7 +233,7 @@ function addPadding($value) {
 
 <p>运行结果</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091814184014500.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091814184014500.png" alt="enter image description here"></p>
 
 <h3>测试2 利用padding oracle来实现RCE</h3>
 
@@ -426,7 +426,7 @@ if __name__ == '__main__':
 
 <p>运行结果</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091814184136717.png" alt="enter image description here"></p>      <p></p>
+<p><img src="../images_result/images/2014091814184136717.png" alt="enter image description here"></p>      <p></p>
     
 			</body>
 		</html>

@@ -3,7 +3,7 @@
 			<head>
 			     <title>OS X版本的OceanLotus（海莲花木马） - virustracker</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/13046">http://drops.wooyun.org/papers/13046</a></h1>
 				
@@ -41,11 +41,11 @@ EmptyApplication (for architecture i386): Mach-O executable i386
 
 <p>在混淆算法上，EmptyApplication使用了“xc”作为XOR算法的加密秘钥，混淆了二进制中的字符串。下面是一个简单的解密函数。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160222/2016022205482221511OS1.png" alt="p1"></p>
+<p><img src="../images_result/images/2016022205482221511OS1.png" alt="p1"></p>
 
 <p>在64位版本中，8字节长度以内的字符串会保存成整数值（integer value）。超过8字节长度的字符串会加密储存在相邻变量中，解密函数在读取变量时会以8个字节为界。如下所示，&amp;v34被传递给了解密函数，但是，函数实际上解密了v34和v35组合。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160222/2016022205482487517OS2.png" alt="p2"></p>
+<p><img src="../images_result/images/2016022205482487517OS2.png" alt="p2"></p>
 
 <p>在解码了<code>.en_icon</code>之后，EmptyApplication会将其写到一个名称是“pboard”的临时目录（可能是为了伪装成OS X系统中的粘贴板守护进程），并执行二进制文件。然后，EmptyApplication会删除自身，解码<code>.DS_Stores</code>，并把解码得到的二进制写为“EmptyApplication”-替换掉原来的EmptyApplication可执行文件。最后，通过调用<code>NSTask.launch()</code>就可以启动新的EmptyApplication。解密后的<code>.DS_Stores</code>二进制在功能上与原有的EmptyApplication并没有太多区别，只是新的EmptyApplication不会查找<code>.DS_Stores</code>。</p>
 
@@ -59,11 +59,11 @@ EmptyApplication (for architecture i386): Mach-O executable i386
 
 <p>还有一点，二进制中的大部分字符串都使用了XOR算法进行加密，但是，这个二进制使用了多个不同的秘钥，并且这些秘钥本身也经过了XOR加密。事实上，这个木马做的第一件事就是解密几个XOR秘钥。有趣的是，用于设置解密秘钥的代码会通过使用C++静态构造器（static constructor）在“main”入口点之前执行。这个代码引用在mach-o二进制文件的<code>__mod_init_func</code>部分。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160222/2016022205482686219OS3.png" alt="p3"></p>
+<p><img src="../images_result/images/2016022205482686219OS3.png" alt="p3"></p>
 
 <p>从上图中可以看出，整个可执行文件主要使用的解密秘钥是“Variable”。但是，这里出现了几个不同的"Variable" 字符串，这样能够方便木马作者使用不同的解密秘钥来更新代码。虽然，XOR解密不难，但是，这种方案能够增加逆向工程的繁琐程度。下面这个解密函数与EmptyApplication使用的函数很类似，只不过，下面这个版本采用了一个变量解密秘钥:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160222/2016022205482724491OS4.png" alt="p4"></p>
+<p><img src="../images_result/images/2016022205482724491OS4.png" alt="p4"></p>
 
 <h3>反调试</h3>
 
@@ -81,7 +81,7 @@ EmptyApplication (for architecture i386): Mach-O executable i386
 
 <p>木马会尝试联系多个CC服务器（C2）来获取命令和其他有效载荷。木马首先会使用HTTP连接端口80上的第一个C2：kiifd[.]pozon7[.]net。下面的例子就是一个check-in请求：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160222/2016022205482958051OS5.png" alt="p5"></p>
+<p><img src="../images_result/images/2016022205482958051OS5.png" alt="p5"></p>
 
 <p>在这里，1AD6A35F4C2D73593912F9F9E1A55097是IOPlatformUUID的MD5哈希。IOPlatformUUID是通过执行下面的OS X命令获取到的：</p>
 
@@ -110,13 +110,13 @@ EmptyApplication (for architecture i386): Mach-O executable i386
 
 <p>除了系统和用户信息，木马会根据www.microsoft.com获取当前时间。为了获取时间信息，木马会发送一个HTTP请求到www.microsoft.com，并解析响应中的Data标头。实际上，在请求中存在一个错误-发送到www.microsoft.com的请求是这样的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160222/2016022205483139448OS6.png" alt="p6"></p>
+<p><img src="../images_result/images/2016022205483139448OS6.png" alt="p6"></p>
 
 <p>你会发现，在请求中没有任何路径，并且服务器响应了一个400。因为木马只关心响应中的Data标头，所以，这个有问题的请求也是可以用的。解析后的数据会转换成epoch时间，并储存在~/Library/Hash/.Hashtag/.hash (或/Library/Hash/.Hashtag/.hash)。在这里，代码中还存在另一个错误，导致木马会从~/Library/Hash/.hash中读取时间信息，而真正的目录中应该有.HashTag。除了时间戳，值“th”和1也储存在这个文件中，所有的内容都使用了XOR加密，秘钥是“camon”。</p>
 
 <p>木马会把系统信息和用户信息发送到C2，并最后创建一个线程来处理C2发来的命令。下面的转储就是加密的C2通讯：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160222/2016022205483342301OS7.png" alt="p7"></p>
+<p><img src="../images_result/images/2016022205483342301OS7.png" alt="p7"></p>
 
 <p>使用秘钥0x1B解码了系统信息块后，我们得到了下面的数据-加粗的部分是产品名称，OS版本，用户名，机器名和IOPlatformUUID的MD5哈希。</p>
 
@@ -126,7 +126,7 @@ EmptyApplication (for architecture i386): Mach-O executable i386
 
 <p>在向C2发送了系统信息和用户信息后，这个线程每秒都会尝试读取C2信息，但是，C2似乎每隔5秒才会发送一次数据。如果C2响应的数据中包含有命令指令，木马就会执行某条命令。下面的这些字符串是从二进制文件中解密获得的，很可能属于C2端的一个交互命令控制台（console）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160222/2016022205483464886OS8.png" alt="p8"></p>
+<p><img src="../images_result/images/2016022205483464886OS8.png" alt="p8"></p>
 
 <p>除了几个命令之外，这些命令的作用都是一目了然的。</p>
 

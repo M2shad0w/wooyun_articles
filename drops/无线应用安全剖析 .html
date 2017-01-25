@@ -3,7 +3,7 @@
 			<head>
 			     <title>无线应用安全剖析  - sanr</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/wireless/4295">http://drops.wooyun.org/wireless/4295</a></h1>
 				
@@ -20,7 +20,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421412832.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421412832.jpg" alt="enter image description here"></p>
 
 <h2>WPA/WPA2‍‍爆破‍‍‍‍‍‍‍‍‍‍</h2>
 
@@ -30,19 +30,19 @@
 
 <p>抓握手包跑字典，这主要看你的字典给不给力了，拼人品的时间到了，和破解wep操作一样的，选中信号点lanch开始抓包，抓包的时候路由器是一定要有用户使用，目的是攻击导致对方掉线，在自动重连的过程中抓取WPA认证的四次握手包。如果一直没找到在线的客户端，就抓不到包的，只能等有人用的时候再试了。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421479009.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421479009.png" alt="enter image description here"></p>
 
 <p>弹出下面这个提示，说明抓包成功了，把包拷出来用EWSA验证下是不是完整的握手包，要包含完整的四次握手信息才能用来破解。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421454936.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421454936.png" alt="enter image description here"></p>
 
 <p>只有提示是有效的数据包才能进行字典破解，像下面这样的数据包就是可以利用的。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421585083.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421585083.png" alt="enter image description here"></p>
 
 <p>接下来请出hashcat神器或者ewsa直接跑字典，(由于我的电脑配置不是很高 往往我选择的是)直接丢到淘宝让专业人士来跑</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421556101.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421556101.png" alt="enter image description here"></p>
 
 <h2>Pin码穷举攻击(WPS‍‍破解)</h2>
 
@@ -52,15 +52,15 @@
 
 <p>点击扫描出现路由器MAC 名称 等信息 带有WPS支持PIN码破解，扫描出来带有WPS路由器，点击Reaver进行PIN码穷举攻击。如下图</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421522198.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421522198.png" alt="enter image description here"></p>
 
 <p>现已破解出PIN码</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421579807.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421579807.png" alt="enter image description here"></p>
 
 <p>进行连接</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421687639.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421687639.png" alt="enter image description here"></p>
 
 <p>在框中输入破解得到的pin码。点击下一步，软件会自动寻找路由，自动连接啦</p>
 
@@ -72,9 +72,9 @@
 
 <p>把计算器调为程序员型，选十六进制，比如08:10:76:0F:B3:5C这个MAC地址，取后六位，输入完后选十进制就算出pin码前7位了，第8位程序会自己补全。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421675230.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421675230.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421699914.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421699914.png" alt="enter image description here"></p>
 
 <p>计算得到的 就是路由的pin的前7位了，pin码共由8位数字组成，前7位已经出来了，最后一位自己猜呀猜就出来了，猜出了就直接连接路由啦。</p>
 
@@ -84,11 +84,11 @@
 
 <p>用WiFi万能钥匙获取WiFi密码，前提是已经root的安卓手机。WiFi万能钥匙从服务器获取到别人分享的密码来连接WiFi，断开后就把密码清除了。重点来了，WiFi在连接的过程中密码是保存在本机的/data/misc/wifi/wpa&#95;supplicant.conf上的，我们可以强行终止WiFi万能钥匙进程，那密码就永久保存下来了，这时候用带文件管理器比如re或者es浏览器，打开/data/misc/wifi/wpa&#95;supplicant.conf就能看到密码了。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421637024.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421637024.png" alt="enter image description here"></p>
 
 <p>或者装个app吧，搜下WiFi连接管理器，长按显示密码就行了，都需要root权限的。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421686640.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421686640.png" alt="enter image description here"></p>
 
 <h1>0x01 WIFI攻击</h1>
 
@@ -100,15 +100,15 @@
 
 <p>所谓中间人攻击就是目标主机与另一主机进行正常连接的过程中，攻击者通过拦截、插入、伪造、中断数据包等方式，达到获取对方登陆账户及密码，伪造身份等目的。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421756603.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421756603.jpg" alt="enter image description here"></p>
 
 <p>手机端进行ARP攻击</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421775237.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421775237.jpg" alt="enter image description here"></p>
 
 <p>连接进入网络之后，使用dSploit扫描到的设备列表与路由器管理界面中的一模一样：</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421755077.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421755077.png" alt="enter image description here"></p>
 
 <h2>跳板攻击</h2>
 
@@ -134,11 +134,11 @@
 
 <p>利用DHCP的脆弱性发起的攻击能够迅速耗尽IP地址池，导致大面积的业务瘫痪，而且难以追踪，危害性极大。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421742571.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421742571.jpg" alt="enter image description here"></p>
 
 <p>大量IP被占用</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421817789.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421817789.png" alt="enter image description here"></p>
 
 <h2>DDOS攻击</h2>
 
@@ -152,7 +152,7 @@
 
 <p>我们可以看到mdk3伪造了大量的虚假客户端去连接chinanet，MA地址也都是随机伪造的。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421810086.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421810086.png" alt="enter image description here"></p>
 
 <p>取消验证洪水攻击</p>
 
@@ -163,7 +163,7 @@
 <li><p>已连接的客户端自行断开连接</p></li>
 </ol>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421988573.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421988573.png" alt="enter image description here"></p>
 
 <p>这种攻击不是针对AP的，而是针对于client的，当我们发动攻击的时候我们可以马上看到无法访问网络了，见效很快。此时我们可以利用-s参数来加快发包速率。这种效率是非常高的，一般发动开始，client便开始断网。</p>
 
@@ -225,7 +225,7 @@ http://admin:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfe
   <p>http://www.exploit-db.com/exploits/28450/</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org/20141209/2014120920421990559.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120920421990559.jpg" alt="enter image description here"></p>
 
 <h1>0x04 路由器攻破可以干什么？</h1>
 

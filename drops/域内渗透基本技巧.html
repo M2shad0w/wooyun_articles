@@ -3,7 +3,7 @@
 			<head>
 			     <title>域内渗透基本技巧 - 碧云涛</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/421">http://drops.wooyun.org/tips/421</a></h1>
 				
@@ -20,11 +20,11 @@
 
 <p>综上所诉，域就是我们在进行渗透测试时，会碰到的一种网络环境。对域比较直观的展示时，在登录3389时，在域里的机器会多一个下拉框，见图。</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101800462942715.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101800462942715.png" alt="enter image description here"></p>
 
 <p>如果“登录到”这个下拉框没有显示，请点击“选项（0）”按钮显示。仔细看，这个下拉框有两个选项，一个是此计算机，本地登录。一个是TESTONE域。再看下图</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101800463033672.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2013101800463033672.png" alt="enter image description here"></p>
 
 <p>这个3389登录界面里的“登录到”下拉框只有一个选项TESTONE。没有此计算机的选项。没错，这台机器就是DC，变身成DC的机器本地帐户会被禁用，所以不能登录本机，只能登录到域中（一些书上是这样说的，偶学艺不精，没有准确验证过）。所以DC是伟大的。</p>
 

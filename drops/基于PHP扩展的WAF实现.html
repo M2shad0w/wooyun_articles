@@ -3,7 +3,7 @@
 			<head>
 			     <title>基于PHP扩展的WAF实现 - lightless</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/7333">http://drops.wooyun.org/web/7333</a></h1>
 				
@@ -32,7 +32,7 @@ $_GET($_POST)
 
 <p>这里我们需要用到<code>PHP Extension</code>， 即PHP扩展，位于PHP内核zend和PHP应用代码之间，很明显，扩展可以监控应用层代码的执行细节，也可以调用内核提供的ZEND API接口，包括禁用类、禁用函数等等。图为PHP结合其他必要组件的基本结构。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072402312441018.png" alt=""></p>
+<p><img src="../images_result/images/2015072402312441018.png" alt=""></p>
 
 <p>在ZEND中提供了接口供我们进行这样的操作，通过<code>zend_set_user_opcode_handler</code>就可以达到目的，根据某大牛所说，只需要<code>hook</code>三个<code>OPCODE</code>即可。</p>
 
@@ -155,15 +155,15 @@ static int LIGHT_DO_FCALL(ZEND_OPCODE_HANDLER_ARGS)
 
 <p>根据之前so文件放的位置不同，请自行修改路径。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072402312436936.png" alt=""></p>
+<p><img src="../images_result/images/2015072402312436936.png" alt=""></p>
 
 <p>最后我们重启<code>PHP</code>服务，让设置生效。<code>PHP</code>重启完成后，在终端中执行<code>php -m</code>，来验证扩展是否加载成功，如果在结果中看到了<code>lightWAF</code>，则说明加载成功。（请无视图中的错误信息，那个是我本地环境的问题，对<code>lightWAF</code>以及<code>PHP</code>没什么影响）</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072402312590443.png" alt=""></p>
+<p><img src="../images_result/images/2015072402312590443.png" alt=""></p>
 
 <p>成功加载后，我们看一下实际效果，这里有一个上传文件的页面，可以上传任何类型的文件并将上传的文件保存在upload目录中。现在模拟一下getshell的过程。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072402312583919.png" alt="上传页面"></p>
+<p><img src="../images_result/images/2015072402312583919.png" alt="上传页面"></p>
 
 <p>我们写个小马，内容如下：</p>
 
@@ -175,7 +175,7 @@ static int LIGHT_DO_FCALL(ZEND_OPCODE_HANDLER_ARGS)
 
 <p>进行上传，并访问shell，结果如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072402312530620.png" alt=""></p>
+<p><img src="../images_result/images/2015072402312530620.png" alt=""></p>
 
 <p>可以看到被成功拦截了，好吧，我们换只牛逼的马儿，试试反射型的。</p>
 
@@ -188,7 +188,7 @@ static int LIGHT_DO_FCALL(ZEND_OPCODE_HANDLER_ARGS)
 
 <p>继续上传并访问，看看结果：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072402312557402.png" alt=""></p>
+<p><img src="../images_result/images/2015072402312557402.png" alt=""></p>
 
 <p>依然被拦截了，只不过这次触发的是<code>ZEND_DO_FCALL_BY_NAME</code>这个<code>OPCODE</code>。 接下来我们看看正常的文件会不会被拦截，在lightWAF目录下写入一个test.php，用于模拟正常的业务文件，内容如下：</p>
 
@@ -200,7 +200,7 @@ static int LIGHT_DO_FCALL(ZEND_OPCODE_HANDLER_ARGS)
 
 <p>访问一下看看结果：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150724/2015072402312692292.png" alt=""></p>
+<p><img src="../images_result/images/2015072402312692292.png" alt=""></p>
 
 <p>可以看到<code>ls</code>命令成功的执行了，也就是说我们的正常文件是不会被拦截的，而只有<code>upload</code>目录中的文件会被拦截，这样做又会引发另一个弊端，倘若攻击者通过某种方法将shell写入正常的文件中，或是与业务结合起来，那么这种防御手段就很难生效了。具体如何防御还要结合其他的特征进行检测，并不是没有办法了，实际应用中不能只依靠检测文件路径这一条规则，需要结合业务进行部署防御方案。</p>
 

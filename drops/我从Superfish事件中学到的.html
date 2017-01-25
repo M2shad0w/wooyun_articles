@@ -3,7 +3,7 @@
 			<head>
 			     <title>我从Superfish事件中学到的 - mickey</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5080">http://drops.wooyun.org/papers/5080</a></h1>
 				
@@ -31,11 +31,11 @@ run.exe 30000 VDWFPInstaller.exe install
 
 <p>superfish基于Komodia的引擎，他会注册服务，并且安装驱动，这些驱动文件也都有自己的签名，不过已经过期了。安装目录有个VDWFP.pdb文件，是使用WFP(Windows Filtering Platform)实现连接重定向的，也会在注册表添加HKEY&#95;LOCAL&#95;MACHINE\SYSTEM\CurrentControlSet\Services\VDWFP项，包括要劫持的应用程序列表，不劫持的IP地址，劫持端口等信息。还会开放23154，23156，23160端口实现代理，方便中间人攻击。SuperfishCert.dll文件的作用是安装恶意证书到应用程序，VisualDiscovery.exe使用OpenSSL的静态链接文件，包含公共密钥是私有密钥，但是我逆向基础差，没有从这里看到，而是通过dump出的内存找到的，下一节会有介绍。</p>
 
-<p><img src="http://static.wooyun.org/20150305/2015030502582159865.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015030502582159865.png" alt="enter image description here"></p>
 
 <p>此时你在访问HTTPS网站的时候，浏览器里显示的SSL证书的颁发颁发机构(CA)会是superfish，而不是常见的VeriSign，如图：</p>
 
-<p><img src="http://static.wooyun.org/20150305/2015030502582244045.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015030502582244045.png" alt="enter image description here"></p>
 
 <p>Superfish的目的是在用户电脑上安装自签名证书，劫持用户浏览的HTTPS/HTTP网页，插入广告。从上可以知道superfish本身也是认证机构(CA)，如果我们能够得到CA的私钥， 自签名证书，还能做更多有意思的事情。</p>
 
@@ -53,11 +53,11 @@ run.exe 30000 VDWFPInstaller.exe install
 <pre><code>Strings.exe super.dmp &gt; stringsuper.txt
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20150305/2015030502582336410.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015030502582336410.png" alt="enter image description here"></p>
 
 <p>在stringsuper.txt文件中搜索"PRIVATE KEY"，可以看到证书信息，把相关信息COPY出来（https://github.com/robertdavidgraham/pemcrack/blob/master/test.pem），然后用openssl导入证书和密钥,确提示输入密码</p>
 
-<p><img src="http://static.wooyun.org/20150305/2015030502582311087.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015030502582311087.png" alt="enter image description here"></p>
 
 <p>老外有放出来一个单线程的破解工具（https://github.com/robertdavidgraham/pemcrack），还是使用stringsuper.txt里的单词当字典进行破解</p>
 
@@ -69,11 +69,11 @@ grep "^[a-z]*$" stringsuper.txt | sort | uniq &gt; super.dict
 
 <p>编译工具，破解</p>
 
-<p><img src="http://static.wooyun.org/20150305/2015030502582330723.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015030502582330723.png" alt="enter image description here"></p>
 
 <p>得到密码是komodia</p>
 
-<p><img src="http://static.wooyun.org/20150305/2015030502582446212.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015030502582446212.png" alt="enter image description here"></p>
 
 <h1>0x03 作恶</h1>
 
@@ -81,7 +81,7 @@ grep "^[a-z]*$" stringsuper.txt | sort | uniq &gt; super.dict
 
 <p>得到认证机构(CA)的私钥后，任何人都可以以该机构的身份颁发证书了。比如利用superfish的CA私钥给恶意软件做签名逃避主动防御和杀毒，mcafee已经发现有真实的互联网攻击了（https://blogs.mcafee.com/mcafee-labs/superfish-root-certificate-used-sign-malware）</p>
 
-<p><img src="http://static.wooyun.org/20150305/2015030502582413542.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015030502582413542.png" alt="enter image description here"></p>
 
 <p>其他的攻击利用场景：受害者机器已经安装了superfish软件,在一个不可信的网络内（比如共享WIFI），自己的上网流量可以被重定向（比如攻击者通过ARP/修改受害者机器网关/修改受害者机器的DNS配置等方法）；攻击者的平台使用的是KALI，使用hostapd做了一个无线热点，然后用sslsplit(https://github.com/droe/sslsplit)做中间人劫持，sslsplit比mitmproxy好的地方是，他还能支持其他基于TLS/SSL的流量，比如像FTPS,SMTP OVER SSL，IMAP OVER SSL等，操作步骤如下：</p>
 
@@ -137,7 +137,7 @@ TtCqSwGl9t9JEoFqvtW+znZ9TqyLiOMw7TGEUI+88VAqW0qmXnwPcfo=
 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3745585843775c565b5e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# sslsplit -D -l connections.log -S /var/log/sslsplit -k ca.key -c ca.cer ssl 0.0.0.0 8443
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20150305/2015030502582546372.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015030502582546372.png" alt="enter image description here"></p>
 
 <p>这样受害者再访问有HTTPS的网站时，所有会话信息会保存到/var/log/sslsplit。</p>
 

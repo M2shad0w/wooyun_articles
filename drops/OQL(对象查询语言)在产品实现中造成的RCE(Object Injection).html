@@ -3,7 +3,7 @@
 			<head>
 			     <title>OQL(对象查询语言)在产品实现中造成的RCE(Object Injection) - Nebula</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4115">http://drops.wooyun.org/papers/4115</a></h1>
 				
@@ -28,7 +28,7 @@
 
 <p>在百度中搜索: GemFire,排在第5位的结果就是我们的答案</p>
 
-<p><img src="http://static.wooyun.org/20141202/2014120201092510451.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120201092510451.png" alt="enter image description here"></p>
 
 <p>我们知道中国是个人口大国,由于地域经济差异大,外出打工挣钱的人特别多.逢年过节买火车票一直有个头痛的问题,就是关键时候这个网站就打不开了.无论它体验及性能有多烂,我们还是要去上它,因为要回家(这是刚需),随着国人网上预订越来越多,存在并发访问量爆表的问题,庆幸的是它一直在通过技术手段解决这个问题.</p>
 
@@ -68,29 +68,29 @@
 
 <p>首先，我们启动任何一个Java程序，我这里是个Tomcat,再找到它的PID,如图：</p>
 
-<p><img src="http://static.wooyun.org/20141202/2014120201092551816.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120201092551816.png" alt="enter image description here"></p>
 
 <p>然后使用jmap命令生成堆转储快照，如图：</p>
 
-<p><img src="http://static.wooyun.org/20141202/2014120201092689303.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120201092689303.png" alt="enter image description here"></p>
 
 <p>然后使用堆分析命令jhat,它是个http服务，默认端口7000，如图：</p>
 
-<p><img src="http://static.wooyun.org/20141202/2014120201092627253.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120201092627253.png" alt="enter image description here"></p>
 
 <p>我们就可以使用浏览器查看堆信息了，它还提供我们前面需要的OQL查询功能，如图：</p>
 
-<p><img src="http://static.wooyun.org/20141202/2014120201092657530.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120201092657530.png" alt="enter image description here"></p>
 
 <p>查询长度大于100的字符串：</p>
 
-<p><img src="http://static.wooyun.org/20141202/2014120201092678727.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120201092678727.png" alt="enter image description here"></p>
 
 <p>Java代码执行系统命令也不需要老外说的那么复杂，还使用反射？（当然，看语句拼接情况）：</p>
 
-<p><img src="http://static.wooyun.org/20141202/2014120201092671192.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120201092671192.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141202/2014120201092773750.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120201092773750.png" alt="enter image description here"></p>
 
 <p>未来使用对象数据库会越来越多，而漏洞类型已经不是我们之前熟悉的SQL注入漏洞了，而是OQL注入，危害就更为严重了(不仅限于Java)。</p>      <p></p>
     

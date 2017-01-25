@@ -3,7 +3,7 @@
 			<head>
 			     <title>浏览器安全策略说之内容安全策略CSP - 天融信阿尔法实验室</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1439">http://drops.wooyun.org/tips/1439</a></h1>
 				
@@ -72,7 +72,7 @@
 
 <p>目前CSP各个浏览器支持情况可以去<a href="http://caniuse.com/#feat=contentsecuritypolicy">http://caniuse.com/#feat=contentsecuritypolicy</a>查看</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101714582130228.png" alt="NewImage" width="953" height="528" border="0">cspuse<br></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101714582130228.png" alt="NewImage" width="953" height="528" border="0">cspuse<br></p>
 
 <h2>0x03 CSP语法</h2>
 
@@ -80,15 +80,15 @@
 
 <h3>CSP1.0指令</h3>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101714582181046.png" alt="NewImage" width="771" height="438" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101714582181046.png" alt="NewImage" width="771" height="438" border="0"></p>
 
 <h3>CSP1.1新增指令</h3>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101714582376091.png" alt="NewImage" width="768" height="129" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101714582376091.png" alt="NewImage" width="768" height="129" border="0"></p>
 
 <h3>CSP语法</h3>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101714582319315.png" alt="NewImage" width="718" height="400" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101714582319315.png" alt="NewImage" width="718" height="400" border="0"></p>
 
 <h2>0x04 CSP默认特性</h2>
 
@@ -193,7 +193,7 @@ script-src userscripts.example.com 脚本只能加载userscripts.example.com域�
 
 <p>在线CSP编写，可以协助和帮助网站管理员编写出适合自己站点的CSP。http://cspisawesome.com/</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101714582449672.png" alt="NewImage" width="1121" height="792" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101714582449672.png" alt="NewImage" width="1121" height="792" border="0"></p>
 
 <h2>0x06 CSP的错误使用</h2>
 
@@ -203,7 +203,7 @@ script-src userscripts.example.com 脚本只能加载userscripts.example.com域�
 
 <p>（1）我在2013年底访问http://www.grosshandel-hahn.de/，发现CSP策略明显使用错误。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101714582438641.png" alt="NewImage" width="1169" height="716" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101714582438641.png" alt="NewImage" width="1169" height="716" border="0"></p>
 
 <p>可以看到使用X-Content-Security-Policy-Report-Only。此头的意思是让浏览器只汇报日志，不阻止任何内容。但这条策略里却没有给出接收信息日志的地址。</p>
 
@@ -299,7 +299,7 @@ fclose($file);
 
 <p>而使用Content-Security-Policy-Report-Only进行单独接收攻击报告的网站只有24个。而统计中也指出，发现大量网站使用unsafe-inline这个指令，分析其原因可能是由于开发人员很难在页面中彻底消除内联脚本，这很让人失望，所有只能要求制定的CSP策略更加严谨。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101714582642022.png" alt="NewImage" width="481" height="289" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101714582642022.png" alt="NewImage" width="481" height="289" border="0"></p>
 
 <p><a href="http://blog.veracode.com/2013/11/security-headers-on-the-top-1000000-websites-november-2013-report/">http://blog.veracode.com/2013/11/security-headers-on-the-top-1000000-websites-november-2013-report/</a></p>
 

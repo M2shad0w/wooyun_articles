@@ -3,7 +3,7 @@
 			<head>
 			     <title>关于libStagefright系列漏洞分析 - 百度安全攻防实验室</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/7506">http://drops.wooyun.org/papers/7506</a></h1>
 				
@@ -28,19 +28,19 @@
 
 <p>微信同样受到影响。通过微信发送的视频，点击也会导致media server崩溃。此外，收到的视频即使用户不点击，后面在微信中发送图片时，也会造成前面gallery,文件管理器同样的效果，也会触发缩略图过程并溢出。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150729/2015072910112222552.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072910112222552.jpg" alt="enter image description here"></p>
 
 <p>在最新版的Chrome43版中打开一个video链接（mp4），无需点击自动触发。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150729/2015072910112212988.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072910112212988.jpg" alt="enter image description here"></p>
 
 <p>开机同样是一个触发点，mediaprovider会扫描sd卡里的所有文件，并且尝试去解析，恩开机自启动</p>
 
-<p><img src="http://static.wooyun.org//drops/20150729/2015072910112375153.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072910112375153.jpg" alt="enter image description here"></p>
 
 <p>media framework的架构如下：基本上采用了android的media框架来开发的程序都会受到影响。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150729/2015072910112392589.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072910112392589.jpg" alt="enter image description here"></p>
 
 <p>看到这里，想说的是，外界所谓的那些，关闭彩信功能保平安也就寻求个心理安慰吧。从根源上看大部分（有一个例外）都和整数计算的上溢/下溢相关，因为这个问题，间接导致了后续的内存破坏等相关的安全问题。</p>
 
@@ -144,7 +144,7 @@ status_t MPEG4Extractor::parse3GPPMetaData(off64_t offset, size_t size, int dept
 
 <p>读到的内容被保存到一个metadata中，或许可以泄漏（例如title, artist这些信息）</p>
 
-<p><img src="http://static.wooyun.org//drops/20150729/2015072910112357670.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072910112357670.jpg" alt="enter image description here"></p>
 
 <h4>1.1.2. No2 heap 越界写</h4>
 
@@ -183,25 +183,25 @@ off64_t chunk_data_size = *offset + chunk_size – data_offset;
 
 <p>然后是<code>mpeg tx3g tag</code>的，<code>chunk_size</code>是<code>uint</code>，与<code>size</code>之和溢出，导致实际分配比<code>size</code>小的内存。后面的<code>memcpy heap overflow</code>，写入的data应该是可控的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150729/2015072910112458156.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072910112458156.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150729/2015072910112430755.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072910112430755.jpg" alt="enter image description here"></p>
 
 <p>将trak修改为tx3g，然后前面的改为ffff</p>
 
-<p><img src="http://static.wooyun.org//drops/20150729/2015072910112413550.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072910112413550.jpg" alt="enter image description here"></p>
 
 <h4>1.1.4. No4 heap 越界读</h4>
 
 <p>出现在covr这个tag处理时，<code>chunk_data_size</code>小于<code>kSkipBytesOfDataBox</code>时，<code>setData</code>会读过<code>buffer</code>的边界。由于<code>setData</code>会分配内存，但多半分配失败，所以可能也会导致向地址为0的内存写入。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150729/2015072910112475261.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072910112475261.jpg" alt="enter image description here"></p>
 
 <h4>1.1.5. No5 heap 越界写</h4>
 
 <p>当<code>chunk_data_size=SIZE_MAX</code>时，+1导致分配0长度的内存，后面的<code>readAt</code>会边读文件边写入buffer，在读到文件结束之前已经导致了<code>heap write</code> 越界。由于覆盖数据来自文件，所以内容与长度都是可控的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150729/2015072910112548613.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072910112548613.jpg" alt="enter image description here"></p>
 
 <h4>1.1.6. No6 Integer overflow</h4>
 
@@ -367,7 +367,7 @@ off64_t chunk_data_size = *offset + chunk_size – data_offset;
 
 <p>No6-8：都是<code>integer overflow</code>，但没有看到直接内存破坏的错误。可能会造成数据异常等。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150729/2015072910112590513.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072910112590513.jpg" alt="enter image description here"></p>
 
 <h3>1.3. POC</h3>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>也谈链路劫持 - lk1ngaa7</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11682">http://drops.wooyun.org/tips/11682</a></h1>
 				
@@ -30,7 +30,7 @@
 
 <p>页面请求后得到奇怪数据返回：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151227/201512271530388520519.jpg" alt=""></p>
+<p><img src="../images_result/images/201512271530388520519.jpg" alt=""></p>
 
 <p>请求中 Connection 字段为 keep alive 且请求协议是 1.0 而返回的header 关闭了请求，返回一段奇怪的js，跳转到另外一个 url</p>
 
@@ -47,11 +47,11 @@
 
 <hr>
 
-<p><img src="http://static.wooyun.org//drops/20151227/201512271530418749227.jpg" alt=""></p>
+<p><img src="../images_result/images/201512271530418749227.jpg" alt=""></p>
 
 <p>客户端接受的数据包TTL是 51 ，后面来自真实 server 的TTL 是 47，还有 1022 和 1024（本来应该在前面） 都是两个来自 劫持者的数据包，但是 fin 包在前，提前关闭连接，导致HTTP应用层拿不到正确的数据，导致浏览器白屏。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151227/201512271530464059035.jpg" alt=""></p>
+<p><img src="../images_result/images/201512271530464059035.jpg" alt=""></p>
 
 <p>这次 TCP 连接上的其他数据包，可以看到有 部分 数据包，被抛弃，而且被抛弃的数据包的 TTL 和 握手包的TTL 相等（一般 握手包 不会被劫持，说明被抛弃的包是来自 真实的服务器的）是 47 。</p>
 
@@ -61,7 +61,7 @@
 
 <p>RFC定义：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151227/201512271530494609743.jpg" alt=""></p>
+<p><img src="../images_result/images/201512271530494609743.jpg" alt=""></p>
 
 <p>所以对于给定地址和协议的 ip 包来说，它的identification应该是公差为 1 的单调递增数列：</p>
 
@@ -69,11 +69,11 @@
 
 <p>劫持者：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151227/201512271530523972553.jpg" alt=""></p>
+<p><img src="../images_result/images/201512271530523972553.jpg" alt=""></p>
 
 <p>被劫持者：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151227/201512271530553654062.jpg" alt=""></p>
+<p><img src="../images_result/images/201512271530553654062.jpg" alt=""></p>
 
 <p>仔细看，可以发现 993 和 1022 这两个包的identification 是一样的，多次抓包也是这样，所以这里可以判断，链路上肯定出了问题。</p>
 
@@ -83,7 +83,7 @@
 
 <p>劫持过程应该类似于：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151227/201512271530572787772.jpg" alt=""></p>
+<p><img src="../images_result/images/201512271530572787772.jpg" alt=""></p>
 
 <p>结论已经获得，但是问题的解决就是要定位到相应的劫持路由，然后向有关部门反馈：</p>
 

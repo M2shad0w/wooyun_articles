@@ -3,7 +3,7 @@
 			<head>
 			     <title>域渗透的金之钥匙 - mickey</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/9591">http://drops.wooyun.org/tips/9591</a></h1>
 				
@@ -20,7 +20,7 @@
 
 <p>我原来发过一个微薄说</p>
 
-<p><img src="http://static.wooyun.org//drops/20151013/2015101303103866694120.png" alt=""></p>
+<p><img src="../images_result/images/2015101303103866694120.png" alt=""></p>
 
 <!--more-->
 
@@ -42,7 +42,7 @@
 
 <p>krbtgt(current-disabled):502:aad3b435b51404eeaad3b435b51404ee:<strong>6a8e501fabcf264c70 ef3316c6aab7dc:::</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151013/2015101303104160300220.png" alt=""></p>
+<p><img src="../images_result/images/2015101303104160300220.png" alt=""></p>
 
 <p>然后该用神器mimikatz出场了，依次执行</p>
 
@@ -52,7 +52,7 @@ mimikatz # kerberos::ptt Administrator.kiribi
 mimikatz # kerberos::tgt
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151013/2015101303104318617314.png" alt=""></p>
+<p><img src="../images_result/images/2015101303104318617314.png" alt=""></p>
 
 <p>到现在，我们又重新拥有域管理员权限了，可以验证下</p>
 
@@ -60,7 +60,7 @@ mimikatz # kerberos::tgt
 E:\&gt;psexec.exe \\WIN-0DKN2AS0T2G cmd
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151013/201510130310452401147.png" alt=""></p>
+<p><img src="../images_result/images/201510130310452401147.png" alt=""></p>
 
 <h1>0x02 后话闲扯</h1>
 

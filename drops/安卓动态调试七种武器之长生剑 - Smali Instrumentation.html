@@ -3,7 +3,7 @@
 			<head>
 			     <title>安卓动态调试七种武器之长生剑 - Smali Instrumentation - 蒸米</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/6045">http://drops.wooyun.org/papers/6045</a></h1>
 				
@@ -160,7 +160,7 @@ D - double (64 bits)
 
 <p>测试程序是一个简单的crackme (图1)。输入密码，然后点击check，如果密码正确会输出yes，否则输出no。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503033327873.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503033327873.png" alt="enter image description here"></p>
 
 <p>图1 Crackme1的界面</p>
 
@@ -238,7 +238,7 @@ java -jar signapk.jar testkey.x509.pem testkey.pk8 update.apk update_signed.apk
 
 <p>5 安装程序到android，随便输入点啥，然后点击check按钮，随后在logcat中就可以看到getkey("mrkxqcroxqtskx",42)这个函数的返回值了(图2)。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503033349748.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503033349748.png" alt="enter image description here"></p>
 
 <p>图2 通过logcat获取getkey的返回值</p>
 
@@ -341,7 +341,7 @@ java -jar AndroidMasterKeys.jar -a orig.apk -z moddedClassesDex.zip -o out.apk
 
 <p><code>orig.apk</code>是原本的apk文件，<code>moddedClassesDex.zip</code>是修改后的<code>classes.dex</code>并压缩成zip文件，<code>out.apk</code>就是利用<code>Masterkey</code>漏洞生成的新的apk文件。如果成功的话用rar打开文件会看到两个<code>classes.dex</code>。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503033470295.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503033470295.png" alt="enter image description here"></p>
 
 <p>图3 Masterkey生成的apk文件有两个classes.dex文件</p>
 

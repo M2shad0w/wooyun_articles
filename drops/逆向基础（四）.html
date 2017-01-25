@@ -3,7 +3,7 @@
 			<head>
 			     <title>逆向基础（四） - reverse-engineering</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2046">http://drops.wooyun.org/tips/2046</a></h1>
 				
@@ -777,15 +777,15 @@ main endp
 
 <p>9是i的最后一个循环制，这也就是为什么JL在递增的最后不会触发，之后函数结束，如图12.3。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404543359892.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404543359892.png" alt="enter image description here"></p>
 
 <p>图12.1： OllyDbg main（）开始</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404543380770.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404543380770.png" alt="enter image description here"></p>
 
 <p>图12.2： OllyDbg： 循环体刚刚递增了i，现在i=6</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071406022227566.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071406022227566.png" alt="enter image description here"></p>
 
 <p>图12.3： OllyDbg中ESI=10，循环终止</p>
 
@@ -883,7 +883,7 @@ skipping this CALL 8D1000h=0x8d1000
 
 <p>生成的代码可以在此使用：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404543396491.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404543396491.png" alt="enter image description here"></p>
 
 <p>图12.4： IDA加载了.idc-script之后的内容</p>
 
@@ -1153,19 +1153,19 @@ _strlen ENDP
 
 <p>然后SUB指令会被执行：图13.4。 差值保存在EAX中，为7。 但是，字符串“hello!”的长度是6，这儿7是因为包含了末尾的 。但是strlen（）函数必须返回非0部分字符串的长度，所以在最后还是要给EAX减去1，然后将它作为返回值返回，退出函数。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071406020261496.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071406020261496.png" alt="enter image description here"></p>
 
 <p>图13.1： 第一次循环迭代起始位置</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404543428160.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404543428160.png" alt="enter image description here"></p>
 
 <p>图13.2：第二次循环迭代开始位置</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404543472335.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404543472335.png" alt="enter image description here"></p>
 
 <p>图13.3： 现在要计算二者的差了</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404543587563.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071404543587563.png" alt="enter image description here"></p>
 
 <p>图13.4： EAX需要减一</p>
 
@@ -1298,7 +1298,7 @@ loc_2DF6                ; CODE XREF: _strlen+8
 
 <p>在x86中这里并没有这样的地址存取方式，但是在其他处理器中却是有的，甚至在PDP-11里也有。这是PDP-11中一个前增、后增、前减、后减的例子。这个很像是C语言（它是在PDP-11上开发的）中“罪恶的”语句形式<em>ptr++、</em>++ptr、<em>ptr--、</em>--ptr。顺带一提，C的这个语法真的很难让人记住。下为具体叙述：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405025435563.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071405025435563.jpg" alt="enter image description here"></p>
 
 <p>C语言作者之一的Dennis Ritchie提到了这个可能是由于另一个作者Ken Thompson开发的功能，因此这个处理器特性在PDP-7中最早出现了（参考资料&#91;28&#93;&#91;29&#93;）。因此，C语言编译器将在处理器支持这种指令时使用它。</p>
 

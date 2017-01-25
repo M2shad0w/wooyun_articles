@@ -3,7 +3,7 @@
 			<head>
 			     <title>IDAPython 让你的生活更滋润 – Part 3 and Part 4 - 蒸米</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12060">http://drops.wooyun.org/tips/12060</a></h1>
 				
@@ -39,7 +39,7 @@
 
 <p>研究员经常会对dll文件进行分析。在很多情况下，这些dll会被其他的可执行文件加载。一种解决方案是用IDA在选项中设置，确保IDA在每个库被加载的时候都暂停下来。如图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160109/2016010904092423920110.jpg" alt="p1"></p>
+<p><img src="../images_result/images/2016010904092423920110.jpg" alt="p1"></p>
 
 <p>然而这种方式非常低效，经常需要研究人员手动的暂停和继续：先判断最新加载的库是不是想调试的那个，如果不是再继续执行。如果能仅仅运行一条简单的指令，然后坐等想要的文件被加载进来的话，会让我们的调试工作更加惬意。</p>
 
@@ -49,11 +49,11 @@
 
 <p>我们将用一个dd.dll的文件作为例子进行讲解。这个文件在运行过程中被提取后，通常会被利用程序注入到另一个进程中。为了能够在IDA中动态调试这个文件，我将会动态加载rundll32.exe这个保存在system32目录下的执行文件，并且将dd.dll文件作为参数（如图2所示）。在给定导出名的情况下，rundll32.exe文件允许用户加载一个指定的dll文件。在这个样本中，我对dll文件中的Setting函数很有兴趣，于是我将如下参数传递给IDA：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160109/2016010904092688956210.jpg" alt="p2"></p>
+<p><img src="../images_result/images/2016010904092688956210.jpg" alt="p2"></p>
 
 <p>下一步是当一个DLL文件被加载进来后，找到正确的地方设置断点。为了做到这一点，我先在调试器设置中的”在库被加载或卸载时暂停”的选项上打勾，然后我能够看到有一个断点被设置到了NtMapViewOfSection的后面一个指令。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160109/201601090409287171533.jpg" alt="p3"></p>
+<p><img src="../images_result/images/201601090409287171533.jpg" alt="p3"></p>
 
 <p>接下来我在0x7C91ADFB处下了一个断点。在我的代码中，我使用<code>add_bpt()</code>和<code>enable_bpt()</code>去创建和激活这个断点。</p>
 
@@ -108,7 +108,7 @@ return False
 
 <p>这个代码会遍历所有被加载进来的模块，然后判断”dd.dll”是不是被加载了进来，如果被加载了，一条调试信息将会被打印出来，并且会返回Ture并触发断点。当执行的时候，我们能看到如下输出：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160109/201601090409299933942.jpg" alt="p4"></p>
+<p><img src="../images_result/images/201601090409299933942.jpg" alt="p4"></p>
 
 <p>在这时候，我们可以设置我们期望的导出函数为”Setting”然后运行程序直到触发断点。为了能够自动的完成这个任务，如下代码将会被用到：</p>
 
@@ -136,7 +136,7 @@ GetDebuggerEvent(WFNE_SUSP, -1)
 
 <p>这段代码会遍历所有加载的模块来寻找”dd.dll”文件。当找到这个文件之后，我们会分析这个DLL文件并且遍历代码中的函数名。当我们找到”Setting”这个函数名后会在这个函数名对应的函数上设置一个断点。随后继续我们继续运行调试器，直到这个断点被触发。当我们执行的时候，发现调试器暂停在了我们期望的地址上：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160109/201601090409311273952.jpg" alt="p5"></p>
+<p><img src="../images_result/images/201601090409311273952.jpg" alt="p5"></p>
 
 <h1>0x04 Part3 – 总结</h1>
 
@@ -190,7 +190,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 <p>当我们把这个文件载入IDA后，我们可以看到期望的循环和重定向的语句。如果我们不看底层代码（源代码）的话，通过反汇编，我们依然可以知道会发生什么。如图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160109/201601090409321660964.jpg" alt="p6"></p>
+<p><img src="../images_result/images/201601090409321660964.jpg" alt="p6"></p>
 
 <p>但是如果我们想要知道哪一块代码会在运行时执行。我就需要IDAPython来完成这个挑战了。</p>
 
@@ -216,7 +216,7 @@ while True:
 
 <p>在上面的代码中，我们先启动调试器，然后利用Runto(BeginEA())执行到入口处的代码。随后的GetDebuggerEvent()函数调用将会在断点触发的时候进行等待。然后我们使用EnableTracing()函数启动跟踪。随后的GetDebuggerEvent()将会让调试器继续单步执行。最后我们进入一个循环然后遍历每个地址，直到我们收到进程结束的信号为止。输出结果如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160109/201601090409345062472.jpg" alt="p7"></p>
+<p><img src="../images_result/images/201601090409345062472.jpg" alt="p7"></p>
 
 <p>下一步就是取出和设置每一条执行的指令的地址的颜色。为了做到这一点，我们可以使用GetColor()和SetColor()函数。接下来的代码可以得到目标行指令的颜色，然后判断并设置这行指令的颜色。在这个例子中，我使用了四种不同深度的蓝色。某行指令被执行的越多颜色就会越深（我鼓励读者自定义自己的偏好）。</p>
 
@@ -241,7 +241,7 @@ SetColor(addr, CIC_ITEM, new_color)
 
 <p>执行上面的代码会让指定行的指令变蓝，如果指定行的指令被执行了多次，会让蓝色变得更深。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160109/201601090409354213282.jpg" alt="p8"></p>
+<p><img src="../images_result/images/201601090409354213282.jpg" alt="p8"></p>
 
 <p>我们可以使用接下的代码去除掉之前在IDA Pro文件中的颜色。因为设置颜色为0xFFFFFF会让颜色变成白色，并且去掉之前设置的所有颜色。</p>
 
@@ -286,7 +286,7 @@ while True:
 
 <p>当我们在我们的程序中执行这段代码的时候，我们能看到如下的变化：我们能看到所有被执行的汇编指令都被高亮了。就像下图所示，指令执行的次数越多，颜色就会越深，这会让我们很容易的理解程序执行的流程。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160109/201601090409371644193.jpg" alt="p9"></p>
+<p><img src="../images_result/images/201601090409371644193.jpg" alt="p9"></p>
 
 <h1>0x08 Part4 – 总结</h1>
 

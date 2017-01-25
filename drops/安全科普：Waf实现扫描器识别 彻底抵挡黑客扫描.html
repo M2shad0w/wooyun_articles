@@ -3,7 +3,7 @@
 			<head>
 			     <title>安全科普：Waf实现扫描器识别 彻底抵挡黑客扫描 - Seay</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/730">http://drops.wooyun.org/tips/730</a></h1>
 				
@@ -46,7 +46,7 @@
 
 <p>下面是我抓到的一个wvs的请求</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404170835926.jpg" alt="20131107114510_20989.jpg"></p>
+<p><img src="../images_result/images/2014071404170835926.jpg" alt="20131107114510_20989.jpg"></p>
 
 <pre><code>GET /help/website-performance-settings/x HTTP/1.1
 Pragma: no-cache
@@ -72,7 +72,7 @@ Acunetix-Aspect-Queries: filelist;aspectalerts
 
 <p>另外在请求的参数值，比如URL跟POST数据中都有很明显的acunetix_wvs_security_test特征，下图是我从waf拦截中调取到的结果。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404170988492.jpg" alt="20131107114759_54681.jpg"></p>
+<p><img src="../images_result/images/2014071404170988492.jpg" alt="20131107114759_54681.jpg"></p>
 
 <p></p><p></p>
 
@@ -82,7 +82,7 @@ Acunetix-Aspect-Queries: filelist;aspectalerts
 
 <p>同样的，appscan也有自己的一些特征，如下</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404170998594.jpg" alt="20131107114839_35125.jpg"></p>
+<p><img src="../images_result/images/2014071404170998594.jpg" alt="20131107114839_35125.jpg"></p>
 
 <h4>Bugscan</h4>
 
@@ -93,11 +93,11 @@ Acunetix-Aspect-Queries: filelist;aspectalerts
 
 <p>另外还有一些特征就不一一列举。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404171028293.jpg" alt="20131107114919_40006.jpg"></p>
+<p><img src="../images_result/images/2014071404171028293.jpg" alt="20131107114919_40006.jpg"></p>
 
 <p>注意：并不是所有的请求都会带有扫描器的特征，比如下面的一个包也是wvs发出的，但是没有带上面我们说的特征，扫描器指纹特征只能抵挡住一部分的扫描，但是我们可以利用这些信息识别出扫描器然后干掉IP等。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404171173963.jpg" alt="20131107114955_31758.jpg"></p>
+<p><img src="../images_result/images/2014071404171173963.jpg" alt="20131107114955_31758.jpg"></p>
 
 <h3>二、单IP+ cookie某时间段内触发规则次数</h3>
 
@@ -105,7 +105,7 @@ Acunetix-Aspect-Queries: filelist;aspectalerts
 
 <p>数据证明如下图：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404171124960.jpg" alt="20131107115034_38569.jpg"></p>
+<p><img src="../images_result/images/2014071404171124960.jpg" alt="20131107115034_38569.jpg"></p>
 
 <p>另外还可以根据IP+user angent等，或者更多维度。</p>
 
@@ -138,7 +138,7 @@ Acunetix-Aspect-Queries: filelist;aspectalerts
 
 <p>通过抓取wvs的数据包可以看到，扫描器很快的捕获了http://localhost/1.php?id=1这个链接，并进行漏洞测试。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404171257296.jpg" alt="20131107115118_39599.jpg"></p>
+<p><img src="../images_result/images/2014071404171257296.jpg" alt="20131107115118_39599.jpg"></p>
 
 <p>当然如果在正常情况下也给所有用户植入这种代码是非常令人反感的，用户体验也会大打折扣，可以在前期先做一些条件限制，比如固定时间段内触发waf拦截规则到达预定阀值，再给这个用户单独植入一个隐藏链接。</p>
 
@@ -156,7 +156,7 @@ cookie植入有利有弊，优点是更直接，种下cookie马上就能根据�
 <p>这种方法主要用来应对探测敏感目录和文件的扫描器，这类的扫描器都是基于字典文件，通过对字典内的url进行请求获得的返回信息来进行判断目录或者文件的是否存在。
 如果某个IP在一段时间内请求频率过快，这时候waf可以进行收集一段时间内webserver返回404状态数目，到达一定阀值后进行封杀。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404171275656.jpg" alt="20131107115147_87082.jpg"></p>
+<p><img src="../images_result/images/2014071404171275656.jpg" alt="20131107115147_87082.jpg"></p>
 
 <h2>0x02 思考</h2>
 

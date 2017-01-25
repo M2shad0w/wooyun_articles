@@ -3,7 +3,7 @@
 			<head>
 			     <title>基于WPAD的中间人攻击 - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11107">http://drops.wooyun.org/tips/11107</a></h1>
 				
@@ -14,7 +14,7 @@
 
 <p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b5501813510c15f5fdd0c785dcdb56353fe2dcdbd1dac2c65025385212055d1216532b2553290f503d03533b17521c03503a3f52090f5c2c02503d1c52211d56353e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>很受启发，于是对其实际利用做了进一步研究，发现基于WPAD的中间人攻击很是有趣，现将收获分享给大家。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/2015120714225423077119.png" alt="p1"></p>
+<p><img src="../images_result/images/2015120714225423077119.png" alt="p1"></p>
 
 <!--more-->
 
@@ -49,7 +49,7 @@ function FindProxyForURL(url, host) {
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/201512071422569730327.png" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/201512071422569730327.png" alt="这里写图片描述"></p>
 
 <p>此图片修改于http://wenku.baidu.com/link?url=KFoXTvqgxnNR1lxM_2dHCCRlJXp0D2GXa80fI7BCjR7XSoDqv2jmLJ8WJoSaew9MFSpKmTDV9lxNF2XKhTaJ1T8rSghDrhZ71OqlQ1yqx-a</p>
 
@@ -59,7 +59,7 @@ function FindProxyForURL(url, host) {
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/201512071422587546237.png" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/201512071422587546237.png" alt="这里写图片描述"></p>
 
 <p>web浏览器向DHCP服务器发送DHCP INFORM查询PAC文件位置</p>
 
@@ -97,7 +97,7 @@ function FindProxyForURL(url, host) {
 
 <p>对照WPAD的原理，不难发现其中存在的漏洞，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/201512071423006981747.png" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/201512071423006981747.png" alt="这里写图片描述"></p>
 
 <p>此图片修改于 http://wenku.baidu.com/link?url=KFoXTvqgxnNR1lxM_2dHCCRlJXp0D2GXa80fI7BCjR7XSoDqv2jmLJ8WJoSaew9MFSpKmTDV9lxNF2XKhTaJ1T8rSghDrhZ71OqlQ1yqx-a</p>
 
@@ -130,7 +130,7 @@ run
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/201512071426136970757.png" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/201512071426136970757.png" alt="这里写图片描述"></p>
 
 <p><strong>2、设置WPAD服务器</strong></p>
 
@@ -141,7 +141,7 @@ run
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/201512071423023060667.png" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/201512071423023060667.png" alt="这里写图片描述"></p>
 
 <p><strong>3、被攻击用户发起查询</strong></p>
 
@@ -153,7 +153,7 @@ run
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/201512071423045325277.png" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/201512071423045325277.png" alt="这里写图片描述"></p>
 
 <p>攻击主机响应广播NBNS查询并指定PAC文件位置</p>
 
@@ -163,19 +163,19 @@ run
 
 <p>广播NBNS查询包，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/201512071423054881287.png" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/201512071423054881287.png" alt="这里写图片描述"></p>
 
 <p>NBNS查询响应包，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/201512071423076609495.png" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/201512071423076609495.png" alt="这里写图片描述"></p>
 
 <p>被攻击主机请求PAC文件位置，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/2015120714230974523105.png" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/2015120714230974523105.png" alt="这里写图片描述"></p>
 
 <p>攻击主机回复PAC文件信息，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/20151207142311563731110.png" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151207142311563731110.png" alt="这里写图片描述"></p>
 
 <blockquote>
   <p>Tips：</p>
@@ -185,7 +185,7 @@ run
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/2015120714231336220124.png" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/2015120714231336220124.png" alt="这里写图片描述"></p>
 
 <p><strong>5、被攻击机用户使用伪造的代理配置上网</strong></p>
 
@@ -211,11 +211,11 @@ run
 
 <p>如图为测试环境下抓到的windows更新请求包</p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/2015120714231498239134.png" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/2015120714231498239134.png" alt="这里写图片描述"></p>
 
 <p>Burp suite抓到的数据包：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/2015120714232016258143.png" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/2015120714232016258143.png" alt="这里写图片描述"></p>
 
 <p>Flame最终成功实现了基于WPAD实施中间人攻击，篡改windows更新数据，最终感染了内网其他主机。</p>
 
@@ -231,9 +231,9 @@ run
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/2015120714232169883153.png" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/2015120714232169883153.png" alt="这里写图片描述"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/2015120714232486384163.png" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/2015120714232486384163.png" alt="这里写图片描述"></p>
 
 <p>如果已被NBNS中间人攻击，可通过查看netbios缓存检查</p>
 
@@ -242,7 +242,7 @@ run
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/2015120714232931596172.png" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/2015120714232931596172.png" alt="这里写图片描述"></p>
 
 <h1>0x07 补充</h1>
 
@@ -266,7 +266,7 @@ python Responder.py -I eth0 -i 192.168.16.245 -b
 
 <p>当被攻击主机访问主机共享时就能抓到其hash，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151207/2015120714233128486182.png" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/2015120714233128486182.png" alt="这里写图片描述"></p>
 
 <h1>0x08 小结</h1>
 

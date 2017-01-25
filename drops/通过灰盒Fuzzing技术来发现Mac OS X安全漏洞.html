@@ -3,7 +3,7 @@
 			<head>
 			     <title>通过灰盒Fuzzing技术来发现Mac OS X安全漏洞 - vvun91e0n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6972">http://drops.wooyun.org/tips/6972</a></h1>
 				
@@ -42,11 +42,11 @@
 
 <p>任何一个OS的基本组件就是用户态与内核空间的交互通信组件。Windows和Linux通过系统调用system call和特殊的虚拟文件(例如：／dev／urandom)。IOKit支持这两种技术，但是还新增了一种新奇的更加复杂的机制，叫做设备接口(DevieceInterface)。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/20150714070812318118291c5130eb4cecec731269c8061d0ad" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150714070812318118291c5130eb4cecec731269c8061d0ad" alt="enter image description here"></p>
 
 <p>为了实现这种机制，内核扩展定义了一系列的可以在用户态被调用的方法。这些方法返回的参数的数量和数据的类型是被限制的。这些方法的列表和参数的限制都都存贮在被极度重要的结构体里面：这就是分派表(dispatch table)。每一个kext都可以定义一个或多个分派表。每个表都是一组结构体。每一个都包含了一个函数指针，允许的输入值和输出值，还有该方法允许接收或返回的值的数量和大小。如果输入结构体的大小不需要在输入前检验，可以将大小在表中声明为0xffffffff，然后由接收函数进行检验。任何驱动都可以拥有一个以上的分派表。IOKit允许扩展在同一时刻提供给用户空间程序以多个接口。每个kext都必须为每一个接口定义一个UserClient的子类。这些子类的实例随后与kext一起加载到内核内存(图2)。每一个UserClient对象都包含一个与它提供接口对应的分派表。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071407081390886448298393f99a92223f8905ec6f0cbb8" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071407081390886448298393f99a92223f8905ec6f0cbb8" alt="enter image description here"></p>
 
 <p>用户态程序可以通过IoConnectCallMethod()来调用kext的方法，前提是这个方法已经在kext分派表中。当然，用户态程序需要必须先找到目标实例。想解释这一过程，我们首先需要介绍一个IOKit抽象类：IOService。每一个IOKit设备驱动都是继承于它的对象，一个kext可以同时拥有不同的IOService对象。举例说明，具有代表性的就是同时有几个USB设备连接到电脑，每个都需要它自己的驱动。这些驱动都被包含在IOUSBFamily kext中，每一个都是一个特殊的IOService的子类。当一个用户态程序想要和一个设备交互时，像前面提到的一样，它会与IOKit建立一个mach连接，然后寻找合适的服务来适应设备。这个过程叫做Device Matching。</p>
 
@@ -62,7 +62,7 @@
 
 <p>在上一节中，需要指出的是在调用一个kext方法时，很多的约束必须得到考虑。对于每个kext来说是不同的。知道分派表中的约束能减小我们fuzzing工作量。提高fuzzing的效率。所以我们设计的LynxFuzzer能够全自动的提取信息，然后自动的进行fuzz。当然，我们的fuzzing基础设计的自动化功能不止于此。事实上，我们能提取到在用户态和内核态组件非人工交互的合法有效输入向量。这些输入可以经过精心使用来加强我们的fuzzing策略。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/201507140708138891662aabce2c8a95115ac7c01f0516c34f5" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507140708138891662aabce2c8a95115ac7c01f0516c34f5" alt="enter image description here"></p>
 
 <p>LynxFuzzer的基本结构可以从图3中看到，框架拥有两个主要的组件：一个在用户态，有4个子组件构成。另一个构建在调试器分析框架上。图3中还说明了LynxFuzzer内部组件的主要交互行为。tracer和调试器(hypervisor)交互得到目标分派表。一旦发现，调试器就从内核内存中取回分派表的地址，返回给tracer，tracer将其保存到data manager中以待后面使用。sniffer使用这些信息来拦截非人工的IoConnectCall()调用，收集到一些有效的输入。最后fuzzer组件开始使用自定义的参数来调用目标方法。等待最后的异常。fuzzer可以使用之前存贮的数据生成新的输入数据或者使用覆盖突变方法来生成输入，这取决于fuzzer引擎的选择。</p>
 
@@ -86,7 +86,7 @@
 
 <hr>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071407081354802b8c28711958cf7257da72b3081de8242" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071407081354802b8c28711958cf7257da72b3081de8242" alt="enter image description here"></p>
 
 <p>fuzzer是LynxFuzzer的主要组件。当tracer盒sniffer获取了足够的辅助信息可以进行fuzz一个kext时，fuzzer生成对kext方法的测试集，然后通过IOKit设备接口来调用方法。图4显示了该组件的结构：一个请求生成器，一组fuzzing引擎和一个监视器。 请求生成器是一个通用的组件：它必须独立于目标kext和选择的fuzzing引擎来运转。在一次典型的执行中，它从fuzzing引擎中接收到测试数据之后，检查数据是否符合分派表中声明目标方法的要求，适当的调整以符合最后在kext中执行目标方法的IoConncetCallMethod()函数. 如果测试数据没有导致崩溃，kext发出一个回应，由monitor来接收。monitor根据接收到的放回数据和当前的fuzzing引擎来决定是否继续使用当前的引擎。所以后一个测试基于前一个测试反馈的。突变引擎和进化引擎都会使用该模式。</p>
 
@@ -108,7 +108,7 @@
 
 <p>代码覆盖率分析。我们的代码覆盖率分析方法如下：在开始调用kext方法之前，fuzzer组件告知调试器kext的代码范围。调试器将相应代码内存段的可执行属性在EPT(Extended Page Tables)入口中移除。这样只要kext执行相应页的代码时就会触发一个EPT违规。调试器跟踪到导致违规的指令。为了继续，调试器重新将不可执行夜标志为可执行，同时让程序单步执行。当调试器由于调试异常而重新获得控制权，它再将这个可执行权限移除，所以下一个指令还是会产生执行违规。当被fuzz的方法返回，fuzzer发出调用来解除跟踪。调试器存贮收集到的信息到fuzzer的一块空间中，让用户空间的组件来计算相应调用的代码覆盖率。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071407081358813a508dbd446ead58505abf2705d17900e" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071407081358813a508dbd446ead58505abf2705d17900e" alt="enter image description here"></p>
 
 <h1>0x03 实验评估</h1>
 
@@ -128,7 +128,7 @@
 
 <p>我们还估算了在3.3中描述的代码覆盖率方法的开销。为此，我们在10个不同kext上运行随机引擎fuzz每个方法。将代码覆盖率统计模块分别开启和关闭，统计kext每秒可以处理的请求数。出于精确性，我们在每个模块上进行了10次重复。结果取平均值。平均开销是3.45x，最优和最差分别是1.73x和5.99x。表2给出了细节。我们可以看到，我们为获取高精度，在没有优化目标时付出了较大的代价，但是相对其他技术来说也算是很低了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/201507140708146122232b19dd5f39f0140d67f3821e49794c5" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507140708146122232b19dd5f39f0140d67f3821e49794c5" alt="enter image description here"></p>
 
 <p>最后，评估了引擎的效率，特别指出，通过不同配置的我们的引擎都能用于发现bug，但是基于代码覆盖率的进化引擎是最快的，随机引擎最慢。</p>      <p></p>
     

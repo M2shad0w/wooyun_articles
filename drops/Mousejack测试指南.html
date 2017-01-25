@@ -3,7 +3,7 @@
 			<head>
 			     <title>Mousejack测试指南 - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/13444">http://drops.wooyun.org/tips/13444</a></h1>
 				
@@ -16,7 +16,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408265081947p1.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408265081947p1.png" alt="Alt text"></p>
 
 <h1>0x01 简介</h1>
 
@@ -40,11 +40,11 @@
 
 <p><strong>1、</strong>Crazyradio 2.4Ghz nRF24LU1+ USB radio dongle(&lt;￥200)</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408265228970p2.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408265228970p2.png" alt="Alt text"></p>
 
 <p><strong>2、</strong>DELL KM714 无线键盘鼠标套装（&lt;￥400）</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408265377060p3.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408265377060p3.png" alt="Alt text"></p>
 
 <p><strong>注：</strong></p>
 
@@ -53,7 +53,7 @@ https://www.bastille.net/affected-devices</p>
 
 <p><strong>3、</strong>我的测试设备</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408265567064p4.jpg" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408265567064p4.jpg" alt="Alt text"></p>
 
 <h1>0x03 实际测试</h1>
 
@@ -76,7 +76,7 @@ sudo pip install -U -I pyusb
 sudo pip install -U platformio
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408265741133p5.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408265741133p5.png" alt="Alt text"></p>
 
 <h3>2、插上U盘</h3>
 
@@ -89,7 +89,7 @@ make
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408265811638p6.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408265811638p6.png" alt="Alt text"></p>
 
 <p>执行：</p>
 
@@ -99,7 +99,7 @@ make install
 
 <p>如图，操作失败</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408270052945p7.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408270052945p7.png" alt="Alt text"></p>
 
 <h3>3、查找解决方法</h3>
 
@@ -120,7 +120,7 @@ python usbtools/launchBootloader.py
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408270188589p8.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408270188589p8.png" alt="Alt text"></p>
 
 <p>到<a href="https://github.com/bitcraze/crazyradio-firmware/releases">https://github.com/bitcraze/crazyradio-firmware/releases</a><br>
 下载cradio-pa-0.53.bin，放在crazyradio-firmware文件下，执行：</p>
@@ -131,7 +131,7 @@ python usbtools/nrfbootload.py flash cradio-pa-0.53.bin
 
 <p>如图，成功更新Crazyradio 固件</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408270346138p9.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408270346138p9.png" alt="Alt text"></p>
 
 <h3>5、再次make install</h3>
 
@@ -144,7 +144,7 @@ make install
 
 <p>如图，发现依然失败</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408270442568p10.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408270442568p10.png" alt="Alt text"></p>
 
 <p>接着执行：</p>
 
@@ -154,7 +154,7 @@ lsusb -d 1915:7777 -v | grep bcdDevice
 
 <p>此时也无法查看固件版本</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408270691617p11.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408270691617p11.png" alt="Alt text"></p>
 
 <h3>6、再次查找原因</h3>
 
@@ -168,7 +168,7 @@ lsusb -d 1915:7777 -v | grep bcdDevice
 
 <p>如图成功</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408270750849p12.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408270750849p12.png" alt="Alt text"></p>
 
 <p>再次执行</p>
 
@@ -178,15 +178,15 @@ make install
 
 <p>成功，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408270894881p13.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408270894881p13.png" alt="Alt text"></p>
 
 <h3>7、再次拔掉重新插</h3>
 
 <p>根据上面更新固件成功的代码提示"Please unplug your dongle or breakout board and plug it back in",再次拔掉重新插入U盘</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408271010940p14.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408271010940p14.png" alt="Alt text"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408271121909p15.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408271121909p15.png" alt="Alt text"></p>
 
 <p>如图，此时本机的Windows系统无法识别U盘，这就导致虚拟机系统也无法加载U盘，无法进行后续的测试</p>
 
@@ -204,7 +204,7 @@ make install
 
 <p>但发现zadig也无法识别U盘，因此这种方法也失效</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408271351233p16.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408271351233p16.png" alt="Alt text"></p>
 
 <h3>9、分析问题</h3>
 
@@ -213,7 +213,7 @@ make install
 <p><strong>（1）</strong>Windows系统下的Crazyradio固件驱动存在问题，所以无法识别，因此导致虚拟机系统无法加载U盘（但是已经用了2种更新驱动的方法还是无法识别，会不会是刷坏了呢）<br>
 <strong>（2）</strong>U盘被刷坏（存在这种可能，固件更新的说明里有提到，不是100%安全），有询问研究过crazyradio file的小伙伴，也倾向于U盘被刷坏</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408271538507p17.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408271538507p17.png" alt="Alt text"></p>
 
 <h3>10、解决问题</h3>
 
@@ -229,7 +229,7 @@ make install
 
 <p>测试发现osx系统能够成功识别，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408271641486p18.jpg" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408271641486p18.jpg" alt="Alt text"></p>
 
 <p>依然是在虚拟机里面接着测试，这次虚拟机中的系统使用的是kali2.0，顺便也就研究了如果成功刷好U盘，在其他系统上使用需要哪些环境.</p>
 
@@ -239,13 +239,13 @@ make install
 
 <p>简单的测试图如下</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408271791442p19.jpg" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408271791442p19.jpg" alt="Alt text"></p>
 
 <h3>11、更多测试</h3>
 
 <p>连接上设备Dell KM714，对比给出的硬件id</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408271999596p20.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408271999596p20.png" alt="Alt text"></p>
 
 <p>右图为购买的Dell KM714显示的硬件id</p>
 
@@ -262,7 +262,7 @@ cd mousejack-master/
 
 <p>这时我们对KM714鼠标和键盘操作，命令行会立即回显捕获到的数据包</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408272031796p21.jpg" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408272031796p21.jpg" alt="Alt text"></p>
 
 <p>可找到Dell KM714的地址为 08:D0:4F:28:02</p>
 
@@ -274,7 +274,7 @@ cd mousejack-master/
 ./nrf24-sniffer.py -a 08:D0:4F:28:02
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408272234760p22.jpg" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408272234760p22.jpg" alt="Alt text"></p>
 
 <p><strong>（3）network mapper（Denial of Service）</strong></p>
 
@@ -286,7 +286,7 @@ cd mousejack-master/
 
 <p>可拦截地址为08:D0:4F:28:02的设备发出的数据包，并对最后一位做修改，此操作可使设备失效，无法对电脑发送控制指令</p>
 
-<p><img src="http://static.wooyun.org//drops/20160304/2016030408272423624p23.jpg" alt="Alt text"></p>
+<p><img src="../images_result/images/2016030408272423624p23.jpg" alt="Alt text"></p>
 
 <p>如图，执行完脚本后，此时Dell KM714的鼠标键盘失去响应，无法对电脑进行控制，只有重新插拔接收器才能恢复正常。</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>物联网操作系统安全性分析 - bt0sea</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/wireless/8338">http://drops.wooyun.org/wireless/8338</a></h1>
 				
@@ -32,7 +32,7 @@
 
 <p>那么，物联网操作系统具体怎么连接互联网呢？</p>
 
-<p><img src="http://static.wooyun.org//drops/20150910/2015091006270956204pic1.jpg" alt=""></p>
+<p><img src="../images_result/images/2015091006270956204pic1.jpg" alt=""></p>
 
 <p>其中物联网终端（例如：灯泡）有两种连接方式，</p>
 
@@ -45,7 +45,7 @@
 
 <p>那么物联网协议都有哪些呢？</p>
 
-<p><img src="http://static.wooyun.org//drops/20150910/2015091006280116177pic21.png" alt=""></p>
+<p><img src="../images_result/images/2015091006280116177pic21.png" alt=""></p>
 
 <p>那么，从商业模式上分析，大公司一般是通过移动端（手机开发SDK）、云端（建立开源物联网云平台）、设备端（物联网连接硬件和软件SDK）、然后使开发者通过众筹方式，开发硬件，但是传递到云端的数据归物联网公司平台拥有。最后通过自己的电商销售渠道卖给用户。通过上述流程物联网生态系统，拥有物联网大数据，在资本市场上大捞一笔。</p>
 
@@ -70,7 +70,7 @@
 
 <h3>（一）物联网终端设计</h3>
 
-<p><img src="http://static.wooyun.org//drops/20150910/2015091006282398045pic31.png" alt=""></p>
+<p><img src="../images_result/images/2015091006282398045pic31.png" alt=""></p>
 
 <p>安全层可以看出一般在协MQTT等议栈中实现，如果协议栈中没有实现，那只能在Application SDK API中实现。</p>
 
@@ -83,17 +83,17 @@
 
 <p>一般和云通讯会有Cloud key 和自己设备本身的private key。通过SSL隧道交换秘钥。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150910/2015091006282718841pic4.jpg" alt=""></p>
+<p><img src="../images_result/images/2015091006282718841pic4.jpg" alt=""></p>
 
 <p>和云端通讯函数。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150910/2015091006282916507pic51.png" alt=""></p>
+<p><img src="../images_result/images/2015091006282916507pic51.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150910/2015091006283235660pic61.png" alt=""></p>
+<p><img src="../images_result/images/2015091006283235660pic61.png" alt=""></p>
 
 <p>同时，查看了iOS手机端控制部分，由于是部分开源，dot m实现函数已经屏蔽，无法了解其内部逻辑。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150910/2015091006283665069pic7.jpg" alt=""></p>
+<p><img src="../images_result/images/2015091006283665069pic7.jpg" alt=""></p>
 
 <p>小结：由于某云厂商相应的硬件端源码开发不完全，只能看到这些，同时、强烈鄙视这种伪开源的行为。</p>
 
@@ -101,7 +101,7 @@
 
 <h3>（二）物联网云端设计</h3>
 
-<p><img src="http://static.wooyun.org//drops/20150910/2015091006284298845pic81.png" alt=""></p>
+<p><img src="../images_result/images/2015091006284298845pic81.png" alt=""></p>
 
 <p>云端设计、一般要有几个模块要考虑：</p>
 

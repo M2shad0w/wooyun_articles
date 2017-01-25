@@ -3,7 +3,7 @@
 			<head>
 			     <title>提起模糊测试时我们在说什么 - pr0mise</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/15572">http://drops.wooyun.org/tips/15572</a></h1>
 				
@@ -86,11 +86,11 @@ HTTP/1.1 200 OK
 
 <p>复杂如tcp/ip协议的NBNS,wireshark本身支持的协议比较多,或是本身公开或是逆向工程,将数据解析成肉眼可阅读的格式.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222500895582112.png" alt="test"></p>
+<p><img src="../images_result/images/2016051222500895582112.png" alt="test"></p>
 
 <p>当面对复杂且闭源的协议,对其fuzz首要工作就是逆向工程,为此出现了内存形式的fuzz,直接在程序的内存空间里进行模糊测试</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222500924061210.png" alt="test"></p>
+<p><img src="../images_result/images/2016051222500924061210.png" alt="test"></p>
 
 <p>有如上代码,无限循环接受请求,在内存空间定位到parse之前插入数据而不必关心数据在recv之前是如何封装的,缺陷就是漏洞场景可能无法重现</p>
 
@@ -100,7 +100,7 @@ HTTP/1.1 200 OK
 
 <p>流程图如下:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122250117817335.png" alt="test"></p>
+<p><img src="../images_result/images/201605122250117817335.png" alt="test"></p>
 
 <p>本文以简单协议的ftp fuzz为例,瓶颈出现在发包过程中,要考虑server端的带宽和上游isp的响应速度,好在可以把server部署在本地.</p>
 
@@ -216,7 +216,7 @@ void test(){
 
 <p><code>python -m pydoc pydbg</code>或者<code>help(pydbg)</code>查看相关介绍.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122250138757745.png" alt="test"></p>
+<p><img src="../images_result/images/201605122250138757745.png" alt="test"></p>
 
 <p>测试软件用的光刃前辈之前挖掘的"守望迷你ftp服务器"漏洞,测试exp:</p>
 
@@ -288,7 +288,7 @@ if __name__ == '__main__':
 
 <p>看效果:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122250156401555.png" alt="test"></p>
+<p><img src="../images_result/images/201605122250156401555.png" alt="test"></p>
 
 <p>上面的utils模块的功能就是记录当前线程的状态,包括异常类型、上下文、异常地址、栈展开、seh链等</p>
 
@@ -388,15 +388,15 @@ SEH unwind:
 
 <p>首先查看是用的哪个dll的导出函数</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122250182824074.png" alt="test"></p>
+<p><img src="../images_result/images/201605122250182824074.png" alt="test"></p>
 
 <p>这里可以看到用了ws2_32和wsock32,hook wsock32 recv</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122250201997882.png" alt="test"></p>
+<p><img src="../images_result/images/201605122250201997882.png" alt="test"></p>
 
 <p>0x71A42E9E位置调用了ws2&#95;32的WSARecv函数,bp ws2&#95;32.WSARecv</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122250222660892.png" alt="test"></p>
+<p><img src="../images_result/images/201605122250222660892.png" alt="test"></p>
 
 <p>查看数据包结尾标志,这里是'\x0D',读内存代码大致如下:</p>
 
@@ -429,31 +429,31 @@ int WSARecv(
 
 <p>断在WSARecv上</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222502390952102.png" alt="test"></p>
+<p><img src="../images_result/images/2016051222502390952102.png" alt="test"></p>
 
 <p>lpOverlapped is null,那么就是说为阻塞式,可以直接hook</p>
 
 <p>跟踪recv</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222502598062113.png" alt="test"></p>
+<p><img src="../images_result/images/2016051222502598062113.png" alt="test"></p>
 
 <p>在recv结束后ebx的值为BUFFER,缓冲区的数据会写入BUFFER指向的位置,所以在该api结束时callback即可</p>
 
 <p>func&#95;resolve&#95;debug获得地址,创建一个container容器,源码上有example:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122250179685665.png" alt="test"></p>
+<p><img src="../images_result/images/201605122250179685665.png" alt="test"></p>
 
 <p>hook参数格式:hook.add(pydbg实例,要钩住的api,地址,接受的参数数量,调用时的callback,结束时的callback)</p>
 
 <p>发包USER 1 PASS 1 APPE AAAAA效果如下:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222502660317122.png" alt="test"></p>
+<p><img src="../images_result/images/2016051222502660317122.png" alt="test"></p>
 
 <p>现在加上发包行为,当程序溢出时,最后一个打印出来的包就是poc了</p>
 
 <p>发500长度数据包,hook recv,打印最后poc,然后覆盖缓冲区,触发异常,看效果:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222502853545132.png" alt="test"></p>
+<p><img src="../images_result/images/2016051222502853545132.png" alt="test"></p>
 
 <p>现在需要做的就是在程序内内嵌一个发包动作了</p>
 

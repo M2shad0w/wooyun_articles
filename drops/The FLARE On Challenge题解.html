@@ -3,7 +3,7 @@
 			<head>
 			     <title>The FLARE On Challenge题解 - g3t</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2988">http://drops.wooyun.org/tips/2988</a></h1>
 				
@@ -955,11 +955,11 @@ int main()
 
 <p>再后面就是将解密后的程序写入文件 <strong>gratz.exe</strong> 并运行了.</p>
 
-<p>程序运行界面: <img src="http://static.wooyun.org/20140918/2014091811174674844.png" alt="flare-on challenge 7"></p>
+<p>程序运行界面: <img src="../images_result/images/2014091811174674844.png" alt="flare-on challenge 7"></p>
 
 <p>这是个 .Net 程序, 拖到 <strong>ILSpy</strong> 里, 可以看到如下程序结构:</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811174610174.png" alt="flare-on challenge 7"></p>
+<p><img src="../images_result/images/2014091811174610174.png" alt="flare-on challenge 7"></p>
 
 <p>其中, <code>lulz.decoder1</code>, <code>lulz.decoder2</code>, <code>lulz.decoder3</code> 和 <code>lulz.decoder4</code> 都是将输入字符串的每个字符经过一系列转换后生成解密后的字符. 解密后发现 <code>lulz.datwork</code> 里面使用SMTP协议发送邮件的几个设置都是错误的, 其具体值为:</p>
 
@@ -995,7 +995,7 @@ public void lulzors()
 
 <p>当然也可以修改程序, 让程序直接输出邮箱地址:</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811174632044.png" alt="flare-on challenge 7"></p>
+<p><img src="../images_result/images/2014091811174632044.png" alt="flare-on challenge 7"></p>
 
 <h2>参考链接:</h2>
 

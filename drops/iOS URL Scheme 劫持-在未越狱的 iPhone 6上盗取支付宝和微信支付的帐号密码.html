@@ -3,7 +3,7 @@
 			<head>
 			     <title>iOS URL Scheme 劫持-在未越狱的 iPhone 6上盗取支付宝和微信支付的帐号密码 - 蒸米</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5309">http://drops.wooyun.org/papers/5309</a></h1>
 				
@@ -43,7 +43,7 @@
 
 <p>在 iOS 上,一个应用可以将其自身”绑定”到一个自定义 URL Scheme 上,该 scheme 用于 从浏览器或其他应用中启动该应用。这个设计非常类似于 android 上的 broadcast 和 broadcast receiver,但远远没有 android 上的复杂。美团利用支付宝付款的整个过程如图一所示:美团 首先将订单信息通过 URL Scheme 发送给 Alipay,Alipay 收到订单信息,调用支付界面,用户 在 Alipay 上完成支付后,Alipay 再发送一个 URL Scheme 给美团,美团收到付款信息后,显 示团购成功的界面。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032306272974648.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032306272974648.png" alt="enter image description here"></p>
 
 <p>图一、正常支付流程</p>
 
@@ -51,7 +51,7 @@
 
 <p>结果就如 demo 中所演示的那样,后安装的 FakeAlipay 应用劫持了美团与支付宝之间的支付 流程,并且可以在用户毫无意识情况下获取用户的帐号,支付密码,以及帮用户完成支付。 整个过程如图二所示:FakeAlipay 在收到美团发来的订单信息后,构造了一个和支付宝一样 的登陆界面,用户在输入了帐号密码后,FakeAlipay 会把帐号密码以及订单信息发送到黑客 的服务器上,黑客在获得了这些信息后,可以在自己的 iOS 设备上完成支付,并把支付成功 的 URL Scheme 信息发回给 FakeAlipay,FakeAlipay 再把支付成功的 URL Scheme 信息转发给 美团。因为时间原因,demo 做得比较粗糙,没有做转发信息给美团这一部分的演示,但绝 对是可行的。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032306273077225.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032306273077225.png" alt="enter image description here"></p>
 
 <p>图二、劫持后的支付流程</p>
 
@@ -70,7 +70,7 @@
 <p><embed src="http://static.video.qq.com/TencentPlayer.swf?vid=x0149k4red4&auto=0&outhost=http://cf.qq.com/" width="480" height="390">
 </p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032306273067805.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032306273067805.png" alt="enter image description here"></p>
 
 <p>图三、Google Chrome URL Scheme 劫持</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>Powershell and Windows RAW SOCKET - DM_</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4707">http://drops.wooyun.org/tips/4707</a></h1>
 				
@@ -14,13 +14,13 @@
 
 <p>大家都知道powershell有一个非常厉害的地方是可以直接调用.net框架，并且.net框架在windows7/2008及以后是默认安装的。 Powershell调用.net框架可以有多种方法，最简单的方法是写c#代码然后直接运行，或者在powershell中使用new-object创建.net对象，然后再调用。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150119/2015011909365353553run-c-sharp-code-in-powershell.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011909365353553run-c-sharp-code-in-powershell.jpg" alt="enter image description here"></p>
 
 <!--more-->
 
 <p>(在powershell中运行c#代码)</p>
 
-<p><img src="http://static.wooyun.org/drops/20150119/2015011909352825887use-dotnet-class-in-powershell.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011909352825887use-dotnet-class-in-powershell.png" alt="enter image description here"></p>
 
 <p>(在powershell中直接创建.net对象)</p>
 
@@ -59,7 +59,7 @@
 
 <p>在这里并不是调用的raw socket，所以不需要administrator权限，下面的Bind TCP shell也是。只有sniffer需要administrator权限。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150119/2015011909372034420reverse_tcp_shell.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011909372034420reverse_tcp_shell.png" alt="enter image description here"></p>
 
 <pre><code>#!c#
 $Addr = "127.0.0.1"
@@ -167,7 +167,7 @@ public class ReverseTCPShell
 
 <p><strong>Bind TCP SHELL</strong></p>
 
-<p><img src="http://static.wooyun.org/drops/20150119/2015011909380335184bind_tcp_cmdshell.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011909380335184bind_tcp_cmdshell.png" alt="enter image description here"></p>
 
 <pre><code>#!c#
 $port = 2233
@@ -271,7 +271,7 @@ public class BindTCPShell
 
 <p><strong>SNIFFER</strong></p>
 
-<p><img src="http://static.wooyun.org/drops/20150119/2015011909384490535powershell-simple-sniffer-and-TCP-filter.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011909384490535powershell-simple-sniffer-and-TCP-filter.png" alt="enter image description here"></p>
 
 <p>注意这里需要administrator权限。下面的demo只是做到了TCP解析的部分，filter也只是简单的给出了HTTP和FTP的筛选，关于IP和TCP解包的部分我已经在注释中给出了。 如果有其他需求可以自行修改。</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>三个白帽挑战之二进制题《迷阵陷落》分析 - netwind</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/15660">http://drops.wooyun.org/binary/15660</a></h1>
 				
@@ -16,7 +16,7 @@
 
 <p>由于对windows平台下二进制有过研究，本着和大家交流学习的目的，在和三个白帽平台管理沟通后，为《条条大路通罗马系列》设计了一个二进制算法题目。本文将首先从破解者角度对这个二进制题进行分析，单纯以破解者身份来逆向分析算法，解密数据，从而最终获得flag。另外将从该题设计者角度进行分析，一步步描述每步算法相对应的数据如何加密、解密的，试图达到什么样的效果，试图在哪里困住破解者。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051114304539509110.png" alt=""></p>
+<p><img src="../images_result/images/2016051114304539509110.png" alt=""></p>
 
 <!--more-->
 
@@ -178,7 +178,7 @@ hfd4zzg8z
 
 <p>同时根据算法z其实就是数独算法里的空字符，这个时候列表变为：</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201605/2016051122342958725.png" alt=""></p>
+<p><img src="../images_result/images/2016051122342958725.png" alt=""></p>
 
 <p>这是个很简单的难度系数为1的数独游戏，大家有兴趣可以手动完成这个数独游戏，数独游戏结果如下：</p>
 
@@ -357,25 +357,25 @@ else
 
 <p>我们在 函数401000里看到如下汇编代码<code>cmp edi,4 ;cmp edi,3;cmp edi,2</code>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605111430481752434.png" alt=""></p>
+<p><img src="../images_result/images/201605111430481752434.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605111430506855244.png" alt=""></p>
+<p><img src="../images_result/images/201605111430506855244.png" alt=""></p>
 
 <p>这些特征代码和C代码<code>if( j == 4 ); j==3  ;j == 2</code>一致，基本可以大致判断为是BASE64解密代码。</p>
 
 <p>3、函数4016e0进去后，同一个函数4011a0执行了3遍：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605111430521587454.png" alt=""></p>
+<p><img src="../images_result/images/201605111430521587454.png" alt=""></p>
 
 <p>再看4011a0函数有以下汇编代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/201605111430542709464.png" alt=""></p>
+<p><img src="../images_result/images/201605111430542709464.png" alt=""></p>
 
 <p>这里push操作的常数比较多分别为十进制的<code>64  8  56 48</code></p>
 
 <p>我们再看看DES函数的C部分代码：</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201605/2016051122344823548.png" alt=""></p>
+<p><img src="../images_result/images/2016051122344823548.png" alt=""></p>
 
 <p>这个与汇编代码push 的几个常数一致，这时再看看3DES C代码：</p>
 

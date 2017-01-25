@@ -3,7 +3,7 @@
 			<head>
 			     <title>通过.PAC进行网络钓鱼 - Evi1cg</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8638">http://drops.wooyun.org/tips/8638</a></h1>
 				
@@ -110,7 +110,7 @@ msf post(ie_proxypac) &gt; exploit
 
 <p>之后打开ie，internet选项->连接->局域网设置：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091708415119719proxy.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2015091708415119719proxy.png" alt="Alt text"></p>
 
 <p>可以看到pac已经使用pac文件进行了代理。</p>
 
@@ -120,7 +120,7 @@ msf post(ie_proxypac) &gt; exploit
 
 <p>现在再访问<code>www.baidu.com</code>,<code>www.wooyun.org</code>，会看到已经转移到了我们制定的ip：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091708420679676test.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2015091708420679676test.png" alt="Alt text"></p>
 
 <h1>0x02 能做什么</h1>
 
@@ -140,7 +140,7 @@ if (shExpMatch(host, "www.wooyun.org")) {
 
 <p>打开<a href="http://www.wooyun.org/">wooyun</a>,右键查看源代码，将所有源代码保存为index.html，放在网站根目录下，因为当受害者请求 <code>http://wooyun.org</code>，其host为 <code>wooyun.org</code> 不满足代理条件，就会直接请求，所以我们把源代码中的<code>www.wooyun.org</code>，改为<code>wooyun.org</code>:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091708415571271replace.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2015091708415571271replace.png" alt="Alt text"></p>
 
 <p>然后找到url，src，href标签，修改为http://wooyun.org/xxxx 的形式，比如</p>
 
@@ -156,7 +156,7 @@ if (shExpMatch(host, "www.wooyun.org")) {
 
 <p>改完以后，基本上就算克隆成功了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091708414489747clone.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2015091708414489747clone.png" alt="Alt text"></p>
 
 <p>下来要把登陆页面的的源码复制过来，打开<code>http://www.wooyun.org/user.php?action=login</code>，右键复制源码，保存为user.php，放在网站根目录下，修改源码中的url，src，href。修改完之后，打开index.html文件，定位<code>登录</code>，修改href为 <code>user.php?action=login</code>，修改以后此标签为：</p>
 
@@ -183,15 +183,15 @@ if (shExpMatch(host, "www.wooyun.org")) {
 
 <p>当用户登录时：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/2015091708414872540login.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2015091708414872540login.png" alt="Alt text"></p>
 
 <p>点击登陆以后会跳转到<code>http://wooyun.org/user.php?action=login</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/20150917084135470461441773420790.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20150917084135470461441773420790.png" alt="Alt text"></p>
 
 <p>查看data.txt:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150917/20150917084141564101441773646544.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20150917084141564101441773646544.png" alt="Alt text"></p>
 
 <blockquote>
   <p>只是简单地一个示例，具体可以通过修改pac文件来实现控制浏览器是否进行代理。</p>

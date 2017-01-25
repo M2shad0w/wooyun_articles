@@ -3,7 +3,7 @@
 			<head>
 			     <title>“企业应急响应和反渗透”之真实案例分析 - PiaCa</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8130">http://drops.wooyun.org/tips/8130</a></h1>
 				
@@ -73,9 +73,9 @@
 
 <p>这是第一个案例，是官方微博帐号被盗的案例。首先看下面两张图片：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081808391653823.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081808391653823.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081808391631135.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081808391631135.jpg" alt="enter image description here"></p>
 
 <p>某天我们的一个官方帐号突发连续发两条不正常的微博内容，看到第一条的时候还以为是工作人员小手一抖，test 到手，以为是工作人员的误操作，但是看到第二条微博的时候就已经能够判断帐号出了问题，具体是什么问题只能通过后面的分析才知道。</p>
 
@@ -128,17 +128,17 @@ Referrer          : http://**.***.com/_common/jwplayer/player.swf?debug=(functio
 
 <p>首先看下图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081808391693470.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081808391693470.jpg" alt="enter image description here"></p>
 
 <p>一天 QA 发来邮件询问一个比较异常的事情，某测试业务出现多条状态码为 500 的日志，QA 怀疑是有黑客攻击，我们开始介入进行分析。</p>
 
 <p>500 错误代表文件真实存在过并且被人访问执行过，但是现在文件已经被删除了，通过文件名可以判断并非是业务需要的文件，被黑的可能性比较大，然后找来 TOMCAT 和前端 Nginx 日志查看的确被上传了 webshell。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081808391776565.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081808391776565.jpg" alt="enter image description here"></p>
 
 <p>根据攻击者 IP 和时间等线索通过分析 nginx 和 tomcat 的日志可以确定攻击者是通过 tomcat 的管理后台上传的 webshell，并且通过 webshell 做了许多操作</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081808391726889.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081808391726889.jpg" alt="enter image description here"></p>
 
 <p>但是tomcat 帐号密码并非弱密码，how？我们接下来对全网的 tomcat 进行了排查，发现在其中一台内网服务器存在 tomcat 弱口令，并且帐号配置文件中含有攻击者使用的帐号和密码，只是这台服务器较早之前下线了公网 IP，只保留内网 IP，并且通过分析这台服务器的日志，能够判断攻击者之前就已经通过弱口令拿到了服务器权限，并且收集了服务器上的用户名和密码等信息。</p>
 
@@ -146,9 +146,9 @@ Referrer          : http://**.***.com/_common/jwplayer/player.swf?debug=(functio
 
 <p>下面两张图片可以看到攻击者通过 lcx 中转了内网的反弹 shell</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081808391837422.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081808391837422.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081808391850971.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081808391850971.jpg" alt="enter image description here"></p>
 
 <p>那么到目前为止我们做了哪些事情呢？</p>
 
@@ -166,7 +166,7 @@ Referrer          : http://**.***.com/_common/jwplayer/player.swf?debug=(functio
 
 <p>之前的安全事件刚过不久，IT 人员反馈域控服务器异常，自动重启，非常异常。登录域控进行排查原因，发现域控被植入了 gh0st 后门。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081808391811336.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081808391811336.jpg" alt="enter image description here"></p>
 
 <p>域控被控制，那域控下面的服务器的安全性就毫无保障，继续对办公网所有的 windows 服务器排查，发现多台 Windows 服务器被植入后门，攻击的方法是通过域控管理员帐号密码利用 at 方式添加计划任务。</p>
 
@@ -216,19 +216,19 @@ Referrer          : http://**.***.com/_common/jwplayer/player.swf?debug=(functio
 
 <p>snort 加上 gh0st 的特征后不久我们就发现我们办公网还有服务器被控制</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081808391848668.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081808391848668.jpg" alt="enter image description here"></p>
 
 <p>对这台服务器进行清理后，我们仍然没有放弃对攻击者的反渗透，这次我们发现攻击者还有美国的 IP，对其渗透，最终通过 c 断进行 cain 嗅探到 3389 的密码。</p>
 
 <p>登录到这台美国 IP 的服务器后，发现上面运行着 gh0st 的控制端，我们内网仍然有一台服务器处于上线状态。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081808391967864.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081808391967864.jpg" alt="enter image description here"></p>
 
 <p>其实到这里这次事件就能告一段落了，关于攻击者我们在这台美国的服务器上发现了攻击者的多个 QQ 和密码，登录邮箱后找到了攻击者的简历等私人信息，还有就是我们之前也获取到攻击者在国内某安全论坛帐号。其实到这里我们能够确定攻击者是谁了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081808391987823.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081808391987823.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081808391923107.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081808391923107.jpg" alt="enter image description here"></p>
 
 <h1>0x06 案例之永无止境的劫持</h1>
 
@@ -240,9 +240,9 @@ Referrer          : http://**.***.com/_common/jwplayer/player.swf?debug=(functio
 
 <p>下面两个图是我们业务监控系统和基调的截图，上面的图可以很明显看到在 9:30 用户登录成功数明显下降，持续不到一个小时，下图是全国部分地区基调的数据，可以看到域名被明显劫持到 61 这个 ip，这是一次典型的 DNS 攻击。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081808392045550.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081808392045550.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081808392011559.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081808392011559.jpg" alt="enter image description here"></p>
 
 <p>页面中被插入的攻击核心代码</p>
 
@@ -284,9 +284,9 @@ xmlHttp.send(param);
 
 <p>接下来看下面两张图片</p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081808392033321.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081808392033321.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150818/2015081808392198571.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081808392198571.jpg" alt="enter image description here"></p>
 
 <p>这是一次典型的链路劫持攻击，通过 ttl 就能够判断，攻击的结果和前面提到的 dns 劫持攻击类似，插入恶意 js 代码来获取用户的用户名和密码。</p>
 

@@ -3,14 +3,14 @@
 			<head>
 			     <title>BadTunnel：跨网段劫持广播协议 - xlab</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/16925">http://drops.wooyun.org/papers/16925</a></h1>
 				
       <p>
         </p><p><strong>Author：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b9cdd6d4dbd2dcdcc9dccbf9513c075117165e373d5f141f5c17275013355c171d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061902231244234168.png" alt=""></p>
+<p><img src="../images_result/images/2016061902231244234168.png" alt=""></p>
 
 <!--more-->
 
@@ -116,7 +116,7 @@ http://web.server/reader.aspx?ID=\\10.10.10.10\BadTunnel
 
 <p>至于TransactionID，NBNS的Transaction ID并不是随机的，而是递增的。前面提到，NBNS解析名称时，会发出NBNS NB query；而系统访问file URI scheme或UNC path失败时，会发出NBNS NBSTAT query。NBNS NB query和NBNS NBSTAT query除了都使用且只使用137/UDP外，它们还共享同一个Transaction ID计数器。也就是说，当192.168.2.2访问<code>\\10.10.10.10\BadTunnel</code>失败，向10.10.10.10发出的NBNS NBSTAT query不但打开了一条双向UDP隧道，还将系统的Transaction ID计数器当前值告诉了10.10.10.10。</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201606/2016061911363977227.png" alt=""></p>
+<p><img src="../images_result/images/2016061911363977227.png" alt=""></p>
 
 <p>也就是说，一个NBNS NBSTAT query同时解决了第一个问题和第二个问题。而第三个问题就更容易解决了。我们既然能在网页中嵌入<code>&lt;img src=”\\10.10.10.10\BadTunnel”&gt;</code>，当然也可以同时嵌入：</p>
 
@@ -128,7 +128,7 @@ http://web.server/reader.aspx?ID=\\10.10.10.10\BadTunnel
 
 <p>即使不考虑WEB缓存，NBNS也有自己的缓存机制。只要成功实现一次NBNS Spoofing，伪造的结果会被NBNS缓存10分钟：</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201606/2016061911365380817.png" alt=""></p>
+<p><img src="../images_result/images/2016061911365380817.png" alt=""></p>
 
 <p>此后10分钟内系统本身也会试图去解析“WPAD”进而访问<code>http://WPAD/wpad.dat</code>来设置代理，但获得的将会是缓存中这个伪造的结果。而攻击者在一旦通过WPAD劫持到用户的流量，可以定时对某些HTTP请求返回302重定向，实现循环BadTunnel攻击，保持劫持状态：</p>
 
@@ -175,11 +175,11 @@ Content-Length: 0
 
 <p>对无需访问Windows网络共享服务的个人用户来说，可以考虑禁用NetBIOS over TCP/IP：</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201606/2016061911370560863.png" alt=""></p>
+<p><img src="../images_result/images/2016061911370560863.png" alt=""></p>
 
 <p>对兼容性影响最小的方式可能是在<code>%SystemRoot%\System32\drivers\etc\hosts</code>中添加固定的WPAD解析，或关闭自动检查代理配置，来防止“WPAD”这个名称被劫持：</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201606/2016061911371845303.png" alt=""></p>
+<p><img src="../images_result/images/2016061911371845303.png" alt=""></p>
 
 <p>不过要注意的是，这样并不能阻止对其它名称的劫持。而BadTunnel，不只是WPAD。</p>
 

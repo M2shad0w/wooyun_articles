@@ -3,7 +3,7 @@
 			<head>
 			     <title>深夜调试某浏览器内存损坏的小记录 - blast</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1026">http://drops.wooyun.org/papers/1026</a></h1>
 				
@@ -40,7 +40,7 @@
 
 <p>首先，我们可以确定的是我们的poc可以导致这个程序崩溃，而通常我们的目标程序也会自带有一个dump文件，例如：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816551761511.png" alt="2014030816551761511.png"><br>
+<p><img src="../images_result/images/2014030816551761511.png" alt="2014030816551761511.png"><br>
   图：通常在<code>%temp%</code>下可能有崩溃文件，也有可能在<code>%appdata%</code>下</p>
 
 <p>打开windbg，载入dump文件，进行简单的<code>!analyze -v</code>。显示信息如下：</p>
@@ -305,12 +305,12 @@ window.open(s);
 
 <p>运行浏览器，最好是直接把html拖图标上，这样之后方便我们找哪个进程容纳着html，如下：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816544725513.png" alt="2014030816544725513.png"><br>
+<p><img src="../images_result/images/2014030816544725513.png" alt="2014030816544725513.png"><br>
   图： 暴风雨前夕</p>
 
 <p>姨妈大，给它Attach上，</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816542723049.png" alt="2014030816542723049.png"><br>
+<p><img src="../images_result/images/2014030816542723049.png" alt="2014030816542723049.png"><br>
   图：这样就能找到pid了</p>
 
 <p>找到对应进程的PID，然后Attach，之后按下g让它跑起来：</p>
@@ -731,17 +731,17 @@ bdlogicmain+0x7565:
 
 <p>1、VC2010 Debug + malloc（0）</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816534264313.png" alt="2014030816534264313.png"><br>
+<p><img src="../images_result/images/2014030816534264313.png" alt="2014030816534264313.png"><br>
   返回了一个非NULL的堆。</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816531984074.png" alt="2014030816531984074.png"><br>
+<p><img src="../images_result/images/2014030816531984074.png" alt="2014030816531984074.png"><br>
  </p>
 
 <p>损坏。</p>
 
 <p>2、 VC2010 Release + malloc（0）</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816524787877.png" alt="2014030816524787877.png"><br>
+<p><img src="../images_result/images/2014030816524787877.png" alt="2014030816524787877.png"><br>
   情形类似</p>
 
 <p>HEAP[testMalloc.exe]: Heap block at 005455B8 modified at 005455C1 past requested size of 1 Windows 已在 testMalloc.exe 中触发一个断点。</p>
@@ -754,18 +754,18 @@ bdlogicmain+0x7565:
 
 <p>3、gcc Debug+malloc（0）</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816522134427.png" alt="2014030816522134427.png"><br>
+<p><img src="../images_result/images/2014030816522134427.png" alt="2014030816522134427.png"><br>
   分配了一个非NULL但是可以释放的堆。</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816515591239.png" alt="2014030816515591239.png"><br>
+<p><img src="../images_result/images/2014030816515591239.png" alt="2014030816515591239.png"><br>
   成功覆盖了堆的信息</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816512347292.png" alt="2014030816512347292.png"><br>
+<p><img src="../images_result/images/2014030816512347292.png" alt="2014030816512347292.png"><br>
   同样崩溃</p>
 
 <p>4、gcc Release+malloc（0）</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816505532197.png" alt="2014030816505532197.png"><br>
+<p><img src="../images_result/images/2014030816505532197.png" alt="2014030816505532197.png"><br>
   情形类似</p>
 
 <p>果不其然四个情况下都表明：VS和G++编译器编译后malloc(0)返回的不是NULL，而是一个活生生的堆，而且你动它一下，它就赖地上让你赔钱了。</p>
@@ -813,13 +813,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 <p>在wmain处下断点，l-t之后并用p执行完malloc，然后查看当前分配来的堆的信息：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816503217634.png" alt="2014030816503217634.png"><br>
+<p><img src="../images_result/images/2014030816503217634.png" alt="2014030816503217634.png"><br>
   可以看到当前的堆内数据如下，其中数据使用了堆的填充模式abababe8 abababab，而这看起来像是一个已分配的堆空间的末尾的填充模式（为什么呢？因为如果分配了字节的话，堆会用baadf00d这个填充模式来填充将来可能会被使用的空间，而这个abababe8 blablabla则是像是这个填充模式的末尾，或者，更像是说ANSI字符串的中止符号“”的东西）：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816500856704.png" alt="2014030816500856704.png"><br>
+<p><img src="../images_result/images/2014030816500856704.png" alt="2014030816500856704.png"><br>
   这是memset完，我们26个字符填充进去之后的效果：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816494124061.png" alt="2014030816494124061.png">  </p>
+<p><img src="../images_result/images/2014030816494124061.png" alt="2014030816494124061.png">  </p>
 
 <p>这个相当于什么？相当于在一个堆的用户可操作区域之外做写入操作，这样数据就已然超出了堆的申请大小，让它活生生的演变成了堆溢出，之后程序还会对它进行free，必然是错上加错。</p>
 
@@ -827,13 +827,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 <p>让我们换一点代码，我们把malloc(0)修改为malloc(27)，重新载入。</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816490529344.png" alt="2014030816490529344.png"></p>
+<p><img src="../images_result/images/2014030816490529344.png" alt="2014030816490529344.png"></p>
 
 <p>这回，我们看到了一个新的填充模式，baadf00d ，而这正是我们之前提到的可用但是未初始化的堆空间的填充模式。</p>
 
 <p>而如此如此运行之后，程序正常退出。</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030816484971812.png" alt="2014030816484971812.png"></p>
+<p><img src="../images_result/images/2014030816484971812.png" alt="2014030816484971812.png"></p>
 
 <h3>0x04c 几个小名词</h3>
 

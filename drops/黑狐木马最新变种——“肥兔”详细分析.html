@@ -3,7 +3,7 @@
 			<head>
 			     <title>黑狐木马最新变种——“肥兔”详细分析 - 腾讯电脑管家</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/7117">http://drops.wooyun.org/papers/7117</a></h1>
 				
@@ -22,11 +22,11 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404061678370image002.gif" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404061678370image002.gif" alt="enter image description here"></p>
 
 <p>“肥兔”木马功能示意图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144568580.gif" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144568580.gif" alt="enter image description here"></p>
 
 <p>“肥兔”木马模块分工示意图</p>
 
@@ -60,35 +60,35 @@
 刘*   QQ：304******   185******   Tel：15957******   15869******    15957******  
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144592946.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144592946.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144622743.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144622743.png" alt="enter image description here"></p>
 
 <p>在QQ上发现工作邮箱，顺手去看了下他们公司官网。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144750538.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144750538.png" alt="enter image description here"></p>
 
 <p>公司域名是由张XX注册的，就查了下，结果：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144725202.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144725202.png" alt="enter image description here"></p>
 
 <p>可以看出，该公司是有过前科的，而且，刚好是做推广的，不得不怀疑下。</p>
 
 <p>接下来，就不挖作者信息了，看看统计的后台，扫了下网站，发现源码泄漏。拿下源码看了看整站目录结构、命名并不那么规范。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144760733.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144760733.png" alt="enter image description here"></p>
 
 <p>tj.php是木马要访问的，跟进去发现，它每天都会对推广的数量进行统计。审计源码后，发现，其对要insert的数据没有做过滤处理。于是构造payload，用sqlmap跑起来。得到数据库表信息如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144764314.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144764314.png" alt="enter image description here"></p>
 
 <p>后台每天新建一张表来统计当天安装日志以及前一天的上线日志。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144737907.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144737907.png" alt="enter image description here"></p>
 
 <p>随意Dump了其中一张表，看到一个惊人的安装数量：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144715491.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144715491.png" alt="enter image description here"></p>
 
 <p>从后台数据可以看出，该木马从15年5月11日开始推广，平均日推广量10万以上，在2015年7月11日达到了64万之多。</p>
 
@@ -103,9 +103,9 @@
 
 <p>样本运行后下载了一张图片http://less.3gfetion.com/logo.png，该图片尾部附加了大量的二进制数据，将其解密后得到一个名为FeiTuDll.dll的文件，并在内存中加载执行。这也是“肥兔”木马名字的来源，以下是FeiTuDll.dll文件的属性信息，以及PDB路劲信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144812297.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144812297.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144845172.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144845172.png" alt="enter image description here"></p>
 
 <p><strong>3.2 FeiTuDll.dll 文件分析</strong></p>
 
@@ -138,17 +138,17 @@ key= （以上信息的MD5校验）
 
 <p>接收服务器返回的信息，判断是否含有“az”字符设置相应的标志，木马后台会根据提交的MAC信息判断此机器是否感染过，如果感染过则返回“az”，否则不返回任何信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144887970.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144887970.png" alt="enter image description here"></p>
 
 <p>随后木马会下载“大天使之剑”的安装包到本地，并执行安装。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144812143.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144812143.png" alt="enter image description here"></p>
 
 <p>安装完成后根据之前是否返回“az”还决定随后行为，如果返回“az”则退出进程，不再有其它行为；如果未返回“az”，则进行以下行为：判断当前操作系统版本是32位或64位加载不同的资源文件，最终在临时目录下释放tmp.exe和yrd.tmp，在windows目录下释放yre.tmp，并将yrd.tmp文件路劲作为参数执行tmp.exe。完成以上行为后判断系统文件是否已经替换成功，并负责关闭windows文件保护相关的警告窗口。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144843510.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144843510.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144855185.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144855185.png" alt="enter image description here"></p>
 
 <p><strong>3.3 tmp.exe 文件分析</strong></p>
 
@@ -167,17 +167,17 @@ a18d30fef0a73cce4131faf2726adfdb
 
 <p>该文件的PDB信息如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144891644.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144891644.png" alt="enter image description here"></p>
 
 <p>该文件在系统启动时会被winlogon进程加载，其功能是解密%windir%\yre.tmp文件并保存为%windir%\svchost.exe，最后将其执行两次，即创建两个进程。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144963354.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144963354.png" alt="enter image description here"></p>
 
 <p><strong>3.5 %WinDir%\svchost.exe文件分析</strong></p>
 
 <p>该文件pdb信息如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144973939.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144973939.png" alt="enter image description here"></p>
 
 <p>该文件同时被执行两次，根据互斥量来进行如下不同的分工：</p>
 
@@ -198,11 +198,11 @@ a18d30fef0a73cce4131faf2726adfdb
 <li>关闭UAC</li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144933741.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144933741.png" alt="enter image description here"></p>
 
 <p><strong>3.6 驱动文件LKS19.tmp分析</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144944570.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144944570.png" alt="enter image description here"></p>
 
 <p>该驱动文件具有以下功能：</p>
 
@@ -217,21 +217,21 @@ a18d30fef0a73cce4131faf2726adfdb
 
 <p>该文件PDB信息如下：该模块的功能主要是通过百度有钱推广获利</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144966345.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144966345.png" alt="enter image description here"></p>
 
 <p>推广的软件列表如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144915704.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144915704.png" alt="enter image description here"></p>
 
 <h1>0x04 查杀方式</h1>
 
 <hr>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144980399.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144980399.png" alt="enter image description here"></p>
 
 <p>对于安装了电脑管家的用户，无需做任何处理，管家已经能够精准拦截该木马及其变种。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071404144927633.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071404144927633.png" alt="enter image description here"></p>
 
 <p>对于未安装管家而感染了该木马的用户，安装管家后使用闪电杀毒可完美清除该木马。</p>      <p></p>
     

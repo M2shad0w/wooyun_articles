@@ -3,7 +3,7 @@
 			<head>
 			     <title>境外“暗黑客栈”组织对国内企业高管发起APT攻击 - 小白帽</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11726">http://drops.wooyun.org/tips/11726</a></h1>
 				
@@ -31,7 +31,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20151231/20151231101037735861129.png" alt="p1"></p>
+<p><img src="../images_result/images/20151231101037735861129.png" alt="p1"></p>
 
 <h1>0x01 威胁事件分析</h1>
 
@@ -41,19 +41,19 @@
 
 <p>通过对捕获的可疑SWF文件进行分析，确认此样本利用了Adobe Flash整数溢出漏洞 (即此次Adobe修复的CVE-2015-8651漏洞)。受攻击者访问此SWF文件后，漏洞利用成功会跳转到下面这段shellcode:</p>
 
-<p><img src="http://static.wooyun.org//drops/20151231/2015123110103993061259.png" alt="p2"></p>
+<p><img src="../images_result/images/2015123110103993061259.png" alt="p2"></p>
 
 <p>其主要功能是下载一个名为update.exe 的文件到系统<code>的%temp%</code>目录下， 通过RC4解密并且通过ECHO加可执行文件的“MZ”头来构建有效的PE文件，然后运行。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151231/2015123110104056166348.png" alt="p3"></p>
+<p><img src="../images_result/images/2015123110104056166348.png" alt="p3"></p>
 
 <p>Update.exe约1.3Mb, 具有完整的文件属性，伪装成SSH密钥生成工具：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151231/2015123110104267121441.png" alt="p4"></p>
+<p><img src="../images_result/images/2015123110104267121441.png" alt="p4"></p>
 
 <p>通过逆向分析发现，木马作者篡改和裁剪了正常的OpenSSL文件，篡改后的版本只提供一个参数：<code>-genkeypair</code>。无论是否传递此参数，木马文件都会首先释放一个公钥在当前目录用于干扰判断，同时进入真正的恶意代码部分。此样本未进行代码混淆，但是采用了多种反调试/反虚拟机技术及字段加密，通过检测各种系统环境来判断是否有反病毒软件及沙箱存在，比如：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151231/2015123110104414641531.png" alt="p5"></p>
+<p><img src="../images_result/images/2015123110104414641531.png" alt="p5"></p>
 
 <p>Update.exe是一个Trojan Downloader， 利用执行mshta.exe 来下载木马文件，木马文件服务器位于冰岛。形式如下：</p>
 
@@ -71,7 +71,7 @@
 
 <p>我们对此次事件和暗黑客栈（Darkhotel）的特点进行了对比，认为有充足理由认定其就是始作俑者。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151231/201512311010453254263.jpg" alt="p6"></p>
+<p><img src="../images_result/images/201512311010453254263.jpg" alt="p6"></p>
 
 <h1>0x03 小结</h1>
 

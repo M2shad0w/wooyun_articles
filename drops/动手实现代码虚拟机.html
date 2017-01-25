@@ -3,7 +3,7 @@
 			<head>
 			     <title>动手实现代码虚拟机 - 厕所打灯笼</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/10384">http://drops.wooyun.org/tips/10384</a></h1>
 				
@@ -33,10 +33,10 @@
 <ol>
 <li><p>使用虚拟机解释执行解壳代码。这种混淆是为了隐藏原代码是如何被加密的，又是如何被解壳代码解密的。这种方式对于静态分析来说比较有效，但是对于动态调试效果不大。因为动态调试的时候完全可以等到解壳代码解密初源代码之后进行脱壳。只有配合其他保护技术才会有比较强的保护效果。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151110/2015111004412499496214.png" alt=""></p></li>
+<p><img src="../images_result/images/2015111004412499496214.png" alt=""></p></li>
 <li><p>把需要保护的程序源码转换为自定义字节码，再使用虚拟机解释执行被转换后的程序字节码，而程序的源码是不会出现在程序中的。这种方式不管静态还是动态都可以有效的保护。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151110/2015111004412597637312.png" alt=""></p></li>
+<p><img src="../images_result/images/2015111004412597637312.png" alt=""></p></li>
 </ol>
 
 <p>可以看出两种保护的区别就是，第一种只保护解壳代码，没有保护源码。第二种直接保护了所有源码。所以第一种的强度也小于第二种。本文则是以第二种方式来实现保护，也就是保护所有源码。</p>
@@ -185,23 +185,23 @@ void exec_opcode(vm_processor *proc)
 
 <p>这里就用demo中的第一条字节码做演示来说明虚拟机中解释器解释执行时的过程，首先可以从上面看到解释器vm&#95;interp执行时eip会指向target&#95;func + 4，也就是target&#95;func中内联汇编中定义的第一个字节0xa0，之后会判断eip指向的字节码是否为ret指令，ret指令是0xa3，所以不是eip指向的不是ret，进入exec&#95;opcode函数进行字节码解释。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151110/201511100441292241556.png" alt=""></p>
+<p><img src="../images_result/images/201511100441292241556.png" alt=""></p>
 
 <p>进入exec&#95;opcode后开始在虚拟处理器的op&#95;table中查找eip指向的字节码，当前就是0xa0，找到之后就调用它的解释函数。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151110/201511100441307625863.png" alt=""></p>
+<p><img src="../images_result/images/201511100441307625863.png" alt=""></p>
 
 <p>字节码与解释函数的初始化在init&#95;vm&#95;proc中</p>
 
-<p><img src="http://static.wooyun.org//drops/20151110/201511100441325824273.png" alt=""></p>
+<p><img src="../images_result/images/201511100441325824273.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20151110/201511100441339000382.png" alt=""></p>
+<p><img src="../images_result/images/201511100441339000382.png" alt=""></p>
 
 <p>可以看出0xa0就对应着mov指令，所以当解释器遇到0xa0就会调用vm_mov函数来解释mov指令。</p>
 
 <p>在vm_mov函数中首先把eip + 1处的一个字节和eip + 2处4个字节分别保存在dest和src中，dest是寄存器标识，在后面的switch中判断dest是哪个寄存器，在这个例子中dest是0x10，也就是r1寄存器，在case 0x10分支中就把*src赋值给r1。总体来看，前6个字节就是第一条mov指令，对应着mov r1, xxxx，xxxx就是这6个字节中的后4个，在这个例子中就是0x00000000。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151110/201511100441352733392.png" alt=""></p>
+<p><img src="../images_result/images/201511100441352733392.png" alt=""></p>
 
 <p>从这个例子中就可以大致了解一个解释器在解释执行字节码时的过程，其实很简单，就是通过一个字节码和解释函数的关系来调用相应的函数，或者通过一个很长的switch来判断每个字节码，并调用相应函数。而解释函数则通过执行相应的操作来模拟出一个指令。最后，把这些指令串联在一起就可以执行完一个完整的逻辑。</p>
 
@@ -209,7 +209,7 @@ void exec_opcode(vm_processor *proc)
 
 <hr>
 
-<p><img src="http://static.wooyun.org//drops/20151110/2015111004412248957113.png" alt=""></p>
+<p><img src="../images_result/images/2015111004412248957113.png" alt=""></p>
 
 <h1>0x06 虚拟机保护效果</h1>
 
@@ -219,7 +219,7 @@ void exec_opcode(vm_processor *proc)
 
 <p>在静态分析基于虚拟机保护的代码时，一般的工具都是没有效果的，因为字节码都是我们自己定义的，只有解释器能够识别。所以在用ida分析时字节码只是一段不能识别的数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151110/2015111004412756854412.png" alt=""></p>
+<p><img src="../images_result/images/2015111004412756854412.png" alt=""></p>
 
 <p>这就是ida识别到的target_func的代码，已经做到了对抗静态分析。不过还是可以静态分析我们的解释器,在分析解释器的时候，解释器中的控制流会比源程序的控制流复杂很多，这样也是会增加分析难度。</p>
 

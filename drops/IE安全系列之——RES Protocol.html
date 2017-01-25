@@ -3,14 +3,14 @@
 			<head>
 			     <title>IE安全系列之——RES Protocol - blast</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/13898">http://drops.wooyun.org/papers/13898</a></h1>
 				
       <p>
         </p><p>RES是IE支持的特殊Protocol。它用于从二进制文件中读取资源信息并展示在网页中。由于现在RES已经被微软大老爷削弱成狗，所以本来准备拆两篇的文章干脆就合在一篇写了。文中除非有特殊提示，否则都以IE11为准。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/2016031711233888024117.jpg" alt="p1"></p>
+<p><img src="../images_result/images/2016031711233888024117.jpg" alt="p1"></p>
 
 <h1>0x00 Res Protocol ABC</h1>
 
@@ -59,15 +59,15 @@
 
 <p>Res URL格式如我们之前所述。<strong>另外，res protocol的第一个path部分不允许有“/”。因为微软在crack URL时hardcode直接wcschr搜索的L'/'。</strong>解析字符串时遇到的第一个“/”（除了res://的//）后面只能是restype，或者id。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/2016031711234073442210.jpg" alt="p2"></p>
+<p><img src="../images_result/images/2016031711234073442210.jpg" alt="p2"></p>
 
 <p><strong>b、</strong>传入的res protocol 路径长度大于MAX&#95;PATH时，返回E&#95;FAIL，所以Fuzz这里意义也不是多大了。Win95+IE4.0时候这里有漏洞，这个判断也是自那个漏洞之后补上的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/2016031711234144835310.jpg" alt="p2"></p>
+<p><img src="../images_result/images/2016031711234144835310.jpg" alt="p2"></p>
 
 <p><strong>c、</strong>LoadLibraryEx载入资源DLL，Flag为DONT&#95;RESOLVE&#95;DLL&#95;REFERENCES | LOAD&#95;LIBRARY&#95;AS&#95;DATAFILE。所以也不要考虑重复利用载入的DLL了，因为DLL被映射到了只读内存中。并不会被执行。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/201603171123429883849.jpg" alt="p3"></p>
+<p><img src="../images_result/images/201603171123429883849.jpg" alt="p3"></p>
 
 <pre><code>#!bash
 0:009&gt; !address 67370000   
@@ -96,11 +96,11 @@ More info:              !dh 0x67370000
 
 <hr>
 
-<p><img src="http://static.wooyun.org//drops/20160317/201603171123445654359.jpg" alt="p4"></p>
+<p><img src="../images_result/images/201603171123445654359.jpg" alt="p4"></p>
 
 <p>确实迟了一些，不过为了弥补，我接下来会分析为什么用不了了</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/201603171123458334167.jpg" alt="p5"></p>
+<p><img src="../images_result/images/201603171123458334167.jpg" alt="p5"></p>
 
 <p>曾经在Angler Exploit Kit中，攻击者用Res Protocol玩出了一堆花样。使用如下代码，可以判断本地文件是否存在。</p>
 
@@ -119,7 +119,7 @@ Check("res://f:\\node\\asoehook2.dll/#2/#102")
 <p>代码3：使用Res Protocol检查本地文件<br>
 （不过在最新的IE11中，这个判断并不能在http/https/ftp下进行，也不能在任何网络相关的protocol打开的about:blank或者iframe 的about：blank中进行。下节说）</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/201603171123477074976.jpg" alt="p6"></p>
+<p><img src="../images_result/images/201603171123477074976.jpg" alt="p6"></p>
 
 <p>为啥Image可以做到这个呢？让我们仔细看一下。猜也能猜得到，new Image事实上创建了一个CImgElement。</p>
 
@@ -173,11 +173,11 @@ CImgElement::OnPropertyChange ---&gt; CImgHelper::SetImgSrc ---&gt; CImgHelper::
 
 <p>首先，在IE中我输入了下面的代码。不出意外地，document.body.appendChild(iii)之后，元素添加成功，但是图片没显示出来，同时，onerror也没有触发。我开始以为是因为f:\asoehook2.dll存在的缘故。结果换了个随便打的地址加上Res Protocol，还是没有触发onerror。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/201603171123485574085.jpg" alt="p7"></p>
+<p><img src="../images_result/images/201603171123485574085.jpg" alt="p7"></p>
 
 <p>同比在IE8下的Res Protocol，则既能显示图片，又能触发onerror。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/201603171123505184895.jpg" alt="p8"></p>
+<p><img src="../images_result/images/201603171123505184895.jpg" alt="p8"></p>
 
 <p>于在IE11下，Img SRC指定为RES Protocol时，Img显示的是一个透明的方块，所以先怀疑这些点：下载是否出问题了？在跟踪下载栈之后，发现下载和IE8的几乎一模一样。</p>
 
@@ -217,7 +217,7 @@ ChildEBP RetAddr
 
 <p>然后，让我们再追踪一下事件。给<code>MSHTML!CImgHelper::Fire_onerror</code>下断点，为了确认下我下的对不对，我修改了<code>iii.src=“aa”</code>，这时，Fire_onerror成功触发。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/2016031711235266388104.jpg" alt="p9"></p>
+<p><img src="../images_result/images/2016031711235266388104.jpg" alt="p9"></p>
 
 <p>图：给iii的src传入非res Protocol时，onerror事件就能成功触发。</p>
 
@@ -225,7 +225,7 @@ ChildEBP RetAddr
 
 <p>对比在IE8下，即使使用Res Protocol，Fire_onerror仍然可以断到：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/2016031711235455560118.jpg" alt="p10"></p>
+<p><img src="../images_result/images/2016031711235455560118.jpg" alt="p10"></p>
 
 <p>目标放在Fire_onerror的前后两层。上一层OnDwnChan看起来并不是多相关，再向上一层，CImgHelper：：SetImgCtx里首先有了一些不一样的地方。</p>
 
@@ -264,11 +264,11 @@ MSHTML!CImgHelper::SetImgCtx+0x217:
 
 <p>CImgHelper::CScriptCalloutProtection::CScriptCalloutProtection在IE8中并不存在，不过很不幸，CImgHelper::CScriptCalloutProtection::CScriptCalloutProtection 并不是我们要找的目标。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/2016031711235628013125.jpg" alt="p11"></p>
+<p><img src="../images_result/images/2016031711235628013125.jpg" alt="p11"></p>
 
 <p>但是目标也不遥远了，继续往下看一点代码，就可以发现IE11在设置IMG元素的上下文时，做了一个CMarkup：：CheckForLMZLLoad(v8, 1);的判断。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/2016031711235726587134.jpg" alt="p12"></p>
+<p><img src="../images_result/images/2016031711235726587134.jpg" alt="p12"></p>
 
 <p>LMZL还有印象不？就是上一节说的Local Machine Zone Lockdown，名字看起来有点中二病，微软具体让这个东西覆盖了多少代码量也是个谜。</p>
 
@@ -278,11 +278,11 @@ MSHTML!CImgHelper::SetImgCtx+0x217:
 
 <p>看起来很明显了，微软在IMG设置上下文的时候，限制了Local Machine Zone的图片资源加载。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/2016031711235958497142.jpg" alt="p13"></p>
+<p><img src="../images_result/images/2016031711235958497142.jpg" alt="p13"></p>
 
 <p>设置上下文？差点忘了，获取图片和设置上下文的函数就是这个：CImgHelper::FetchandSetImgCtx。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/2016031711240014548152.jpg" alt="p14"></p>
+<p><img src="../images_result/images/2016031711240014548152.jpg" alt="p14"></p>
 
 <p>既然上下文设置失败，那么事件绑定和触发也必然没着落，更惨的是图片也不让显示，RES Protocol判断本地文件是否存在的功能自此宣告灭亡。</p>
 
@@ -292,7 +292,7 @@ MSHTML!CImgHelper::SetImgCtx+0x217:
 
 <p>也许你最近一年根本就没有用过IE，不要紧，IE里面有个无法显示此页还是一直在那里的。当访问一个无法处理的网站时，IE会展示<code>res://ieframe.dll/dnserror.htm#http://xxx</code>，在这个页面上有一个“修复连接问题”。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/2016031711240249175161.jpg" alt="p15"></p>
+<p><img src="../images_result/images/2016031711240249175161.jpg" alt="p15"></p>
 
 <p>点击一下这个东西，就会蹦出来一个网络修复程序，比较神奇。那么这里会不会也有安全问题呢，这个修复程序IE是怎么定位到的？</p>
 

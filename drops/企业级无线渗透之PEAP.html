@@ -3,7 +3,7 @@
 			<head>
 			     <title>企业级无线渗透之PEAP - qingxp9</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/wireless/15269">http://drops.wooyun.org/wireless/15269</a></h1>
 				
@@ -62,13 +62,13 @@
   <p>验证者就像是一个受保护网络的警卫。申请者不允许通过验证者访问到受保护一侧的网络，直到申请者的身分被验证和授权。这就像是允许进入一个国家之前要在机场的入境处提供一个有效的签证一样。使用802.1X基于端口的验证，申请者向验证者提供凭据，如用户名/密码或者数字证书，验证者将凭据转发给验证服务器来进行验证。如果验证服务器认为凭据有效，则申请者就被允许访问被保护侧网络的资源。</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20160425/2016042504001569730.png" alt="802.1X验证"></p>
+<p><img src="../images_result/images/2016042504001569730.png" alt="802.1X验证"></p>
 
 <p>802.1X 最初为有线接入而设计，因连接需要物理接触，所以在安全方面考虑较少。而无线网络的出现，使设备接入变得容易，需要对802.1X的安全性进行加强，即增强EAP协议的安全性。除了验证用户外，用户也需要去确保正在连接的是合法热点。</p>
 
 <p>需求便是：强健的加密方式及双向认证。 基于 IETF 的 TLS 标准可以较好的实现这两点需求，三种基于TLS的EAP协议就被研制了出来：EAP-TLS、EAP-TTLS、EAP-PEAP。 EAP-TLS基于Client和Server双方互相验证数字证书。因为EAP-TLS需要PKI系统为客户端签发证书的缺点，所以设计出了TTLS和PEAP，这两个协议可以在TLS隧道内部使用多种认证方法。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160425/2016042504001560848.png" alt="EAP-TLS、TTLS、PEAP "></p>
+<p><img src="../images_result/images/2016042504001560848.png" alt="EAP-TLS、TTLS、PEAP "></p>
 
 <p>因为PEAP与Windows操作系统的良好协调性，以及可以通过Windows组策略进行管理的特性，使得PEAP在部署时极其简单。同时，由于PEAP可以兼容几乎全部厂商的全部设备，因此对于企业来说，PEAP是一个最佳的验证协议。</p>
 
@@ -118,7 +118,7 @@
 <li>Security由用户决定。</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160425/2016042504001760174.png" alt="未经验证的证书"></p>
+<p><img src="../images_result/images/2016042504001760174.png" alt="未经验证的证书"></p>
 
 <h2>3.2 PEAP Attack</h2>
 
@@ -169,7 +169,7 @@ General -
 
 <p>建立成功后，用手机连上此热点，输入账号密码就可观察到被记录hash值(Challenge/Response），被记录在hostapd-wpe.log</p>
 
-<p><img src="http://static.wooyun.org//drops/20160425/2016042504012059457.png" alt="此处输入图片的描述"></p>
+<p><img src="../images_result/images/2016042504012059457.png" alt="此处输入图片的描述"></p>
 
 <h3>Asleap &amp; John the Ripper</h3>
 
@@ -185,7 +185,7 @@ make
 ./asleap -C Challenge值 -R Response值 -W path/to/wordlist.txt
 </code></pre>
 
-<p><img src="http://2.bp.blogspot.com/_Y2uWeGSk9Sw/TC3N00ynJ0I/AAAAAAAAGi8/9b7QQ67DuR4/s1600/Figura9.png" alt="此处输入图片的描述"></p>
+<p><img src="../images_result/images/Figura9.png" alt="此处输入图片的描述"></p>
 
 <h3>MS-CHAP v2 Vulnerability</h3>
 

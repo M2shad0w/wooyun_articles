@@ -3,7 +3,7 @@
 			<head>
 			     <title>Android密码学相关 - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6049">http://drops.wooyun.org/tips/6049</a></h1>
 				
@@ -60,15 +60,15 @@
 
 <p>首先抓包分析确定关键字后追踪其调用调用</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503281512388.png" alt=""></p>
+<p><img src="../images_result/images/2015062503281512388.png" alt=""></p>
 
 <p>定位到摘要算法:传入的Map对象后转成数组排序后拼接上传入的string进行md5最后转成大写.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503281530603.png" alt=""></p>
+<p><img src="../images_result/images/2015062503281530603.png" alt=""></p>
 
 <p>然后再找到key,到这里看貌似这个key是静态的.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503281619634.png" alt=""></p>
+<p><img src="../images_result/images/2015062503281619634.png" alt=""></p>
 
 <p>现在可以根据这个写出sign的类了.</p>
 
@@ -201,29 +201,29 @@ public class Main implements IXposedHookLoadPackage {
 }
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503281620503.png" alt=""></p>
+<p><img src="../images_result/images/2015062503281620503.png" alt=""></p>
 
 <p>通过hook发现大部分请求的sign是按照之前分析的方法计算出的,但是在查询密码处计算sign的key一直在变化的,这里是一个动态的key</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503281762193.png" alt=""></p>
+<p><img src="../images_result/images/2015062503281762193.png" alt=""></p>
 
 <p>再返回去分析摘要算法的调用情况来追踪动态key如何产生的,交叉引用xrefs</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503281816296.png" alt=""></p>
+<p><img src="../images_result/images/2015062503281816296.png" alt=""></p>
 
 <p>原来计算sign的方式还请求包中pid的值有关</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503281939995.png" alt=""></p>
+<p><img src="../images_result/images/2015062503281939995.png" alt=""></p>
 
 <p>当pid=qryapwd:commoanswith所用的key并非之前提到的静态密钥,而且调用一个方法,追踪此方法发现此参数是从默认的shared_prefs文件中读取的.如果为空才使用静态密钥.(分享wifi密码和查询wifi密码均进入此条件)</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503281980535.png" alt=""></p>
+<p><img src="../images_result/images/2015062503281980535.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282023205.png" alt=""></p>
+<p><img src="../images_result/images/2015062503282023205.png" alt=""></p>
 
 <p>那么shared_prefs默认文件中的值又是从哪里生成的了?通过抓包可以发现这个是由服务器返回的.每次查询后都会更新</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282064274.png" alt=""></p>
+<p><img src="../images_result/images/2015062503282064274.png" alt=""></p>
 
 <p>现在已经完全了解官网版本的两种摘要算法,可以自己构造请求来查询wifi密码了.</p>
 
@@ -233,7 +233,7 @@ public class Main implements IXposedHookLoadPackage {
 
 <p>在之后的测试发现如果查询过于频繁会被服务器给ban掉,通过fuzz发现服务器是通过dhid这个参数来判断是请求来源是否为同一设备,修改dhid然后重新计算sign发包.此处的sign是通过上文digest(v1,retSn)算出的.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282153783.jpg" alt=""></p>
+<p><img src="../images_result/images/2015062503282153783.jpg" alt=""></p>
 
 <p>显然dhid也做了合法性效验,继续探索dhid是如何生成的,客户端是从私有文件中取得dhid的,而客户端的dhid是由应用安装后发送请求由服务器返回的.</p>
 
@@ -255,7 +255,7 @@ public class Main implements IXposedHookLoadPackage {
 
 <p>查询密码后服务器返回的wifi密码是加密过的,但是这种加密客户端必定对应有解密算法.你的剑就是我的剑.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282195827.png" alt=""></p>
+<p><img src="../images_result/images/2015062503282195827.png" alt=""></p>
 
 <pre><code>#!java
 import javax.crypto.Cipher;
@@ -315,13 +315,13 @@ public class AES {
 
 <p>如果不想改密码还可以伪造分享ap请求来覆盖之前的密码,依然需要计算sign哦.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282231256.png" alt=""></p>
+<p><img src="../images_result/images/2015062503282231256.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282220145.png" alt=""></p>
+<p><img src="../images_result/images/2015062503282220145.png" alt=""></p>
 
 <p>再覆盖一次.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282231454.png" alt=""></p>
+<p><img src="../images_result/images/2015062503282231454.png" alt=""></p>
 
 <h3>wifi密码查询小工具</h3>
 
@@ -329,13 +329,13 @@ public class AES {
 
 <p>综合上述分析就可以制作出自己的wifi密码查询工具了.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282362962.jpg" alt=""></p>
+<p><img src="../images_result/images/2015062503282362962.jpg" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282380463.png" alt=""></p>
+<p><img src="../images_result/images/2015062503282380463.png" alt=""></p>
 
 <p>顺手也写了一个android客户端.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282459839.png" alt=""></p>
+<p><img src="../images_result/images/2015062503282459839.png" alt=""></p>
 
 <h3>乌云案例</h3>
 
@@ -359,7 +359,7 @@ public class AES {
 
 <p>得想出一种方案让攻击者知道sign的算法也很难利用此算法,例如:计算sign之后对数据进行非对称加密,这时要对sign重新计算sign就无法直接从http包中获取字段,要解密也没有私钥.只有通过hook以及反编译来获得计算的sign的参数变得较为繁琐,如果有必要可以对应用进行加壳使用反编译和hook变得更加困难.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282467843.png" alt=""></p>
+<p><img src="../images_result/images/2015062503282467843.png" alt=""></p>
 
 <p>设计好方案之后的关键就是选择加密算法/密钥存储位置.</p>
 
@@ -437,7 +437,7 @@ public class AES {
 在用户session做个字段当盐?
 -->
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282489692.png" alt=""></p>
+<p><img src="../images_result/images/2015062503282489692.png" alt=""></p>
 
 <ul>
 <li>特别重要的用户数据加解密/签名验证应选择基于密码生成key的加密算法 (PBE)</li>
@@ -445,7 +445,7 @@ public class AES {
 <li>客户端/服务端通信...加解密/签名验证使用公钥加密算法 (非对称加密)</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282515169.png" alt=""></p>
+<p><img src="../images_result/images/2015062503282515169.png" alt=""></p>
 
 <h3>Protecting Key</h3>
 
@@ -459,7 +459,7 @@ public class AES {
 
 <p>算法生成密钥:本地数据加解密</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282598831.png" alt=""></p>
+<p><img src="../images_result/images/2015062503282598831.png" alt=""></p>
 
 <p>key的存储位置</p>
 

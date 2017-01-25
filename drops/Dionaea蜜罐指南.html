@@ -3,7 +3,7 @@
 			<head>
 			     <title>Dionaea蜜罐指南 - 我是壮丁</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4584">http://drops.wooyun.org/papers/4584</a></h1>
 				
@@ -196,7 +196,7 @@ cd /opt/dionaea/bin
 ./dionaea -c /opt/dionaea/etc/dionaea/dionaea.conf -u dionaea -g dionaea
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011307493258759image001.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011307493258759image001.png" alt="enter image description here"></p>
 
 <h1>0x04 图形化</h1>
 
@@ -333,15 +333,15 @@ TIME_ZONE = 'Asia/Shanghai'
 
 <p>访问http://ip:8000</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011307572869991image003.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011307572869991image003.png" alt="enter image description here"></p>
 
 <p>Nessus扫描</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011307575770242image005.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011307575770242image005.png" alt="enter image description here"></p>
 
 <p>主机识别的结果</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011307582777946image007.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011307582777946image007.png" alt="enter image description here"></p>
 
 <h1>0x06 结构</h1>
 
@@ -413,11 +413,11 @@ listen =
 
 <p>提供以下这些服务</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011308030947544image009.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011308030947544image009.png" alt="enter image description here"></p>
 
 <p>nmap -sV端口识别,信息太明显,显示" Dionaea honeypot"等字样</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011308034361799image011.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011308034361799image011.png" alt="enter image description here"></p>
 
 <p>修改配置文件,变更指纹信息 SMB的445端口指纹: /opt/dionaea/lib/dionaea/python/dionaea/smb/include/smbfields.py 中</p>
 
@@ -433,7 +433,7 @@ ConditionalField(UnicodeNullField("ServerName", "HOMEUSER-3AF6FE")
 
 <p>识别为正常的服务</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011308050639292image013.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011308050639292image013.png" alt="enter image description here"></p>
 
 <h1>0x08 通过uwsgi+nginx来发布页面</h1>
 
@@ -619,15 +619,15 @@ Esac
 
 <p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6f8deff38ad1ee88fbc78deff28bd5e98af0d58ae0e42f8acbc586f7dc86cce188f5eb191f1c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>,收集了一些数据,这个比ssh的蜜罐多了太多!!!!!</p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011308113236733image015.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011308113236733image015.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011308115488874image0071.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011308115488874image0071.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011308122036420image019.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011308122036420image019.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011308130870663image021.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011308130870663image021.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150113/2015011308134195515image023.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015011308134195515image023.png" alt="enter image description here"></p>
 
 <p>有大量的恶意程序,有兴趣的可以私信我啊~~~</p>
 

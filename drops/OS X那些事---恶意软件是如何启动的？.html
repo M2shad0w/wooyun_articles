@@ -3,7 +3,7 @@
 			<head>
 			     <title>OS X那些事---恶意软件是如何启动的？ - vvun91e0n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11370">http://drops.wooyun.org/tips/11370</a></h1>
 				
@@ -16,7 +16,7 @@
 
 <p>报告主要的内容就是说说2015年OS X平台恶意软件的情况。bit9的研究团队进行了10周的分析研究，分析了1400个恶意软件样本。给出了下面这张图，可见，2015年恶意软件样本数量是前5年恶意样本数量之和的5倍。这估计要亮瞎苹果公司的眼。Mac越来越火。也越来越不安全了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151222/20151222103123646851103.png" alt="p1"></p>
+<p><img src="../images_result/images/20151222103123646851103.png" alt="p1"></p>
 
 <!--more-->
 
@@ -35,7 +35,7 @@
 
 <p>接下来就来谈谈这启动的事，看看是哪7种武器是黑客所喜欢的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151222/2015122210312573144245.png" alt="p2"></p>
+<p><img src="../images_result/images/2015122210312573144245.png" alt="p2"></p>
 
 <p>如上7种武器你知道几种（大神就自动飘过）。</p>
 
@@ -45,7 +45,7 @@
 
 <p>这两种方式都是苹果官方提供的标准启动方式。在官方手册里面可以查询到更详细的介绍<a href="https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html#//apple_ref/doc/uid/10000172i-SW7-BCIEDDBJ">[link]</a>。daemons和agents都是由launchd进程负责启动的后台作业。launchd是OS X系统用户态的第一个进程。对应于其他UN*X系统中的init。负责直接或者间接的启动系统中的其他进程。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151222/2015122210312780909335.png" alt="p3"></p>
+<p><img src="../images_result/images/2015122210312780909335.png" alt="p3"></p>
 
 <p>从图中可以看到daemons和agents都是由launchd进程启动的。</p>
 
@@ -89,7 +89,7 @@
 
 <p>plist文件的结构可以查看手册<a href="https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html#//apple_ref/doc/uid/TP40001762-104142">[link]</a>,下面给出了一个启动计算器的plist文件。拥有键值为true的RunAtLoad键。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151222/2015122210312990743433.png" alt="p4"></p>
+<p><img src="../images_result/images/2015122210312990743433.png" alt="p4"></p>
 
 <p>将此<code>.plist</code>文件拷贝到<code>/Library/LaunchAgents</code>目录（拷贝之后的文件拥有者为root），就可以在重启后，自动启动计算器。</p>
 
@@ -123,7 +123,7 @@ sudo plutil -lint /path/to/com.test.plist
 
 <p>crontab可以直接读取文件作为输入来配置：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151222/2015122210313124686524.png" alt="p5"> 如图 用crontab加载文本persist</p>
+<p><img src="../images_result/images/2015122210313124686524.png" alt="p5"> 如图 用crontab加载文本persist</p>
 
 <p>保存文本内容为：</p>
 
@@ -131,7 +131,7 @@ sudo plutil -lint /path/to/com.test.plist
 
 <p>该配置为每分钟执行open命令打开计算器。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151222/2015122210313331295624.png" alt="p6"></p>
+<p><img src="../images_result/images/2015122210313331295624.png" alt="p6"></p>
 
 <p>上图为文件格式，多个任务可以分多行给出，可以用#进行注释。</p>
 
@@ -160,7 +160,7 @@ sudo plutil -lint /path/to/com.test.plist
 
 <p>使用第一种方式启动的login items在系统偏好设置->用户和群组>登录项里面可以查看并设置</p>
 
-<p><img src="http://static.wooyun.org//drops/20151222/2015122210313411204721.png" alt="p7"></p>
+<p><img src="../images_result/images/2015122210313411204721.png" alt="p7"></p>
 
 <p>在这个界面可以添加，删除登录项。</p>
 
@@ -209,7 +209,7 @@ CFRelease(loginItems);
 
 <p>下图是一个例子：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151222/2015122210313628127820.png" alt="p8"></p>
+<p><img src="../images_result/images/2015122210313628127820.png" alt="p8"></p>
 
 <p>开机启动后系统会自动向脚本给出start作为参数。“$1” 表示传给该脚本的第一个参数</p>
 
@@ -221,13 +221,13 @@ CFRelease(loginItems);
 
 <p>在目录中创建该文件<code>StartupParameters.plist</code>是一个属性列表。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151222/2015122210313899900918.png" alt="p9"></p>
+<p><img src="../images_result/images/2015122210313899900918.png" alt="p9"></p>
 
 <p>关于plist中主要的字段</p>
 
 <p>可以参考：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151222/20151222103139854011017.png" alt="p10"></p>
+<p><img src="../images_result/images/20151222103139854011017.png" alt="p10"></p>
 
 <h3>Binary infection</h3>
 
@@ -251,7 +251,7 @@ CFRelease(loginItems);
 
 <p>该工具自动扫描9中启动方式。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151222/20151222103141417461121.png" alt="p11"></p>
+<p><img src="../images_result/images/20151222103141417461121.png" alt="p11"></p>
 
 <p>读者可以利用此工具来进行一个快速的检测。</p>
 

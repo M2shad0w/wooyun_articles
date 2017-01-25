@@ -3,7 +3,7 @@
 			<head>
 			     <title>浏览器fuzz框架介绍 - 绿盟科技</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/10590">http://drops.wooyun.org/papers/10590</a></h1>
 				
@@ -16,7 +16,7 @@
 
 <p>Fuzz（模糊测试）是一种侧重于发现软件安全漏洞的方法。典型地模糊测试过程是通过自动的或半自动的方法，反复驱动目标软件运行，并为其提供”精心”构造的输入数据，同时监控软件运行的异常，进而根据异常结果及输入数据查找软件的安全漏洞。随着Smart Fuzz的发展，RCE（逆向代码工程）需求的增加，其特征更符合一种灰盒测试。其简要流程图如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151121/2015112106041144302.png" alt=""></p>
+<p><img src="../images_result/images/2015112106041144302.png" alt=""></p>
 
 <!--more-->
 
@@ -42,11 +42,11 @@
 
 <h2>界面</h2>
 
-<p><img src="http://static.wooyun.org//drops/20151121/2015112106041221517.png" alt=""></p>
+<p><img src="../images_result/images/2015112106041221517.png" alt=""></p>
 
 <h2>流程图</h2>
 
-<p><img src="http://static.wooyun.org//drops/20151121/2015112106041224042.png" alt=""></p>
+<p><img src="../images_result/images/2015112106041224042.png" alt=""></p>
 
 <h1>0x02 X-Fuzzer 简介</h1>
 
@@ -56,11 +56,11 @@
 
 <h2>界面</h2>
 
-<p><img src="http://static.wooyun.org//drops/20151121/2015112106041298767.png" alt=""></p>
+<p><img src="../images_result/images/2015112106041298767.png" alt=""></p>
 
 <h2>功能模块图</h2>
 
-<p><img src="http://static.wooyun.org//drops/20151121/2015112106041343044.png" alt=""></p>
+<p><img src="../images_result/images/2015112106041343044.png" alt=""></p>
 
 <h1>0x03 grinder 简介</h1>
 
@@ -78,7 +78,7 @@
 
 <h2>界面</h2>
 
-<p><img src="http://static.wooyun.org//drops/20151121/2015112106041323677.png" alt=""></p>
+<p><img src="../images_result/images/2015112106041323677.png" alt=""></p>
 
 <h1>0x04 NBFuzz</h1>
 
@@ -97,7 +97,7 @@
 
 <h2>NBFuzz模块图</h2>
 
-<p><img src="http://static.wooyun.org//drops/20151121/2015112106041320013.png" alt=""></p>
+<p><img src="../images_result/images/2015112106041320013.png" alt=""></p>
 
 <p>通过测试用例生成程序生成大量指定浏览器的fuzz测试用例，将生成的测试用例和调度页面一并置于web服务端，监控模块打开待测浏览器访问调度页面，调度页面通过内嵌iframe页面顺序调用测试用例；监控模块记录被测浏览器异常或者超时重启被测浏览器进程，保障浏览器fuzz的自动化；最后分析监控模块记录的异常信息，找出可疑crash，根据其异常时间查找web服务端log文件中修改时间与之相匹配的文件，获取调度页面发来的导致异常的测试用例名称，进而重现crash，进一步判断漏洞的可利用性。</p>
 
@@ -106,12 +106,12 @@
 <ul>
 <li><p><strong>界面</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151121/2015112106041469929.png" alt=""></p>
+<p><img src="../images_result/images/2015112106041469929.png" alt=""></p>
 
 <p>根据选定的浏览器类型生成大量包含其特性（不同的属性、函数、垃圾回收机制等）的测试用例，由于使用了IE特有的ActiveXObject进行本地文件操作所以要求使用IE运行此程序，使用js写包含js的测试用例。</p></li>
 <li><p><strong>流程图</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151121/2015112106041451630.png" alt=""></p></li>
+<p><img src="../images_result/images/2015112106041451630.png" alt=""></p></li>
 </ul>
 
 <h2>测试用例加载（调度模块）</h2>
@@ -120,7 +120,7 @@
 
 <p>调度模块流程图如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151121/2015112106041492027.png" alt=""></p>
+<p><img src="../images_result/images/2015112106041492027.png" alt=""></p>
 
 <h1>0x05 浏览器Fuzz总结</h1>
 

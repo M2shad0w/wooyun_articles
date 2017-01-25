@@ -3,7 +3,7 @@
 			<head>
 			     <title>破解使用radius实现802.1x认证的企业无线网络 - mickey</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/8294">http://drops.wooyun.org/tools/8294</a></h1>
 				
@@ -39,7 +39,7 @@ cd /usr/local/etc/raddb/certs
 ./bootstrap &amp;&amp; ldconfig
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150831/2015083110534590676140.png" alt="the progress pictures"></p>
+<p><img src="../images_result/images/2015083110534590676140.png" alt="the progress pictures"></p>
 
 <p>通过源码安装的步骤如下：</p>
 
@@ -51,7 +51,7 @@ patch -p1 &lt; ../freeradius-wpe.patch
 make install
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150831/2015083110550968648237.png" alt="the progress pictures"></p>
+<p><img src="../images_result/images/2015083110550968648237.png" alt="the progress pictures"></p>
 
 <p>然后执行<code>radiusd -X</code>开启<code>debug</code>模式验证是否安装成功，如果运行此命令的时候提示</p>
 
@@ -72,7 +72,7 @@ cp defconfig .config
 make
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150831/2015083110554383707325.png" alt="the progress pictures"></p>
+<p><img src="../images_result/images/2015083110554383707325.png" alt="the progress pictures"></p>
 
 <p>如果安装的时候提示：</p>
 
@@ -118,11 +118,11 @@ rsn_pairwise=CCMP
 
 <p>看到抓到的用户名和MSCHAPv2的响应hash和挑战hash。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150831/2015083110555949697425.png" alt="the progress pictures"></p>
+<p><img src="../images_result/images/2015083110555949697425.png" alt="the progress pictures"></p>
 
 <p>有了challenge和response，就可以使用<code>asleep</code>工具来基于字典的暴力破解，命令如下</p>
 
-<p><img src="http://static.wooyun.org//drops/20150831/2015083110560419964519.png" alt="the progress pictures"></p>
+<p><img src="../images_result/images/2015083110560419964519.png" alt="the progress pictures"></p>
 
 <p>使用<strong>radius</strong>实现802.1x认证的企业无线网络相对来说还是比较安全的，如果每个用户的密码足够复杂的话。后续的国外研究者也对这种攻击增加了针对客户端和路由设备的心跳漏洞的工具，集成的项目叫<strong>cupid</strong>,有兴趣的可以参考<a href="http://www.sysvalue.com/en/heartbleed-cupid-wireless/">http://www.sysvalue.com/en/heartbleed-cupid-wireless/</a></p>
 

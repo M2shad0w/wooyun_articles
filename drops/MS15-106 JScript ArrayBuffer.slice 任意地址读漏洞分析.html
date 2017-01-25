@@ -3,7 +3,7 @@
 			<head>
 			     <title>MS15-106 JScript ArrayBuffer.slice 任意地址读漏洞分析 - 小叮当</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/16892">http://drops.wooyun.org/papers/16892</a></h1>
 				
@@ -34,19 +34,19 @@
 
 <p>ZDI说明中提到问题出现在JavaScript的ArrayBuffer.slice方法中，通过比对两个不同版本的DLL文件，可以确定函数Js::ArrayBuffer::EntrySlice()被补丁过了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160617/2016061716065618772p1.png" alt="p1"></p>
+<p><img src="../images_result/images/2016061716065618772p1.png" alt="p1"></p>
 
 <p>MSDN中有关 <a href="https://msdn.microsoft.com/en-us/library/dn641192%28v=vs.94%29.aspx">ArrayBuffer.slice</a> 的描述为：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160617/2016061716065763257p2.png" alt="p2"></p>
+<p><img src="../images_result/images/2016061716065763257p2.png" alt="p2"></p>
 
 <p>这个函数流程大致预览对比如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160617/2016061716065922500p3.png" alt="p3"></p>
+<p><img src="../images_result/images/2016061716065922500p3.png" alt="p3"></p>
 
 <p>进入函数Js::ArrayBuffer::EntrySlice()详细看，注意红色方框里面的代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160617/2016061716070068798p4.png" alt="p4"></p>
+<p><img src="../images_result/images/2016061716070068798p4.png" alt="p4"></p>
 
 <p>右边红色方框里面，增加了Js::ArrayBuffer::EntrySlice()函数检查：补丁后的版本检查了ArrayBuffer结构体偏移0x10字节的内容，如果这里不是0的话，就抛出TypeError异常。</p>
 
@@ -54,7 +54,7 @@
 
 <p>观察下Js::ArrayBuffer类，在初始化的时候偏移0x10的位置被设置成0，然后函数Js::ArrayBuffer::CreateNeuteredState()将偏移0x10这里的数值设置成它的参数：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160617/2016061716070249771p5.png" alt="p5"></p>
+<p><img src="../images_result/images/2016061716070249771p5.png" alt="p5"></p>
 
 <p>(译者：CreateNeuteredState()这个函数名字里面的Neutered是阉割、绝育的意思)</p>
 
@@ -86,11 +86,11 @@
 
 <p>但，漏洞在哪？IE做了和FireFox相同的事情，当运行ArrayBuffer.slice()方法的时候，代码逻辑去保存ArrayBuffer中当前有效的byteLength：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160617/2016061716070395449p6.png" alt="p6"></p>
+<p><img src="../images_result/images/2016061716070395449p6.png" alt="p6"></p>
 
 <p>当ArrayBuffer.slice()方法的参数不是原始类型，就会调用当前传递进来的对象的成员函数valueOf()。这个过程发生在Js::ArrayBuffer::GetIndexFromVar()函数内部。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160617/2016061716070552720p7.png" alt="p7"></p>
+<p><img src="../images_result/images/2016061716070552720p7.png" alt="p7"></p>
 
 <p>攻击的思路，在FireFox Pwn2Own里解释过，就是利用这样一个原理：原生代码会调用攻击者构造的JS代码(攻击者控制的对象里面的valueOf()函数)，以此来实现在Js::ArrayBuffer::EntrySlice()函数内部(错误地)结扎ArrayBuffer对象。就是说，我们就构造了一个前后矛盾的情况——正常的byteLength值在函数一开始的时候被保存，而经过两次Js::ArrayBuffer::GetIndexFromVar()调用，对象却又被结扎。</p>
 
@@ -100,7 +100,7 @@
 
 <p>ArrayBuffer在Js::ArrayBuffer::EntrySlice()函数里被意外地结扎后，这个函数试着去创建一个被结扎的ArrayBuffer对象的副本：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160617/2016061716070698775p8.png" alt="p8"></p>
+<p><img src="../images_result/images/2016061716070698775p8.png" alt="p8"></p>
 
 <p>函数memcpy()的参数具体如下：</p>
 
@@ -271,7 +271,7 @@ msvcrt!memcpy+0x52:
 
 <p>脚本跑出的结果再经过人工删选，最终的最优解如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160617/2016061716070832456p9.png" alt="p9"></p>
+<p><img src="../images_result/images/2016061716070832456p9.png" alt="p9"></p>
 
 <p>看下Js::DynamicProfileInfo::EnsureDynamicProfileInfoThunk()函数的代码，它调用(标记为红色的jmp eax)函数Js::DynamicProfileInfo::EnsureDynamicProfileInfo()返回的指针，而没有经过CFG检查，这就是我们想要的情况。</p>
 
@@ -279,7 +279,7 @@ msvcrt!memcpy+0x52:
 
 <p>更完美的是，Js::DynamicProfileInfo::EnsureDynamicProfileInfo()函数接受的参数(IDA里显示，应该是一个Js::ScriptFunction对象的指针)正好可以被我们完全控制。这里截取一小段上一篇文章的代码，VBScript里面的漏洞VAR::ObjGetDefault + 0x6b处，一个完全由我们控制的值被压栈，然后调用CFG保护的函数：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160617/2016061716070994951p10.png" alt="p10"></p>
+<p><img src="../images_result/images/2016061716070994951p10.png" alt="p10"></p>
 
 <p>也就是说，我们可以提供一个假的Js::ScriptFunction对象指针给函数Js::DynamicProfileInfo::EnsureDynamicProfileInfo()，通过精心构造(古师傅的喷射代码是你忠实的小伙伴)一个假的指针链交给Js::DynamicProfileInfo::EnsureDynamicProfileInfo()，这个函数会返回一个我们控制的指针，交给后面的jmp eax跳转。</p>
 

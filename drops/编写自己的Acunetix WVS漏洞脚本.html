@@ -3,7 +3,7 @@
 			<head>
 			     <title>编写自己的Acunetix WVS漏洞脚本 - 乌帽子</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2498">http://drops.wooyun.org/tips/2498</a></h1>
 				
@@ -24,11 +24,11 @@
 
 <p>下面的截图就是WVS码脚本工具了</p>
 
-<p><img src="http://static.wooyun.org/201407/2014070400041767163.jpg" alt="2014070400041767163.jpg"></p>
+<p><img src="../images_result/images/2014070400041767163.jpg" alt="2014070400041767163.jpg"></p>
 
 <p>打开WVS数据目录，通常是在<strong>C:\Documents and Settings\All Users\Application Data\Acunetix WVS 8\Data\Scripts</strong>下，可以看到有10个文件夹，Network、PerFile、PerScheme、PostScan、PerFolder、PerServer、PostCrawl、WebApps、XML。我们先来认识一下：</p>
 
-<p><img src="http://static.wooyun.org/201407/2014070400050052332.jpg" alt="2014070400050052332.jpg"></p>
+<p><img src="../images_result/images/2014070400050052332.jpg" alt="2014070400050052332.jpg"></p>
 
 <pre><code>Network：此目录下的脚本文件是当扫描器完成了端口扫描模块后执行，这些脚本可以检测TCP端口的开放情况，比如检测FTP的21端口是否开放、是否允许匿名登录； 
 PerFile：此目录下的脚本是当扫描器爬虫爬到文件后执行，比如你可以检查当前测试文件是否存在备份文件，当前测试文件的内容等； 
@@ -55,23 +55,23 @@ XML：漏洞的详细描述文档都在这里。
 <pre><code>faq.php?action=grouppermission&amp;gids[99]='&amp;gids[100][0]=)%20and%20(select%201%20from%20(select%20count(),concat((select%200x4861636B656442795365636572),floor(rand(0)2))x%20from%20information_schema%20.tables%20group%20by%20x)a)%23
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201407/2014070400052637340.jpg" alt="2014070400052637340.jpg"></p>
+<p><img src="../images_result/images/2014070400052637340.jpg" alt="2014070400052637340.jpg"></p>
 
 <p>我们需要用WVS的脚本请求此URL并处理返回的内容，以此判断是否存在漏洞。</p>
 
 <p>打开AWVS，Tools -> Vulnerability Editor，右键VulnXMLs节点，选择‘Add Vulnerability’</p>
 
-<p><img src="http://static.wooyun.org/201407/2014070400061580159.jpg" alt="2014070400061580159.jpg"></p>
+<p><img src="../images_result/images/2014070400061580159.jpg" alt="2014070400061580159.jpg"></p>
 
 <p>新建一个漏洞，VulnXML FILENAME为<strong>Discuz7.2FaqSqlinjection</strong>，点Add按钮（新建的VulnXML会被保存到XML文件夹下哦）</p>
 
-<p><img src="http://static.wooyun.org/201407/2014070400063761671.jpg" alt="2014070400063761671.jpg"></p>
+<p><img src="../images_result/images/2014070400063761671.jpg" alt="2014070400063761671.jpg"></p>
 
 <p>接下来登记下该漏洞的相关信息</p>
 
-<p><img src="http://static.wooyun.org/201407/2014070400072634459.jpg" alt="2014070400072634459.jpg"></p>
+<p><img src="../images_result/images/2014070400072634459.jpg" alt="2014070400072634459.jpg"></p>
 
-<p><img src="http://static.wooyun.org/201407/2014070400073990780.jpg" alt="2014070400073990780.jpg"></p>
+<p><img src="../images_result/images/2014070400073990780.jpg" alt="2014070400073990780.jpg"></p>
 
 <p>然后进入wvss写脚本，保存为Discuz7.2FaqSqlinjection.script放入PerServer文件夹吧。</p>
 
@@ -79,35 +79,35 @@ XML：漏洞的详细描述文档都在这里。
 
 <p>使用AWVS的网站爬虫爬行网站并保存结果，</p>
 
-<p><img src="http://static.wooyun.org/201407/2014070400081569530.jpg" alt="2014070400081569530.jpg"></p>
+<p><img src="../images_result/images/2014070400081569530.jpg" alt="2014070400081569530.jpg"></p>
 
 <p>这里选择根目录</p>
 
-<p><img src="http://static.wooyun.org/201407/2014070400083732484.jpg" alt="2014070400083732484.jpg"></p>
+<p><img src="../images_result/images/2014070400083732484.jpg" alt="2014070400083732484.jpg"></p>
 
 <p>点击小三角按钮测试</p>
 
-<p><img src="http://static.wooyun.org/201407/2014070400091625586.jpg" alt="2014070400091625586.jpg"></p>
+<p><img src="../images_result/images/2014070400091625586.jpg" alt="2014070400091625586.jpg"></p>
 
-<p><img src="http://static.wooyun.org/201407/2014070400092981770.jpg" alt="2014070400092981770.jpg"></p>
+<p><img src="../images_result/images/2014070400092981770.jpg" alt="2014070400092981770.jpg"></p>
 
 <p>完整的代码如下</p>
 
-<p><img src="http://static.wooyun.org/201407/2014070400095916620.jpg" alt="2014070400095916620.jpg"></p>
+<p><img src="../images_result/images/2014070400095916620.jpg" alt="2014070400095916620.jpg"></p>
 
 <p>测试成功了，我到WVS里扫描去测试扫描看看~</p>
 
 <p>我们新建的漏洞脚本在这里，Scanning Profiles –》 PerFolder目录下，新建一个扫描模板勾选要测试的脚本并保存，这里保存为“test_HA.CKER.IN”，然后用这个模板扫描目标站测试吧</p>
 
-<p><img src="http://static.wooyun.org/201407/2014070400102959221.jpg" alt="2014070400102959221.jpg"></p>
+<p><img src="../images_result/images/2014070400102959221.jpg" alt="2014070400102959221.jpg"></p>
 
 <p>选择模板并开始扫描</p>
 
-<p><img src="http://static.wooyun.org/201407/2014070400105090725.jpg" alt="2014070400105090725.jpg"></p>
+<p><img src="../images_result/images/2014070400105090725.jpg" alt="2014070400105090725.jpg"></p>
 
 <p>扫描完成后，结果如图</p>
 
-<p><img src="http://static.wooyun.org/201407/2014070400112465943.jpg" alt="2014070400112465943.jpg"></p>
+<p><img src="../images_result/images/2014070400112465943.jpg" alt="2014070400112465943.jpg"></p>
 
 <p>漏洞脚本重复检测了很多次，下次更新修复下这个问题。</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>return2libc学习笔记 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/13554">http://drops.wooyun.org/binary/13554</a></h1>
 				
@@ -24,7 +24,7 @@
 
 <p>大致技术原理，如图1-1所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091538476609912.jpg" alt="p1"></p>
+<p><img src="../images_result/images/201603091538476609912.jpg" alt="p1"></p>
 
 <p>图1-1 r2libc技术原理</p>
 
@@ -56,7 +56,7 @@ $1 = {&lt;text variable, no debug info&gt;} 0xb7e56190 &lt;__libc_system&gt;
 
 <p>因此对于正常函数调用而言，其栈帧结构如下图1-2所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091538499744822.jpg" alt="p2"></p>
+<p><img src="../images_result/images/201603091538499744822.jpg" alt="p2"></p>
 
 <p>图1-2 函数调用栈帧结构图</p>
 
@@ -66,7 +66,7 @@ $1 = {&lt;text variable, no debug info&gt;} 0xb7e56190 &lt;__libc_system&gt;
 
 <p>首先，解释为何Filler是函数的返回地址。这需要我们查看system函数的汇编实现。通过 gdb调试得到如下信息：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091538518213732.jpg" alt="p3"></p>
+<p><img src="../images_result/images/201603091538518213732.jpg" alt="p3"></p>
 
 <p>图1-3 system函数汇编实现</p>
 
@@ -82,7 +82,7 @@ $1 = {&lt;text variable, no debug info&gt;} 0xb7e56190 &lt;__libc_system&gt;
 
 <p>下面唯一的问题就是如何在栈中构造”/bin/sh”参数了。当然，这里用“构造”一词并不准确，“借用”更合适——我们从内存中搜寻此字符串，然后将该字符串在内存中的起始地址赋值到Filler之后即可。那么如何获取到这个字符串的地址呢？我们知道，LINUX的SHELL环境变量的值一般就是“/bin/sh”，所以我们可以通过gdb调试器，暴力搜索<code>%esp</code>寄存器之后开始的n个字符串，方法如下图1-4所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091538536329142.jpg" alt="p4"></p>
+<p><img src="../images_result/images/201603091538536329142.jpg" alt="p4"></p>
 
 <p>图1-4 GDB暴力搜索字符串</p>
 
@@ -90,7 +90,7 @@ $1 = {&lt;text variable, no debug info&gt;} 0xb7e56190 &lt;__libc_system&gt;
 
 <p><strong>还有一种更简单的方法</strong>，详细步骤如下图1-5所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091538553391352.jpg" alt="p5"></p>
+<p><img src="../images_result/images/201603091538553391352.jpg" alt="p5"></p>
 
 <p>图1-5 构造“/bin/sh”参数方法三</p>
 
@@ -120,7 +120,7 @@ int main(int argc, char *argv[]) {
 
 <p>回顾图1-1，我们知道system函数执行后，其返回地址是Filler，因此如果我们将需要执行的第二个libc函数的地址放置到Filler上，那么不就构造了一个函数调用链么？详情见图2-1：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091538579146361.jpg" alt="p6"></p>
+<p><img src="../images_result/images/201603091538579146361.jpg" alt="p6"></p>
 
 <p>图2-1基于libc的函数调用链攻击原理图</p>
 
@@ -154,7 +154,7 @@ int main(int argc, char *argv[]) {
 
 <p>因此，我们需要构造如图3-1所示的stack数据：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091538596952971.jpg" alt="p7"></p>
+<p><img src="../images_result/images/201603091538596952971.jpg" alt="p7"></p>
 
 <p>图3-1 构造实施攻击的栈结构</p>
 
@@ -174,7 +174,7 @@ int main(int argc, char *argv[]) {
 
 <p>表3-1 magic formula</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/20160309153901389948.jpg" alt="p8"></p>
+<p><img src="../images_result/images/20160309153901389948.jpg" alt="p8"></p>
 
 <p>公式的详细推导见：<br>
 <a href="http://www.cgsecurity.org/Articles/SecProg/Art4/">http://www.cgsecurity.org/Articles/SecProg/Art4/</a></p>
@@ -194,13 +194,13 @@ ret
 
 <p>结合1.1章节的分析，可以知道当执行完printf函数之后，此时的esp指针指向图3-1中的Add of ‘%5$n’处，如图3-2所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/20160309153903465959.jpg" alt="p9"></p>
+<p><img src="../images_result/images/20160309153903465959.jpg" alt="p9"></p>
 
 <p>图3-2 执行完printf函数后的ESP指针位置</p>
 
 <p>现在开始执行<code>pop %ebp</code>指令，将Addr of ‘%5$n’放入ebp寄存器中；然后再执行<code>ret</code>指令(即<code>pop IP</code>)，将Addr of execl放入IP寄存器中，这样程序下一步就会转而执行execl函数了，而此时的ESP指针指向Addr of exit，如下图3-3所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091539056227910.jpg" alt="p10"></p>
+<p><img src="../images_result/images/201603091539056227910.jpg" alt="p10"></p>
 
 <p>图3-3 开始执行execl函数之前ESP指针位置</p>
 
@@ -324,7 +324,7 @@ gdb.error: No function contains program counter for selected frame.
 
 <p>那么怎么才能泄露出Libc库文件的地址呢？考虑到程序本身在内存中的地址并不是随机的，所以只要将返回值设置到程序本身所处的内存段就可以了，当然，<strong>前提是我们必须获取目标系统中的libc.so库文件</strong>。Linux内存随机化分布图如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/2016030915390727497111.jpg" alt="p11"></p>
+<p><img src="../images_result/images/2016030915390727497111.jpg" alt="p11"></p>
 
 <p>整体攻击思路：</p>
 
@@ -334,7 +334,7 @@ gdb.error: No function contains program counter for selected frame.
 
 <p>1) 首先使用<code>objdump –R</code>命令查看目标文件的<strong>动态重定位项</strong>，也就是常说的<strong>GOT表项</strong>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/2016030915390828325121.jpg" alt="p12"></p>
+<p><img src="../images_result/images/2016030915390828325121.jpg" alt="p12"></p>
 
 <p>2) 然后使用<code>objdump –j .glt –d</code>命令反编译目标文件的<strong>plt表</strong>：</p>
 
@@ -372,7 +372,7 @@ Disassembly of section .plt:
 
 <p>2.根据第1步的结果确定想要获取的属于Libc的某个函数的地址，这里我们使用write函数。获取方法并不难，从上面对linux动态重定位机制的介绍可以知道，我们只需要按照如下方式做就可以了：首先构造payload执行目标文件的write函数(怎么执行呢？<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0febb2b0e89ba7e894a1e9af88e99988ebb4b9ebb7a2e8958b787d667b6a4f7f637bea93bfea928fe7a989e894994a465f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>)，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b5510d35532213533c125d1439510f33c2c7dcc1d0f5c5d9c1533932510e11">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="95733831730223e2e7fce1f0efd5f2fae1712d38720f1173002573183b70252471290f7d373e72262e722e0a712a3b73012c712d2ff9fcf7f6712d3872090a733836">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>的write函数的地址，所以我们再使用write函数打印出该地址即可：payload构造如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091539103532713.jpg" alt="p13"></p>
+<p><img src="../images_result/images/201603091539103532713.jpg" alt="p13"></p>
 
 <p>即执行<code>write(STDOUT, &amp;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="84f3f6edf0e1c4e3ebf0">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>, 4)</code>，这样就会将libc中真正的write函数地址打印到标准输出中。这里的vul_func地址可以通过<code>objdump –d</code>获取，当然使用IDA更方便。</p>
 
@@ -386,7 +386,7 @@ system_real_addr = write_real_addr – ( write_addr_in_libc – system_addr_in_l
 
 <p>4.执行<code>system(‘/bin/sh’)</code>，payload构造如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091539114200614.jpg" alt="p14"></p>
+<p><img src="../images_result/images/201603091539114200614.jpg" alt="p14"></p>
 
 <h1>0x06 参考文献</h1>
 

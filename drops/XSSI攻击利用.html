@@ -3,7 +3,7 @@
 			<head>
 			     <title>XSSI攻击利用 - 大学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5797">http://drops.wooyun.org/papers/5797</a></h1>
 				
@@ -112,11 +112,11 @@ Content-Length: 39
 
 <p>测试这段代码之后，我们给自己弹了个窗。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503210937058.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503210937058.jpg" alt="enter image description here"></p>
 
 <p>我们可以看到一串乱码，因为，当浏览器获取目标网页的数据，之间经过了一次编码，然后到我们的页面上经过charset制定的字符集进行了一次解码。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503210988643.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503210988643.jpg" alt="enter image description here"></p>
 
 <p>我们能很简单的得出一个结论就是我们能通过对乱码的再次编码来获得原有的信息，不过需要注意的就是只有当编码后的信息能够被浏览器识别为有效的js标示符的时候攻击才有可能成功，这是一个重要的条件，对于不同的平台的编码是有所不同的，在ie上可以被识别为有效js标示符的字符是多于其他平台的，至于其他来说ie的 ECMAScript规范 (5]跟其他浏览器总体没什么不同。</p>
 
@@ -124,7 +124,7 @@ Content-Length: 39
 
 <p>我们花了很多时间研究了什么样的组合，能够被浏览器认定为有效的js标示符，当字符编码为UTF-16的时候的数字字母组合，ie 9将其99.3%认为是有效的js标示符，高于chrome和firefox。具体结果见下图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503210975596.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015062503210975596.jpg" alt="enter image description here"></p>
 
 <p>需要注意的一件事就是在ie 10 或者更高的版本，可能攻击无法奏效，因为ie 10 拒绝将没有空字节活着bom的编码为utf16。</p>
 

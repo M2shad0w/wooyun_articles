@@ -3,7 +3,7 @@
 			<head>
 			     <title>使用powershell Client进行有效钓鱼 - Evi1cg</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8568">http://drops.wooyun.org/tips/8568</a></h1>
 				
@@ -46,7 +46,7 @@ PS G:\github\Pentest\powershell\nishang-master\Shells&gt; Invoke-PowerShellTcp -
 
 <p>执行结果如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091106151761582Invoke-PowerShellTcp.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2015091106151761582Invoke-PowerShellTcp.png" alt="Alt text"></p>
 
 <p>可以发现，直接获取了一个powershell的shell。下面制作word文件。 复制nishang中Invoke-PowerShellTcpOneLine.ps1 client代码，如下：</p>
 
@@ -82,7 +82,7 @@ PS G:\github\Pentest\powershell\nishang-master\Utility&gt;
 
 <p>执行word以后，则会反弹shell，在启用宏的计算机上没有任何提示，未启用宏的计算机会有启用宏的提示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091106125149349backshell.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2015091106125149349backshell.png" alt="Alt text"></p>
 
 <p>获取反弹的powershell可以很容易的升级到metasploit的meterpreter。</p>
 
@@ -107,7 +107,7 @@ msf exploit(web_delivery) &gt; exploit
 
 <p>开启服务如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091106153130275web_delivery.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2015091106153130275web_delivery.png" alt="Alt text"></p>
 
 <p>使用Out-Excel.ps1制作excel钓鱼文件:</p>
 
@@ -123,7 +123,7 @@ Saved to file D:\temp\test.xls
 
 <p>其中<code>http://192.168.52.129:8080/</code>是msf开启的服务地址。 运行excel，获取meterpreter会话如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091106132417843excel_meter.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2015091106132417843excel_meter.png" alt="Alt text"></p>
 
 <h1>0x03制作chm钓鱼文件</h1>
 
@@ -151,7 +151,7 @@ PS D:\temp&gt;
 
 <p>运行doc.chm,获取meterpreter会话:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091106131746320chm_meter.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2015091106131746320chm_meter.png" alt="Alt text"></p>
 
 <p>缺点是会弹出黑框框。丢给几个小伙伴测试，都上线了（23333）。</p>
 
@@ -168,11 +168,11 @@ The Shortcut file has been written as D:\temp\Shortcut to File Server.lnk
 
 <p>其中PayloadURL为web_delivery服务地址，Icon为快捷方式的图标，HotKey为快捷键。 右键属性快捷方式，可以看到快捷方式指向我们的服务地址，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091106152177523Shorcut.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2015091106152177523Shorcut.png" alt="Alt text"></p>
 
 <p>运行快捷方式，可以获取meterpreter会话：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150911/2015091106152688640shorcut_meter.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2015091106152688640shorcut_meter.png" alt="Alt text"></p>
 
 <h1>0x05小结</h1>
 

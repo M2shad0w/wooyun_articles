@@ -3,7 +3,7 @@
 			<head>
 			     <title>从反序列化漏洞到掌控帝国：百万美刀的Instagram漏洞 - 我是小号</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/11548">http://drops.wooyun.org/papers/11548</a></h1>
 				
@@ -47,7 +47,7 @@ _sensu-admin_session=BAhvOkBBY3RpdmVTdXBwb3J0OjpEZXByZWNhdGlvbjo6RGVwcmVjYXRlZEl
 
 <p>所以，我建立了一个监听端口，然后上传了一个远程shell文件，结果如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151221/201512210749409938201.png" alt="p1"></p>
+<p><img src="../images_result/images/201512210749409938201.png" alt="p1"></p>
 
 <p>成功让Instagram服务器执行了我发送的命令代码以后，我把该漏洞报告给了Facebook团队。我在报告中提到：</p>
 
@@ -64,7 +64,7 @@ _sensu-admin_session=BAhvOkBBY3RpdmVTdXBwb3J0OjpEZXByZWNhdGlvbjo6RGVwcmVjYXRlZEl
 
 <p>上一章提到，我虽然成功让Facebook的服务器执行了远程代码，获取了服务器的Shell，但是我并没有接触到该后台的UI界面。碰巧的是，Instagram的这个后台把管理用户数据存储在了同一台服务器的Postgres DB内，既然这样，手起刀落，我成功获取了该后台大约60个账户的用户名和密码。不过，很悲催的是，密码被加密了，我正在蛋疼如何解密这些数据呢，好消息就来了。我短时间内就破解出了12个弱口令，这些密码包括"changme","password","instagram"。我的天！赤果果的弱口令啊。所以，我成功登录了<a href="https://sensu.instagram.com">https://sensu.instagram.com</a>的后台界面，截图留念：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151221/201512210749433703502.png" alt="p2"></p>
+<p><img src="../images_result/images/201512210749433703502.png" alt="p2"></p>
 
 <p>因为Facebook极力反对在测试中可能对业务进行破坏的渗透行为，所以我就截图留念走人，顺手把这个作为新漏洞提交给了Facebook应急响应团队。</p>
 
@@ -117,7 +117,7 @@ _sensu-admin_session=BAhvOkBBY3RpdmVTdXBwb3J0OjpEZXByZWNhdGlvbjo6RGVwcmVjYXRlZEl
 
 <p>最后，我想用一张思维导图总结一下我此次渗透进入Instagram帝国的过程:</p>
 
-<p><img src="http://static.wooyun.org//drops/20151221/201512210749445203003.png" alt="p3"></p>
+<p><img src="../images_result/images/201512210749445203003.png" alt="p3"></p>
 
 <p>其实整件事情的起因是，sensu.instagram.com的远程代码执行，从这个漏洞，我又发掘出了后台员工的弱口令。通过sensu.instagram. com服务器上的配置文件，我又获取了AWS keypair，使用这keypair，我又从S3云存储服务器上读取到了EC2 AWS keypair。使用这个keypair我读取到了instagram存储在S3云存储服务上的所有重要敏感数据。 整个渗透测试过程，暴露出了Facebook在安全体系建设上的大量缺陷，是我惊讶的是，在安全体系建设了这么多年以后，竟然还会出现许多低级的安全和规范问题。可见，安全攻防，还会朝着更为纵深的方向持续。</p>
 

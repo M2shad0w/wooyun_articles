@@ -3,7 +3,7 @@
 			<head>
 			     <title>利用任务调度特性检测Android模拟器 - leonnewton</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/13486">http://drops.wooyun.org/mobile/13486</a></h1>
 				
@@ -30,7 +30,7 @@
 
 <p>Qemu使用二进制翻译技术把要翻译的native代码，比如ARM下的代码，翻译到host系统下一样或者不同的指令集，比如x86指令集。跟指令集模拟技术相比，二进制翻译运行速度更快，因为已经翻译的代码块可以进行cache然后直接执行。下面是Qemu二进制翻译过程的流程图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160318/2016031809542745651160.png" alt="p1"></p>
+<p><img src="../images_result/images/2016031809542745651160.png" alt="p1"></p>
 
 <p>从图中可以看出，当遇到分支指令的时候，就会对后面的代码进行处理。后面的代码地址可以在分支指令里面找到，所以会先去找是否有代码的cache。当命中的时候，代码块已经有cache了，代码已经翻译过，所以直接执行就行了。当没有命中的时候，翻译函数就会去翻译代码，一直翻译到遇到下一个分支指令。然后把翻译好的代码放到cache中接着执行。</p>
 
@@ -46,7 +46,7 @@
 
 <p>试想下在多任务的操作系统中，当有中断发生的时候，上面的优化会导致什么事？由于程序计数器不是每执行一次就更新的，那么虚拟CPU在执行一个代码块的时候是不能被中断的，被中断后就没法恢复正确的程序计数器值。所以在运行一个代码块的时候，一般不会发生任务调度的情况。整个过程如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160318/2016031809542922250230.png" alt="p2"></p>
+<p><img src="../images_result/images/2016031809542922250230.png" alt="p2"></p>
 
 <h1>0x04 实验验证</h1>
 
@@ -56,7 +56,7 @@
 
 <p>具体的实验是通过2个线程。一个线程在一个代码块中对一个全局变量不断地加1，每次循环全局变量都赋值为1。另一个线程也是循环，每次都去读前面的那个全局变量。然后统计读出来每个数字的次数。流程如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160318/2016031809543120053329.png" alt="p3"></p>
+<p><img src="../images_result/images/2016031809543120053329.png" alt="p3"></p>
 
 <p>不断加1的线程代码如下：</p>
 
@@ -119,7 +119,7 @@ for(i=0;i&lt;50000;i++)
 <ol>
 <li>直接计算原始数据的方差和标准差；</li>
 <li><p>对所有数据除以最大值，然后计算方差和标准差；</p></li>
-<li><p><img src="http://static.wooyun.org//drops/20160318/2016031809543252823415.png" alt="p4">，进行离差标准化以后，计算方差和标准差。</p></li>
+<li><p><img src="../images_result/images/2016031809543252823415.png" alt="p4">，进行离差标准化以后，计算方差和标准差。</p></li>
 </ol>
 
 <h1>0x05 结果与讨论</h1>
@@ -130,21 +130,21 @@ for(i=0;i&lt;50000;i++)
 
 <p>在模拟器里，3种方式计算出来的方差和标准差如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160318/2016031809543473783513.png" alt="p5"></p>
+<p><img src="../images_result/images/2016031809543473783513.png" alt="p5"></p>
 
 <p>每个数字统计的次数如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160318/2016031809543627064613.png" alt="p6"></p>
+<p><img src="../images_result/images/2016031809543627064613.png" alt="p6"></p>
 
 <p>除了<code>count[32]</code>其他都是0。</p>
 
 <p>在真机中，3种方式计算出来的方差和标准差如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160318/2016031809543723857713.png" alt="p7"></p>
+<p><img src="../images_result/images/2016031809543723857713.png" alt="p7"></p>
 
 <p>每个数字统计的次数如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160318/2016031809543991625811.png" alt="p8"></p>
+<p><img src="../images_result/images/2016031809543991625811.png" alt="p8"></p>
 
 <p>虽然<code>count[32]</code>比其他各个地方都多，但是中间基本都是均匀分布的。</p>
 

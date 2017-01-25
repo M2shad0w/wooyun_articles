@@ -3,7 +3,7 @@
 			<head>
 			     <title>iOS冰与火之歌番外篇 - App Hook答疑以及iOS 9砸壳 - 蒸米</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/13824">http://drops.wooyun.org/papers/13824</a></h1>
 				
@@ -47,11 +47,11 @@ xcode-select --install
 
 <p><a href="https://developer.apple.com/downloads/">https://developer.apple.com/downloads/</a></p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/2016031515015494829110.jpg" alt="p1"></p>
+<p><img src="../images_result/images/2016031515015494829110.jpg" alt="p1"></p>
 
 <p>iOSOpenDev里提供了很多越狱开发的模板，可以在<a href="http://iosopendev.com/download/">http://iosopendev.com/download/</a>下载到。安装完iOSOpenDev后就可以在Xcode里通过新建一个project看到我们进行非越狱Hook的时候需要用的CaptainHook了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/201603151501566612227.jpg" alt="p2"></p>
+<p><img src="../images_result/images/201603151501566612227.jpg" alt="p2"></p>
 
 <h1>0x02 如何得到App Store上解密后的ipa</h1>
 
@@ -63,15 +63,15 @@ xcode-select --install
 
 <p>首先用file来看一下ipa解压后的二进制文件包含哪些架构（e.g., armv7, arm64）。如果有多个架构的话，最好是把所有的架构都解密了。但理论上只要把最老的架构解密就可以了，因为新的cpu会兼容老的架构。比如我们拿微博作为例子，可以看到weibo的客户端包含了armv7和arm64这两个架构。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/201603151501582164437.jpg" alt="p3"></p>
+<p><img src="../images_result/images/201603151501582164437.jpg" alt="p3"></p>
 
 <p>随后我们可以通过”<code>otool –l</code>”来输出app的load commands，随后再查看cryptid这个标志位来判断app是否被加密了。如果是1的话代表加密了，如果是0的话代表解密了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/201603151501597830446.jpg" alt="p4"></p>
+<p><img src="../images_result/images/201603151501597830446.jpg" alt="p4"></p>
 
 <p>从上图可以看到，weibo的armv7架构的代码被加密了，arm64架构却是解密的，原因是我已经通过dumpdecrypted对arm64架构的代码砸过壳了。如果没有解密的话，用ida打开app会看到加密的提示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/201603151502019189656.jpg" alt="p5"></p>
+<p><img src="../images_result/images/201603151502019189656.jpg" alt="p5"></p>
 
 <p><strong>(2) dumpdecrypted砸壳：</strong></p>
 
@@ -79,7 +79,7 @@ xcode-select --install
 
 <p>虽然hook可以在越狱的环境下实现，但是想要砸壳的话，必须具备越狱的环境，比如这篇文就使用的越狱后的iOS 9。用ssh连接上iOS设备后，我们打开想要砸壳的app。然后输入<code>ps ax</code>，就可以在进程中找到这个app的二进制文件的地址：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/201603151502036360065.jpg" alt="p6"></p>
+<p><img src="../images_result/images/201603151502036360065.jpg" alt="p6"></p>
 
 <p>因为每个app目录下都有一个Info.plist。我们可以通过这个Info.plist得到app的Bundle ID：</p>
 
@@ -87,11 +87,11 @@ xcode-select --install
 cat /var/mobile/Containers/Bundle/Application/19A9AE5E-22DC-449A-A530-C793D88ACB24/Weibo.app/Info.plist
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160315/201603151502047479475.jpg" alt="p7"></p>
+<p><img src="../images_result/images/201603151502047479475.jpg" alt="p7"></p>
 
 <p>比如Weibo的Bundle ID就是：com.sina.weibo。得到BundleID后我们下一步要知道app的data目录，原因是app的运行会受到沙盒的限制，因此dump出来的app只能保存在自己的data目录下，这里我们可以通过Bundle ID和一个private API得到data目录的位置：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/201603151502064988584.jpg" alt="p8"></p>
+<p><img src="../images_result/images/201603151502064988584.jpg" alt="p8"></p>
 
 <p>代码如下：</p>
 
@@ -104,7 +104,7 @@ NSLog(@"%@",dataID);
 
 <p>得到data目录的地址后，我们将dumpdecrypted.dylib 拷贝到data的tmp目录下，然后在tmp目录下执行<code>DYLD_INSERT_LIBRARIES=dumpdecrypted.dylib /var/mobile/Containers/Bundle/Application/19A9AE5E-22DC-449A-A530-C793D88ACB24/Weibo.app/Weibo</code>进行砸壳。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/201603151502089171094.jpg" alt="p9"></p>
+<p><img src="../images_result/images/201603151502089171094.jpg" alt="p9"></p>
 
 <p>然后在目录下就可以得到砸壳后的二进制文件了，要注意的是我们砸壳后的app只能解密砸壳运行时的架构，所以我建议找个armv7架构的iOS设备进行砸壳，然后执行：</p>
 
@@ -118,7 +118,7 @@ lipo app -thin armv7 -output app_armv7
 
 <p>当然，除了利用dumpdecrypted获取解密后的app还可以直接在PP助手的越狱市场上下载到，这些越狱应用都是解密后的app。但不能保证下载到AppStore上所有的app。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/2016031515021096451103.jpg" alt="p10"></p>
+<p><img src="../images_result/images/2016031515021096451103.jpg" alt="p10"></p>
 
 <h1>0x03 获取embedded.mobileprovision的技巧</h1>
 
@@ -126,7 +126,7 @@ lipo app -thin armv7 -output app_armv7
 
 <p>有人会问如何获取embedded.mobileprovision这个文件，因为自己开发的app默认会有embedded.mobileprovision，但从AppStore上下载app并没有。其实，除了在developer center上通过录入device的UDID，然后下载embedded.mobileprovision之外，我们还可以利用xcode自动生成embedded.mobileprovision。比如我们想要重打包微博这个app，只要新建一个app（为了确保万无一失，可以把app的Bundle ID也起为com.sina.weibo），然后把手机连接上电脑，编译并在手机上运行这个app。然后只要去app的目录下拷贝embedded.mobileprovision就可以了。这样获取的embedded.mobileprovision可以保证能够适配重打包的app。如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/2016031515021146379114.jpg" alt="p11"></p>
+<p><img src="../images_result/images/2016031515021146379114.jpg" alt="p11"></p>
 
 <h1>0x04 签名的技巧</h1>
 
@@ -134,7 +134,7 @@ lipo app -thin armv7 -output app_armv7
 
 <p>签名的时候我们需要提供entitlement的信息，这个entitlement是什么呢？其实这个entitlement是用来做iOS权限管理的，通过声明不同的entitlement就能得到不同的权限。并且这个信息已经保存到了二进制文件里。比如我们可以通过”<code>ldid –e</code>”来查看一个二进制文件的entitlement。比如Weibo的entitlement为：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/2016031515021346748124.jpg" alt="p12"></p>
+<p><img src="../images_result/images/2016031515021346748124.jpg" alt="p12"></p>
 
 <p>理论上需要给app签上原app对应的所有entitlement才行。</p>
 
@@ -154,7 +154,7 @@ codesign -f -s "iPhone Developer: <a class="__cf_email__" href="/cdn-cgi/l/email
 
 <p>上一篇中介绍了一种利用libimobiledevice来安装ipa的方法。但我在尝试安装特别大的ipa的时候（大于50M），经常会失败，需要尝试多次才行。这里有个小技巧，如果有条件的话，可以使用windows下的itools来辅助我们安装，基本上一次就能搞定了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160315/2016031515021590953133.jpg" alt="p13"></p>
+<p><img src="../images_result/images/2016031515021590953133.jpg" alt="p13"></p>
 
 <h1>0x06 总结</h1>
 

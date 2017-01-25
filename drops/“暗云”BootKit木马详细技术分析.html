@@ -3,7 +3,7 @@
 			<head>
 			     <title>“暗云”BootKit木马详细技术分析 - 腾讯电脑管家</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/4788">http://drops.wooyun.org/binary/4788</a></h1>
 				
@@ -26,11 +26,11 @@
 
 <p>第五，有效对抗杀软：有于木马的主体在内核中运行，且启动时间比所有的安全软件都早，因此大部分的安全软件无法拦截和检测该木马的恶意行为。木马能够在内核中直接结束部分安全软件进程，同时可以向任意安全软件进程插入APC执行。插入的APC代码不稳定，且会关闭安全软件的设备句柄，会导致安全软件崩溃或退出，大大减少了被检测的机率。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004125280380image0022.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004125280380image0022.png" alt="enter image description here"></p>
 
 <p>图1. 暗云 木马启动流程图（图中按红紫绿黑分四个模块）</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004143924241image0041.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004143924241image0041.png" alt="enter image description here"></p>
 
 <p>图2 . 暗云木马模块功能分工示意图</p>
 
@@ -54,7 +54,7 @@
 
 <p>插入到svchost代码只实现一个简单的功能：判断操作系统类型，从云端下载相应的Addata.dat模块到本地，解密执行，云端模块的URL硬编码在Shellcode中。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004160151211image0061.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004160151211image0061.png" alt="enter image description here"></p>
 
 <p>图3. BootKit 启动过程示意图</p>
 
@@ -64,7 +64,7 @@
 
 <p>感染后的MBR（黑）与原始MBR（红）对比图</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004181351086image0076.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004181351086image0076.png" alt="enter image description here"></p>
 
 <h1>0x02 云端模块一（Addata.dat）行为</h1>
 
@@ -76,7 +76,7 @@
 
 <p>此模块为木马云端配置的第一个模块，其格式固定，以简单的循环移位的方式进行加密，解密后的模块数据结构如下：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004194737381image0101.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004194737381image0101.png" alt="enter image description here"></p>
 
 <p>云端模块1解密后的数据结构</p>
 
@@ -127,19 +127,19 @@
 
 <p>Addata.dll中硬编码的配置文件URL信息</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004400088434image0114.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004400088434image0114.png" alt="enter image description here"></p>
 
 <p>设置浏览器主页的相关代码</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004402768606image0135.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004402768606image0135.png" alt="enter image description here"></p>
 
 <p>对下载的文件可进行不同的处理（LoadLibrary、CreateProcess、加载到内核执行），这里还有一个很有意思的代码：DeleFileA(“我真的凌乱了…….”)，作者都凌乱了，真的很复杂！</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004405866322image0154.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004405866322image0154.png" alt="enter image description here"></p>
 
 <p>Shellcode是通过NtSetInformationKey代入内核的（内核注册了cmpCallBack）</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004413291124image0173.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004413291124image0173.png" alt="enter image description here"></p>
 
 <h1>0x03 云端模块二（jmdm.db）行为</h1>
 
@@ -151,7 +151,7 @@
 
 <p>此模块为木马云端配置的第二个模块，由云端模块一下载后传递到内核执行，已相对较为复杂的加密算法进行加密，其中文件的前0x32字节为解密key，解密后的模块数据结构如下：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004432682801image0201.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004432682801image0201.png" alt="enter image description here"></p>
 
 <p>云端模块2解密后的数据结构</p>
 
@@ -213,27 +213,27 @@
 
 <p>调用ZwTerminateProcess结束安全软件进程kxetray.exe、kxescore.exe、QQPcTray.exe，由于管家的进程有object钩子防护，因此不会被干掉。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004474927657image0212.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004474927657image0212.png" alt="enter image description here"></p>
 
 <p>遍历进程，看进程是否在硬编码的进程列表中，如果是，则插入apc，找到一个进程之后跳出循环，即只向一个进程插入apc</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004484964916image0232.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004484964916image0232.png" alt="enter image description here"></p>
 
 <p>插apc的具体代码</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004492719310image0251.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004492719310image0251.png" alt="enter image description here"></p>
 
 <p>关闭名为\Device\qutmipc等的设备句柄，名称字符串硬编码于文件中</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004500683630image027.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004500683630image027.png" alt="enter image description here"></p>
 
 <p>配置文件http://jm.sqc3.com/cn/jmdmpz.db 的URL硬编码在文件中</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004505876214image029.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004505876214image029.png" alt="enter image description here"></p>
 
 <p>下载指定URL的文件到本地，加载或者运行</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004514172167image031.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004514172167image031.png" alt="enter image description here"></p>
 
 <h1>0x04 木马的盈利推广部分（inst .exe、update.exe）行为</h1>
 
@@ -249,25 +249,25 @@
 
 <p>Update.exe运行后会创建两个svchost.exe傀儡进程，并将解密出的功能模块分别注入到两个进程中，一个负责向安卓手机安装推广app、另一个实现向含有“私服”等关键词的QQ群上传共享文件，用来推广私服游戏获利。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004525958359image034.png" alt="enter image description here"> 木马通过各种推广来实现盈利</p>
+<p><img src="../images_result/images/2015013004525958359image034.png" alt="enter image description here"> 木马通过各种推广来实现盈利</p>
 
 <h2>2. 代码细节：</h2>
 
 <p>当用户用浏览器访问www.baidu.com等网站时，为其添加推广id，实现推广获利</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004542553963image035.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004542553963image035.jpg" alt="enter image description here"></p>
 
 <p>在桌面上创建的美女视频聊天快捷方式，推广haomm.com这个网站</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004550831415image037.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004550831415image037.jpg" alt="enter image description here"></p>
 
 <p>不断检测是否有LSP模块，有则删除，保护自己的推广ID不被修改</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004554449656image039.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015013004554449656image039.png" alt="enter image description here"></p>
 
 <p>向指定名称的QQ群上传私服游戏，进行私服游戏的推广</p>
 
-<p><img src="http://static.wooyun.org/drops/20150130/2015013004561997951image041.png" alt="enter image description here"></p>      <p></p>
+<p><img src="../images_result/images/2015013004561997951image041.png" alt="enter image description here"></p>      <p></p>
     
 			</body>
 		</html>

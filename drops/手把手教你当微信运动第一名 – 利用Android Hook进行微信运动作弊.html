@@ -3,7 +3,7 @@
 			<head>
 			     <title>手把手教你当微信运动第一名 – 利用Android Hook进行微信运动作弊 - 蒸米</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8416">http://drops.wooyun.org/tips/8416</a></h1>
 				
@@ -14,11 +14,11 @@
 
 <p>随着带协处理器和买手环的人越来越多，微信运动一下子火了，只要你在微信关注微信运动，手机就能自动记录你每天行走的步数，还可以跟朋友圈里的好友PK运动量。并且每日排名第一的用户可以占据当日排行榜的封面。这充分激起了大家的求胜的欲望，于是出现了很多励志的和悲伤的故事……</p>
 
-<p><img src="http://static.wooyun.org/drops/20150906/2015090602134969936image3.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015090602134969936image3.png" alt="enter image description here"></p>
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/drops/20150906/2015090602141147056image4.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015090602141147056image4.png" alt="enter image description here"></p>
 
 <h1>0x01微信运动作弊大法</h1>
 
@@ -32,20 +32,20 @@
 
 <p>下载完后，先安装<code>XPosed.apk</code>。接着打开Xposed，选择“<code>安装/更新</code>”，然后根据提示重启手机。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150906/2015090602141550096image5.png" height="480" width="270"></p>
+<p><img src="../images_result/images/2015090602141550096image5.png" height="480" width="270"></p>
 
 <p>重启完后，再安装<code>xposedwechat.apk</code>插件。然后打开Xposed的模块界面，会看到xposedwechat这个插件。我们在这里将它选中，然后再根据提示重启手机。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150906/2015090602141817265image6.png" height="480" width="270"></p>
+<p><img src="../images_result/images/2015090602141817265image6.png" height="480" width="270"></p>
 
 <p>接下来就是见证奇迹的时刻…你随意走两步，然后打开微信运动，咦，怎么就多了1000步？再随便走几步，咦，怎么又多了1000步？… demo视频如下：</p>
 
-<p><embed src="http://static.wooyun.org//drops/20150906/2015090602172891853wechat-sport-YouTube-720p.mp4" autostart="0" width="480" height="390">
+<p><embed src="./drops/20150906/2015090602172891853wechat-sport-YouTube-720p.mp4" autostart="0" width="480" height="390">
 </p>
 
 <p>仅仅刷步数还是不够过瘾吧？微信运动还推出了益行家活动，可以用每天的步数换取爱心捐款。有了微信运动作弊大法，我们可以每天在家随便走几步然后换取爱心捐款（如图所示）。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150906/2015090602142565803image7.png" height="480" width="270"></p>
+<p><img src="../images_result/images/2015090602142565803image7.png" height="480" width="270"></p>
 
 <h1>0x02 微信运动作弊原理</h1>
 
@@ -79,15 +79,15 @@ WechatStepCount+=1;
 XposedBridge.log("   SensorEvent: sensor=" + ss);
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150906/2015090602143136869image8.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015090602143136869image8.png" alt="enter image description here"></p>
 
 <p>比如说x就代表开机以来行走的步数，timestamp是获取步数时候的时间戳等。</p>
 
 <p>另外，我们不仅在android上可以hook计步器，在iOS上也是可以通过越狱后hook iHealth的API接口达到同样的作弊效果，有兴趣的同学可以继续研究。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150906/2015090602144786551image9.jpeg" height="480" width="270"></p>
+<p><img src="../images_result/images/2015090602144786551image9.jpeg" height="480" width="270"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150906/2015090602150140215image10.png" height="480" width="270"></p>
+<p><img src="../images_result/images/2015090602150140215image10.png" height="480" width="270"></p>
 
 <h1>0x03微信运动反作弊建议</h1>
 

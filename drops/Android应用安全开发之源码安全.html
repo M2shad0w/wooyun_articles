@@ -3,7 +3,7 @@
 			<head>
 			     <title>Android应用安全开发之源码安全 - gh0stbo</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/12172">http://drops.wooyun.org/mobile/12172</a></h1>
 				
@@ -218,7 +218,7 @@ int main(int argc, char *argv[]) {
 
 <p>这里我们通过getppid获得父进程的PID，之后由/proc文件系统获取父进程的命令内容，并通过比较字符串检查父进程是否为gdb。实际运行结果如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/2016012010510132870120.jpg" alt="p1"></p>
+<p><img src="../images_result/images/2016012010510132870120.jpg" alt="p1"></p>
 
 <p><strong>b.当前运行进程检测</strong></p>
 
@@ -264,7 +264,7 @@ pid_t GetPidByName(const charchar *as_name) {  
 
 <p>State属性值T 表示调试状态，TracerPid 属性值正在调试此进程的pid,在非调试情况下State为S或R, TracerPid等于0</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/2016012010510380203218.jpg" alt="p2"></p>
+<p><img src="../images_result/images/2016012010510380203218.jpg" alt="p2"></p>
 
 <p>由此，我们便可通过检查status文件中TracerPid的值来判断是否有正在被调试。示例代码如下：</p>
 
@@ -297,7 +297,7 @@ int main(int argc, char *argv[]) {
 
 <p>实际运行结果如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/2016012010510789920310.jpg" alt="p3"></p>
+<p><img src="../images_result/images/2016012010510789920310.jpg" alt="p3"></p>
 
 <p>值得注意的是，/proc目录下包含了进程的大量信息。我们在这里是读取status文件，此外，也可通过/proc/self/stat文件来获得进程相关信息，包括运行状态。</p>
 
@@ -305,7 +305,7 @@ int main(int argc, char *argv[]) {
 
 <p>下图中第一个红色框值为非调试状态值，第二个红色框值为调试状态：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/201601201051123415847.jpg" alt="p4"></p>
+<p><img src="../images_result/images/201601201051123415847.jpg" alt="p4"></p>
 
 <pre><code>#!cpp
 static int getWchanStatus(int pid)  
@@ -383,11 +383,11 @@ int main(int argc, char *argv[]) {
 
 <p>在此例中，我们通过<code>__attribute__((constructor))</code>，在程序启动时便设置好定时。实际运行中，当我们使用gdb在main函数下断点，稍候片刻后继续执行时，则触发了SIGALRM，进而检测到调试器。如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/201601201051141430658.jpg" alt="p5"></p>
+<p><img src="../images_result/images/201601201051141430658.jpg" alt="p5"></p>
 
 <p>顺便一提，这种方式可以轻易地被绕过。我们可以设置gdb对signal的处理方式，如果我们选择将SIGALRM忽略而非传递给程序，则alarmHandler便不会被执行，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/201601201051165775369.jpg" alt="p6"></p>
+<p><img src="../images_result/images/201601201051165775369.jpg" alt="p6"></p>
 
 <p><strong>g.检查进程打开的filedescriptor</strong></p>
 
@@ -415,7 +415,7 @@ int main(int argc, char *argv[]) {
 
 <p>这里，我们检查/proc/self/fd/中是否包含fd为5。由于fd从0开始编号，所以fd为5则说明已经打开了6个文件。如果程序正常运行则不会打开这么多，所以由此来判断是否被调试。运行结果见下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/201601201051182323977.jpg" alt="p7"></p>
+<p><img src="../images_result/images/201601201051182323977.jpg" alt="p7"></p>
 
 <p><strong>h.防止dump</strong></p>
 
@@ -541,7 +541,7 @@ int set_SIGTRAP()  
 
 <p>使用一代加固技术以后的apk加载流程发生了变化如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/201601201051212999186.jpg" alt="p8"></p>
+<p><img src="../images_result/images/201601201051212999186.jpg" alt="p8"></p>
 
 <p>应用启动以后，会首先启动保护代码，保护代码会启动反调试、完整性检测等机制，之后再加载真实的代码。</p>
 
@@ -568,7 +568,7 @@ int set_SIGTRAP()  
 
 <p>使用二代加固技术以后，启动流程增加了一个解析函数代码的过程，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160120/201601201051231768397.jpg" alt="p9"></p>
+<p><img src="../images_result/images/201601201051231768397.jpg" alt="p9"></p>
 
 <p><strong>第三代加固技术：虚拟机指令集</strong></p>
 

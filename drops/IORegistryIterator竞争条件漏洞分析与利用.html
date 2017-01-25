@@ -3,7 +3,7 @@
 			<head>
 			     <title>IORegistryIterator竞争条件漏洞分析与利用 - 360NirvanTeam</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/13505">http://drops.wooyun.org/papers/13505</a></h1>
 				
@@ -65,7 +65,7 @@ bool IORegistryIterator::exitEntry( void )
 
 <p>但是由于缺乏锁的保护，通过多线程调用IORegistryIteratorExitEntry，导致gone指向的内存区域被释放两次，引起崩溃。示意图如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/2016030712002851831114.png" alt="p1"></p>
+<p><img src="../images_result/images/2016030712002851831114.png" alt="p1"></p>
 
 <h1>0x03 漏洞利用</h1>
 
@@ -146,7 +146,7 @@ bool IORegistryIterator::exitEntry( void )
 
 <p>攻击流程示意图如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/2016030712003072898212.png" alt="p2"></p>
+<p><img src="../images_result/images/2016030712003072898212.png" alt="p2"></p>
 
 <h3>2. Heap Spray</h3>
 
@@ -162,7 +162,7 @@ struct IORegCursor {
 
 <p>当第二次exitEntry被调用后，where指向的内存区域在kalloc.32的freelist链表中。我们可以通过heap spray kalloc.32，使得位于freelist中的内存重新被填充为我们控制的数据，实现控制where->iter的目的。heap spray的方法就是通过结合<code>io_service_open_extended</code>以及OSData，Pangu Team在其POC 2015的议题《Hacking from iOS8 to iOS9》中提到了这种heap spray的方法。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/2016030712003383603312.png" alt="p3"></p>
+<p><img src="../images_result/images/2016030712003383603312.png" alt="p3"></p>
 
 <p>通过构造特定的XML数据，包含data标签，那么通过<code>io_service_open_extended</code>创建任意UserClient，在OSUnserializeXML中反序列化data数据时，就可以通过OSData占用内存，实现任意zone的heap spray。</p>
 
@@ -190,7 +190,7 @@ buildData(parser_state_t *state, object_t *o)
 
 <p>在用户空间映射两块内存空间，分别放置构造的iter对象以及构造的虚表。将XML中的data的第三个QWORD字段设置为构造的iter对象指针，并进行heap spray。通过heap spray成功控制where指向的内存区域内容后，where->iter可控，最终调用where->iter->release()时就会调用我们构造的虚表中的函数，实现任意代码执行。在已知Kernel Slide的情况下，在10.10.5以及10.11上都成功实现提权，10.10.5如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/201603071200354923243.png" alt="p4"></p>
+<p><img src="../images_result/images/201603071200354923243.png" alt="p4"></p>
 
 <h1>0x04 官方修复</h1>
 

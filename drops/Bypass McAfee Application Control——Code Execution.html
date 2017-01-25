@@ -3,7 +3,7 @@
 			<head>
 			     <title>Bypass McAfee Application Control——Code Execution - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/10667">http://drops.wooyun.org/tips/10667</a></h1>
 				
@@ -16,7 +16,7 @@
 
 <p>那么，我们就试试看，究竟能不能绕过最新版的McAfee Application Control 6.2.0（截至投稿日期）</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704460554447p110.png" alt="p1"></p>
+<p><img src="../images_result/images/2015112704460554447p110.png" alt="p1"></p>
 
 <!--more-->
 
@@ -24,7 +24,7 @@
 
 <hr>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704460678954p210.png" alt="p2"></p>
+<p><img src="../images_result/images/2015112704460678954p210.png" alt="p2"></p>
 
 <p>McAfee Application Control对常见文件类型如exe、dll、bat作了限制，白名单外的这些文件均无法运行。所以这次的目标就是绕过限制来执行文件。</p>
 
@@ -40,7 +40,7 @@
 
 <h3>2.配置流程图</h3>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704460817677p34.png" alt="p3"></p>
+<p><img src="../images_result/images/2015112704460817677p34.png" alt="p3"></p>
 
 <h3>3.Add the license</h3>
 
@@ -64,7 +64,7 @@
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704461082564p44.png" alt="p4"></p>
+<p><img src="../images_result/images/2015112704461082564p44.png" alt="p4"></p>
 
 <p><strong>3.重启服务Application Control service</strong></p>
 
@@ -96,7 +96,7 @@ net start scsrvc
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704461224116p54.png" alt="p5"></p>
+<p><img src="../images_result/images/2015112704461224116p54.png" alt="p5"></p>
 
 <h3>5.Place Application Control in Enabled mode</h3>
 
@@ -109,7 +109,7 @@ net start scsrvc
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704461389252p63.png" alt="p6"></p>
+<p><img src="../images_result/images/2015112704461389252p63.png" alt="p6"></p>
 
 <p>重启系统,重启服务，执行</p>
 
@@ -128,7 +128,7 @@ net start scsrvc
 
 <p>重启后如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704461436328p72.png" alt="p7"></p>
+<p><img src="../images_result/images/2015112704461436328p72.png" alt="p7"></p>
 
 <p><strong>3.测试</strong></p>
 
@@ -143,7 +143,7 @@ net start scsrvc
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704461618678p82.png" alt="p8"></p>
+<p><img src="../images_result/images/2015112704461618678p82.png" alt="p8"></p>
 
 <p>执行</p>
 
@@ -154,13 +154,13 @@ net start scsrvc
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704461772195p91.png" alt="p9"></p>
+<p><img src="../images_result/images/2015112704461772195p91.png" alt="p9"></p>
 
 <p>分别执行exe、bat、dll，均被限制，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704461936559p101.png" alt="p10"></p>
+<p><img src="../images_result/images/2015112704461936559p101.png" alt="p10"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704462046373p112.png" alt="p11"></p>
+<p><img src="../images_result/images/2015112704462046373p112.png" alt="p11"></p>
 
 <h1>0x03 代码执行漏洞</h1>
 
@@ -220,7 +220,7 @@ net start scsrvc
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704462151490p122.png" alt="p12"></p>
+<p><img src="../images_result/images/2015112704462151490p122.png" alt="p12"></p>
 
 <p>然而并不完美，hta的界面会默认显示，所以我们需要进一步修改来隐藏hta的主界面</p>
 
@@ -244,7 +244,7 @@ WINDOWSTATE = "minimize"&gt;
 
 <p>保存为vbs.hta,执行如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704462343450p132.png" alt="p13"></p>
+<p><img src="../images_result/images/2015112704462343450p132.png" alt="p13"></p>
 
 <h3>2.执行jscript</h3>
 
@@ -259,7 +259,7 @@ objShell.run('calc.exe');
 
 <p>执行成功，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704462498725p142.png" alt="p14"></p>
+<p><img src="../images_result/images/2015112704462498725p142.png" alt="p14"></p>
 
 <h3>3.执行powershell</h3>
 
@@ -267,7 +267,7 @@ objShell.run('calc.exe');
 
 <p>当然，默认是肯定无法执行的，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704462667896p151.png" alt="p15"></p>
+<p><img src="../images_result/images/2015112704462667896p151.png" alt="p15"></p>
 
 <p><strong>方法1：</strong></p>
 
@@ -278,7 +278,7 @@ objShell.run('calc.exe');
 
 <p>但是如果txt中含有函数，会产生如下错误，需要更改脚本内容，错误如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704462742985p161.png" alt="p16"></p>
+<p><img src="../images_result/images/2015112704462742985p161.png" alt="p16"></p>
 
 <p><strong>方法2：</strong></p>
 
@@ -317,7 +317,7 @@ WINDOWSTATE = "minimize"&gt;
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704462979643p171.png" alt="p17"></p>
+<p><img src="../images_result/images/2015112704462979643p171.png" alt="p17"></p>
 
 <p>运行快捷方式后执行Powershell命令，弹出计算器</p>
 
@@ -357,7 +357,7 @@ WINDOWSTATE = "minimize"&gt;
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704463062334p181.png" alt="p18"></p>
+<p><img src="../images_result/images/2015112704463062334p181.png" alt="p18"></p>
 
 <p><strong>方法4：</strong></p>
 
@@ -374,7 +374,7 @@ C:\Windows\Microsoft.NET\Framework\v2.0.50727\InstallUtil.exe /logfile= /LogToCo
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704463275490p191.png" alt="p19"></p>
+<p><img src="../images_result/images/2015112704463275490p191.png" alt="p19"></p>
 
 <p><strong>方法5：</strong></p>
 
@@ -402,7 +402,7 @@ C:\Windows\Microsoft.NET\Framework\v4.0.30319\regsvcs.exe regsvcs.dll
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704463397800p201.png" alt="p20"></p>
+<p><img src="../images_result/images/2015112704463397800p201.png" alt="p20"></p>
 
 <h3>3、加载dll</h3>
 
@@ -414,7 +414,7 @@ C:\Windows\Microsoft.NET\Framework\v4.0.30319\regsvcs.exe regsvcs.dll
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704463633978p212.png" alt="p21"></p>
+<p><img src="../images_result/images/2015112704463633978p212.png" alt="p21"></p>
 
 <h3>4、注入meterpreter</h3>
 
@@ -426,7 +426,7 @@ C:\Windows\Microsoft.NET\Framework\v4.0.30319\regsvcs.exe regsvcs.dll
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112704463744448p222.png" alt="p22"></p>
+<p><img src="../images_result/images/2015112704463744448p222.png" alt="p22"></p>
 
 <h2>0x06 小结</h2>
 

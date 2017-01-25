@@ -3,7 +3,7 @@
 			<head>
 			     <title>Android Broadcast Security - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4393">http://drops.wooyun.org/tips/4393</a></h1>
 				
@@ -16,7 +16,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/20150211/2015021110415483840.jpg" alt=""></p>
+<p><img src="../images_result/images/2015021110415483840.jpg" alt=""></p>
 
 <h2>0x01 知识要点</h2>
 
@@ -26,7 +26,7 @@
 
 <p><activity>元素的name属性指定了实现了这个activity的 Activity的子类。icon和label属性指向了包含展示给用户的此activity的图标和标签的资源文件。其它组件也以类似的方法声明──<service> 元素用于声明服务， <receiver> 元素用于声明广播接收器，而 <provider> 元素用于声明内容提供器。 manifest文件中未进行声明的activity、服务以及内容提供器将不为系统所见，从而也就不会被运行。然而，广播接收器既可以在manifest文件中声明，也可以在代码中进行动态的创建，并以调用Context.registerReceiver()的方式注册至系统。</provider></receiver></service></activity></p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110415529643.jpg" alt=""></p>
+<p><img src="../images_result/images/2015021110415529643.jpg" alt=""></p>
 
 <p>（静态与动态注册广播接收器区别）</p>
 
@@ -82,7 +82,7 @@ Broadcast the given intent to all interested BroadcastReceivers, allowing an opt
 
 <p>sendStickyBroadcast()字面意思是发送粘性的广播，使用这个api需要权限android.Manifest.permission.BROADCAST_STICKY,粘性广播的特点是Intent会一直保留到广播事件结束，而这种广播也没有所谓的10秒限制，10秒限制是指普通的广播如果onReceive方法执行时间太长，超过10秒的时候系统会将这个广播置为可以干掉的candidate，一旦系统资源不够的时候，就会干掉这个广播而让它不执行。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110415616860.png" alt=""></p>
+<p><img src="../images_result/images/2015021110415616860.png" alt=""></p>
 
 <p>(几种广播的特性)</p>
 
@@ -108,7 +108,7 @@ Broadcast the given intent to all interested BroadcastReceivers, allowing an opt
 
 <hr>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110415681438.jpg" alt=""></p>
+<p><img src="../images_result/images/2015021110415681438.jpg" alt=""></p>
 
 <ol>
 <li>私有广播接收器：只接收app自身发出的广播</li>
@@ -120,7 +120,7 @@ Broadcast the given intent to all interested BroadcastReceivers, allowing an opt
 
 <p>intent-filter节点与exported属性设置组合建议</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110415726501.png" alt=""></p>
+<p><img src="../images_result/images/2015021110415726501.png" alt=""></p>
 
 <ol>
 <li><p>私有广播接收器设置exported='false'，并且不配置intent-filter。(私有广播接收器依然能接收到同UID的广播)</p>
@@ -227,7 +227,7 @@ public class Receiver extends BroadcastReceiver {
 
 <p>某应用利用广播传输用户账号密码</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110415718708.png" alt=""></p>
+<p><img src="../images_result/images/2015021110415718708.png" alt=""></p>
 
 <p>隐式意图发送敏感信息</p>
 

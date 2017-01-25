@@ -3,7 +3,7 @@
 			<head>
 			     <title>DUQ U2.0 技术分析 - virustracker</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6599">http://drops.wooyun.org/tips/6599</a></h1>
 				
@@ -63,15 +63,15 @@ Size: 503,296 bytes
 
 <p>在Windows资源管理器的文件属性对话框中，可以查看某些字段。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/20150714052538874258c1537dce56e0982a1400867677f32c3" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150714052538874258c1537dce56e0982a1400867677f32c3" alt="enter image description here"></p>
 
 <p>这个MSI数据包中有两个二进制文件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071405444015723493d5ea9ed305f998772422e6836697c" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071405444015723493d5ea9ed305f998772422e6836697c" alt="enter image description here"></p>
 
 <p>ActionDll是一个dll文件，ActionData0是一个经过Camellia加密，LZJB压缩的数据payload（不同情况下的加密算法和压缩算法也不同）。实际上，经过加密或压缩的二进制数据块中，会有好几层可执行代码。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150726/2015072623002487653.com/blob/tdyaaada8nk/opmw_xi87y0cts9q7o4phw?s=uvzhap5mzrbr" alt="enter image description here"></p>
+<p><img src="../images_result/images/opmw_xi87y0cts9q7o4phw?s=uvzhap5mzrbr" alt="enter image description here"></p>
 
 <p>在后面的文章中，我们详细地说明了这些组件。</p>
 
@@ -88,7 +88,7 @@ Link时间: 2004.02.12 02:04:50 (GMT)
 
 <p>这个DLL只有一个StartAction导出函数，msiexec.exe进程的上下文会调用这个函数。当这个函数被调用时，这个函数就会获取一个MSI属性-PROP，并用这个值来解密actionData0包。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071405444416734454a0222cba184058486e6d5b375b309" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071405444416734454a0222cba184058486e6d5b375b309" alt="enter image description here"></p>
 
 <p>接下来，这段代码会遍历12个需要解密并启动的payload。这些payload是MSI的一部分，可能会包含以下名称：ActionData0, ActionData1, ActionData2。</p>
 
@@ -104,7 +104,7 @@ Link时间: 2004.02.12 02:04:50 (GMT)
 
 <p>一般情况下，ActionData0中的代码会在一个内嵌的可执行程序-“klif.dll”上运行，由这个DLL文件的导出函数表上的第二个函数执行。也就是说，函数名称无所谓，就是要按照函数表上的顺序。当调用这个导出函数时，下一阶段的辅助结构指针就会传递到这个函数上，这样指针就能使用上一层中设置的一些值。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/201507140544452972130ff8528b1871b8e9f3cfc303cd43558" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507140544452972130ff8528b1871b8e9f3cfc303cd43558" alt="enter image description here"></p>
 
 <p>但是，在klif.dll执行之前，代码会尝试另一条路径。首先，代码会查找“api-ms-win-shell-XXXX.dll”，其中X可以是任意的十进制数。如果当前进程中没有这种名称形式的模块，名称就是无效的。这样的话，代码就会遍历查找任何符合名称形式的模块，首先从api-ms-win-shell-0000.dll, api-ms-win-shell-0001.dll, api-ms-winshell-0002.dll开始。这应该是Duqu平台组件的一个依赖选项。</p>
 
@@ -137,7 +137,7 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 
 <p>如果“avp.exe”进程正在运行，模块就会尝试打开OSBoot-section，并且尝试攻击avp.exe进程。攻击开始时，首先遍历下列产品的硬编码注册表项和注册表值，来识别卡巴斯基产品的安装路径：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071405444747711f673ba54c4df3014fac6681b836a6b36" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071405444747711f673ba54c4df3014fac6681b836a6b36" alt="enter image description here"></p>
 
 <p>在模块所查询的注册表值中包含了卡巴斯基产品的根目录路径，如“C:\Program Files\KasperskyLab\Kaspersky Internet Security 15.0.0\”</p>
 
@@ -153,13 +153,13 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 
 <p>我们测试了卡巴斯基的其他一些产品，结果发现，这些产品都会检查进程的自定义数字签名来验证caller进程。截至目前，如果没有额外的驱动支持，这项技术不会成功。从2010年开始，如果有进程尝试打开\KlifComm微过滤器的通信端口，卡巴斯基的产品就会验证这些进程的数字签名。这种攻击只能影响旧版的卡巴斯基产品，比如在2009年发布的KIS2010。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071405444875712dccbe28430d08bfb8f2570830c1d92c1" alt="ima"></p>
+<p><img src="../images_result/images/2015071405444875712dccbe28430d08bfb8f2570830c1d92c1" alt="ima"></p>
 
 <p>一般来说，攻击者现在不会攻击卡巴斯基在2009年之前发布的产品。所以，我们有分析了另一种比较合理的解释。</p>
 
 <p>通常来说，这类攻击不会攻击我们的产品，因为我们的产品会检查进程的自定义数字签名，来验证进程的合法性。为了绕过这种检测，Duqu 2.0的一个“KMART.dll”模块给内存中的“klif.sys”打了补丁。因为 “KMART.dll”已经利用Windows内核漏洞在内核模式下运行了，所以这种攻击才能发挥作用。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071405444875712dccbe28430d08bfb8f2570830c1d92c1" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071405444875712dccbe28430d08bfb8f2570830c1d92c1" alt="enter image description here"></p>
 
 <p>在发送完代码后，模块会继续下一阶段，也就是进程迁移。</p>
 
@@ -183,7 +183,7 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 
 <p>“CTwoPENC.DLL”是 “win32k.sys” 中存在的一个0-day漏洞，利用这个漏洞，非权限用户也能获取到内核权限。这个模块会利用漏洞来创建窗口，线程的类别名称分别是“CPer”, “Zero”, “CTwo”, “Vero” ，并且模块还能操控回调指针。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/201507140645287535791dd5011eb2db0d6377ff4c0166929af" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507140645287535791dd5011eb2db0d6377ff4c0166929af" alt="enter image description here"></p>
 
 <p>部分漏洞代码会注册窗口类并创建新的窗口</p>
 
@@ -313,9 +313,9 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 <li>/Int/HMI/ 或/LG/HM/文件夹的文件</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150714/201507140544552518720360c1054e0a1658d9586464910215f" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507140544552518720360c1054e0a1658d9586464910215f" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/201507140544552518720360c1054e0a1658d9586464910215f" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507140544552518720360c1054e0a1658d9586464910215f" alt="enter image description here"></p>
 
 <pre><code>09A0 插件感兴趣的文件名称和目录名称
 </code></pre>
@@ -332,7 +332,7 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 
 <p>在某些情况中，模块会搜索目录-“\int”, “\lg”, “\of\md”, “\tl”, “\ak”，以及扩展名-“.part”, “.manual”, “.inuse”。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071405450182715c99b94348a21badccbec290b959c7875" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071405450182715c99b94348a21badccbec290b959c7875" alt="enter image description here"></p>
 
 <p>0AB8 插件感兴趣的文件目录名称</p>
 
@@ -354,13 +354,13 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 
 <p>2125-网络感染模块。尝试从正在运行的进程中，获取管理凭证。然后使用Windows共享来连接到一个目标设备。接着，恶意DLL后门成功感染设备；目标目录是变化的，可能在UPDROOT$, ADMIN$ 或 C$。使用自定义SMB数据包来识别目标OS的版本。然后使用新创建的服务“svcmsi&#95;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fbc8c9bb197b66">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4fa9d2eaaadfe0aac5e7a8d4e1a9efc8a9cef9a9cbc00b0303accfcda7f0d6abf7e5a9e7eeaad2d8a6cfd5a7f0c81826212b20383ca8e1eea6cedcabf7c1a8d4e1a9">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>��后门通信。其他变体：DB65。除了恶意DLL，模块还会上传一个新的MSI数据包，并且依赖MSIEXEC.EXE 通过新创建的服务“msisvc&#95;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ab9899eb492b364d360e4e3b044e2103e6f8e2">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，目标MSI的名称是随机生成的，名称模版是“tmp%x.tmp”。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071405450354131e58bb844773871923fda1f195682af4f" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071405450354131e58bb844773871923fda1f195682af4f" alt="enter image description here"></p>
 
 <p>在被感染时，Windows创建的事件日志（系统）项目</p>
 
 <p>模块通过窃取当前运行进程的token来获取管理凭证。这些进程需要是管理员权限用户启动的。所以，模块首先会直接在域控制器中，查询当前域中的100个管理员用户名。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/201507140556515322691366ae529692fc090a4444c5aa7ef7d" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507140556515322691366ae529692fc090a4444c5aa7ef7d" alt="enter image description here"></p>
 
 <p>网络感染模块使用的远程位置</p>
 
@@ -421,7 +421,7 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 <li>使用SMB数据包来扫描网络并识别OS</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071405565441138f99f31edb96a77245195b7e2725fd54f" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071405565441138f99f31edb96a77245195b7e2725fd54f" alt="enter image description here"></p>
 
 <p>模块收集到的一些注册位置</p>
 
@@ -469,7 +469,7 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 <li>LSA证书</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150714/201507140556576698632f4f2665fb3c29e244b36f12f3dfaf2" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507140556576698632f4f2665fb3c29e244b36f12f3dfaf2" alt="enter image description here"></p>
 
 <p>使用这些数据来定位Chrome保存的登录信息</p>
 
@@ -486,7 +486,7 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 <li>Windows Live，Net Passport密码</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071406444478663a94356c490d576d70a977f72629345ba" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071406444478663a94356c490d576d70a977f72629345ba" alt="enter image description here"></p>
 
 <pre><code>该模块收集的信息
 </code></pre>
@@ -513,7 +513,7 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 <li>用人类可读的格式来显示所有条目</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150714/20150714054512319158e69ca2e4495010b8379889ef63e5c3c" alt="sss"></p>
+<p><img src="../images_result/images/20150714054512319158e69ca2e4495010b8379889ef63e5c3c" alt="sss"></p>
 
 <p>ActiveDirectory详细路径</p>
 
@@ -563,7 +563,7 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 <li>网络适配器配置：IP地址，MAC，MTU，适配器列表</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150715/2015071517244787563e6af277e004402a6546e1fcbf7511960" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071517244787563e6af277e004402a6546e1fcbf7511960" alt="enter image description here"></p>
 
 <p>生成系统报告的XML标签</p>
 
@@ -590,7 +590,7 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 
 <p>网络过滤器基于BPF库。HTTP和WPAD的payload由外部提供.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071415053763998e8deca36240c1f66feeb8f0554de35e2" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071415053763998e8deca36240c1f66feeb8f0554de35e2" alt="enter image description here"></p>
 
 <p>虚假HTTP响应及相关状态信息</p>
 
@@ -642,7 +642,7 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 
 <p>其他已知变体：EB18，C091</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/20150714055706604372e8d0fe5a55aa56070b605fe1d555b3f" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150714055706604372e8d0fe5a55aa56070b605fe1d555b3f" alt="enter image description here"></p>
 
 <p>感兴趣的文件扩展名及其对应的状态信息列表</p>
 
@@ -654,7 +654,7 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 <li>以“3142”（只限日志）开头的名字</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150714/201507140545202185356757468161fcfa21b5b3b692c076168" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507140545202185356757468161fcfa21b5b3b692c076168" alt="enter image description here"></p>
 
 <p>附加功能：该组件能够在硬编码模板中新建shellcode blob。</p>
 
@@ -676,7 +676,7 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 <li>还会连接到 ADOdb pviders</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071405570934824ce0244b496ffc912d8124a283fea2abd" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071405570934824ce0244b496ffc912d8124a283fea2abd" alt="enter image description here"></p>
 
 <p><strong>8912——处理加密文件，收集系统信息</strong></p>
 
@@ -703,7 +703,7 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 
 <p><strong>92DB</strong>——修改cmd.exe shell。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150714/201507140644526551421f734e48ae4fe9c427ed03edc1064f5" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507140644526551421f734e48ae4fe9c427ed03edc1064f5" alt="enter image description here"></p>
 
 <p><strong>9F0D</strong>（64位）， <strong>D1A3</strong>（32位）——NPF.SYS这个驱动是伴随着VFS插件一起分发的,它有合法的签名.。它被用来执行嗅探攻击。</p>
 
@@ -728,7 +728,7 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 <li>执行SMB v1命令</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150714/20150714054528602284f82817e9c4de85c13dfc10309eec2e4" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150714054528602284f82817e9c4de85c13dfc10309eec2e4" alt="enter image description here"></p>
 
 <ul>
 <li>开放虚假ipc$ A:share</li>
@@ -736,7 +736,7 @@ Type: 64-bit PE32+ executable DLL for MS Windows
 <li>处理HTTP “GET /”请求</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150714/2015071405453120459fe254c6e3fc6f0e2c50c910852c616ff" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015071405453120459fe254c6e3fc6f0e2c50c910852c616ff" alt="enter image description here"></p>
 
 <p><strong>ED92——文件系统调查</strong></p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>逆向基础（一） - reverse-engineering</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1517">http://drops.wooyun.org/tips/1517</a></h1>
 				
@@ -310,7 +310,7 @@ main ENDP
 
 <p>在win64里，RCX,RDX,R8,R9寄存器被用来传递函数参数，如果还有更多就使用栈，在这里我们可以看到printf()函数的参数没用通过栈来传递，而是使用了rcx。 让我们针对64位来看，作为64位寄存器会有R-前缀，并且这些寄存器向下兼容，32位的部分使用E-前缀。</p>
 
-<p>如下图所示，这是RAX/EAX/AX/AL在64位x86兼容cpu里的情况 ￼ <img src="http://static.wooyun.org/20140918/2014091811131217520.jpg" alt="enter image description here"></p>
+<p>如下图所示，这是RAX/EAX/AX/AL在64位x86兼容cpu里的情况 ￼ <img src="../images_result/images/2014091811131217520.jpg" alt="enter image description here"></p>
 
 <p>在main()函数会返回一个int类型的值，在64位的程序里为了兼容和移植性，还是用32位的，所以可以看到EAX（寄存器的低32位部分）在函数最后替代RAX被清空成0。</p>
 
@@ -583,7 +583,7 @@ ret    0
 
 <p>按正常思维来说,我们会认为像其它数据结构一样,栈是正向增长的,比如:栈指针会指向高地址。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811131267111.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811131267111.jpg" alt="enter image description here"></p>
 
 <p>我们知道:</p>
 
@@ -665,7 +665,7 @@ add esp, 4*3
 
 <p>被调用函数通过栈指针访问函数参数。因此,这就是为什么要在函数f()执行之前将数据放入栈中的原因。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811131271977.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811131271977.jpg" alt="enter image description here"></p>
 
 <p>来看一下其它调用约定。没有意义也没有必要强迫程序员一定要使用栈来传递参数。</p>
 
@@ -809,7 +809,7 @@ f:
 
 <p>在32位系统中，函数开始时，栈的布局:</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811131333414.jpg" alt="enter image description here"></p>      <p></p>
+<p><img src="../images_result/images/2014091811131333414.jpg" alt="enter image description here"></p>      <p></p>
     
 			</body>
 		</html>

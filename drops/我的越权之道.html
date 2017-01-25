@@ -3,7 +3,7 @@
 			<head>
 			     <title>我的越权之道 - 小川</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/727">http://drops.wooyun.org/tips/727</a></h1>
 				
@@ -74,13 +74,13 @@
 
 <p>打开fiddler2按f11，截断大号上更新用户信息请求。（查看参数可以选择fiddler中Inspects下的WebFroms或TextView。只有在截断的情况下，才可以修改请求。）</p>
 
-<p><img src="http://static.wooyun.org/201311/2013110111201521478.png" alt="2013110111201521478.png"></p>
+<p><img src="../images_result/images/2013110111201521478.png" alt="2013110111201521478.png"></p>
 
 <p>判断出可能辨别用户身份的参数ulogin。</p>
 
 <h3>步骤二：截断小号浏览器中更新用户信息的请求</h3>
 
-<p><img src="http://static.wooyun.org/201311/2013110111354159450.png" alt="2013110111354159450.png"></p>
+<p><img src="../images_result/images/2013110111354159450.png" alt="2013110111354159450.png"></p>
 
 <p>步骤3：将小号中ulogin的参数值替换为大号的，然后解除fiddler截断（shift+f11）,将请求放过去（），查看下大号用户信息是否更改。</p>
 
@@ -88,7 +88,7 @@
 
 <p>为了避免以上消耗时间的操作其实可以利用fiddler2复制小号浏览器中的cookie值，到大号的请求中即可验证越权。操作就是用fiddler先截获一个小号的访问目标站点的请求，在fiddler2的head标签下将cookie复制出来</p>
 
-<p><img src="http://static.wooyun.org/201311/2013110112010523256.png" alt="2013110112010523256.png"></p>
+<p><img src="../images_result/images/2013110112010523256.png" alt="2013110112010523256.png"></p>
 
 <p>小号的浏览器就可以不用管了，用Fiddler2截断大号的请求，把小号的cookie覆盖大号的cookie，进行测试。如果改变了大号的数据则说明越权，然后在分析是哪个参数造成的。如果未改变，则说明不存在越权，该功能直接越过。小号的cookie一直在剪贴板中的，所以在测其他功能会非常方便。用不了多长时间，即可测试完整个站点下的功能。</p>
 

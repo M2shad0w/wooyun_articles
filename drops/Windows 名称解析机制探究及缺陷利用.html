@@ -3,7 +3,7 @@
 			<head>
 			     <title>Windows 名称解析机制探究及缺陷利用 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/10887">http://drops.wooyun.org/papers/10887</a></h1>
 				
@@ -109,7 +109,7 @@
 
 <p>还有一种影响 Windows 系统名称解析的一个因素就是当前主机的网络节点模式。可以使用<code>ipconfig /all</code>命令查看本机的网络节点模式，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151130/2015113007382219573node.png" alt=""></p>
+<p><img src="../images_result/images/2015113007382219573node.png" alt=""></p>
 
 <p>图 1 查看本机网络节点模式</p>
 
@@ -157,29 +157,29 @@
 
 <p>攻击者在启动 Responder 后，当受害者去访问一个在当前局域网中不存在的主机时就会触发 LLMNR Poison 攻击，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151130/2015113007380363576140.png" alt=""></p>
+<p><img src="../images_result/images/2015113007380363576140.png" alt=""></p>
 
 <p>图 1 ： 受害者主机 PING 一台局域网中并不存在的主机</p>
 
-<p><img src="http://static.wooyun.org//drops/20151130/2015113007380697540235.png" alt=""></p>
+<p><img src="../images_result/images/2015113007380697540235.png" alt=""></p>
 
 <p>图 2 ：Responder 会响应 LLMNR 的广播包并进行了 Poison 攻击</p>
 
-<p><img src="http://static.wooyun.org//drops/20151130/2015113007380854103328.png" alt=""></p>
+<p><img src="../images_result/images/2015113007380854103328.png" alt=""></p>
 
 <p>图 3 ：在受害者的主机中 NetBIOS 缓存中已经加入了被 Poison 攻击的主机 IP 记录</p>
 
 <p>上述攻击演示中，已经证实了 LLMNR Poison 攻击的效果，可以利用让受害者访问不存在的主机的共享进行 LLMNR Poison 攻击，这样可以获得受害者主机的 HASH ，拿到 HASH 就可以进行暴力破解了，如果是弱口令的话，就可以爆破出密码。同样也可以利用让受害者访问不存在的 HTTP 服务器进行 401 认证拿到客户端的 HASH，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151130/2015113007381029119425.png" alt=""></p>
+<p><img src="../images_result/images/2015113007381029119425.png" alt=""></p>
 
 <p>图 4 ：受害者访问一个不存在的主机的共享</p>
 
-<p><img src="http://static.wooyun.org//drops/20151130/2015113007381457611517.png" alt=""></p>
+<p><img src="../images_result/images/2015113007381457611517.png" alt=""></p>
 
 <p>图 5 ：LLMNR Poison 攻击拿到了 SMB 验证过程中的 HASH</p>
 
-<p><img src="http://static.wooyun.org//drops/20151130/2015113007381743276614.png" alt=""></p>
+<p><img src="../images_result/images/2015113007381743276614.png" alt=""></p>
 
 <p>图 6 ：使用 john 对 HASH 进行暴力破解</p>
 

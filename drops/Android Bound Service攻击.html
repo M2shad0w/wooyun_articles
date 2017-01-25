@@ -3,7 +3,7 @@
 			<head>
 			     <title>Android Bound Service攻击 - 小荷才露尖尖角</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/13676">http://drops.wooyun.org/mobile/13676</a></h1>
 				
@@ -159,7 +159,7 @@ Got a reply from com.mwr.example.sieve/com.mwr.example.sieve.AuthService:
 
 <p>文献【1】给出了一个存在命令执行漏洞的Bound Service，并根据Bound Service的apk生成AIDL接口文件，编写攻击程序调用Bound Service中的命令执行方法。然而，在使用中发现生成AIDL文件的工具主要根据smali文件中的Stub.Proxy类进行抓取，而当apk进行了混淆，便不能正确生成AIDL文件了。例如，我们配置build.gradle中的minifyEnabledtrue开关为true，使用Android Studio的默认混淆规则。对混淆的apk与未混淆的apk使用JEB逆向对比如下</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/2016031110111067893118.png" alt="image"></p>
+<p><img src="../images_result/images/2016031110111067893118.png" alt="image"></p>
 
 <p>混淆后的apk少了许多有关AIDL的信息，没有了Stub Proxy这些特征，致使如下代码实现的GenerateAIDL工具出错</p>
 
@@ -176,7 +176,7 @@ if (stubProxyDef == null) {
 }
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160311/2016031110111291829216.png" alt="image"></p>
+<p><img src="../images_result/images/2016031110111291829216.png" alt="image"></p>
 
 <p>由于AIDL文件本质上只是SDK为我们提供的一种快速实现Binder的工具，因此完全可以不依赖AIDL文件而实现Binder的方法，这也是在实际渗透测试过程中最常见的情况。下面我们结合有漏洞混淆后的apk进行说明。</p>
 
@@ -312,7 +312,7 @@ public void onServiceConnected(ComponentName name, IBinder service) {
 
 <p>攻击效果如下</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/2016031110111445780316.png" alt="image"></p>
+<p><img src="../images_result/images/2016031110111445780316.png" alt="image"></p>
 
 <p>至此，就完成了不依赖于AIDL文件攻击Bound Service的过程。</p>
 
@@ -322,7 +322,7 @@ public void onServiceConnected(ComponentName name, IBinder service) {
 
 <p>通过adb shell service list可以查看在context manager（或servicemanager）中注册的系统服务名称和IBinder接口。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603111011169397646.png" alt="image"></p>
+<p><img src="../images_result/images/201603111011169397646.png" alt="image"></p>
 
 <p>这些服务也暴露了潜在的攻击面，可以编写客户端程序通过服务名获得Binder对象的引用，进而调用服务的功能或者传入污染的数据。</p>
 

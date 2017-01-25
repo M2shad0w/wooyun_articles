@@ -3,7 +3,7 @@
 			<head>
 			     <title>Windows平台下的堆溢出利用技术（二）（上篇） - lxj616</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1714">http://drops.wooyun.org/papers/1714</a></h1>
 				
@@ -82,7 +82,7 @@ def main(args):
 
 <p>加粗字体的地址就是目前在运行进程的堆。这条信息也可以在windbg和Immunity Debugger中通过使用!heap命令找到</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812463249978.png" alt=""></p>
+<p><img src="../images_result/images/2014091812463249978.png" alt=""></p>
 
 <p>额外地，你可以通过windbg中的!heap –stat命令观看每个堆的静态信息。下面是示例回显：</p>
 
@@ -96,7 +96,7 @@ VirtAlloc bytes 00000000
 
 <p>最终，你可以通过使用-h和-q标签dump一些堆的元数据</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812463330198.png" alt=""></p>
+<p><img src="../images_result/images/2014091812463330198.png" alt=""></p>
 
 <p>第一个堆(0x00240000)是默认的堆，其他堆都是由C组件及构造方法创建的，而回显中最后的堆(0x00480000)是被我们的程序创建的。</p>
 
@@ -523,15 +523,15 @@ HANDLE WINAPI HeapCreate(
 
 <p>在分析堆segment时，我们可以通过在windbg中使用<code>'!heap -a [heap address]'</code>命令完成</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812463313170.png" alt=""></p>
+<p><img src="../images_result/images/2014091812463313170.png" alt=""></p>
 
 <p>额外地，你可以在immunity debugger中使用 <code>'!heap -h [heap address] -c'(选项-c 显示chunk)</code></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812463483888.png" alt=""></p>
+<p><img src="../images_result/images/2014091812463483888.png" alt=""></p>
 
 <p>每个segment在数据chunk后面包含了它自己的元数据。下面是segment分配的内存，并且最终这个segment包含了一个未分配内存的部分。现在我们清楚了我们想要分析的segment，我们可以使用命令<code>'dt _heap_segment [segment address]'</code>来dump元数据结构。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812463443735.png" alt=""></p>
+<p><img src="../images_result/images/2014091812463443735.png" alt=""></p>
 
 <p>下面是一个详细的元数据结构表单。为简单起见，我们将设定从地址0x00480000开始。</p>
 
@@ -845,7 +845,7 @@ HANDLE WINAPI HeapCreate(
 
 <p>在堆结构的0x178偏移量上，我们可以看到FreeList[]数组的开头。这个FreeList包含了一个双向链接的chunk list。他们通过既有flink又有blink的方式来双向链接。</p>
 
-<p><a href="http://net-ninja.net/images/freelist.png"><img src="http://static.wooyun.org/20140918/2014091812463543476.png" alt="" border="0"></a></p>
+<p><a href="http://net-ninja.net/images/freelist.png"><img src="../images_result/images/2014091812463543476.png" alt="" border="0"></a></p>
 
 <p>上面的图表显示了freelist包含着范围在0-128的堆chunk索引数组。任意chunk的大小在0和1016之间（之所以是1016是因为最大1024减去8字节的元数据）并存储在[它们的分配大小]*8位置。举例来说，我有一个40字节大小的chunk来free，那么我将会把这个chunk放在freelist中index为4的位置（40/8）</p>
 
@@ -941,11 +941,11 @@ HANDLE WINAPI HeapCreate(
 
 <p>Freelist chunk 1[flink] == Freelist chunk 2 &amp;&amp; Freelist chunk 3[blink] ==Freelist chunk 2</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812463585975.png" alt=""></p>
+<p><img src="../images_result/images/2014091812463585975.png" alt=""></p>
 
 <p>红线是检查发生的地方</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812463544204.png" alt=""></p>
+<p><img src="../images_result/images/2014091812463544204.png" alt=""></p>
 
 <p>如果任何检查未通过，那么就jump到ntdll.dll的0x7c936934，正如你所见这几乎与我们传统的unlink相同除了我们加入了检查flink/blink的代码</p>
 
@@ -953,7 +953,7 @@ HANDLE WINAPI HeapCreate(
 
 <p>对于Windows XP sp2的介绍中可见一个随机的堆cookie位于chunk header中的0x5偏移。。只有freelist chunks有这些cookie检查。下面是一张加亮了安全cookie的关于堆chunk的图片。这是一条随机单字节条目，这样有最大256种可能的值。记住你在一个多线程的环境下也许能够暴力穷举这个值。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812463642453.png" alt=""></p>
+<p><img src="../images_result/images/2014091812463642453.png" alt=""></p>
 
 <h2>0x04 前端分配器-Lookaside：</h2>
 
@@ -1053,7 +1053,7 @@ HANDLE WINAPI HeapCreate(
     </tr>
   </table>
 
-<p><br><img src="http://static.wooyun.org/20140918/2014091812463655499.png" alt="" border="0"></p>
+<p><br><img src="../images_result/images/2014091812463655499.png" alt="" border="0"></p>
 
 <p>当windows堆管理器接收到一个分配的请求，它会去寻找一个空闲的堆内存chunk来满足这个请求。</p>
 
@@ -1091,34 +1091,34 @@ HANDLE WINAPI HeapCreate(
 <li>我们通过在当前segment中分配chunk A开始 </li>
 </ol>
 
-<p><a href="http://net-ninja.net/images/1.png"><img src="http://static.wooyun.org/20140918/2014091812463715751.png" alt="" border="0"></a></p>
+<p><a href="http://net-ninja.net/images/1.png"><img src="../images_result/images/2014091812463715751.png" alt="" border="0"></a></p>
 
 <ol>
 <li>下一步我们在相同segment分配另一个chunk B </li>
 </ol>
 
-<p><a href="http://net-ninja.net/images/2.png"><img src="http://static.wooyun.org/20140918/2014091812463731385.png" alt="" border="0"></a></p>
+<p><a href="http://net-ninja.net/images/2.png"><img src="../images_result/images/2014091812463731385.png" alt="" border="0"></a></p>
 
 <ol>
 <li>现在我们free chunk B 去向lookaside list，那么有两个条目存在，一个在segment而另一个在lookaside list。. </li>
 </ol>
 
-<p><a href="http://net-ninja.net/images/3.png"><img src="http://static.wooyun.org/20140918/2014091812463764380.png" alt="" border="0"></a></p>
+<p><a href="http://net-ninja.net/images/3.png"><img src="../images_result/images/2014091812463764380.png" alt="" border="0"></a></p>
 
 <ol>
 <li>现在我们溢出chunk A（会在以后溢出到chunk B中并且覆写其flink）。这是将会被覆写的元数据. </li>
 </ol>
 
-<p><a href="http://net-ninja.net/images/4.png"><img src="http://static.wooyun.org/20140918/2014091812463873983.png" alt="" border="0"></a></p>
+<p><a href="http://net-ninja.net/images/4.png"><img src="../images_result/images/2014091812463873983.png" alt="" border="0"></a></p>
 
 <ol>
 <li><p>现在我们重新再一次分配B（通过分配一个和B相同大小的chunk如第二步）。这会返回chunk B的指针并且更新其在当前堆segment中的引用并且准备好下一次的分配。现在chunk B 中的flink已经更新成攻击者通过溢出A而控制的任意地址。</p>
 
-<p><a href="http://net-ninja.net/images/5.png"><img src="http://static.wooyun.org/20140918/2014091812463883162.png" alt="" border="0"></a></p></li>
+<p><a href="http://net-ninja.net/images/5.png"><img src="../images_result/images/2014091812463883162.png" alt="" border="0"></a></p></li>
 <li><p>现在我们通过分配chunk C 获取控制。它将会是在chunk B之后的下一个可用chunk并且通过chunk B 的已经控制的flink 被指向了。攻击者在chunk C 填入他们的shellcode</p></li>
 </ol>
 
-<p><a href="http://net-ninja.net/images/6.png"><img src="http://static.wooyun.org/20140918/2014091812463996674.png" alt="" border="0"></a></p>
+<p><a href="http://net-ninja.net/images/6.png"><img src="../images_result/images/2014091812463996674.png" alt="" border="0"></a></p>
 
 <p>当这些步骤全部完成，我们现在控制了一个覆写的函数指针，其将会理想地在我们的"4字节写"之后被调用。下面是我们将会说明的C代码：</p>
 
@@ -1203,39 +1203,39 @@ int main(int argc,char *argv[])
 
 <p>我们之所以有好多<strong>asm</strong>("int $0x3");指令是为了在调试器中设置软件断点来暂停程序执行。其他选择的话，你也可以在调试器中打开编译后的二进制文件然后再每个call下断点。在dev c++（it uses AT&amp;T in-line assembly compiling with gcc.exe）中编译代码。当代码在调试器中执行触发第一个断点时让我们来看一下。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812463939219.png" alt=""></p>
+<p><img src="../images_result/images/2014091812463939219.png" alt=""></p>
 
 <p>我们可以看到在segment 0x00480000有两个已分配的chunk大小为0x18.如果我们减去0x8字节我们还剩0x10即16个字节。让我们来看一看lookaside并且观察我们是否把chunk B free过去了</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464044317.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464044317.png" alt=""></p>
 
 <p>太棒了！所以我们可以在lookaside看到我们的chunk(差8字节指到header)。这个chunk被free到这个位置取决于其大小&lt; 1016并且目前在lookaside中有&lt;= 3 chunk 指定那个chunk size。</p>
 
 <p>为了进一步确认，让我们看一眼freelist并且观察发生了什么</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464059452.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464059452.png" alt=""></p>
 
 <p>好的 那么它看上去很直接，除了 一些在freelist[0]在创建segment时正常的一些分配外 没有其他条目。继续，我们用一些0x41溢出chunk A到临近的chunk header。使用同样的数据，我们将用0x44溢出临近chunk的flink.</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464117704.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464117704.png" alt=""></p>
 
 <p>太棒了 我们可以看到我们分配的0x00481ea8-0x8（chunk B）已经被攻击者的输入覆写了。我们也可以看到lookaside条目包含着0x4444443c这个值，如果我们把这个值加上0x8字节就会是0x44444444即我们使用的确切值！因此在这一点上你可以理解你是怎样控制chunk B 的flink的 ：）</p>
 
 <p>一旦执行与chunk B(0x00481ea8-0x8)大小相同的分配，chunk B 的条目将被从lookaside<a href="http://static.wooyun.org/20141017/2014101720555724243.png">3</a>移除并且返回给调用者。注意额外的，header也同样被完全控制了。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464187602.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464187602.png" alt=""></p>
 
 <p>所以如果我们仔细看看chunk A(0x00481e88)我们可以看到这个chunk正在被使用因为flag设置成0x1（表示它状态busy）。下一个在(0x00481ea0)的chunk目前还没有被更新因为其仍然被free到lookaside中。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464130365.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464130365.png" alt=""></p>
 
 <p>这时候，代码将会在READ操作上违反访问规则。当使用这种技术攻击一个程序时，我们会把0x44444444用一个函数指针替换（虚假flink）。现在，当堆管理器创建了下一个分配的chunk，该程序将会在虚假指针处写入。我们现在会分配chunk C并且用任意shellcode填充buffer。这里的这个想法是让我们的函数指针在程序崩溃之前被调用（或者因为崩溃而调用）。我没在Heap Overflow for Humans 101中提到的一个非常聪明的技巧是 攻击者可以利用PEB全局函数指针（仅在XP SP1 之前）。但是在windows XP SP2 及更高版本，这些地址指针都是随机的。让我们来看看这个，在把二进制文件装载进调试器时我们首先看到：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464242304.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464242304.png" alt=""></p>
 
 <p>我们再做一遍：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464285988.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464285988.png" alt=""></p>
 
 <p>注意以上两个PEB指针是不同的。当触发一个异常时，异常处理器大致将调用ExitProcess()，其又会调用RtlAcquirePebLock()。这项操作管理的是在处理异常期间不许修改peb 并且当处理器结束运作，它将会通过调用RtlReleasePebLock()释放lock。另外，在这些函数中使用的指针并不是W^X保护的而这意味着我们可以在那个内存区域写入并且运行。这些函数每一个都利用了静态指针与固定的相对的peb的偏移量。下面是RtlAcquirePebLock()函数并且正如你所见，FS:<a href="http://static.wooyun.org/20141017/2014101720555873429.png">18</a> (peb)被移进了EAX。接着，全局函数指针被存储在0x30偏移量的地方。而将会被调用的函数'FastPebLockRoutine()'位于0x24偏移量位置。</p>
 
@@ -1266,7 +1266,7 @@ int main(int argc,char *argv[])
 
 <p>所以当RtlAcquirePebLock() 和 RtlReleasePebLock()过程在有异常发生时被调用，这代码将会无限的触发异常并且执行你的代码。不过你可以通过执行完shellcode然后修改指针地址到exit()修补peb来实现。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464238620.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464238620.png" alt=""></p>
 
 <p>当前进程的线程数越多，随机化的强度就越弱（随机地址将被用于多个PEB）并且我们将能够"猜解"当前PEB的地址。不过由于我们没有一个可靠的函数指针以供我们做简单的"4字节"覆写（一个通用函数指针）</p>
 
@@ -1286,7 +1286,7 @@ int main(int argc,char *argv[])
 
 <p>所以现在我们将会溢出chunk A X's并且溢出AAAA和BBBB进入chunk B的元数据并且最终使用0x7ffdf020覆写chunk B的flink。重新编译并且装入调试器。现在当我们分配chunk C（指向0x7ffdf020）时，我们可以用shellcode填充这个chunk并且当触发异常时将会被调用。下面我们可以看到如下代码设置PEB地址到EAX并且直接call调用0x20偏移量(FastPEBLockRoutine())把执行权转交到我们的代码。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464362321.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464362321.png" alt=""></p>
 
 <p>现在我们对EIP拥有了直接的控制并且可以利用它返回到代码中。在这里不考虑绕过DEP以及执行代码。</p>
 
@@ -1296,19 +1296,19 @@ int main(int argc,char *argv[])
 
 <p>举例来说，winsock的WSACleanup()，它在XP SP3下包含了一个位于0x71ab400a的硬编码函数调用。这也可以成为我们用于往内存中写shellcode的地址。那样的话当WSACleanup()（或者许多其它winsock函数）执行时，它会重定向回shellcode。下面是对于WSACleanup()反汇编并且寻找硬编码函数调用：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464318152.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464318152.png" alt=""></p>
 
 <p>几乎所有windows下面的网络程序都喜欢使用从winsock导出的函数调用并且特别是（原文是spefcially，想必是specially打错了）WSACleanup()用来清理任何socket连接，并且这些多数在溢出后肯定会被调用。因此，使用这个函数指针(0x71ac4050)来覆写 看上去运行时始终一致（原文consistantly，想必是consistently打错了）。另一个例子显示，recv()函数也包含了一个相同函数的调用。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464311522.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464311522.png" alt=""></p>
 
 <p>如果我们跟踪0x71ab678f函数调用，我们可以看到我们到了这里</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464422765.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464422765.png" alt=""></p>
 
 <p>你知道了什么？另一个顺下来对0x71ac4050的调用，为了确保这个会成功，让我们看看这段内存的访问权限。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464458554.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464458554.png" alt=""></p>
 
 <p>这种技术的基本难题是 因为你将会覆写那个区域，所以任何使用了winsock的shellcode(几乎所有我用的shellcode)都会失效。一种解决这难题的办法是再次把0x71ac4050恢复到原来的代码这样winsock就能工作了</p>
 
@@ -1318,7 +1318,7 @@ int main(int argc,char *argv[])
 
 <p>构造一个'PoC'利用的思路是 通过正确的方式触发并且列出堆栈内容这样你就可以覆写一个在lookaside的chunk然后达到代码执行。下载this文件并且在windows xp sp3下运行然后尝试我在这里提供的例子来帮助你抓住这个技术的知识要点。我已经决定不提供这个的源代码这样人们必须做一些你想工作来寻找正确堆栈布局然后达到命令执行。作为一个提示（希望不是很透），这里有一张'PoC'通过确定堆布局工作的截图</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464613877.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464613877.png" alt=""></p>
 
 <p>当然，任何情况下只要你能弄清堆内存的布局都很好。一个列出目标进程的堆的更简单的目标是稳妥地利用客户端。随着能够编写和控制堆的布局，你一定能够构造一个通过堆溢出攻击利用的场景。一个例子是利用Alex Soritov的heaplib.js来协助分配，释放以及在堆内存中实行其他字符串操作。如果使用MSHTML在相同堆中利用javascript或者DHTML来分配或者释放chunk，那么你就可以控制堆管理器并且你可以在浏览器中通过堆溢出转交执行控制。</p>
 
@@ -1333,17 +1333,17 @@ int main(int argc,char *argv[])
 
 <p>所以让欢乐开始吧！首先我触发了<a href="http://www.exploit-db.com/exploits/11190/">exploit-db</a>上的Hellcode Research写的PoC。让我们来分析程序的crash</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464762743.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464762743.png" alt=""></p>
 
 <p>我们在这里可以看到当前堆的segment实际上用光了未分配内存并且无法为那个堆segment提供更多的内存。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464878753.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464878753.png" alt=""></p>
 
 <p>然后我们来看一下：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464817047.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464817047.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464846631.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464846631.png" alt=""></p>
 
 <p>我们用光了堆segment并且没有能力创建一个新的segment。所以我们该怎么办？好吧我们知道我们必须触发一个unlink操作。为了那样做，我们需要windows堆管理器复制所有的数据进入分配的buffer（覆写其它的chunk）但是不丢失当前的segment。那么当下一此分配或者free被触发，它会试着去unlink。我修改了poc去只用2240字节代替4000字节来触发溢出</p>
 
@@ -1356,7 +1356,7 @@ target.BindToFile(x,1);
 
 <p>现在当我们触发这一漏洞时，我们实际上并没有让浏览器崩溃。当然chunk已经溢出了，但是直到再有一个其他的unlink操作 它不会崩溃。但是当关闭浏览器时，垃圾搜集器启动并且分配所有已经free的chunk并且如是多个对RtlAllocateHeap()的调用 然后漏洞被触发。这次事情看上去更实际了。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464922488.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464922488.png" alt=""></p>
 
 <pre><code>#!bash
 (384c.16e0): Access violation - code c0000005 (first chance)
@@ -1371,7 +1371,7 @@ ntdll!RtlAllocateHeap+0x567:
 
 <p>太棒了，所以我们有了一个潜在的攻击利用条件。在这种情况下，flink就是EAX然后blink就是EDI.带XP sp 0-1和以下版本，我们可以简单地实行一次简单的UEF函数覆写并且获取控制。但是我们已经能够通过浏览器强大的脚本能力给堆"按摩（原文massage，但我总觉得像是message，呵呵）"这样我们将会试着在xp sp3下对付这个漏洞。在分析堆的布局时，我快速地注意到Active X control实际上在运行时创建了它自己的堆并且crash是在freelist insert时被触发的</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464950524.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464950524.png" alt=""></p>
 
 <p>当使用heaplib.js库时，我可以成功地操作堆，那就是说，默认的进程堆<strong>不是</strong> active X controls的堆。在这一点上，我大致可以说在Windows XP SP3及以上版本<em>看上去</em>不能利用，当然这可能是糟糕的误解但是就目前我可以说，如果对象的堆无法被操作，那么它就不能被利用。</p>
 
@@ -1379,7 +1379,7 @@ ntdll!RtlAllocateHeap+0x567:
 
 <p>一个非常有用的提示是 知道当调试具有堆溢出的程序时调的是分配与free的数量以及它们的大小。在一个进程/线程的生命周期里，许多分配与free被执行并且确实对它们都下断点非常耗时。一件对immunity debugger不错的事情是你可以使用!hookheap插件来hook RtlAllocateHeap() 和 RtlFreeHeap()并且这样你就可以找到所有在特定操作中执行的 分配和free 的大小和数量</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812464932606.png" alt=""></p>
+<p><img src="../images_result/images/2014091812464932606.png" alt=""></p>
 
 <p>正如你所见，一个特别的分配露了出来，一次大量字节的分配看上去像是对目标漏洞服务器的请求。</p>
 

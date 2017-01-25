@@ -3,7 +3,7 @@
 			<head>
 			     <title>Pfsense HA（高可用性群集） - 合天智汇</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/4010">http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/4010</a></h1>
 				
@@ -32,7 +32,7 @@
 
 <p>简单绘了个拓扑图：</p>
 
-<p><img src="http://static.wooyun.org/20141125/2014112502424281287.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112502424281287.jpeg" alt="enter image description here"></p>
 
 <p>拓扑图确实有点不咋的啊！可以说是有点难看，有什么好的软件可以给我推荐下啊！</p>
 
@@ -56,9 +56,9 @@
 
 <p>注：在弄Pfsense HA过程中Pfsense1和Pfsense2有两个状态一个是MASTER，一个是BACKUP。</p>
 
-<p><img src="http://static.wooyun.org/20141125/2014112502424254012.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112502424254012.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141125/2014112502424390771.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112502424390771.png" alt="enter image description here"></p>
 
 <h1>0x03 具体实现Pfsense HA</h1>
 
@@ -66,25 +66,25 @@
 
 <h2>A 增加虚拟ip</h2>
 
-<p><img src="http://static.wooyun.org/20141125/2014112502424326860.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112502424326860.png" alt="enter image description here"></p>
 
 <p>增加wlan口的虚拟ip</p>
 
-<p><img src="http://static.wooyun.org/20141125/2014112502424318591.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112502424318591.png" alt="enter image description here"></p>
 
 <p>增加lan口的虚拟ip</p>
 
-<p><img src="http://static.wooyun.org/20141125/2014112502424384944.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112502424384944.png" alt="enter image description here"></p>
 
 <p>都弄完成了</p>
 
-<p><img src="http://static.wooyun.org/20141125/2014112502424388657.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112502424388657.png" alt="enter image description here"></p>
 
 <h2>B CARP设置</h2>
 
-<p><img src="http://static.wooyun.org/20141125/2014112502424414282.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112502424414282.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141125/2014112502424460303.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112502424460303.png" alt="enter image description here"></p>
 
 <p>下面还有各种同步选项，请根据自己的实际情况去勾选。</p>
 
@@ -98,15 +98,15 @@
 
 <p>这里需要在MASTER防火墙做了个端口转发</p>
 
-<p><img src="http://static.wooyun.org/20141125/2014112502424480705.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112502424480705.png" alt="enter image description here"></p>
 
 <p>到BACKUP上面来看，数据已经同步过来了。</p>
 
 <p>说明下：配置防火墙请一定要到MASTER防火墙上面去配置，在BACKUP上配了是没用的。</p>
 
-<p><img src="http://static.wooyun.org/20141125/2014112502424518878.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112502424518878.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141125/2014112502424680796.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112502424680796.png" alt="enter image description here"></p>
 
 <p>我把MASTER防火墙关机，BACKUP防火墙马上接管成为MASTER防火墙， 照样不影响访问254。</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>流量劫持攻击之链路劫持剖析 - an0nym0u5</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/13661">http://drops.wooyun.org/tips/13661</a></h1>
 				
@@ -24,23 +24,23 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909346190018.jpg" alt="p1"> 图1</p>
+<p><img src="../images_result/images/201603110909346190018.jpg" alt="p1"> 图1</p>
 
 <h3>案例问题追踪：</h3>
 
 <p>通过分析抓取的样本数据发现，数据包在传输过程中出现异常TTL，目标机的正常TTL为51如图2。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909405876225.jpg" alt="p2"> 图2</p>
+<p><img src="../images_result/images/201603110909405876225.jpg" alt="p2"> 图2</p>
 
 <p>这里出现异常TTL值116和114，并且两个包的ID（Identification）值相同，均为25576，如图3和图4，明显是伪造的包。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909437300335.jpg" alt="p3"> 图3</p>
+<p><img src="../images_result/images/201603110909437300335.jpg" alt="p3"> 图3</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909458275945.jpg" alt="p4"> 图4</p>
+<p><img src="../images_result/images/201603110909458275945.jpg" alt="p4"> 图4</p>
 
 <p>另外服务器banner信息也发现了异常情况，公司提供的Server是Tengine的，网站编写语言是Asp.Net的，在响应头中应该能看到，而异常响应头部无此信息，如图5所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909479625955.jpg" alt="p5"> 图5</p>
+<p><img src="../images_result/images/201603110909479625955.jpg" alt="p5"> 图5</p>
 
 <p>综上判断，中间链路发生了劫持。劫持者应该是利用在运营商内部的便利条件，在网关路由器上添加嗅探程序，嗅探明文HTTP请求数据包，拿到要劫持的数据包之后，马上给请求者返回HTTP response（302 到其他 url），导致用户无法访问正常URL。</p>
 
@@ -50,9 +50,9 @@
 
 <p>spm可以理解为跟踪引导成交效果数据的解决方案，可以用来评估某一个站点上某一频道的访问和点击效果，以及后续引导和成交情况。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909485120964.jpg" alt="p6"> 图6</p>
+<p><img src="../images_result/images/201603110909485120964.jpg" alt="p6"> 图6</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909502000274.jpg" alt="p7"> 图7</p>
+<p><img src="../images_result/images/201603110909502000274.jpg" alt="p7"> 图7</p>
 
 <h3>劫持影响：</h3>
 
@@ -81,7 +81,7 @@
 
 <p>链路劫持的原理就是运营商（也可能是黑客）在用户访问网站的时候进行窃听，获取用户访问的目的ip后，然后以这个ip为source-ip冒充网站给用户响应，通常响应中会插入一段JS代码，这段代码可能会让用户去get一些非真实网站资源，最终可能造成真实页面被插入广告，被蒙层，甚至整页面被替换，严重影响用户体验以及企业形象。由于链路劫持可能通常发生在last-mile，而last-mile被运营商牢牢控住，所以这对监测以及解决问题带来了巨大的挑战。劫持原理大概如图8所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909532026983.jpg" alt="p8"> 图8</p>
+<p><img src="../images_result/images/201603110909532026983.jpg" alt="p8"> 图8</p>
 
 <p>目前发现的TCP链路劫持攻击一般有两种形式：中断访问型（分为单向发包和双向发包）和替换页面型。</p>
 
@@ -154,7 +154,7 @@ WIN7             TTL：64
 
 <p>目前腾讯做的比较领先，有链路劫持检测的相关发明专利。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909561255693.jpg" alt="p9"></p>
+<p><img src="../images_result/images/201603110909561255693.jpg" alt="p9"></p>
 
 <h1>0x05总结</h1>
 

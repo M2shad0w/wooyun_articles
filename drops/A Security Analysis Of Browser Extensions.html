@@ -3,7 +3,7 @@
 			<head>
 			     <title>A Security Analysis Of Browser Extensions - DBA</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/2918">http://drops.wooyun.org/web/2918</a></h1>
 				
@@ -47,7 +47,7 @@
 3）权限模型。扩展必须先声明使用的权限，然后浏览器会匹配相应的权限模型用于限制扩展。所以，如果是核心扩展脚本被发现了漏洞，攻击者还是会被权限模型限制。
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201409/2014090110151131712.png" alt="2014090110151131712.png"></p>
+<p><img src="../images_result/images/2014090110151131712.png" alt="2014090110151131712.png"></p>
 
 <p>图1：Google Chrome的扩展架构图</p>
 
@@ -95,11 +95,11 @@
 <p>在统计中，我们没有包含那些不能被滥用的权限。比如，通知功能的权限，能被允许使用HTML5的通知接口，但是无法被滥用。有超过300个扩展申请了该权限，却并未使用，我们也就没有将这些扩展列入统计结果。尽管它们不会造成安全问题，但在申请权限中，这也是个不好的习惯。<br>
 如下是我们统计的数据：</p>
 
-<p><img src="http://static.wooyun.org/201409/2014090110162199504.png" alt="2014090110162199504.png"></p>
+<p><img src="../images_result/images/2014090110162199504.png" alt="2014090110162199504.png"></p>
 
 <p>下面是一个权限滥用的扩展数量和申请的额外的权限数量对比的树状分布图，Y坐标是以10为底对数的值。</p>
 
-<p><img src="http://static.wooyun.org/201409/2014090110165751905.png" alt="2014090110165751905.png"></p>
+<p><img src="../images_result/images/2014090110165751905.png" alt="2014090110165751905.png"></p>
 
 <p>很多不合格的扩展会申请极度敏感的权限，这样就能很容易的被黑客和居心叵测的开发者利用这些权限获取用户的账号信息，如浏览器的cookie。</p>
 

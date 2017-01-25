@@ -3,7 +3,7 @@
 			<head>
 			     <title>Double Free浅析 - explorer</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/7958">http://drops.wooyun.org/binary/7958</a></h1>
 				
@@ -58,7 +58,7 @@
 
 <p>所有空闲的chunk之间的联系就像这样</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081305142881196.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081305142881196.jpg" alt="enter image description here"></p>
 
 <p>手绘轻喷。</p>
 
@@ -171,7 +171,7 @@ BK-&gt;fd = FD;
 
 <p>然后释放这2块内存。这样子我们就可以在距离第一个指针偏移量为0x200的地方有了一个野指针。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081305142832639.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081305142832639.png" alt="enter image description here"></p>
 
 <p>我们留下了一个野指针p指向偏移为0x200的地方。然后我们需要做的就是伪造chunk。再free野指针p。首先是申请一块更大的内存，大小应该等于我们刚才申请的内存的总和。</p>
 
@@ -187,7 +187,7 @@ BK-&gt;fd = FD;
 
 <p>现在的chunk就是这个样子了</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081305142948112.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081305142948112.png" alt="enter image description here"></p>
 
 <p>可以看到现在我们在内存中伪造了出了２个chunk。它们的结构就像图中我们看到的样子。首先是第一个chunk的chunk头部分。我们分别填上了0x０和0x1f9代表了前一个chunk正在使用，当前chunk的大小是１f8。然后就是伪造的双向链表指针了。为了绕过unlink中的检查，这里需要稍微构造一下这个双向链表的指针了。payload中的0x0804bfc0位置其实就是存放在.data段中的指针ptr。这样子就可以绕过保护了。</p>
 

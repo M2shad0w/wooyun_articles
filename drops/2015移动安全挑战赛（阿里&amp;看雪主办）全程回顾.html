@@ -3,7 +3,7 @@
 			<head>
 			     <title>2015移动安全挑战赛（阿里&amp;看雪主办）全程回顾 - GoSSIP_SJTU</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5409">http://drops.wooyun.org/tips/5409</a></h1>
 				
@@ -16,7 +16,7 @@
 
 <h2>0x1 分析</h2>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033008205093477.jpg" alt="APK界面"></p>
+<p><img src="../images_result/images/2015033008205093477.jpg" alt="APK界面"></p>
 
 <!--more-->
 
@@ -58,7 +58,7 @@
 
 <h2>0x1 分析</h2>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033008351321399.png" alt="APK界面"></p>
+<p><img src="../images_result/images/2015033008351321399.png" alt="APK界面"></p>
 
 <p><a href="http://drops.wooyun.org/wp-content/uploads/2015/03/AliCrackme_2.zip">题目下载</a></p>
 
@@ -81,9 +81,9 @@
 
 <p>下面是对比patch前和patch后的图：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033008205025533.png" alt="Patch前代码"></p>
+<p><img src="../images_result/images/2015033008205025533.png" alt="Patch前代码"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033008205193745.png" alt="Patch后代码"></p>
+<p><img src="../images_result/images/2015033008205193745.png" alt="Patch后代码"></p>
 
 <p>参考视频给出了完整的解决过程：</p>
 
@@ -161,7 +161,7 @@ for ( size_t i = 33; i &lt; 127; ++i )
 
 <hr>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033008205167871.png" alt="APK界面"></p>
+<p><img src="../images_result/images/2015033008205167871.png" alt="APK界面"></p>
 
 <p><a href="http://drops.wooyun.org/wp-content/uploads/2015/03/AliCrackme_4.zip">题目下载</a></p>
 
@@ -218,7 +218,7 @@ u0_a73    1935  126   512204 48276 ffffffff 400dc408 S crackme.a4
 
 <p>类似下图：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033008205268772.png" alt="图1"></p>
+<p><img src="../images_result/images/2015033008205268772.png" alt="图1"></p>
 
 <p>不过我没找到这个<code>M\$j</code>这个名字，逆过JNI库的都知道，如果符号表里找不到这个函数名，说明在<code>JNI_Onload</code>的时候，使用<code>RegisterNatives</code>函数重新将一个JNI函数映射为Native函数了。</p>
 
@@ -226,7 +226,7 @@ u0_a73    1935  126   512204 48276 ffffffff 400dc408 S crackme.a4
 
 <p>这个函数本身做了一些控制流混淆，同时还有很多字符串加解密的功能函数，一些简单的如异或操作，也被展开成与和或的组合等更长更复杂的表达式形式。另外还看到一些变形过的RC4，等等。不过因为我们已经是dump出来执行过的数据，所以必要的数据都已经解密了。如下图：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033008205329764.png" alt="图2"></p>
+<p><img src="../images_result/images/2015033008205329764.png" alt="图2"></p>
 
 <p>通过查看反编译的C代码，我发现程序中是直接通过JNI方法调用了Java中的<code>bh</code>类的方法<code>a</code>（在图2常量中也可以看到）。 再次回到dex层查看<code>a</code>方法，该方法是不断的将输入传递给不同的函数进行处理，先是<code>cd</code>的<code>a</code>方法，<code>cC</code>的<code>a</code>方法，<code>p</code>的<code>a</code>方法，<code>x</code>的<code>a</code>方法，<code>ali$a</code>的<code>M$d</code>方法（native），<code>aS</code>的<code>a</code>方法，<code>x</code>的<code>a</code>方法，<code>ali$a</code>的<code>M&amp;z</code>方法（native），<code>cd</code>的<code>a</code>方法，<code>cC</code>的<code>a</code>方法，每一个方法都是些简单的数学运算，编码，以及密码学处理等可逆的操作，结合逆向和Indroid对输入输出的监控，都可以轻松确定每个Java函数的作用，具体过程如下代码显示：</p>
 
@@ -330,7 +330,7 @@ print flag
 
 <p>这里还需要提一下如何寻找<code>M\$d</code>和<code>M\$z</code>两个函数在so库中的地址的方法，不过这个方法是一些经验的总结，原因是整个native ELF文件的节区结构是被修改过的。这两个方法和M\$j不太一样，因为在dump出的libmobisec里可以找到M\$z的函数名，证明这个方法没有使用<code>RegiterNatives</code>来做变换，因此我们可以通过符号表来找这个函数与文件头部的偏移。方法是找<code>M\$z</code>和字符串表的偏移，如0x03FE，然后穷搜整个文件:</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033008205373783.png" alt="图3"></p>
+<p><img src="../images_result/images/2015033008205373783.png" alt="图3"></p>
 
 <p>因为符号表应该会把字符串表偏移作为一项，这块区域的结构体，我们对照ELF结构发现并不是标准的符号表，但还是可以大概看出结构体的内容，包括索引，字符串表偏移，以及ELF特殊的标志数，因此推测0x57BE4偏移是<code>M\$z</code>函数。该地址也正好是个压栈的指令，证明了我们的猜想。</p>
 
@@ -338,7 +338,7 @@ print flag
 
 <hr>
 
-<p><img src="http://static.wooyun.org/drops/20150331/2015033108563984733.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033108563984733.png" alt="enter image description here"></p>
 
 <p><a href="http://drops.wooyun.org/wp-content/uploads/2015/03/AliCrackme_5.zip">题目下载</a></p>
 
@@ -346,13 +346,13 @@ print flag
 
 <p>先把名为<code>AliCrackme_5.apk</code>的文件丢到JEB里看一看：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150331/2015033108564190995.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033108564190995.jpg" alt="enter image description here"></p>
 
 <p>dex文件并没有进行加壳和混淆，看上去是一个非常简单的程序，Java代码部分使用函数<code>Register("Bomb_Atlantis", input)</code>对输入进行判断。所以需要分析的逻辑应该都在<code>libcrackme.so</code>里的<code>Register</code>函数中。</p>
 
 <p>接下来我们用IDA打开这个<code>libcrackme.so</code>，不出所料的发现IDA完全没法处理，应该是进行了强烈的混淆和加壳处理：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150331/2015033108564388860.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033108564388860.jpg" alt="enter image description here"></p>
 
 <p>使用和解决前面题目相同的技巧，我们继续使用<code>dd</code>的方法来去处一部分的混淆和加壳。运行一次程序后，从<code>/proc/self/maps</code>里找到<code>libcrackme.so</code>在内存中的位置，使用<code>dd</code>命令从<code>/proc/self/mem</code>中提取出内存中的<code>libcrackme.so</code>，接着使用在解决第四题时使用过的技巧，将<code>libcrackme.so</code>和<code>libc.so</code>一起加载到IDA里。</p>
 
@@ -362,7 +362,7 @@ print flag
 
 <p>之后程序会将这个md5值和我们的输入进行一些异或和计算的操作，经过几步比较简单、可逆的变换之后，进入一个比较复杂的函数，经过这个函数处理后直接和一个内存中的值进行比较，返回比较结果。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150331/2015033108564681128.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015033108564681128.jpg" alt="enter image description here"></p>
 
 <p>这里说一个我们在做第五题时用到的分析方法——动态hook。由于<code>libcrackme.so</code>中并没有对调用自身的上层应用进行验证，这就导致了我们可以自己写一个程序去加载这个so，调用其中的方法。这也导致了我们在加载<code>libcrackme.so</code>后，可以加载另一个用于hook的so，这样我们可以hook <code>libcrackme.so</code>中的任意函数，从而知道任意函数的参数和返回值，这对于我们理解程序有着非常大的帮助。这里我们使用的hook框架是著名Android安全研究人员Collin Mulliner开发的Android平台上的一个二进制注入框架<a href="https://github.com/crmulliner/adbi">adbi</a>。当然这道题目并不能够通过注入的方法将我们的so注入进去，因为源程序禁掉了ptrace这样的系统调用。我们对adbi稍作修改，使之成为一个可以手动加载的动态hook框架。同时由于我们没法通过符号表来定位函数的地址，所有的hook地址都需要硬编码，并且要和运行这道题目程序的Android设备内存映射严格对应。</p>
 

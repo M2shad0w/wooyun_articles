@@ -3,7 +3,7 @@
 			<head>
 			     <title>BurpSuite 扩展开发[1]-API与HelloWold - 园长</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/3962">http://drops.wooyun.org/papers/3962</a></h1>
 				
@@ -29,7 +29,7 @@
 <li><p>http://blog.portswigger.net/2012/12/draft-new-extensibility-api.html</p></li>
 </ol>
 
-<p><img src="http://static.wooyun.org/20141120/2014112007081918979.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112007081918979.jpg" alt="enter image description here"></p>
 
 <p>You can:</p>
 
@@ -58,19 +58,19 @@
 
 <p>下载API后新建Eclipse项目导入API文件：</p>
 
-<p><img src="http://static.wooyun.org/20141120/2014112007082138862.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112007082138862.jpg" alt="enter image description here"></p>
 
 <p>不急于动手写代码，先看下官方的Demo：</p>
 
-<p><img src="http://static.wooyun.org/20141120/2014112007082122742.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112007082122742.jpg" alt="enter image description here"></p>
 
 <p>下载第一个HelloWorld解压它并复制BurpExtender.java到我们的项目当中：</p>
 
-<p><img src="http://static.wooyun.org/20141120/2014112007082239625.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112007082239625.jpg" alt="enter image description here"></p>
 
 <p>BurpExtender.java：</p>
 
-<p><img src="http://static.wooyun.org/20141120/2014112007082229959.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112007082229959.jpg" alt="enter image description here"></p>
 
 <p>BurpExtender.java实现了IBurpExtender接口，而IBurpExtender仅定义了一个方法：registerExtenderCallbacks(注册扩展回调方法)：</p>
 
@@ -89,15 +89,15 @@ public interface  IBurpExtender{
 
 <p>在确认代码无任何错误后选中项目并导出为jar,建议安装一个打jar包的插件:Build Fat Jar这样你就可以非常方便的把整个项目打成一个jar包了.</p>
 
-<p><img src="http://static.wooyun.org/20141120/2014112007082385265.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112007082385265.jpg" alt="enter image description here"></p>
 
 <p>如果你和我一样从来都没有使用过BurpSuite，那么不妨先打开它把玩几分钟。在extender(扩展)标签当中看到了Burp的插件加载界面。</p>
 
-<p><img src="http://static.wooyun.org/20141120/2014112007082375326.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112007082375326.jpg" alt="enter image description here"></p>
 
 <p>Add我们刚打好的jar包，加载到Burp扩展中去。</p>
 
-<p><img src="http://static.wooyun.org/20141120/2014112007082480407.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112007082480407.jpg" alt="enter image description here"></p>
 
 <p>这个时候可以看到我们的插件已经成功运行了，在LoadBurpExtension中的output标签已经看到了Hello output(stdout.println("Hello output");)</p>
 
@@ -109,25 +109,25 @@ public interface  IBurpExtender{
 
 <p>以及提醒面板的信息Hello alerts(callbacks.issueAlert("Hello alerts");)。</p>
 
-<p><img src="http://static.wooyun.org/20141120/2014112007082439626.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112007082439626.jpg" alt="enter image description here"></p>
 
 <p>获取到Burp混淆后的扩展加载类(自定义类加载器)：</p>
 
-<p><img src="http://static.wooyun.org/20141120/2014112007082578368.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112007082578368.jpg" alt="enter image description here"></p>
 
 <p>如你所想，java加载外部扩展利用了URLClassLoader load外部的jar(对这感兴趣的朋友可以看下p2j上的相关文章:http://p2j.cn/?s=URLClassLoader&amp;submit=Search)。</p>
 
 <p>第一个HelloWorld很容易就搞定了，第二个Event listeners的Demo。所谓事件监听即你可以通过Burp的IBurpExtenderCallbacks去注册自己的监听方法。Demo只提供了四种事件(包含HTTP监听、代理、Scanner、状态监听)，所有的未列举的事件直接用Eclipse的快捷键提示就出来了：</p>
 
-<p><img src="http://static.wooyun.org/20141120/2014112007082560295.jpg" alt="z"></p>
+<p><img src="../images_result/images/2014112007082560295.jpg" alt="z"></p>
 
 <p>比如想要添加一个IScopeChangeListener很简单，让当前类实现IScopeChangeListener接口，注册ScopeChange事件(callbacks.registerScopeChangeListener(this);)重写其scopeChanged方法即可。</p>
 
-<p><img src="http://static.wooyun.org/20141120/2014112007082667114.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112007082667114.jpg" alt="enter image description here"></p>
 
 <p>设置本地浏览器代理后再次访问任意网站后回到扩展标签，选中我们的扩展程序可以看到监听中的请求已输出。</p>
 
-<p><img src="http://static.wooyun.org/20141120/2014112007082678859.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014112007082678859.jpg" alt="enter image description here"></p>
 
 <h1>0x03 HelloWorld</h1>
 
@@ -182,7 +182,7 @@ public class BurpExtender implements IBurpExtender, ITab {
 
 <p>效果图：</p>
 
-<p><img src="http://static.wooyun.org/20141120/2014112007082764524.jpg" alt="enter image description here"></p>      <p></p>
+<p><img src="../images_result/images/2014112007082764524.jpg" alt="enter image description here"></p>      <p></p>
     
 			</body>
 		</html>

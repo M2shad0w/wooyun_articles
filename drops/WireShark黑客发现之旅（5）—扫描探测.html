@@ -3,7 +3,7 @@
 			<head>
 			     <title>WireShark黑客发现之旅（5）—扫描探测 - 聚锋实验室</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8660">http://drops.wooyun.org/tips/8660</a></h1>
 				
@@ -28,19 +28,19 @@
 
 <p>如：<code>192.1.14.235</code>向指定网段发起<code>ARP</code>请求，如果<code>IP</code>不存在，则无回应。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%871.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%871.jpg" alt="enter image description here"></p>
 
 <p>如果<code>IP</code>存在，该<code>IP</code>会通过<code>ARP</code>回应攻击<code>IP</code>，发送自己的<code>MAC</code>地址与对应的<code>IP</code>。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%872.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%872.jpg" alt="enter image description here"></p>
 
 <p><code>ARP</code>欺骗适用范围多限于内网，通过互联网进行地址扫描一般基于<code>Ping</code>请求。</p>
 
 <p>如：<code>192.1.14.235</code>向指定网段发起<code>Ping</code>请求，如果<code>IP</code>存在，则返回<code>Ping reply</code>。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%873.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%873.jpg" alt="enter image description here"></p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%874.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%874.jpg" alt="enter image description here"></p>
 
 <h1>0x02 端口扫描探测</h1>
 
@@ -66,15 +66,15 @@
 
 <p>如：<code>192.1.14.235</code>对<code>172.16.33.162</code>进行全连接端口扫描，首先发起<code>Ping</code>消息确认主机是否存在，然后对端口进行扫描。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%875.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%875.jpg" alt="enter image description here"></p>
 
 <p>下图为扫描到<code>TCP3389</code>端口开启的情况。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%876.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%876.jpg" alt="enter image description here"></p>
 
 <p>下图为扫描到<code>TCP1723</code>端口未开启的情况。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%877.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%877.jpg" alt="enter image description here"></p>
 
 <h3>2、半连接扫描</h3>
 
@@ -82,15 +82,15 @@
 
 <p>如：<code>192.1.14.235</code>对<code>172.16.33.162</code>进行半连接端口扫描，首先发起<code>Ping</code>消息确认主机是否存在，然后对端口进行扫描。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%878.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%878.jpg" alt="enter image description here"></p>
 
 <p>扫描到<code>TCP80</code>端口开启。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%879.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%879.jpg" alt="enter image description here"></p>
 
 <p><code>TCP23</code>端口未开启。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%8710.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%8710.jpg" alt="enter image description here"></p>
 
 <h3>3、秘密扫描TCPFIN</h3>
 
@@ -98,13 +98,13 @@
 
 <p>如下图，扫描方发送<code>FIN</code>包，如果端口关闭则返回<code>RST ACK</code>包。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%8711.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%8711.jpg" alt="enter image description here"></p>
 
 <h3>4、秘密扫描TCPACK</h3>
 
 <p><code>TCP ACK</code>扫描是利用标志位<code>ACK</code>，而<code>ACK</code>标志在<code>TCP</code>协议中表示确认序号有效，它表示确认一个正常的<code>TCP</code>连接。但是在<code>TCP AC</code>K扫描中没有进行正常的<code>TCP</code>连接过程，实际上是没有真正的<code>TCP</code>连接。所以使用<code>TCP ACK</code>扫描不能够确定端口的关闭或者开启，因为当发送给对方一个含有<code>ACK</code>表示的<code>TCP</code>报文的时候，都返回含有<code>RST</code>标志的报文，无论端口是开启或者关闭。但是可以利用它来扫描防火墙的配置和规则等。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%8712.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%8712.jpg" alt="enter image description here"></p>
 
 <h3>5、UDP端口扫描</h3>
 
@@ -112,15 +112,15 @@
 
 <p>如：<code>192.1.14.235</code>对<code>172.16.2.4</code>发送大量<code>UDP</code>端口请求，扫描其开启<code>UDP</code>端口的情况。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%8713.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%8713.jpg" alt="enter image description here"></p>
 
 <p>如果对应的<code>UDP</code>端口开启，则会返回<code>UDP</code>数据包。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%8714.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%8714.jpg" alt="enter image description here"></p>
 
 <p>如果端口未开启，则返回“<code>ICMP</code>端口不可达”消息。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%8715.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%8715.jpg" alt="enter image description here"></p>
 
 <h1>0x03 操作系统的探测</h1>
 
@@ -130,19 +130,19 @@
 
 <p>如：<code>192.168.1.50</code>对<code>192.168.1.90</code>进行操作系统的扫描探测。首先发起<code>Ping</code>请求，确认主机是否存在。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%8716.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%8716.jpg" alt="enter image description here"></p>
 
 <p>发起<code>ARP</code>请求，获取主机<code>MAC</code>地址。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%8717.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%8717.jpg" alt="enter image description here"></p>
 
 <p>进行端口扫描。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%8718.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%8718.jpg" alt="enter image description here"></p>
 
 <p>根据综合扫描情况，判断操作系统类型。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150914/2015091405440268973.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015091405440268973.png" alt="enter image description here"></p>
 
 <h1>0x04 漏洞扫描</h1>
 
@@ -154,13 +154,13 @@
 
 <p><code>Nmap</code>扫描命令：<code>nmap --script=smb-check-vulns.nse --script-args=unsafe=1 192.168.1.40</code>。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150914/2015091405440283665.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015091405440283665.png" alt="enter image description here"></p>
 
 <h3>1、端口扫描</h3>
 
 <p>漏洞扫描前，开始对目标主机进行端口扫描。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%8721.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%8721.jpg" alt="enter image description here"></p>
 
 <h3>2、SMB协议简单分析</h3>
 
@@ -182,7 +182,7 @@
 
 <p>SMB Command: <code>Logoff AndX</code>(0x74)：退出登录</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%8722.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%8722.jpg" alt="enter image description here"></p>
 
 <h3>3、MS08-067漏洞</h3>
 
@@ -226,11 +226,11 @@
 
 <p>尝试打开“<code>\\BROWSER</code>”目录，下一包返回成功。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%8723.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%8723.jpg" alt="enter image description here"></p>
 
 <p>同时还有其它尝试，均成功，综合判断目标存在<code>MS08-067</code>漏洞。通过<code>Metasploit</code>进行漏洞验证，成功溢出，获取Shell。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%8724.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%8724.png" alt="enter image description here"></p>
 
 <h3>4、CVE-2009-3103漏洞</h3>
 
@@ -260,7 +260,7 @@ buff = (
 
 <p>十六进制字符串“<code>0x00000000</code>到<code>202e30303200</code>”请求，通过<code>ASCII</code>编码可以看出是在探测<code>NTLM</code>和<code>SMB</code>协议的版本。无响应，无此漏洞。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%8725.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%8725.jpg" alt="enter image description here"></p>
 
 <h3>5、MS06-025漏洞</h3>
 
@@ -291,9 +291,9 @@ End
 
 <p>先后尝试去连接“<code>\router</code>”、“ <code>\srvsvc</code>”路径，均报错，无<code>RAS RPC</code>服务。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%8726.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%8726.jpg" alt="enter image description here"></p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%8727.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%8727.jpg" alt="enter image description here"></p>
 
 <h3>6、MS07-029漏洞</h3>
 
@@ -348,7 +348,7 @@ end
 
 <p>尝试打开“<code>\DNSSERVER</code>”，报错，未开启<code>DNS RPC</code>服务。</p>
 
-<p><img src="http://drops.wooyun.org/wp-content/uploads/2015/09/%E5%9B%BE%E7%89%8728.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/%E5%9B%BE%E7%89%8728.jpg" alt="enter image description here"></p>
 
 <h1>0x05 总结</h1>
 

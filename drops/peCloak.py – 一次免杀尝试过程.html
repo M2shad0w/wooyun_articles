@@ -3,7 +3,7 @@
 			<head>
 			     <title>peCloak.py – 一次免杀尝试过程 - DM_</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/5286">http://drops.wooyun.org/binary/5286</a></h1>
 				
@@ -366,11 +366,11 @@ def update_jump_location(asm, current_address, instruction_offset):
 
 <p>之前写过一篇笔记提到想要从自己修改的函数中获取更多的信息我不得不轻微的修改pefile库。特别是当我查看issue时发现当pefile 保存一个修改过的文件时，它会覆盖块结构数据上的几个字节。换句话说，如果你修改了某给定文件.rdata块的前50个字节，修改过的东西将会被原始的块头替换。对此，我给pefile 的write()函数加了一个附加参数(SizeofHeaders)。这样我就可以保留PE文件头然后替换我想要部分：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150319/2015031904302643493image0017.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031904302643493image0017.png" alt="enter image description here"></p>
 
 <p>同样，字符串也会被覆盖所以我又对write()函数做了点修改：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302554432291.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015032302554432291.png" alt="enter image description here"></p>
 
 <p>根据你修改的程度，额外的修改也许是有必要的，虽然这两处修改也可以满足简单的测试。</p>
 

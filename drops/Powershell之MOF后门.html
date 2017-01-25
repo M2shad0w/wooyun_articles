@@ -3,7 +3,7 @@
 			<head>
 			     <title>Powershell之MOF后门 - Evi1cg</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12354">http://drops.wooyun.org/tips/12354</a></h1>
 				
@@ -122,7 +122,7 @@ instance of __EventFilter as $Filt
 
 <p>下面使用Veil来生成Powershell payload:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160119/2016011911191070861170.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016011911191070861170.png" alt="Alt text"></p>
 
 <p>选择x86里面进行测试，payload如下：</p>
 
@@ -223,11 +223,11 @@ C:\&gt;mofcomp.exe c:\test.mof
 
 <p>执行以后，当打开记事本的时候，则可生成meterpreter会话：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160119/2016011911191592205236.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016011911191592205236.png" alt="Alt text"></p>
 
 <p>同时，这个mof文件是免杀的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160119/2016011911191813228325.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016011911191813228325.png" alt="Alt text"></p>
 
 <p>当然除了这个我们还可以做其他事情，比如关闭某个程序，当其启动时就关闭，MOF文件如下：</p>
 
@@ -299,7 +299,7 @@ foreach ($nethost in $nethosts)
 c:\&gt; powershell -ExecutionPolicy Bypass .\test.ps1 # mof文件在同一个文件夹下面
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160119/2016011911191951709426.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016011911191951709426.png" alt="Alt text"></p>
 
 <h1>0x02 Meterpreter Post Module</h1>
 
@@ -328,7 +328,7 @@ msf post(mof_ps_persist) &gt; run
   <p>默认payload为<code>windows/meterpreter/reverse_tcp</code>，执行时间间隔为60秒，如果想通过触发方式启动，可以自行修改ruby脚本。</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20160119/2016011911192192490522.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016011911192192490522.png" alt="Alt text"></p>
 
 <p>开启监听：</p>
 
@@ -343,7 +343,7 @@ lport =&gt; 8887
 msf exploit(handler) &gt; exploit -j
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160119/2016011911192345537618.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016011911192345537618.png" alt="Alt text"></p>
 
 <blockquote>
   <p>如果看到错误80041003，说明权限不够，可以试试试用bypassuac,具体怎么bypass，请<a href="http://evi1cg.me/archives/Powershell_Bypass_UAC.html">戳我</a>。</p>
@@ -353,7 +353,7 @@ msf exploit(handler) &gt; exploit -j
 
 <p>如果想要清除后门，可以resource 生成的rc文件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160119/2016011911192492227717.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016011911192492227717.png" alt="Alt text"></p>
 
 <h1>0x03 停止MOF</h1>
 

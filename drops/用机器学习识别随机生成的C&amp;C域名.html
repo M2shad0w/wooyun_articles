@@ -3,7 +3,7 @@
 			<head>
 			     <title>用机器学习识别随机生成的C&amp;C域名 - phunter</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6220">http://drops.wooyun.org/tips/6220</a></h1>
 				
@@ -110,7 +110,7 @@ entropy = -sum(j/f_len*(math.log(j/f_len)) for i,j in count)#shannon entropy
 
 <p>特征工程就好像Taylor Swift的胸一样，你只要需要，用力挤努力挤还是有的。如果按照反例Alexa前10万名训练隐含马尔可夫链，计算一下从<code>A_i</code>到<code>A_i+1</code>转换的概率。这个转换概率的分布对于正例有一些区别，也可以用来帮助区分。具体关于马尔可夫链相关知识请参见<a href="http://en.wikipedia.org/wiki/Markov_chain">http://en.wikipedia.org/wiki/Markov_chain</a> （解释起来背后的原因篇幅比较大，就只贴一下这个特征的分布图，但是不要害怕，看示例代码里的实现其实很简单，只是计算转移矩阵而已）</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503145385140.png" alt="markov example"></p>
+<p><img src="../images_result/images/2015062503145385140.png" alt="markov example"></p>
 
 <h3>领域特征：安全专家的领域知识</h3>
 
@@ -211,13 +211,13 @@ precision, recall, thresholds = precision_recall_curve(y_truth, probas_)
 
 <p>对于每次的交叉检验，我们可以画出precision vs recall的曲线图，从中可以看到precision和recall的相对平衡，比如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503145331429.png" alt="AUC example"></p>
+<p><img src="../images_result/images/2015062503145331429.png" alt="AUC example"></p>
 
 <p>我们可以看到，如果要保持0.8左右的recall召回率，precision可以达到90%以上，但是如果要召回率达到100%，那precision只能有15%左右了。</p>
 
 <p>域名的分类效果和域名的长度也有关系，我们可以画出来平均的Accuracy和域名长度的关系图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503145458766.png" alt="accuracy example"></p>
+<p><img src="../images_result/images/2015062503145458766.png" alt="accuracy example"></p>
 
 <p>正如大家想到的一样，对短的域名分类效果一般，因为短域字符串本身的信息不如长域名丰富。不过现在C&amp;C的域名越来越长，如果只看长于12个字符的C&amp;C域名，预测效果还是很不错的。</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>发掘和利用ntpd漏洞 - cssembly</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4486">http://drops.wooyun.org/papers/4486</a></h1>
 				
@@ -149,7 +149,7 @@ if (authhavekey(req_keyid)) {
 
 <p>为了达到一个稳定的利用，我们将不得不绕过ASLR，所以让我们泄露一些指针。因为datapt变量的原因，这实际上很容易，你可能还记得它指向当前写入位置，位于缓冲区之后：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150104/2015010410583629260Untitled-drawing.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010410583629260Untitled-drawing.png" alt="enter image description here"></p>
 
 <p>我们只需要覆盖datapt变量的两个最低有效字节，然后ntpd会误判长度，将缓冲区之后的数据发送给你，这将泄漏一个指向ntpd二进制文件的指针以及一个堆指针。在此之后，datapt变量被重置为指向缓冲区的开始。</p>
 
@@ -192,7 +192,7 @@ if (authhavekey(req_keyid)) {
 
 <p>相反，我们需要找到一个gadget来控制堆栈指针使其指向一个ROP链。这通常需要一个stack pivot来做到这一点，但我们控制的堆栈上的数据是有限的。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150104/2015010411022728153ntp-drawing-2.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010411022728153ntp-drawing-2.png" alt="enter image description here"></p>
 
 <p>在栈上，我们控制了3个地点的数据，我们可以填充任意的指针，没有任何限制。除此之外，我们完全控制二进制程序中已知地址上的全局缓冲区的中的内容，如果我们能将堆栈指针（RSP）指向该缓冲区，我们可以执行任意ROP链。</p>
 

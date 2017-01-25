@@ -3,7 +3,7 @@
 			<head>
 			     <title>一起针对国内企业OA系统精心策划的大规模钓鱼攻击事件 - 核攻击</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2562">http://drops.wooyun.org/tips/2562</a></h1>
 				
@@ -44,7 +44,7 @@
 
 <p>先来看看钓鱼邮件内容：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195096457.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195096457.png" alt="enter image description here"></p>
 
 <p>邮件明文内容：</p>
 
@@ -90,7 +90,7 @@
 
 <p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f9c81a79788a9c8b8f909a9cb9cbc9c8cdd4cfd4cbcfd7979c8d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，是<font color="red">一个以日期命名的、伪造的、不存在的域名</font>。 2、&#42;&#42;354@&#92;<em>&#42;&#42;|&#92;</em>&#42;&#42;|.com，百度了一下域名，是：&#92;*&#42;&#42;|&#92;***|</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195026956.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195026956.png" alt="enter image description here"></p>
 
 <p>目测寡人和这个A企业木有任何关系，目测钓鱼者看寡人网名是核攻击，就弄了个A企业的邮箱增强真实性（<font color="red">也有可能只是为了用个正常域名，让邮件不进入垃圾箱？</font>）（2014-7-14 18:10:08 补充：证明这个猜想正确！）（<font color="red">不排除A企业域名已被搞下，见后边的分析~</font>）</p>
 
@@ -147,7 +147,7 @@
 
 <p>于是核总经过前边的A企业网络基本构架摸排，顺利进入A企业邮箱登陆页面（mail.&#42;&#42;&#42;|&#92;<em>&#42;</em>|.com）：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195188233.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195188233.png" alt="enter image description here"></p>
 
 <p>并使用之前的发件账号（&#42;&#42;354@&#92;*&#42;&#42;|&#92;***|.co）与密码（123456）（<font color="red">2014-7-14 18:12:59 补充：现在密码已被修改！</font>）成功登陆！</p>
 
@@ -155,7 +155,7 @@
 
 <p>（2014-7-14 19:10:14 补充：事后这也证明一个观点：<font color="red">该犯罪团伙可能大规模扫描互联网中的企业邮箱弱口令，并进行利用，进行大规模邮件群发！而且如上边所述，邮件不会进入垃圾箱！</font>）</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195181586.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195181586.png" alt="enter image description here"></p>
 
 <p>发现这只是一个普通员工“张*”（可能已经离职，账户没有注销）的企业邮箱（2014-7-14 18:19:31 补充：企业邮箱是个大坑，国内各大厂商早该注意这个事情了！），而且密码是弱口令，看了下使用日志、收/发件箱，已经很久没用了~</p>
 
@@ -187,9 +187,9 @@
 
 <p>同时核总在该员工邮箱内发现数以千计的已发送的大规模钓鱼邮件！！！</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195184105.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195184105.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195251180.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195251180.png" alt="enter image description here"></p>
 
 <p>经过核总细细查阅，发现这些都是收件人地址不存在或其它各种原因导致发送失败的退信，或者收件人自动回复的邮件！</p>
 
@@ -203,7 +203,7 @@
 
 <p>经过查阅退信邮件内容，发现都是发给各种网站管理员、各种企业员工、各类政府网站邮箱，种类繁多。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195398392.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195398392.png" alt="enter image description here"></p>
 
 <p>经过分析，推测该犯罪团伙的邮件发送地址名单，应该是从搜索引擎搜索某类关键词批量采集的。</p>
 
@@ -217,7 +217,7 @@
 
 <p>国际惯例，看看钓鱼邮件接收邮箱（<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2342474e4a4d63504655464a40460d404d0d404c4e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>）的域名解析情况先~</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195386946.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195386946.png" alt="enter image description here"></p>
 
 <pre><code>C:&gt;nslookup seveice.cn.com 服务器: UnKnown Address: 218.30.19.50
 
@@ -240,7 +240,7 @@ C:&gt;nslookup www.seveice.cn.com 服务器: UnKnown Address: 218.30.19.50
 
 <p>再看看 ns 解析记录：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195373757.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195373757.png" alt="enter image description here"></p>
 
 <pre><code>C:\&gt;nslookup -qt=ns seveice.cn.com
 服务器:  UnKnown
@@ -264,7 +264,7 @@ f1g1ns1.dnspod.net      internet address = 182.140.167.166
 
 <p>在看看 mx 邮件服务器解析记录：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195475500.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195475500.png" alt="enter image description here"></p>
 
 <pre><code>C:\&gt;nslookup -qt=mx seveice.cn.com
 服务器:  UnKnown
@@ -284,7 +284,7 @@ mxdomain.qq.com internet address = 112.90.142.55
 
 <p>再看看该域名历史解析的IP地址记录（IP反查网站接口 旁站查询 IP查域名 域名历史解析记录查询 IP地址查机房AS号）：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195488934.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195488934.png" alt="enter image description here"></p>
 
 <pre><code>Site: http://seveice.cn.com
 Domain: seveice.cn.com
@@ -312,21 +312,21 @@ Last seen Refresh: 14-Jul-2014
 
 <p>直接访问这个 IP 地址看看</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195496510.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195496510.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195537933.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195537933.png" alt="enter image description here"></p>
 
 <p>疑似一个QQ钓鱼站点？</p>
 
 <p>再直接访问这个域名看看：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195560176.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195560176.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195677633.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195677633.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195661995.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195661995.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195743720.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195743720.png" alt="enter image description here"></p>
 
 <p>发现是一个假冒 QQ 安全中心的钓鱼站点。</p>
 
@@ -385,11 +385,11 @@ Last seen Refresh: 14-Jul-2014
 
 <p>QQ：5777755，号码不错：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195738409.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195738409.png" alt="enter image description here"></p>
 
 <p>百度了一下：1083298850</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811195845763.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811195845763.jpg" alt="enter image description here"></p>
 
 <p>搜索了一下 www.hk6h.net，发现是个香港六合彩赌博网站。</p>
 

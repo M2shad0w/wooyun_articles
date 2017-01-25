@@ -3,7 +3,7 @@
 			<head>
 			     <title>Apple OS X系统中存在可以提升root权限的API后门 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5566">http://drops.wooyun.org/tips/5566</a></h1>
 				
@@ -43,7 +43,7 @@ You need administrator access to run this tool... exiting!
 
 <p>总之，上面的消息表明执行该命令需要root权限，通过Hopper反汇编发现了下面的代码</p>
 
-<p><img src="http://static.wooyun.org/drops/20150409/2015040916525337833pic1.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040916525337833pic1.jpg" alt="enter image description here"></p>
 
 <p>OK，所以systemsetup二进制文件只是简单的检查了是否是root权限。</p>
 
@@ -116,7 +116,7 @@ ___47-[InternetServices _netFSServerFrameworkBundle]_block_invoke
 
 <p>继续看Admin框架代码，发现：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150409/2015040916525168323pic2.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040916525168323pic2.jpg" alt="enter image description here"></p>
 
 <p>代码看来是为guest账户创建一个用户特定的Apache配置文件，注意root用户是这个文件的拥有者：</p>
 
@@ -157,23 +157,23 @@ id tool = [sharedClient remoteProxy];
 
 <p>下面找出如何出现这个错误的：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150409/2015040916524754718pic3.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040916524754718pic3.jpg" alt="enter image description here"></p>
 
 <p>这是检查XPC代理在我的进程中是否启动，看一下_onewayMessageDispatcher来定位初始代码：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150409/2015040916524526325pic4.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040916524526325pic4.png" alt="enter image description here"></p>
 
 <p>实际初始化的地方就是authenticateUsingAuthorization方法。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150409/2015040916524223285pic5.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040916524223285pic5.png" alt="enter image description here"></p>
 
 <p>这正是我想要的，给writeconfig XPC服务创建一个XPC客户端，并且这个服务是以root权限运行的。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150409/2015040916523827573pic6.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040916523827573pic6.png" alt="enter image description here"></p>
 
 <p>唯一的问题就是我应该给authenticateUsingAuthorization传递什么参数，从systemsetup文件当中找到如下：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150409/2015040916523683094pic7.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040916523683094pic7.png" alt="enter image description here"></p>
 
 <p>看起来[SFAuthorization authorization]可以来做触发，下面是我的新的exp：</p>
 

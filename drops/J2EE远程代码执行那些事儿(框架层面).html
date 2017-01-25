@@ -3,7 +3,7 @@
 			<head>
 			     <title>J2EE远程代码执行那些事儿(框架层面) - Nebula</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/914">http://drops.wooyun.org/papers/914</a></h1>
 				
@@ -32,7 +32,7 @@ Ognl.getValue("@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-
 ...  
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201402/2014021112460957891.png" alt="2014021112460957891.png"></p>
+<p><img src="../images_result/images/2014021112460957891.png" alt="2014021112460957891.png"></p>
 
 <p>set方式，new一个对象调用方法执行命令： </p>
 
@@ -57,7 +57,7 @@ org.springframework.expression.Expression exp=parser.parseExpression("T(java.lan
 ...   
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201402/2014021112491712314.png" alt="2014021112491712314.png"></p>
+<p><img src="../images_result/images/2014021112491712314.png" alt="2014021112491712314.png"></p>
 
 <h3>2.new一个对象调用方法执行命令: </h3>
 
@@ -66,7 +66,7 @@ org.springframework.expression.Expression exp=parser.parseExpression("new java.l
 ... 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201402/2014021112505361561.png" alt="2014021112505361561.png"></p>
+<p><img src="../images_result/images/2014021112505361561.png" alt="2014021112505361561.png"></p>
 
 <p>但spring在安全方面应该不会像struts2一样这么不负责任（不过，现在稍微好点了！），它有没有类似的安全漏洞，有兴趣的可以去找找 ^-^ </p>
 
@@ -83,7 +83,7 @@ el: &lt;spring:message text="${param.el}"&gt;&lt;/spring:message&gt;
 
 <p>之前是个信息泄露漏洞（路径及jar等信息）： </p>
 
-<p><img src="http://static.wooyun.org/201402/2014021112525255051.png" alt="2014021112525255051.png"></p>
+<p><img src="../images_result/images/2014021112525255051.png" alt="2014021112525255051.png"></p>
 
 <p>前段时间老外弄出了远程命令执行,部分exp（网上都有，有兴趣自己找试一下。能否执行代码和web容器有很大关系，最好选老外一样的Glassfish或者resin某些版本用反射技巧实现执行代码）:</p>
 
@@ -129,7 +129,7 @@ m.invoke(对象);
 
 <p>cve-2010-1622 这是我最喜欢的一个漏洞利用技巧：</p>
 
-<p><img src="http://static.wooyun.org/201402/2014021112554878852.png" alt="2014021112554878852.png"></p>
+<p><img src="../images_result/images/2014021112554878852.png" alt="2014021112554878852.png"></p>
 
 <p>这个利用有点绕，其实如果看得懂Java其实也很简单！（大家常说，<strong>喜欢熬夜的coder不是好员工</strong>，睡觉了！） </p>
 

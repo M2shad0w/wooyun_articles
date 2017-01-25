@@ -3,7 +3,7 @@
 			<head>
 			     <title>异或加密之美 #主流web弱算法科普文 - 小飞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/2609">http://drops.wooyun.org/papers/2609</a></h1>
 				
@@ -28,7 +28,7 @@ E^A=K
 <p>有了A和E(加密前后的字符串)就等获得k，一旦我们知道了key 就能本地构造那个字符串（evilcode）进行攻击！<br>
 今天 我们研究DedeCMS(buy_action.php)</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071622331932510.png" alt="2014071622331932510.png"></p>
+<p><img src="../images_result/images/2014071622331932510.png" alt="2014071622331932510.png"></p>
 
 <p>这是个简单的异或算法</p>
 
@@ -108,7 +108,7 @@ string |  i  a  m  a  s
 
 <p>通过变量覆盖进行GLOBALS[cfg_dbprefix]覆盖注入</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071622373460573.png" alt="2014071622373460573.png"></p>
+<p><img src="../images_result/images/2014071622373460573.png" alt="2014071622373460573.png"></p>
 
 <p>接下来看图看代码<br>
 我们先看看$string(代码中的$pr_encode)是如何获取的</p>
@@ -130,7 +130,7 @@ string |  i  a  m  a  s
 
 <p>知道了获取办法 让我们控制它吧</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071622394580644.png" alt="2014071622394580644.png"></p>
+<p><img src="../images_result/images/2014071622394580644.png" alt="2014071622394580644.png"></p>
 
 <p>此处的</p>
 
@@ -141,7 +141,7 @@ string |  i  a  m  a  s
 
 <p>所以加密得到的$code（也就是$pd_encode） 包含了post和cookies全部内容  如图</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071622402082199.png" alt="2014071622402082199.png"></p>
+<p><img src="../images_result/images/2014071622402082199.png" alt="2014071622402082199.png"></p>
 
 <p>也就是符合</p>
 
@@ -150,11 +150,11 @@ string |  i  a  m  a  s
 
 <p>所以我们直接取post的巧合18位，进行破解，后面的其实不用管，要不然得到的key由于case one的不同重复，就是真正key的一遍遍重复。</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071622413034353.png" alt="2014071622413034353.png"></p>
+<p><img src="../images_result/images/2014071622413034353.png" alt="2014071622413034353.png"></p>
 
 <p>这样我们就得到了MD5形式的key 不过是18位 去掉最后两位开始跑吧</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071622422219738.png" alt="2014071622422219738.png"></p>
+<p><img src="../images_result/images/2014071622422219738.png" alt="2014071622422219738.png"></p>
 
 <p>后来的故事就是变量覆盖 不在本文的讨论之类</p>
 
@@ -173,7 +173,7 @@ string |  i  a  m  a  s
 
 <p>那么怎么样的异或才是安全简便的？ 我们看看齐博cms的这个吧</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071622454411580.jpg" alt="2014071622454411580.jpg"></p>
+<p><img src="../images_result/images/2014071622454411580.jpg" alt="2014071622454411580.jpg"></p>
 
 <p>优点有两个<br>
 一， 绝密字串有三部分 两部分可控</p>

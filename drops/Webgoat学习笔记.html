@@ -3,7 +3,7 @@
 			<head>
 			     <title>Webgoat学习笔记 - Alan.Li</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/13594">http://drops.wooyun.org/web/13594</a></h1>
 				
@@ -133,7 +133,7 @@ sh webgoat_developer_bootstrap.sh
 
 <p>由于WebGoat不同的版本课程都不一样,所以说网上的资料也不全,我用的是7.1.0版本,先来上个图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110013068445816.jpg" alt="Figure01"></p>
+<p><img src="../images_result/images/201603110013068445816.jpg" alt="Figure01"></p>
 
 <p>而且<strong>!!!最坑的是!!!</strong>有些题根本他娘的没答案,或者答案是错的,开发版的题也不知道怎么做!</p>
 
@@ -159,7 +159,7 @@ sh webgoat_developer_bootstrap.sh
 
 <p>这一节是让你利用拦截工具,改变参数,访问到原本不能访问的路径,在BurpSuite的Intercept里抓到这个请求</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/2016031100130829351215.png" alt="Figure02"></p>
+<p><img src="../images_result/images/2016031100130829351215.png" alt="Figure02"></p>
 
 <p>然后根据Hints提醒使用shell脚本里切换到上一级目录的指令".."修改File的值"CSRF.html"构造出另外一个指令</p>
 
@@ -350,7 +350,7 @@ Content-Length: 169
 
 <p><font color="red">这个坑了我好久啊,对前端不熟悉怎么都找不到.js文件</font></p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/2016031100131177347315.png" alt="Figure03"></p>
+<p><img src="../images_result/images/2016031100131177347315.png" alt="Figure03"></p>
 
 <p>Solution里给的答案第一步就是让你定位"clientSideValidation.js",<strong>定位不到怎么办!!!!</strong></p>
 
@@ -507,13 +507,13 @@ http://zhuojiademacbook-pro.local:8080/WebGoat/attack?Screen=272&amp;menu=400
 <li>基础字符串是A,选择最短位数4096最长位数10240,步长50</li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110013138070245.png" alt="Figure01"></p>
+<p><img src="../images_result/images/201603110013138070245.png" alt="Figure01"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110013158449354.png" alt="Figure02"></p>
+<p><img src="../images_result/images/201603110013158449354.png" alt="Figure02"></p>
 
 <p>这个Character Blocks是什么意思呢?就是代表用4096位的A开始然后50位50位的依次加长长度,直到达到10240位,然后点击Start Attack,查看大于4096位之后的结果,就可以看到模拟出的内存泄漏信息</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110013171471664.png" alt="Figure03"></p>
+<p><img src="../images_result/images/201603110013171471664.png" alt="Figure03"></p>
 
 <h2>Code Quality-Discover Clues in the HTML</h2>
 
@@ -835,7 +835,7 @@ CREATE TRIGGER myBackDoor BEFORE INSERT ON employee FOR EACH ROW BEGIN UPDATE em
 
 <p>那么一共就是520次可能性,Intruder的设置如下</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110013192191474.png" alt="Figure01"> <img src="http://static.wooyun.org//drops/20160311/201603110013219017084.png" alt="Figure02"> <img src="http://static.wooyun.org//drops/20160311/201603110013232717694.png" alt="Figure03"></p>
+<p><img src="../images_result/images/201603110013192191474.png" alt="Figure01"> <img src="../images_result/images/201603110013219017084.png" alt="Figure02"> <img src="../images_result/images/201603110013232717694.png" alt="Figure03"></p>
 
 <p>可以看到报文有两种结果1333 1334,其中第一个爆破点为10的都是1334,而有一些不是,查看返回报文发现有两种</p>
 
@@ -844,11 +844,11 @@ Invalid account number
 Account number is valid
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160311/2016031100132588957104.png" alt="Figure04"> <img src="http://static.wooyun.org//drops/20160311/2016031100132748399117.png" alt="Figure04"></p>
+<p><img src="../images_result/images/2016031100132588957104.png" alt="Figure04"> <img src="../images_result/images/2016031100132748399117.png" alt="Figure04"></p>
 
 <p>爆破点1=10返回报文为1334是因为10比1-9多一位,那么对正确的报文进行搜索Fliter,得到结果</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/2016031100132899836124.png" alt="Figure04"></p>
+<p><img src="../images_result/images/2016031100132899836124.png" alt="Figure04"></p>
 
 <p>用户名爆破成功</p>
 
@@ -993,13 +993,13 @@ password' OR '1'='1
 
 <p>发现不行,然后分析HTTP报文</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/2016031100133026929134.png" alt="Figure01"></p>
+<p><img src="../images_result/images/2016031100133026929134.png" alt="Figure01"></p>
 
 <p>发现输入可能可以注入的点有Username/Password/Submit/user/user(Cookie)这几个,用户名一般不能进行注入,密码又试验过了,还剩下user和user(Cookie)</p>
 
 <p>发现Cookie中的User是个编码,先去看看是什么,通过尝试,发现Base64编解码发现Cookie中会存user参数</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/2016031100133288760143.png" alt="Figure02"></p>
+<p><img src="../images_result/images/2016031100133288760143.png" alt="Figure02"></p>
 
 <p>对两个都进行注入试试,先是user,然后把注入代码编码成Base64再放入user(Cookie)</p>
 
@@ -1079,7 +1079,7 @@ tcp; pwd; ls; find . -iname "webgoat_challenge_guest.jsp";
 
 <p>通过命名行注入,我们可以得到webgoat&#95;challenge&#95;guest.jsp文件的地址</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/2016031100133450879153.png" alt="Figure03"></p>
+<p><img src="../images_result/images/2016031100133450879153.png" alt="Figure03"></p>
 
 <p>然后可以使用另外一段自定义的HTML文本代替webgoat&#95;challenge&#95;guest.jsp,原理是利用了命令行注入的</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>HttpOnly 隐私嗅探器 - EtherDream</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2834">http://drops.wooyun.org/tips/2834</a></h1>
 				
@@ -40,7 +40,7 @@ chrome.cookies.getAll({domain: 'baidu.com'}, function(cookies) {
 });
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811062660436.png" alt="chrome_cookie.png"></p>
+<p><img src="../images_result/images/2014091811062660436.png" alt="chrome_cookie.png"></p>
 
 <p>稍加过滤即可获得 HttpOnly 的数据。</p>
 
@@ -83,19 +83,19 @@ chrome.extension.onRequest.addListener(function(message, sender, sendResponse) {
 
 <p>先试试百度首页上的几个产品。不到 10 秒钟，就逮到了一个：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811062759274.png" alt="demo.png"></p>
+<p><img src="../images_result/images/2014091811062759274.png" alt="demo.png"></p>
 
 <p>打开源文件一搜，果然看见了传说中带 HttpOnly 的 BDUSS：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811062825467.png" alt="demo_src_1.png"></p>
+<p><img src="../images_result/images/2014091811062825467.png" alt="demo_src_1.png"></p>
 
 <p>赶紧测试其他页面。开始的几分钟时间里，不断发现新的泄漏点：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811062910471.png" alt="demo_src_2.png"></p>
+<p><img src="../images_result/images/2014091811062910471.png" alt="demo_src_2.png"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811063099028.png" alt="demo_src_3.png"></p>
+<p><img src="../images_result/images/2014091811063099028.png" alt="demo_src_3.png"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811063020252.png" alt="demo_src_4.png"></p>
+<p><img src="../images_result/images/2014091811063020252.png" alt="demo_src_4.png"></p>
 
 <p>。。。</p>
 
@@ -164,13 +164,13 @@ function scanAddress() {
 
 <p>我们再来测试下，很快就发现刚才遗漏的一例：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811063151500.png" alt="demo_src_5.png"></p>
+<p><img src="../images_result/images/2014091811063151500.png" alt="demo_src_5.png"></p>
 
 <p>对于其他网站，同样也存在这类问题：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811063161754.png" alt="demo2.png"></p>
+<p><img src="../images_result/images/2014091811063161754.png" alt="demo2.png"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811063236043.png" alt="demo2_src.png"></p>
+<p><img src="../images_result/images/2014091811063236043.png" alt="demo2_src.png"></p>
 
 <p>多的不计其数。。。</p>
 

@@ -3,7 +3,7 @@
 			<head>
 			     <title>STRUTS2的getClassLoader漏洞利用 - 阿里巴巴安全中心</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1151">http://drops.wooyun.org/papers/1151</a></h1>
 				
@@ -52,7 +52,7 @@ getClass().getClassLoader()
 
 <p>Ognl的Context树形结构：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405592341609.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071405592341609.png" alt="enter image description here"></p>
 
 <p>servletContext被转换成Map，变成了图中的application子项，这个位址很尴尬，如果是上一层Node，从上到下找到value Stack，确实有实现这个思路的可能，但现在看来，这条路断了，它不支持找到父节点。经过多次找寻后，确认Ognl出局，只能从web容器本身入手。</p>
 
@@ -62,7 +62,7 @@ getClass().getClassLoader()
 this.getClass().getClassLoader();
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405592355292.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071405592355292.png" alt="enter image description here"></p>
 
 <p>任何一个Action的classLoader都是org.apache.catalina.loader.WebappClassLoader，这是漏洞的源头。</p>
 
@@ -111,7 +111,7 @@ public final User user;
 
 <p>在tomcat的环境下，classLoader会挂载一个resources，类名叫做“StandardRoot”，这个恐怖的东西，和tomcat的资源文件管理有关，debug看到的第一个属性就是非常危险的属性“allowLinking”。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071413462042314.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071413462042314.png" alt="enter image description here"></p>
 
 <p>这个事情，要从很久很久以前，struts修补的一个任意文件读取漏洞说起。</p>
 
@@ -136,7 +136,7 @@ getClassLoader().getResource(Path)
 
 <p>当时修补代码为：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071413462066410.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071413462066410.png" alt="enter image description here"></p>
 
 <p>用户提交<code>struts/../</code>时，<code>pathEnding="struts/../"</code>。</p>
 
@@ -163,7 +163,7 @@ getClassLoader().getResource(Path)
 
 <p>然后按照以前的攻击方法：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071413462053954.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071413462053954.png" alt="enter image description here"></p>
 
 <p>就可以轻易读取任意文件，拿到数据库密码等等。</p>
 
@@ -177,15 +177,15 @@ getClassLoader().getResource(Path)
 
 <p>成因非常的“正常”，因为这个context属性代表了tomcat的<code>/conf/context.xml</code>文件的配置，我现在把path给你改了，那么struts去处理result时，会用路径拼接读取文件，现在目录名被改掉了，自然就读不到文件了，可惜这里不能00截断，否则又是一个任意文件读取漏洞。 下面是被干掉的网站，访问任何一个action，都会有如下效果：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071413462149263.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071413462149263.png" alt="enter image description here"></p>
 
 <p>看看debug的情况：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071413462116721.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071413462116721.png" alt="enter image description here"></p>
 
 <p>当前action叫做T1，会找到T1.jsp，但是现在目录名已经被修改了，所以报错。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071413462179078.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071413462179078.png" alt="enter image description here"></p>
 
 <p>这个问题可以影响tomcat8所有版本下运行的struts2，对了，你们得自己设计EXP哈，不要乱入。</p>
 
@@ -209,11 +209,11 @@ org.eclipse.jetty.webapp.WebAppClassLoader
 
 <p>jetty的漏洞，没有tomcat那么含蓄，非常直接的，context就挂载在classLoader上。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405592440113.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071405592440113.png" alt="enter image description here"></p>
 
 <p>jetty在运行过程中，会去实时查看ContextHandler中的shutdown属性（webappcontext通过几层继承关系，继承了这个类，其实亲戚关系有八丈远），一旦发现true，直接就不工作了，这是典型的，使用一个状态判断业务是否同行。基于这个原理，只要如下访问，以后这个应用，就只剩下404了。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405592479238.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071405592479238.png" alt="enter image description here"></p>
 
 <p>无论是什么action，都只会返回这个错误，后续的执行，jetty都以为真的shutdown了。并且这个过程没有任何补救措施，只能管理员手工重启了，各位SA亲们，你们准备好了么？</p>
 
@@ -225,17 +225,17 @@ org.eclipse.jetty.webapp.WebAppClassLoader
 
 <p>我们看看jetty对于自定义错误文件的配置过程：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071413462239937.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071413462239937.png" alt="enter image description here"></p>
 
 <p>这段配置文件，可以自定义404错误文件，这里可以指定<code>/WEB-INF/</code>目录下的文件，一旦配置之后，由ErrorPageErrorHandler负责给errorPages（这也是个map）添加一个对应关系。这个类最终会被挂在到context中，那么依照这个漏洞的原理，我们可以层层调用，最终制定一种错误，比如404错误。</p>
 
 <p>Jetty把errorHandler挂载到context上，errorHander有个errorPages属性，这其实是个map，代表错误页面，key是一个返回码数字，value就是错误后显示的文件。 所以打开：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405592550836.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071405592550836.png" alt="enter image description here"></p>
 
 <p>访问图片中这条URL后，效果如下，任何一个不存在的页面都会显示web.xml的内容：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405592553573.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071405592553573.png" alt="enter image description here"></p>
 
 <p>有了这个问题，就可以读取数据库文件，查看数据库密码，读取代码文件，查找隐藏的业务逻辑漏洞。注意，是任何人遇到404都可以看到这个页面，最好等夜深人静的时候再使用，用完了还得恢复原样。</p>
 

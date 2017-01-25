@@ -3,7 +3,7 @@
 			<head>
 			     <title>Android UXSS阶段性小结及自动化测试  - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/3186">http://drops.wooyun.org/tools/3186</a></h1>
 				
@@ -38,11 +38,11 @@
 
 <p>的确漏洞产生的原因是因为kitkat（android 4.4）之前webview组件使用webview内核而遗留的漏洞。使用最新的android系统当然安全性要更高而且运行更流畅，但是有多少人能升级或者使用到相对安全的android版本了。下图来自谷歌官方2014.09.09的统计数据。</p>
 
-<p><img src="http://static.wooyun.org/20141014/2014101410520562663.jpg" alt=""></p>
+<p><img src="../images_result/images/2014101410520562663.jpg" alt=""></p>
 
 <p>看起来情况不是太糟糕，有24.5%的android用户是处于相对安全的版本下。但是官方数据的是来google play明显和大陆水土不服。国内就只能使用相对靠谱的本土第三方统计了。下图是umeng八月的统计情况</p>
 
-<p><img src="http://static.wooyun.org/20141014/2014101410520540461.jpg" alt=""></p>
+<p><img src="../images_result/images/2014101410520540461.jpg" alt=""></p>
 
 <p>能使用到相对安全的android系统的用户不到8%，那么问题来了~我要换一个什么的样的手机了。忘记我是个屌丝了，破手机无法升级到kitkat也没钱换手机。那就只能选择使用相对安全的应用来尽量避免我受到攻击。于是我们收集了一些命中率较高的POC来验证到底哪些app更靠谱一些。</p>
 
@@ -66,11 +66,11 @@
 
 <p>下图为360浏览器在android 4.2.2下的测试结果</p>
 
-<p><img src="http://static.wooyun.org/20141014/2014101410520682359.jpg" alt=""></p>
+<p><img src="../images_result/images/2014101410520682359.jpg" alt=""></p>
 
 <p>下图为搜狗浏览器在android 4.4.3下的测试结果</p>
 
-<p><img src="http://static.wooyun.org/20141014/2014101410520676975.jpg" alt=""></p>
+<p><img src="../images_result/images/2014101410520676975.jpg" alt=""></p>
 
 <p>测试代码将放入github供大家参考，欢迎大神来修改</p>
 
@@ -82,7 +82,7 @@
 
 <p>我们对主流手机浏览器进行了横向对比，测试对象包括：UC浏览器、搜狗浏览器、百度浏览器、360安全浏览器、欧鹏浏览器、遨游云浏览器、猎豹浏览器。测试结果见下图。</p>
 
-<p><img src="http://static.wooyun.org/20141014/2014101410520629277.jpg" alt=""></p>
+<p><img src="../images_result/images/2014101410520629277.jpg" alt=""></p>
 
 <h2>0x04 建议</h2>
 
@@ -186,9 +186,9 @@ function main(){
 main();
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141020/2014102009073756984.png" alt=""></p>
+<p><img src="../images_result/images/2014102009073756984.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102009073782598.jpg" alt=""></p>
+<p><img src="../images_result/images/2014102009073782598.jpg" alt=""></p>
 
 <p>2、窃取本地文件</p>
 
@@ -216,7 +216,7 @@ function exploit2(){
 
 <p>服务端接收到android的default.prop文件内容。也可以窃取相应app私有目录/data/data/packagename/下文件</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102009073710226.png" alt=""></p>
+<p><img src="../images_result/images/2014102009073710226.png" alt=""></p>
 
 <h2>0x06 参考</h2>
 

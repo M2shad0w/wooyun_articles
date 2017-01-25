@@ -3,7 +3,7 @@
 			<head>
 			     <title>GSM HACK的另一种方法:RTL-SDR - light</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4716">http://drops.wooyun.org/papers/4716</a></h1>
 				
@@ -26,7 +26,7 @@
 
 <p>以上文字有所演绎，真实历史请参见：http://rtlsdr.org/#history&#95;and&#95;discovery&#95;of&#95;rtlsdr</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123135081101image001.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012123135081101image001.jpg" alt="enter image description here"></p>
 
 <p>该电视棒PBC板裸照</p>
 
@@ -36,7 +36,7 @@
 
 <p>作为高富帅代表的light教授，当然没有选用这些资本主义土豪的玩意儿，而是打开x宝，淘了一款华强北山寨的硬件。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123144217736image0032.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012123144217736image0032.png" alt="enter image description here"></p>
 
 <p>Gnuradio（硬件要用作sdr用途，就得装他，可以简单理解为驱动）</p>
 
@@ -50,7 +50,7 @@
 
 <p>sources.list(/etc/apt/sources.list)文件里有这两条：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123154536120image0052.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012123154536120image0052.png" alt="enter image description here"></p>
 
 <h1>0x01 安装GNU Radio</h1>
 
@@ -110,7 +110,7 @@ sudo apt-get install git-core autoconf automake libtool g++ python-dev swig libp
 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0f636668677b4f646e6366">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm# git clone git://git.osmocom.org/libosmocore.git
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123190270400image0073.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012123190270400image0073.png" alt="enter image description here"></p>
 
 <p>接着： <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="264a4f414e52664d474a4f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm/libosmocore# autoreconf -i <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4e222729263a0e252f2227">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm/libosmocore# ./configure <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3854515f504c7853595451">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm/libosmocore# make <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="bcd0d5dbd4c8fcd7ddd0d5">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/gsm/libosmocore# sudo make install</p>
 
@@ -176,7 +176,7 @@ Where options are:
 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6804010f001c2803090401">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# kal -s 900
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123223431278image0092.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012123223431278image0092.png" alt="enter image description here"></p>
 
 <p>搜到两个基站，上面一个信号比较强，频率为946Mhz，我们选用这个基站，并 继续使用kalibrate帮助我们校准电视棒的偏频，使用 -c 参数加我们基站的频道号（channel）来计算出这个误差值：</p>
 
@@ -184,15 +184,15 @@ Where options are:
 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2f434648475b6f444e4346">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# kal -c 55
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123231565666image0112.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012123231565666image0112.png" alt="enter image description here"></p>
 
 <p>得到的结果，average为偏频的平均值，单位kHz，+表示我们的电视棒高出这么多，所以在测试时要用频率值减去这个值。下面的ppm值是另一种偏频单位，反而更常用，但是我们用来接收先好的软件不支持这个值的改动，所以先不做深究。</p>
 
 <p>接下来打开wireshark，注意要选择回环网卡，并在启动后选择gsmtap过滤器：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123235841278image0133.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012123235841278image0133.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123244634666image0152.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012123244634666image0152.png" alt="enter image description here"></p>
 
 <p>接着把wireshark放在一边，使用airprobe的gsm&#95;receive&#95;rtl 模块来接收GSM信号：</p>
 
@@ -223,27 +223,27 @@ Where options are:
 
 <p>理论上，你用频率值减去偏频值得到的数字，放gsm&#95;receive&#95;rtl 的-f参数中，或者直接输入频率值，在打开的波形图中鼠标点击波峰偏左一点的位置，就可以接收到信号。但现实往往是残酷的，你会发现经常打开波形图都是下图这样的：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123260047439image0171.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012123260047439image0171.png" alt="enter image description here"></p>
 
 <p>波峰距离原点十万八千里有木有！这种情况下，不管你怎么点，点哪里，在wireshark里都看不到任何东西。</p>
 
 <p>这时候需要我们小幅修改频率值，将波峰尽量微调值处在原点附近。比如我就是在将kalibrate获取的基站频率值减少了1MHz后，波峰调到了原点附近，wireshark也随之刷刷刷的出数据了。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123263160307image0191.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012123263160307image0191.png" alt="enter image description here"></p>
 
 <p>有了数据，接下来大家就自由发挥吧。点到为止。</p>
 
 <p>Kali还自带了一个好玩的东西，叫gqrx，一款基于GNU Radio和Qt的sdr工具。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123273874009image0211.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012123273874009image0211.png" alt="enter image description here"></p>
 
 <p>我们可以用它来收听广播：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123291766771image0231.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012123291766771image0231.png" alt="enter image description here"></p>
 
 <p>或者收听GSM信号传输的声音</p>
 
-<p><img src="http://static.wooyun.org/drops/20150121/2015012123294435943image025.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015012123294435943image025.png" alt="enter image description here"></p>
 
 <p>PS：听到我耳朵都快怀孕了也只是沙沙声和蜂鸣声，难道有干扰信号？说好的不加密呢 ToT</p>
 

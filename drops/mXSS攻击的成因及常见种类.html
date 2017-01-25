@@ -3,7 +3,7 @@
 			<head>
 			     <title>mXSS攻击的成因及常见种类 - gainover</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/956">http://drops.wooyun.org/tips/956</a></h1>
 				
@@ -22,11 +22,11 @@
 
 <p>不论是服务器端或客户端的XSS过滤器，都认定过滤后的HTML源代码应该与浏览器所渲染后的HTML代码保持一致，至少不会出现很大的出入（图1）。然而，如果用户所提供的富文本内容通过javascript代码进入innerHTML属性后，一些意外的变化会使得这个认定不再成立：一串看似没有任何危害的HTML代码，将逃过XSS过滤器的检测，最终进入某个DOM节点的innerHTML中，浏览器的渲染引擎会将本来没有任何危害的HTML代码渲染成具有潜在危险的XSS攻击代码。随后，该段攻击代码，可能会被JS代码中的其它一些流程输出到DOM中或是其它方式被再次渲染，从而导致XSS的执行。 这种由于HTML内容进入innerHTML后发生意外变化（mutation，突变，来自遗传学的一个单词，大家都知道的基因突变，gene mutation），而最终导致XSS的攻击流程，被称为突变XSS（mXSS, Mutation-based Cross-Site-Scripting），整个流程的示意图见图2。从流程中不难看出，突变发生在XSS过滤流程之后，因此不论是服务器端还是客户端的XSS过滤器对这类攻击并不能进行有效的防御。</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022300123470806.png" alt="2014022300123470806.png"></p>
+<p><img src="../images_result/images/2014022300123470806.png" alt="2014022300123470806.png"></p>
 
 <p>图1. XSS过滤所假设的前提</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022300151189780.png" alt="2014022300151189780.png"></p>
+<p><img src="../images_result/images/2014022300151189780.png" alt="2014022300151189780.png"></p>
 
 <p>图2. mXSS攻击流程</p>
 

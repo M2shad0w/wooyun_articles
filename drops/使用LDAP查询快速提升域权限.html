@@ -3,7 +3,7 @@
 			<head>
 			     <title>使用LDAP查询快速提升域权限 - DM_</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/pentesting/2125">http://drops.wooyun.org/pentesting/2125</a></h1>
 				
@@ -61,7 +61,7 @@ MSSQLSvc/Server2.acme.com:1433
 <pre><code>Import-Module .Get-SPN.psm1
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404080628141.png" alt=""></p>
+<p><img src="../images_result/images/2014071404080628141.png" alt=""></p>
 
 <p>安装后，下面是在我的测试环境下的几个示例，来帮助你理解使用，更多的示例你可以通过使用help来发现。</p>
 
@@ -73,14 +73,14 @@ MSSQLSvc/Server2.acme.com:1433
 <pre><code>Get-SPN -type group -search "Domain Admins" -List yes | Format-Table –Autosize
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404314283501.png" alt=""></p>
+<p><img src="../images_result/images/2014071404314283501.png" alt=""></p>
 
 <p>这一命令也可以使用-list参数以获取更多详细的输出，比如:</p>
 
 <pre><code>Get-SPN -type group -search "Domain Admins"
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404080782834.png" alt=""></p>
+<p><img src="../images_result/images/2014071404080782834.png" alt=""></p>
 
 <p>如果你在一个非域系统上以域凭证执行那么可以使用下面的命令，“DomainController”和 “Credential”选项也可以用来在Get-SPN中查询.</p>
 
@@ -92,7 +92,7 @@ MSSQLSvc/Server2.acme.com:1433
 <pre><code>Get-SPN  -type service -search "MSSQLSvc*" -List yes | Format-Table –Autosize
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404314263423.png" alt=""></p>
+<p><img src="../images_result/images/2014071404314263423.png" alt=""></p>
 
 <p>针对那些对除SQL server以外的服务感兴趣的人，下面列出一些SPN服务名称.</p>
 
@@ -105,7 +105,7 @@ MSSQLSvc/Server2.acme.com:1433
 <pre><code>Get-SPN  -type user -search "*svc*" -List yes
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071407555215440.png" alt=""></p>
+<p><img src="../images_result/images/2014071407555215440.png" alt=""></p>
 
 <h2>0x04 小结</h2>
 

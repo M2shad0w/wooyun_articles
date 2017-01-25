@@ -3,7 +3,7 @@
 			<head>
 			     <title>解密MSSQL链接数据库的密码 - wefgod</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1067">http://drops.wooyun.org/tips/1067</a></h1>
 				
@@ -36,7 +36,7 @@
 
 <p>MSSQL将链接服务器的信息（包含加密的密码）保存在master.sys.syslnklgns表中。我们重点关注的加密密码是保存在字段“pwdhash”中的（虽然写着hash但是他不是一个普通的hash），下图是一个例子：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014031313584244331.jpg" alt="2014031313584244331.jpg"></p>
+<p><img src="../images_result/images/2014031313584244331.jpg" alt="2014031313584244331.jpg"></p>
 
 <p>master.sys.syslnklgns表在正常的数据库连接情况下是无法访问的，必须在专用管理员连接（DAC）下才可以访问（更多关于DAC的信息请查看<a href="http://technet.microsoft.com/en-us/library/ms178068%28v=sql.105%29.aspx">http://technet.microsoft.com/en-us/library/ms178068%28v=sql.105%29.aspx</a>）。打开专用管理员连接有两个条件：一是需要有mssql的Sysadmin权限，二是本地服务器的管理员权限。</p>
 
@@ -50,11 +50,11 @@
 
 <p>服务主密钥是首次需要它来加密其他密钥时自动生成的”可知SMK保存在master.sys.key&#95;encryptions表中，而他的key&#95;id对应的值是102。SMK是使用DPAPI来加密的，而这里他有两个可用的版本，第一种是使用的LocalMachine加密，另一种是CurrentUser的相关上下文（意思是SQL Server服务运行的账户）。这里我们挑使用LocalMachine的Machinekey来单独加密的、解密时不依赖于SQL Server账户的格式来讨论。下面是一个例子：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014031313592481620.jpg" alt="2014031313592481620.jpg"></p>
+<p><img src="../images_result/images/2014031313592481620.jpg" alt="2014031313592481620.jpg"></p>
 
 <p>为了增强加密的强度，算法中会加入熵（密码学用语，可自行查阅），不过算法中使用到的熵字节我们可以从注册表<code>HKLM:\SOFTWARE\Microsoft\Microsoft SQL Server\[instancename]\Security\Entropy</code>中找到。再次提醒，访问此表项需要本地系统的管理员权限。下图是熵的一个例子：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014031313595995821.jpg" alt="2014031313595995821.jpg"></p>
+<p><img src="../images_result/images/2014031313595995821.jpg" alt="2014031313595995821.jpg"></p>
 
 <p>搞定上面这些之后（同时必须去除填充字节等）我们就可以使用DPAPI来解密SMK了。</p>
 
@@ -87,7 +87,7 @@
 9. 若程序运行成功则会回显相关的密码信息，比如下图就是一个例子：
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201403/2014031314002642166.jpg" alt="2014031314002642166.jpg"></p>
+<p><img src="../images_result/images/2014031314002642166.jpg" alt="2014031314002642166.jpg"></p>
 
 <h2>0x06 译者自测</h2>
 
@@ -107,19 +107,19 @@
 
 <p>1.pwdhash</p>
 
-<p><img src="http://static.wooyun.org/201403/2014031314004519325.png" alt="2014031314004519325.png"></p>
+<p><img src="../images_result/images/2014031314004519325.png" alt="2014031314004519325.png"></p>
 
 <p>2.读取加密的SMK</p>
 
-<p><img src="http://static.wooyun.org/201403/2014031314010729749.png" alt="2014031314010729749.png"></p>
+<p><img src="../images_result/images/2014031314010729749.png" alt="2014031314010729749.png"></p>
 
 <p>3.查看注册表key</p>
 
-<p><img src="http://static.wooyun.org/201403/2014031314012465783.png" alt="2014031314012465783.png"></p>
+<p><img src="../images_result/images/2014031314012465783.png" alt="2014031314012465783.png"></p>
 
 <p>但是在运行脚本的时候（注意要2.0以上）还是报错了：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014031314014787183.png" alt="2014031314014787183.png"></p>
+<p><img src="../images_result/images/2014031314014787183.png" alt="2014031314014787183.png"></p>
 
 <p>已经测试过两个参数都非空，而且应该是正确的。</p>
 

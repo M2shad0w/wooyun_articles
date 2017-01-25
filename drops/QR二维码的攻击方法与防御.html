@@ -3,7 +3,7 @@
 			<head>
 			     <title>QR二维码的攻击方法与防御 - Blackeagle</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/160">http://drops.wooyun.org/tips/160</a></h1>
 				
@@ -22,19 +22,19 @@
 
 <p>每个QR码由寻景图案、校准图案、定位图案等功能图案和编码区域构成，其中功能图形不用于数据编码。图1为QR码符号的结构，图2为笔者个人的QR二维码结构图。</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803365916210.jpg" alt="20130703132414_43978.jpg"></p>
+<p><img src="../images_result/images/2013101803365916210.jpg" alt="20130703132414_43978.jpg"></p>
 
 <p>图1</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803365998923.png" alt="20130703132440_39635.png"> </p>
+<p><img src="../images_result/images/2013101803365998923.png" alt="20130703132440_39635.png"> </p>
 
 <p>图2</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370116669.jpg" alt="20130703132459_21637.jpg"> </p>
+<p><img src="../images_result/images/2013101803370116669.jpg" alt="20130703132459_21637.jpg"> </p>
 
 <p>图3：生成器生成页面</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370215178.png" alt="20130703132549_80684.png"> </p>
+<p><img src="../images_result/images/2013101803370215178.png" alt="20130703132549_80684.png"> </p>
 
 <p>图4：二维码扫描结果</p>
 
@@ -42,17 +42,17 @@
 
 <p>QR码符号共有40种规格，分别为版本1、版本2、…、版本40。版本1 的规格为21模块×21模块，版本2为25模块×25模块。以此类推，每一个版本符号比前一个版本每边增加4个模块，直到版本40，规格为177模块×177模块。以下图分别为版本1，2，6，7，14，21和40的符号结构。</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370217240.jpg" alt="20130703132707_96013.jpg"></p>
+<p><img src="../images_result/images/2013101803370217240.jpg" alt="20130703132707_96013.jpg"></p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370229931.jpg" alt="20130703132723_86012.jpg"> </p>
+<p><img src="../images_result/images/2013101803370229931.jpg" alt="20130703132723_86012.jpg"> </p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370384930.jpg" alt="20130703132748_18448.jpg">  </p>
+<p><img src="../images_result/images/2013101803370384930.jpg" alt="20130703132748_18448.jpg">  </p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370335313.jpg" alt="20130703133039_35118.jpg"> </p>
+<p><img src="../images_result/images/2013101803370335313.jpg" alt="20130703133039_35118.jpg"> </p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370329245.jpg" alt="20130703133059_58164.jpg"> </p>
+<p><img src="../images_result/images/2013101803370329245.jpg" alt="20130703133059_58164.jpg"> </p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370442395.jpg" alt="20130703133137_76190.jpg"> </p>
+<p><img src="../images_result/images/2013101803370442395.jpg" alt="20130703133137_76190.jpg"> </p>
 
 <p>download：快速响应矩阵码</p>
 
@@ -60,7 +60,7 @@
 
 <p>寻景图案（Finder Pattern）：寻景图案分别位于QR符号的左上角、右上角、左下角，如图5所示。每个寻景图案是由3个黑白相间的正方形图案嵌套组成。其用途是帮助QR编解码软件定位QR码，在寻景图案对齐之后，就可确认码的位置、尺寸和角度。</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370561156.jpg" alt="20130703133227_66056.jpg"> </p>
+<p><img src="../images_result/images/2013101803370561156.jpg" alt="20130703133227_66056.jpg"> </p>
 
 <p>图5：笔者QR二维码结构分析</p>
 
@@ -84,7 +84,7 @@
 步骤6：使用不同的掩模图形对编码区进行掩模处理（功能模块不进行掩模），评价掩模结果，选择评估结果最好的进行掩模。
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370526557.jpg" alt="20130703133449_12768.jpg"> </p>
+<p><img src="../images_result/images/2013101803370526557.jpg" alt="20130703133449_12768.jpg"> </p>
 
 <p>图6：QR码的编码过程</p>
 
@@ -131,21 +131,21 @@
 
 <p>某些信息只希望被特定的接收对象接收，而不是对所有人都可见。直接使用QR码会造成信息的泄漏，例如火车票上的二维码会泄漏身份信息。</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370530114.jpg" alt="20130703134005_21560.jpg"> </p>
+<p><img src="../images_result/images/2013101803370530114.jpg" alt="20130703134005_21560.jpg"> </p>
 
 <p>图7：网上找的一张火车票</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370638946.jpg" alt="20130703134038_48543.jpg"> </p>
+<p><img src="../images_result/images/2013101803370638946.jpg" alt="20130703134038_48543.jpg"> </p>
 
 <p>图8：我查查扫描QR二维码1</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370698076.jpg" alt="20130703134106_68453.jpg"> </p>
+<p><img src="../images_result/images/2013101803370698076.jpg" alt="20130703134106_68453.jpg"> </p>
 
 <p>图9：我查查扫描QR二维码2</p>
 
 <p>如图7、9所示，身份证号是2311211995&#42;*&#42;|&#42;0625，在我查查上直接可以查到身份证号为231121199503280625。以及票号和发车时间，最后通过网络查询个人信息（图10）：</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370799960.jpg" alt="20130703134235_93139.jpg"> </p>
+<p><img src="../images_result/images/2013101803370799960.jpg" alt="20130703134235_93139.jpg"> </p>
 
 <p>图10：从二维码得到的身份证信息</p>
 
@@ -159,7 +159,7 @@
 
 <p>目前在国内，将QR码应用在电子票务中已逐渐发展成趋势。例如，用户通过网上支付购买火车票，服务器根据用户提供信息发放QR码到用户手机。虽然目前提出了时间戳技术，保证票据一次性使用，但是并不能抵抗中间人攻击，具体流程见下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370730832.jpg" alt="20130703134453_72939.jpg"> </p>
+<p><img src="../images_result/images/2013101803370730832.jpg" alt="20130703134453_72939.jpg"> </p>
 
 <p>图11：用户和服务器认为的通信</p>
 
@@ -173,7 +173,7 @@
 
 <p>试想这样的应用环境，QR码解码器是链接到数据库中，并且QR码是用于执行查询后端数据库。在这种情形下，如果QR码包含了像“1”OR“1=1”等查询信息，读取器在没有核对此信息是否合法授权时便执行查询命令，导致信息泄漏给非法授权的攻击者。尽管QR码目前为止没有被用于数据库查询，但是如果此应用方式在未来被实现的话，针对这种情形的QR攻击就很可能存在。现在，谷歌公司正在进行利用QR码登录到谷歌账户的实验，用户通过扫描QR码导向一个谷歌账户登录页面。腾讯aq.qq.com里已经用到QR二维码扫描技术，即“安全扫一扫”功能。</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370775238.jpg" alt="20130703134716_91820.jpg"> </p>
+<p><img src="../images_result/images/2013101803370775238.jpg" alt="20130703134716_91820.jpg"> </p>
 
 <p>图12：QQ安全中心安全扫一扫</p>
 
@@ -195,7 +195,7 @@
 
 <p>针对QR码伪造的问题，可使用常用的加密方法和消息鉴别码的方法，在原有的二维码编码解码时加入加密和解密的环节。以非对称加密为例，假设原始信息为M0，发行方的私钥为Kr，公钥为KU，则M’=EKr(M)。将M’信息使用QR编码器编码，将生成后的二维码和公钥刊登在印刷品上，用户扫描QR码时输入公钥KU，若能解码得到正确可读的信息，则说明扫描的QR码来源可靠。非对称加密方式不仅能够抵抗上树应用场景的攻击，还能够抵抗大部分针对QR码信息的篡改行为。另一种简化方式是在QR码中加入加密后的hash值模块，解码时，解码器解密hash值并比对是否与原QR码信息匹配，如果7所示。而抵挡QR码的泄漏可采用对称加密的方法，加密后的QR码只有密钥持有人才能正常解码，特对对象可以正常使用QR码，比如火车票上的二维码。</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370874126.jpg" alt="20130703135108_60020.jpg"> </p>
+<p><img src="../images_result/images/2013101803370874126.jpg" alt="20130703135108_60020.jpg"> </p>
 
 <p>图13：加入hash值的解码流程图</p>
 
@@ -210,7 +210,7 @@
 （5）用户链接商家地址。 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20131018/2013101803370829988.jpg" alt="20130703135228_88214.jpg"> </p>
+<p><img src="../images_result/images/2013101803370829988.jpg" alt="20130703135228_88214.jpg"> </p>
 
 <p>图14：引入第三方统一管理商家网址</p>
 

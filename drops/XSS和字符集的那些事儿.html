@@ -3,7 +3,7 @@
 			<head>
 			     <title>XSS和字符集的那些事儿 - mramydnei</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1327">http://drops.wooyun.org/papers/1327</a></h1>
 				
@@ -65,7 +65,7 @@
 
 <p>不过遗憾是在,在现在已经没有这种基于 iframe 的跨域字符集继承的漏洞 可利用了。MK 在不久前也指正了某人在 Slide 中这种的错误。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712353913402.png" alt="NewImage" width="622" height="112" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101712353913402.png" alt="NewImage" width="622" height="112" border="0"></p>
 
 <p>简短的翻译一下,就是说:『如果在你的 Slide 中所说的通过 iframe 来设定字符集是指,继承 top frame 的字符集,那么现在已经不存在这种问题了。因为这种继承的大前提是必须同域。』</p>
 
@@ -128,7 +128,7 @@
 
 <p>然后,再用 Internet Explorer 打开它,那么最终你会看到小窗口弹起来了。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354023343.png" alt="NewImage" width="257" height="236" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101712354023343.png" alt="NewImage" width="257" height="236" border="0"></p>
 
 <h2>0x03 利用字符集来绕过 htmlspecialchars()函数</h2>
 
@@ -267,17 +267,17 @@ var q="&lt;?php echo str_replace("&lt;/","&lt;\/",addslashes($_GET["test"])); ?&
 
 <p>如果我们运用宽字节就可以突破这里的限制:</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354046804.png" alt="NewImage" width="832" height="452" border="0">￼￼</p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101712354046804.png" alt="NewImage" width="832" height="452" border="0">￼￼</p>
 
 <p>但这种问题,只会出现在 GBK 里面么?其实这样的字符集还有很多。下面就是一个 Shift&#95;JIS 的例子。将上面的代码中的字符集改成 shift&#95;JIS 后的测试结果如下:</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354029890.png" alt="NewImage" width="815" height="446" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101712354029890.png" alt="NewImage" width="815" height="446" border="0"></p>
 
 <p>有问题的字符集还远远不止这些。在这次东京举行的 OWASP 国际峰会上,日本人 Masato kinugawa 的议题“编码和安全的彻底调查”当中就提交到了很多这样 的问题。下面对这个议题的内容做一下简单的介绍。</p>
 
 <p>(1)各浏览器对字符集支持情况的调查</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354166846.png" alt="NewImage" width="860" height="496" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101712354166846.png" alt="NewImage" width="860" height="496" border="0"></p>
 
 <p>作者事先收集了将近 2500 个左右像字符集编码名称的文字,并通过测试,对结果进行了三种分类。分别为字符集名,别名和无法识别的字符。其中的调查方法细节可以参考下面的链接:</p>
 
@@ -291,17 +291,17 @@ var q="&lt;?php echo str_replace("&lt;/","&lt;\/",addslashes($_GET["test"])); ?&
 
 <p><a href="http://l0.cm/encodings/table/">http://l0.cm/encodings/table/</a></p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354186576.png" alt="NewImage" width="847" height="537" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101712354186576.png" alt="NewImage" width="847" height="537" border="0"></p>
 
 <p>由于内容比较多,这里只附上部分贴图(上图为 chrome 的支持情况): 下图为 IE 的支持情况:</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354176020.png" alt="NewImage" width="882" height="526" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101712354176020.png" alt="NewImage" width="882" height="526" border="0"></p>
 
 <p>就像前面所提及到的 MK 也认为其中最凶残的还是 UTF-7。因为一般的过滤方法根本无法拦截这种 XSS 攻击。而且悲催的是直到 IE11 微软还依然在支持着这个编码。不过好消息是微软正在探讨是否会在接下来的 IE12 当中移除对 UTF-7 的支持。</p>
 
 <p>在完成了对各个浏览器的编码支持情况的调查之后,MK 又对这些编码进行了各种各样的测试。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354294163.png" alt="NewImage" width="881" height="485" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101712354294163.png" alt="NewImage" width="881" height="485" border="0"></p>
 
 <p>将历史上出现过问题的部分作为参考,对字符集进行下面三种测试:</p>
 
@@ -312,18 +312,18 @@ var q="&lt;?php echo str_replace("&lt;/","&lt;\/",addslashes($_GET["test"])); ?&
 
 <p>TEST1 的部分测试结果:</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354322259.png" alt="NewImage" width="878" height="533" border="0">￼￼</p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101712354322259.png" alt="NewImage" width="878" height="533" border="0">￼￼</p>
 
 <p>注释:其中第一列位浏览器,第二列为字符集,第三列为测试的 byte,第四列为呈现的字符。</p>
 
 <p>TEST2 的部分测试结果:</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354357084.png" alt="NewImage" width="878" height="537" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101712354357084.png" alt="NewImage" width="878" height="537" border="0"></p>
 
 <p>注释:其中第一列位浏览器,第二列为字符集,第三列为具有破坏性的 byte,,第四列具体破 坏的 byte 数。<br>
 TEST3 的部分测试结果</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354417584.png" alt="NewImage" width="878" height="529" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101712354417584.png" alt="NewImage" width="878" height="529" border="0"></p>
 
 <p>注释:其中第一列位浏览器,第二列为字符集,第三列为会被忽视的 byte</p>
 
@@ -335,15 +335,15 @@ TEST3 的部分测试结果</p>
 
 <p>Chrome 的 Anti-XSS 功能绕过实例:</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354410870.png" alt="NewImage" width="878" height="524" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101712354410870.png" alt="NewImage" width="878" height="524" border="0"></p>
 
 <p>IE 的 Anti-XSS 功能绕过实例:</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354451330.png" alt="NewImage" width="883" height="493" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101712354451330.png" alt="NewImage" width="883" height="493" border="0"></p>
 
 <h3>(2)基于编码切换的 self-XSS</h3>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101712354548766.png" alt="NewImage" width="998" height="410" border="0"></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101712354548766.png" alt="NewImage" width="998" height="410" border="0"></p>
 
 <p>注释:具体操作方法就是手动切换编码至 shift&#95;jis(具体可以翻阅前面给出的 shift&#95;jis 的例子)</p>
 

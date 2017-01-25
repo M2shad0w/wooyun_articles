@@ -3,7 +3,7 @@
 			<head>
 			     <title>逆向基础 OS-specific (四) - 左懒</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/7453">http://drops.wooyun.org/binary/7453</a></h1>
 				
@@ -409,7 +409,7 @@ cl no_crt.c user32.lib /link /entry:main /align:16
 
 <p>因为术语混乱，导入表是一个比较令人困惑的地方。让我们尝试一下整理这些信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150816/2015081610071124812.jpg" alt="Figure 68.1: A scheme that unites all PE-file structures related to imports"></p>
+<p><img src="../images_result/images/2015081610071124812.jpg" alt="Figure 68.1: A scheme that unites all PE-file structures related to imports"></p>
 
 <p>Figure 68.1: A scheme that unites all PE-file structures related to imports</p>
 
@@ -499,19 +499,19 @@ JMP EAX
 
 <p>在异常处理链的结尾处有一个标准的处理程序，它显示一个对话框用于通知用户进程崩溃，然后把一些崩溃时CPU的状态信息，收集起来并将其发送给微软开发商。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150816/2015081610071114122.jpg" alt="Figure 68.2: Windows XP"></p>
+<p><img src="../images_result/images/2015081610071114122.jpg" alt="Figure 68.2: Windows XP"></p>
 
 <p>Figure 68.2: Windows XP</p>
 
-<p><img src="http://static.wooyun.org//drops/20150816/2015081610071272324.jpg" alt="Figure 68.3: Windows XP"></p>
+<p><img src="../images_result/images/2015081610071272324.jpg" alt="Figure 68.3: Windows XP"></p>
 
 <p>Figure 68.3: Windows XP</p>
 
-<p><img src="http://static.wooyun.org//drops/20150816/2015081610071224017.jpg" alt="Figure 68.4: Windows 7"></p>
+<p><img src="../images_result/images/2015081610071224017.jpg" alt="Figure 68.4: Windows 7"></p>
 
 <p>Figure 68.4: Windows 7</p>
 
-<p><img src="http://static.wooyun.org//drops/20150816/2015081610071257420.jpg" alt="Figure 68.5: Windows 8.1"></p>
+<p><img src="../images_result/images/2015081610071257420.jpg" alt="Figure 68.5: Windows 8.1"></p>
 
 <p>Figure 68.5: Windows 8.1</p>
 
@@ -600,7 +600,7 @@ int main()
 
 <p>每个结点的handler字段指向一个异常处理程序，每个结点的prev字段指向在栈中的上一个结点。最后一个结点的prev指向0xFFFFFFFF(-1)。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150816/2015081610071297798.jpg" alt="Figure 68.5: Windows 8.1"></p>
+<p><img src="../images_result/images/2015081610071297798.jpg" alt="Figure 68.5: Windows 8.1"></p>
 
 <p>我们的处理程序安装后，我们调用RaiseException()。这是一个用户异常。处理程序检查异常代码，如果异常代码是0xE1223344，它返回ExceptionContinueExecution。这意味着处理程序修复了CPU的状态（通常是EIP/ESP寄存器），操作系统可以恢复运行。如果你稍微修改一下代码，处理程序返回ExceptionContinueSearch，那么操作系统将调用下一个处理程序，如果没有找到处理程序（因为没人捕获该异常），你会看到标准的Windows进程崩溃对话框。</p>
 
@@ -775,7 +775,7 @@ Return Value:
 
 <p>scope table是一个表，包含了指向filter和handler code的块和每个try/except嵌套。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150816/2015081610071313437.jpg" alt="scopetable"></p>
+<p><img src="../images_result/images/2015081610071313437.jpg" alt="scopetable"></p>
 
 <p>再者，操作系统只关心prev/handle字段。&#95;except&#95;handler3函数的工作是读取其他字段和scope table，并决定由哪些处理程序来执行。</p>
 
@@ -1157,7 +1157,7 @@ scopetable entry[0]. previous try level=-2, filter=0x771f74d0 (ntdll.dll!___safe
 
 <p>SEH4的previous try level初始化值是-2而不是-1。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150816/2015081610071393081.jpg" alt="seh4"></p>
+<p><img src="../images_result/images/2015081610071393081.jpg" alt="seh4"></p>
 
 <p>这里有两个使用MSVC编译的SEH4例子：</p>
 

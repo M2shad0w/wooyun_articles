@@ -3,7 +3,7 @@
 			<head>
 			     <title>WinRAR(5.21)-0day漏洞-始末分析 - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/9470">http://drops.wooyun.org/papers/9470</a></h1>
 				
@@ -16,7 +16,7 @@
 
 <p>本以为就此可以跳过该漏洞，但深入研究后发现了更加有趣的事情。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151011/2015101109472471079.net/20151010091121088" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151010091121088" alt="这里写图片描述"></p>
 
 <h1>0x01 WinRar 5.21 - SFX OLE 代码执行漏洞</h1>
 
@@ -32,7 +32,7 @@
 
 <p><strong>MS14-064：</strong> Microsoft Windows OLE远程代码执行漏洞，影响Win95+IE3 – Win10+IE11全版本，实际使用时在win7以上系统由于IE存在沙箱机制，启动白名单以外的进程会弹出提示，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151011/2015101109472597397.net/20151010091133923" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151010091133923" alt="这里写图片描述"></p>
 
 <h2>2、漏洞原理</h2>
 
@@ -60,7 +60,7 @@ exploit
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151011/2015101109472549323.net/20151010091150210" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151010091150210" alt="这里写图片描述"></p>
 
 <p><strong>（2）</strong>生成SFX</p>
 
@@ -88,7 +88,7 @@ exploit
 <li>发现是否包含SFX OLE 代码执行漏洞的方法：遇到后缀为.exe的压缩文件，右键-属性-注释，查看其中的内容如图</li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20151011/2015101109472557942.net/20151010091946087" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151010091946087" alt="这里写图片描述"></p>
 
 <h1>0x02 poc之谜</h1>
 
@@ -188,7 +188,7 @@ exploit
 
 <p>poc需要作细微修改（此处暂不提供修改方法），执行python脚本，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151011/2015101109472654869.net/20151010093119067" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151010093119067" alt="这里写图片描述"></p>
 
 <p>注：如果了解MS14-064漏洞原理，此处修改轻而易举</p>
 
@@ -200,9 +200,9 @@ exploit
 
 <p>默认弹出广告，触发漏洞，弹出计算器，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151011/2015101109472653986.net/20151010093129061" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151010093129061" alt="这里写图片描述"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151011/2015101109472723820.net/20151010091215363" alt="这里写图片描述"></p>
+<p><img src="../images_result/images/20151010091215363" alt="这里写图片描述"></p>
 
 <h2>5、分析</h2>
 

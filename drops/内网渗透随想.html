@@ -3,7 +3,7 @@
 			<head>
 			     <title>内网渗透随想 - redrain有节操</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5234">http://drops.wooyun.org/tips/5234</a></h1>
 				
@@ -20,7 +20,7 @@
 
 <hr>
 
-<p><img src="http://static.wooyun.org/20150316/2015031603142416882.png" alt="image"></p>
+<p><img src="../images_result/images/2015031603142416882.png" alt="image"></p>
 
 <!--more-->
 
@@ -186,14 +186,14 @@ use multi/ssh/login_password
 
 <p>首先进行161端口扫描，发现snmp开放情况，通过弱口令查看设备信息，在oid中读取设备密码</p>
 
-<p><img src="http://static.wooyun.org/drops/20150316/201503160400084357525.jpg" alt="image"></p>
+<p><img src="../images_result/images/201503160400084357525.jpg" alt="image"></p>
 
 <p>例子：<a href="http://www.wooyun.org/bugs/wooyun-2013-021964">中国移动集团华为三层交换SNMP漏洞，可获取管理帐号密码，已成功登录</a></p>
 
 <p>可以通过这个nmap和msf脚本进行自动攻击<a href="https://github.com/grutz/h3c-pt-tools">h3c-pt-tools</a></p></li>
 <li><p>尝试从主机的用户目录或者管理运维邮箱寻找敏感信息(某次渗透即是keylogger运维后在测试机桌面获取到拓扑和网段)</p>
 
-<p><img src="http://static.wooyun.org/drops/20150316/201503160400132745233.jpg" alt="image"></p></li>
+<p><img src="../images_result/images/201503160400132745233.jpg" alt="image"></p></li>
 <li><p>通过resolv.conf找到内网dns服务器，或者字典穷举dns</p></li>
 <li><p>注意分析用户的.bash_history，一般可以分析出用户的使用习惯，纪录等,获取~/.shh/，尝试配合history的连接纪录直接通过密钥登陆其他机器</p></li>
 </ul>
@@ -220,7 +220,7 @@ use multi/ssh/login_password
 
 <p>主要对ssh,dbserver,vnc,ftp进行爆破</p>
 
-<p><img src="http://static.wooyun.org/20150316/2015031603142528600.png" alt="image"></p>
+<p><img src="../images_result/images/2015031603142528600.png" alt="image"></p>
 
 <ul>
 <li><p>对开了web service的server进行常规渗透，有可以减少工作量的办法就是先对机器批量识别banner，通过banner判断出cms或中间件，直接利用exp</p></li>
@@ -231,13 +231,13 @@ use multi/ssh/login_password
 
 <p>也可以猥琐一点，劫持插件，攻击网关，或者利用evilgrade去伪造软件更新(如notepad++)，然后捆绑上后门，直接打下工作机器，进入办公网</p>
 
-<p><img src="http://static.wooyun.org/20150316/2015031603142610588.png" alt="image"></p>
+<p><img src="../images_result/images/2015031603142610588.png" alt="image"></p>
 
-<p><img src="http://static.wooyun.org/20150316/2015031603142614810.png" alt="image"></p>
+<p><img src="../images_result/images/2015031603142614810.png" alt="image"></p>
 
 <p>简单配置后用msf生成后门，start即可配合ettercap使用伪造软件更新了</p>
 
-<p><img src="http://static.wooyun.org/20150316/2015031603142654555.png" alt="image"></p>
+<p><img src="../images_result/images/2015031603142654555.png" alt="image"></p>
 
 <ul>
 <li><p>常见服务漏洞攻击</p>
@@ -305,9 +305,9 @@ exploit
 keyscan_dump
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20150316/2015031603142712585.png" alt="image"></p>
+<p><img src="../images_result/images/2015031603142712585.png" alt="image"></p>
 
-<p><img src="http://static.wooyun.org/20150316/2015031603142781920.png" alt="image"></p>
+<p><img src="../images_result/images/2015031603142781920.png" alt="image"></p>
 
 <p>用meterpreter有个好处，就是在win中可以做内存注入，不会创建进程</p>
 

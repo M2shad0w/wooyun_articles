@@ -3,7 +3,7 @@
 			<head>
 			     <title>Android应用程序通用自动脱壳方法研究 - GoSSIP_SJTU</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/9214">http://drops.wooyun.org/tips/9214</a></h1>
 				
@@ -38,29 +38,29 @@
 
 <p>而DEX的代码是这样的。</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/10/替换图片.jpg"><img src="http://static.wooyun.org//drops/20151001/2015100116092117525.jpg" alt="" title="替换图片" class="alignnone size-full wp-image-9337"></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2015/10/替换图片.jpg"><img src="../images_result/images/2015100116092117525.jpg" alt="" title="替换图片" class="alignnone size-full wp-image-9337"></a></p>
 
 <p>DEX代码只包含很少的类和代码，其主要是做些检测工作或者准备工作，然后通过载入一个native库去动态加载原始的DEX文件。由于使用了动态加载机制，因此加固过的DEX文件中不会涉及原始DEX的真正代码（也有一些加固并没有采取完整DEX的动态加载）。</p>
 
 <p>接着使用IDA去逆向入口点加载运行的native代码，通常so库也是被混淆加壳的。手段包括破坏ELF头部信息让IDA解析失败，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092406160113939pic215.png" alt=""></p>
+<p><img src="../images_result/images/2015092406160113939pic215.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092406160298967pic313.png" alt=""></p>
+<p><img src="../images_result/images/2015092406160298967pic313.png" alt=""></p>
 
 <p>通过readelf可以明显看到ELF头部的几个字段是有问题的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092406160438857pic412.png" alt=""></p>
+<p><img src="../images_result/images/2015092406160438857pic412.png" alt=""></p>
 
 <p>修复之后，IDA可以正常反汇编so文件了。接着我们从入口点开始分析，会发现F5反编译成C代码会有问题，多个函数内容都不能反编译成正常的C代码。直接看汇编代码看到如下的花指令：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092406160549505pic512.png" alt=""></p>
+<p><img src="../images_result/images/2015092406160549505pic512.png" alt=""></p>
 
 <p>这是我们总结的该产品的花指令模式。它会通过压栈跳转出栈的方式让反编译的函数辨识出现问题，因为反编译通常会认为一个压栈操作为函数调用，而其实他通过压栈，计算寄存器值，跳转再出栈让反编译失效后并平衡栈后，再执行一条真正有用的指令。因此上述例子中只有两条真正有用的指令。</p>
 
 <p>通过写脚本甚至是人工的方式可以把真正的汇编指令提取出来。提取后再逆向代码，其功能是去解密JNI&#95;OnLoad函数。JNI&#95;OnLoad会从一段数据中再解密出另一个ELF文件，而此时这个新的ELF文件还不能正确反汇编，后面的代码会接着对该ELF进行数据的修正。先解压新ELF文件中的text端，从text端中提取一个key再去解密rotext，最后才解密出一个真正的对DEX的壳程序，形如：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092406160721742pic612.png" alt=""></p>
+<p><img src="../images_result/images/2015092406160721742pic612.png" alt=""></p>
 
 <p>以上步骤其实是一个ELF文件的壳。新的被解密修正后的ELF文件才是真正对DEX壳的解密程序。这个程序并没有混淆或者加壳，通过逆向后发现，他会取原始DEX后的一段padding数据，获取一些解密和解压需要的参数，对整段padding数据解密解压，就能得到真正原始的DEX文件了。当然ELF中还包括一些反调试反分析的代码，由于我们这是静态分析，不需要顾及这部分代码，如果是使用调试器去附加进程使用dump等动态分析时就需要考虑怎么优雅的bypass这些反调试技巧了。</p>
 
@@ -94,11 +94,11 @@
 
 <p>至此，我们的第一个反应是有没有现成的程序，可以去翻译Dalvik字节码的，但是以读入内存中的DexFile结构体为输入，同时可以直接基于源码实现，也就是用C/C++实现的，而不是像更多的静态逆向工具直接以读入一个静态DEX文件为输入。找了下发现Android系统源码里本身就提供了DexDump（dalvik/dexdump/DexDump.cpp）这个工具，直接能满足这个要求。我们对DexDump代码稍作修改，插入到解释器中，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092406160961474pic712.png" alt=""></p>
+<p><img src="../images_result/images/2015092406160961474pic712.png" alt=""></p>
 
 <p>让他去读取DexFile，默认就直接在一个APP的主Activity处执行这个代码，主Activity可以通过AndroidManifest.xml文件获取，因为该文件中的入口点类都不会被隐藏。 我们发现这样几乎就能够应对大多数加固程序了，能够得到加固程序被隐藏的DEX文件中的真实代码，输出如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092406161086438pic811.png" alt=""></p>
+<p><img src="../images_result/images/2015092406161086438pic811.png" alt=""></p>
 
 <p>但这个方法的缺点也很明显，就是输出是dalvik字节码的文本形式，一方面无法反汇编成Java，另一方面文本形式非常不适合后续的复杂程序的分析，我们的最佳目的是得到一个完整的DEX文件。</p>
 
@@ -108,11 +108,11 @@
 
 <p>通常到上一步，许多其他的脱壳工具为了恢复出完整的DEX文件，会选择直接读取pDexFile->baseAddr或者pDvmDex->memMap为起始地址，直接将整个文件大小的内存dump出来。然而我们发现对某些加固软件，这样dump出来的代码里依然不包含真实的代码，这是由于DEX文件中部分真实信息在运行时被修改和映射到了文件连续内存以外的部分，如下图，一个DEX文件被载入内存后，理应是在一个连续的内存空间中，然后被解析赋值为各个动态执行时Dalvik所需的结构体，而部分索性性质的结构体应该指向连续的data数据块。但加固程序可能会做些修改，例如将header的部分数据篡改，以及重新分配不连续的内存来存放data数据，并让那些索引数据块指向的新分配的data块。这样如果直接用dump的方法，则无法得到完整的DEX文件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092406161365959pic911.png" alt=""></p>
+<p><img src="../images_result/images/2015092406161365959pic911.png" alt=""></p>
 
 <p>我们旨在以统一的方法恢复出原始的DEX文件，不希望还需要针对的不同的壳来做后续的修复，因为这样又将进入到和静态逆向加固算法一样的困境。因此我们基于上述简单实现，有了个更加完善的实现方案，称之为DEX文件重组。过程非常简单，就是在程序执行过程中先获取所有解释器所需的Dalvik数据结构，这里都是内存中真实的被解释执行的数据结构，然后再将这些数据结构组合重新写回成一个新的DEX文件。如上图所示，即使内存不连续，我们也无需关心他对原始映射内存的操作，可以直接获取每块不连续的数据，按照一定的规范去把这些数据重组成一个新的DEX文件。 第一步是去准确获取每个Dalvik数据机构，为了保证获取的准确性，我们采取的方式是和运行中解释器中去执行程序时的获取方式一致（参考DexFile.h 文件中的dexGetXXXX方法），因为一个DEX文件，同一块数据可能有很多种方式去获取的，打个比方，常量字符串可以去读文件头里的偏移去获取，也可以通过stringId列表去获取，等等。正常情况下这些方式都应该是正确的，但是加固程序会去做一些破坏。但它不能去破坏运行时这些数据被获取时用的数据，因为这个一旦破坏，程序就无法正常运行了。具体的获取方式如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092406161588897pic1010.png" alt=""></p>
+<p><img src="../images_result/images/2015092406161588897pic1010.png" alt=""></p>
 
 <p>我们需要遍历每个数组（如pStringIds，pProtoIds，…，pClassDefs）里的某些指针和偏移，每项中都逐一获取，将其内容再合并成一个大类（如stringData，typeList，…，ClassData，Code）。接着获取完重写的时候，需要注意几个问题。首先是对获取这些数据块的排列问题，我们参考了dalvik/libdex/DexFile.h里的map item type codes枚举的顺序进行排列。排列好需要调整每个数据项里的偏移值为新的偏移，如stringDataOff, parametersOff, interfacesOff, classDataOff, codeOff等，接着对于DexHeader, MapList这两个结构体中的值，我们需要重新计算后填写，而不是直接取原来的值，对于一些固定的值例如Header里面的文件头等，我们根据已有知识直接填写。最后需要考虑到内存中的数据表达和DEX文件中的某些数据格式的差异，例如有些数据项在文件中是ULEB128编码的，而在内存中就直接是int类型，另外还需要注意4字节的对齐，以及encoded&#95;method&#95;format里是field&#95;idx&#95;diff，method&#95;idx&#95;diff而不是简单的index等。具体细节可参考官方的DEX文件格式文档</p>
 
@@ -126,27 +126,27 @@
 
 <p>改完代码后，我们重新编译了libdvm模块并将新生成libdvm.so写入系统目录/system/lib/下覆盖掉原始的库文件，我们实验的对象是Galaxy Nexus手机对应Android 4.3版本和Nexus 4手机对应的Android 4.4.2版本。然后我们提交了一个简单的应用程序，送到各个在线加固服务上获取加固后的应用程序版本再实施脱壳。实验发现几乎能够针对所有的加固程序恢复出原始的DEX文件。以下是一些针对加固程序的发现。主要集中在不同的加固所使用的自我保护的手段，这里有些结果是DexDump的文本，因为有些保护措施用这个方式更好的展示出细节，当然全部都能直接恢复成DEX文件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092406161725388pic1111.png" alt=""></p>
+<p><img src="../images_result/images/2015092406161725388pic1111.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092406161949538pic129.png" alt=""></p>
+<p><img src="../images_result/images/2015092406161949538pic129.png" alt=""></p>
 
 <p>以上两个例子表明，有些加固程序会将magic number抹去，来隐藏内存中的DEX文件，让穷搜DEX文件的方式失效，另外还会篡改header的大小，以及将header中的各种字段偏移值抹去，由于我们用的方法是对header重新计算，因此重组后的DEX不受其影响。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092406161265021pic136.png" alt=""></p>
+<p><img src="../images_result/images/2015092406161265021pic136.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092406162097502pic146.png" alt=""></p>
+<p><img src="../images_result/images/2015092406162097502pic146.png" alt=""></p>
 
 <p>另外有些加固程序会额外插入一些类来破坏正常的反编译效果，例如这个类就有个方法是能够让dex2jar失效。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092406162278673pic155.png" alt=""></p>
+<p><img src="../images_result/images/2015092406162278673pic155.png" alt=""></p>
 
 <p>还有壳将codeOff改成了负的值，这样代码就会被映射到文件内存范围之外。我们的方法可以直接将代码获取后重新写回到正常的位置。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092406162624379pic163.png" alt=""></p>
+<p><img src="../images_result/images/2015092406162624379pic163.png" alt=""></p>
 
 <p>另外还有壳是重写了某些方法，将代码放入一个新的方法中，并在执行前去解密，执行后再重新抹去。对于这种情况，由于我们脱壳代码插桩于每个方法调用处，因此我们只需要调整脱壳点到该方法执行处去实施脱壳就能恢复出代码了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092406162730098pic172.png" alt=""></p>
+<p><img src="../images_result/images/2015092406162730098pic172.png" alt=""></p>
 
 <p>除以上例子外，我们还发现某些加固程序会hook进程空间中的write函数，检测写的内容如果是特定的数据（如dex文件头），则让write操作失败，或者获取内存地址空间在映射的DEX文件区域内，也会让write失败等。还有加固程序会将原始的DEX文件分离出多个DEX，以及修改特定的数据项如debug&#95;info&#95;off为错误值，运行时再动态改回正确值。还有壳会在字节码基础上对原始的程序做代码混淆。</p>
 

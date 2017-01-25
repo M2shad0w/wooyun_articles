@@ -3,7 +3,7 @@
 			<head>
 			     <title>跟我把Kali Nethunter编译至任意手机 - lxj616</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/10993">http://drops.wooyun.org/tips/10993</a></h1>
 				
@@ -12,7 +12,7 @@
 
 <p>本文将以Oneplus one为例讲解Kali Nethunter代码的移植方式，同时也在三星的i9100g手机上测试成功</p>
 
-<p><img src="http://static.wooyun.org//drops/20151202/2015120202554626080.png" alt="cm12"></p>
+<p><img src="../images_result/images/2015120202554626080.png" alt="cm12"></p>
 
 <!--more-->
 
@@ -223,11 +223,11 @@ patching file drivers/usb/gadget/f_hid_android_mouse.c
 
 <p>可以看到是android.c第3和第4处patch失败，我们去手动patch</p>
 
-<p><img src="http://static.wooyun.org//drops/20151202/2015120202554767144.png" alt="patch01"></p>
+<p><img src="../images_result/images/2015120202554767144.png" alt="patch01"></p>
 
 <p>前两处都已经patch成功了，所以跳过就好了</p>
 
-<p><img src="http://static.wooyun.org//drops/20151202/2015120202554765692.png" alt="patch02"></p>
+<p><img src="../images_result/images/2015120202554765692.png" alt="patch02"></p>
 
 <p>解释一下：左边是patch代码，右边是目前的android.c，patch的意思是要在<code>&amp;uasp_function,</code>下面加一个<code>&amp;hid_function,</code>，第四处也去找一下用大脑找到位置敲上代码即可</p>
 
@@ -263,7 +263,7 @@ cd ~/arm-stuff/kali-nethunter
 
 <p>下图是在测试HID攻击的i9100g</p>
 
-<p><img src="http://static.wooyun.org//drops/20151202/2015120202554772154.jpg" alt="i9100g"></p>
+<p><img src="../images_result/images/2015120202554772154.jpg" alt="i9100g"></p>
 
 <p>检查各项功能：</p>
 
@@ -289,7 +289,7 @@ cd ~/arm-stuff/kali-nethunter
 
 <p>结尾图片：在手机上的WooyunWifi，开启了热点用于钓鱼</p>
 
-<p><img src="http://static.wooyun.org//drops/20151202/2015120202554977547.jpg" alt="woophone"></p>      <p></p>
+<p><img src="../images_result/images/2015120202554977547.jpg" alt="woophone"></p>      <p></p>
     
 			</body>
 		</html>

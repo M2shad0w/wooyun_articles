@@ -3,7 +3,7 @@
 			<head>
 			     <title>网络资源重污染：超过20家知名下载站植入Killis木马 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/9085">http://drops.wooyun.org/papers/9085</a></h1>
 				
@@ -24,19 +24,19 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305310117076pic119.png" alt=""></p>
+<p><img src="../images_result/images/2015092305310117076pic119.png" alt=""></p>
 
 <p>这个程序运行后，除了为用户下载原本需要的资源以外，它同时会向服务器请求一个推广列表：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305310312919pic22.jpg" alt=""></p>
+<p><img src="../images_result/images/2015092305310312919pic22.jpg" alt=""></p>
 
 <p>Killis木马就在这时进入电脑。再看带有Killis木马推广行为的下载站列表，只要你在国内下载站下载文件，几乎无可避免会遇到Killis木马的侵袭，此木马背后产业链的流量控制能力由此可见一斑：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305305633629fig11.png" alt=""></p>
+<p><img src="../images_result/images/2015092305305633629fig11.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305305864173fig21.png" alt=""></p>
+<p><img src="../images_result/images/2015092305305864173fig21.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305310017620fig31.png" alt=""></p>
+<p><img src="../images_result/images/2015092305310017620fig31.png" alt=""></p>
 
 <h1>0x02 KILLIS木马分析：AV终结者+全功能流氓推广器</h1>
 
@@ -46,13 +46,13 @@
 
 <p>木马原始包：629c04c150ef632b098fe65cf3ff3b60</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305310474306pic39.png" alt=""></p>
+<p><img src="../images_result/images/2015092305310474306pic39.png" alt=""></p>
 
 <p>木马驱动，带有一个过期的签名：4f504c748025aa34d9c96d0e7f735004</p>
 
 <p>Xuanyi Electronic (Shanghai) Co., Ltd.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305310640560pic47.png" alt=""></p>
+<p><img src="../images_result/images/2015092305310640560pic47.png" alt=""></p>
 
 <p>被这个木马利用的签名列表：</p>
 
@@ -70,25 +70,25 @@ Xuanyi Electronic (Shanghai) Co., Ltd.
 
 <p>用来做伪装的游戏安装包：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305310775401pic58.png" alt=""></p>
+<p><img src="../images_result/images/2015092305310775401pic58.png" alt=""></p>
 
 <p>木马功能分析：驱动部分，是一个名为KILLIS的设备，用来负责查杀进程操作：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305310986865pic69.png" alt=""></p>
+<p><img src="../images_result/images/2015092305310986865pic69.png" alt=""></p>
 
 <p>驱动打开进程与结束进程：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305311056469pic78.png" alt=""></p>
+<p><img src="../images_result/images/2015092305311056469pic78.png" alt=""></p>
 
 <p>驱动pid查找结束进程：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305311261067pic89.png" alt=""></p>
+<p><img src="../images_result/images/2015092305311261067pic89.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305311315768pic98.png" alt=""></p>
+<p><img src="../images_result/images/2015092305311315768pic98.png" alt=""></p>
 
 <p>Ring3部分，是一个下载推广器，内置了一批推广列表，通过Base64编码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305311541761pic108.png" alt=""></p>
+<p><img src="../images_result/images/2015092305311541761pic108.png" alt=""></p>
 
 <p>解码后发现的木马推广列表：</p>
 
@@ -158,23 +158,23 @@ Xuanyi Electronic (Shanghai) Co., Ltd.
 
 <p>木马的云控打点信息，收集客户端的mac地址，系统信息等提交云端，云端下发推广列表给木马推广执行：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305311621287pic1110.png" alt=""></p>
+<p><img src="../images_result/images/2015092305311621287pic1110.png" alt=""></p>
 
 <p>木马检查杀软进程，包括360、腾讯和金山的软件进程：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305311815659pic125.png" alt=""></p>
+<p><img src="../images_result/images/2015092305311815659pic125.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305311915831pic135.png" alt=""></p>
+<p><img src="../images_result/images/2015092305311915831pic135.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305312198399pic145.png" alt=""></p>
+<p><img src="../images_result/images/2015092305312198399pic145.png" alt=""></p>
 
 <p>木马注册插件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305312294836pic153.png" alt=""></p>
+<p><img src="../images_result/images/2015092305312294836pic153.png" alt=""></p>
 
 <p>木马创建服务，并向设备发送消息：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092305312376448pic162.png" alt=""></p>
+<p><img src="../images_result/images/2015092305312376448pic162.png" alt=""></p>
 
 <h1>0x03 安全建议</h1>
 

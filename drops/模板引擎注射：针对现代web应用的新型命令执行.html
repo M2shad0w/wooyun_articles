@@ -3,7 +3,7 @@
 			<head>
 			     <title>模板引擎注射：针对现代web应用的新型命令执行 - 小飞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7961">http://drops.wooyun.org/tips/7961</a></h1>
 				
@@ -76,7 +76,7 @@ $output = $twig-&gt;render($_GET['custom_email'], array("first_name" =&gt; $user
 
 <p>这里给出了寻找模板注射的流程图。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081305015266883.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081305015266883.jpg" alt="enter image description here"></p>
 
 <h3>漏洞检测：</h3>
 
@@ -132,7 +132,7 @@ Hello 49
 
 <p>在侦测到注射漏洞之后，我们自然要分析对应的是哪一类模板，方便对症下药</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081305023254031.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015081305023254031.jpg" alt="enter image description here"></p>
 
 <p>上图描述了测试流程的树形结构，分支从左到右对应检测顺序，绿色箭头表示能够返回预期的结果，也就说明此时存在漏洞所使用的模板框架就是箭头指向的框架。</p>
 

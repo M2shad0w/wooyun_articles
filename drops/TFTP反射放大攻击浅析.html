@@ -3,7 +3,7 @@
 			<head>
 			     <title>TFTP反射放大攻击浅析 - Larry</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14020">http://drops.wooyun.org/tips/14020</a></h1>
 				
@@ -26,7 +26,7 @@
 
 <p>我们在<a href="http://jingyan.baidu.com/article/454316ab6fb11af7a7c03ae0.html?qq-pf-to=pcqq.group">更新源</a>了的Kali2上进行tftp的安装，详细过程可见<a href="http://askubuntu.com/questions/201505/how-do-i-install-and-run-a-tftp-server">这里</a>和<a href="https://doc.ubuntu-fr.org/tftpd">那里</a>。在Kali上自带的有tftp客户端，我们可以不用再进行安装。其中主要使用了使用<a href="http://www.cnblogs.com/itech/archive/2010/12/27/1914846.html">xinetd</a>超级守护进程更加方便安全地管理使用tftp服务。最后在服务都安装好后，测试图如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160322/2016032212373978475169.png" alt=""></p>
+<p><img src="../images_result/images/2016032212373978475169.png" alt=""></p>
 
 <p>在这里值得一提的是，客户端上键入<code>?</code>发现有<code>put</code>命令可以直接上传文件，但是会引发<code>Error code 2: Access violation</code>错误。究其原因查看<code>man</code>手册可知道，因为咱们之前在登录的时候没有经过认证就可以读取文件，所以处于安全的考虑，只有文件存在而且对于所有的用户都可写才能<code>put</code>相应文件，这一点也会成为之后攻击的一个限制。</p>
 
@@ -68,7 +68,7 @@
 
 <p>就拿A对S上的<code>RRQ (read request)</code>文件过程来演示一下，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160322/2016032212374033613237.png" alt=""></p>
+<p><img src="../images_result/images/2016032212374033613237.png" alt=""></p>
 
 <p>具体过程文字描述如下：</p>
 
@@ -81,7 +81,7 @@
 
 <p>实际测试的抓包图如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160322/2016032212374225704330.png" alt=""></p>
+<p><img src="../images_result/images/2016032212374225704330.png" alt=""></p>
 
 <h1>0x03 反射放大攻击</h1>
 
@@ -104,19 +104,19 @@
 
 <p>也还是有两点需要说明，我们这里伪造的源端口用的是XP SP3默认开启的UDP端口之一(123,137,138,445,500,1900)，当然你也可以用其他你在攻击目标上扫描出来的端口；另一点就是为了达到放大数据包大小的最佳效果，我们这里<code>RRQ</code>的已知文件的大小必须大于512字节为好。三个主机在同一个网段下的测试结果图如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160322/2016032212374415676416.png" alt=""></p>
+<p><img src="../images_result/images/2016032212374415676416.png" alt=""></p>
 
 <p>在搭建传统的LAN环境的时候，会要求TFTP服务器对所有客户端是可连接的，通常会将其拿来当做内部网络网关。如果这些TFTP服务器同时暴露在外的话，我们就可以利用其在网络当中的角色加上对源地址无验证的缺陷,对内网机器进行DOS攻击。当然鸡肋的会是我们不知道在内网当中有哪些机器，就算攻击成功了，由于没有回执响应，我们就不知道实际情况是如何而“盲打”一通了。在vbox当中创建一个<a href="https://www.youtube.com/watch?v=nsbxw_jx1wQ">内网环境</a>，同时给服务端设置<a href="http://gfrog.net/2008/01/config-file-in-debian-interfaces-1/">两个网卡</a>，测试结果如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160322/2016032212374554580514.png" alt=""></p>
+<p><img src="../images_result/images/2016032212374554580514.png" alt=""></p>
 
 <p>从以上的测试结果可以看出由于tftpd服务的特性，在服务端未接收到ACK数据包时，会默认进行5次重传，并且重传时间间隔（可设置）为5秒。对于不同的反射放大攻击，例如<a href="http://baike.baidu.com/link?url=S20WqQCEfXL7YDelSc2bVLw-veVfXFPpYdsy64mCQZ_kV66yFpq3fsDTVWT9rN2xU-hO6PIJAbSKjUzAU9j9XK">Smurf</a>，DNS，<a href="http://drops.wooyun.org/papers/926">NTP</a>，TCP-based，<a href="http://drops.wooyun.org/tips/2106">SNMP</a>等反射放大攻击，研究时通常会计算其中的反射因子/放大倍数作为相互比较的标准。在基于tftpd的TFTP反射放大攻击中，这里响应数据包大小总和比上请求数据包大小为：<code>558*5/60=46.5</code>。为了简单地对比一下，我还是在XP上下载了<a href="http://tftpd32.jounin.net/tftpd32_download.html">tftpd32</a>，然后再去<code>get</code>自带的文件<code>tftpd32.chm</code>（其实在默认状态下tftpd32是允许<code>put</code>文件的，但也可在<code>Setting</code>中设置为<code>Read Only</code>模式）。tftpd32的特性就是会重传6次，时间间隔依次为1,2,3,3,3秒，最后还会发送一个ERROR数据包。这里抛开ERROR数据包计算反射因子的话就是<code>558*6/62=54</code>。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160322/2016032212374781409614.png" alt=""></p>
+<p><img src="../images_result/images/2016032212374781409614.png" alt=""></p>
 
 <p>在论文中的tftpd32版本可能有所不同，反射因子为<code>59.78</code>，这个放大因子和其他反射放大攻击相比较还是很可观的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160322/2016032212374957021714.png" alt=""></p>
+<p><img src="../images_result/images/2016032212374957021714.png" alt=""></p>
 
 <h1>0x04 限制及解决方案</h1>
 
@@ -134,11 +134,11 @@ $ sudo nmap -sU -p 69 --script tftp-enum.nse --script-args="tftp-enum.filelist=c
 
 <p>如果未加<code>--script-args</code>的话，脚本会默认调用<a href="https://github.com/nmap/nmap/blob/master/nselib/data/tftplist.txt">tftplist.txt</a>文件去枚举可能存在的文件。当然，<code>tftp-enum.filelist</code>可以指定自定义的列表进行枚举扫描。测试结果示例如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160322/2016032212375089684812.png" alt=""></p>
+<p><img src="../images_result/images/2016032212375089684812.png" alt=""></p>
 
 <p>论文当中说是有<a href="http://internetcensus2012.bitbucket.org/serviceprobe_overview.html">599600</a>台（2012年扫描结果）对外开放的TFTP服务器可能会被用来进行发射放大攻击，但在<a href="https://www.shodan.io/search?query=tftp">shodan</a>上搜索<code>tftp</code>的结果也只有10w左右的样子，可能有待进一步的扫描发现。以下是我在<a href="https://shodanio.wordpress.com/2014/12/01/using-shodan-from-the-command-line/">shodan</a>中搜索出的999个IP进行测试，其中有47个服务器可以<code>get</code>到默认的文件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160322/2016032212375227854912.png" alt=""></p>
+<p><img src="../images_result/images/2016032212375227854912.png" alt=""></p>
 
 <p><strong>2. TFTP服务器上已知文件的大小</strong></p>
 

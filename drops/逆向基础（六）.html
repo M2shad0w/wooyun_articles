@@ -3,7 +3,7 @@
 			<head>
 			     <title>逆向基础（六） - reverse-engineering</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2177">http://drops.wooyun.org/tips/2177</a></h1>
 				
@@ -1153,7 +1153,7 @@ f       endp
 
 <p>代码更短。值得注意的是编译器使用了AH寄存器-EAX寄存器8bit-15bit部分。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071409423719905.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071409423719905.jpg" alt="enter image description here"></p>
 
 <p>8086 16位CPU累加器被称为AX，包含两个8位部分-AL（低字节）和AH（高字节）。在80386下所有寄存器被扩展为32位，累加器被命名为EAX，为了保持兼容性，它的老的部分仍可以作为AX/AH/AL寄存器来访问。 因为所有的x86 CPU都兼容于16位CPU，所以老的16位操作码比32位操作码更短。”<code>or ah,40h</code>”指令仅复制3个字节比“<code>or eax,04000h</code>”需要复制5个字节甚至6个字节（如果第一个操作码不是EAX）更合理。 编译时候开启-O3并且设置regram=3生成的代码会更短。</p>
 
@@ -1238,7 +1238,7 @@ int f(unsigned int a)
 
 <p>在循环中，迭代计数从0到31，1&lt;&lt;i语句将计数从1到0x80000000。1&lt;&lt;i即1左移n位，将包含32位数字所有可能的bit位。每次移位仅有1位被置1，其它位均为0，IS_SET宏将判断a对应的位是否置1。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071407142365742.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071407142365742.jpg" alt="enter image description here"></p>
 
 <p>IS_SET宏就是逻辑与(AND)操作，如果对应的位不为1，则返回0。if条件表达式如果不为0，if()将被触发。</p>
 
@@ -1347,7 +1347,7 @@ _f ENDP
 
 <p>例子中的SHR（逻辑右移）指令将a值右移2位，最高两位被置0，最低2位被丢弃。实施上丢弃的两位是除法的余数。 SHR作用类似SHL只是移位方向不同。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071407142334154.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014071407142334154.jpg" alt="enter image description here"></p>
 
 <p>使用十进制23很好来理解。23除以10，丢弃最后的数字（3是余数），商为2。 与此类似的是乘法。比如乘以4，仅需将数字左移2位，最低两位被置0。就像3乘以100—仅仅在最后补两个0就行了。</p>
 

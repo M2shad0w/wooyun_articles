@@ -3,7 +3,7 @@
 			<head>
 			     <title>教你解密Gh0st 1.0远控木马VIP版配置信息 - New4</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3589">http://drops.wooyun.org/tips/3589</a></h1>
 				
@@ -14,7 +14,7 @@
 
 <p>Gh0st是一款非常优秀的开源远程控制软件，由红狼小组的Cooldiyer开发。开源3.6发布后一段时间，作者对其进行大量重写并发布1.0 Alpha，这个版本是有VIP的，我也有幸收集到一套。 当你拿到一个别人的免杀木马你想做什么，学习免杀方法？而你由发现你拿到的样本你手头的控制端可以完美兼容，你想把配置信息修改了写个专版生成器吗？想？那就跟我来吧！（其实你看完文章也不会写，我也没有写过）</p>
 
-<p><img src="http://static.wooyun.org/20141103/2014110308385569212.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110308385569212.png" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -33,21 +33,21 @@ F4 执行到所选行，常用。
 
 <p>想写生成器吗，前提条件要先把配置信息加密解密算法给解了，这里我从服务端exe入手，就不从生成器上下手了，毕竟我们多数情况只有服务端exe样本。</p>
 
-<p><img src="http://static.wooyun.org/20141103/2014110308385531839.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110308385531839.png" alt="enter image description here"></p>
 
 <p>注意看生成器下面“GH0STC+用户配置信息+GH0STC”，这就是我们要解密的字符串。假如我们现在才抓到服务端exe怎么找配置？一般情况能直观快速找到的，1、写在资源文件里面 2、写在exe、dll尾部附加数据上。（我写DRAT的时候这两种都试过），我们用C32ASM工具16进制编辑。拖到最后发现文件尾部有配置信息。大家是否觉得有点简单…… 难的篇幅太大不在本文考虑范围内。</p>
 
-<p><img src="http://static.wooyun.org/20141103/2014110308385690343.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110308385690343.png" alt="enter image description here"></p>
 
 <p>下面我们用动态调试工具Ollydbg打开，设置CreateFileW函数断点，这里我用工具直接设置，你也可以使用bp CreateFileW命令设置。为什么要这么做？它要读取自身配置肯定要“打开自己”所以断点设置在这个函数最合适，当然也有其他方法不在本文讨论范围，然后按F9把程序运行起来。</p>
 
-<p><img src="http://static.wooyun.org/20141103/2014110308385632390.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110308385632390.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141103/2014110308385684315.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110308385684315.png" alt="enter image description here"></p>
 
 <p>如上图所示的时候（如果不是的话继续按F9），我们按ALT+F9返回程序，按几下F8向下走。看到ReadFile函数还有CloseHandle、字符GH0STC，这个时候就说明程序已经把“配置”读取完了，正常情况下应该准备进入解密了。所以下面出现的CALL调用都要非常注意（一般要按F7进入，不要再按F8了可能会跳过关键）</p>
 
-<p><img src="http://static.wooyun.org/20141103/2014110308385654681.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110308385654681.png" alt="enter image description here"></p>
 
 <p>看到这个CALL，我们用F7跟进，然后按多个F8直到下一个CALL。</p>
 
@@ -57,9 +57,9 @@ n……
 ……
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141103/2014110308385765948.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110308385765948.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141103/2014110308385753062.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110308385753062.png" alt="enter image description here"></p>
 
 <p>看到关键算法CALL（00401527，至于怎么判断的我只能说我事先做过功课了，实践中大家要多试试），我们还是用F7跟进（其他无用部分你可以用F2+F9或F4跳过即可）。</p>
 
@@ -68,7 +68,7 @@ n……
 
 <p>在F7跟入就可以看到</p>
 
-<p><img src="http://static.wooyun.org/20141103/2014110308385728706.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110308385728706.png" alt="enter image description here"></p>
 
 <pre><code>00401404  |&gt; /8A1401        /MOV DL,BYTE PTR DS:[ECX+EAX]
 00401407  |. |80EA 08       |SUB DL,8
@@ -81,11 +81,11 @@ n……
 
 <p>这是解密算法关键部分记下地址，我们这里换个工具用IDA看看这个函数（004013E0）。 提示：IDA快速跳转地址快捷键是”G”，</p>
 
-<p><img src="http://static.wooyun.org/20141103/2014110308385720377.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110308385720377.png" alt="enter image description here"></p>
 
 <p>转过去以后我喜欢用F5插件（Hex-Rays Decompiler），这里我直接按F5看C代码了（这部分操作就不截图装B了，事实是也没什么需要好截的）。</p>
 
-<p><img src="http://static.wooyun.org/20141103/2014110308385788691.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014110308385788691.png" alt="enter image description here"></p>
 
 <p>对比下OD里面的汇编代码慢慢品，你会发现关键代码就两行。</p>
 

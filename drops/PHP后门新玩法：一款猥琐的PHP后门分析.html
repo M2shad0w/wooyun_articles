@@ -3,7 +3,7 @@
 			<head>
 			     <title>PHP后门新玩法：一款猥琐的PHP后门分析 - 360网站安全中心</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1215">http://drops.wooyun.org/papers/1215</a></h1>
 				
@@ -56,11 +56,11 @@ echo gzuncompress(substr(file_get_contents(sprintf('%s?%s',pack("H*",
 
 <p>如图所示：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811114863309.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811114863309.jpg" alt="enter image description here"></p>
 
 <p>分析这段代码，发现这是一个伪装的404木马(这里实在是太猥琐了…把页面标题改成404 Not Found)，其实整个webshell就一个class外加三个function，如下图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811114893413.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811114893413.jpg" alt="enter image description here"></p>
 
 <p>首先我先看一下它的前端html代码，其中有这么一段js程序</p>
 
@@ -76,19 +76,19 @@ $("login").style.display = "block"
 
 <p>这里它用document.onkeydown获取用户敲击键盘事件，当code等于80的时候显示login这个div，这里查询了一下keyCode的对照表，查到80对应p和P键</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811114965406.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811114965406.jpg" alt="enter image description here"></p>
 
 <p>所以触发webshell登陆需要按p键(不按P键页面就是一个空白页，看不到登陆框)，如图所示：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811114995039.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811114995039.jpg" alt="enter image description here"></p>
 
 <p>再回到服务端php代码中，可以看到程序用的是对称加密，并且将登陆密码作为加密key，代码如图所示：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811115046455.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811115046455.jpg" alt="enter image description here"></p>
 
 <p>再看init()的逻辑</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811115083046.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811115083046.jpg" alt="enter image description here"></p>
 
 <p>如图所示，先看这句代码</p>
 
@@ -121,15 +121,15 @@ sideOut();
 
 <p>这里执行<code>exit('{"status":"on"}')</code>会返回json串<code>{"status":"on"}</code>，此时前端js代码classback()获取到此响应会执行window.location.reload()刷新，再次请求正好带上前面获取的cookie，然后执行判断COOKIE的逻辑，如图所示：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811115187035.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811115187035.jpg" alt="enter image description here"></p>
 
 <p>这里跟前面POST的逻辑一样，下面当判断为'true'以后，这里又请求了一张图片，pack出来地址为<code>http://2012heike.googlecode.com/svn/trunk/code.jpg</code>，然后调用_REQUEST获取图片内容，解密解压之后再eval，分析之后发现code.jpg中才是真正的webshell经过加密压缩之后的内容。这里我跟踪了一下代码打印出了真正执行的webshell的内容：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811115265963.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811115265963.jpg" alt="enter image description here"></p>
 
 <p>登陆成功之后的webshell如下图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811115272703.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014091811115272703.jpg" alt="enter image description here"></p>
 
 <h2>0x02 总结</h2>
 

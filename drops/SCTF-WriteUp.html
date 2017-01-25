@@ -3,7 +3,7 @@
 			<head>
 			     <title>SCTF-WriteUp - EvilMoon</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4243">http://drops.wooyun.org/tips/4243</a></h1>
 				
@@ -234,11 +234,11 @@ return 0;
 <pre><code>http://corp.sycsec.com
 </code></pre>
 
-<p><img src="http://C:%5CUsers%5Ctrack%5CDocuments%5CTencent%20Files%5C2577406885%5CFileRecv%5Cwriteup" alt="enter image description here"></p>
+<p><img src="../images_result/images/C:%5CUsers%5Ctrack%5CDocuments%5CTencent%20Files%5C2577406885%5CFileRecv%5Cwriteup" alt="enter image description here"></p>
 
 <p>可以看到给出了几个链接，还有个妹子的图片，在源码里还有妹子的邮箱。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120906513375512.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120906513375512.png" alt="enter image description here"></p>
 
 <p>从题面看，最终是要到 file 服务器找到那个种子。然后</p>
 
@@ -248,7 +248,7 @@ Request timeout for icmp_seq 0
 
 <p>发现 file 服务器在内网，好了就是渗透了。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120906513489390.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120906513489390.png" alt="enter image description here"></p>
 
 <p>然后先到 report 服务器，看到时要用工号登陆，又说妹子来了就有83人了。易得，妹子的工号肯定就是</p>
 
@@ -257,13 +257,13 @@ Request timeout for icmp_seq 0
 
 <p>然后到公开的社工库查询下，发现在 csdn 泄漏了妹子的密码。用那个密码成功登陆 report 服务器。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120906513458226.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120906513458226.png" alt="enter image description here"></p>
 
 <p>然后有上传点，发现上传任何文件都会变成 lol 的后缀的文件。然后看了下上传的包，随手在文件名里面加了个 ' 发现报错了。</p>
 
 <p>好了，目测就是文件名的注入了。注入得到每个人的账号密码，工号，公司邮箱。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120906513431804.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120906513431804.png" alt="enter image description here"></p>
 
 <p>噢，邮箱啊。那就是接下去要登陆 mail 服务器了。目测邮箱地址为</p>
 
@@ -277,11 +277,11 @@ Request timeout for icmp_seq 0
 
 <p>可以登陆，发现里面有 vpn 服务器地址，还说了密码是工号加生日，</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120906513420469.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120906513420469.png" alt="enter image description here"></p>
 
 <p>邮件里还说小美周末就生日了。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120906513567996.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120906513567996.png" alt="enter image description here"></p>
 
 <p>然后到</p>
 
@@ -291,7 +291,7 @@ Request timeout for icmp_seq 0
 
 <p>SYC079940927</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120906513598294.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120906513598294.png" alt="enter image description here"></p>
 
 <p>登陆 vpn 服务器后，访问</p>
 
@@ -306,7 +306,7 @@ Request timeout for icmp_seq 0
 <pre><code>http://10.24.13.37/files/SYC001 － SYC083/torrent
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141209/2014120906513558561.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120906513558561.png" alt="enter image description here"></p>
 
 <p>Get Flag!</p>
 
@@ -408,9 +408,9 @@ if __name__ == '__main__':
 
 <p>送分题，就是没来得及看公告……使用IDA64分析，发现是对输入的字符串每一个字符右移3位，然后和字符串Jr3gFud6n进行比较看是否一致。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265765016.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120904265765016.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265793374.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120904265793374.png" alt="enter image description here"></p>
 
 <p>Python脚本：</p>
 
@@ -434,7 +434,7 @@ if __name__ == "__main__":
 
 <p>对bin文件进行分析，发现在主框架中通过signal函数注册了几个信号，其中’2’,’4’,’6’,’8’分别用于控制下、左、上、右四个方向，SIGALRM用于处理游戏的主要业务逻辑。至于SIGTRAP，则是在handler里面留了个个int 3的断点，简单的反调试罢了，SIGTRAP的信号处理逻辑为直接执行一个空函数。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265776339.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120904265776339.png" alt="enter image description here"></p>
 
 <p>所以我们可以写一个程序，通过发送信号的方式来控制按键。Linux下C语言可以使用kill函数对指定的pid发送信号，而pid则可以通过执行命令得到（ps/grep/awk），为了完美接收键盘控制信息，我这里使用了curses来接收按键操作，这样直接按方向键就好了。</p>
 
@@ -491,11 +491,11 @@ int main(int argc, char** argv)
 
 <p>从编号为16的数据包中找到一个Encryption Key为1122334455667788，于是Google一下关键字“SMB 1122334455667788 密码”，点点点来到看雪的一个帖子http://bbs.pediy.com/showthread.php?t=176189，学习一下。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265752248.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120904265752248.png" alt="enter image description here"></p>
 
 <p>以及Unicode Password，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265721219.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120904265721219.png" alt="enter image description here"></p>
 
 <p>参照看雪论坛的帖子，新进行如下操作：</p>
 
@@ -507,7 +507,7 @@ int main(int argc, char** argv)
 
 <p>很快就看到了结果，如图所示：</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265862283.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120904265862283.png" alt="enter image description here"></p>
 
 <p>第一步搞定，这里得到的结果为：</p>
 
@@ -559,11 +559,11 @@ ret={$ret}
 
 <p>其中hp后面的JJBoom就是压缩包的密码了，解压得到一个1.gif文件，trid鉴定一下，发现是个Minidump文件：</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265843549.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120904265843549.png" alt="enter image description here"></p>
 
 <p>将后缀改成mdmp之后，使用Visual Studio打开看了下，发现是lsass.exe进程的Dump文件，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265843670.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120904265843670.png" alt="enter image description here"></p>
 
 <p>Google一下关键字“lsass dump 密码”，就看到了mimikatz，所以根据经验这就是通过mimikatz来读取密码了，打开mimikatz，然后输入如下命令：</p>
 
@@ -575,7 +575,7 @@ ret={$ret}
 
 <p>就能看到分析出来的密码了，密码处显示<tab><space>，如下图所示：</space></tab></p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265844095.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120904265844095.png" alt="enter image description here"></p>
 
 <p>于是提交了一下尝试：</p>
 
@@ -583,7 +583,7 @@ ret={$ret}
 
 <p>发现都不对，然后又去反查NTLM发现查不到，最后自己在XP下测试了一下，发现密码中是不能有空格的，然后空格就是空格，也不会显示成<space>，当然在命令行下也看不出来有空格，所以只能猜测<tab><space>后面是有空格了，试了几个发现也不对，就把输出重定向到文件里：</space></tab></space></p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265943622.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120904265943622.png" alt="enter image description here"></p>
 
 <p>打开文件就能看到密码了，所以Flag为SCTF{<tab><space> }。</space></tab></p>
 
@@ -773,7 +773,7 @@ if __name__ == "__main__":
 <ol>
 <li><p>先通过%279$x泄露获得libc&#95;start&#95;main地址</p></li>
 <li><p>根据提供的libc计算出system地址</p></li>
-<li><p>每次该两个字节劫持printf函数地址为system <img src="http://static.wooyun.org/20141209/2014120904265983048.jpeg" alt="enter image description here"></p></li>
+<li><p>每次该两个字节劫持printf函数地址为system <img src="../images_result/images/2014120904265983048.jpeg" alt="enter image description here"></p></li>
 <li><p>发送/bin/sh，让其通过printf打印，实际上是在执行/bin/sh</p></li>
 </ol>
 
@@ -783,17 +783,17 @@ if __name__ == "__main__":
 
 <p>看到双向链表就猜到了是模拟dlmalloc堆溢出了.在edit content的时候，输入超长，可以覆盖下一个堆块的内容，这样链表的双向指针就可以被我们控制，实现任意地址写漏洞：如下是content超长的截图：</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265930396.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120904265930396.jpeg" alt="enter image description here"></p>
 
 <p>要注意的是，该文件关闭了dep，那利用思路就是利用任意地址写漏洞，将shellcode地址写入某个got表，选择一个合适的函数got表很关键，最后我选择的是free函数的got表，原因是如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265982144.jpeg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014120904265982144.jpeg" alt="enter image description here"></p>
 
 <p>在链表卸载后有个释放堆的函数，我们要覆盖双向指针，必然会导致堆块头部受损，保证堆块头部不出问题是个麻烦的事儿，不如直接劫持free函数，同时也不会有其他问题。</p>
 
 <p>那整体的利用顺序就是：1。申请3个note 2.编辑第一个note，设置内容覆盖第二个note的双向指针，3.释放第二个note。关键代码如下：</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265943043.jpeg" alt="enter image description here"></p>      <p></p>
+<p><img src="../images_result/images/2014120904265943043.jpeg" alt="enter image description here"></p>      <p></p>
     
 			</body>
 		</html>

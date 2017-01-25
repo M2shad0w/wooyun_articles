@@ -3,7 +3,7 @@
 			<head>
 			     <title>IE安全系列：IE的自我介绍 （II） - blast</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5519">http://drops.wooyun.org/papers/5519</a></h1>
 				
@@ -32,7 +32,7 @@
 
 <p>当时（2007）网马已经较为成熟，各种加密（或者专业一些，称作混淆，obfuscation）层出不穷，为了应付，当时我还做了一个工具叫Redoce，用户体验几乎没有，不嫌难用的也可以试试（本来想C++重写这个工具的，可惜时间不允许了）。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150407/2015040707521137538.jpg" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040707521137538.jpg" alt="enter image description here"></p>
 
 <p>图：国外各种Exploit Kit提供支持的漏洞利用代码</p>
 
@@ -40,7 +40,7 @@
 
 <p>水坑攻击中关于钓鱼、欺骗的部分我暂且不提了，剩余部分，网马的代码一般涉及两个部分，一个是代码混淆，一个是漏洞利用。很简单，由于杀毒软件都有各种网盾之类的扫描机制，包括IE访问时还会产生本地缓存文件，如果不对利用代码进行免杀的话，凭借特征库，杀毒软件很容易就能检测到当前页面有恶意代码。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150407/2015040707521239818.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040707521239818.png" alt="enter image description here"></p>
 
 <p>图：某个Exploit Kit中提供的各种利用代码</p>
 
@@ -56,7 +56,7 @@
 
 <p>总的来说，网马的解密就是要靠眼睛，即使中间加密再牛，最后也无非就是一两招就能拆掉的。偶尔把自己当参数解密的这类难度系数可能会高上一层，但是也只是多费时间而已。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150407/2015040707521293679.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040707521293679.png" alt="enter image description here"></p>
 
 <p>图：某个Exploit Kit提供的漏洞利用脚本</p>
 
@@ -84,9 +84,9 @@
 
 <hr>
 
-<p><img src="http://static.wooyun.org/drops/20150407/2015040707521416557.gif" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040707521416557.gif" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150407/2015040707521431986.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040707521431986.png" alt="enter image description here"></p>
 
 <p>图：IFRAME在IE中的显示效果</p>
 
@@ -135,13 +135,13 @@
 
 <p>而且使用Spy++跟踪Internet Explorer&#95;Server的消息时，几乎看不见WM&#95;CREATE窗口创建的消息，有的全部是WM_PAINT和各种自定义消息。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150407/2015040707521442580.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040707521442580.png" alt="enter image description here"></p>
 
 <p>图：Spy++观察IE窗口</p>
 
 <p>使用WebBrowser也可以得到这个对象。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150407/2015040707521563319.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040707521563319.png" alt="enter image description here"></p>
 
 <p>图：WebBrowser控件的结构和IE的窗口相似</p>
 
@@ -149,7 +149,7 @@
 
 <p>如果无法理解，可以类比一下QQ主界面，感受两下。与IE渲染相关的类十分之多，这块与安全关系不大，牵扯到的代码量也很大，最基础的可以从CFormDrawInfo（获取绘制信息）、CSetDrawSurface（设置绘图区域）、CCalcInfo（计算Site大小）这些以及相关的类跟踪一下，它们是用于计算绘图相关的类，还有文字排版、具体的绘制等内容分列在其他许多代码中，现在也暂且不谈。对页面渲染有兴趣的话可以直接参考Chrome的代码，虽然他和IE用的不是一套，但是这样更能受到启发。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150407/2015040707521578757.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040707521578757.png" alt="enter image description here"></p>
 
 <p>图：IE9的渲染逻辑概括</p>
 
@@ -165,7 +165,7 @@
 
 <p>在IE中，层级结构类似于：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150407/2015040707521577254.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040707521577254.png" alt="enter image description here"></p>
 
 <p>详细的描述一下上图。每一页（CDoc）都会有一个Primary Markup，该Primary Markup（CMarkup）指向当前Root Element（CElement）。</p>
 
@@ -179,7 +179,7 @@
 <li><p>3如果 2 步的结果是遍历到了根Node，那么返回VB&#95;FALSE，如果是遍历到了当前Node，返回VB&#95;TRUE，这个逻辑大致是：</p></li>
 </ul>
 
-<p><img src="http://static.wooyun.org/drops/20150407/2015040707521537162.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040707521537162.png" alt="enter image description here"></p>
 
 <p>同样，每个CTreeNode可以是与CElement关联的（它也可以谁都不关联，称为未初始化的，也可以与文本关联）。而CTreePos即为描述CTreeNode的位置“指针”，CTreePos要描述的是节点在“树中的位置”。</p>
 
@@ -205,13 +205,13 @@
 
 <p>在IE8中，是：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150407/2015040707521582569.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040707521582569.png" alt="enter image description here"></p>
 
 <p>图：请看zzzzz被重复了两次</p>
 
 <p>IE8的输出结果是：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150407/2015040707521620486.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040707521620486.png" alt="enter image description here"></p>
 
 <p>而同样的代码，在IE11中则是：</p>
 
@@ -245,11 +245,11 @@ SCRIPT,1,7 : Parent is BODY
 
 <p>可见，IE8中元素I的区域明显异于IE11。IE11中为什么有如此改动呢？对比一下Chrome的结果即可知晓：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150407/2015040707521615521.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040707521615521.png" alt="enter image description here"></p>
 
 <p>对比可见IE11的输出和Chrome其实一样，在元素发生交叉时，将逻辑修改成了：重叠区域拆分成多个元素，而不是一直保持原始输入不变。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150407/2015040707521663420.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015040707521663420.png" alt="enter image description here"></p>
 
 <p>以上是Chrome的控制台结果，为了消除浏览器间的差异性，修改后的IE11的运行结果和Chrome变得一样了。</p>
 

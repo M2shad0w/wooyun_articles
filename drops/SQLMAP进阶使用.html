@@ -3,7 +3,7 @@
 			<head>
 			     <title>SQLMAP进阶使用 - MayIKissYou</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5254">http://drops.wooyun.org/tips/5254</a></h1>
 				
@@ -65,11 +65,11 @@ select * from users where user_id in(1,2,3,[4]) and first_name like '%[t]%' and 
 
 <p>Sqlmap在运行之后会加载读取xml文件，并且将结果保存到conf.tests中，如下图：</p>
 
-<p><img src="http://static.wooyun.org/20150317/2015031702345865859.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031702345865859.png" alt="enter image description here"></p>
 
 <p>这部分payload会在会在checkSqlInjection中使用：</p>
 
-<p><img src="http://static.wooyun.org/20150317/2015031702345959587.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031702345959587.png" alt="enter image description here"></p>
 
 <p>接下来只要知道如何使用这部分payload以及xml中各个字段是什么意思即可。</p>
 
@@ -145,7 +145,7 @@ vector字段表示的是payload向量，类似于一个模型的感觉。</p>
 
 <p>在函数中有一个重要的参数，boundary参数，这个参数是从xml目录下的boundaries.xml文件中读取出来的。每个boundary的格式如下图内容：</p>
 
-<p><img src="http://static.wooyun.org/20150317/2015031702345975532.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031702345975532.png" alt="enter image description here"></p>
 
 <p>其中level，clause以及where表达的意思和payload中相关标签表达的意思是一样的。 标签ptype表示参数的类型，prefix表示添加内容的前缀，suffix表示添加内容的后缀。</p>
 
@@ -167,17 +167,17 @@ vector字段表示的是payload向量，类似于一个模型的感觉。</p>
 
 <p>Sqlmap的相关payload在目录./sqmap/xml/payloads/目录下，新版目录下会有一个payloads的目录，里面有各种类型的sql注入的payload，选取盲注的xml，在其中编写一个test节点，内容如下图：</p>
 
-<p><img src="http://static.wooyun.org/20150317/2015031702345962174.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031702345962174.png" alt="enter image description here"></p>
 
 <p>（相关参数的解释在后面描述）</p>
 
 <p>然后自己创建一个存在<code>order by 1 [desc]</code>这种类型sql注入的php页面：</p>
 
-<p><img src="http://static.wooyun.org/20150317/2015031702345917689.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031702345917689.png" alt="enter image description here"></p>
 
 <p>这时候用我们修改过的sqlmap去发送，查看结果：</p>
 
-<p><img src="http://static.wooyun.org/20150317/2015031702350048345.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031702350048345.png" alt="enter image description here"></p>
 
 <h1>0x03 自定义bypass脚本</h1>
 
@@ -211,19 +211,19 @@ vector字段表示的是payload向量，类似于一个模型的感觉。</p>
 
 <p>这样看来要自定义的话这个脚本中得有个tamper函数，然后就是编写tamper函数的内</p>
 
-<p><img src="http://static.wooyun.org/20150317/2015031702350072122.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031702350072122.png" alt="enter image description here"></p>
 
 <h3>问题二：tamper脚本是什么时候被sqlmap调用的</h3>
 
 <p>tamper脚本在queryPage函数中被调用，queryPage函数是用来请求页面内容，在每次发送请求之前，先会将payload进行tamper函数处理。下图为调用between.py的脚本。</p>
 
-<p><img src="http://static.wooyun.org/20150317/2015031702350093521.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031702350093521.png" alt="enter image description here"></p>
 
 <h3>问题三：tamper脚本的里的内容有什么样的规范</h3>
 
 <p>我们随机选择一个脚本，该脚本为base64encode.py，查看脚本中的tamper内容：</p>
 
-<p><img src="http://static.wooyun.org/20150317/2015031702350195574.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031702350195574.png" alt="enter image description here"></p>
 
 <p>可以看到内容非常简单，将payload的内容内容做了base64编码然后直接返回。Tamper有两个参数第一个参数payload即为传入的实际要操作的payload，第二个参数**kwargs为相关httpheader。譬如你想插入或则修改header的时候可以用到。</p>
 
@@ -235,11 +235,11 @@ vector字段表示的是payload向量，类似于一个模型的感觉。</p>
 
 <p>以使用%a0替换空格的脚本为例，在tamper目录下创建space2ao.py脚本，稍微修改下脚本：</p>
 
-<p><img src="http://static.wooyun.org/20150317/2015031702350177840.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031702350177840.png" alt="enter image description here"></p>
 
 <p>使用sqlmap发送请求，去查看下web日志：</p>
 
-<p><img src="http://static.wooyun.org/20150317/2015031702350159198.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031702350159198.png" alt="enter image description here"></p>
 
 <p>Ps.感觉很容易的样子，这里不演示如何bypass逗号的情况，下面换一个方式来使sqlmap bypass逗号被过滤的情况。</p>
 
@@ -251,7 +251,7 @@ vector字段表示的是payload向量，类似于一个模型的感觉。</p>
 
 <p>这些内容在<code>sqlmap/xml</code>目录下的queries.xml目录中。截图下mysql标签中的一些内容：</p>
 
-<p><img src="http://static.wooyun.org/20150317/2015031702350272501.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031702350272501.png" alt="enter image description here"></p>
 
 <p>这个inference看起来就是用来猜字段用的，而且之前我们在第一篇自定义过这个[inference字段的]，是不是我们将</p>
 
@@ -267,15 +267,15 @@ vector字段表示的是payload向量，类似于一个模型的感觉。</p>
 
 <p>我们修改之后，跟踪下payload的值是否更改了：</p>
 
-<p><img src="http://static.wooyun.org/20150317/2015031702350290731.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031702350290731.png" alt="enter image description here"></p>
 
 <p>查看下是否能够爆出密码：</p>
 
-<p><img src="http://static.wooyun.org/20150317/2015031702350231223.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031702350231223.png" alt="enter image description here"></p>
 
 <p>查看下web日志，是否是发送的那样，解码之后结果可以看到mid的逗号已经被修改。</p>
 
-<p><img src="http://static.wooyun.org/20150317/2015031702350337752.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015031702350337752.png" alt="enter image description here"></p>
 
 <p>这样我们就可以让mid函数没有逗号了。其他的可以参考去修改queries中的相关内容就可以了。</p>
 

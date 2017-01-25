@@ -3,7 +3,7 @@
 			<head>
 			     <title>利用勒索软件Locky的漏洞来免疫系统 - netwind</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/14852">http://drops.wooyun.org/papers/14852</a></h1>
 				
@@ -22,7 +22,7 @@
 
 <p>这些小的改动可以是一个特别的互斥体或者一个注册表键的创建或者一个简单的系统参数的修改，但是这些改动不能对用户造成任何不便。这里有一个反例，Locky在开始执行的时候回检查系统语言，它不会感染系统语言是俄语的系统：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/2016041215283315944120.jpg" alt="p1"></p>
+<p><img src="../images_result/images/2016041215283315944120.jpg" alt="p1"></p>
 
 <p>因此，把系统语言改为俄语可以免受其感染，但是这样会给很多人造成使用上的不方便。</p>
 
@@ -32,11 +32,11 @@
 
 <p>在检查完语言后，Locky会尝试创建注册表项HKCU\Software\Locky ，如果创建失败，它就会立即终止。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/2016041215283595406216.jpg" alt="p2"></p>
+<p><img src="../images_result/images/2016041215283595406216.jpg" alt="p2"></p>
 
 <p>当这个键被创建以前我们利用ACLs来阻止任何人打开这个键，这样系统就得到了免疫。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/2016041215284027393310.jpg" alt="p3"></p>
+<p><img src="../images_result/images/2016041215284027393310.jpg" alt="p3"></p>
 
 <h1>0x02 注册表键completed 的值</h1>
 
@@ -44,7 +44,7 @@
 
 <p>Locky会检查注册表项HKCU\Software\Locky的键，查找ID（被感染机器系统标识），pubkey（服务器上的公钥，后面详述）， paytext（以它指定的语言格式，显示给用户的文字） 和completed值。最后一项的值代表着对用户系统的加密过程是否结束。按照Locky的定义：如果completed被设置为1,同时id值为正确的系统标识符，那么它将停止执行。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/201604121528428866746.jpg" alt="p4"></p>
+<p><img src="../images_result/images/201604121528428866746.jpg" alt="p4"></p>
 
 <p>这个标识符生成的算法比较简单，我们在测试机器上产生的结果如下：</p>
 
@@ -57,7 +57,7 @@
 
 <p>创建这样两个键值，其中id的值随着系统不同而不同，这样就能阻止Locky加密系统文件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/201604121528446537757.jpg" alt="p5"></p>
+<p><img src="../images_result/images/201604121528446537757.jpg" alt="p5"></p>
 
 <h1>0x03 破坏RSA密钥</h1>
 
@@ -78,11 +78,11 @@
 
 <p>第一行是后面字符串的MD5值，这个数据在发送前会进行简单的编码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/201604121528468253868.jpg" alt="p6"></p>
+<p><img src="../images_result/images/201604121528468253868.jpg" alt="p6"></p>
 
 <p>用类似的算法可以解码返回数据：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/201604121528491000078.jpg" alt="p7"></p>
+<p><img src="../images_result/images/201604121528491000078.jpg" alt="p7"></p>
 
 <p>这两个算法可以用几行Python代码实现：</p>
 
@@ -153,11 +153,11 @@ def decode(buff):
 
 <p>这个结构（除去MD5 hash部分）保存在上面提到的pubkey键值里，如果这个值存在，并且是一个错误的值，那么系统里的文件既不会被改名，也不会被加密。下图中，把pubkey用一个NULL字节填充，然后在测试机器上运行Locky，尽管Locky对txt格式的文件具有针对性，但是这时候桌面上的文件monfichier.txt 并没有发生变化。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/201604121528515035686.jpg" alt="p8"></p>
+<p><img src="../images_result/images/201604121528515035686.jpg" alt="p8"></p>
 
 <p>另外如果pubkey是一个RSA 1024密钥，文件将会被改名，但是不会被加密(“ceci est un secret”，法语：“这是一个秘密”):</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/201604121528533461395.jpg" alt="p9"></p>
+<p><img src="../images_result/images/201604121528533461395.jpg" alt="p9"></p>
 
 <h1>0x04 获取RSA 私钥</h1>
 
@@ -190,7 +190,7 @@ WriteFile(hPrivateKeyFile, (LPCVOID)pbPrivateKey, dwPrivateKeyLen, &amp;lpNumber
 
 <p>让我们仔细看看Locky是怎么加密文件的。当通过CryptAcquireContext()函数获得一个指向PROV&#95;RSA&#95;AES结构的CSP（密码库）句柄后，通过CryptImportKey()函数导入pubkey键值里包含有公钥的二进制数据，然后它把文件按<code>&lt;id&gt;&lt;16个随机字符&gt;.locky</code>格式改名。它通过CryptGenRandom()函数来产生16个随机字符：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/2016041215285592772105.jpg" alt="p10"></p>
+<p><img src="../images_result/images/2016041215285592772105.jpg" alt="p10"></p>
 
 <pre><code>#!bash
 (gdb) hexdump 0x009ef8a0 16
@@ -354,7 +354,7 @@ f5 ff 7e d4 20 65 73 74 20 75 6e 20 73 65 63 72 |..~. est un secr|
 
 <p>最终一个.Locky文件布局如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/20160412152858257211110.jpg" alt="p11"></p>
+<p><img src="../images_result/images/20160412152858257211110.jpg" alt="p11"></p>
 
 <p>可以按以下步骤来解密：</p>
 

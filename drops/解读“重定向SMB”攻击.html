@@ -3,7 +3,7 @@
 			<head>
 			     <title>解读“重定向SMB”攻击 - 腾讯电脑管家</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5723">http://drops.wooyun.org/papers/5723</a></h1>
 				
@@ -18,13 +18,13 @@
 
 <p>SMB是对CIFS(Common Internet File System)协议的扩展，主要用于访问网络上的共享文件以及打印服务。SMB和其它协议的关系如下：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041709064133351.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015041709064133351.png" alt="enter image description here"></p>
 
 <!--more-->
 
 <p>SMB可以直接使用TCP端口进行传输(端口445)，也可以使用NetBIOS进行传输(TCP端口139)。以直接TCP端口传输为例，每一条SMB消息必须有一个4字节的包头。包头第一个字节为0（network byte order，下同），紧跟着的3字节表示SMB消息的长度；包体是变长的。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041709064166673.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015041709064166673.png" alt="enter image description here"></p>
 
 <p>在windows vista以后，引入了SMB2协议，在原有的SMB协议基础上扩展了部分字段。</p>
 
@@ -32,7 +32,7 @@
 
 <p>NTLM支持 Challenge/Response方式进行加密通信，安全认证的消息序列如下：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041709064156910.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015041709064156910.png" alt="enter image description here"></p>
 
 <h1>0x02 利用HTTP重定向到SMB协议</h1>
 
@@ -40,19 +40,19 @@
 
 <p>以Win7x86+IE11为例，看看IE如何处理HTTP返回的重定向请求。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041709064170966.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015041709064170966.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041709064145290.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015041709064145290.png" alt="enter image description here"></p>
 
 <p>IE获得HTTP请求返回的状态码后，如果是代表重定向的301、302、303、307，跳转到处理重定向的逻辑，调用CINetHttp::RedirectRequest处理重定向请求。</p>
 
 <p>构造一个重定向到file协议的网页</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041709064258415.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015041709064258415.png" alt="enter image description here"></p>
 
 <p>当IE访问这个网页时，可以抓到访问SMB服务器的数据包</p>
 
-<p><img src="http://static.wooyun.org/drops/20150417/2015041709064211752.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2015041709064211752.png" alt="enter image description here"></p>
 
 <p>可见本机当前用户的登录凭证通过SMB2协议发送服务器进行认证了。如果这个服务器（上图中的10.4.75.32）是被恶意劫持过的“中间人”，那么用户的登录凭证就泄漏了。</p>
 

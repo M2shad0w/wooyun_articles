@@ -3,7 +3,7 @@
 			<head>
 			     <title>Samsung S Voice attack - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2736">http://drops.wooyun.org/tips/2736</a></h1>
 				
@@ -16,7 +16,7 @@
 
 <p>三星s voice是类似apple siri以及google voice的一款语音助手软件，通过此款软件可以释放双手通过语音命令操作手机。执行如拨打电话、发送短信、拍照等功能。由此可见此软件的权限是非常宽广的。</p>
 
-<p><img src="http://static.wooyun.org/20140808/2014080804365379134.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014080804365379134.png" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -89,11 +89,11 @@
 
 <p>http://developer.android.com/guide/topics/manifest/uses-permission-element.html http://developer.android.com/guide/topics/manifest/manifest-intro.html#perms http://developer.android.com/reference/android/Manifest.permission.html</p>
 
-<p><img src="http://static.wooyun.org/20140808/2014080804365415029.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014080804365415029.png" alt="enter image description here"></p>
 
 <p>恶意软件要获取手机通讯录中的联系人信息就必须申请READ&#95;CONTACTS 权限，读取信必须申请READ&#95;SMS ，发现短信要申请 SEND_SMS 权限。利用这一机制小伙伴如果发现某些不知名软件申请这些权限就果断点取消。更机智小伙伴就会利用权限管理软件把看片神器的除网络访问权限以为的权限都关闭掉。</p>
 
-<p><img src="http://static.wooyun.org/20140808/2014080804365558496.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014080804365558496.png" alt="enter image description here"></p>
 
 <h2>0x02 攻击思路</h2>
 
@@ -101,7 +101,7 @@
 
 <p>在权限管理软件的控制下恶意软件视乎难以再有所作为，是否有零权限的攻击方法了？ 这就要借助上文提到高权限软件s voice了，我们可以伪装一个恶意软件不申请任何敏感权限再借助S voice“提升权限”达到攻击效果。</p>
 
-<p><img src="http://static.wooyun.org/20140808/2014080804365568545.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014080804365568545.png" alt="enter image description here"></p>
 
 <h2>0x03 Demo</h2>
 
@@ -121,7 +121,7 @@ mp4.start();
 
 <p>demo应用未申请任何权限</p>
 
-<p><img src="http://static.wooyun.org/20140808/2014080804365655665.png" alt="enter image description here"></p>
+<p><img src="../images_result/images/2014080804365655665.png" alt="enter image description here"></p>
 
 <p>演示视频： http://v.youku.com/v&#95;show/id&#95;XNzUyNzk3MzYw.html</p>
 
@@ -137,7 +137,7 @@ mp4.start();
 6. 锁屏下攻击思路：
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140808/2014080804365627146.png" alt="enter image description here"></p>      <p></p>
+<p><img src="../images_result/images/2014080804365627146.png" alt="enter image description here"></p>      <p></p>
     
 			</body>
 		</html>

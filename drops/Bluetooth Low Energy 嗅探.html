@@ -3,7 +3,7 @@
 			<head>
 			     <title>Bluetooth Low Energy 嗅探 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/9651">http://drops.wooyun.org/tips/9651</a></h1>
 				
@@ -22,11 +22,11 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20151015/2015101502550077729128.png" alt=""></p>
+<p><img src="../images_result/images/2015101502550077729128.png" alt=""></p>
 
 <p>比如：运动手表，蓝牙智能鼠标，一些超昂贵的智能滑板又或者是一些医疗器材上。bluetooth smart的字样几乎随处可见。由于用户喜欢低功耗，厂家喜欢低成本它便成为了很受欢迎的一样东西。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/2015101502551382495227.png" alt=""></p>
+<p><img src="../images_result/images/2015101502551382495227.png" alt=""></p>
 
 <p>BLE和传统的蓝牙有着许多不同之处。它们使用不同的modulation参数，使用不同的频道（但仍然是2.4GHz），使用不同的频率跳变，使用不同的包格式，即使是数据白化方面也有着诸多不同。当然了，它们也存在一些共同之处。它们还是会使用传统的主控设备-从属设备模式。虽然它的ph层 link layer 层和传统的蓝牙不相同但l2cap层att层还是相同的。</p>
 
@@ -36,7 +36,7 @@
 
 <p>因为它是无线通讯，所以这很容易让我们联想到我们可以实施的一些攻击手段。如果可能的话，我们想去嗅探，想去进行包注入，在有必要的时候进行jamming来完成我们余下的攻击。听上去好像没有那么难，也没有那么新鲜。但实际上蓝牙嗅探实现起来却并没有想象的那么简单。对于wifi我们可以购买一张支持监听模式的网卡。但对于蓝牙根本就存在这么欢快的模式。这意味着我们需要一个这样的设备。两个选择，造一个或买一个。幸运的是已经有人做出来了，虽然在功能上还有许多问题（多在于控制成本，我觉得mike应该不会遇到技术上的困难。。），但对于ble嗅探来说还是可以胜任的。so 它就是ubertooth one。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/201510150255245658934.jpg" alt=""></p>
+<p><img src="../images_result/images/201510150255245658934.jpg" alt=""></p>
 
 <p>对于ubertooth one的环境搭建，我认为已经有了一个很友好的文章。所以，如果你在看完这篇文章后想买一个或者买了一个不知道怎么去配置你可以参考的下面这个链接中的文章。</p>
 
@@ -148,7 +148,7 @@ ubertooth 2014-02-R1 (<a class="__cf_email__" href="/cdn-cgi/l/email-protection"
 
 <p>让我们继续回到技术之上。我们想要的应该不是坐享其成。所以让我们试着了解一下ble，先看看ble栈长什么模样（如图1 所示）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/2015101502552858889412.png" alt=""></p>
+<p><img src="../images_result/images/2015101502552858889412.png" alt=""></p>
 
 <p>图1 BLE栈</p>
 
@@ -160,7 +160,7 @@ ubertooth 2014-02-R1 (<a class="__cf_email__" href="/cdn-cgi/l/email-protection"
 
 <p>让我们继续往上看，来看看 link layer。通过查阅ble的spec我们可以获知link layer的包格式看上去是这样：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/201510150255341771757.png" alt=""></p>
+<p><img src="../images_result/images/201510150255341771757.png" alt=""></p>
 
 <p>看上去link layer的格式并不复杂。它包含前导码，访问地址，PDU和CRC校验码。不过似乎有点问题。因为我们前面所提到的都是bits我们需要的是bits，而这里说的都是octets。如何获取我们想要的bits？首先通过ubertooth one我们可以截获海量的数据。所以我们有很多数据。但是我们需要区分开什么是什么。怎么做到呢？我们需要的就是等待我们的已知量access address的出现。根据spec加上小学数学功底，推出前后的数据都是什么。这样一来我们就拥有了整个link later的bits数据。 拥有了这两层之后我们就可以将RF转换成数据包了。</p>
 
@@ -218,11 +218,11 @@ ubertooth 2014-02-R1 (<a class="__cf_email__" href="/cdn-cgi/l/email-protection"
 
 <p><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f684999982b69d979a9f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop# ubertooth-specan-ui</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/201510150256039976266.png" alt=""></p>
+<p><img src="../images_result/images/201510150256039976266.png" alt=""></p>
 
 <p>手头上没有bluetooth smart设备？那咱就模拟一个。分别在ios设备1和ios设备2上从appstore下载并安装lightblue。设备A模拟主控设备，设备B模拟从属设备</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/201510150256414622171.jpg" alt=""></p>
+<p><img src="../images_result/images/201510150256414622171.jpg" alt=""></p>
 
 <p>在这里我们装扮成了一个心率计算设备。试图进行匹配。在这个时候攻击者需要提前准备。你可以选择使用pipe来实现实施监听。</p>
 
@@ -254,7 +254,7 @@ ubertooth 2014-02-R1 (<a class="__cf_email__" href="/cdn-cgi/l/email-protection"
 
 <p>抓到包之后我们最关心的问题是我们有没有抓到的足够的包来破解tk。所以在wireshark中你可以在filter处加上btsmp，确保抓到了我们需要的6个包。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/201510150256508156288.png" alt=""></p>
+<p><img src="../images_result/images/201510150256508156288.png" alt=""></p>
 
 <p>确定抓到了包之后我们去下载神器crackle。</p>
 
@@ -266,7 +266,7 @@ make install
 
 <p>安装完成后，开始借助cracle和我们抓到的包依次破解tk和ltk</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/201510150257204615397.png" alt=""></p>
+<p><img src="../images_result/images/201510150257204615397.png" alt=""></p>
 
 <p>从上图中我们可以看到我们不但破解了tk，还利用利用tk和其它一些数据成功的还原出了ltk。</p>
 
@@ -274,7 +274,7 @@ make install
 
 <p><code>crackle -l 7f62c053f104a5bbe68b1d896a2ed49c -i test44.pcap -o test66.pcap</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/2015101502581536639107.png" alt=""></p>
+<p><img src="../images_result/images/2015101502581536639107.png" alt=""></p>
 
 <p>可以看到我们成功地破解了7个包。</p>
 
