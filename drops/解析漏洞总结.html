@@ -3,14 +3,14 @@
 			<head>
 			     <title>解析漏洞总结 - erevus</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/539">http://drops.wooyun.org/papers/539</a></h1>
 				
       <p>
-        <h2>一、IIS 5.x/6.0解析漏洞</h2>
+        </p><h2>一、IIS 5.x/6.0解析漏洞</h2>
 
-<hr />
+<hr>
 
 <p>IIS 6.0解析利用方法有两种</p>
 
@@ -55,7 +55,7 @@
 
 <h2>二、IIS 7.0/IIS 7.5/ Nginx &lt;8.03畸形解析漏洞</h2>
 
-<hr />
+<hr>
 
 <p>Nginx解析漏洞这个伟大的漏洞是我国安全组织80sec发现的…</p>
 
@@ -76,7 +76,7 @@
 
 <h2>三、Nginx &lt;8.03 空字节代码执行漏洞</h2>
 
-<hr />
+<hr>
 
 <p>影响版:0.5.<em>,0.6.</em>, 0.7 &lt;= 0.7.65, 0.8 &lt;= 0.8.37</p>
 
@@ -93,7 +93,7 @@
 
 <h2>四、Apache解析漏洞</h2>
 
-<hr />
+<hr>
 
 <p>Apache 是从右到左开始判断解析,如果为不可识别解析,就再往左判断.</p>
 
@@ -107,7 +107,7 @@
 
 <h2>五、其他</h2>
 
-<hr />
+<hr>
 
 <p>在windows环境下，xx.jpg[空格] 或xx.jpg. 这两类文件都是不允许存在的，若这样命名，windows会默认除去空格或点,黑客可以通过抓包，在文件名后加一个空格或者点绕过黑名单.若上传成功，空格和点都会被windows自动消除,这样也可以getshell。</p>
 
@@ -116,7 +116,7 @@
 <pre><code>&lt;FilesMatch "wooyun.jpg"&gt; SetHandler application/x-httpd-php &lt;/FilesMatch&gt;
 </code></pre>
 
-<p>然后再上传shell.jpg的木马, 这样shell.jpg就可解析为php文件。</p>      </p>
+<p>然后再上传shell.jpg的木马, 这样shell.jpg就可解析为php文件。</p>      <p></p>
     
 			</body>
 		</html>

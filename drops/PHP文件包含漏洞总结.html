@@ -3,14 +3,14 @@
 			<head>
 			     <title>PHP文件包含漏洞总结 - Kuuki</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3827">http://drops.wooyun.org/tips/3827</a></h1>
 				
       <p>
-        <h2>0x00 前言</h2>
+        </p><h2>0x00 前言</h2>
 
-<hr />
+<hr>
 
 <p>PHP文件包含漏洞的产生原因是在通过PHP的函数引入文件时，由于传入的文件名没有经过合理的校验，从而操作了预想之外的文件，就可能导致意外的文件泄露甚至恶意的代码注入。最常见的就属于本地文件包含（Local File Inclusion）漏洞了。</p>
 
@@ -30,7 +30,7 @@ if ($_GET['func']) {
 
 <p>那么问题来了，如果我们提交http://example.com/index.php?func=upload/pic/evil.jpg ，且evil.jpg是由黑客上传到服务器上的一个图片，在图片的末尾添加了恶意的php代码，那么恶意的代码就会被引入当前文件执行。</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/file0001.png"><img src="http://static.wooyun.org/20141112/2014111204023183499.png" alt="" title="file0001" width="458" height="67" class="aligncenter size-full wp-image-3837" /></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/file0001.png"><img src="../images_result/images/2014111204023183499.png" alt="" title="file0001" width="458" height="67" class="aligncenter size-full wp-image-3837"></a></p>
 
 <p>如果被包含的文件中无有效的php代码，则会直接把文件内容输出。</p>
 
@@ -40,14 +40,14 @@ if ($_GET['func']) {
 
 <h2>0x01 普通本地文件包含</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!php
 &lt;?php include("inc/" . $_GET['file']); ?&gt;
 </code></pre>
 
 <ul>
-<li><p>包含同目录下的文件：<br />
+<li><p>包含同目录下的文件：<br>
 ?file=.htaccess</p></li>
 <li><p>目录遍历：</p></li>
 </ul>
@@ -113,7 +113,7 @@ if ($_GET['func']) {
 
 <h2>0x02 有限制的本地文件包含</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!php
 &lt;?php include("inc/" . $_GET['file'] . ".htm"); ?&gt; 
@@ -155,7 +155,7 @@ if ($_GET['func']) {
 
 <h2>0x03 普通远程文件包含</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!php
 &lt;?php include($_GET['file']); ?&gt;
@@ -203,7 +203,7 @@ if ($_GET['func']) {
 
 <h2>0x04 有限制的远程文件包含</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!php
 &lt;?php include($_GET['file'] . ".htm"); ?&gt; 
@@ -223,11 +223,11 @@ if ($_GET['func']) {
 
 <h2>0x05 延伸</h2>
 
-<hr />
+<hr>
 
 <p>其实在前面也说了，这些漏洞产生原因是PHP函数在引入文件时，传入的文件名没有经过合理的校验，从而操作了预想之外的文件。实际上我们操作文件的函数不只是include()一个，上面提到的一些截断的方法同样可以适用于以下函数：</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/file0002.png"><img src="http://static.wooyun.org/20141112/2014111204023129613.png" alt="" title="file0002" width="193" height="326" class="aligncenter size-full wp-image-3838" /></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/file0002.png"><img src="../images_result/images/2014111204023129613.png" alt="" title="file0002" width="193" height="326" class="aligncenter size-full wp-image-3838"></a></p>
 
 <p>参考文章:</p>
 
@@ -245,7 +245,7 @@ if ($_GET['func']) {
 
 <p>http://websec.wordpress.com/2010/02/22/exploiting-php-file-inclusion-overview/</p>
 
-<p>http://diablohorn.wordpress.com/2010/01/16/interesting-local-file-inclusion-method/</p>      </p>
+<p>http://diablohorn.wordpress.com/2010/01/16/interesting-local-file-inclusion-method/</p>      <p></p>
     
 			</body>
 		</html>

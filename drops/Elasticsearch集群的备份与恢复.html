@@ -3,19 +3,19 @@
 			<head>
 			     <title>Elasticsearch集群的备份与恢复 - rootsecurity</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12673">http://drops.wooyun.org/tips/12673</a></h1>
 				
       <p>
-        <h1>0x00 NFS准备</h1>
+        </p><h1>0x00 NFS准备</h1>
 
-<hr />
+<hr>
 
 <p>在ES集群上做一个NFS，并挂载：</p>
 
-<pre><code>[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3c4e5353487c50535f5d5054534f48">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~]# yum install nfs-utils*
-[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7a0815150e3a1615191b161215090e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~]# vi /etc/exports
+<pre><code>[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3c4e5353487c50535f5d5054534f48">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~]# yum install nfs-utils*
+[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7a0815150e3a1615191b161215090e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~]# vi /etc/exports
 </code></pre>
 
 <p>输入集群的IP地址，例如：</p>
@@ -29,19 +29,19 @@
 
 <p>保存退出,并启动NFS服务</p>
 
-<pre><code>[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="384a57574c7854575b595450574b4c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~]# service nfs start
-[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8bf9e4e4ffcbe7e4e8eae7e3e4f8ff">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~]# service rpcgissd start
-[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8bf9e4e4ffcbe7e4e8eae7e3e4f8ff">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~]# service rpcbind start
+<pre><code>[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="384a57574c7854575b595450574b4c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~]# service nfs start
+[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8bf9e4e4ffcbe7e4e8eae7e3e4f8ff">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~]# service rpcgissd start
+[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8bf9e4e4ffcbe7e4e8eae7e3e4f8ff">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~]# service rpcbind start
 </code></pre>
 
 <p>挂载NFS</p>
 
-<pre><code>[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9ceef3f3e8dcf0f3fffdf0f4f3efe8">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~]# mount elasticsearch.master:/data/es/es_backup /data/es/es_backup
+<pre><code>[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9ceef3f3e8dcf0f3fffdf0f4f3efe8">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~]# mount elasticsearch.master:/data/es/es_backup /data/es/es_backup
 </code></pre>
 
 <h1>0x01 配置</h1>
 
-<hr />
+<hr>
 
 <p>在elasticsearch.master端执行:</p>
 
@@ -64,7 +64,7 @@
 
 <h1>0x02 备份常用命令</h1>
 
-<hr />
+<hr>
 
 <p>查看备份状态:</p>
 
@@ -83,7 +83,7 @@
 
 <h1>0x03 最后附备份脚本</h1>
 
-<hr />
+<hr>
 
 <pre><code>#!python
 # -*- coding:UTF-8 -*- #
@@ -148,7 +148,7 @@ if __name__=='__main__':
 
     else:
         print '%s 备份失败' % index
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

@@ -3,16 +3,16 @@
 			<head>
 			     <title>WordPress < 3.6.1 PHP 对象注入漏洞 - 五道口杀气</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/596">http://drops.wooyun.org/papers/596</a></h1>
 				
       <p>
-        <p>From:<a href="http://vagosec.org/2013/09/wordpress-php-object-injection/">WordPress &lt; 3.6.1 PHP Object Injection</a></p>
+        </p><p>From:<a href="http://vagosec.org/2013/09/wordpress-php-object-injection/">WordPress &lt; 3.6.1 PHP Object Injection</a></p>
 
 <h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>当我读到一篇关于Joomla的“PHP对象注射”的漏洞blog后，我挖深了一点就发现Stefan Esser大神在2010年黑帽大会的文章：</p>
 
@@ -81,7 +81,7 @@ echo serialize($foo);
 
 <h2>0x01 wordpress的安全问题</h2>
 
-<hr />
+<hr>
 
 <p>Stefan Esser's的黑帽演讲中，他提到Wordpress是一款使用了serialize和unserialize函数的知名应用。在他的幻灯片中，unserialize用来接收来自Wordpress站点上的数据。所以攻击者可以在受害站点上发起一次中间人攻击。他可以修改来自Wordpress站点的返回数据，把他的代码加进去。有趣的是就在我编写这篇文章的时候，Wordpress最新的版本也包含这个问题（距离那演讲似乎过去三年了），想象一下，如果有黑客可以劫持WordPress.org的DNS会发生什么事情吧。</p>
 
@@ -185,7 +185,7 @@ function maybe_serialize( $data ) {
 
 <h2>0x02 WordPress 利用</h2>
 
-<hr />
+<hr>
 
 <p>现在我们展示了WordPress存在PHP对象注入漏洞。让我们尝试利用它。所以为了利用该漏洞（通过注入对象的方法），我们需要找到一个符合以下条件的class：</p>
 
@@ -238,7 +238,7 @@ __wakeup()
 
 <h2>0x03 修复WordPress</h2>
 
-<hr />
+<hr>
 
 <p>这个修复方式是修改is_serialized函数，我简单的说说：</p>
 
@@ -289,7 +289,7 @@ function is_serialized( $data, $strict = true ) {
 <pre><code>ALTER TABLE wp_commentmeta CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ALTER TABLE wp_postmeta CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ALTER TABLE wp_usermeta CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

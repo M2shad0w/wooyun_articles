@@ -3,20 +3,20 @@
 			<head>
 			     <title>某EXCEL漏洞样本shellcode分析 - 椒图科技</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4339">http://drops.wooyun.org/papers/4339</a></h1>
 				
       <p>
-        <h2>0x00 起因</h2>
+        </p><h2>0x00 起因</h2>
 
-<hr />
+<hr>
 
 <p>近日我得到一个EXCEL样本，据称是一个过所有杀软的0day，经过分析之后让我大失所望，这是一个2012年的老漏洞，根本不是0day。虽然没捡到0day，但是这个样本中的shellcode还是相当有特色的，确实可以绕过大多数的杀毒软件和主动防御。 下面就来分析一下这个EXCEL EXP所使用漏洞和shellcode技术。</p>
 
 <h2>0x01 漏洞分析</h2>
 
-<hr />
+<hr>
 
 <p>该漏洞是CVE-2012-0158，一个栈溢出漏洞，漏洞成因是MSCOMCTL.OCX在解析一个标志为Cobj的结构的时候直接使用文件内容的数据作为拷贝长度，导致拷贝数据的时候可以覆盖函数返回地址，造成了一个标准的栈溢出漏洞。</p>
 
@@ -95,11 +95,11 @@
 
 <h2>0x02 Shellcode1</h2>
 
-<hr />
+<hr>
 
 <p>该exp使用了MSCOMCTL.DLL里的一个JMP ESP地址作为RET，这样可以使EXP做到与操作系统版本无关，只与OFFICE版本有关：</p>
 
-<p><img src="http://static.wooyun.org/20141218/2014121802260653861.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014121802260653861.jpg" alt="enter image description here"></p>
 
 <p>然后跳转回堆栈之后会先执行一小段EGGHUNTER SHELLCODE，去解码并跳转到真正的SHELLCODE。</p>
 
@@ -207,7 +207,7 @@
 
 <h2>0x03 Shellcode2</h2>
 
-<hr />
+<hr>
 
 <p>第二段shellcode是此exp的真正精华所在，这段shellcode应该也是使用C语言编写的，长度非常的长，主要做了以下几件事情：</p>
 
@@ -637,7 +637,7 @@ ImageBaseAddress = (DWORD *) contx.Ebx+8;
 
 <h2>0x04 木马exe</h2>
 
-<hr />
+<hr>
 
 <p>虽然这个木马并没有什么特殊之处，我也顺便分析了一下。</p>
 
@@ -647,7 +647,7 @@ ImageBaseAddress = (DWORD *) contx.Ebx+8;
 
 <h2>0x05 总结</h2>
 
-<hr />
+<hr>
 
 <p>这个xls样本虽然是个老漏洞，但是其shellcode还是很有创意，值得学习的。最大的亮点有两个：</p>
 
@@ -655,7 +655,7 @@ ImageBaseAddress = (DWORD *) contx.Ebx+8;
 
 <p>另一个是借EXCEL进程的壳来执行木马exe，以绕过主防对木马的拦截。</p>
 
-<p>from:http://blog.jowto.com/?p=81</p>      </p>
+<p>from:http://blog.jowto.com/?p=81</p>      <p></p>
     
 			</body>
 		</html>

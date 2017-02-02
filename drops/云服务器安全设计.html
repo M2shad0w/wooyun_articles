@@ -3,14 +3,14 @@
 			<head>
 			     <title>云服务器安全设计 - bt0sea</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12755">http://drops.wooyun.org/tips/12755</a></h1>
 				
       <p>
-        <h1>0x00 产品定位</h1>
+        </p><h1>0x00 产品定位</h1>
 
-<hr />
+<hr>
 
 <p>目前越来越多的初创企业把自己的业务系统架设在公有云上，包含：阿里云、Ucloud、青云、华为云和AWS。在云上的安全怎么保证，是目前摆在我们面前的最大问题，因为，互联网公司业务系统在不断迭代，迭代周期最少的有3天，而且架构也不断在改变。在这种频繁改变的过程中，云安全应该怎么保证？，云主机安全服务平台（Cloud security as a service），为多租户提供云主机安全服务的产品，减少用户业务系统攻击面，防止恶意的定向攻击（APT）。造成企业敏感信息泄露等，避免影响企业业务的安全事件的发生。</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 国外竞争产品分析</h1>
 
-<hr />
+<hr>
 
 <p>目前在云主机安全ToB的国外厂商归纳总结有以下几家：</p>
 
@@ -86,7 +86,7 @@
 
 <h1>0x02 产品目标</h1>
 
-<hr />
+<hr>
 
 <p>针对互联网金融中小企业用户。获取用户改进产品，互联网金融目标用户行业分析如下：</p>
 
@@ -139,7 +139,7 @@
 
 <h1>0x03 市场机会</h1>
 
-<hr />
+<hr>
 
 <h3>3.1 我们的机会在哪里</h3>
 
@@ -194,7 +194,7 @@
 
 <h3>3.3 项目里程碑</h3>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021407003838200117.jpg" alt="p1" /></p>
+<p><img src="../images_result/images/2016021407003838200117.jpg" alt="p1"></p>
 
 <h1>0x04 产品功能详细架构设计（Product Proposal）</h1>
 
@@ -202,7 +202,7 @@
 
 <p>通过以上国内外云安全公司产品分析，我认为云主机安全平台需要具备以下四个大功能模块。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/201602140700402487727.jpg" alt="p2" /></p>
+<p><img src="../images_result/images/201602140700402487727.jpg" alt="p2"></p>
 
 <p>开发的优先级如下：</p>
 
@@ -217,21 +217,21 @@
 
 <p>针对P1需要完成的功能，建立基于大数据分析平台，防范APT攻击。产品概念设计可以 为：基于日志的态势感知功能。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/201602140700411333036.jpg" alt="p3" /></p>
+<p><img src="../images_result/images/201602140700411333036.jpg" alt="p3"></p>
 
 <p>处理Web日志数据结构如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/201602140700436673846.jpg" alt="p4" /></p>
+<p><img src="../images_result/images/201602140700436673846.jpg" alt="p4"></p>
 
 <p>所选择的实现技术手段：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/201602140700444508056.jpg" alt="p5" /></p>
+<p><img src="../images_result/images/201602140700444508056.jpg" alt="p5"></p>
 
 <p>由于前期数据量没有到达一定的数量级，可以使用传统的关系型数据实现。当然如果本系统应用到大公司的时候可以迭代技术架构、hadoop或者storm来解决问题。</p>
 
 <p>业务流程图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/201602140700467897666.jpg" alt="p6" /></p>
+<p><img src="../images_result/images/201602140700467897666.jpg" alt="p6"></p>
 
 <p>核心界面设计：通过visio原型图表现。</p>
 
@@ -248,29 +248,29 @@
 <li>Configuration：参数配置（非核心模块就不展示了）</li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20160214/201602140700474756975.jpg" alt="p7" /></p>
+<p><img src="../images_result/images/201602140700474756975.jpg" alt="p7"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/201602140700499292884.jpg" alt="p8" /></p>
+<p><img src="../images_result/images/201602140700499292884.jpg" alt="p8"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/201602140700512461893.jpg" alt="p9" /></p>
+<p><img src="../images_result/images/201602140700512461893.jpg" alt="p9"></p>
 
 <p>（2）Web管理后台</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021407005490606103.jpg" alt="p10" /></p>
+<p><img src="../images_result/images/2016021407005490606103.jpg" alt="p10"></p>
 
 <p>交互流程设计：正常应该通过Axure动画表现，由于本次设计不是特别复杂，只是几个功能模块的切换就不画交换流程图了。</p>
 
 <h1>0x05 产品技术架构设计</h1>
 
-<hr />
+<hr>
 
 <p>由于目前产品设计需要考虑高扩展性，所以技术选型大致如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021407005574406118.jpg" alt="p11" /></p>
+<p><img src="../images_result/images/2016021407005574406118.jpg" alt="p11"></p>
 
 <h1>0x06 Demo搭建</h1>
 
-<hr />
+<hr>
 
 <p>根据技术选型后，需要建立Demo 环境技术难点集中在服务器端和Web后端。那么下面说明一下这两部分搭建：</p>
 
@@ -318,14 +318,14 @@
 <p>Nginx部署过程：</p>
 
 <ol>
-<li><code>rpm -ivh</code><br />
+<li><code>rpm -ivh</code><br>
 <code>http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm</code></li>
 <li><code>yum -y install nginx</code></li>
 <li><code>service nginx restart</code></li>
 <li><code>chkconfig nginx on</code></li>
 </ol>
 
-<p>配置nginx<br />
+<p>配置nginx<br>
 在/etc/nginx/conf.d/中增加MyPythonServer.conf，内容如下：</p>
 
 <pre><code>#!bash
@@ -355,9 +355,9 @@ http {
 <p><strong>6.1.2 Django&amp;uwsgi安装配置</strong></p>
 
 <pre><code>#!bash
-[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2d5f4242596d41424e4c4145425e59">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> venv]# pip install Django
+[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2d5f4242596d41424e4c4145425e59">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> venv]# pip install Django
 安装uWSGI
-[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8cfee3e3f8cce0e3efede0e4e3fff8">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> venv]# pip install uwsgi
+[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8cfee3e3f8cce0e3efede0e4e3fff8">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> venv]# pip install uwsgi
 
 [uwsgi]
 home=/data/Mydata/env
@@ -527,7 +527,7 @@ make &amp;&amp; make install
 
 vim /usr/local/php5/etc/php.ini
 extension=yaf.so
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

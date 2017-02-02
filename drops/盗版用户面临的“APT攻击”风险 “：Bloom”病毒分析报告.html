@@ -3,14 +3,14 @@
 			<head>
 			     <title>盗版用户面临的“APT攻击”风险 “：Bloom”病毒分析报告 - 火绒安全</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/16587">http://drops.wooyun.org/papers/16587</a></h1>
 				
       <p>
-        <h1>0x00 概述</h1>
+        </p><h1>0x00 概述</h1>
 
-<hr />
+<hr>
 
 <h2>1. 盗版软件用户和“APT 攻击”</h2>
 
@@ -38,7 +38,7 @@
 
 <h1>0x01 样本分析</h1>
 
-<hr />
+<hr>
 
 <p>“Bloom”病毒是一组通过修改浏览器快捷方式的手段劫持用户流量的恶意程序。通过火绒的“威胁情报分析系统”,我们发现该病毒通常会藏匿于以下几个路径名中:</p>
 
@@ -54,13 +54,13 @@ C:\Program Files\Windows Defender\DATA\Supervisory
 
 <p>经过我们一段时间的追踪,我们发现在当前互联网环境中活跃“Bloom”病毒的两个版本,我们暂且称他们为“Bloom”病毒的“第一代”和“第二代”。如下图所示:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160604/2016060407232227626118.png" alt="" /></p>
+<p><img src="../images_result/images/2016060407232227626118.png" alt=""></p>
 
 <p>图 2-1. “Bloom”病毒“第一代”(左)与“第二代”(右)概览</p>
 
 <p>两代病毒都是通过名为“360.bat”的批处理脚本进行病毒相关的初始化操作。如下图所示:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160604/2016060407232462983213.png" alt="" /></p>
+<p><img src="../images_result/images/2016060407232462983213.png" alt=""></p>
 
 <p>图 2-2. “360.bat”内容概览</p>
 
@@ -80,17 +80,17 @@ http://www.i**8.com/?fw -&gt; https://web.sogou.com/?12242-0001
 
 <p>由于“Prison.exe”中指向的网址是固定的,病毒作者为了增加“锁首”的“灵活性”,还为“第一代”病毒设置了更新程序“360TidConsole.exe”。每隔一分钟就会检测“Prison.exe” ,如果本地的病毒版本过旧,就会通过访问<code>http://update.qido***ashi.com/</code>下的“version.txt”获取最新的病毒版本。如果版本不统一,则会通过该站点下的“download.txt”获取病毒下载地址进行更新。为了增加其病毒的隐蔽性,“第一代”病毒还试图仿冒微软签名欺骗用户,如下图:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160604/2016060407232588236313.png" alt="" /></p>
+<p><img src="../images_result/images/2016060407232588236313.png" alt=""></p>
 
 <p>图 2-3. “第一代”病毒仿冒的微软签名展示</p>
 
 <p>“第二代”病毒较前者去掉了病毒的更新功能,添加了“preservice.exe”用于结束一些主流安全软件的安装程序进程。由于病毒“入场”时间早于安全软件,在与安全软件对抗的时候大大降低的技术成本。如下图:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160604/2016060407232724637413.png" alt="" /></p>
+<p><img src="../images_result/images/2016060407232724637413.png" alt=""></p>
 
 <p>图 2-4. “preservice.exe”结束进程概览“第二代”病毒为了绕过国内个别安全软件的查杀,每个可执行文件都加上自己的签名。如下图:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160604/201606040723298001855.png" alt="" /></p>
+<p><img src="../images_result/images/201606040723298001855.png" alt=""></p>
 
 <p>图 2-5. “第二代”病毒所使用的签名</p>
 
@@ -98,11 +98,11 @@ http://www.i**8.com/?fw -&gt; https://web.sogou.com/?12242-0001
 
 <h1>0x02 追根溯源</h1>
 
-<hr />
+<hr>
 
 <p>通过病毒更新时使用的域名(<code>http://update.qido***ashi.com</code>),我们找到了与病毒相关的一个“U 盘启动制作工具”——“启动大师”的官网。如下图:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160604/201606040723313198964.png" alt="" /></p>
+<p><img src="../images_result/images/201606040723313198964.png" alt=""></p>
 
 <p>图 3-1. 与病毒相关的“U 盘启动制作工具”官网</p>
 
@@ -110,19 +110,19 @@ http://www.i**8.com/?fw -&gt; https://web.sogou.com/?12242-0001
 
 <p>在用“启动大师”制作了 PE 启动盘后,我们进入了其预设好的 PE 系统。“启动大师”运行效果图如下:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160604/201606040723334063774.png" alt="" /></p>
+<p><img src="../images_result/images/201606040723334063774.png" alt=""></p>
 
 <p>图 3-2. “启动大师”运行效果图</p>
 
 <p>在进入 PE 系统之后,我们发现“启动大师”的 Ghost 工具跃然于桌面,似乎有一种“恭候多时”的殷切。效果如下图:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160604/201606040723343904885.png" alt="" /></p>
+<p><img src="../images_result/images/201606040723343904885.png" alt=""></p>
 
 <p>图 3-3. 使用“启动大师”制作的 PE 系统效果图</p>
 
 <p>我们随即找到了该程序所在的位置,如下图:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160604/201606040723368080695.png" alt="" /></p>
+<p><img src="../images_result/images/201606040723368080695.png" alt=""></p>
 
 <p>图 3-4. 与病毒相关的 Ghost 还原程序总览</p>
 
@@ -134,7 +134,7 @@ http://www.i**8.com/?fw -&gt; https://web.sogou.com/?12242-0001
 
 <p>“qddsghost.exe”所释放的文件都存在其资源中,资源 Type(EXEFILE)&#95;Name(AD)&#95;Lang(0x804)是一个批处理文件(下文称“ad.bat”)其起到了整体的调度分配作用。该批处理文件内容如下:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160604/2016060407233850514104.png" alt="" /></p>
+<p><img src="../images_result/images/2016060407233850514104.png" alt=""></p>
 
 <p>图 3-5. “ad.bat”内容总览</p>
 
@@ -152,7 +152,7 @@ http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_26101802_0_0&amp
 
 <p>3) 释放 Apache、搭建本地 PHP 跳转页面“黑吃黑”:其先下载 <code>http://host.66***5.com/index3.txt</code> 中存放的 hosts 文件,之后通过修改系统 hosts 文件将其过滤列表中的网址 IP 改为“127.0.0.1”(其搭建的跳转页),最后通过跳转页跳转至推广页面。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160604/2016060407234037136119.png" alt="" /></p>
+<p><img src="../images_result/images/2016060407234037136119.png" alt=""></p>
 
 <p>图 3-6. 病毒在本地搭建的 PHP 跳转页面</p>
 
@@ -160,7 +160,7 @@ http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_26101802_0_0&amp
 
 <p>4) 释放安全软件的白名单库:<code>Type(EXEFILE)_Name(BAIDUSD7)_Lang(0x804)</code>和<code>Type(EXEFILE)_Name(QQPCMGR)_Lang(0x804)</code>都是压缩包,前者压缩的文件是百度杀毒的白名单数据库,后者为腾讯电脑管家的白名单数据库及相关配置。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160604/2016060407234227433125.png" alt="" /></p>
+<p><img src="../images_result/images/2016060407234227433125.png" alt=""></p>
 
 <p>图 3-7. 百度杀毒白名单数据库设置</p>
 
@@ -172,7 +172,7 @@ http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_26101802_0_0&amp
 
 <p>下图中显示了 srcdll.dll 文件释放出来的文件之间的相互关系,其首先会释放最上边的三个深色的可执行文件,通过对这三个文件的运行和分析,我们又得到了四组恶意程序。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160604/2016060407234395485135.png" alt="" /></p>
+<p><img src="../images_result/images/2016060407234395485135.png" alt=""></p>
 
 <p>图 3-8. srcdll.dll 释放文件关系图(图中标号与下文对应)</p>
 
@@ -180,7 +180,7 @@ http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_26101802_0_0&amp
 
 <p>第二组:“Home.exe”和“pic.exe”都会修改 IE 首页,“pf.exe”是释放出了很多网址链接文件和加了网址参数浏览器快捷方式用于其进行“流量变现”,在 WIN7 系统下其还会释放“淘宝商城.exe”,该程序会打开带有推广付费号的“爱淘宝”网址链接。“pf.exe”程序运行效果图如下:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160604/2016060407234541973144.png" alt="" /></p>
+<p><img src="../images_result/images/2016060407234541973144.png" alt=""></p>
 
 <p>图 3-9. “pf.exe”运行效果图</p>
 
@@ -188,7 +188,7 @@ http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_26101802_0_0&amp
 
 <p>第四组:“Project1.exe”会将“360safte.dll ”注册为 BHO(Browser Helper Object)插件,其会劫持浏览器访问的网址。该插件会根据自己在 <code>http://bho.66***5.com/config.txt</code> 上的劫持列表,在浏览器访问其中的网址时将其劫持为带有推广付费号的网址链接。如果系统中还有其他的程序在进行广告推广时,这些流量最终都会流进病毒作者的“腰包”,使得该病毒不但成为了其截取流量的工具,也成为了其用来“黑吃黑”的牟利工具。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160604/2016060407234791148155.png" alt="" /></p>
+<p><img src="../images_result/images/2016060407234791148155.png" alt=""></p>
 
 <p>图 3-10. 病毒劫持网址列表</p>
 
@@ -214,7 +214,7 @@ http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_26101802_0_0&amp
 
 <h1>0x03 结论</h1>
 
-<hr />
+<hr>
 
 <p>随着国内互联网环境的日益复杂,如今的用户所面对环境的复杂程度史无前例。内有“启动大师”这样的“流氓当道”,外有勒索病毒一类高威胁性病毒对我们的虎视眈眈,对于一个普通用户而言,能够保证自己远离这些威胁已经实属不易。但是随着当今互联网中“套利方式”的不断翻新,每天互联网中都会出现新的病毒、流氓软件威胁用户的信息安全和切身利益。</p>
 
@@ -224,11 +224,11 @@ http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_26101802_0_0&amp
 
 <h1>0x04 附录</h1>
 
-<hr />
+<hr>
 
 <p>文中涉及样本 SHA1</p>
 
-<p><img src="http://static.wooyun.org//drops/20160604/2016060407234857256164.png" alt="" /></p>      </p>
+<p><img src="../images_result/images/2016060407234857256164.png" alt=""></p>      <p></p>
     
 			</body>
 		</html>

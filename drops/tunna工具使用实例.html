@@ -3,12 +3,12 @@
 			<head>
 			     <title>tunna工具使用实例 - mickey</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/650">http://drops.wooyun.org/tools/650</a></h1>
 				
       <p>
-        <h3>原理:就是个HTTP tunneling工具</h3>
+        </p><h3>原理:就是个HTTP tunneling工具</h3>
 
 <pre><code>#!php
  +-------------------------------------------+                     +-------------------------------------------+
@@ -36,7 +36,7 @@
 
 <p>直接扫描发现3389是关闭的</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c9a4a0aaa2acb089b9aca7bdacbabd">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# nmap -sS -p3389 219.x.x.x
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c9a4a0aaa2acb089b9aca7bdacbabd">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~# nmap -sS -p3389 219.x.x.x
 
 Starting Nmap 6.40 ( http://nmap.org ) at 2013-09-26 22:47 EDT
 Nmap scan report for 219.x.x.x
@@ -64,7 +64,7 @@ PORT     STATE SERVICE
 
 <p>就可以连接到目标的3389了</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071408055431067.jpg" alt="如图1" /></p>
+<p><img src="../images_result/images/2014071408055431067.jpg" alt="如图1"></p>
 
 <h3>实例2:</h3>
 
@@ -79,7 +79,7 @@ PORT     STATE SERVICE
 ssh localhost -p 1234
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403022461042.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071403022461042.jpg" alt="enter image description here"></p>
 
 <h3>实例3:</h3>
 
@@ -117,7 +117,7 @@ msf exploit(tunna_exploit) &gt; exploit -j
 
 <p>conn.jsp Tested on Apache Tomcat (windows + linux) conn.aspx Tested on IIS 6+8 (windows server 2003/2012) conn.php Tested on LAMP + XAMPP + IIS (windows + linux)</p>
 
-<p>使用的时候需要注意:metasploit里的脚本只对应metasploit使用.</p>      </p>
+<p>使用的时候需要注意:metasploit里的脚本只对应metasploit使用.</p>      <p></p>
     
 			</body>
 		</html>

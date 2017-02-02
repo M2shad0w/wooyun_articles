@@ -3,14 +3,14 @@
 			<head>
 			     <title>Openssl多个安全补丁简易分析危害及修复方案 - livers</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/2185">http://drops.wooyun.org/papers/2185</a></h1>
 				
       <p>
-        <h2>0x00 概述</h2>
+        </p><h2>0x00 概述</h2>
 
-<hr />
+<hr>
 
 <p>心脏出血（CVE-2014-0160）后，Openssl 拿出专项资金进行了代码审计，于6月5号晚发布了所发现的漏洞公告。</p>
 
@@ -18,7 +18,7 @@
 
 <p>总结如图：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403383225613.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071403383225613.jpg" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -26,7 +26,7 @@
 
 <h2>0x01 详情</h2>
 
-<hr />
+<hr>
 
 <h3>1. CVE-2014-0224 ChangeCipherSpec 注入</h3>
 
@@ -34,7 +34,7 @@
 
 <h4>漏洞原理</h4>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403404820943.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071403404820943.png" alt="enter image description here"></p>
 
 <p>按照TLS的协议 在固定的时间顺序内服务端发送和接收ChangeCipherSpec（更改密钥规格）数据，但是实际上openssl的实现：</p>
 
@@ -143,7 +143,7 @@ SNMPv3
 
 <h2>0x02 修复</h2>
 
-<hr />
+<hr>
 
 <h3>1. 升级到Openssl最新版</h3>
 
@@ -161,7 +161,7 @@ SNMPv3
 
 <h3>2. 升级完后 记得重启是配置生效。</h3>
 
-<p>受影响的客户端及时进行补丁更新。:）</p>      </p>
+<p>受影响的客户端及时进行补丁更新。:）</p>      <p></p>
     
 			</body>
 		</html>

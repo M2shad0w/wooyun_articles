@@ -3,14 +3,14 @@
 			<head>
 			     <title>4A安全性分析 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4484">http://drops.wooyun.org/tips/4484</a></h1>
 				
       <p>
-        <h1>0x00.概述</h1>
+        </p><h1>0x00.概述</h1>
 
-<hr />
+<hr>
 
 <h3>0.1 起因</h3>
 
@@ -24,7 +24,7 @@
 
 <h1>0x01.认证Authentication</h1>
 
-<hr />
+<hr>
 
 <p>认证的方式一般有以下几种：</p>
 
@@ -68,11 +68,11 @@ echo 'false';
 
 <h1>0x02.账号Account</h1>
 
-<hr />
+<hr>
 
 <p>4A中账号分为主账号和从账号，一个用户只会有一个主账号，唯一标识了他的身份。这个主账号还会有N个从账号，对不同的系统会有不同的从账号，方便用户访问其可以访问的系统。如下图</p>
 
-<p><img src="http://static.wooyun.org/drops/20150104/20150104092808535462_user.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/20150104092808535462_user.jpg" alt="enter image description here"></p>
 
 <h3>2.1 重置用户密码</h3>
 
@@ -84,17 +84,17 @@ echo 'false';
 
 <p>token在4A中可谓是到处都是，那么如果token验证不严谨，很可能出现戏剧性的结果。接下来这个漏洞给大家展示token失效的时候。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150331/201503310303291499111.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/201503310303291499111.jpg" alt="enter image description here"></p>
 
 <p>这个页面不是通过4A登录过来的，而是直接访问网站的登录界面，登录后的页面。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150331/201503310303276203921.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/201503310303276203921.jpg" alt="enter image description here"></p>
 
 <p>上面的图是通过4A登录后，访问系统时，将URL和username修改为管理员的页面和用户名，然后可以看到，页面显示的就是管理员的页面了。</p>
 
 <h1>0x03.授权Authorization</h1>
 
-<hr />
+<hr>
 
 <p>授权一般分为：</p>
 
@@ -112,7 +112,7 @@ echo 'false';
 
 <p>如下图，是通过分配的IE浏览器，直接调用出cmd窗口，接下来，你想干什么，都OK。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150331/20150331030325373533.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/20150331030325373533.jpg" alt="enter image description here"></p>
 
 <h3>3.2 越权问题</h3>
 
@@ -171,7 +171,7 @@ public function download(){
 
 <h1>0x04.审计Audit</h1>
 
-<hr />
+<hr>
 
 <p>审计主要是对登录、访问等所有的动作记录日志，查看是否有不合规的事件。</p>
 
@@ -183,10 +183,10 @@ public function download(){
 
 <h1>0x05. 总结</h1>
 
-<hr />
+<hr>
 
-<p>以上只是列举了我在测试4A或堡垒机时遇到过的问题，肯定还有许多猥琐的方式我没有观察到，欢迎大家补充。<br />
-元旦在家码字不容易。</p>      </p>
+<p>以上只是列举了我在测试4A或堡垒机时遇到过的问题，肯定还有许多猥琐的方式我没有观察到，欢迎大家补充。<br>
+元旦在家码字不容易。</p>      <p></p>
     
 			</body>
 		</html>

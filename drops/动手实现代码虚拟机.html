@@ -3,22 +3,22 @@
 			<head>
 			     <title>动手实现代码虚拟机 - 厕所打灯笼</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/10384">http://drops.wooyun.org/tips/10384</a></h1>
 				
       <p>
-        <p>Author:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="97f4fff8f9f0c8efefd7e4fef9f6b9f4f8fa">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
+        </p><p>Author:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="97f4fff8f9f0c8efefd7e4fef9f6b9f4f8fa">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
 
 <h1>0x00 什么是代码虚拟化</h1>
 
-<hr />
+<hr>
 
 <p>虚拟化实际上我认为就是使用一套自定义的字节码来替换掉程序中原有的native指令，而字节码在执行的时候又由程序中的解释器来解释执行。自定义的字节码是只有解释器才能识别的，所以一般的工具是无法识别我们自定义的字节码，也是因为这一点，基于虚拟机的保护相对其他保护而言要更加难破解。但是解释器一般都是native代码，这样才能使解释器运行起来解释执行字节码。其中的关系就像很多的解释型语言一样，不是系统的可执行文件，不能直接在系统中运行，需要相应的解释器才能运行，如python。</p>
 
 <h1>0x01 为什么研究代码虚拟化</h1>
 
-<hr />
+<hr>
 
 <p>目前很多地方都会用到虚拟化技术，比如sandbox、程序保护壳等。很多时候为了防止恶意代码对我们的系统造成破坏，我们需要一个sandbox，使程序运行在sandbox中，即使恶意代码破坏系统也只是破坏了sandbox而不会对我们的系统造成影响。还有如vmp,shielden这些加密壳就是内置了一个虚拟机来实现对程序代码的保护，基于虚拟机的保护相对其他保护而言破解起来会更加困难，因为使用现有的工具也是不能识别虚拟机的字节码。在见识过这类保护壳的威力之后，也萌生出了自己动手写一个的冲动，所以才有了本文。</p>
 
@@ -26,17 +26,17 @@
 
 <h1>0x02 基于虚拟机的代码混淆</h1>
 
-<hr />
+<hr>
 
 <p>基于虚拟机的代码保护也可以算是代码混淆技术的一种。代码混淆的目的就是防止代码被逆向分析，但是所有的混淆技术都不是完全不能被分析出来，只是增加了分析的难度或者加长了分析的时间，虽然这些技术对保护代码很有效果，但是也存在着副作用，比如会或多或少的降低程序效率，这一点在基于虚拟机的保护中格外突出，所以大多基于虚拟机的保护都只是保护了其中比较重要的部分。在基于虚拟机的代码保护中可以大致分为两种：</p>
 
 <ol>
 <li><p>使用虚拟机解释执行解壳代码。这种混淆是为了隐藏原代码是如何被加密的，又是如何被解壳代码解密的。这种方式对于静态分析来说比较有效，但是对于动态调试效果不大。因为动态调试的时候完全可以等到解壳代码解密初源代码之后进行脱壳。只有配合其他保护技术才会有比较强的保护效果。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151110/2015111004412499496214.png" alt="" /></p></li>
+<p><img src="../images_result/images/2015111004412499496214.png" alt=""></p></li>
 <li><p>把需要保护的程序源码转换为自定义字节码，再使用虚拟机解释执行被转换后的程序字节码，而程序的源码是不会出现在程序中的。这种方式不管静态还是动态都可以有效的保护。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151110/2015111004412597637312.png" alt="" /></p></li>
+<p><img src="../images_result/images/2015111004412597637312.png" alt=""></p></li>
 </ol>
 
 <p>可以看出两种保护的区别就是，第一种只保护解壳代码，没有保护源码。第二种直接保护了所有源码。所以第一种的强度也小于第二种。本文则是以第二种方式来实现保护，也就是保护所有源码。</p>
@@ -181,45 +181,45 @@ void exec_opcode(vm_processor *proc)
 
 <h1>0x04 解释器解释执行过程</h1>
 
-<hr />
+<hr>
 
 <p>这里就用demo中的第一条字节码做演示来说明虚拟机中解释器解释执行时的过程，首先可以从上面看到解释器vm&#95;interp执行时eip会指向target&#95;func + 4，也就是target&#95;func中内联汇编中定义的第一个字节0xa0，之后会判断eip指向的字节码是否为ret指令，ret指令是0xa3，所以不是eip指向的不是ret，进入exec&#95;opcode函数进行字节码解释。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151110/201511100441292241556.png" alt="" /></p>
+<p><img src="../images_result/images/201511100441292241556.png" alt=""></p>
 
 <p>进入exec&#95;opcode后开始在虚拟处理器的op&#95;table中查找eip指向的字节码，当前就是0xa0，找到之后就调用它的解释函数。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151110/201511100441307625863.png" alt="" /></p>
+<p><img src="../images_result/images/201511100441307625863.png" alt=""></p>
 
 <p>字节码与解释函数的初始化在init&#95;vm&#95;proc中</p>
 
-<p><img src="http://static.wooyun.org//drops/20151110/201511100441325824273.png" alt="" /></p>
+<p><img src="../images_result/images/201511100441325824273.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20151110/201511100441339000382.png" alt="" /></p>
+<p><img src="../images_result/images/201511100441339000382.png" alt=""></p>
 
 <p>可以看出0xa0就对应着mov指令，所以当解释器遇到0xa0就会调用vm_mov函数来解释mov指令。</p>
 
 <p>在vm_mov函数中首先把eip + 1处的一个字节和eip + 2处4个字节分别保存在dest和src中，dest是寄存器标识，在后面的switch中判断dest是哪个寄存器，在这个例子中dest是0x10，也就是r1寄存器，在case 0x10分支中就把*src赋值给r1。总体来看，前6个字节就是第一条mov指令，对应着mov r1, xxxx，xxxx就是这6个字节中的后4个，在这个例子中就是0x00000000。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151110/201511100441352733392.png" alt="" /></p>
+<p><img src="../images_result/images/201511100441352733392.png" alt=""></p>
 
 <p>从这个例子中就可以大致了解一个解释器在解释执行字节码时的过程，其实很简单，就是通过一个字节码和解释函数的关系来调用相应的函数，或者通过一个很长的switch来判断每个字节码，并调用相应函数。而解释函数则通过执行相应的操作来模拟出一个指令。最后，把这些指令串联在一起就可以执行完一个完整的逻辑。</p>
 
 <h1>0x05 代码运行效果</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org//drops/20151110/2015111004412248957113.png" alt="" /></p>
+<p><img src="../images_result/images/2015111004412248957113.png" alt=""></p>
 
 <h1>0x06 虚拟机保护效果</h1>
 
-<hr />
+<hr>
 
 <h2>静态分析</h2>
 
 <p>在静态分析基于虚拟机保护的代码时，一般的工具都是没有效果的，因为字节码都是我们自己定义的，只有解释器能够识别。所以在用ida分析时字节码只是一段不能识别的数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151110/2015111004412756854412.png" alt="" /></p>
+<p><img src="../images_result/images/2015111004412756854412.png" alt=""></p>
 
 <p>这就是ida识别到的target_func的代码，已经做到了对抗静态分析。不过还是可以静态分析我们的解释器,在分析解释器的时候，解释器中的控制流会比源程序的控制流复杂很多，这样也是会增加分析难度。</p>
 
@@ -229,7 +229,7 @@ void exec_opcode(vm_processor *proc)
 
 <h1>0x07 完整代码</h1>
 
-<hr />
+<hr>
 
 <p>以下是demo的完整代码，已经在linux中测试通过。</p>
 
@@ -585,7 +585,7 @@ int main()
 
 <h1>0x08 总结</h1>
 
-<hr />
+<hr>
 
 <p>以上程序为学习代码虚拟化之后的总结，其中有很多理解不正确的地方希望大牛指正。这只是最简单的实现，仅用于学习使用，想要深入学习虚拟化技术还是非常复杂，需要积累更多知识才能理解到位，这篇文章就当是抛砖引玉。在学习的过程也有很多问题没有解决，比如：如果想实现一个基于虚拟机的保护壳，必定需要把源程序中的native指令首先转换为自定义字节码，但是不知道用什么方法来转换比较好。</p>
 
@@ -593,9 +593,9 @@ int main()
 
 <h1>0x09 参考</h1>
 
-<hr />
+<hr>
 
-<p><a href="http://www.cs.rhul.ac.uk/home/kinder/papers/wcre12.pdf">http://www.cs.rhul.ac.uk/home/kinder/papers/wcre12.pdf</a></p>      </p>
+<p><a href="http://www.cs.rhul.ac.uk/home/kinder/papers/wcre12.pdf">http://www.cs.rhul.ac.uk/home/kinder/papers/wcre12.pdf</a></p>      <p></p>
     
 			</body>
 		</html>

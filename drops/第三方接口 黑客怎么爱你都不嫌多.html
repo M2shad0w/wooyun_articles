@@ -3,14 +3,14 @@
 			<head>
 			     <title>第三方接口 黑客怎么爱你都不嫌多 - 小飞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/2803">http://drops.wooyun.org/papers/2803</a></h1>
 				
       <p>
-        <h2>0x01 写在前面</h2>
+        </p><h2>0x01 写在前面</h2>
 
-<hr />
+<hr>
 
 <p>本文总结了乌云主站最近提交的 由于第三方接口程序导致的高危漏洞 本文实例都是使用率高，且在近期爆出漏洞的API，具有一定现实意义</p>
 
@@ -22,7 +22,7 @@
 
 <h2>0x02  实例分析</h2>
 
-<hr />
+<hr>
 
 <h3>看看那些厂商都是怎么被出卖的</h3>
 
@@ -129,15 +129,15 @@ function condition(&amp;$condition) {
 
 <p>所以卖队友成功</p>
 
-<p><img src="http://static.wooyun.org/201408/2014081318305040309.jpg" alt="2014081318305040309.jpg" /></p>
+<p><img src="../images_result/images/2014081318305040309.jpg" alt="2014081318305040309.jpg"></p>
 
 <p><strong>第三弹 腾讯连弹 换个姿势咱们继续卖队友</strong></p>
 
 <p>微信sdk接口（weixin.php） 影响程序：数不清，这个太多了点，从大到小</p>
 
-<p>挑个超级典型的对象 PHPYUN<br />
-/<em>phpyun的全局过滤堪称典范 所有特殊字符入库一律被替换成&amp;acute 再加上360wscan 铜墙铁壁的防御<br />
-那么壮士yun是不是革命成功？ 错！ 汪精卫weixin笑而不语。。。</em>/<br />
+<p>挑个超级典型的对象 PHPYUN<br>
+/<em>phpyun的全局过滤堪称典范 所有特殊字符入库一律被替换成&amp;acute 再加上360wscan 铜墙铁壁的防御<br>
+那么壮士yun是不是革命成功？ 错！ 汪精卫weixin笑而不语。。。</em>/<br>
 这里引入一个古老而又粗暴的漏洞 XML实体注入，也许下一篇drop文就是这个的科普</p>
 
 <pre><code>#!php
@@ -209,21 +209,21 @@ isBind private function isBind($wxid='')
 
 <p>wxid就是一开始POST来的数据里面的参数 注入赤果果的产生</p>
 
-<p><img src="http://static.wooyun.org/201408/2014081318470353538.jpg" alt="2014081318470353538.jpg" /></p>
+<p><img src="../images_result/images/2014081318470353538.jpg" alt="2014081318470353538.jpg"></p>
 
-<p>微信团队开发这个API的时候，其实是验证了来源的<br />
-验证了signature（签名）<br />
+<p>微信团队开发这个API的时候，其实是验证了来源的<br>
+验证了signature（签名）<br>
 验证的条件是 检查signature是否非空 非空 非空...</p>
 
 <h2>0x03 卷尾语</h2>
 
-<hr />
+<hr>
 
-<p>这样的第三方插件 应该成为程序员或者白帽子重点检查对象，原因如上0x02 这货们如同后门一般有魅力...<br />
-一般来讲 造成此类漏洞的原因有两种<br />
-一，双方相互信任 (你不打单引号，咱不过滤，好基友一起死)<br />
-二，签名未设置或者验证<br />
-为各位客官提供点思路</p>      </p>
+<p>这样的第三方插件 应该成为程序员或者白帽子重点检查对象，原因如上0x02 这货们如同后门一般有魅力...<br>
+一般来讲 造成此类漏洞的原因有两种<br>
+一，双方相互信任 (你不打单引号，咱不过滤，好基友一起死)<br>
+二，签名未设置或者验证<br>
+为各位客官提供点思路</p>      <p></p>
     
 			</body>
 		</html>

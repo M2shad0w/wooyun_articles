@@ -3,20 +3,20 @@
 			<head>
 			     <title>BadTunnel：跨网段劫持广播协议 - xlab</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/16925">http://drops.wooyun.org/papers/16925</a></h1>
 				
       <p>
-        <p><strong>Author：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b9cdd6d4dbd2dcdcc9dccbf9513c075117165e373d5f141f5c17275013355c171d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
+        </p><p><strong>Author：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b9cdd6d4dbd2dcdcc9dccbf9513c075117165e373d5f141f5c17275013355c171d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061902231244234168.png" alt="" /></p>
+<p><img src="../images_result/images/2016061902231244234168.png" alt=""></p>
 
 <!--more-->
 
 <h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>本文提出了一种新的攻击模型，可以跨网段劫持TCP/IP广播协议，我们把它命名为“BadTunnel”。</p>
 
@@ -30,7 +30,7 @@
 
 <h1>0x01 背景知识</h1>
 
-<hr />
+<hr>
 
 <p>NetBIOS是一套古老的协议。1987年IETF发布RFC 1001与RFC 1002，定义了NetBIOS over TCP/IP，简称NBT。NetBIOS包含三种服务，其中之一是名称服务（Name service），即NetBIOS-NS，简称NBNS。NBNS可以通过发送局域网内广播来实现本地名称解析。</p>
 
@@ -60,7 +60,7 @@
 
 <h1>0x02 实现方法</h1>
 
-<hr />
+<hr>
 
 <p>所以，假如我们能在NBNS发出名称解析请求的时候，从本网段之外返回一个回应，也同样会被NBNS接受，就可以实现跨网段NBNS Spoofing。但存在几个问题：</p>
 
@@ -87,13 +87,13 @@
 <p>也就是说，无论192.168.2.2的本机防火墙，还是NAT，还是中间的任何其它网络设备，只要允许查询请求发出，并允许查询结果返回，就至少需要在一段时间内，允许10.10.10.10:137发出任何UDP包到192.168.2.2:137。这其实就开启了一条双向UDP隧道。BadTunnel，指的就是这个Tunnel：</p>
 
 <blockquote>
-  <p>192.168.2.2:137 <-> NAT:54231<-> 10.10.10.10:137</p>
+  <p>192.168.2.2:137 <-> NAT:54231<-> 10.10.10.10:137</-></-></p>
 </blockquote>
 
 <p>有个简单的实验可以帮助你理解这个隧道。准备两台开启了防火墙的系统，IP地址分别是192.168.2.2和192.168.3.3：</p>
 
-<p>首先在192.168.2.2上执行“<code>nbtstat -A 192.168.3.3</code>”，会失败。<br />
-然后在192.168.3.3上执行“<code>nbtstat -A 192.168.2.2</code>”，会成功。<br />
+<p>首先在192.168.2.2上执行“<code>nbtstat -A 192.168.3.3</code>”，会失败。<br>
+然后在192.168.3.3上执行“<code>nbtstat -A 192.168.2.2</code>”，会成功。<br>
 再次在192.168.2.2上执行“<code>nbtstat -A 192.168.3.3</code>”，会成功。</p>
 
 <p>那么怎么让192.168.2.2向10.10.10.10发出NBNS请求呢？当Windows系统试图访问一个带有IP地址的file URI scheme或UNC path时，如果目标IP地址的139、445端口不可访问（超时或收到TCP重置报文），系统会再向该IP地址发送NBNS NBSTAT query查询。而让系统访问file URI scheme或UNC path的途径太多了。</p>
@@ -116,7 +116,7 @@ http://web.server/reader.aspx?ID=\\10.10.10.10\BadTunnel
 
 <p>至于TransactionID，NBNS的Transaction ID并不是随机的，而是递增的。前面提到，NBNS解析名称时，会发出NBNS NB query；而系统访问file URI scheme或UNC path失败时，会发出NBNS NBSTAT query。NBNS NB query和NBNS NBSTAT query除了都使用且只使用137/UDP外，它们还共享同一个Transaction ID计数器。也就是说，当192.168.2.2访问<code>\\10.10.10.10\BadTunnel</code>失败，向10.10.10.10发出的NBNS NBSTAT query不但打开了一条双向UDP隧道，还将系统的Transaction ID计数器当前值告诉了10.10.10.10。</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201606/2016061911363977227.png" alt="" /></p>
+<p><img src="../images_result/images/2016061911363977227.png" alt=""></p>
 
 <p>也就是说，一个NBNS NBSTAT query同时解决了第一个问题和第二个问题。而第三个问题就更容易解决了。我们既然能在网页中嵌入<code>&lt;img src=”\\10.10.10.10\BadTunnel”&gt;</code>，当然也可以同时嵌入：</p>
 
@@ -128,7 +128,7 @@ http://web.server/reader.aspx?ID=\\10.10.10.10\BadTunnel
 
 <p>即使不考虑WEB缓存，NBNS也有自己的缓存机制。只要成功实现一次NBNS Spoofing，伪造的结果会被NBNS缓存10分钟：</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201606/2016061911365380817.png" alt="" /></p>
+<p><img src="../images_result/images/2016061911365380817.png" alt=""></p>
 
 <p>此后10分钟内系统本身也会试图去解析“WPAD”进而访问<code>http://WPAD/wpad.dat</code>来设置代理，但获得的将会是缓存中这个伪造的结果。而攻击者在一旦通过WPAD劫持到用户的流量，可以定时对某些HTTP请求返回302重定向，实现循环BadTunnel攻击，保持劫持状态：</p>
 
@@ -141,7 +141,7 @@ Content-Length: 0
 
 <h1>0x03 总结</h1>
 
-<hr />
+<hr>
 
 <p>本文所描述的BadTunnel攻击，是一个严重的安全问题。但当我们试图寻找问题根源时，却发现这并不容易。BadTunnel攻击能得以实现，至少依赖于以下这些特性：</p>
 
@@ -167,7 +167,7 @@ Content-Length: 0
 
 <h1>0x04 防御建议</h1>
 
-<hr />
+<hr>
 
 <p>即使不能及时安装MS16-063和MS16-077补丁，也有一些其它方法可以阻止BadTunnel攻击。</p>
 
@@ -175,17 +175,17 @@ Content-Length: 0
 
 <p>对无需访问Windows网络共享服务的个人用户来说，可以考虑禁用NetBIOS over TCP/IP：</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201606/2016061911370560863.png" alt="" /></p>
+<p><img src="../images_result/images/2016061911370560863.png" alt=""></p>
 
 <p>对兼容性影响最小的方式可能是在<code>%SystemRoot%\System32\drivers\etc\hosts</code>中添加固定的WPAD解析，或关闭自动检查代理配置，来防止“WPAD”这个名称被劫持：</p>
 
-<p><img src="http://static.wooyun.org/upload/image/201606/2016061911371845303.png" alt="" /></p>
+<p><img src="../images_result/images/2016061911371845303.png" alt=""></p>
 
 <p>不过要注意的是，这样并不能阻止对其它名称的劫持。而BadTunnel，不只是WPAD。</p>
 
 <h1>0x05 一点遗憾</h1>
 
-<hr />
+<hr>
 
 <p>利用BadTunnel劫持WPAD可能是历史上影响范围最广、触发途径最多的Windows漏洞，更可能是绝无仅有的写一个Exploit即可攻击所有版本Windows的漏洞。而实际上还可能更有趣。</p>
 
@@ -193,37 +193,37 @@ Content-Length: 0
 
 <h1>0x06 参考链接</h1>
 
-<hr />
+<hr>
 
-<p>【1】 Evilgrade<br />
+<p>【1】 Evilgrade<br>
 https://github.com/infobyte/evilgrade/</p>
 
-<p>【2】 10Places to Stick Your UNC Path<br />
+<p>【2】 10Places to Stick Your UNC Path<br>
 https://blog.netspi.com/10-places-to-stick-your-unc-path/</p>
 
-<p>【3】 WebProxy Auto-Discovery Protocol<br />
+<p>【3】 WebProxy Auto-Discovery Protocol<br>
 http://tools.ietf.org/html/draft-ietf-wrec-wpad-01</p>
 
-<p>【4】 NetBIOS Over TCP/IP<br />
+<p>【4】 NetBIOS Over TCP/IP<br>
 https://technet.microsoft.com/en-us/library/cc940063.aspx</p>
 
-<p>【5】 Disable WINS/NetBT name resolution<br />
+<p>【5】 Disable WINS/NetBT name resolution<br>
 https://technet.microsoft.com/en-us/library/cc782733(v=ws.10).aspx</p>
 
-<p>【6】 MS99-054, CVE-1999-0858<br />
+<p>【6】 MS99-054, CVE-1999-0858<br>
 https://technet.microsoft.com/en-us/library/security/ms99-054.aspx</p>
 
-<p>【7】 MS09-008, CVE-2009-0093, CVE-2009-0094<br />
+<p>【7】 MS09-008, CVE-2009-0093, CVE-2009-0094<br>
 https://technet.microsoft.com/en-us/library/security/ms09-008.aspx</p>
 
-<p>【8】 MS12-074, CVE-2012-4776<br />
+<p>【8】 MS12-074, CVE-2012-4776<br>
 https://technet.microsoft.com/en-us/library/security/ms12-074.aspx</p>
 
-<p>【9】 MS16-063,CVE-2016-3213<br />
+<p>【9】 MS16-063,CVE-2016-3213<br>
 https://technet.microsoft.com/en-us/library/security/ms16-063.aspx</p>
 
-<p>【10】 MS16-077,CVE-2016-3213, CVE-2016-3236<br />
-https://technet.microsoft.com/en-us/library/security/ms16-077.aspx</p>      </p>
+<p>【10】 MS16-077,CVE-2016-3213, CVE-2016-3236<br>
+https://technet.microsoft.com/en-us/library/security/ms16-077.aspx</p>      <p></p>
     
 			</body>
 		</html>

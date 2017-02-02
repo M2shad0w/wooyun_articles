@@ -3,16 +3,16 @@
 			<head>
 			     <title>Python网络攻防之第二层攻击 - Larry</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8547">http://drops.wooyun.org/tips/8547</a></h1>
 				
       <p>
-        <p>本章节节选翻译自<em>《Understanding Network Hacks: Attack and Defense with Python》</em>中的第四章<em>Layer 2 Attacks</em>。该书通过网络层次划分介绍漏洞，并使用<code>Python</code>编写相关利用工具进行网络攻防，每小节均按照“<code>原理--代码--解释--防御</code>”的结构行文，此书也可与<em>《Python黑帽子:黑客与渗透测试编程之道》</em>相互参照学习，相信会达到较好的效果呦。另译者水平有限，如有错误还请指正与海涵。</p>
+        </p><p>本章节节选翻译自<em>《Understanding Network Hacks: Attack and Defense with Python》</em>中的第四章<em>Layer 2 Attacks</em>。该书通过网络层次划分介绍漏洞，并使用<code>Python</code>编写相关利用工具进行网络攻防，每小节均按照“<code>原理--代码--解释--防御</code>”的结构行文，此书也可与<em>《Python黑帽子:黑客与渗透测试编程之道》</em>相互参照学习，相信会达到较好的效果呦。另译者水平有限，如有错误还请指正与海涵。</p>
 
 <h1>0x00 摘要</h1>
 
-<hr />
+<hr>
 
 <p>在本章第二层攻击当中，我们将进入网络<code>hacking</code>的奇幻之旅。让我们回顾一下，第二层是负责在以太网中，使用MAC地址来发送数据包。除了<code>ARP</code>攻击，我们将探讨交换机是如何应对<code>DOS</code>攻击的，以及如何逃逸出<code>VLAN</code>环境。</p>
 
@@ -20,7 +20,7 @@
 
 <h1>0x01 需求模块</h1>
 
-<hr />
+<hr>
 
 <p>在<code>Python</code>中，你不必在意原始套接字或网络字节顺序，借由<code>Philippe Biondi</code>编写的<code>Scapy</code>，具有世界上最好的数据包生成器，你可以轻松地定制数据包。既不像在<code>Libnet</code>和<code>C</code>中那样需要指针运算，也不像在<code>RawIP</code>和<code>Perl</code>中，或者是在<code>Scruby</code>和<code>Ruby</code>中，你会被有限的几种协议所束缚。<code>Scapy</code>可以构造从<code>ARP</code>到<code>IP/ICMP</code>，再到<code>TCP/UDP</code>和<code>DNS/DHCP</code>等所有<code>OSI</code>层上的数据包，甚至是更不常见的协议也同样被支持，比如<code>BOOTP</code>, <code>GPRS</code>, <code>PPPoE</code>, <code>SNMP</code>, <code>Radius</code>, <code>Infrared</code>, <code>L2CAP/HCI</code>, <code>EAP</code>。</p>
 
@@ -33,7 +33,7 @@
 
 <h1>0x02 ARP-Cache-Poisoning</h1>
 
-<hr />
+<hr>
 
 <p>如果一台主机想要发送<code>IP</code>数据包到另一台主机，就必须预先通过使用<code>ARP</code>协议请求目的<code>MAC</code>地址。这个询问会向网络中的所有成员广播。在一个完美的世界中，只有应答的主机是所需的目的主机。在一个不那么完美的世界中，攻击者会每隔几秒向它的受害者发送一个<code>ARP</code>应答报文，但是是以它自己的<code>MAC</code>地址作为响应，从而重定向该连接到其自身。因为大多数的操作系统都接受它们从未询问过的应答报文，所以该攻击才会生效！</p>
 
@@ -75,11 +75,11 @@ while True:
 
 <p>如果你只是用<code>fake_ip</code>来处理客户端的<code>ARP</code>缓存，那么你只会得到客户端的数据包，而无法接收到服务端的响应。如下图所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150914/2015091406295823477.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015091406295823477.png" alt="enter image description here"></p>
 
 <p>如下图所示，要强制通过攻击者的主机进行双向连接，攻击者就必须使用他的<code>MAC</code>地址，来伪造客户端和服务端的相关目的地址。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150914/2015091406295940612.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015091406295940612.png" alt="enter image description here"></p>
 
 <p>我们的第一段代码有些粗糙，它发送了大量的<code>ARP</code>报文，不仅产生了所需要的流量，而且也比较暴露。隐蔽的攻击者会采取另一种策略。</p>
 
@@ -87,7 +87,7 @@ while True:
 
 <p>如下图所示，欺骗性的响应数据包和真实主机的响应数据包被并行发送。谁的数据包先被受害者的网卡接收到，则谁获胜。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150914/2015091406295944994.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015091406295944994.png" alt="enter image description here"></p>
 
 <pre><code>#!python
 #!/usr/bin/python    
@@ -136,7 +136,7 @@ sniff(prn=arp_poison_callback,
 
 <h1>0x03 ARP-Watcher</h1>
 
-<hr />
+<hr>
 
 <p>接下来我们编写一个小工具，来报告所有新连接到我们网络的设备，为此它必须能够记住所有<code>IP</code>和<code>MAC</code>地址的对应关系。此外，它还可以检测出一个网络设备是否突然更改了它的<code>MAC</code>地址。</p>
 
@@ -216,7 +216,7 @@ sniff(prn=watch_arp,
 
 <h1>0x04 MAC-Flooder</h1>
 
-<hr />
+<hr>
 
 <p>交换机和其他计算机一样，具有有限的内存，交换机中存放<code>MAC</code>地址信息的表格也同样如此，该表格记录哪个<code>MAC</code>地址对应哪个端口及其内部的<code>ARP</code>缓存。当交换机的缓冲区溢出时，它们的反应就会有些古怪。这将会导致交换机拒绝服务，以至于放弃交换行为而变得像正常的集线器。在集线器模式下，整体的高流量不会是你遇到的唯一问题，因此在没有附加操作下，所有已连接的计算机都会接收到完整的流量。你应该测试一下的你的交换机在这种意外情况下是如何反应的，接下来的脚本就可以做到这一点。它会产生随机的<code>MAC</code>地址，并将它们发送到你的交换机中，直到交换机的缓冲区被填满。</p>
 
@@ -246,7 +246,7 @@ sendp(packet, iface=dev, loop=1)
 
 <h1>0x05 VLAN Hopping</h1>
 
-<hr />
+<hr>
 
 <p>因为<code>VLAN</code>不具备安全特性，一方面标记<code>VLAN</code>取决于包含<code>VLAN id</code>的数据包头部，使用<code>Scapy</code>可以很容易创建这样的数据包。现在让我们的电脑连接到<code>VLAN1</code>，并且尝试去<code>ping VLAN2</code>上的其他主机。</p>
 
@@ -268,7 +268,7 @@ sendp(packet)
 
 <h1>0x06 Let’s Play Switch</h1>
 
-<hr />
+<hr>
 
 <p><code>Linux</code>可以运行在许多嵌入式网络设备上；因此凭借<code>Linux</code>操作系统，人们可以把自己的电脑变成一台功能齐全的<code>VALN</code>交换机，这并不令人惊奇。你只需要<code>vconfig</code>这种工具就够了。在根据你的操作系统安装所需的数据包后，通过以下的命令，你可以将你的主机加入到另一个<code>VLAN</code>环境中。</p>
 
@@ -282,7 +282,7 @@ sendp(packet)
 
 <h1>0x07 ARP Spoofing Over VLAN Hopping</h1>
 
-<hr />
+<hr>
 
 <p><code>VLAN</code>会限制对同一<code>VLAN</code>的端口的广播流量，因此我们不能在默认情况下应对所有的<code>ARP</code>请求，就像在第一个<code>ARP spoofing</code>例子中看到的那样，必须每隔几秒就向受害者告诉我们的<code>MAC</code>地址。除了我们对每个数据包进行了标记和加之的目的<code>VLAN</code>，下面的代码是通用的。</p>
 
@@ -316,7 +316,7 @@ while True:
 
 <h1>0x08 DTP Abusing</h1>
 
-<hr />
+<hr>
 
 <p><code>DTP</code>（动态中继协议）是一种由思科发明的专有协议，用于如果一个端口是<code>trunk</code>端口，则交换机之间可以动态地交流。<code>Trunk</code>端口通常用于互连交换机和路由器，以便共享一些或所有已知的<code>VLAN</code>。</p>
 
@@ -366,7 +366,7 @@ ifconfig eth0.&lt;vlan-id&gt; &lt;ip_of_vlan&gt; up
 
 <h1>0x09 Tools</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li><p><strong>NetCommander</strong></p>
@@ -384,7 +384,7 @@ ifconfig eth0.&lt;vlan-id&gt; &lt;ip_of_vlan&gt; up
 <p><code>Loki</code>是一种像<code>Yersinia</code>的第二层和第三层攻击工具。它可以通过插件来扩展，也有一个漂亮的<code>GUI</code>界面。它实现了像<code>ARP</code>欺骗和泛洪，<code>BGP</code>，<code>RIP</code>路由注入之类的攻击，甚至可以攻击像HSRP和VRRP那样非常罕见的协议。</p>
 
 <p>工具的源代码地址为：<a href="https://www.c0decafe.de/loki.html">https://www.c0decafe.de/loki.html</a></p></li>
-</ol>      </p>
+</ol>      <p></p>
     
 			</body>
 		</html>

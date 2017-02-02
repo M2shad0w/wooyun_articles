@@ -3,14 +3,14 @@
 			<head>
 			     <title>Bypass xss过滤的测试方法 - 五道口杀气</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/845">http://drops.wooyun.org/tips/845</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>本文来自于《Modern Web Application Firewalls Fingerprinting and Bypassing XSS Filters》其中的bypass xss过滤的部分，前面有根据WAF特征确定是哪个WAF的测试方法给略过了，重点来看一下后面绕xss的一些基本的测试流程，虽说是绕WAF的，但这里还是根据WAF中的正则缺陷来绕过测试方法，并不是协议上问题，所以呢，基本可以通用于其他xss过滤的场景。方便新手们比较快速的了解到测试xss的一些基本的方法。</p>
 
@@ -18,7 +18,7 @@
 
 <h2>0x01 Bypassing黑名单</h2>
 
-<hr />
+<hr>
 
 <p>大多数的场所是用的黑名单来做过滤器的，有三种方式绕过黑名单的测试：</p>
 
@@ -446,9 +446,9 @@ encodeURIComponent("-prompt(1)-")
 
 <h2>0x02 总结</h2>
 
-<hr />
+<hr>
 
-<p>本文主要是一个测试XSS的思路流程，并没有把所有的payload写全，其实也没有人能够写全，只是列了一个大体的框架，大家实际在寻找的过程中可以不断慢慢的根据这种思路补充自己的payload，想必呢，一定会有很大的进步的！~</p>      </p>
+<p>本文主要是一个测试XSS的思路流程，并没有把所有的payload写全，其实也没有人能够写全，只是列了一个大体的框架，大家实际在寻找的过程中可以不断慢慢的根据这种思路补充自己的payload，想必呢，一定会有很大的进步的！~</p>      <p></p>
     
 			</body>
 		</html>

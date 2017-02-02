@@ -3,18 +3,18 @@
 			<head>
 			     <title>一个 Chrome XSS Filter Bypass 的分析 - kamael</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/6905">http://drops.wooyun.org/papers/6905</a></h1>
 				
       <p>
-        <p>前几天，在微博上看到一条关于最近的 Chrome XSS Filter Bypass 的链接：<a href="http://weibo.com/3274966043/Co3xvztxc?type=comment">webo</a>，原始补丁在这里：<a href="https://codereview.chromium.org/1187843005/">补丁</a>。在补丁中还提供了 <a href="https://codereview.chromium.org/1187843005/patch/1/10002">PoC</a> 用于后续的单元测试。</p>
+        </p><p>前几天，在微博上看到一条关于最近的 Chrome XSS Filter Bypass 的链接：<a href="http://weibo.com/3274966043/Co3xvztxc?type=comment">webo</a>，原始补丁在这里：<a href="https://codereview.chromium.org/1187843005/">补丁</a>。在补丁中还提供了 <a href="https://codereview.chromium.org/1187843005/patch/1/10002">PoC</a> 用于后续的单元测试。</p>
 
 <p>攻击者用一种巧妙的方法绕过了 Chrome 的 XSSAuditor 的过滤。不过微博里的那篇短文并没有对这个漏洞的缘由作分析。碰巧前段时间笔者仔细读过 Chrome 的 XSSAuditor 的代码，因此趁此机会自己分析了一下，如果有错误的地方还望指教。</p>
 
 <h1>0x00 漏洞描述</h1>
 
-<hr />
+<hr>
 
 <p>原始 PoC :</p>
 
@@ -61,7 +61,7 @@ index a1e1852201d23ac858c3b5065a2e26f52d128f4d..e73259145366c12c821a710fe83d3637
 
 <h1>0x01 背景知识</h1>
 
-<hr />
+<hr>
 
 <p><strong>首先，浏览器是如何解析 HTML 的？</strong></p>
 
@@ -121,7 +121,7 @@ index a1e1852201d23ac858c3b5065a2e26f52d128f4d..e73259145366c12c821a710fe83d3637
 
 <h1>0x02 漏洞分析</h1>
 
-<hr />
+<hr>
 
 <p>这里我们先不管这个 Patch 是如何修复的，我们先来分析漏洞的成因。</p>
 
@@ -210,11 +210,11 @@ return (c == '\\' || c == '0' || c == '\0' || c == '/' || c == '?' || c &gt;= 12
 
 <h1>0x03 补丁分析</h1>
 
-<hr />
+<hr>
 
 <p>补丁其实很简单，如果某个处理后的字符串为空，则既不设置为允许也不设置为禁止。这样既不会干涉后面的处理，也不会增加误判。</p>
 
-<p>具体补丁代码不再分析，其实就只有上面这一点差别。</p>      </p>
+<p>具体补丁代码不再分析，其实就只有上面这一点差别。</p>      <p></p>
     
 			</body>
 		</html>

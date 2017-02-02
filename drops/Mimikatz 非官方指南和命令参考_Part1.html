@@ -3,33 +3,33 @@
 			<head>
 			     <title>Mimikatz 非官方指南和命令参考_Part1 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/12462">http://drops.wooyun.org/tools/12462</a></h1>
 				
       <p>
-        <p><strong>原文地址：</strong><a href="https://adsecurity.org/?page_id=1821">https://adsecurity.org/?page_id=1821</a><br />
+        </p><p><strong>原文地址：</strong><a href="https://adsecurity.org/?page_id=1821">https://adsecurity.org/?page_id=1821</a><br>
 <strong>原文作者：</strong><a href="https://twitter.com/PyroTek3">Sean Metcalf</a></p>
 
-<p><strong>译者注：</strong><br />
+<p><strong>译者注：</strong><br>
 由于<a href="https://adsecurity.org/?page_id=1821">原文</a>中，作者（<a href="https://twitter.com/PyroTek3">Sean Metcalf</a>）已经明确的指出 <strong>“未经本文作者明确的书面同意，请勿复制包含在此页面的全部或部分内容。”</strong>，因此为了分享此佳作，译者与作者（<a href="https://twitter.com/PyroTek3">Sean Metcalf</a>）在推上取得了联系，沟通之后，作者允许我将此文完整翻译并分享给其他人。在此也感谢 Sean Metcalf 大牛将有关 Mimikatz 的全部内容做了系统的整理并分享出来。以下是原文作者（Sean Metcalf）回复的截图,以作授权说明：</p>
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160126/2016012611234434455189.png" alt="p1" /></p>
+<p><img src="../images_result/images/2016012611234434455189.png" alt="p1"></p>
 
 <p>Mimikatz 作为当下内网渗透神器之一，看起来似乎很少有人真正关注它的全部功能（Sean Metcalf 在原文开头也表示了这样的疑惑），在一些诸如 <strong>“十大黑客工具”</strong> 的文章中也看不到 Mimikatz 的影子。 Sean Metcalf 大牛将有关 Mimikatz 的相关技术做了系统的整理，遂做粗糙翻译并作分享。译文难免有误，望各位看官及时指正。此文是译文的第一部分，主要阐述了 Mimikatz 的基本信息和检测 Mimikatz 使用的方法，在第二部分中会包含大量常用或不常用的 Mimikatz 命令的具体用法。</p>
 
 <h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>看起来 Red（攻） &amp; Blue（防） Team 里的大多数人并不熟悉 Mimikatz 的大部分功能，所以我收集了所有我可以找到的可用的命令并将它们整理在此文中。如果，日后我又找到了一些新的有用的命令，我也会更新此文。这样， Red（攻） &amp; Blue（防） Team 的黑客就都可以更好的理解 Mimikatz 的所有功能，同时也能把雇佣其所保护的企业的安全做的更好。</p>
 
 <p>在与很多人，包括被雇佣的攻防两方的黑客，网络从业者交谈之后，我了解到除了最常用的几个 Mimikatz 命令外，大多数人并不知道 Mimikatz 的全部功能。本文将尽可能的详述每一个命令，它是什么，它又是如何工作的，以及运行它所需的权限，参数（必需的和可选的），另外还将使用相关的截图及附加的内容进行说明（如果可能的话）。然而还有一些内容我没有研究过，期望在不久的将来能深入探究。我会继续将关于使用 Mimikatz 的各个方面的文章发表在 <strong>ADSecurity.org</strong> 上，不过我打算一直更新此文，并尽可能的全面。</p>
 
 <blockquote>
-  <p>本文的内容是为了帮助企业更好地了解 Mimikatz 的功能，且不能被用于非法活动。请不要在未获批准的计算机上使用 Mimikatz ，总之，不要使用 Mimikatz 进行渗透测试攻击。<br />
+  <p>本文的内容是为了帮助企业更好地了解 Mimikatz 的功能，且不能被用于非法活动。请不要在未获批准的计算机上使用 Mimikatz ，总之，不要使用 Mimikatz 进行渗透测试攻击。<br>
   未经本文作者明确的书面同意，请勿复制包含在此页面的全部或部分内容。</p>
 </blockquote>
 
@@ -41,7 +41,7 @@
 
 <h1>0x02 Mimikatz 概述</h1>
 
-<hr />
+<hr>
 
 <p>Mimikatz 是从 Windows 系统中收集凭证数据最好的工具之一。事实上，我个人认为 Mimikatz 是收集 Windows 系统凭证数据的“瑞士军刀”（多个利器的集合） - 一个可以做任何事情的工具。由于 Mimikatz 的作者 Benjamin Delpy 是法国人，所以描述关于 Mimikatz 用法的资源都是法语的，至少在<a href="http://blog.gentilkiwi.com/">他的博客</a>中是这样的。 Mimikatz 的<a href="https://github.com/gentilkiwi/mimikatz"> GitHub 页面</a>是英文的，包括了命令的用法等有用信息。</p>
 
@@ -67,7 +67,7 @@
 
 <h1>0x03 Mimikatz 作者介绍</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>Benjamin DELPY <strong>gentilkiwi</strong>, 可以在 Twitter 上关注他 ( @gentilkiwi ) or 邮件联系 ( benjamin [at] gentilkiwi.com ) </li>
@@ -76,7 +76,7 @@
 
 <h1>0x04 Mimikatz 官方链接</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="https://github.com/gentilkiwi/mimikatz">Mimikatz GitHub</a> (源码)</li>
@@ -87,7 +87,7 @@
 
 <h1>0x05 Mimikatz 与 凭证</h1>
 
-<hr />
+<hr>
 
 <p>在用户登录之后，会生成很多凭证数据并存储在本地安全权限服务的进程（<a href="http://en.wikipedia.org/wiki/Local_Security_Authority_Subsystem_Service">LSASS</a>）内存中。其目的是为了方便单点登录（SSO）在每次对资源进行访问请求时确保用户不会被提示。凭证数据包括 NTLM 密码哈希，LM 密码哈希（如果密码长度小于 15 个字符），甚至明文密码（以支持其他的 WDigest 和 SSP 认证）。虽然可以<a href="http://support.microsoft.com/kb/299656">阻止 Windows 创建 LM 哈希到本地计算机的 SAM 数据库（或 AD 数据库）</a>，但这并不能阻止系统在内存中生成 LM 哈希。<a href="https://technet.microsoft.com/en-us/magazine/2006.08.securitywatch.aspx">默认情况下，在 Windows Server 2008 和 Windows Vista 中不再生成用户的 LM 哈希</a>，除非明确的启用了该功能。从 Windows 8.1 和 Windows Server 2012 R2 开始，LM 哈希和“纯文本”密码将不在内存中生成。此功能也被“移植”到了较早版本的 Windows 中，Windows 7/8/2008 R2/2012 需要打 kb2871997 补丁。为了防止在 LSASS 进程中放置“明文”密码，下面的注册表键需要被设置为“0”（禁用摘要）：</p>
 
@@ -95,7 +95,7 @@
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest “UseLogonCredential”(DWORD)
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160126/2016012611234678682219.jpg" alt="p2" /></p>
+<p><img src="../images_result/images/2016012611234678682219.jpg" alt="p2"></p>
 
 <p>此注册表项值得你在你的环境中进行监控，因为攻击者可能希望将它设置为 <strong>1</strong> ，启用摘要密码支持，以便在任何版本的 Windows 中，从 Windows 7/2008 R2 到 Windows 10/2012 R2，强制将“明文”密码放置在 LSASS 进程中。在 Windows 8.1/2012 R2 及以后的 Windows 系统中，没有 “UseLogonCredential” 的 DWORD 值，所以必须手动创建。如果在这些系统中存在了该键，可能意味着该系统存在一些问题。</p>
 
@@ -103,15 +103,15 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest �
 
 <h1>0x06 不同版本的操作系统中可用的凭证</h1>
 
-<hr />
+<hr>
 
 <p>Benjamin Delpy 在 OneDrive 上传了一个 Excel 图表（如下图所示），显示了在内存（LSASS）中可用的证书数据类型，其中包括了在 Windows 8.1 和 Windows 2012 R2 中增强的“减少保存在内存中的凭证数量和类型”的保护机制。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160126/2016012611234867825334.png" alt="p3" /></p>
+<p><img src="../images_result/images/2016012611234867825334.png" alt="p3"></p>
 
 <h1>0x07 Powershell 与 Mimikatz:</h1>
 
-<hr />
+<hr>
 
 <p>Mimikatz 中的大多数功能在 <a href="https://github.com/mattifestation/PowerSploit">PowerSploit</a>（PowerShell 渗透框架）中都是可用的。通过 <a href="https://github.com/mattifestation/PowerSploit/blob/master/Exfiltration/Invoke-Mimikatz.ps1">“Invoke-Mimikatz”</a> 这个 PowerShell 脚本（作者是<a href="https://twitter.com/JosephBialek">Joseph Bialek</a>），此脚本“利用Mimikatz 2.0 和 Invoke-ReflectivePEInjection 反射式的将 Mimikatz 完全加载到内存运行。这使得你在转储凭证时无需将 Mimikatz 的二进制文件写到磁盘中。PowerSploit 框架现在托管在 <a href="https://github.com/PowerShellMafia/PowerSploit">“PowerShellMafia”</a> GitHub 库中。</p>
 
@@ -131,7 +131,7 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest �
 
 <h1>0x08 检测 Mimikatz 的方法</h1>
 
-<hr />
+<hr>
 
 <p>有几种方法可以潜在地检测 Mimikatz 在网络上的使用，虽然这些方法不能保证一定可行。由于 Mimikatz 的源代码在 GitHub 上已经公开，所以任何人都可以使用 Visual Studio 编译他们自己的版本。我构建了我自己的 Mimikatz 版本叫做 “kitkatz”，将所有的 “mimikatz” 实例替换为 “kitikatz”后，在 VirusTotal 上的检测率并不理想（4/54）。在我的 Windows 10 中的 Windows Defender 检测到了它。之后，我使用相同的字词将 “Benjamin Delpy” 和 “gentilkiwi” 替换了一下，仅仅是把 “e” 替换为 “3” ，“i” 替换为 “1”。检测率仍然<a href="https://www.virustotal.com/en/file/84b6cd8ccaa60a89c1375bec5044e6240d8a2db3f19fecd763749fa9a530470b/analysis/1449967355/">比较差（4/54）</a>。然而在我的 Windows 10 中的 Windows Defender 却没有检测到它。所以，你的检测情况会有所不同。</p>
 
@@ -149,7 +149,7 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest �
 
 <h1>0x09 Mimikatz 与 LSA 保护方式</h1>
 
-<hr />
+<hr>
 
 <p>在 Windows Server 2012 R2 和 Windows 8.1 中包含了一个名为 “LSA 保护” 的新功能，其中包括在 Windows Server 2012 R2 上启用 LSASS 作为一个受保护的进程（Mimikatz 可以使用驱动程序绕过此保护措施，但会在事件日志中产生一些日志）：</p>
 
@@ -164,18 +164,18 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest �
 
 <p>LSA 保护阻止了一个非受保护的进程与 LSASS 进行交互。但是 Mimikatz 仍然可以使用驱动程序绕过（“!+”）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160126/201601261123505925648.jpg" alt="p4" /></p>
+<p><img src="../images_result/images/201601261123505925648.jpg" alt="p4"></p>
 
 <h1>0x0A 检测 Invoke-Mimikatz</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>确保所有的 Windows 系统都安装了 PowerShell v3 或更高版本。新版本的 PowerShell 有更好的日志记录功能，特别是PowerShell V5。</li>
 <li>开启通过组策略记录 PowerShell 模块运行日志：计算机配置 — 策略 — 管理模板 — Windows组件 — Windows PowerShell，打开模块记录功能。输入“*”，然后单击确定。这将记录所有的 PowerShell 活动，包括所有的 PowerShell 模块。</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160126/201601261123517481059.jpg" alt="p5" /></p>
+<p><img src="../images_result/images/201601261123517481059.jpg" alt="p5"></p>
 
 <ul>
 <li>PowerShell 的活动将被记录到 PowerShell 的操作日志中。将这些事件推送到中央日志服务器（通过 Windows 事件转发或类似的方法）或 SIEM。</li>
@@ -206,7 +206,7 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest �
 <li>“<code>TOKEN_DUPLICATE</code>”</li>
 <li>“<code>TOKEN_ADJUST_PRIVILEGES</code>”</li>
 <li>“<code>TOKEN_PRIVILEGES</code>”</li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

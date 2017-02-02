@@ -3,14 +3,14 @@
 			<head>
 			     <title>京东数据库泄露事件分析 - 猪猪侠</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/news/989">http://drops.wooyun.org/news/989</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>昨天一张截图在QQ群里疯传，并说京东数据库泄露，里面有钱的尽快转。</p>
 
@@ -22,7 +22,7 @@
 
 <h2>0x01 细节</h2>
 
-<hr />
+<hr>
 
 <p>我们认真的研究了一下关于京东数据库泄露提及的几个QQ号，确定这次炒作使用的手法是 <a href="http://www.zhihu.com/question/21596439">企业 2013 年最高的 10 个信息安全威胁是哪些？</a>提及的：</p>
 
@@ -32,67 +32,67 @@
 
 <p>网上疯传的京东数据库泄露的截图：(全都是QQ邮箱，全都是明文密码？)</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405040999823.jpg" alt="e682ef8628dd37d1d21be13e125ff258_m.jpg" /></p>
+<p><img src="../images_result/images/2014071405040999823.jpg" alt="e682ef8628dd37d1d21be13e125ff258_m.jpg"></p>
 
 <h3>我们的分析结果</h3>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a5949491929d9d9d9393e5d4d48bc6cac8">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script><br />
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a5949491929d9d9d9393e5d4d48bc6cac8">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script><br>
 QQ：114788866</p>
 
-<p>图中密码：114788866 (密码和QQ号码一样，撞库黑客考虑了人类设置密码缺陷)<br />
+<p>图中密码：114788866 (密码和QQ号码一样，撞库黑客考虑了人类设置密码缺陷)<br>
 密码2：j2j5gx1019l (泄露位置：08-09=5600W8-350W-02.txt)</p>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3d0e0a0c0a04040c0c097d4c4c135e5250">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3d0e0a0c0a04040c0c097d4c4c135e5250">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 QQ：371799114</p>
 
-<p>密码：ren15964078319 (泄露位置：8-09=5600W9-200W.txt)<br />
+<p>密码：ren15964078319 (泄露位置：8-09=5600W9-200W.txt)<br>
 密码2：13046018130 (泄露位置：http://uuu9.com)</p>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="546c636165646c6762631425257a373b39">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="546c636165646c6762631425257a373b39">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 QQ：875108367</p>
 
-<p>密码：AITING (泄露位置：1E~001_162971E~001.txt)<br />
-密码2：AIBAOTING (泄露位置：1E~001_162971E~001.txt)<br />
+<p>密码：AITING (泄露位置：1E~001_162971E~001.txt)<br>
+密码2：AIBAOTING (泄露位置：1E~001_162971E~001.txt)<br>
 密码3：562377990 (泄露位置：1E~001_162971E~001.txt)</p>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="675f55545f5e50535e532716164904080a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="675f55545f5e50535e532716164904080a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 QQ：823897494</p>
 
-<p>密码：2015975cc <br />
+<p>密码：2015975cc <br>
 密码2：2015975c (泄露位置：http://uuu9.com)</p>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="21101319161514151116136150500f424e4c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="21101319161514151116136150500f424e4c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 QQ：1287454072</p>
 
-<p>密码：nibuaiwoma (泄露位置：10年300万463231.txt过滤后文件.txt)<br />
-IP地址：222.208.214.6<br />
-物理地址：四川省达州市大竹县 有家网吧<br />
+<p>密码：nibuaiwoma (泄露位置：10年300万463231.txt过滤后文件.txt)<br>
+IP地址：222.208.214.6<br>
+物理地址：四川省达州市大竹县 有家网吧<br>
 时间：2010-11-1&#45;--|-4:21:28</p>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fbc3cbcfc2cbcfcfc8cebb8a8ad5989496">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fbc3cbcfc2cbcfcfc8cebb8a8ad5989496">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 QQ：804904435</p>
 
-<p>密码：jiaoyang1993329 (泄露位置：9位数据9位A库9位-005.txt)<br />
-密码2：jiao1993329<br />
-IP地址：60.16.167.11<br />
-物理地址：辽宁省沈阳市联通ADSL<br />
+<p>密码：jiaoyang1993329 (泄露位置：9位数据9位A库9位-005.txt)<br>
+密码2：jiao1993329<br>
+IP地址：60.16.167.11<br>
+物理地址：辽宁省沈阳市联通ADSL<br>
 时间：2009-12-6&#45;--|-12:54:41</p>
 
 <h3>分析过程相关截图：</h3>
 
 <p>371799114</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405582732789.jpg" alt="2c84433702ef05cc1aa56e1fc7d454b9_m.jpg" /></p>
+<p><img src="../images_result/images/2014071405582732789.jpg" alt="2c84433702ef05cc1aa56e1fc7d454b9_m.jpg"></p>
 
 <p>875108367</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403310114822.jpg" alt="8e11ca4d2cc41832867b4a55b88a864f_m.jpg" /></p>
+<p><img src="../images_result/images/2014071403310114822.jpg" alt="8e11ca4d2cc41832867b4a55b88a864f_m.jpg"></p>
 
 <p>804904435</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071405041063934.jpg" alt="634abb614feb43310f6d1496e358f25e_m.jpg" /></p>
+<p><img src="../images_result/images/2014071405041063934.jpg" alt="634abb614feb43310f6d1496e358f25e_m.jpg"></p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403310276956.jpg" alt="41e24c4d91962a47953bfbba89e002b9_m.jpg" /></p>      </p>
+<p><img src="../images_result/images/2014071403310276956.jpg" alt="41e24c4d91962a47953bfbba89e002b9_m.jpg"></p>      <p></p>
     
 			</body>
 		</html>

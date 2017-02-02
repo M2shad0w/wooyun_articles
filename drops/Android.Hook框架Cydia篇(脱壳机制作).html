@@ -3,12 +3,12 @@
 			<head>
 			     <title>Android.Hook框架Cydia篇(脱壳机制作) - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8084">http://drops.wooyun.org/tips/8084</a></h1>
 				
       <p>
-        <p>注:框架有风险,使用要谨慎.</p>
+        </p><p>注:框架有风险,使用要谨慎.</p>
 
 <p>Cydia Substrate是一个代码修改平台.它可以修改任何主进程的代码,不管是用Java还是C/C++（native代码）编写的.而Xposed只支持HOOK app_process中的java函数,因此Cydia Substrate是一款强大而实用的HOOK工具.</p>
 
@@ -20,7 +20,7 @@
 
 <h2>0x00Hook Java 层</h2>
 
-<hr />
+<hr>
 
 <p>之前讲解过 xposed 的用法为啥还要整这个了,下面简单对比两款框架.想了解之前 xposed 篇的可以看这里:<a href="http://drops.wooyun.org/tips/7488">http://drops.wooyun.org/tips/7488</a></p>
 
@@ -43,7 +43,7 @@
 
 <h3>使用方法</h3>
 
-<hr />
+<hr>
 
 <p>1.安装框架app：http://www.cydiasubstrate.com/download/com.saurik.substrate.apk</p>
 
@@ -113,7 +113,7 @@ public class Main {
 
 <p>6.在 cydia app 界面中点击 Link Substrate Files 之后重启手机</p>
 
-<p><img src="http://static.wooyun.org//drops/20150814/2015081410002183631.png" alt="" /></p>
+<p><img src="../images_result/images/2015081410002183631.png" alt=""></p>
 
 <p>7.使用getimei的小程序验证imei是否被改变</p>
 
@@ -216,7 +216,7 @@ void hookMethod(Class _class, Member member, MS.MethodHook hook, MS.MethodPointe
 
 <h2>0x01Hook Native 层</h2>
 
-<hr />
+<hr>
 
 <p>这块的功能 xposed 就不能实现啦.</p>
 
@@ -245,11 +245,11 @@ void hookMethod(Class _class, Member member, MS.MethodHook hook, MS.MethodPointe
 
 <h3>使用方法</h3>
 
-<hr />
+<hr>
 
 <p>**第零步:添加 ndk 支持,将 cydia 的库和头文件加入工程</p>
 
-<p>有关 ndk 开发的基础可以参考此文: <a href="http://www.codefrom.com/paper/Android.NDK%E5%85%A5%E9%97%A8">NDK入门篇</a> <img src="http://static.wooyun.org//drops/20150814/2015081410002269410.png" alt="" /></p>
+<p>有关 ndk 开发的基础可以参考此文: <a href="http://www.codefrom.com/paper/Android.NDK%E5%85%A5%E9%97%A8">NDK入门篇</a> <img src="../images_result/images/2015081410002269410.png" alt=""></p>
 
 <p>注意要是 xxx.cy.cpp,不要忘记.cy</p>
 
@@ -314,7 +314,7 @@ static void OnResources(JNIEnv *jni, jclass resources, void *data) {
 }
 </code></pre>
 
-<hr />
+<hr>
 
 <p>下面是步骤是在官网教程基础上对小白同学的一些补充吧.</p>
 
@@ -386,7 +386,7 @@ Java_com_jerome_jni_JNIProcess_getInfoMD5
 
 <h3>脱壳机模块发开</h3>
 
-<hr />
+<hr>
 
 <p>网上流传的 IDA dump 脱壳流程大致如下:</p>
 
@@ -400,7 +400,7 @@ Java_com_jerome_jni_JNIProcess_getInfoMD5
 
 <p>现在目标就是通过 Cydia 的模块来自动化完成这个功能.这里咱选择对dvmDexFileOpenPartial函数进行 hook.至于为什么要选择这里了?这就需要分析下 android dex优化过程</p>
 
-<hr />
+<hr>
 
 <p>Android会对每一个安装的应用的dex文件进行优化,生成一个odex文件.相比于dex文件,odex文件多了一个optheader,依赖库信息（dex文件所需要的本地函数库）和辅助信息（类索引信息等）.</p>
 
@@ -694,7 +694,7 @@ MSInitialize
 
 <p>效果如下:</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="75061d101919351d14181810071d101411">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/sdcard $ l |grep dex
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="75061d101919351d14181810071d101411">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/sdcard $ l |grep dex
 app_process_classes_3220.dex
 com.ali.tg.testapp_classes_606716.dex
 com.chaozh.iReaderFree_classes_4673256.dex
@@ -813,7 +813,7 @@ MSInitialize
 
 <p><a href="https://github.com/WooyunDota/DumpDex">https://github.com/WooyunDota/DumpDex</a></p>
 
-<p><img src="http://static.wooyun.org//drops/20150814/2015081410002221211.png" alt="" /></p>
+<p><img src="../images_result/images/2015081410002221211.png" alt=""></p>
 
 <p>如果提取的是 encode 版的,需要 decode 一下:</p>
 
@@ -822,14 +822,14 @@ MSInitialize
 
 <h3>一些错误排除</h3>
 
-<hr />
+<hr>
 
 <pre><code>NDK Symbol 'NULL' could not be resolved
 </code></pre>
 
 <p>NDK环境没有配好,没有找到stddef.h</p>
 
-<p><img src="http://static.wooyun.org//drops/20150814/2015081410002220629.png" alt="" /></p>
+<p><img src="../images_result/images/2015081410002220629.png" alt=""></p>
 
 <pre><code>jni.h头文件找不到
 </code></pre>
@@ -844,7 +844,7 @@ MSInitialize
 
 <h2>0x03参考</h2>
 
-<hr />
+<hr>
 
 <p><a href="http://www.cnblogs.com/goodhacker/p/4014617.html">http://www.cnblogs.com/goodhacker/p/4014617.html</a></p>
 
@@ -866,7 +866,7 @@ MSInitialize
 
 <p><a href="http://bbs.pediy.com/showthread.php?t=199230">DexClassLoader4.4.2动态加载分析（磁盘加载分析）</a></p>
 
-<p><a href="http://blog.csdn.net/androidsecurity/article/details/9674251">Android4.0内存Dex数据动态加载技术</a></p>      </p>
+<p><a href="http://blog.csdn.net/androidsecurity/article/details/9674251">Android4.0内存Dex数据动态加载技术</a></p>      <p></p>
     
 			</body>
 		</html>

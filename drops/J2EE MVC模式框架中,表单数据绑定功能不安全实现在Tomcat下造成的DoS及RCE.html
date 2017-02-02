@@ -3,20 +3,20 @@
 			<head>
 			     <title>J2EE MVC模式框架中,表单数据绑定功能不安全实现在Tomcat下造成的DoS及RCE - Nebula</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1395">http://drops.wooyun.org/papers/1395</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>当这个<a href="http://drops.wooyun.org/papers/1377">《Struts2 Tomcat class.classLoader.resources.dirContext.docBase赋值造成的DoS及远程代码执行利用!》</a>在Tomcat下的利用出来以后,它其实秒杀的不是一个框架,而是所有表单数据绑定功能不安全实现的J2EE MVC模式框架(因为国内运营商共享协议的限制,远程代码执行漏洞在国内难以大规模实现.但DoS漏洞还是存在的!).</p>
 
 <h2>0x01 细节</h2>
 
-<hr />
+<hr>
 
 <p>稍微列一下清单:</p>
 
@@ -26,17 +26,17 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/201404/2014040921474585720.png" alt="2014040921474585720.png" /></p>
+<p><img src="../images_result/images/2014040921474585720.png" alt="2014040921474585720.png"></p>
 
 <p>如图:</p>
 
-<p><img src="http://static.wooyun.org/201404/2014040922063313735.png" alt="2014040922063313735.png" /></p>
+<p><img src="../images_result/images/2014040922063313735.png" alt="2014040922063313735.png"></p>
 
 <h3>webWork框架:</h3>
 
 <p>struts2框架的前身,由于与struts2框架合并,所以不会有补丁!</p>
 
-<p><img src="http://static.wooyun.org/201404/2014040922091186766.png" alt="2014040922091186766.png" /></p>
+<p><img src="../images_result/images/2014040922091186766.png" alt="2014040922091186766.png"></p>
 
 <h3>Struts2框架:</h3>
 
@@ -46,7 +46,7 @@
 
 <p>已经在cve-2010-1622中,补丁对class.classLoader的限制.但利用从此可以简化!</p>
 
-<p>还有就是,自己早年学习java时,写的简易框架,也可以打(只是表单填充需要多写一行代码手动调用填充,而其他常规框架是自动的)<img src="http://static.wooyun.org/20140714/2014071411294222136.gif" alt="40.gif" /></p>
+<p>还有就是,自己早年学习java时,写的简易框架,也可以打(只是表单填充需要多写一行代码手动调用填充,而其他常规框架是自动的)<img src="../images_result/images/2014071411294222136.gif" alt="40.gif"></p>
 
 <p>就以自己写的框架说明问题:</p>
 
@@ -152,7 +152,7 @@ public class Test {
 
 <p>获取包括父类的所有属性,如图:</p>
 
-<p><img src="http://static.wooyun.org/201404/2014040922595023935.png" alt="2014040922595023935.png" /></p>
+<p><img src="../images_result/images/2014040922595023935.png" alt="2014040922595023935.png"></p>
 
 <p>如果不想获取父类的属性.可以使用</p>
 
@@ -162,19 +162,19 @@ Introspector.getBeanInfo(dto.getClass(),Object.class);
 
 <p>其中第二个参数就是终止遍历到的父类(如:终止到基类Object),如图(这才是表单绑定实现正确的做法):</p>
 
-<p><img src="http://static.wooyun.org/201404/2014040923033384924.png" alt="2014040923033384924.png" /></p>
+<p><img src="../images_result/images/2014040923033384924.png" alt="2014040923033384924.png"></p>
 
 <p>然后只要属性有set器,参数就会被填充,以及后面的Tomcat的一些属性被挂载到class.classLoader下等原因,然后Tomcat的属性被访问到并且赋值.然后才是发生上面的利用!</p>
 
 <h2>0x02 总结</h2>
 
-<hr />
+<hr>
 
 <p>任何使用commons-beanutils组件或内省(及反射)不安全实现表单参数绑定功能的框架,都会受影响(当然,我这里只测试了Tomcat,其他web容器感兴趣的也可以测试一下利用思路!).</p>
 
 <p>J2EE规范在现今使用极广了，但如果不是Struts2漏洞，或许很少有人关注Java安全，这点很是奇怪！</p>
 
-<p>Author: Nebula, HelloWorld security team</p>      </p>
+<p>Author: Nebula, HelloWorld security team</p>      <p></p>
     
 			</body>
 		</html>

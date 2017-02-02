@@ -3,14 +3,14 @@
 			<head>
 			     <title>分享信息安全工作小记 - 健宇</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2945">http://drops.wooyun.org/tips/2945</a></h1>
 				
       <p>
-        <h2>0x01 工作背景：</h2>
+        </p><h2>0x01 工作背景：</h2>
 
-<hr />
+<hr>
 
 <p>1、 某厅级部门政府站点被篡改</p>
 
@@ -20,7 +20,7 @@
 
 <h2>0x02 工作记录：</h2>
 
-<hr />
+<hr>
 
 <p><strong>1、 信息收集</strong></p>
 
@@ -52,35 +52,35 @@
 
 <p>在初步了解完情况以后，对web目录进行可疑文件筛选：</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507400812485.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507400812485.png" alt="enter image description here"></p>
 
 <p>（黑客所放置的后门程序，文件修改时间被伪装）</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507400840508.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507400840508.png" alt="enter image description here"></p>
 
 <p>（webshell内容，变异的一句话）</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507400819329.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507400819329.png" alt="enter image description here"></p>
 
 <p>（通过FCKEDITOR编辑器上传的一句话木马文件初步判断为2014年6月30日黑客攻击）</p>
 
 <p>初步判断为FCKEDITOR编辑器被黑客利用了，接下来对iis 36GB日志进行压缩打包：</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507400974901.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507400974901.png" alt="enter image description here"></p>
 
 <p>（成功打包网站日志）</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507400987717.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507400987717.png" alt="enter image description here"></p>
 
 <p>（以webshell路径做为筛选条件初步快速从33GB日志文件内找出所有可疑IP地址以及时间）</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507400926260.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507400926260.png" alt="enter image description here"></p>
 
 <p>入侵手段分析：最终分析得知最早黑客攻击利用 Common/UpLoadFile.aspx文件上传了ASPX木马文件在common/201406/20140619183500432547.aspx，</p>
 
 <p>此上传功能并未调用FCKEDITOR编辑器，之前加固限制FCKEDITOR编辑器上传文件执行权限成功阻止了黑客利用该漏洞</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507400956173.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507400956173.png" alt="enter image description here"></p>
 
 <p>黑客通过 /common/201406/20140619183500432547.aspx文件写入了/userspace/enterprisespace/MasterPages.aspx一句话木马文件，</p>
 
@@ -90,15 +90,15 @@
 
 <p>在对3个月内日志仔细分析发现几个可疑的重庆和广东5个IP地址中113.<em>.</em>.173并未攻击成功，其他4个IP地址为1人或者1个团伙所使用IP地址：</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507400941568.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507400941568.png" alt="enter image description here"></p>
 
 <p>（黑客利用FCKEDITOR编辑器漏洞成功建立了a.asp文件夹尝试利用IIS解析漏洞，但是由于IIS中进行过安全配置以及IIS7.5已经修补该解析漏洞入侵并未成功，故忽略）</p>
 
 <p>对剩余的4个IP地址仔细分析发现61.<em>.</em>.181属于一个黑客使用的windows服务器：</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507400917065.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507400917065.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507401031640.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507401031640.png" alt="enter image description here"></p>
 
 <p>（对该服务器进行收集得知操作系统为windows2003，浏览器ie8.0，绑定域名www.**dns.cn）</p>
 
@@ -117,7 +117,7 @@ r httpd admin(通过HTTPS协议访问后了解到计算机名称为EASYN-9D76400
 10000/tcp open     ms-wbt-server   Microsoft Terminal Service（远程桌面服务，进行分析判断时发现存在黑客安装的shift后门）
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507401024231.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507401024231.png" alt="enter image description here"></p>
 
 <p>（黑客的shift后门真逗，竟然不使用灰色按钮，伪装失败，肉眼直接识别是后门）</p>
 
@@ -133,67 +133,67 @@ r httpd admin(通过HTTPS协议访问后了解到计算机名称为EASYN-9D76400
 
 <p>运气还不错，找到一个显错注入点直接sa权限：</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507401084796.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507401084796.png" alt="enter image description here"></p>
 
 <p>（SQL2008显错注入成功）</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507401078550.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507401078550.png" alt="enter image description here"></p>
 
 <p>（测试SA可以执行cmdshell，但是权限为网络服务，无法直接添加命令，还需要提权）</p>
 
 <p>思考后觉得数据库与网站都属于network service，应该可以通过数据库写文件到网站根目录，然后连接菜刀提权进入服务器：</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507401027040.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507401027040.png" alt="enter image description here"></p>
 
 <p>（通过显错得知了网站根目录，然后利用echo命令写入shell成功）</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507401090593.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507401090593.png" alt="enter image description here"></p>
 
 <p>（webshell连接成功，运气真好！）</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507401195334.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507401195334.png" alt="enter image description here"></p>
 
 <p>（从web.config文件中找到明文数据库sa超级管理员用户密码）</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507401141861.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507401141861.png" alt="enter image description here"></p>
 
 <p>（iis6提权成功）</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507401194735.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507401194735.png" alt="enter image description here"></p>
 
 <p>（明文管理员密码读取成功）</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507401115026.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507401115026.png" alt="enter image description here"></p>
 
 <p>（进入服务器分析杀毒软件历史日志，得知黑客入侵手法）</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507401222851.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507401222851.png" alt="enter image description here"></p>
 
 <p>（查看VPN配置信息取出日志，顺便了解到该服务器220天没有重启了，真牛。。。）</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507401246318.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507401246318.png" alt="enter image description here"></p>
 
 <p>（提取出存在于系统中的shift后门）</p>
 
 <p>继续向下分析，黑客是否种植远程控制木马或者其他rootkit：</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507401252878.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507401252878.png" alt="enter image description here"></p>
 
 <p>（系统服务中发现异常服务项为远程控制木马，爆破1组准备）</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507401315058.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507401315058.png" alt="enter image description here"></p>
 
 <p>（小样，默认还设置了注册表不允许administrators组无权限）</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507401381524.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507401381524.png" alt="enter image description here"></p>
 
 <p>（定位到木马的DLL，提取并固定到入侵证据中）</p>
 
-<p><img src="http://static.wooyun.org/20140905/2014090507401387517.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014090507401387517.png" alt="enter image description here"></p>
 
 <p>（黑客惯用手法，伪装与正常ASPX程序相关文件名，修改文件时间，就连webshell代码都是那么几个一模一样的） 后续还发现黑客添加成功asp.net用户，但是没有种植驱动级后门，当前也并未发现其他后门。综合系统日志、IIS日志、webshell、逆向分析shift后门以及远程控制木马结果、数据库日志、防火墙日志等判断出黑客是重庆的XXX，这里就不提这些了。</p>
 
-<p>以上内容仅供技术交流参考，欢迎大家与我互相交流，同时请关注长沙雨人网安的专业安全团队。</p>      </p>
+<p>以上内容仅供技术交流参考，欢迎大家与我互相交流，同时请关注长沙雨人网安的专业安全团队。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,18 +3,18 @@
 			<head>
 			     <title>网络间谍-目标：格鲁吉亚政府（Georbot Botnet） - virustracker</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/9293">http://drops.wooyun.org/papers/9293</a></h1>
 				
       <p>
-        <p>原文：<a href="http://dea.gov.ge/uploads/CERT%20DOCS/Cyber%20Espionage.pdf">http://dea.gov.ge/uploads/CERT%20DOCS/Cyber%20Espionage.pdf</a></p>
+        </p><p>原文：<a href="http://dea.gov.ge/uploads/CERT%20DOCS/Cyber%20Espionage.pdf">http://dea.gov.ge/uploads/CERT%20DOCS/Cyber%20Espionage.pdf</a></p>
 
 <p>译者按: 这是一篇对 &lt;&lt;<strong>DUKES&#45;--||-持续七年的俄罗斯网络间谍组织大起底</strong>>>文章的补充文章. 披露的是格鲁吉亚CERT在2011年对俄罗斯军方黑客的一次调查. 文章中诸多亮点现在看还是常看常新:比如反制黑客的手段是诱使黑客执行了一个木马. 另外将此篇文章对比最近ThreatCONNECT发布的camerashy报告,让我们不禁感慨的是,政府的反APT实在是比商业公司的反APT纯粹多了,专业多了.</p>
 
 <h1>0x00 概述</h1>
 
-<hr />
+<hr>
 
 <p>2011年3月，格鲁吉亚“计算机应急响应小组”（CERT）发现了一次网络攻击事件，似乎是一起网络间谍活动。</p>
 
@@ -36,11 +36,11 @@
 
 <h1>0x01 受害者</h1>
 
-<hr />
+<hr>
 
 <p>这次网络攻击活动设计的十分聪明。多家与新闻相关的格鲁吉亚网站都被黑了，并且只有几个特定的新闻网页遭到了篡改（比如，<strong><em>NATO delegation Visit in Georgia-NATO代表团访问格鲁吉亚, US- Georgian Agreements and Meetings-美国格鲁吉亚协议与会面, Georgian Military NEWS-格鲁吉亚军事新闻</em></strong>）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150929/2015092904323312002.com/blob/eftaaakzmur/majslj0brfruyuugr9vihq?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/majslj0brfruyuugr9vihq?s=ca6xamzgfwti" alt=""></p>
 
 <p>只有对这类信息感兴趣的用户才会感染这个高级威胁，无论目标计算机和网络系统上使用了什么安全防御措施或软件。这个威胁的加密程度很高，并且使用了最新的隐藏技术，因此，还没有安全工具能识别这个威胁。</p>
 
@@ -58,7 +58,7 @@
 
 <h1>0x02 木马功能</h1>
 
-<hr />
+<hr>
 
 <p>完全控制受感染的计算机。 木马会搜索受害者MS Office和PDF中的<strong>敏感词汇</strong>。</p>
 
@@ -76,17 +76,17 @@
 
 <h1>0x03 敏感词汇</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093021312053851.com/blob/eftaaakzmur/v6ceiasfcgo0scjegel1pq?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/v6ceiasfcgo0scjegel1pq?s=ca6xamzgfwti" alt=""></p>
 
 <p>最后，攻击者会窃取匹配的文件并上传到服务器。</p>
 
 <h1>0x04 CC服务器</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org//drops/20150928/2015092809271442586.com/blob/eftaaakzmur/e6g-3qzmzio2pwwmj62y1w?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/e6g-3qzmzio2pwwmj62y1w?s=ca6xamzgfwti" alt=""></p>
 
 <p>木马会受根据受害者的地理位置相应的改变它的CC服务器位置。</p>
 
@@ -102,11 +102,11 @@
 
 <p>美国受感染的计算机实例</p>
 
-<p><img src="http://static.wooyun.org//drops/20150929/2015092902210624211.com/blob/eftaaakzmur/qy_pv0ulbpvzjvf7ltphua?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/qy_pv0ulbpvzjvf7ltphua?s=ca6xamzgfwti" alt=""></p>
 
 <h1>0x05 恶意文件在逐渐进化和发展</h1>
 
-<hr />
+<hr>
 
 <p><strong>2011年3月30日</strong>– 病毒窃取敏感的文档，证书</p>
 
@@ -120,7 +120,7 @@
 
 <h1>0x06 感染机制</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>向合法网站注入script标签或iframe标签.</li>
@@ -130,15 +130,15 @@
 <li>创建起维持作用的usbserv.exe病毒</li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093021253512435.com/blob/eftaaakzmur/sf3pqbmem07vxrv1r0lxog?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/sf3pqbmem07vxrv1r0lxog?s=ca6xamzgfwti" alt=""></p>
 
 <p>第一步-注入脚本</p>
 
-<p><img src="http://static.wooyun.org//drops/20150929/2015092902425173832.com/blob/eftaaakzmur/h_rzm7k25tbvhszqgv34fw?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/h_rzm7k25tbvhszqgv34fw?s=ca6xamzgfwti" alt=""></p>
 
 <p>frame.php中的shellcode/漏洞载荷</p>
 
-<p><img src="http://static.wooyun.org//drops/20150929/2015092902211378387.com/blob/eftaaakzmur/obsmxaal8dfru4mtmphfha?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/obsmxaal8dfru4mtmphfha?s=ca6xamzgfwti" alt=""></p>
 
 <ol>
 <li>我们发现了一个特别制作且经过混淆的frame.php文件，在这个文件中携带着一些漏洞代码，并且会把用户重定向到其他的漏洞页面：利用了CVE-2010-0842，CVE-2006-3730，MS06-057和其他未知的漏洞。</li>
@@ -148,7 +148,7 @@
 
 <p>各大主要的杀毒产品都没能检测出这些恶意文件（1/4Virustoal，Dr.Web结果-可疑）。绕过了开启防火墙的Win7 sp1。截止到25.03.2011，20.06.2011，16.01.2012，25.03.2012。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150928/2015092809272825543.com/blob/eftaaakzmur/eu2jnxxtfzeblhdm-jxagg?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/eu2jnxxtfzeblhdm-jxagg?s=ca6xamzgfwti" alt=""></p>
 
 <p>在执行后，木马主要干3件事：</p>
 
@@ -160,24 +160,24 @@
 
 <h1>0x07 Bot控制机制</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org//drops/20150929/2015092902165197430.com/blob/eftaaakzmur/uwb-u8fmc9zy26fu9ps9oa?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/uwb-u8fmc9zy26fu9ps9oa?s=ca6xamzgfwti" alt=""></p>
 
 <ol>
 <li>CC服务器地址会硬编码到木马的二进制文件中.</li>
 <li>如果所有的这些地址都无法连接，木马会钓鱼网站中读取回连地址.(此处的钓鱼网站指上文阐述的已经被黑客事先入侵的新闻网站)</li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20150929/2015092902183177163.com/blob/eftaaakzmur/tuimagavsr9ig8g_wvmtlg?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/tuimagavsr9ig8g_wvmtlg?s=ca6xamzgfwti" alt=""></p>
 
 <h1>0x08 新的木马更新方法</h1>
 
-<hr />
+<hr>
 
 <p>新版本的木马文件，会用base64明文编码，从不同的网站上同时下载，然后整合成一个文件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151009/2015100903134263555.com/blob/eftaaakzmur/cs1-ivx57cdj53omhtubpw?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/cs1-ivx57cdj53omhtubpw?s=ca6xamzgfwti" alt=""></p>
 
 <p>特点</p>
 
@@ -192,7 +192,7 @@
 
 <h1>0x09 受感染的组织</h1>
 
-<hr />
+<hr>
 
 <p>多数受感染的格鲁吉亚计算机都是来自政府机构和关键信息基础设施。</p>
 
@@ -208,7 +208,7 @@
 
 <h1>0x0A 响应过程</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>根据检测，通过国家的三大主要ISP来拦截这6个CC IP地址（快速响应）</li>
@@ -221,7 +221,7 @@
 
 <h1>0x0B 网路情报对抗（揭开攻击者的面纱）</h1>
 
-<hr />
+<hr>
 
 <p>格鲁吉亚CERT小组 获取了CC服务器的权限，解密了木马的通信机制。在分析了所有收集到的信息后，我们已经识别了网络攻击者和攻击组织的身份。</p>
 
@@ -243,7 +243,7 @@
 
 <p><code>www.rbc.ru</code> – 直接硬编码在木马代码中，如果所有信道都关闭了，则与攻击者通信。官方名称“Russian Business Consalting” –官方网站，与RBN有关联。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150929/2015092905424856530.com/blob/eftaaakzmur/oruulghpwcyeyhspuvj3wa?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/oruulghpwcyeyhspuvj3wa?s=ca6xamzgfwti" alt=""></p>
 
 <pre><code>http://legalcrf.in/f/4b178e605583cca28c850943e805aabc/1
 http://legalcrf.in/t/19ebfd07a13d3edf82fcc121a0e4643c 
@@ -259,19 +259,19 @@ http://legalcrf.in/f/4b178e605583cca28c850943e805aabc/1
 
 <h1>0x0C 托管漏洞文件</h1>
 
-<hr />
+<hr>
 
 <p>注册人信息不明确，通过印度Whois服务发现</p>
 
-<p><img src="http://static.wooyun.org//drops/20150929/2015092902294541689.com/blob/eftaaakzmur/avk-vum0mvel_erezc_96w?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/avk-vum0mvel_erezc_96w?s=ca6xamzgfwti" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150928/2015092809274226922.com/blob/eftaaakzmur/ftktiluailixvv_uodip7w?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/ftktiluailixvv_uodip7w?s=ca6xamzgfwti" alt=""></p>
 
 <p><strong>Lubianka 13, Moscow. - 俄罗斯内务部， 后勤部- 组织开发和通信系统， 组织发展和通信系统，提升信息和通信技术和信息技术保障；</strong></p>
 
 <p>在他旁边的是：俄罗斯联邦安全服务部 <strong>(FSB) – 莫斯科</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150929/2015092902245445858.com/blob/eftaaakzmur/qma-7oy6riz9epysygynaq?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/qma-7oy6riz9epysygynaq?s=ca6xamzgfwti" alt=""></p>
 
 <p>在2012年3月，ESET安全公司公布了一份报告-“Georbot: From Russia With Love” (根据我们小组的技术支持)</p>
 
@@ -291,21 +291,21 @@ http://legalcrf.in/f/4b178e605583cca28c850943e805aabc/1
 
 <p>然后，我们获取到了他的所在城市，ISP，邮件等。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150929/2015092902321032580.com/blob/eftaaakzmur/8suewpxhgxgz6awjjki3cg?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/8suewpxhgxgz6awjjki3cg?s=ca6xamzgfwti" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20151121/2015112118511044052.com/blob/eftaaakzmur/jpwg8_zet71b29rllc5bfw?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/jpwg8_zet71b29rllc5bfw?s=ca6xamzgfwti" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093021254288776.com/blob/eftaaakzmur/ttiwzaue2-ogahnqb7klxq?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/ttiwzaue2-ogahnqb7klxq?s=ca6xamzgfwti" alt=""></p>
 
 <p>正在使用OllyDbg进行反汇编</p>
 
-<p><img src="http://static.wooyun.org//drops/20150929/2015092903093234177.com/blob/eftaaakzmur/hh6mcohhos_2cwhrt9zrkw?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/hh6mcohhos_2cwhrt9zrkw?s=ca6xamzgfwti" alt=""></p>
 
 <p><strong>Nickname: ESHKINKOT – 木马可执行程序内部也出现了</strong></p>
 
 <p><strong>相同的邮件地址，俄罗斯城市</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150930/2015093021254584802.com/blob/eftaaakzmur/psb_bsqecq5xhdnews-pqw?s=ca6xamzgfwti" alt="" /></p>
+<p><img src="../images_result/images/psb_bsqecq5xhdnews-pqw?s=ca6xamzgfwti" alt=""></p>
 
 <p><strong>在俄罗斯的 Xakep 论坛，寻求别人帮助他编写EXPLOIT.</strong></p>
 
@@ -317,7 +317,7 @@ http://legalcrf.in/f/4b178e605583cca28c850943e805aabc/1
 <li>SSECI 2012 (关键基础设施的安全，保障和效率) – Prague, Czech Republic 30 may – 01 June 2012*(with support of ONRG – Office of Naval Research Global) *</li>
 <li>网络事件和关键基础设施保护研讨会 – Tallin, Estonia 18-19 June 2012 </li>
 <li>NATO – 和平与安全科学 (SPS) - METU - 中东技术大学阿富汗IT专家分析格鲁吉亚网络案例 , Turkey 21 May - 01 Jun 2012</li>
-</ol>      </p>
+</ol>      <p></p>
     
 			</body>
 		</html>

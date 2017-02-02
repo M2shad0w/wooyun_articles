@@ -3,14 +3,14 @@
 			<head>
 			     <title>基于ngx_lua模块的waf开发实践 - zhangsan</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5136">http://drops.wooyun.org/tips/5136</a></h1>
 				
       <p>
-        <h1>0x00 常见WAF简单分析</h1>
+        </p><h1>0x00 常见WAF简单分析</h1>
 
-<hr />
+<hr>
 
 <p>WAF主要分为硬件WAF和软件防火墙，硬件WAF如绿盟的NSFOCUS Web Application Firewall，软件防火墙比较有名的是ModSecurity，再就是代码级别的ngx&#95;lua&#95;waf。下面谈谈个人对几款防火墙的理解：</p>
 
@@ -20,11 +20,11 @@
 
 <!--more-->
 
-<p>基于高性能，低成本的想法，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7e9bf1ef99f0ce9ac4f83e1211081b0d161b12129bc2fe9bf1ef99e4fa101906">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&#95;lua&#95;waf，经过实际使用下来，确实性能极好，由于LUA语言的性能是接近于C的，而且ngx&#95;lua&#95;module本身就是基于为nginx开发的高性能的模块。安全宝的云 WAF，以及cloudflare的新waf也是基于此模块使用LUA开发的。结合ModSecurity的思路，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f1147e73197172b19d9e87948299949d9d166b759f9689">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&#95;lua&#95;waf来开发适合自己用的WAF，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4eabcbf8aaf6e3aaf3f1a9dae6aaf4c8abf0c6abead40e2221382b3d262b2222a9d4caabc9f3a8dbfe">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，再此也表示感谢。</p>
+<p>基于高性能，低成本的想法，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7e9bf1ef99f0ce9ac4f83e1211081b0d161b12129bc2fe9bf1ef99e4fa101906">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&#95;lua&#95;waf，经过实际使用下来，确实性能极好，由于LUA语言的性能是接近于C的，而且ngx&#95;lua&#95;module本身就是基于为nginx开发的高性能的模块。安全宝的云 WAF，以及cloudflare的新waf也是基于此模块使用LUA开发的。结合ModSecurity的思路，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f1147e73197172b19d9e87948299949d9d166b759f9689">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&#95;lua&#95;waf来开发适合自己用的WAF，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4eabcbf8aaf6e3aaf3f1a9dae6aaf4c8abf0c6abead40e2221382b3d262b2222a9d4caabc9f3a8dbfe">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，再此也表示感谢。</p>
 
 <h1>0x01 WAF框架设计</h1>
 
-<hr />
+<hr>
 
 <p>WAF开发过程中的主要方向为：</p>
 
@@ -57,11 +57,11 @@
 
 <p>图示如下：</p>
 
-<p><img src="http://static.wooyun.org/20150305/2015030513391113406.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015030513391113406.jpg" alt="enter image description here"></p>
 
 <h1>0x02 规则格式分析</h1>
 
-<hr />
+<hr>
 
 <p>规则说明：</p>
 
@@ -81,7 +81,7 @@
 
 <h1>0x03 cc攻击防护代码示例</h1>
 
-<hr />
+<hr>
 
 <pre><code>#!bash
 --在nginx.conf的HTTP中加入
@@ -143,7 +143,7 @@ end
 
 <h1>0x04 优势举例</h1>
 
-<hr />
+<hr>
 
 <p>可以很灵活的实现复杂的控制</p>
 
@@ -173,7 +173,7 @@ end
 
 <h1>0x05 源码下载及使用</h1>
 
-<hr />
+<hr>
 
 <p>源码下载地址为：http://pan.baidu.com/s/18QQya</p>
 
@@ -187,7 +187,7 @@ end
 
 <h1>0x06 后续研究方向</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>1.根据ModSecurity规则提取一份较适应自己用的规则</li>
@@ -199,13 +199,13 @@ end
 
 <h1>0x07 参考资料</h1>
 
-<hr />
+<hr>
 
 <pre><code>1. https://github.com/loveshell/ngx_lua_waf
 2. http://wiki.nginx.org/HttpLuaModule
 3. http://www.freebuf.com/tools/54221.html
 ……
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

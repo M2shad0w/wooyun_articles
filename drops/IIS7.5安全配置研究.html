@@ -3,14 +3,14 @@
 			<head>
 			     <title>IIS7.5安全配置研究 - zhangsan</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1019">http://drops.wooyun.org/papers/1019</a></h1>
 				
       <p>
-        <h2>0x00 测试环境</h2>
+        </p><h2>0x00 测试环境</h2>
 
-<hr />
+<hr>
 
 <p><strong>操作系统：</strong>Windows Server 2008 R2 Enterprise Service Pack 1 x64 <strong>IIS版本：</strong>IIS7.5 <strong>程序：</strong>asp.net</p>
 
@@ -18,9 +18,9 @@
 
 <!--more-->
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org/201403/2014030611270847744.jpg" alt="2014030611270847744.jpg" /></p>
+<p><img src="../images_result/images/2014030611270847744.jpg" alt="2014030611270847744.jpg"></p>
 
 <p><strong>http 常见功能：</strong>开启静态内容，默认文档，HTTP错误；目录浏览，WebDAV发布如无特殊要求，不要开启；HTTP重定向可根据需要开启。</p>
 
@@ -34,7 +34,7 @@
 
 <h2>0x02 IIS7.5权限配置介绍</h2>
 
-<hr />
+<hr>
 
 <p>IIS7.5涉及两个账户，一个为匿名账户，一个为应用程序池账户。在磁盘的NTFS权限设置中，匿名账户只需要拥有对网站目录的读取权限即可；而应用程序池账户需要根据程序实际情况给予相应权限，比如：需要去写文件，则要给予写权限，需要去调用一个程序（如cmd.exe）则需要给予执行权限。总之，对文件的访问，首先需要有匿名账户的访问权限，然后再根据程序的操作需要什么样的权限给予应用程序池账户相应的权限。</p>
 
@@ -53,7 +53,7 @@
 
 <h2>0x03 常见服务器被入侵威胁及解决措施</h2>
 
-<hr />
+<hr>
 
 <h3>常见服务器入侵威胁：</h3>
 
@@ -72,11 +72,11 @@
 
 <p>可以在IIS中设置需要上传文件的目录，处理程序映射中的编辑功能权限中的脚本去掉，这样即使上传了木马文件在此目录，也是无法执行的。</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030611273098478.jpg" alt="2014030611273098478.jpg" /></p>
+<p><img src="../images_result/images/2014030611273098478.jpg" alt="2014030611273098478.jpg"></p>
 
 <p>上传目录取消应用程序池账户的执行权限</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030611274922035.png" alt="2014030611274922035.png" /></p>
+<p><img src="../images_result/images/2014030611274922035.png" alt="2014030611274922035.png"></p>
 
 <h4>3. 防止木马执行后看到网站目录之外的文件</h4>
 
@@ -92,21 +92,21 @@
 
 <h2>0x04 推荐安全配置方案</h2>
 
-<hr />
+<hr>
 
 <h3>安全配置简单配置：</h3>
 
 <h4>1. 匿名账户使用默认的IUSR。</h4>
 
-<p><img src="http://static.wooyun.org/201403/2014030611280328764.jpg" alt="2014030611280328764.jpg" /></p>
+<p><img src="../images_result/images/2014030611280328764.jpg" alt="2014030611280328764.jpg"></p>
 
 <h4>2. 应用程序池使用默认的标识，对于的账户为IIS AppPool\应用程序池名称。</h4>
 
-<p><img src="http://static.wooyun.org/201403/2014030611281563141.jpg" alt="2014030611281563141.jpg" /></p>
+<p><img src="../images_result/images/2014030611281563141.jpg" alt="2014030611281563141.jpg"></p>
 
 <h4>3.IIS中对上传目录设置为脚本不可执行</h4>
 
-<p><img src="http://static.wooyun.org/201403/2014030611282823501.png" alt="2014030611282823501.png" /></p>
+<p><img src="../images_result/images/2014030611282823501.png" alt="2014030611282823501.png"></p>
 
 <h3>加强安全配置：</h3>
 
@@ -130,14 +130,14 @@
 
 <h2>0x05 疑问</h2>
 
-<hr />
+<hr>
 
 <ol>
 <li><p>在测试过程中发现，访问aspx程序，如果匿名账户为自定义的账户，则需要给自定义的匿名账户在文件夹<code>C:\Windows\Microsoft.NET\Framework64\v2.0.50727\Temporary ASP.NET Files</code>上的写入权限；但是，如果使用默认的匿名账户，也就是IUSR时，需要给予应用程序池账户在此文件夹上的写入权限。疑问点在于此文件夹到底是需要哪个账户的写入权限，因为选择默认的匿名账户时，即时禁止IUSR在此文件的写入权限，只要应用程序池账户在此文件夹有写权限，一样运行正常?</p></li>
 <li><p>当匿名用户为程序默认的时候，应该就是IUSR，但为什么又传递的进程池账户?</p></li>
 </ol>
 
-<p> </p>      </p>
+<p> </p>      <p></p>
     
 			</body>
 		</html>

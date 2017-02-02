@@ -3,14 +3,14 @@
 			<head>
 			     <title>Android uncovers master-key 漏洞分析 - livers</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/219">http://drops.wooyun.org/papers/219</a></h1>
 				
       <p>
-        <h3>0x00 背景</h3>
+        </p><h3>0x00 背景</h3>
 
-<hr />
+<hr>
 
 <p>Bluebox的CTO Jeff Forristal在其官⽅方blog爆出一个漏洞叫做UNCOVERING ANDROID MASTER KEY,大致是不篡改签名修改android代码。</p>
 
@@ -20,7 +20,7 @@
 
 <p><!--more--> 剩下就是放出来一张更改基带字串的图:</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811394530853.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811394530853.png" alt="enter image description here"></p>
 
 <p>具体细节7月底的blackhat放出。</p>
 
@@ -28,7 +28,7 @@
 
 <h3>0x01 分析</h3>
 
-<hr />
+<hr>
 
 <p>POC还没出来之前,先是看了下android的签名机制和安装机制。</p>
 
@@ -52,7 +52,7 @@
 
 <p>回头看⽼老外的POC:<a href="https://gist.github.com/poliva/36b0795ab79ad6f14fd8">https://gist.github.com/poliva/36b0795ab79ad6f14fd8</a></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811394551470.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811394551470.jpeg" alt="enter image description here"></p>
 
 <p>在linux执⾏行了一遍,出现错误。可能是apk的原因。</p>
 
@@ -64,7 +64,7 @@
 
 <p>把apk_old所有⽂文件以zip压缩的⽅方式加⼊入新的apk中。我本机以weibo.apk为例:</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811394657069.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811394657069.png" alt="enter image description here"></p>
 
 <p>可见两者大小发生了变化,apktool在反编译过程不可避免的出现差异。并且重编译的apk不含有签名文件。</p>
 
@@ -89,15 +89,15 @@ for i in range(0,len(test)):
 z.close()
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811394686712.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811394686712.png" alt="enter image description here"></p>
 
 <p>差不多增大了一倍,放在手机上安装了一下,成功安装。查看了下:</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811394685963.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811394685963.png" alt="enter image description here"></p>
 
 <p>出现了多对同名文件。CRC校验不同,查看了一下,基本上是两个字节便产生不同。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811394680771.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811394680771.png" alt="enter image description here"></p>
 
 <p>这里我又测试了只添加签名文件,或者dex文件等,均不能通过验证。</p>
 
@@ -105,7 +105,7 @@ z.close()
 
 <h3>0x02 验证</h3>
 
-<hr />
+<hr>
 
 <p>证明是否可以进行更改源码,并能使用原生签名。我把apk图标进行了更改。</p>
 
@@ -120,13 +120,13 @@ z.close()
 这里没有进行签名直接借用原来的签名。
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811394776790.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811394776790.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811394768100.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811394768100.png" alt="enter image description here"></p>
 
 <h3>0x03 查找根源</h3>
 
-<hr />
+<hr>
 
 <p>我这里下载的android 2.2的源码，查找到获取签名信息安装位于<code>frameworks\base\core\java\android\content\pm\PackageParser.java</code>这个文件，<code>public boolean collectCertificates(Package pkg, int flags)</code>和<code>private Certificate[] loadCertificates(JarFile jarFile, JarEntry je, byte[] readBuffer)</code>这个方法是用来获取签名信息的。</p>
 
@@ -164,7 +164,7 @@ z.close()
 
 <h3>0x04 后继</h3>
 
-<hr />
+<hr>
 
 <p>我android研究不多，大多以前玩逆向的底子。大家可以多讨论。 欢迎大家留言探讨~！</p>
 
@@ -184,21 +184,21 @@ z.close()
 
 <p>1. 解析zip的所有Entry，结果存到HashMap（key为路径，value为Entry）。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811394857404.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811394857404.jpeg" alt="enter image description here"></p>
 
 <p>2. 由于HashMap.put在相同key的情况下，会把value更新，导致上述的HashMap在相同路径下，存储的一定是最后一个文件的Entry。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811394884839.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811394884839.jpeg" alt="enter image description here"></p>
 
 <p> 系统加载dex文件，加载的是第一个dex。   </p>
 
 <p>  1. 查找dex的Entry用的是dexZipFindEntry。 </p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811394838477.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811394838477.jpeg" alt="enter image description here"></p>
 
 <p>2. dexZipFindEntry的实现是只要match就返回，所以返回的都是第一个文件。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811394964103.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811394964103.jpeg" alt="enter image description here"></p>
 
 <p>Zip 可以包含两个同名文件或者路径，而其自身的unzip 默认方式是后一个覆盖前一个。</p>
 
@@ -210,7 +210,7 @@ z.close()
 
 <p>看雪上也是讨论很多帖子得到准确的原理分析，大家共同讨论，集思广益。Hack it, know it too.</p>
 
-<p>持续跟新中。</p>      </p>
+<p>持续跟新中。</p>      <p></p>
     
 			</body>
 		</html>

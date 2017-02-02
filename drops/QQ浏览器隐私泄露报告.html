@@ -3,16 +3,16 @@
 			<head>
 			     <title>QQ浏览器隐私泄露报告 - virustracker</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/14532">http://drops.wooyun.org/papers/14532</a></h1>
 				
       <p>
-        <p>source:citizenlab.org</p>
+        </p><p>source:citizenlab.org</p>
 
 <h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>QQ浏览器是腾讯开发的一款网络浏览器，面向Android，Windows，Mac和iOS等平台。相较于内置浏览器，QQ浏览器提供了更丰富的功能，例如，增加了标签窗口，并且整合了聊天平台等。</p>
 
@@ -32,7 +32,7 @@
 
 <h1>0x01 技术分析</h1>
 
-<hr />
+<hr>
 
 <p>我们分析了两个版本的QQ浏览器，分别是安卓版6.3.01920和Windows版9.2.5478。在分析过程中，我们使用了大量的工具。比如，我们使用了tcpdump和Wireshark来捕捉和分析网络流量，也使用了机器代码和字节码反汇编工具，反编译器和调试工具来分析程序行为，包括，JD, JADX和IDA。</p>
 
@@ -42,7 +42,7 @@
 
 <h1>0x02 第一部分：QQ浏览器的数据传输</h1>
 
-<hr />
+<hr>
 
 <p>安卓和Windows版的QQ浏览器都使用了一种WUP请求与QQ服务器通讯。</p>
 
@@ -62,7 +62,7 @@
 
 <h1>0x03 第二部分：分析安卓版QQ浏览器</h1>
 
-<hr />
+<hr>
 
 <p>我们分析的安卓版QQ浏览器是6.3.01920版本，下载于<a href="http://mb.qq.com/">http://mb.qq.com/</a>。在启动后，或执行了某些事件时，比如，浏览网页或检查更新，浏览器就会向<code>http://wup.imtt.qq.com:8080/</code>发送WUP请求。这些请求使用了下面的这种加密方式。</p>
 
@@ -92,7 +92,7 @@ int i = 10000000 + new Random().nextInt(89999999);
 
 <p>我们一直监控着浏览器发送的流量，并且使用这个秘钥解密了所有的WUP请求。多数WUP请求中传输的是一些很容易解密的个人信息。在图1中，是一个解密后的WUP请求，通过我们的脚本，可以将其解析成可读的形式。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040515192838745117.png" alt="p1" /> 图1-解密后的WUP请求。我们用“#”替代了敏感数字。</p>
+<p><img src="../images_result/images/2016040515192838745117.png" alt="p1"> 图1-解密后的WUP请求。我们用“#”替代了敏感数字。</p>
 
 <p>下面是我们识别出的一些重要请求，以及每个请求传输的个人信息：</p>
 
@@ -230,13 +230,13 @@ int i = 10000000 + new Random().nextInt(89999999);
 
 <p>通过pkgcenternew.checkUpdate请求的存在来看，软件更新是可用的。在这个请求的响应中可能会包含有下载新APK文件的链接，APK的MD5哈希和更新日志。在安卓上，如果APK更新使用的签名与当前安装的版本不符，那么APK更新就会失败；虽然，这种攻击方式无法将QQ浏览器替换成任意的APK；但是，这种方法可以用来安装新App，通过使用QQ浏览器的名称和图标，诱骗用户安装恶意的APK。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040515193062800214.png" alt="p2" /> 图2-中间人攻击QQ浏览器的更新过程。在左图中，我们可以插入任意的更新日志。在右侧，更新下载完成后，浏览器会提示用户安装愤怒的小鸟APK（攻击者可以将这个App的名称修改为“QQ浏览器”，使用与QQ浏览器相似的图标，从而诱使用户安装这个APK）</p>
+<p><img src="../images_result/images/2016040515193062800214.png" alt="p2"> 图2-中间人攻击QQ浏览器的更新过程。在左图中，我们可以插入任意的更新日志。在右侧，更新下载完成后，浏览器会提示用户安装愤怒的小鸟APK（攻击者可以将这个App的名称修改为“QQ浏览器”，使用与QQ浏览器相似的图标，从而诱使用户安装这个APK）</p>
 
 <p>目前，由于Google Play商店无法在中国使用，所以中国的安卓用户必须通过其他途径来更新应用。因为无法使用Google Play商店的更新过程，所以，开发者必须自己实现自动更新机制，而这样则会导致程序的更新过程出现漏洞。据称，中国版的Google Play商店会在2016年上线。</p>
 
 <h1>0x04 第三部分：分析Windows版QQ浏览器</h1>
 
-<hr />
+<hr>
 
 <p>我们分析的Windows版QQ浏览器是9.2.5478版本，下载于<a href="http://browser.qq.com/">http://browser.qq.com/</a>。虽然，Windows版的QQ浏览器也是通过WUP请求与服务器通讯，但是，采用了不同于安卓版本的加密方式和加密时间。而且，Windows版本使用了MTEA+MCBC算法来加密WUP请求，这是一种对称加密算法，而不是安卓版本上的非对称RSA算法（WUP响应都是采用了MTEA+MCBC算法进行加密，无论是安卓版本还是Windows版本）。</p>
 
@@ -391,11 +391,11 @@ int i = 10000000 + new Random().nextInt(89999999);
 
 <p>第二种攻击方式说明了仅仅是验证数字签名还不足以认证软件更新的安全性。数字签名验证只是判断下载的EXE是不是由腾讯签名的，但是不会判断这个EXE会不会更新QQ浏览器-这个EXE可以是任何一个腾讯签名的程序。我们发现，旧版的QQ浏览器安装程序不会执行签名检查（这个安装程序本身只使用了对称加密），在更新时也是这样，我们使用了漏洞版本的QQ浏览器在线安装服务来“更新”用户的QQ浏览器，然后下载和执行我们选择一个EXE（图3）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160405/2016040515193128026314.png" alt="p3" /> 图3-中间人攻击QQ浏览器的更新程序，首先注入一个有漏洞的在线安装程序，然后注入我们的程序。有效载荷是显示为“Oh Hai There”，但是，可以注入任意软件，比如间谍程序或木马。</p>
+<p><img src="../images_result/images/2016040515193128026314.png" alt="p3"> 图3-中间人攻击QQ浏览器的更新程序，首先注入一个有漏洞的在线安装程序，然后注入我们的程序。有效载荷是显示为“Oh Hai There”，但是，可以注入任意软件，比如间谍程序或木马。</p>
 
 <h1>0x05 讨论</h1>
 
-<hr />
+<hr>
 
 <p>在这份报告中，我们指出了QQ浏览器中存在的一些很严重的安全漏洞。这个应用会收集和传输用户的身份数据，从而导致第三方可以监控到这些数据。另外，软件更新缺陷致使攻击者可以在用户设备上执行任意代码，比如第三方可以在用户的设备上插入恶意的间谍程序并执行。最让人讨厌的是用户还不一定能意识到风险的存在-没有意识到自己的数据会被收集，也可能不会意识到自己的设备上会被安装恶意代码。</p>
 
@@ -403,7 +403,7 @@ int i = 10000000 + new Random().nextInt(89999999);
 
 <p>用户信任web浏览器会安全地处理用户输入的敏感信息并安全地将这些信息传输给web服务器。但是，QQ浏览器和其他的浏览器背弃了用户的信任，这些软件不仅仅在收集用户数据，还采用了一种不安全的传输方式。即使是使用了非对称加密，也没有能够坚持。安卓版的QQ浏览器使用了非对称的RSA算法，但是使用的秘钥太小，没有满足建议的2048位大小。这一缺陷要求开发者必须要使用经过考验的协议，比如OpenSSL这种广泛使用的方法能够更加安全地传输敏感数据。</p>
 
-<p>除了批评这些应用的数据传输方式不够安全，更大的问题在于为什么要收集和传输这类个人数据。经由移动设备传输的个人身份数据成千上万，收集这些信息会导致严重的用户安全和隐私问题。然而，正是因为用户设备上的这些数据，开发者才能够提供高效的，高度定制化的服务，这些移动版浏览器收集的数据范围过大，很可能会引起用户的担忧-尤其是当厂商没有办法保证数据的安全。收集与用户身份，用户设备和用户在线行为相关的信息，很可能是为了监控高风险用户，在中国，可能包括民主人士，记者，人权支持者，律师等。</p>      </p>
+<p>除了批评这些应用的数据传输方式不够安全，更大的问题在于为什么要收集和传输这类个人数据。经由移动设备传输的个人身份数据成千上万，收集这些信息会导致严重的用户安全和隐私问题。然而，正是因为用户设备上的这些数据，开发者才能够提供高效的，高度定制化的服务，这些移动版浏览器收集的数据范围过大，很可能会引起用户的担忧-尤其是当厂商没有办法保证数据的安全。收集与用户身份，用户设备和用户在线行为相关的信息，很可能是为了监控高风险用户，在中国，可能包括民主人士，记者，人权支持者，律师等。</p>      <p></p>
     
 			</body>
 		</html>

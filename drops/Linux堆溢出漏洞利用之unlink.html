@@ -3,16 +3,16 @@
 			<head>
 			     <title>Linux堆溢出漏洞利用之unlink - 阿里移动安全</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/16610">http://drops.wooyun.org/tips/16610</a></h1>
 				
       <p>
-        <p><strong>作者：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e40c5154005969a40d7c5b0d63680c657e014a6d01614c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
+        </p><p><strong>作者：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e40c5154005969a40d7c5b0d63680c657e014a6d01614c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>之前我们深入了解了glibc malloc的运行机制（<strong>文章链接请看文末</strong><font color="red">▼</font>），下面就让我们开始真正的堆溢出漏洞利用学习吧。说实话，写这类文章，我是比较怂的，因为我当前从事的工作跟漏洞挖掘完全无关，学习这部分知识也纯粹是个人爱好，于周末无聊时打发下时间，甚至我最初的目标也仅仅是能快速看懂、复现各种漏洞利用POC而已…鉴于此，后续的文章大致会由两种内容构成：1)各种相关文章的总结，再提炼；2)某些好文章的翻译及拓展。本文两者皆有，主要参考文献见<a href="https://sploitfun.wordpress.com/2015/02/26/heap-overflow-using-unlink/">这里</a>。</p>
 
@@ -20,7 +20,7 @@
 
 <h1>0x01 背景介绍</h1>
 
-<hr />
+<hr>
 
 <p>首先，存在漏洞的程序如下：</p>
 
@@ -45,15 +45,15 @@ int main( int argc, char * argv[] )
 }
 </code></pre>
 
-<p>在代码<a href="http://static.wooyun.org//drops/20160606/2016060603583849316214.png">3</a>中存在一个堆溢出漏洞：如果用户输入的argv<a href="http://static.wooyun.org//drops/20160606/2016060603571010923120.png">1</a>的大小比first变量的666字节更大的话，那么输入的数据就有可能覆盖掉下一个chunk的chunk header——这可以导致任意代码执行。而攻击的核心思路就是利用glibc malloc的unlink机制。</p>
+<p>在代码<a href="./drops/20160606/2016060603583849316214.png">3</a>中存在一个堆溢出漏洞：如果用户输入的argv<a href="./drops/20160606/2016060603571010923120.png">1</a>的大小比first变量的666字节更大的话，那么输入的数据就有可能覆盖掉下一个chunk的chunk header——这可以导致任意代码执行。而攻击的核心思路就是利用glibc malloc的unlink机制。</p>
 
 <p>上述程序的内存图如下所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060603571010923120.png" alt="" /></p>
+<p><img src="../images_result/images/2016060603571010923120.png" alt=""></p>
 
 <h1>0x02 unlink技术原理</h1>
 
-<hr />
+<hr>
 
 <h2>2.1 基本知识介绍</h2>
 
@@ -99,8 +99,8 @@ size += prevsize;
 
 <p>如果为free的话，那么就进行向后合并：</p>
 
-<p>1)将前一个chunk占用的内存合并到当前chunk;<br />
-2)修改指向当前chunk的指针，改为指向前一个chunk。<br />
+<p>1)将前一个chunk占用的内存合并到当前chunk;<br>
+2)修改指向当前chunk的指针，改为指向前一个chunk。<br>
 3)使用unlink宏，将前一个free chunk从双向循环链表中移除(这里最好自己画图理解，学过数据结构的应该都没问题)。</p>
 
 <p>在本例中由于前一个chunk是allocated的，所以并不会进行向后合并操作。</p>
@@ -174,13 +174,13 @@ set_foot(p, size);//将后一个chunk的prev_size设置为当前chunk的size
 
 <h2>2.2 开始攻击</h2>
 
-<p>现在我们再来分析如果一个攻击者在代码<a href="http://static.wooyun.org//drops/20160606/2016060603583849316214.png">3</a>中精心构造输入数据并通过strcpy覆盖了second chunk的chunk header后会发生什么情况。</p>
+<p>现在我们再来分析如果一个攻击者在代码<a href="./drops/20160606/2016060603583849316214.png">3</a>中精心构造输入数据并通过strcpy覆盖了second chunk的chunk header后会发生什么情况。</p>
 
 <p>假设被覆盖后的chunk header相关数据如下：</p>
 
-<p>1) prev&#95;size = 一个偶数，这样其PREV&#95;INUSE 位就是0 了，即表示前一个chunk为free。<br />
-2) size = -4<br />
-3) fd = free 函数的got表地址address – 12；(后文统一简称为“free addr – 12”)<br />
+<p>1) prev&#95;size = 一个偶数，这样其PREV&#95;INUSE 位就是0 了，即表示前一个chunk为free。<br>
+2) size = -4<br>
+3) fd = free 函数的got表地址address – 12；(后文统一简称为“free addr – 12”)<br>
 4) bk = shellcode的地址</p>
 
 <p>那么当程序在[4]处调用free(first)后会发生什么呢？我们一步一步分析。</p>
@@ -219,14 +219,14 @@ nextinuse = inuse_bit_at_offset(nextchunk, nextsize);
 
 <p>此时P = nextchunk, BK = bck, FD = fwd。</p>
 
-<p>1)首先FD = nextchunk->fd = free地址 – 12;<br />
-2)然后BK = nextchunk->bk = shellcode起始地址；<br />
-3)再将BK赋值给FD->bk，即（free地址 – 12）->bk = shellcode起始地址；<br />
+<p>1)首先FD = nextchunk->fd = free地址 – 12;<br>
+2)然后BK = nextchunk->bk = shellcode起始地址；<br>
+3)再将BK赋值给FD->bk，即（free地址 – 12）->bk = shellcode起始地址；<br>
 4)最后将FD赋值给BK->fd，即(shellcode起始地址)->fd = free地址 – 12。</p>
 
 <p>前面两步还好理解，主要是后面2步比较迷惑。我们作图理解：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160606/2016060603583849316214.png" alt="" /></p>
+<p><img src="../images_result/images/2016060603583849316214.png" alt=""></p>
 
 <p>结合上图就很好理解第3，4步了。细心的朋友已经注意到，free addr -12和shellcode addr对应的prev&#95;size等字段是用虚线标记的，为什么呢？因为事实上它们对应的内存并不是chunk header，只是在我们的攻击中需要让glibc malloc在进行unlink操作的时候将它们强制看作malloc&#95;chunk结构体。这样就很好理解为什么要用free addr – 12替换next chunk的fd了，因为(free addr -12)->bk刚好就是free addr，也就是说第3步操作的结果就是将free addr处的数据替换为shellcode 的起始地址。</p>
 
@@ -236,7 +236,7 @@ nextinuse = inuse_bit_at_offset(nextchunk, nextsize);
 
 <h1>0x03 对抗技术</h1>
 
-<hr />
+<hr>
 
 <p>当前，上述unlink技术已经过时了(但不代表所有的unlink技术都失效，详情见后文)，因为glibc malloc对相应的安全机制进行了加强，具体而言，就是添加了如下几条安全检测机制。</p>
 
@@ -277,17 +277,17 @@ if (__builtin_expect (FD-&gt;bk != P || BK-&gt;fd != P, 0))             \
 
 <h1>0x04 另一种unlink攻击技术</h1>
 
-<hr />
+<hr>
 
 <p>经过上述3层安全检测，是否意味着所有unlink技术都失效了呢？答案是否定的，因为进行漏洞攻击的人脑洞永远比天大！之前刚好看到一篇好文(强烈推荐)，主讲在Android4.4上利用unlink机制实现堆溢出攻击。众所周知，Android内核基于linux，且其堆内存管理也是使用的glibc malloc，虽然在一些细节上有些许不同，但核心原理类似。该文介绍的攻击方式就成功绕过了上述三层检测。</p>
 
 <h1>0x05 总结</h1>
 
-<hr />
+<hr>
 
 <p>本文详细介绍了unlink攻击技术的核心原理，虽然上述介绍的unlink漏洞利用技术已经失效，而其他的unlink技术难度也越来越大，但是我们还是有必要认真学习，因为它一方面可以进一步加深我们对glibc malloc的堆栈管理机制的理解，另一方面也为后续的各种堆溢出攻击技术提供了思路。</p>
 
-<p>从上文的分析可以看出，unlink主要还是利用的glibc malloc中隐式链表机制，通过覆盖相邻chunk的数据实现攻击，那么我们能不能在显示链表中也找到攻击点呢？请关注下一篇文章：基于fastbin的堆溢出漏洞利用介绍。</p>      </p>
+<p>从上文的分析可以看出，unlink主要还是利用的glibc malloc中隐式链表机制，通过覆盖相邻chunk的数据实现攻击，那么我们能不能在显示链表中也找到攻击点呢？请关注下一篇文章：基于fastbin的堆溢出漏洞利用介绍。</p>      <p></p>
     
 			</body>
 		</html>

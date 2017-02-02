@@ -3,14 +3,14 @@
 			<head>
 			     <title>安全科普：Waf实现扫描器识别 彻底抵挡黑客扫描 - Seay</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/730">http://drops.wooyun.org/tips/730</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>目前安全测试的软件越来越多，也越来越强大，越来越多的人成为[黑客]，今天在网上看到一个文章说拦截wvs的扫描，勾起了我写这篇文章的欲望。</p>
 
@@ -22,7 +22,7 @@
 
 <h2>0x01 分析特征</h2>
 
-<hr />
+<hr>
 
 <p>目前全能型的扫描器主要是wvs（Acunetix Web Vulnerability Scanner）、AppScan、WebInspect，国内的像aisec、bugscan等等…还有国内那些老安全厂商的扫描器就不说了，主要提一下像wvs这种使用率比较高的。另外还有目录文件型的扫描器、注入工具(类似sqlmap、Havij)等等。</p>
 
@@ -46,7 +46,7 @@
 
 <p>下面是我抓到的一个wvs的请求</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404170835926.jpg" alt="20131107114510_20989.jpg" /></p>
+<p><img src="../images_result/images/2014071404170835926.jpg" alt="20131107114510_20989.jpg"></p>
 
 <pre><code>GET /help/website-performance-settings/x HTTP/1.1
 Pragma: no-cache
@@ -72,9 +72,9 @@ Acunetix-Aspect-Queries: filelist;aspectalerts
 
 <p>另外在请求的参数值，比如URL跟POST数据中都有很明显的acunetix_wvs_security_test特征，下图是我从waf拦截中调取到的结果。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404170988492.jpg" alt="20131107114759_54681.jpg" /></p>
+<p><img src="../images_result/images/2014071404170988492.jpg" alt="20131107114759_54681.jpg"></p>
 
-<p></p></p>
+<p></p><p></p>
 
 <p>根据以上抓取到的特征，我们可以把这个作为wvs的一个指纹，在waf中进行过滤。</p>
 
@@ -82,22 +82,22 @@ Acunetix-Aspect-Queries: filelist;aspectalerts
 
 <p>同样的，appscan也有自己的一些特征，如下</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404170998594.jpg" alt="20131107114839_35125.jpg" /></p>
+<p><img src="../images_result/images/2014071404170998594.jpg" alt="20131107114839_35125.jpg"></p>
 
 <h4>Bugscan</h4>
 
 <p>关于Bugscan，我咨询了一下作者，作者给了XSS模块的扫描源码我看了下，主要特征是：</p>
 
-<pre><code>–&gt;’”&gt;&lt;H1&gt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="08505b5b48404d5a4d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&lt;/H1&gt;
+<pre><code>–&gt;’”&gt;&lt;H1&gt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="08505b5b48404d5a4d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&lt;/H1&gt;
 </code></pre>
 
 <p>另外还有一些特征就不一一列举。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404171028293.jpg" alt="20131107114919_40006.jpg" /></p>
+<p><img src="../images_result/images/2014071404171028293.jpg" alt="20131107114919_40006.jpg"></p>
 
 <p>注意：并不是所有的请求都会带有扫描器的特征，比如下面的一个包也是wvs发出的，但是没有带上面我们说的特征，扫描器指纹特征只能抵挡住一部分的扫描，但是我们可以利用这些信息识别出扫描器然后干掉IP等。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404171173963.jpg" alt="20131107114955_31758.jpg" /></p>
+<p><img src="../images_result/images/2014071404171173963.jpg" alt="20131107114955_31758.jpg"></p>
 
 <h3>二、单IP+ cookie某时间段内触发规则次数</h3>
 
@@ -105,7 +105,7 @@ Acunetix-Aspect-Queries: filelist;aspectalerts
 
 <p>数据证明如下图：</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404171124960.jpg" alt="20131107115034_38569.jpg" /></p>
+<p><img src="../images_result/images/2014071404171124960.jpg" alt="20131107115034_38569.jpg"></p>
 
 <p>另外还可以根据IP+user angent等，或者更多维度。</p>
 
@@ -138,7 +138,7 @@ Acunetix-Aspect-Queries: filelist;aspectalerts
 
 <p>通过抓取wvs的数据包可以看到，扫描器很快的捕获了http://localhost/1.php?id=1这个链接，并进行漏洞测试。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404171257296.jpg" alt="20131107115118_39599.jpg" /></p>
+<p><img src="../images_result/images/2014071404171257296.jpg" alt="20131107115118_39599.jpg"></p>
 
 <p>当然如果在正常情况下也给所有用户植入这种代码是非常令人反感的，用户体验也会大打折扣，可以在前期先做一些条件限制，比如固定时间段内触发waf拦截规则到达预定阀值，再给这个用户单独植入一个隐藏链接。</p>
 
@@ -156,11 +156,11 @@ cookie植入有利有弊，优点是更直接，种下cookie马上就能根据�
 <p>这种方法主要用来应对探测敏感目录和文件的扫描器，这类的扫描器都是基于字典文件，通过对字典内的url进行请求获得的返回信息来进行判断目录或者文件的是否存在。
 如果某个IP在一段时间内请求频率过快，这时候waf可以进行收集一段时间内webserver返回404状态数目，到达一定阀值后进行封杀。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404171275656.jpg" alt="20131107115147_87082.jpg" /></p>
+<p><img src="../images_result/images/2014071404171275656.jpg" alt="20131107115147_87082.jpg"></p>
 
 <h2>0x02 思考</h2>
 
-<hr />
+<hr>
 
 <p>看过上面几种方法的介绍，应该大部分人都会想到两个问题，</p>
 
@@ -174,7 +174,7 @@ cookie植入有利有弊，优点是更直接，种下cookie马上就能根据�
 
 <p>PS：如果误杀太大，如果刚好哪个妹纸在线看小电影到激情片段，这是多伤人妹纸的心啊。</p>
 
-<p>出自：<a href="http://www.cnseay.com/3469/">http://www.cnseay.com/3469/</a></p>      </p>
+<p>出自：<a href="http://www.cnseay.com/3469/">http://www.cnseay.com/3469/</a></p>      <p></p>
     
 			</body>
 		</html>

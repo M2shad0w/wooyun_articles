@@ -3,14 +3,14 @@
 			<head>
 			     <title>Winrar4.x的文件欺骗漏洞利用脚本 - Xcode</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1346">http://drops.wooyun.org/tips/1346</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>这几天仔细研究了winrar4.x系列的文件扩展名欺骗漏洞的那篇文章，通过一些测试对其有了一些新的想法和建议。（准确的说应该不能算文件扩展名欺骗漏，不止扩展名，整个文件名都是可以欺骗的）</p>
 
@@ -26,7 +26,7 @@
 
 <h2>0x01 细节</h2>
 
-<hr />
+<hr>
 
 <p>在研究这个问题以前，先科普一下zip格式（想看详细版的去网上下载APPNOTE.TXT）。</p>
 
@@ -75,7 +75,7 @@ Offset           Bytes                Description
 
 <p>在了解了zip基本格式后，我对winrar压缩生成的zip文件和用windows生成的zip文件进行了分析，它们的区别是winrar的zip文件在Extra field区段都进行了一些数据填充。</p>
 
-<p><img src="http://static.wooyun.org/201403/2014033020212771177.jpg" alt="2014033020212771177.jpg" /></p>
+<p><img src="../images_result/images/2014033020212771177.jpg" alt="2014033020212771177.jpg"></p>
 
 <p>由于不清楚Extra field这部分的值会不会影响到winrar的校验，所以根据不同情况做了几个测试，当filename2长度改变时，并且对受filename2长度影响的所有字段（除Extra field）进行修改后，文件可以正常打开。测试结果证明Extra field的值并不会影响winrar打开zip文件。</p>
 
@@ -85,7 +85,7 @@ Offset           Bytes                Description
 
 <p>用WinHex对正常zip文件、使用了字符反转的zip文件进行分析：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014033020214732907.jpg" alt="2014033020214732907.jpg" /></p>
+<p><img src="../images_result/images/2014033020214732907.jpg" alt="2014033020214732907.jpg"></p>
 
 <p>通过对比分析可以看到，当使用含有RLO文件名的文件进行压缩时，压缩的格式有点区别，继续做了几个测试，发现winrar在Extra field添加的信息，不会影响到漏洞的利用。</p>
 
@@ -113,7 +113,7 @@ WinrarExp.py [-f &lt;open file&gt;][-s &lt;forged name&gt;][-v &lt;reversed stri
     -s表示要伪装的文件名，比如readme.txt 
     -v表示需要反转的字符串，该参数为选用。比如想要文件名反转变成readmeEXE.jpg则参数只要设置为EXE.jpg</p>
 
-<p>下载地址：<a href="http://static.wooyun.org/20141017/2014101712290362071.zip">WinrarExp.py</a></p>      </p>
+<p>下载地址：<a href="http://static.wooyun.org/20141017/2014101712290362071.zip">WinrarExp.py</a></p>      <p></p>
     
 			</body>
 		</html>

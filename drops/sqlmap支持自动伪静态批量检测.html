@@ -3,14 +3,14 @@
 			<head>
 			     <title>sqlmap支持自动伪静态批量检测 - 路飞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/15038">http://drops.wooyun.org/tools/15038</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>由于还没有找到一款比较适合批量检测sql注入点的工具（proxy+sqlmapapi的方式批量检测之类的批量sql注入点检测），我的目光就转向了sqlmap。虽然sqlmap没有支持伪静态注入点的测试(需要手动添加注入标记)，由于是python写的，可以快速方便的进行二次开发。</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 思路</h1>
 
-<hr />
+<hr>
 
 <p>我的思路是在有.html之类的后缀或者既没有.html或者包含"?"的url进行修改。</p>
 
@@ -77,7 +77,7 @@ if re.search('html|htm|sthml',url) or url.find("?") == -1:
 
 <h1>0x02 sqlmap支持单个自动检测伪静态</h1>
 
-<hr />
+<hr>
 
 <p>相关文件</p>
 
@@ -152,15 +152,15 @@ if re.search('html|htm|sthml',conf.url) or conf.url.find("?") == -1:
 
 <p>效果图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160418/2016041810151228836pic1.jpg" alt="pic1" /></p>
+<p><img src="../images_result/images/2016041810151228836pic1.jpg" alt="pic1"></p>
 
 <p>这里只是单个的，要支持批量检测注入点。修改这里是不行的。</p>
 
 <h1>0x03 sqlmap支持批量自动检测伪静态</h1>
 
-<hr />
+<hr>
 
-<p>相关文件<br />
+<p>相关文件<br>
 <a href="https://github.com/sqlmapproject/sqlmap/blob/master/lib/core/option.py">https://github.com/sqlmapproject/sqlmap/blob/master/lib/core/option.py</a></p>
 
 <p>583行处</p>
@@ -210,13 +210,13 @@ for line in getFileItems(conf.bulkFile):
 
 <p>效果图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160418/2016041810151353289pic21.jpg" alt="pic2" /></p>
+<p><img src="../images_result/images/2016041810151353289pic21.jpg" alt="pic2"></p>
 
 <h1>0x04 最后</h1>
 
-<hr />
+<hr>
 
-<p>如果有好的建议，可以在评论中给我留言。</p>      </p>
+<p>如果有好的建议，可以在评论中给我留言。</p>      <p></p>
     
 			</body>
 		</html>

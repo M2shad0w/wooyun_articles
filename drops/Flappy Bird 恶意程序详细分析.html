@@ -3,14 +3,14 @@
 			<head>
 			     <title>Flappy Bird 恶意程序详细分析 - 爱小狐狸的小螃蟹</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1314">http://drops.wooyun.org/tips/1314</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>Flappy Bird是在年初的时候非常火爆的一个小游戏，但是后来作者在2014年2月10日将其在Apple与Google商店下架，因为这游戏太容易让人上瘾了。</p>
 
@@ -25,8 +25,8 @@
 <p>所使用的工具：</p>
 
 <blockquote>
-  <p><a href="https://code.google.com/p/droidbox/">DroidBox</a> 一个动态分析工具，他为我们展示了一个程序运行时具体在做什么 <a href="http://developer.android.com/tools/help/emulator.html">Android Emulator</a> 包含在<a href="https://developer.android.com/sdk/index.html">Android SDK</a> - 用来模拟运行APK文件<br />
-  <a href="https://code.google.com/p/dex2jar/">dex2jar</a> - 反编译可执行文件 (.dex/.odex) 输出 .jar 文件<br />
+  <p><a href="https://code.google.com/p/droidbox/">DroidBox</a> 一个动态分析工具，他为我们展示了一个程序运行时具体在做什么 <a href="http://developer.android.com/tools/help/emulator.html">Android Emulator</a> 包含在<a href="https://developer.android.com/sdk/index.html">Android SDK</a> - 用来模拟运行APK文件<br>
+  <a href="https://code.google.com/p/dex2jar/">dex2jar</a> - 反编译可执行文件 (.dex/.odex) 输出 .jar 文件<br>
   <a href="http://jd.benow.ca/#jd-gui">JD-GUI</a> 显示 jar 文件java源代码的GUI工具</p>
 </blockquote>
 
@@ -42,7 +42,7 @@
 
 <h2>0x01 动态分析</h2>
 
-<hr />
+<hr>
 
 <p>使用的最主要的工具就是DroidBox。</p>
 
@@ -450,7 +450,7 @@ User-Agent: Dalvik/1.6.0 (Linux; U; Android 4.
 
 <h2>0x02 静态分析</h2>
 
-<hr />
+<hr>
 
 <p>静态分析需要两个工具，<a href="https://code.google.com/p/dex2jar/">dex2jar</a>和<a href="http://jd.benow.ca/#jd-gui">JD-GUI</a>。</p>
 
@@ -486,7 +486,7 @@ tar -zxvf jd-gui-version.linux.i686.tar.gz
 
 <p>运行打开JD-GUI载入Flappy Bird的jar文件，看到内容如下：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811142148697.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811142148697.png" alt="enter image description here"></p>
 
 <p>寻找左边的类文件列表，其中有一个在utilities包下的SendSMS类，看起来很像是一个发送短信的类。</p>
 
@@ -926,13 +926,13 @@ private void getInfoFromFile()
 
 <h2>0x03 总结</h2>
 
-<hr />
+<hr>
 
 <p>事实证明，这个Flappy Bird是一个恶意应用，发送付费短信，并会下载其他恶意的应用。</p>
 
 <p>此次检测用到的工具都是免费的工具可以下载到。</p>
 
-<p>from:<a href="http://securehoney.net/blog/how-to-dissect-android-flappy-bird-malware.html#.UzFS7q1Wc0k">enter link description here</a></p>      </p>
+<p>from:<a href="http://securehoney.net/blog/how-to-dissect-android-flappy-bird-malware.html#.UzFS7q1Wc0k">enter link description here</a></p>      <p></p>
     
 			</body>
 		</html>

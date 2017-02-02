@@ -3,12 +3,12 @@
 			<head>
 			     <title>CoolShell解密游戏的WriteUp - LinE</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2730">http://drops.wooyun.org/tips/2730</a></h1>
 				
       <p>
-        <p>游戏地址：<a href="http://fun.coolshell.cn/">http://fun.coolshell.cn/</a></p>
+        </p><p>游戏地址：<a href="http://fun.coolshell.cn/">http://fun.coolshell.cn/</a></p>
 
 <p>一个很有意思的小游戏，也很费脑子的说TAT</p>
 
@@ -89,7 +89,7 @@ main(int argc,char *argv[])
 <pre><code>./test test.bf
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811575468789.png" alt="1.png" /></p>
+<p><img src="../images_result/images/2014091811575468789.png" alt="1.png"></p>
 
 <p>如图，得到第一关地址</p>
 
@@ -132,7 +132,7 @@ main(int argc,char *argv[])
 
 <p>黑色为Dvorak布局，红色为QWERTY布局</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811575584855.png" alt="2.png" /></p>
+<p><img src="../images_result/images/2014091811575584855.png" alt="2.png"></p>
 
 <p>把给出的提示用QWERTY布局表示出来即可</p>
 
@@ -150,7 +150,7 @@ main() { printf(&amp;unix["\021%six\012\0"],(unix)["have"]+"fun"-0x60);}
 
 <p>把该代码编译之后得到一个程序，运行返回结果unix，过关，如图</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811575556886.png" alt="3.png" /></p>
+<p><img src="../images_result/images/2014091811575556886.png" alt="3.png"></p>
 
 <h2>3-QR Code</h2>
 
@@ -158,7 +158,7 @@ main() { printf(&amp;unix["\021%six\012\0"],(unix)["have"]+"fun"-0x60);}
 
 <p>首先映入眼帘的是一个二维码,使用二维码识别工具可得到下面提示的码表，如图</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811575596093.png" alt="4.png" /></p>
+<p><img src="../images_result/images/2014091811575596093.png" alt="4.png"></p>
 
 <p>得到字符转换码表为</p>
 
@@ -187,7 +187,7 @@ print content
 
 <p>转换后截图如下</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811575662156.png" alt="5.png" /></p>
+<p><img src="../images_result/images/2014091811575662156.png" alt="5.png"></p>
 
 <p>转换出结果为：Where there is a shell, there is a way. I expect you use the shell command to solve this problem, now, please try using the rot13 of “shell” to enter next level.</p>
 
@@ -208,11 +208,11 @@ print content
 
 <p>本关地址:http://fun.coolshell.cn/furyy.html</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811575656526.png" alt="8.png" /></p>
+<p><img src="../images_result/images/2014091811575656526.png" alt="8.png"></p>
 
 <p>首先看提示，提示说答案在源代码的底部，拉到底下，惊呆了TAT</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811575717137.png" alt="9.png" /></p>
+<p><img src="../images_result/images/2014091811575717137.png" alt="9.png"></p>
 
 <p>这一坨TM是什么…</p>
 
@@ -223,7 +223,7 @@ print content
 
 <p>然后把html中注释掉的东西拉到<a href="http://tool.oschina.net/regex">http://tool.oschina.net/regex</a>匹配一下，得出结果如图</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811575787110.png" alt="10.png" /></p>
+<p><img src="../images_result/images/2014091811575787110.png" alt="10.png"></p>
 
 <p>得出这些回文</p>
 
@@ -267,7 +267,7 @@ end function
 
 <p>如图，得出key为tree</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811575771329.png" alt="11.png" /></p>
+<p><img src="../images_result/images/2014091811575771329.png" alt="11.png"></p>
 
 <h2>6-tree</h2>
 
@@ -277,7 +277,7 @@ end function
 
 <p>花了3个小时，对这个树进行了复原，复原图如下</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811575875914.png" alt="12.png" /></p>
+<p><img src="../images_result/images/2014091811575875914.png" alt="12.png"></p>
 
 <p>吐槽一下，这么复杂的树这是要死人的节奏啊</p>
 
@@ -292,7 +292,7 @@ end function
 <pre><code>echo U2FsdGVkX1+gxunKbemS2193vhGGQ1Y8pc5gPegMAcg=|openssl enc -aes-128-cbc -a -d -pass pass:zWp8LGn01wxJ7 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811575813565.png" alt="13.png" /></p>
+<p><img src="../images_result/images/2014091811575813565.png" alt="13.png"></p>
 
 <p>得到明文为nqueens 过关</p>
 
@@ -444,7 +444,7 @@ fclose($f)
 ?&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811575829174.png" alt="15.png" /></p>
+<p><img src="../images_result/images/2014091811575829174.png" alt="15.png"></p>
 
 <h2>8-Excel Column</h2>
 
@@ -470,9 +470,9 @@ E—-5
 
 <p>写了一个C语言小程序，发现数值太大溢出了，换成长整之后还是溢出了TAT，后来朋友让我把公式丢谷歌，果然万能的Google帮我计算出了答案</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811575869168.png" alt="16.png" /></p>
+<p><img src="../images_result/images/2014091811575869168.png" alt="16.png"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811575935637.png" alt="17.png" /></p>
+<p><img src="../images_result/images/2014091811575935637.png" alt="17.png"></p>
 
 <p>直接结算结果</p>
 
@@ -548,7 +548,7 @@ print 'Pass is :',c1+c2+c3+c4
 
 <p>该图为共济会的猪圈密码密文对照表</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811575945410.png" alt="18.png" /></p>
+<p><img src="../images_result/images/2014091811575945410.png" alt="18.png"></p>
 
 <p>对照上题目，很快就可以翻译出密码明文为helloworld</p>
 
@@ -556,7 +556,7 @@ print 'Pass is :',c1+c2+c3+c4
 
 <p>通关证明</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811575935322.png" alt="19.png" /></p>      </p>
+<p><img src="../images_result/images/2014091811575935322.png" alt="19.png"></p>      <p></p>
     
 			</body>
 		</html>

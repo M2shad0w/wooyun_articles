@@ -3,16 +3,16 @@
 			<head>
 			     <title>Wordpress 3.8.2补丁分析 HMAC timing attack - insight-labs</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1404">http://drops.wooyun.org/papers/1404</a></h1>
 				
       <p>
-        <p>author: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d6b7b8a2bea4b7ae96bfb8a5bfb1bea2fbbab7b4a5f8b9a4b1">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
+        </p><p>author: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d6b7b8a2bea4b7ae96bfb8a5bfb1bea2fbbab7b4a5f8b9a4b1">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
 
 <h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>在github翻来覆去看了半天，官方版的diff只在php里改动了一个位置:</p>
 
@@ -27,7 +27,7 @@
 
 <h2>0x01 细节</h2>
 
-<hr />
+<hr>
 
 <p>边信道攻击我就不具体解释了，这个地方补的是一个关于HMAC的边信道攻击，利用时间差来判断HMAC。</p>
 
@@ -79,7 +79,7 @@ define( 'COOKIEHASH', md5( $siteurl ) );
 
 <h2>0x02 攻击</h2>
 
-<hr />
+<hr>
 
 <p>构造POC:</p>
 
@@ -106,7 +106,7 @@ echo 'You are admin!'
 <pre><code>00000000000000000000000000000000
 </code></pre>
 
-<p>并且记录从提交到服务器返回结果所需要的时间(需要精确到微秒，起码也得是毫秒级)<br />
+<p>并且记录从提交到服务器返回结果所需要的时间(需要精确到微秒，起码也得是毫秒级)<br>
 之后提交</p>
 
 <pre><code>10000000000000000000000000000000  
@@ -142,13 +142,13 @@ f 0.004887240
 
 <p>等等……这不是差不多么，而且明明第一位是f，但是7的时间最长，这尼玛不是……</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810511434945.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091810511434945.jpg" alt="enter image description here"></p>
 
 <p>但是统计学告诉我们，任何微小的差异在重复多次后都会放大，所以这次我们把每个请求轮流跑500遍，然后都记录下来，注意，要轮流跑，如果先把0跑500遍再把1跑500遍，第二次对比相同内容的时候服务器返回都飞快，似乎有某种缓存机制。</p>
 
 <p>把第一位的0-f轮流跑了500次之后，把记录的时间差做成图:</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810511433517.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091810511433517.png" alt="enter image description here"></p>
 
 <p>可以看出，多次重试增加了误差的统计显著性。</p>
 
@@ -175,7 +175,7 @@ ff000000000000000000000000000000
 
 <p>WP的这个洞是补上了，我相信大家会举一反三的，毕竟用 == 或者!=的地方太多了。</p>
 
-<p>PS: 小编欠饭次数+=1</p>      </p>
+<p>PS: 小编欠饭次数+=1</p>      <p></p>
     
 			</body>
 		</html>

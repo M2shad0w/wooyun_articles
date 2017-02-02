@@ -3,14 +3,14 @@
 			<head>
 			     <title>利用被入侵的路由器获取网络流量 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8641">http://drops.wooyun.org/tips/8641</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>现在，对终端路由器进行流量劫持的方法很多，如DNS劫持等等，但是根据不同的渗透场景，如对电信级别的组织进行大范围攻击时，利用被入侵的路由器进行流量重定向则会显得更加高效。这种类似“核攻击”的攻击方法会导致X州市数字电视一样的后果。</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 介绍</h1>
 
-<hr />
+<hr>
 
 <p>这篇文档详细描述了在最近试验中，使用边界路由器作为工具来捕获网络流量的方法 、步骤以及结果。</p>
 
@@ -32,11 +32,11 @@
 
 <p>在本次这个试验中扩展了Joshua的方法，同样使用另外一台思科路由器来终结GRE隧道，但是从组织中透明地捕捉到了进出的流量。对这个技术进行扩展的主要因素是为了最少进行软件定制以及组件的需要。</p>
 
-<p>特别感谢Darren Pedley(<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="95d1f4e7e7f0fbbbc5f0f1f9f0ecd5f4f9e5fdf4e2f0e6e1a3bbf6faf8bbf4e0">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></code>)<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b752180e5f0018502306522e1f5e323a500a19502d33523a38523d1e530c1252383d52180e512203530f1d5219295e1d3b52193b512203502d335114375128125437">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�</p>
+<p>特别感谢Darren Pedley(<code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="95d1f4e7e7f0fbbbc5f0f1f9f0ecd5f4f9e5fdf4e2f0e6e1a3bbf6faf8bbf4e0">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></code>)<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b752180e5f0018502306522e1f5e323a500a19502d33523a38523d1e530c1252383d52180e512203530f1d5219295e1d3b52193b512203502d335114375128125437">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>�</p>
 
 <h1>0x02 方法</h1>
 
-<hr />
+<hr>
 
 <p>所选择的方法是，在目标路由器（“Target router”）和被黑客控制的中间路由器（“Attacker router”）之间建立GRE隧道。使用策略路由来把该组织中进出的流量通过GRE隧道重定向到中间路由器（Attacker router）中。流量在最终被目标路由器（Target router）传送之前，就已经被黑客控制的中间路由器（Attacker router）处理过了。</p>
 
@@ -47,7 +47,7 @@
 <li>被捕获的流量是通过GRE报文封装的，就必须在执行IP解码之前对流量进行解封装。</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150914/2015091405333821871pic11.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015091405333821871pic11.jpg" alt=""></p>
 
 <p>图1 – 场景1</p>
 
@@ -58,17 +58,17 @@
 <li>流量转发给Unix工作站时已经解封装，则使用较少的处理过程就可以提取流量中有用的信息。</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150914/2015091405334135892pic2.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015091405334135892pic2.jpg" alt=""></p>
 
 <p>图2 – 场景2</p>
 
 <h1>0x03 步骤</h1>
 
-<hr />
+<hr>
 
 <p>图3显示了在本次试验的网络拓扑。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150914/2015091405334439822pic3.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015091405334439822pic3.jpg" alt=""></p>
 
 <p>图3 - 实验测试拓扑</p>
 
@@ -220,7 +220,7 @@ Target#
 
 <h1>0x04 结果</h1>
 
-<hr />
+<hr>
 
 <p>在两个场景中，SMPT连接通过GRE隧道转移，成功地被UNIX工作站抓取。</p>
 
@@ -280,7 +280,7 @@ Target#
 
 <h1>0x05 结论及讨论</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li><p><strong>透明度</strong></p>
@@ -311,7 +311,7 @@ Target#
 
 <h1>0x06 附录</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li><p><strong>附录A - 目标路由器完整配置（Target Router）</strong></p>
@@ -686,7 +686,7 @@ Approximate round trip times in milli-seconds:
 
 C:\&gt;
 </code></pre></li>
-</ol>      </p>
+</ol>      <p></p>
     
 			</body>
 		</html>

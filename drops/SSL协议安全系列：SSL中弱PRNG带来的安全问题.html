@@ -3,20 +3,20 @@
 			<head>
 			     <title>SSL协议安全系列：SSL中弱PRNG带来的安全问题 - GoSSIP_SJTU</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/9144">http://drops.wooyun.org/papers/9144</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>在前两讲中，我们主要对SSL协议中CBC模式的弱安全性进行了系统的介绍。这一讲中我们对用于生成SSL中所用密钥的PRNG做一点简单介绍。</p>
 
 <h1>0x01 什么是PRNG？</h1>
 
-<hr />
+<hr>
 
 <p>PRNG（pseudo Random Noise Generation），即伪随机噪声生成，用于生成各种密码学操作中所需的随机数。</p>
 
@@ -30,7 +30,7 @@
 
 <p>Linux系统中PRNG的结构抽象如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092308570289557pic120.png" alt="" /></p>
+<p><img src="../images_result/images/2015092308570289557pic120.png" alt=""></p>
 
 <ul>
 <li><p><strong>Pools and counters</strong>：上图描述了LRNG流程。内部状态保持在3个熵池里：primary、secondary、urandom，它们的大小分别为512、128、128字节。熵源向primary池添加数据；它的输出再给到secondary和urandom中，LRNG的输出是从secondary或者urandom中提取的。提取过程中，一个池子的内部状态会根据反馈行为更新。</p>
@@ -55,7 +55,7 @@
 
 <h1>0x02 Linux中PRNG的运作原理</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><p>Linux中PRNG的初始化 操作系统启动时会初始化LRNG，使用固定的操作系统参数和当前时间，以及额外的磁盘操作或系统事件。这样的操作序列很容易被攻击者预测，并且如果没有额外事件发生，LRNG的熵会很有限。导致LRNG的输出具有可预测性。</p>
@@ -65,11 +65,11 @@
 <p>这个脚本是Linux发行包中的一部分，而不是内核的一部分。在KNOPPIX及OpenWRT发行版中没有这个脚本，他们的LRNG初始状态是可预测的，安全性较低。</p></li>
 <li><p>估算熵值 LRNG仅适用一个时间函数估算事件的熵，而与事件类型无关。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092308570463942pic210.png" alt="" /></p>
+<p><img src="../images_result/images/2015092308570463942pic210.png" alt=""></p>
 
 <p>事件的熵为：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151010/2015101008402089705pic3ed.png" alt="" /></p></li>
+<p><img src="../images_result/images/2015101008402089705pic3ed.png" alt=""></p></li>
 <li><p>更新熵池 熵池的更新机制基于TGFSR（Twisted Generalized Feedback Shift Register）。</p>
 
 <p>TGFSR的唯一输入是状态的初始值（一个p*w bit的种子），每个循环中内部状态被用来生成新的状态。</p>
@@ -78,18 +78,18 @@
 
 <p>熵通过运行add(pool, j, g）算法来增加，g是新的熵word。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092308570765448pic48.png" alt="" /></p>
+<p><img src="../images_result/images/2015092308570765448pic48.png" alt=""></p>
 
 <p>每个池子基于一个本原多项式来更新。多项式根据池子大小来选，secondary和urandom用的多项式相同。</p>
 
 <p>从熵池中提取随机bit的方式为：（1）对提取的bit做hash；（2）修改池子状态；（3）减小计数器。 依据如下算法：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092308581331366pic59.png" alt="" /></p></li>
+<p><img src="../images_result/images/2015092308581331366pic59.png" alt=""></p></li>
 </ul>
 
 <h1>0x03 弱PRNG对SSL的影响</h1>
 
-<hr />
+<hr>
 
 <p>OpenSSL的PRNG是一个确定性函数，知道输入和调用次序的攻击者可以预测输出。为了使PRNG安全，熵池必须从/dev/random或者其它攻击者不知道的熵源中取种。2006年，在Debian Linux发布版本中的OpenSSL增加了一个漏洞修复，而这个漏洞修复引入了一个新的漏洞，它在修复另一个漏洞时把生成随机数选种过程的代码给删掉了，这导致初始选种时使用到的唯一的随机值是当前进程ID-pid，Linux平台默认最大进程号是32,768，所以生成随机数的种子值范围很小。这个漏洞到2008年才被发现，受影响的Debian Linux版本的可用熵都很有限，产生的公私钥对是可预测的，这样导致生成的SSL协议中使用的服务器私钥具有脆弱性。由于漏洞存在，攻击者可以事先生成公私钥对，一旦发现有跟公钥匹配的就知道了对应私钥。加州大学圣地亚哥分校的研究人员在漏洞发布不久对流行的SSL服务器进行扫描，发现1.5%左右的服务器使用了弱密钥证书。</p>
 
@@ -97,7 +97,7 @@
 
 <p>这一现象是由于PRNG在生成随机数时，如果用于产生RSA公钥的两个随机数都是在熵源不足的情况下生成的，那么采用相同实现的设备就可能生成两个相同的素因子，导致对应的私钥相同。如果两个随机数中，仅有一个是在熵源不足的情况下生成，那么两台采用相同实现的不同设备生成的RSA公钥就可能共享一个素因子，导致这两个RSA公钥均可很容易地被分解。</p>
 
-<p>弱PRNG导致的弱RSA和DSA密钥问题在嵌入式设备如路由器、闭路电视等中也广泛存在，因为这类设备的熵源有限（缺少鼠标键盘等熵源）。关于嵌入式设备中弱密钥的问题具体可以参考USENIX Security 14年的文章A Large-Scale Analysis of the Security of Embedded Firmwares，由于导致弱密钥的原理相同，这里就不多做介绍了。</p>      </p>
+<p>弱PRNG导致的弱RSA和DSA密钥问题在嵌入式设备如路由器、闭路电视等中也广泛存在，因为这类设备的熵源有限（缺少鼠标键盘等熵源）。关于嵌入式设备中弱密钥的问题具体可以参考USENIX Security 14年的文章A Large-Scale Analysis of the Security of Embedded Firmwares，由于导致弱密钥的原理相同，这里就不多做介绍了。</p>      <p></p>
     
 			</body>
 		</html>

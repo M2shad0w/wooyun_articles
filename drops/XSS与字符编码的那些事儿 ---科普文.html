@@ -3,14 +3,14 @@
 			<head>
 			     <title>XSS与字符编码的那些事儿 ---科普文 - 0x_Jin</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/689">http://drops.wooyun.org/tips/689</a></h1>
 				
       <p>
-        <h2>目录</h2>
+        </p><h2>目录</h2>
 
-<hr />
+<hr>
 
 <pre><code>0x00:基本介绍
 0x01:html实体编码
@@ -24,7 +24,7 @@
 
 <h2>0x00基本介绍</h2>
 
-<hr />
+<hr>
 
 <p>提起XSS 想到的就是插入字符字符编码与各种解析了！</p>
 
@@ -58,7 +58,7 @@
 
 <h2>0x01 html实体编码</h2>
 
-<hr />
+<hr>
 
 <p>html实体编码本身存在的意义是防止与HTML本身语义标记的冲突。</p>
 
@@ -99,9 +99,9 @@
 
 <p>大多数网站是不会&amp;#号的，如果过滤了怎么办呢？</p>
 
-<p>那么再来讲一下另外一个案例： ￼ <img src="http://static.wooyun.org/20140918/2014091812431520141.jpeg" alt="enter image description here" /></p>
+<p>那么再来讲一下另外一个案例： ￼ <img src="../images_result/images/2014091812431520141.jpeg" alt="enter image description here"></p>
 
-<p>源码如下： ￼ <img src="http://static.wooyun.org/20140918/2014091812431615908.jpeg" alt="enter image description here" /></p>
+<p>源码如下： ￼ <img src="../images_result/images/2014091812431615908.jpeg" alt="enter image description here"></p>
 
 <p>页面中的Go按钮中包含一个a标签 输入的值会存在于a标签的href属性中，href中用了javascript伪协议，可以在href跳转时执行js代码！</p>
 
@@ -134,7 +134,7 @@
 
 <h2>0x02 新增的实体编码，变异以及浏览器的某些工作原理</h2>
 
-<hr />
+<hr>
 
 <p>通常程序做 XSS 防御的时候会考虑到一些 HTML 编码的问题，会拦截或转义 " \ 这样的东西 那么我的双引号跟尖括号就被拦截了！</p>
 
@@ -156,7 +156,7 @@ case: &lt;a href="javasc&amp;NewLine;ript&amp;colon;alert(1)"&gt;click&lt;/a&gt;
 
 <p>还有，数字编码前面加「0」，这也是一条很好的绕过 WAF 的向量。</p>
 
-<p>如下图（我去掉了后面的分号 另外在每个数字前加了一个零）： ￼ <img src="http://static.wooyun.org/20140918/2014091812431657122.jpeg" alt="enter image description here" /></p>
+<p>如下图（我去掉了后面的分号 另外在每个数字前加了一个零）： ￼ <img src="../images_result/images/2014091812431657122.jpeg" alt="enter image description here"></p>
 
 <p>数字前面是可以加多个0的 闲的蛋疼的基友可以自己试下！</p>
 
@@ -209,7 +209,7 @@ ript:alert(1)"&gt;click&lt;/a&gt;
 
 <h2>0x03 javascript编码</h2>
 
-<hr />
+<hr>
 
 <p>javascript中只识别几种编码：Jsunicode js8进制 js10进制</p>
 
@@ -238,7 +238,7 @@ document.getElementById().innerHTML=search;
 
 <p>现在我们来看看 输出是什么效果！</p>
 
-<p>我就用chrome console来演示吧！ ￼ <img src="http://static.wooyun.org/20140918/2014091812431732415.jpeg" alt="enter image description here" /></p>
+<p>我就用chrome console来演示吧！ ￼ <img src="../images_result/images/2014091812431732415.jpeg" alt="enter image description here"></p>
 
 <p>看到了把 经过js的解码 我们的代码又还原回来了 并且注入到了网页中！这时候代码执行！成功弹窗！</p>
 
@@ -254,7 +254,7 @@ document.getElementById().innerHTML=search;
 
 <p>既然提到了js中的十六进制编码 跟js中的unicode编码 那么也上两张图吧！</p>
 
-<p>十六进制在js中是\x[16hex] 来表示的 如：<code>&lt;  \x3c</code> ￼ <img src="http://static.wooyun.org/20140918/2014091812431715573.jpeg" alt="enter image description here" /></p>
+<p>十六进制在js中是\x[16hex] 来表示的 如：<code>&lt;  \x3c</code> ￼ <img src="../images_result/images/2014091812431715573.jpeg" alt="enter image description here"></p>
 
 <p>大家看到跟八进制的用法也是一样的！只不过多了一个字符X 虽然我很喜欢这个字符 但是我更喜欢八进制的短小精悍！</p>
 
@@ -262,11 +262,11 @@ document.getElementById().innerHTML=search;
 
 <p>他的表示方式是这样的：\uxxxx \uxxx &lt; 转码后: /u003c</p>
 
-<p>上图： ￼ <img src="http://static.wooyun.org/20140918/2014091812431713012.jpeg" alt="enter image description here" /></p>
+<p>上图： ￼ <img src="../images_result/images/2014091812431713012.jpeg" alt="enter image description here"></p>
 
 <h2>0x04 base64编码</h2>
 
-<hr />
+<hr>
 
 <p>到目前为止 我遇到使用base64编码的情况 大多数是这样！</p>
 
@@ -288,11 +288,11 @@ document.getElementById().innerHTML=search;
 
 <p>如下图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812431875954.jpeg" alt="enter image description here" /> ￼ 在iframe里也同样可以使用！大家自己测试把！</p>
+<p><img src="../images_result/images/2014091812431875954.jpeg" alt="enter image description here"> ￼ 在iframe里也同样可以使用！大家自己测试把！</p>
 
 <h2>0x05 闲扯</h2>
 
-<hr />
+<hr>
 
 <p>web前端的世界真的太难让人捉摸透！</p>
 
@@ -310,7 +310,7 @@ document.getElementById().innerHTML=search;
 
 <p>附 <a href="http://static.wooyun.org/20141017/2014101711070077673.zip">XSS Encode插件打包</a></p>
 
-<p>END</p>      </p>
+<p>END</p>      <p></p>
     
 			</body>
 		</html>

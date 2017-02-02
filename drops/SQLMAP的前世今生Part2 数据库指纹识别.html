@@ -3,26 +3,26 @@
 			<head>
 			     <title>SQLMAP的前世今生Part2 数据库指纹识别 - 猎豹科学院</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/10652">http://drops.wooyun.org/papers/10652</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>谈到SQL注入，那麽第一时间就会想到神器SQLMAP，SQLMap是一款用来检测与利用的SQL注入开源工具。那麽SQLMap在扫描SQL的逻辑到底是怎样实现的呢，接下来就探讨下SQLMap的扫描逻辑，通过了解SQLMap的扫描逻辑打造一款属于自己的SQL扫描工具。</p>
 
 <h1>0x01 SQLMAP的准备工作</h1>
 
-<hr />
+<hr>
 
 <p>SQLMAP在进行扫描之前会有一些其他的功能去确定当前的目标的一些有用的信息，如防火墙的检测，当检测到有防火墙之后，进行SQL检测时的判断依据也会有所调整，如bool类型的盲注的时候，而其中heuristicCheckSqlInjection这一函数既会影响到接下来所要使用什么样的Payload进行测试，heuristicCheckSqlInjection翻译过来的意思是启发式SQL注入测试，那麽到底什么是启发式，具体作用到底是什么呢，在我们经常使用SQLMAP的时候，有可能会出现以下的提示。</p>
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20151124/2015112410435935506p11.png" alt="p1" /></p>
+<p><img src="../images_result/images/2015112410435935506p11.png" alt="p1"></p>
 
 <p>上面提示我们当前的目标数据库版本好像是Oracle，而这上面的提示的依据就是根据这一个启发式SQL注入测试也就是本文要介绍的heuristicCheckSqlInjection来决定的。SQLMAP中有许多的Payload，足以有几百条，那麽如果全部Payload都测试一遍的话，无疑是一件很浪费时间的事情，除非Payload中的risk，clause，where字段中加以过滤，还会以这一个根据数据库的指纹来选择所要测试的Payload。</p>
 
@@ -36,7 +36,7 @@
 
 <h1>0x02 数据库版本的识别</h1>
 
-<hr />
+<hr>
 
 <pre><code>#!python
 # Alphabet used for heuristic checks
@@ -63,7 +63,7 @@ page, _ = Request.queryPage(payload, place, content=True, raise404=False)
 
 <p>如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151124/2015112410440144534p21.png" alt="p2" /></p>
+<p><img src="../images_result/images/2015112410440144534p21.png" alt="p2"></p>
 
 <p>其实熟悉SQL注入的人也知道这是一个Oracle的一个错误信息，那麽接下来看看SQLMAP到底是怎样去判断的。</p>
 
@@ -138,13 +138,13 @@ class HTMLHandler(ContentHandler):
 
 <p>可以发现当前返回的页面信息命中了<code>&lt;error regexp="\bORA-[0-9][0-9][0-9][0-9]"/&gt;</code>这一条正规</p>
 
-<p><img src="http://static.wooyun.org//drops/20151124/2015112410440357307p31.png" alt="p3" /></p>
+<p><img src="../images_result/images/2015112410440357307p31.png" alt="p3"></p>
 
 <p>到此SQLMap就可以确定数据的版本了，从而选择对应的测试Payload，减少SQLMAP的扫描时间。</p>
 
 <h1>0x03 绝对路径获取与XSS检测</h1>
 
-<hr />
+<hr>
 
 <p>相比指纹识别，获取绝对路径的功能模块相对简单，利用正则匹配寻找出绝对路径。</p>
 
@@ -186,9 +186,9 @@ DUMMY_XSS_CHECK_APPENDIX = "&lt;'\"&gt;"
 
 <h1>0x04 总结</h1>
 
-<hr />
+<hr>
 
-<p>至此heuristicCheckSqlInjection的功能也介绍的差不多了，通过具体了解SQLMAP的一些扫描规则又或者是思路，可以让我们根据具体的情况去配置SQLMAP又或者编写自己的SQL Fuzz系统，其中可以通过编辑errors.xml这一指数据纹配置来增强SQLMAP的嗅探能力，从而打造更强大的神器了。</p>      </p>
+<p>至此heuristicCheckSqlInjection的功能也介绍的差不多了，通过具体了解SQLMAP的一些扫描规则又或者是思路，可以让我们根据具体的情况去配置SQLMAP又或者编写自己的SQL Fuzz系统，其中可以通过编辑errors.xml这一指数据纹配置来增强SQLMAP的嗅探能力，从而打造更强大的神器了。</p>      <p></p>
     
 			</body>
 		</html>

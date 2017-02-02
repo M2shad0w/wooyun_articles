@@ -3,12 +3,12 @@
 			<head>
 			     <title>BurpSuite插件开发指南之 Python 篇 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/16261">http://drops.wooyun.org/tools/16261</a></h1>
 				
       <p>
-        <p>此文接着 《BurpSuite插件开发指南之 Java 篇》 。在此篇中将会介绍如何使用 Python编程语言 开发 BurpSuite 的插件。</p>
+        </p><p>此文接着 《BurpSuite插件开发指南之 Java 篇》 。在此篇中将会介绍如何使用 Python编程语言 开发 BurpSuite 的插件。</p>
 
 <p>《BurpSuite 插件开发指南》系列文章如下：</p>
 
@@ -24,7 +24,7 @@
 
 <h1>0x00 Jython 简介</h1>
 
-<hr />
+<hr>
 
 <p>BurpSuite 是使用 Java 编程语言编写的，所以想要使用 Python 编程语言开发其插件，就必须借助于 Jython。Jython 本质上是一个 Java 应用程序，它允许 coder 们使用 Java 代码调用 Python 库反之，也可以使用 Python 调用 Java 的库。</p>
 
@@ -34,7 +34,7 @@
 
 <h1>0x01 Python 编写 Burp 插件</h1>
 
-<hr />
+<hr>
 
 <h2>Python 编写 Burp 插件辅助工具</h2>
 
@@ -58,7 +58,7 @@
   <p>编辑 <strong>jython-burp-api/Lib/gds/burp/console/console.py</strong> 文件，将 25 26 行直接改为如下代码即可：</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20160530/2016053000370952572fix.jpg" alt="" /></p>
+<p><img src="../images_result/images/2016053000370952572fix.jpg" alt=""></p>
 
 <h2>Python 编写 Burp 插件 注意事项</h2>
 
@@ -98,9 +98,9 @@ class BurpExtender(IBurpExtender, IProxyListener):
 
 <p>在 Burp 加载 Python 编写的插件时，会经常遇到如下图所示的错误：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160530/2016053000370753038error.jpg" alt="" /></p>
+<p><img src="../images_result/images/2016053000370753038error.jpg" alt=""></p>
 
-<p>Burp 官网也给出了解决 <strong>java.lang.OutOfMemoryError: PermGen space</strong> 错误的办法。<br />
+<p>Burp 官网也给出了解决 <strong>java.lang.OutOfMemoryError: PermGen space</strong> 错误的办法。<br>
 在启动 Burp 时设置 JVM 的 XX 参数即可，如： java -XX:MaxPermSize=1G -jar burp.jar</p>
 
 <p>不过即使是使用上述参数启动 Burp，在多次加载 Python 编写的插件后，还是会出现 Burp 卡死的现象。</p>
@@ -111,17 +111,17 @@ class BurpExtender(IBurpExtender, IProxyListener):
 
 <p>在 Jython 官方下载页面选择 Jython 独立 jar 包。下载好后，按照下图所示设置：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160530/2016053000371137688jython.jpg" alt="" /></p>
+<p><img src="../images_result/images/2016053000371137688jython.jpg" alt=""></p>
 
 <p>加载 Python 插件的方式如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160530/2016053000371342600jython1.jpg" alt="" /></p>
+<p><img src="../images_result/images/2016053000371342600jython1.jpg" alt=""></p>
 
 <h2>Python 编写 Burp GUI 插件实例</h2>
 
 <p>本实例使用 Python 调用 Java 的 swing 图形控件库并绑定相关事件。最终结果如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160530/2016053000370562521burp_python.jpg" alt="" /></p>
+<p><img src="../images_result/images/2016053000370562521burp_python.jpg" alt=""></p>
 
 <p>示例代码如下：</p>
 
@@ -176,14 +176,14 @@ class BurpExtender(IBurpExtender, ITab):
 
 <h1>0x02 Python 编写 Burp 插件实例之 工具集成菜单</h1>
 
-<hr />
+<hr>
 
 <p>本小节会使用一个工具集成右键菜单的 Burp 插件举例说明 Python 编写 Burp 插件的套路。</p>
 
-<p>注：<br />
+<p>注：<br>
 读者可以在此插件的基础上修改为任何你想要执行的命令或程序 并指定不同的参数，如：使用 请求原始数据配合 SQLMap 进行SQLi 测试。另外在使用该插件过程时，可以将输出设置为系统控制台输出，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160530/2016053000371462670output.jpg" alt="" /></p>
+<p><img src="../images_result/images/2016053000371462670output.jpg" alt=""></p>
 
 <p>代码和配置文件内容如下：</p>
 
@@ -315,7 +315,7 @@ class BurpExtender(IBurpExtender, IContextMenuFactory):
   "param": "url",
   "command": "python /opt/sqlmap/sqlmap.py -u {#} --dbs"
 }]
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

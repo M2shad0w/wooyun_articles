@@ -3,7 +3,7 @@
 			<head>
 			     <title>确定目标：利用web分析技术诱捕受害者 - virustracker</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/11946">http://drops.wooyun.org/papers/11946</a></h1>
 				
@@ -12,9 +12,9 @@
   <p><a href="https://www2.fireeye.com/rs/848-DID-242/images/rpt-witchcoven.pdf">https://www2.fireeye.com/rs/848-DID-242/images/rpt-witchcoven.pdf</a></p>
 </blockquote>
 
-<h1>0x00 介绍</h1>
+</p><h1>0x00 介绍</h1>
 
-<hr />
+<hr>
 
 <p>这起活动的策划者积累了大量关于web流量和网站的访客信息，涉及了100多家网站-攻击者会有选择地渗透这些网站，从而接触到他们的受众目标。</p>
 
@@ -40,7 +40,7 @@
 
 <h1>0x01 行动</h1>
 
-<hr />
+<hr>
 
 <p>今年年初，我们发现有攻击者在利用免费工具和自定义脚本来偷偷地监控网络用户的在线活动。我们认为这些攻击者正在寻找潜在的受害者，了解用户计算机上都有哪些漏洞。商业公司也会使用同样的技术来跟踪自己的客户，确保他们的网站能在不同类型的浏览器上正常运行，但是，攻击者利用这些技术也能更方便的识别受害者，并制定相应的感染方法。</p>
 
@@ -61,7 +61,7 @@
 
 <p><strong>WITCHCOVEN– 分析用户计算机并跟踪用户</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061501281578112.jpg" alt="p1" /> 图1-战略性web渗透，重定向到WITCHCOVEN分析脚本</p>
+<p><img src="../images_result/images/201601061501281578112.jpg" alt="p1"> 图1-战略性web渗透，重定向到WITCHCOVEN分析脚本</p>
 
 <p>除了收集关于安装应用、浏览器插件的数据和版本信息，WITCHCOVEN脚本还使用了另外一个开源工具-“evercookie”。“evercookie”设计用于在用户的计算机上创建“相当长久的cookies”，通过：</p>
 
@@ -85,7 +85,7 @@
 
 <h1>0x03 这种手段是恶意的吗？</h1>
 
-<hr />
+<hr>
 
 <p>虽然，WITCHCOVEN的分析活动可以视为有入侵性的，但是，目前为止我们还没有发现确切的恶意活动。没有投放漏洞代码，没有攻击任何网站访客。如我们所说的，这些分析和跟踪技术也可以用于合法用途，以便优化用户体验，支持营销、人口统计和销售分析。那么为什么这些活动会引起我们的注意呢？</p>
 
@@ -101,7 +101,7 @@
 
 <h1>0x04 拼图</h1>
 
-<hr />
+<hr>
 
 <p>为什么这些无害的信息收集活动会是针对性攻击呢？根据WITCHCOVEN收集的数据。</p>
 
@@ -122,7 +122,7 @@
 
 <h1>0x05 理清头绪</h1>
 
-<hr />
+<hr>
 
 <p>虽然，上面的信息足够说明某个用户的习惯，但是这仅仅代表了一个网站的一个随机用户。攻击者入侵了100多个网站，每个网站每天会接收上千名访客。我们猜测，如果攻击者想要利用这些数据来针对特定的受害者，他们需要通过一些手段来分析WITCHCOVEN脚本收集到的这些数据（和web服务器的日志文件），从而识别接下来的具体目标。</p>
 
@@ -134,11 +134,11 @@
 <li>识别特定的受害者</li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010615013197136214.png" alt="p2" /> 图2-目标提炼示例</p>
+<p><img src="../images_result/images/2016010615013197136214.png" alt="p2"> 图2-目标提炼示例</p>
 
 <h1>0x06 利用这些数据来投放木马</h1>
 
-<hr />
+<hr>
 
 <p>一旦根据信息确定了特定的目标，我们认为攻击者就会设计和部署定制木马来增加入侵的成功率。目前，我们还没有发现任何漏洞攻击活动，但是这可能是由于攻击者攻击范围很小，致使我们在某个受害者那里发现漏洞和木马有效载荷的概率很低。</p>
 
@@ -165,11 +165,11 @@
 
 <p><strong>收集到的数据是如何使用的</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061501337418131.jpg" alt="p3" /> 图5-数据的可能使用方法</p>
+<p><img src="../images_result/images/201601061501337418131.jpg" alt="p3"> 图5-数据的可能使用方法</p>
 
 <h1>0x07 有效、高效且隐蔽</h1>
 
-<hr />
+<hr>
 
 <p>我们认为这次活动是政府小组策划的，他们的目标是收集全球数据，支持未来的网络行动。原因如下：</p>
 
@@ -198,15 +198,15 @@
 
 <p>前面我们已经提到，我们发现了100多个网站会重定向访客到WITCHCOVEN分析脚本。总的来看，这些网站并不是随机选择 ，虽然种类繁多，这些网站都有共同得到兴趣点。这些网站主要是吸引对下面这些领域感兴趣的用户：国际旅行，外交，能源生产政策，国际经济，以及在外国政府就职的个人-所有这些目标都与国家战略利益相关（参照图4被攻破网站的行业划分）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/2016010615013594864412.png" alt="p4" /></p>
+<p><img src="../images_result/images/2016010615013594864412.png" alt="p4"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061501371673859.png" alt="p5" /></p>
+<p><img src="../images_result/images/201601061501371673859.png" alt="p5"></p>
 
 <p>被攻击网站的地理位置分布</p>
 
 <h1>0x08 可能的预期目标</h1>
 
-<hr />
+<hr>
 
 <p><strong>美国和欧洲的政府官员和高层</strong></p>
 
@@ -246,11 +246,11 @@
 
 <p>在我们的客户中，几乎所有的行业都检测到了WITCHCOVEN。教育、政府、金融服务、能源和娱乐业是最受影响的。图5中列出了从2015年3月8日-10月31日，FireEye客户中收到WITCHCOVEN警告的各行业比例。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160106/201601061501396853961.jpg" alt="p6" /> 图5-2015年3月8日-10月31日，FireEye客户中收到WITCHCOVEN警告的各行业比例</p>
+<p><img src="../images_result/images/201601061501396853961.jpg" alt="p6"> 图5-2015年3月8日-10月31日，FireEye客户中收到WITCHCOVEN警告的各行业比例</p>
 
 <h1>0x09 应对办法</h1>
 
-<hr />
+<hr>
 
 <p>客户经常问我们有什么办法能对抗这起恶意网络活动。对于本文中介绍的这次活动，应对办法是一项挑战，因为攻击者是通过用户的web浏览活动来收集潜在的受害者信息。攻击者使用的脚本和方法也是合法网站在用于分析客户和改善浏览体验的方法。</p>
 
@@ -260,7 +260,7 @@
 
 <h1>0x0A 附录:技术细节</h1>
 
-<hr />
+<hr>
 
 <p>WITCHCOVEN 分析脚本 (示例MD5: 634438A50AE1990C4F8636801C410460) 使用了JavaScript编写。这个脚本中包含有 jQuery JavaScript库，这个库经过混淆去除了变量名称。完整的脚本很长，但是主要是由一些相似的公开脚本组成的，包括 evercookie, PluginDetect 和 “detect Office” 模块。</p>
 
@@ -309,7 +309,7 @@
   <td align="left">55（静态值，根据WITCHCOVEN 实例变化）</td>
 </tr>
 </tbody>
-</table>      </p>
+</table>      <p></p>
     
 			</body>
 		</html>

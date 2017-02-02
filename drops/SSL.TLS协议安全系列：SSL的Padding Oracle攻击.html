@@ -3,20 +3,20 @@
 			<head>
 			     <title>SSL/TLS协议安全系列：SSL的Padding Oracle攻击 - GoSSIP_SJTU</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/7658">http://drops.wooyun.org/papers/7658</a></h1>
 				
       <p>
-        <h2>0x00 前言</h2>
+        </p><h2>0x00 前言</h2>
 
-<hr />
+<hr>
 
 <p>在上一讲中，我们已经介绍了Padding Oracle攻击的背景知识和基本原理。简单来说，攻击就是利用密文解密后填充是否正确这一信息，以此得到明文的部分信息甚至恢复出全部明文。在这一讲里，我们会按照时间序梳理一遍与此攻击相关并影响SSL协议安全性的重要学术文章，简单介绍文章的贡献，给出其影响及对现实应用的指导意义。</p>
 
 <h2>0x01 Padding Oracle的学术线</h2>
 
-<hr />
+<hr>
 
 <p>1998年，贝尔实验室研究员瑞士密码学家Daniel Bleichenbacher在顶级密码学会议CRYPTO上发表了一篇名<a href="http://link.springer.com/chapter/10.1007/BFb0055716">Chosen Ciphertext Attacks Against Protocols Based on the RSA Encryption Standard PKCS#1</a>的文章，这算是Padding Oracle攻击的开山之作。文章给出了可用于实际攻击那些使用了PKCS#1v1.5填充规范的RSA的协议的一种有效方法，这些协议中就包含了当时已被广泛使用的SSL协议。此外，这篇文章的学术意义还在于，它也第一次表明了考虑加密方案的适应性选择密文攻击安全性是有实际意义的，实际中可以发起选择密文攻击（对于使用1024bit密钥加密的密文，恢复出对应明文需要大约一百万次Oracle查询，作者对此的描述为though not entirely as efficient）。文中给出的解决方案是，不要使用PKCS#1 1.5版本中的填充方案，而是转而使用OAEP。</p>
 
@@ -40,7 +40,7 @@
 
 <h2>0x02 Lucky13攻击</h2>
 
-<hr />
+<hr>
 
 <p>下面我们先来简单回顾一下，Vaudenay攻击要求攻击者能够识别出何时填充是正确的，在TLS中，即使消息验证失败也要可以。通常情况下，验证应该在解密之前做，而TLS显然没有这么做，这就导致了在CBC模式下的Padding Oracle攻击。</p>
 
@@ -106,7 +106,7 @@
 
 <h3>漏洞修补</h3>
 
-<hr />
+<hr>
 
 <p>很容易想到，针对Lucky13的修补，就是不论可能的Padding是什么，都要用恒定的时间计算MAC。实际中，不同的密码库有其不同的实现方法，大概可以分为两类：</p>
 
@@ -123,7 +123,7 @@
 
 <h2>0x03 Lucky13卷土重来？</h2>
 
-<hr />
+<hr>
 
 <p>上一小节讲到，如果攻击者能够得到dummy function是否被执行的信息，Lucky13就还可以攻击成功。今年AsiaCCS上的一篇文章<a href="http://dl.acm.org/citation.cfm?id=2714625">Lucky 13 Strikes Back</a>，就成功地得到了dummy function执行与否的信息，从而让Lucky13复活。</p>
 
@@ -146,7 +146,7 @@
 
 <h2>0x04 POODLE攻击</h2>
 
-<hr />
+<hr>
 
 <p>以上攻击讲完，似乎Padding Oracle攻击所需的padding oracle已无从寻找，从实现上来讲，在padding正确与否时，服务器都尽量做到了响应保持一致。但这并不意味着无法找到差别，毕竟服务器在收到正确的消息后，要完成正常的业务处理，而消息不对时则会拒绝服务。因此，找到一个特殊修改密文的方法使得服务器正常接受，同时最后一个字节可以预测，则就得到了一个可用的padding oracle。</p>
 
@@ -160,9 +160,9 @@
 
 <h2>0x05 结语</h2>
 
-<hr />
+<hr>
 
-<p>SSL的Padding Oracle攻击就介绍到这里，在下一讲中，我们会对SSL中弱PRNG带来的安全问题进行深入剖析，敬请期待。</p>      </p>
+<p>SSL的Padding Oracle攻击就介绍到这里，在下一讲中，我们会对SSL中弱PRNG带来的安全问题进行深入剖析，敬请期待。</p>      <p></p>
     
 			</body>
 		</html>

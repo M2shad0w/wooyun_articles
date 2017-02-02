@@ -3,14 +3,14 @@
 			<head>
 			     <title>异或加密之美 #主流web弱算法科普文 - 小飞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/2609">http://drops.wooyun.org/papers/2609</a></h1>
 				
       <p>
-        <p>本文只是对异或算法的科普文 逆向dede漏洞的原作者是 @<a href="http://loudong.360.cn/vul/profile/uid/1893575">my5t3ry</a> 而不是我<br />
-有些图片甚至直接借用 我不是抄袭狗 - -<br />
-哥就是抱在大牛的大腿上的那个人<br />
+        </p><p>本文只是对异或算法的科普文 逆向dede漏洞的原作者是 @<a href="http://loudong.360.cn/vul/profile/uid/1893575">my5t3ry</a> 而不是我<br>
+有些图片甚至直接借用 我不是抄袭狗 - -<br>
+哥就是抱在大牛的大腿上的那个人<br>
 研究对称算法的时候 对异或加密产生了性欲</p>
 
 <p>刚刚高考完  高中闭关结束  I AM BACK~ </p>
@@ -25,16 +25,16 @@ E^A=K
 
 <!--more-->
 
-<p>有了A和E(加密前后的字符串)就等获得k，一旦我们知道了key 就能本地构造那个字符串（evilcode）进行攻击！<br />
+<p>有了A和E(加密前后的字符串)就等获得k，一旦我们知道了key 就能本地构造那个字符串（evilcode）进行攻击！<br>
 今天 我们研究DedeCMS(buy_action.php)</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071622331932510.png" alt="2014071622331932510.png" /></p>
+<p><img src="../images_result/images/2014071622331932510.png" alt="2014071622331932510.png"></p>
 
 <p>这是个简单的异或算法</p>
 
 <h2>0x01初识你的美，算法分析</h2>
 
-<hr />
+<hr>
 
 <pre><code>string[0]^key[0] 
 </code></pre>
@@ -62,7 +62,7 @@ E^A=K
 string |  i  a  m  a  s  r   i   n   g   
 </code></pre>
 
-<p>等于key被重复了多次直到string被完全加密!<br />
+<p>等于key被重复了多次直到string被完全加密!<br>
 <strong>case two</strong></p>
 
 <pre><code>$key长度（18）&gt;$string长度  
@@ -73,22 +73,22 @@ string |  i  a  m  a  s  r   i   n   g
 <pre><code>$k=$i=  strlen($string) -1
 </code></pre>
 
-<p>就取尽了$string，下一次执行会直接跳出，也就是说，此时的key都没完整进入$code。<br />
+<p>就取尽了$string，下一次执行会直接跳出，也就是说，此时的key都没完整进入$code。<br>
 示意图如下</p>
 
 <pre><code>key    |  i  a  m  a  k  (e  y )  
 string |  i  a  m  a  s
 </code></pre>
 
-<p>  <br />
-括号里面表示没能进入$code部分<br />
+<p>  <br>
+括号里面表示没能进入$code部分<br>
 现在分析完了算法 我们就能够来思考如何注入到key了</p>
 
 <h2>0x02 禁不起推敲的美 攻击算法</h2>
 
-<hr />
+<hr>
 
-<p>现在我们要得到key 当然是要完整的<br />
+<p>现在我们要得到key 当然是要完整的<br>
 所以是选择case one</p>
 
 <p>所以思路应该是构造一个</p>
@@ -108,9 +108,9 @@ string |  i  a  m  a  s
 
 <p>通过变量覆盖进行GLOBALS[cfg_dbprefix]覆盖注入</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071622373460573.png" alt="2014071622373460573.png" /></p>
+<p><img src="../images_result/images/2014071622373460573.png" alt="2014071622373460573.png"></p>
 
-<p>接下来看图看代码<br />
+<p>接下来看图看代码<br>
 我们先看看$string(代码中的$pr_encode)是如何获取的</p>
 
 <pre><code>$pr_encode = '';  
@@ -130,7 +130,7 @@ string |  i  a  m  a  s
 
 <p>知道了获取办法 让我们控制它吧</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071622394580644.png" alt="2014071622394580644.png" /></p>
+<p><img src="../images_result/images/2014071622394580644.png" alt="2014071622394580644.png"></p>
 
 <p>此处的</p>
 
@@ -141,7 +141,7 @@ string |  i  a  m  a  s
 
 <p>所以加密得到的$code（也就是$pd_encode） 包含了post和cookies全部内容  如图</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071622402082199.png" alt="2014071622402082199.png" /></p>
+<p><img src="../images_result/images/2014071622402082199.png" alt="2014071622402082199.png"></p>
 
 <p>也就是符合</p>
 
@@ -150,32 +150,32 @@ string |  i  a  m  a  s
 
 <p>所以我们直接取post的巧合18位，进行破解，后面的其实不用管，要不然得到的key由于case one的不同重复，就是真正key的一遍遍重复。</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071622413034353.png" alt="2014071622413034353.png" /></p>
+<p><img src="../images_result/images/2014071622413034353.png" alt="2014071622413034353.png"></p>
 
 <p>这样我们就得到了MD5形式的key 不过是18位 去掉最后两位开始跑吧</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071622422219738.png" alt="2014071622422219738.png" /></p>
+<p><img src="../images_result/images/2014071622422219738.png" alt="2014071622422219738.png"></p>
 
 <p>后来的故事就是变量覆盖 不在本文的讨论之类</p>
 
 <h2>0x03 金絮其外 败絮其中 算法优缺点分析</h2>
 
-<hr />
+<hr>
 
-<p>简单异或算法实际上并不复杂，因为它并不比维吉尼亚密码多什么东西。它之所以被包括在这本书中，是因为它在商业软件包中很流行，至少在MS-DOS和 Macintosh世界中是这样[1502，1387]。不幸的是，如果一个软件保密程序宣称它有一个“专有”加密算法（该算法比DES更快)  &#45;--|||应用密码学<br />
-确实异或算法轻巧，采用位运算，在速度方面有十分大的优势。<br />
-但是轻巧简单却带来了弱逻辑，所以更应该小心使用 比如对$key的复杂程度 应该有更苛刻的要求<br />
+<p>简单异或算法实际上并不复杂，因为它并不比维吉尼亚密码多什么东西。它之所以被包括在这本书中，是因为它在商业软件包中很流行，至少在MS-DOS和 Macintosh世界中是这样[1502，1387]。不幸的是，如果一个软件保密程序宣称它有一个“专有”加密算法（该算法比DES更快)  &#45;--|||应用密码学<br>
+确实异或算法轻巧，采用位运算，在速度方面有十分大的优势。<br>
+但是轻巧简单却带来了弱逻辑，所以更应该小心使用 比如对$key的复杂程度 应该有更苛刻的要求<br>
 否则会让safe&#95;code变成evil&#95;code</p>
 
 <h2>0x04 你本来就很美 好的程序员才写得出安全算法</h2>
 
-<hr />
+<hr>
 
 <p>那么怎么样的异或才是安全简便的？ 我们看看齐博cms的这个吧</p>
 
-<p><img src="http://static.wooyun.org/201407/2014071622454411580.jpg" alt="2014071622454411580.jpg" /></p>
+<p><img src="../images_result/images/2014071622454411580.jpg" alt="2014071622454411580.jpg"></p>
 
-<p>优点有两个<br />
+<p>优点有两个<br>
 一， 绝密字串有三部分 两部分可控</p>
 
 <pre><code>$webdb[mymd5].$rand.'5*j,.^&amp;;?.%#@!' 
@@ -196,9 +196,9 @@ string |  i  a  m  a  s
 
 <h2>0x05 参考文章  </h2>
 
-<hr />
+<hr>
 
-<p>DedeCMS最新通杀注入(buy_action.php)漏洞分析</p>      </p>
+<p>DedeCMS最新通杀注入(buy_action.php)漏洞分析</p>      <p></p>
     
 			</body>
 		</html>

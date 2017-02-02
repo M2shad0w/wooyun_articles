@@ -3,14 +3,14 @@
 			<head>
 			     <title>Windows 内核攻击 - netwind</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/6095">http://drops.wooyun.org/papers/6095</a></h1>
 				
       <p>
-        <h1>0x00 引言</h1>
+        </p><h1>0x00 引言</h1>
 
-<hr />
+<hr>
 
 <p>作者：Ashfaq Ansari</p>
 
@@ -22,7 +22,7 @@
 
 <h1>0x01 环境配置</h1>
 
-<hr />
+<hr>
 
 <p>所有的演示都基于Windows 7 x86 SP1环境下编译的特意存在漏洞的驱动，本文将通过该驱动存在的漏洞来展示内核缺陷以及如果通过内核攻击技术来进行本地权限提升。</p>
 
@@ -39,11 +39,11 @@
 
 <h1>0x02 Windows 内核结构</h1>
 
-<hr />
+<hr>
 
 <p>在开始攻击之旅之前，我们先了解一下内核基本结构和windows进程空间的内存分配和执行方式。Windows操作系统有两个模式：内核模式和用户模式。任何一个程序都是在其中一个模式里执行。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505505876360.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505505876360.png" alt="enter image description here"></p>
 
 <p>图 1: Windows 结构 来自: logs.msdn.com</p>
 
@@ -51,13 +51,13 @@
 
 <h1>0x03 堆栈溢出</h1>
 
-<hr />
+<hr>
 
 <p>当拷贝用户输入数据到事先分配的一个缓冲空间里时，如果没有做边界检查，就会发生栈溢出。 memcpy()函数在进行内存拷贝的时候不会做长度检查，如果拷贝过长的数据到预先定义的缓冲变量里，就会导致溢出的发生。</p>
 
 <p>以下是一个用了 memcpy() 函数的程序。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505505969619.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505505969619.png" alt="enter image description here"></p>
 
 <p>图 2: StackOverflow.c</p>
 
@@ -65,7 +65,7 @@
 
 <p>通过溢出代码构造了一组输入数据，我们找到了返回地址的偏移如图:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505505967213.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505505967213.png" alt="enter image description here"></p>
 
 <p>图 3: 定位EIP</p>
 
@@ -73,7 +73,7 @@
 
 <p>在我们的溢出代码里, 我们通过变量ring0_shellcode’定义了 shellcode 如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505505930060.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505505930060.png" alt="enter image description here"></p>
 
 <p>图 4:  Shellcode</p>
 
@@ -87,25 +87,25 @@ ring0_shellcode_address = id(ring0_shellcode) + 20 //id(var) + 20
 
 <p>接着,把SHELLCODE地址放到可以覆盖返回地址的地方（上述找到的EIP偏移）。溢出代码执行后会调用SHELLCODE，这时会开启一个以系统权限执行的命令行SHELL，如图:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505505997766.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505505997766.png" alt="enter image description here"></p>
 
 <h1>0x04 堆栈保护绕过</h1>
 
-<hr />
+<hr>
 
 <p>为了抵御堆栈溢出攻击，产生了一种保护机制：Stack Guard. 这种机制使得执行函数增加了两个元素：function&#95;prologue和function&#95;epilogue。Stack Guard 实际是通过编译时在这个两个元素处增加代码以设置和检验栈信息(保存在Canary里)。</p>
 
 <p>Function prologue</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510032892.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510032892.png" alt="enter image description here"></p>
 
 <p>图 6: &#95;except&#95;handler4</p>
 
 <p>Function Epilogue</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510067408.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510067408.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510099784.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510099784.png" alt="enter image description here"></p>
 
 <p>图8: Security Cookie效验</p>
 
@@ -115,23 +115,23 @@ ring0_shellcode_address = id(ring0_shellcode) + 20 //id(var) + 20
 
 <p>我们将通过溢出覆盖异常处理函数地址的方法来绕过 Stack Cookie保护。 异常处理函数地址存放在堆栈里，我们可以任意的覆盖堆栈，当从用户空间传递大量数据到内核缓冲区的时候，我们把SHELLCODE地址覆盖掉异常处理函数的地址，这时触发异常并跳转去执行我们的SHELLCODE代码。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510143372.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510143372.png" alt="enter image description here"></p>
 
 <p>图 9: 堆栈溢出防护绕过</p>
 
 <p>根据攻击代码，绕过 Stack Guard 后执行INT 3指令，观察调试信息如图:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510199174.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510199174.png" alt="enter image description here"></p>
 
 <p>图 10: 绕过 stack Guard</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510169186.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510169186.png" alt="enter image description here"></p>
 
 <p>图11: 执行shellcode并停止在断点</p>
 
 <h1>0x05 任意改写</h1>
 
-<hr />
+<hr>
 
 <p>这个漏洞也被称作: WRITE&#95;WHAT&#95;WHERE,可以使攻击者可以在任意内存写任意内容。 如果操作不当会导致程序崩溃（用户模式）或者蓝屏（内核模式BSOD）。</p>
 
@@ -147,27 +147,27 @@ ring0_shellcode_address = id(ring0_shellcode) + 20 //id(var) + 20
 
 <p>如下是 WRITE&#95;WHAT&#95;WHERE 漏洞的结构:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510252968.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510252968.png" alt="enter image description here"></p>
 
 <p>既然漏洞允许我们自定义上述结构中的What和Where属性, 我们把我们的shellcode地址写在‘What’处，把 HalDispatchTable0x4 的地址写在‘Where’ 处，如下:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510279687.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510279687.png" alt="enter image description here"></p>
 
 <p>图 13: 部署shellcode 地址和HAL Dispatch Table地址</p>
 
 <p>我们在内核调试器中断程序，检查HalDispatch Table 函数地址如下:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510265399.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510265399.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510257935.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510257935.png" alt="enter image description here"></p>
 
 <p>图 15: Write&#95;What&#95;Where执行演示</p>
 
 <p>Exploit执行后,我们在调试器检查内存发现， HalDispatchTable+4处地址被SHELLCODE地址覆盖， 然后SHELLCODE被执行。 下面对话框显示程序在断点处中断。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510366617.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510366617.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510320130.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510320130.png" alt="enter image description here"></p>
 
 <p>图 17: 改写后断点处的EIP</p>
 
@@ -175,11 +175,11 @@ ring0_shellcode_address = id(ring0_shellcode) + 20 //id(var) + 20
 
 <h1>0x06 Use After Free 漏洞利用</h1>
 
-<hr />
+<hr>
 
 <p>当一个程序使用已经被释放后的内存时，会导致意外的系统行为，如异常或可以用来获得任意代码执行。此类漏洞需要如下条件:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510357431.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510357431.png" alt="enter image description here"></p>
 
 <p>某些时候一个对象被创建，同时与一个虚表关联，然后程序会通过某个方法来调用这个对象。如果在程序调用对象之前，我们把这个对象释放，当程序调用该对象时就会导致程序崩溃。</p>
 
@@ -197,35 +197,35 @@ ring0_shellcode_address = id(ring0_shellcode) + 20 //id(var) + 20
 
 <p>首先我们让被调试端/目标以guest权限运行。 我们首先必须在内核池分配一个弱点对象，以触发Use After free漏洞, 然后释放它并强制使程序使用这个被释放的对象。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510398510.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510398510.png" alt="enter image description here"></p>
 
 <p>图 18:Use After Free 对象被分配.等待释放.</p>
 
 <p>接下来, 我们释放对象以创建内存“孔”.最后,我们填充所有被释放的内存块以控制被释放对象的内存，需要花费一定的时间来实现内存控制，大概需要尝试100次左右。 我们通常通过一个FakeObject来重新分配 UaF对象。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510441392.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510441392.png" alt="enter image description here"></p>
 
 <p>图 19: 释放并重新分配 UAF 对象</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510497420.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510497420.png" alt="enter image description here"></p>
 
 <p>图 20: 释放并重新分配 UAF 对象</p>
 
 <p>同时, 这些内存块会被攻击者控制的对象填充。这个时候我们看一下内存池, 我们会发现我们已经成功地重新分配了我们创建的内存“孔”。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510431794.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510431794.png" alt="enter image description here"></p>
 
 <p>图 21: 所有连续的内存块都被 IoCo填充以确保内存被均匀喷射</p>
 
 <p>最后触发使用被释放的UaF对象，导致漏洞产生。 攻击代码执行后，会生成一个系统权限的SHELL， 如图:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510580427.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510580427.png" alt="enter image description here"></p>
 
 <p>图 22: 攻击者代码以系统权限执行</p>
 
 <h1>0x07 用内核调试器偷令牌</h1>
 
-<hr />
+<hr>
 
 <p>另一个有趣的漏洞是，可以利用内核缺陷通过进程令牌来提升权限。</p>
 
@@ -248,7 +248,7 @@ For SYSTEM
 <li><p>获得KPROCESS成员 Process的地址。 它包含令牌值，在KTHREAD 基址偏移+0x40处</p></li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510531897.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510531897.png" alt="enter image description here"></p>
 
 <p>图 23: KAPC List Entry</p>
 
@@ -259,19 +259,19 @@ For SYSTEM
 
 <p>实际的令牌值需要把最后3位和0进行与操作，然后令牌值0x953b6037变为 0x953b6030 现在我们用系统令牌替换掉进程令牌。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510511413.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510511413.png" alt="enter image description here"></p>
 
 <p>图 24: 令牌值被替换</p>
 
 <p>令牌被替换后，进程马上就被赋予了系统权限。 在被攻击者电脑里验证如下:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510634569.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510634569.jpg" alt="enter image description here"></p>
 
 <p>图 25: 通过令牌漏洞提升Guest到系统权限</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062505510675376.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062505510675376.jpg" alt="enter image description here"></p>
 
-<p>图 26: 一个例子: 利用令牌漏洞对Guest用户进行权限提升</p>      </p>
+<p>图 26: 一个例子: 利用令牌漏洞对Guest用户进行权限提升</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,16 +3,16 @@
 			<head>
 			     <title>XDS: Cross-Device Scripting Attacks - 夺吻狂魔</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1472">http://drops.wooyun.org/papers/1472</a></h1>
 				
       <p>
-        <p>from：http://www.cis.syr.edu/~wedu/Research/paper/xds_attack.pdf</p>
+        </p><p>from：http://www.cis.syr.edu/~wedu/Research/paper/xds_attack.pdf</p>
 
 <h2>0x00 摘要</h2>
 
-<hr />
+<hr>
 
 <p>基于HTML5的移动应用程序变得越来越于流行，主要是因为他们更容易在不同的移动平台进行移植。基于HTML5的应用程序使用标准的Web技术，包括HTML5 ， JavaScript和CSS;它们依赖于一些如PhoneGap的中间件与底层的操作系统进行交互。</p>
 
@@ -24,7 +24,7 @@
 
 <h2>0x01 背景</h2>
 
-<hr />
+<hr>
 
 <p>基于HTML5的移动应用程序大多数不能直接运行在移动系统，如Android和iOS ，因为这些系统不支持HTML5和JavaScript本身; Web容器需要渲染HTML5以及执行JavaScript代码。</p>
 
@@ -44,13 +44,13 @@
 
 <p>PhoneGap和PhoneGap插件：PhoneGap帮助开发人员创建使用基于HTML5标准的移动应用程序Web。开发人员在HTML，JavaScript和CSS中写应用程序。该PhoneGap的框架默认情况下嵌入一个WebView中实例的应用程序，并依靠这个WebView来呈现HTML页面和执行JavaScript代码。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812562796754.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812562796754.png" alt="enter image description here"></p>
 
 <p>PhoneGap架构图</p>
 
 <h2>0x02 XDS攻击</h2>
 
-<hr />
+<hr>
 
 <p>有两种方式可以让JavaScript的字符串当成代码执行，一种是利用eval() API，另一种是通过DOM API和属性，如document.write(), appendChild(), innerHTML等。一些jQuery的展示API也有问题，例如html()和append()。</p>
 
@@ -61,7 +61,7 @@
 &lt;IMG src=x onerror="alert(’attack’)"&gt;...Data...
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812562821446.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812562821446.jpg" alt="enter image description here"></p>
 
 <p>DOM(jQuery)展示API和属性（勾表示能触发，叉表示不能出发）。</p>
 
@@ -81,13 +81,13 @@
 
 <p>程序展示使用java写的所以不会执行js代码：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812562877316.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812562877316.png" alt="enter image description here"></p>
 
 <p>非PhoneGap应用</p>
 
 <p>使用PhoneGap实现的，SSID将在WebView中显示，这个程序使用html() API展示的SSID导致JavaScript代码执行。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812563091017.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812563091017.png" alt="enter image description here"></p>
 
 <p>PhoneGap应用</p>
 
@@ -95,31 +95,31 @@
 
 <h4>NFC读取软件当中：</h4>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812563155705.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812563155705.png" alt="enter image description here"></p>
 
 <p>非PhoneGap应用</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812563278526.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812563278526.png" alt="enter image description here"></p>
 
 <p>PhoneGap应用</p>
 
 <h4>二维码扫描：</h4>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812563331521.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812563331521.png" alt="enter image description here"></p>
 
 <p>非PhoneGap应用</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812574088332.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812574088332.png" alt="enter image description here"></p>
 
 <p>PhoneGap应用</p>
 
 <h4>MP3, MP4, and Images</h4>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812574168873.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812574168873.png" alt="enter image description here"></p>
 
 <p>非PhoneGap应用</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812574287090.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812574287090.png" alt="enter image description here"></p>
 
 <p>PhoneGap应用</p>
 
@@ -127,11 +127,11 @@
 
 <h2>0x04 限制</h2>
 
-<hr />
+<hr>
 
 <p>在各场景中的长度限制</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812574317316.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812574317316.jpg" alt="enter image description here"></p>
 
 <p>可以看到Wi-Fi当中长度限制的最短。</p>
 
@@ -165,7 +165,7 @@
 
 <h2>0x06 案例研究</h2>
 
-<hr />
+<hr>
 
 <p>看看现实当中是否有app可以被攻击：</p>
 
@@ -189,9 +189,9 @@ function(e) {},
 'Contacts', 'search', [['displayName'], {}]) &gt; 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812574475292.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812574475292.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812574686791.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812574686791.png" alt="enter image description here"></p>
 
 <h3>案例2：RewardingYourself应用程序。</h3>
 
@@ -217,11 +217,11 @@ function(loc) {
 
 <p>使用geolocation.watchPosition获取当前位置。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812574731016.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812574731016.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812585327138.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812585327138.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812585466874.png" alt="enter image description here" /></p>      </p>
+<p><img src="../images_result/images/2014091812585466874.png" alt="enter image description here"></p>      <p></p>
     
 			</body>
 		</html>

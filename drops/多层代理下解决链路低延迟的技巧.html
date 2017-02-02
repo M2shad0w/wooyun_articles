@@ -3,14 +3,14 @@
 			<head>
 			     <title>多层代理下解决链路低延迟的技巧 - Xeyes</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1286">http://drops.wooyun.org/tips/1286</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>大多数小伙伴们在渗透测试的时候经常需要挂多层代理隐藏行踪，往往采取在较小的成本上达到最大化资源的利用实现多层代理，并且保持较低的网络延迟进行正常工作。而想要利用多环链路进行匿名，就必须忍受速度质量的降低，我们往往只能在这二者之间寻找平衡点，所谓鱼和熊掌不可兼得。这里楼主分享一个简单实用的方法，各位看官见笑，这个方法我常用于控制远端Windows Server作为前期信息刺探的扫描平台。</p>
 
@@ -20,13 +20,13 @@
 
 <h2>0x01 原理</h2>
 
-<hr />
+<hr>
 
 <p>主要通过TeamViewer远程控制软件实现这一过程，实测过程中TeamViewer具有流量优化的作用。本机通过TeamViewer软件连接服务器的过程中流量通过TeamViewer服务器的优化跟中转实现了一层代理的效果，还能在远端Windows Server 上再次拨一层VPN再对目标进行代理，而不会发生Windows远程终端（3389）连接因为服务器IP的改变而断开连接。</p>
 
 <h2>0x03 方法</h2>
 
-<hr />
+<hr>
 
 <ol>
 <li><p>本地的环境: 电信8M速率，Backbox Linux + Tor + Proxychains + 2个VPN翻墙账户 。</p></li>
@@ -36,29 +36,29 @@
 
 <h2>0x04 图示</h2>
 
-<hr />
+<hr>
 
 <p>3层代理：</p>
 
 <p>本机->  TeamViewer -> 服务器 -> VPN（本机通过TeamViewer连接远端Windows Server，流量已经通过TeamViewer服务器的中转实现了一层代理）</p>
 
-<p><img src="http://static.wooyun.org/201403/2014032203270360352.jpg" alt="2014032203270360352.jpg" /></p>
+<p><img src="../images_result/images/2014032203270360352.jpg" alt="2014032203270360352.jpg"></p>
 
 <p>4层代理：</p>
 
 <p>本机-> VPN 1 -> TeamViewer -> 服务器 -> VPN 2  （VPN 1我用的是香港的VPN出口，速度快）</p>
 
-<p><img src="http://static.wooyun.org/201403/2014032203310127430.jpg" alt="2014032203310127430.jpg" /></p>
+<p><img src="../images_result/images/2014032203310127430.jpg" alt="2014032203310127430.jpg"></p>
 
 <p>5层代理：</p>
 
 <p>本机-> VPN-> Tor -> TeamViewer -> 服务器(usa) -> VPN  （第二层使用的是Proxychains本地代理Tor启动TeamViewer  ）</p>
 
-<p><img src="http://static.wooyun.org/201403/2014032203513750413.jpg" alt="2014032203513750413.jpg" /></p>
+<p><img src="../images_result/images/2014032203513750413.jpg" alt="2014032203513750413.jpg"></p>
 
 <p>以我的网络环境实际使用中，使用5层代理桌面连接模式下传输文件速度平均值在50K左右。画质跟速度都在我可以接受的范围。这个方法适用于Linux下控制Windows终端保持画质跟速度的绝佳方法。当然如果不需要桌面终端，我们直接使用Tor加上多个SSH即可达到效果。</p>
 
-<p><img src="http://static.wooyun.org/201403/2014032204005875355.png" alt="2014032204005875355.png" /></p>      </p>
+<p><img src="../images_result/images/2014032204005875355.png" alt="2014032204005875355.png"></p>      <p></p>
     
 			</body>
 		</html>

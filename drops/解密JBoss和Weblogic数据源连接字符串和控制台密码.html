@@ -3,14 +3,14 @@
 			<head>
 			     <title>解密JBoss和Weblogic数据源连接字符串和控制台密码 - insight-labs</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/349">http://drops.wooyun.org/tips/349</a></h1>
 				
       <p>
-        <h3>0x00 背景</h3>
+        </p><h3>0x00 背景</h3>
 
-<hr />
+<hr>
 
 <p>现在越来越多的站喜欢用java语言的框架做web应用了，这里应用有很多大型站点经常采用jboss或者weblogic做web服务器。出于安全原因，他们都提供把数据源连接密码以及web服务器后台密码加密的功能，jboss用的是blowfish，weblogic旧版的加密算法一般为3DES，新版的则都是AES。</p>
 
@@ -20,7 +20,7 @@
 
 <h3>0x01 JBoss解密</h3>
 
-<hr />
+<hr>
 
 <p>jboss的数据库连接密码一般存在</p>
 
@@ -37,7 +37,7 @@
 &lt;password&gt;123456&lt;/password&gt;  //密码
 </code></pre>
 
-<p>在配置完密码加密后，这个文件里要么没有username和password，要么被comment掉了。下面多了个EncryptDBPassword<br />
+<p>在配置完密码加密后，这个文件里要么没有username和password，要么被comment掉了。下面多了个EncryptDBPassword<br>
 加密后的密码存在jboss目录的conf/login-config.xml文件里：</p>
 
 <pre><code>&lt;application-policy name="EncryptDBPassword"&gt;
@@ -119,7 +119,7 @@ public class JBoss {
 
 <h3>0x02 Weblogic解密</h3>
 
-<hr />
+<hr>
 
 <p>weblogic要稍微复杂一些，jboss的加密函数是java代码里面的，但是weblogic是自己写的，所以解密程序也需要调用weblogic的代码包。WebLogic 11gR1后采用了AES的加密方式，之前的版本采用的DES加密方式。另外，每个Weblogic app的加密key都是随机生成的，所以不同服务器甚至同服务器不同应用上的weblogic都是用不同的密码加密的，这一点上比jboss安全很多。但是，毕竟连数据库的时候还是要还原，所以还是可以解密的。解密过程如下：</p>
 
@@ -198,7 +198,7 @@ public class Decrypt {
 
 <p>执行完后就会告诉你 Decrypted Password is : weblogic</p>
 
-<p>weblogic的控制台密码也是用同样的方式加密的。</p>      </p>
+<p>weblogic的控制台密码也是用同样的方式加密的。</p>      <p></p>
     
 			</body>
 		</html>

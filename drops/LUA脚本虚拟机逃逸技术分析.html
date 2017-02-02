@@ -3,18 +3,18 @@
 			<head>
 			     <title>LUA脚本虚拟机逃逸技术分析 - boywhp</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12677">http://drops.wooyun.org/tips/12677</a></h1>
 				
       <p>
-        <p><strong>Author:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d3b1bcaaa4bba393e2e1e5fdb0bcbe">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
+        </p><p><strong>Author:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d3b1bcaaa4bba393e2e1e5fdb0bcbe">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
 
 <p>参考<a href="https://gist.github.com/corsix/6575486">https://gist.github.com/corsix/6575486</a></p>
 
 <h1>0x00 LUA数据泄露</h1>
 
-<hr />
+<hr>
 
 <p>LUA提供了string.dump将一个lua函数dump为LUA字节码，同时loadstring函数加载字节码为LUA函数，通过操作LUA原始字节码可以使得LUA解释器进入特殊状态，甚至导致BUG发生。</p>
 
@@ -137,7 +137,7 @@ case OP_FORLOOP: {
 
 <h1>0x01 LUA任意内存读/写</h1>
 
-<hr />
+<hr>
 
 <pre><code>#!cpp
 read_mem = loadstring(string.dump(function(mem_addr) 
@@ -276,7 +276,7 @@ k = cl-&gt;p-&gt;k;
 
 <p>先看下字符串对象和Closure对象的内存布局。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160202/20160202065729158801.jpg" alt="p1" /></p>
+<p><img src="../images_result/images/20160202065729158801.jpg" alt="p1"></p>
 
 <p>cl->p对应TString第9个字符串开始的内容，magic在inner函数被初始化为"01234567"，将前8字节填充，并拼接两个内存指针，【..为LUA字符串连接符】如下：</p>
 
@@ -328,7 +328,7 @@ case OP_GETUPVAL: {
 
 <h1>0x02 代码执行</h1>
 
-<hr />
+<hr>
 
 <p>LUA使用OP&#95;CALL进行函数调用，luaD&#95;precall中处理了C函数CALL，如下</p>
 
@@ -353,13 +353,13 @@ co = coroutine.wrap(function() end)
 
 <p>CClosure数据结构内存布局如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160202/20160202065727705982.jpg" alt="p2" /></p>
+<p><img src="../images_result/images/20160202065727705982.jpg" alt="p2"></p>
 
 <p>其object偏移位置32为函数指针f，通过前面的内存写技术可以将f替换为指定的函数地址即可实现任意代码执行。</p>
 
 <h1>0x03 附：POC代码</h1>
 
-<hr />
+<hr>
 
 <pre><code>#!cpp
 asnum = loadstring(string.dump(function(x)
@@ -438,7 +438,7 @@ x="AAAABBBB"
 l,h=f2ii(asnum(x))
 x=ii2f(l+24,h)
 print(f2ii(read_mem(x)))
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

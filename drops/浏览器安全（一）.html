@@ -3,14 +3,14 @@
 			<head>
 			     <title>浏览器安全（一） - 杀戮</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/526">http://drops.wooyun.org/papers/526</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>嗯，长短短要求我写一篇关于浏览器安全的文章，所以我出现了，求大神不吐槽，本人渣技术。</p>
 
@@ -20,7 +20,7 @@
 
 <h2>0x01 简介</h2>
 
-<hr />
+<hr>
 
 <p>如何看待浏览器安全，总之就是战场大小的问题。有多少功能，就有多少攻击面。缓冲区溢出什么的是高富帅的东西，好好当屌丝，别看了。</p>
 
@@ -28,7 +28,7 @@
 
 <h2>0x02 如何学习</h2>
 
-<hr />
+<hr>
 
 <p>如何学习这方面的知识，说实在的，浏览器安全比较冷门，别指望有坑货会为这方面写书。只能丢一些链接出来：</p>
 
@@ -44,7 +44,7 @@
 
 <h2>0x03 基础</h2>
 
-<hr />
+<hr>
 
 <h3>攻击面：</h3>
 
@@ -80,7 +80,7 @@
 
 <h2>0x04 找到奶糖</h2>
 
-<hr />
+<hr>
 
 <p>浏览器的本质是为了方便用户浏览网页，所以我们的攻击代码最终都是存在与网页上的，我们要攻击一个浏览器，要看浏览器如何处理我们的代码，火狐的firebug曾经爆出过浏览器命令执行， 漏洞的成因就是firebug提取网页内容时过滤不严谨，导致可以在特权区域调用特权API执行代码。</p>
 
@@ -90,7 +90,7 @@
 
 <p>我们确定一个插件，我们已经发现它对网页内容进行提取。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071408331781036.jpeg" alt="2013082701211476111.jpg" /></p>
+<p><img src="../images_result/images/2014071408331781036.jpeg" alt="2013082701211476111.jpg"></p>
 
 <p>插件提取了 title 和 Url 我们构造一个页面</p>
 
@@ -100,7 +100,7 @@
 "&gt;&lt;iframe src=http://drops.wooyun.org &gt;&lt;/iframe&gt;&lt;a
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071407014652773.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071407014652773.jpeg" alt="enter image description here"></p>
 
 <p>很早的时候谷歌就意识到了插件的安全问题并且加了防范，所以在这个特权区域执行js比较困难。这里只是打个比方，说明下浏览器处理网页内容造成的危害。</p>
 
@@ -115,17 +115,17 @@
 
 <p>查看历史记录</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101806145819339.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2013101806145819339.jpeg" alt="enter image description here"></p>
 
 <p>同样也是对网页内容的抓取，同时还有很多地方存在安全问题，比如调试器。</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101806145910453.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2013101806145910453.jpeg" alt="enter image description here"></p>
 
 <p>哥几个高抬贵手啊，我这个还有点用，就不说内容了。</p>
 
 <h2>0x05 奶糖和琥珀</h2>
 
-<hr />
+<hr>
 
 <p>如何找到漏洞，要注意的是注意浏览器中的每一个点。</p>
 
@@ -140,11 +140,11 @@
 
 <p>确定特权域</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101806150058565.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2013101806150058565.jpeg" alt="enter image description here"></p>
 
 <p>这是一个傲游的特权区域，我们先确定这个页面对网页进行怎么样的抓取。</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101806150049631.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2013101806150049631.jpeg" alt="enter image description here"></p>
 
 <p>我们点一下 加号 可以看到这些 ，我们可以判定 它对我们经常访问的title进行了提取。</p>
 
@@ -156,17 +156,17 @@
 &lt;title&gt;&lt;script&gt;alert(document.domain);&lt;/script&gt;&lt;/title&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20131018/2013101806150194626.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2013101806150194626.jpeg" alt="enter image description here"></p>
 
 <p>现在我们简单查看下有什么高权限的API可以调用。</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101806150285903.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2013101806150285903.jpeg" alt="enter image description here"></p>
 
 <p>通过审查这些API我们可以抽取出高权限的API来进行攻击。</p>
 
 <h2>0x06 有过的漏洞？</h2>
 
-<hr />
+<hr>
 
 <p>– CVE-2002-0189</p>
 
@@ -182,9 +182,9 @@
 
 <h2>0x07 结尾</h2>
 
-<hr />
+<hr>
 
-<p>嗯。。。。其实还有一些要点，第二篇再说吧，好累 睡觉去了，改天我要捅死短短。</p>      </p>
+<p>嗯。。。。其实还有一些要点，第二篇再说吧，好累 睡觉去了，改天我要捅死短短。</p>      <p></p>
     
 			</body>
 		</html>

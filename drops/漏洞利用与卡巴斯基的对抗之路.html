@@ -3,14 +3,14 @@
 			<head>
 			     <title>漏洞利用与卡巴斯基的对抗之路 - 夜未央</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2903">http://drops.wooyun.org/tips/2903</a></h1>
 				
       <p>
-        <h2>0x00 致谢</h2>
+        </p><h2>0x00 致谢</h2>
 
-<hr />
+<hr>
 
 <p>特别感谢各位朋友在这一年中对自己工作的支持，无以为报，只能凑合写一些文章来一搏各位的欢心，如有不对之处还请各位不吝指出，感激不尽！</p>
 
@@ -26,7 +26,7 @@
 
 <h2>0x01 题记：</h2>
 
-<hr />
+<hr>
 
 <p>主题是关于漏洞利用与卡巴斯基之间的种种对抗，之所以选择卡巴斯基是因为其在众多杀毒软件中为一个典型，从04、05年的内存查杀到最新流行的行为检测云查杀，卡巴斯基一直紧跟时代步伐并且针对漏洞利用的查杀也越来越准确有效，与诺顿、Bitdefender号称是最难绕过的杀软之一。杀毒软件对文档类漏洞和浏览器漏洞的查杀最为严格，此篇也以上述两类漏洞利用作为示例进行阐述。</p>
 
@@ -38,7 +38,7 @@
 
 <h2>0x02 漏洞利用的基本形式</h2>
 
-<hr />
+<hr>
 
 <p>MS Office 漏洞的没落，Adobe Reader PDF漏洞的方兴未艾，Flash Player漏洞的强势崛起以及目前浏览器UAF漏洞的中兴，漏洞的形式多种多样但是漏洞利用的基本思路倒没有太大的变化，无非两种形式：下载并执行和释放并执行，可谓万变不离其宗，漏洞利用的最终目的就是把一个程序执行起来，杀毒软件的查杀目的为把这种行为检测出来报警并阻止其运行。 漏洞利用最终执行的伪代码如下：</p>
 
@@ -197,7 +197,7 @@ mov ebp, [ eax + 0x10 ]    ; // get the 3rd entries base address                
 
 <h2>0x03 卡巴斯基的对抗策略</h2>
 
-<hr />
+<hr>
 
 <p>上述的漏洞利用方法来看，卡巴斯基可以在上述方法中进行有针对性的查杀。最初卡巴斯基相对于对病毒和木马的查杀而言，漏洞利用方面的查杀是非常弱的，后来由于漏洞利用越来越广泛越来越烂大街，所用的方法也都是如出一辙，其改进速度非常快，针对漏洞利用方法进行了又针对性的查杀。</p>
 
@@ -230,7 +230,7 @@ mov ebp, [ eax + 0x10 ]    ; // get the 3rd entries base address                
 
 <p>每种漏洞都有其明显的特征，卡巴斯基定位出漏洞特征之后，就能够爆出精确的CVE编号，这对用户来说非常有帮助，如下图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810511312050.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091810511312050.jpg" alt="enter image description here"></p>
 
 <p>图1:卡巴斯基告警图</p>
 
@@ -238,7 +238,7 @@ mov ebp, [ eax + 0x10 ]    ; // get the 3rd entries base address                
 
 <p>通过简单的查找，就可以定位出，卡巴斯基定位的特征码也是此漏洞触发的关键位置：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810511372150.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091810511372150.jpg" alt="enter image description here"></p>
 
 <p>图2:Cobj为漏洞的关键位置</p>
 
@@ -252,7 +252,7 @@ mov ebp, [ eax + 0x10 ]    ; // get the 3rd entries base address                
 
 <h2>0x04 漏洞利用对抗卡巴斯基检测策略</h2>
 
-<hr />
+<hr>
 
 <p>魔高一尺道高一丈，还是道高一尺魔高一丈，没有一个定论。放在漏洞利用与杀毒软件的对抗上也同样适用，这是一对矛盾发展的综合体。漏洞利用对抗以卡巴斯基为代码的杀毒软件的主要思路就是使其把恶意代码识别为程序执行正常代码，混淆杀毒软件的对恶意代码的识别能力，抓住这一点就能够很好的理解漏洞利用针对卡巴斯基所做的精心构造的技巧：</p>
 
@@ -332,13 +332,13 @@ void main()
 
 <h2>0x05 总结</h2>
 
-<hr />
+<hr>
 
 <p>本来自己想写一篇漏洞利于与卡巴斯基的对抗史，但是有些东西不能说的太细，很多细节在这里不能一一表述，最终就写成了这么一篇科普文，实乃一大憾事，以后会对此篇文章中的一些细节进行补充，大家见谅，废话很多，干货到一点没有。</p>
 
 <p>卡巴斯基是一款非常强大的杀毒软件，这一点毋庸置疑。漏洞利用与之对抗也促进了双方技术能力和水平的提高，让我等小菜打开眼界。</p>
 
-<p>路漫漫其修远兮，吾将上下而求索，谨以此句送给奋战在逆向第一线的各位朋友。</p>      </p>
+<p>路漫漫其修远兮，吾将上下而求索，谨以此句送给奋战在逆向第一线的各位朋友。</p>      <p></p>
     
 			</body>
 		</html>

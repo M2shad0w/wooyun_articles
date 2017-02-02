@@ -3,14 +3,14 @@
 			<head>
 			     <title>提起模糊测试时我们在说什么 - pr0mise</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/15572">http://drops.wooyun.org/tips/15572</a></h1>
 				
       <p>
-        <h1>0x00 基础知识</h1>
+        </p><h1>0x00 基础知识</h1>
 
-<hr />
+<hr>
 
 <h3>一:区分</h3>
 
@@ -18,14 +18,14 @@
 
 <p>1.白盒,又称透明盒测试,指我们清楚的了解程序的逻辑,获得设计思路,说明文档,源代码的情况下进行的测试.</p>
 
-<p>优点:准确率高,定位到可能存在的漏洞位置处,能清楚的看到前后逻辑.<br />
+<p>优点:准确率高,定位到可能存在的漏洞位置处,能清楚的看到前后逻辑.<br>
 缺点:过于复杂,在代码量巨大的情况下,手工寻找要付出相当的精力,网传winNt4.0泄露过源码,但并未出现因该次泄露而导致的漏洞.</p>
 
 <!--more-->
 
 <p>2.黑盒,又称功能测试,指在完全不了解内部信息的情况下进行碰撞测试</p>
 
-<p>优点:可用性、重现性高,完全针对功能的测试,不同于白盒,在源码中实现漏洞函数细节但并未调用的情况,编译器会优化掉这个函数,也就是这个功能并不可用.<br />
+<p>优点:可用性、重现性高,完全针对功能的测试,不同于白盒,在源码中实现漏洞函数细节但并未调用的情况,编译器会优化掉这个函数,也就是这个功能并不可用.<br>
 缺点:高误报,捕捉异常麻烦</p>
 
 <h3>二:fuzz的局限性</h3>
@@ -49,7 +49,7 @@ int main(int argc,char **argv){
 
 <h1>0x01 fuzz的各阶段</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>确定目标</li>
@@ -74,7 +74,7 @@ int main(int argc,char **argv){
 <p>简单协议通讯的数据在可打印字符范围内,人工可阅读,例如ftp、http协议</p>
 
 <pre><code>#!bash
-[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="81f3eeeef5c1f9e8f8e0efe6">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~]# nc www.xxx.com 80
+[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="81f3eeeef5c1f9e8f8e0efe6">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~]# nc www.xxx.com 80
 GET / HTTP/1.1
 Host: xxx.com
 Referrer: google.com
@@ -86,11 +86,11 @@ HTTP/1.1 200 OK
 
 <p>复杂如tcp/ip协议的NBNS,wireshark本身支持的协议比较多,或是本身公开或是逆向工程,将数据解析成肉眼可阅读的格式.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222500895582112.png" alt="test" /></p>
+<p><img src="../images_result/images/2016051222500895582112.png" alt="test"></p>
 
 <p>当面对复杂且闭源的协议,对其fuzz首要工作就是逆向工程,为此出现了内存形式的fuzz,直接在程序的内存空间里进行模糊测试</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222500924061210.png" alt="test" /></p>
+<p><img src="../images_result/images/2016051222500924061210.png" alt="test"></p>
 
 <p>有如上代码,无限循环接受请求,在内存空间定位到parse之前插入数据而不必关心数据在recv之前是如何封装的,缺陷就是漏洞场景可能无法重现</p>
 
@@ -100,7 +100,7 @@ HTTP/1.1 200 OK
 
 <p>流程图如下:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122250117817335.png" alt="test" /></p>
+<p><img src="../images_result/images/201605122250117817335.png" alt="test"></p>
 
 <p>本文以简单协议的ftp fuzz为例,瓶颈出现在发包过程中,要考虑server端的带宽和上游isp的响应速度,好在可以把server部署在本地.</p>
 
@@ -216,7 +216,7 @@ void test(){
 
 <p><code>python -m pydoc pydbg</code>或者<code>help(pydbg)</code>查看相关介绍.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122250138757745.png" alt="test" /></p>
+<p><img src="../images_result/images/201605122250138757745.png" alt="test"></p>
 
 <p>测试软件用的光刃前辈之前挖掘的"守望迷你ftp服务器"漏洞,测试exp:</p>
 
@@ -288,7 +288,7 @@ if __name__ == '__main__':
 
 <p>看效果:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122250156401555.png" alt="test" /></p>
+<p><img src="../images_result/images/201605122250156401555.png" alt="test"></p>
 
 <p>上面的utils模块的功能就是记录当前线程的状态,包括异常类型、上下文、异常地址、栈展开、seh链等</p>
 
@@ -388,15 +388,15 @@ SEH unwind:
 
 <p>首先查看是用的哪个dll的导出函数</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122250182824074.png" alt="test" /></p>
+<p><img src="../images_result/images/201605122250182824074.png" alt="test"></p>
 
 <p>这里可以看到用了ws2_32和wsock32,hook wsock32 recv</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122250201997882.png" alt="test" /></p>
+<p><img src="../images_result/images/201605122250201997882.png" alt="test"></p>
 
 <p>0x71A42E9E位置调用了ws2&#95;32的WSARecv函数,bp ws2&#95;32.WSARecv</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122250222660892.png" alt="test" /></p>
+<p><img src="../images_result/images/201605122250222660892.png" alt="test"></p>
 
 <p>查看数据包结尾标志,这里是'\x0D',读内存代码大致如下:</p>
 
@@ -429,31 +429,31 @@ int WSARecv(
 
 <p>断在WSARecv上</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222502390952102.png" alt="test" /></p>
+<p><img src="../images_result/images/2016051222502390952102.png" alt="test"></p>
 
 <p>lpOverlapped is null,那么就是说为阻塞式,可以直接hook</p>
 
 <p>跟踪recv</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222502598062113.png" alt="test" /></p>
+<p><img src="../images_result/images/2016051222502598062113.png" alt="test"></p>
 
 <p>在recv结束后ebx的值为BUFFER,缓冲区的数据会写入BUFFER指向的位置,所以在该api结束时callback即可</p>
 
 <p>func&#95;resolve&#95;debug获得地址,创建一个container容器,源码上有example:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/201605122250179685665.png" alt="test" /></p>
+<p><img src="../images_result/images/201605122250179685665.png" alt="test"></p>
 
 <p>hook参数格式:hook.add(pydbg实例,要钩住的api,地址,接受的参数数量,调用时的callback,结束时的callback)</p>
 
 <p>发包USER 1 PASS 1 APPE AAAAA效果如下:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222502660317122.png" alt="test" /></p>
+<p><img src="../images_result/images/2016051222502660317122.png" alt="test"></p>
 
 <p>现在加上发包行为,当程序溢出时,最后一个打印出来的包就是poc了</p>
 
 <p>发500长度数据包,hook recv,打印最后poc,然后覆盖缓冲区,触发异常,看效果:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160512/2016051222502853545132.png" alt="test" /></p>
+<p><img src="../images_result/images/2016051222502853545132.png" alt="test"></p>
 
 <p>现在需要做的就是在程序内内嵌一个发包动作了</p>
 
@@ -755,14 +755,14 @@ ftp didn't response
 
 <h1>0x02 参考文档</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>《模糊测试-强制发觉安全漏洞的利器》 </li>
 <li>《python灰帽子》 </li>
 <li><a href="http://pedramamini.com/PaiMei/heap_trace/hook_container.py">http://pedramamini.com/PaiMei/heap&#95;trace/hook&#95;container.py</a></li>
 <li><a href="http://bbs.pediy.com/showthread.php?t=151870">http://bbs.pediy.com/showthread.php?t=151870</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

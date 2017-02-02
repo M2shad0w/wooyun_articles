@@ -3,20 +3,20 @@
 			<head>
 			     <title>流量劫持攻击之链路劫持剖析 - an0nym0u5</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/13661">http://drops.wooyun.org/tips/13661</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>链路劫持属于流量劫持攻击的一种，在电商领域较为常见，网络上也有不少案例。本文作者将会结合公司实际发生的案例来简要剖析链路劫持有关技术。由于作者水平有限，见解浅显在所难免，望大牛勿喷，如有描述不当之处望各路看官批评指正。</p>
 
 <h1>0x01 劫持案例分析</h1>
 
-<hr />
+<hr>
 
 <h3>案例现象描述：</h3>
 
@@ -24,23 +24,23 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909346190018.jpg" alt="p1" /> 图1</p>
+<p><img src="../images_result/images/201603110909346190018.jpg" alt="p1"> 图1</p>
 
 <h3>案例问题追踪：</h3>
 
 <p>通过分析抓取的样本数据发现，数据包在传输过程中出现异常TTL，目标机的正常TTL为51如图2。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909405876225.jpg" alt="p2" /> 图2</p>
+<p><img src="../images_result/images/201603110909405876225.jpg" alt="p2"> 图2</p>
 
 <p>这里出现异常TTL值116和114，并且两个包的ID（Identification）值相同，均为25576，如图3和图4，明显是伪造的包。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909437300335.jpg" alt="p3" /> 图3</p>
+<p><img src="../images_result/images/201603110909437300335.jpg" alt="p3"> 图3</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909458275945.jpg" alt="p4" /> 图4</p>
+<p><img src="../images_result/images/201603110909458275945.jpg" alt="p4"> 图4</p>
 
 <p>另外服务器banner信息也发现了异常情况，公司提供的Server是Tengine的，网站编写语言是Asp.Net的，在响应头中应该能看到，而异常响应头部无此信息，如图5所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909479625955.jpg" alt="p5" /> 图5</p>
+<p><img src="../images_result/images/201603110909479625955.jpg" alt="p5"> 图5</p>
 
 <p>综上判断，中间链路发生了劫持。劫持者应该是利用在运营商内部的便利条件，在网关路由器上添加嗅探程序，嗅探明文HTTP请求数据包，拿到要劫持的数据包之后，马上给请求者返回HTTP response（302 到其他 url），导致用户无法访问正常URL。</p>
 
@@ -50,9 +50,9 @@
 
 <p>spm可以理解为跟踪引导成交效果数据的解决方案，可以用来评估某一个站点上某一频道的访问和点击效果，以及后续引导和成交情况。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909485120964.jpg" alt="p6" /> 图6</p>
+<p><img src="../images_result/images/201603110909485120964.jpg" alt="p6"> 图6</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909502000274.jpg" alt="p7" /> 图7</p>
+<p><img src="../images_result/images/201603110909502000274.jpg" alt="p7"> 图7</p>
 
 <h3>劫持影响：</h3>
 
@@ -68,20 +68,20 @@
 <li>京东：<a href="http://www.freebuf.com/vuls/62561.html">http://www.freebuf.com/vuls/62561.html</a></li>
 <li>唯品会：<a href="http://www.jianshu.com/p/0397a89057a9">http://www.jianshu.com/p/0397a89057a9</a></li>
 <li>Github：<a href="http://www.360doc.com/content/16/0208/02/6427260_533236263.shtml">http://www.360doc.com/content/16/0208/02/6427260_533236263.shtml</a></li>
-<li>新浪：<a href=" <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2015-0105146">WooYun: 新浪博客疑似被流量劫持攻击Github（目标纽约时报和某墙仓库）</a> "> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2015-0105146">WooYun: 新浪博客疑似被流量劫持攻击Github（目标纽约时报和某墙仓库）</a> </a></li>
-<li>搜狐：<a href=" <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2015-0105864">WooYun: 搜狐视频疑似流量劫持攻击Github</a> "> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2015-0105864">WooYun: 搜狐视频疑似流量劫持攻击Github</a> </a></li>
+<li>新浪：<a href=" <a target=" _blank"="">WooYun: 新浪博客疑似被流量劫持攻击Github（目标纽约时报和某墙仓库）</a> "> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2015-0105146">WooYun: 新浪博客疑似被流量劫持攻击Github（目标纽约时报和某墙仓库）</a> </li>
+<li>搜狐：<a href=" <a target=" _blank"="">WooYun: 搜狐视频疑似流量劫持攻击Github</a> "> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2015-0105864">WooYun: 搜狐视频疑似流量劫持攻击Github</a> </li>
 <li>百度：<a href="http://cn.nytimes.com/china/20150331/c31hack/">http://cn.nytimes.com/china/20150331/c31hack/</a>（需翻墙）</li>
 </ul>
 
 <h1>0x02 链路劫持概述</h1>
 
-<hr />
+<hr>
 
 <p>链路层劫持是指第三方（可能是运营商、黑客）通过在用户至服务器之间，植入恶意设备或者控制网络设备的手段，侦听或篡改用户和服务器之间的数据，达到窃取用户重要数据（包括用户密码，用户身份数据等等）的目的。链路层劫持最明显的危害就是帐号、密码被窃取。最常见的就是某些设备实现的对非法站点的访问拦截，以及一些地区运营商的网页植入广告行为。</p>
 
 <p>链路劫持的原理就是运营商（也可能是黑客）在用户访问网站的时候进行窃听，获取用户访问的目的ip后，然后以这个ip为source-ip冒充网站给用户响应，通常响应中会插入一段JS代码，这段代码可能会让用户去get一些非真实网站资源，最终可能造成真实页面被插入广告，被蒙层，甚至整页面被替换，严重影响用户体验以及企业形象。由于链路劫持可能通常发生在last-mile，而last-mile被运营商牢牢控住，所以这对监测以及解决问题带来了巨大的挑战。劫持原理大概如图8所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909532026983.jpg" alt="p8" /> 图8</p>
+<p><img src="../images_result/images/201603110909532026983.jpg" alt="p8"> 图8</p>
 
 <p>目前发现的TCP链路劫持攻击一般有两种形式：中断访问型（分为单向发包和双向发包）和替换页面型。</p>
 
@@ -91,7 +91,7 @@
 
 <h1>0x03 链路劫持判断依据</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><strong>TTL：</strong>表现为TCP 报的 TTL 不一致甚至抖动很大。一种情况是跟正常包的ttl相差明显，就像以上本案例中的那样；另一种情况是通过ttl来判断操作系统类型，进而间接判断数据包是否有异常。</li>
@@ -136,7 +136,7 @@ WIN7             TTL：64
 
 <h1>0x04 解决方案</h1>
 
-<hr />
+<hr>
 
 <p><strong>（1）HTTPS</strong></p>
 
@@ -154,11 +154,11 @@ WIN7             TTL：64
 
 <p>目前腾讯做的比较领先，有链路劫持检测的相关发明专利。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603110909561255693.jpg" alt="p9" /></p>
+<p><img src="../images_result/images/201603110909561255693.jpg" alt="p9"></p>
 
 <h1>0x05总结</h1>
 
-<hr />
+<hr>
 
 <p>链路层劫持较为底层，而且很多涉及运营商行为，所以不可能从根本上来防止（或者找到运营商，或者抓住黑客，当然运营商你是战胜不了的你懂得）。个人认为应对链路劫持一般可以考虑几个维度：业务层面、技术层面。所有的安全都是为业务服务的，在确保业务的前提下，做好安全防护措施。最重要的是技术层面加强有效检测、监控，包括对有关攻击技术的研究、对日志流量等数据的分析。当然，对企业来讲，我们只能够尽量做好自身，对于我们不可控的因素往往无能为力。总之，广域网一点都不安全，所以敏感信息传输一定要加密，还要高强度加密。</p>
 
@@ -166,7 +166,7 @@ WIN7             TTL：64
 
 <h1>0x06 参考文献</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>【1】：<a href="http://security.tencent.com/index.php/blog/msg/10">http://security.tencent.com/index.php/blog/msg/10</a></li>
@@ -175,7 +175,7 @@ WIN7             TTL：64
 <li>【4】：<a href="http://drops.wooyun.org/tips/127">http://drops.wooyun.org/tips/127</a></li>
 <li>【5】：<a href="http://blog.jobbole.com/78042/">http://blog.jobbole.com/78042/</a></li>
 <li>【6】：<a href="http://3.1415926.science/%E7%BC%96%E7%A8%8B%E7%AE%97%E6%B3%95/2015/08/02/libpcap%E6%A3%80%E6%B5%8B%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8A%AB%E6%8C%81/">http://3.1415926.science/%E7%BC%96%E7%A8%8B%E7%AE%97%E6%B3%95/2015/08/02/libpcap%E6%A3%80%E6%B5%8B%E9%93%BE%E8%B7%AF%E5%B1%82%E5%8A%AB%E6%8C%81/</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

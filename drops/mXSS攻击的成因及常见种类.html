@@ -3,14 +3,14 @@
 			<head>
 			     <title>mXSS攻击的成因及常见种类 - gainover</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/956">http://drops.wooyun.org/tips/956</a></h1>
 				
       <p>
-        <h2>0x00 译者的话</h2>
+        </p><h2>0x00 译者的话</h2>
 
-<hr />
+<hr>
 
 <p>本文原文是由国外大牛Mario Heiderich在2013年所写的一篇paper：mXSS attacks: attacking well-secured web-applications by using innerHTML mutations. 本人觉得此类mXSS攻击较为隐蔽，常规的XSS过滤器并不能防止此类攻击。在测试QQ空间日志中的确存在此类问题后，认为mXSS在WEB应用中还是存在较大的潜在危害，因此，决定将此文做一个翻译。但是，一来由于水平有限，仅能依靠自己浅薄的理解来大致的翻译一下，文中图片以及代码都是在自己的理解上加以重新阐述，也许这样更加易于读者掌握。如果英文较好的同学可自行阅读英文原版。二来，我个人仅注重“攻”的一部分，本文中我认为实用性不高的部分，以及如何防御此类攻击的大幅段落，我并未进行翻译，因而有需要的读者也需要自行去了解这些部分。不论如何，希望本文能够让国内的研究者们对mXSS有一个基本的了解。</p>
 
@@ -18,15 +18,15 @@
 
 <h2>0x01 简介</h2>
 
-<hr />
+<hr>
 
 <p>不论是服务器端或客户端的XSS过滤器，都认定过滤后的HTML源代码应该与浏览器所渲染后的HTML代码保持一致，至少不会出现很大的出入（图1）。然而，如果用户所提供的富文本内容通过javascript代码进入innerHTML属性后，一些意外的变化会使得这个认定不再成立：一串看似没有任何危害的HTML代码，将逃过XSS过滤器的检测，最终进入某个DOM节点的innerHTML中，浏览器的渲染引擎会将本来没有任何危害的HTML代码渲染成具有潜在危险的XSS攻击代码。随后，该段攻击代码，可能会被JS代码中的其它一些流程输出到DOM中或是其它方式被再次渲染，从而导致XSS的执行。 这种由于HTML内容进入innerHTML后发生意外变化（mutation，突变，来自遗传学的一个单词，大家都知道的基因突变，gene mutation），而最终导致XSS的攻击流程，被称为突变XSS（mXSS, Mutation-based Cross-Site-Scripting），整个流程的示意图见图2。从流程中不难看出，突变发生在XSS过滤流程之后，因此不论是服务器端还是客户端的XSS过滤器对这类攻击并不能进行有效的防御。</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022300123470806.png" alt="2014022300123470806.png" /></p>
+<p><img src="../images_result/images/2014022300123470806.png" alt="2014022300123470806.png"></p>
 
 <p>图1. XSS过滤所假设的前提</p>
 
-<p><img src="http://static.wooyun.org/201402/2014022300151189780.png" alt="2014022300151189780.png" /></p>
+<p><img src="../images_result/images/2014022300151189780.png" alt="2014022300151189780.png"></p>
 
 <p>图2. mXSS攻击流程</p>
 
@@ -97,7 +97,7 @@ document.getElementById("testb").innerHTML = html;
 
 <h2>0x02 反引号打破属性边界导致的 mXSS</h2>
 
-<hr />
+<hr>
 
 <p>该类型是最早被发现并利用的一类mXSS，于2007年被提出，随后被有效的修复，所以当前绝大多数用户的浏览器不会被此mXSS所影响。当时的利用代码如下：</p>
 
@@ -115,7 +115,7 @@ document.getElementById("testb").innerHTML = html;
 
 <h2>0x03 未知元素中的xmlns属性所导致的mXSS</h2>
 
-<hr />
+<hr>
 
 <p>一些浏览器不支持HTML5的标记，例如IE8，会将article，aside，menu等当作是未知的HTML标签。对于开发者来说，虽然是未知标签，但是我们还是可以通过设置这些标签的xmlns 属性，让浏览器知道这些未知的标签是的XML命名空间是什么。一般来说，在HTML中，指定这些未知标签的xmlns属性并没有任何意义，也不会改变它们在浏览器中的外观之流的东西。但是，这些被指定了xmlns属性的标签进入innerHTML后，被浏览器所渲染，就会发生一些变化，而这个变化被十分猥琐的用于了XSS。首先我们来看正常情况下设置xmlns的情况。</p>
 
@@ -141,7 +141,7 @@ document.getElementById("testb").innerHTML = html;
 &lt;img src=1 onerror=alert(1)//:pkav xmlns="urn:img src=1 onerror=alert(1)//"&gt;123&lt;/img src=1 onerror=alert(1)//:pkav&gt;
 </code></pre>
 
-<p>扩展：细心的同学也许会注意到，我们的代码中，并未闭合<pkav>标签。那么一个经常碰到的场景是：XSS过滤器会在解析HTML代码时，自动补全未闭合的标签。这样一来，就会出现下面的场景：</p>
+<p>扩展：细心的同学也许会注意到，我们的代码中，并未闭合<pkav>标签。那么一个经常碰到的场景是：XSS过滤器会在解析HTML代码时，自动补全未闭合的标签。这样一来，就会出现下面的场景：</pkav></p>
 
 <pre><code>#!html
 输入形式：
@@ -171,7 +171,7 @@ document.getElementById("testb").innerHTML = html;
 
 <h2>0x04 CSS中反斜线转义导致的mXSS</h2>
 
-<hr />
+<hr>
 
 <p>在CSS中，允许用\来对字符进行转义，例如：<code>property: 'v\61 lue'</code> 表示 <code>property:'value'</code>，其中61是字母a的ascii码（16进制）。\后也可以接unicode，例如：\20AC 表示 € 。正常情况下，这种转义不会有问题。但是碰上innerHTML后，一些奇妙的事情就发生了。看以下代码。</p>
 
@@ -199,7 +199,7 @@ document.getElementById("testb").innerHTML = html;
 
 <h2>0x05 CSS中双引号实体或转义导致的mXSS</h2>
 
-<hr />
+<hr>
 
 <p>接着上一部分，依然是CSS中所存在的问题，既然反斜线转义会被解码为它原本的形式，那么会出现下面这样一种情况。</p>
 
@@ -225,7 +225,7 @@ document.getElementById("testb").innerHTML = html;
 
 <h2>0x06 CSS属性名中的转义所导致的mXSS</h2>
 
-<hr />
+<hr>
 
 <p>前2部分都讲到的CSS属性值中的情况，如果CSS属性名中出现了反斜线转义，又会如何？见下面代码。</p>
 
@@ -255,7 +255,7 @@ document.getElementById("testb").innerHTML = html;
 
 <h2>0x07 Listing标签导致的mXSS</h2>
 
-<hr />
+<hr>
 
 <p>此外，在本文原作者的PPT中，还提到了一个<code>&lt;listing&gt;</code>标签导致的mXSS，大家理解上面的例子后，本例也较为简单。</p>
 
@@ -272,7 +272,7 @@ document.getElementById("testb").innerHTML = html;
 
 <h2>0x08 易于被mXSS攻击的Javascript代码</h2>
 
-<hr />
+<hr>
 
 <p>上面已经讲解了不同种类的mXSS，那么什么样的代码易于遭受mXSS攻击呢？根据图2中的mXSS流程，JS代码中，至少要将用户提供的内容放入DOM中两次，才会触发XSS攻击。原作者给出了以下代码场景：</p>
 
@@ -286,17 +286,17 @@ document.getElementById("testb").innerHTML = html;
 
 <h2>0x09 总结</h2>
 
-<hr />
+<hr>
 
-<p>原文中还有两类：非HTML文档中的实体突变以及HTML文档中的非HTML上下文的实体突变，本人觉得被实际应用的场景并不丰满，就不进行阐述了，有兴趣的研究者可以自行了解。 希望看过本文后，可以为大家提供一些思路性的东西。 如果你有此方面的意外发现，一定不要忘了与我分享：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="91f6f0f8fffee7f4e3d1e0e0bff2fefc">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>（欢迎邮箱xss来稿）。</p>
+<p>原文中还有两类：非HTML文档中的实体突变以及HTML文档中的非HTML上下文的实体突变，本人觉得被实际应用的场景并不丰满，就不进行阐述了，有兴趣的研究者可以自行了解。 希望看过本文后，可以为大家提供一些思路性的东西。 如果你有此方面的意外发现，一定不要忘了与我分享：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="91f6f0f8fffee7f4e3d1e0e0bff2fefc">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>（欢迎邮箱xss来稿）。</p>
 
 <h2>0x10 参考文献</h2>
 
-<hr />
+<hr>
 
 <p>1. Heiderich, M., Schwenk, J., Frosch, T., Magazinius, J., &amp; Yang, E. Z. (2013, November). mXSS attacks: attacking well-secured web-applications by using innerHTML mutations. In <em>Proceedings of the 2013 ACM SIGSAC conference on Computer &amp; communications security</em> (pp. 777-788). ACM.</p>
 
-<p>2. Heiderich, M. The innerHTML Apocalypse. <a href="http://www.slideshare.net/x00mario/the-innerhtml-apocalypse">http://www.slideshare.net/x00mario/the-innerhtml-apocalypse</a>. Security Research / Penetration Testing at Cure53 on Apr 25, 2013</p>      </p>
+<p>2. Heiderich, M. The innerHTML Apocalypse. <a href="http://www.slideshare.net/x00mario/the-innerhtml-apocalypse">http://www.slideshare.net/x00mario/the-innerhtml-apocalypse</a>. Security Research / Penetration Testing at Cure53 on Apr 25, 2013</p>      <p></p>
     
 			</body>
 		</html>

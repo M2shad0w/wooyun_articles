@@ -3,14 +3,14 @@
 			<head>
 			     <title>shellcode教程从新手到高手 - P3nro5e</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4225">http://drops.wooyun.org/tips/4225</a></h1>
 				
       <p>
-        <h1>0x00 介绍与工具安装</h1>
+        </p><h1>0x00 介绍与工具安装</h1>
 
-<hr />
+<hr>
 
 <p>在这个站点中的这套教程目的在于利用汇编代码来生成自己的shellcode，它将有希望地被包含在"Project Shellcode Development Framework"（shellcode 开发框架项目）中Windows shellcode和linux shellcode 的不同点是什么？</p>
 
@@ -124,7 +124,7 @@
 
 <h1>0x01 一段简明的shellcode</h1>
 
-<hr />
+<hr>
 
 <p>这个教程教你shellcoding的基础,包括</p>
 
@@ -150,7 +150,7 @@
   
   <p>arwin - win32 address resolution program - by steve hanna - v.01</p>
   
-  <p>./arwin <Library Name> <Function Name></p>
+  <p>./arwin <library name=""> <function name=""></function></library></p>
 </blockquote>
 
 <p>因此使用Arwin我们需要知道函数存在于哪个DLL中这通常将会是Kernel32.dll或User32.dll或ws2_32.dll;.</p>
@@ -326,7 +326,7 @@ func = (int (*)()) code;
 
 <h1>0x02 命令执行shellcode</h1>
 
-<hr />
+<hr>
 
 <p>这个教程不过是第一个教程的扩展教程;</p>
 
@@ -498,7 +498,7 @@ func = (int (*)()) code;
 
 <h1>0x03 消息框shellcode</h1>
 
-<hr />
+<hr>
 
 <p>这篇教程教你设计shellcode时的一些有用的技巧,例如教你加载库，动态定位windows函数,定义并找到字符串常量的地址,以及调用Windows函数的方法,这可以让你开始着手设计你自己的shellcode</p>
 
@@ -724,7 +724,7 @@ func = (int (*)()) code;
 
 <h1>0x04 生成函数Hash</h1>
 
-<hr />
+<hr>
 
 <p>在前面的教程中,总还有指向已经想调用的windows函数的硬编码地址.这阻碍了shellcode在多种不同的windows操作系统,服务包,甚至是不同的补丁程序级别上的执行</p>
 
@@ -954,7 +954,7 @@ func = (int (*)()) code;
 
 <p>你可以仅仅双击在教程1中已经下载好的zip文件开始使用OllyDbg调试器.一旦开始使用了，当你你想使用File菜单来打开shellcodetest.exe时,可以在例如:”C:\cygwin\home{username}\shellcode\lcc\shellcodetest.exe”这样的位置上找到它，你已经用OllyDbg打开了你的可执行程序,应该可以看到如下图所示的内容,它含有一些红色指针指向的内容.</p>
 
-<p><img src="http://static.wooyun.org/20141207/2014120718353780267.gif" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120718353780267.gif" alt="enter image description here"></p>
 
 <p>上图可以看到可执行程序已经被加载到OllyDbg中了.</p>
 
@@ -970,7 +970,7 @@ func = (int (*)()) code;
 
 <p>在这个教程中,我们将按下”Play”（或 F9）按钮来开始我们的程序.因为我们已经把”int 3”指令（断点）写入到了我们的shellcode中,调试器将在到达第一断点时停止执行.如下图所示:</p>
 
-<p><img src="http://static.wooyun.org/20141207/2014120718353855263.gif" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120718353855263.gif" alt="enter image description here"></p>
 
 <p>上图展示了我们的断点之一(int 3）</p>
 
@@ -982,17 +982,17 @@ func = (int (*)()) code;
 
 <p>如果你想再次开始执行程序,那么点击两下Play按钮（因为我们有两个断点).</p>
 
-<p><img src="http://static.wooyun.org/20141207/2014120718353879375.gif" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120718353879375.gif" alt="enter image description here"></p>
 
 <p>这次可以清楚地看到两个断点了.call指令在断点之前是”call compute_hash”指令.这个函数计算hash并把它压到栈上.你可以在”Stack Window”中看到它,也可以看到函数字符串(被计算出的函数hash）已经被压到了栈上.你需要记住的是栈就像是堆放起来的一副扑克牌.最后被压在栈上的”牌”是栈顶的第一个参数,也将会第一个从栈中弹出的.你也可以通过改变”esp”（扩展的栈指针）寄存器来控制栈顶.</p>
 
 <p>因此可以看到已经找到的第一个函数的字符串,它也已经被压入了栈中,同时对应的hash已经计算出来并压在了栈上.如果你现在点了两次Play你将看到下一个函数名和已经压入到栈中的hash.如果你继续这样做,应该开始看以下东西,如下所示：那是一个函数名表和hash(被定位在栈上的）</p>
 
-<p><img src="http://static.wooyun.org/20141207/2014120718353892571.gif" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120718353892571.gif" alt="enter image description here"></p>
 
 <p>如果你点击Play甚至可以来到函数名字表尾,同时程序将向下转移到表尾,正如图中所显示的三个断点那样.这可以让你明白完整的函数名列表和hash,如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20141207/2014120718353825247.gif" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120718353825247.gif" alt="enter image description here"></p>
 
 <p>恭喜！</p>
 
@@ -1008,7 +1008,7 @@ func = (int (*)()) code;
 
 <h1>0x05 动态shellcode</h1>
 
-<hr />
+<hr>
 
 <p>截至目前为止我们已经创建了包含已经硬编码的windows函数地址shellcode.硬编码的内存地址把shellcode限制在特定的windows，服务包甚至在可能的补丁程序级别环境下运行.</p>
 
@@ -1269,7 +1269,7 @@ GetCommand:
 
 <h1>0x06 端口绑定shellcode</h1>
 
-<hr />
+<hr>
 
 <p>这个教程提供了关于网络shellcode的介绍.这种shellcode示范了动态加载库，和在那些库中找到函数地址的方法.然后着手实现了”Port Bind”shellcode,它建立了一个用于监听的socket使远程攻击者与本地命令提示符相连接.</p>
 
@@ -1636,7 +1636,7 @@ exit_process:
 
 <h1>0x07 网络的介绍</h1>
 
-<hr />
+<hr>
 
 <p>这个教程使你的shellcode可以从受害者机器中反向和攻击者建立连接.这种shellcode和在前面的教程中绑定端口的shellcode很相似,带着一些相对小的改变允许你的shellcode反向连接到攻击者.攻击者的机器这次也将使用netcat来安装一个反向连接shellcode的监听器以便可以获取远程命令提示符.</p>
 
@@ -1987,7 +1987,7 @@ exit_process:
 
 <h1>0x08 使用MSF生成shellcode</h1>
 
-<hr />
+<hr>
 
 <p>Metasploit是一个开源的exploit框架,它为你提供了exploits的堆,也提供了协助你创建自己exploit的工具.它可以为不同目的和平台生成大范围的shellcode,同时可以自定义这些shellcode来攻击你的目标</p>
 
@@ -2019,11 +2019,11 @@ exit_process:
 
 <p>这在下图中有演示:</p>
 
-<p><img src="http://static.wooyun.org/20141207/2014120718353891237.gif" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120718353891237.gif" alt="enter image description here"></p>
 
 <p>在工具栏的顶部点击”Payloads”来获取Metasploit Web接口生成shellcode的特性.现在应该在下面的屏幕中看看可以生成的有效的payloads有哪些:</p>
 
-<p><img src="http://static.wooyun.org/20141207/2014120718353946070.gif" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120718353946070.gif" alt="enter image description here"></p>
 
 <p>我们想使用这个接口生成如下shellcode:</p>
 
@@ -2043,11 +2043,11 @@ exit_process:
 
 <p>如下所示，这里将使用默认选项</p>
 
-<p><img src="http://static.wooyun.org/20141207/2014120718353924720.gif" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120718353924720.gif" alt="enter image description here"></p>
 
 <p>如果你现在点击生成按钮,metasploit将生成你已经指明参数的shellcode.这应该类似于如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20141207/2014120718353939860.gif" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120718353939860.gif" alt="enter image description here"></p>
 
 <p>下面列出已经生成的shellcode;</p>
 
@@ -2142,7 +2142,7 @@ Output Types:
     Needs Admin: No
      Total size: 136
     Provided by:
-     Ramon de Carvalho Valle&lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4c3e2d2123220c3e253f293f292f393e25383562233e2b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+     Ramon de Carvalho Valle&lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4c3e2d2123220c3e253f293f292f393e25383562233e2b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
     Basic options:
     Name Current Setting Required Description
     ---- --------------- -------- -----------
@@ -2197,7 +2197,7 @@ Output Types:
      Total size: 113
     
     Provided by:
-     vlad902 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="45332924217c7577052228242c296b262a28">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+     vlad902 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="45332924217c7577052228242c296b262a28">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
     Basic options:
     Name Current Setting Required Description
     ---- --------------- -------- -----------
@@ -2227,9 +2227,9 @@ Output Types:
 
 <p>这在下图中已经示范了:</p>
 
-<p><img src="http://static.wooyun.org/20141207/2014120718353943281.gif" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120718353943281.gif" alt="enter image description here"></p>
 
-<p>恭喜！ 你已经使用Metasploit Exploit Framework 以不同的格式为四种不同平台的生成了四种不同类型的shellcode.</p>      </p>
+<p>恭喜！ 你已经使用Metasploit Exploit Framework 以不同的格式为四种不同平台的生成了四种不同类型的shellcode.</p>      <p></p>
     
 			</body>
 		</html>

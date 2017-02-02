@@ -3,14 +3,14 @@
 			<head>
 			     <title>Android Linker学习笔记 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12122">http://drops.wooyun.org/tips/12122</a></h1>
 				
       <p>
-        <h1>0x00 知识预备</h1>
+        </p><h1>0x00 知识预备</h1>
 
-<hr />
+<hr>
 
 <p>Linker是Android系统动态库so的加载器/链接器，要想轻松地理解Android linker的运行机制，我们需要先熟悉ELF的文件结构，再了解ELF文件的装入/启动，最后学习Linker的加载和启动原理。</p>
 
@@ -20,7 +20,7 @@
 
 <h1>0x01 so的加载和启动</h1>
 
-<hr />
+<hr>
 
 <p>我们知道如果一个APP需要使用某一共享库so的话，它会在JAVA层声明代码：</p>
 
@@ -853,7 +853,7 @@ void phdr_table_get_dynamic_section(const ElfW(Phdr)* phdr_table, size_t phdr_co
 
 <h1>0x02 开始执行so文件</h1>
 
-<hr />
+<hr>
 
 <p>上面的<code>find_library_internal</code>函数中的<code>soinfo_link_image</code>函数执行完后就返回到上层函数<code>find_library</code>中，然后进一步返回到<code>do_dlopen</code>函数：</p>
 
@@ -907,7 +907,7 @@ void soinfo::CallArray(const char* array_name UNUSED, linker_function_t* functio
 
 <p>首先是<code>init_array</code>节区的数据结构。该节中包含指针，这些指针指向了一些初始化代码。这些初始化代码一般是在main函数之前执行的。在C++程序中，这些代码用来运行静态构造函数。另外一个用途就是有时候用来初始化C库中的一些IO系统。使用IDA查看具有<code>init_array</code>节区的so库文件就可以找到如下数据：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160112/2016011210472471936113.jpg" alt="p1" /></p>
+<p><img src="../images_result/images/2016011210472471936113.jpg" alt="p1"></p>
 
 <p>这里共三个函数指针，每个指针指向一个函数地址。值得注意的是，上图中每个函数指针的值都加了1，这是因为地址的最后1位置1表明需要使得处理器由ARM转为Thumb状态来处理Thumb指令。将目标地址处的代码解释为Thumb代码来执行。</p>
 
@@ -927,7 +927,7 @@ void soinfo::CallFunction(const char* function_name UNUSED, linker_function_t fu
 }
 </code></pre>
 
-<p>至此，整个Android so的linker机制就分析完毕了！</p>      </p>
+<p>至此，整个Android so的linker机制就分析完毕了！</p>      <p></p>
     
 			</body>
 		</html>

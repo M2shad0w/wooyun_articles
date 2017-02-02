@@ -3,12 +3,12 @@
 			<head>
 			     <title>wechall mysql关卡题解 - 蓝蓝</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1321">http://drops.wooyun.org/papers/1321</a></h1>
 				
       <p>
-        <p>特别鸣谢 Random Debug Slipper 对我的无私帮助</p>
+        </p><p>特别鸣谢 Random Debug Slipper 对我的无私帮助</p>
 
 <p>PS:虽然是一份题解，但是其中某些题目的解法还有些不尽人意。如有更好的思路欢迎留言评论 :)</p>
 
@@ -16,7 +16,7 @@
 
 <h2>Training: MySQL I</h2>
 
-<hr />
+<hr>
 
 <p>最简单的注入情况，参数没有经过任何过滤就带入查询</p>
 
@@ -57,7 +57,7 @@ function auth1_onLogin(WC_Challenge $chall, $username, $password)
 
 <h2>MySQL Authentication Bypass II</h2>
 
-<hr />
+<hr>
 
 <p>比较基础的题目，和上一题不同，username password分开来验证。通常的利用方法是使用union构造已知MD5值的查询。</p>
 
@@ -109,7 +109,7 @@ function auth2_onLogin(WC_Challenge $chall, $username, $password)
 
 <h2>No Escape</h2>
 
-<hr />
+<hr>
 
 <p>一个投票的功能，使用<code>mysql_real_escape_string()</code> 对参数进行了过滤，不过并不需要绕过它，因为它并不会过滤重音符（backtick）</p>
 
@@ -147,7 +147,7 @@ function noesc_voteup($who)
 
 <h2>The Guestbook</h2>
 
-<hr />
+<hr>
 
 <p>一个留言本的程序，其中大部分参数都经过了过滤，但是IP地址直接带入insert语句，可以构造一个x-forwraded-for来实现注入</p>
 
@@ -184,7 +184,7 @@ function gbook_getIP()
 
 <h2>MD5.SALT</h2>
 
-<hr />
+<hr>
 
 <p>这道题是一道简单的注入，不过需要破解MD5，在网站上付费一下就可以了。</p>
 
@@ -199,7 +199,7 @@ function gbook_getIP()
 
 <h2>Addslashes</h2>
 
-<hr />
+<hr>
 
 <p>这题的参数使用了Addslashes()函数进行了过滤，使用双字节绕过即可。</p>
 
@@ -251,7 +251,7 @@ function asvsmysql_login($username, $password)
 
 <h2>Blinded by the light</h2>
 
-<hr />
+<hr>
 
 <p>盲注，参数没用经过过滤，猜测一个32位的hash，但是要求在128次之内猜解出来，使用二分即可。</p>
 
@@ -352,7 +352,7 @@ for ($i=0, $hash=''; $i&lt;32; ++$i) {
 
 <h2>Blinded by the lighter</h2>
 
-<hr />
+<hr>
 
 <p>这题和上题相同，只不过把次数减少成为33次</p>
 
@@ -390,7 +390,7 @@ function blightVuln($password)
 
 <h2>Light in the Darkness</h2>
 
-<hr />
+<hr>
 
 <p>上面两题的加强版，只允许2次查询。不过是返回错误信息的盲注。可以使用双查询报错。</p>
 
@@ -426,14 +426,14 @@ function blightVuln($password)
 <pre><code> '||(select min(@a:=1) from information_schema.tables group by concat(password,@a:=(@a+1)%2))||'
 </code></pre>
 
-<p>我当时设想出这样一种解法，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7490c9f292ecdb91fbe593fac491f8f191e4df92e8fd340c0c0c0c93eef09cdbd991fbd19df7c990ccf990c8ee9cd3d291fbe59ccbed90ccde160113">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d63f4f723f4b4896aeaeaeae304e79316c79304366337b4135565433685e3e69613e5a7d355654">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
+<p>我当时设想出这样一种解法，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7490c9f292ecdb91fbe593fac491f8f191e4df92e8fd340c0c0c0c93eef09cdbd991fbd19df7c990ccf990c8ee9cd3d291fbe59ccbed90ccde160113">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d63f4f723f4b4896aeaeaeae304e79316c79304366337b4135565433685e3e69613e5a7d355654">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
 
 <pre><code>' or (@lanlan:=password) or (select 1 from(select count(*),concat(@lanlan,floor(rand(0)*2))x from information_schema.tables group by x)a) -- 
 </code></pre>
 
 <h2>Are you blind?</h2>
 
-<hr />
+<hr>
 
 <p>这题也是一道盲注，可是不管对错返回的结果一样。可以使用order by报错的方法来盲注。</p>
 
@@ -470,7 +470,7 @@ function blightVuln(WC_Challenge $chall, $password, $attempt)
 
 <h2>Order By Query</h2>
 
-<hr />
+<hr>
 
 <p>这是一个在order by后面的注入，可以直接使用双查询报错来解决。也可以使用盲注的手法猜测。</p>
 
@@ -557,7 +557,7 @@ echo $hash;
 
 <h2>Table Names</h2>
 
-<hr />
+<hr>
 
 <p>猜测表名和数据库名的题目，直接查询information_schema即可</p>
 
@@ -651,9 +651,9 @@ require_once('challenge/html_foot.php');
 
 <h2>Credit Card Challenge Pwned!</h2>
 
-<hr />
+<hr>
 
-<p>这题描述特别长，看了半天就是发送一个页面给管理员，csrf+injection。</p>      </p>
+<p>这题描述特别长，看了半天就是发送一个页面给管理员，csrf+injection。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>RESTFUL API 安全设计指南 - xxlegend</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/9737">http://drops.wooyun.org/web/9737</a></h1>
 				
       <p>
-        <h1>0x01 REST API 简介</h1>
+        </p><h1>0x01 REST API 简介</h1>
 
-<hr />
+<hr>
 
 <p>REST的全称是REpresentational State Transfer，表示表述性无状态传输，无需session，所以每次请求都得带上身份认证信息。rest是基于http协议的，也是无状态的。只是一种架构方式，所以它的安全特性都需我们自己实现，没有现成的。建议所有的请求都通过https协议发送。RESTful web services 概念的核心就是“资源”。 资源可以用 URI 来表示。客户端使用 HTTP 协议定义的方法来发送请求到这些 URIs，当然可能会导致这些被访问的”资源“状态的改变。HTTP请求对应关系如下：</p>
 
@@ -31,7 +31,7 @@ DELETE      删除资源               http://xx.com/api/orders/123
 
 <h1>0x02 身份认证</h1>
 
-<hr />
+<hr>
 
 <p>身份认证包含很多种，有HTTP Basic，HTTP Digest，API KEY，Oauth，JWK等方式，下面简单讲解下：</p>
 
@@ -56,11 +56,11 @@ base64编码后：Basic YWRtaW46YWRtaW4=
 
 <p>client端：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151016/2015101611045213385client.png" alt="clint端" /></p>
+<p><img src="../images_result/images/2015101611045213385client.png" alt="clint端"></p>
 
 <p>server端：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151016/2015101611045762856server.png" alt="server端" /></p>
+<p><img src="../images_result/images/2015101611045762856server.png" alt="server端"></p>
 
 <p>client端向服务端注册，服务端给客户端发送响应的api&#95;key以及security&#95;key，注意保存不要泄露，然后客户端根据api&#95;key,secrity&#95;key,timestrap,rest_uri采用hmacsha256算法得到一个hash值sign，构造途中的url发送给服务端。</p>
 
@@ -76,11 +76,11 @@ base64编码后：Basic YWRtaW46YWRtaW4=
 
 <p>JWT 是JSON Web Token，用于发送可通过数字签名和认证的东西，它包含一个紧凑的，URL安全的JSON对象，服务端可通过解析该值来验证是否有操作权限，是否过期等安全性检查。由于其紧凑的特点，可放在url中或者 HTTP Authorization头中，具体的算法就如下图</p>
 
-<p><img src="http://static.wooyun.org//drops/20151016/2015101611045541381jwt.png" alt="jwt组成图" /></p>
+<p><img src="../images_result/images/2015101611045541381jwt.png" alt="jwt组成图"></p>
 
 <h1>0x03 授权</h1>
 
-<hr />
+<hr>
 
 <p>身份认证之后就是授权，根据不同的身份，授予不同的访问权限。比如admin用户，普通用户，auditor用户都是不同的身份。简单的示例：</p>
 
@@ -129,7 +129,7 @@ App::abort(403, 'Hourly request limit exceeded');
 
 <h1>0x07 错误处理</h1>
 
-<hr />
+<hr>
 
 <p>对于非法的，导致系统出错的等请求都进行记录，一些重要的操作，如登录，注册等都通过日志接口输出展示。有一个统一的出错接口，对于400系列和500系列的错误都有相应的错误码和相关消息提示，如401：未授权；403：已经鉴权，但是没有相应权限。如不识别的url:<code>{"result":"Invalid URL!"}</code>,错误的请求参数<code>{"result":"json format error"}</code>,不允许的方法：<code>{"result":"Method Not Allowed"}</code>，非法参数等。上面所说的都是单状态码，同时还有多状态码，表示部分成功，部分字符非法等。示例如下：</p>
 
@@ -159,13 +159,13 @@ Content-Length: XXXX
 
 <h1>0x08 重要ID不透明处理</h1>
 
-<hr />
+<hr>
 
 <p>在系统一些敏感功能上，比如/user/1123 可获取id=1123用户的信息，为了防止字典遍历攻击，可对id进行url62或者uuid处理，这样处理的id是唯一的，并且还是字符安全的。</p>
 
 <h1>0x09 其他注意事项</h1>
 
-<hr />
+<hr>
 
 <p>（1）请求数据，对于POST,DELETE方法中的数据都采用json格式，当然不是说rest架构不支持xml，由于xml太不好解析，对于大部分的应用json已经足够，近一些的趋势也是json越来越流行，并且json格式也不会有xml的一些安全问题，如xxe。使用json格式目前能防止扫描器自动扫描。</p>
 
@@ -177,7 +177,7 @@ Content-Length: XXXX
 
 <p>（5）存储安全，重要信息加密存储，如认证信息hash保存。</p>
 
-<p>总之，尽量使用SSL。</p>      </p>
+<p>总之，尽量使用SSL。</p>      <p></p>
     
 			</body>
 		</html>

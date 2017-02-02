@@ -3,14 +3,14 @@
 			<head>
 			     <title>Android Bound Service攻击 - 小荷才露尖尖角</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/13676">http://drops.wooyun.org/mobile/13676</a></h1>
 				
       <p>
-        <h1>0x00 引子</h1>
+        </p><h1>0x00 引子</h1>
 
-<hr />
+<hr>
 
 <p>去年12月，【1】 讲述了针对android bound service的攻击方法，给出了从apk包中恢复AIDL文件的工具，利用AIDL便可以编写攻击Bound Service的Client。拜这篇文章所赐，笔者也在实际测试工作中发现了类似漏洞，其中的过程却有些曲折。作为白帽子，通常情况下很难直接得到或者恢复AIDL文件，这决定了Bound Service的易守难攻，因此需要更加系统地掌握Bound Sercive的测试方法，并辅以耐心和一定的运气，才能发现类似的漏洞。在【1】的基础上，本文将分享此类漏洞的经验，进一步对Bound Service攻击进行说明。</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 Bound Service简介</h1>
 
-<hr />
+<hr>
 
 <p>Bound Service提供了一种基于Binder的跨进程调用(IPC)机制，在其Service类中实现OnBind方法并返回用于IPC的IBinder对象。根据官方文档【2】，实现Bound Service有以下三种方式：</p>
 
@@ -32,7 +32,7 @@
 
 <h1>0x02 攻击Messenger</h1>
 
-<hr />
+<hr>
 
 <p>Messenger是一种轻量级的IPC方案，其底层实现也是基于AIDL的，从android.os.Messenger的两个构造函数可以看到一些Binder的痕迹。</p>
 
@@ -40,7 +40,7 @@
     /**
 36     * Create a new Messenger pointing to the given Handler.  Any Message
 37     * objects sent through this Messenger will appear in the Handler as if
-38     * <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1d665d71747376">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> Handler#sendMessage(Message) Handler.sendMessage(Message)} had
+38     * <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1d665d71747376">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> Handler#sendMessage(Message) Handler.sendMessage(Message)} had
 39     * been called directly.
 40     *
 41     * @param target The Handler that will receive sent messages.
@@ -50,7 +50,7 @@
 45    }
     /**
 140     * Create a Messenger from a raw IBinder, which had previously been
-141     * retrieved with <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2a516a46434441">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> #getBinder}.
+141     * retrieved with <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2a516a46434441">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> #getBinder}.
 142     *
 143     * @param target The IBinder this Messenger should communicate with.
 144     */
@@ -155,11 +155,11 @@ Got a reply from com.mwr.example.sieve/com.mwr.example.sieve.AuthService:
 
 <h1>0x03 攻击基于AIDL的Bound Service</h1>
 
-<hr />
+<hr>
 
 <p>文献【1】给出了一个存在命令执行漏洞的Bound Service，并根据Bound Service的apk生成AIDL接口文件，编写攻击程序调用Bound Service中的命令执行方法。然而，在使用中发现生成AIDL文件的工具主要根据smali文件中的Stub.Proxy类进行抓取，而当apk进行了混淆，便不能正确生成AIDL文件了。例如，我们配置build.gradle中的minifyEnabledtrue开关为true，使用Android Studio的默认混淆规则。对混淆的apk与未混淆的apk使用JEB逆向对比如下</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/2016031110111067893118.png" alt="image" /></p>
+<p><img src="../images_result/images/2016031110111067893118.png" alt="image"></p>
 
 <p>混淆后的apk少了许多有关AIDL的信息，没有了Stub Proxy这些特征，致使如下代码实现的GenerateAIDL工具出错</p>
 
@@ -176,7 +176,7 @@ if (stubProxyDef == null) {
 }
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160311/2016031110111291829216.png" alt="image" /></p>
+<p><img src="../images_result/images/2016031110111291829216.png" alt="image"></p>
 
 <p>由于AIDL文件本质上只是SDK为我们提供的一种快速实现Binder的工具，因此完全可以不依赖AIDL文件而实现Binder的方法，这也是在实际渗透测试过程中最常见的情况。下面我们结合有漏洞混淆后的apk进行说明。</p>
 
@@ -312,17 +312,17 @@ public void onServiceConnected(ComponentName name, IBinder service) {
 
 <p>攻击效果如下</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/2016031110111445780316.png" alt="image" /></p>
+<p><img src="../images_result/images/2016031110111445780316.png" alt="image"></p>
 
 <p>至此，就完成了不依赖于AIDL文件攻击Bound Service的过程。</p>
 
 <h1>0x05 攻击已注册的系统服务</h1>
 
-<hr />
+<hr>
 
 <p>通过adb shell service list可以查看在context manager（或servicemanager）中注册的系统服务名称和IBinder接口。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160311/201603111011169397646.png" alt="image" /></p>
+<p><img src="../images_result/images/201603111011169397646.png" alt="image"></p>
 
 <p>这些服务也暴露了潜在的攻击面，可以编写客户端程序通过服务名获得Binder对象的引用，进而调用服务的功能或者传入污染的数据。</p>
 
@@ -338,7 +338,7 @@ sp&lt;IDemo&gt; ServiceName = interface_cast&lt;IDemo&gt;(binder);
 
 <h1>0x06 防御</h1>
 
-<hr />
+<hr>
 
 <p>除了在Manifest文件中对暴露的Service增加Signature的保护级别外，Binder还提供了更为灵活的验证方式</p>
 
@@ -350,14 +350,14 @@ sp&lt;IDemo&gt; ServiceName = interface_cast&lt;IDemo&gt;(binder);
 
 <h1>0x07 参考文献</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>【1】：<a href="http://blog.thecobraden.com/2015/12/attacking-bound-services-on-android.html?m=1">http://blog.thecobraden.com/2015/12/attacking-bound-services-on-android.html?m=1</a></li>
 <li>【2】：<a href="http://developer.android.com/guide/components/bound-services.html">http://developer.android.com/guide/components/bound-services.html</a></li>
 <li>【3】：The Mobile Application Hackers Handbook</li>
 <li>【4】：<a href="http://ebixio.com/blog/2012/07/07/using-android-ipc-binders-from-native-code/">http://ebixio.com/blog/2012/07/07/using-android-ipc-binders-from-native-code/</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

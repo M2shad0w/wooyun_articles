@@ -3,12 +3,12 @@
 			<head>
 			     <title>PHP漏洞挖掘思路+实例 - lxj616</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/838">http://drops.wooyun.org/tips/838</a></h1>
 				
       <p>
-        <p>最近研究PHP漏洞的挖掘，总结了一些我挖到的漏洞，整理了一下思路，求各路神人补充、批评、指导~</p>
+        </p><p>最近研究PHP漏洞的挖掘，总结了一些我挖到的漏洞，整理了一下思路，求各路神人补充、批评、指导~</p>
 
 <p>本文所有示例均来自我在乌云上已由厂商允许公开的漏洞</p>
 
@@ -18,7 +18,7 @@
 
 <h2>0x01:  搜索所有的用户可控变量（GET/POST/COOKIE/referer）</h2>
 
-<hr />
+<hr>
 
 <p>原因：所有用户输入都是有害的，代码审计注重函数和变量，先看看在什么地方会有输入</p>
 
@@ -116,7 +116,7 @@ $id=trim($_GET["id"]);  //呵呵呵，曲项向天歌，CS_Request哭了
 
 <h2>0x02：单独搜索$_COOKIE，分析身份认证时的逻辑</h2>
 
-<hr />
+<hr>
 
 <p>原因：身份验证属于业务逻辑中“高危”的部分，大部分的高危漏洞都出在这里</p>
 
@@ -147,7 +147,7 @@ $id=trim($_GET["id"]);  //呵呵呵，曲项向天歌，CS_Request哭了
 
 <h2>0x03：搜索所有的文件操作函数，分析其逻辑</h2>
 
-<hr />
+<hr>
 
 <p>原因：文件操作函数属于敏感函数，往往业务逻辑上的漏洞可能导致任意文件操作</p>
 
@@ -193,7 +193,7 @@ die('image not find');
 
 <h2>0x04：爆物理目录</h2>
 
-<hr />
+<hr>
 
 <p>原因：上一小节我们可能能够任意操作文件，但没拿到网站的物理目录地址，的确可以用黑盒不停地试图读取 c:\boot.ini 和 /etc/passwd 之类的来试图判断，但是这么弄实在不可靠</p>
 
@@ -205,7 +205,7 @@ die('image not find');
 
 <h2>0x05：搜索eval，preg_replace什么的，看看有没有命令执行</h2>
 
-<hr />
+<hr>
 
 <p>原因：能直接执行PHP代码，也就是说可以写一句话木马了（file&#95;put&#95;contents），当然，要找可写目录</p>
 
@@ -213,7 +213,7 @@ die('image not find');
 
 <h2>0x06：可以开始通读代码了，从index开始，注意的是数据的传输和输出函数</h2>
 
-<hr />
+<hr>
 
 <p>原因：常见模式化的漏洞都不存在的话，就要分析整个系统了，因此需要完全而彻底地去做审计，这样比继续单独搜索变量然后跟踪更加省力一些</p>
 
@@ -235,9 +235,9 @@ die('image not find');
 
 <h2>0x07 总结</h2>
 
-<hr />
+<hr>
 
-<p>目前我就知道这么些，希望能对刚接触PHP代码审计漏洞挖掘的新手有点帮助，由于我也是刚开始学习PHP漏洞挖掘不久，希望大家能广泛提供学习的建议以及思路，也请批评指正文章中不妥之处，更希望高手们能带着示例来指导。</p>      </p>
+<p>目前我就知道这么些，希望能对刚接触PHP代码审计漏洞挖掘的新手有点帮助，由于我也是刚开始学习PHP漏洞挖掘不久，希望大家能广泛提供学习的建议以及思路，也请批评指正文章中不妥之处，更希望高手们能带着示例来指导。</p>      <p></p>
     
 			</body>
 		</html>

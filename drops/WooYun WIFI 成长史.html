@@ -3,18 +3,18 @@
 			<head>
 			     <title>WooYun WIFI 成长史 - lxj616</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3248">http://drops.wooyun.org/tips/3248</a></h1>
 				
       <p>
-        <h1>第一章：失传的菠萝神话</h1>
+        </p><h1>第一章：失传的菠萝神话</h1>
 
-<hr />
+<hr>
 
 <h2>0x00 前言:</h2>
 
-<hr />
+<hr>
 
 <p>WooyunWifi是一款基于Openwrt开发的无线审计测试固件，内置集成了众多著名无线/网络审计工具，并基于Ngrep+sslstrip开发了原创工具及BS架构管理界面。 本系列文章将详细讲解 无线安全、网络安全、嵌入式开发、前端Bootstrap界面设计、后台PHP程序设计、Shell Script编写、C语言有限自动机设计、Python网络编程、Linux高级命令、路由器常识概念 等相关内容</p>
 
@@ -24,7 +24,7 @@
 
 <h2>0x01 菠萝神话：</h2>
 
-<hr />
+<hr>
 
 <p>由于wifi pineapple支持的路由器有限（事实上除了它自己销售的那一款，其他的路由器都没办法完全正常运行），因此网上出现了各种“移植”的教程，只为一睹神器真容，然而多数人最终失败，少数人在付出了巨大代价后才勉强成功。 Wifi pineapple自称开源，但事实上并非如此，其公开的源代码陈旧而混乱，也没有充足的文档以供分析。 菠萝神话已经失传，只剩国外垄断销售的黑客路由器与一群心怀不轨的购买者，技术研究的气氛 和 自由公开的精神 早已不见了踪影。 如果你真的好奇大菠萝到底是怎样实现的，如果你真的想看到确凿的技术细节，那么跟我来体验一把求真求实、自由共享的乌云白帽“安全实践”吧 注：根据有关法律法规，我们正在仔细评估并设计该固件的”安全使用”限制，尽管遵守GPL协议，在”安全使用”评估设计完成之前不会公开源代码，也不会向公众发布固件。</p>
 
@@ -32,11 +32,11 @@
 
 <h2>0x02 架构设计：</h2>
 
-<hr />
+<hr>
 
 <p>先展示一下WooyunWifi的架构图（Wooyun Wifi简称Woofi）：</p>
 
-<p><img src="http://static.wooyun.org/20141019/2014101912594821522.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014101912594821522.png" alt="enter image description here"></p>
 
 <p>1、 PHP+Bootstrap的组合大家已经在乌云靶场项目中见过了，不过由于路由器环境限制和开源工具数据存储特性，经过考虑不使用Mysql数据库存储数据，直接使用文本方式保存数据内容。</p>
 
@@ -50,7 +50,7 @@
 
 <h2>0x03 实现方案的演变：</h2>
 
-<hr />
+<hr>
 
 <p>在我还没有开始设计之前，我考虑过几种实现方案</p>
 
@@ -64,7 +64,7 @@
 
 <p>发生这种情况一方面是由于预研不到位，以及SE对技术难度的预判有误，而导致项目规划和实际执行严重错位，这么巨大的技术难度偏差很可能导致项目流产。 那么这个项目是怎么来的呢？那就要从2014/7/30的下午说起……</p>
 
-<p>社区里小伙伴发了个思想无比前卫的帖子：Anymous《<a href="http://zone.wooyun.org/content/14162">设想wooyun智能路由改造openwrt</a>》 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="af4a263e4a102c4a0b084b1515ef4b152948312348320e4611364a0b084b1515">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，瞌睡龙大人把这个光荣的任务交给了我，我当时想了一下答道：“如果只是改改大菠萝源代码，不会很难” 事实证明，我在没有预研的情况下错判了项目技术难度，看来还有好多的东西要学~</p>
+<p>社区里小伙伴发了个思想无比前卫的帖子：Anymous《<a href="http://zone.wooyun.org/content/14162">设想wooyun智能路由改造openwrt</a>》 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="af4a263e4a102c4a0b084b1515ef4b152948312348320e4611364a0b084b1515">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，瞌睡龙大人把这个光荣的任务交给了我，我当时想了一下答道：“如果只是改改大菠萝源代码，不会很难” 事实证明，我在没有预研的情况下错判了项目技术难度，看来还有好多的东西要学~</p>
 
 <p><strong>感想：</strong></p>
 
@@ -72,7 +72,7 @@
 
 <h2>0x04 工具原理：</h2>
 
-<hr />
+<hr>
 
 <p>1、 嗅探使用ngrep+自己写的C语言自动机，以及sslstrip+自己写的C语言自动机</p>
 
@@ -86,13 +86,13 @@
 
 <p>首先Karma需要建立一个能够用来劫持用户的AP（比如说利用hostapd），然后对hostapd源码进行patch，使之可以无视请求中的ssid提供服务</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102002282025138.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014102002282025138.png" alt="enter image description here"></p>
 
 <p>（默认情况下，若ssid不一致，hostapd会报告异常，因此为了实现karma功能需要hostapd去除ssid检查）</p>
 
 <p>部分重要patch如下：</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102002282065428.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014102002282065428.png" alt="enter image description here"></p>
 
 <p>即如果karma&#95;beacon&#95;respond选项开启则无视ssid的检查，补丁原作者在截图中有显示，我只是把他的针对hostapd 2.0补丁重新做到了hostapd最新版20140603上而已</p>
 
@@ -108,7 +108,7 @@
 
 <h2>0x05 Luci的简要分析：</h2>
 
-<hr />
+<hr>
 
 <p>我们使用Openwrt自己的Luci进行常规功能的管理，因为Luci自己的功能其实是很强大的。我曾经一度想要在Luci之上开发我们的WooyunWifi WEB界面，但是由于cgi和lua脚本都比较陌生，所以为了敏捷开发，还是选择了PHP 请注意：部分Openwrt版本的Luci不支持网络中继功能（就是作为client连接一个Wifi然后再作为AP播出一个Wifi），我选择的最新barrier_breaker是有这个功能的 另外，Luci依赖uhttpd，因此正好PHP也放在uhttpd上了</p>
 
@@ -116,17 +116,17 @@
 
 <h2>0x06 投影至乌云峰会irc上：</h2>
 
-<hr />
+<hr>
 
 <p>这个是临时功能，为了乌云峰会设计的，从各种sniff中posturl到服务端，然后fate0在瞌睡龙大人的weechat里做了个python插件，我只是post数据，没有实际参与，因此不知道相关细节。 展示出的代码中没有该功能</p>
 
 <h1>第二章：路由器的先天技能</h1>
 
-<hr />
+<hr>
 
 <h2>0x00 前言:</h2>
 
-<hr />
+<hr>
 
 <blockquote>
   <p>本章概括了WooyunWifi基于Openwrt的源码编译及集成方式。</p>
@@ -167,11 +167,11 @@
 
 <p>进行配置</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102007151784128.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014102007151784128.png" alt="enter image description here"></p>
 
 <p>第一项是目标芯片型号，不知道自己路由器芯片型号的Google去吧，第二项选项是NAND什么的设置视情况选择，第三项是你的路由器型号，我这里选择了极路由，只有在选对了芯片类型后才会可选，其它选项都比较易懂，如果用到再说</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102002282122997.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014102002282122997.png" alt="enter image description here"></p>
 
 <p>选择编译的软件包时，星号代表编译进固件，M代表编译安装包但不放进固件，内置某些软件包时会自动选中依赖项</p>
 
@@ -199,7 +199,7 @@
 
 <h2>0x02 开源工具的评测：</h2>
 
-<hr />
+<hr>
 
 <p>1、 Ngrep：之所以不使用tcpdump是因为ngrep提供了更简便的数据处理和输出，运行时很稳定，用它开发了cookiesniff、passsniff、mailsniff等工具</p>
 
@@ -217,7 +217,7 @@
 
 <h2>0x03 fate0修复sslstrip：</h2>
 
-<hr />
+<hr>
 
 <p>使用sslstrip的时候报错：</p>
 
@@ -249,17 +249,17 @@ elif (key.lower() == 'set-cookie'):
 
 <h2>0x04 制作修复后的sslstrip软件包：</h2>
 
-<hr />
+<hr>
 
 <p>修改sslstrip的Makefile，改为从本地下载（我搭了个nginx），别忘改md5校验哦</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102002282286694.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014102002282286694.png" alt="enter image description here"></p>
 
 <p>然后把修复后的ServerConnection.py打进压缩包，放在自己nginx即可</p>
 
 <h2>0x05 制作自己的软件包：</h2>
 
-<hr />
+<hr>
 
 <p>请优先参阅官方文档</p>
 
@@ -290,7 +290,7 @@ define Package/wooyunwifi/description
  Wooyun Wifi is a whitehat wifi auditing toolsuite based
  on Openwrt , Have fun testing security issues on your 
  own wifi network ,serves study purpose only, license GPL
-                                    ------ <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9df1e5f7abacabddeaf2f2e4e8f3">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+                                    ------ <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9df1e5f7abacabddeaf2f2e4e8f3">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 endef
 
 define Build/Prepare
@@ -341,11 +341,11 @@ $(eval $(call BuildPackage,wooyunwifi))
 
 <h1>第三章：路由器的漂亮界面</h1>
 
-<hr />
+<hr>
 
 <h2>0x00 前言:</h2>
 
-<hr />
+<hr>
 
 <blockquote>
   <p>本章概括了WooyunWifi的WEB端功能实现。</p>
@@ -353,15 +353,15 @@ $(eval $(call BuildPackage,wooyunwifi))
 
 <h2>0x01 PHP：</h2>
 
-<hr />
+<hr>
 
 <p>我曾经考虑，可不可以只用html+cgi实现所有的功能，但考虑到WEB管理的业务需求比较宽松，因此采用PHP敏捷开发更加快速。 Menuconfig时，额外选择<code>language – PHP – php-mod-session</code>用作登录控制，同理可集成其它所需插件 为了使uhttpd支持PHP，修改<code>package/network/services/uhttpd/files/uhttpd.config</code> 去掉<code>list interpreter php</code> 的注释符号，其它配置同理</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102002282219283.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014102002282219283.png" alt="enter image description here"></p>
 
 <p>以sslstrip插件的设计为例进行说明</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102002282243021.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014102002282243021.png" alt="enter image description here"></p>
 
 <pre><code>/WooyunWifi/sslstrip.inc
 
@@ -425,15 +425,15 @@ kill $(ps|grep "php-cgi"|awk '{print $1}') &amp;
 
 <h2>0x02 Bootstrap前端设计：</h2>
 
-<hr />
+<hr>
 
 <p><a href="http://www.layoutit.com/build?r=35144450">在线</a>画了个框架，然后放在路由器上一边vi一边刷新浏览器</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102002282337431.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014102002282337431.png" alt="enter image description here"></p>
 
 <h2>0x03 MITM功能设计：</h2>
 
-<hr />
+<hr>
 
 <p>因为这个功能主要是在应用层实现的，而且和WEB相关协议联系比较密切，所以放在WEB层来探讨这个问题。 首先我们来分析一下解决这个功能的可选方案：</p>
 
@@ -476,17 +476,17 @@ kill $(ps|grep "php-cgi"|awk '{print $1}') &amp;
 
 <p>感想：写一句代码只需要一分钟，但知道这行代码写在哪需要一天</p>
 
-<p><img src="http://static.wooyun.org/20141020/2014102002282353850.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014102002282353850.png" alt="enter image description here"></p>
 
 <p>既然WEB控制端设计好了，开始做model层的数据处理工具吧！</p>
 
 <h1>第四章：路由器的数据处理</h1>
 
-<hr />
+<hr>
 
 <h2>0x00 前言:</h2>
 
-<hr />
+<hr>
 
 <blockquote>
   <p>本章概括了WooyunWifi的model层数据处理功能实现。</p>
@@ -494,7 +494,7 @@ kill $(ps|grep "php-cgi"|awk '{print $1}') &amp;
 
 <h2>0x01 交叉编译：</h2>
 
-<hr />
+<hr>
 
 <p>我们在本地编译一个Linux程序：</p>
 
@@ -517,7 +517,7 @@ kill $(ps|grep "php-cgi"|awk '{print $1}') &amp;
 
 <h2>0x02 数据交互：</h2>
 
-<hr />
+<hr>
 
 <p>实例说明：</p>
 
@@ -543,12 +543,12 @@ tail -f ${1}/sslstrip.log|stripsslstrip &amp;
 
 <h2>0x03 自动机设计：</h2>
 
-<hr />
+<hr>
 
 <p>以passsniff为例介绍C语言自动机设计：</p>
 
 <pre><code>/*
-    code by <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f4988c9ec2c5c2b4839b9b8d819a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+    code by <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f4988c9ec2c5c2b4839b9b8d819a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 */
 #include &lt;stdlib.h&gt;
 #include &lt;errno.h&gt;
@@ -694,7 +694,7 @@ int main()
 
 <h2>0x04 为什么不用python：</h2>
 
-<hr />
+<hr>
 
 <p>字符处理，还是python方便，但是我们真的很需要“效率”，无论是从内存占用还是数据包延迟来说，C语言仍然占据了不可替代的优势（其实也没那么悬殊，只不过自动机程序比较简单，因此对C熟练的话不会很吃力） 还有一个重要的原因是：当初我以为会涉及到kernel的数据包修改，后来写完自动机才发现原来想多了，所以C语言反倒只用来写了几个自动机，唉……</p>
 
@@ -709,7 +709,7 @@ iptables -t nat -A POSTROUTING -p tcp -d 192.168.16.134 --dport 8029 -j MASQUERA
 
 <p>由此一方面可以将流量重定向到自己的proxy上（是transparrent proxy），也可以直接转发到其他ip（如burpsuite）</p>
 
-<p>至此，WooyunWifi设计完成，大家可能会觉得“哇，还是很简单的嘛”，如果大家真的打算试一下全过程，请务必要看《WooyunWifi 第五章：十万个变砖方法》</p>      </p>
+<p>至此，WooyunWifi设计完成，大家可能会觉得“哇，还是很简单的嘛”，如果大家真的打算试一下全过程，请务必要看《WooyunWifi 第五章：十万个变砖方法》</p>      <p></p>
     
 			</body>
 		</html>

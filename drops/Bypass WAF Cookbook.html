@@ -3,16 +3,16 @@
 			<head>
 			     <title>Bypass WAF Cookbook - MayIKissYou</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7883">http://drops.wooyun.org/tips/7883</a></h1>
 				
       <p>
-        <p><strong>PS</strong>.之前一直想把零零碎碎的知识整理下来，作为知识沉淀下来，正好借着wooyun峰会的机会将之前的流程又梳理了一遍，于是就有了下文。也希望整理的内容能给甲方工作者或则白帽子带来一些收获。</p>
+        </p><p><strong>PS</strong>.之前一直想把零零碎碎的知识整理下来，作为知识沉淀下来，正好借着wooyun峰会的机会将之前的流程又梳理了一遍，于是就有了下文。也希望整理的内容能给甲方工作者或则白帽子带来一些收获。</p>
 
 <h1>0x00 概述</h1>
 
-<hr />
+<hr>
 
 <p>随着网络安全越来越受到重视，发展越来越快。随之也出现了越来越多的安全防护的软件。例如有：</p>
 
@@ -34,7 +34,7 @@
 
 <h1>0x01 WAF 在哪里</h1>
 
-<hr />
+<hr>
 
 <p>这里我就用’WAF’来代替上面所说的一些防护软件，我们需要知道这些WAF都在网络空间的哪些位置。</p>
 
@@ -44,7 +44,7 @@
 
 <p>如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292360563.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292360563.png" alt="enter image description here"></p>
 
 <p>画了一个简单的拓扑图。</p>
 
@@ -52,7 +52,7 @@
 
 <h1>0x02 WAF 数据处理</h1>
 
-<hr />
+<hr>
 
 <p>在明白了各种防护软件在网络环境下的拓扑之后，现在了解一下基础数据的流量与相关设备的基本处理。</p>
 
@@ -70,7 +70,7 @@
 
 <h1>0x03 WAF BYPASS的理解</h1>
 
-<hr />
+<hr>
 
 <p><strong>在我自己看来，所谓的BYPASS WAF实际上是去寻找位于WAF设备之后处理应用层数据包的硬件/软件的特性。利用特性构造WAF不能命中，但是在应用程序能够执行成功的载荷，绕过防护。</strong></p>
 
@@ -94,7 +94,7 @@
 
 <h1>0x04 Bypass WAF 姿势</h1>
 
-<hr />
+<hr>
 
 <h3>1 Web Server层 bypass</h3>
 
@@ -114,7 +114,7 @@
 
 <p>本地搭建<code>asp+iis</code>环境测试，测试效果如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292390683.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292390683.png" alt="enter image description here"></p>
 
 <p>Ps.此处猜测可能是iis下<code>asp.dll</code>解析时候的问题，<code>aspx+iis</code>的环境就没有这个特性。</p>
 
@@ -128,13 +128,13 @@
 
 <p>测试效果如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292367241.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292367241.png" alt="enter image description here"></p>
 
 <h6>（2）aspx+iis的环境</h6>
 
 <p>测试效果如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292365457.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292365457.png" alt="enter image description here"></p>
 
 <h5>3 另类%u特性</h5>
 
@@ -158,7 +158,7 @@ s%u00f0lect-&gt;select
 
 <p>测试效果如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292363822.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292363822.png" alt="enter image description here"></p>
 
 <p>Ps.该漏洞的利用场景可能有局限性，但是挖掘思路是可以借鉴的。</p>
 
@@ -168,7 +168,7 @@ s%u00f0lect-&gt;select
 
 <p>某些apache版本在做GET请求的时候，无论method为何值均会取出GET的内容，如请求为的method为DOTA2，依然返回了aid为2的结果。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292384860.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292384860.png" alt="enter image description here"></p>
 
 <p>如果某些WAF在处理数据的时候严格按照GET,POST等方式来获取数据，就会因为apache的宽松的请求方式导致bypass。 实例：  <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2013-024599">WooYun: 安全宝SQL注入规则绕过</a> </p>
 
@@ -180,7 +180,7 @@ s%u00f0lect-&gt;select
 
 <p>参考：<a href="http://blog.phdays.com/2014/07/review-of-waf-bypass-tasks.html">http://blog.phdays.com/2014/07/review-of-waf-bypass-tasks.html</a></p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292363966.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292363966.png" alt="enter image description here"></p>
 
 <p>如上图，可能出现waf获取的是一个图片的内容，而在web端获取的是<code>aid=2</code>的值。这样的差别就有可能造成bypass。</p>
 
@@ -208,11 +208,11 @@ s%u00f0lect-&gt;select
 
 <p>我们在阿里云ecs主机上搭建个环境，创建一个存在sql注入漏洞的页面，获取参数从POST上获取，首先我以<code>urlencode</code>的方式提交，查看发现提交的请求被阻断了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292427046.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292427046.png" alt="enter image description here"></p>
 
 <p>其次我们以<code>form-data</code>的方式提交，发现爆出了数据库的版本。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292484515.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292484515.png" alt="enter image description here"></p>
 
 <h5>2.2.2 畸形请求方式</h5>
 
@@ -226,11 +226,11 @@ s%u00f0lect-&gt;select
 
 <p>我们创建一个<code>letmetest.aspx</code>的界面获取用户提交的内容，并且将<code>request['t']</code>的内容打印出来。【在服务器上安装了安全狗】 首先我们提交正常的POST请求，发现已经被安全狗阻断了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292435996.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292435996.png" alt="enter image description here"></p>
 
 <p>此时我们提交畸形的请求，method为GET，但是内容为POST的内容，发现打印出来了内容。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292529386.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292529386.png" alt="enter image description here"></p>
 
 <h4>2.3 hpp方式</h4>
 
@@ -243,7 +243,7 @@ s%u00f0lect-&gt;select
 <pre><code>id=1&amp;id=2&amp;id=3 
 </code></pre>
 
-<p></br></p>
+<p><br></p>
 
 <pre><code>Asp.net + iis：id=1,2,3 
 Asp + iis：id=1,2,3 
@@ -274,19 +274,19 @@ Php + apache：id=3
 
 <p><strong>(1):<code>\Nunion</code>的形式：</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292511960.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292511960.png" alt="enter image description here"></p>
 
 <p><strong>(2):浮点数的形式如<code>1.1,8.0</code></strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292565558.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292565558.png" alt="enter image description here"></p>
 
 <p><strong>(3):<code>8e0</code>的形式：</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292559156.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292559156.png" alt="enter image description here"></p>
 
 <p><strong>(4): 利用<code>/*!50000*/</code>的形式</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292599700.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292599700.png" alt="enter image description here"></p>
 
 <h6>第二：union和select之前的位置</h6>
 
@@ -306,7 +306,7 @@ Php + apache：id=3
 
 <p><strong>(3)使用括号</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292545804.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292545804.png" alt="enter image description here"></p>
 
 <h6>第三：<code>union select</code>后的位置</h6>
 
@@ -328,46 +328,46 @@ Php + apache：id=3
 
 <p>括号：<code>select(1)from</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292521429.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292521429.png" alt="enter image description here"></p>
 
 <p>运算符号：</p>
 
 <p><code>减号</code>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292579712.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292579712.png" alt="enter image description here"></p>
 
 <p><code>加号</code>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292681389.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292681389.png" alt="enter image description here"></p>
 
 <p><code>~号</code>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292672238.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292672238.png" alt="enter image description here"></p>
 
 <p><code>!号</code>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292677561.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292677561.png" alt="enter image description here"></p>
 
 <pre><code>@`形式`
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292678670.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292678670.png" alt="enter image description here"></p>
 
 <p><code>*号</code>，利用<code>/*!50000*/</code>的形式</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292618577.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292618577.png" alt="enter image description here"></p>
 
 <p><code>单引号和双引号</code>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292616962.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292616962.png" alt="enter image description here"></p>
 
 <p><code>{括号</code>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292684127.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292684127.png" alt="enter image description here"></p>
 
 <p><code>\N符号</code>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292616701.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292616701.png" alt="enter image description here"></p>
 
 <h6>第四：<code>select from</code>之间的位置</h6>
 
@@ -386,23 +386,23 @@ Php + apache：id=3
 <pre><code>``符号
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292756858.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292756858.png" alt="enter image description here"></p>
 
 <p><code>+,-,!,~,’”</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292740861.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292740861.png" alt="enter image description here"></p>
 
 <p><code>*号</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292741135.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292741135.png" alt="enter image description here"></p>
 
 <p><code>{号</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292777119.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292777119.png" alt="enter image description here"></p>
 
 <p><code>(号</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292764288.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292764288.png" alt="enter image description here"></p>
 
 <h6>第五：select from之后的位置</h6>
 
@@ -421,19 +421,19 @@ Php + apache：id=3
 <pre><code>``号
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292791699.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292791699.png" alt="enter image description here"></p>
 
 <p><code>*号</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292767803.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292767803.png" alt="enter image description here"></p>
 
 <p><code>{号</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292731529.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292731529.png" alt="enter image description here"></p>
 
 <p><code>括号</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292757157.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292757157.png" alt="enter image description here"></p>
 
 <p>Ps.空白符，注释符，<code>/!50000select*/,{x version},(),</code>在很多点都可以使用，某些点有自己特殊的地方，可以使用一些其他的符号。</p>
 
@@ -485,7 +485,7 @@ Unhex(61)
 
 <p>通过join拼接。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292831626.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292831626.png" alt="enter image description here"></p>
 
 <h4>5.3.2 sqlserver数据库</h4>
 
@@ -504,11 +504,11 @@ Unhex(61)
 
 <p><strong>其他符号：</strong> .符号</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292816390.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292816390.png" alt="enter image description here"></p>
 
 <p>:号</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292821124.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292821124.png" alt="enter image description here"></p>
 
 <h6>(2) select from之间的位置</h6>
 
@@ -521,7 +521,7 @@ Unhex(61)
 
 <p><strong>：号</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292848673.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292848673.png" alt="enter image description here"></p>
 
 <h6>(3) and之后的位置</h6>
 
@@ -536,11 +536,11 @@ Unhex(61)
 
 <p><code>：号：</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292890905.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292890905.png" alt="enter image description here"></p>
 
 <p><code>%2b号</code>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292847120.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292847120.png" alt="enter image description here"></p>
 
 <h5>2）常见过滤函数</h5>
 
@@ -563,11 +563,11 @@ Char(‘97’)
 
 <p>使用exec的方式：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292868059.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292868059.png" alt="enter image description here"></p>
 
 <p>使用sp_executesql的方式：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292892865.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292892865.png" alt="enter image description here"></p>
 
 <p>使用这类可以对自己的参数进行拼接，可以绕过WAF防御。</p>
 
@@ -583,7 +583,7 @@ Char(‘97’)
 
 <h5>5.4.1.1 性能检测bypass</h5>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292912678.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292912678.png" alt="enter image description here"></p>
 
 <p>现在问题就是检测多长呢？例如我用HTTP POST上传一个2G的文件，明显不可能2G全做检测不但耗CPU，同时也会耗内存。因此在设计WAF的时候可能就会设计一个默认值，有可能是默认多少个字节的流大小，可能是多少个数据包。</p>
 
@@ -593,7 +593,7 @@ Char(‘97’)
 
 <h5>5.4.1.2 性能负载bypass</h5>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292927216.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292927216.png" alt="enter image description here"></p>
 
 <p>一些传统硬件防护设备为了避免在高负载的时候影响用户体验，如延时等等问题，会考虑在高负载的时候bypass掉自己的防护功能，等到设备的负载低于门限值的时候又恢复正常工作。</p>
 
@@ -605,7 +605,7 @@ Char(‘97’)
 
 <h4>4.2 fuzz bypass</h4>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292992566.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292992566.png" alt="enter image description here"></p>
 
 <p>使用脚本去探测WAF设备对于字符处理是否有异常，上面已经说过WAF在接收到网络数据之后会做相应的数据包解析，一些WAF可能由于自身的解析问题，对于某些字符解析出错，造成全局的bypass。 我测试的时候常常测试的位置：</p>
 
@@ -634,7 +634,7 @@ Char(‘97’)
 
 <h4>5.4.3 白名单bypass</h4>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292948483.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292948483.png" alt="enter image description here"></p>
 
 <p>WAF在设计之初一般都会考虑白名单功能。如来自管理IP的访问，来自cdn服务器的访问等等。这些请求是可信任的，不必走WAF检测流程。</p>
 
@@ -644,11 +644,11 @@ Char(‘97’)
 
 <p>文章内容是通过修改http的header来bypass waf，这里我们截取文章中部分内容：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292938645.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292938645.png" alt="enter image description here"></p>
 
 <p>这些header常常用来获取IP，可能还有其他的，例如nginx-lua-waf:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150811/2015081104292972279.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081104292972279.png" alt="enter image description here"></p>
 
 <p>获取clientip使用了X-Real-ip的header。</p>
 
@@ -656,7 +656,7 @@ Char(‘97’)
 
 <h1>0x05 结束语</h1>
 
-<hr />
+<hr>
 
 <p>特性就像是一个个特定的场景一样，一些是已经被研究人员发现的，一些是还没被发现，等待被研究人员发现的。</p>
 
@@ -664,7 +664,7 @@ Char(‘97’)
 
 <p>因此我们不用担心当所有的特性被WAF考虑到的时候我们无计可施，未知的特性那么多，我们还有很多地方可以去挖掘。</p>
 
-<p>当你发现这些姿势都不好使的时候，你就该去发现一些新的特性了，毕竟设计WAF的选手都是基于目前的认知下去设计的，当新的特性出现的时候，势必又是一波bypass。</p>      </p>
+<p>当你发现这些姿势都不好使的时候，你就该去发现一些新的特性了，毕竟设计WAF的选手都是基于目前的认知下去设计的，当新的特性出现的时候，势必又是一波bypass。</p>      <p></p>
     
 			</body>
 		</html>

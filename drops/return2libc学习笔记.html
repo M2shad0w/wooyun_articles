@@ -3,14 +3,14 @@
 			<head>
 			     <title>return2libc学习笔记 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/13554">http://drops.wooyun.org/binary/13554</a></h1>
 				
       <p>
-        <h1>0x00 背景介绍</h1>
+        </p><h1>0x00 背景介绍</h1>
 
-<hr />
+<hr>
 
 <p>author:万抽抽</p>
 
@@ -20,11 +20,11 @@
 
 <h1>0x01 技术原理</h1>
 
-<hr />
+<hr>
 
 <p>大致技术原理，如图1-1所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091538476609912.jpg" alt="p1" /></p>
+<p><img src="../images_result/images/201603091538476609912.jpg" alt="p1"></p>
 
 <p>图1-1 r2libc技术原理</p>
 
@@ -56,7 +56,7 @@ $1 = {&lt;text variable, no debug info&gt;} 0xb7e56190 &lt;__libc_system&gt;
 
 <p>因此对于正常函数调用而言，其栈帧结构如下图1-2所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091538499744822.jpg" alt="p2" /></p>
+<p><img src="../images_result/images/201603091538499744822.jpg" alt="p2"></p>
 
 <p>图1-2 函数调用栈帧结构图</p>
 
@@ -66,7 +66,7 @@ $1 = {&lt;text variable, no debug info&gt;} 0xb7e56190 &lt;__libc_system&gt;
 
 <p>首先，解释为何Filler是函数的返回地址。这需要我们查看system函数的汇编实现。通过 gdb调试得到如下信息：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091538518213732.jpg" alt="p3" /></p>
+<p><img src="../images_result/images/201603091538518213732.jpg" alt="p3"></p>
 
 <p>图1-3 system函数汇编实现</p>
 
@@ -82,7 +82,7 @@ $1 = {&lt;text variable, no debug info&gt;} 0xb7e56190 &lt;__libc_system&gt;
 
 <p>下面唯一的问题就是如何在栈中构造”/bin/sh”参数了。当然，这里用“构造”一词并不准确，“借用”更合适——我们从内存中搜寻此字符串，然后将该字符串在内存中的起始地址赋值到Filler之后即可。那么如何获取到这个字符串的地址呢？我们知道，LINUX的SHELL环境变量的值一般就是“/bin/sh”，所以我们可以通过gdb调试器，暴力搜索<code>%esp</code>寄存器之后开始的n个字符串，方法如下图1-4所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091538536329142.jpg" alt="p4" /></p>
+<p><img src="../images_result/images/201603091538536329142.jpg" alt="p4"></p>
 
 <p>图1-4 GDB暴力搜索字符串</p>
 
@@ -90,7 +90,7 @@ $1 = {&lt;text variable, no debug info&gt;} 0xb7e56190 &lt;__libc_system&gt;
 
 <p><strong>还有一种更简单的方法</strong>，详细步骤如下图1-5所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091538553391352.jpg" alt="p5" /></p>
+<p><img src="../images_result/images/201603091538553391352.jpg" alt="p5"></p>
 
 <p>图1-5 构造“/bin/sh”参数方法三</p>
 
@@ -116,11 +116,11 @@ int main(int argc, char *argv[]) {
 
 <h1>0x02 基于libc的函数调用链攻击原理</h1>
 
-<hr />
+<hr>
 
 <p>回顾图1-1，我们知道system函数执行后，其返回地址是Filler，因此如果我们将需要执行的第二个libc函数的地址放置到Filler上，那么不就构造了一个函数调用链么？详情见图2-1：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091538579146361.jpg" alt="p6" /></p>
+<p><img src="../images_result/images/201603091538579146361.jpg" alt="p6"></p>
 
 <p>图2-1基于libc的函数调用链攻击原理图</p>
 
@@ -128,7 +128,7 @@ int main(int argc, char *argv[]) {
 
 <h1>0x03 进阶——使用Execl函数</h1>
 
-<hr />
+<hr>
 
 <p>前文提到，使用system函数必须结合setuid(0)函数才能确保获取root权限，这种处理相对麻烦，好在我们可以直接使用execl函数解决(system是通过fork子进程执行shell，而execl是直接在当前进程中执行shell)。</p>
 
@@ -154,7 +154,7 @@ int main(int argc, char *argv[]) {
 
 <p>因此，我们需要构造如图3-1所示的stack数据：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091538596952971.jpg" alt="p7" /></p>
+<p><img src="../images_result/images/201603091538596952971.jpg" alt="p7"></p>
 
 <p>图3-1 构造实施攻击的栈结构</p>
 
@@ -174,9 +174,9 @@ int main(int argc, char *argv[]) {
 
 <p>表3-1 magic formula</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/20160309153901389948.jpg" alt="p8" /></p>
+<p><img src="../images_result/images/20160309153901389948.jpg" alt="p8"></p>
 
-<p>公式的详细推导见：<br />
+<p>公式的详细推导见：<br>
 <a href="http://www.cgsecurity.org/Articles/SecProg/Art4/">http://www.cgsecurity.org/Articles/SecProg/Art4/</a></p>
 
 <p>另外，提及一点注意事项：在Linux shell中，如果使用双引号<code>” ”</code>包含字符串的话，就需要在’<code>$</code>’之前加上转义字符<code>‘\’</code>，如果使用单引号<code>’ ’</code>包含字符串的话，就不需要额外添加转义字符<code>’\’</code>了。详情见：</p>
@@ -194,13 +194,13 @@ ret
 
 <p>结合1.1章节的分析，可以知道当执行完printf函数之后，此时的esp指针指向图3-1中的Add of ‘%5$n’处，如图3-2所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/20160309153903465959.jpg" alt="p9" /></p>
+<p><img src="../images_result/images/20160309153903465959.jpg" alt="p9"></p>
 
 <p>图3-2 执行完printf函数后的ESP指针位置</p>
 
 <p>现在开始执行<code>pop %ebp</code>指令，将Addr of ‘%5$n’放入ebp寄存器中；然后再执行<code>ret</code>指令(即<code>pop IP</code>)，将Addr of execl放入IP寄存器中，这样程序下一步就会转而执行execl函数了，而此时的ESP指针指向Addr of exit，如下图3-3所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091539056227910.jpg" alt="p10" /></p>
+<p><img src="../images_result/images/201603091539056227910.jpg" alt="p10"></p>
 
 <p>图3-3 开始执行execl函数之前ESP指针位置</p>
 
@@ -227,7 +227,7 @@ msfelfscan –p –D target
 
 <h1>0x04 实战演练</h1>
 
-<hr />
+<hr>
 
 <p>含有缓冲区溢出漏洞的程序源代码如下：</p>
 
@@ -274,7 +274,7 @@ Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac
 <p>然后使用gdb调试目标程序：</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="accfc4c3d9cfc4c3d9ecd9ced9c2d8d9">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/security/flaws/return2libc$ gdb  ./vuln -q
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="accfc4c3d9cfc4c3d9ecd9ced9c2d8d9">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/security/flaws/return2libc$ gdb  ./vuln -q
 Reading symbols from ./vuln...(no debugging symbols found)...done.
 &gt;&gt;&gt; r  Aa0……i2A(省略部分输入数据)
 回车之后，gdb输出如下错误数据：
@@ -289,7 +289,7 @@ gdb.error: No function contains program counter for selected frame.
 <p>显然，目标程序去执行0x61413661的地址时发生错误，这个地址就是被我们使用攻击buffer覆盖后的EIP地址，现在我们使用pattern_offset.rb查找这个地址在攻击buffer中的位置：</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="44272c2b31272c2b31043126312a3031">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/security/flaws/return2libc$ pattern_offset.rb 0x61413661 250
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="44272c2b31272c2b31043126312a3031">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/security/flaws/return2libc$ pattern_offset.rb 0x61413661 250
 [*] Exact match at offset 19
 </code></pre>
 
@@ -316,7 +316,7 @@ gdb.error: No function contains program counter for selected frame.
 
 <h1>0x05 对抗ASLR</h1>
 
-<hr />
+<hr>
 
 <p>鉴于ASLR机制只是将既然stack，heap以及共享库文件的起始地址进行了随机化，而文件内部各部分数据之间的偏移值却是固定不变的，所以攻击的整体思路如下：</p>
 
@@ -324,7 +324,7 @@ gdb.error: No function contains program counter for selected frame.
 
 <p>那么怎么才能泄露出Libc库文件的地址呢？考虑到程序本身在内存中的地址并不是随机的，所以只要将返回值设置到程序本身所处的内存段就可以了，当然，<strong>前提是我们必须获取目标系统中的libc.so库文件</strong>。Linux内存随机化分布图如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/2016030915390727497111.jpg" alt="p11" /></p>
+<p><img src="../images_result/images/2016030915390727497111.jpg" alt="p11"></p>
 
 <p>整体攻击思路：</p>
 
@@ -334,35 +334,35 @@ gdb.error: No function contains program counter for selected frame.
 
 <p>1) 首先使用<code>objdump –R</code>命令查看目标文件的<strong>动态重定位项</strong>，也就是常说的<strong>GOT表项</strong>：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/2016030915390828325121.jpg" alt="p12" /></p>
+<p><img src="../images_result/images/2016030915390828325121.jpg" alt="p12"></p>
 
 <p>2) 然后使用<code>objdump –j .glt –d</code>命令反编译目标文件的<strong>plt表</strong>：</p>
 
 <pre><code>#!bash
 Disassembly of section .plt:
 
-08048300 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="176572767357677b633a276f2627">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;:
+08048300 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="176572767357677b633a276f2627">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;:
  8048300:   ff 35 04 a0 04 08       pushl  0x804a004
  8048306:   ff 25 08 a0 04 08       jmp    *0x804a008
  804830c:   00 00                   add    %al,(%eax)
     ...
 
-08048310 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6d1f080c092d1d0119">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;:
+08048310 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6d1f080c092d1d0119">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;:
  8048310:   ff 25 0c a0 04 08       jmp    *0x804a00c
  8048316:   68 00 00 00 00          push   $0x0
  804831b:   e9 e0 ff ff ff          jmp    8048300 &lt;_init+0x30&gt;
 
-08048320 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="207f7f474d4f4e7f53544152547f7f60504c54">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;:
+08048320 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="207f7f474d4f4e7f53544152547f7f60504c54">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;:
  8048320:   ff 25 10 a0 04 08       jmp    *0x804a010
  8048326:   68 08 00 00 00          push   $0x8
  804832b:   e9 d0 ff ff ff          jmp    8048300 &lt;_init+0x30&gt;
 
-08048330 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7d222211141f1e220e091c0f0922101c14133d0d1109">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;:
+08048330 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7d222211141f1e220e091c0f0922101c14133d0d1109">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;:
  8048330:   ff 25 14 a0 04 08       jmp    *0x804a014
  8048336:   68 10 00 00 00          push   $0x10
  804833b:   e9 c0 ff ff ff          jmp    8048300 &lt;_init+0x30&gt;
 
-08048340 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7c0b0e1508193c0c1008">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;:
+08048340 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7c0b0e1508193c0c1008">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;:
  8048340:   ff 25 18 a0 04 08       jmp    *0x804a018
  8048346:   68 18 00 00 00          push   $0x18
  804834b:   e9 b0 ff ff ff          jmp    8048300 &lt;_init+0x30&gt;
@@ -370,11 +370,11 @@ Disassembly of section .plt:
 
 <p>熟悉linux中elf文件的动态重定位机制都知道，由于linux采用懒绑定机制，所以对于GOT表中的动态重定位符号，在第一次调用的时候got表项会定位到其对应的plt表项中，再由该plt表项转到真正的函数处。第一次执行完之后，系统会将此时GOT表项的位置加以修改，直接指向真正的函数处，而不再指向之前的plt表项。</p>
 
-<p>2.根据第1步的结果确定想要获取的属于Libc的某个函数的地址，这里我们使用write函数。获取方法并不难，从上面对linux动态重定位机制的介绍可以知道，我们只需要按照如下方式做就可以了：首先构造payload执行目标文件的write函数(怎么执行呢？<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0febb2b0e89ba7e894a1e9af88e99988ebb4b9ebb7a2e8958b787d667b6a4f7f637bea93bfea928fe7a989e894994a465f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>)，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b5510d35532213533c125d1439510f33c2c7dcc1d0f5c5d9c1533932510e11">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="95733831730223e2e7fce1f0efd5f2fae1712d38720f1173002573183b70252471290f7d373e72262e722e0a712a3b73012c712d2ff9fcf7f6712d3872090a733836">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>的write函数的地址，所以我们再使用write函数打印出该地址即可：payload构造如下：</p>
+<p>2.根据第1步的结果确定想要获取的属于Libc的某个函数的地址，这里我们使用write函数。获取方法并不难，从上面对linux动态重定位机制的介绍可以知道，我们只需要按照如下方式做就可以了：首先构造payload执行目标文件的write函数(怎么执行呢？<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0febb2b0e89ba7e894a1e9af88e99988ebb4b9ebb7a2e8958b787d667b6a4f7f637bea93bfea928fe7a989e894994a465f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>)，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b5510d35532213533c125d1439510f33c2c7dcc1d0f5c5d9c1533932510e11">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="95733831730223e2e7fce1f0efd5f2fae1712d38720f1173002573183b70252471290f7d373e72262e722e0a712a3b73012c712d2ff9fcf7f6712d3872090a733836">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>的write函数的地址，所以我们再使用write函数打印出该地址即可：payload构造如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091539103532713.jpg" alt="p13" /></p>
+<p><img src="../images_result/images/201603091539103532713.jpg" alt="p13"></p>
 
-<p>即执行<code>write(STDOUT, &amp;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="84f3f6edf0e1c4e3ebf0">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>, 4)</code>，这样就会将libc中真正的write函数地址打印到标准输出中。这里的vul_func地址可以通过<code>objdump –d</code>获取，当然使用IDA更方便。</p>
+<p>即执行<code>write(STDOUT, &amp;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="84f3f6edf0e1c4e3ebf0">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>, 4)</code>，这样就会将libc中真正的write函数地址打印到标准输出中。这里的vul_func地址可以通过<code>objdump –d</code>获取，当然使用IDA更方便。</p>
 
 <p>3.获取了write的真正地址之后，只需要根据libc中write函数与system函数的相对偏移地址就可以计算出system函数真正的地址，计算公式如下：</p>
 
@@ -386,11 +386,11 @@ system_real_addr = write_real_addr – ( write_addr_in_libc – system_addr_in_l
 
 <p>4.执行<code>system(‘/bin/sh’)</code>，payload构造如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160309/201603091539114200614.jpg" alt="p14" /></p>
+<p><img src="../images_result/images/201603091539114200614.jpg" alt="p14"></p>
 
 <h1>0x06 参考文献</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="http://stackoverflow.com/questions/1697440/difference-between-system-and-exec-in-linux">http://stackoverflow.com/questions/1697440/difference-between-system-and-exec-in-linux</a></li>
@@ -403,7 +403,7 @@ system_real_addr = write_real_addr – ( write_addr_in_libc – system_addr_in_l
 <li><a href="http://hubingforever.blog.163.com/blog/static/171040579201372932033844/">http://hubingforever.blog.163.com/blog/static/171040579201372932033844/</a></li>
 <li><a href="http://nba20717zcx.blog.51cto.com/343890/392063">http://nba20717zcx.blog.51cto.com/343890/392063</a></li>
 <li><a href="http://www.cs.berkeley.edu/~daw/papers/setuid-usenix02.pdf">http://www.cs.berkeley.edu/~daw/papers/setuid-usenix02.pdf</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

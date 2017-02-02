@@ -3,18 +3,18 @@
 			<head>
 			     <title>得到内网域管理员的5种常见方法 - mickey</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/646">http://drops.wooyun.org/tips/646</a></h1>
 				
       <p>
-        <p>from:<a href="http://blog.spiderlabs.com/2013/09/top-five-ways-spiderlabs-got-domain-admin-on-your-internal-network.html">http://blog.spiderlabs.com/2013/09/top-five-ways-spiderlabs-got-domain-admin-on-your-internal-network.html</a></p>
+        </p><p>from:<a href="http://blog.spiderlabs.com/2013/09/top-five-ways-spiderlabs-got-domain-admin-on-your-internal-network.html">http://blog.spiderlabs.com/2013/09/top-five-ways-spiderlabs-got-domain-admin-on-your-internal-network.html</a></p>
 
 <p>spiderlabs总结的,我简单翻译下,偶尔加点我的牢骚。</p>
 
 <h2>1.Netbios and LLMNR Name Poisoning</h2>
 
-<hr />
+<hr>
 
 <p>这个方法在WIN工作组下渗透很有用,WIN的请求查询顺序是下面三个步骤:本地hosts文件(<code>%windir%\System32\drivers\etc\hosts</code>),DNS服务器,NetBIOS广播,如果前2个请求失败,则在本地发送NetBIOS广播请求,此时任何本地网络的系统都能回答这个请求,使用SpiderLabs出品的Responder工具,能够在不借助ARP欺骗的情况下,响应这个请求.其实metasploit也能利用(<a href="http://www.packetstan.com/2011/03/nbns-spoofing-on-your-way-to-world.html">http://www.packetstan.com/2011/03/nbns-spoofing-on-your-way-to-world.html</a>),但实际测试还是Responder比较好,都是套用标准库写的,很方便在目标上使用:)</p>
 
@@ -22,7 +22,7 @@
 
 <pre><code>~/Responder# python Responder.py -i 192.168.8.25
 NBT Name Service/LLMNR Answerer 1.0.
-Please send bugs/comments to: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5b373c3a3d3d323e1b2f292e282f2c3a2d3e75383436">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+Please send bugs/comments to: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5b373c3a3d3d323e1b2f292e282f2c3a2d3e75383436">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 To kill this script hit CRTL-C
 [+]NBT-NS &amp; LLMNR responder started
 Global Parameters set:
@@ -77,7 +77,7 @@ The command completed successfully.
 
 <h2>2.利用jboss漏洞</h2>
 
-<hr />
+<hr>
 
 <p>可以前期先用nmap扫描下端口,识别出常见的JAVA应用服务器,后期配合Metasploit的auxiliary模块来利用.比如jboss漏洞.最常见的就是弱口令了吧,同理的,也可以寻找webloigc,websphere,tomcat等这些基于JAVA的应用服务器,还有最近国内政府部门部署比较多的Apusic,不过需要注意war包格式,进后台,直接部署WAR就行了.jboss的除了弱口令,还有个后台绕过,和流传很久的1337那个.用例说下如何用metasploit暴力破解jboss后台,以及部署war包.</p>
 
@@ -166,7 +166,7 @@ The command completed successfully.
 
 <h2>3.MS08-067</h2>
 
-<hr />
+<hr>
 
 <p>这个漏洞已经超过4年了,但是内网中还是有很多机器没有打补丁,影响的有(Windows Server 2000, Windows Server 2003, and Windows XP),不过说实话,我内网渗透的过程中很少用MS08-067,因为溢出不好,有可能造成DOS,被人发现了,就不好了,你懂得.</p>
 
@@ -190,7 +190,7 @@ Host script results:
 ...snip...
 </code></pre>
 
-<p>nmap的NSE脚本是用LUA语言写的,把这些NSE都过一遍,对渗透很有帮助哦,尤其是在LINUX平台,win平台下除了有几种扫描方式利用不了,NSE脚本照样可以用,不过LINUX上默认安装的NMAP版本都比较低了,你不能直接放NSE到目录,注意看库之间的依赖关系,才能利用,上次看wooyun的drops,<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="65090c1300171680c1c282ecfe80fefb80c1e883edf481dec982dee182ffe1240b110d17253d82ecfe82ffe12c0b160c020d113606040b4b151c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>,说用nse也实现了一个,我只想说,你能偷偷发我一份吗?</p>
+<p>nmap的NSE脚本是用LUA语言写的,把这些NSE都过一遍,对渗透很有帮助哦,尤其是在LINUX平台,win平台下除了有几种扫描方式利用不了,NSE脚本照样可以用,不过LINUX上默认安装的NMAP版本都比较低了,你不能直接放NSE到目录,注意看库之间的依赖关系,才能利用,上次看wooyun的drops,<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="65090c1300171680c1c282ecfe80fefb80c1e883edf481dec982dee182ffe1240b110d17253d82ecfe82ffe12c0b160c020d113606040b4b151c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>,说用nse也实现了一个,我只想说,你能偷偷发我一份吗?</p>
 
 <p>接下来,还是用metasploit溢出，不知道对中文系统效果怎么样，我没有试过 =.=</p>
 
@@ -274,7 +274,7 @@ The command completed successfully.
 
 <h2>4. GPO cpassword</h2>
 
-<hr />
+<hr>
 
 <p>这个原理完全可以看瞌睡龙牛翻译的<a href="http://drops.wooyun.org/papers/576">http://drops.wooyun.org/papers/576</a>,本文中亮点是他从LINUX连接到WIN的,有许多同学不会通过linux渗透WIN域,尤其是在得到一个WEBSHELL,还是ROOT权限,还是跟内网连着,还有个域用户的情况下(=.=现实中哪儿有这么多好的条件让你都碰到了)</p>
 
@@ -357,7 +357,7 @@ The command completed successfully.
 
 <h2>5.NetBIOS Null Enumeration Allowed on Server</h2>
 
-<hr />
+<hr>
 
 <p>其实就是说,域服务器,允许你空会话连接,然后列举账户信息,然后在破解账户,LINUX下用enum4linux.pl遍历用户,用medusa破解帐号,用winexec连接执行命令.WIN下的话,&lt;&lt;黑客大曝光>>查点那章看过木?</p>
 
@@ -456,7 +456,7 @@ The command completed successfully.
 
 <h2>修补方法:[真心不希望管理员看到]</h2>
 
-<hr />
+<hr>
 
 <p>1.少用XP/win2k吧,否则为了某些兼容性,很少能全面禁止Netbios and LLMNR Name Poisoning</p>
 
@@ -466,7 +466,7 @@ The command completed successfully.
 
 <p>4.做好账户审核</p>
 
-<p>5.禁止空会话,关键服务器,做好VLAN划分</p>      </p>
+<p>5.禁止空会话,关键服务器,做好VLAN划分</p>      <p></p>
     
 			</body>
 		</html>

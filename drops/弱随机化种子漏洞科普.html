@@ -3,14 +3,14 @@
 			<head>
 			     <title>弱随机化种子漏洞科普 - ∑-TEAM</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1419">http://drops.wooyun.org/papers/1419</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>上周我参加了一个Bishop Fox和BYU大学举办的CTF比赛，在比赛过程中我决定尝试一下入侵一下计分系统，并且我把入侵的过程记录了下来。</p>
 
@@ -20,7 +20,7 @@
 
 <h2>0x01 cookie运行原理</h2>
 
-<hr />
+<hr>
 
 <p>在开始之前，我推荐你阅读一下<a href="http://robertheaton.com/2013/07/22/how-to-hack-a-rails-app-using-its-secret-token/">这篇博文</a>，他会告送你一个基于ruby的webapps如何处理cookie。</p>
 
@@ -54,13 +54,13 @@
 
 <p>下图就是上述过程简要流程</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091810450929878.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091810450929878.png" alt="enter image description here"></p>
 
 <p>如果你篡改了你的cookie，会导致HMAC验证不通过，从而使你修改过的cookie值失效。</p>
 
 <h2>0x02 简介</h2>
 
-<hr />
+<hr>
 
 <p>CTF的评分系统是一个Sinatra-based的webapp，它使用了一些基本的Rails机制，提供了一个计分板的效果。看一下代码，还是比较简洁的。</p>
 
@@ -88,7 +88,7 @@ end
 
 <h2>0x03 原理</h2>
 
-<hr />
+<hr>
 
 <p>现在我们很容易知道，如果想要伪造cookie，就必须得到一个合法的HMAC字符串，只有得到它之后，我们才可以通过修改session-id来控制session。</p>
 
@@ -98,7 +98,7 @@ end
 
 <h2>0x04 POC</h2>
 
-<hr />
+<hr>
 
 <p>为了确定一下我们是否可以破解HMAC，我们可以试一下。</p>
 
@@ -135,7 +135,7 @@ key = Digest::SHA1.hexdigest(seed.to_s)
 
 <h2>0x05 利用</h2>
 
-<hr />
+<hr>
 
 <p>得到了key，我们就可以找一下源代码中有什么能让我们提升权限的地方。</p>
 
@@ -165,7 +165,7 @@ header = "rack.session=#{bad_cookie}--#{bad_hmac};"
 
 <h2>0x06 防御方法</h2>
 
-<hr />
+<hr>
 
 <p>我在github上提交了一个修改版本，其中使用这句代替了cookie secret key的生成</p>
 
@@ -181,11 +181,11 @@ header = "rack.session=#{bad_cookie}--#{bad_hmac};"
 
 <h2>0x07 结论</h2>
 
-<hr />
+<hr>
 
 <p>这篇文章虽然在技术上没有什么实质性突破，但是作为一个弱随机漏洞的例子还是很不错的，希望在思路上可以启发到各位。</p>
 
-<p>from:<a href="http://blog.tjll.net/weak-random-seed-rack-exploit/">http://blog.tjll.net/weak-random-seed-rack-exploit/</a></p>      </p>
+<p>from:<a href="http://blog.tjll.net/weak-random-seed-rack-exploit/">http://blog.tjll.net/weak-random-seed-rack-exploit/</a></p>      <p></p>
     
 			</body>
 		</html>

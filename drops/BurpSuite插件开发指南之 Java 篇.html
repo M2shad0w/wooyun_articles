@@ -3,12 +3,12 @@
 			<head>
 			     <title>BurpSuite插件开发指南之 Java 篇 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/16056">http://drops.wooyun.org/tools/16056</a></h1>
 				
       <p>
-        <p>此文接着 <a href="http://drops.wooyun.org/tools/14685">《BurpSuite插件开发指南之 API 下篇》</a> 。在此篇中将会介绍如何使用Java 开发 BurpSuite 的插件，重点会介绍利用 Java 的 Swing 包开发带有 GUI 的 Burp 插件。</p>
+        </p><p>此文接着 <a href="http://drops.wooyun.org/tools/14685">《BurpSuite插件开发指南之 API 下篇》</a> 。在此篇中将会介绍如何使用Java 开发 BurpSuite 的插件，重点会介绍利用 Java 的 Swing 包开发带有 GUI 的 Burp 插件。</p>
 
 <p>《BurpSuite 插件开发指南》系列文章如下：</p>
 
@@ -24,7 +24,7 @@
 
 <h1>0x00 Java 接口简介</h1>
 
-<hr />
+<hr>
 
 <p>知其然更要知其所以然。在真正动手编写 Burp 插件之前，有必要对Burp提供的各个接口有一定的了解，同时要有一定的编程经验和能力。那么，在此篇中读者则有必要了解 Java 的接口技术。</p>
 
@@ -88,7 +88,7 @@ public class BurpExtender implements IBurpExtender, IProxyListener{
 
 <h1>0x01 Java Swing 和 AWT 包简介</h1>
 
-<hr />
+<hr>
 
 <p>Java Swing 是 Java Foundation Classes（JFC）的一部分。在 Swing 中，包含了很多强大灵活的，跨平台的 GUI 控件。Swing 组件遵循(MVC)模型 - 视图 - 控制器架构，并提供了三个通用的顶层容器类 JFrame，JDialog 和 JApplet。在开发带有 GUI 的 BurpSuite 插件时，一般不会直接用到这三个顶层容器类，具体要看个人的设计和需求。</p>
 
@@ -118,13 +118,13 @@ public class BurpExtender implements IBurpExtender, IProxyListener{
 
 <h1>0x02 自定义 Burp UI 标签</h1>
 
-<hr />
+<hr>
 
 <p>编写 GUI 的 Burp 插件在实际使用时更加易于操作和表达信息。当然，编写起来也十分简单，只需遵循一定的“套路”，就可以了。</p>
 
 <p>最终编写好的基本的样式如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160525/2016052513193014611burp_tab.jpg" alt="" /></p>
+<p><img src="../images_result/images/2016052513193014611burp_tab.jpg" alt=""></p>
 
 <p>代码如下：</p>
 
@@ -210,13 +210,13 @@ public class BurpExtender implements IBurpExtender, ITab{
 
 <h1>0x03 BurpSuite插件开发实例之 JSON 水坑 检测插件</h1>
 
-<hr />
+<hr>
 
 <p>本小节，笔者将会使用一个实例来“抛砖引玉”式的描述编写带有 GUI 的 Burp 插件。读者可以把关注点放在图形控件的放置顺序和事件处理上，可以无视 JSON 水坑检测的逻辑是否严谨以及误报率，准确率是否科学等问题。</p>
 
 <p>最终编写好的插件如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160525/2016052513192985524burp_json.jpg" alt="" /></p>
+<p><img src="../images_result/images/2016052513192985524burp_json.jpg" alt=""></p>
 
 <p>顶部的控件是一个表格列表控件，会放置检测到的结果。下面两个 ITextEditor 分别显示当前 HTTP 数据包的请求信息和响应信息。</p>
 
@@ -447,7 +447,7 @@ public class BurpExtender implements IBurpExtender, ITab, IHttpListener{
         }
     }
 }
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

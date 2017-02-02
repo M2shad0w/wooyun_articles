@@ -3,23 +3,23 @@
 			<head>
 			     <title>32C3 CTF 两个Web题目的Writeup - 一个狗</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/11718">http://drops.wooyun.org/papers/11718</a></h1>
 				
       <p>
-        <h1>0x00 简介</h1>
+        </p><h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>作为一个销售狗，还能做得动Web题，十分开心。 这次搞了两个题目，一个是TinyHosting，一个是Kummerkasten。</p>
 
 <h1>0x01 TingHosting</h1>
 
-<hr />
+<hr>
 
 <blockquote>
-  <p>A new file hosting service for very small files. could you pwn it?<br />
+  <p>A new file hosting service for very small files. could you pwn it?<br>
   http://136.243.194.53/</p>
 </blockquote>
 
@@ -27,7 +27,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20151231/2015123103245455324113.jpg" alt="p1" /></p>
+<p><img src="../images_result/images/2015123103245455324113.jpg" alt="p1"></p>
 
 <p>大概的意思就是说可以往服务器上传任意文件名的文件，不过每个文件的内容只有有7个字符那么长。</p>
 
@@ -85,19 +85,19 @@ bash bb index.html z.php
 
 <p>其中bash内容随意，bb的内容为<code>rm ./*</code>不超过7个字符。然后再通过上面的方法即可获得一个webshell，然后在根目录发现一个flag。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151231/201512310324568324129.jpg" alt="p2" /></p>
+<p><img src="../images_result/images/201512310324568324129.jpg" alt="p2"></p>
 
 <p>之后看了老外的做法真是简单好用，就利用bash、bb和z.php，bb的内容分别为<code>ls /</code>,<code>cat /f*</code>,简单直接0 0</p>
 
 <h1>0x02 Kummerkasten</h1>
 
-<hr />
+<hr>
 
 <blockquote>
-  <p>Our Admin is a little sad this time of the year. Maybe you can cheer him up at this site http://136.243.194.46/<br />
+  <p>Our Admin is a little sad this time of the year. Maybe you can cheer him up at this site http://136.243.194.46/<br>
   Please note: This challenge does not follow the flag format.</p>
   
-  <p>Hints:<br />
+  <p>Hints:<br>
   To build the flag, concatenate both parts and omit '32C3_'</p>
 </blockquote>
 
@@ -105,7 +105,7 @@ bash bb index.html z.php
 
 <p>直接丢了一个盲打cookie的payload之后收到了回显：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151231/2015123103290586132311.jpg" alt="p3" /></p>
+<p><img src="../images_result/images/2015123103290586132311.jpg" alt="p3"></p>
 
 <p>访问过去是403，感觉需要用XSS来读一下页面的内容。</p>
 
@@ -119,7 +119,7 @@ bash bb index.html z.php
 
 <p>最后的payload如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151231/201512310329067742245.jpg" alt="p4" /></p>
+<p><img src="../images_result/images/201512310329067742245.jpg" alt="p4"></p>
 
 <p>然后把两个图里的内容，一个mysql的password和一个6位数字拼起来就是FLAG咯。</p>
 
@@ -127,7 +127,7 @@ bash bb index.html z.php
 
 <p>更多的writeup可以参考如下链接：</p>
 
-<p><a href="https://github.com/ctfs/write-ups-2015/tree/master/32c3-ctf-2015/web">https://github.com/ctfs/write-ups-2015/tree/master/32c3-ctf-2015/web</a></p>      </p>
+<p><a href="https://github.com/ctfs/write-ups-2015/tree/master/32c3-ctf-2015/web">https://github.com/ctfs/write-ups-2015/tree/master/32c3-ctf-2015/web</a></p>      <p></p>
     
 			</body>
 		</html>

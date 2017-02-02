@@ -3,16 +3,16 @@
 			<head>
 			     <title>MySQL注入技巧 - Utopia</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7299">http://drops.wooyun.org/tips/7299</a></h1>
 				
       <p>
-        <p>原文地址：http://websec.files.wordpress.com/2010/11/sqli2.pdf</p>
+        </p><p>原文地址：http://websec.files.wordpress.com/2010/11/sqli2.pdf</p>
 
 <h1>0x00、介绍</h1>
 
-<hr />
+<hr>
 
 <p>也可以参考瞌腄龙的mysql注入科普：http://drops.wooyun.org/tips/123</p>
 
@@ -24,7 +24,7 @@
 
 <h1>0x01 MYSQl灵活的语法</h1>
 
-<hr />
+<hr>
 
 <p><strong>1 MySQL语法以及认证绕过</strong></p>
 
@@ -124,7 +124,7 @@ select data from users where 0=0
 
 <h1>0x02 关键字过滤</h1>
 
-<hr />
+<hr>
 
 <p>空格</p>
 
@@ -238,7 +238,7 @@ if(substr(pass,1,1)='a',1,0) // if true
 
 <h1>0x03 函数过滤</h1>
 
-<hr />
+<hr>
 
 <p>构建字符串相关函数</p>
 
@@ -298,7 +298,7 @@ length(replace(data, 'a', '')) # length will be shorter
 
 <h1>0x04 注入时主要使用的一些东西</h1>
 
-<hr />
+<hr>
 
 <pre><code>1个控制流程操作(select, case, if(), ...)
 1个比较操作(=, like, mod(), ...)
@@ -329,7 +329,7 @@ https://media.blackhat.com/bh-us-12/Briefings/Ristic/BH_US_12_Ristic_Protocol_Le
 http://www.blackhatlibrary.net/SQL_injection
 
 http://websec.ca/kb/sql_injection
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

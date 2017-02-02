@@ -3,14 +3,14 @@
 			<head>
 			     <title>如何用意念获取附近美女的手机号码 - Metasploit</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/573">http://drops.wooyun.org/tips/573</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>那是一个漆黑的夜晚，北风凛凛，我和我的小伙伴们结伴走在回家的路上。下面……没有了，哈哈……我是标题党！</p>
 
@@ -22,11 +22,11 @@
 
 <h2>0x01 准备</h2>
 
-<hr />
+<hr>
 
 <p>我们附近没有CMCC信号，我们就想搭建一个免费的CMCC，让她们主动来输入手机号认证，岂不更好，下面是实施计划。</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410515922155.jpg" alt="2013090819053783681.jpg" /></p>
+<p><img src="../images_result/images/2013100410515922155.jpg" alt="2013090819053783681.jpg"></p>
 
 <p>准备：无线网卡（8137）、bt5、钓鱼页面</p>
 
@@ -37,21 +37,21 @@
 #ifconfig eht0 192.168.10.2/24 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071406101713294.jpg" alt="2013090819074528998.jpg" /></p>
+<p><img src="../images_result/images/2014071406101713294.jpg" alt="2013090819074528998.jpg"></p>
 
 <h3>二：下面要安装dhcp和配置</h3>
 
 <pre><code>#apt-get install dhcp3-server
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403481661602.jpg" alt="2013090819081424128.jpg" /></p>
+<p><img src="../images_result/images/2014071403481661602.jpg" alt="2013090819081424128.jpg"></p>
 
 <pre><code># vi /etc/default/dhcp3-server
 </code></pre>
 
 <p>INTERFACES="eth0" 修改为 INTERFACES="at0"</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071406100262723.jpg" alt="2013090819093997661.jpg" /></p>
+<p><img src="../images_result/images/2014071406100262723.jpg" alt="2013090819093997661.jpg"></p>
 
 <pre><code># vi /etc/dhcp3/dhcpd.conf
 </code></pre>
@@ -72,7 +72,7 @@ range 192.168.10.10 192.168.10.100;
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403460525256.jpg" alt="2013090819102545091.jpg" /></p>
+<p><img src="../images_result/images/2014071403460525256.jpg" alt="2013090819102545091.jpg"></p>
 
 <h3>三：启动apache和配置钓鱼页面</h3>
 
@@ -85,7 +85,7 @@ range 192.168.10.10 192.168.10.100;
 
 <p>当然如果你直接伪造成移动CMCC页面也行！</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403460654824.jpg" alt="2013090819110030478.jpg" /></p>
+<p><img src="../images_result/images/2014071403460654824.jpg" alt="2013090819110030478.jpg"></p>
 
 <h3>四：准备的差不多了，神器该派出来了</h3>
 
@@ -97,7 +97,7 @@ range 192.168.10.10 192.168.10.100;
 
 <p>1)  Social-Engineering Attacks</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403481681465.jpg" alt="2013090819113210713.jpg" /></p>
+<p><img src="../images_result/images/2014071403481681465.jpg" alt="2013090819113210713.jpg"></p>
 
 <p>下一步</p>
 
@@ -105,13 +105,13 @@ range 192.168.10.10 192.168.10.100;
 
 <p>8) WirelessAccess Point Attack Vector</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404362043943.jpg" alt="2013090819115743190.jpg" /></p>
+<p><img src="../images_result/images/2014071404362043943.jpg" alt="2013090819115743190.jpg"></p>
 
 <p>下一步</p>
 
 <p>set:wireless>1 //选择1 启动</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403460647259.jpg" alt="2013090819122771172.jpg" /></p>
+<p><img src="../images_result/images/2014071403460647259.jpg" alt="2013090819122771172.jpg"></p>
 
 <p>会提示让你编辑dhcp3-server这个文件。按Ctrl+x 直接退出就可以，因为之前我们编辑过了。</p>
 
@@ -123,29 +123,29 @@ range 192.168.10.10 192.168.10.100;
 
 <p>Enter the wireless network interface (ex. wlan0):wlan0 //选择wlan0</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403460615913.jpg" alt="2013090819125527463.jpg" /></p></p>
+<p><img src="../images_result/images/2014071403460615913.jpg" alt="2013090819125527463.jpg"></p><p></p>
 
 <p>（忘记说一个，# vi /pentest/exploits/set/config/set_config.py 更改为自己想要的AP名字，我这里改成CMCC）</p>
 
 <p>下面是效果</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403460631904.jpg" alt="2013090819133492348.jpg" /></p>
+<p><img src="../images_result/images/2014071403460631904.jpg" alt="2013090819133492348.jpg"></p>
 
 <p>连接AP不用输入密码</p>
 
 <p>打开任意网站都会跳到我的钓鱼页面</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403460725222.jpg" alt="2013090819140773680.jpg" /></p>
+<p><img src="../images_result/images/2014071403460725222.jpg" alt="2013090819140773680.jpg"></p>
 
 <p>手机UC登陆效果</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404362183076.jpg" alt="2013090819143770651.jpg" /></p>
+<p><img src="../images_result/images/2014071404362183076.jpg" alt="2013090819143770651.jpg"></p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071404362137156.jpg" alt="2013090819145114971.jpg" /></p>
+<p><img src="../images_result/images/2014071404362137156.jpg" alt="2013090819145114971.jpg"></p>
 
 <p>总结:</p>
 
-<p>钓了2天，钓到10多个“美女”手机号码，效果还是不错，如果伪造成cmcc登陆页面，效果会更好！ （仅限技术研究，切勿用于法非用途！！！后果自负）</p>      </p>
+<p>钓了2天，钓到10多个“美女”手机号码，效果还是不错，如果伪造成cmcc登陆页面，效果会更好！ （仅限技术研究，切勿用于法非用途！！！后果自负）</p>      <p></p>
     
 			</body>
 		</html>

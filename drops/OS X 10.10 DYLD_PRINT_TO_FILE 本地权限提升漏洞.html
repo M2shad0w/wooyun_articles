@@ -3,16 +3,16 @@
 			<head>
 			     <title>OS X 10.10 DYLD_PRINT_TO_FILE 本地权限提升漏洞 - P3nro5e</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/news/7427">http://drops.wooyun.org/news/7427</a></h1>
 				
       <p>
-        <p>from:https://www.sektioneins.de/en/blog/15-07-07-dyld_print_to_file_lpe.html</p>
+        </p><p>from:https://www.sektioneins.de/en/blog/15-07-07-dyld_print_to_file_lpe.html</p>
 
 <h1>0x00 介绍</h1>
 
-<hr />
+<hr>
 
 <p>随着<code>OS X 10.10</code>的发布，Apple已为其动态链接器添加了以下新特性。已添加用于将错误日志记录到任意文件的环境变量<code>DYLD_PRINT_TO_FILE</code> 。
 当该变量被添加到通常被需要的<code>safeguard</code>时，新的环境变量会被添加到未被使用的动态链接器。所以即使是suid为root的二进制程序也可能拥有这个新特性。因为在文件系统中可以打开或创建root用户拥有的任意文件。所以在这种情况下会有一定的危险性。此外，已打开的日志文件从不被关闭，因此它的文件描述符会被泄漏进SUID为root的进程。这意味着在文件系统中，SUID为root进程的子进程可以对具有root权限的用户所拥有的任意文件进行写操作。进而在<code>OS X 10.10.x</code>中实现权限提升。</p>
@@ -24,7 +24,7 @@
 
 <h1>0x01 漏洞描述</h1>
 
-<hr />
+<hr>
 
 <p>当Apple已经改变了用于OS X 10.10的动态链接器代码来支持新的环境变量<code>DYLD_PRINT_TO_FILE</code>时，他们已经将如下代码直接添加到了dyld的_main函数。正如你可以从该代码中所了解到的，该环境变量值被直接当作文件名来使用，其用于已打开或已创建的记录日志的文件。</p>
 
@@ -50,7 +50,7 @@ if ( loggingPath != NULL ) {
 
 <h1>0x02 测试</h1>
 
-<hr />
+<hr>
 
 <p>如果系统存在漏洞或仅输入如下内容到shell中：</p>
 
@@ -88,7 +88,7 @@ lrwxr-xr-x@  1 root  wheel      11 Jul 15 15:56 tmp -&gt; private/tmp
 
 <h1>0x03 保护</h1>
 
-<hr />
+<hr>
 
 <p>在进行对该问题的利用前，因为Apple将花费数月来对该问题进行回顾，我们已发布了一个内核扩展，通过阻止所有SUID为root的二进制程序识别的环境变量来进行保护。此外它添加了缓解来解决在文件描述符上绕过的O_APPEND的限制。</p>
 
@@ -136,7 +136,7 @@ int main(int argc, char **argv)
 # Simple Proof of Concept Exploit for the DYLD_PRINT_TO_FILE
 # local privilege escalation vulnerability in OS X 10.10 - 10.10.4
 #
-# (C) Copyright 2015 Stefan Esser &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f88b8c9d9e9996d69d8b8b9d8ab88b9d938c9197969d91968bd69c9d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+# (C) Copyright 2015 Stefan Esser &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="f88b8c9d9e9996d69d8b8b9d8ab88b9d938c9197969d91968bd69c9d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
 #
 # Wait months for a fix from Apple or install the following KEXT as protection
 # https://github.com/sektioneins/SUIDGuard
@@ -241,7 +241,7 @@ echo "cp $TARGET/backup $SUIDVICTIM" | /usr/bin/boomsh &gt; /dev/null 2&gt; /dev
 rm -rf $TARGET
 
 /usr/bin/boomsh
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

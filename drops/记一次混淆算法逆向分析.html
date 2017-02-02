@@ -3,20 +3,20 @@
 			<head>
 			     <title>记一次混淆算法逆向分析 - ThomasKing</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/11326">http://drops.wooyun.org/mobile/11326</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>小弟最近整理之前的资料，偶然发现半年前的混淆对抗研究以及一道CTF练习题目，故分享以作记录。限于水平，难免会有疏漏或者错误之处，望各位读者批评指正。</p>
 
 <h1>0x01 基本分析</h1>
 
-<hr />
+<hr>
 
 <p>jeb打开文件，找到方法校验方法。逻辑很简单，校验函数既是Native函数check.</p>
 
@@ -117,7 +117,7 @@ seg013:80A065D8                 LDMFD           SP!, {R8,PC}
 
 <h1>0x02 基于指令特征匹配对抗混淆</h1>
 
-<hr />
+<hr>
 
 <p>通过分析找到所有的混淆模式，最后大概几种。限于篇幅，列举一些做说明</p>
 
@@ -189,8 +189,8 @@ seg013:80A065F4                 B               sub_80A06620
 seg013:80A06620                 B               sub_80A01364
 </code></pre>
 
-<p>执行前混淆：STMFD-LDMFD跳转到<code>loc_80A065E0</code>。获取<code>next_jmp</code>和上述一致。<br />
-执行后混淆：通过STMFD-LDMFD和两次B直接跳转返回到下一条B指令地址sub_80A01364。<br />
+<p>执行前混淆：STMFD-LDMFD跳转到<code>loc_80A065E0</code>。获取<code>next_jmp</code>和上述一致。<br>
+执行后混淆：通过STMFD-LDMFD和两次B直接跳转返回到下一条B指令地址sub_80A01364。<br>
 真实指令：和上述类似，遍历混淆指令时，对指令进行分组(STMFD-LDMFD)、(LDR R3, [R0])、(B)、(B)。易获取真实指令(LDR R3, [R0])。</p>
 
 <p>通过上述方法，大概分析20个多有的B指令即可找到所有的混淆模式，总的来说混淆的模式是有限的。</p>
@@ -211,7 +211,7 @@ seg013:80A06620                 B               sub_80A01364
 
 <p>但存在问题，当IDA并没有识别出指令时，无法通过GetMnem等API获取信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151218/2015121801460023413189.png" alt="p1" /></p>
+<p><img src="../images_result/images/2015121801460023413189.png" alt="p1"></p>
 
 <p>由于混淆对IDA指令识别的影响，致使IDA无法自动将指令反汇编出来。可能已经有读者意识到，遇到这种情况直接调用MakeCode将数据转化为指令即可。然而，实际使用MakeCode自动处理时，并不能完成手动按'C'识别指令的功能。那么，是否遇到这种情况后，就手动去完成指令反汇编呢？答案是否定的。由于存在很多这种情况，手动转化也很费时(测试环境IDA6.8)。</p>
 
@@ -219,7 +219,7 @@ seg013:80A06620                 B               sub_80A01364
 
 <h1>0x03 基于指令解析执行对抗混淆</h1>
 
-<hr />
+<hr>
 
 <p>通过上述分析，由于IDA存在无法自动反汇编一部分opcode数据，故单纯依靠IDAPython是无法满足指令解析指令的需求的。为了实现对指令的解析，可采用两种途径：</p>
 
@@ -401,7 +401,7 @@ seg013:80A0680C                 LDMFD           SP!, {R8,R9,PC}
 
 <h1>0x04 算法逆向分析</h1>
 
-<hr />
+<hr>
 
 <p>通过简单分析check即可看到算法的核心流程在0x80a010c0这个函数，而0x80a01048函数的功能是对指令路径上的断点进行检测，和其他平台的反调试思路类似，这里把重点放在0x80a010c0的逆向上。自动化分析得到0x80a010c0函数：</p>
 
@@ -514,7 +514,7 @@ for(i = 0; i &lt; N; i++){
 
 <p>至此，此ctf题目大致分析完毕。</p>
 
-<p>题目下载地址：<a href="http://pan.baidu.com/s/1hrqZH9E">http://pan.baidu.com/s/1hrqZH9E</a></p>      </p>
+<p>题目下载地址：<a href="http://pan.baidu.com/s/1hrqZH9E">http://pan.baidu.com/s/1hrqZH9E</a></p>      <p></p>
     
 			</body>
 		</html>

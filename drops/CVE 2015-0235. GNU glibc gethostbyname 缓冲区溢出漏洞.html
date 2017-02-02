@@ -3,16 +3,16 @@
 			<head>
 			     <title>CVE 2015-0235: GNU glibc gethostbyname 缓冲区溢出漏洞 - blast</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4780">http://drops.wooyun.org/papers/4780</a></h1>
 				
       <p>
-        <p>from:<a href="http://www.openwall.com/lists/oss-security/2015/01/27/9">http://www.openwall.com/lists/oss-security/2015/01/27/9</a>，<a href="http://ma.ttias.be/critical-glibc-update-cve-2015-0235-gethostbyname-calls/">http://ma.ttias.be/critical-glibc-update-cve-2015-0235-gethostbyname-calls/</a></p>
+        </p><p>from:<a href="http://www.openwall.com/lists/oss-security/2015/01/27/9">http://www.openwall.com/lists/oss-security/2015/01/27/9</a>，<a href="http://ma.ttias.be/critical-glibc-update-cve-2015-0235-gethostbyname-calls/">http://ma.ttias.be/critical-glibc-update-cve-2015-0235-gethostbyname-calls/</a></p>
 
 <h2>0x00 内容</h2>
 
-<hr />
+<hr>
 
 <pre><code>1 - 摘要
 2 - 分析
@@ -24,7 +24,7 @@
 
 <h2>0x01 摘要</h2>
 
-<hr />
+<hr>
 
 <p>Qualys公司在进行内部代码审核时，发现了一个在GNU C库(glibc)中存在的_&#95;nss&#95;hostname&#95;digits&#95;dots函数导致的缓冲区溢出漏洞。这个bug可达可以通过gethostbyname *()函数来触发，本地和远程均可行。鉴于它的影响，我们决定仔细分析它。分析完成后，我们也决定以“幽灵”(GHOST)命名此漏洞。</p>
 
@@ -42,7 +42,7 @@
 
 <h2>0x02 分析</h2>
 
-<hr />
+<hr>
 
 <p>存在漏洞的函数_&#95;nss&#95;hostname&#95;digits&#95;dots()由glibc的非重入版本的文件：nss/getXXbyYY.c，以及重入版本：nss/getXXbyYY&#95;r.c提供。然而，这个函数的调用是由#ifdef HANDLE&#95;DIGITS_DOTS来定义的，这个宏定义只在这几个文件有：</p>
 
@@ -199,7 +199,7 @@
 
 <h2>0x04 案例分析</h2>
 
-<hr />
+<hr>
 
 <p>在本节中，我们将分析真实的调用gethostbyname*()函数的例子，但我们首先介绍一个小测试程序，检查系统是否脆弱：</p>
 
@@ -370,7 +370,7 @@ Segmentation fault
 [202086.144336] clockdiff[3618]: segfault at b90d0d24 ip b75bb0c6 sp bf8e9dc0 error 6 in libc-2.17.so[b7544000+1b8000]
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150128/20150128052237518404.4.1.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/20150128052237518404.4.1.jpg" alt="enter image description here"></p>
 
 <h4>4.4.2 - ping and arping</h4>
 
@@ -542,7 +542,7 @@ user@...ntu-12-04-32b:~$ /usr/sbin/pppd 'dryrun' 'ms-dns' `python -c "print '0' 
 Aborted (core dumped)
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150128/20150128052514967524.6.1.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/20150128052514967524.6.1.jpg" alt="enter image description here"></p>
 
 <h4>4.6.2 - ms-wins optio</h4>
 
@@ -582,7 +582,7 @@ user@...ntu-12-04-32b:~$ /usr/sbin/pppd 'dryrun' 'ms-wins' `python -c "print '0'
 Aborted (core dumped)
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150128/20150128052548821424.6.2.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/20150128052548821424.6.2.jpg" alt="enter image description here"></p>
 
 <h4>4.6.3 - socket option</h4>
 
@@ -643,11 +643,11 @@ user@...ian-7-7-64b:~$ dmesg
 [ 1715.842547] exim4[2562]: segfault at 7fabf1f0ecb8 ip 00007fabef31bd04 sp 00007fffb427d5b0 error 6 in libc-2.13.so[7fabef2a2000+182000]
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150128/20150128062706763484.7.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/20150128062706763484.7.jpg" alt="enter image description here"></p>
 
 <h2>0x05 Exploitation</h2>
 
-<hr />
+<hr>
 
 <h3>5.1 - Code execution</h3>
 
@@ -723,7 +723,7 @@ typedef struct storeblock {
 
 <p>这有效地把gethostbyname的缓冲区溢出变成随便往哪儿写东西的问题，因为我们控制了两个指针：Exim分配器会返回的下一块内存块(被劫持“next”指针)和分配的数据(null终止字符串，我们发送Exim的SMTP命令的参数)。</p>
 
-<p>最后，我们用这个随意写的漏洞来覆盖Exim的运行时配置，这个配置是存在堆中的。确切地说，我们覆盖Exim的访问控制列表(ACL)，并实现任意代码执行。这要感谢Exim的 "${run{<command> <args>}}" 字符串扩展机制。</p>
+<p>最后，我们用这个随意写的漏洞来覆盖Exim的运行时配置，这个配置是存在堆中的。确切地说，我们覆盖Exim的访问控制列表(ACL)，并实现任意代码执行。这要感谢Exim的 "${run{<command> <args>}}" 字符串扩展机制。</args></p>
 
 <pre><code>#!cpp
                                                      |&lt; storeblock
@@ -796,13 +796,13 @@ typedef struct storeblock {
 
 <h2>0x06 致谢</h2>
 
-<hr />
+<hr>
 
 <p>我们要感谢OpenWall项目的Alexander Peslyak帮助以发现披露这个漏洞。</p>
 
 <h2>0x07 修复 CVE-2015-0235</h2>
 
-<hr />
+<hr>
 
 <p>就像最近的OpenSSL心脏滴血漏洞，这个问题要修复起来也很烦人。更新是在glibc包中，但是这个库会被很多运行中的服务使用。在更新之后，每个服务都要重启一下。</p>
 
@@ -838,7 +838,7 @@ $ apt-get clean &amp;&amp; apt-get update &amp;&amp; apt-get upgrade
 
 <h2>0x08 可能的攻击手段</h2>
 
-<hr />
+<hr>
 
 <p>服务器上gethostbyname() 应该是用的最多的了。许多DNS解析服务都可能会和这个CVE有关，唯一一点是，你需要控制DNS解析的东西才行。</p>
 
@@ -851,7 +851,7 @@ $ apt-get clean &amp;&amp; apt-get update &amp;&amp; apt-get upgrade
 ·其他
 </code></pre>
 
-<p>【任何】DNS查询都可能会触发这个漏洞，唯一一个“好事”是漏洞并不会立刻造成提权，你可能还是以同一个用户身份执行命令，但是肯定有其他的各种各样的提权方式。非高权限用户依然可以用你的服务器做DDoS攻击等等。</p>      </p>
+<p>【任何】DNS查询都可能会触发这个漏洞，唯一一个“好事”是漏洞并不会立刻造成提权，你可能还是以同一个用户身份执行命令，但是肯定有其他的各种各样的提权方式。非高权限用户依然可以用你的服务器做DDoS攻击等等。</p>      <p></p>
     
 			</body>
 		</html>

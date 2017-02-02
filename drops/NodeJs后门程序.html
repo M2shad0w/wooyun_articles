@@ -3,20 +3,20 @@
 			<head>
 			     <title>NodeJs后门程序 - Black_Hole</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/10900">http://drops.wooyun.org/tips/10900</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>从语言下手，来写一个市面没有的后面程序。</p>
 
 <h1>0x01 为什么选择NodeJs</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>我个人非常喜爱JavaScript这门语言，而我们今天所说的就是NodeJS，JavaScript语言的一个分支。NodeJS本身就是一个Web 服务器同时他还是一门后端语言，这一点尤其重要，因为我们只需要下载一个NodeJs就可以完成一系列操作，从而免去很多的麻烦。</li>
@@ -31,13 +31,13 @@
 
 <h1>0x02 前期准备工作</h1>
 
-<hr />
+<hr>
 
 <p>有关NodeJs安装的，请自行百度。</p>
 
 <p>我这里使用的是NodeJs版本是5.1.0</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/20151201135255604501.png" alt="p1" /></p>
+<p><img src="../images_result/images/20151201135255604501.png" alt="p1"></p>
 
 <p>NodeJs安装完成后，我们可以随便在哪一个目录建立一个NodeJs文件，当然我这里推荐在服务器网站上的静态目录里的JavaScript目录来写，因为都是JavaScript文件，有很大的隐蔽性。我嫌麻烦，就在~目录下建立一个nodeDemo目录来建立NodeJs文件了。</p>
 
@@ -45,7 +45,7 @@
 
 <h1>0x03 telnet通信后门</h1>
 
-<hr />
+<hr>
 
 <p>NodeJs里使用telnet进行通信的时候，需要调用<code>net</code>库和<code>child_process</code>库里的exec方法。</p>
 
@@ -148,17 +148,17 @@ server.listen(3000,function(){
 
 <p>现在让我们来测试一下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/20151201135303440302.png" alt="p2" /></p>
+<p><img src="../images_result/images/20151201135303440302.png" alt="p2"></p>
 
 <p>打开另一个终端，输入<code>telnet 127.0.0.1 3000</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/20151201135307869033.png" alt="p3" /></p>
+<p><img src="../images_result/images/20151201135307869033.png" alt="p3"></p>
 
 <p>现在我们输入几条命令试下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/20151201135309839994.png" alt="p4" /></p>
+<p><img src="../images_result/images/20151201135309839994.png" alt="p4"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/20151201135312162115.png" alt="p5" /></p>
+<p><img src="../images_result/images/20151201135312162115.png" alt="p5"></p>
 
 <p>OK了。现在只需要使用添加用户即可再次控制机器。</p>
 
@@ -173,7 +173,7 @@ server.listen(3000,function(){
 
 <p>每一条命令的前面都加上js才会运行，如果没有，则什么都不输出。事例：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/20151201135315299256.png" alt="p6" /></p>
+<p><img src="../images_result/images/20151201135315299256.png" alt="p6"></p>
 
 <p>加上当我第一次输入ls的时候，程序并没有运行，当前面加上js字符串之后，命令才成功的运行。</p>
 
@@ -184,21 +184,21 @@ server.listen(3000,function(){
 
 <p>如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/20151201135317511487.png" alt="p7" /></p>
+<p><img src="../images_result/images/20151201135317511487.png" alt="p7"></p>
 
 <p>那么现在的NodeJs后门代码就变成这个样子：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/20151201135319592158.png" alt="p8" /></p>
+<p><img src="../images_result/images/20151201135319592158.png" alt="p8"></p>
 
 <p>现在我们来测试一下能不能使用：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/20151201135320395279.png" alt="p9" /></p>
+<p><img src="../images_result/images/20151201135320395279.png" alt="p9"></p>
 
 <p>完美。</p>
 
 <h1>0x03 web通信后门</h1>
 
-<hr />
+<hr>
 
 <p>上节说道使用telnet通信当做后门，那么现在我们来说一说web通信后门。</p>
 
@@ -210,7 +210,7 @@ server.listen(3000,function(){
 
 <p>express node如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011353239110310.png" alt="p10" /></p>
+<p><img src="../images_result/images/201512011353239110310.png" alt="p10"></p>
 
 <pre><code>cd node &amp;&amp; npm install
 </code></pre>
@@ -220,7 +220,7 @@ server.listen(3000,function(){
 <pre><code>vim router/index.js
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011353304141711.png" alt="p11" /></p>
+<p><img src="../images_result/images/201512011353304141711.png" alt="p11"></p>
 
 <p>这是之前的index.js代码，现在我们来修改它。</p>
 
@@ -249,33 +249,33 @@ server.listen(3000,function(){
 
 <p>完整代码如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011353322686412.png" alt="p12" /></p>
+<p><img src="../images_result/images/201512011353322686412.png" alt="p12"></p>
 
 <p>现在我们进入到node目录。运行它：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011353343312013.png" alt="p13" /></p>
+<p><img src="../images_result/images/201512011353343312013.png" alt="p13"></p>
 
 <p>打开浏览器，输入<code>http://127.0.0.1:3000/?webshellPassword=ls</code></p>
 
 <p>结果如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011353357042514.png" alt="p14" /></p>
+<p><img src="../images_result/images/201512011353357042514.png" alt="p14"></p>
 
 <p>浏如果是window系统，没有装linux命令集的话，请把ls改成dir。</p>
 
 <p>我们来大致看一下能做哪些事：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011353377642015.png" alt="p15" /></p>
+<p><img src="../images_result/images/201512011353377642015.png" alt="p15"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011353393256616.png" alt="p16" /></p>
+<p><img src="../images_result/images/201512011353393256616.png" alt="p16"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011353419810917.png" alt="p17" /></p>
+<p><img src="../images_result/images/201512011353419810917.png" alt="p17"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151201/201512011353421143818.png" alt="p18" /></p>
+<p><img src="../images_result/images/201512011353421143818.png" alt="p18"></p>
 
 <p>想干啥都可以，心情瞬间变得更美丽的呢。</p>
 
-<p>下一章将说到使用网站来管理后门。麻麻再也不用担心我天天抱着电脑了呢。</p>      </p>
+<p>下一章将说到使用网站来管理后门。麻麻再也不用担心我天天抱着电脑了呢。</p>      <p></p>
     
 			</body>
 		</html>

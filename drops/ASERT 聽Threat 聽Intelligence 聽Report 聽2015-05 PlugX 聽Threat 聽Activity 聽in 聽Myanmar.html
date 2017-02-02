@@ -3,14 +3,14 @@
 			<head>
 			     <title>ASERT  Threat  Intelligence  Report  2015-05 PlugX  Threat  Activity  in  Myanmar - 左懒</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/8496">http://drops.wooyun.org/binary/8496</a></h1>
 				
       <p>
-        <h1>0x01 概要</h1>
+        </p><h1>0x01 概要</h1>
 
-<hr />
+<hr>
 
 <p>缅甸目前是一个从事重要政治活动的国家。2011年的民主改革更是帮助政府创造了一个有利于吸引投资者的氛围。该国资源丰富，拥有多种自然资源和稳定劳动力供给【1】。尽管近来有所发展，该国还需要长期进行种族斗争和内战。分析人士认为，中国和美国对缅甸的内部斗争有很大的影响，尤其是中国有海上通道，港口贸易和重要的燃料管道等优势。地理政治学家认为，美国可能会因为自己的利益而在这里阻挠中国的野心【2】，【3】，【4】。</p>
 
@@ -22,27 +22,27 @@
 
 <h1>0x02 缅甸政府站点分布的PlugX和加载器</h1>
 
-<hr />
+<hr>
 
 <p>截至2015-07-30，缅甸政府的Web服务器上保存了几个PlugX相关的恶意软件。确切来说，Ministry of Information(MOI)网站托管了Myanma Motion Picture Development Department(MMPDD)相关网站URL<a href="http://www.moi.gov[.]mm/mmpdd/sites/default/files/field">http://www.moi.gov[.]mm/mmpdd/sites/default/files/field</a></p>
 
 <p><strong>Figure  1: Screenshot of website containing malware as of July 30, 2015</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609024871450figure1.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609024871450figure1.png" alt=""></p>
 
 <p>PlugX的二进制文件包括moigov.exe，fields.exe，fibmapp.exe三个文件。field目录最后的修改时间是2015-07-15 23:33，可以推测该网站在这个日期或之前就遭受黑手。网站是运行在Drupal，但相关的危害分析技术超出文本的范围。</p>
 
 <p><strong>Figure 2: Parent directory reveals last modification of the directory used to store PlugX artifacts</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609032779005figure2.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609032779005figure2.png" alt=""></p>
 
 <p><strong>Table  1: A variety of PlugX malware-related content was observed on the Myanmar site</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609060817342table1.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609060817342table1.png" alt=""></p>
 
 <h1>0x03 PlugX moigov.exe样本</h1>
 
-<hr />
+<hr>
 
 <p>加载程序（MD5:a30262bf36b3023ef717b6e23e21bd30）下载一个叫moigov.exe的PlugX二进制文件（MD5: d0c5410140c15c8d148437f0f7eabcf7）。该PlugX样本具有多种配置属性。分析人员，事故救援人员和研究人员可以通过使用Volatility memory forensics framework（<a href="https://github.com/arbor-jjones/volatility_plugins/blob/master/plugx.py">https://github.com/arbor-jjones/volatility_plugins/blob/master/plugx.py</a>和<a href="https://github.com/arbor-jjones/volatility_plugins/blob/master/plugx_structures.py">https://github.com/arbor-jjones/volatility&#95;plugins/blob/master/plugx&#95;structures.py</a>）获取其内部信息。</p>
 
@@ -113,7 +113,7 @@ udp_p2p_port:  1357
 
 <h1>0x04 PlugX fields.exe样本</h1>
 
-<hr />
+<hr>
 
 <p>有几个原因使得fields.exe样本比较出名。它同样存在缅甸的moi.gov网站，和上述的moigov.exe样本有差不多一样的结构。但是有些elements是不同的，比如C2认证字符串，注入的进程表，安装文件夹等方面。</p>
 
@@ -185,13 +185,13 @@ udp_p2p_port: 1357
 
 <p><strong>Figure 3: About KP SEZ from http://kpsez.org/en/about-us-2/</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609033928478figure3.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609033928478figure3.png" alt=""></p>
 
 <p>基于先来者们使用PlugX的历史【7】【8】【9】【10】和该经济特区特性，为选择有利于民族国家利益而实施泄露和间谍行动，具体情况还要进一步调查。</p>
 
 <h1>0x05 PlugX fibmapp.exe样本</h1>
 
-<hr />
+<hr>
 
 <p><strong>PlugX configuration, MD5 69754b86021d3daa658da15579b8f08a</strong></p>
 
@@ -259,21 +259,21 @@ udp_p2p_port:  1357
 
 <h1>0x06 近来缅甸受到Evilgrab的攻击的TTP's</h1>
 
-<hr />
+<hr>
 
 <p>根据配置的信息来看，这件事情可能和六月份Palo Alto Networks【5】发布的使用Evilgrab恶意软件对缅甸总统网站发起的策略性网络感染攻击（SWC）相关。</p>
 
 <p>这种攻击在目标网站上添加一个iframe。这次攻击中，一个iframe也添加到www.moi.gov.mm网站，通过分析MOI网站可以发现以下脚本被index.html?q=content%2Fmmpdd-e-services页面调用。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609051962535ref1.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609051962535ref1.png" alt=""></p>
 
 <p>custom.js最后一行包含一个隐藏的iframe，指向Drupal themes文件夹里面html5.php：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609052711140ref2.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609052711140ref2.png" alt=""></p>
 
 <p>html5.php在目标网站上已经不再有效（可能是被攻击者、网站维护人员移除或者限定到指定的目标），VirusTotal检查结果表明其它html5.php文件可能提供其它服务。特别是一个MD5为a1c0c364e02b3b1e0e7b8ce89b611b53的html5.php文件包含了一个捆绑了PlugX的Firefox浏览器插件。这个浏览器插件只是复制PlugX二进制文件（名字为 Components.exe）到C:\Windows\tasks目录然后执行它。具体代码在boostrap.js里面：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609053539027ref3.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609053539027ref3.png" alt=""></p>
 
 <p>Components.exe的MD5是1c7fafe58caf55568bd5f28cae1c18fd。这个特殊的二进制文件似乎没有攻击缅甸的相关动作。然而它捆绑PlugX的策略、文件名和web感染方法都和Palo Alto Networks发布的Evilgrab攻击方法吻合。</p>
 
@@ -290,11 +290,11 @@ udp_p2p_port:  1357
 
 <h1>0x07 可能相关的PlugX恶意软件</h1>
 
-<hr />
+<hr>
 
 <p>配置清单还列出了另一个DNS服务器（203.81.64.18）。运行在缅甸邮电可能是因为比起其它DNS服务器会受到较少的怀疑。至少了四个PlugX样本使用这个DNS服务器。CA验证字符串可以参看下表：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609061771992table2.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609061771992table2.png" alt=""></p>
 
 <p>在#1样本的C2验证字符串分析表明其日期可能是4月9日（04-09）和4月20日（04-20），样本#2包含了2015-02-24的时间戳。样本#3的验证字符串可能指的是3月12日和3月20日。但目前ASERT缺乏证据证明这些活动是在这些日期。样本#4（在上述的Myanmar.gov网站发现）可能指的是通用术语“Electronic Document  Management  System”，GM716可能是7月16日。EDMS可能跟缅甸政府的EDMS相关【11】，【12】，虽然没证据证明这种说法。</p>
 
@@ -313,19 +313,19 @@ Thumbs.db Mode
 Sun_FlashUpdate.lnk
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609054383029ref4.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609054383029ref4.png" alt=""></p>
 
 <p>这个恶意样本发现自缅甸的Naypyitaw联邦选举委员会网站<a href="http://www.uecmyanmar[.]org/dmdocuments/invitations.rar">http://www.uecmyanmar[.]org/dmdocuments/invitations.rar</a>RAR文件（MD5: d055518ad14f3d6c40aa6ced6a2d05f2）。2015-07-30的时候，这个RAR文件仍然还在这个网站上。档案的名称是“Preliminary discussions about the election,invitations\Preliminary discussions about the election,invitations.lnk”。.lnk文件显示的修改时间是2015-03-25 2:35:36PM 星期三。.lnk的目标地址是：“C:\WINDOWS\system32\rundll32.exe invitations.jpeg Mode”，在DLL里面使用Mode功能执行invitations.jepg。</p>
 
 <p>档案还包含一个Readme.txt文件，为确保恶意软件的执行包含了以下的措辞。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609055281644ref5.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609055281644ref5.png" alt=""></p>
 
 <p>在同一个网站发现<a href="http://www.uecmyanmar[.]org/dmdocuments/PlanProposal.rar">http://www.uecmyanmar[.]org/dmdocuments/PlanProposal.rar</a>。当解压之后得到另一个PlugX样本。RAR包含的三个文件如下：</p>
 
 <p><strong>Figure 4: Malware found inside RAR file hosted on uecmyanmar site</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609034687291figure4.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609034687291figure4.png" alt=""></p>
 
 <p>这三个文件解压到“PlanProposal\new questionnaire\Voter Plan Proposal”目录，说明他们的目标可能是操作缅甸的参与投票。</p>
 
@@ -333,7 +333,7 @@ Sun_FlashUpdate.lnk
 
 <p><strong>Figure 5: External site hosting PlugX Command &amp; Control servers in an encoded form</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609035390960figure5.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609035390960figure5.png" alt=""></p>
 
 <p>在其他一些诸如：“PlugX:some uncovered points"的elements被Airbus Defence and Space【13】和应急人员【14】作为讨论的焦点。Volatility memory forensics framework可能是使用ASERT的plugx.py和plugx_structures.py Volatility插件分析PlugX配置elements【15】。每行的开头和结尾四个字节包含C2编码信息，之前的版本和端口信息。</p>
 
@@ -356,7 +356,7 @@ print rvalue
 
 <h1>0x08 建议</h1>
 
-<hr />
+<hr>
 
 <p>缅甸内部相关的机构应该意识到，攻击者的目的是本文所述的所有特殊邮件信息或网络流量。相关机构应当了解PlugX的网络流量，并应监控本文所述的PlugX配置数据相关的主机和网络。另外，监控JPCERT【17】所说的P2P PlugX也是一个明智的选择，尽管这个简单的PlugX样本P2P功能是被禁用的。PlugX只是恶意软件系列中的一员，攻击者通常有树种恶意软件可以选择。鉴于PlugX攻击活动具有针对性，攻击活动可能会持续。IOCs包含本书所述可能遭到攻击的组织，发现系统受损程度、以及所造成的损失以及组织应急措施。</p>
 
@@ -364,7 +364,7 @@ print rvalue
 
 <h1>0x09 附录1：”Connection Test.exe“恶意软件下载器技术分析</h1>
 
-<hr />
+<hr>
 
 <p>2015年7月2日，一个名为moigov.exe的文件试图下载来自MOI网站一个2015年6月23日编译的恶意软件下载器。分析时，如果下载这个文件返回404错误，则该文件很可能已经被攻击者删除了。恶意软件下载器原有的名字被VirusTotal检测到是”Connection Test.exe“，更多细节请参考【18】。这个程序伪装成IBM安全软件AppScan，并且使用相同的文件名，版权，版本号，出版商和产品值 (8.0.650.113)（参考binarydb.com 【19】）。</p>
 
@@ -374,15 +374,15 @@ print rvalue
 
 <p><strong>Figure 6: Legitimate AppScan binary</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609040370292figure6.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609040370292figure6.png" alt=""></p>
 
 <p><strong>Figure 7: Bogus AppScan binary that downloads PlugX</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609041484321figure7.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609041484321figure7.png" alt=""></p>
 
 <p>两个程序的图标：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609060022874ref6.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609060022874ref6.png" alt=""></p>
 
 <p>我们这里选择介绍的恶意软件下载器非常普通，使用的是2013年Arbor ASERT的成员Jason Jones所说的字节串技术【21】。字节串技术常常被各种恶意软件用于混淆代码。Deobfuscation可以手动为之，然而有一个python脚本实现快速Deobfuscation【22】。独特的字节串技术可以很容易混淆代码。</p>
 
@@ -392,43 +392,43 @@ print rvalue
 
 <p><strong>Figure  8: Byte strings technique fills AL, CL, BL, and DL one byte registers (hex on the left, ASCII on the right) with characters</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609042323974figure8.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609042323974figure8.png" alt=""></p>
 
 <p><strong>Figure 9: Strings being built (obfuscated on the left, deobfuscated on the right)</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609043396960figure9.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609043396960figure9.png" alt=""></p>
 
 <p>可以看到数据字符串组合成：kernel32.dll，urlMon.dll（作为调用LoadLibraryA的参数）。</p>
 
 <p><strong>Figure 10: Strings being processed after deobfuscation</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609043989848figure10.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609043989848figure10.png" alt=""></p>
 
 <p>同样还可以看到CreateProcessA，URLDownloadToFileA(作为调用GetProcAddress的参数)。字符串加工之后，PlugX恶意下载器通过 这个URL调用UrlMod.URLDownloadToFileA函数。</p>
 
 <p><strong>Figure 11: Downloader URL target which downloads PlugX</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609044539998figure11.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609044539998figure11.png" alt=""></p>
 
 <p><strong>Figure 12: Calls to LoadLibraryA and GetProcAddress receive the dynamically created strings</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609045491632figure12.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609045491632figure12.png" alt=""></p>
 
 <p><strong>Figure 13: The next function (4011F0) specifies the malware download location</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609050394737figure13.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609050394737figure13.png" alt=""></p>
 
 <p>虽然通过IDA pro或者其它静态分析器可以获取到下载器的详细信息。但更方便的方法是使用调试器。地址00403000显示了下载的URL。顺便说一下，里面还包含了“Hello，World！”字符串。</p>
 
 <p><strong>Figure 14: .data section reveals downloader details</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150906/2015090609051137361figure14.png" alt="" /></p>
+<p><img src="../images_result/images/2015090609051137361figure14.png" alt=""></p>
 
 <p>此字符串叠加技术有一个方便的特点是，它留下的的机器码很独特，可以通过一定的规则来检测。虽然这些规则有用，但是生成这些恶意下载器可能一些使用随机的寄存器或随机的字节，导致代码进一步的混乱。</p>
 
 <h1>0x0A 参考</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li><a href="http://thediplomat.com/2014/06/changing-dynamics-in-myanmar-impact-bangladeshs-geopolitics/">http://thediplomat.com/2014/06/changing-dynamics-in-myanmar-impact-bangladeshs-geopolitics/</a></li>
@@ -457,13 +457,13 @@ print rvalue
 
 <h1>0x0B 关于ASERT</h1>
 
-<hr />
+<hr>
 
 <p>Arbor NetWorks的ASERT（Arbor Security Engineering &amp; Response Team）是一个提供世界级的网络安全的研究和分析，帮助当今企业维护利益的网络运营商。ASERT的工程师和研究人员更是机构里面的精英团队，他们被成为“super remediators”，代表着最好的信息安全团队。其知名度和修复能力在全球的大多数网络服务提供商可以反映出来。</p>
 
 <p>ASERT分享给几百名国际计算机应急反应小组（CERTs）和成千上万的网络运营商情报简要和安全内容供稿。ASERT也运营当今世界上最大的分布式Honeynet，全天候监控全球的网络威胁<a href="http://atlas.arbor.net">http://atlas.arbor.net</a>。这一使命和Arbor Networks相关的资源给全球网络安全问题带一个创新和研究的动力。</p>
 
-<p>要查看Arbor近期的研究，新闻和ASERT信息安全社区请访问我们的门户<a href="http://www.arbornetworks.com/threats/">http://www.arbornetworks.com/threats/</a>。</p>      </p>
+<p>要查看Arbor近期的研究，新闻和ASERT信息安全社区请访问我们的门户<a href="http://www.arbornetworks.com/threats/">http://www.arbornetworks.com/threats/</a>。</p>      <p></p>
     
 			</body>
 		</html>

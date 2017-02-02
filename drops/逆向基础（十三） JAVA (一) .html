@@ -3,12 +3,12 @@
 			<head>
 			     <title>逆向基础（十三） JAVA (一)  - 糖果</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6924">http://drops.wooyun.org/tips/6924</a></h1>
 				
       <p>
-        <p>翻译书籍:Reverse Engineering for Beginners</p>
+        </p><p>翻译书籍:Reverse Engineering for Beginners</p>
 
 <p>作者:Dennis Yurichev</p>
 
@@ -16,7 +16,7 @@
 
 <h2>54.1介绍</h2>
 
-<hr />
+<hr>
 
 <p>大家都知道，java有很多的反编译器（或是产生JVM字节码） 原因是JVM字节码比其他的X86低级代码更容易进行反编译。</p>
 
@@ -155,7 +155,7 @@ public class ret
 }
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>public static boolean main(java.lang.String[]);
 flags: ACC_PUBLIC, ACC_STATIC
@@ -179,7 +179,7 @@ public class ret
 }
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>public static short main(java.lang.String[]);
 flags: ACC_PUBLIC, ACC_STATIC
@@ -201,7 +201,7 @@ public class ret
 }
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>public static char main(java.lang.String[]);
 flags: ACC_PUBLIC, ACC_STATIC
@@ -225,7 +225,7 @@ public class retc
 }
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>public static byte main(java.lang.String[]);
 flags: ACC_PUBLIC, ACC_STATIC
@@ -333,7 +333,7 @@ public class ret
 }
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>public static void main(java.lang.String[]);
 flags: ACC_PUBLIC, ACC_STATIC
@@ -346,7 +346,7 @@ stack=0, locals=1, args_size=1
 
 <h2>54.3 简单的计算函数</h2>
 
-<hr />
+<hr>
 
 <p>让我们继续看简单的计算函数。</p>
 
@@ -429,7 +429,7 @@ public class calc
 }
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>#!bash
 public static int sum(int, int);
@@ -492,7 +492,7 @@ public class calc
 }
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>public static int mult_add(int, int, int);
 flags: ACC_PUBLIC, ACC_STATIC
@@ -526,7 +526,7 @@ TOS -&gt;| c |
 
 <h2>54.4 JVM内存模型</h2>
 
-<hr />
+<hr>
 
 <p>X86和其他低级环境系统使用栈传递参数和存储本地变量，JVM稍微有些不同。</p>
 
@@ -538,7 +538,7 @@ TOS -&gt;| c |
 
 <h2>54.5 简单的函数调用</h2>
 
-<hr />
+<hr>
 
 <p>mathrandom()返回一个伪随机数，函数范围在「0.0...1.0)之间，但对我们来说，由于一些原因，我们常常需要设计一个函数返回数值范围在「0.0...0.5)</p>
 
@@ -638,7 +638,7 @@ stack=2, locals=1, args_size=1
 
 <h2>54.6 调用beep()函数</h2>
 
-<hr />
+<hr>
 
 <p>这可能是最简单的，不使用参数的调用两个函数。</p>
 
@@ -649,7 +649,7 @@ public static void main(String[] args)
 };
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>#!bash
 public static void main(java.lang.String[]);
@@ -663,7 +663,7 @@ stack=1, locals=1, args_size=1
 6: return
 </code></pre>
 
-<p>首先，invokestatic在0行偏移调用javaawt.toolkit. getDefaultTookKit()函数,返回toolkit类对象的引用，invokedvirtualIFge指令在3行偏移，调用这个类的beep（）方法。</p>      </p>
+<p>首先，invokestatic在0行偏移调用javaawt.toolkit. getDefaultTookKit()函数,返回toolkit类对象的引用，invokedvirtualIFge指令在3行偏移，调用这个类的beep（）方法。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>利用 NetBIOS 协议名称解析及 WPAD 进行内网渗透 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/pentesting/11799">http://drops.wooyun.org/pentesting/11799</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>WPAD 这项技术已经诞生了近十年的时间，其最大的优势就在于，在一个或多个局域网中，当需要为内网中的用户设置不同的代理服务器去连接互联网或者企业内网时，利用 WPAD 就能够灵活方便的进行配置。由于配置代理服务器的方式对于用户来说是透明的，无需用户手动操作的，因此，攻击者就可以利用这个特点使用 WPAD 进行内网的渗透。</p>
 
@@ -24,7 +24,7 @@
 
 <h1>0x01 WPAD 简介</h1>
 
-<hr />
+<hr>
 
 <p><strong>WPAD（Web Proxy Auto-Discovery Protocol）</strong> 是 Web 代理自动发现协议的简称，该协议的功能是可以使局域网中用户的浏览器可以自动发现内网中的代理服务器，并使用已发现的代理服务器连接互联网或者企业内网。WPAD 支持所有主流的浏览器，从 IE 5.0 开始就已经支持了代理服务器自动发现/切换的功能，不过苹果公司考虑到 WPAD 的安全风险，在包括 OSX 10.10 及之后版本的操作系统中的 Safari 浏览器将不再支持 PAC 文件的解析。</p>
 
@@ -60,7 +60,7 @@ function FindProxyForURL(url, host) {
 
 <h1>0x02 Windows 中的 WPAD</h1>
 
-<hr />
+<hr>
 
 <p>在 Windows 系统中，从 IE 5.0 开始就支持了 WPAD，并且 Windows 系统默认是开启了 WPAD 功能的。</p>
 
@@ -68,7 +68,7 @@ function FindProxyForURL(url, host) {
 
 <p>如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/2016010511165685071115.png" alt="p1" /> 图 1：Windows 中 IE 浏览器的 WPAD 设置</p>
+<p><img src="../images_result/images/2016010511165685071115.png" alt="p1"> 图 1：Windows 中 IE 浏览器的 WPAD 设置</p>
 
 <p>另外， Windows 系统从 IE 5.5 开始支持“自动代理结果缓存”功能，并默认开启了此功能，此功能的机制为每当客户端的浏览器连接成功 HTTP 代理服务器，都会更新 ARP 缓存，所以在客户端浏览器再次连接代理服务器也就是在再次调用 <strong>FindProxyForURL()</strong> 函数时，会先检查 ARP 缓存列表中，是否存在要连接的 HTTP 代理服务器地址。所以此功能的目的就是缩减系统获取分配对象的开销。</p>
 
@@ -98,7 +98,7 @@ function FindProxyForURL(url, host) {
 
 <h1>0x03 WPAD 实现方式</h1>
 
-<hr />
+<hr>
 
 <p>WPAD 实现的方式有两种，DHCP 和 DNS，具体内容如下。</p>
 
@@ -108,7 +108,7 @@ function FindProxyForURL(url, host) {
 
 <p>DHCP 的工作流程有 4 个步骤：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051116597277724.png" alt="p2" /> 图 2：DHCP 工作流程</p>
+<p><img src="../images_result/images/201601051116597277724.png" alt="p2"> 图 2：DHCP 工作流程</p>
 
 <p>上图即为客户端与 DHCP 服务器进行交互的过程，其中，前两个流程主要是通过客户端发送广播包，之后 DHCP 服务器进行相应与客户端进行单播通讯。后面的两个流程即为客户端从 DHCP 服务器获取 IP 地址的过程。当客户端已经成功获取到了 IP 地址后同时该地址在客户端重新登录到网络前并未被其他主机占用，那么将不会再执行前两个流程。关于 DHCP 协议的具体内容不是本文的重点内容，不再详述。</p>
 
@@ -116,7 +116,7 @@ function FindProxyForURL(url, host) {
 
 <p>DHCP 服务器响应的 DHCPACK 数据包对应的 DHCP 结构：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051117014441534.png" alt="p3" /> 图 3： DHCPACK 消息结构</p>
+<p><img src="../images_result/images/201601051117014441534.png" alt="p3"> 图 3： DHCPACK 消息结构</p>
 
 <p>关于 <strong>DHCP Options</strong> 的其他定义可以查看 DHCP 的 <a href="https://tools.ietf.org/html/rfc1531">RFC 1531 文档</a></p>
 
@@ -138,7 +138,7 @@ function FindProxyForURL(url, host) {
 
 <h1>0x04 利用 WPAD 进行内网渗透</h1>
 
-<hr />
+<hr>
 
 <p>前面的内容已经说明了 WPAD 的工作原理,实现方式和 WPAD 在 Windows 系统中的相关内容。接下来就是本文要重点阐述的内容，如何利用 WPAD 进行内网渗透。</p>
 
@@ -158,13 +158,13 @@ function FindProxyForURL(url, host) {
 
 <p>一张图看明白 NetBIOS 名称解析过程，以受害者访问局域网中的 WEBSERVER 为例（受害者主机的 NetBIOS缓存中无 WEBSERVER）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051117025544743.png" alt="p4" /> 图 4：NetBIOS 名称解析过程</p>
+<p><img src="../images_result/images/201601051117025544743.png" alt="p4"> 图 4：NetBIOS 名称解析过程</p>
 
 <p><strong>NetBIOS 协议分析</strong></p>
 
 <p>使用 Wireshark 可以快速抓取到 NetBIOS 协议<strong>名称查询</strong>的数据包，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051117043166253.png" alt="p5" /> 图 5：NetBIOS 名称查询数据包格式</p>
+<p><img src="../images_result/images/201601051117043166253.png" alt="p5"> 图 5：NetBIOS 名称查询数据包格式</p>
 
 <p>NetBIOS 的协议结构与 LLMNR 的基本一致。但是与 LLMNR 还是有所不同，其中最明显的一点为 NetBIOS 协议中的主机名称是加密的，通过查阅相关资料，如 dpkt，Wireshark等，可以找到其加密和解密的源码：</p>
 
@@ -345,7 +345,7 @@ if __name__ == "__main__":
 
 <p>利用上一节中的 Demo 程序以及 Python 的 SimpleHTTPServer 功能还有一台 HTTP 或者 SOCKS 代理服务器即可快速模拟出一个简单的攻击场景。如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051117069496763.png" alt="p6" /> 图 6： 利用 NetBIOS 名称解析进行基于 WPAD 的中间人攻击</p>
+<p><img src="../images_result/images/201601051117069496763.png" alt="p6"> 图 6： 利用 NetBIOS 名称解析进行基于 WPAD 的中间人攻击</p>
 
 <p>如上图所示，攻击者开启 NetBIOS 恶意应答程序，并监听 80 端口提供 PAC 配置文件（wpad.dat）的下载，同时开启代理服务器（这里使用的是 HTTP 代理服务器 => Burp Suite）。</p>
 
@@ -355,11 +355,11 @@ if __name__ == "__main__":
 
 <h1>0x05 总结</h1>
 
-<hr />
+<hr>
 
 <p>利用 NetBIOS 协议进行中间人攻击的方式其实还有很多，攻击的思路也可以很灵活的根据实际需要进行布局。在利用 WPAD 进行攻击时，实际的效果很有可能没有想象的那么好，不过一旦奏效，就可以拿到受害者主机权限。尤其是在无计可施的情况下，还是值得一试的，很多内网中，管理员都不会对这些攻击方式做防御措施，除了部分桌面安全产品，如防火墙可能会做严格的过滤拦截，大部分情况下，此类攻击方式还是很有效的，尤其是可以在做名称解析响应时，筛选受害者主机，对 HTTP 数据包进行更改插入恶意代码，进行针对性的定点打击。另外，NetBIOS 协议比起 LLMNR 有一个更佳有利于攻击的特点，NetBIOS 协议的名称解析可以对受害者访问的域名进行响应，当然，前提是 DNS 服务器没有做出成功的响应时，才会使用 NetBIOS 协议进行查询。关于这一点以及 WPAD ，都可以结合 Windows Update 所使用的更新域名进行中间人攻击，下载并执行攻击者指定的补丁文件。</p>
 
-<p>关于 NetBIOS 协议的内容可以在相关的 RFC 文档中查阅，其中还有不少东西可以在内网渗透中利用到，如 OPCODE 字段的取值，BROWSER 协议等等，更多的攻击思路还有待各位看官多多“引玉”。</p>      </p>
+<p>关于 NetBIOS 协议的内容可以在相关的 RFC 文档中查阅，其中还有不少东西可以在内网渗透中利用到，如 OPCODE 字段的取值，BROWSER 协议等等，更多的攻击思路还有待各位看官多多“引玉”。</p>      <p></p>
     
 			</body>
 		</html>

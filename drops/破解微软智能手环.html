@@ -3,16 +3,16 @@
 			<head>
 			     <title>破解微软智能手环 - 暗羽</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/wireless/15139">http://drops.wooyun.org/wireless/15139</a></h1>
 				
       <p>
-        <p>翻译自：<a href="http://www.b0n0n.com/2016/04/20/ms-jailbreak/">http://www.b0n0n.com/2016/04/20/ms-jailbreak/</a></p>
+        </p><p>翻译自：<a href="http://www.b0n0n.com/2016/04/20/ms-jailbreak/">http://www.b0n0n.com/2016/04/20/ms-jailbreak/</a></p>
 
 <h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>这学期我得到了一个微软智能手环作为项目研究目标。最初的项目目标并不是太难：只是去理解客户端的通信方式。因此我决定寻求乐趣，我决定尝试pwn掉它。在这里我想要感谢远在<a href="http://blog.isis.poly.edu/">OSIRIS实验室</a>的朋友给我提供的支持，我的伴侣也一直默默支持着我。当然，需要感谢的还有我的导师，mongo，他启发了我，教会了我很多，对此我表示由衷地感谢。</p>
 
@@ -20,7 +20,7 @@
 
 <h1>0x01 行为分析</h1>
 
-<hr />
+<hr>
 
 <p>首先，我们分析一下这种智能手环的一些基本行为，例如它如何升级固件，上传用户状态等。幸运的是，这个客户端只是一个windows二进制文件，因此我们可以很容易的构建好逆向环境。这个Windows客户端文件可以在<a href="https://www.microsoft.com/en-us/download/details.aspx?id=44579">这里下载</a>。由于客户端是用C#编写的，我们可以使用一些例如<a href="http://ilspy.net/">ILSpy</a>,<a href="http://justdecompile/">JustDecompile</a>,<a href="https://github.com/0xd4d/dnSpy">dnSpy</a>以及<a href="https://www.jetbrains.com/decompiler/">dotPeek</a>之类的工具很容易的对它进行调试和反编译。</p>
 
@@ -32,12 +32,12 @@ c:/Users/IEUser/AppData/Local/Microsoft/CargoDevice/u_9e35ffc6-2859-4332-b89c-91
 
 <p>现在我知道了固件会从哪里进行更新，下一步要做的就是获取用于更新的固件。因为我的设备已经是最新固件了，无法正常获取更新固件，所以我需要找到另外一种方法来获取固件。或许我可以试着欺骗服务器？</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042115595977338pic13.png" alt="p1" /></p>
+<p><img src="../images_result/images/2016042115595977338pic13.png" alt="p1"></p>
 
 <p>我使用Burp修改了请求信息中的版本号，之后它成功的欺骗了服务器，开始下载FirmwareUpdate.bin文件。得到这个文件后我就可以继续做一些有趣的事情。首先，我们需要分析更新固件FirmwareUpdate.bin。</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="dab8eab4eab49a9e97">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/MS_band $ binwalk FirmwareUpdate.bin
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="dab8eab4eab49a9e97">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ~/MS_band $ binwalk FirmwareUpdate.bin
 
 DECIMAL HEXADECIMAL DESCRIPTION
 --------------------------------------------------------------------------------
@@ -117,15 +117,15 @@ CRC=431E23C3
 
 <p><strong>1.检查主CRC</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116000151422pic23.png" alt="p2" /></p>
+<p><img src="../images_result/images/2016042116000151422pic23.png" alt="p2"></p>
 
 <p><strong>2.检查块CRC</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116000590968pic32.png" alt="p3" /></p>
+<p><img src="../images_result/images/2016042116000590968pic32.png" alt="p3"></p>
 
 <p><strong>3.检查更新固件版本号是否高于当前版本</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116001087392pic43.png" alt="p4" /></p>
+<p><img src="../images_result/images/2016042116001087392pic43.png" alt="p4"></p>
 
 <p>因此我要做的就是将版本号修改为比我当前手环高的数值，然后重新计算块CRC校验值，以及主CRC校验值。</p>
 
@@ -179,23 +179,23 @@ Patch("FirmwareUpdate.bin")
 
 <p>在对固件进行完修改后，我使用了上面一样的方法将其更新到设备中。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116001315378pic51.png" alt="p5" /></p>
+<p><img src="../images_result/images/2016042116001315378pic51.png" alt="p5"></p>
 
 <p>设备接收到文件后，它会检查文件的完整性，如果文件通过所有检查，你会看到这样的安装画面：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116001758830pic6.jpg" alt="p6" /></p>
+<p><img src="../images_result/images/2016042116001758830pic6.jpg" alt="p6"></p>
 
 <p>安装完成后手环会重启，然后你可以检查版本号以及其他修改过的地方：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116001971103pic7.jpg" alt="p7" /></p>
+<p><img src="../images_result/images/2016042116001971103pic7.jpg" alt="p7"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160421/2016042116002026835pic8.jpg" alt="p8" /></p>
+<p><img src="../images_result/images/2016042116002026835pic8.jpg" alt="p8"></p>
 
 <p>你可以修改将其中的任意代码和数据修改为你想要的。</p>
 
 <p>我还没有购买微软手环二代，所以我不知道这种方法是否适用于二代的手环。当然们如果你有兴趣可以自己进行尝试。</p>
 
-<p>以上，如果您在文章中发现有任何错误，欢迎指正。</p>      </p>
+<p>以上，如果您在文章中发现有任何错误，欢迎指正。</p>      <p></p>
     
 			</body>
 		</html>

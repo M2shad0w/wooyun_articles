@@ -3,14 +3,14 @@
 			<head>
 			     <title>域内渗透基本技巧 - 碧云涛</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/421">http://drops.wooyun.org/tips/421</a></h1>
 				
       <p>
-        <h2>0x00 什么是域</h2>
+        </p><h2>0x00 什么是域</h2>
 
-<hr />
+<hr>
 
 <p>有人说域是一种组织结构，是个安全边界。域也有另为一个名字，“活动目录”。不管域是什么，它总有一些特点，有了它，对管理一个机构的组织单元，人员，特别是计算机就方便了许多，特别是计算机，因为域就是建立在计算机上的。加入域里的计算机，共享文件，共享上网就会很方便。</p>
 
@@ -20,17 +20,17 @@
 
 <p>综上所诉，域就是我们在进行渗透测试时，会碰到的一种网络环境。对域比较直观的展示时，在登录3389时，在域里的机器会多一个下拉框，见图。</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101800462942715.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2013101800462942715.png" alt="enter image description here"></p>
 
 <p>如果“登录到”这个下拉框没有显示，请点击“选项（0）”按钮显示。仔细看，这个下拉框有两个选项，一个是此计算机，本地登录。一个是TESTONE域。再看下图</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101800463033672.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2013101800463033672.png" alt="enter image description here"></p>
 
 <p>这个3389登录界面里的“登录到”下拉框只有一个选项TESTONE。没有此计算机的选项。没错，这台机器就是DC，变身成DC的机器本地帐户会被禁用，所以不能登录本机，只能登录到域中（一些书上是这样说的，偶学艺不精，没有准确验证过）。所以DC是伟大的。</p>
 
 <h2>0x01 寻找域控制</h2>
 
-<hr />
+<hr>
 
 <p>假设我们现在已经在一个域里，当然不是正常的存在。因为我们正在做渗透测试呢，而不是坐在公司里上班打dota。</p>
 
@@ -83,7 +83,7 @@ mstsc /admin 远程桌面登录到console会话解决hash无法抓出问题
 
 <h2>0x02 自由飞翔</h2>
 
-<hr />
+<hr>
 
 <p>假设现在我们拿到了域控管理员的帐号和密码，我们可以登录域内一台服务器，当然域控也没问题。不过管理会经常登域控，这样偷情肯定很容易被发现，所以最好找一台没有什么作用，被遗弃的服务器上去操作。</p>
 
@@ -137,7 +137,7 @@ mstsc /admin 远程桌面登录到console会话解决hash无法抓出问题
 
 <h2>0x03 问题与提高</h2>
 
-<hr />
+<hr>
 
 <p>如果你只有远控，对方网络在内网。你无法直接登录服务器上的3389,那就只有端口转发了。 如果对方内网不能直接上网，只能通过一个代理服务器上网，比如ISA，squid撒的，再加上一个会随时断你线的防火墙，那么麻烦就大了。就算一些木马能出来，一般的端口转发也出不来啊～。</p>
 
@@ -145,7 +145,7 @@ mstsc /admin 远程桌面登录到console会话解决hash无法抓出问题
 
 <p>一 找到内网里可以直接出来的机器，比如管理员为了方便下片什么的开放的。其实可以直接找管理员。（还有一个思路，看对方内网里发邮件到外面的邮件头，一般都是邮件中继信息，一步一步跟就从内网到外网了，要是有基于邮件协议的木马就爽YY了，中了以后直接劫持邮件客服端，隐蔽的发邮件，控制信息由邮件出去）</p>
 
-<p>二 写程序，搞定代理，刺穿防火墙。</p>      </p>
+<p>二 写程序，搞定代理，刺穿防火墙。</p>      <p></p>
     
 			</body>
 		</html>

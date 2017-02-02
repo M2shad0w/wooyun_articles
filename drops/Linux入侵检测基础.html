@@ -3,14 +3,14 @@
 			<head>
 			     <title>Linux入侵检测基础 - Blood_Zero</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/11106">http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/11106</a></h1>
 				
       <p>
-        <h1>0x00 审计命令</h1>
+        </p><h1>0x00 审计命令</h1>
 
-<hr />
+<hr>
 
 <p>在linux中有5个用于审计的命令：</p>
 
@@ -39,17 +39,17 @@ who [OPTION]... [ FILE | ARG1 ARG2 ]
 
 <p>last：不带任何参数，显示系统的登录以及重启情况</p>
 
-<p><img src="http://static.wooyun.org//drops/20151218/2015121808143686736190.png" alt="p1" /></p></li>
+<p><img src="../images_result/images/2015121808143686736190.png" alt="p1"></p></li>
 <li><p>只针对关机/重启</p>
 
 <p>使用<code>-x</code>参数可以针对不同的情况进行查看</p>
 
-<p><img src="http://static.wooyun.org//drops/20151218/2015121808143878216235.png" alt="p2" /></p></li>
+<p><img src="../images_result/images/2015121808143878216235.png" alt="p2"></p></li>
 <li><p>只针对登录</p>
 
 <p>使用<code>-d</code>参数，并且参数后不用跟任何选项</p>
 
-<p><img src="http://static.wooyun.org//drops/20151218/2015121808144033839326.png" alt="p3" /></p></li>
+<p><img src="../images_result/images/2015121808144033839326.png" alt="p3"></p></li>
 <li><p>显示错误的登录信息</p>
 
 <p>lastb</p></li>
@@ -60,7 +60,7 @@ who [OPTION]... [ FILE | ARG1 ARG2 ]
 
 <h1>0x01 日志查看</h1>
 
-<hr />
+<hr>
 
 <p>在Linux系统中，有三类主要的日志子系统:</p>
 
@@ -77,17 +77,17 @@ who [OPTION]... [ FILE | ARG1 ARG2 ]
 
 <p><code>cat /var/log/messages</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20151218/2015121808144270353424.png" alt="p4" /></p></li>
+<p><img src="../images_result/images/2015121808144270353424.png" alt="p4"></p></li>
 <li><p>查看服务日志</p>
 
 <p><code>cat /var/log/maillog</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20151218/2015121808144463129520.png" alt="p5" /></p></li>
+<p><img src="../images_result/images/2015121808144463129520.png" alt="p5"></p></li>
 </ol>
 
 <h1>0x02 用户查看</h1>
 
-<hr />
+<hr>
 
 <p>Linux不同的用户，有不同的操作权限，但是所有用户都会在/etc/passwd /etc/shadow /etc/group /etc/group- 文件中记录；</p>
 
@@ -104,12 +104,12 @@ who [OPTION]... [ FILE | ARG1 ARG2 ]
 
 <p>注：linux设置空口令：passwd -d username</p>
 
-<p><img src="http://static.wooyun.org//drops/20151218/2015121808144542521620.png" alt="p6" /></p></li>
+<p><img src="../images_result/images/2015121808144542521620.png" alt="p6"></p></li>
 </ol>
 
 <h1>0x03 进程查看</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li><p>普通进程查看</p>
@@ -133,7 +133,7 @@ who [OPTION]... [ FILE | ARG1 ARG2 ]
 
 <h1>0x04 其他检查</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li><p>检查文件</p>
@@ -166,15 +166,15 @@ who [OPTION]... [ FILE | ARG1 ARG2 ]
 
 <p>对于linux的后门检查，网络上有一些公开的工具，但是在不使用这些工具的前提时，我们可以通过一些命令来获取一些信息。</p>
 
-<p>首先就是检测计划任务，可以参考上面；<br />
-第二：查看ssh永久链接文件：vim $HOME/.ssh/authorized_keys<br />
-第三：lsmod：检查内核模块<br />
-第四：chkconfig --list/systemctl list-units --type=service：检查自启<br />
-第五：服务后门/异常端口（是否存在shell反弹或监听）<br />
-其它：<br />
-ls /etc/rc.d<br />
+<p>首先就是检测计划任务，可以参考上面；<br>
+第二：查看ssh永久链接文件：vim $HOME/.ssh/authorized_keys<br>
+第三：lsmod：检查内核模块<br>
+第四：chkconfig --list/systemctl list-units --type=service：检查自启<br>
+第五：服务后门/异常端口（是否存在shell反弹或监听）<br>
+其它：<br>
+ls /etc/rc.d<br>
 ls /etc/rc3.d</p></li>
-</ol>      </p>
+</ol>      <p></p>
     
 			</body>
 		</html>

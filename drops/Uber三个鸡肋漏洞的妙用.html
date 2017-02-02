@@ -3,33 +3,33 @@
 			<head>
 			     <title>Uber三个鸡肋漏洞的妙用 - virusdefender</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/14035">http://drops.wooyun.org/web/14035</a></h1>
 				
       <p>
-        <h1>0x00 简介</h1>
+        </p><h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>作者通过精心设计，将一个鸡肋的的self-XSS和两个鸡肋的csrf变成了一个高质量的漏洞。</p>
 
-<p>原文：<br />
+<p>原文：<br>
 <a href="https://fin1te.net/articles/uber-turning-self-xss-into-good-xss/">https://fin1te.net/articles/uber-turning-self-xss-into-good-xss/</a></p>
 
 <p>在Uber一个设置个人信息的页面上，我找到一个非常简单且经典的XSS漏洞。设置项中随便修改一个字段为<code>&lt;script&gt;alert(document.domain);&lt;/script&gt;</code>就可以执行并弹框。</p>
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160324/2016032405012880554170.png" alt="uber-partners-xss-1-1" /></p>
+<p><img src="../images_result/images/2016032405012880554170.png" alt="uber-partners-xss-1-1"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160324/2016032405013355354238.png" alt="uber-partners-xss-1-1" /></p>
+<p><img src="../images_result/images/2016032405013355354238.png" alt="uber-partners-xss-1-1"></p>
 
 <p>一共花了两分钟找到这个漏洞，但是我们要来点更有意思的。</p>
 
 <h1>0x01 self-XSS</h1>
 
-<hr />
+<hr>
 
 <p>可以在网页中运行外界可控的任意JS脚本就被称为XSS漏洞，这时候你一般可以去读取其他用户的Cookies，或者发出一些请求。但是如果你只能对自己做这些，而不是其他用户，比如这段代码只会在你能看到的页面里面运行，这就被称为self-XSS。这种情况下，即使我们发现了漏洞，也很难去影响其他人。</p>
 
@@ -37,7 +37,7 @@
 
 <h1>0x02 Uber OAuth 登录流程</h1>
 
-<hr />
+<hr>
 
 <p>Ubser的OAuth登录流程也是很经典的</p>
 
@@ -48,7 +48,7 @@
 <li>用户重定向回到<code>partners.uber.com</code>，同时URL中携带<code>code</code>，可以用来换取Access Token</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160324/2016032405013657317335.png" alt="uber-partners-xss-2" /></p>
+<p><img src="../images_result/images/2016032405013657317335.png" alt="uber-partners-xss-2"></p>
 
 <p>从上面的截图你可以看到，OAuth的回调地址<code>/oauth/callback?code=...</code>并没有使用标准推荐的<code>state</code>参数，这意味着登录功能存在CSRF的问题，但是不好说会不会造成严重的问题。</p>
 
@@ -58,7 +58,7 @@
 
 <h1>0x03 捆绑利用漏洞</h1>
 
-<hr />
+<hr>
 
 <p>我们的计划就是这样的了</p>
 
@@ -83,7 +83,7 @@
 
 <p>这样是可以的，CSP会有下面的提示</p>
 
-<p><img src="http://static.wooyun.org//drops/20160324/2016032405013871837417.png" alt="uber-partners-xss-3" /></p>
+<p><img src="../images_result/images/2016032405013871837417.png" alt="uber-partners-xss-3"></p>
 
 <h3>第二步 登录我的账号</h3>
 
@@ -162,7 +162,7 @@ setTimeout(function() {
 
 <p>因为我们最终的这个iframe是在个人信息页面加载的，是同源的，而且<code>X-Frame-Options</code>也是设置的<code>sameorigin</code>而不是<code>deny</code>，所以我们使用<code>contentWindow</code>是可以访问到里面的内容的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160324/2016032405014328185515.png" alt="uber-partners-xss-5" /></p>
+<p><img src="../images_result/images/2016032405014328185515.png" alt="uber-partners-xss-5"></p>
 
 <h3>综合在一起</h3>
 
@@ -177,7 +177,7 @@ setTimeout(function() {
 <li>这样我们就有了一个同源的有用户session的iframe了</li>
 </ul>
 
-<p>这个漏洞很有意思，启发我们要在一个更高的层面去挖掘和思考安全漏洞。</p>      </p>
+<p>这个漏洞很有意思，启发我们要在一个更高的层面去挖掘和思考安全漏洞。</p>      <p></p>
     
 			</body>
 		</html>

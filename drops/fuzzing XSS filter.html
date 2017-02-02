@@ -3,16 +3,16 @@
 			<head>
 			     <title>fuzzing XSS filter - isno</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/879">http://drops.wooyun.org/tips/879</a></h1>
 				
       <p>
-        <p>题记：这是09年自己写的总结文章，之后多年也不搞这个了，技术显然是过时了，但我觉得思路还是有用的，算抛砖引玉吧，各位见笑 </p>
+        </p><p>题记：这是09年自己写的总结文章，之后多年也不搞这个了，技术显然是过时了，但我觉得思路还是有用的，算抛砖引玉吧，各位见笑 </p>
 
 <h2>0x00 前言</h2>
 
-<hr />
+<hr>
 
 <p>这是一篇学习总结，首先对几位未曾谋面也不知道名字的老师表示感谢，通过对你们大作的学习，使我逐渐入门开始跨入XSSer的行列，虽然我现在的水平和大师们比起来还差得太远，脚本方面的基础也不不行，但我会继续努力学习。</p>
 
@@ -20,13 +20,13 @@
 
 <h2>0x01 概述</h2>
 
-<hr />
+<hr>
 
 <p>曾经有一度，在N年前，我对网络安全对抗的总结就是“过滤与反过滤”，虽然现在看起来这种理解太狭隘了，不过在很大程度上过滤和突破过滤确实是很重要的手段。安全的目的就是过滤掉有害信息，保存安全的信息，而黑客的目的就是突破过滤把有害信息传递过去。无论是SQL注入、XSS、溢出等等，最最核心的东西就是突破过滤。本文主要讲针对存储型XSS过滤器的fuzz。</p>
 
 <h2>0x02 XSS filter：安全域边界</h2>
 
-<hr />
+<hr>
 
 <p>随着XSS攻击越来越流行，对XSS的过滤也越来越成熟，尤其是存储型XSS，由于攻击更加灵活多变，应用更加广泛，所以过滤手段也更复杂，从最早的黑名单字符串过滤，发展到现在基于语法分析的黑白名单相结合的过滤器，对攻击的难度要求也越来越高。</p>
 
@@ -50,7 +50,7 @@
 
 <h2>0x03 fuzzer的设计：突破边界</h2>
 
-<hr />
+<hr>
 
 <p>当一些普通的尝试无法成功突破filter，就要考虑用fuzzer。首先要设计测试模型，这也是最核心的问题。我经常想为什么fuzzing能够成功呢，一定是filter存在某些隐藏比较深的漏洞，例如前面谈过的安全域边界，所以我们设计fuzzing模型就重点对这些地方进行测试，举个例子说明一下安全域边界的问题：</p>
 
@@ -125,7 +125,7 @@
 
 <h2>0x04 实践练习：本地fuzzing的例子</h2>
 
-<hr />
+<hr>
 
 <p>在实际进行远程黑盒fuzzing之前我们先来构造一个本地fuzzing的例子来练习一下，看看模版的构造和元素的选择能否达到预想的效果。</p>
 
@@ -207,7 +207,7 @@ div style="w:exp  '&lt;div*/ression(alert(8));'="&gt;722&lt;/div&gt;
 
 <h2>0x05 实战：远程fuzzing</h2>
 
-<hr />
+<hr>
 
 <p>刚才看到本地fuzzing的例子其实也是黑盒测试而不是白盒测试，因为我们是不考虑filter源代码的，也不是直接用程序加载filter来跑，我们关系的只是过滤结果。以前看过一篇老外写XSS fuzzing的文章，说破解一个远程filter系统，先在本地模拟该filter的行为，然后直接在程序里边跑，根据跑出的结果去远程验证，在根据远程的结果修正本地模拟filter，不断这样修正，直到最后完全在本地实现远程filter的所有特性。最后直接在程序里面fuzzing本地filter。这种方法听起来是很不错的，因为在程序内部进行fuzzing效率是非常高的，每秒钟可以测几万次甚至几十万次，如果远程fuzzing的话有时候一分钟都测不完一次，就算一次发过去几百个testcase，算上生成用例时间，发送接收时间，验证结果时间，总共平均下来也是非常耗费时间的。但是，实际做起来就会知道本地模拟远程filter的方法更多的是纸上谈兵，因为仅仅根据输入输出结果是模拟不了fliter程序的全部特性的，也会漏掉绝大多数的漏洞。</p>
 
@@ -250,7 +250,7 @@ div style="w:exp  '&lt;div*/ression(alert(8));'="&gt;722&lt;/div&gt;
 
 <h2>0x06 思考：如何做出完善的filter</h2>
 
-<hr />
+<hr>
 
 <p>如果一篇文章只写攻击不写防范是会被同行鄙视，尤其到了我这把年纪的人。那么通过fuzzing测试对于改进filter能够有什么帮助呢？如果每个公司对自己的产品做足够的fuzzing测试，而不是又黑客来测试的话，我想会大大的改进产品安全性。更何况公司自己掌握着源代码，可以把fuzzing测试的效率提高几个数量级。很多公司我想也是有这方面测试的。但是为什么还是会有漏洞呢？大概是因为很多公司的开发测试人员不是搞安全出身的，至少是不精通安全，从另一个角度来说某些网络公司对其产品安全的重视程度是不够的。还有一方面是利益驱动的问题，微软自己测不出来的漏洞黑帽子也都能挖出来，这就不用我细说了。</p>
 
@@ -262,7 +262,7 @@ div style="w:exp  '&lt;div*/ression(alert(8));'="&gt;722&lt;/div&gt;
 
 <p>不知名大牛的yahoo XSS样本
 Blackbox Reversing of XSS Filters（Alexander Sotirov）
-WEB应用安全设计思想（axis）</p>      </p>
+WEB应用安全设计思想（axis）</p>      <p></p>
     
 			</body>
 		</html>

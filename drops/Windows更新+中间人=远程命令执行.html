@@ -3,14 +3,14 @@
 			<head>
 			     <title>Windows更新+中间人=远程命令执行 - 小飞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/10558">http://drops.wooyun.org/tips/10558</a></h1>
 				
       <p>
-        <h1>0x00 Windows Server Update Services</h1>
+        </p><h1>0x00 Windows Server Update Services</h1>
 
-<hr />
+<hr>
 
 <p>WSUS是Windows Server Update Services的简称。利用这个windows服务,管理员只需要保证局域网中的一台主机能够连接到MicroSoftUpdate服务器，就能实现内网中所所有主机快速地进行windows更新。</p>
 
@@ -27,15 +27,15 @@
 
 <h1>0x01 WSUS 协议分析</h1>
 
-<hr />
+<hr>
 
 <p>wsus利用SOAP XML实现c/s之间的通信，当client主机首次连入wsus-server的时候，会有一个这样的注册过程。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151121/2015112106260576738.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015112106260576738.jpg" alt=""></p>
 
 <p>一旦完成了这样的注册流程，client主机就能进行定时更新检查了。(只要上述的cookies不过期)</p>
 
-<p><img src="http://static.wooyun.org//drops/20151121/2015112106260538931.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015112106260538931.jpg" alt=""></p>
 
 <p>这里我们详细分析一下每一个请求</p>
 
@@ -120,7 +120,7 @@ PackageIdentity="InternetExplorer-Package~11.2.9600.16428" /&gt; &lt;/Not&gt;
 &lt;/soap:Body&gt;&lt;/soap:Envelope&gt;
 </code></pre>
 
-<p>需要说明的是，每一个update标签就是一个更新线程，然而最为重要的metadada标签<xml>在MSDN文档中却并没有详细解释。我们自己来分析一个看看</p>
+<p>需要说明的是，每一个update标签就是一个更新线程，然而最为重要的metadada标签<xml>在MSDN文档中却并没有详细解释。我们自己来分析一个看看</xml></p>
 
 <pre><code>#!xml
 &lt;ExtendedProperties DefaultPropertiesLanguage="en" Handler="http://schemas.microsoft.com/msus/2002/12/UpdateHandlers/WindowsInstaller" MaxDownloadSize="3077548" MinDownloadSize="0"&gt;
@@ -181,7 +181,7 @@ PackageIdentity="InternetExplorer-Package~11.2.9600.16428" /&gt; &lt;/Not&gt;
 
 <h1>0x02 Http有毒</h1>
 
-<hr />
+<hr>
 
 <p>将整个wsus流程分析清楚了。我们再来考虑一下基于wsus的安全问题，不知道大家是否注意到，前文曾经提到过</p>
 
@@ -189,13 +189,13 @@ PackageIdentity="InternetExplorer-Package~11.2.9600.16428" /&gt; &lt;/Not&gt;
 
 <p>而http协议在内网中简直就是毒药。 最令人遗憾的是，截止到最新的版本，wsus依然使用http作为默认的同学协议，只是在安装完毕的wizard界面向管理员建议部署ssl通信（谁会去看那个？）</p>
 
-<p><img src="http://static.wooyun.org//drops/20151121/2015112106260658488.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015112106260658488.jpg" alt=""></p>
 
 <p>所以我们完全有能力在内网中通过中间人篡改metadata实现攻击（以system权限）。而且<strong>攻击一定会奏效</strong>，因为wsus部署好之后，client的update check是定期的，所以肯定能够伪造一个新更新，迫使用户安装。</p>
 
 <h1>0x03 windows签名验证的绕过到中间人远程命令执行</h1>
 
-<hr />
+<hr>
 
 <p>可惜如果你们觉得通过中间人篡改metadata就能装个驱动马到主机上，那就too young了。</p>
 
@@ -212,16 +212,16 @@ PackageIdentity="InternetExplorer-Package~11.2.9600.16428" /&gt; &lt;/Not&gt;
 <li>另辟蹊径</li>
 </ol>
 
-<p>恩。。我们直接想第二种办法。 windows Update会验证每个更新是否被微软公司签名，然而，签名证书并不需要指明是用来“windows update” 这就是说，任何被微软签名的可执行程序都能被作为更新包被安装并运行。<br />
-想象一下，假如我们能够伪造一个cmd.exe的更新呢，加上前面又提到，在xml标签里面是可以指定运行参数的，那我们就能够通过中间人执行任意命令了！<br />
+<p>恩。。我们直接想第二种办法。 windows Update会验证每个更新是否被微软公司签名，然而，签名证书并不需要指明是用来“windows update” 这就是说，任何被微软签名的可执行程序都能被作为更新包被安装并运行。<br>
+想象一下，假如我们能够伪造一个cmd.exe的更新呢，加上前面又提到，在xml标签里面是可以指定运行参数的，那我们就能够通过中间人执行任意命令了！<br>
 冷静冷静，我们的微软并没有给cmd.exe签名。</p>
 
-<p>但是psExec确乎是被微软签名了，psexec的作用这里不解释，大家都懂<br />
+<p>但是psExec确乎是被微软签名了，psexec的作用这里不解释，大家都懂<br>
 所以我们完全有能力将psexec运行在NT AUTHORITY\SYSTEM下。所以，pwned~</p>
 
 <h1>0x04 Pwn</h1>
 
-<hr />
+<hr>
 
 <p>这是一个没有经过篡改的SyncUpdate 响应（用来告诉client现在有哪些更新可用）</p>
 
@@ -413,12 +413,12 @@ RebootByDefault="false" DefaultResult="Succeeded"&gt;
 
 <h1>0x05 Source</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="http://www.contextis.com/documents/161/CTX_WSUSpect_White_Paper.pdf">http://www.contextis.com/documents/161/CTX&#95;WSUSpect&#95;White_Paper.pdf</a></li>
 <li>pocket: <a href="https://github.com/ctxis/wsuspect-proxy">https://github.com/ctxis/wsuspect-proxy</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

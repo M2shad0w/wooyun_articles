@@ -3,14 +3,14 @@
 			<head>
 			     <title>Android Logcat Security - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3812">http://drops.wooyun.org/tips/3812</a></h1>
 				
       <p>
-        <h2>0x00 科普</h2>
+        </p><h2>0x00 科普</h2>
 
-<hr />
+<hr>
 
 <p>development version ：开发版，正在开发内测的版本，会有许多调试日志。</p>
 
@@ -28,41 +28,41 @@
 
 <h2>0x01 测试</h2>
 
-<hr />
+<hr>
 
 <p>测试方法是非常简单的，可以使用sdk中的小工具monitor或者ADT中集成的logcat来查看日志，将工具目录加入环境变量用起来比较方便。当然如果你想更有bigger也可以使用adb logcat。android整体日志信息量是非常大的，想要高效一些就必须使用filter来过滤一些无关信息，filter是支持正则的，可以做一些关键字匹配比如password、token、email等。本来准备想做个小工具自动化收集，但是觉得这东西略鸡肋没太大必要，故本文的重点也是在如何安全的使用logcat方面。</p>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209filter.jpg" alt="" /></p>
+<p><img src="../images_result/images/201411071209filter.jpg" alt=""></p>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209adb.jpg" alt="" /></p>
+<p><img src="../images_result/images/201411071209adb.jpg" alt=""></p>
 
 <p>当然也可以自己写个app在直接在手机上抓取logcat，不过前面提到因为android系统原因如果手机是android4.1或者之后版本即使在manifest.xml中加入了如下申请也是无法读取到其他应用的log的。</p>
 
 <pre><code>&lt;uses-permission android:name="android.permission.READ_LOGS"/&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209capture1.jpg" alt="" /></p>
+<p><img src="../images_result/images/201411071209capture1.jpg" alt=""></p>
 
 <p>root权限可以随便看logcat，所以“logcat信息泄露”漏洞因谷歌在4.1上的动作变得很鸡肋了。</p>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209capture2.jpg" alt="" /></p>
+<p><img src="../images_result/images/201411071209capture2.jpg" alt=""></p>
 
 <h2>0x02 smali注入logcat</h2>
 
-<hr />
+<hr>
 
 <p>http://drops.wooyun.org/tips/2986 一文中提到将敏感数据在加密前打印出来就是利用静态smali注入插入了logcat方法。 使用APK改之理smali注入非常方便，但要注意随意添加寄存器可能破坏本身逻辑，新手建议不添加寄存器直接使用已有的寄存器。</p>
 
 <pre><code>invoke-static {v0, v0}, Landroid/util/Log;-&gt;e(Ljava/lang/String;Ljava/lang/String;)I
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209smali.jpg" alt="" /></p>
+<p><img src="../images_result/images/201411071209smali.jpg" alt=""></p>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209password.jpg" alt="" /></p>
+<p><img src="../images_result/images/201411071209password.jpg" alt=""></p>
 
 <h2>0x03 建议</h2>
 
-<hr />
+<hr>
 
 <p>有些人认为任何log都不应该在发行版本打印。但是为了app的错误采集，异常反馈，必要的日志还是要被输出的，只要遵循安全编码规范就可以将风险控制在最小范围。</p>
 
@@ -101,25 +101,25 @@ System.out.println(String.format("Log.v() returned %d. ", i)); //Use the returne
 
 <p>eclipse中配置ProGuard</p>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209ProGuard.jpg" alt="" /></p>
+<p><img src="../images_result/images/201411071209ProGuard.jpg" alt=""></p>
 
 <p>开发版所有log都打印出来了。</p>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209development.jpg" alt="" /></p>
+<p><img src="../images_result/images/201411071209development.jpg" alt=""></p>
 
 <p>发行版ProGuard移除了d/v的log</p>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209release.jpg" alt="" /></p>
+<p><img src="../images_result/images/201411071209release.jpg" alt=""></p>
 
 <p>反编译后查看确实被remove了</p>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209reverse.jpg" alt="" /></p>
+<p><img src="../images_result/images/201411071209reverse.jpg" alt=""></p>
 
 <p>5、公开的APK文件应该是release版而不是development版。</p>
 
 <h2>0x04 native code</h2>
 
-<hr />
+<hr>
 
 <p>android.util.Log的构造函数是私有的，并不会被实例化，只是提供了静态的属性和方法。 而android.util.Log的各种Log记录方法的实现都依赖于native的实现println&#95;native()，Log.v()/Log.d()/Log.i()/Log.w()/Log.e()最终都是调用了println&#95;native()。</p>
 
@@ -210,9 +210,9 @@ return res;
 
 <h2>0x05 其他注意</h2>
 
-<hr />
+<hr>
 
-<hr />
+<hr>
 
 <p>1、使用Log.d()/v()打印异常对象。（如SQLiteException可能导致sql注入的问题）</p>
 
@@ -236,7 +236,7 @@ return res;
 <li>intent.setData(URL)的URL</li>
 </ul>
 
-<p><img src="http://static.wooyun.org/drops/20141107/201411071209ActivityManager.jpg" alt="" /></p>
+<p><img src="../images_result/images/201411071209ActivityManager.jpg" alt=""></p>
 
 <p>5、即使不用System.out/err程序也有可能输出相关信息，如使用 Exception.printStackTrace()</p>
 
@@ -254,7 +254,7 @@ return res;
 
 <h2>0x06 乌云案例</h2>
 
-<hr />
+<hr>
 
 <p> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2014-079241">WooYun: 途牛网app logcat信息泄露用户的同团聊的聊天内容</a> </p>
 
@@ -337,7 +337,7 @@ public class L
 
 <h2>0x08 参考</h2>
 
-<hr />
+<hr>
 
 <p><a href="http://www.jssec.org/dl/android_securecoding_en.pdf">http://www.jssec.org/dl/android&#95;securecoding&#95;en.pdf</a></p>
 
@@ -351,7 +351,7 @@ public class L
 
 <p><a href="https://www.securecoding.cert.org/confluence/display/java/DRD04-J.+Do+not+log+sensitive+information">https://www.securecoding.cert.org/confluence/display/java/DRD04-J.+Do+not+log+sensitive+information</a></p>
 
-<p><a href="https://android.googlesource.com/platform/frameworks/base.git/+/android-4.2.2_r1/core/jni/android_util_Log.cpp">https://android.googlesource.com/platform/frameworks/base.git/+/android-4.2.2&#95;r1/core/jni/android&#95;util_Log.cpp</a></p>      </p>
+<p><a href="https://android.googlesource.com/platform/frameworks/base.git/+/android-4.2.2_r1/core/jni/android_util_Log.cpp">https://android.googlesource.com/platform/frameworks/base.git/+/android-4.2.2&#95;r1/core/jni/android&#95;util_Log.cpp</a></p>      <p></p>
     
 			</body>
 		</html>

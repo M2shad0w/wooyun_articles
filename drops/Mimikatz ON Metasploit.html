@@ -3,16 +3,16 @@
 			<head>
 			     <title>Mimikatz ON Metasploit - BMa</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2443">http://drops.wooyun.org/tips/2443</a></h1>
 				
       <p>
-        <p>from：http://www.offensive-security.com/metasploit-unleashed/Mimikatz</p>
+        </p><p>from：http://www.offensive-security.com/metasploit-unleashed/Mimikatz</p>
 
 <h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>看了各种文章讲神器mimikatz，但是一直没有讲与metasploit使用的。Metasploit其实早就集成了mimikatz，现在将官方的文章翻译给大家。</p>
 
@@ -26,7 +26,7 @@
 
 <h2>0x01 Loading Mimikatz</h2>
 
-<hr />
+<hr>
 
 <p>在得到一个meterpreter shell后，我们应该确保我们的session是运行在system权限以便让mimikatz正常工作。</p>
 
@@ -120,7 +120,7 @@ Description du module : Fonctions diverses n'ayant pas encore assez de corps pou
 
 <h2>0x02 从内存中读取hash和密码</h2>
 
-<hr />
+<hr>
 
 <p>我们既可以使用metasploit内建的命令也可以使用mimikatz自带的命令来从目标机器上导出hash和明文证书。</p>
 
@@ -195,7 +195,7 @@ meterpreter &gt; mimikatz_command -f sekurlsa::searchPasswords
 
 <h2>0x03 其他的模块</h2>
 
-<hr />
+<hr>
 
 <p>Mimikatz的一些其他模块包含了很多有用的特性，更完整的特性列表可以在Benjamin Delpy的博客 http://blog.gentilkiwi.com/上找到。下面是几个使用实例：</p>
 
@@ -291,11 +291,11 @@ Providers CryptoAPI :
 
 <h2>0x04 Never Lose At Minesweeper Again!</h2>
 
-<hr />
+<hr>
 
 <p>Mimikatz也包含许多新奇的特性。最重要的一个就是能够在经典的windows扫描游戏中，直接从内存中读地雷的位置。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091820225889163.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091820225889163.png" alt="enter image description here"></p>
 
 <pre><code>#!bash
 meterpreter &gt; mimikatz_command -f winmine::infos
@@ -319,7 +319,7 @@ Champ           :
          . . . . . . 1   1 * . . . 1     1 * . . . * . . . . . * . .
          . . . . . . 1 1 2 . . . * 1     1 1 1 1 * * . * . . . . * .
          . * . . . . . * . . . * . 1           1 . * . . . . . . . *
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

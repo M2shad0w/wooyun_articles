@@ -3,14 +3,14 @@
 			<head>
 			     <title>CDN流量放大攻击思路 - 囧思九千</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/679">http://drops.wooyun.org/papers/679</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>大家好，我们是<a href="http://ocdn.me">OpenCDN团队</a>，专注于CDN技术的开发和研究。</p>
 
@@ -18,7 +18,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032303322445939.com/wx519kv6-ml-9-col7iwmzetami4zcpuswt94lwht89_w3yeaydzlsj-34_zl491aispcuw35l2r7hzfps4gg1cfbgqlhve7mri354hsm5is_jei8qwriv5t" alt="Wx519Kv6-ML-9-cOl7IWmzetAmI4zcPuswT94LWh" /></p>
+<p><img src="../images_result/images/wx519kv6-ml-9-col7iwmzetami4zcpuswt94lwht89_w3yeaydzlsj-34_zl491aispcuw35l2r7hzfps4gg1cfbgqlhve7mri354hsm5is_jei8qwriv5t" alt="Wx519Kv6-ML-9-cOl7IWmzetAmI4zcPuswT94LWh"></p>
 
 <p>CDN的全称是Content Delivery Network（内容分发网络），通过在网络各处的加速节点服务器来为网站抵挡恶意流量，把正常流量进行转发。用简单点的话来说，CDN一般有三个作用</p>
 
@@ -36,11 +36,11 @@
 
 <h2>0x01 探究之旅</h2>
 
-<hr />
+<hr>
 
 <p>我们在做OpenCDN测试的时候，遇到了一些小问题。发现一个没有人访问的网站居然会有流量，并且有着惊人的访问次数。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032303322513720.com/fylj-bwlqug58tp3usue7-7uhu3xdzixspm1xwohtwxih2ilwfx5hhqqd9gcx1kzdaginzzagpdcfj4pbz1njf1bxpwxcbjd9ztsbg92kzvasvhzjd4a2ukr" alt="FYLJ-BwLQug58TP3usUE7-7uhu3xDzixsPm1XwOH" /></p>
+<p><img src="../images_result/images/fylj-bwlqug58tp3usue7-7uhu3xdzixspm1xwohtwxih2ilwfx5hhqqd9gcx1kzdaginzzagpdcfj4pbz1njf1bxpwxcbjd9ztsbg92kzvasvhzjd4a2ukr" alt="FYLJ-BwLQug58TP3usUE7-7uhu3xDzixsPm1XwOH"></p>
 
 <p>我们的OpenCDN有2分钟一次的反向代理检测，但是这次数加起来也就区区的720次，而这400万的访问次数是哪里冒出来的？然后我们查看了日志，发现单个域名的日志到达了58G之多，而将其打开之后发现X-Forwarded-For字段中（X-Forwarded-For机制是通过一层代理后记录一个IP，让源站在使用CDN后能够获得真实的访客IP而不是CDN节点IP）充斥着大量有的IP，而且都是本服务器IP。我们瞬间明白了什么，然后去管理端上验证了一下，果不其然地，我们一不小心把源站IP设成了CDN节点的IP，不过当时我们并没有发现。于是这么大的流量也好解释了，由于2分钟一次的检测触发CDN节点的回源，而这个站点的源站是CDN节点本身，于是CDN就开始不断自身反向代理死循环，这样一个请求就被无限地放大了。当超时或者HEADER太大（就是X-Forwarded-For字段导致HEADER溢出）的时候，请求会被丢弃。</p>
 
@@ -65,11 +65,11 @@
 <pre><code>我们的opencdn.cc在甲CDN服务商注册服务，并且在乙CDN服务商注册服务，然后我们得到甲CDN服务商的一个CDN加速节点1.1.1.1，然后又得到乙CDN服务商的一个CDN加速节点2.2.2.2。 然后聪明的你一定已经猜到了。我们把在甲CDN服务商设置源站为乙的加速节点2.2.2.2，在乙CDN服务商设置源站为甲的加速节点1.1.1.1，然后甲会问乙去索取源站，乙又来问甲索取源站，于是1.1.1.1和2.2.2.2就很开心地并且不停地交流了起来~
 </code></pre>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032306334951383.com/qyrvpnlskdqn9q6zwadr79mzresrrth5fxj1zf6xous3rbpaqfjyhmut4mpdvtam22n6xpkn3suifk7acgktjab0e_ytgurvvkukxhqyyvps1fr2hx8shikd" alt="qYRVpnlSKDQn9Q6ZWaDr79MZRESrrtH5FXj1zF6x" /></p>
+<p><img src="../images_result/images/qyrvpnlskdqn9q6zwadr79mzresrrth5fxj1zf6xous3rbpaqfjyhmut4mpdvtam22n6xpkn3suifk7acgktjab0e_ytgurvvkukxhqyyvps1fr2hx8shikd" alt="qYRVpnlSKDQn9Q6ZWaDr79MZRESrrtH5FXj1zF6x"></p>
 
 <p>于是我们也进行了实验。这次我们采用POST包进行测试。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032303322759443.com/fwq5nijy4-us0fyey2nqsxxpzh8pzuqamhrdxvw82ydpuxfnq2ublcvfva71h9nboewhsf5anklhzp1ry_nrj2dmc7smozb5deqrwpnwog5usk1xmvqsjcgt" alt="FwQ5nijy4-us0fYEY2NqSxxpzh8PZUQAMhRDxvW8" /></p>
+<p><img src="../images_result/images/fwq5nijy4-us0fyey2nqsxxpzh8pzuqamhrdxvw82ydpuxfnq2ublcvfva71h9nboewhsf5anklhzp1ry_nrj2dmc7smozb5deqrwpnwog5usk1xmvqsjcgt" alt="FwQ5nijy4-us0fYEY2NqSxxpzh8PZUQAMhRDxvW8"></p>
 
 <p>用POST包的原因有两个</p>
 
@@ -81,7 +81,7 @@
 
 <p>然后让我们来看下两个节点的反应</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032303322769841.com/p3iv2pgk-nhnw_ezntrhq0yf8sggxv0vdy7qoygmpd9sbouykvu1q3znsmducisbhka-wcxsp44dkfagpxtikzxhuav-yo7mlsurkikkii1msf28vxqkqf1v" alt="p3iV2pGk-nHNW_eZnTRHq0Yf8SGgxV0VDy7qOYgM" /></p>
+<p><img src="../images_result/images/p3iv2pgk-nhnw_ezntrhq0yf8sggxv0vdy7qoygmpd9sbouykvu1q3znsmducisbhka-wcxsp44dkfagpxtikzxhuav-yo7mlsurkikkii1msf28vxqkqf1v" alt="p3iV2pGk-nHNW_eZnTRHq0Yf8SGgxV0VDy7qOYgM"></p>
 
 <p>不过似乎到了带宽上限。因为我们手中的机器毕竟也不是很给力。</p>
 
@@ -109,11 +109,11 @@ RX bytes:6133578284 (5.7 GiB) TX bytes:5649798353 (5.2 GiB)
 
 <p>我们可以这样。让多个CDN节点和一个CDN节点死循环，把中间的CDN节点带宽耗尽。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032306335068264.com/dqsw0ul69ptlw6kbgmg1tzt1dvysjjzlk7wxq3cnhcsjzshauwk4hmfy3pgzrjlpkjnolvqk7vfub9t0t1f2qzt7f2auhdzipnilqwxcngz33duepgbkasnv" alt="DQsw0uL69ptLW6kbgMG1tzT1dVySjJzlk7WxQ3CN" /></p>
+<p><img src="../images_result/images/dqsw0ul69ptlw6kbgmg1tzt1dvysjjzlk7wxq3cnhcsjzshauwk4hmfy3pgzrjlpkjnolvqk7vfub9t0t1f2qzt7f2auhdzipnilqwxcngz33duepgbkasnv" alt="DQsw0uL69ptLW6kbgMG1tzT1dVySjJzlk7WxQ3CN"></p>
 
 <p>我们还可以这样。让三个CDN节点死循环，如果有做流量上的流入流出探测限制，这样能保证流入流出不为一个IP。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150323/2015032306335187887.com/c_1qxrpuknztxxrg-dnnuyqbzdxsf_mqfw79zrhw3vhn4nd5a-bpgzja_og7k-me4-e4m1xtqmnbiyd7wwx1i7jr5hjftepctmu8o8-e0x21ycckwb1hjlom" alt="C_1QXRpUKnzTxXrG-DnNUYQBzdxsf_mqfw79zrhW" /></p>
+<p><img src="../images_result/images/c_1qxrpuknztxxrg-dnnuyqbzdxsf_mqfw79zrhw3vhn4nd5a-bpgzja_og7k-me4-e4m1xtqmnbiyd7wwx1i7jr5hjftepctmu8o8-e0x21ycckwb1hjlom" alt="C_1QXRpUKnzTxXrG-DnNUYQBzdxsf_mqfw79zrhW"></p>
 
 <p>毕竟在CDN服务商添加一个域名的代价是很小的（免费），我们可以用一个一个域名将节点串起来，然后啪一下开始流量死循环震荡。</p>
 
@@ -121,7 +121,7 @@ RX bytes:6133578284 (5.7 GiB) TX bytes:5649798353 (5.2 GiB)
 
 <h2>0x02 防御方法</h2>
 
-<hr />
+<hr>
 
 <p>那么如何来防御这种以及可能演化出来的攻击呢？</p>
 
@@ -135,7 +135,7 @@ RX bytes:6133578284 (5.7 GiB) TX bytes:5649798353 (5.2 GiB)
 
 <p>本文仅为一种CDN流量放大攻击的思路，只是做过一些小规模的实验，也欢迎大牛们进行验证。如有不足之处或者逻辑上的错误还请提出，谢谢您的阅读。</p>
 
-<p>by OpenCDN成员 <a href="http://weibo.com/jelope">囧思八千</a> <a href="http://twwy.net">Twwy.net</a></p>      </p>
+<p>by OpenCDN成员 <a href="http://weibo.com/jelope">囧思八千</a> <a href="http://twwy.net">Twwy.net</a></p>      <p></p>
     
 			</body>
 		</html>

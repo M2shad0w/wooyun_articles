@@ -3,29 +3,29 @@
 			<head>
 			     <title>关于32位程序在64位系统下运行中需要注意的重定向问题 - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14831">http://drops.wooyun.org/tips/14831</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0bed978be3b49aeea6adefb2abefb18d587f7e6a797f4b7e60787f7e6d7e78ec918fed9d8ceca0abe88b815b6e797862787f6e65686e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> Architecture Matters》，恰巧解决了我之前遇到过的一个问题，理清了文件和注册表重定向中需要注意的细节</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0bed978be3b49aeea6adefb2abefb18d587f7e6a797f4b7e60787f7e6d7e78ec918fed9d8ceca0abe88b815b6e797862787f6e65686e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> Architecture Matters》，恰巧解决了我之前遇到过的一个问题，理清了文件和注册表重定向中需要注意的细节</p>
 
 <p>大家在学习的过程中难免也会碰到，所以在此分享一下。</p>
 
-<p>《Persistence Architecture Matters》的链接：<br />
+<p>《Persistence Architecture Matters》的链接：<br>
 <a href="https://labs.mwrinfosecurity.com/blog/persistence-architecture-matters/">https://labs.mwrinfosecurity.com/blog/persistence-architecture-matters/</a></p>
 
 <!--more-->
 
 <h1>0x01 消失的注册表键值</h1>
 
-<hr />
+<hr>
 
-<p><strong>OS：</strong>Win8x64<br />
+<p><strong>OS：</strong>Win8x64<br>
 <strong>开发环境：</strong>VS2008</p>
 
 <h3>1、编写程序写入注册表</h3>
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/20160412160211400332-12.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/20160412160211400332-12.png" alt="Alt text"></p>
 
 <h3>2、获取写入的键值</h3>
 
@@ -83,7 +83,7 @@ REG query "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "test" &gt;&gt
 
 <h1>0x02 消失的文件</h1>
 
-<hr />
+<hr>
 
 <h3>1、编写程序写入文件</h3>
 
@@ -110,7 +110,7 @@ void main()
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/20160412160213759542-21.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/20160412160213759542-21.png" alt="Alt text"></p>
 
 <h3>2、获取写入的文件</h3>
 
@@ -126,14 +126,14 @@ dir c:\windows\system32\test.txt &gt;&gt;result.txt
 
 <h1>0x03 原因分析</h1>
 
-<hr />
+<hr>
 
 <h3>1、重定向</h3>
 
 <blockquote>
-  <p>自xp系统开始，64位的系统引入了新技术：<code>文件重定向和注册表重定向</code><br />
-  这个技术是为了在64位系统下将32位程序和64程序分离开<br />
-  在64位平台上运行32位程序的模拟器被称为WOW64<br />
+  <p>自xp系统开始，64位的系统引入了新技术：<code>文件重定向和注册表重定向</code><br>
+  这个技术是为了在64位系统下将32位程序和64程序分离开<br>
+  在64位平台上运行32位程序的模拟器被称为WOW64<br>
   WOW64全称为"Windows 32 on Windows 64"</p>
 </blockquote>
 
@@ -145,7 +145,7 @@ dir c:\windows\system32\test.txt &gt;&gt;result.txt
 
 <p>比如对HKLM/Software访问，会被WOW64重定向至HKLM/Software/Wow6432Node</p>
 
-<p>具体存在重定向的注册表位置可参考如下链接：<br />
+<p>具体存在重定向的注册表位置可参考如下链接：<br>
 <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa384253(v=vs.85).aspx">https://msdn.microsoft.com/en-us/library/windows/desktop/aa384253(v=vs.85).aspx</a></p>
 
 <p><strong>（2）</strong>64位程序对注册表的操作不存在重定向</p>
@@ -176,7 +176,7 @@ dir c:\windows\system32\test.txt &gt;&gt;result.txt
 
 <h1>0x04 找回注册表键值</h1>
 
-<hr />
+<hr>
 
 <p><strong>解决思路：</strong></p>
 
@@ -234,9 +234,9 @@ REG query "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "test" &gt;&gt
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/20160412160214691242-31.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/20160412160214691242-31.png" alt="Alt text"></p>
 
-<p><strong>注：</strong><br />
+<p><strong>注：</strong><br>
 也可结合使用<code>Wow64DisableWow64FsRedirection</code>和<code>Wow64RevertWow64FsRedirection</code>关闭和开启重定向，以此来跳过重定向，写入64位的注册表</p>
 
 <h3>2、修改批处理，查询重定向后的注册表键值（验证结论用）</h3>
@@ -251,13 +251,13 @@ REG query "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run" /v "t
 
 <p>在本地右键执行后可成功获得键值</p>
 
-<p><strong>注：</strong><br />
-实际测试的过程中很少能够在本地右键执行批处理，所以该方法仅作验证思路<br />
+<p><strong>注：</strong><br>
+实际测试的过程中很少能够在本地右键执行批处理，所以该方法仅作验证思路<br>
 通常情况下，32位的程序执行批处理文件也会存在重定向的问题。</p>
 
 <h1>0x05 找回文件</h1>
 
-<hr />
+<hr>
 
 <p><strong>解决思路：</strong></p>
 
@@ -279,7 +279,7 @@ dir C:\Windows\SysWOW64\test.txt &gt;&gt;result.txt
 
 <p><strong>（1）</strong>之前遇到过的一个问题：</p>
 
-<p>在测试Security Support Provider的时候就存在这个问题:<br />
+<p>在测试Security Support Provider的时候就存在这个问题:<br>
 <a href="http://drops.wooyun.org/tips/12518">http://drops.wooyun.org/tips/12518</a></p>
 
 <p>使用32位的程序将mimikatz.dll上传至域控(Server2008x64)的c:\windows\system32\下</p>
@@ -338,7 +338,7 @@ dir C:\Windows\Sysnative\test.txt
 
 <h1>0x06 小结</h1>
 
-<hr />
+<hr>
 
 <p>32位程序在64系统下执行的时候，如果有对注册表和文件的操作，重定向的细节必须考虑。</p>
 
@@ -348,16 +348,16 @@ dir C:\Windows\Sysnative\test.txt
 
 <p><strong>对文件操作：</strong></p>
 
-<p>访问<code>c:\windows\Sysnative\</code> 的实际路径为 <code>c:\windows\system32\</code><br />
+<p>访问<code>c:\windows\Sysnative\</code> 的实际路径为 <code>c:\windows\system32\</code><br>
 访问<code>c:\windows\system32\</code> 的实际路径为 <code>c:\windows\SysWOW64\</code></p>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="83663f1664172bd0f7f6e2f1f7c3f6e8f0f7f6e5f6f0651504642823673b2e641907673b27663a0666183d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，能够帮助大家更清晰的认识其中的细节。</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="83663f1664172bd0f7f6e2f1f7c3f6e8f0f7f6e5f6f0651504642823673b2e641907673b27663a0666183d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，能够帮助大家更清晰的认识其中的细节。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/20160412160217693273-1.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/20160412160217693273-1.png" alt="Alt text"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160412/20160412160222946553-2.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/20160412160222946553-2.png" alt="Alt text"></p>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="33d5b7acdb8391604746524147734658404746554640d4a9b7d6bbb5d78998d0b3b1db9490d6b580d789b5d5bba2d4a9b7daa49dda91ab">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，也让我有了更清楚的认识。</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="33d5b7acdb8391604746524147734658404746554640d4a9b7d6bbb5d78998d0b3b1db9490d6b580d789b5d5bba2d4a9b7daa49dda91ab">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，也让我有了更清楚的认识。</p>
 
 <p>更多学习资料：</p>
 
@@ -366,7 +366,7 @@ dir C:\Windows\Sysnative\test.txt
 <li><a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa384187(v=vs.85).aspx">https://msdn.microsoft.com/en-us/library/windows/desktop/aa384187(v=vs.85).aspx</a></li>
 </ul>
 
-<p><strong>本文由三好学生原创并首发于乌云drops，转载请注明</strong></p>      </p>
+<p><strong>本文由三好学生原创并首发于乌云drops，转载请注明</strong></p>      <p></p>
     
 			</body>
 		</html>

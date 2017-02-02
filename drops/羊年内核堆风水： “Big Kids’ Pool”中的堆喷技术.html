@@ -3,14 +3,14 @@
 			<head>
 			     <title>羊年内核堆风水： “Big Kids’ Pool”中的堆喷技术 - Chuck</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4766">http://drops.wooyun.org/tips/4766</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>作者：Alex Lonescu</p>
 
@@ -24,7 +24,7 @@
 
 <h1>0x01 内核漏洞利用的技术现状</h1>
 
-<hr />
+<hr>
 
 <p>典型的“任意地址写任意数据”类型内核漏洞的利用技术通常需要依靠两种方法，一种是修改某些内核空间的数据结构，这种方法由于Windows内核地址空间随机分配（KASLR）机制，在本地是容易做到的；另一种方法是程序重定向到可控的用户态地址空间，并以ring0权限执行可控代码。</p>
 
@@ -53,7 +53,7 @@
 
 <h1>0x02 “大池”</h1>
 
-<hr />
+<hr>
 
 <p>精通Windows堆管理（称为“池”）的高手肯定了解，有两种不同的堆分配机制（如果你特别较真，也可以认为是三种）：一种是“正常”池分配（包括使用lookaside链表的分配方法，该方法与正常池分配略有不同）；另一种是“大池”分配。</p>
 
@@ -132,7 +132,7 @@ if (bigPoolInfo != NULL)
 
 <h1>0x03 池控制</h1>
 
-<hr />
+<hr>
 
 <p>很明显，能够读取到这些内核态内存地址是非常有用的，但仅仅内存块地址可读还不够，那么如何才能进一步做到控制内存块中的数据呢？ 你会注意到前面讲到的技术中，有几种是可以令用户态下的攻击者分配内核对象的（如，APC reserve对象），这类的内核对象有几个域是用户可控的，并且有一个用于获取内核态内存地址的API函数。我们这里基本上也是要做同样的事情，但是不仅仅是控制内核对象的几个域，我们的目标是找到一个可以完全控制内核对象所有数据的用户API，且需要该API调用时能够触发一个“大池”分配。</p>
 
@@ -217,7 +217,7 @@ for (entry = bigPoolInfo-&gt;AllocatedInfo;
 
 <p>下图是WinDBG中的截图证明。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150127/2015012710572374731image0014.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015012710572374731image0014.png" alt="enter image description here"></p>
 
 <p>看吧！将程序打包成一个简单的“kmalloc”帮助函数，然后你也可以分配可执行的且已知地址的内核态内存空间了。那么这种分配最多可以多大？根据我做过的实验，128MB是完全没有问题的，但是因为这种分配是非分页的内存，你还必须考虑你的RAM内存是否足够大。这里的链接指向一段部署了该分配功能的例子代码（没有链接）。</p>
 
@@ -225,11 +225,11 @@ for (entry = bigPoolInfo-&gt;AllocatedInfo;
 
 <p>下图是RAMMap的截图，展示了另一个已分配载荷的虚拟地址以及实地址（注意下图中有0x1000的差异是因为命令行PoC代码使指针产生了一个页的偏移，如代码中所写：加了一个PAGE_SIZE）。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150127/2015012710575588899image0035.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015012710575588899image0035.png" alt="enter image description here"></p>
 
 <h1>0x04 结语</h1>
 
-<hr />
+<hr>
 
 <p>该技术的此次完整爆出，有几点额外的说明会令其在2015年变得不那么sexy—这也是我为什么不选择8年前第一次偶尔发现它时，而是选择今天将其爆出的原因：</p>
 
@@ -239,7 +239,7 @@ for (entry = bigPoolInfo-&gt;AllocatedInfo;
 
 <p>当然，也存在一些相应的方法来解决上述问题，如沙盒逃逸就常用于本地—远程攻击，因此上述问题2）就有解决的余地。至于上述问题1），一些聪明的研究者也已经指出NX并没有在所有地方都完整部署，比如，分配的Session池空间，在新版本的Windows下仍然是可执行的，当然仅限X86（32位）系统上可执行。我把这个如何在扩展Windows版本中实现此技术作为练习留给读者完成（小提示：系统中有一种叫做“Big Session Pool”的池）。</p>
 
-<p>那么，64位的Windows或者更新版本的Windows 10下怎么办呢？看起来本文提到的这种技术在这些系统上是失效的了&#45;--|-是这样的吗！？内核态下所有的内存空间都已经NX了吗？或者还有没有别的猥琐方法来分配到可执行的内存空间，并且得到其地址？当2022年到来，Windows14发布后，我必将立刻在Blog中回答这些个相关问题。</p>      </p>
+<p>那么，64位的Windows或者更新版本的Windows 10下怎么办呢？看起来本文提到的这种技术在这些系统上是失效的了&#45;--|-是这样的吗！？内核态下所有的内存空间都已经NX了吗？或者还有没有别的猥琐方法来分配到可执行的内存空间，并且得到其地址？当2022年到来，Windows14发布后，我必将立刻在Blog中回答这些个相关问题。</p>      <p></p>
     
 			</body>
 		</html>

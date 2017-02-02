@@ -3,14 +3,14 @@
 			<head>
 			     <title>加盐hash保存密码的正确方式 - D＆G</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1066">http://drops.wooyun.org/papers/1066</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>大多数的web开发者都会遇到设计用户账号系统的需求。账号系统最重要的一个方面就是如何保护用户的密码。一些大公司的用户数据库泄露事件也时有发生，所以我们必须采取一些措施来保护用户的密码，即使网站被攻破的情况下也不会造成较大的危害。保护密码最好的的方式就是使用带盐的密码hash(salted password hashing).对密码进行hash操作是一件很简单的事情，但是很多人都犯了错。接下来我希望可以详细的阐述如何恰当的对密码进行hash，以及为什么要这样做。</p>
 
@@ -18,13 +18,13 @@
 
 <h2>0x01 重要提醒</h2>
 
-<hr />
+<hr>
 
 <p>如果你打算自己写一段代码来进行密码hash，那么赶紧停下吧。这样太容易犯错了。这个提醒适用于每一个人，<strong>不要自己写密码的hash算法</strong> ！关于保存密码的问题已经有了成熟的方案，那就是使用<a href="http://www.openwall.com/phpass/">phpass</a>或者本文提供的源码。</p>
 
 <h2>0x02 什么是hash</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!python
 hash("hello") = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
@@ -51,7 +51,7 @@ hash("waltz") = c0e81794384491161f1777c232bc6bd9ec38f616560b120fda8e90f383853542
 
 <h2>0x03 如何破解hash</h2>
 
-<hr />
+<hr>
 
 <h3>字典和暴力破解攻击(Dictionary and Brute Force Attacks)</h3>
 
@@ -103,7 +103,7 @@ Searching for hash(apple) in users' hash list...     : Matches [alice3, 0bob0, c
 Searching for hash(blueberry) in users' hash list... : Matches [usr10101, timmy, john91]
 Searching for hash(letmein) in users' hash list...   : Matches [wilson10, dragonslayerX, joe1984]
 Searching for hash(s3cr3t) in users' hash list...    : Matches [bruce19, knuth1337, john87]
-Searching for hash(<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="017b413338696b6b60">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>) in users' hash list...  : No users used this password
+Searching for hash(<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="017b413338696b6b60">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>) in users' hash list...  : No users used this password
 </code></pre>
 
 <p>这种方式可以让攻击者不预先计算一个查询表的情况下同时对大量hash进行字典和暴力破解攻击。</p>
@@ -118,7 +118,7 @@ Searching for hash(<a class="__cf_email__" href="/cdn-cgi/l/email-protection" da
 
 <h2>0x04 加盐(Adding Salt)</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!python
 hash("hello")                    = 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
@@ -137,7 +137,7 @@ hash("hello" + "YYLmfY6IehjZMQ") = a49670c3c18b9e079b9cfaf51634f563dc8ae3070db2c
 
 <h2>0x05 错误的方式：短的盐和盐的复用</h2>
 
-<hr />
+<hr>
 
 <p>最常见的错误实现就是一个盐在多个hash中使用或者使用的盐很短。</p>
 
@@ -157,7 +157,7 @@ hash("hello" + "YYLmfY6IehjZMQ") = a49670c3c18b9e079b9cfaf51634f563dc8ae3070db2c
 
 <h2>0x06 错误的方式：双重hash和古怪的hash函数</h2>
 
-<hr />
+<hr>
 
 <p>这一节讨论另外一个常见的hash密码的误解:古怪的hash算法组合。人们可能解决的将不同的hash函数组合在一起用可以让数据更安全。但实际上，这种方式带来的效果很微小。反而可能带来一些互通性的问题，甚至有时候会让hash更加的不安全。本文一开始就提到过，永远不要尝试自己写hash算法，要使用专家们设计的标准算法。有些人会觉得通过使用多个hash函数可以降低计算hash的速度，从而增加破解的难度。通过减慢hash计算速度来防御攻击有更好的方法，这个下文会详细介绍。</p>
 
@@ -181,7 +181,7 @@ md5(sha1(md5(md5(password) + sha1(password)) + md5(password)))
 
 <h2>0x07 hash碰撞(Hash Collisions)</h2>
 
-<hr />
+<hr>
 
 <p>因为hash函数是将任意数量的数据映射成一个固定长度的字符串，所以一定存在不同的输入经过hash之后变成相同的字符串的情况。加密hash函数(Cryptographic hash function)在设计的时候希望使这种碰撞攻击实现起来成本难以置信的高。但时不时的就有密码学家发现快速实现hash碰撞的方法。最近的一个例子就是MD5，它的碰撞攻击已经实现了。</p>
 
@@ -189,7 +189,7 @@ md5(sha1(md5(md5(password) + sha1(password)) + md5(password)))
 
 <h2>0x08 正确的方式：如何恰当的进行hash</h2>
 
-<hr />
+<hr>
 
 <p>这部分会详细讨论如何恰当的进行密码hash。第一个章节是最基础的，这章节的内容是必须的。后面一个章节是阐述如何继续增强安全性，让hash破解变得异常困难。</p>
 
@@ -353,7 +353,7 @@ md5(sha1(md5(md5(password) + sha1(password)) + md5(password)))
 
 <h2>0x09 其他的安全措施</h2>
 
-<hr />
+<hr>
 
 <p>密码hash仅仅是在发生安全事故的时候保护密码。它并不能让应用程序更加安全。对于保护用户密码hash更多的是需要保护密码hash不被偷走。</p>
 
@@ -365,7 +365,7 @@ md5(sha1(md5(md5(password) + sha1(password)) + md5(password)))
 
 <h2>0x0A 经常提问的问题</h2>
 
-<hr />
+<hr>
 
 <p><strong>我应该使用什么hash算法</strong></p>
 
@@ -496,7 +496,7 @@ OR [DIFF], EAX
 
 <h2>0x0B PHP PBKDF2 密码hash代码</h2>
 
-<hr />
+<hr>
 
 <p><a href="https://crackstation.net/source/password-hashing/PasswordHash.php">代码下载</a></p>
 
@@ -644,7 +644,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
 
 <h2>0x0C java PBKDF2 密码hash代码</h2>
 
-<hr />
+<hr>
 
 <p><a href="https://crackstation.net/source/password-hashing/PasswordHash.java">代码下载</a></p>
 
@@ -888,7 +888,7 @@ public class PasswordHash
 
 <h2>0x0D ASP.NET (C#)密码hash代码</h2>
 
-<hr />
+<hr>
 
 <p><a href="https://crackstation.net/source/password-hashing/PasswordHash.cs">代码下载</a></p>
 
@@ -1018,7 +1018,7 @@ namespace PasswordHash
 
 <h2>0x0E Ruby (on Rails) 密码hash代码</h2>
 
-<hr />
+<hr>
 
 <p><a href="https://crackstation.net/source/password-hashing/PasswordHash.rb">代码下载</a></p>
 
@@ -1142,7 +1142,7 @@ end
 PasswordHash.runSelfTests
 </code></pre>
 
-<p>from:<a href="https://crackstation.net/hashing-security.htm">https://crackstation.net/hashing-security.htm</a></p>      </p>
+<p>from:<a href="https://crackstation.net/hashing-security.htm">https://crackstation.net/hashing-security.htm</a></p>      <p></p>
     
 			</body>
 		</html>

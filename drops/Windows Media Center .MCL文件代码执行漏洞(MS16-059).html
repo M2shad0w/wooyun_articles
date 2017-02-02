@@ -3,20 +3,20 @@
 			<head>
 			     <title>Windows Media Center .MCL文件代码执行漏洞(MS16-059) - blast</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/16935">http://drops.wooyun.org/papers/16935</a></h1>
 				
       <p>
-        <h1>0x00 简介</h1>
+        </p><h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>漏洞作者EduardoBraun Prado在今年早期发现了WMP的.MCL文件又存在一个可以导致远程代码执行的漏洞。为什么要说又呢，因为这个东西实在是“不争气”，同一个地方出现了多次绕过导致远程代码执行的问题。</p>
 
 <h1>0x01 历史A――MS15-100</h1>
 
-<hr />
+<hr>
 
 <p>2015年的MS15-100（CVE-2015-2509，Aaron Luo, Kenney Lu, and Ziv Chang of TrendMicro）漏洞便是MCL“噩梦”的开始，研究者发现只要在MCL文件中指定：</p>
 
@@ -29,7 +29,7 @@
 
 <h1>0x02 历史B――MS15-134</h1>
 
-<hr />
+<hr>
 
 <p>紧随着MS15-100中微软将run的内容做了过滤之后，MS15-134（CVE-2015-6127，Francisco Falcon of CoreSecurity）又诞生了。这回作者利用的倒不是run这个属性，而是另一个url属性。</p>
 
@@ -47,7 +47,7 @@
 
 <h1>0x03 主角――MS16-059</h1>
 
-<hr />
+<hr>
 
 <p>在微软拦截的七七八八的时候，又有人发现了新玩法：</p>
 
@@ -62,7 +62,7 @@
 
 <h1>0x04 MCL是如何被处理的？（原版・14年版本）</h1>
 
-<hr />
+<hr>
 
 <p>因为虚拟机打补丁实在是太慢了，所以这里就直接用14年的DLL来演示了，看一个原始风貌。</p>
 
@@ -122,7 +122,7 @@ kernel32!CreateFileW:
 
 <p>由于MediaCenter以及ehshell.dll都是C# DLL，因此WinDbg看就显得比较捉急了，我们将其反编译，生成源代码直接看：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061905533426094pic11.jpg" alt="pic1" /></p>
+<p><img src="../images_result/images/2016061905533426094pic11.jpg" alt="pic1"></p>
 
 <p>工程十分庞大，在漫长的生成过程后，搜索关键字可以看到这样的逻辑：在加载MCL之后，首先程序解析.MCL文件（通过System.XML），并在InternalExtensibilityAppInfo中为包含有Run属性的MCL创建一个特殊的“AppEntryPoint”。</p>
 
@@ -163,15 +163,15 @@ catch (Exception exception)
 
 <h1>0x05 新版如何过滤？（16年6月补丁后版本）</h1>
 
-<hr />
+<hr>
 
 <p>简单粗暴，所有包含Run/Url的全部弹窗二次确认。这也是微软对前几个严重问题所做的非常暴力的“折中”处理。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160619/2016061905533673989pic2.jpg" alt="pic2" /></p>
+<p><img src="../images_result/images/2016061905533673989pic2.jpg" alt="pic2"></p>
 
 <h1>0x06 十年以上的漏洞</h1>
 
-<hr />
+<hr>
 
 <p>而有趣的是，这个漏洞看起来感觉有十年以上。MCL文件最初就是为了在WMP中执行一个程序用的，这有点像HTA文件，在查找相关信息的时候，我发现了06年（肯定还有更早的）论坛帖子就有关于MCL如何启动程序的讨论了。非常有意思的是，当时的人们并不觉得这个功能是一个安全漏洞，而只是一个功能而已，但是到了2015年第一次被人报告开始，微软就给了这个问题最高的安全评级――但是这个原本是正常的“功能设计”。可见安全的概念在十年间转换了很多。</p>
 
@@ -191,7 +191,7 @@ intensiverendering="True"
 console="False"
 cdburning="False" /&gt;
 &lt;/application&gt;
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

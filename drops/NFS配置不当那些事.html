@@ -3,14 +3,14 @@
 			<head>
 			     <title>NFS配置不当那些事 - Blood_Zero</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/8659">http://drops.wooyun.org/tips/8659</a></h1>
 				
       <p>
-        <h1>0x00 背景</h1>
+        </p><h1>0x00 背景</h1>
 
-<hr />
+<hr>
 
 <p>NFS（Network File System）：是FreeBSD支持的文件系统中的一种，它允许网络中的计算机之间通过TCP/IP网络共享资源；</p>
 
@@ -45,31 +45,31 @@ showmount -e （查看共享）
 mount -t nfs NFS服务器IP:/ /tmp/test （挂载到本地的/tmp/test中）
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150916/2015091606442022268.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015091606442022268.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150916/2015091606442064074.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015091606442064074.jpg" alt="enter image description here"></p>
 
 <h1>0x01 检测</h1>
 
-<hr />
+<hr>
 
 <p>对存在NFS配置错误的机子进行扫描：<code>rpcinfo -p 192.168.119.131</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150916/2015091606442169981.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015091606442169981.jpg" alt="enter image description here"></p>
 
 <p>查看nfs挂载新型：<code>showmount -e 192.168.119.131</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150916/2015091606442132378.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015091606442132378.jpg" alt="enter image description here"></p>
 
 <p>得到这些信息，我们就可以挂载NFS，并传输ssh永久连接文件</p>
 
-<p><img src="http://static.wooyun.org//drops/20150916/2015091606442130997.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015091606442130997.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150916/2015091606442124816.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015091606442124816.jpg" alt="enter image description here"></p>
 
 <h1>0x02 总结</h1>
 
-<hr />
+<hr>
 
 <p>其实漏洞形成的原理就是权限不对，<code>/etc/exports</code>这个文件中的权限设置，我们上文采用的是<code>root</code>权限，所以导致服务器被入侵；</p>
 
@@ -128,7 +128,7 @@ mount -t nfs NFS服务器IP:/ /tmp/test （挂载到本地的/tmp/test中）
 
 <p><code>subtree</code>：若输出目录是一个子目录，则<code>nfs</code>服务器将检查其父目录的权限(默认设置)；</p>
 
-<p><code>no_subtree</code>：即使输出目录是一个子目录，<code>nfs</code>服务器也不检查其父目录的权限，这样可以提高效率。</p>      </p>
+<p><code>no_subtree</code>：即使输出目录是一个子目录，<code>nfs</code>服务器也不检查其父目录的权限，这样可以提高效率。</p>      <p></p>
     
 			</body>
 		</html>

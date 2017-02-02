@@ -3,16 +3,16 @@
 			<head>
 			     <title>恶意软件Linux/Mumblehard分析 - 杀戮</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5898">http://drops.wooyun.org/tips/5898</a></h1>
 				
       <p>
-        <p>From:http://www.welivesecurity.com/wp-content/uploads/2015/04/mumblehard.pdf</p>
+        </p><p>From:http://www.welivesecurity.com/wp-content/uploads/2015/04/mumblehard.pdf</p>
 
 <h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>我们发现<code>Linux/ Mumblehard</code>的原因来自于某天某网管联系我们，他的服务器因为不断发送垃圾邮件被列入了黑名单。我们dump了服务器上其中一个奇怪进程的内存，这玩意连接到了一个不同的SMTP服务器，并发送垃圾邮件。dump下来的内存显示这玩意是一个，唔，perl解释器，随之我们在<code>/tmp</code>目录发现了一个相关的可执行文件，并且立即开始着手分析，为了方便我们给这玩意起名<code>Mumblehard</code>。</p>
 
@@ -20,7 +20,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503005991813.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503005991813.jpg" alt="enter image description here"></p>
 
 <p>Figure 1. Wayback Machine上显示的Yellsoft主页</p>
 
@@ -30,13 +30,13 @@
 
 <h1>0x01 恶意软件分析</h1>
 
-<hr />
+<hr>
 
 <p>我们分析了两种不同的恶意软件组件，第一个是一个通用的后门，向C&amp;C服务器请求一个命令，该命令包含一个网址，然后通过这个网址下载恶意文件并且执行，第二个是一种多功能的垃圾邮件发送器的程序。这两个组件都使用perl进行编写，然后使用一个汇编写的特殊加壳器进行混淆，最终隐藏到一个ELF格式的二进制文件中。</p>
 
 <p>下面的图显示了恶意软件和C&amp;C服务器之间的关系。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503005917655.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503005917655.jpg" alt="enter image description here"></p>
 
 <p>Figure 2. Linux/Mumblehard的交互</p>
 
@@ -44,13 +44,13 @@
 
 <h3>1.1 ELF二进制中的perl壳</h3>
 
-<hr />
+<hr>
 
 <p>最初引起我们兴趣的是恶意软件的加壳器，简单看看反汇编代码，我们可以很明显的看出，加壳器是直接使用汇编进行编写，整个加壳大约使用了200个汇编指令。这个观察来源于两个点，一个是他们直接使用<code>int 80</code>指令进行系统中断，另一个是它们并不适用常见的方式进行堆栈管理。</p>
 
 <p>通过其系统调用的方式，可执行文件可以避免任何的外部依赖，同时，加壳器被确认适用于linux和bsd系统。因为系统进行了系统调用13，并传入了参数0，该系统调用对应到linux的时间，和BSD的标准输入。在BSD上该调用失败后会返回一个负数到eax上，而linux上会返回一个正数表示从1970年到今天过了几秒。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503005955438.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503005955438.jpg" alt="enter image description here"></p>
 
 <p>Figure 3. system call 13</p>
 
@@ -58,7 +58,7 @@
 
 <h4>1.2 perl后门</h4>
 
-<hr />
+<hr>
 
 <p>后门实际上只有一个简单的任务，就是从C&amp;C服务器上请求一条命令，并且返回其是否成功。不过后门并不会使用<code>daemonize</code>来进行进程守护，他直接使用<code>crontab</code>来每15分钟执行一次。</p>
 
@@ -81,7 +81,7 @@ $0 = "httpd";
 
 <h4>1.2.1 C&amp;C通信</h4>
 
-<hr />
+<hr>
 
 <p>Mumblehard使用http的get对每台C&amp;C服务器发送请求，将返回的命令隐藏在http响应头的Set-Cookie中，来逃避一些数据包的检测。</p>
 
@@ -101,7 +101,7 @@ under construction
 
 <p>PHPSESSID cookie值进行了hex进行编码，并且通过自定义的算法进行加密，该加密算法与加壳器中用来加密perl脚本的算法是相同的.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503010064107.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503010064107.jpg" alt="enter image description here"></p>
 
 <p>Figure 4. 用汇编写的加密算法</p>
 
@@ -125,13 +125,13 @@ sub xorl {
 
 <p>一旦解密，下面的信息回从<code>cookie</code>中提取出来。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503010092406.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503010092406.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503010069517.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503010069517.jpg" alt="enter image description here"></p>
 
 <p>这里有一个解密后的信息的例子。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503010075689.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503010075689.jpg" alt="enter image description here"></p>
 
 <p>Mumblehard后门的user-agent</p>
 
@@ -150,7 +150,7 @@ sub xorl {
 
 <h3>1.3 perl恶意邮件发送器</h3>
 
-<hr />
+<hr>
 
 <p>该恶意软件发送器也是perl写的，并且加壳后嵌入elf可执行文件，目的在于向C&amp;C请求任务，并且发送恶意邮件，Mumblehard支持大部分一个恶意邮件发送器会有的功能，模板，报表，SMTP执行等，我们会将接下来的内容限制在其中的一些独特的功能和网络协议等。</p>
 
@@ -168,11 +168,11 @@ if ( $^O eq "MSWin32" ) { $ewblock = 10035; $eiprogr = 10036; }
 
 <h4>1.3.1 C&amp;C通信</h4>
 
-<hr />
+<hr>
 
 <p>C&amp;C服务器运行在端口25上，恶意邮件发送器可以通过post请求发送二进制数据，内容如下表</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503010059530.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503010059530.jpg" alt="enter image description here"></p>
 
 <p>不过这些数据似乎只在一种情况下会被使用，比如统计有多少服务器在发邮件啥的。它存在4个32位的整数头。</p>
 
@@ -185,15 +185,15 @@ if ( $^O eq "MSWin32" ) { $ewblock = 10035; $eiprogr = 10036; }
 
 <p>恶意主机还可以自定义发送报告的详细程度，其中有三个级别，最低的一级只有数字，中级包括电子邮件地址，最高一级包括成功或者失败的原因。最初的请求，服务器会返回一个200的响应，包含设置，电子邮件列表，和垃圾邮件模版。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503010112574.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503010112574.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503010199053.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503010199053.jpg" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503010174218.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503010174218.jpg" alt="enter image description here"></p>
 
 <h4>1.3.2 代理功能的特点</h4>
 
-<hr />
+<hr>
 
 <p>我们分析的大多数的样本中都包含一个通用的代理组件，工作原理很简单，监听tcp端口的连接，并且发送通知，只有c&amp;c服务器的连接允许连接到该端口，但是内部有一个list，可以自定义添加允许的连接。不过其实只有两条命令会被代理组件识别。</p>
 
@@ -204,21 +204,21 @@ if ( $^O eq "MSWin32" ) { $ewblock = 10035; $eiprogr = 10036; }
 
 <p>下面是用作参考的协议内容</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503010268989.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503010268989.jpg" alt="enter image description here"></p>
 
 <p>在创建连接时候实际上使用的是通过SOCKS4协议进行实现，这个功能允许黑客传输任意的流量到服务器，不过蛋疼的是我们并没有见该功能使用过，所以并无法断定是用于什么。</p>
 
 <h4>1.3.3 恶意邮件内容</h4>
 
-<hr />
+<hr>
 
 <p>我们跟踪了大量的恶意邮件，发现主要是用于推广一些药物产品，并且还有产品官方的链接，这里是其中一个例子。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503010226642.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503010226642.jpg" alt="enter image description here"></p>
 
 <p>该恶意邮件的链接贩卖解决性功能障碍的药物的网站。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503010248605.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503010248605.jpg" alt="enter image description here"></p>
 
 <p>具体网站为加拿大的<code>spamtrackers.eu</code> ，不过其消息头貌似是使用随机的词。</p>
 
@@ -232,19 +232,19 @@ Interoffice-Gastronome-Unmodified: d41f7ebe89a
 
 <h1>0x02 被感染主机的统计</h1>
 
-<hr />
+<hr>
 
 <p>其中恶意服务器支持的C＆C域名其中一部分已经失效，所以我们购买了其中的域名来监控受到感染的服务器，我们使用了恶意软件中用到的特殊的user-agent来进行监控。</p>
 
 <p>下面是我们收集的2014年9月19日到2015年4月22日的数据，大概存在8,867个ip进行连接，其中大部分是用于网站托管的服务器。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503010278360.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503010278360.jpg" alt="enter image description here"></p>
 
 <p>(此处省略部分关于统计的细节)</p>
 
 <h1>0x03 WHO IS YELLSOFT?</h1>
 
-<hr />
+<hr>
 
 <p>样本中的C＆C服务器的ip范围位于 194.54.81.162 到194.54.81.164</p>
 
@@ -265,11 +265,11 @@ $ for i in 2 3 4 5 6; do dig +short -x 194.54.81 SOA @194.54.81.16$i; done | uni
 
 <p>那么Yellsoft是干嘛的，他们销售一种perl编写的批量邮件发送工具，叫DirectMailer。运行在UNIX系统上。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503010233951.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503010233951.jpg" alt="enter image description here"></p>
 
 <h3>3.1 DirectMailer分析</h3>
 
-<hr />
+<hr>
 
 <p>其主页上告诉访客，他们不提供直接下载，下载地址被托管在narod.ru上，我们可以从上面得到副本。在2014年我们下载了一个叫 directmailer-retail.zip 的压缩包，之后ESET讲其识别为恶意软件后，该软件就不再被放置于softexp.narod.ru上。</p>
 
@@ -309,7 +309,7 @@ sub bdrp {
 
 <h1>0x04 结论</h1>
 
-<hr />
+<hr>
 
 <p>恶意软件正在变的越来越复杂，另一个令人担忧的是Mumblehard的运营这么多年一直没中断过。</p>
 
@@ -354,7 +354,7 @@ condition:
 }
 </code></pre>
 
-<p>附录b (参考原文)</p>      </p>
+<p>附录b (参考原文)</p>      <p></p>
     
 			</body>
 		</html>

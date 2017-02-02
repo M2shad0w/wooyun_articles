@@ -3,20 +3,20 @@
 			<head>
 			     <title>2015移动安全挑战赛（阿里&amp;看雪主办）全程回顾 - GoSSIP_SJTU</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5409">http://drops.wooyun.org/tips/5409</a></h1>
 				
       <p>
-        <p>Author: 上海交通大学密码与计算机安全实验室软件安全小组GoSSIP</p>
+        </p><p>Author: 上海交通大学密码与计算机安全实验室软件安全小组GoSSIP</p>
 
 <h1>第一题</h1>
 
-<hr />
+<hr>
 
 <h2>0x1 分析</h2>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033008205093477.jpg" alt="APK界面" /></p>
+<p><img src="../images_result/images/2015033008205093477.jpg" alt="APK界面"></p>
 
 <!--more-->
 
@@ -30,8 +30,8 @@
 
 <p>我们在这里提供一种非常愉快的解法，不需要复杂的工具和分析，大家可以参见视频</p>
 
-<p><embed src="http://drops.wooyun.org/wp-content/uploads/2015/03/alimobisec_1.mp4" autostart="0" width="480" height="390" >
-</embed></p>
+<p><embed src="http://drops.wooyun.org/wp-content/uploads/2015/03/alimobisec_1.mp4" autostart="0" width="480" height="390">
+</p>
 
 <p>打开app后，我们使用adb logcat并加上这个app独有的 <em>lil</em> 标签过滤日志输出，发现app输出日志中有table，pw以及enPassword。随意输入字符串如123456789，发现enPassword中有对应的中文输出，根据输出反馈，可以知道有如下对应关系</p>
 
@@ -54,11 +54,11 @@
 
 <h1>第二题</h1>
 
-<hr />
+<hr>
 
 <h2>0x1 分析</h2>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033008351321399.png" alt="APK界面" /></p>
+<p><img src="../images_result/images/2015033008351321399.png" alt="APK界面"></p>
 
 <p><a href="http://drops.wooyun.org/wp-content/uploads/2015/03/AliCrackme_2.zip">题目下载</a></p>
 
@@ -81,14 +81,14 @@
 
 <p>下面是对比patch前和patch后的图：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033008205025533.png" alt="Patch前代码" /></p>
+<p><img src="../images_result/images/2015033008205025533.png" alt="Patch前代码"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033008205193745.png" alt="Patch后代码" /></p>
+<p><img src="../images_result/images/2015033008205193745.png" alt="Patch后代码"></p>
 
 <p>参考视频给出了完整的解决过程：</p>
 
-<p><embed src="http://static.wooyun.org/drops/20150331/alimobisec_2.mp4" autostart="0" width="480" height="390" >
-</embed></p>
+<p><embed src="http://static.wooyun.org/drops/20150331/alimobisec_2.mp4" autostart="0" width="480" height="390">
+</p>
 
 <p>通过观察Logcat输出可知，最终密码为：</p>
 
@@ -97,7 +97,7 @@
 
 <h1>第三题</h1>
 
-<hr />
+<hr>
 
 <p><a href="http://drops.wooyun.org/wp-content/uploads/2015/03/AliCrackme_3.zip">题目下载</a></p>
 
@@ -107,8 +107,8 @@
 
 <p>使用InDroid进行脱壳的演示视频：</p>
 
-<p><embed src="http://drops.wooyun.org/wp-content/uploads/2015/03/Alimobisec_3_1.mp4" autostart="0" width="480" height="390" >
-</embed></p>
+<p><embed src="http://drops.wooyun.org/wp-content/uploads/2015/03/Alimobisec_3_1.mp4" autostart="0" width="480" height="390">
+</p>
 
 <p>在得到脱壳之后的dexdump结果后，我们可以对代码进行静态分析。我们发现用户的输入会传递给继承自Class timertask的Class b，被Class b的<em>run</em>方法处理。在<em>run</em>方法中，如果<em>sendEmptyMessage</em>方法被调用时的参数为0，就会导致Class c的<em>handleMessage</em>这个方法中得到的<em>message</em>的<em>what</em>值为0，进而导致103除0跳入异常处理中，触发成功的提示。</p>
 
@@ -144,8 +144,8 @@ for ( size_t i = 33; i &lt; 127; ++i )
 
 <p>不过没关系，我们还有动态分析工具这一利器，因为最终目的是得到<em>getAnnotation</em>方法的返回值，依然可以用InDroid在Dalvik执行到<em>getAnnotation</em>方法时监控返回值，就能得到Annotation的具体值。使用InDroid获取具体信息的视频如下：</p>
 
-<p><embed src="http://drops.wooyun.org/wp-content/uploads/2015/03/Alimobisec_3_2.mp4" autostart="0" width="480" height="390" >
-</embed></p>
+<p><embed src="http://drops.wooyun.org/wp-content/uploads/2015/03/Alimobisec_3_2.mp4" autostart="0" width="480" height="390">
+</p>
 
 <p>最后可知，符合程序需求的字符串是</p>
 
@@ -159,9 +159,9 @@ for ( size_t i = 33; i &lt; 127; ++i )
 
 <h1>第四题</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033008205167871.png" alt="APK界面" /></p>
+<p><img src="../images_result/images/2015033008205167871.png" alt="APK界面"></p>
 
 <p><a href="http://drops.wooyun.org/wp-content/uploads/2015/03/AliCrackme_4.zip">题目下载</a></p>
 
@@ -169,8 +169,8 @@ for ( size_t i = 33; i &lt; 127; ++i )
 
 <p>使用InDroid进行脱壳的演示视频：</p>
 
-<p><embed src="http://drops.wooyun.org/wp-content/uploads/2015/03/Alimobisec_4.mp4" autostart="0" width="480" height="390" >
-</embed></p>
+<p><embed src="http://drops.wooyun.org/wp-content/uploads/2015/03/Alimobisec_4.mp4" autostart="0" width="480" height="390">
+</p>
 
 <p>Dex整体处理过程和上一题也类似，使用<code>handleMessage</code>处理最后的判断输入成功与否，只有<code>sendEmptyMessage(0)</code>后，触发除以0的异常才能成功。不过这一题将用户输入转成byte后，传给一个native的方法：<code>ali$a</code>的<code>M$j</code>方法，另外参数还包括一个常数48和Handler。看样子逆向native库势在必行了。这一题的lib文件夹下文件和上一题是一样的，有三个文件，其中<code>libmobisecy.so</code>其实是个zip文件，解压后是个classes.dex，直接反汇编后，类和方法的名字都在，只是里面的代码都是</p>
 
@@ -185,9 +185,9 @@ for ( size_t i = 33; i &lt; 127; ++i )
 
 <p>输入命令：</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5624393922163b3731232439">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/ # ps | grep crackme.a4
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5624393922163b3731232439">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/ # ps | grep crackme.a4
 u0_a73    1935  126   512204 48276 ffffffff 400dc408 S crackme.a4
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c4b6ababb084a9a5a3b1b6ab">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/ # cat /proc/1935/maps
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c4b6ababb084a9a5a3b1b6ab">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/ # cat /proc/1935/maps
 5e0f2000-5e283000 r-xp 00000000 103:04 741132    /data/app-lib/crackme.a4-1/libmobisec.so
 5e283000-5e466000 r-xp 00000000 00:00 0 
 5e466000-5e467000 rwxp 00000000 00:00 0 
@@ -201,7 +201,7 @@ u0_a73    1935  126   512204 48276 ffffffff 400dc408 S crackme.a4
 
 <p>使用dd命令将libmobisec.so的内存dump出来</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5f2d30302b1f323e382a2d30">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/ # dd if=/proc/1935/mem of=/sdcard/alimsc4 skip=1578049536 ibs=1 count=3993600
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5f2d30302b1f323e382a2d30">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/ # dd if=/proc/1935/mem of=/sdcard/alimsc4 skip=1578049536 ibs=1 count=3993600
 </code></pre>
 
 <p>dd命令使用的数字都是十进制的，skip就是<code>libmobisec.so</code>的起始地址，count是总长度。 为了让IDA还能够识别libmobisec里的libc函数，我们还需要把libc也载入到IDA中，libc就直接从system/lib里拖出来就行了。</p>
@@ -218,7 +218,7 @@ u0_a73    1935  126   512204 48276 ffffffff 400dc408 S crackme.a4
 
 <p>类似下图：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033008205268772.png" alt="图1" /></p>
+<p><img src="../images_result/images/2015033008205268772.png" alt="图1"></p>
 
 <p>不过我没找到这个<code>M\$j</code>这个名字，逆过JNI库的都知道，如果符号表里找不到这个函数名，说明在<code>JNI_Onload</code>的时候，使用<code>RegisterNatives</code>函数重新将一个JNI函数映射为Native函数了。</p>
 
@@ -226,40 +226,40 @@ u0_a73    1935  126   512204 48276 ffffffff 400dc408 S crackme.a4
 
 <p>这个函数本身做了一些控制流混淆，同时还有很多字符串加解密的功能函数，一些简单的如异或操作，也被展开成与和或的组合等更长更复杂的表达式形式。另外还看到一些变形过的RC4，等等。不过因为我们已经是dump出来执行过的数据，所以必要的数据都已经解密了。如下图：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033008205329764.png" alt="图2" /></p>
+<p><img src="../images_result/images/2015033008205329764.png" alt="图2"></p>
 
 <p>通过查看反编译的C代码，我发现程序中是直接通过JNI方法调用了Java中的<code>bh</code>类的方法<code>a</code>（在图2常量中也可以看到）。 再次回到dex层查看<code>a</code>方法，该方法是不断的将输入传递给不同的函数进行处理，先是<code>cd</code>的<code>a</code>方法，<code>cC</code>的<code>a</code>方法，<code>p</code>的<code>a</code>方法，<code>x</code>的<code>a</code>方法，<code>ali$a</code>的<code>M$d</code>方法（native），<code>aS</code>的<code>a</code>方法，<code>x</code>的<code>a</code>方法，<code>ali$a</code>的<code>M&amp;z</code>方法（native），<code>cd</code>的<code>a</code>方法，<code>cC</code>的<code>a</code>方法，每一个方法都是些简单的数学运算，编码，以及密码学处理等可逆的操作，结合逆向和Indroid对输入输出的监控，都可以轻松确定每个Java函数的作用，具体过程如下代码显示：</p>
 
-<pre><code>invoke-static {}, LbKn;.a:()Z // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="345951405c5b5074040c5505">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code>invoke-static {}, LbKn;.a:()Z // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="345951405c5b5074040c5505">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 move-result v3
-invoke-static {v3}, LbKn;.b:(I)V // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="630e06170b0c0723535b0251">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+invoke-static {v3}, LbKn;.b:(I)V // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="630e06170b0c0723535b0251">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 add-int/lit8 v0, v5, #int 1 // #01
-invoke-static {v4, v5}, Lcd;.a:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1e737b6a76717a5e2e7c2c2d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+invoke-static {v4, v5}, Lcd;.a:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1e737b6a76717a5e2e7c2c2d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 move-result-object v1
 add-int/lit8 v2, v0, #int 1 // #01
-invoke-static {v1, v0}, LcC;.a:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e08d8594888f84a0d081d3d0">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+invoke-static {v1, v0}, LcC;.a:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e08d8594888f84a0d081d3d0">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 move-result-object v0
 add-int/lit8 v1, v2, #int -1 // #ff
-invoke-static {v0, v2}, Lp;.a:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fa979f8e92959ebaca9fc29e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+invoke-static {v0, v2}, Lp;.a:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fa979f8e92959ebaca9fc29e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 move-result-object v0
-invoke-static {v0, v1}, Lx;.a:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="137e76677b7c775323767776">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+invoke-static {v0, v1}, Lx;.a:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="137e76677b7c775323767776">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 move-result-object v0
 add-int/lit8 v2, v1, #int -1 // #ff
-invoke-static {v0, v1}, Lali$a;.M$d:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="69040c1d01060d29595a0d5a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+invoke-static {v0, v1}, Lali$a;.M$d:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="69040c1d01060d29595a0d5a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 move-result-object v0
 add-int/lit8 v1, v2, #int 1 // #01
-invoke-static {v0, v2}, LaS;.a:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e78a82938f8883a7d7d5d582">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+invoke-static {v0, v2}, LaS;.a:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e78a82938f8883a7d7d5d582">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 move-result-object v0
-invoke-static {v0, v1}, Lx;.a:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="076a62736f68634737626362">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+invoke-static {v0, v1}, Lx;.a:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="076a62736f68634737626362">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 move-result-object v0
 add-int/lit8 v2, v1, #int 1 // #01
-invoke-static {v0, v1}, Lali$a;.M$z:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="84e9e1f0ecebe0c4b4b0b0b4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+invoke-static {v0, v1}, Lali$a;.M$z:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="84e9e1f0ecebe0c4b4b0b0b4">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 move-result-object v0
 add-int/lit8 v1, v2, #int 1 // #01
-invoke-static {v0, v2}, Lcd;.a:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="254840514d4a416515471716">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+invoke-static {v0, v2}, Lcd;.a:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="254840514d4a416515471716">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 move-result-object v0
 add-int/lit8 v2, v1, #int 1 // #01
-invoke-static {v0, v1}, LcC;.a:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2a474f5e42454e6a1a4b191a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+invoke-static {v0, v1}, LcC;.a:([BI)[B // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2a474f5e42454e6a1a4b191a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 move-result-object v0
 return-object v0
 </code></pre>
@@ -330,15 +330,15 @@ print flag
 
 <p>这里还需要提一下如何寻找<code>M\$d</code>和<code>M\$z</code>两个函数在so库中的地址的方法，不过这个方法是一些经验的总结，原因是整个native ELF文件的节区结构是被修改过的。这两个方法和M\$j不太一样，因为在dump出的libmobisec里可以找到M\$z的函数名，证明这个方法没有使用<code>RegiterNatives</code>来做变换，因此我们可以通过符号表来找这个函数与文件头部的偏移。方法是找<code>M\$z</code>和字符串表的偏移，如0x03FE，然后穷搜整个文件:</p>
 
-<p><img src="http://static.wooyun.org/drops/20150330/2015033008205373783.png" alt="图3" /></p>
+<p><img src="../images_result/images/2015033008205373783.png" alt="图3"></p>
 
 <p>因为符号表应该会把字符串表偏移作为一项，这块区域的结构体，我们对照ELF结构发现并不是标准的符号表，但还是可以大概看出结构体的内容，包括索引，字符串表偏移，以及ELF特殊的标志数，因此推测0x57BE4偏移是<code>M\$z</code>函数。该地址也正好是个压栈的指令，证明了我们的猜想。</p>
 
 <h1>第五题</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org/drops/20150331/2015033108563984733.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015033108563984733.png" alt="enter image description here"></p>
 
 <p><a href="http://drops.wooyun.org/wp-content/uploads/2015/03/AliCrackme_5.zip">题目下载</a></p>
 
@@ -346,13 +346,13 @@ print flag
 
 <p>先把名为<code>AliCrackme_5.apk</code>的文件丢到JEB里看一看：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150331/2015033108564190995.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015033108564190995.jpg" alt="enter image description here"></p>
 
 <p>dex文件并没有进行加壳和混淆，看上去是一个非常简单的程序，Java代码部分使用函数<code>Register("Bomb_Atlantis", input)</code>对输入进行判断。所以需要分析的逻辑应该都在<code>libcrackme.so</code>里的<code>Register</code>函数中。</p>
 
 <p>接下来我们用IDA打开这个<code>libcrackme.so</code>，不出所料的发现IDA完全没法处理，应该是进行了强烈的混淆和加壳处理：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150331/2015033108564388860.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015033108564388860.jpg" alt="enter image description here"></p>
 
 <p>使用和解决前面题目相同的技巧，我们继续使用<code>dd</code>的方法来去处一部分的混淆和加壳。运行一次程序后，从<code>/proc/self/maps</code>里找到<code>libcrackme.so</code>在内存中的位置，使用<code>dd</code>命令从<code>/proc/self/mem</code>中提取出内存中的<code>libcrackme.so</code>，接着使用在解决第四题时使用过的技巧，将<code>libcrackme.so</code>和<code>libc.so</code>一起加载到IDA里。</p>
 
@@ -362,7 +362,7 @@ print flag
 
 <p>之后程序会将这个md5值和我们的输入进行一些异或和计算的操作，经过几步比较简单、可逆的变换之后，进入一个比较复杂的函数，经过这个函数处理后直接和一个内存中的值进行比较，返回比较结果。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150331/2015033108564681128.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015033108564681128.jpg" alt="enter image description here"></p>
 
 <p>这里说一个我们在做第五题时用到的分析方法——动态hook。由于<code>libcrackme.so</code>中并没有对调用自身的上层应用进行验证，这就导致了我们可以自己写一个程序去加载这个so，调用其中的方法。这也导致了我们在加载<code>libcrackme.so</code>后，可以加载另一个用于hook的so，这样我们可以hook <code>libcrackme.so</code>中的任意函数，从而知道任意函数的参数和返回值，这对于我们理解程序有着非常大的帮助。这里我们使用的hook框架是著名Android安全研究人员Collin Mulliner开发的Android平台上的一个二进制注入框架<a href="https://github.com/crmulliner/adbi">adbi</a>。当然这道题目并不能够通过注入的方法将我们的so注入进去，因为源程序禁掉了ptrace这样的系统调用。我们对adbi稍作修改，使之成为一个可以手动加载的动态hook框架。同时由于我们没法通过符号表来定位函数的地址，所有的hook地址都需要硬编码，并且要和运行这道题目程序的Android设备内存映射严格对应。</p>
 
@@ -390,7 +390,7 @@ print flag
 <pre><code>3EFoAdTxepVcVtGgdVDB6AA=   
 </code></pre>
 
-<p>好了，我们的2015移动安全挑战赛全系列回顾就到此为止了！希望大家能和我们多多交流讨论，欢迎大家关注我们的微博<strong>GoSSIP_SJTU</strong>，基本上每天都会有精彩的内容发布哦。</p>      </p>
+<p>好了，我们的2015移动安全挑战赛全系列回顾就到此为止了！希望大家能和我们多多交流讨论，欢迎大家关注我们的微博<strong>GoSSIP_SJTU</strong>，基本上每天都会有精彩的内容发布哦。</p>      <p></p>
     
 			</body>
 		</html>

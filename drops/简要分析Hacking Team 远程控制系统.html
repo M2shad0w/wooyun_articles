@@ -3,14 +3,14 @@
 			<head>
 			     <title>简要分析Hacking Team 远程控制系统 - 绿盟科技</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/7025">http://drops.wooyun.org/papers/7025</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>7月5日晚，一家意大利远程控制软件厂商HackingTeam的内部数据被泄露出来，其影响力不亚于斯洛登事件及维基解密事件，绿盟科技威胁响应中心随即启动应急响应工作。</p>
 
@@ -28,7 +28,7 @@
 
 <h1>0x01 泄露：Hacking Team</h1>
 
-<hr />
+<hr>
 
 <p>7月5日晚，一家意大利软件厂商被攻击，其掌握的400GB漏洞（包括0day）数据泄露出来，由此可能引发的动荡，引起了业界一片哗然。数据包中主要包含几个大的部分：</p>
 
@@ -43,13 +43,13 @@
 
 <h1>0x02 Hacking Team</h1>
 
-<hr />
+<hr>
 
 <p>Hacking Team在意大利米兰注册了一家软件公司，主要向各国政府及法律机构销售入侵及监视功能的软件。其远程控制系统可以监测互联网用户的通讯、解密用户的加密文件及电子邮件，记录Skype及其他VoIP通信，也可以远程激活用户的麦克风及摄像头。其总部在意大利，雇员40多人，并在安纳波利斯和新加坡拥有分支机构，其产品在几十个国家使用。</p>
 
 <h1>0x03 分析：远程控制系统</h1>
 
-<hr />
+<hr>
 
 <p>大家知道IT运维管理中常常用到远程控制软件，比如Dameware，但Hacking Team RCS相比市面上常见的远程控制软件而言，主要区别如下：</p>
 
@@ -64,13 +64,13 @@
 
 <h1>0x04 Hacking Team RCS系统架构</h1>
 
-<hr />
+<hr>
 
 <p>RCS (Remote Control System)系统是一套用于政府拦截的黑客套件，实现了全平台的监控系统。</p>
 
 <h2>RCS主要组件</h2>
 
-<p><img src="http://static.wooyun.org//drops/20150709/2015070914380851134.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015070914380851134.png" alt="enter image description here"></p>
 
 <p>每一块组件具体的功能如下，</p>
 
@@ -126,7 +126,7 @@ GPS位置
 
 <h1>0x05 Hacking Team RCS基本功能</h1>
 
-<hr />
+<hr>
 
 <h2>电话监控</h2>
 
@@ -181,7 +181,7 @@ GPS位置
 
 <h1>0x06 Hacking Team RCS入侵手段</h1>
 
-<hr />
+<hr>
 
 <p>Hacking Team RCS软件入侵目标，主要通过如下三种方式：</p>
 
@@ -199,13 +199,13 @@ GPS位置
 
 <h1>0x07 Hacking Team RCS信息上传</h1>
 
-<hr />
+<hr>
 
 <p>用于搜集客户端搜集信息的上传通道，是一个强加密和需要认证的通信过程，同时整个上传通道的设计是基于复杂网络环境的，考虑到防火墙、带有域认证功能的代理等等，会通过模仿一个正常用户浏览web的过程来进行这一些操作。</p>
 
 <p>信息搜集功能是通过Collection Node来完成的客户端上传信息的搜集，并且允许客户端从服务器上下载新的配置和插件，这个节点是通过提供ASP服务完成交互的。这个节点是整个控制系统唯一能从外部进行访问的节点，因此对它的保护也非常关键，比如使用防火墙等措施进行一定的隔离，也需要使用到Anonymizer 链来对ASP真实的IP地址进行隐藏。</p>
 
-<p>RSSM(Mobile Collection Node)作为Collection Node的一个补充，通过蓝牙等手段完成Collection Node的功能，并且该节点也会和Collection Node完成同步的过程。</p>      </p>
+<p>RSSM(Mobile Collection Node)作为Collection Node的一个补充，通过蓝牙等手段完成Collection Node的功能，并且该节点也会和Collection Node完成同步的过程。</p>      <p></p>
     
 			</body>
 		</html>

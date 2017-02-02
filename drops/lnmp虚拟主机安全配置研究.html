@@ -3,14 +3,14 @@
 			<head>
 			     <title>lnmp虚拟主机安全配置研究 - phith0n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2866">http://drops.wooyun.org/tips/2866</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>众所周知，虚拟主机的安全不好做，特别是防止跨目录成为了重点。apache+php服务器防止跨目录的方式比较简单，网上的所有成熟虚拟主机解决方案都是基于apache的，如directadmin、cpanel。</p>
 
@@ -22,7 +22,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/201408/2014082402315954182.png" alt="2014082402315954182.png" /></p>
+<p><img src="../images_result/images/2014082402315954182.png" alt="2014082402315954182.png"></p>
 
 <p>防御跨站要防御的有三点，第一是防止其他用户列网站目录，防止自己的一些敏感文件名被看到及访问；第二是防止其他用户读取自己的文件，防止配置信息泄露；第三就是防止其他用户写shell在自己目录。</p>
 
@@ -36,7 +36,7 @@
 
 <h2>0x01 lNMP加固</h2>
 
-<hr />
+<hr>
 
 <p>比如我们服务器上有两个虚拟主机game01.com和game02.com，其目录分别是 /home/wwwroot/game01/和/home/wwwroot/game02/。</p>
 
@@ -155,7 +155,7 @@ usermod -aG game02 www
 
 <h2>0x02 使用方法</h2>
 
-<hr />
+<hr>
 
 <p>先kill掉已有的php-fpm，再重启一下nginx，再/home/start.sh启动新的php-fpm即可。</p>
 
@@ -169,13 +169,13 @@ usermod -aG game02 www
 
 <h2>0x03 参考:</h2>
 
-<hr />
+<hr>
 
 <p>http://drops.wooyun.org/tips/1323</p>
 
 <p>http://www.dedecms.com/knowledge/servers/linux-bsd/2012/0819/8389.html</p>
 
-<p>http://yzs.me/2198.html</p>      </p>
+<p>http://yzs.me/2198.html</p>      <p></p>
     
 			</body>
 		</html>

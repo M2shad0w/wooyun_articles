@@ -3,14 +3,14 @@
 			<head>
 			     <title>物联网操作系统安全性分析 - bt0sea</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/wireless/8338">http://drops.wooyun.org/wireless/8338</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>物联网目前是继移动互联网之后的又一个未来IT发展的蓝海。智能设备的不断涌现已经在不知不觉中占领我们的生活，颠覆我们的原有的思维模式，记得前几年我还带着一块天梭的机械手表，近段时间地铁好多人都佩戴iWatch等智能手表。还有智能手环、智能灯等在不断的改变我们的生活方式。那么这些智能设备具体的IT架构是什么？他们的安全性设计如何？对于信息安全工作者，有必要研究一下。</p>
 
@@ -26,13 +26,13 @@
 
 <h1>0x01 物联网云协议安全性分析</h1>
 
-<hr />
+<hr>
 
 <p>针对于智能家居等物联网设备，接入到互联网进行数据交换，安全风险性就非常大，如果处理不好，可能就会像黑客电影中桥段：通过网络把你家的智能门锁打开。</p>
 
 <p>那么，物联网操作系统具体怎么连接互联网呢？</p>
 
-<p><img src="http://static.wooyun.org//drops/20150910/2015091006270956204pic1.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015091006270956204pic1.jpg" alt=""></p>
 
 <p>其中物联网终端（例如：灯泡）有两种连接方式，</p>
 
@@ -45,7 +45,7 @@
 
 <p>那么物联网协议都有哪些呢？</p>
 
-<p><img src="http://static.wooyun.org//drops/20150910/2015091006280116177pic21.png" alt="" /></p>
+<p><img src="../images_result/images/2015091006280116177pic21.png" alt=""></p>
 
 <p>那么，从商业模式上分析，大公司一般是通过移动端（手机开发SDK）、云端（建立开源物联网云平台）、设备端（物联网连接硬件和软件SDK）、然后使开发者通过众筹方式，开发硬件，但是传递到云端的数据归物联网公司平台拥有。最后通过自己的电商销售渠道卖给用户。通过上述流程物联网生态系统，拥有物联网大数据，在资本市场上大捞一笔。</p>
 
@@ -70,7 +70,7 @@
 
 <h3>（一）物联网终端设计</h3>
 
-<p><img src="http://static.wooyun.org//drops/20150910/2015091006282398045pic31.png" alt="" /></p>
+<p><img src="../images_result/images/2015091006282398045pic31.png" alt=""></p>
 
 <p>安全层可以看出一般在协MQTT等议栈中实现，如果协议栈中没有实现，那只能在Application SDK API中实现。</p>
 
@@ -83,17 +83,17 @@
 
 <p>一般和云通讯会有Cloud key 和自己设备本身的private key。通过SSL隧道交换秘钥。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150910/2015091006282718841pic4.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015091006282718841pic4.jpg" alt=""></p>
 
 <p>和云端通讯函数。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150910/2015091006282916507pic51.png" alt="" /></p>
+<p><img src="../images_result/images/2015091006282916507pic51.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150910/2015091006283235660pic61.png" alt="" /></p>
+<p><img src="../images_result/images/2015091006283235660pic61.png" alt=""></p>
 
 <p>同时，查看了iOS手机端控制部分，由于是部分开源，dot m实现函数已经屏蔽，无法了解其内部逻辑。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150910/2015091006283665069pic7.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015091006283665069pic7.jpg" alt=""></p>
 
 <p>小结：由于某云厂商相应的硬件端源码开发不完全，只能看到这些，同时、强烈鄙视这种伪开源的行为。</p>
 
@@ -101,7 +101,7 @@
 
 <h3>（二）物联网云端设计</h3>
 
-<p><img src="http://static.wooyun.org//drops/20150910/2015091006284298845pic81.png" alt="" /></p>
+<p><img src="../images_result/images/2015091006284298845pic81.png" alt=""></p>
 
 <p>云端设计、一般要有几个模块要考虑：</p>
 
@@ -147,7 +147,7 @@
 
 <h1>0x02 物联网操作系统安全建议</h1>
 
-<hr />
+<hr>
 
 <p>目前，物联网还在发展之中，把通讯协议直接裸奔在固件上也无可厚非。但是还是有几条提醒各位物联网玩家。</p>
 
@@ -158,7 +158,7 @@
 <li>使用SSL/TLS连接云端传输数据(HTTPS+ AES 128bit encryption)，尽量不要在物联网终端设备上存储数据，以免被黑。如果必须在本地存储请加密，同时加密备份到云端一份。如果再安全一点可以使用TPM处理，把秘钥存储到类似U盘的设备当中做认证。</li>
 <li>如果使用SSL，检查两端(服务器和客户端)的证书，不允许使用自签名证书。</li>
 <li>云端处理好多租户问题，尽量做到操作系统层面、数据层面的隔离。</li>
-</ol>      </p>
+</ol>      <p></p>
     
 			</body>
 		</html>

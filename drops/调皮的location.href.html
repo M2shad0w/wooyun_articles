@@ -3,14 +3,14 @@
 			<head>
 			     <title>调皮的location.href - 呆子不开口</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/892">http://drops.wooyun.org/papers/892</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>随着水瓶月的到来，在祖国繁荣昌盛的今天，web系统的浏览器端也越来越重，很多的功能逻辑都放在了js中，前端的漏洞也越来越多。 我今天就说说location.href跳转的一些问题。</p>
 
@@ -35,7 +35,7 @@ location.href = url;
 
 <h2>0x01 常见的跳转漏洞</h2>
 
-<hr />
+<hr>
 
 <p>什么是跳转漏洞？突破了系统预期的跳转，就是跳转漏洞。大多数系统的预期是跳转到当前域url的http访问。</p>
 
@@ -53,7 +53,7 @@ location.href = url;
 
 <h2>0x02 跳转漏洞的危害</h2>
 
-<hr />
+<hr>
 
 <p>可能的危害场景如下：</p>
 
@@ -69,7 +69,7 @@ location.href = url;
 
 <h2>0x03 目前的防护的一些问题</h2>
 
-<hr />
+<hr>
 
 <p>我见到的常见的有防护有：</p>
 
@@ -93,7 +93,7 @@ location.href = "//diaoyuwangzhan.com"
 <p>对于允许第三方跳转的，匹配域名白名单的，一定要写好正则的逻辑严格匹配url的标准格式，否则可能会被</p>
 
 <pre><code>http://yigezangpao.com.jiajiba.taobao.com
-http:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e0cfcf998987859a818e8790818fce838f8da08a89818a898281ce94818f82818fce838f8d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+http:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e0cfcf998987859a818e8790818fce838f8da08a89818a898281ce94818f82818fce838f8d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 http://jiajiba.taobao.com/yigezangpao.com
 </code></pre>
 
@@ -118,7 +118,7 @@ var c = location.href.split("#!")[1];     if (c) {     window.location = c.r
 
 <h2>0x04 比杨幂还神奇</h2>
 
-<hr />
+<hr>
 
 <p>对于上面的替换":"的方案，如果完全替换，是不是就没有问题了呢？</p>
 
@@ -139,13 +139,13 @@ location.href = "javascript&amp;#x3A;alert(1)"
 
 <h2>0x05 解决方案</h2>
 
-<hr />
+<hr>
 
 <p>对于不允许跳转到第三方的，可以使用location.pathname来跳转，用这个跳转绝对靠谱。</p>
 
 <p>有句成语”path就不是共产党员“就是修饰这个属性的，既然不是共产党员，说明path是靠谱的。</p>
 
-<p>对于允许跳转到第三方的，做好白名单的检查规则。</p>      </p>
+<p>对于允许跳转到第三方的，做好白名单的检查规则。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,16 +3,16 @@
 			<head>
 			     <title>【安天】Xcode非官方版本恶意代码污染事件（XcodeGhost）的分析与综述  - SwordLea</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/9178">http://drops.wooyun.org/papers/9178</a></h1>
 				
       <p>
-        <p><strong>微信公众号:Antiylab</strong></p>
+        </p><p><strong>微信公众号:Antiylab</strong></p>
 
 <h1>0x00 摘要</h1>
 
-<hr />
+<hr>
 
 <p>Xcode 是由苹果公司发布的运行在操作系统Mac OS X上的集成开发工具（IDE），是开发OS X 和 iOS 应用程序的最主流工具。</p>
 
@@ -28,7 +28,7 @@
 
 <h1>0x01 背景</h1>
 
-<hr />
+<hr>
 
 <p>Xcode是由苹果公司开发的运行在操作系统Mac OS X上的集成开发工具（IDE），是开发OS X 和 iOS 应用程序的最快捷的方式，其具有统一的用户界面设计，同时编码、测试、调试都在一个简单的窗口内完成。【1】</p>
 
@@ -42,11 +42,11 @@
 
 <h1>0x02 作用机理与影响</h1>
 
-<hr />
+<hr>
 
 <p>安天根据Xcode非官方供应链污染事件的相关信息形成了图2-1，其整体污染路径为官方Xcode被攻击者植入恶意代码后，由攻击者上传到百度云网盘等网络位置，再通过论坛传播等方式广播下载地址，导致被App开发者获取，同时对于攻击者是否利用下载工具通过下载重定向方式扩大散布，也有较多猜测。有多个互联网公司采用被污染过的Xcode开发编译出了被污染的App，并将其提交至苹果App Store，且通过了苹果的安全审核，在用户获取相关App进行安装后，相关应用会被感染并回传信息至攻击者指定域名。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405334828281pic19.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405334828281pic19.jpeg" alt=""></p>
 
 <p>图2‑1 Xcode非官方供应链污染事件示意图</p>
 
@@ -66,7 +66,7 @@
 
 <p>表2‑1 样本信息</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405334952777pic2.jpeg" alt="" /></p></li>
+<p><img src="../images_result/images/2015092405334952777pic2.jpeg" alt=""></p></li>
 </ul>
 
 <h3>2.1.2 感染方式</h3>
@@ -75,7 +75,7 @@
 
 <p>这次攻击本质上是通过攻击Xcode间接攻击了自动化构建和编译环境，目前开发者不论是使用XcodeServer还是基于第三方工具或自研发工具都需要基于Xcode。而这次如此大面积的国内产品中招，则只能反映大量产品研发团队在产品开发和构建环境的维护以及安全意识上都呈现出比较大的问题。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405335247801pic31.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405335247801pic31.jpeg" alt=""></p>
 
 <p>图2‑2 基于Xcode的开发流程（第三方图片）【4】</p>
 
@@ -119,9 +119,9 @@
 <li>添加的语句： “-force&#95;load$(PLATFORM&#95;DEVELOPER&#95;SDK&#95;DIR)/Library/Frameworks/CoreServices.framework/CoreService”</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405335487918pic411.png" alt="" /></p>
+<p><img src="../images_result/images/2015092405335487918pic411.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405385356055pic511.png" alt="" /></p>
+<p><img src="../images_result/images/2015092405385356055pic511.png" alt=""></p>
 
 <p>图2‑3 受感染Xcode与官方版本配置文件对比</p>
 
@@ -133,7 +133,7 @@
 <li>iOS应用启动流程：从代码执行流程来看，图2-4中每一步都可以作为恶意代码植入点，且其框架基本都是由模板自动生成，而UIWindow为iOS App启动后展示页面时执行。</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405335647549pic61.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405335647549pic61.jpeg" alt=""></p>
 
 <p>图2‑4 iOS应用启动流程（第三方图片）【5】</p>
 
@@ -142,7 +142,7 @@
 <li>恶意代码启动时机分析：恶意代码植入于UIWindow (didFinishLaunchingWithOptions)中，其入口点为： &#95;&#95;UIWindow&#95;didFinishLaunchingWithOptions&#92;&#95;&#95;makeKeyAndVisible_；UIWindow是作为包含了其他所有View的一个容器，每一个程序里面都会有一个UIWindow；而didFinishLaunchingWithOptions里面的代码会在UIWindow启动时执行，即被感染App在启动时的开始准备展示界面就已经在执行被植入的恶意代码了。</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405335795708pic711.png" alt="" /></p>
+<p><img src="../images_result/images/2015092405335795708pic711.png" alt=""></p>
 
 <p>图2‑5 恶意插件植入的代码入口点</p>
 
@@ -162,19 +162,19 @@
 
 <p>其中6.0版本URL为字符串形式，而到7.0版本URL则进化到字符拼接，7.0版本中还可以获取应用剪贴板信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405340199358pic81.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405340199358pic81.jpeg" alt=""></p>
 
 <p>图2‑6 获取上传的信息</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405340393548pic910.png" alt="" /></p>
+<p><img src="../images_result/images/2015092405340393548pic910.png" alt=""></p>
 
 <p>图2‑7 6.0版本中URL为字符串形式</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405340480059pic101.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405340480059pic101.jpeg" alt=""></p>
 
 <p>图2‑8 7.0版本中URL字符拼接形式</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405340633354pic112.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405340633354pic112.jpeg" alt=""></p>
 
 <p>图2‑9 7.0版本获取应用剪贴板信息</p>
 
@@ -182,7 +182,7 @@
 
 <p>恶意代码可以远程设置任意应用的弹窗信息，包括弹框标题、内容、推广应用ID、取消按钮、确认按钮；需要注意的是该部分代码并没有使用输入框控件，同时也并无进一步的数据回传代码，因此是不能直接高仿伪造系统弹窗，钓鱼获取Apple ID输入和密码输入的（这点在诸多已公开分析报告中均有一定误导性）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405340747280pic122.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405340747280pic122.jpeg" alt=""></p>
 
 <p>图2‑10 远程设置弹窗信息</p>
 
@@ -194,7 +194,7 @@
 
 <p>恶意代码包含了一个使用OpenURL的远控模块，该模块可以用来执行从服务器获取到的URL scheme，其使用canOpenURL获取设备上定义的URL scheme信息，并从服务器获取URL scheme通过OpenURL执行。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405340935563pic131.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405340935563pic131.jpeg" alt=""></p>
 
 <p>图2‑11 canOpenURL获取信息，执行从服务器获取的URLscheme</p>
 
@@ -214,7 +214,7 @@
 <li>结合弹窗推广应用，App Store&amp;企业证书应用皆可</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405341031535pic141.jpegg" alt="" /></p>
+<p><img src="../images_result/images/2015092405341031535pic141.jpegg" alt=""></p>
 
 <p>图2‑12 设置推广应用appID和对应URL scheme</p>
 
@@ -228,7 +228,7 @@
 
 <p>DES标准密钥长度为56位，加上8个奇偶校验位，共64bit即8个字节。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405341135381pic154.png" alt="" /></p>
+<p><img src="../images_result/images/2015092405341135381pic154.png" alt=""></p>
 
 <p>图2‑13 DES密钥生成方式</p>
 
@@ -244,7 +244,7 @@
 
 <p>表2‑2 App Store Top200中受影响App统计，红色为受到影响软件</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405341314680pic161.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405341314680pic161.jpeg" alt=""></p>
 
 <p>目前，已有其他分析团队示警著名手机游戏开发平台Unity 3D也被同一作者植入了恶意代码，与攻击Xcode手法一样，但安天分析小组没有跟进分析。</p>
 
@@ -254,7 +254,7 @@
 
 <p>攻击者使用了多个账号，在多个不同网站或论坛进行传播被植入恶意代码的Xcode，以下是我们对其传播账号及传播信息的脑图化整理：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405341411995pic172.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405341411995pic172.jpeg" alt=""></p>
 
 <p>图3‑1 传播马甲关联分析图</p>
 
@@ -262,31 +262,31 @@
 
 <p>表3‑1 传播论坛情况</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405341636784pic181.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405341636784pic181.jpeg" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405341725013pic191.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405341725013pic191.jpeg" alt=""></p>
 
 <p>图3‑2 作者百度云网盘</p>
 
 <p>以威锋论坛传播为例，这个帖子本身是一个旧帖，首次发布于2012年，并在2015年6月15日进行最后编辑，作者用旧帖“占坑”的目的，是为了增加下载者对此帖信任度，如图3-3。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405341991444pic20.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405341991444pic20.jpeg" alt=""></p>
 
 <p>图3‑3 通过威锋网传播</p>
 
 <p>此外，微博上有网友说Xcode传播是通过迅雷下载重定向传播，会导致输入官方下载地址下载到错误版本，但后来同一网友又澄清是自己看错了导致，并删除了原帖。有关截图参见图3-4、图3-5：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405342163920pic21.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405342163920pic21.jpeg" alt=""></p>
 
 <p>图3‑4 证明截图1微博发贴已删</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405342224988pic22.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405342224988pic22.jpeg" alt=""></p>
 
 <p>图3‑5 证明截图2微博发贴已删</p>
 
 <p>2015年9月19日该网友公开澄清是自己记错了，误把百度云盘链接直接拷贝到迅雷下载地址里了，以下是网友的公开声明。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405342493754pic23.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405342493754pic23.jpeg" alt=""></p>
 
 <p>图3‑6 网友澄清证明</p>
 
@@ -328,7 +328,7 @@
 <li>在Developer Apple网站下载安装：<a href="https://developer.apple.com/downloads/">https://developer.apple.com/downloads/</a></li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405342546947pic24.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405342546947pic24.jpeg" alt=""></p>
 
 <p>图3‑7 Developer Apple上的Command LineTools工具</p>
 
@@ -344,13 +344,13 @@
 <li>Authority=Apple Mac OSApplication Signing，表示证书所有者，即该应用属于Mac App Store签名发布。</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405342651073pic25.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405342651073pic25.jpeg" alt=""></p>
 
 <p>图3‑8 官方Xcode7.0签名信息</p>
 
 <p>而验证含XcodeGhost恶意插件的Xcode6.4应用，其所有者为“Software Signing”，说明非Mac App Store官方渠道发布。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405342865029pic26.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405342865029pic26.jpeg" alt=""></p>
 
 <p>图3‑9 恶意Xcode签名信息</p>
 
@@ -362,27 +362,27 @@
 
 <p>校验官方Xcode应用，验证通过，将没有任何提示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405343365314pic271.png" alt="" /></p>
+<p><img src="../images_result/images/2015092405343365314pic271.png" alt=""></p>
 
 <p>图3‑10 官方Xcode签名校验合法</p>
 
 <p>校验含XcodeGhost恶意插件的Xcode应用，验证失败，会出现提示，说明该应用在签名之后被修改过。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405343583094pic281.png" alt="" /></p>
+<p><img src="../images_result/images/2015092405343583094pic281.png" alt=""></p>
 
 <p>图3‑11 恶意Xcode签名校验失败</p>
 
 <h3>3.3.3 官方推荐Xcode验证工具spclt</h3>
 
-<p>鉴于此事件影响重大，苹果官方于2015年9月22日发布文章<a href="http://static.wooyun.org//drops/20150924/2015092405335647549pic61.jpeg">6</a>推荐使用spclt工具校验Xcode合法性。</p>
+<p>鉴于此事件影响重大，苹果官方于2015年9月22日发布文章<a href="./drops/20150924/2015092405335647549pic61.jpeg">6</a>推荐使用spclt工具校验Xcode合法性。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405343653369pic29.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405343653369pic29.jpeg" alt=""></p>
 
 <p>图3‑12 官方推荐使用spctl工具校验Xcode合法性</p>
 
 <p>如图3-13，上面为正版Xcode验证信息，表明来源为Mac App Store；而下面为恶意Xcode工具验证信息，没有任何来源信息；</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405343763708pic30.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405343763708pic30.jpeg" alt=""></p>
 
 <p>图3‑13 使用spctl工具校验Xcode来源</p>
 
@@ -390,7 +390,7 @@
 
 <h1>0x04 Android风险预警</h1>
 
-<hr />
+<hr>
 
 <h2>4.1 预警背景</h2>
 
@@ -400,17 +400,17 @@
 
 <p>目前Android下的开发生产环境如图4-1所示，其可以分成开发流程、自动化构建和发布三部分。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405343916952pic311.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405343916952pic311.jpeg" alt=""></p>
 
 <p>图4‑1 Xcode安卓开发生产环境示意图</p>
 
 <p>通过分析，无论开发者是否使用IDE环境进行开发或者自动化构建，都会使用到Android SDK和Android NDK，并且默认官网下载的zip中只包含有SDK Manager，不同API版本的构建工具和lib库均需要开发者在线下载，并且在在线云盘中有大量的离线包分享。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405344054798pic32.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405344054798pic32.jpeg" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405344259270pic33.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405344259270pic33.jpeg" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405344369159pic34.jpeg" alt="" /></p>
+<p><img src="../images_result/images/2015092405344369159pic34.jpeg" alt=""></p>
 
 <p>图4‑2 通过搜索引擎可以看到在百度网盘资源中有多份Android开发工具包</p>
 
@@ -429,7 +429,7 @@
 
 <p>Android SDK中最大的风险是jar库没有普遍采用签名验证机制，存在被篡改风险。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150924/2015092405344496303pic351.png" alt="" /></p>
+<p><img src="../images_result/images/2015092405344496303pic351.png" alt=""></p>
 
 <p>图4‑3 验证部分.jar的数字签名</p>
 
@@ -451,7 +451,7 @@
 
 <h1>0x05 全景的安全视野才能减少盲点</h1>
 
-<hr />
+<hr>
 
 <p>如果对这一事件进行定性，我们将其称之为一系列严重的“地下供应链”（工具链）污染事件，在当前移动互联网研发过度追求效率、安全意识低下的现状下，连锁形成了重大后果。从目前分析来看其污染源可能是地下黑产，并穿透了若干道应有的安全篱笆。同时值得深思的是，在今年3月份的时候斯诺登曝光的一份文档显示：美国情报机构曾考虑通过对Xcode(4.1)SDK进行污染，从而绕过苹果App Store的安全审查机制，最终将带毒App放到正规的苹果应用商店里。长期起来，国内安全的焦虑过多地集中围绕着CPU和操作系统等少数环节的的自主化展开，但有其他几方面问题没有得到足够关注。</p>
 
@@ -471,7 +471,7 @@
 
 <p>同时，我们也需要看到，网络地下黑产的泛滥与无孔不入，其不仅将危害网民的安全，也会带来更多纵深的安全风险，其让国家安全的防护边界变得模糊。因此在这一问题上投入更多的资源，进行更为强力、有效的综合治理，于国于民都非常必要。</p>
 
-<p><a href="http://mp.weixin.qq.com/s?__biz=MjM5MTA3Nzk4MQ==&amp;mid=211284160&amp;idx=1&amp;sn=a2de7a525b668f78b55dc318d3e7cf2a&amp;scene=1&amp;srcid=0924TlNwItkd9zHm2wEPKzS9&amp;key=2877d24f51fa53844e66b561382922075e89fbbaf58738438dbe31082dac08aaaebfdfdca955daad4525bbff608f3e78&amp;ascene=0&amp;uin=Mjg2OTM2MjIwMw==&amp;devicetype=iMac%20MacBookPro11,1%20OSX%20OSX%2010.10%20build%2814A389%29&amp;version=11020012&amp;pass_ticket=tQfXLJpYeYEEZgekCHBViFVSXHz%2bil8zfyoNXRmNdwsDgtADGS95Pgf7yV5uUTPq">博客地址</a></p>      </p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MjM5MTA3Nzk4MQ==&amp;mid=211284160&amp;idx=1&amp;sn=a2de7a525b668f78b55dc318d3e7cf2a&amp;scene=1&amp;srcid=0924TlNwItkd9zHm2wEPKzS9&amp;key=2877d24f51fa53844e66b561382922075e89fbbaf58738438dbe31082dac08aaaebfdfdca955daad4525bbff608f3e78&amp;ascene=0&amp;uin=Mjg2OTM2MjIwMw==&amp;devicetype=iMac%20MacBookPro11,1%20OSX%20OSX%2010.10%20build%2814A389%29&amp;version=11020012&amp;pass_ticket=tQfXLJpYeYEEZgekCHBViFVSXHz%2bil8zfyoNXRmNdwsDgtADGS95Pgf7yV5uUTPq">博客地址</a></p>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>Reflected File Download Attack - darksn0w</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/3771">http://drops.wooyun.org/papers/3771</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>前几天Blackhat上,有一个有意思的议题,《Reflected File Download,A New Web Attack Vector》,瞬间觉得高大上,就拿来膜拜了一下,经过膜拜发现不知道是我不能完全理解还是什么原因,总是觉得这种攻击方式略微鸡肋.我简单的把膜拜的过程记录下发出来,让各路基友帮忙看看,到底该用什么姿势去膜拜才是正确的.</p>
 
@@ -22,7 +22,7 @@
 
 <h2>0x01 细节</h2>
 
-<hr />
+<hr>
 
 <p>首先看实验，然后在详细说原理： 如果你的浏览器是chrome，那么使用这个链接：</p>
 
@@ -36,11 +36,11 @@
 
 <p>当你点击了这个链接，你的浏览器会提示下载:</p>
 
-<p><img src="http://static.wooyun.org/20141104/2014110414195471201.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014110414195471201.png" alt="enter image description here"></p>
 
 <p>细心的童鞋在url中就已经发现了，内容都写在url里了，很显然如果你运行了，就会弹出计算器：</p>
 
-<p><img src="http://static.wooyun.org/20141104/2014110414195435816.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014110414195435816.png" alt="enter image description here"></p>
 
 <p>当然，肯定会有童鞋说，你以为我是SB吗，我才不会去点他呢。。（遇到这问题我竟无言以对，确实鸡肋）</p>
 
@@ -53,7 +53,7 @@
 <pre><code>http://suggestion.baidu.com/su?wd=&amp;cb=window.bdsug.sugPreRequest&amp;sid=1466&amp;t=1362316450913
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141104/2014110414195444438.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014110414195444438.png" alt="enter image description here"></p>
 
 <p>从图中我们可以看出两个对我们有用的地方：</p>
 
@@ -66,7 +66,7 @@
 
 <p>这里我们打开这个.bat：</p>
 
-<p><img src="http://static.wooyun.org/20141104/2014110414195575692.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014110414195575692.png" alt="enter image description here"></p>
 
 <p>这段字符串用被管道符隔成了两段命令，第一段是弹计算器，第二段是无效命令。 这个例子没有Hafif的PPT里的那个例子好，如果在我们能控制的输入位前面还有一些字符串,我们仍然可以使用管道符分隔开两段字符串。例如:</p>
 
@@ -80,7 +80,7 @@
 
 <p>但是google产生漏洞的这个位置并没有加filename参数。按理来说百度这个地方的安全风险也应该是这样产生的，但是在实际测试中我们发现，并不是这样的。 先看一下百度的返回包：</p>
 
-<p><img src="http://static.wooyun.org/20141104/2014110414195544609.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014110414195544609.png" alt="enter image description here"></p>
 
 <p>虽然没有那个强制下载的字段Content-Disposition，但是我们仍然成功下载了，这里就产生了一个问题。。。</p>
 
@@ -96,15 +96,15 @@
 
 <p>这个微博地址返回的是json的数据，并没有下载行为，他的返回包是这样的：</p>
 
-<p><img src="http://static.wooyun.org/20141104/2014110414195594125.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014110414195594125.png" alt="enter image description here"></p>
 
 <p>现在我把修改返回里的content-type字段为baiduApp/jason:</p>
 
-<p><img src="http://static.wooyun.org/20141104/2014110414195510628.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014110414195510628.png" alt="enter image description here"></p>
 
 <p>发现页面文件发生了下载行为！</p>
 
-<p><img src="http://static.wooyun.org/20141104/2014110414195559061.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014110414195559061.png" alt="enter image description here"></p>
 
 <p>经过接下来的尝试我们发现，如果content-type不符合http协议，也就是说不是标准的application/json写法，而是baiduAPP/json或者xxxx/json,甚至Fuck/json，都会使页面产生下载行为！</p>
 
@@ -120,9 +120,9 @@
 
 <p>原理上基本就这样了，至于利用上这的确是有一定的鸡肋，不过类似反射型XSS，如果在社交网络中使用，效果还是很不错的，例子我就不举了，这里贴个Hafif在PPT中的例子。效果好坏完全看你的忽悠能力了！！</p>
 
-<p><img src="http://static.wooyun.org/20141104/2014110414195647145.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014110414195647145.png" alt="enter image description here"></p>
 
-<p>PPT里面还有关于如何修复，这里我就不说了，感兴趣的童鞋可以去看看，附上PPT下载地址：<a href="http://dakrsn0w.sectree.cn/RFD.pdf">http://dakrsn0w.sectree.cn/RFD.pdf</a></p>      </p>
+<p>PPT里面还有关于如何修复，这里我就不说了，感兴趣的童鞋可以去看看，附上PPT下载地址：<a href="http://dakrsn0w.sectree.cn/RFD.pdf">http://dakrsn0w.sectree.cn/RFD.pdf</a></p>      <p></p>
     
 			</body>
 		</html>

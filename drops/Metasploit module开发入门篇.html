@@ -3,14 +3,14 @@
 			<head>
 			     <title>Metasploit module开发入门篇 - 小饼仔</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14408">http://drops.wooyun.org/tips/14408</a></h1>
 				
       <p>
-        <h2>0x00 概述</h2>
+        </p><h2>0x00 概述</h2>
 
-<hr />
+<hr>
 
 <p>Metasploit——渗透测试神器，相信大家应该都用过或听过，drops里也有很多白帽子写过相关的文章，介绍如何使用Metasploit。使用过Metasploit的同学应该知道，Metasploit Framework是高度模块化的，即框架是由多个module组成，我们除了可以使用已有的 module，还可以自行编写module来满足自己的需求，模块化使得框架具有很好的可扩展性，这也是为什么Metasploit Framework这么受欢迎的原因之一。</p>
 
@@ -24,7 +24,7 @@
 
 <h2>0x01 漏洞环境</h2>
 
-<hr />
+<hr>
 
 <p>漏洞环境是一个WordPress 插件<a href="https://wordpress.org/plugins/imdb-widget/">imdb-widget</a> 1.0.8版本的任意文件读取漏洞，缺陷代码存在于pic.php，代码：</p>
 
@@ -44,7 +44,7 @@ readfile( $_GET["url"] );
 
 <h2>0x02 环境搭建</h2>
 
-<hr />
+<hr>
 
 <p>环境搭建包括两部分</p>
 
@@ -94,7 +94,7 @@ readfile( $_GET["url"] );
 
 <p>然后点击 外观 - 小工具，把左边的 IMDb Profile 拖到 挂件区域的第一个位置，点开设置User id，随便填一个如<code>ur1</code>，Show 随便勾选几个，点保存。主页刷新就可以看到了</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2016/04/F38F9F26-CDAE-4370-A01F-34416B4A297F.jpg"><img src="http://static.wooyun.org//drops/20160404/2016040416112163137.jpg" alt="" title="F38F9F26-CDAE-4370-A01F-34416B4A297F" class="alignnone size-full wp-image-14409" /></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2016/04/F38F9F26-CDAE-4370-A01F-34416B4A297F.jpg"><img src="../images_result/images/2016040416112163137.jpg" alt="" title="F38F9F26-CDAE-4370-A01F-34416B4A297F" class="alignnone size-full wp-image-14409"></a></p>
 
 <p>测试漏洞，执行如下命令，就可以看到 <code>/etc/passwd</code> 的内容</p>
 
@@ -106,7 +106,7 @@ cat result.txt
 
 <h2>0x03 编写Module</h2>
 
-<hr />
+<hr>
 
 <p>编写之前先简单介绍一些概念相关的东西</p>
 
@@ -508,7 +508,7 @@ end
 
 <h2>0x04 测试Module</h2>
 
-<hr />
+<hr>
 
 <p>前面提到，msf有专门的目录<code>~/.msf7/modules/</code>来存放自己编写的module，这里对照着<code>auxiliary/scanner/http/wp_dukapress_file_read</code>，创建目录</p>
 
@@ -620,9 +620,9 @@ msf auxiliary(wp_imdb_profile_widget_file_read) &gt;
 
 <h2>0x05 结论</h2>
 
-<hr />
+<hr>
 
-<p>文章主要介绍的是如何去编写module的方法，有的地方可能写的不是很详细。总结来说就是： 在接触一个新的东西时，参考别人已经写好的东西，然后修修改改，是一种很好快速入门的方法。</p>      </p>
+<p>文章主要介绍的是如何去编写module的方法，有的地方可能写的不是很详细。总结来说就是： 在接触一个新的东西时，参考别人已经写好的东西，然后修修改改，是一种很好快速入门的方法。</p>      <p></p>
     
 			</body>
 		</html>

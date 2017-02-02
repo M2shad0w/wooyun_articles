@@ -3,14 +3,14 @@
 			<head>
 			     <title>常见Flash XSS攻击方式 - MayIKissYou</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2924">http://drops.wooyun.org/tips/2924</a></h1>
 				
       <p>
-        <h2>0x01 HTML中嵌入FLASH</h2>
+        </p><h2>0x01 HTML中嵌入FLASH</h2>
 
-<hr />
+<hr>
 
 <p>在HTML中嵌入FLASH的时候在IE和非IE浏览器下嵌入的方式有所不同，可以使用embed标签和object标签，使用如下的代码进行嵌入：</p>
 
@@ -63,7 +63,7 @@ none：所有的网络API不可用。
 
 <p>运行结果：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811023527636.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811023527636.png" alt="enter image description here"></p>
 
 <p>2）：插入本地的Flash，将allowScriptAccess参数改为samedomain。</p>
 
@@ -76,7 +76,7 @@ none：所有的网络API不可用。
 
 <p>运行结果：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811023558445.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811023558445.png" alt="enter image description here"></p>
 
 <p>Html界面与Flash属于同域，因此能够弹出。</p>
 
@@ -104,7 +104,7 @@ none：所有的网络API不可用。
 
 <p>运行结果：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811023616256.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811023616256.png" alt="enter image description here"></p>
 
 <p>注意这里弹出的域为当前html的域名，非Flash的域。</p>
 
@@ -145,7 +145,7 @@ none：所有的网络API不可用。
 
 <h2>0x02 Flash跨域请求</h2>
 
-<hr />
+<hr>
 
 <p>Flash跨域访问的时候主要受到crossdomain.xml文件的影响。crossdomain.xml文件严格遵循xml语法，主要作用就是当被Flash请求到本域资源的时候，是否允许请求。 例如： www.evil.com中嵌入一个Flash，Flash跨域请求www.q.com下的资源，此时会先查看www.q.com目录下的crossdomain.xml文件，查看是否允许evil.com域Flash请求本域的资源。 crossdomain.xml文件主要包含如下几个节点：</p>
 
@@ -170,7 +170,7 @@ none：所有的网络API不可用。
 
 <h2>0x03 常见Flash xss分类总结</h2>
 
-<hr />
+<hr>
 
 <p><strong>Flash缺陷参数-getURL</strong></p>
 
@@ -204,13 +204,13 @@ root_xml.load(_root.url);
 
 <p>运行结果：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811023610833.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811023610833.png" alt="enter image description here"></p>
 
 <p>Ps.此类问题一般可以使用google搜索xml文件被swf调用的情况，传入的内容如果没做过滤，很可能出现此类问题。</p>
 
 <p><strong>Flash缺陷参数-navigateToURL</strong></p>
 
-<hr />
+<hr>
 
 <p>上例中getURL（）为AS2中的方法，在AS3中使用的是navigateToURL，wooyun中上报过此参数导致Flash xss的实例。</p>
 
@@ -238,7 +238,7 @@ ld.load(req)
 
 <p>运行结果：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811023694609.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811023694609.png" alt="enter image description here"></p>
 
 <p><strong>Flash缺陷参数-ExternalInterface.call(参数一)</strong></p>
 
@@ -300,14 +300,14 @@ try { __Flash__toXML(a1lert(1))}catch(e){alert(100)}// ("参数1")) ; } catch (e
 <pre><code>http://192.168.4.70/ExternalInterface_first.swf?func=alert(1))}catch(e){alert(100)}//
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811023623052.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811023623052.png" alt="enter image description here"></p>
 
 <p>访问</p>
 
 <pre><code>http://192.168.4.70/ExternalInterface_first.swf?func=a1lert(1))}catch(e){alert(100)}//
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811023692848.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811023692848.png" alt="enter image description here"></p>
 
 <p>和预期结果一样。</p>
 
@@ -359,11 +359,11 @@ catch(e){
 
 <p>如此下来应该就会弹出两个框，一个为1111\，另外一个为1000。 运行结果，弹出1111\：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811023625818.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811023625818.png" alt="enter image description here"></p>
 
 <p>点击确定，弹出1000：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811023644630.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811023644630.png" alt="enter image description here"></p>
 
 <p>Ps. 此处ExternalInterface.call调用的函数名，编写Flash的时候设置了alert，因此此处会弹两次，一般情况下，函数名是不能够被控制，这样我们使得，前面的函数执行异常，执行catch中的js即可。</p>
 
@@ -392,7 +392,7 @@ addChild(t)
 
 <p>访问结果如下：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811023728135.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811023728135.png" alt="enter image description here"></p>
 
 <p>Ps.当反编译Flash文件，发现htmltext输出点的时候，可以查看相关是否存在相关的可控的输入，可能存在xss。 Flash缺陷参数object的id可控 html与swf通讯的时候，使用的是ExternalInterface.addCallback函数，调用如下：</p>
 
@@ -446,7 +446,7 @@ ExternalInterface.addCallback("test",a)
 
 <p>访问该界面（IE8下测试）：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811023772679.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811023772679.png" alt="enter image description here"></p>
 
 <p><strong>Flash缺陷参数addcallback与lso结合</strong></p>
 
@@ -515,7 +515,7 @@ setTimeout("get()",7000)
 
 <p>运行结果：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811023713340.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811023713340.png" alt="enter image description here"></p>
 
 <p><strong>跨站Flash</strong></p>
 
@@ -570,7 +570,7 @@ addChild(myLoader);
 
 <p>运行结果，加载了远程有缺陷的swf文件导致了xsf。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811023762795.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811023762795.png" alt="enter image description here"></p>
 
 <p><strong>其他</strong></p>
 
@@ -586,7 +586,7 @@ addChild(myLoader);
 
 <p>drops相关链接：</p>
 
-<p><a href="http://drops.wooyun.org/tips/2031">上传文件的陷阱</a></p>      </p>
+<p><a href="http://drops.wooyun.org/tips/2031">上传文件的陷阱</a></p>      <p></p>
     
 			</body>
 		</html>

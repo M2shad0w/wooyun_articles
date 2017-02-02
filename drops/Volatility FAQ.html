@@ -3,26 +3,26 @@
 			<head>
 			     <title>Volatility FAQ - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/2854">http://drops.wooyun.org/papers/2854</a></h1>
 				
       <p>
-        <h2>0x00 前言</h2>
+        </p><h2>0x00 前言</h2>
 
-<hr />
+<hr>
 
 <p>出于检测Linux平台下Rootkit的需要,试了一下很早以前知道,但一直没有用过的工具Volatility.考虑国内服务器的现实情况,选择CentOS 5.5作为实验平台. 一个工具的使用在我想来应该是相当简单的,但实际情况相当曲折,……经过很多实践和教训,写了一些笔记,整理为FAQ,遂成此文,以供同好交流讨论.</p>
 
 <h2>0x01 正文</h2>
 
-<hr />
+<hr>
 
 <p><strong>Q1: Volatility 是什么?</strong></p>
 
 <p>A1: Volatility是一个Python编写的跨平台,用于内存分析的法证工具,其目的是为了在数据犯罪中提取易失性数据 ,也可以用来进行Rootkit的检测和协助清除.</p>
 
-<hr />
+<hr>
 
 <!--more-->
 
@@ -30,7 +30,7 @@
 
 <p>A2: Linux的System.map文件列出了详细的系统调用（syscall）,而kernel-header源码通过dwarfdump生成的module.dwarf文件中会包含很多kernel‘s data structure,将以上2个文件打包为profile.再用这个profile解析dump下来的物理内存,就很容易找到植入Rootkit的机器活动时的进程(linux&#95;psaux)、网络通信(linux&#95;netstat)、活动文件(linux&#95;lsof)、驱动模块(linux&#95;lsmod)等等.</p>
 
-<hr />
+<hr>
 
 <p><strong>Q3: CentOS 5X中为运行volatility而安装了python2.6,导致依赖python2.4的yum无法运行,如何处理?</strong></p>
 
@@ -43,7 +43,7 @@
 
 <p>将文件开始的#!/usr/bin/python改#!/usr/bin/python2.4</p>
 
-<hr />
+<hr>
 
 <p><strong>Q4:执行python vol.py,报错提示</strong></p>
 
@@ -55,7 +55,7 @@
 <pre><code>#yum install pycrypto
 </code></pre>
 
-<hr />
+<hr>
 
 <p><strong>Q5:执行yum install pycrypto后,Python仍提示</strong></p>
 
@@ -77,7 +77,7 @@ print(os.listdir(os.path.dirname(Crypto.__file__)))
 <pre><code>#cp -ivR  /usr/lib/python2.4/Crypto/  /usr/lib/python2.7/site-packages/
 </code></pre>
 
-<hr />
+<hr>
 
 <p><strong>Q6:执行python vol.py后提示</strong></p>
 
@@ -92,7 +92,7 @@ print(os.listdir(os.path.dirname(Crypto.__file__)))
 #ll /usr/local/lib/python2.7/site-packages/Crypto/
 </code></pre>
 
-<hr />
+<hr>
 
 <p><strong>Q7: volatility.可以正常使用了,该开始制作profile,那么profile如何创建?</strong></p>
 
@@ -104,7 +104,7 @@ print(os.listdir(os.path.dirname(Crypto.__file__)))
 #zip volatility/volatility/plugins/overlays/linux/Ubuntu1204.zip volatility/tools/linux/module.dwarf /boot/System.map-3.2.0-23-generic 
 </code></pre>
 
-<hr />
+<hr>
 
 <p><strong>Q8:CentOS 5X似乎默认没有dwarfdump.</strong></p>
 
@@ -118,7 +118,7 @@ print(os.listdir(os.path.dirname(Crypto.__file__)))
 #cp dwarfdump/dwarfdump.conf /usr/local/lib
 </code></pre>
 
-<hr />
+<hr>
 
 <p><strong>Q9: CentOS 5X没有对应版本的内核头文件（kernel-headers）,无法编译module.dwarf?</strong></p>
 
@@ -130,7 +130,7 @@ print(os.listdir(os.path.dirname(Crypto.__file__)))
 
 <p>如果软件源中没有匹配的版本,那就手动下载安装 一般还在支持的版本可在http://pkgs.org/download/kernel-headers#下载 否则,只能自行google了.</p>
 
-<hr />
+<hr>
 
 <p><strong>Q10: profile顺利制作完成,开始dump内存.但是执行以下命令：</strong></p>
 
@@ -141,7 +141,7 @@ print(os.listdir(os.path.dirname(Crypto.__file__)))
 
 <p>A10: Linux Kernel 2.6.x某个版本后开始对内存访问做了保护,无法dump出完整内存.可使用第三方工具Lime / fmem等来dump内存.</p>
 
-<hr />
+<hr>
 
 <p><strong>Q11: Lime源码编译安装后只生成一个ko驱动文件,没有ELF文件,怎么dump内存?</strong></p>
 
@@ -150,7 +150,7 @@ print(os.listdir(os.path.dirname(Crypto.__file__)))
 <pre><code>#insmod lime.ko “path=/tmp/mem.lime format=lime”  //加载驱动就是正确使用方法
 </code></pre>
 
-<hr />
+<hr>
 
 <p><strong>Q12: lime在ubuntu/debian的机器上使用正常,为什么在CentOS 上提示错误</strong></p>
 
@@ -160,7 +160,7 @@ insmod: error inserting 'lime.ko': -1 Unknown symbol in module
 
 <p>A12: CentOS 下insmod命令的参数不接受双引号,去掉即可,即执行insmod lime.ko path=/tmp/mem.lime format=lime 就好.</p>
 
-<hr />
+<hr>
 
 <p><strong>Q13: profile和dump内存都搞定了,先调用volatility看一下内存中的网络连接,在CentOS执行</strong></p>
 
@@ -186,7 +186,7 @@ linux_yarascan          - A shell in the Linux memory image
 <pre><code>#vol -f /tmp/centos.lime --profile=LinuxCentOS510x64 linux_netstat
 </code></pre>
 
-<hr />
+<hr>
 
 <p><strong>Q14: 在CentOS 5X_64上执行</strong></p>
 
@@ -232,7 +232,7 @@ class VolatilityDTB(obj.VolatilityMagic):
 
 <p>再次执行命令,一切正常,Over.</p>
 
-<hr />
+<hr>
 
 <p><strong>Q15: volatility对Linux内核版本有要求吗?适用范围?</strong></p>
 
@@ -266,12 +266,12 @@ Mac OSX (new) 32-bit 10.5.x Leopard (the only 64-bit 10.5 is Server, which isn't
 
 <h2>0x03 题外</h2>
 
-<hr />
+<hr>
 
 <p>为方便启动volatility. 可执行</p>
 
 <pre><code>#ln -s /pentoo/volatility-2.3.1/vol.py /usr/bin/vol
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

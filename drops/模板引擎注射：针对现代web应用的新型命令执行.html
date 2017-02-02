@@ -3,16 +3,16 @@
 			<head>
 			     <title>模板引擎注射：针对现代web应用的新型命令执行 - 小飞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7961">http://drops.wooyun.org/tips/7961</a></h1>
 				
       <p>
-        <p>原文链接 <a href="https://www.blackhat.com/docs/us-15/materials/us-15-Kettle-Server-Side-Template-Injection-RCE-For-The-Modern-Web-App-wp.pdf">https://www.blackhat.com/docs/us-15/materials/us-15-Kettle-Server-Side-Template-Injection-RCE-For-The-Modern-Web-App-wp.pdf</a></p>
+        </p><p>原文链接 <a href="https://www.blackhat.com/docs/us-15/materials/us-15-Kettle-Server-Side-Template-Injection-RCE-For-The-Modern-Web-App-wp.pdf">https://www.blackhat.com/docs/us-15/materials/us-15-Kettle-Server-Side-Template-Injection-RCE-For-The-Modern-Web-App-wp.pdf</a></p>
 
 <h1>0x00 科普</h1>
 
-<hr />
+<hr>
 
 <p>要讨论模板引擎的攻击，先来了解下什么是模板引擎</p>
 
@@ -22,7 +22,7 @@
 
 <h1>0x01 摘要</h1>
 
-<hr />
+<hr>
 
 <p>模板引擎（Template engines）在现代web应用被广泛使用，它们被用来动态地显示数据。然而，不安全地将用户输入嵌入到模板中，会导致一系列针对服务器的注入攻击。然而，这种漏洞很容易被误当做Xss对待。然而，针对模板的注入其实可以攻击服务器，往往还能够RCE(远程命令执行)，触发任意对象构造，任意文件读写，远程文件包含，信息泄露，和提权。</p>
 
@@ -36,7 +36,7 @@
 
 <h1>0x02 介绍</h1>
 
-<hr />
+<hr>
 
 <p>当今web应用频繁地使用模板系统，诸如Twig，FreeMarket等。当用户输入嵌入在一个很没有安全性的模板时，模板注射就可能发生。</p>
 
@@ -58,7 +58,7 @@ $output = $twig-&gt;render($_GET['custom_email'], array("first_name" =&gt; $user
 ￼输出：49
 </code></pre>
 
-<p></br></p>
+<p><br></p>
 
 <pre><code>￼输入：custom_email={{self}}
 ￼输出：Object of class __TwigTemplate_7ae62e582f8a35e5ea6cc639800ecf15b96c0d6f78db3538221c1145580ca4a5 could not be converted to string
@@ -72,11 +72,11 @@ $output = $twig-&gt;render($_GET['custom_email'], array("first_name" =&gt; $user
 
 <h1>0x03 模板注射之方法论</h1>
 
-<hr />
+<hr>
 
 <p>这里给出了寻找模板注射的流程图。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081305015266883.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081305015266883.jpg" alt="enter image description here"></p>
 
 <h3>漏洞检测：</h3>
 
@@ -102,7 +102,7 @@ $output = $twig-&gt;render($_GET['custom_email'], array("first_name" =&gt; $user
 Hello 49
 </code></pre>
 
-<p></br></p>
+<p><br></p>
 
 <pre><code>freemarker=Hello ${7*7}
 Hello 49
@@ -116,13 +116,13 @@ Hello 49
 输出：Hello user01
 </code></pre>
 
-<p>那么这种情况更容易遗漏，因为此时的自动扫描工具检测到这里时，payload根本不会让模板框架返回一个有效的回显，你必须遵循特定模板的语法，才能看到页面的变化，比如这里我们必须先用}}提前闭合模板代码段，才能插入任意一个html的标签<tag> ￼</p>
+<p>那么这种情况更容易遗漏，因为此时的自动扫描工具检测到这里时，payload根本不会让模板框架返回一个有效的回显，你必须遵循特定模板的语法，才能看到页面的变化，比如这里我们必须先用}}提前闭合模板代码段，才能插入任意一个html的标签<tag> ￼</tag></p>
 
 <pre><code>输入：personal_greeting=username&lt;tag&gt; 
 输出：Hello
 </code></pre>
 
-<p></br></p>
+<p><br></p>
 
 <pre><code>输入：personal_greeting=username}}&lt;tag&gt; 
 输出：Hello user01 &lt;tag&gt;
@@ -132,13 +132,13 @@ Hello 49
 
 <p>在侦测到注射漏洞之后，我们自然要分析对应的是哪一类模板，方便对症下药</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081305023254031.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081305023254031.jpg" alt="enter image description here"></p>
 
 <p>上图描述了测试流程的树形结构，分支从左到右对应检测顺序，绿色箭头表示能够返回预期的结果，也就说明此时存在漏洞所使用的模板框架就是箭头指向的框架。</p>
 
 <h1>0x04 利用漏洞</h1>
 
-<hr />
+<hr>
 
 <p><strong>阅读</strong></p>
 
@@ -164,7 +164,7 @@ Hello 49
 
 <h1>0x05漏洞范例</h1>
 
-<hr />
+<hr>
 
 <p>往往，你只需要细读开发文档三十秒就足以找到一个RCE，举个例子。攻击没有沙箱隔离的“smarty”框架只需要这样</p>
 
@@ -182,9 +182,9 @@ ${x}
 
 <h1>0x06写在后面</h1>
 
-<hr />
+<hr>
 
-<p>本文摘自2015BH大会paper，转述，翻译部分内容，目的是帮助大家理解原理，有了原理的了解，大家就能很快地上手，去看原文作者提供的真实案例了。这也是花这么多时间翻译，总结这篇文章的目的。</p>      </p>
+<p>本文摘自2015BH大会paper，转述，翻译部分内容，目的是帮助大家理解原理，有了原理的了解，大家就能很快地上手，去看原文作者提供的真实案例了。这也是花这么多时间翻译，总结这篇文章的目的。</p>      <p></p>
     
 			</body>
 		</html>

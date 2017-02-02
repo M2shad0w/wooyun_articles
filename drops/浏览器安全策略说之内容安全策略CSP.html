@@ -3,12 +3,12 @@
 			<head>
 			     <title>浏览器安全策略说之内容安全策略CSP - 天融信阿尔法实验室</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1439">http://drops.wooyun.org/tips/1439</a></h1>
 				
       <p>
-        <p>目录</p>
+        </p><p>目录</p>
 
 <pre><code>0x00         前言
 0x01         CSP概念
@@ -28,7 +28,7 @@
 
 <h2>0x00 前言</h2>
 
-<hr />
+<hr>
 
 <p>一直说要去写个浏览器安全策略系列，10篇安全策略的内容虽早已成竹在胸，但写出来却要花费好多时间。CSP这篇已于一个月前写出来，而后筹备Blog上线用了一段时间，不容易。FirstBlood，第一篇文章就献给阿尔法实验室和浏览器中一个伟大而又被忽略的安全策略CSP吧。好酒值得细细去品，好的安全策略也一样。废话少说，下面正式进入文章主题。</p>
 
@@ -40,13 +40,13 @@
 
 <h2>0x01 CSP概念</h2>
 
-<hr />
+<hr>
 
 <p>内容安全策略（Content Security Policy，简称CSP）是一种以可信白名单作机制，来限制网站中是否可以包含某来源内容。默认配置下不允许执行内联代码（<code>&lt;script&gt;</code>块内容，内联事件，内联样式），以及禁止执行eval() , newFunction() , setTimeout([string], …) 和setInterval([string], …) 。</p>
 
 <h2>0x02 CSP发展时间轴</h2>
 
-<hr />
+<hr>
 
 <p>毋容置疑CSP是一个伟大的策略，但CSP从最初设计到被W3C认可制定成通用标准，却经历了一个漫长而曲折的过程。</p>
 
@@ -72,27 +72,27 @@
 
 <p>目前CSP各个浏览器支持情况可以去<a href="http://caniuse.com/#feat=contentsecuritypolicy">http://caniuse.com/#feat=contentsecuritypolicy</a>查看</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101714582130228.png" alt="NewImage" width="953" height="528" border="0" />cspuse<br /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101714582130228.png" alt="NewImage" width="953" height="528" border="0">cspuse<br></p>
 
 <h2>0x03 CSP语法</h2>
 
-<hr />
+<hr>
 
 <h3>CSP1.0指令</h3>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101714582181046.png" alt="NewImage" width="771" height="438" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101714582181046.png" alt="NewImage" width="771" height="438" border="0"></p>
 
 <h3>CSP1.1新增指令</h3>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101714582376091.png" alt="NewImage" width="768" height="129" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101714582376091.png" alt="NewImage" width="768" height="129" border="0"></p>
 
 <h3>CSP语法</h3>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101714582319315.png" alt="NewImage" width="718" height="400" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101714582319315.png" alt="NewImage" width="718" height="400" border="0"></p>
 
 <h2>0x04 CSP默认特性</h2>
 
-<hr />
+<hr>
 
 <h3>阻止内联代码执行</h3>
 
@@ -193,17 +193,17 @@ script-src userscripts.example.com 脚本只能加载userscripts.example.com域�
 
 <p>在线CSP编写，可以协助和帮助网站管理员编写出适合自己站点的CSP。http://cspisawesome.com/</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101714582449672.png" alt="NewImage" width="1121" height="792" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101714582449672.png" alt="NewImage" width="1121" height="792" border="0"></p>
 
 <h2>0x06 CSP的错误使用</h2>
 
-<hr />
+<hr>
 
 <p>CSP的语法和指令并不复杂，但如果没有充分了解网站业务和安全需求，错误的使用CSP则会适得其反。</p>
 
 <p>（1）我在2013年底访问http://www.grosshandel-hahn.de/，发现CSP策略明显使用错误。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101714582438641.png" alt="NewImage" width="1169" height="716" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101714582438641.png" alt="NewImage" width="1169" height="716" border="0"></p>
 
 <p>可以看到使用X-Content-Security-Policy-Report-Only。此头的意思是让浏览器只汇报日志，不阻止任何内容。但这条策略里却没有给出接收信息日志的地址。</p>
 
@@ -211,7 +211,7 @@ script-src userscripts.example.com 脚本只能加载userscripts.example.com域�
 
 <h2>0x07 CSP分析报告</h2>
 
-<hr />
+<hr>
 
 <p>对于网站管理员来说CSP的一个强大功能是它可以产生试图攻击你网站的分析报告。你可以用report-uri指令使浏览器发送HTTP POST请求把攻击报告以JSON格式传送到你指定的地址。接下来给大家介绍你的站点如何配置来接收攻击报告。</p>
 
@@ -293,13 +293,13 @@ fclose($file);
 
 <h2>0x08 CSP的使用率统计</h2>
 
-<hr />
+<hr>
 
 <p>CSP的全球范围使用率非常低，而且增加的也非常缓慢。根据Veracode在2013年11月给出的报告指出，全球前1000000网站中仅有269个网站使用了W3C规范的CSP 策略头Content-Security-Policy。584个网站在使用X-Content-Security-Policy策略头和487个网站在使用X-Webkit-CSP策略头，这两个协议头已经被废弃，但还没有被禁用。</p>
 
 <p>而使用Content-Security-Policy-Report-Only进行单独接收攻击报告的网站只有24个。而统计中也指出，发现大量网站使用unsafe-inline这个指令，分析其原因可能是由于开发人员很难在页面中彻底消除内联脚本，这很让人失望，所有只能要求制定的CSP策略更加严谨。</p>
 
-<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="http://static.wooyun.org/20141017/2014101714582642022.png" alt="NewImage" width="481" height="289" border="0" /></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" title="NewImage.png" src="../images_result/images/2014101714582642022.png" alt="NewImage" width="481" height="289" border="0"></p>
 
 <p><a href="http://blog.veracode.com/2013/11/security-headers-on-the-top-1000000-websites-november-2013-report/">http://blog.veracode.com/2013/11/security-headers-on-the-top-1000000-websites-november-2013-report/</a></p>
 
@@ -318,7 +318,7 @@ www.uyitec.cn  CSP语法错误
 
 <h2>0x09 CSP Bypass</h2>
 
-<hr />
+<hr>
 
 <p>一个安全策略从诞生开始将会时不时的有一个叫“Bypass”的小伙伴跟随左右。而从辩证角度来讲，多加载一种安全策略，就多了一种Bypass的维度。一旦Bypass出现，就意味着将有一种设计者没有考虑到的方法或技巧，将破坏策略的原有规则。</p>
 
@@ -386,7 +386,7 @@ Click me
 
 <h2>0x0a CSP总结</h2>
 
-<hr />
+<hr>
 
 <p>充分了解CSP安全策略的语法和指令，并最大程度的合理的去利用和部署这些策略，努力把安全策略发挥到极致，使其最终把危害降低到最低。</p>
 
@@ -402,7 +402,7 @@ Click me
 
 <h2>0x0b 参考</h2>
 
-<hr />
+<hr>
 
 <p><a href="http://www.w3.org/TR/CSP11/">http://www.w3.org/TR/CSP11/</a>
 <a href="http://www.w3.org/TR/CSP/">http://www.w3.org/TR/CSP/</a>
@@ -427,7 +427,7 @@ Click me
 <a href="http://www.slideshare.net/x00mario/jsmvcomfg-to-sternly-look-at-javascript-mvc-and-templating-frameworks">http://www.slideshare.net/x00mario/jsmvcomfg-to-sternly-look-at-javascript-mvc-and-templating-frameworks</a>
 <a href="http://trends.builtwith.com/javascript/Angular-JS">http://trends.builtwith.com/javascript/Angular-JS</a>
 <a href="http://developer.chrome.com/extensions/contentSecurityPolicy">http://developer.chrome.com/extensions/contentSecurityPolicy</a>
-<a href="http://cs.ucsb.edu/~adoupe/static/dedacota-ccs2013.pdf">http://cs.ucsb.edu/~adoupe/static/dedacota-ccs2013.pdf</a></p>      </p>
+<a href="http://cs.ucsb.edu/~adoupe/static/dedacota-ccs2013.pdf">http://cs.ucsb.edu/~adoupe/static/dedacota-ccs2013.pdf</a></p>      <p></p>
     
 			</body>
 		</html>

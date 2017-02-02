@@ -3,16 +3,16 @@
 			<head>
 			     <title>Bypass Windows AppLocker - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11804">http://drops.wooyun.org/tips/11804</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010708532215158125.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010708532215158125.png" alt="Alt text"></p>
 
 <p>上一次我们对McAfee Application Control做了测试，这次接着对另一款白名单工具Windows AppLocker进行测试，分享一下其中的攻防技术。</p>
 
@@ -20,23 +20,23 @@
 
 <h1>0x01 简介</h1>
 
-<hr />
+<hr>
 
 <p>Windows AppLocker，即“应用程序控制策略”，可用来对可执行程序、安装程序和脚本进行控制，之前只能支持windows7 Enterprise、windows7 Ultimate和WindowsServer2008 R2，但是微软在2012年10月18日将其更新，已支持Windows8.1,Windows Server2012 R2,WindowsServer2012和Windows8 Enterprise</p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010708532472169215.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010708532472169215.png" alt="Alt text"></p>
 
 <p>AppLocker可对以下文件格式创建规则，限制其执行</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010708532657699312.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010708532657699312.png" alt="Alt text"></p>
 
 <p>下面我们就实际测试一下相关功能</p>
 
 <h1>0x02 配置</h1>
 
-<hr />
+<hr>
 
 <p><strong>测试环境:</strong></p>
 
@@ -50,7 +50,7 @@ OS：Windows7 Ultimate x86
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010708532884473413.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010708532884473413.png" alt="Alt text"></p>
 
 <h3>2、进入AppLocker配置界面</h3>
 
@@ -60,7 +60,7 @@ OS：Windows7 Ultimate x86
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010708533051667510.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010708533051667510.png" alt="Alt text"></p>
 
 <h3>3、配置规则</h3>
 
@@ -74,7 +74,7 @@ OS：Windows7 Ultimate x86
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/201601070853324481668.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201601070853324481668.png" alt="Alt text"></p>
 
 <p>对脚本设置默认规则：</p>
 
@@ -86,27 +86,27 @@ OS：Windows7 Ultimate x86
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/201601070853346469977.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201601070853346469977.png" alt="Alt text"></p>
 
 <p><strong>开启默认规则后，除了默认路径可以执行外，其他路径均无法执行程序和脚本</strong></p>
 
 <h1>0x03 测试</h1>
 
-<hr />
+<hr>
 
 <h3>1、执行exe</h3>
 
-<p><img src="http://static.wooyun.org//drops/20160107/201601070853351262887.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201601070853351262887.png" alt="Alt text"></p>
 
 <h3>2、执行脚本</h3>
 
-<p><img src="http://static.wooyun.org//drops/20160107/201601070853379665797.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201601070853379665797.png" alt="Alt text"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010708533899575107.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010708533899575107.png" alt="Alt text"></p>
 
 <h1>0x04 安全机制分析</h1>
 
-<hr />
+<hr>
 
 <p>通过测试发现设置的规则已经生效，能够阻止信任路径外的exe和脚本执行，但是对以下方面没有做限制：</p>
 
@@ -131,7 +131,7 @@ OS：Windows7 Ultimate x86
 
 <h1>0x05 绕过方法</h1>
 
-<hr />
+<hr>
 
 <h3>1、hta</h3>
 
@@ -187,11 +187,11 @@ Get-Content script.txt | iex
 
 <p>测试如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/20160107085340652771112.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/20160107085340652771112.png" alt="Alt text"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010708534199082126.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010708534199082126.png" alt="Alt text"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010708534388782134.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010708534388782134.png" alt="Alt text"></p>
 
 <p>执行后会自动扫描出可利用的路径</p>
 
@@ -205,7 +205,7 @@ Get-Content script.txt | iex
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010708534537138144.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010708534537138144.png" alt="Alt text"></p>
 
 <h3>6、rundll32</h3>
 
@@ -219,13 +219,13 @@ Get-Content script.txt | iex
 
 <p><strong>b、</strong>利用JavaScript执行powershell命令返回HTTP shell</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010708534799119154.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010708534799119154.png" alt="Alt text"></p>
 
 <p><strong>（2）加载第三方dll</strong></p>
 
 <p><strong>a、</strong>自己编写的dll</p>
 
-<p>参考资料：<br />
+<p>参考资料：<br>
 <a href="http://blog.didierstevens.com/2010/02/04/cmd-dll/">http://blog.didierstevens.com/2010/02/04/cmd-dll/</a></p>
 
 <p>按照dll的格式，自己编写并生成dll上传</p>
@@ -240,7 +240,7 @@ rundll32.exe cmd.dll,Control_RunDLL
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010708534851450163.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010708534851450163.png" alt="Alt text"></p>
 
 <p><strong>b、</strong>反弹meterpreter</p>
 
@@ -262,9 +262,9 @@ rundll32.exe a.dll,Control_RunDLL
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010708534958386173.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010708534958386173.png" alt="Alt text"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160107/2016010708535190561183.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010708535190561183.png" alt="Alt text"></p>
 
 <h3>7、利用InstallUtil</h3>
 
@@ -282,7 +282,7 @@ rundll32.exe a.dll,Control_RunDLL
 
 <h1>0x06 防御</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>严格控制文件写入权限</li>
@@ -293,7 +293,7 @@ rundll32.exe a.dll,Control_RunDLL
 
 <h1>0x07 小结</h1>
 
-<hr />
+<hr>
 
 <p>随着研究的逐渐深入，我们不难发现：利用InstallUtil、regsvcs是绕过白名单限制的一把利器，无论是攻击还是防御，对此部分都要尤其重视。</p>
 
@@ -301,7 +301,7 @@ rundll32.exe a.dll,Control_RunDLL
 
 <h1>0x08 参考资料：</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="https://technet.microsoft.com/en-us/library/dd759117.aspx">https://technet.microsoft.com/en-us/library/dd759117.aspx</a></li>
@@ -316,7 +316,7 @@ rundll32.exe a.dll,Control_RunDLL
 
 <p><a href="https://github.com/3gstudent/Bypass-Windows-AppLocker">https://github.com/3gstudent/Bypass-Windows-AppLocker</a></p>
 
-<p><strong>本文由三好学生原创并首发于乌云drops，转载请注明</strong></p>      </p>
+<p><strong>本文由三好学生原创并首发于乌云drops，转载请注明</strong></p>      <p></p>
     
 			</body>
 		</html>

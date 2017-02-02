@@ -3,12 +3,12 @@
 			<head>
 			     <title>磨针记1——从*外杀马说起 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/9650">http://drops.wooyun.org/tips/9650</a></h1>
 				
       <p>
-        <p>（本文纯属虚构，如有雷同，实属巧合）</p>
+        </p><p>（本文纯属虚构，如有雷同，实属巧合）</p>
 
 <p>大名鼎鼎的AspxSpy，罹患间歇性木马病而被白道追杀。大权在握的系统管理员，冷笑着把这位老兄打入了十八层地狱。拒绝访问，组件错误……连最宝贵的命令执行都要封杀。是可忍孰不可忍！拿上小馒头，我闭关数月。</p>
 
@@ -16,7 +16,7 @@
 
 <h1>0x00 词汇约定</h1>
 
-<hr />
+<hr>
 
 <p>非专业术语，仅供娱乐：</p>
 
@@ -28,15 +28,15 @@
 
 <h1>0x01 *外杀马</h1>
 
-<hr />
+<hr>
 
 <p>和* 外真是有缘，这不，最近又偶遇* 外的服务器，规模约莫二十上下。向来服务器的安全检测，也有不少无法获得最高权限的情形，但这次最令人困惑的，是无论如何也无法在Shell中执行命令。管理员，你在挑逗我么？不想让我知道其中的奥妙，为何又留下了一个漏洞？给管理员戴好可爱的绿帽后，我搜遍系统，终于发现装神弄鬼的，是一个小小驱动——*外杀马。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/201510150610015724914.jpg" alt="" /></p>
+<p><img src="../images_result/images/201510150610015724914.jpg" alt=""></p>
 
 <p>图1 *外杀马</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/201510150610036607021.jpg" alt="" /></p>
+<p><img src="../images_result/images/201510150610036607021.jpg" alt=""></p>
 
 <p>图2 IDA中的*外杀马</p>
 
@@ -109,7 +109,7 @@ C:\\WINDOWS\\Microsoft.NET\\Framework\\v3.5\\csc.ex
 
 <h1>0x02 光明而曲折的破解之路</h1>
 
-<hr />
+<hr>
 
 <p>道高一尺，魔高一丈，既然明白了原理，就来尝试如何破解吧。</p>
 
@@ -227,7 +227,7 @@ C:\\WINDOWS\\Microsoft.NET\\Framework\\v3.5\\csc.ex
 
 <p><code>D:\vc\vc6common\MSDev98\Bin\MSDEV.EXE /useenv</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/201510150610058842235.jpg" alt="" /></p>
+<p><img src="../images_result/images/201510150610058842235.jpg" alt=""></p>
 
 <p>图5 x64 兼容工具命令提示</p>
 
@@ -235,7 +235,7 @@ C:\\WINDOWS\\Microsoft.NET\\Framework\\v3.5\\csc.ex
 
 <p>复制Release或Debug的配置，起名xx64,激活该配置。(1、<code>Build – Configurations – Add…</code>；2、<code>Build – Set Active Configuration…</code>)</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/201510150610079764641.jpg" alt="" /></p>
+<p><img src="../images_result/images/201510150610079764641.jpg" alt=""></p>
 
 <p>图6 新建Win32 Debug64配置</p>
 
@@ -243,19 +243,19 @@ C:\\WINDOWS\\Microsoft.NET\\Framework\\v3.5\\csc.ex
 
 <p>1、在“Project Settings”对话框中, 点击“General”标签. 在“Output directories”, 在“Intermediate files” 和“Output files”输入框中, 键入“Debug64”(无引号)</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/201510150610097958752.jpg" alt="" /></p>
+<p><img src="../images_result/images/201510150610097958752.jpg" alt=""></p>
 
 <p>图7 设置输出路径</p>
 
 <p>2、在“C/C++”标签上, “Debug info”下拉列表中, 选择“Program database”(参数选项对应是 /Zi)</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/201510150610108244362.jpg" alt="" /></p>
+<p><img src="../images_result/images/201510150610108244362.jpg" alt=""></p>
 
 <p>图8 设置调试信息</p>
 
 <p>3、在“Link”标签上, “Project options”的输入框中, 将“/machine:I386”改为“/machine:AMD64”（命令中将出现两个不同的/machine）</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/201510150610127560072.jpg" alt="" /></p>
+<p><img src="../images_result/images/201510150610127560072.jpg" alt=""></p>
 
 <p>图9 设置编译指令</p>
 
@@ -267,19 +267,19 @@ C:\\WINDOWS\\Microsoft.NET\\Framework\\v3.5\\csc.ex
 
 <p>代码基本未变，我只是把它封装在DLL中，由w3wp.exe加载运行，怎么就崩溃了呢。长夜漫漫，无心睡眠，在迷糊中把IIS 7应用程序池从集成模式调整为经典模式后，异常莫明地消失了。比尔，你想玩死人么 ？集成与经典模式到底是怎么一回事？</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/201510150610139059089.png" alt="" /></p>
+<p><img src="../images_result/images/201510150610139059089.png" alt=""></p>
 
 <p>图10 集成模式处理管道</p>
 
 <p>八股文常常引用上图说明IIS7的集成模式。IIS 7集成了ASP.NET运行库，使用统一的管道来处理请求。经典模式兼容了IIS 6，如下图所示，处理ASP.NET动态请求的只是IIS的一个插件——ISAPI模块。同理，PHP插件只处理PHP请求，它们各司其职，互不干涉。两种模式的差别泾渭分明。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/201510150610157327998.png" alt="" /></p>
+<p><img src="../images_result/images/201510150610157327998.png" alt=""></p>
 
 <p>图11 经典模式处理流程</p>
 
 <p>还有一些值得阅读的入门文档，如《ASP.NET Application Life Cycle Overview for IIS 7.0》，概述了ASP.NET应用程序在生命周期里发生了什么事情。《IIS Modules Overview》主要说明模式及其配置方式。从IIS 7的模块界面可以看到，集成模式使用托管代码模块来处理.aspx页面的请求，而经典模式使用本机代码模块。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/2015101506101612724101.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015101506101612724101.jpg" alt=""></p>
 
 <p>图12 请求处理模块</p>
 
@@ -305,13 +305,13 @@ C:\\WINDOWS\\Microsoft.NET\\Framework\\v3.5\\csc.ex
 
 <p>在提升权限之前，查询应用程序池的用户：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/2015101506101832871111.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015101506101832871111.jpg" alt=""></p>
 
 <p>图13 提权前用户</p>
 
 <p>此时，75804号进程，即w3wp.exe拥有IIS_IUSRS用户权限。紧接着提升权限，页面显示了执行结果：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/2015101506101972234121.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015101506101972234121.jpg" alt=""></p>
 
 <p>图14 Shell代码提权</p>
 
@@ -319,7 +319,7 @@ C:\\WINDOWS\\Microsoft.NET\\Framework\\v3.5\\csc.ex
 
 <p>让我们再次查看此时应用程序池的用户：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/2015101506102128655131.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015101506102128655131.jpg" alt=""></p>
 
 <p>图15 提权成功后用户未变</p>
 
@@ -329,7 +329,7 @@ C:\\WINDOWS\\Microsoft.NET\\Framework\\v3.5\\csc.ex
 
 <p>为了验证这种可能性，让我们亮剑，它就是用来中断模拟的API——RevertToSelf。美女现身，Beautiful!</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/2015101506102285582141.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015101506102285582141.jpg" alt=""></p>
 
 <p>图16 强制中断IIS模拟恢复用户身份</p>
 
@@ -337,25 +337,25 @@ C:\\WINDOWS\\Microsoft.NET\\Framework\\v3.5\\csc.ex
 
 <p>西元201x年，001号大杀器研制成功，为纪念cctv，我把它命名为cv51。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/201510150610246903315.jpg" alt="" /></p>
+<p><img src="../images_result/images/201510150610246903315.jpg" alt=""></p>
 
 <p>图17 未能进入内核无权读写致出错</p>
 
 <p>首次执行出错，不必理会，再次尝试执行。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/2015101506102688822161.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015101506102688822161.jpg" alt=""></p>
 
 <p>图18 提权成功</p>
 
 <p>cv51的兄弟cvbb此时运行在SYSTEM权限下，顺利添加用户tingting。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/2015101506102791644172.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015101506102791644172.jpg" alt=""></p>
 
 <p>图19 其他工具共享同一个w3wp.exe的权限</p>
 
 <p>登录服务器。任务管理器中，w3wp.exe（PID：22324）在提升权限后的身份可能显示为SYSTEM，也可能保持不变。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/201510150610299722318.jpg" alt="" /></p>
+<p><img src="../images_result/images/201510150610299722318.jpg" alt=""></p>
 
 <p>图20 模拟使任务管理器不能真实显示Shell的权限</p>
 
@@ -363,11 +363,11 @@ C:\\WINDOWS\\Microsoft.NET\\Framework\\v3.5\\csc.ex
 
 <p><code>mimikatz log privilege::debug sekurlsa::logonpasswords</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20151015/2015101506103035632191.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015101506103035632191.jpg" alt=""></p>
 
 <p>图21 mimikatz破解曾经登录的用户信息</p>
 
-<p>以上测试在Windows 2003、2008及R2版本中通过。</p>      </p>
+<p>以上测试在Windows 2003、2008及R2版本中通过。</p>      <p></p>
     
 			</body>
 		</html>

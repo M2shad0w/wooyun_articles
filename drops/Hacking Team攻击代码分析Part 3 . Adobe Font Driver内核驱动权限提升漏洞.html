@@ -3,18 +3,18 @@
 			<head>
 			     <title>Hacking Team攻击代码分析Part 3 : Adobe Font Driver内核驱动权限提升漏洞 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/6998">http://drops.wooyun.org/papers/6998</a></h1>
 				
       <p>
-        <p>作者：360Vulcan Team的pgboy</p>
+        </p><p>作者：360Vulcan Team的pgboy</p>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ab4f10214e0f024f13214e2623eb989d9bfddec7c8cac5">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> 共享了我们针对Hacking Team泄露的 Flash 0day漏洞的技术分析（http://blogs.360.cn/blog/hacking-team-part2/和http://blogs.360.cn/blog/hacking-team-flash-0day/），为了在IE和Chrome上绕过其沙盒机制完全控制用户系统，Hacking Team还利用了一个Windows中的内核驱动： Adobe Font Driver(atmfd.dll)中存在的一处字体0day漏洞，实现权限提升并绕过沙盒机制。</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ab4f10214e0f024f13214e2623eb989d9bfddec7c8cac5">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> 共享了我们针对Hacking Team泄露的 Flash 0day漏洞的技术分析（http://blogs.360.cn/blog/hacking-team-part2/和http://blogs.360.cn/blog/hacking-team-flash-0day/），为了在IE和Chrome上绕过其沙盒机制完全控制用户系统，Hacking Team还利用了一个Windows中的内核驱动： Adobe Font Driver(atmfd.dll)中存在的一处字体0day漏洞，实现权限提升并绕过沙盒机制。</p>
 
 <p>该0day漏洞可以用于WindowsXP~Windows 8.1系统，X86和X64平台都受影响，在Hacking Team泄露的源码中我们发现了该漏洞的详细利用代码。在利用Flash漏洞获得远程代码执行权限后，Hacking Team经过复杂的内核堆操作准备后，加载一个畸形的OTF字体文件，再调用Atmfd中的相关接口触发处理字体文件过程的漏洞，最后获得任意次数的任意内核地址读写权限，接着复制Explorer.exe的token到当前进程，并清除本进程的Job来实现沙盒逃逸。</p>
 
@@ -24,7 +24,7 @@
 
 <h1>0x01 漏洞分析</h1>
 
-<hr />
+<hr>
 
 <p>通过分析漏洞利用的源码我们看到，该漏洞在加载字体完成后利用NamedEscape函数的0x2514命令来触发关键操作 通过跟踪NamedEscape我们可以找到存在于atmfd.dll里面漏洞点: 以下是笔者测试机器上atmfd的版本（win7 32bit）:</p>
 
@@ -127,13 +127,13 @@
 
 <p>我们可以通过T2F Analyzer来观察这个被加载的OTF字体文件的格式。见下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150708/2015070805014979392.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015070805014979392.png" alt="enter image description here"></p>
 
 <p>显而易见，样本OTF文件中构造了超长的Charset，然后通过NamedEscape函数的0x2514命令来获取Charset的时候，就会触发到上面描述的触发点，引发符号溢出。</p>
 
 <h1>0x02 漏洞利用</h1>
 
-<hr />
+<hr>
 
 <p>我们从头再看一下漏洞利用的流程，整个流程主要分这么几个部分：</p>
 
@@ -218,7 +218,7 @@
 
 <p>这样在最终符号溢出时，就会写入到这块Buffer上面未被释放的Bitmap对象中，这就通过精确地堆操作完成了将这个符号溢出导致的缓存上溢转换到对已控制的Bitmap对象的写入。 这个转化的流程如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150708/2015070805014940237.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015070805014940237.png" alt="enter image description here"></p>
 
 <p>3 将Bitmap写入转换为内核任意地址读写</p>
 
@@ -251,7 +251,7 @@
 
 <p>也就是说，我们通过对Bitmap2进行 SetBitmapBits,设置实际读写的 Bitmap的pBitsBuffer为我们想要读写的地址，然后就可以通过进行实际读写的Bitmap的GetBitmapBits和SetBitmapBits来实现对指定地址的读写了，如图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150708/2015070805014963473.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015070805014963473.png" alt="enter image description here"></p>
 
 <p>我们看到，在攻击代码中，首先创建了一个假的Bitmap对象，然后将这个对象写到字体的Charset中：</p>
 
@@ -328,17 +328,17 @@
 
 <h1>0x03 修复内核堆</h1>
 
-<hr />
+<hr>
 
 <p>由于漏洞是在上溢过程中进行的对前一个对象写入，必然会对内核堆造成破坏，所以必须要修复内核堆的结构，这样才能实现在进程退出，对象被释放时不会造成系统蓝屏崩溃，详细的修复代码可以参考源码中触发利用点之后的操作，篇幅关系就不在这里完全列出了。</p>
 
 <h1>0x04 实现权限提升</h1>
 
-<hr />
+<hr>
 
 <p>在实现了内核任意地址写入功能后，权限提升过程就比较简单了，攻击代码通过遍历内核进程表找到explore.exe的进程token，直接将explore的token对象的地址写入到当前进程的token中，并清除进程的Job对象，来实现最终完全绕过各类沙盒的保护功能。</p>
 
-<p>由于权限提升过程中完全使用了DKOM的方式，没有进行内核代码执行，因此也绕过了Windows8以上系统中的SMEP内核保护功能。 我们在分析这个漏洞的过程中，发现目前Hacking Team版本的漏洞利用代码还是存在一些问题的，由于最终的提权代码直接从Explore复制的token对象，会导致该token对象的引用计数出现问题，当系统关机、注销，或者Explore.exe异常结束，最终导致Explore.exe进程退出时，可能会导致引用错误的token对象，引发系统蓝屏崩溃，这是这个利用不够优美的地方。</p>      </p>
+<p>由于权限提升过程中完全使用了DKOM的方式，没有进行内核代码执行，因此也绕过了Windows8以上系统中的SMEP内核保护功能。 我们在分析这个漏洞的过程中，发现目前Hacking Team版本的漏洞利用代码还是存在一些问题的，由于最终的提权代码直接从Explore复制的token对象，会导致该token对象的引用计数出现问题，当系统关机、注销，或者Explore.exe异常结束，最终导致Explore.exe进程退出时，可能会导致引用错误的token对象，引发系统蓝屏崩溃，这是这个利用不够优美的地方。</p>      <p></p>
     
 			</body>
 		</html>

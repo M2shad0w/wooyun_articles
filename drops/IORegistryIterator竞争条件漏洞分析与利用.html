@@ -3,16 +3,16 @@
 			<head>
 			     <title>IORegistryIterator竞争条件漏洞分析与利用 - 360NirvanTeam</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/13505">http://drops.wooyun.org/papers/13505</a></h1>
 				
       <p>
-        <p><strong>Author：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a8dbc0dacdc3f7dfd2dfe89b9e98e6c1dadec9c6fccdc9c5">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
+        </p><p><strong>Author：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a8dbc0dacdc3f7dfd2dfe89b9e98e6c1dadec9c6fccdc9c5">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
 
 <h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>CVE-2015-7084是由于IORegistryIterator没有考虑用户态多线程同时调用的情况，引起Race Condition，可导致任意代码执行。漏洞存在于XNU版本3248.20.55之前的内核上，即Mac OS X 10.11.2、iOS 9.2、watchOS 2.1、tvOS 9.1之前的系统版本上。官方修复公告<a href="https://support.apple.com/en-us/HT205637">https://support.apple.com/en-us/HT205637</a>。</p>
 
@@ -20,13 +20,13 @@
 
 <h1>0x01 漏洞背景</h1>
 
-<hr />
+<hr>
 
 <p>IORegistryIterator是用于XNU内核中用于遍历访问IO Registry Entry的一个类。在XNU版本3248.20.55之前的内核上，即Mac OS X 10.11.2、iOS 9.2、watchOS 2.1、tvOS 9.1之前的系统版本上，在操作IORegistryIterator时缺少锁机制，用户态进程通过多线程调用引起Race Condition，最终可实现任意代码执行。这个漏洞是由Google Project Zero的Ian Beer报告，CVE编号CVE-2015-7084。</p>
 
 <h1>0x02 漏洞分析</h1>
 
-<hr />
+<hr>
 
 <p>Ian Beer在<a href="https://code.google.com/p/google-security-research/issues/detail?id=598">https://code.google.com/p/google-security-research/issues/detail?id=598</a>中给出了漏洞的说明，以及一份导致Double Free的PoC代码。</p>
 
@@ -65,11 +65,11 @@ bool IORegistryIterator::exitEntry( void )
 
 <p>但是由于缺乏锁的保护，通过多线程调用IORegistryIteratorExitEntry，导致gone指向的内存区域被释放两次，引起崩溃。示意图如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/2016030712002851831114.png" alt="p1" /></p>
+<p><img src="../images_result/images/2016030712002851831114.png" alt="p1"></p>
 
 <h1>0x03 漏洞利用</h1>
 
-<hr />
+<hr>
 
 <p>由于Double Free不易利用，Pangu Team在其博客文章<a href="http://blog.pangu.io/race_condition_bug_92/">http://blog.pangu.io/race&#95;condition&#95;bug_92/</a>中提出了另外一种思路，可以稳定地利用Race Condition实现任意代码执行。下面将对这种思路进行具体的分析，在已知Kernel Slide的情况下，在Mac OS X 10.11上实现提权。</p>
 
@@ -146,7 +146,7 @@ bool IORegistryIterator::exitEntry( void )
 
 <p>攻击流程示意图如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/2016030712003072898212.png" alt="p2" /></p>
+<p><img src="../images_result/images/2016030712003072898212.png" alt="p2"></p>
 
 <h3>2. Heap Spray</h3>
 
@@ -162,7 +162,7 @@ struct IORegCursor {
 
 <p>当第二次exitEntry被调用后，where指向的内存区域在kalloc.32的freelist链表中。我们可以通过heap spray kalloc.32，使得位于freelist中的内存重新被填充为我们控制的数据，实现控制where->iter的目的。heap spray的方法就是通过结合<code>io_service_open_extended</code>以及OSData，Pangu Team在其POC 2015的议题《Hacking from iOS8 to iOS9》中提到了这种heap spray的方法。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/2016030712003383603312.png" alt="p3" /></p>
+<p><img src="../images_result/images/2016030712003383603312.png" alt="p3"></p>
 
 <p>通过构造特定的XML数据，包含data标签，那么通过<code>io_service_open_extended</code>创建任意UserClient，在OSUnserializeXML中反序列化data数据时，就可以通过OSData占用内存，实现任意zone的heap spray。</p>
 
@@ -190,11 +190,11 @@ buildData(parser_state_t *state, object_t *o)
 
 <p>在用户空间映射两块内存空间，分别放置构造的iter对象以及构造的虚表。将XML中的data的第三个QWORD字段设置为构造的iter对象指针，并进行heap spray。通过heap spray成功控制where指向的内存区域内容后，where->iter可控，最终调用where->iter->release()时就会调用我们构造的虚表中的函数，实现任意代码执行。在已知Kernel Slide的情况下，在10.10.5以及10.11上都成功实现提权，10.10.5如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/201603071200354923243.png" alt="p4" /></p>
+<p><img src="../images_result/images/201603071200354923243.png" alt="p4"></p>
 
 <h1>0x04 官方修复</h1>
 
-<hr />
+<hr>
 
 <p>在10.11.2的XNU源码中，苹果官方进行了修复。新添加了一个IOUserIterator,用于封装IORegistryIterator，对reset操作等加锁，也在enterEntry和exitEntry时加锁，防止多线程调用引起的Race Condition。</p>
 
@@ -230,13 +230,13 @@ kern_return_t is_io_registry_iterator_exit_entry(
 
 <h1>0x05 References</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li><a href="https://code.google.com/p/google-security-research/issues/detail?id=598">https://code.google.com/p/google-security-research/issues/detail?id=598</a></li>
 <li><a href="http://blog.pangu.io/race_condition_bug_92/">http://blog.pangu.io/race&#95;condition&#95;bug_92/</a></li>
 <li><a href="http://blog.pangu.io/wp-content/uploads/2015/11/POC2015_RUXCON2015.pdf">http://blog.pangu.io/wp-content/uploads/2015/11/POC2015_RUXCON2015.pdf</a></li>
-</ol>      </p>
+</ol>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>Discuz!X升级/转换程序GETSHELL漏洞分析 - 360网站安全中心</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/929">http://drops.wooyun.org/papers/929</a></h1>
 				
       <p>
-        <h2>0x01 漏洞分析</h2>
+        </p><h2>0x01 漏洞分析</h2>
 
-<hr />
+<hr>
 
 <p>漏洞的根源在代码注释中出现换行，导致代码执行，流程如下:</p>
 
@@ -18,32 +18,32 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/20140714/2014071408371240078.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071408371240078.png" alt="enter image description here"></p>
 
 <h3>0x0102 do&#95;config&#95;inc.php的第37行，跟入这个save&#95;config&#95;file()函数。</h3>
 
-<p><img src="http://static.wooyun.org/20140714/2014071411142891984.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071411142891984.png" alt="enter image description here"></p>
 
 <h3>0x0103 gobal.func.php第624行，跟入这个getvars()函数。</h3>
 
-<p><img src="http://static.wooyun.org/20140714/2014071411142823390.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071411142823390.png" alt="enter image description here"></p>
 
 <h3>0x0104 继续跟入buildarray()这个函数</h3>
 
-<p><img src="http://static.wooyun.org/20140714/2014071406145498450.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071406145498450.png" alt="enter image description here"></p>
 
 <h3>0x0105 漏洞出现在598行，这个$newline的问题。</h3>
 
-<p><img src="http://static.wooyun.org/20140714/2014071406145468946.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071406145468946.png" alt="enter image description here"></p>
 
 <p>这里因为$key可控，所以$newline可控，当$newline出现或
 时，导致BBB可以作为php代码执行。如图所示。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071408513245367.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071408513245367.png" alt="enter image description here"></p>
 
 <h2>0x02 漏洞利用</h2>
 
-<hr />
+<hr>
 
 <p>可以构造如下请求：</p>
 
@@ -64,11 +64,11 @@ a=config&amp;source=d7.2_x2.0&amp;submit=yes&amp;newconfig%5Btarget%5D%5Bdbhost%
 
 <p>发送这段请求直接getshell，恶意代码写入/convert/data/config.inc.php文件当中，如图所示。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071408513268357.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071408513268357.png" alt="enter image description here"></p>
 
 <h2>0x03 关于修复</h2>
 
-<hr />
+<hr>
 
 <p>需要在global.func.php文件的buildarray函数中过滤掉$key中的非字母、数字及下划线字符，即添加代码如下：</p>
 
@@ -78,11 +78,11 @@ $key = preg_replace("/[^w]/","", $key);
 
 <p>如图所示。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071408371228087.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071408371228087.png" alt="enter image description here"></p>
 
 <p>（以上分析仅供学习交流，各DZ！X系列站长勿忘修复！）</p>
 
-<p>以上为360网站安全中心博客文章，原文：<a href="http://loudong.360.cn/blog/view/id/15">http://loudong.360.cn/blog/view/id/15</a></p>      </p>
+<p>以上为360网站安全中心博客文章，原文：<a href="http://loudong.360.cn/blog/view/id/15">http://loudong.360.cn/blog/view/id/15</a></p>      <p></p>
     
 			</body>
 		</html>

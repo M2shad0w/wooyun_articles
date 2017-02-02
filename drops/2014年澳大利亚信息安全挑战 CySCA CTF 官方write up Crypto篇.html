@@ -3,22 +3,22 @@
 			<head>
 			     <title>2014年澳大利亚信息安全挑战 CySCA CTF 官方write up Crypto篇 - F1uYu4n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2618">http://drops.wooyun.org/tips/2618</a></h1>
 				
       <p>
-        <p><strong>from:https://www.cyberchallenge.com.au/CySCA2014_Crypto.pdf</strong></p>
+        </p><p><strong>from:https://www.cyberchallenge.com.au/CySCA2014_Crypto.pdf</strong></p>
 
 <h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>Fortcerts开发了不少涉及加密算法的程序并已经自行测试了这些程序，现在他们想要了解其他人对于这些加密程序安全性的看法。</p>
 
 <h2>0x01 标准银河字母（Standard Galactic Alphabet）</h2>
 
-<hr />
+<hr>
 
 <p><strong>Question</strong> 请对Fortcerts自定义加密算法的Slightly Secure Shell程序进行白盒测试。找出漏洞并证明其可以利用来获取机密信息。服务器运行在172.16.1.20:12433</p>
 
@@ -130,7 +130,7 @@ Lq=Gq:?qKEs-{qoEW__ &lt;&lt; CaviarBakedShame966
 
 <h2>0x02 压缩会话（Compression Session）</h2>
 
-<hr />
+<hr>
 
 <p><strong>Question</strong> 请对Fortcerts的高安全性密钥生成服务器进行白盒测试。找出能造成秘密数据泄漏的漏洞。服务器运行在172.16.1.20:9999 <strong>Source</strong> 5a92cb8141992b7b71497a3bc920c7a5-crypt02.py</p>
 
@@ -262,7 +262,7 @@ Key:DrizzleVerandaFinger576
 
 <h2>0x03 杂项（Chop Suey）</h2>
 
-<hr />
+<hr>
 
 <p><strong>Question</strong></p>
 
@@ -321,7 +321,7 @@ D,BBBBBB
 Key Reset!
 </code></pre>
 
-<p>对于E命令，服务要求使用的正确命令格式为E, <value>，任何其它的命令都显示Invalid use of encrypt，同时返回一个用法。当向E命令提供正确参数值时，输出的格式和D命令一致，所以D命令很有可能只是执行E命令存储在服务中的数据。</p>
+<p>对于E命令，服务要求使用的正确命令格式为E, <value>，任何其它的命令都显示Invalid use of encrypt，同时返回一个用法。当向E命令提供正确参数值时，输出的格式和D命令一致，所以D命令很有可能只是执行E命令存储在服务中的数据。</value></p>
 
 <pre><code>E.
 Invalid use of encrypt. Usage E,&lt;valuetoencrypt&gt;
@@ -433,7 +433,7 @@ A's response: 32fe79d33e7055190ec47c1778c1029946c9fc47398c613936
 Secret response: 35cd51f711555a373bec5e337be52fbe66fbc9334af8
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811554613660.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811554613660.png" alt="enter image description here"></p>
 
 <p>复现图</p>
 
@@ -450,7 +450,7 @@ Shared keystream: 73bf38927f3114584f853d56398043d80788bd0678cd207877
 Shared keystream: 73bf38927f3114584f853d56398043d80788bd0678cd207877
 Dump plaintext: 467269656e644e6f7469636542656c66617374353235
 Plaintext(ASCII): FriendNoticeBelfast525
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

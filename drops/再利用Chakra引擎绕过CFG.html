@@ -3,16 +3,16 @@
 			<head>
 			     <title>再利用Chakra引擎绕过CFG - xlab</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11565">http://drops.wooyun.org/tips/11565</a></h1>
 				
       <p>
-        <p><strong>Author:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="711409015c021a083199f4cf99dfde96fff597dcd794dfef98dbfd94dfd5">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
+        </p><p><strong>Author:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="711409015c021a083199f4cf99dfde96fff597dcd794dfef98dbfd94dfd5">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>本文源自一次与<a href="http://weibo.com/101174?source=webim&amp;is_all=1">TK</a>闲聊，期间得知成功绕过CFG的经过与细节(参考：[利用Chakra JIT绕过DEP和CFG])。随即出于对技术的兴趣，也抽出一些时间看了相关的东西，结果发现了另一处绕过CFG的位置。所以这篇文章中提到的思路与技术归根结底是来自<a href="http://weibo.com/101174?source=webim&amp;is_all=1">TK</a>提示的，在此特别感谢。</p>
 
@@ -22,7 +22,7 @@
 
 <h1>0x01 Chakra调用函数的逻辑</h1>
 
-<hr />
+<hr>
 
 <p>chakra引擎在函数调用时，会根据所调用函数状态的不同进行不同的处理。比如第一次调用的函数、多次调用的函数、DOM接口函数及经过jit编译后的函数。不同的函数类型会有不同的处理流程，而这些不同的处理都会通过<code>Js::InterpreterStackFrame::OP_CallCommon&lt;Js::OpLayoutDynamicProfile&lt;Js::OpLayoutT_CallI&lt;Js::LayoutSizePolicy&lt;0&gt; &gt; &gt; &gt;</code>函数调用<code>Js::JavascriptFunction::CallFunction&lt;1&gt;</code>函数来实现。</p>
 
@@ -234,7 +234,7 @@ chakra!Js::JavascriptExternalFunction::ExternalFunctionThunk:
 
 <h1>0x02 漏洞与利用</h1>
 
-<hr />
+<hr>
 
 <p>经过前面对chakra引擎各种调用函数方法的介绍，我们再来看一下本文的重点绕过cfg的漏洞。前面提到的在第一次调用脚本创建的函数时与后续调用此函数会有不同的流程。这里我们再看一下此处的逻辑，调用栈如下。</p>
 
@@ -308,7 +308,7 @@ chakra!`dynamic initializer for 'DOMFastPathInfo::getterTable''+0x734:
 
 <h1>0x03 修补方案</h1>
 
-<hr />
+<hr>
 
 <p>本文所述的漏洞微软已经修补，修补方案也比较简单就是对此处跳转增加cfg检查。</p>
 
@@ -328,12 +328,12 @@ chakra!`dynamic initializer for 'DOMFastPathInfo::getterTable''+0x734:
 
 <h1>0x04 参考</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="http://xlab.tencent.com/cn/2015/12/09/bypass-dep-and-cfg-using-jit-compiler-in-chakra-engine">利用Chakra JIT绕过DEP和CFG</a> </li>
 <li><a href="https://github.com/exp-sky/HitCon-2015-spartan-0day-exploit/blob/master/Spartan%200day%20&amp;%20Exploit-m.pdf">spartan 0day &amp; exploit</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

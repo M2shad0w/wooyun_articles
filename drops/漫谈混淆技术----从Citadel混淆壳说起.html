@@ -3,34 +3,34 @@
 			<head>
 			     <title>漫谈混淆技术----从Citadel混淆壳说起 - 360安全卫士</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/15532">http://drops.wooyun.org/tips/15532</a></h1>
 				
       <p>
-        <p><strong>Author：360天眼实验室</strong></p>
+        </p><p><strong>Author：360天眼实验室</strong></p>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>由于杀软对商业壳比较敏感，并且商业壳检测,脱壳技术比较成熟，病毒作者一般不会去选择用商业的壳来保护自己的恶意代码,所以混淆壳成为了一个不错的选择.混淆壳可以有效对抗杀软，因为这种壳一般不存在通用的检测方法，并且很难去静态的脱壳，所以其恶意代码就不会被发现,从而使自己长时间的存在.对于恶意代码分析者来说，分析这种带混淆壳的样本往往会花费很大精力，甚至有时候会使分析变得不可能。本文主要几种常见的混淆手段,不涉及样本本身功能分析。</p>
 
 <h1>0x01 从一个样本说起</h1>
 
-<hr />
+<hr>
 
 <p>Citadel(md5: 767a861623802da72fd6c96ce3a33bff)是一个zeus的衍生版本,其较zeus更加的健壮,也更稳定。前一段时间发现了一个citadel 样本，较之普通的citadel稍微有一点特别，其整体的结构如下图：</p>
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160429/20160429084809577321102.png" alt="" /></p>
+<p><img src="../images_result/images/20160429084809577321102.png" alt=""></p>
 
 <p>图1 Citadel样本结构</p>
 
 <p>即外层加了upx的壳，里面是一个混淆壳，再往里面才是citadel原始代码。脱掉UPX后的,混淆壳代码分支总览图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/2016042908481885033260.png" alt="" /></p>
+<p><img src="../images_result/images/2016042908481885033260.png" alt=""></p>
 
 <p>图2混淆壳代码分支总览图</p>
 
@@ -38,7 +38,7 @@
 
 <p>下面的图为该混淆壳的混淆代码片段，其中这么一大段代码中只有红框中的指令是有用的。其他都是无效指令。很显然比一般的垃圾指令填充不知道高到哪里去了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/2016042908484239111346.png" alt="" /></p>
+<p><img src="../images_result/images/2016042908484239111346.png" alt=""></p>
 
 <p>图 3，混淆片段实例</p>
 
@@ -46,25 +46,25 @@
 
 <p>当手动脱掉upx后，运行样本后就崩溃了，然而不脱upx壳，样本是可以正常运行的。运行前后api trace 对比图:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/20160429084849394444-1.png" alt="" /></p>
+<p><img src="../images_result/images/20160429084849394444-1.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/20160429084859621304-2.png" alt="" /></p>
+<p><img src="../images_result/images/20160429084859621304-2.png" alt=""></p>
 
 <p>图4,api trace</p>
 
 <p>其中上图是脱掉upx壳的api log，下图为没脱upx壳的api log，从图中我们可以看到在地址0x4176768地址中的调用的API名不同。很显然从这里出错了。从这个地址往上回溯，这个调用api的过程被划分为十几个代码块，然后利用JMP连接起来，其中每个代码块就只有一两条代码是有效指令：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/2016042908491663939522.png" alt="" /></p>
+<p><img src="../images_result/images/2016042908491663939522.png" alt=""></p>
 
 <p>图5，获取导入表导入函数地址表第四项过程</p>
 
 <p>通过上图我们发现call esi指令中esi的值由mov esi,[esi+0xch]获得,esi+0xch的值是导入函数地址表中第四项的api的地址。所以问题很可能出现在这里，即脱壳后与脱壳前导入地址表第四项api不同。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/2016042908491967356617.png" alt="" /></p>
+<p><img src="../images_result/images/2016042908491967356617.png" alt=""></p>
 
 <p>图6，没脱upx壳的导入函数地址表：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/2016042908492533999719.png" alt="" /></p>
+<p><img src="../images_result/images/2016042908492533999719.png" alt=""></p>
 
 <p>图 7，脱掉upx壳的第四项：</p>
 
@@ -72,7 +72,7 @@
 
 <h2>1.2 混淆壳整个的执行流程</h2>
 
-<p><img src="http://static.wooyun.org//drops/20160429/2016042908493216114819.png" alt="" /></p>
+<p><img src="../images_result/images/2016042908493216114819.png" alt=""></p>
 
 <p>图 8,,代码执行流程</p>
 
@@ -92,11 +92,11 @@
 
 <p>如前面所说citadel大部分的混淆代码主要是操作数据读写，主要的混淆代码是由一下几种模式组合起来，形成这种长的混淆代码片段的，作者使用这几种模式：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/2016042908504387233p110.png" alt="" /></p>
+<p><img src="../images_result/images/2016042908504387233p110.png" alt=""></p>
 
 <p>如下图所示</p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/2016042908493839464919.png" alt="" /></p>
+<p><img src="../images_result/images/2016042908493839464919.png" alt=""></p>
 
 <p>图9，混淆模式</p>
 
@@ -104,7 +104,7 @@
 
 <h1>0x02 混淆壳常见的几种技术手段</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>控制流程混淆</li>
@@ -124,7 +124,7 @@
 
 <p>即将一个函数过程分割成更多的流程。扰乱分析者对样本分析，很显然这样的过程会使分析者感到沮丧，严重拖慢了分析效率。这个在citadel中是有体现的。即在执行Routine2堆内存代码的时候:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/20160429084949975401019.png" alt="" /></p>
+<p><img src="../images_result/images/20160429084949975401019.png" alt=""></p>
 
 <p>图10 代码块分割</p>
 
@@ -138,7 +138,7 @@
 
 <p>比如:value=9*8,实际上value就是72，恶意代码编写者故意让这些常数72,在运行时由乘法指令产生。常量拆分就是一种逆向的操作，把本来可以直接获取的值，通过计算来产生的一种混淆方式。如下图:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/20160429084953248881121.png" alt="" /></p>
+<p><img src="../images_result/images/20160429084953248881121.png" alt=""></p>
 
 <p>图11，常量拆分</p>
 
@@ -150,7 +150,7 @@
 
 <p>数据编码的原理就是将常量数据动态编码，然后在动态的解解码，数据编码集中体现在加密解密上。同样在citadel这个样本里我们发现有这样的过程，如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/20160429085000754891218.png" alt="" /></p>
+<p><img src="../images_result/images/20160429085000754891218.png" alt=""></p>
 
 <p>图12，数据编码</p>
 
@@ -182,13 +182,13 @@ MOV Reg,Mem                             Jcc @xxx
 
 <p>在去年的recon大会中《The M/o/Vfuscator-Turning 'mov' into a soul-crushing RE nightmare》议题，让我们见识到了，代码混淆的另一种方式，作者演示了所有的机器指令，除过控制流指令外，都用mov指令来实现，很显然，如果人为去理解这样的代码，是很困难的，这个可以看出作者对x86指令深入的理解，让我们大开眼界，下面我就从我的角度来说明下这个背后的原理和一些细节。先来直观的感受下，这些代码指令吧：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/20160429085017636051317.png" alt="" /></p>
+<p><img src="../images_result/images/20160429085017636051317.png" alt=""></p>
 
 <p>图13，mov 混淆代码</p>
 
 <p>源码是这样子的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/20160429085020120951416.png" alt="" /></p>
+<p><img src="../images_result/images/20160429085020120951416.png" alt=""></p>
 
 <p>图14，源代码</p>
 
@@ -230,7 +230,7 @@ mov R, [x]
 
 <p>对于这种分支代码，设置一个Selector(相当于一个指针)，一个data内存区域存放的数据是100，一个scratch 内存区，是存放的原始x的原始值，如果x的值与y的值相等的话就将selector的指向data区，如果不等就将selector指向scratch区域。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/2016042908504875080p26.png" alt="" /></p>
+<p><img src="../images_result/images/2016042908504875080p26.png" alt=""></p>
 
 <p>从上图我们可以总结出具体的实现原理是这样的：</p>
 
@@ -371,21 +371,21 @@ for (i=0; i&lt;t; i++)
 
 <p>首先随机选取了寄存器，Genrand()是产生随机数的函数,o()是产生opcode的函数，oad（）是产生指令其余部分的函数。每次随机选取一个寄存器，然后对选取的寄存器产生对应的混淆指令。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/20160429085026686891515.png" alt="" /></p>
+<p><img src="../images_result/images/20160429085026686891515.png" alt=""></p>
 
 <p>对于call指令会产生这样的代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/20160429085033799751616.png" alt="" /></p>
+<p><img src="../images_result/images/20160429085033799751616.png" alt=""></p>
 
 <p>对应的代码如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160429/20160429085037741821714.png" alt="" /></p>
+<p><img src="../images_result/images/20160429085037741821714.png" alt=""></p>
 
 <p>就是在原始的call 之前加入代码，最后jmp到原来的流程，然后返回继续执行下面的流程。还有很多的细节这里就不一一介绍了，如果感兴趣可以自己研究下源码。</p>
 
 <h1>0x03 如何反混淆</h1>
 
-<hr />
+<hr>
 
 <p>从上面可以看出混淆技术的种类繁多，但是也是有层次的，对于海量样本的处理，反混淆流程是必须的，也是一个很重要的流程，怎么做，如何做，这将直接影响到对恶意样本的分类，数据提炼效果上，所以这是一个很有意义的话题，关于如何反混淆，将会在后续的文章谈到。</p>
 
@@ -397,7 +397,7 @@ for (i=0; i&lt;t; i++)
 <li><a href="https://en.wikipedia.org/wiki/Turing_machine">https://en.wikipedia.org/wiki/Turing_machine</a></li>
 <li><a href="https://recon.cx/2015/slides/recon2015-14-christopher-domas-The-movfuscator.pdf">https://recon.cx/2015/slides/recon2015-14-christopher-domas-The-movfuscator.pdf</a></li>
 <li><a href="http://conus.info/stuff/tcc-obfuscate/">http://conus.info/stuff/tcc-obfuscate/</a></li>
-</ol>      </p>
+</ol>      <p></p>
     
 			</body>
 		</html>

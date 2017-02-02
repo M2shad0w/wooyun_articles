@@ -3,24 +3,24 @@
 			<head>
 			     <title>攻击者利用Google Docs传播Trojan.Laziok - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/news/15586">http://drops.wooyun.org/news/15586</a></h1>
 				
       <p>
-        <p>攻击者通过 Google Docs 传播 Trojan.Laziok 木马，过程中使用 PowerShell，从 Google Docs 下载木马、绕过反病毒软件</p>
+        </p><p>攻击者通过 Google Docs 传播 Trojan.Laziok 木马，过程中使用 PowerShell，从 Google Docs 下载木马、绕过反病毒软件</p>
 
 <p><strong>links:https://www.fireeye.com/blog/threat-research/2016/04/powershell&#95;used&#95;for.html</strong></p>
 
 <h1>0x00 介绍</h1>
 
-<hr />
+<hr>
 
 <p>通过我们的多流检测技术，我们最近发现了恶意的活动者在通过Google Docs传播Trojan.Laziok恶意软件。我们发现攻击者试图在2016年三月份把payload上传到Google docs上去。在它存活的短短的时间内，从IE（从第3到第11版本）接触到恶意页面的用户可能会在没有任何安全警告的情况下被动的成为恶意payload的主机。在我们向谷歌警示这个恶意程序存在之后，谷歌快速的清除了这个恶意程序和原始的URL，传播的情况也被遏制住了。</p>
 
 <h1>0x01 Payload</h1>
 
-<hr />
+<hr>
 
 <p>这个Trojan.Laziok恶意软件充当一个攻击者用来收集他们所要攻击的系统的信息的侦察工具。它之前在针对能源领域的网络间谍活动中被发现过，尤其是在中东地区<a href="http://www.symantec.com/connect/blogs/new-reconnaissance-threat-trojanlaziok-targets-energy-sector">[1]</a>。在那些活动中，这个恶意软件是通过带有恶意附件的垃圾邮件来传播的，而这些恶意的附件利用的主要是CVE-2012-0158漏洞。</p>
 
@@ -30,21 +30,21 @@
 
 <h1>0x02 Attack Delivery Point</h1>
 
-<hr />
+<hr>
 
 <p>攻击者在波兰域名的主机地址存放了攻击的第一阶段。正如下图所示，第一阶段通过从这个主机地址运行混淆后的JavaScript代码来启动攻击。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051106002480484.jpg" alt="" /></p>
+<p><img src="../images_result/images/2016051106002480484.jpg" alt=""></p>
 
 <p>图1 response中的被混淆的代码</p>
 
 <p>一旦被解码，JavaScript代码就会打开并通过VBScript在IE（从第3到第11版本）内运行的时候执行CVE-2014-6332漏洞，利用windows OLE的内存崩溃漏洞来自动化的bypass操作系统安全设施以及其他的保护措施，这样就会确保攻击者进入“上帝”模式。CVE-2014-6332的使用，以及被滥用的“上帝”模式，早在2014年底就借助一个已知的PoC<a href="http://blog.trendmicro.com/trendlabs-security-intelligence/a-killer-combo-critical-vulnerability-and-godmode-exploitation-on-cve-2014-6332/">[2]</a>作为一个组合技被使用，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051106002552041.jpg" alt="" /></p>
+<p><img src="../images_result/images/2016051106002552041.jpg" alt=""></p>
 
 <p>图2a CVE-2014-6332的使用</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051106002640052.jpg" alt="" /></p>
+<p><img src="../images_result/images/2016051106002640052.jpg" alt=""></p>
 
 <p>图2b 在“上帝模式”改变了安全模式标志之后的runmumaa()函数调用。</p>
 
@@ -52,13 +52,13 @@
 
 <p>PowerShell在bypass反病毒软件方面也很有用，因为它可以直接在内存中注入payloads。我们之前讨论过俄罗斯的活跃的数据窃取活动<a href="https://www.fireeye.com/blog/threat-research/2015/12/uncovering_activepower.html">[3]</a>。看起来这个技术在牵涉到恶意程序的时候仍然很流行，并且这个技术可以逃避Google Docs的安全检查。这个payload会从Google Docs上下载链接——如图3中去混淆后的代码所示——最终会从上述的波兰网站上获取活动的恶意软件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160511/2016051106002734746.jpg" alt="" /></p>
+<p><img src="../images_result/images/2016051106002734746.jpg" alt=""></p>
 
 <p>图3 使用Powershell获得在Google Docs链接上的payload</p>
 
 <h1>0x03 Payload细节</h1>
 
-<hr />
+<hr>
 
 <p>被下载下来的payload是恶意程序Trojan.Laziok，它的回调函数和以下的数据可以作为证明：</p>
 
@@ -104,7 +104,7 @@
 
 <h1>0x04 结论</h1>
 
-<hr />
+<hr>
 
 <p>FireEye的多流检测技术捕获了这次活动的所有细节，从入口点到回调哈数，并且这个恶意软件不能bypass FireEye沙箱的安全措施。PowerShell的数据窃取活动也被观察到通过带有嵌入宏命令的文件进行传播，所以企业环境需要格外的重视使用PowerShell的政策和规定。</p>
 
@@ -112,7 +112,7 @@
 <li>http://www.symantec.com/connect/blogs/new-reconnaissance-threat-trojanlazioktargets- energy-sector</li>
 <li>http://blog.trendmicro.com/trendlabs-security-intelligence/a-killer-combocritical- vulnerability-and-godmode-exploitation-on-cve-2014-6332/</li>
 <li>https://www.fireeye.com/blog/threatresearch/2015/12/uncovering_activepower.html</li>
-</ol>      </p>
+</ol>      <p></p>
     
 			</body>
 		</html>

@@ -3,16 +3,16 @@
 			<head>
 			     <title>PHP安全编码 - 瞌睡龙</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/135">http://drops.wooyun.org/tips/135</a></h1>
 				
       <p>
-        <p>译自：《Pro PHP Security》</p>
+        </p><p>译自：《Pro PHP Security》</p>
 
 <h2>验证过滤用户的输入</h2>
 
-<hr />
+<hr>
 
 <p>即使是最普通的字母数字输入也可能是危险的，列举几个容易引起安全问题的字符：</p>
 
@@ -126,7 +126,7 @@ if (!settype($year, 'integer')) {exit("$year is an invalid value for year!");}
 
 <p>下表是对各种类型变量使用各函数判断的结果：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811222282173.jpg" alt="http://static.wooyun.org/20141017/2014101711111019667.jpg" /></p>
+<p><img src="../images_result/images/2014091811222282173.jpg" alt="http://static.wooyun.org/20141017/2014101711111019667.jpg"></p>
 
 <p>检查字符串的长度使用strlen()变量：</p>
 
@@ -256,7 +256,7 @@ $importedData = file_get_contents($uri);
 
 <h2>防止SQL注入</h2>
 
-<hr />
+<hr>
 
 <h3>SQL注入是如何产生的：</h3>
 
@@ -370,7 +370,7 @@ $mysqli-&gt;close();
 
 <h2>防止XSS攻击</h2>
 
-<hr />
+<hr>
 
 <p>xss攻击一个常用的方法就是注入HTML元素执行js脚本，php中已经内置了一些防御的函数（如htmlentities或者htmlspecialchars）：</p>
 
@@ -426,7 +426,7 @@ echo safeURI($uri);
 
 <h2>防止远程执行</h2>
 
-<hr />
+<hr>
 
 <p>远程执行通常是使用了php代码执行如eval()函数，或者是调用了命令执行如exec()，passthru()，proc&#95;open()，shell&#95;exec()，system()或popen()。</p>
 
@@ -749,7 +749,7 @@ echo preg_replace("/\s*\[p hp language=""](.+?)\[\/php\]\s*/ies", 'test("\1")', 
 
 <p>注意：双引号中的函数不会被执行和替换。</p>
 
-<p>在这里我们需要通过{${}}构造出了一个特殊的变量，'test("{${phpinfo()}}")'，达到让函数被执行的效果 ${phpinfo()} 会被解释执行。</p>      </p>
+<p>在这里我们需要通过{${}}构造出了一个特殊的变量，'test("{${phpinfo()}}")'，达到让函数被执行的效果 ${phpinfo()} 会被解释执行。</p>      <p></p>
     
 			</body>
 		</html>

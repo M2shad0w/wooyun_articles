@@ -3,14 +3,14 @@
 			<head>
 			     <title> Flash CSRF - _Dy</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/688">http://drops.wooyun.org/tips/688</a></h1>
 				
       <p>
-        <h2>目录</h2>
+        </p><h2>目录</h2>
 
-<hr />
+<hr>
 
 <pre><code>0x00 Flash CSRF 名词解释
 0x01 Flash CSRF形成的原因
@@ -23,7 +23,7 @@
 
 <h2>0x00 Flash CSRF名词解释</h2>
 
-<hr />
+<hr>
 
 <p>CSRF（Cross-site request forgery跨站请求伪造，是一种对网站的恶意利用，CSRF则通过伪装来自受信任用户的请求来利用受信任的网站。</p>
 
@@ -31,7 +31,7 @@
 
 <h2>0x01 Flash CSRF形成的原因</h2>
 
-<hr />
+<hr>
 
 <p>So 官腔我们也打了，还是要干点实事PS：:)</p>
 
@@ -54,7 +54,7 @@ This XML file does not appear to have any style information associated with it. 
 
 <h2>0x02 如何来发现哪些地方存在Flash CSRF</h2>
 
-<hr />
+<hr>
 
 <p>骚年们，前面我们介绍了形成Flash CSRF的原因，我们是不是就可以对站下药了，难道又有一波个人资料被莫名被修改成“狗皮膏药”广告的节奏啊，敬告各位看官，看见了这篇文章之后请检查自己的站是否存在Flash CSRF以免减少被举报而带来的巨额损失啊（吊丝们对各位看官望尘莫及啊）：</p>
 
@@ -63,7 +63,7 @@ This XML file does not appear to have any style information associated with it. 
 <pre><code>http://www.xxx.com/crossdomain.xml
 </code></pre>
 
-<p></br></p>
+<p><br></p>
 
 <pre><code>#!xml
 This XML file does not appear to have any style information associated with it. The document tree is shown below.
@@ -74,7 +74,7 @@ This XML file does not appear to have any style information associated with it. 
 
 <h2>0x02 Flash CSRF可以干些什么</h2>
 
-<hr />
+<hr>
 
 <p>在一个月黑风高的夜晚，Flash CSRF慢慢的在向XX网靠近，下面说说我是怎么找到XX网的Flash CSRF和利用XX网的Flash CSRF直接修改访问者账号信息。</p>
 
@@ -83,7 +83,7 @@ This XML file does not appear to have any style information associated with it. 
 <pre><code>Google hack:crossdomain filetype:xml
 </code></pre>
 
-<p></br></p>
+<p><br></p>
 
 <pre><code>#!xml
 This XML file does not appear to have any style information associated with it. The document tree is shown below.
@@ -98,7 +98,7 @@ This XML file does not appear to have any style information associated with it. 
 
 <h2>0x03 Flash CSRF如何利用</h2>
 
-<hr />
+<hr>
 
 <p>我们找一个可以插入Flash的地方，插入我们自己写的Flash，访客访问我们网页就会执行我们写的脚本，下面我们来看看Flash CSRF具体利用方法。
 So~下面我们来制造一个访客访问我们链接的时候，自动设置自己的密保邮箱：</p>
@@ -106,10 +106,10 @@ So~下面我们来制造一个访客访问我们链接的时候，自动设置�
 <p>首先我们添加保密邮箱点提交，然后抓包分析它提交了什么内容，然后来构造我们的Flash CSRF利用代码,下面我们提交绑定保密邮箱请求，抓包分析它的数据。
 申请保密邮箱，浏览器向服务端发送了一个POST请求，请求地址和参数为：</p>
 
-<pre><code>POST:xxx.xxx.xx/xx.jsp?userid=xxxx&amp;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d5b8b4bcb9e8b1b1b1b195b1b1b1b1fbb6bab8">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code>POST:xxx.xxx.xx/xx.jsp?userid=xxxx&amp;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d5b8b4bcb9e8b1b1b1b195b1b1b1b1fbb6bab8">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a344371247192d452b3247180f471a28462a2e4516284b0c36471c3e460c254a210d440d12461d34443c06453f2e46290244080c451102453f2a4a092f4b0c22f1c6">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>ferer，但是页面验证了Token，所以我们就可以直接把POST数据包中的请求地址，参数名，参数值，Token值取出来用于伪造绑定保密邮箱的请求。</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a344371247192d452b3247180f471a28462a2e4516284b0c36471c3e460c254a210d440d12461d34443c06453f2e46290244080c451102453f2a4a092f4b0c22f1c6">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>ferer，但是页面验证了Token，所以我们就可以直接把POST数据包中的请求地址，参数名，参数值，Token值取出来用于伪造绑定保密邮箱的请求。</p>
 
 <p>利用代码：</p>
 
@@ -142,7 +142,7 @@ package {
             var emailrequest:URLRequest = new URLRequest(emailtargetURL);
             emailrequest.method = URLRequestMethod.POST;
             var postdata:Object = new Array();
-            postdata[0]="<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8af2f2f2f2b7f2f2f2f2caf2f2f2a4e9e9">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&amp;xxxx="+xxxxx&amp;"xxxxx="+xxx;
+            postdata[0]="<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8af2f2f2f2b7f2f2f2f2caf2f2f2a4e9e9">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&amp;xxxx="+xxxxx&amp;"xxxxx="+xxx;
             emailrequest.data = postdata[0];
             sendToURL(emailrequest);
             }
@@ -156,7 +156,7 @@ package {
 
 <h2>0x04 Flash CSRF怎么防御</h2>
 
-<hr />
+<hr>
 
 <p>知道Flash CSRF攻击流程，然后在防御就so easy了~:)</p>
 
@@ -183,7 +183,7 @@ package {
 PS:url=[post请求的地址]&amp;[参数值用&amp;分开]
 </code></pre>
 
-<p>谢谢各位大牛捧场，十分感谢二哥，长短短，PKAV团队的技术栽培 :)~</p>      </p>
+<p>谢谢各位大牛捧场，十分感谢二哥，长短短，PKAV团队的技术栽培 :)~</p>      <p></p>
     
 			</body>
 		</html>

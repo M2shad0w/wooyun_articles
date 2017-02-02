@@ -3,14 +3,14 @@
 			<head>
 			     <title>Python编写shellcode注入程序 - light</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4413">http://drops.wooyun.org/tips/4413</a></h1>
 				
       <p>
-        <h1>0x00 背景</h1>
+        </p><h1>0x00 背景</h1>
 
-<hr />
+<hr>
 
 <p>本文为《小学生科普系列》的番外篇，本系列面向小学生，纯科普，大牛莫喷~</p>
 
@@ -30,7 +30,7 @@
 
 <h1>0x01 准备工作</h1>
 
-<hr />
+<hr>
 
 <p>写python的小程序，light同学推荐性感的Sublime text2 +JEDI（python自动补全插件）。</p>
 
@@ -44,17 +44,17 @@ import urllib2,os;pf='Package Control.sublime-package';ipp=sublime.installed_pac
 
 <p>安装完毕后重启sublime text2，输入Ctrl + Shift + P 然后输入Install Package</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110461871586.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015021110461871586.png" alt="enter image description here"></p>
 
 <p>然后输入“jedi”，回车安装。</p>
 
-<p><img src="http://static.wooyun.org/drops/20141229/2014122903513995261file00027.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014122903513995261file00027.png" alt="enter image description here"></p>
 
 <p>磨刀不误砍柴工，装好插件，我们开始正式撸代码。</p>
 
 <h1>0x02 烹饪开始</h1>
 
-<hr />
+<hr>
 
 <p>原料：win7、python27、sublime text2、msfpayload</p>
 
@@ -138,19 +138,19 @@ print "[*] Remote thread successfully created with a thread ID of: 0x%08x" % thr
 
 <p>后来号基友用ollydbg调试发现shellcode退出时直接exit process，把整个进程都结束了。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110461995881.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015021110461995881.png" alt="enter image description here"></p>
 
 <p>在基友热心帮助下，再参考msfpayload官方文档后顿悟，果断修改EXITFUNC的值为thread（默认为process）：</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110462064801.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015021110462064801.png" alt="enter image description here"></p>
 
 <p>测试成功！</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110462049636.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015021110462049636.png" alt="enter image description here"></p>
 
 <p>最后，我们可以把这个python脚本用py2exe打包成exe可执行文件。有兴趣的话还可以加上UI，做成一个可以定制不同注入类型（dll或代码注入）、注入代码（反向后门或恶作剧程序）的程序。</p>
 
-<p>任何问题或者好的建议请骚扰：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5d2f3232291d6c343a3529733e32">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
+<p>任何问题或者好的建议请骚扰：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5d2f3232291d6c343a3529733e32">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
 
 <p>参考文档：</p>
 
@@ -158,7 +158,7 @@ print "[*] Remote thread successfully created with a thread ID of: 0x%08x" % thr
 
 <p>http://www.offensive-security.com/metasploit-unleashed/Msfpayload</p>
 
-<p>http://www.google.com</p>      </p>
+<p>http://www.google.com</p>      <p></p>
     
 			</body>
 		</html>

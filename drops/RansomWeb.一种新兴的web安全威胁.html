@@ -3,18 +3,18 @@
 			<head>
 			     <title>RansomWeb:一种新兴的web安全威胁 - 大学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4834">http://drops.wooyun.org/papers/4834</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>目前越来越多的人称为勒索软件的受害者，恶意软件会加密你的计算机直到你愿意交保护费，最新的趋势发现，网站已经成为犯罪分子的攻击目标，犯罪软件会加密你的数据库直到你付钱。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150203/201502031440575549611.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/201502031440575549611.png" alt="enter image description here"></p>
 
 <!--more-->
 
@@ -22,7 +22,7 @@
 
 <h1>0x01 守候</h1>
 
-<hr />
+<hr>
 
 <p>2014.12.** 我们的安全专家在一个理财网站上发现一个很有趣的案例:网站一直显示无法连接数据库，而网站管理员收到一封勒索邮件，“给钱，然后我们会给你数据库解锁”。</p>
 
@@ -42,7 +42,7 @@
 
 <h1>0x02 另一个案例</h1>
 
-<hr />
+<hr>
 
 <p>我们一开始相信这是一个针对部分公司进行的apt行为，属于一个特殊的个别案例，不过后来发现我们错了，上周我们又发现一个相似的例子，来自我们的另一个客户。他收到了一个勒索邮件。。。在他的phpbb论坛失灵之后。对于客户来说这个phpBB是一个非常重要的平台，版本还是2014年11月25日发布的phpBB 3.1.2 最新版。</p>
 
@@ -52,7 +52,7 @@
 
 <h2>1. factory.php</h2>
 
-<hr />
+<hr>
 
 <p>函数sql_fetchrow()遭到了修改，在进行sql查询</p>
 
@@ -73,7 +73,7 @@ if(isset($result['user_email'])){
 
 <h2>2. functions_user.php</h2>
 
-<hr />
+<hr>
 
 <p>函数 user_add 经过修改之后 添加数据时会被加密</p>
 
@@ -92,7 +92,7 @@ $sql_ary = array(
 
 <h2>3. cp_activate.php</h2>
 
-<hr />
+<hr>
 
 <p>main 函数遭到修改</p>
 
@@ -107,7 +107,7 @@ $sql_ary = array(
 
 <h2>4. ucp_profile.php</h2>
 
-<hr />
+<hr>
 
 <p>main函数。。。</p>
 
@@ -124,7 +124,7 @@ if (sizeof($sql_ary))
 
 <h2>5. config.php</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!php
 class Cipher { 
@@ -209,7 +209,7 @@ echo "FILES UPDATED!”;
 
 <h1>0x03 结论</h1>
 
-<hr />
+<hr>
 
 <p>我们称这种攻击为 RansomWeb , 我们做了一个简要的分析：</p>
 
@@ -227,7 +227,7 @@ echo "FILES UPDATED!”;
 
 <p>2 在不对网站造成影响的情况下加密极其困难。</p>
 
-<p>3 定期检测更新</p>      </p>
+<p>3 定期检测更新</p>      <p></p>
     
 			</body>
 		</html>

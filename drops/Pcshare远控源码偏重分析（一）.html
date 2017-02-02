@@ -3,16 +3,16 @@
 			<head>
 			     <title>Pcshare远控源码偏重分析（一） - New4</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4412">http://drops.wooyun.org/tips/4412</a></h1>
 				
       <p>
-        <h1>0x00背景</h1>
+        </p><h1>0x00背景</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org/drops/20141230/2014123006340923680file00015.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014123006340923680file00015.png" alt="enter image description here"></p>
 
 <p>PcShare是一款功能强大的远程管理软件，可以在内网、外网任意位置随意管理需要的远程主机，该软件是由国内安全爱好者无可非议开发。在当时这款远控在大家应该比较熟悉了，VC编译器调出来的的小体积全功能木马。相比Delphi的灰鸽子真是碉堡了！</p>
 
@@ -22,7 +22,7 @@
 
 <h1>0x01 代码结构</h1>
 
-<hr />
+<hr>
 
 <p>作者开源的源码包大致目录结构：</p>
 
@@ -69,7 +69,7 @@
 
 <p>我们先看下会员版本配置界面，然后在开始分析。你可以发现会员版本和早期拿到的版本不一样，有一个捆绑文件功能，而这个功能有一个亮点“压缩编码”。想知道？继续看</p>
 
-<p><img src="http://static.wooyun.org/drops/20141230/2014123006373661147file00028.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014123006373661147file00028.png" alt="enter image description here"></p>
 
 <p>PcLKey键盘记录插件 编译文件名：PcLkey.dll
 这款键盘记录插件的特色就是可以记录中文英文等，而且可以尝试记录系统登录密码。服务启动SYSTEM权限的，登陆系统密码记录应该是支持XP/2003的，具体大家测测看。</p>
@@ -284,11 +284,11 @@ typedef struct _PSDLLINFO_
 
 <h1>0x02 多功能的详解</h1>
 
-<hr />
+<hr>
 
 <p>下面看看作者的debug版本调试用的代码，更形象一些。主要数据就是上线地址、端口、安装服务名称、服务显示名称、服务描述、上线分组、备注、重连超时、软件版本、上线密码等等</p>
 
-<p><img src="http://static.wooyun.org/drops/20141230/2014123006453981531file00037.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014123006453981531file00037.png" alt="enter image description here"></p>
 
 <p>下面这段代码可以看得出会员版本和普通版本区别，</p>
 
@@ -298,7 +298,7 @@ typedef struct _PSDLLINFO_
 
 <p>3、会员版本直接带完整控制插件DLL，免费版会先建立TCP连接传输控制插件（就是小马带大马减小体积），这个后续在提到。</p>
 
-<p><img src="http://static.wooyun.org/drops/20141230/2014123006462425945file00047.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014123006462425945file00047.png" alt="enter image description here"></p>
 
 <p>PcStart还有三处值得注意的亮点：</p>
 
@@ -382,7 +382,7 @@ BYTE* GetCmdType()
 
 <p>验证：</p>
 
-<p><img src="http://static.wooyun.org/drops/20141230/2014123006520997358file00057.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014123006520997358file00057.png" alt="enter image description here"></p>
 
 <p>3 运行成功后加密配置数据修改DLL 文件，生成一段随机作为Key。数据和Key异或加密存储，放在PE空区段里面。Pcshare多次利用空区段存放数据，用的时候在找标记“PS_VER_ULONGLONG”找大小在读取出来，避免“资源文件存文件”、“附加数据存文件”等传统捆绑打包和携带配置文件的方式，被杀毒启发式扫描检测出来。</p>
 
@@ -504,13 +504,13 @@ BOOL MyMainFunc::GetFileSaveInfo(LPVOID pInfoData, DWORD nInfoLen, HINSTANCE hIn
 
 <p>验证方法：16进制编辑工具搜索16进制“7856341278563412”</p>
 
-<p><img src="http://static.wooyun.org/drops/20141230/2014123006572638957file00065.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014123006572638957file00065.png" alt="enter image description here"></p>
 
 <p>Ollydbg调试印证：</p>
 
-<p><img src="http://static.wooyun.org/drops/20141230/2014123006582426715file00074.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014123006582426715file00074.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20141230/2014123006584898242file00084.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014123006584898242file00084.png" alt="enter image description here"></p>
 
 <pre><code>#!c++
 #define PS_ENTRY_COMM_KEY       0xf7                //简单异或
@@ -557,7 +557,7 @@ void CMyClientTran::EncryptByte(LPVOID pData, DWORD nLen)
 
 <p>连接控制端成功后发送软件版本和上线密码（传输的数据使用异或F7加密，有点弱爆的感觉。），然后从主控端下载控制插件。</p>
 
-<p><img src="http://static.wooyun.org/drops/20141230/2014123006594716598file00094.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014123006594716598file00094.png" alt="enter image description here"></p>
 
 <pre><code>#!c++
 void CMyWorkMoudle::MakeModFileMd5(LPCTSTR pFileName, BYTE* sMd5Str)
@@ -640,11 +640,11 @@ HMODULE CMyWorkMoudle::GetModFile(char* pFilePath, UINT nCmd)
 
 <h1>0x03 文章小结</h1>
 
-<hr />
+<hr>
 
 <p>Pcshare这款远控的代码规范方面还是比较工整的，代码缩进而且还有大量注释。非常适合初学入门和二次开发。据说早期有HTTP协议的版本但是现在代码丢失了，可惜了这款2010款是TCP版本对企业防火墙穿墙能力有限。比较有特色的思路：1、LZW编码压缩 2、改PE的DOS头“This”给文件做标记 3、利用空区段存放数据，看得出作者对安装用的EXE处理上花了不少功夫。</p>
 
-<p>PcMain 主功能控制插件、PcShare 主控程序带界面将在第2篇中在分析，预知后事如何,请听下回分解。</p>      </p>
+<p>PcMain 主功能控制插件、PcShare 主控程序带界面将在第2篇中在分析，预知后事如何,请听下回分解。</p>      <p></p>
     
 			</body>
 		</html>

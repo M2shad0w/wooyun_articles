@@ -3,18 +3,18 @@
 			<head>
 			     <title>儿童智能手表行业安全问题报告 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/9164">http://drops.wooyun.org/papers/9164</a></h1>
 				
       <p>
-        <p><strong>Wooyun &amp; NumenTeam 联合出品</strong></p>
+        </p><p><strong>Wooyun &amp; NumenTeam 联合出品</strong></p>
 
 <h1>0x00 引子</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092312592771695pic127.png" alt="" /></p>
+<p><img src="../images_result/images/2015092312592771695pic127.png" alt=""></p>
 
 <p>这是来自美剧《网络犯罪调查》的一张截图，讲述的是黑客通过入侵了数万家庭婴儿监控摄像头，分析家庭的作息时间，在合适的时机偷出需要的婴儿，并实时进行全球在线拍卖的故事。</p>
 
@@ -24,11 +24,11 @@
 
 <h1>0x01 背景</h1>
 
-<hr />
+<hr>
 
 <p>以Apple Watch为代表的智能手表行业的兴起，带起了智能穿戴设备的一波高潮。当这类技术和特定的人群结合，就形成了各种细分市场，比如老人手表、运动手表、儿童手表。由于开学季，近几个月来，儿童智能手表的市场呈现出爆发的姿势，行业月出货量达到百万以上。家长们也纷纷愿意为这个新产品买单，以期收获一份安心。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092312592939228pic214.png" alt="" /></p>
+<p><img src="../images_result/images/2015092312592939228pic214.png" alt=""></p>
 
 <p>这个现象引起了专注智能硬件安全的NumenTeam（<a href="http://numen-team.org">http://numen-team.org</a>）团队的注意，凭着过往的积累，我们敏锐地感知到，大量涌入的手表厂商，同时也携带了大量的安全问题进入这个领域。孩子是一个家庭的希望，可以说孩子的安全是一个家庭最重要的事情，其重要性远远超过隐私泄漏、财产被盗这类传统安全关注的问题。</p>
 
@@ -108,7 +108,7 @@
   </tr>
 </table>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092312593194094pic312.png" alt="" /></p>
+<p><img src="../images_result/images/2015092312593194094pic312.png" alt=""></p>
 
 <p>市面上的儿童智能手表一般主打以下几个卖点：</p>
 
@@ -123,7 +123,7 @@
 
 <h1>0x02 研究方法</h1>
 
-<hr />
+<hr>
 
 <p>如果从专业的安全角度来说，评测智能手表会涉及到很多细节问题，比如APP安全、Web安全、固件安全等。为了简化研究过程，本文从下面四个关键维度的结论来评估手表的安全风险：</p>
 
@@ -138,7 +138,7 @@
 
 <h1>0x03 结论数据</h1>
 
-<hr />
+<hr>
 
 <p>通过对各款手表的通信协议和指令系统进行分析和模拟，我们得到的结论非常不乐观。大部分儿童智能手表存在上面提到的一个或多个安全风险。有些品牌甚至全中，对此我们表示非常担忧。</p>
 
@@ -154,7 +154,7 @@
 
 <p>原因：部分品牌的后台查询接口，权限控制不严格，通过构造指令可以直接查询到其他手表的定位信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092312591931145fig12.png" alt="" /></p>
+<p><img src="../images_result/images/2015092312591931145fig12.png" alt=""></p>
 
 <h2>2、监听其他儿童</h2>
 
@@ -166,7 +166,7 @@
 
 <p>原因：部分品牌在处理监听请求时，没有限制只有来自父母的请求才接受，导致可被黑客监听。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092312592085320fig22.png" alt="" /></p>
+<p><img src="../images_result/images/2015092312592085320fig22.png" alt=""></p>
 
 <h2>3、切断家长和孩子的联系</h2>
 
@@ -178,7 +178,7 @@
 
 <p>原因：部分品牌后台修改用户信息的接口存在权限控制问题，可以通过特定的方式修改他人帐号信息和密码，导致父母无法登录。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092312592278419fig32.png" alt="" /></p>
+<p><img src="../images_result/images/2015092312592278419fig32.png" alt=""></p>
 
 <h2>4、精确匹配家长和儿童</h2>
 
@@ -186,7 +186,7 @@
 
 <p>原因：部分品牌的数据查询接口暴露了过多信息，可能包括家长和孩子的手机号，导致可以做到精确匹配。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092312592346565fig4.png" alt="" /></p>
+<p><img src="../images_result/images/2015092312592346565fig4.png" alt=""></p>
 
 <h2>5、详细结论</h2>
 
@@ -545,11 +545,11 @@
   </tr>
 </table>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092312592523714graph3.png" alt="" /></p>
+<p><img src="../images_result/images/2015092312592523714graph3.png" alt=""></p>
 
 <h1>0x04 细节举隅</h1>
 
-<hr />
+<hr>
 
 <h2>1. 越权查询</h2>
 
@@ -557,11 +557,11 @@
 
 <p>例如调用某款智能手表的reqDeviceInfo指令，修改参数 device_id。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092312593394136pic410.png" alt="" /></p>
+<p><img src="../images_result/images/2015092312593394136pic410.png" alt=""></p>
 
 <p>就可以拿到非常敏感的信息，包括家长和孩子的手机号、头像等。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092312593578355pic510.png" alt="" /></p>
+<p><img src="../images_result/images/2015092312593578355pic510.png" alt=""></p>
 
 <h2>2. 设备遍历</h2>
 
@@ -569,11 +569,11 @@
 
 <p>下图是从某厂商的数据接口中读出的部分定位数据：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092312593931587pic611.png" alt="" /></p>
+<p><img src="../images_result/images/2015092312593931587pic611.png" alt=""></p>
 
 <p>上面的简单数据或许不会感觉太明显。为了直观表示，这里抽取了部分定位数据，绘制了京津唐地区的实时监控数据图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150923/2015092312594479849pic710.png" alt="" /></p>
+<p><img src="../images_result/images/2015092312594479849pic710.png" alt=""></p>
 
 <p>可以看到，黑客完全可以绘制一张实时地图，来监控全国各地的孩子们，细思极恐。</p>
 
@@ -581,13 +581,13 @@
 
 <h1>0x05 结语</h1>
 
-<hr />
+<hr>
 
 <p>限于研究时间的关系，上面的数据可能只是部分产品的一部分问题而已。还有更多的其他智能产品在让我们享受更便利生活的同时，在源源不断的泄露隐私，导致可能的安全风险。后续相关问题我们也会持续提交到乌云平台，为产业的安全能力提升贡献力量。</p>
 
 <p>作为安全研究人员同时也是一个普通父亲，我们对此现状感到非常担忧。仿佛看到千千万万的孩子处于危险。虽然我们倾向于认为人贩子不会拥有这样的视野和技术，但是在未来的高科技犯罪场景下一切皆有可能。</p>
 
-<p>对此，我们NumenTeam团队也在积极打造相关的安全服务和产品，希望能帮助安全能力不足的企业，一起努力提升这个行业的安全性，希望引子里的场景仅仅存在于电视剧而已。</p>      </p>
+<p>对此，我们NumenTeam团队也在积极打造相关的安全服务和产品，希望能帮助安全能力不足的企业，一起努力提升这个行业的安全性，希望引子里的场景仅仅存在于电视剧而已。</p>      <p></p>
     
 			</body>
 		</html>

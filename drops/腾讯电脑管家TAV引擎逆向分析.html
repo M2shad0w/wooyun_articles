@@ -3,14 +3,14 @@
 			<head>
 			     <title>腾讯电脑管家TAV引擎逆向分析 - Variable</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4931">http://drops.wooyun.org/tips/4931</a></h1>
 				
       <p>
-        <h1>0x00 背景</h1>
+        </p><h1>0x00 背景</h1>
 
-<hr />
+<hr>
 
 <p>about me：写过外挂，做过破解，对电脑管家也有比较长时间的逆向分析积累，现在整理下投出来，求邀请码和WB。</p>
 
@@ -24,65 +24,65 @@
 
 <h1>0x01 结构与功能初析</h1>
 
-<hr />
+<hr>
 
 <p>引擎结构和功能如下。不难看出，TAV引擎属于基础的传统特征引擎。特征数量较少，与主流杀软相比还处于初级阶段。</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301312237197.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301312237197.png" alt=""></p>
 
 <h2>1. 引擎内部功能一览</h2>
 
-<hr />
+<hr>
 
 <h3>内存扫描</h3>
 
 <p>匹配指定的进程和内存串，如果匹配到就终止进程</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301312370299.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301312370299.png" alt=""></p>
 
 <h3>匹配文件是否存在</h3>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301312324510.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301312324510.png" alt=""></p>
 
 <h3>创建一个和病毒相同的互斥体，防止病毒再次运行</h3>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301312494462.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301312494462.png" alt=""></p>
 
 <h3>内存清理</h3>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301312614681.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301312614681.png" alt=""></p>
 
 <h3>解包</h3>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301312669078.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301312669078.png" alt=""></p>
 
 <h3>字符串多模式匹配</h3>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301312723227.png" alt="" />  </p>
+<p><img src="../images_result/images/2015021301312723227.png" alt="">  </p>
 
 <h3>虚拟机:</h3>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301312926806.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301312926806.png" alt=""></p>
 
 <p>模拟了ntdll、kernel32、gdi32、user32、advapi32、shell32、wsock32、ole32、oleaut32、msvcrt、version、urlmon这几个系统DLL</p>
 
-<p>对于不常用的API采用同一个函数统一处理： <img src="http://static.wooyun.org/20150213/2015021301313015091.png" alt="" /></p>
+<p>对于不常用的API采用同一个函数统一处理： <img src="../images_result/images/2015021301313015091.png" alt=""></p>
 
-<p>对于关键函数，使用单独的模拟代码实现： <img src="http://static.wooyun.org/20150213/2015021301313154979.png" alt="" /></p>
+<p>对于关键函数，使用单独的模拟代码实现： <img src="../images_result/images/2015021301313154979.png" alt=""></p>
 
 <h2>2. 病毒库分析：</h2>
 
-<hr />
+<hr>
 
 <h3>A).病毒库算法:</h3>
 
 <p>只是简单的ZLIB。</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301313161327.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301313161327.png" alt=""></p>
 
 <p>解密后内容如下：</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301313275178.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301313275178.png" alt=""></p>
 
 <h3>B). 病毒库结构:</h3>
 
@@ -98,7 +98,7 @@ structVirInfo
 
 <p>特征数量整体非常少，以PE为例只有8135条特征。分布见下图。从特征分布和类型来看，TAV主要查杀目标为外挂、盗号程序。对于动辄百万级规模的恶意程序家族其实只覆盖了冰山一角，远远达不到一个杀毒引擎的程度，仅仅停留在外挂、盗号专杀的层面。更让人捉急的是TAV维护了大量的脱壳解包特征，直接暴露了开发者框架设计方面的缺陷。与此形成鲜明对比的是国际知名的卡巴和BD引擎，通常在一个“膨胀”的过程中，维护较多的同家族特征，随后再在“收缩”过程中，用一条obj通杀，显得章法自如、张弛有度。</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301313341192.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301313341192.png" alt=""></p>
 
 <h3>D). 病毒库更新：</h3>
 
@@ -110,11 +110,11 @@ structVirInfo
 
 <h1>0x02 PE查杀过程逆向分析：</h1>
 
-<hr />
+<hr>
 
 <h2>1.病毒库描述：</h2>
 
-<hr />
+<hr>
 
 <p>virpeXX.def：（PE库）</p>
 
@@ -136,7 +136,7 @@ struct VirpeHeader
 };
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>#!c++
 struct Sig //特征结构
@@ -151,7 +151,7 @@ BYTE btVirMask[btLength];//病毒特征具体内容
 
 <h2>2. 静态查杀方式：</h2>
 
-<hr />
+<hr>
 
 <h3>a). 二进制全文匹配。（二进制特征存放在virpe01.def库解密后的tbl5中）</h3>
 
@@ -163,13 +163,13 @@ BYTE btVirMask[btLength];//病毒特征具体内容
 
 <h2>3. 静态扫描流程：</h2>
 
-<hr />
+<hr>
 
-<p>见下图 <img src="http://static.wooyun.org/20150213/2015021301313463841.png" alt="" /></p>
+<p>见下图 <img src="../images_result/images/2015021301313463841.png" alt=""></p>
 
 <h2>4. 设计缺陷分析：</h2>
 
-<hr />
+<hr>
 
 <p>传统杀软最容易出现的几个问题：效率低、体积庞大、对抗门槛低。这几个问题在TAV身上尤为明显。只是现阶段TAV特征数量极低，暂时未大规模展现而已。</p>
 
@@ -185,7 +185,7 @@ BYTE btVirMask[btLength];//病毒特征具体内容
 
 <p>匹配代码在内存中明文存在。</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301313553446.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301313553446.png" alt=""></p>
 
 <p>使得无论木马作者通过分析病毒库来免杀还是通过MYCCL等黑客工具进行黑盒免杀都极为容易。</p>
 
@@ -193,7 +193,7 @@ BYTE btVirMask[btLength];//病毒特征具体内容
 
 <p>下图为TAV的TOP50特征，可见出现大量重复二进制。特征之间基本无复用。</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301313525664.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301313525664.png" alt=""></p>
 
 <p><strong>例：Virus.Win32.DiskGen</strong></p>
 
@@ -204,87 +204,87 @@ BYTE btVirMask[btLength];//病毒特征具体内容
 <pre><code>18 8B 8E 30 0A 00 00 03 C8 40 40 8A 11 F6 D2 88 11 3B 05 3F 3F 3F 3F 7C
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301313669773.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301313669773.png" alt=""></p>
 
 <p>特征含义是病毒自解密代码</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301313741299.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301313741299.png" alt=""></p>
 
 <p>尽管使用了索引复用，但并没有优化。从病毒库中可以看到，这条相同的特征出现了20次。也就意味着，为了匹配这个家族的所有变种，当前待扫描文件需要扫描20次才行。因为目前TAV特征只有数千条，效率低下的问题感受不明显，倘若哪天TAV特征达到竞品平均水平的数百万条，不难想象扫描一个文件将会是何等的慢。</p>
 
 <h1>0x03 其他类型分析：</h1>
 
-<hr />
+<hr>
 
 <p>virscrXX.def：脚本库，直接存储的字符串，用于挂马的查杀。为了避免误报自身内存，采用了异或的方式，将特征加载到内存中。</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301313862353.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301313862353.png" alt=""></p>
 
 <p>virdexXX.def：安卓特征库</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301313939932.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301313939932.png" alt=""></p>
 
 <p>virsrcXX.def：脚本库，用于查杀HTML\JAVA\PDF\OLE\JS\NSIS</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301313937362.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301313937362.png" alt=""></p>
 
 <p>vircmpinfo.def：壳、编译器识别</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301314042932.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301314042932.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301314165956.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301314165956.png" alt=""></p>
 
 <p> </p>
 
 <h1>0x04 实战对抗</h1>
 
-<hr />
+<hr>
 
 <h2>1.TAV虚拟机对抗</h2>
 
-<hr />
+<hr>
 
 <p>当文件被加UPX壳后，会调用GetProcAddress动态获得API地址，TAV可以模拟GetProcAddress的结果，并且可以执行到下一条EIP所在位置，使得程序能够正常模拟下去，而不至于触发异常返回。</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301314119054.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301314119054.png" alt=""></p>
 
 <p>文件的真实调试结果：</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301314440004.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301314440004.png" alt=""></p>
 
 <p>不过TAV的虚拟执行能力比较弱，比较适用于对压缩壳进行脱壳，如常见的UPX壳，而对于动态行为查杀却无能为力。</p>
 
 <p>比如某个非常简单的Downloader木马，作者调用了URLDownloadToFileW下载一个木马，然后调用WinExec执行木马。整个过程非常简单，只用到2个Windows API，并且没有额外的代码来对抗虚拟机，而TAV引擎却无法查杀：</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301314559912.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301314559912.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301314640068.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015021301314640068.jpg" alt=""></p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301314683354.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015021301314683354.jpg" alt=""></p>
 
 <p>同样的样本，扫描对比国外知名杀软，则可以通过虚拟机动态检出</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301314748669.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301314748669.png" alt=""></p>
 
 <h2>2.MYCCL黑盒对抗：</h2>
 
-<hr />
+<hr>
 
 <p>以某盗QQ木马测试。</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301314845627.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301314845627.png" alt=""></p>
 
 <p>特征码地址如下：</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301315081606.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301315081606.png" alt=""></p>
 
 <p>使用C32ASM查看特征码：</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301315075866.png" alt="" /></p>
+<p><img src="../images_result/images/2015021301315075866.png" alt=""></p>
 
 <p>随便改改：</p>
 
-<p><img src="http://static.wooyun.org/20150213/2015021301315115926.png" alt="" /></p>      </p>
+<p><img src="../images_result/images/2015021301315115926.png" alt=""></p>      <p></p>
     
 			</body>
 		</html>

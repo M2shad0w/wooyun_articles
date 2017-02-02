@@ -3,16 +3,16 @@
 			<head>
 			     <title>转储活动目录数据库凭证的方法总结 - Her0in</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/pentesting/12020">http://drops.wooyun.org/pentesting/12020</a></h1>
 				
       <p>
-        <p><strong>原文地址：</strong> <a href="https://adsecurity.org/?p=2398">https://adsecurity.org/?p=2398</a></p>
+        </p><p><strong>原文地址：</strong> <a href="https://adsecurity.org/?p=2398">https://adsecurity.org/?p=2398</a></p>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>ADS 的大牛发表的文章都堪称佳作，值得仔细拜读，遂花了点时间对全文进行了翻译，以飨各位。</p>
 
@@ -42,7 +42,7 @@
 
 <h1>0x01 远程执行命令方式</h1>
 
-<hr />
+<hr>
 
 <p>有几种不同的方式可以在域控制器上远程执行命令，假设它们已经有了相应的执行权限。最可靠的远程执行方法包括两种 PowerShell（利用 WinRM ）和 WMI。</p>
 
@@ -72,16 +72,16 @@ New-PSSession -Name PSCOMPUTER –ComputerName $COMPUTER; Enter-PSSession -Name 
 
 <h1>0x02 Active Directory 数据库文件（NTDS.DIT）</h1>
 
-<hr />
+<hr>
 
 <p>Active Directory 域数据库存储在 <a href="https://technet.microsoft.com/en-us/library/cc961761.aspx">Ntds.dit</a> 文件中（默认存放在 C:\WINDOWS\NTDS 中，但一般是在不同的逻辑驱动器上的）。 AD 数据库是一个使用了<a href="https://en.wikipedia.org/wiki/Extensible_Storage_Engine">可扩展存储引擎（ESE）</a> 的 <a href="https://en.wikipedia.org/wiki/Microsoft_Jet_Database_Engine">Jet 数据库引擎</a>，它提供了数据存储和索引服务; ESE 级别的索引使得对象的属性能够快速定位。 ESE 确保数据库符合 <a href="https://en.wikipedia.org/wiki/ACID">ACID</a>（原子性，一致性，隔离性和持久性）即 在一个事务中的所有操作要么全部完成要么全部不完成。AD 的 ESE 数据库是非常快速且可靠的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/20160110152710438951.gif" alt="p1" /></p>
+<p><img src="../images_result/images/20160110152710438951.gif" alt="p1"></p>
 
 <p>注：微软同样使用了 Jet 数据库作为 Exchange 的邮箱数据库。</p>
 
-<p>Active Directory 将 Ntds.dit 文件的一部分加载到了内存（已被 LSASS 进程保护）中，并且缓存时使用了基于 LRU-K 的算法，以确保被频繁访问的数据是在内存中的，这样可以提高性能，并且能够提高二次读取的性能。数据库的更改会在内存中执行，写入事务日志，之后会有一个缓慢的提交到数据库文件的过程。check point 文件（edb.chk）将会跟踪到事务写入操作点。这个有点类似于指针的操作。<br />
-“<a href="https://technet.microsoft.com/en-us/library/cc772829(v=ws.10).aspx">版本存储</a>”是一个对象实例的副本，这使得数据从内存中被读取时，更新操作可以在不改变被读取的数据（ESE事务处理视图）的前提下进行读取。一旦读取操作完成，该版本存储的实例也将结束。<br />
+<p>Active Directory 将 Ntds.dit 文件的一部分加载到了内存（已被 LSASS 进程保护）中，并且缓存时使用了基于 LRU-K 的算法，以确保被频繁访问的数据是在内存中的，这样可以提高性能，并且能够提高二次读取的性能。数据库的更改会在内存中执行，写入事务日志，之后会有一个缓慢的提交到数据库文件的过程。check point 文件（edb.chk）将会跟踪到事务写入操作点。这个有点类似于指针的操作。<br>
+“<a href="https://technet.microsoft.com/en-us/library/cc772829(v=ws.10).aspx">版本存储</a>”是一个对象实例的副本，这使得数据从内存中被读取时，更新操作可以在不改变被读取的数据（ESE事务处理视图）的前提下进行读取。一旦读取操作完成，该版本存储的实例也将结束。<br>
 Active Directory 包括<a href="https://technet.microsoft.com/en-us/library/cc961591.aspx">三个目录分区：域，配置和架构</a>，这是数据库数据最精简的抽象视图。 Ntds.dit 文件包括<a href="https://technet.microsoft.com/en-us/library/cc772829(v=ws.10).aspx">三个主要的表：数据表，链接表，以及 SD 表</a>。</p>
 
 <h3>数据表</h3>
@@ -102,9 +102,9 @@ Active Directory 包括<a href="https://technet.microsoft.com/en-us/library/cc96
 
 <h1>0x03 Active Directory 中的密码哈希使用的加密方式</h1>
 
-<hr />
+<hr>
 
-<p>Csaba Barta（<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0e6d7d6f6c6f206c6f7c7a6f4e69636f6762206d6163">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>）于2011年7月 发表过一份白皮书 —— “<a href="http://www.ntdsxtract.com/downloads/ActiveDirectoryOfflineHashDumpAndForensics.pdf"> Active Directory 的 HASH 离线转储和取证分析技术</a>”。</p>
+<p>Csaba Barta（<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0e6d7d6f6c6f206c6f7c7a6f4e69636f6762206d6163">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>）于2011年7月 发表过一份白皮书 —— “<a href="http://www.ntdsxtract.com/downloads/ActiveDirectoryOfflineHashDumpAndForensics.pdf"> Active Directory 的 HASH 离线转储和取证分析技术</a>”。</p>
 
 <p>需要注意的是在前一个列表中，有很多被描述为加密的字段，加密的目的是提供保护，防止数据被离线提取。</p>
 
@@ -126,7 +126,7 @@ Active Directory 包括<a href="https://technet.microsoft.com/en-us/library/cc96
 
 <p>该字段的值的长度是 76 个字节（二进制数据）。值的结构如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015271241906223.png" alt="p2" /></p>
+<p><img src="../images_result/images/2016011015271241906223.png" alt="p2"></p>
 
 <p>解密后得到的 PEK 的值可以分为两部分。跳过前 36 字节（因此实际上 PEK 密钥的长度只有 16 个字节）。</p>
 
@@ -156,13 +156,13 @@ hash = d1.decrypt(denc_hash[:8]) + d2.decrypt(denc_hash[8:])
 
 <h1>0x04 缓和措施</h1>
 
-<hr />
+<hr>
 
 <p>最好的缓解措施是防止攻击者能够获得域控制器中相关文件的访问权限。在这篇文章中——“<a href="https://adsecurity.org/?p=2362">在 Active Directory 域中获得管理员权限的攻击方法</a>”涵盖了保护管理员凭据的方法。</p>
 
 <h1>0x05 使用 VSS 卷影副本远程读取 ntds.dit（通过 WMI or PowerShell 远程管理）</h1>
 
-<hr />
+<hr>
 
 <p>在 Windows 中有内置的管理组件—— WMI，允许远程执行命令（需要管理员权限）。 WMIC 是 WMI 的命令行工具，可以在远程计算机上执行命令。</p>
 
@@ -170,29 +170,29 @@ hash = d1.decrypt(denc_hash[:8]) + d2.decrypt(denc_hash[8:])
 
 <p>利用 WMIC （或者是 PowerShell 远程管理）创建（或 copy 已存在的）VSS。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015271362254317.png" alt="p3" /></p>
+<p><img src="../images_result/images/2016011015271362254317.png" alt="p3"></p>
 
 <p>当 VSS 快照完成后，我们就可以从 VSS 中将 NTDS.dit 文件和 注册表中的 System hive 复制到域控制器的 C 盘中。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015271586585419.png" alt="p4" /></p>
+<p><img src="../images_result/images/2016011015271586585419.png" alt="p4"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015271644814516.png" alt="p5" /></p>
+<p><img src="../images_result/images/2016011015271644814516.png" alt="p5"></p>
 
 <p>之后就可以将域控制器中 <code>c:\\temp</code> 目录的文件复制到本地的计算机中。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015271878646613.png" alt="p6" /></p>
+<p><img src="../images_result/images/2016011015271878646613.png" alt="p6"></p>
 
 <p>上图中显示了攻击者使用 Mimikatz 获取的明文密码，进行远程连接操作。不过，就算我们没有密码又有什么关系呢？</p>
 
 <p>攻击者可以通过 WMIC 传递 Kerberos 票证同样可以进行远程连接操作。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015271955729712.png" alt="p7" /></p>
+<p><img src="../images_result/images/2016011015271955729712.png" alt="p7"></p>
 
 <p>需要注意的是在较新版本的 Windows 中 WMIC 已经有些过时了。 PowerShell 提供了 Invoke-WMIMethod cmdlet 可以执行相同的功能。</p>
 
 <h1>0x06 使用 NTDSUtil 创建 IFM 抓取 DC 本地的Ntds.dit文件 （VSS 卷影复制）</h1>
 
-<hr />
+<hr>
 
 <p>NTDSUTIL 是一个命令行实用程序，在本地工作时需要 AD 数据库（NTDS.DIT）并支持为 DCPROMO 创建 IFM 。DCPROMO 将使用 IFM 以“从媒体介质中安装”，这样服务器就不需要通过网络从另一台 DC 上复制域数据。</p>
 
@@ -206,13 +206,13 @@ ntdsutil “ac i ntds” “ifm” “create full c:\temp” q q
 
 <p>该文件可能存储在一个正在 promot 的新的 DC 的共享文件夹中，也可能出现在还没有 promot 的新的服务器上。此服务器可能无法确保IFM 数据的安全，包括复制 Ntds.dit 文件并提取凭证数据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015272095138812.png" alt="p8" /></p>
+<p><img src="../images_result/images/2016011015272095138812.png" alt="p8"></p>
 
 <p>这个命令也可以通过 WMI 或 PowerShell 远程执行。</p>
 
 <h1>0x07 使用 PowerSploit 的 Invoke-NinjaCopy 远程读取 ntds.dit（需要目标 DC 启用 PowerShell 远程管理）</h1>
 
-<hr />
+<hr>
 
 <p><a href="https://github.com/PowerShellMafia/PowerSploit/blob/master/Exfiltration/Invoke-NinjaCopy.ps1">Invoke-NinjaCopy</a> 是一个 PowerShell 函数，可以利用 PowerShell 远程管理复制远程计算机的文件（需要目标 DC 启用 PowerShell 远程管理）。</p>
 
@@ -250,7 +250,7 @@ Invoke-NinjaCopy -Path “c:\windows\ntds\ntds.dit” -ComputerName “RDLABDC02
 
 <p>从正在运行的系统中抓取文件时，我必须对 Ntds.dit 文件进行“拍摄快照”以便纠正错误。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/201601101527225858894.jpg" alt="p9" /></p>
+<p><img src="../images_result/images/201601101527225858894.jpg" alt="p9"></p>
 
 <p>注意:</p>
 
@@ -258,7 +258,7 @@ Invoke-NinjaCopy -Path “c:\windows\ntds\ntds.dit” -ComputerName “RDLABDC02
 
 <h1>0x08 在 DC 中使用 Mimikatz 转储 Active Directory 凭据</h1>
 
-<hr />
+<hr>
 
 <p>一般情况下服务帐户就是域管理员组（或同等权限）的成员或者攻击者从域管理员最近登录到的计算机中 dump 出登录凭证。使用这些凭据，攻击者可以访问域控制器，并可以得到所有的域凭据，其中包括用于创建 Kerberos 的黄金票证的 KRBTGT 帐户的 NTLM 哈希值。</p>
 
@@ -280,11 +280,11 @@ mimikatz lsadump::lsa /inject exit
 
 <p>UID 为 502 的帐户是 KRBTGT 帐户 与 RID 为 500 的帐户一样都是域中默认的管理员。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/20160110152723794021013.png" alt="p10" /></p>
+<p><img src="../images_result/images/20160110152723794021013.png" alt="p10"></p>
 
 <h1>0x09 在 DC 中使用 Invoke-Mimikatz 转储 Active Directory 凭据</h1>
 
-<hr />
+<hr>
 
 <p><a href="https://github.com/PowerShellMafia/PowerSploit/blob/master/Exfiltration/Invoke-Mimikatz.ps1">Invoke-Mimikatz</a> 是 <a href="https://github.com/PowerShellMafia/PowerSploit">PowerSploit</a> 的一部分，由 Joe Bialek (<a href="https://twitter.com/JosephBialek">@JosephBialek</a>) 编写，在一个 Powershell 函数中整合了 Mimikatz 的所有功能。它利用 Mimikatz 2.0 和 Invoke-ReflectivePEInjection 在内存中反射式的加载了 Mimikatz 的全部代码。这使得你在转储凭证时无需写入 Mimikatz 的二进制数据到磁盘中。</p>
 
@@ -310,14 +310,14 @@ Invoke-Mimikatz -Command ‘”privilege::debug” “LSADump::LSA /inject” ex
 
 <p>在域控制器上运行并转储 Active Directory 的域凭证数据是需要使用 debug 模式获取本地管理员权限或者系统权限进行访问。</p>
 
-<p>注意：<br />
+<p>注意：<br>
 UID 为 502 的帐户是 KRBTGT 帐户 与 RID 为 500 的帐户一样都是域中默认的管理员。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015272562421112.jpg" alt="p11" /></p>
+<p><img src="../images_result/images/2016011015272562421112.jpg" alt="p11"></p>
 
 <h1>0x0A 使用 Invoke-Mimikatz 远程转储 Active Directory 凭据 ( 通过 PowerShell 远程管理)</h1>
 
-<hr />
+<hr>
 
 <p>命令:</p>
 
@@ -327,11 +327,11 @@ Invoke-Mimikatz -Command '"privilege::debug" "LSADump:LSA /inject"' -Computer RD
 
 <p>下面这个这个示例是从外网下载并完全是在内存中执行代码，然后执行 Invoke-Mimikatz 。如果攻击者已经拿到了域管理员已登录的主机，那么在这种情况下会很有效，从而使攻击者可以将 Active Directory 数据库文件从域控制器复制到主机中，然后上传到外网。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015272726246123.jpg" alt="p12" /></p>
+<p><img src="../images_result/images/2016011015272726246123.jpg" alt="p12"></p>
 
 <h1>0x0B 使用 Mimikatz 的 DCSync 功能远程转储 Active Directory 凭据</h1>
 
-<hr />
+<hr>
 
 <p>在 2015 年八月, Mimikatz 加入了一个新的特性—— “DCSync”，可以有效地“假冒”一个域控制器，并可以向目标域控制器请求帐户密码数据。</p>
 
@@ -386,15 +386,15 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:rd.adsecurity.org /user:Adm
 Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:adsdc03$" exit
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015272915776132.jpg" alt="p13" /></p>
+<p><img src="../images_result/images/2016011015272915776132.jpg" alt="p13"></p>
 
 <p>如果帐户启用了 “可逆加密”，则会显示明文密码。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160110/2016011015273257278141.jpg" alt="p14" /></p>
+<p><img src="../images_result/images/2016011015273257278141.jpg" alt="p14"></p>
 
 <h1>0x0C 参考及引用</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="https://adsecurity.org/?page_id=1352">Sean Metcalf’s Presentations on Active Directory Security</a></li>
@@ -407,7 +407,7 @@ Mimikatz "privilege::debug" "lsadump::dcsync /domain:lab.adsecurity.org /user:ad
 <li><a href="https://github.com/PowerShellMafia/PowerSploit">PowerShellMafia’s PowerSploit offensive PowerShell tools on Github</a></li>
 <li>Joe Bialek’s (<a href="https://twitter.com/JosephBialek">@JosephBialek</a>) <a href="https://clymb3r.wordpress.com/2013/06/13/using-powershell-to-copy-ntds-dit-registry-hives-bypass-sacls-dacls-file-locks/">his blog post about Invoke-NinjaCopy</a></li>
 <li><a href="https://github.com/yosqueoy/ditsnap">DIT Snapshot Viewer</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

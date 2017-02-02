@@ -3,16 +3,16 @@
 			<head>
 			     <title>逆向被虚拟机所保护的二进制文件 - 左懒</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/9616">http://drops.wooyun.org/tips/9616</a></h1>
 				
       <p>
-        <p>From: <a href="http://resources.infosecinstitute.com/reverse-engineering-virtual-machine-protected-binaries/">http://resources.infosecinstitute.com/reverse-engineering-virtual-machine-protected-binaries/</a></p>
+        </p><p>From: <a href="http://resources.infosecinstitute.com/reverse-engineering-virtual-machine-protected-binaries/">http://resources.infosecinstitute.com/reverse-engineering-virtual-machine-protected-binaries/</a></p>
 
 <h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>在代码混淆当中，虚拟机被用于在一个程序上运行不同机器指令集。例如虚拟机可以让32位的x86架构机器上运行ARM指令集。用于代码混淆的虚拟机跟那种普通的，能运行操作系统的虚拟机完全不同（如：VMware），前者只用于执行有限的指令做一些特定的任务。</p>
 
@@ -20,7 +20,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20151014/2015101405202361521picture1.png" alt="" /></p>
+<p><img src="../images_result/images/2015101405202361521picture1.png" alt=""></p>
 
 <p>很明显，这些指令都是把第二个操作数指定的内存字节赋值到第一个操作数的寄存器当中。然而这两条指令的二进制操作码表示却并不相同，其中第二条指令的0x56操作码完全是一个随机数字。两条指令的第二个字节都表示操作码需要用到的寄存器，其中每4位表示一个寄存器。</p>
 
@@ -28,7 +28,7 @@
 
 <h1>0x01 举个例子</h1>
 
-<hr />
+<hr>
 
 <p>为此我花了一些时间用C语言写了一个自定指令集的虚拟机，完整的源代码可以在这篇文章最后获得。正如你所猜的，单独一个虚拟机是做不了任何事情的。这也是我为什么还写了这么一个CrackMe小程序。另外我诚挚邀请大家也给这个小家伙添加更多的功能吧！</p>
 
@@ -36,19 +36,19 @@
 
 <p>让我们确保操作码文件和虚拟机在同一个目录，然后执行。随便输入一串密码可以看到：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151014/2015101405202532806picture2.png" alt="" /></p>
+<p><img src="../images_result/images/2015101405202532806picture2.png" alt=""></p>
 
 <p>密码验证失败！</p>
 
 <p>我们现在的目标就是给这个程序找出正确的密码。先从看一下这个操作码文件(vm_file)开始，用十六进制编辑器打开它：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151014/2015101405202730593picture3.png" alt="" /></p>
+<p><img src="../images_result/images/2015101405202730593picture3.png" alt=""></p>
 
 <p>可以看到，在vm_file文件有诸如”Right pass!“，”Wrong pass!“和”Password:“的字符串。接下来开始逆向这个虚拟机，用IDA打开它。</p>
 
 <p>IDA打开虚拟机之后我们直接定位到VM loop的虚拟地址：0x00401334。下图显示了这个程序相当庞大，但既然找到正确的入口点那我们肯定有办法搞定它。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151014/2015101405203054964picture4.png" alt="" /></p>
+<p><img src="../images_result/images/2015101405203054964picture4.png" alt=""></p>
 
 <p>让我们来看看入口函数执行了哪些指令：</p>
 
@@ -86,15 +86,15 @@ loc_40134D: ; This is where the loop starts
 
 <h1>0x02 第一条指令</h1>
 
-<hr />
+<hr>
 
 <p>第一个switch带我们跳到一个小过程当中：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151014/2015101405203172489picture5.png" alt="" /></p>
+<p><img src="../images_result/images/2015101405203172489picture5.png" alt=""></p>
 
 <p>我们现在处于“case 0x18”这个操作码，因为编译器增加了一个减法操作优化这段代码。如果你现在回去检查一下vm_file的话可以发现第一个字节就是0x18。这个操作码似乎需要一些操作数，所以VM多读取一个字节到DX寄存器。下一步，VM的指令指针[EBX+0AH]更新为EAX+2，这意味着IP(instruction pointer)指向下一个字节。之后，读取到的字节跟3比较，如果大于3则离开循环并抛出一个异常。但在我们的例子中是不会抛出异常的，因为二进制文件中该操作数等于0x01，因此程序不会发生跳转。接着我们到达这里：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151014/2015101405203356055picture6.png" alt="" /></p>
+<p><img src="../images_result/images/2015101405203356055picture6.png" alt=""></p>
 
 <p>提醒你一下，EBX是指向虚拟机的寄存器数组的指针，所以第一条指令把[EBX+1*2]（第二个寄存器）初始化为0。</p>
 
@@ -109,11 +109,11 @@ loc_40134D: ; This is where the loop starts
 
 <h1>0x03 第二条指令</h1>
 
-<hr />
+<hr>
 
 <p>让我们来看看下个操作码（0xAF）:</p>
 
-<p><img src="http://static.wooyun.org//drops/20151014/2015101405203417139picture7.png" alt="" /></p>
+<p><img src="../images_result/images/2015101405203417139picture7.png" alt=""></p>
 
 <p>第一个代码块跟之前的mov指令一样。显然，这是需要用到一个寄存器作为操作数的典型代码，在我们的例子当中，它使用的是R1(0x01)寄存器。下一步它访问[EBX+0CH]的寄存器。我们知道这个寄存器肯定不是R0，R1，R2，R3。因为R3被存储在[EBX+6]。我们也知道这不是IP指令指针，因为它位于[EBX+0AH]。所以要弄清楚这个寄存器是什么，我们需要回去检查它在主函数中的初始化：</p>
 
@@ -143,11 +143,11 @@ section[ –reg ] = R1;
 
 <h1>0x04 第三条指令</h1>
 
-<hr />
+<hr>
 
 <p>接着第三个操作码（0xC2）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151014/2015101405203621995picture8.png" alt="" /></p>
+<p><img src="../images_result/images/2015101405203621995picture8.png" alt=""></p>
 
 <p>这个操作码的含义似乎是在读取栈顶的一个WORD数据。但在读取之前它先检查栈是否为空，如果是，则抛出一个VM异常。因为之前已经有一个值PUSH进去了，所以我们知道这个栈不为空。把栈顶的数据保存到DX寄存器后，栈指针+1。我们还知道DX的值现在为0x250（属于代码和数据区域的一部分）。随后，确保栈顶的值不会超过0x1000（address space的尺寸）。接下来把[ESI+DX]指向的字符串作为的参数调用printf。在我们这个例子当中，vm_file第0x250个字节保存的字符串是“Password:”，它将被打印到屏幕上。</p>
 
@@ -157,7 +157,7 @@ section[ –reg ] = R1;
 
 <h1>0x05 破解密码</h1>
 
-<hr />
+<hr>
 
 <p>下面给出如何快速找到正确密码的方式：</p>
 
@@ -165,18 +165,18 @@ section[ –reg ] = R1;
 
 <p>我在下面引用一节中已经给出了一个密码生成器。编译执行它便可获得正确的密码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151014/2015101405203757665picture9.png" alt="" /></p>
+<p><img src="../images_result/images/2015101405203757665picture9.png" alt=""></p>
 
 <h1>0x06 引用</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="https://gist.github.com/SouhailHammou/6b4069b07e538a48bb70">VM source code</a></li>
 <li><a href="https://mega.nz/#!sVwxEKjD!LOmwg8_XFWMV0dMRcLdea4OQ6Bluo8bUpqXyZdWbLuw">Opcodes file (vm_file)</a></li>
 <li><a href="https://gist.github.com/SouhailHammou/d306c9127df6c53d2eda">Hex dump of vm_file for those who don’t want to download it</a></li>
 <li><a href="https://gist.github.com/SouhailHammou/71c06a12c3d3cebd437b">Solution code</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

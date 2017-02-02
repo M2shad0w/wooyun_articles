@@ -3,22 +3,22 @@
 			<head>
 			     <title>IE沙箱拖拽安全策略解析 - xlab</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11329">http://drops.wooyun.org/tips/11329</a></h1>
 				
       <p>
-        <p><strong>Author:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e78b9e90868980a70f62590f4948006963014a410249790e4d6b024943">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
+        </p><p><strong>Author:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e78b9e90868980a70f62590f4948006963014a410249790e4d6b024943">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>IE沙箱逃逸是IE浏览器安全研究的一个重要课题，其中有一类漏洞会借助ElevationPolicy设置中的白名单程序的缺陷来完成沙箱逃逸。IE在注册表中有一个和ElevationPolicy类似的名为DragDrop策略设置，这引起了我们的注意。在本文中，笔者将以一个攻击者的视角，尝试各种途径来突破IE沙箱的这一安全策略，通过分析所遇到的障碍，达到对IE沙箱拖拽安全策略进行详细解析的目的。</p>
 
 <h1>0x01 IE沙箱的拖拽策略</h1>
 
-<hr />
+<hr>
 
 <p>IE沙箱逃逸技术中有一类是利用ElevationPolicy中的白名单程序的问题去执行任意代码，在注册表中，有一个和ElevationPolicy类似的配置，名为DragDrop，具体注册表路径如下：</p>
 
@@ -29,7 +29,7 @@
 
 <p>如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151215/2015121513284826712159.png" alt="p1" /></p>
+<p><img src="../images_result/images/2015121513284826712159.png" alt="p1"></p>
 
 <p>DragDrop Policy值的含义如下：</p>
 
@@ -41,21 +41,21 @@
 
 <p>在一个干净的Windows 8.1系统上，DragDrop目录下默认有三个程序：iexplore.exe, explorer.exe, notepad.exe，它们的Policy值都是3。当目标程序的Policy值为2时，向目标程序窗口拖拽文件，IE会弹出一个提示框，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151215/2015121513285074935220.png" alt="p2" /></p>
+<p><img src="../images_result/images/2015121513285074935220.png" alt="p2"></p>
 
 <h1>0x02 Explorer进程的拖拽问题</h1>
 
-<hr />
+<hr>
 
 <p>在从IE往Explorer上拖拽文件时，虽然DragDrop Policy值设置为了3，IE不会弹框，但是Explorer进程会会弹一个提示框，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151215/2015121513285276184318.png" alt="p3" /></p>
+<p><img src="../images_result/images/2015121513285276184318.png" alt="p3"></p>
 
 <p>然而，当我们从IE中向Explorer侧边栏的树形文件夹结构中拖拽文件时，并不会弹框。这应该是Explorer程序实现上的一个疏漏。进一步设想，如果我们能够在IE沙箱中通过程序模拟鼠标的拖拽操作，那么就能够利用Explorer的这个问题跨越IE沙箱的安全边界。</p>
 
 <h1>0x03 不使用鼠标完成OLE拖拽</h1>
 
-<hr />
+<hr>
 
 <p>OLE拖拽是一种通用的文件拖拽方式，它采用了OLE的接口设计方法来实现拖拽功能，使得拖拽的实现通用且模块化。OLE拖拽技术包含三个基本接口：</p>
 
@@ -67,7 +67,7 @@
 
 <p>下图描述了一个完整的OLE拖拽操作需要实现的关键组件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151215/2015121513285492869417.png" alt="p4" /></p>
+<p><img src="../images_result/images/2015121513285492869417.png" alt="p4"></p>
 
 <p>我们要模拟鼠标拖拽，则只需要实现<code>IDropSource</code>和<code>IDataObject</code>接口。正常的OLE拖拽操作的核心是调用<code>ole32!DoDragDrop</code>函数，该函数原型如下：</p>
 
@@ -203,7 +203,7 @@ auto GetIDataObjectForFile(CStringfilePath)
 
 <h1>0x04 IE沙箱的拖拽实现</h1>
 
-<hr />
+<hr>
 
 <p>当我们在IE沙箱中用鼠标进行拖拽操作时，沙箱内的IE Tab进程会通过ShdocvwBroker将数据转发给沙箱外的主进程，在主进程中完成拖拽操作。也就是说，真正完成拖拽操作是在沙箱外的IE主进程内。两个进程的函数调用情况大致如下：</p>
 
@@ -228,7 +228,7 @@ MSHTML!CDoc::DoDrag
 
 <h1>0x05 IE沙箱对拖拽操作的安全限制</h1>
 
-<hr />
+<hr>
 
 <p>在IE沙箱中，我们是可以直接调到Broker中的函数的。通过自己创建一个IEUserBroker，再由IEUserBroker创建一个ShdocvwBroker，我们就可以调到主进程中的IEFRAME!CShdocvwBroker::PerformDoDragDrop函数。调用的实现方法大致如下：</p>
 
@@ -338,13 +338,13 @@ TargetIsAppContainer);
 
 <h1>0x06 总结</h1>
 
-<hr />
+<hr>
 
 <p>本文详细解析了IE沙箱对于拖拽操作的安全策略，先后分析了IE沙箱的拖拽限制策略、Explorer进程在拖拽限制上存在的问题、ole32.dll实现拖拽的内部原理、IE在沙箱中实现拖拽操作的原理和IE沙箱对拖拽操作进行安全限制的具体位置和实现细节。IE沙箱通过在IEShims.dll中hook特定函数和借助系统的UIPI特性（Windows Vista以上）对拖拽操作进行了有效的安全限制。</p>
 
 <h1>0x07 参考资料</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>Understanding and Working in Protected Mode Internet Explorer <a href="https://msdn.microsoft.com/en-us/library/bb250462">https://msdn.microsoft.com/en-us/library/bb250462</a></li>
@@ -355,11 +355,11 @@ TargetIsAppContainer);
 
 <h1>0x08 致谢</h1>
 
-<hr />
+<hr>
 
 <p>感谢Wins0n在ole32逆向上的帮助；</p>
 
-<p>感谢FlowerCode在思路和技术难点上的指点。</p>      </p>
+<p>感谢FlowerCode在思路和技术难点上的指点。</p>      <p></p>
     
 			</body>
 		</html>

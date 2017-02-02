@@ -3,28 +3,28 @@
 			<head>
 			     <title>特殊条件数据传输 - Beta-TNT</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14568">http://drops.wooyun.org/tips/14568</a></h1>
 				
       <p>
-        <h1>0x00 借问酒家</h1>
+        </p><h1>0x00 借问酒家</h1>
 
-<hr />
+<hr>
 
 <p>有什么东西想拿却拿不出来？不妨开开脑洞。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160407/2016040707070681877120.png" alt="" /></p>
+<p><img src="../images_result/images/2016040707070681877120.png" alt=""></p>
 
 <!--more-->
 
 <p>缘起是2014年底的时候看到金山做的在线恶意代码分析系统“Fire eye”（<code>https://fireeye.ijinshan.com/</code>）。感觉很新鲜，丢了自己攒的几个样本丢了上去，分析的结果还算可以。从分析报告来看，它也是一类沙箱检测工具，把样本丢到虚拟机里跑，再在虚拟机内外布控，监测样本的各种行为，最后生成分析报告并给出判断是否恶意样本，分析报告里还包含样本运行时的截图。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160407/2016040707070850004216.png" alt="" /></p>
+<p><img src="../images_result/images/2016040707070850004216.png" alt=""></p>
 
 <h1>0x01 柳暗</h1>
 
-<hr />
+<hr>
 
 <p>于是我开始有点好奇，这个沙箱大概是个什么样的，于是自己写了一些小的检测程序丢进去，把环境变量、系统信息、网络配置、进程列表、服务和驱动什么的读出来显示在窗体上，这样从分析报告里的样本截图就能读到这些信息了。</p>
 
@@ -36,7 +36,7 @@
 
 <h1>0x02 花明</h1>
 
-<hr />
+<hr>
 
 <p>不过既然有了目标，路就好找了。试了几次找到了绕过保护的办法，成功读取到了FEKERNEL里的文件并把详细信息。下一步当然就是如何拿到里面的东西咯。</p>
 
@@ -50,7 +50,7 @@
 
 <p>思路有了，东西直接就搞出来了。由于FE只能上传单个可执行文件样本，于是把所有用到的东西打包成一个自解压RAR，并附带解压后执行脚本，先绕过保护读取到FEKERNEL里的所有内容并复制到另外的位置，然后用自带的WINRAR.EXE通过命令行将其压缩，最后把压缩包以二进制打开，把内容“画”在自己窗体上。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160407/2016040707071196665315.png" alt="" /></p>
+<p><img src="../images_result/images/2016040707071196665315.png" alt=""></p>
 
 <p>这样我就顺利拿到了FEKERNEL里的所有东西。当然这还得感谢FE在处理样本截图的时候没有做任何有损压缩，虽然是JPEG格式。</p>
 
@@ -58,7 +58,7 @@
 
 <h1>0x03 又一村</h1>
 
-<hr />
+<hr>
 
 <p>总结：如果有什么东西你知道在哪，但没法直接拿到，不妨冷静分析一下：</p>
 
@@ -68,7 +68,7 @@
 <li>你能拿到的输出数据有哪些，其中哪些可以通过输入数据直接或间接控制，哪些输出数据包含的信息量最大。</li>
 </ol>
 
-<p>综合考虑这三方面因素，并仔细分析，就不难达成目标了。</p>      </p>
+<p>综合考虑这三方面因素，并仔细分析，就不难达成目标了。</p>      <p></p>
     
 			</body>
 		</html>

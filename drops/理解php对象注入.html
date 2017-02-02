@@ -3,14 +3,14 @@
 			<head>
 			     <title>理解php对象注入 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4820">http://drops.wooyun.org/papers/4820</a></h1>
 				
       <p>
-        <h1>0x00 背景</h1>
+        </p><h1>0x00 背景</h1>
 
-<hr />
+<hr>
 
 <p>原文:http://securitycafe.ro/2015/01/05/understanding-php-object-injection/</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 漏洞案例</h1>
 
-<hr />
+<hr>
 
 <p>如果你觉得这是个渣渣洞，那么请看一眼这个列表，一些被审计狗挖到过该漏洞的系统，你可以发现都是一些耳熟能详的玩意（就国外来说）</p>
 
@@ -36,7 +36,7 @@
 
 <h1>0x01 PHP类和对象</h1>
 
-<hr />
+<hr>
 
 <p>类和变量是非常容易理解的php概念，打个比方，下面的代码在一个类中定义了一个变量和一个方法。</p>
 
@@ -74,7 +74,7 @@ $object-&gt;PrintVariable();
 
 <h1>0x02 php magic方法</h1>
 
-<hr />
+<hr>
 
 <p>php类可能会包含一些特殊的函数叫magic函数，magic函数命名是以符号“&#95;&#95;”开头的，比如 &#95;&#95;construct, &#95;&#95;destruct, &#95;&#95;toString, &#95;&#95;sleep, &#95;&#95;wakeup 和其他的一些玩意。</p>
 
@@ -159,7 +159,7 @@ __destruct
 
 <h1>0x03 php对象序列化</h1>
 
-<hr />
+<hr>
 
 <p>php允许保存一个对象方便以后重用，这个过程被称为序列化，打个比方，你可以保存一个包含着用户信息的对象方便等等重用。</p>
 
@@ -256,7 +256,7 @@ $usr-&gt;PrintData();
 
 <h1>0x04 序列化magic函数</h1>
 
-<hr />
+<hr>
 
 <p>magic函数constructor (&#95;&#95;construct)和 destructor (&#95;&#95;destruct) 是会在对象创建或者销毁时自动调用，其他的一些magic函数会在serialize 或者 unserialize的时候被调用。</p>
 
@@ -345,7 +345,7 @@ __destruct
 
 <h1>0x05 php对象注入</h1>
 
-<hr />
+<hr>
 
 <p>现在我们理解了序列化是如何工作的，我们该如何利用它？事实上，利用这玩意的可能性有很多种，关键取决于应用程序的流程与，可用的类，与magic函数。</p>
 
@@ -482,7 +482,7 @@ __destruct deletes ".htaccess" file.
 
 <h1>0x06 常见的注入点</h1>
 
-<hr />
+<hr>
 
 <p>先不谈 &#95;&#95;wakeup 和 &#95;&#95;destruct，还有一些很常见的注入点允许你利用这个类型的漏洞，一切都是取决于程序逻辑。</p>
 
@@ -574,7 +574,7 @@ $private_data = 'MAGIC';
 
 <h1>0x07 其他的利用方法</h1>
 
-<hr />
+<hr>
 
 <p>可能其他的一些magic函数海存在利用点：比如&#95;&#95;call 会在对象调用不存在的函数时调用，&#95;&#95;get 和 __set会在对象尝试访问一些不存在的类，变量等等时调用。</p>
 
@@ -588,15 +588,15 @@ $private_data = 'MAGIC';
 
 <h1>0x08 如何利用或者避免这个漏洞</h1>
 
-<hr />
+<hr>
 
 <p>别在任何用户可控的地方使用“unserialize”，可以考虑“json_decode“</p>
 
 <h1>0x09 结论</h1>
 
-<hr />
+<hr>
 
-<p>虽然很难找到而且很难利用，但是这真的真的很严重，可以导致各种各样的漏洞。</p>      </p>
+<p>虽然很难找到而且很难利用，但是这真的真的很严重，可以导致各种各样的漏洞。</p>      <p></p>
     
 			</body>
 		</html>

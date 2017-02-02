@@ -3,14 +3,14 @@
 			<head>
 			     <title>Android Adobe Reader  任意代码执行分析(附POC) - livers</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1440">http://drops.wooyun.org/papers/1440</a></h1>
 				
       <p>
-        <h2>0x00 描述</h2>
+        </p><h2>0x00 描述</h2>
 
-<hr />
+<hr>
 
 <p>前几天老外在fd还有exploit-db上，公布了Adobe Reader任意代码执行的漏洞。</p>
 
@@ -30,11 +30,11 @@
 
 <p>我查看了之前的几个版本例如Android Adobe Reader 11.1.2 如下图，问题也应该存在。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813332241483.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091813332241483.png" alt="enter image description here"></p>
 
 <h2>0x01利用</h2>
 
-<hr />
+<hr>
 
 <p>从反编译出来的java代码看</p>
 
@@ -84,27 +84,27 @@ if(window._app) {
 
 <p>然后添加表单按钮或者书签等，调用事件添加</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813332335341.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091813332335341.jpeg" alt="enter image description here"></p>
 
 <p>我这里看了下button最好演示，和老外的那个poc一样基本上.</p>
 
 <p>导入到android虚拟机里，打开，成功复现。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091813332386324.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091813332386324.png" alt="enter image description here"></p>
 
 <h2>0x02 扩展</h2>
 
-<hr />
+<hr>
 
 <p>一些网盘或浏览器，看看能否调用adobe reader来预览pdf的应用可能会存在这个漏洞，大部分应用都是直接下载pdf到本地。可以再测试一些能预览pdf的邮箱之类的应用。</p>
 
 <h2>0x03 修复</h2>
 
-<hr />
+<hr>
 
-<p>新版本的Adobe Reader 11.2.0 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1efaa6a42a302cfaa5bbfaa694f9849af98ab6f896a9faa3a1f98ab6faa498fbb097fb9bb6f9849a746df6ae9df98ab6f890bbfb91bddcbe5e547f687f6d7d6c776e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>tInterface，老版本的用户则在adobereader禁用了表单的js执行。 不知道那些杀毒软件能不能检测到这些恶意poc呢 :）</p>
+<p>新版本的Adobe Reader 11.2.0 <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1efaa6a42a302cfaa5bbfaa694f9849af98ab6f896a9faa3a1f98ab6faa498fbb097fb9bb6f9849a746df6ae9df98ab6f890bbfb91bddcbe5e547f687f6d7d6c776e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>tInterface，老版本的用户则在adobereader禁用了表单的js执行。 不知道那些杀毒软件能不能检测到这些恶意poc呢 :）</p>
 
-<p>附上<a href="http://static.wooyun.org/20141017/2014101711445669638.pdf">poc.pdf</a></p>      </p>
+<p>附上<a href="http://static.wooyun.org/20141017/2014101711445669638.pdf">poc.pdf</a></p>      <p></p>
     
 			</body>
 		</html>

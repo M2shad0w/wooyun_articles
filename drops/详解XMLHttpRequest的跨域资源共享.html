@@ -3,14 +3,14 @@
 			<head>
 			     <title>详解XMLHttpRequest的跨域资源共享 - nyannyannyan</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/188">http://drops.wooyun.org/tips/188</a></h1>
 				
       <p>
-        <h3>0x00 背景</h3>
+        </p><h3>0x00 背景</h3>
 
-<hr />
+<hr>
 
 <p>在<a href="http://drops.wooyun.org/papers/151">Browser Security-同源策略、伪URL的域</a>这篇文章中提到了浏览器的同源策略，其中提到了XMLHttpRequest严格遵守同源策略，非同源不可请求。但是，在实践当中，经常会出现需要跨域请求资源的情况，比较典型的例如某个子域名向负责进行用户验证的子域名请求用户信息等应用。</p>
 
@@ -25,7 +25,7 @@
 
 <h3>0x01 基本模型</h3>
 
-<hr />
+<hr>
 
 <p>虽然说允许了XMLHttpRequest的跨域请求，但是这种许可并不是无条件的。</p>
 
@@ -44,7 +44,7 @@
 
 <h3>0x02 请求时发送的HTTP头</h3>
 
-<hr />
+<hr>
 
 <p>简单跨域请求并不会包含下面的HTTP头。而预检请求将会发送以下HTTP头</p>
 
@@ -57,7 +57,7 @@ Access-Control-Request-Headers: 自定义的头部，所有用setRequestHeader�
 
 <h3>0x03 返回的HTTP头</h3>
 
-<hr />
+<hr>
 
 <p>浏览器主要通过返回的这些HTTP头判断请求是否合法。值得注意的一点是，预检请求通过并不代表请求一定会成功，如果预检请求时服务器返回的HTTP头使浏览器判断请求合法，从而发出了实际请求，但是实际请求的返回头中含有的访问控制头显示请求不合法时，浏览器仍会判定请求不合法，从而向脚本隐藏返回的细节。</p>
 
@@ -73,7 +73,7 @@ Access-Control-Allow-Headers: 允许自定义的头部，以逗号隔开，大�
 
 <h3>0x04 单独谈谈Credentials</h3>
 
-<hr />
+<hr>
 
 <p>在跨域请求中，默认情况下，HTTP Authentication信息，Cookie头以及用户的SSL证书无论在预检请求中或是在实际请求都是不会被发送的。</p>
 
@@ -87,11 +87,11 @@ Access-Control-Allow-Headers: 允许自定义的头部，以逗号隔开，大�
 
 <h3>0x05 CORS中的安全隐患</h3>
 
-<hr />
+<hr>
 
 <p>最大的隐患就在于某些偷懒的程序员会将Access-Control-Allow-Origin设置为"*"从而使得这个CORS模型基本失效，但是由于Credentials模型的保护，很多网上的文章认为的信息泄露问题其实并不存在。在这里的风险其实是可以构造DDoS进行攻击。</p>
 
-<p>另外就是我们会发现，虽然无法得到返回值，简单请求其实是发出的，所以POST请求是可以发出的。这时候，其实就和平常的CSRF一样了，所以并不是说保证了跨域请求限定的域就可以不做CSRF防范了。</p>      </p>
+<p>另外就是我们会发现，虽然无法得到返回值，简单请求其实是发出的，所以POST请求是可以发出的。这时候，其实就和平常的CSRF一样了，所以并不是说保证了跨域请求限定的域就可以不做CSRF防范了。</p>      <p></p>
     
 			</body>
 		</html>

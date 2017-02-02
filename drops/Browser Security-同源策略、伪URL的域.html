@@ -3,14 +3,14 @@
 			<head>
 			     <title>Browser Security-同源策略、伪URL的域 - 瞌睡龙</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/151">http://drops.wooyun.org/tips/151</a></h1>
 				
       <p>
-        <h3>同源策略</h3>
+        </p><h3>同源策略</h3>
 
-<hr />
+<hr>
 
 <h4>同源策略的文档模型</h4>
 
@@ -301,13 +301,13 @@ localstorage.removeItem("message");
   <tr>
     <td rowspan="2" valign="middle" style="width: 188.6px; height: 45.5px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        <b>在foo.example.com设置cookie，domain设置为：</b><br />
+        <b>在foo.example.com设置cookie，domain设置为：</b><br>
       </p>
     </td>
     
     <td colspan="2" valign="middle" style="width: 387.3px; height: 17.8px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        <b>最终cookie的范围</b><br />
+        <b>最终cookie的范围</b><br>
       </p>
     </td>
   </tr>
@@ -315,13 +315,13 @@ localstorage.removeItem("message");
   <tr>
     <td valign="middle" style="width: 188.9px; height: 17.8px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        <b>非IE浏览器</b><br />
+        <b>非IE浏览器</b><br>
       </p>
     </td>
     
     <td valign="middle" style="width: 188.4px; height: 17.8px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        <b>IE浏览器</b><br />
+        <b>IE浏览器</b><br>
       </p>
     </td>
   </tr>
@@ -329,19 +329,19 @@ localstorage.removeItem("message");
   <tr>
     <td valign="middle" style="width: 188.6px; height: 17.8px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        设置为空<br />
+        设置为空<br>
       </p>
     </td>
     
     <td valign="middle" style="width: 188.9px; height: 17.8px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        foo.example.com（一个域）<br />
+        foo.example.com（一个域）<br>
       </p>
     </td>
     
     <td valign="middle" style="width: 188.4px; height: 17.8px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        ＊.foo.example.com<br />
+        ＊.foo.example.com<br>
       </p>
     </td>
   </tr>
@@ -349,13 +349,13 @@ localstorage.removeItem("message");
   <tr>
     <td valign="middle" style="width: 188.6px; height: 17.8px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        bar.foo.example.com<br />
+        bar.foo.example.com<br>
       </p>
     </td>
     
     <td colspan="2" valign="middle" style="width: 387.3px; height: 17.8px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        cookie设置失败，设置的域是当前域的一个子域<br />
+        cookie设置失败，设置的域是当前域的一个子域<br>
       </p>
     </td>
   </tr>
@@ -363,13 +363,13 @@ localstorage.removeItem("message");
   <tr>
     <td valign="middle" style="width: 188.6px; height: 17.8px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        foo.example.com<br />
+        foo.example.com<br>
       </p>
     </td>
     
     <td colspan="2" valign="middle" style="width: 387.3px; height: 17.8px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        *.foo.example.com<br />
+        *.foo.example.com<br>
       </p>
     </td>
   </tr>
@@ -377,13 +377,13 @@ localstorage.removeItem("message");
   <tr>
     <td valign="middle" style="width: 188.6px; height: 17.8px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        baz.example.com<br />
+        baz.example.com<br>
       </p>
     </td>
     
     <td colspan="2" valign="middle" style="width: 387.3px; height: 17.8px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        cookie设置失败，域名不匹配<br />
+        cookie设置失败，域名不匹配<br>
       </p>
     </td>
   </tr>
@@ -391,13 +391,13 @@ localstorage.removeItem("message");
   <tr>
     <td valign="middle" style="width: 188.6px; height: 17.8px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        example.com<br />
+        example.com<br>
       </p>
     </td>
     
     <td colspan="2" valign="middle" style="width: 387.3px; height: 17.8px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        *.example.com<br />
+        *.example.com<br>
       </p>
     </td>
   </tr>
@@ -405,13 +405,13 @@ localstorage.removeItem("message");
   <tr>
     <td valign="middle" style="width: 188.6px; height: 17.8px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        ample.com<br />
+        ample.com<br>
       </p>
     </td>
     
     <td colspan="2" valign="middle" style="width: 387.3px; height: 17.8px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        cookie设置失败，域名不匹配<br />
+        cookie设置失败，域名不匹配<br>
       </p>
     </td>
   </tr>
@@ -419,7 +419,7 @@ localstorage.removeItem("message");
   <tr>
     <td valign="middle" style="width: 188.6px; height: 17.8px; border-style: solid; border-width: 2.0px 2.0px 2.0px 2.0px; border-color: #000000 #000000 #000000 #000000; padding: 4.0px 4.0px 4.0px 4.0px">
       <p style="margin: 0px; font-size: 12px; font-family: Helvetica; min-height: 14px;">
-        .com<br />
+        .com<br>
       </p>
     </td>
     
@@ -502,7 +502,7 @@ main();
 
 <h3>伪URL的域</h3>
 
-<hr />
+<hr>
 
 <p>一些web应用用到了伪URL例如about:，javascript:，和data:来创建HTML文档。</p>
 
@@ -552,7 +552,7 @@ frames["test"].document.body.innerHTML = "&lt;h1&gt;Hi!&lt;/h1&gt;";
 
 <pre><code>&lt;iframe src='javascript:"&lt;b&gt;2 + 2 = " + (2+2) + "&lt;/b&gt;"'&gt; 
 &lt;/iframe&gt;
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

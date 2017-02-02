@@ -3,14 +3,14 @@
 			<head>
 			     <title>首例具有中文提示的比特币勒索软件“LOCKY” - SwordLea</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/13032">http://drops.wooyun.org/papers/13032</a></h1>
 				
       <p>
-        <h1>0x00 概述</h1>
+        </p><h1>0x00 概述</h1>
 
-<hr />
+<hr>
 
 <p>安天安全研究与应急处理中心（安天CERT）发现一款新的勒索软件家族，名为“Locky”，它通过RSA-2048和AES-128算法对100多种文件类型进行加密，同时在每个存在加密文件的目录下释放一个名为&#95;Locky&#95;recover_instructions.txt的勒索提示文件。经过安天CERT研究人员分析发现，这是一类利用垃圾邮件进行传播的勒索软件，是首例具有中文提示的比特币勒索软件。</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 样本分析</h1>
 
-<hr />
+<hr>
 
 <h3>1.1 样本标签</h3>
 
@@ -202,11 +202,11 @@ HKCU\Control Panel\Desktop\Wallpaper      "%UserProfile%\Desktop\_Locky_recover_
 
 <p>“Locky”样本会首先使用函数rdtsc获取处理器时间，将该值与某变量进行求余运算，通过对该值的判断来决定样本是访问使用算法生成的域名，还是直接访问样本中的硬编码IP地址。这样可以使样本具有一定的随机性。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160219/2016021910074861874110.png" alt="p1" /> 图1 域名生成算法</p>
+<p><img src="../images_result/images/2016021910074861874110.png" alt="p1"> 图1 域名生成算法</p>
 
 <p>域名在生成的时候，需要使用一个随机数，该随机数的计算是根据被感染机器的年月日进行的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160219/2016021910075040707210.png" alt="p2" /> 图2 随机值计算</p>
+<p><img src="../images_result/images/2016021910075040707210.png" alt="p2"> 图2 随机值计算</p>
 
 <p><strong>1.3.2 C&amp;C服务器</strong></p>
 
@@ -263,15 +263,15 @@ HKCU\Control Panel\Desktop\Wallpaper      "%UserProfile%\Desktop\_Locky_recover_
 
 <p>加密的数据包部分内容：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160219/201602191007518147536.png" alt="p3" /> 图3 数据包内容</p>
+<p><img src="../images_result/images/201602191007518147536.png" alt="p3"> 图3 数据包内容</p>
 
 <p>数据包发送时加密的算法：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160219/201602191007527486142.png" alt="p4" /> 图4 加密算法</p>
+<p><img src="../images_result/images/201602191007527486142.png" alt="p4"> 图4 加密算法</p>
 
 <p>接收到数据时，样本的解密算法：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160219/201602191007541219452.png" alt="p5" /> 图5 解密算法</p>
+<p><img src="../images_result/images/201602191007541219452.png" alt="p5"> 图5 解密算法</p>
 
 <p><strong>1.3.3 控制命令</strong></p>
 
@@ -306,11 +306,11 @@ HKCU\Control Panel\Desktop\Wallpaper      "%UserProfile%\Desktop\_Locky_recover_
 
 <p>中文的提示信息如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160219/201602191007557644862.png" alt="p6" /> 图6 提示内容</p>
+<p><img src="../images_result/images/201602191007557644862.png" alt="p6"> 图6 提示内容</p>
 
 <h1>0x02 总结</h1>
 
-<hr />
+<hr>
 
 <p>通过安天CERT目前的分析来看，勒索软件“Locky”的功能与之前分析的勒索软件<sup>【1】</sup>的功能基本一致。勒索软件能给攻击者带来巨大的收益，因其使用比特币进行交易，所以很难追踪；一旦用户感染了勒索软件，只能付费进行解密或是丢弃这些文件。安天CERT提示广大用户，即使支付赎金也不一定能保证可以完全恢复被加密的文件。防止数据被加密，更应该注意勒索软件的防御，养成良好的上网使用习惯，不要轻易执行来历不明的文件。</p>
 
@@ -320,13 +320,13 @@ HKCU\Control Panel\Desktop\Wallpaper      "%UserProfile%\Desktop\_Locky_recover_
 
 <h1>0x03 附录</h1>
 
-<hr />
+<hr>
 
 <h3>一、参考资料</h3>
 
 <ul>
 <li>【1】 揭开勒索软件的真面目 <a href="http://www.antiy.com/response/ransomware.html">http://www.antiy.com/response/ransomware.html</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

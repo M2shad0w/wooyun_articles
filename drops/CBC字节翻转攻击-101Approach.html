@@ -3,14 +3,14 @@
 			<head>
 			     <title>CBC字节翻转攻击-101Approach - Larry</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7828">http://drops.wooyun.org/tips/7828</a></h1>
 				
       <p>
-        <h1>0x00 译者前言</h1>
+        </p><h1>0x00 译者前言</h1>
 
-<hr />
+<hr>
 
 <p>本文翻译自：<a href="http://resources.infosecinstitute.com/cbc-byte-flipping-attack-101-approach/">http://resources.infosecinstitute.com/cbc-byte-flipping-attack-101-approach/</a></p>
 
@@ -20,7 +20,7 @@
 
 <h1>0x01 相关介绍</h1>
 
-<hr />
+<hr>
 
 <p>此攻击方法的精髓在于：<strong>通过损坏密文字节来改变明文字节</strong>。（注：借助CBC内部的模式）借由此可以绕过过滤器，或者改变用户权限提升至管理员，又或者改变应用程序预期明文以尽猥琐之事。</p>
 
@@ -32,7 +32,7 @@
 
 <p><strong>加密过程</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150814/2015081408372937392.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081408372937392.png" alt="enter image description here"></p>
 
 <p><strong>Plaintext</strong>：待加密的数据。</p>
 
@@ -55,7 +55,7 @@
 
 <p><strong>Decryption Process</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20150814/2015081408372941944.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081408372941944.png" alt="enter image description here"></p>
 
 <ul>
 <li><em>Plaintext-0 = Decrypt(Ciphertext) XOR IV</em>—只用于第一个组块</li>
@@ -64,13 +64,13 @@
 
 <p>注意：<strong><em>Ciphertext-N-1</em>（密文-N-1）是用来产生下一块明文</strong>；这就是字节翻转攻击开始发挥作用的地方。如果我们改变<em>Ciphertext-N-1</em>（密文-N-1）的一个字节，然后与下一个解密后的组块异或，我们就可以得到一个不同的明文了！<strong>You got it?</strong>别担心，下面我们将看到一个详细的例子。与此同时，下面的这张图也可以很好地说明这种攻击：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150814/2015081408372925051.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081408372925051.jpg" alt="enter image description here"></p>
 
 <!--more-->
 
 <h1>0x02 一个例子（CBC Blocks of 16 bytes）</h1>
 
-<hr />
+<hr>
 
 <p>比方说，我们有这样的明文序列：</p>
 
@@ -107,7 +107,7 @@
 
 <p>运行这段代码后，我们可以将数字6变为7：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150814/2015081408373017114.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081408373017114.png" alt="enter image description here"></p>
 
 <p>但是我们在第3行中，是如何改变字节成为我们想要的值呢？</p>
 
@@ -158,13 +158,13 @@ echo "Plaintext AFTER attack : $b\n";
 
 <h1>0x03 一个练习</h1>
 
-<hr />
+<hr>
 
 <p>光说不练假把式，接下来作者举了一个他参加过的CTF中的一道题目的例子（更多详情可以参阅最后的相关参考链接），然后阐述了他是怎样在最后几步中打破CBC的。</p>
 
 <p>下面提供了这个练习当中很重要的一部分源码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150814/2015081408373079459.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081408373079459.png" alt="enter image description here"></p>
 
 <p>其中，你在POST提交参数"name"的任何文本值之后，应用程序则会对应输出"Hello"加上最后提交的文本。但是有两件事情发生在消息打印之前：</p>
 
@@ -190,7 +190,7 @@ exploit = cookie[0:pos] + val + cookie[pos + 1:]
 
 <p>然后作者通过改变cookie（因为其具有全部的密文），得到以下结果：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150814/2015081408373048849.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081408373048849.png" alt="enter image description here"></p>
 
 <p>首先，因为我们改变了第一块，所以在第二块中，黄色标记的"X"被成功替换为单引号，它被认为是多余插入（绿色），导致在unserialize()处理数据时产生一个错误（红色），因此应用程序甚至都没有去尝试执行注入了。</p>
 
@@ -205,7 +205,7 @@ exploit = cookie[0:pos] + val + cookie[pos + 1:]
 
 <h1>0x04 相关参考</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>CRYPTO #2: <a href="http://blog.gdssecurity.com/labs/tag/crypto">http://blog.gdssecurity.com/labs/tag/crypto</a></li>
@@ -215,7 +215,7 @@ exploit = cookie[0:pos] + val + cookie[pos + 1:]
 
 <h1>0x05 附录代码</h1>
 
-<hr />
+<hr>
 
 <p>下面是上面练习当中的PHP源码及exp：</p>
 
@@ -359,7 +359,7 @@ pos = 100; #test case success
 val = chr(ord('X') ^ ord("'") ^ ord(cookie[pos]))
 exploit = cookie[0:pos] + val + cookie[pos + 1:]
 Pwn(exploit)
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

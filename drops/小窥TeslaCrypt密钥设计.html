@@ -3,16 +3,16 @@
 			<head>
 			     <title>小窥TeslaCrypt密钥设计 - Samsong</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/16060">http://drops.wooyun.org/tips/16060</a></h1>
 				
       <p>
-        <p><strong>Author: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="396a50554f5c4b79617d6a7c7a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
+        </p><p><strong>Author: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="396a50554f5c4b79617d6a7c7a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
 
 <h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>最近群里提到TeslaCrypt的作者放出了主密钥，简单看了下，对他的加密流程比较感兴趣。受条件限制，没有拿到早期样本（只拿到了晚一些的），放狗搜了搜也没找到，但是找到了两款解密程序。一款是Googulator开发的TeslaCrack，另外一款则是BloodDolly开发的TeslaDecoder。前者虽然开源，但支持解密的版本少于后者。本文通过分析及逆向样本和这两款工具，试图了解TeslaCrypt的设计思路。</p>
 
@@ -26,7 +26,7 @@
 
 <p>勒索软件的制作者为了打到目的，通常会给用户一个比特币钱包的地址。用户向该钱包付款之后，可以得到一个解密密钥，用此密钥即可解密。有报告指出，不同的受害者需要向不同的钱包中打款，这暗示着比特币钱包的生成过程可能与加密密钥的产生存在一定关联。因此，先大致了解下钱包是如何生成的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160524/2016052415571268454img0.jpg" alt="How to generate a btc addr?" title="How to waste your brain and understand all of it?" /></p>
+<p><img src="../images_result/images/2016052415571268454img0.jpg" alt="How to generate a btc addr?" title="How to waste your brain and understand all of it?"></p>
 
 <p>比特币钱包生成的基本步骤是：</p>
 
@@ -103,29 +103,29 @@
 
 <h1>0x02 部分漏洞分析</h1>
 
-<hr />
+<hr>
 
 <p>TC的老版本则没有新版本这么“安全”了。对加密通道运用不当是比较常见的错误，在TC中也由发现。这是最早修复的漏洞，一个比较标志性的版本是v6，在v6之前，所有的文件都可以通过抓取感染后向CC通信的网络流量来解密，但v6版本开始，这一做法便不能使用了。一种合理的猜想是，在旧版本的软件中，可以直接解析出加密密钥。对TD的分析证实了这一点。下图是TD获取网络流量后，判定密钥与比特币地址是否相符的（以免解密错误）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160524/2016052415514174690img1.png" alt="Judge if bitcoin addr is correct" title="Judge if your finger is too big to type" /></p>
+<p><img src="../images_result/images/2016052415514174690img1.png" alt="Judge if bitcoin addr is correct" title="Judge if your finger is too big to type"></p>
 
 <p>之后，TD便将密钥放入对应区域中，其他操作则与正常解密类似：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160524/2016052415514363347img2.png" alt="Put the key back" title="And serve for you" /></p>
+<p><img src="../images_result/images/2016052415514363347img2.png" alt="Put the key back" title="And serve for you"></p>
 
 <p>从V2版本到V5版本的TC，将传输的私钥以特定方式进行的加密，各版本的密钥也有所不同，但由于密钥是硬编码在程序里的，因此仍可以被TD直接提取出来，这就很尴尬了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160524/2016052415514417277img3.png" alt="Hard-coded key" title="Oops, bad boy" /></p>
+<p><img src="../images_result/images/2016052415514417277img3.png" alt="Hard-coded key" title="Oops, bad boy"></p>
 
 <p>从TD的验证逻辑推断，旧版本的TC应该是向CC服务器直接发回了BTC地址和Private&#95;BtcKey（或简单加密后的Private&#95;BtcKey）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160524/2016052415514671667img4.png" alt="Filter key out of network request" title="Where is my Mag?" /></p>
+<p><img src="../images_result/images/2016052415514671667img4.png" alt="Filter key out of network request" title="Where is my Mag?"></p>
 
 <p>因此，在v5版本的某个变种中，TC作者移除了部分数据，使TC无法验证网络请求中的BTC地址和私钥是否相符，并在v6版本完全修改了向CC传输的数据，不再在通信中直接暴露加密密钥，彻底的封堵了这个逻辑漏洞。然而，利用这个漏洞，需要用户持续收集网络流量，这在很多环境下不容易实现，因此这种方法的利用难度比较高。</p>
 
 <p>第二个漏洞存在于TC的前两个版本中。有一种比较简单的方法，利用的主要是在加密设计过程中的漏洞。由于对数据存储区域清洗不彻底，部分解密密钥可能残留在key.dat和注册表中。获取了部分密钥，可以极大的降低TD的解密难度，而且由于设计过程问题比较严重，这样获得的密钥不是SessionKey而是用户主密钥，这样就可以直接解密所有文件了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160524/2016052415514714236img5.png" alt="Get the key directly" title="Sorry, Bob." /></p>
+<p><img src="../images_result/images/2016052415514714236img5.png" alt="Get the key directly" title="Sorry, Bob."></p>
 
 <p>这个漏洞比较容易利用，修补难度也不高，因此只存活了两个版本，就被勤劳的地下工作者修好了。</p>
 
@@ -144,7 +144,7 @@
 
 <h1>0x03 相关链接</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>英文Wiki有很多关于密码学的文章，此外关于ECC有一篇较为可靠的文章也可参考，来自<a href="http://www.pediy.com/kssd/pediy06/pediy6014.htm">看雪论坛</a> </li>
@@ -154,7 +154,7 @@
 <li><a href="http://www.venustech.com.cn/UserFiles/20160512_%E7%89%B9%E6%96%AF%E6%8B%89%E6%81%B6%E6%84%8F%E6%A0%B7%E6%9C%AC%E5%88%86%E6%9E%90%E6%96%B0%E8%A7%A3(1).pdf">启明星辰</a>对该软件的分</li>
 <li>利用第三个漏洞的代码：<a href="https://github.com/Googulator/TeslaCrack">Github</a></li>
 <li>对第三个漏洞的介绍：<a href="http://www.bleepingcomputer.com/news/security/teslacrypt-decrypted-flaw-in-teslacrypt-allows-victims-to-recover-their-files/">BleepingComputer.com</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

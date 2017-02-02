@@ -3,20 +3,20 @@
 			<head>
 			     <title>初识linux内核漏洞利用 - 爱宝宝的粑粑</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/14936">http://drops.wooyun.org/binary/14936</a></h1>
 				
       <p>
-        <h1>0x00 简介</h1>
+        </p><h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>之前只接触过应用层的漏洞利用， 这次第一次接触到内核层次的，小结一下。</p>
 
 <h1>0x01 概况</h1>
 
-<hr />
+<hr>
 
 <p>这次接触到的，是吾爱破解挑战赛里的一个题，给了一个有问题的驱动程序，要求在ubuntu 14.04 32位系统环境下提权。驱动实现了write函数，但是write可以写0x5a0000000个字节。然后还实现了一个ioctl，这里有任意地址写的问题（但是这个分析里没用到）。还有一个read函数，这个可以读取堆上的数据。驱动的代码可以在这里下载到：<a href="http://www.52pojie.cn/thread-480792-1-1.html">http://www.52pojie.cn/thread-480792-1-1.html</a></p>
 
@@ -108,11 +108,11 @@ static ssize_t mem_read(struct file *filp, char __user *buf, size_t size, loff_t
 
 <p>write里的dev->data是通过调用ioctl后kmalloc出来的，kmalloc的size可以自行指定。于是通过这个write，可以写内核堆，甚至写到内核栈里。我用的方法是覆盖内核某个堆结构，改掉其上的某个指针，最好是某个函数指针，或者函数表指针。具体的是shmid&#95;kernel结构的file指针，里面存有shm&#95;ops，这是shm的函数表，里面有shm&#95;mmap，而这个函数可以在用户态通过shmat调用到。shmid&#95;kernel这个结构体，则会通过在系统调用shmget时，被kmalloc。在我操作的机器上（32位）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160414/2016041415474637545130.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016041415474637545130.png" alt="Alt text"></p>
 
 <p>shmid_kernel分配时的大小是64+92 = 156:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160414/2016041415474714489225.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016041415474714489225.png" alt="Alt text"></p>
 
 <pre><code>#!cpp
 struct shmid_kernel //结构体大小为92bytes
@@ -134,11 +134,11 @@ struct shmid_kernel //结构体大小为92bytes
 
 <h1>0x02 覆盖前的堆排布</h1>
 
-<hr />
+<hr>
 
 <p>要保证能覆盖到特定的结构，首先是要保证，申请到的内存是相邻的。内核里kmalloc是slab的分配机制。一次至少会分配一个页面，然后把这个页面分为很多个连续的块，这些块的信息，可以通过<strong>cat /proc/slabinfo</strong>看到：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160414/2016041415474939402324.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016041415474939402324.png" alt="Alt text"></p>
 
 <p>分配的时候，是向上对齐的。比如，如果kmalloc的size满足区间(128,192]，那么就会给它分配一个192大小的块。如果有空闲的块，则把空闲的块分配出去。只有当所有分配的slab里的块，都被占用了，才会去分配新的slab（里面有很多相邻内存的大小相同的块）。比如说需要一个192的块，而已经分配的192的slab里没有空闲的，就会分配一个页面的内存，里面分成4096/192 = 21个192bytes的块，然后拿出第一块分配出去，再申请，则拿出第二块，以此类推。</p>
 
@@ -173,15 +173,15 @@ ioctl(fd,0,&amp;arg);
 
 <h1>0x03 overflow shmid_kernel</h1>
 
-<hr />
+<hr>
 
 <p>为了确保我们的堆排布好了，我给这个有漏洞的驱动，patch了一行代码，使得能够把每次kmalloc的地址打印出来：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160414/2016041415475043910419.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016041415475043910419.png" alt="Alt text"></p>
 
 <p>而且在exp里，调用shmget之后，再一次调用ioctl来kmalloc一个192的块。那么得到的dmesg：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160414/201604141547522142359.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201604141547522142359.png" alt="Alt text"></p>
 
 <p>最后两次 ioctl，中间相隔了2个0xC0的大小，其中一个应该是shmid&#95;kernel。那么还有一个是什么？通过调用驱动的read，读取这段堆上的内存，我发现：还有一个是shmid&#95;kernel结构的shm_file，排布是这样的：</p>
 
@@ -207,12 +207,12 @@ ioctl(fd,0,&amp;arg);
 </tr>
 <tr>
   <td align="left">0xc04e4600</td>
-  <td align="right">dev<a href="http://static.wooyun.org//drops/20160414/2016041415474637545130.png">1</a>->data</td>
+  <td align="right">dev<a href="./drops/20160414/2016041415474637545130.png">1</a>->data</td>
 </tr>
 </tbody>
 </table>
 
-<p><img src="http://static.wooyun.org//drops/20160414/201604141547535790569.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201604141547535790569.png" alt="Alt text"></p>
 
 <p>最开始的计划，是覆盖shmid&#95;kernel结构的shmid&#95;file指针（shmid&#95;kernel+0x6c），但是现在发现可以直接覆盖shmid&#95;file的fop（shmid&#95;file+0x14），这是指向其file&#95;operations的指针。我们只要把这个指针覆盖，就能伪造file&#95;operations，于是伪造一个file&#95;operations，在偏移0x40处，指定0x41414141。其余的内容，由于我们可以通过read读取堆内容，所以write的时候，直接复制过去，改别的。 但是如果没有read，我们也可以自己伪造一个shmid_kernel，当然肯定会麻烦一些。因为有一些检查是要绕过的。</p>
 
@@ -232,14 +232,14 @@ write(fd[0],buf,oversize);
 ret = shmat(shmid,NULL,0);
 </code></pre>
 
-<p>那么，调用shmat的时候，最终会调用:<br />
+<p>那么，调用shmat的时候，最终会调用:<br>
 shmid&#95;kernel->shm&#95;file->fop->mmap(...)。这个时候，我们就能得到内核的控制流。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160414/201604141547556471779.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201604141547556471779.png" alt="Alt text"></p>
 
 <h1>0x04 SMEP</h1>
 
-<hr />
+<hr>
 
 <p>得到控制流后，最开始我是这么想的：</p>
 
@@ -258,7 +258,7 @@ kernel_code(struct file *file, void *vma)
 
 <p>什么是SMEP？简单来说，就是禁止内核执行用户控件的代码。它存在于CR4寄存器的第20 bit。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160414/2016041415475915379109.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016041415475915379109.png" alt="Alt text"></p>
 
 <p>在安卓上，也叫PXN。因为传统的内核提权漏洞利用，得到控制流之后，直接跳转到用户空间执行提权代码，实在是太轻松，所以就加了这么一个缓解机制。</p>
 
@@ -266,7 +266,7 @@ kernel_code(struct file *file, void *vma)
 
 <h1>0x05 ROP &amp; 栈移植</h1>
 
-<hr />
+<hr>
 
 <p>构造ROP来调用</p>
 
@@ -326,7 +326,7 @@ ret
 
 <p>rop链，首先要写到栈里面去，问题是如何写。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160414/201604141547556471779.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201604141547556471779.png" alt="Alt text"></p>
 
 <p>最后获得控制流之前，eax 是内核堆上的地址，是shmid&#95;kerneld的shm&#95;file，里面的内容我们可以控制。ecx是伪造的fop表地址，我们可以完全控制。不好往栈里头写数据，不妨把栈给移植到能控制的地方来。</p>
 
@@ -343,7 +343,7 @@ memcpy(buf+0x180,rop,4);
 
 <h1>0x06 内核态返回</h1>
 
-<hr />
+<hr>
 
 <p>最后一个问题，内核态如何返回用户态。</p>
 
@@ -355,7 +355,7 @@ memcpy(buf+0x180,rop,4);
 
 <p>所以，我需要一个寄存器，来保存被移植前的esp。而prepare&#95;kernel&#95;cred() 和 commit_creds()。会对esi,edi,ebx三个寄存器进行保护：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160414/201604141547568844989.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201604141547568844989.png" alt="Alt text"></p>
 
 <p>我选择其中的esi来保存原始内核栈esp。那么rop链就变成了这样子：</p>
 
@@ -486,7 +486,7 @@ memcpy(buf+0x180,rop,4);
 
 <h1>0x07 get root shell</h1>
 
-<hr />
+<hr>
 
 <p>最后，我们再用户态，调用：</p>
 
@@ -498,7 +498,7 @@ execl("/bin/bash","/bin/bash",NULL);
 
 <p>整个提权利用，就完成了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160414/2016041415475873749910.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016041415475873749910.png" alt="Alt text"></p>
 
 <h1>0x08 exp</h1>
 
@@ -624,13 +624,13 @@ MAP_SHARED|MAP_ANONYMOUS|MAP_FIXED, -1, 0);
 
 <h1>0x09 参考链接</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="http://old.sebug.net/paper/pst_WebZine/pst_WebZine_0x05/0x09_Exploit%20Linux%20Kernel%20Slub%20Overflow.html">http://old.sebug.net/paper/pst&#95;WebZine/pst&#95;WebZine&#95;0x05/0x09&#95;Exploit%20Linux%20Kernel%20Slub%20Overflow.html</a></li>
 <li><a href="http://drops.wooyun.org/tips/7764">http://drops.wooyun.org/tips/7764</a></li>
 <li><a href="https://cyseclabs.com/page?n=17012016">https://cyseclabs.com/page?n=17012016</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

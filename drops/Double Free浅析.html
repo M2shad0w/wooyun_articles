@@ -3,16 +3,16 @@
 			<head>
 			     <title>Double Free浅析 - explorer</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/7958">http://drops.wooyun.org/binary/7958</a></h1>
 				
       <p>
-        <p>最近在研究一些堆上面的漏洞。然后某一天骑自行车在路上跑的时候我突然悟出了Double Free的真谛。 2333好像太中二了一点，我是根据堆溢出的利用方法启发，再结合linux中libc的源码。研究出了double free的利用方法。虽然有关double free的利用技巧已经不是一个秘密。不过好像很少有相关的中文的介绍，所以以一个初学者的角度来讲解一下double free漏洞的利用方法。 如果有错误，希望大家批评指正。Orz</p>
+        </p><p>最近在研究一些堆上面的漏洞。然后某一天骑自行车在路上跑的时候我突然悟出了Double Free的真谛。 2333好像太中二了一点，我是根据堆溢出的利用方法启发，再结合linux中libc的源码。研究出了double free的利用方法。虽然有关double free的利用技巧已经不是一个秘密。不过好像很少有相关的中文的介绍，所以以一个初学者的角度来讲解一下double free漏洞的利用方法。 如果有错误，希望大家批评指正。Orz</p>
 
 <h1>0x00简介</h1>
 
-<hr />
+<hr>
 
 <p>Double Free其实就是同一个指针free两次。虽然一般把它叫做double free。其实只要是free一个指向堆内存的指针都有可能产生可以利用的漏洞</p>
 
@@ -30,7 +30,7 @@
 
 <h1>0x01内存管理介绍</h1>
 
-<hr />
+<hr>
 
 <p>这里先简单的介绍一下glibc中内存管理的一些内容。帮助理解漏洞产生的原理。因为没有进行非常深入的研究，欢迎大神们指正补充。为了照顾新手，我写的比较详细，大神们请跳过</p>
 
@@ -58,7 +58,7 @@
 
 <p>所有空闲的chunk之间的联系就像这样</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081305142881196.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081305142881196.jpg" alt="enter image description here"></p>
 
 <p>手绘轻喷。</p>
 
@@ -149,7 +149,7 @@ BK-&gt;fd = FD;
 
 <h1>0x02漏洞的原理</h1>
 
-<hr />
+<hr>
 
 <p>要利用Double Free的漏洞。我们就要让系统进行unlink的操作，达到篡改指针的目的。但是一般的情况下，我们两次释放同一块内存会被操作系统给检测出来，怎么欺骗过操作系统才是最重要的。</p>
 
@@ -171,7 +171,7 @@ BK-&gt;fd = FD;
 
 <p>然后释放这2块内存。这样子我们就可以在距离第一个指针偏移量为0x200的地方有了一个野指针。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081305142832639.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081305142832639.png" alt="enter image description here"></p>
 
 <p>我们留下了一个野指针p指向偏移为0x200的地方。然后我们需要做的就是伪造chunk。再free野指针p。首先是申请一块更大的内存，大小应该等于我们刚才申请的内存的总和。</p>
 
@@ -187,7 +187,7 @@ BK-&gt;fd = FD;
 
 <p>现在的chunk就是这个样子了</p>
 
-<p><img src="http://static.wooyun.org//drops/20150813/2015081305142948112.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081305142948112.png" alt="enter image description here"></p>
 
 <p>可以看到现在我们在内存中伪造了出了２个chunk。它们的结构就像图中我们看到的样子。首先是第一个chunk的chunk头部分。我们分别填上了0x０和0x1f9代表了前一个chunk正在使用，当前chunk的大小是１f8。然后就是伪造的双向链表指针了。为了绕过unlink中的检查，这里需要稍微构造一下这个双向链表的指针了。payload中的0x0804bfc0位置其实就是存放在.data段中的指针ptr。这样子就可以绕过保护了。</p>
 
@@ -205,7 +205,7 @@ BK-&gt;fd = FD;
   <ul>
   <li><a href="https://gitcafe.com/zh_explorer/zh_explorer/blob/master/heap.py">poc传送门</a></li>
   </ul>
-</blockquote>      </p>
+</blockquote>      <p></p>
     
 			</body>
 		</html>

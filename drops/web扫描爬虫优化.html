@@ -3,14 +3,14 @@
 			<head>
 			     <title>web扫描爬虫优化 - smarttang</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/3831">http://drops.wooyun.org/tips/3831</a></h1>
 				
       <p>
-        <h2>0x01 需求背景</h2>
+        </p><h2>0x01 需求背景</h2>
 
-<hr />
+<hr>
 
 <p>公司要弄自动化的扫描工具，目前市面上的工具都无法针对业务进行检测，所以只能自己开发。辣么，就有个问题，爬虫需要自己去写。。。</p>
 
@@ -18,13 +18,13 @@
 
 <h2>0x02 遇到问题</h2>
 
-<hr />
+<hr>
 
 <p>本身在爬虫上轻车熟路，很轻易就写出了一个根据多线程的爬虫，完成整站扫描，但是问题来了，效率如何提高。仔细观察下扫描的链接就发现，它爬取了很多链接，都是一些重复性比较高的链接，例如以下：</p>
 
 <!--more-->
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/file0001.jpg"><img src="http://static.wooyun.org/20141113/2014111302264852067.jpg" alt="" title="file0001" width="478" height="142" class="aligncenter size-full wp-image-3860" /></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/file0001.jpg"><img src="../images_result/images/2014111302264852067.jpg" alt="" title="file0001" width="478" height="142" class="aligncenter size-full wp-image-3860"></a></p>
 
 <p>这些链接都是静态的页面，也就是一些新闻之类的，页面架构的都差不多，这个情况我们自己知道，但是爬虫是不了解的。它只是按照我们指定的规则去做，所以导致爬虫效率降低。</p>
 
@@ -74,31 +74,31 @@
 
 <h2>0x03 奇葩的实验</h2>
 
-<hr />
+<hr>
 
 <p>找到了这些规律后，应该考虑怎样去把爬虫的质量提升起来，降低重复率，然后就有了以下奇葩的实验：</p>
 
 <p>1）先建立规则：</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/file00021.png"><img src="http://static.wooyun.org/20141113/2014111302264812478.png" alt="" title="file0002" width="755" height="146" class="aligncenter size-full wp-image-3861" /></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/file00021.png"><img src="../images_result/images/2014111302264812478.png" alt="" title="file0002" width="755" height="146" class="aligncenter size-full wp-image-3861"></a></p>
 
 <p>2) 然后针对这些规则进行引用、测试。</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/file0003.jpg"><img src="http://static.wooyun.org/20141113/2014111302264882511.jpg" alt="" title="file0003" width="1026" height="298" class="aligncenter size-full wp-image-3862" /></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/file0003.jpg"><img src="../images_result/images/2014111302264882511.jpg" alt="" title="file0003" width="1026" height="298" class="aligncenter size-full wp-image-3862"></a></p>
 
 <p>运行结果诸如:</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/file0004.jpg"><img src="http://static.wooyun.org/20141113/2014111302264817301.jpg" alt="" title="file0004" width="521" height="174" class="aligncenter size-full wp-image-3863" /></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/file0004.jpg"><img src="../images_result/images/2014111302264817301.jpg" alt="" title="file0004" width="521" height="174" class="aligncenter size-full wp-image-3863"></a></p>
 
 <p>确实达到了我期望的结果…. 本文只是抛砖引玉，可能代码略挫。各位大侠轻拍，射射。</p>
 
 <p>【实验前】</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/file0005.jpg"><img src="http://static.wooyun.org/20141113/2014111302264957069.jpg" alt="" title="file0005" width="487" height="39" class="aligncenter size-full wp-image-3864" /></a></p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/file0005.jpg"><img src="../images_result/images/2014111302264957069.jpg" alt="" title="file0005" width="487" height="39" class="aligncenter size-full wp-image-3864"></a></p>
 
 <p>【实验后】</p>
 
-<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/file0006.jpg"><img src="http://static.wooyun.org/20141113/2014111302264956279.jpg" alt="" title="file0006" width="474" height="52" class="aligncenter size-full wp-image-3865" /></a></p>      </p>
+<p><a href="http://drops.wooyun.org/wp-content/uploads/2014/11/file0006.jpg"><img src="../images_result/images/2014111302264956279.jpg" alt="" title="file0006" width="474" height="52" class="aligncenter size-full wp-image-3865"></a></p>      <p></p>
     
 			</body>
 		</html>

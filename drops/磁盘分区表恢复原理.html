@@ -3,18 +3,18 @@
 			<head>
 			     <title>磁盘分区表恢复原理 - purpleroc</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12043">http://drops.wooyun.org/tips/12043</a></h1>
 				
       <p>
-        <p><strong>Author: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e0909592908c85928f83a0d098a6a1cdb485818d">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
+        </p><p><strong>Author: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e0909592908c85928f83a0d098a6a1cdb485818d">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
 
-<p><strong>Email: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4c2d282125220c7c342a2d622f20392e">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
+<p><strong>Email: <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4c2d282125220c7c342a2d622f20392e">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
 
 <h1>0x00 引子</h1>
 
-<hr />
+<hr>
 
 <p>实在是词穷想不到要怎么写题目了，就把vs中的工程名当题目吧。</p>
 
@@ -28,7 +28,7 @@
 
 <h1>0x01 背景</h1>
 
-<hr />
+<hr>
 
 <p>事情是这样的，这几天在测试TrueCrypt解密的时候，碰到这么一种情况：</p>
 
@@ -40,17 +40,17 @@
 
 <p>这时，我的解密工具便不能直接挂载了，双击出现：</p>
 
-<p>图1： <img src="http://static.wooyun.org//drops/20160113/2016011311113517321148.png" alt="Alt text" /></p>
+<p>图1： <img src="../images_result/images/2016011311113517321148.png" alt="Alt text"></p>
 
 <p>Winhex打开看了看，解密后的数据都是正确的，也看到了DBR：</p>
 
-<p>图2： <img src="http://static.wooyun.org//drops/20160113/2016011311113866691224.png" alt="Alt text" /></p>
+<p>图2： <img src="../images_result/images/2016011311113866691224.png" alt="Alt text"></p>
 
 <p>可还是打不开，为啥呢？猜测是分区表被破坏了。那怎么修复呢？瞬间想到了大一那会儿帮别人修电脑，搞坏分区表，花了一晚上找数据（而且还没找全）的黑历史，毕竟那会儿不知道用重建分区表的功能，也不理解原理，也就那次之后，呆图书馆看了蛮多数据恢复的书籍，去了解原理。</p>
 
 <p>于是对解密后的文件做了个镜像，用数据恢复软件Diskgenuis打开，搜索并重建分区表，得到结果如下：</p>
 
-<p>图3： <img src="http://static.wooyun.org//drops/20160113/2016011311114011332318.png" alt="Alt text" /></p>
+<p>图3： <img src="../images_result/images/2016011311114011332318.png" alt="Alt text"></p>
 
 <p>发现他很神奇的把两个分区找回来了，如果点保存，再去winhex中看，就能当磁盘来分析了。</p>
 
@@ -66,7 +66,7 @@
 
 <h1>0x02 寻址方式（CHS/LBA）</h1>
 
-<hr />
+<hr>
 
 <p>在用正常磁盘做讲解前先来了解下磁盘的两种寻址方式，一种是CHS（cylinder head sector）寻址方式、一种是LBA（Logical Block Addressing）逻辑块寻址方式。其中CHS（寻址方式）在分区表中使用24个bit位（前10位表示cylinder、中间8位表示head、后6位表示sector），其最大寻址空间为8GB，后因为其满足不了要求了，人们给他扩充到28bit，但寻址空间也只有128G，面对现有的动辄上TB的硬盘还是无能为力。LBA是用来取代CHS的，LBA是一个整数，常见有32bit和64bit，32bit最大寻址空间达到2TB。</p>
 
@@ -80,7 +80,7 @@
 
 <h1>0x03 主引导记录MBR</h1>
 
-<hr />
+<hr>
 
 <p>接着，来看看正常的磁盘中的MBR，所谓MBR即Main Boot Record 主引导记录区，位于整个硬盘的0磁道0柱面1扇区（也可以用LBA描述成0扇区）。总共占512字节，通常也就是1个扇区的大小。其重要作用就是负责从BIOS手中接过引导权，再去找可引导的分区，并将权限交给可引导的DBR（Dos Boot Record），完成系统启动。</p>
 
@@ -97,19 +97,19 @@ typedef struct MBR_T
 
 <p>对照着结构体，我们看看winhex中的截图：</p>
 
-<p>图4： <img src="http://static.wooyun.org//drops/20160113/2016011311114487613420.png" alt="Alt text" /></p>
+<p>图4： <img src="../images_result/images/2016011311114487613420.png" alt="Alt text"></p>
 
 <p>黄色区域就是boot_code所占用的446个字节，红色部分就是DPT，蓝色就是标志位了。 　　</p>
 
 <h1>0x04 磁盘分区表DPT</h1>
 
-<hr />
+<hr>
 
 <p>既然找到了DPT，那肯定是要分析清楚，它是干嘛用的，里面都有些什么信息呢？</p>
 
 <p>直接用winhex的模板看看先：</p>
 
-<p>图5： <img src="http://static.wooyun.org//drops/20160113/2016011311114744434517.png" alt="Alt text" /></p>
+<p>图5： <img src="../images_result/images/2016011311114744434517.png" alt="Alt text"></p>
 
 <p>桌面太小，截图不完全，但也大体知道了里面会有些什么信息，顺便翻出结构体如下：</p>
 
@@ -142,7 +142,7 @@ typedef struct PartTableRecord_t
 
 <p>再回到winhex中看分区信息，来对照DPT一一理解。</p>
 
-<p>图6： <img src="http://static.wooyun.org//drops/20160113/2016011311114944886614.png" alt="Alt text" /></p>
+<p>图6： <img src="../images_result/images/2016011311114944886614.png" alt="Alt text"></p>
 
 <p>上图可以看出，这块硬盘总共有5个分区。其中主分区三个，扩展分区1个，逻辑分区2个（逻辑分区是在扩展分区里面的）。也就是MBR中64个字节除了主分区就是扩展分区。</p>
 
@@ -161,17 +161,17 @@ dwTotalSector = 0x00036000    //分区大小 221184
 
 <p>在winhex中Ctrl+G输入扇区号184448，跟随过去：</p>
 
-<p>图7： <img src="http://static.wooyun.org//drops/20160113/2016011311115690654713.png" alt="Alt text" /></p>
+<p>图7： <img src="../images_result/images/2016011311115690654713.png" alt="Alt text"></p>
 
 <p>还是和刚才一样，黄色部分为前446字节，这里全为0，因为不需要boot_code，而后64字节为扩展分区的分区表信息。在图的左右下方分别标示出了现在所在的偏移扇区位置，以及总扇区个数和偏移位置（字节数表示）。还是来看这里的DPT信息吧，有两个分区有信息，这次直接用winhex来看：</p>
 
-<p>图8： <img src="http://static.wooyun.org//drops/20160113/2016011311115810414813.png" alt="Alt text" /></p>
+<p>图8： <img src="../images_result/images/2016011311115810414813.png" alt="Alt text"></p>
 
 <p>第一个分区起始扇区是128，总大小为122880，类型是ntfs；第二个分区起始扇区是123008，总大小为94338，类型是扩展分区。需要注意的是，扩展分区的起始扇区是需要加上基地址（扩展分区偏移扇区位置）的。也就是说，我们看到的第一个分区，实际起始地址为：184448 + 128 = 184576，与图6的partition4的起始位置是一样的，那下一个呢？再来一个扩展分区的类型是怎么个意思，也还是算一下实际的起始地址：184448 + 123008 = 307456。</p>
 
 <p>再次Ctrl + G跟随过去：</p>
 
-<p>图9： <img src="http://static.wooyun.org//drops/20160113/2016011311115923405912.png" alt="Alt text" /></p>
+<p>图9： <img src="../images_result/images/2016011311115923405912.png" alt="Alt text"></p>
 
 <p>同样的，再次找到一个DPT信息，这里面只有一项，也就是图6中的第五个分区了，也来算一下吧：</p>
 
@@ -179,11 +179,11 @@ dwTotalSector = 0x00036000    //分区大小 221184
 
 <p>从上面的实例中可以得出，整个磁盘大概是这么分布的：</p>
 
-<p>图10： <img src="http://static.wooyun.org//drops/20160113/20160113111201672521014.png" alt="Alt text" /></p>
+<p>图10： <img src="../images_result/images/20160113111201672521014.png" alt="Alt text"></p>
 
 <p>再看扩展分区的链接图示：</p>
 
-<p>图11： <img src="http://static.wooyun.org//drops/20160113/20160113111206571311116.png" alt="Alt text" /></p>
+<p>图11： <img src="../images_result/images/20160113111206571311116.png" alt="Alt text"></p>
 
 <p>于是，回到背景里提到的目标，我们要做的就是，根据磁盘中存有的信息，来重建出这么一个分区表。</p>
 
@@ -191,7 +191,7 @@ dwTotalSector = 0x00036000    //分区大小 221184
 
 <h1>0x05 操作系统引导分区DBR</h1>
 
-<hr />
+<hr>
 
 <p>在上一节里面，提到了DPT，也提到了分区表的结构体，从结构体里我们可以看到偏移5的位置有键值byPartType，分区类型，去找了找资料，这里的取值非常多，常见类型大致如下：</p>
 
@@ -219,7 +219,7 @@ OCH WINDOWS95 FAT32
 
 <p>首先，从MBR中看到分区信息能知道，分区1是NTFS分区，在winhex中跟随上一节中分区1的起始位置，可以看到如下信息，图12：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160113/20160113111208175881211.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/20160113111208175881211.png" alt="Alt text"></p>
 
 <p>已将每个数据对应的结构和数据都着色了，然后也是时候拿出NTFS文件系统中DBR的数据结构了：</p>
 
@@ -281,7 +281,7 @@ typedef struct ntfs_boot_sector_t {
 
 <p>为了证实，我们在winhex中跟随到6952扇区，如下：</p>
 
-<p>图13： <img src="http://static.wooyun.org//drops/20160113/20160113111213450021311.png" alt="Alt text" /></p>
+<p>图13： <img src="../images_result/images/20160113111213450021311.png" alt="Alt text"></p>
 
 <p>在这里，我们也可以用MFT作为判断某个搜索到的DBR是否正确的条件。有想更详细了解MFT的可以去找找资料继续看文件管理方式，这里就不展开了，毕竟，我们这次主要目的是恢复分区表。</p></li>
 <li><p><code>mftmirr_lcn</code>：每个MFT表所占用的扇区数量。一般为2.</p></li>
@@ -293,7 +293,7 @@ typedef struct ntfs_boot_sector_t {
 
 <p>上一小节中，我们知道了怎么重建NTFS型分区，接着，来看看FAT32。回到图6中，看看第三个分区。winhex跟过去，得到截图如下，这次就不上色了，太累~~~</p>
 
-<p>图14： <img src="http://static.wooyun.org//drops/20160113/2016011311122110978149.png" alt="Alt text" /></p>
+<p>图14： <img src="../images_result/images/2016011311122110978149.png" alt="Alt text"></p>
 
 <p>找了找资料，翻出FAT32的结构体表示：</p>
 
@@ -338,7 +338,7 @@ typedef struct fat_boot_sector_t {
 
 <p>前面是BIOS Parameter Block结构体的一些信息，是公用的，后面的才是单纯的FAT32所需要的。用winhex的模板解析一下，得到下面的内容。</p>
 
-<p>图15： <img src="http://static.wooyun.org//drops/20160113/2016011311122396149157.png" alt="Alt text" /></p>
+<p>图15： <img src="../images_result/images/2016011311122396149157.png" alt="Alt text"></p>
 
 <p>首先，我们需要的文件类型是可以通过<code>system_id</code>来获取到的，起始扇区也是可以通过DBR所在的位置得到的，相对NTFS来说FAT32中少了<code>sectors_nbr</code>键值，那我们应该如何去获取到FAT32的总大小呢？</p>
 
@@ -351,7 +351,7 @@ typedef struct fat_boot_sector_t {
 <li>total_sect：本来可以用来表示分区大小的，可只是个长整形变量，只能正确表示小分区的大小，对于大分区无力了。</li>
 <li><p>reserved：保留扇区数，起始，他指的是第一个FAT1表所在的相对偏移位置，例如，在partition3中，起始地址是82048扇区，reserved扇区数量是6718扇区，可以得到，FAT1表起始扇区为82048 + 6718 = 88766。在winhex跟过去，得到信息如下：</p>
 
-<p>图16： <img src="http://static.wooyun.org//drops/20160113/2016011311122489331165.png" alt="Alt text" /></p></li>
+<p>图16： <img src="../images_result/images/2016011311122489331165.png" alt="Alt text"></p></li>
 <li><p>途中每一种颜色代表一个目录表项，绿色为0号FAT项，淡黄色为1号FAT项。通常0号FAT项总为0x0ffffff8。于是，这一特征也可以被我们当做判断分区表是否正确的标准。</p></li>
 <li><p>fats：表示的是FAT表的个数，通常为2个，即FAT1和FAT2。</p></li>
 <li><p><code>fat32_length</code>：每个FAT表的扇区数。在上面我们定位到了FAT1，那么FAT2就是用FAT1的起始位置加上每个FAT表的大小。</p></li>
@@ -379,7 +379,7 @@ typedef struct fat_boot_sector_t {
 
 <h1>0x06 FileMapping（文件映射）</h1>
 
-<hr />
+<hr>
 
 <p>首先需要从磁盘、磁盘镜像中找到DBR存在的痕迹，就需要对整个磁盘或镜像文件进行遍历搜索，由于分区是线性扩展的，而且DBR所在的位置永远的是扇区开头，并且独自占有一整个扇区。于是我们可以遍历文件或磁盘中的每个扇区来快速完成搜索。</p>
 
@@ -474,7 +474,7 @@ int Maping_file(char* big_file, LCN lOffset, long lSize)
 
 <h1>0x07 搜索DBR</h1>
 
-<hr />
+<hr>
 
 <p>这里的思路是，遍历整个磁盘，而后检测每个扇区，看是否满足NTFS或FAT32型分区格式。若满足，则键入到链表中。</p>
 
@@ -603,7 +603,7 @@ typedef struct dbr_list_t
 
 <h1>0x08 判断DBR</h1>
 
-<hr />
+<hr>
 
 <p>在上一小节，我们完成了对整个磁盘中可能存在的分区信息的搜索。那，搜索到的结果肯定不会全部正确或者可用，为了使重建的分区表更加可靠，需要对搜索到的分区信息进行筛选，以及链表信息的填充。</p>
 
@@ -787,7 +787,7 @@ int ShowDPT()
 
 <h1>0x09 重构DPT</h1>
 
-<hr />
+<hr>
 
 <p>重构DPT需要考虑的问题有以下几个：</p>
 
@@ -923,7 +923,7 @@ void ReBuildDPT(char* sz_file_path)
 
 <h1>0x0A 文件处理</h1>
 
-<hr />
+<hr>
 
 <p>通过前面的操作，可以得到处理好了的rebuild_list。接下来要做的就是用它来完成重建分区表，恢复DBR的工作。</p>
 
@@ -1034,47 +1034,47 @@ void HandleFile(char* file_path, rebuild_content_t* p_rebuild_list)
 
 <h1>0x0B 程序效果</h1>
 
-<hr />
+<hr>
 
 <p>还是用前面例子中用到的VHD文件来做演示，该VHD现在的情况是：先前新建过两个NTFS的分区，之后删除了一个NTFS，并重新格式化成FAT32，再然后，我将其分区全部删除，并新建了3个NTFS与两个FAT32，最终效果如图6所示。现在我们用刚写好的工具来对它进行搜索分析。</p>
 
-<p>图17： <img src="http://static.wooyun.org//drops/20160113/2016011311122693720174.png" alt="Alt text" /></p>
+<p>图17： <img src="../images_result/images/2016011311122693720174.png" alt="Alt text"></p>
 
 <p>可以看到它总共搜索到了8个可用的DBR信息，但显然其中有一些是前几次分区留下的内容。选择保留1.2.3.5.7五个分区（也就是图6所示的五个分区），起始你选择保留第三个的时候，就不有机会让你选择第四个了，因为他们是冲突的。结果如图18：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160113/2016011311124039941184.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016011311124039941184.png" alt="Alt text"></p>
 
 <p>提示写文件成功，并已经可以直接当做VHD文件挂载了，我们用winhex打开处理过的文件，得到图19：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160113/2016011311124480234193.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016011311124480234193.png" alt="Alt text"></p>
 
 <p>可以看到，重构后的分区表几乎与原来的分区表一致。</p>
 
 <p>接着，我们试着来恢复前几次分区留下的信息，看是否能够成功。图20：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160113/2016011311124647051203.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016011311124647051203.png" alt="Alt text"></p>
 
 <p>这里我选择恢复了一个NTFS和一个FAT32，再进winhex中查看，得到图21：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160113/20160113111249932662110.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/20160113111249932662110.png" alt="Alt text"></p>
 
 <p>可以看到第一个NTFS分区，是并不存在与图6的五个分区中的。</p>
 
 <p>再次，我们用图1的那个TrueCrypt解密后的打不开的磁盘作为例子，看看这次能否恢复出正确的分区表，并且，实现加载。找到可用的DBR信息如图22：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160113/2016011311125762376225.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016011311125762376225.png" alt="Alt text"></p>
 
 <p>按照逻辑，选择了第一个后，就只能选择1和2。已提示写文件成功，图23：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160113/2016011311130320062233.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016011311130320062233.png" alt="Alt text"></p>
 
 <p>Winhex解析如图24：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160113/2016011311130534963243.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016011311130534963243.png" alt="Alt text"></p>
 
 <p>正确完整恢复，所有文件也能正确解析，图25：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160113/2016011311130697867252.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016011311130697867252.png" alt="Alt text"></p>
 
 <p>接着，在做只留下尾部备份分区测试程序需找情况的时候，发现起始我们程序中并没有必要将备份分区复制到起始扇区，因为，也能正常解析。</p>
 
@@ -1082,7 +1082,7 @@ void HandleFile(char* file_path, rebuild_content_t* p_rebuild_list)
 
 <h1>0x0C Summarize</h1>
 
-<hr />
+<hr>
 
 <p>加上写代码的时间和些这文章的时间，大概花费了近十天吧。各种找资料、调程序、做样本，也算是把恢复分区表的原理弄清楚了。同时，也把忘得差不多的磁盘格式、文件系统什么的再捡起来看了看。当然文章其实并不详细，因为关注点不一样，就没讲太多关于文件系统的内容了。再往下，可以详细到文件的恢复等等，当然，起始也没必要去做，毕竟现有的工具一大堆，我只是突然感兴趣就拿来实现了一把。</p>
 
@@ -1091,11 +1091,11 @@ void HandleFile(char* file_path, rebuild_content_t* p_rebuild_list)
 <p>写文章也比较仓促，也没校稿习惯，若有勘误，还请谅解并提醒更正。感谢！</p>
 
 <blockquote>
-  <p>源码下载地址：<a href="https://github.com/purpleroc/hand_disk">https://github.com/purpleroc/hand_disk</a><br />
-  另推荐学习源码：testdisk、ReadPartTable<br />
-  ——Tracy_梓朋<br />
+  <p>源码下载地址：<a href="https://github.com/purpleroc/hand_disk">https://github.com/purpleroc/hand_disk</a><br>
+  另推荐学习源码：testdisk、ReadPartTable<br>
+  ——Tracy_梓朋<br>
   2016年1月6日21:31:52</p>
-</blockquote>      </p>
+</blockquote>      <p></p>
     
 			</body>
 		</html>

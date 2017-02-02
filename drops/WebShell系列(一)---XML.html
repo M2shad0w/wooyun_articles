@@ -3,16 +3,16 @@
 			<head>
 			     <title>WebShell系列(一)---XML - zcgonvh</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/5799">http://drops.wooyun.org/tips/5799</a></h1>
 				
       <p>
-        <p>想来想去还是归结成一个系列吧，虽然说在现在各种讲究高大上的时代还谈webshell实在是一种没什么品味的做法。 基本上也就是一些新型webshell、特殊环境下的特殊利用、特殊webshell的菜刀中转脚本等，外带一些对应的分析。 先挖个坑，至于填坑么⋯⋯看情况吧。</p>
+        </p><p>想来想去还是归结成一个系列吧，虽然说在现在各种讲究高大上的时代还谈webshell实在是一种没什么品味的做法。 基本上也就是一些新型webshell、特殊环境下的特殊利用、特殊webshell的菜刀中转脚本等，外带一些对应的分析。 先挖个坑，至于填坑么⋯⋯看情况吧。</p>
 
 <h1>0x01 xml与xslt</h1>
 
-<hr />
+<hr>
 
 <p>相信所有人对xml都不陌生，其被广泛的应用于数据数据传输、保存与序列化中，是一种极为强大的数据格式。强大必然伴随着复杂，xml在发展中派生出了一系列标准，包括DTD、XSD、XDR、XPATH以及XSLT等。</p>
 
@@ -50,11 +50,11 @@
 
 <h1>0x02 asp与xml</h1>
 
-<hr />
+<hr>
 
 <p>asp中最常见的就是vbscript和jscript两种语言，可通过创建MSXML2.DOMDocument COM对象获取一个xml解析器。 通过oleview可以看到，此对象公开了一个transformNode方法来进行XSL转换:</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503203557213.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503203557213.png" alt="enter image description here"></p>
 
 <p>具体的调用代码大致如下：</p>
 
@@ -95,7 +95,7 @@ response.write xmldoc.TransformNode(xsldoc)
 &lt;root&gt;cmd /c dir&lt;/root&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503203522297.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503203522297.png" alt="enter image description here"></p>
 
 <p>可见成功执行了命令，其结果中的特殊字符都被转换成了xml实体，需要进一步进行处理。</p>
 
@@ -103,7 +103,7 @@ response.write xmldoc.TransformNode(xsldoc)
 
 <h1>0x03 .net与xml</h1>
 
-<hr />
+<hr>
 
 <p>xml可以称为.net的核心之一，[System.Xml]System.Xml.Xsl.XslCompiledTransform类和[System.Xml]System.Xml.Xsl.XslTransform类提供了XSL转换功能。</p>
 
@@ -207,13 +207,13 @@ xct.Transform(xmldoc,null,new MemoryStream());
 
 <p>此时可使用菜刀直接进行连接，功能与aspx(eval)完全相同：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503203527758.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503203527758.png" alt="enter image description here"></p>
 
 <p>最后要注意：xml的内嵌脚本块需要FullTrust信任等级，在安全模式下不能运行。当然，安全模式下正常的aspx一句话也不能运行，所以并不能算是一个缺点。</p>
 
 <h1>0x04 php与xml</h1>
 
-<hr />
+<hr>
 
 <p>在php的官方文档中搜索xsl，将直接定位到XSLTProcessor类，在页面中可以看到很明显的registerPHPFunctions方法。 方法的示例就是一个完整的调用过程，将函数修改为assert并略作精简，可以得到以下xsl：</p>
 
@@ -236,7 +236,7 @@ xct.Transform(xmldoc,null,new MemoryStream());
 
 <p>由于php并没有上下文的概念，所有的代码都是在同一代码空间中执行，在xsl中可直接访问GPCS，于是可以直接使用菜刀连接：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503203581131.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503203581131.png" alt="enter image description here"></p>
 
 <p>同样的功能齐全。</p>
 
@@ -244,7 +244,7 @@ xct.Transform(xmldoc,null,new MemoryStream());
 
 <h1>0x05 总结与其他</h1>
 
-<hr />
+<hr>
 
 <p>在上述基于xslt转换的webshell中，所有的敏感调用都是以字符串形式存在于xml中，避免了基于关键字的webshell查杀。同时，由于xslt是一项正常的功能，对xsl转换器所提供的方法进行查杀、禁用很不实际。例如：msxml组件被大量的系统用于远程文件下载或xmlrpc，基本上是不可能禁用的。 最后，服务端与客户端的交互实质上是通过xml进行的，所以可以伪装成xmlrpc/soap等协议，借助xml的转义将敏感字符转义为实体字符，以躲避基于流量分析的防火墙。例如：将cmd替换为等效的实体字符cmd等。</p>
 
@@ -258,7 +258,7 @@ xct.Transform(xmldoc,null,new MemoryStream());
 
 <h1>0x06 参考文档</h1>
 
-<hr />
+<hr>
 
 <p>Bypassing Windows 8.1 Mitigations using Unsafe COM Objects(老外借助xslt转换的DVE利用)： http://www.contextis.com/resources/blog/windows-mitigaton-bypass/</p>
 
@@ -276,7 +276,7 @@ xct.Transform(xmldoc,null,new MemoryStream());
 
 <p>百度网盘：http://pan.baidu.com/s/1bnq9I8J</p>
 
-<p>解压密码见注释。</p>      </p>
+<p>解压密码见注释。</p>      <p></p>
     
 			</body>
 		</html>

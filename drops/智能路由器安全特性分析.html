@@ -3,22 +3,22 @@
 			<head>
 			     <title>智能路由器安全特性分析 - 腾讯安全中心</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7318">http://drops.wooyun.org/tips/7318</a></h1>
 				
       <p>
-        <p>博文作者：zhuliang</p>
+        </p><p>博文作者：zhuliang</p>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>随着互联网的发展，越来越多公司推出了智能路由器，这些智能路由器给用户带来了众多便利的功能，同时也采用了一些传统路由器不具备的安全特性，本文在简要分析下这些安全特性，供相关技术人员参考。</p>
 
 <h1>0x01 概述</h1>
 
-<hr />
+<hr>
 
 <p>传统路由器有意或无意地使用了种种不安全的特性，如预留后门，这些后门原本是为了现场调试方便，但是也开放了黑客进入的通道。又比如某些路由器<code>WPS（Wi-Fi Protected Setup）</code>的PIN码是可以根据路由器MAC地址推导出来的，这使得即使用户设置了复杂的WiFi密码，黑客也可以轻易破解进而渗透。另外，大部分路由器在固件更新时都没进行签名校验，这使得黑客可以通过固件更新来植入木马，进而永久控制用户的路由器……等等这些不安全特性，是导致用户隐私泄露和财产损失的帮凶。 在这样的背景下，智能路由器采用了一些安全特性，特别值得赞赏。</p>
 
@@ -26,13 +26,13 @@
 
 <h1>0x02 安全特性</h1>
 
-<hr />
+<hr>
 
 <p>下面以路由器生产商为单位，介绍其采用的安全特性及其安全特性带来的好处。只做纯技术的探讨，不涉及其他。</p>
 
 <h1>0x03 360安全路由器</h1>
 
-<hr />
+<hr>
 
 <h2>现场调试接口RSA-1024加密和校验</h2>
 
@@ -46,9 +46,9 @@
 
 <p>见程序<code>debug_telnet</code>如下代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150721/2015072106080341248b4a523c8f9b4feeb9304f1a92da4ceca" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015072106080341248b4a523c8f9b4feeb9304f1a92da4ceca" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150721/20150721060804229880909453d7b5274cddee6626fb93e77fe" alt="enter image description here" /></p>
+<p><img src="../images_result/images/20150721060804229880909453d7b5274cddee6626fb93e77fe" alt="enter image description here"></p>
 
 <p>telnet服务端启动后，只要telnet路由器的ip地址再输入用户名和密码（<code>360user</code>和<code>alpha360</code>）便可以获得<code>root shell</code>。</p>
 
@@ -56,7 +56,7 @@
 
 <p>公钥的详情如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150721/2015072106080591647afa5dff831146060d86cb4ca892de11c" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015072106080591647afa5dff831146060d86cb4ca892de11c" alt="enter image description here"></p>
 
 <p>总的来说，C301路由器采用非对称加密实现既能得到路由器的root权限，又能防止黑客获得root权限，相对于预留后门的做法，表现出值得传统路由器学习之处。</p>
 
@@ -66,7 +66,7 @@
 
 <h1>0x04 小米路由器</h1>
 
-<hr />
+<hr>
 
 <h2>固件更新签名校验</h2>
 
@@ -76,7 +76,7 @@
 
 <h1>0x05 极路由</h1>
 
-<hr />
+<hr>
 
 <h2>固件更新Hash校验</h2>
 
@@ -94,7 +94,7 @@
 
 <h1>0x07 总结</h1>
 
-<hr />
+<hr>
 
 <p>尽管智能路由器在安全方面还有很大改进的空间，它所采用的安全特性，值得传统路由器生产商学习。</p>
 
@@ -102,7 +102,7 @@
 
 <p>为了保护用户的安全和防止用户因黑客入侵而造成损失，笔者认为，路由器厂商可以参考以下的安全设计规范。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150721/20150721060805551106d2c43a353823ce41faee6c1e8726dba" alt="enter image description here" /></p>      </p>
+<p><img src="../images_result/images/20150721060805551106d2c43a353823ce41faee6c1e8726dba" alt="enter image description here"></p>      <p></p>
     
 			</body>
 		</html>

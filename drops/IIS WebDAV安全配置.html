@@ -3,14 +3,14 @@
 			<head>
 			     <title>IIS WebDAV安全配置 - 瞌睡龙</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/238">http://drops.wooyun.org/papers/238</a></h1>
 				
       <p>
-        <h3>0x00 简介</h3>
+        </p><h3>0x00 简介</h3>
 
-<hr />
+<hr>
 
 <p>WebDAV是一种基于 HTTP 1.1协议的通信协议.它扩展了HTTP 1.1，在GET、POST、HEAD等几个HTTP标准方法以外添加了一些新的方法。</p>
 
@@ -46,7 +46,7 @@
 
 <h3>0x01 配置</h3>
 
-<hr />
+<hr>
 
 <p>为了安全上的考虑，IIS默认并不会启动WebDAV的功能，因此必须另外来激活它。</p>
 
@@ -54,15 +54,15 @@
 
 <p>开启WebDAV之后，IIS就支持<code>PROPFIND</code>、<code>PROPPATCH</code>、<code>MKCOL</code>、<code>DELETE</code>、<code>PUT</code>、<code>COPY</code>、<code>MOVE</code>、<code>LOCK</code>、<code>UNLOCK</code>等方法了。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071411022117223.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071411022117223.jpeg" alt="enter image description here"></p>
 
 <p>当IIS中的配置允许写入的时候就可以直接PUT文件上去，由此可能引发非常严重的安全问题，强烈建议禁制</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071411022191372.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071411022191372.jpeg" alt="enter image description here"></p>
 
 <h3>0x02 危害</h3>
 
-<hr />
+<hr>
 
 <p>当开启了WebDAV后，IIS中又配置了目录可写，便会产生很严重的问题。 wooyun上由此配置产生的问题很多，并且有老外黑了一群中国政府站有一部分就是由于此配置。 危害巨大，操作简单，直接批量扫描，上传shell。</p>
 
@@ -80,7 +80,7 @@
 
 <h3>0x03 查找存在问题的服务器</h3>
 
-<hr />
+<hr>
 
 <p>对服务器发送OPTION包：</p>
 
@@ -129,7 +129,7 @@ Destination: http://www.test.com/test.asp;.jpg
 
 <h3>0x03 修复方案</h3>
 
-<hr />
+<hr>
 
 <h4>1 禁用WebDAV。</h4>
 
@@ -149,7 +149,7 @@ Destination: http://www.test.com/test.asp;.jpg
 
 <p>不要选取“启用匿名访问”，以免招致攻击。选择安全的验证方法，选择“集成Windows身份验证”。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071411022225796.jpeg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071411022225796.jpeg" alt="enter image description here"></p>
 
 <p>参考：</p>
 
@@ -161,7 +161,7 @@ Destination: http://www.test.com/test.asp;.jpg
 
 <p><a href="http://www.daxigua.com/archives/2747">http://www.daxigua.com/archives/2747</a></p>
 
-<p><a href="http://blog.163.com/wfruee@126/blog/static/4116699420123261427232/">http:<span class="__cf_email__" data-cfemail="81aeaee3edeee6afb0b7b2afe2eeecaef6e7f3f4e4e4c1b0b3b7">[email&#160;protected]</span><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/blog/static/4116699420123261427232/</a></p>      </p>
+<p><a href="http://blog.163.com/wfruee@126/blog/static/4116699420123261427232/">http:<span class="__cf_email__" data-cfemail="81aeaee3edeee6afb0b7b2afe2eeecaef6e7f3f4e4e4c1b0b3b7">[email&#160;protected]</span><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>/blog/static/4116699420123261427232/</a></p>      <p></p>
     
 			</body>
 		</html>

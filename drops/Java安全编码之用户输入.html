@@ -3,18 +3,18 @@
 			<head>
 			     <title>Java安全编码之用户输入 - Budi</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/15129">http://drops.wooyun.org/tips/15129</a></h1>
 				
       <p>
-        <h1>0x00 安全引言</h1>
+        </p><h1>0x00 安全引言</h1>
 
-<hr />
+<hr>
 
 <h2>1、传统Web应用与新兴移动应用</h2>
 
-<p>（1）传统Web应用：浏览器 HTTP 服务器<br />
+<p>（1）传统Web应用：浏览器 HTTP 服务器<br>
 （2）新兴移动应用：APP HTTP 服务器</p>
 
 <p>从安全角度看，传统Web应用与新兴移动应用没有本质区别</p>
@@ -29,25 +29,25 @@
 
 <p>例如：</p>
 
-<p>√ 请求参数->多次提交或者不提交<br />
-√ 修改Cookie<br />
-√ 修改HTTP信息头<br />
+<p>√ 请求参数->多次提交或者不提交<br>
+√ 修改Cookie<br>
+√ 修改HTTP信息头<br>
 √ 请求顺序->跳过或者打乱</p>
 
 <h2>3、Web应用防御</h2>
 
-<p>（1）完善的异常处理<br />
-（2）监控<br />
+<p>（1）完善的异常处理<br>
+（2）监控<br>
 （3）日志：记录重要业务、异常的详细请求信息</p>
 
 <h2>4、对输入的处理</h2>
 
-<p>建议采用：白名单<br />
+<p>建议采用：白名单<br>
 尽量避免：净化或黑名单</p>
 
 <h1>0x01 SQL注入</h1>
 
-<hr />
+<hr>
 
 <h2>1、原理：</h2>
 
@@ -225,12 +225,12 @@ SQL Paramter:' or 'a'='a
 
 <h2>3、防范建议：</h2>
 
-<p>√ 采用参数查询即预编译方式（<strong>首选</strong>）<br />
+<p>√ 采用参数查询即预编译方式（<strong>首选</strong>）<br>
 √ 字符串过滤</p>
 
 <h1>0x02 XML注入</h1>
 
-<hr />
+<hr>
 
 <h2>1、原理</h2>
 
@@ -368,13 +368,13 @@ public class XMLFormat{
 
 <h2>3、防范建议：</h2>
 
-<p>√ 文档类型定义（Document Type Definition，DTD）<br />
-√ XML结构化定义文件（XML Schemas Definition）<br />
+<p>√ 文档类型定义（Document Type Definition，DTD）<br>
+√ XML结构化定义文件（XML Schemas Definition）<br>
 √ 白名单</p>
 
 <h1>0x03 XXE (XML external entity)</h1>
 
-<hr />
+<hr>
 
 <h2>1、原理：</h2>
 
@@ -522,7 +522,7 @@ public class XXEFormat {
 
 <h1>0x04命令注入</h1>
 
-<hr />
+<hr>
 
 <h2>1、原理：</h2>
 
@@ -631,13 +631,13 @@ public class OrderFormat {
 
 <h2>3、防范建议：</h2>
 
-<p>√ 白名单<br />
-√ 严格权限限制<br />
+<p>√ 白名单<br>
+√ 严格权限限制<br>
 √ 采用命令标号</p>
 
 <h1>0x05 压缩炸弹（zip bomb）</h1>
 
-<hr />
+<hr>
 
 <p>（1）合法输入：</p>
 
@@ -651,7 +651,7 @@ public class OrderFormat {
 高压缩比文件evil.zip
 </code></pre>
 
-<p><img src="http://static.wooyun.org/upload/image/201604/2016042910180073962.png" alt="" /></p>
+<p><img src="../images_result/images/2016042910180073962.png" alt=""></p>
 
 <h1>2、Java代码分析</h1>
 
@@ -761,7 +761,7 @@ Extracting:evil.txt 解压后大小：2000000000
 
 <h1>0x06 正则表达式注入</h1>
 
-<hr />
+<hr>
 
 <h1>1、原理：</h1>
 
@@ -941,7 +941,7 @@ line 5: 10:48:08 public[48964] Backup failed with error: 19
 
 <h1>0x07 未净化输入</h1>
 
-<hr />
+<hr>
 
 <p>（1）日志记录</p>
 
@@ -1071,7 +1071,7 @@ User Login Failed for Unknow User
 
 <h1>0x08 路径遍历</h1>
 
-<hr />
+<hr>
 
 <h2>　1、原理：</h2>
 
@@ -1169,12 +1169,12 @@ public class PathFormat {
 
 <h2>3、防范建议</h2>
 
-<p>√　严格的权限限制->安全管理器<br />
+<p>√　严格的权限限制->安全管理器<br>
 √　getCanonicalPath()在所有平台上对所有别名、快捷方式、符号链接采用统一的解析。</p>
 
 <h1>0x09 格式化字符串</h1>
 
-<hr />
+<hr>
 
 <h2>1、原理：</h2>
 
@@ -1268,12 +1268,12 @@ public class DateFormat {
 
 <h2>3、防范建议：</h2>
 
-<p>√　对用户输入进行安全检查<br />
+<p>√　对用户输入进行安全检查<br>
 √　在格式字符串中，杜绝使用用户输入参数</p>
 
 <h1>0x0A 字符串标准化</h1>
 
-<hr />
+<hr>
 
 <h2>1、原理：</h2>
 
@@ -1367,12 +1367,12 @@ Unicode编码的非法字符
 
 <h2>3、防范建议：</h2>
 
-<p>√　先按指定编码方式标准化字符串，再检查非法输入<br />
+<p>√　先按指定编码方式标准化字符串，再检查非法输入<br>
 √　检测非法字符</p>
 
 <h1>0x0B 最后总结</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>从安全角度看，移动应用与传统Web应用没有本质区别。</li>
@@ -1384,7 +1384,7 @@ Unicode编码的非法字符
 </ol></li>
 </ul>
 
-<p>参考文献: 《Java安全编码标准》</p>      </p>
+<p>参考文献: 《Java安全编码标准》</p>      <p></p>
     
 			</body>
 		</html>

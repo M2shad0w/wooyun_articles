@@ -3,14 +3,14 @@
 			<head>
 			     <title>Python中eval带来的潜在风险 - 隐形人真忙</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7710">http://drops.wooyun.org/tips/7710</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>eval是Python用于执行python表达式的一个内置函数，使用eval，可以很方便的将字符串动态执行。比如下列代码：</p>
 
@@ -52,7 +52,7 @@ win-20140812chj\administrator
 
 <h1>0x01 “安全”使用eval</h1>
 
-<hr />
+<hr>
 
 <p>现在提倡最多的就是使用eval的后两个参数来设置函数的白名单：</p>
 
@@ -93,7 +93,7 @@ win-20140812chj\administrator
 
 <h1>0x02 绕过执行代码1</h1>
 
-<hr />
+<hr>
 
 <p>被绕过的情景如下，小明知道了eval会带来一定的安全风险，所以使用如下的手段去防止eval执行任意代码：</p>
 
@@ -190,7 +190,7 @@ win-20140812chj\administrator
 
 <h1>0x03 拒绝服务攻击1</h1>
 
-<hr />
+<hr>
 
 <p>object的子类中有很多有趣的东西，执行以下代码查看：</p>
 
@@ -227,7 +227,7 @@ C:/&gt;
 
 <h1>0x04 拒绝服务攻击2</h1>
 
-<hr />
+<hr>
 
 <p>同样，我们甚至可以绕过<code>__builtins__</code>为None，造成一次拒绝服务攻击，Payload(来自老外blog)如下：</p>
 
@@ -239,7 +239,7 @@ C:/&gt;
 
 <h1>0x05 总结</h1>
 
-<hr />
+<hr>
 
 <p>从上面的内容我们可以看出，单单将内置模块置为空，是不够的，最好的机制是构造白名单，如果觉得比较麻烦，可以使用<code>ast.literal_eval</code>代替不安全的<code>eval</code>。</p>
 
@@ -249,7 +249,7 @@ C:/&gt;
 
 <p>【2】http://drops.wooyun.org/web/7490</p>
 
-<p>【3】http://stackoverflow.com/questions/3513292/python-make-eval-safe</p>      </p>
+<p>【3】http://stackoverflow.com/questions/3513292/python-make-eval-safe</p>      <p></p>
     
 			</body>
 		</html>

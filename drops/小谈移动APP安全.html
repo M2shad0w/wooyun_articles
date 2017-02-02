@@ -3,14 +3,14 @@
 			<head>
 			     <title>小谈移动APP安全 - zzR</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/749">http://drops.wooyun.org/tips/749</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>随着移动互联的扩张，移动APP承载了更多企业的终端梦。“用户手机安装APP以后，企业即埋下一颗种子，可持续与用户保持联系。”  种子是种下了，可要是它本身就是个[特洛伊木马]呢?试想你在某某知名APP平台下载安装一款知名APP，深更半夜突然响起了[THE PHANTOM OF THE OPERA]那会是怎样的一种情景！</p>
 
@@ -20,23 +20,23 @@
 
 <h2>0x01 细节</h2>
 
-<hr />
+<hr>
 
 <p>1.工具：PC、手机；软件：burpsuite/fiddler、sqlmap等</p>
 
 <p>2.代理设置：首先将你的PC和手机置于同一局域网，在PC上打开burpsuite ，proxy选项proxy-listeners</p>
 
-<p><img src="http://static.wooyun.org/201311/2013112609332157216.png" alt="2013112609332157216.png" /></p>
+<p><img src="../images_result/images/2013112609332157216.png" alt="2013112609332157216.png"></p>
 
 <p>new/edit一下吧</p>
 
-<p><img src="http://static.wooyun.org/201311/2013112609341832703.png" alt="2013112609341832703.png" /></p>
+<p><img src="../images_result/images/2013112609341832703.png" alt="2013112609341832703.png"></p>
 
 <p>在下拉列表中能够找到PC本机IP，同时可以自定义端口，此处设置了8088。</p>
 
 <p>手机端，连接WIFI后，网络属性设置代理，写上上图IP地址和端口号</p>
 
-<p><img src="http://static.wooyun.org/201311/2013112609432012548.png" alt="2013112609432012548.png" /></p>
+<p><img src="../images_result/images/2013112609432012548.png" alt="2013112609432012548.png"></p>
 
 <p>此时您的PC端burpsuite就设置完成。</p>
 
@@ -68,16 +68,16 @@
 
 <p> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2013-040266">WooYun: 联想1#某站权限控制不严导致预装恶意App流毒</a> </p>
 
-<p>以上方法针对少量APP测试还是挺实用的，这个月测试下来，就如一位皂友所说，发现这些问题是比较繁琐，但是出现的问题概率比较大。所以问题还是挺好找<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="11f68b95f29193f4ac82f79980f4bc8df4bc8df5a99cf491b7f49c96f6abb6f68b95f786a7f49188516962627463">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> 给俺一个非常不错的建议用于批量检测：在本地搭建http代理记录APP访问日志，然后sqlmap批量扫这些去重的日志！很赞！</p>
+<p>以上方法针对少量APP测试还是挺实用的，这个月测试下来，就如一位皂友所说，发现这些问题是比较繁琐，但是出现的问题概率比较大。所以问题还是挺好找<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="11f68b95f29193f4ac82f79980f4bc8df4bc8df5a99cf491b7f49c96f6abb6f68b95f786a7f49188516962627463">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> 给俺一个非常不错的建议用于批量检测：在本地搭建http代理记录APP访问日志，然后sqlmap批量扫这些去重的日志！很赞！</p>
 
 <h2>0x02 总结</h2>
 
-<hr />
+<hr>
 
 <p>各厂商在APP程序开发的过程中严格执行开发安全处置流程同时将WEB应用防线扩至移动端！</p>
 
-<p>各APP应用、推广平台加强自身安全防范，升级安全基线，确保平台之安全可靠，要知道，你们可承载着万千互联网企业的中国梦-0-<br />
-最后，各大厂商、平台抱好你们的APP了，皂友们要来啦！</p>      </p>
+<p>各APP应用、推广平台加强自身安全防范，升级安全基线，确保平台之安全可靠，要知道，你们可承载着万千互联网企业的中国梦-0-<br>
+最后，各大厂商、平台抱好你们的APP了，皂友们要来啦！</p>      <p></p>
     
 			</body>
 		</html>

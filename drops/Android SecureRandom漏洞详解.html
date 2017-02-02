@@ -3,14 +3,14 @@
 			<head>
 			     <title>Android SecureRandom漏洞详解 - Guardian</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5164">http://drops.wooyun.org/papers/5164</a></h1>
 				
       <p>
-        <h1>0x00 漏洞概述</h1>
+        </p><h1>0x00 漏洞概述</h1>
 
-<hr />
+<hr>
 
 <p>Android 4.4之前版本的Java加密架构(JCA)中使用的Apache Harmony 6.0M3及其之前版本的SecureRandom实现存在安全漏洞，具体位于</p>
 
@@ -23,7 +23,7 @@
 
 <h1>0x01 漏洞影响</h1>
 
-<hr />
+<hr>
 
 <p>2013年8月份的比特币应用被攻击也与这个漏洞相关。比特币应用里使用了ECDSA 算法，这个算法需要一个随机数来生成签名，然而生成随机数的算法存在本文提到的安全漏洞。同时这个ECDSA算法本身也有漏洞，在这个事件之前索尼的PlayStation 3 master key事件也是利用的这个算法漏洞。</p>
 
@@ -43,7 +43,7 @@
 
 <h1>0x02 SecureRandom技术实现</h1>
 
-<hr />
+<hr>
 
 <p>在java里，随机数是通过一个初始化种子来生成的。两个伪随机数噪声生成器(PRNG)实例，如果使用相同的种子来初始化，就会得到相同的随机序列。Java Cryptography Architecture里提供了几个加密强度更大的PRNGs，这些PRNGs是通过SecureRandom接口实现的。</p>
 
@@ -63,23 +63,23 @@ securerandom.source=file:/dev/random
 
 <h1>0x03 Apache Harmony’s SecureRandom实现</h1>
 
-<hr />
+<hr>
 
 <p>Apache Harmony 是2005年以Apache License发布的一个开源的java核心库。虽然2011年以后已宣布停产，但是这个项目作为Google Android platform的一部分继续被开发维护。</p>
 
 <p>Apache Harmony's SecureRandom实现算法如下：</p>
 
-<p><img src="http://static.wooyun.org/20150310/2015031010041190999.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015031010041190999.png" alt="enter image description here"></p>
 
 <p>Android里的PRNG使用SHA-1哈希算法、操作系统提供的设备相关的种子来产生伪随机序列。随机数是通过三部分(internal state即seed+counter+ padding)反复哈希求和计算产生的。如下图</p>
 
-<p><img src="http://static.wooyun.org/20150310/2015031010041210512.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015031010041210512.png" alt="enter image description here"></p>
 
 <p>其中计数器counter从0开始，算法每运行一次自增一。counter和padding部分都可以称为buffer。Padding遵守SHA-1的填充格式：最后的8 byte存放要hash的值的长度len，剩下的部分由一个1，后面跟0的格式进行填充。最后返回Hash后的结果，也就是生成的伪随机序列。</p>
 
 <h1>0x04 Apache Harmony’s SecureRandom漏洞细节</h1>
 
-<hr />
+<hr>
 
 <p>当使用无参构造函数创建一个SecureRandom实例，并且在随后也不使用setSeed()进行初始化时,插入一个起始值后，代码不能正确的调整偏移量(byte offset,这个offset是指向state buffer的指针)。这导致本该附加在种子后面的计数器(8 byte)和padding(起始4 byte)覆盖了种子的起始12 byte。熵的剩下8 byte(20 byte的种子中未被覆盖部分),使得PRNG加密应用无效。</p>
 
@@ -87,11 +87,11 @@ securerandom.source=file:/dev/random
 
 <p>下面这张图可以形象的表述这个过程：</p>
 
-<p><img src="http://static.wooyun.org/20150310/2015031010041212668.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015031010041212668.png" alt="enter image description here"></p>
 
 <h1>0x05 漏洞修复</h1>
 
-<hr />
+<hr>
 
 <p>Google已经发布了patch，看下Diff文件:</p>
 
@@ -99,11 +99,11 @@ securerandom.source=file:/dev/random
 
 <p>修复前：</p>
 
-<p><img src="http://static.wooyun.org/20150310/2015031010041374963.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015031010041374963.png" alt="enter image description here"></p>
 
 <p>修复后：</p>
 
-<p><img src="http://static.wooyun.org/20150310/2015031010041330246.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015031010041330246.png" alt="enter image description here"></p>
 
 <p>对于普通开发者来讲，可以使用下面链接中的方式进行修复。</p>
 
@@ -111,14 +111,14 @@ securerandom.source=file:/dev/random
 
 <h1>0x06 参考链接</h1>
 
-<hr />
+<hr>
 
 <pre><code>https://android.googlesource.com/platform/libcore/+/kitkat-release/luni/src/main/java/org/apache/harmony/security/provider/crypto/SHA1PRNG_SecureRandomImpl.java
 http://resources.infosecinstitute.com/random-number-generation-java/
 http://developer.android.com/reference/java/security/SecureRandomSpi.html
 http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-7372
 http://android-developers.blogspot.com.au/2013/08/some-securerandom-thoughts.html
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

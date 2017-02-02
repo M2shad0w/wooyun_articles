@@ -3,14 +3,14 @@
 			<head>
 			     <title>Firefox 31~34远程命令执行漏洞的分析 - phith0n</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5350">http://drops.wooyun.org/papers/5350</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>前段时间，二哥在很多浏览器中将脚本层面的漏洞提升为远程命令执行，几乎日遍市面上所有国产浏览器，这成为了许多人津津乐道的话题。确实，在当今这个底层安全防护越来越强的环境下，堆栈溢出、UAF造成的漏洞利用起来变得很困难，但如果借助浏览器提供的一些脚本层接口做到RCE，将是一个是两拨千金的过程。</p>
 
@@ -20,7 +20,7 @@
 
 <h1>0x01 漏洞的发现</h1>
 
-<hr />
+<hr>
 
 <p>Firefox是较早引入ECMAScript 6特性的浏览器，<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy">Proxy</a> 就是一个ECMAScript 6特性，它可以用来hook javascript原生的get/set方法。比如如下代码：</p>
 
@@ -42,7 +42,7 @@ p.bar = 1;
 
 <p>执行后将会得到如下结果：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150327/2015032702203354032.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015032702203354032.png" alt="enter image description here"></p>
 
 <p>这个方法为javascript注入了新的血液，但也带来了新的安全问题。Getter和Setter将导致我们将没有特权的javascript代码注入到有特权的javascript代码之前，这些代码在后面检查权限的函数之前，所以他们是有特权的。Chrome下也出现过由于这个原因导致的问题：<a href="https://code.google.com/p/chromium/issues/detail?id=351787">LINK1</a> ，<a href="http://researchcenter.paloaltonetworks.com/2014/12/google-chrome-exploitation-case-study/">LINK2</a> ，大家也可以下去自己研究一下。</p>
 
@@ -56,7 +56,7 @@ document.__proto__ = Proxy.create({getPropertyDescriptor:function(){ while(1)
 
 <h1>0x02 突破点</h1>
 
-<hr />
+<hr>
 
 <p>作者后来做了如下尝试：</p>
 
@@ -72,7 +72,7 @@ document.__proto__ = Proxy.create(props)
 
 <h1>0x03 chrome:意味着什么</h1>
 
-<hr />
+<hr>
 
 <p>我们能够打开一个域为chrome://browser/content/browser.xul的页面，以为着什么？</p>
 
@@ -100,7 +100,7 @@ runCmd("touch /tmp/owned");
 
 <h1>0x04 注入代码</h1>
 
-<hr />
+<hr>
 
 <p>那么怎么注入代码到这个页面？</p>
 
@@ -123,11 +123,11 @@ c.createOffer(function(){},function(){
 
 <h1>0x05 命令执行</h1>
 
-<hr />
+<hr>
 
 <p>作者其实这块写的特别简略，直接告诉我可以怎样写metasploit exploit，可明明POC都没告诉我呀！！对于我这种没开发过firefox插件、没读过源码的通知简直就……我想到一张操蛋的图：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150327/2015032702203319386.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015032702203319386.png" alt="enter image description here"></p>
 
 <p>对，就像这样……</p>
 
@@ -174,25 +174,25 @@ Object.setPrototypeOf(document, Proxy.create(props));
 
 <p>注意，因为在docshell中，所以是没有传统的window对象、document对象，所以你调用alert、console等方法是没用的。opts对象中的那一串javascript就是最后执行的特权API，通过process.run执行C:\windows\System32\cmd.exe /c calc.exe，效果是弹出一个小计算器：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150327/2015032702203479373.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015032702203479373.png" alt="enter image description here"></p>
 
 <p>一个简单的POC就此诞生了。</p>
 
 <p>然后，不得不说metesploit中的 firefox_proxy_prototype模块，通过这个模块生成的exploit可以直接反弹shell。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150327/2015032702203424777.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015032702203424777.png" alt="enter image description here"></p>
 
 <p>虚拟机10.211.55.3上Firefox版本是33，在影响范围内，打开http:// 10.211.55.2:12306/m0EbugSmqwCW1PP ，随意点击一处，即可触发。</p>
 
 <p>主机上等待上线：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150327/2015032702203543769.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015032702203543769.png" alt="enter image description here"></p>
 
 <p>这边反弹成功，可以看到，已经拿下10.211.55.3的用户权限shell。</p>
 
 <h1>0x06 资料</h1>
 
-<hr />
+<hr>
 
 <p>原文：<a href="https://community.rapid7.com/community/metasploit/blog/2015/03/23/r7-2015-04-disclosure-mozilla-firefox-proxy-prototype-rce-cve-2014-8636">LINK</a></p>
 
@@ -202,7 +202,7 @@ Object.setPrototypeOf(document, Proxy.create(props));
 
 <p>一个小演示：<a href="https://www.youtube.com/watch?v=18xCIXkhF-E">LINK</a></p>
 
-<p>还有很多点，作者虽然没在本文说明，但基本都可以从作者文章链接所指向的文章看到。显然作者对浏览器漏洞的研究是一个过程，就像一部动漫，如果你不看前面的部分，这部分内容就可能比较难懂。</p>      </p>
+<p>还有很多点，作者虽然没在本文说明，但基本都可以从作者文章链接所指向的文章看到。显然作者对浏览器漏洞的研究是一个过程，就像一部动漫，如果你不看前面的部分，这部分内容就可能比较难懂。</p>      <p></p>
     
 			</body>
 		</html>

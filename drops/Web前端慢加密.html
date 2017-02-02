@@ -3,20 +3,20 @@
 			<head>
 			     <title>Web前端慢加密 - EtherDream</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/10665">http://drops.wooyun.org/tips/10665</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>天下武功，唯快不破。但密码加密不同。算法越快，越容易破。</p>
 
 <h1>0x01 暴力破解</h1>
 
-<hr />
+<hr>
 
 <p>密码破解，就是把加密后的密码还原成明文密码。似乎有不少方法，但最终都得走一条路：暴力穷举。</p>
 
@@ -36,7 +36,7 @@
 
 <h1>0x02 慢加密</h1>
 
-<hr />
+<hr>
 
 <p>如果能提高加密时间，显然也能增加破解时间。</p>
 
@@ -59,7 +59,7 @@ end
 
 <h1>0x03 慢加密应用</h1>
 
-<hr />
+<hr>
 
 <p>最需要慢加密的场合，就是网站数据库里的密码。</p>
 
@@ -75,7 +75,7 @@ end
 
 <h1>0x04 慢加密的缺点</h1>
 
-<hr />
+<hr>
 
 <p>不过，慢加密也有明显的缺点：消耗大量计算资源。</p>
 
@@ -95,7 +95,7 @@ end
 
 <p>尤其像「慢加密」这种算法开源、但计算沉重的任务，为何不交给客户端来完成？</p>
 
-<p><img src="http://static.wooyun.org//drops/20151126/2015112613292468426p12.png" alt="p1" /></p>
+<p><img src="../images_result/images/2015112613292468426p12.png" alt="p1"></p>
 
 <p>过去，提交的是明文密码；现在，提交的则是明文密码的<code>慢加密结果</code>。无论是注册，还是登陆。</p>
 
@@ -103,7 +103,7 @@ end
 
 <p>这样就算被拖库，攻击者破解出来的也只是<code>慢加密结果</code>，还需再破解一次，才能还原出「明文密码」。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151126/2015112613292590599p22.png" alt="p2" /></p>
+<p><img src="../images_result/images/2015112613292590599p22.png" alt="p2"></p>
 
 <p>事实上，<code>慢加密结果</code>这个中间值，是不可能破解出来的！</p>
 
@@ -128,7 +128,7 @@ end
 
 <h1>0x06 对抗预先计算</h1>
 
-<hr />
+<hr>
 
 <p>不过，前端的一切都是公开的。所以 front&#95;slow&#95;hash 的算法大家都知道。</p>
 
@@ -151,7 +151,7 @@ end
 
 <p>当然，即使公开，单独提供一个盐值参数，也比用户名要好。因为用户名永远不变，而独立的盐值可以定期更换。</p>
 
-<hr />
+<hr>
 
 <p>盐值可以由前端生成。例如注册时：</p>
 
@@ -167,7 +167,7 @@ submit(..., password, salt)
 
 <p>登录时，输完用户名，就可以开始查询用户对应的盐值：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151126/2015112613292745835p32.png" alt="p3" /></p>
+<p><img src="../images_result/images/2015112613292745835p32.png" alt="p3"></p>
 
 <blockquote>
   <p>当然要注意的是，这个接口可以测试用户是否存在，所以得有一定的控制。</p>
@@ -175,7 +175,7 @@ submit(..., password, salt)
 
 <p>盐值的更换，也非常简单，甚至可以自动完成：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151126/2015112613292860420p41.png" alt="p4" /></p>
+<p><img src="../images_result/images/2015112613292860420p41.png" alt="p4"></p>
 
 <p>前端在加密当前密码时，同时开启一个新线程，计算新盐值和新密码。提交时，将它们全都带上。</p>
 
@@ -189,7 +189,7 @@ submit(..., password, salt)
 
 <h1>0x07 强度策略</h1>
 
-<hr />
+<hr>
 
 <p>密码学上的问题到此结束，下面讨论实现上的问题。</p>
 
@@ -266,7 +266,7 @@ end
 
 <p>如果当前有很多在线用户，它们不就是一堆免费的计算节点吗？计算量大的问题，扔给他们来解决。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151126/2015112613293012474p51.png" alt="p5" /></p>
+<p><img src="../images_result/images/2015112613293012474p51.png" alt="p5"></p>
 
 <p>不过这样做也有一些疑虑，万一正好推送给了坏人怎么办？</p>
 
@@ -282,7 +282,7 @@ end
 
 <h1>0x08 性能优化</h1>
 
-<hr />
+<hr>
 
 <p><strong>1.为什么要优化？</strong></p>
 
@@ -363,7 +363,7 @@ end
 
 <h1>0x09 对抗 GPU</h1>
 
-<hr />
+<hr>
 
 <p>众所周知，跑密码使用 GPU 可以快很多倍。</p>
 
@@ -401,7 +401,7 @@ end
 
 <h1>0x0A 「前端慢加密」额外的意义</h1>
 
-<hr />
+<hr>
 
 <p>除了能降低密码破解速度，前端慢加密还有一些其他意义：</p>
 
@@ -443,7 +443,7 @@ end
 
 <h1>0x0B 慢加密能否并行计算？</h1>
 
-<hr />
+<hr>
 
 <p>用户的配置越来越好，不少都是四核、八核处理器。能否利用多线程的优势，将慢加密计算进行分解？</p>
 
@@ -479,7 +479,7 @@ end
 
 <h1>0x0C 总结</h1>
 
-<hr />
+<hr>
 
 <p>前端慢加密，就是让每个用户贡献少量的计算资源，使加密变得更强劲。</p>
 
@@ -487,7 +487,7 @@ end
 
 <h1>0xFF 后记</h1>
 
-<hr />
+<hr>
 
 <p>前些年比特币流行时，突发奇想用浏览器来挖矿。虽然没做成，不过获得了一些密码学姿势。</p>
 
@@ -497,7 +497,7 @@ end
 
 <p>如果你对算法有疑惑，可以先仔细看 0x05 这节。</p>
 
-<p>如果你是耐心看完本文的，希望能有收获:)</p>      </p>
+<p>如果你是耐心看完本文的，希望能有收获:)</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,20 +3,20 @@
 			<head>
 			     <title>从反序列化到命令执行 - Java 中的 POP 执行链 - RickGray</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/10801">http://drops.wooyun.org/papers/10801</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>作为一名不会 Java %!@#&amp;，仅以此文记录下对 Java 反序列化利用的学习和研究过程。</p>
 
 <h1>0x01 什么是序列化</h1>
 
-<hr />
+<hr>
 
 <p>序列化常用于将程序运行时的对象状态以二进制的形式存储于文件系统中，然后可以在另一个程序中对序列化后的对象状态数据进行反序列化恢复对象。简单的说就是可以基于序列化数据实时在两个程序中传递程序对象。</p>
 
@@ -24,7 +24,7 @@
 
 <p><strong>1.Java 序列化示例</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112709295856352137.png" alt="p1" /></p>
+<p><img src="../images_result/images/2015112709295856352137.png" alt="p1"></p>
 
 <p>上面是一段简单的 Java 反序列化应用的示例。在第一段代码里面，程序将实例对象 <code>String("This is String object!")</code> 通过 <code>ObjectOutputStream</code> 类的 <code>writeObject()</code> 函数写到了文件里。序列化对象在具有一定的二进制结构，以十六进制格式查看存储了序列化对象的文件，除了包含一些字符串常量以外，还能看到其具有不可打印的字符在里面，而这些字符就是用来描述其序列化结构的。（关于序列化格式的相关信息可以参考<a href="https://docs.oracle.com/javase/7/docs/platform/serialization/spec/protocol.html#8130">官方文档</a>)</p>
 
@@ -60,7 +60,7 @@ java.io.ObjectInputStream
 
 <h1>0x02 反序列化的危害</h1>
 
-<hr />
+<hr>
 
 <p>若你对 Python 或者 PHP 足够熟悉就应该知道在这两个语言中的反序列化过程都能直接导致代码执行或者命令执行，并且 Python 中要想利用反序列化执行命令或者代码基本没有什么条件限制，只要有反序列化的交互接口就能直接执行命令或者代码。当然了，如果做了其他的一些安全策略，就要根据实际情况来分析了。</p>
 
@@ -107,7 +107,7 @@ if(isset($_COOKIE['user'])) {
 } else { initUser(); }
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112709300083367228.png" alt="p2" /></p>
+<p><img src="../images_result/images/2015112709300083367228.png" alt="p2"></p>
 
 <p>这段代码将用户信息以 <code>base64_encode(serialize($user))</code> 的形式存储于客户端的 <code>$_COOKIE['data']</code> 里，对序列化敏感的都知道可以自己构造序列化内容然后传递给服务端，使其改变代码逻辑。使用下面这段代码生成 <code>$is_admin = true</code> 的用户信息：</p>
 
@@ -123,7 +123,7 @@ echo base64_encode(serialize(new User()));
 
 <p>用生成好的 Payload 修改 Cookie 后再次访问即可看到 <code>Welcome Come Back, Admninistrator.</code> 的输出信息。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112709300277526326.png" alt="p3" /></p>
+<p><img src="../images_result/images/2015112709300277526326.png" alt="p3"></p>
 
 <p>上面这个只是 PHP 中一个简单利用反序列化过程控制代码流程的例子。</p>
 
@@ -131,7 +131,7 @@ echo base64_encode(serialize(new User()));
 
 <h1>0x03 面向属性编程</h1>
 
-<hr />
+<hr>
 
 <p>面向属性编程（Property-Oriented Programing）常用于上层语言构造特定调用链的方法，与二进制利用中的面向返回编程（Return-Oriented Programing）的原理相似，都是从现有运行环境中寻找一系列的代码或者指令调用，然后根据需求构成一组连续的调用链。在控制代码或者程序的执行流程后就能够使用这一组调用链做一些工作了。</p>
 
@@ -139,7 +139,7 @@ echo base64_encode(serialize(new User()));
 
 <p>在二进制利用时，ROP 链构造中是寻找当前系统环境中或者内存环境里已经存在的、具有固定地址且带有返回操作的指令集，而 POP 链的构造则是寻找程序当前环境中已经定义了或者能够动态加载的对象中的属性（函数方法），将一些可能的调用组合在一起形成一个完整的、具有目的性的操作。二进制中通常是由于内存溢出控制了指令执行流程，而反序列化过程就是控制代码执行流程的方法之一，当然进行反序列化的数据能够被用户输入所控制。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/2015112709300668374422.png" alt="p4" /></p>
+<p><img src="../images_result/images/2015112709300668374422.png" alt="p4"></p>
 
 <p>从上面这幅图可以知道 ROP 与 POP 极其相似，但 ROP 关注的更为底层，而 POP 只关注上层语言中对象与对象之间的调用关系。</p>
 
@@ -149,7 +149,7 @@ echo base64_encode(serialize(new User()));
 
 <h1>0x04 Java 反序列化利用</h1>
 
-<hr />
+<hr>
 
 <p>前面讲了这么多也算是自己在研究老外对 Java 反序列化利用时学习和总结出的一些必要知识，下面就来说说从 Java 反序列化到任意命令执行的利用过程。</p>
 
@@ -298,7 +298,7 @@ public class SetValueToExec {
 
 <p>根据之前的分析，将上面这段代码编译运行后会默认会弹出计算器，对代码详细执行过程有疑惑的可以通过单步调试进行测试：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151127/201511270930088588051.jpg" alt="p5" /></p>
+<p><img src="../images_result/images/201511270930088588051.jpg" alt="p5"></p>
 
 <p>然后我们现在只是测试了使用 <code>TransformedMap</code> 进行任意命令执行而已，要想在 Java 应用反序列化的过程中触发该过程还需要找到一个类，它能够在反序列化调用 <code>readObject()</code> 的时候调用 <code>TransformedMap</code> 内置类 <code>MapEntry</code> 中的 <code>setValue()</code> 函数，这样才能构成一条完整的 Gadget 调用链。恰好在 <code>sun.reflect.annotation.AnnotationInvocationHandler</code> 类具有 <code>Map</code> 类型的参数，并且在 <code>readObject()</code> 方法中触发了上面所提到的所有条件，其源码如下：</p>
 
@@ -409,7 +409,7 @@ public class Commons1 {
 
 <h1>0x05 总结</h1>
 
-<hr />
+<hr>
 
 <p>由于水平有限，暂时只能笔止于此。要清楚反序列化问题不单单存在于某种语言里，而是目前的大多数实现了序列化接口的语言都没有对反序列化的对象做安全检查，虽然官方都有文档说不要对不可信的输入数据进行反序列化，但是往往一些框架就喜欢使用序列化来方便不同应用或者平台之间对象的传递，这就促使了反序列化漏洞的形成。</p>
 
@@ -419,7 +419,7 @@ public class Commons1 {
 
 <h1>0x06 参考</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="https://www.youtube.com/watch?v=KSA7vUkXGSg">https://www.youtube.com/watch?v=KSA7vUkXGSg</a></li>
@@ -430,7 +430,7 @@ public class Commons1 {
 <li><a href="http://docs.oracle.com/javase/7/docs/api/java/io/Serializable.html">http://docs.oracle.com/javase/7/docs/api/java/io/Serializable.html</a></li>
 <li><a href="http://www.javaworld.com/article/2072752/the-java-serialization-algorithm-revealed.html">http://www.javaworld.com/article/2072752/the-java-serialization-algorithm-revealed.html</a></li>
 <li><a href="https://www.owasp.org/images/9/9e/Utilizing-Code-Reuse-Or-Return-Oriented-Programming-In-PHP-Application-Exploits.pdf">https://www.owasp.org/images/9/9e/Utilizing-Code-Reuse-Or-Return-Oriented-Programming-In-PHP-Application-Exploits.pdf</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

@@ -3,22 +3,22 @@
 			<head>
 			     <title>你的应用是如何被替换的，App劫持病毒剖析 - 阿里移动安全</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/15107">http://drops.wooyun.org/papers/15107</a></h1>
 				
       <p>
-        <p><strong>Author：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7891f8fe9dcfcc3891e0c791fff49fdfc39df2d09dd6f19dfdd0">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
+        </p><p><strong>Author：<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7891f8fe9dcfcc3891e0c791fff49fdfc39df2d09dd6f19dfdd0">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
 
 <h1>0x00 App劫持病毒介绍</h1>
 
-<hr />
+<hr>
 
 <p>App劫持是指执行流程被重定向，又可分为Activity劫持、安装劫持、流量劫持、函数执行劫持等。本文将对近期利用Acticity劫持和安装劫持的病毒进行分析。</p>
 
 <h1>0x01 Activity劫持病毒分析</h1>
 
-<hr />
+<hr>
 
 <h3>1.1 Activity劫持病毒介绍</h3>
 
@@ -26,9 +26,9 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160419/2016041904321056253130.jpg" alt="p1" /></p>
+<p><img src="../images_result/images/2016041904321056253130.jpg" alt="p1"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160419/2016041904321245240220.jpg" alt="p2" /></p>
+<p><img src="../images_result/images/2016041904321245240220.jpg" alt="p2"></p>
 
 <p>以MazarBOT间谍木马为例，该类木马有一下几个特点：</p>
 
@@ -41,7 +41,7 @@
 
 <p>以下是C&amp;C控制中心指令列表：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160419/2016041904321435219316.jpg" alt="p3" /></p>
+<p><img src="../images_result/images/2016041904321435219316.jpg" alt="p3"></p>
 
 <p>我们发现该木马能接受并处理一套完整的C&amp;C控制指令，并且使用Tor进行匿名网络通信，使得流量数据的来源和目的地不是一条路径直接相连，增加对攻击者身份反溯的难度。结下来我们将详细分析该木马界面劫持过程。</p>
 
@@ -49,21 +49,21 @@
 
 <p>入口梳理首先看到axml文件。WorkerService服务处理C&amp;C控制中心下发的”update html”指令，同时后台监控顶层运行的Activity，若是待劫持的应用将会启动InjDialog Acticity进行页面劫持。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160419/201604190432167622149.jpg" alt="p4" /> 图 axml信息</p>
+<p><img src="../images_result/images/201604190432167622149.jpg" alt="p4"> 图 axml信息</p>
 
 <p>下图是后台服务对顶层Acticity监控过程，若是待劫持应用则启动InjDialog进行劫持。getTop函数做了代码兼容性处理，5.0以上的设备木马也可以获取顶层Acticity的包名。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160419/2016041904321825651510.jpg" alt="p5" /> 图 后台监控</p>
+<p><img src="../images_result/images/2016041904321825651510.jpg" alt="p5"> 图 后台监控</p>
 
 <p>InjDialog Activity通过webView加载伪造的html应用界面,调用webView.setWebChromeClient(new HookChromeClient())设置html页面与Java交互，在伪造的Html页面里调用prompt把JS中的用户输入信息传递到Java，HookChromeClient类重写onJsPrompt方法，处理用户输入信息，最后将劫持的用户信息通过Tor匿名上传到指定域名。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160419/2016041904322069186611.jpg" alt="p6" /> 图 劫持用户信息</p>
+<p><img src="../images_result/images/2016041904322069186611.jpg" alt="p6"> 图 劫持用户信息</p>
 
-<p><img src="http://static.wooyun.org//drops/20160419/2016041904322229144711.jpg" alt="p7" /> 图 上传劫持信息</p>
+<p><img src="../images_result/images/2016041904322229144711.jpg" alt="p7"> 图 上传劫持信息</p>
 
 <h1>0x02 应用安装劫持病毒分析</h1>
 
-<hr />
+<hr>
 
 <h3>2.1安装劫持病毒介绍</h3>
 
@@ -73,7 +73,7 @@
 
 <p>该应用是一款名为”FlashLight”的应用，程序包名：com.gouq.light,应用图标如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160419/201604190432236032689.jpg" alt="p8" /></p>
+<p><img src="../images_result/images/201604190432236032689.jpg" alt="p8"></p>
 
 <h3>2.3主要组件分析</h3>
 
@@ -86,13 +86,13 @@
 
 <p>下图安装劫持过程，通过监听应用的安装和更新，实施关联的其他应用的静默安装。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160419/201604190432254079798.jpg" alt="p9" /> 图 安装劫持</p>
+<p><img src="../images_result/images/201604190432254079798.jpg" alt="p9"> 图 安装劫持</p>
 
 <p>上图可以知道此恶意应用借用安装或更新intent，安装预设的关联应用，这样在安装完毕后用户并不清楚哪个是刚真正安装的应用，这样增加了推广应用点击运行的几率。</p>
 
 <h1>0x03 怎么有效防治App劫持或安全防护建议</h1>
 
-<hr />
+<hr>
 
 <p>针对企业用户：</p>
 
@@ -104,7 +104,7 @@
 
 <p>安装阿里钱盾保护应用免受App劫持木马威胁。</p>
 
-<p>更多技术文章，请点击<a href="http://jaq.alibaba.com/community/index">阿里聚安全博客</a></p>      </p>
+<p>更多技术文章，请点击<a href="http://jaq.alibaba.com/community/index">阿里聚安全博客</a></p>      <p></p>
     
 			</body>
 		</html>

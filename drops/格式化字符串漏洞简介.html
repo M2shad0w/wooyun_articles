@@ -3,14 +3,14 @@
 			<head>
 			     <title>格式化字符串漏洞简介 - explorer</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/7714">http://drops.wooyun.org/binary/7714</a></h1>
 				
       <p>
-        <h1>0x00简介</h1>
+        </p><h1>0x00简介</h1>
 
-<hr />
+<hr>
 
 <p>格式化字符串，也是一种比较常见的漏洞类型。会触发该漏洞的函数很有限。主要就是<code>printf</code>还有<code>sprintf</code>，<code>fprintf</code>等等c库中print家族的函数。 我们先来看看<code>printf</code>的函数声明</p>
 
@@ -43,7 +43,7 @@ printf(str)
 
 <h1>0x01漏洞的产生原理</h1>
 
-<hr />
+<hr>
 
 <p>这里我们就要详细的讲述一下<code>printf</code>的运行原理了。因为64位上<code>printf</code>函数的行为发生了许多变化。这里暂时不进行说明。不过如果清楚了漏洞的产生原因，依然可以使用此漏洞。</p>
 
@@ -106,13 +106,13 @@ int main(void)
 
 <p>这里我们只给了<code>printf</code>一个参数，却让其打印出12个int类型的数据，我们编译运行看看会有什么结果。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150807/2015080707172969100.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015080707172969100.png" alt="enter image description here"></p>
 
 <p>这里可以看到，<code>printf</code>忠实的按照我们意愿打印出了12个数值。这些数值不是我们输入的参数，而是保存在栈中的其他的数值。通过这个特性，黑客们就创造出了格式化字符串的漏洞。</p>
 
 <h1>0x02漏洞利用</h1>
 
-<hr />
+<hr>
 
 <p>可能有人（~~像我一样的弱渣~~）会对这个漏洞的危害感到疑惑，因为它似乎只是打印一些没有用的垃圾数据而已。其实，它的危害一点不比栈溢出漏洞的危害小，如果使用得当，甚至比栈溢出效果更好。如果栈溢出是粗暴的地毯式轰炸的话，格式化字符串漏洞就是一位可怕的狙击手。一击便可致命。</p>
 
@@ -139,7 +139,7 @@ int main(void)
  return 0; }
 </code></pre>
 
-<p>这是一段有点神奇的代码，让我们看看它的运行结果。 <img src="http://static.wooyun.org//drops/20150807/2015080707172938043.png" alt="enter image description here" /></p>
+<p>这是一段有点神奇的代码，让我们看看它的运行结果。 <img src="../images_result/images/2015080707172938043.png" alt="enter image description here"></p>
 
 <p>可以发现a的值被<code>printf</code>函数修改为了7。这就是<code>%n</code>的功效了。这是一个不常用到的参数。它的功能是将<code>%n</code>之前<code>printf</code>已经打印的字符个数赋值给传入的指针。通过<code>%n</code>我们就可以修改内存中的值了。和<code>%s</code>leak内存一样，只要栈中有我们需要修改的内存的地址就可以使用格式化字符串的漏洞修改它。</p>
 
@@ -149,7 +149,7 @@ int main(void)
 
 <h1>0x03实践</h1>
 
-<hr />
+<hr>
 
 <p>最好的学习方法就是实践，现在我们就来实验一下格式字符串漏洞的功效。 首先，代码</p>
 
@@ -192,9 +192,9 @@ int main(void)
 
 <p>这个便是我构造出的poc，很短，但是很强悍（→_→）。 那么我们来看看效果吧</p>
 
-<p><img src="http://static.wooyun.org//drops/20150807/2015080707173055279.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015080707173055279.png" alt="enter image description here"></p>
 
-<p>oh yeah！！！！</p>      </p>
+<p>oh yeah！！！！</p>      <p></p>
     
 			</body>
 		</html>

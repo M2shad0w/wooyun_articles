@@ -3,16 +3,16 @@
 			<head>
 			     <title>iOS 8.1.2 越狱过程详解及相关漏洞分析 - 360NirvanTeam</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/12045">http://drops.wooyun.org/papers/12045</a></h1>
 				
       <p>
-        <p><strong>Author:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1f4f6d706b7a7e6c5f2c292ff9a99af9b89cfa84bdf68780">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
+        </p><p><strong>Author:<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1f4f6d706b7a7e6c5f2c292ff9a99af9b89cfa84bdf68780">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></strong></p>
 
 <h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>本文主要介绍了：</p>
 
@@ -29,7 +29,7 @@
 
 <h1>0x01 什么是越狱</h1>
 
-<hr />
+<hr>
 
 <p>要说明什么是越狱，我们首先来看下越狱后可以做哪些原来做不了的事情：</p>
 
@@ -58,7 +58,7 @@
 
 <h1>0x02 确定目标</h1>
 
-<hr />
+<hr>
 
 <p>越狱的过程实际上就是攻击 iOS 系统的过程，在发起攻击之前我们首先需要确定攻击的目标，当然从大的方面来说目标就是 iOS 系统，但是这个目标太大了不足以引导攻击过程，我们需要更确切的目标。如何确定确切的攻击目标？我们只要找到系统的哪些部分负责相关的保护机制便可以确定最终的攻击目标，下面是个人总结的攻击目标：</p>
 
@@ -74,11 +74,11 @@
 
 <h1>0x03 攻击概述</h1>
 
-<hr />
+<hr>
 
 <p>对于通过 USB 发起的攻击首先要解决的一个问题是如何突破沙盒。这里的沙盒不单单指由 Sandbox.kext 约束的进程行为，而是广义上的概念，比如可以将整个 iOS 理解为一个沙盒。默认沙盒只是开启了如下几个服务：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160108/2016010815255096050137.png" alt="p1" /> 图1 ：沙盒开启的服务</p>
+<p><img src="../images_result/images/2016010815255096050137.png" alt="p1"> 图1 ：沙盒开启的服务</p>
 
 <p>iOS 8.1.2 的越狱工具利用 Mobile Backup 的漏洞（CVE-2015-1087） 与 AFC 的漏洞（CVE-2014-448）来过沙盒，然后利用 Image Mounter 的漏洞（CVE-2015-1062）来为用户空间的任意代码执行创造条件。如果想在用户空间执行任意代码，需要解决代码签名验证问题，越狱工具利用 dyld 的漏洞（CVE-2014-4455）解决了让 afmid 加载假的 libmiss.dylib 的问题，从而过掉了代码签名。这样用户空间任意代码执行的条件都具备了，接下来越狱工具通过一个辅助工具（root权限）来执行 Untecher，Untether 的主要工作内容是首先重新 mount 磁盘的只读分区到可写状态，然后将 /var/mobile/Media 中的 Payload 拷贝到系统的相关目录。接下来 Untether 行为主要是攻击内核，这里主要有两种方式：</p>
 
@@ -94,7 +94,7 @@
 
 <h1>0x04 攻击过程</h1>
 
-<hr />
+<hr>
 
 <h3>一、突破沙盒</h3>
 
@@ -156,7 +156,7 @@ __proteas_mx__/a/b/c/d/e/f/g/c -&gt; ../../../../../../../private/var/run
 
 <p>表3：目录结构</p>
 
-<p><img src="http://static.wooyun.org//drops/20160108/2016010815255229572218.png" alt="p2" /> 图2：创建目录的日志</p>
+<p><img src="../images_result/images/2016010815255229572218.png" alt="p2"> 图2：创建目录的日志</p>
 
 <p>这里利用的是 CVE-2014-4480，在修补后的设备上，比如：iOS 8.3 上，创建如上的目录的结构 AFC 会报错：</p>
 
@@ -433,7 +433,7 @@ f35e1c239d1bf7d568be613aafef53104f3bc1801eda87ef963a7abeb57b8369/
 
 <p>如上表，蓝色是路径的第一部分，绿色是路径的第二部分(注:代码第2、3行为蓝色,4、5行为绿色)，下面看下 dmg 对应的签名文件内容：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160108/2016010815255459156315.png" alt="p3" /></p>
+<p><img src="../images_result/images/2016010815255459156315.png" alt="p3"></p>
 
 <p>图3：DeveloperDiskImage.dmg.signature</p>
 
@@ -479,9 +479,9 @@ f35e1c239d1bf7d568be613aafef53104f3bc1801eda87ef963a7abeb57b8369/
 
 <p>完成对 DDI 的利用后，相当于我们向系统又添加了一些服务，这些服务如果使用的是系统本身的程序则可以直接调用，如果使用的是自己的程序则首先需要过掉代码签名。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160108/2016010815255685122416.png" alt="p4" /> 图4：com.apple.remove_amfi.plist</p>
+<p><img src="../images_result/images/2016010815255685122416.png" alt="p4"> 图4：com.apple.remove_amfi.plist</p>
 
-<p><img src="http://static.wooyun.org//drops/20160108/2016010815255810841514.png" alt="p5" /> 图5：com.apple.ppinstall.plist</p>
+<p><img src="../images_result/images/2016010815255810841514.png" alt="p5"> 图5：com.apple.ppinstall.plist</p>
 
 <p>至此，只要我们再过掉代码签名便可以在用户空间已 root 权限执行任意代码了，下面看下代码签名。</p>
 
@@ -508,7 +508,7 @@ CVE-2014-4455 : TaiG Jailbreak Team
 
 <p>由于 iOS 8 之后 AMFI 中增加了另外一个安全机制，即：Library Validation，这个安全机制主要用来对抗代码注入式的攻击，盘古在 《Userland Exploits of Pangu 8》中对 LV （Library Validation）有介绍，下图是逆向分析得到的 LV 的流程图，供大家参考：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160108/201601081543237015363.jpg" alt="p6" /> 图6：库验证的流程图</p>
+<p><img src="../images_result/images/201601081543237015363.jpg" alt="p6"> 图6：库验证的流程图</p>
 
 <p>因此，这里 libmiss.dylib 也利用移植代码签名的技术手段来过 LV，这里给大家一个移植代码签名的思路：</p>
 
@@ -635,11 +635,11 @@ CVE-2014-4496 : TaiG Jailbreak Team
 
 <p>具体信息如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160108/2016010815260282327710.png" alt="p7" /> 图7：内核信息</p>
+<p><img src="../images_result/images/2016010815260282327710.png" alt="p7"> 图7：内核信息</p>
 
 <p>得到内核信息后，解析 xml 数据，得到 OSBundleMachOHeaders 键对应 Base64 字符串，之后解码字符串可以得到一个 MachO：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160108/2016010815260495293810.png" alt="p8" /> 图8：MachO Header</p>
+<p><img src="../images_result/images/2016010815260495293810.png" alt="p8"> 图8：MachO Header</p>
 
 <p>然后解析这个 MachO 头从中得到<code>__TEXT Segment</code>的开始地址，得到<code>__PRELINK_STATE</code>的开始地址，然后从<code>__PRELINK_STATE</code>的开始地址中计算出内核的开始地址，用内核的开始地址减去<code>__TEXT</code>的开始地址就是 KASLR 的 Slide。<code>__PRELINK_INFO Segment</code> 的结束地址就是内核的结束地址。这样我们就得到了内核的起始地址、结束地址、KASLR 的 Slide。这些信息主要有两方面的应用：Patch 内核相关的工作需要内核的真实地址；在内核堆利用过程中也需要知道KASLR 的 Slide 从而得到堆对象的真实地址。</p>
 
@@ -685,7 +685,7 @@ CVE-2014-4487 : TaiG Jailbreak Team
 
 <p>利用思路：将一个小 zone 中的内存块释放到大的 zone 中，结合堆风水，释放后立即申请刚刚释放的内存块，便可以覆盖相邻的小内核块。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160108/201601081543248071092.jpg" alt="p9" /> 图9：堆溢出利用过程</p>
+<p><img src="../images_result/images/201601081543248071092.jpg" alt="p9"> 图9：堆溢出利用过程</p>
 
 <p><strong>内核读</strong></p>
 
@@ -912,7 +912,7 @@ void HexDump(char *description, void *addr, int len)
 
 <p>表26：触发任意代码执行</p>
 
-<p><img src="http://static.wooyun.org//drops/20160108/20160108152608586071010.png" alt="p10" /></p>
+<p><img src="../images_result/images/20160108152608586071010.png" alt="p10"></p>
 
 <p>图10：改写虚函数表的结果示例</p>
 
@@ -931,7 +931,7 @@ void HexDump(char *description, void *addr, int len)
 
 <h1>0x05 结束</h1>
 
-<hr />
+<hr>
 
 <p>上面介绍了越狱的过程，越狱所使用的漏洞，以及漏洞的利用思路，希望对大家有帮助。最后，还有几点需要说明下：</p>
 
@@ -940,7 +940,7 @@ void HexDump(char *description, void *addr, int len)
 <li>上文只是介绍了漏洞，而实际越狱工具的开发中，产品化是一个重要方面，具体来说主要指：稳定性；兼容性，可以看出开发一个好的越狱工具不是一件简单的事情。</li>
 </ol>
 
-<p><em>2015-06-25</em></p>      </p>
+<p><em>2015-06-25</em></p>      <p></p>
     
 			</body>
 		</html>

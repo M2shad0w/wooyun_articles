@@ -3,30 +3,30 @@
 			<head>
 			     <title>Android Broadcast Security - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4393">http://drops.wooyun.org/tips/4393</a></h1>
 				
       <p>
-        <h2>0x00 科普</h2>
+        </p><h2>0x00 科普</h2>
 
-<hr />
+<hr>
 
 <p>Broadcast Recevier 广播接收器是一个专注于接收广播通知信息，并做出对应处理的组件。很多广播是源自于系统代码的──比如，通知时区改变、电池电量低、拍摄了一张照片或者用户改变了语言选项。应用程序也可以进行广播──比如说，通知其它应用程序一些数据下载完成并处于可用状态。 应用程序可以拥有任意数量的广播接收器以对所有它感兴趣的通知信息予以响应。所有的接收器均继承自BroadcastReceiver基类。 广播接收器没有用户界面。然而，它们可以启动一个activity来响应它们收到的信息，或者用NotificationManager来通知用户。通知可以用很多种方式来吸引用户的注意力──闪动背灯、震动、播放声音等等。一般来说是在状态栏上放一个持久的图标，用户可以打开它并获取消息。</p>
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/20150211/2015021110415483840.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015021110415483840.jpg" alt=""></p>
 
 <h2>0x01 知识要点</h2>
 
-<hr />
+<hr>
 
 <p><strong>注册形式：动态or静态</strong></p>
 
-<p><activity>元素的name属性指定了实现了这个activity的 Activity的子类。icon和label属性指向了包含展示给用户的此activity的图标和标签的资源文件。其它组件也以类似的方法声明──<service> 元素用于声明服务， <receiver> 元素用于声明广播接收器，而 <provider> 元素用于声明内容提供器。 manifest文件中未进行声明的activity、服务以及内容提供器将不为系统所见，从而也就不会被运行。然而，广播接收器既可以在manifest文件中声明，也可以在代码中进行动态的创建，并以调用Context.registerReceiver()的方式注册至系统。</p>
+<p><activity>元素的name属性指定了实现了这个activity的 Activity的子类。icon和label属性指向了包含展示给用户的此activity的图标和标签的资源文件。其它组件也以类似的方法声明──<service> 元素用于声明服务， <receiver> 元素用于声明广播接收器，而 <provider> 元素用于声明内容提供器。 manifest文件中未进行声明的activity、服务以及内容提供器将不为系统所见，从而也就不会被运行。然而，广播接收器既可以在manifest文件中声明，也可以在代码中进行动态的创建，并以调用Context.registerReceiver()的方式注册至系统。</provider></receiver></service></activity></p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110415529643.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015021110415529643.jpg" alt=""></p>
 
 <p>（静态与动态注册广播接收器区别）</p>
 
@@ -82,7 +82,7 @@ Broadcast the given intent to all interested BroadcastReceivers, allowing an opt
 
 <p>sendStickyBroadcast()字面意思是发送粘性的广播，使用这个api需要权限android.Manifest.permission.BROADCAST_STICKY,粘性广播的特点是Intent会一直保留到广播事件结束，而这种广播也没有所谓的10秒限制，10秒限制是指普通的广播如果onReceive方法执行时间太长，超过10秒的时候系统会将这个广播置为可以干掉的candidate，一旦系统资源不够的时候，就会干掉这个广播而让它不执行。</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110415616860.png" alt="" /></p>
+<p><img src="../images_result/images/2015021110415616860.png" alt=""></p>
 
 <p>(几种广播的特性)</p>
 
@@ -106,9 +106,9 @@ Broadcast the given intent to all interested BroadcastReceivers, allowing an opt
 
 <h2>0x02 分类</h2>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110415681438.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015021110415681438.jpg" alt=""></p>
 
 <ol>
 <li>私有广播接收器：只接收app自身发出的广播</li>
@@ -120,7 +120,7 @@ Broadcast the given intent to all interested BroadcastReceivers, allowing an opt
 
 <p>intent-filter节点与exported属性设置组合建议</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110415726501.png" alt="" /></p>
+<p><img src="../images_result/images/2015021110415726501.png" alt=""></p>
 
 <ol>
 <li><p>私有广播接收器设置exported='false'，并且不配置intent-filter。(私有广播接收器依然能接收到同UID的广播)</p>
@@ -140,14 +140,14 @@ Broadcast the given intent to all interested BroadcastReceivers, allowing an opt
 
 <h2>0x03 测试方法</h2>
 
-<hr />
+<hr>
 
 <p>1、查找动态广播接收器：反编译后检索registerReceiver(),</p>
 
 <pre><code>dz&gt; run app.broadcast.info -a android -i
 </code></pre>
 
-<p>2、查找静态广播接收器：反编译后查看配置文件查找广播接收器组件<receiver>，注意exported属性</p>
+<p>2、查找静态广播接收器：反编译后查看配置文件查找广播接收器组件<receiver>，注意exported属性</receiver></p>
 
 <p>3、查找发送广播内的信息检索sendBroadcast与sendOrderedBroadcast，注意setPackage方法于receiverPermission变量。</p>
 
@@ -203,7 +203,7 @@ public class Receiver extends BroadcastReceiver {
 
 <h2>0x04 案例</h2>
 
-<hr />
+<hr>
 
 <p><strong>案例1：伪造消息代码执行</strong></p>
 
@@ -227,7 +227,7 @@ public class Receiver extends BroadcastReceiver {
 
 <p>某应用利用广播传输用户账号密码</p>
 
-<p><img src="http://static.wooyun.org/20150211/2015021110415718708.png" alt="" /></p>
+<p><img src="../images_result/images/2015021110415718708.png" alt=""></p>
 
 <p>隐式意图发送敏感信息</p>
 
@@ -291,11 +291,11 @@ LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
 
 <h2>0x05 参考</h2>
 
-<hr />
+<hr>
 
 <p><a href="http://www.jssec.org/dl/android_securecoding_en.pdf">http://www.jssec.org/dl/android&#95;securecoding&#95;en.pdf</a></p>
 
-<p><a href="https://www.securecoding.cert.org/confluence/display/java/DRD03-J.+Do+not+broadcast+sensitive+information+using+an+implicit+intent">https://www.securecoding.cert.org/confluence/display/java/DRD03-J.+Do+not+broadcast+sensitive+information+using+an+implicit+intent</a></p>      </p>
+<p><a href="https://www.securecoding.cert.org/confluence/display/java/DRD03-J.+Do+not+broadcast+sensitive+information+using+an+implicit+intent">https://www.securecoding.cert.org/confluence/display/java/DRD03-J.+Do+not+broadcast+sensitive+information+using+an+implicit+intent</a></p>      <p></p>
     
 			</body>
 		</html>

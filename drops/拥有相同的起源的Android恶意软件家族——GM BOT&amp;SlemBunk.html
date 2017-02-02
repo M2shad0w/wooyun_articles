@@ -3,14 +3,14 @@
 			<head>
 			     <title>拥有相同的起源的Android恶意软件家族——GM BOT&amp;SlemBunk - Fnut</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/13839">http://drops.wooyun.org/mobile/13839</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>二月19号，IBM XForce的研究员发布了一个情报报告，这份报告声称GM BOT的源代码在2015年12月被泄漏到了一个恶意软件的论坛上。GM BOT是一个复杂的安卓恶意软件家族，它出现在2014年末俄语地区的网络犯罪地下组织。IBM同时声称几个在最近的安全会议上提出的Android恶意软件家族实际上也是GM BOT的变种，包括<a href="http://www.symantec.com/connect/blogs/androidbankosy-all-ears-voice-call-based-2fa">Banskosy</a>，<a href="https://www.csis.dk/en/csis/news/4819/">MazarBot</a>，以及FireEye最近提到的恶意软件<a href="https://www.fireeye.com/blog/threat-research/2015/12/slembunk_an_evolvin.html">Slembunk</a>。</p>
 
@@ -22,7 +22,7 @@
 
 <h1>0x01 GM BOT和SlemBunk</h1>
 
-<hr />
+<hr>
 
 <p>我们的分析发现最近被IBM研究者提到的四个GM BOT样本都和SlemBunk拥有相同的主要组件。如下图所示，我们早期的报告展示了SlemBunk主要的组件以及相应的类名：</p>
 
@@ -34,13 +34,13 @@
 <li><strong>Customized UI views</strong>：呈现虚假登陆页面的Android类，这些虚假的登录页面都是模仿真正的银行应用 或者社交应用的，这样就可以进行钓鱼来获得银行或者社交账户凭证。</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160317/2016031711002429749.png" alt="p1" /></p>
+<p><img src="../images_result/images/2016031711002429749.png" alt="p1"></p>
 
 <p>前三个GM BOT样本都和我们的SlemBunk样本有相同的包名。除此之外，这些GM BOT样本有5个相同的主要的组件，包括和上图的SlemBunk样本一样，拥有相同的组件名称。</p>
 
 <p>第四个GM BOT有不同的初始化包名，但是会在运行时解压真正的payload。解压的payload拥有和SlemBunk相同的主要组件，只是在类名上有一些小的改变：比如MessageReceiver替换成了buziabuzia，以及MyDeviceAdminReceiver替换成了MDRA。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/2016031711002531967.png" alt="p2" /></p>
+<p><img src="../images_result/images/2016031711002531967.png" alt="p2"></p>
 
 <p>上图展示的是<strong>GM BOT样本</strong>（SHA256 9425fca578661392f3b12e1f1d83b8307bfb94340ae797c2f121d365852a775e）和一个<strong>SlemBunk样本</strong>（SHA256 e072a7a8d8e5a562342121408493937ecdedf6f357b1687e6da257f40d0c6b27）之间代码结构的相似性。从这张图中我们可以发现，我们之前讨论的5个主要的组件也出现在了GM BOT样本里。其他共同的类包括：</p>
 
@@ -52,17 +52,17 @@
 
 <p>在上面所有的这些组件和类中，MainService是最重要的一个。它是在启动时被Main类启动的，并持续在后台运行来监控运行最多的进程，当一个受害者的应用（比如一些手机银行APP）被监控到时就将一个钓鱼页面覆盖上去。为了保持MainService持续运行，恶意软件作者添加了两个receiver——ServiceStater和SDCardServiceStater，以此来检查接收到特殊的系统事件时的运行状态。GM BOT和SlemBunk样本都有同样的结构。下图展示的SDCardServiceStater类的主要代码是为了说明GM BOT和SlemBunk使用了同样的机制来维持MainService运行。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/2016031711002714742.png" alt="p3" /></p>
+<p><img src="../images_result/images/2016031711002714742.png" alt="p3"></p>
 
 <p>从这张图中我们可以发现，GM BOT和SlemBunk使用几乎相同的代码来保持MainService运行。值得注意的是两个样本都在系统区域设置中检查了城市，如果是俄罗斯就不启动MainService。唯一的区别就是GM BOT对某些类名、方法和字段进行了重命名混淆。比如，GM BOT中的静态变量“MainService;->a”和SlemBunk中的“MainService;->isRunning”是同样的功能。恶意软件作者使用这种方式来让他的代码更难去理解。然而这并不会改变根本的代码是来自于相同的起源这一事实。</p>
 
 <p>下图展示的MainService类的核心代码说明GM BOT和SlemBunk拥有相同的主服务逻辑。在Android中，当一个服务被启动，就会调用它的onCreate方法。在两个样本中的onCreate方法里，一个静态的变量都会首先被设置为“True”。在GM BOT中，这个变量被命名为“a”，而在SlemBunk中它被命名为“isRunning”。并且它们都会去读取应用程序偏好，并且在两个样本中有同样的命名：“AppPrefs”。这两个主服务的最后的任务也是相同的。如果一个受害者的应用在运行，一个钓鱼的页面就会覆盖到受害者的应用之上。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160318/2016031802385591940.png" alt="p4" /></p>
+<p><img src="../images_result/images/2016031802385591940.png" alt="p4"></p>
 
 <h1>0x02 SimpleLocker和SlemBunk</h1>
 
-<hr />
+<hr>
 
 <p>IBM声称GM BOT出现在2014年末俄语地区的网络犯罪地下组织。在我们的研究中，我们注意到更早的名为“SimpleLocker”的Android恶意软件也有和GM BOT、SlemBunk相似的代码框架。然而，SimpleLocker有不同的目的：从受害者处索要赎金。在安装到一个Android设备以后，SimpleLocker会扫描设备的特定文件类型，对它们进行加密然后向受害者索要解密的赎金。在SimpleLocker出现之前，也有其他的Android恶意软件会将屏幕锁住；但是SimpleLocker是第一个Android上的文件加密型的勒索软件。</p>
 
@@ -77,11 +77,11 @@
 <li><strong>TorSender, HttpSender and Utils</strong>，支持类来提供代码以进行CnC通信，以及收集设备信息。</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160317/2016031711003182684.png" alt="p5" /></p>
+<p><img src="../images_result/images/2016031711003182684.png" alt="p5"></p>
 
 <p>最后，我们定位到了另一个2014年6月的SimpleLocker样本(SHA256 304efc1f0b5b8c6c711c03a13d5d8b90755cec00cac1218a7a4a22b091ffb30b)，大约在第一个SimpleLocker样本被发现两个月之后。这个新的样本没有使用Tor来进行私密通信，但是和之前的SlemBunk样本(SHA256: f3341fc8d7248b3d4e58a3ee87e4e675b5f6fc37f28644a2c6ca9c4d11c92b96)的5个主要的组件有四个是相同的。下图展示了两个样本的代码结构的比较。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/2016031711003320906.png" alt="p6" /></p>
+<p><img src="../images_result/images/2016031711003320906.png" alt="p6"></p>
 
 <p>正如我们在上图中看到的那样，新的SimpleLocker样本使用了和SlemBunk相似的打包机制，把HttpSender和Utils打包到了名叫“utils”的子包中。它也添加了两个其他的最初只在SlemBunk中看到的主要组件：MessageReceiver和MyDeviceAdminReceiver。总的来说，这个SimpleLocker的变种木马和SlemBunk在5个主要组件里有4个是相同的。</p>
 
@@ -89,7 +89,7 @@
 
 <p>SmsProcessor类定义了恶意软件家族支持的CnC命令。通过对SmsProcessor的观察，我们发现了更多的证据证明SimpleLocker和SlemBunk是有相同的起源的。首先，SimpleLocker支持的CnC命令实际上是SlemBunk支持的命令的子集。在SimpleLocker中，CnC命令包括“<code>intercept_sms_start</code>”、“<code>intercept_sms_stop</code>”、“<code>control_number</code>”和“<code>send_sms</code>”，所有的这些都在SlemBunk样本中出现过。并且，在SimpleLocker和SlemBunk中都有共同的前缀“<code>#</code>”在实际的CnC命令前。这也是SimpleLocker和SlemBunk有相同起源的非常重要的证据。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160317/2016031711003462893.png" alt="p7" /></p>
+<p><img src="../images_result/images/2016031711003462893.png" alt="p7"></p>
 
 <p>MyDeviceAdminReceiver类的任务是请求设备管理员权限，这会让这些恶意软件很难被移除。SimpleLocker和SlemBunk在这个方面极其类似，支持一套相同的设备管理相关函数。</p>
 
@@ -97,7 +97,7 @@
 
 <h1>0x03 结论</h1>
 
-<hr />
+<hr>
 
 <p>我们的分析确认这几个Android恶意软件家族拥有共同的来源。更多的研究可能会发现更多相关的恶意软件家族。</p>
 
@@ -107,7 +107,7 @@
 
 <h1>0x04 Reference</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="https://securityintelligence.com/android-malware-about-to-get-worse-gm-bot-source-code-leaked/">[1]. Android Malware About to Get Worse: GM Bot Source Code Leaked[10]</a></li>
@@ -116,7 +116,7 @@
 <li><a href="https://www.fireeye.com/blog/threat-research/2015/12/slembunk_an_evolvin.html">[4]. SLEMBUNK: AN EVOLVING ANDROID TROJAN FAMILY TARGETING USERS OF WORLDWIDE BANKING APPS[13]</a></li>
 <li><a href="https://www.fireeye.com/blog/threat-research/2016/01/slembunk-part-two.html">[5]. SLEMBUNK PART II: PROLONGED ATTACK CHAIN AND BETTER-ORGANIZED CAMPAIGN[14]</a></li>
 <li><a href="http://www.welivesecurity.com/2014/06/04/simplocker/">[6]. ESET Analyzes Simplocker – First Android File-Encrypting, TOR-enabled Ransomware[15]</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

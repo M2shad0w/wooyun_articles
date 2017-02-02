@@ -3,14 +3,14 @@
 			<head>
 			     <title>java反序列化工具ysoserial分析 - angelwhu</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/14317">http://drops.wooyun.org/papers/14317</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>关于java反序列化漏洞的原理分析，基本都是在分析使用<code>Apache Commons Collections</code>这个库，造成的反序列化问题。然而，在下载老外的<strong>ysoserial</strong>工具并仔细看看后，我发现了许多值得学习的知识。</p>
 
@@ -42,7 +42,7 @@
 
 <h1>0x01 准备工作</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>在github上下载<a href="https://github.com/angelwhu/ysoserial">ysoserial</a>工具。</li>
@@ -51,11 +51,11 @@
 
 <p>导入后，可以看到里面有8个payload。其中<code>ObjectPayload</code>是定义的接口，所有的Payload需要实现这个接口的<code>getObject</code>方法。下面就开始对这些payload进行简要的分析。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160401/20160401022701815633.png" alt="" /></p>
+<p><img src="../images_result/images/20160401022701815633.png" alt=""></p>
 
 <h1>0x02 payload分析</h1>
 
-<hr />
+<hr>
 
 <h2>1. CommonsBeanutilsCollectionsLogging1</h2>
 
@@ -89,12 +89,12 @@ public Object getObject(final String command) throws Exception {
 }
 </code></pre>
 
-<p>第一行代码<code>final TemplatesImpl templates = Gadgets.createTemplatesImpl(command);</code>创建了<code>TemplatesImpl</code>类的对象，里面封装了我们需要的命令执行代码。而且是使用<strong>字节码</strong>的形式存储在对象属性中。<br />
+<p>第一行代码<code>final TemplatesImpl templates = Gadgets.createTemplatesImpl(command);</code>创建了<code>TemplatesImpl</code>类的对象，里面封装了我们需要的命令执行代码。而且是使用<strong>字节码</strong>的形式存储在对象属性中。<br>
 下面就具体分析下这个对象的产生过程。</p>
 
 <h3>(1) 利用TemplatesImpl类存储危险的字节码</h3>
 
-<p>在产生字节码时，用到了JDK中<code>javassist</code>类。具体了解可以参考这篇博客<a href="http://www.cnblogs.com/hucn/p/3636912.html">http://www.cnblogs.com/hucn/p/3636912.html</a>。<br />
+<p>在产生字节码时，用到了JDK中<code>javassist</code>类。具体了解可以参考这篇博客<a href="http://www.cnblogs.com/hucn/p/3636912.html">http://www.cnblogs.com/hucn/p/3636912.html</a>。<br>
 下面是我编写的一个简单的样例程序，便于理解:</p>
 
 <pre><code>#!java
@@ -131,7 +131,7 @@ public void testClassPool() throws CannotCompileException, NotFoundException, IO
 
 <p>这段代码运行后，会在当前目录生成字节码(class文件)。使用<code>java</code>反编译器可看到源码，在原始模板类中插入了恶意静态代码，而且以字节码的形式直接存储。命令行直接运行，可以执行弹出计算器的命令：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160401/20160401022700321562.png" alt="" /></p>
+<p><img src="../images_result/images/20160401022700321562.png" alt=""></p>
 
 <p>现在看看老外工具中，生成字节码的代码为：</p>
 
@@ -212,7 +212,7 @@ throws TransformerConfigurationException {
 
 <p>在<code>defineTransletClasses()</code>方法中，会加载我们之前存储在<code>_bytecodes</code>属性中的字节码(可以看做类文件)，进而返回类的<code>Class</code>对象，存储在<code>_class</code>数组中。下面是调试时候的截图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160401/20160401022703579934.png" alt="" /></p>
+<p><img src="../images_result/images/20160401022703579934.png" alt=""></p>
 
 <p>可以看到在<code>defineTransletClasses()</code>后，得到类的<code>Class</code>对象。然后会执行<code>newInstance()</code>操作，新建一个实例，这样便触发了我们插入的静态恶意java代码。如果接着单步执行，便会弹出计算器。</p>
 
@@ -266,7 +266,7 @@ private void siftDownUsingComparator(int k, E x) {
 }
 </code></pre>
 
-<p>这里传进去的，便是<code>BeanComparator</code>比较器：位于<code>commons-beanutils</code>包。<br />
+<p>这里传进去的，便是<code>BeanComparator</code>比较器：位于<code>commons-beanutils</code>包。<br>
 于是，看看比较器的<code>compare</code>方法。</p>
 
 <pre><code>#!java
@@ -283,7 +283,7 @@ public int compare( T o1, T o2 ) {
 
 <p><code>PropertyUtils.getProperty( o1, property )</code>顾名思义，便是取出<code>o1</code>对象中<code>property</code>属性的值。而实际上会去调用<code>o1.getProperty()</code>方法得到<code>property</code>属性值。</p>
 
-<p>到这里，可以画上完美的一个圈了。我们只需将前面构造好的<code>TemplatesImpl</code>对象添加到<code>PriorityQueue</code>(优先级队列)中，然后设置比较器为<code>BeanComparator("outputProperties")</code>即可。<br />
+<p>到这里，可以画上完美的一个圈了。我们只需将前面构造好的<code>TemplatesImpl</code>对象添加到<code>PriorityQueue</code>(优先级队列)中，然后设置比较器为<code>BeanComparator("outputProperties")</code>即可。<br>
 那么，在反序列化过程中，会自动调用<code>TemplatesImpl.getOutputProperties()</code>方法。执行命令了。</p>
 
 <p>个人总结观点：</p>
@@ -293,11 +293,11 @@ public int compare( T o1, T o2 ) {
 <li>触发原理：提供会自动调用比较器的容器。如:将<code>PriorityQueue</code>换成<code>TreeSet</code>容器，也是可以的。</li>
 </ul>
 
-<p>为了在生成payload时，能够正常运行。在代码中，先象征性地加入了两个<code>BigInteger</code>对象。<br />
-后面使用反射机制，将<code>comparator</code>中的属性和<code>queue</code>容器存储的对象都改成我们需要的属性和对象。<br />
+<p>为了在生成payload时，能够正常运行。在代码中，先象征性地加入了两个<code>BigInteger</code>对象。<br>
+后面使用反射机制，将<code>comparator</code>中的属性和<code>queue</code>容器存储的对象都改成我们需要的属性和对象。<br>
 否则，在生成<code>payload</code>时，便会弹出计算器，抛出异常，无法正常执行了。测试如下:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160401/20160401022705470435.png" alt="" /></p>
+<p><img src="../images_result/images/20160401022705470435.png" alt=""></p>
 
 <h2>2. Jdk7u21</h2>
 
@@ -311,7 +311,7 @@ public int compare( T o1, T o2 ) {
 
 <h3>(1) "f5a5a608"的hash值为0</h3>
 
-<p>类的<code>hashCode</code>方法是返回一个独一无二的hash值(int型)，去代表这个唯一对象。如果类没有重写<code>hashCode</code>方法，会调用原始<code>Object</code>类中的<code>hashCode</code>方法返回一个hash值。<br />
+<p>类的<code>hashCode</code>方法是返回一个独一无二的hash值(int型)，去代表这个唯一对象。如果类没有重写<code>hashCode</code>方法，会调用原始<code>Object</code>类中的<code>hashCode</code>方法返回一个hash值。<br>
 <code>String</code>类的<code>hashCode</code>方法是这么实现的。</p>
 
 <pre><code>#!java    
@@ -394,12 +394,12 @@ public V put(K key, V value) {
 
 <p>通过以上分析下可以知道：在反序列化<code>HashSet</code>过程中，会依次将<code>templates</code>和<code>proxy</code>对象添加到<code>map</code>中。</p>
 
-<p>接着我们需要触发代码去执行<code>key.equals(k)</code>这条语句。<br />
+<p>接着我们需要触发代码去执行<code>key.equals(k)</code>这条语句。<br>
 由于<strong>短路机制</strong>的原因，必须使<code>templates.hashCode()</code>与<code>proxy.hashCode()</code>计算值相等。</p>
 
 <p><code>proxy</code>使用了<strong>动态代理</strong>机制，代理了<code>Templates</code>接口。具体请参考其他分析老外<code>LazyMap</code>触发<code>Apache Commons Collections</code>第三库序列化问题的文章，如：参考资料2。</p>
 
-<p>这里又到了熟悉的<code>sun.reflect.annotation.AnnotationInvocationHandler</code>类。<br />
+<p>这里又到了熟悉的<code>sun.reflect.annotation.AnnotationInvocationHandler</code>类。<br>
 简而言之，我理解为将对象<code>proxy</code>所有的方法调用，都改成调用<code>sun.reflect.annotation.AnnotationInvocationHandler</code>类的<code>invoke()</code>方法。</p>
 
 <p>当我们调用<code>proxy.hashCode()</code>方法时，自然就会执行到了如下代码:</p>
@@ -424,9 +424,9 @@ private int hashCodeImpl() {
 
 <p>这里的<code>memberValues</code>就是<code>payload</code>代码一开始传进去的<code>map("f5a5a608",templates)</code>。简要画图说明为:</p>
 
-<p><img src="http://static.wooyun.org//drops/20160401/20160401022706996326.png" alt="" /></p>
+<p><img src="../images_result/images/20160401022706996326.png" alt=""></p>
 
-<p>因此，通过动态代理机制加上<code>"f5a5a608".hashCode()=0</code>的特殊性，使<code>e.hash == hash</code>成立。<br />
+<p>因此，通过动态代理机制加上<code>"f5a5a608".hashCode()=0</code>的特殊性，使<code>e.hash == hash</code>成立。<br>
 这样便可以执行<code>key.equals(k)</code>，即：<code>proxy.equals(templates)</code>语句。</p>
 
 <p>接着查看源码便知：<code>proxy.equals(templates)</code>操作会遍历<code>Templates</code>接口的所有方法，并调用。如此，即可触发调用<code>templates</code>的<code>getOutputProperties</code>方法。</p>
@@ -512,7 +512,7 @@ private void readObject(ObjectInputStream inputStream) throws IOException, Class
 <li>由于流程可能比较错综复杂，画个简单的图表示下几个对象之间的关系: </li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20160401/20160401022708108847.png" alt="" /></p>
+<p><img src="../images_result/images/20160401022708108847.png" alt=""></p>
 
 <ul>
 <li><p>在执行<code>ReflectionUtils.invokeMethod(method, this.provider.getType())</code>语句时，整个执行流程如下：</p>
@@ -551,7 +551,7 @@ typeTemplatesProxy对象.invoke()
 
 <ul>
 <li><code>CommonsCollections1</code>自然是使用了<code>LazyMap</code>和动态代理机制进行触发调用<code>Transformer</code>执行链，请<a href="http://www.iswin.org/2015/11/13/Apache-CommonsCollections-Deserialized-Vulnerability/">参考链接2</a>。 </li>
-<li><p><code>CommonsCollections2</code>和<code>CommonsBeanutilsCollectionsLogging1</code>一样也使用了比较器去触发<code>TemplatesImpl</code>的<code>newTransformer</code>方法执行命令。<br />
+<li><p><code>CommonsCollections2</code>和<code>CommonsBeanutilsCollectionsLogging1</code>一样也使用了比较器去触发<code>TemplatesImpl</code>的<code>newTransformer</code>方法执行命令。<br>
 这里用到的比较器为<code>TransformingComparator</code>,直接看其<code>compare</code>方法：</p>
 
 <pre><code>#!java
@@ -563,7 +563,7 @@ public int compare(final I obj1, final I obj2) {
 </code></pre></li>
 </ul>
 
-<p>很直接调用了<code>transformer.transform(obj1)</code>，这里的<code>obj1</code>就是<code>payload</code>中的<code>templates</code>对象。<br />
+<p>很直接调用了<code>transformer.transform(obj1)</code>，这里的<code>obj1</code>就是<code>payload</code>中的<code>templates</code>对象。<br>
 主要代码为：</p>
 
 <pre><code>#!java
@@ -640,13 +640,13 @@ args[0] = templates;
 
 <h1>0x03 参考资料</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="http://blog.knownsec.com/2016/03/java-deserialization-commonsbeanutils-pop-chains-analysis/">http://blog.knownsec.com/2016/03/java-deserialization-commonsbeanutils-pop-chains-analysis/</a></li>
 <li><a href="http://www.iswin.org/2015/11/13/Apache-CommonsCollections-Deserialized-Vulnerability/" title="http://www.iswin.org/2015/11/13/Apache-CommonsCollections-Deserialized-Vulnerability/">http://www.iswin.org/2015/11/13/Apache-CommonsCollections-Deserialized-Vulnerability/</a></li>
 <li><a href="https://github.com/angelwhu/ysoserial-test/" title="https://github.com/angelwhu/ysoserial-test/">https://github.com/angelwhu/ysoserial-test/</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

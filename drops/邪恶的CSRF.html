@@ -3,14 +3,14 @@
 			<head>
 			     <title>邪恶的CSRF - superfish</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/15556">http://drops.wooyun.org/web/15556</a></h1>
 				
       <p>
-        <h1>0x00 什么是CSRF</h1>
+        </p><h1>0x00 什么是CSRF</h1>
 
-<hr />
+<hr>
 
 <p>CSRF全称Cross Site Request Forgery，即跨站点请求伪造。我们知道，攻击时常常伴随着各种各样的请求，而攻击的发生也是由各种请求造成的。</p>
 
@@ -18,13 +18,13 @@
 
 <p>CSRF的攻击过程大致如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132314494821103.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132314494821103.png" alt=""></p>
 
 <!--more-->
 
 <h1>0x01 CSRF攻击存在的道理</h1>
 
-<hr />
+<hr>
 
 <p>一种攻击方式之所以能够存在，必然是因为它能够达到某种特定的目的。比如：通过程序中的缓冲区溢出漏洞，我们可以尝试控制程序的流程，使其执行任意代码；通过网站上的SQL注入漏洞，我们可以读取数据库中的敏感信息，进而获取Webshell甚至获取服务器的控制权等等。而CSRF攻击能够达到的目的是使受害者发出由攻击者伪造的请求，那么这有什么作用呢？</p>
 
@@ -36,7 +36,7 @@
 
 <h1>0x02 场景举例</h1>
 
-<hr />
+<hr>
 
 <p>（1）场景一：</p>
 
@@ -96,7 +96,7 @@ uname=test&amp;pword=test
 
 <h1>0x03 CSRF攻击方式</h1>
 
-<hr />
+<hr>
 
 <p>（1）HTML CSRF攻击：</p>
 
@@ -193,27 +193,27 @@ echo $callback."($result)";
 
 <p>我们用以下几张图来总结一下JSON HiJacking的攻击过程：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/2016051013231687604269.png" alt="" /></p>
+<p><img src="../images_result/images/2016051013231687604269.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/2016051013231963221347.png" alt="" /></p>
+<p><img src="../images_result/images/2016051013231963221347.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/2016051013232137402434.png" alt="" /></p>
+<p><img src="../images_result/images/2016051013232137402434.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/2016051013232323886523.png" alt="" /></p>
+<p><img src="../images_result/images/2016051013232323886523.png" alt=""></p>
 
 <p>（图片来源：<a href="http://haacked.com/archive/2009/06/25/json-hijacking.aspx/">http://haacked.com/archive/2009/06/25/json-hijacking.aspx/</a>）</p>
 
 <h1>0x04 CSRF的危害</h1>
 
-<hr />
+<hr>
 
 <p>前面说了CSRF的基本概念，列举了几个CSRF的攻击场景，讲述了几种CSRF的攻击方法，现在我们来简单总结一下CSRF攻击可能造成的危害。</p>
 
 <p>CSRF能做的事情大概如下：</p>
 
-<p>1）篡改目标网站上的用户数据；<br />
-2）盗取用户隐私数据；<br />
-3）作为其他攻击向量的辅助攻击手法；<br />
+<p>1）篡改目标网站上的用户数据；<br>
+2）盗取用户隐私数据；<br>
+3）作为其他攻击向量的辅助攻击手法；<br>
 4）传播CSRF蠕虫。</p>
 
 <p>其中前两点我们在之前的例子中已经做了比较详细的说明，不再赘述。第三点即将其他攻击方法与CSRF进行结合进行攻击，接下来我们以实际的漏洞实例来说明CSRF的第三个危害。</p>
@@ -270,11 +270,11 @@ id=…&amp;accont=…&amp;pass=…&amp;status=…&amp;if_system=…
 
 <p>攻击发生之前，如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/2016051013232436069618.png" alt="" /></p>
+<p><img src="../images_result/images/2016051013232436069618.png" alt=""></p>
 
 <p>管理员在登录的情况下访问攻击者的页面之后，如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/2016051013233013379720.png" alt="" /></p>
+<p><img src="../images_result/images/2016051013233013379720.png" alt=""></p>
 
 <p>可以看到，成功添加了一名管理员。</p>
 
@@ -282,7 +282,7 @@ id=…&amp;accont=…&amp;pass=…&amp;status=…&amp;if_system=…
 
 <p>在后台风格管理-创建模板文件的地方添加一个模板，通过抓包改包的方式绕过前端对文件类型的判断，如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/2016051013233293476820.png" alt="" /></p>
+<p><img src="../images_result/images/2016051013233293476820.png" alt=""></p>
 
 <p>把<code>GET /phpok/admin.php?c=tpl&amp;f=create&amp;id=1&amp;folder=/&amp;type=file&amp;title=wooyun.html</code></p>
 
@@ -290,11 +290,11 @@ id=…&amp;accont=…&amp;pass=…&amp;status=…&amp;if_system=…
 
 <p>可以看到成功添加了.php文件：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132602604972610.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132602604972610.png" alt=""></p>
 
 <p>然后在编辑文件内容为一句话木马即可：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/2016051013233370606920.png" alt="" /></p>
+<p><img src="../images_result/images/2016051013233370606920.png" alt=""></p>
 
 <p>在此次攻击中，攻击者最后利用后台添加模板处的限制不严格拿到了Webshell，但在此之前使攻击者得以进入后台的却是CSRF漏洞，由此可以看到CSRF在这次攻击中的重要性。</p>
 
@@ -308,19 +308,19 @@ id=…&amp;accont=…&amp;pass=…&amp;status=…&amp;if_system=…
 
 <p>选择一个正常的图片，截获数据，如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132335453441020.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132335453441020.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132337909541122.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132337909541122.png" alt=""></p>
 
 <p>然后修改数据，如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132339804861219.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132339804861219.png" alt=""></p>
 
 <p>成功上传.zip文件，记录下文件id号，这里是739。</p>
 
 <p>在后台的程序升级-ZIP离线包升级中的升级操作存在CSRF漏洞，演示如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132340383841318.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132340383841318.png" alt=""></p>
 
 <p>于是攻击者可以构造如下页面：</p>
 
@@ -342,9 +342,9 @@ id=…&amp;accont=…&amp;pass=…&amp;status=…&amp;if_system=…
 
 <p>管理员登录后台后访问攻击者的页面，如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132342990041417.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132342990041417.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132343700531516.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132343700531516.png" alt=""></p>
 
 <p>可以看到我们的木马文件已经上传到服务器上了。</p>
 
@@ -352,7 +352,7 @@ id=…&amp;accont=…&amp;pass=…&amp;status=…&amp;if_system=…
 
 <h1>0x05 CSRF的防御</h1>
 
-<hr />
+<hr>
 
 <p>前面我们了解了这么多有关CSRF攻击的东西，目的是为了明白如何防御CSRF攻击（真的是这样吗？...）。</p>
 
@@ -432,19 +432,19 @@ var_dump($_COOKIE);
 
 <p>我们来演示一下效果，test.html页面如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132345196341617.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132345196341617.png" alt=""></p>
 
 <p>normal submit之后：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132347671811715.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132347671811715.png" alt=""></p>
 
 <p>看到只有xampp设置的一个Cookie，试一下with token按钮：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132349359031814.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132349359031814.png" alt=""></p>
 
 <p>看到我们提交的Cookie中多出了一个名为“xeye”的Cookie，再试一下hook submit：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132350536271912.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132350536271912.png" alt=""></p>
 
 <p>效果和第二个相同。</p>
 
@@ -484,7 +484,7 @@ var_dump($_COOKIE);
 
 <h1>0x06 结合XSS的CSRF攻击</h1>
 
-<hr />
+<hr>
 
 <p>前面我们说到了基于CSRF的攻击，讲的是在一整套攻击中使用CSRF来达到最终目的或某个中间目的。而这里我们要说的是：如何利用CSRF的“黄金搭档”——XSS来辅助我们完成一次CSRF攻击。</p>
 
@@ -564,17 +564,17 @@ id=…&amp;accont=…&amp;pass=…&amp;status=…&amp;if_system=…&amp;accont=�
 
 <p>诱惑受害者访问该页面，效果如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/2016051013271861058278.png" alt="" /></p>
+<p><img src="../images_result/images/2016051013271861058278.png" alt=""></p>
 
 <p>看看生词本：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132352336312011.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132352336312011.png" alt=""></p>
 
 <p>已经成功添加了一个新单词“Wooyun”，到我们的XSS平台上看看备注中的JavaScript代码有没有执行：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132355117902118.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132355117902118.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132356942602215.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132356942602215.png" alt=""></p>
 
 <p>代码成功执行！</p>
 
@@ -582,7 +582,7 @@ id=…&amp;accont=…&amp;pass=…&amp;status=…&amp;if_system=…&amp;accont=�
 
 <h1>0x07 CSRF蠕虫</h1>
 
-<hr />
+<hr>
 
 <p>说说蠕虫。</p>
 
@@ -737,7 +737,7 @@ Response.write(s)
 
 <h1>0x08 还有什么东西？</h1>
 
-<hr />
+<hr>
 
 <p>写到这里，我所了解的有关CSRF攻击与防御的内容就差不多写完了。在写前面内容的时候，我一直在有意回避一个东西，那就是在现在的Web前端仍然占有重要地位的Flash，以及ActionScript脚本。</p>
 
@@ -745,11 +745,11 @@ Response.write(s)
 
 <p>首先，我们必须先介绍一个文件——crossdomain.xml，次文件通常在网站的根目录下存在，比如<code>http://www.qq.com</code>网站上的crossdomain.xml文件内容如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132358213702312.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132358213702312.png" alt=""></p>
 
 <p><code>https://www.baidu.com</code>网站上的crossdomain.xml文件内容如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132400855322411.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132400855322411.png" alt=""></p>
 
 <p>该配置文件中的“allow-access-from domain”用来配置哪些域的Flash请求可以访问本域的资源。如果该项值为“*”，则表示任何与的Flash都可以访问，这是非常危险的。当存在这样的配置时，攻击者可以利用ActionScript脚本轻松突破同源策略的限制，如下：</p>
 
@@ -771,13 +771,13 @@ Loader.load(); //发起请求
 
 <p>除此之外，这种跨域获取信息的方法还可以应用在CSRF蠕虫之中，同样是在2008年，饭否（<code>www.fanfou.com</code>）就被基于Flash的CSRF蠕虫攻击，当时包含饭否CSRF蠕虫的Flash游戏界面如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160510/20160510132402139552510.png" alt="" /></p>
+<p><img src="../images_result/images/20160510132402139552510.png" alt=""></p>
 
 <h1>0x09 结束</h1>
 
-<hr />
+<hr>
 
-<p>由于水平有限，本文写到这里就差不多结束了，里面是我对CSRF几乎所有的认知，包括基本概念、攻击原理、攻击目的、攻击手段以及防御方法等等。需要特别说明的是，文中有许多内容来自《Web前端黑客技术解密》这本书。</p>      </p>
+<p>由于水平有限，本文写到这里就差不多结束了，里面是我对CSRF几乎所有的认知，包括基本概念、攻击原理、攻击目的、攻击手段以及防御方法等等。需要特别说明的是，文中有许多内容来自《Web前端黑客技术解密》这本书。</p>      <p></p>
     
 			</body>
 		</html>

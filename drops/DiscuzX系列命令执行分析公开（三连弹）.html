@@ -3,18 +3,18 @@
 			<head>
 			     <title>DiscuzX系列命令执行分析公开（三连弹） - tang3</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4611">http://drops.wooyun.org/papers/4611</a></h1>
 				
       <p>
-        <h1>0x00 漏洞概要</h1>
+        </p><h1>0x00 漏洞概要</h1>
 
-<hr />
+<hr>
 
 <p>昨天360补天发了这样的一条微博：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150115/2015011510381954387image0012.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015011510381954387image0012.png" alt="enter image description here"></p>
 
 <p>然后打听了一下细节，发现居然是我13年7月报给TSRC的漏洞，看今天大家玩的挺开心，与TSRC的人聊了两句，说这个系列可以发几个了，所以我也来凑个热闹，把原来的分析发出来给大家看一下（这里做个广告，TSRC提交Discuz的漏洞，奖品棒棒哒~~）。这个漏洞原来我是作为前台命令执行发个TSRC的，虽然有限制，但是个人感觉还是不错的。只发一个怕各位不过瘾，就再来一发这个点比较直观的后台命令执行和绕过前台命令执行的修复。原TSRC上的漏洞标题是《Discuz! X系列远程命令执行漏洞（二）》、《Discuz! X系列远程命令执行漏洞（三）》和《Discuz! X系列远程命令执行漏洞（四）》。</p>
 
@@ -28,11 +28,11 @@
 
 <h1>0x01 原理分析</h1>
 
-<hr />
+<hr>
 
 <h2>0. 一定条件下前台命令执行</h2>
 
-<hr />
+<hr>
 
 <p>这个漏洞出现在\source\class\class&#95;image.php文件中的Thumb&#95;IM()函数，问题代码如下：</p>
 
@@ -56,7 +56,7 @@ function Thumb_IM() {
 
 <h2>1. 同点后台命令执行</h2>
 
-<hr />
+<hr>
 
 <p>这个漏洞出现在\source\class\class&#95;image.php文件中的Thumb&#95;IM()函数，问题代码如下：</p>
 
@@ -78,7 +78,7 @@ function Thumb_IM() {
 
 <p>从第一行红色代码中可以看出，程序通过一些变量的拼接形成一条系统命令，在第二行使用exec方法进行执行。若用户可以控制这些变量中的任何一个，那么就可能导致任意命令的执行。</p>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="90770421742a1e74291b75191d770a1473101aa2a0a1a3bda0a7bda2a4d0d4f9e3f3e5ea">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>! X系列远程命令执行漏洞分析（二）》报告中提到过这个问题，也已经提交给腾讯修复了，使用的利用点是param['thumbwidth']和param[' thumbheight']。而这次我使用到param['imageimpath']这个参数，这个参数对应的是后台配置中的“ImageMagick程序安装路径”。</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="90770421742a1e74291b75191d770a1473101aa2a0a1a3bda0a7bda2a4d0d4f9e3f3e5ea">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>! X系列远程命令执行漏洞分析（二）》报告中提到过这个问题，也已经提交给腾讯修复了，使用的利用点是param['thumbwidth']和param[' thumbheight']。而这次我使用到param['imageimpath']这个参数，这个参数对应的是后台配置中的“ImageMagick程序安装路径”。</p>
 
 <p>这个利用点应该是最后一个可控点了，因为param['thumbwidth']和param[' thumbheight']在提交给腾讯后添加了整形校验转换，无法传递字符串。而source和target需要在前面进行文件和文件是否存在的验证，无法自由发挥☹。</p>
 
@@ -122,9 +122,9 @@ function image() {
 
 <h2>2. 前台命令执行修复绕过</h2>
 
-<hr />
+<hr>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d6334a7e305e47326f5d335f5b314c5235565ce4e6e7e5fbe6e1fbe4e29692bfa5b5a3ac">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>! X系列远程命令执行漏洞分析（二）<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5bb8dbd0bec9d7b8dbd1696b6a68766b6c76696f1b1f3228382e21">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>! X系列远程命令执行漏洞分析（三）》两篇报告中，将视角盯死在了Thumb_IM这个方法上。在修复后，这个方法的命令执行失败，导致利用后续操作停止。</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d6334a7e305e47326f5d335f5b314c5235565ce4e6e7e5fbe6e1fbe4e29692bfa5b5a3ac">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>! X系列远程命令执行漏洞分析（二）<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5bb8dbd0bec9d7b8dbd1696b6a68766b6c76696f1b1f3228382e21">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>! X系列远程命令执行漏洞分析（三）》两篇报告中，将视角盯死在了Thumb_IM这个方法上。在修复后，这个方法的命令执行失败，导致利用后续操作停止。</p>
 
 <p>但是如果让这个方法正常完成它的工作，那么他后面的操作中还是有很多修复中没有考虑到的利用点。下面我们来看下其中的一个利用点,source/class/class&#95;image.php中的Cropper&#95;IM方法：</p>
 
@@ -144,11 +144,11 @@ function Cropper_IM() {
 
 <h1>0x02 利用思路</h1>
 
-<hr />
+<hr>
 
 <h2>0. 一定条件下前台命令执行</h2>
 
-<hr />
+<hr>
 
 <p>看到这个漏洞点后，我就开始尝试通过关键字从源码中寻找调用Thumb_IM函数的地方。搜索到使用此函数的文件很多，但是由于这个函数的前两个参数都是和上传文件的文件名相关，而且discuz对于上传文件名做了随机化命名和后缀白名单处理，所以导致前三个参数为不可控点。</p>
 
@@ -156,13 +156,13 @@ function Cropper_IM() {
 
 <h2>1. 一定条件下前台命令执行</h2>
 
-<hr />
+<hr>
 
 <p>无</p>
 
 <h2>2. 前台命令执行修复绕过</h2>
 
-<hr />
+<hr>
 
 <p>漏洞的触发点在source/module/misc/misc_imgcropper.php中，部分代码如下：</p>
 
@@ -200,15 +200,15 @@ if($ictype == 'block') {
 
 <h1>0x03 技术验证</h1>
 
-<hr />
+<hr>
 
 <h2>0. 一定条件下前台命令执行</h2>
 
-<hr />
+<hr>
 
 <p>在管理员开启ImageMagick上传图片功能的前提下，攻击者只需要一个普通用户权限即可，后台设置方法如下图：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150115/2015011510464740089image003.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015011510464740089image003.jpg" alt="enter image description here"></p>
 
 <p>由于这个功能是对图片进行处理的，所以，要在访问时提供一个本站有效的图片地址。而且最好是存放在data/attachment目录下的，因为默认就是这个目录，否则就要用“../”来修改路径。</p>
 
@@ -219,19 +219,19 @@ if($ictype == 'block') {
 
 <p>然后使用chrome审查元素功能，修改picwidth的value为“||whoami&amp;”，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150115/2015011510473133001image005.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015011510473133001image005.jpg" alt="enter image description here"></p>
 
 <p>然后点击网页右下角的裁剪按钮就触发了。为了能直观显示，我添加了一行代码将接受执行结果的$return变量，echo出来并exit来结束掉后面的语句，效果如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150115/2015011510475832852image007.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015011510475832852image007.jpg" alt="enter image description here"></p>
 
 <h2>1. 同点后台命令执行</h2>
 
-<hr />
+<hr>
 
 <p>在后台全局->上传设置->ImageMagick 程序安装路径</p>
 
-<p><img src="http://static.wooyun.org/drops/20150115/2015011510503457908image009.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015011510503457908image009.jpg" alt="enter image description here"></p>
 
 <p>由于这个功能是对图片进行处理的，所以，要在访问时提供一个本站有效的图片地址。而且最好是存放在data/attachment目录下的，因为默认就是这个目录，否则就要用“../”来修改路径。</p>
 
@@ -242,15 +242,15 @@ if($ictype == 'block') {
 
 <p>然后直接点击左下角的裁剪，虽然会返回图片访问错误，但是命令却正常执行了，如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150115/2015011510504922244image011.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015011510504922244image011.jpg" alt="enter image description here"></p>
 
 <h2>2. ImageMagick</h2>
 
-<hr />
+<hr>
 
 <p>这个漏洞需要在后台开启ImageMagick功能，并确保ImageMagick功能正常运行。下图是我在后台中开启的这个功能，并填写ImageMagick安装目录。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150115/2015011510520798926image0132.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015011510520798926image0132.png" alt="enter image description here"></p>
 
 <p>如果这个功能开启，我们甚至可以在没有账号的情况下，前台完成命令执行的触发。</p>
 
@@ -268,11 +268,11 @@ if($ictype == 'block') {
 
 <p>修改输入包如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150115/2015011510530323771image0151.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015011510530323771image0151.png" alt="enter image description here"></p>
 
 <p>提交后效果如下图所示：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150115/2015011510533570873image017.png" alt="enter image description here" /></p>      </p>
+<p><img src="../images_result/images/2015011510533570873image017.png" alt="enter image description here"></p>      <p></p>
     
 			</body>
 		</html>

@@ -3,7 +3,7 @@
 			<head>
 			     <title>Web应用隐形后门的设计与实现 - m6aa8k</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/web/11861">http://drops.wooyun.org/web/11861</a></h1>
 				
@@ -12,9 +12,9 @@
   <p>原文地址：<a href="https://stackoverflow.com/a/15494343/2224584">https://stackoverflow.com/a/15494343/2224584</a></p>
 </blockquote>
 
-<h1>0x00 导言</h1>
+</p><h1>0x00 导言</h1>
 
-<hr />
+<hr>
 
 <p>通俗地说，“后门”通常是计算机犯罪分子在首次攻陷系统之后留下的一个程序代码，以便于将来再次访问该系统。</p>
 
@@ -26,7 +26,7 @@
 
 <h1>0x01 卑鄙密码竞赛</h1>
 
-<hr />
+<hr>
 
 <p>继“卑鄙C程序大赛”之后，从2015开始，Defcon黑客大会又推出了“卑鄙密码竞赛”，以寻找和备案那些能够巧妙地颠覆加密代码的最好方法。在DEFCON 23大会上进行了两项赛事：</p>
 
@@ -39,7 +39,7 @@
 
 <h1>0x02 如何重新设计口令认证后门</h1>
 
-<hr />
+<hr>
 
 <p>首先，我们假设政府工作人员发现了本博主，并希望雇佣我去实现一个后门。</p>
 
@@ -145,7 +145,7 @@ function noise()
 
 <h1>0x03 藏在眼皮底下的漏洞</h1>
 
-<hr />
+<hr>
 
 <p>好吧，最大的谎言就藏在这里：</p>
 
@@ -296,7 +296,7 @@ if (!isset($_COOKIE['csrf'])) {
 
 <h1>0x04 利用方法</h1>
 
-<hr />
+<hr>
 
 <p>将上面的所有信息综合起来，你就会发现实际上利用方法非常简单：</p>
 
@@ -308,13 +308,13 @@ if (!isset($_COOKIE['csrf'])) {
 
 <h1>0x05 这个后门给我们的提示是什么？</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>不要火急火燎的让开发人员修补他们尚未完全弄明白的安全漏洞。 </li>
 <li>对于那些难题的新颖解决方案都应该通过专家进行仔细审查。 </li>
 <li>用户枚举是一个非常棘手的难题。在我看来，与其将力气花在解决用户枚举问题上面，还不如设法提高口令的安全性。口令管理程序能够带来更大的帮助！</li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

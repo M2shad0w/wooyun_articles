@@ -3,12 +3,12 @@
 			<head>
 			     <title>Pwn掉智能手表的正确姿势 - 武汉大学信息安全协会</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/11063">http://drops.wooyun.org/papers/11063</a></h1>
 				
       <p>
-        <p>原文链接：http://grangeia.io/2015/11/09/hacking-tomtom-runner-pt1/ part1 part2 part3</p>
+        </p><p>原文链接：http://grangeia.io/2015/11/09/hacking-tomtom-runner-pt1/ part1 part2 part3</p>
 
 <blockquote>
   <p>虽然专业化是很多领域的关键所在，但是我个人认为在信息安全这一领域，过于专业会导致视野狭隘、观点片面。现在我就想让自己尝试那些我不是很喜欢的领域，而这篇文章就是在阐述一个我讨厌了很久的东西：嵌入式硬件逆向工程。</p>
@@ -16,7 +16,7 @@
 
 <h1>0x00 动机</h1>
 
-<hr />
+<hr>
 
 <p>现在的物联网设备有很多吸引人的地方：</p>
 
@@ -32,19 +32,19 @@
 
 <h1>0x01 准备</h1>
 
-<hr />
+<hr>
 
 <p>这次我们来破解这款智能手表</p>
 
 <p><strong>The TomTom Runner</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20151205/2015120516220035911.png" alt="" /></p>
+<p><img src="../images_result/images/2015120516220035911.png" alt=""></p>
 
 <p>首先要做的第一件事就是给所有这些设备下载了固件，这些设备的固件通常都可以在厂家官网或者用户论坛上找到。</p>
 
 <h1>0x02 从外部寻找突破口</h1>
 
-<hr />
+<hr>
 
 <p>选择好了入侵TomTom，接下来就要从一个黑客的角度来研究它了。我们这里不要选择拆这个智能手表，也不要用JTAG或者Debug pins来进行硬件上的入侵。而且感觉TomTom手表应该会有一些保护措施，这个也应该比较困难。</p>
 
@@ -58,15 +58,15 @@
 
 <h1>0x03 固件</h1>
 
-<hr />
+<hr>
 
 <p>要入侵任何一台设备的第一步都是获取它的固件包，我是通过看TomTom如何用官方软件给手表固件升级实现的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151205/2015120516220232581.png" alt="" /></p>
+<p><img src="../images_result/images/2015120516220232581.png" alt=""></p>
 
 <p>用Wireshark同时强迫固件升级可以找到固件的文件目录：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151205/2015120516062218593.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015120516062218593.jpg" alt=""></p>
 
 <p>如果你足够细心的话，你就会发现这就是一个常规的HTTP页面，没有SSL。这点之后还会用到。这里有很多的文件，但是有用的就只有：</p>
 
@@ -85,11 +85,11 @@ DECIMAL       HEXADECIMAL     HEURISTIC ENTROPY ANALYSIS
 1024          0x400           High entropy data, best guess: encrypted, size: 470544, 0     low entropy blocks
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151205/2015120516062435350.png" alt="" /></p>
+<p><img src="../images_result/images/2015120516062435350.png" alt=""></p>
 
 <p>如果你还想进一步破解的话可以用vbindiff比较下这两个不同的固件版本：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151205/2015120516220449281.png" alt="" /></p>
+<p><img src="../images_result/images/2015120516220449281.png" alt=""></p>
 
 <p>注意：</p>
 
@@ -104,11 +104,11 @@ DECIMAL       HEXADECIMAL     HEURISTIC ENTROPY ANALYSIS
 
 <h1>0x04 硬件</h1>
 
-<hr />
+<hr>
 
 <p>在不打开这个手表的情况下我们怎样了解它的内部信息呢？基本上所有在美国出售RF发射设备都被FCC测试过了，然后FCC会发表一篇报告，这个报告包含了各种丰富的信息和照片：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151205/2015120516062854122.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015120516062854122.jpg" alt=""></p>
 
 <p>上图包括这些芯片：</p>
 
@@ -128,7 +128,7 @@ DECIMAL       HEXADECIMAL     HEURISTIC ENTROPY ANALYSIS
 
 <h1>0x05 USB通信</h1>
 
-<hr />
+<hr>
 
 <p>为了充分理解相关知识，我在ttwatch上找了一个很好的开源软件，TomTom Windows软件做的事情它绝大部分都可以做到。</p>
 
@@ -142,12 +142,12 @@ DECIMAL       HEXADECIMAL     HEURISTIC ENTROPY ANALYSIS
 "0E" -&gt; Actual command byte (this one formats the EEPROM)
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151205/2015120516063165767.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015120516063165767.jpg" alt=""></p>
 
 <p>绝大多数智能手表接受或者发出指令都要从之前的4MB EEPROM中读取或写入。ttwatch已经为我们做好了这些，我们可以读，写并列出这些文件：</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d5a7babaa195beb4b9bc">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/usb# ttwatch -l
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d5a7babaa195beb4b9bc">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/usb# ttwatch -l
 0x00000030: 16072
 0x00810004: 4198
 0x00810005: 4136
@@ -160,7 +160,7 @@ DECIMAL       HEXADECIMAL     HEURISTIC ENTROPY ANALYSIS
 0x00810002: 4115
 [...]    
 
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d0a2bfbfa490bbb1bcb9">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/usb# ttwatch -r 0x00f20000
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d0a2bfbfa490bbb1bcb9">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~/usb# ttwatch -r 0x00f20000
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;preferences version="1" modified="seg set 21 13:34:28 2015"&gt;
     &lt;ephemerisModified&gt;0&lt;/ephemerisModified&gt;
@@ -178,11 +178,11 @@ DECIMAL       HEXADECIMAL     HEURISTIC ENTROPY ANALYSIS
 
 <h1>0x06 突破口</h1>
 
-<hr />
+<hr>
 
 <p>首先，我们要查看EEPROM中的每一个文件，包括日志文件，给大家看个例子：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151205/2015120516063283597.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015120516063283597.jpg" alt=""></p>
 
 <p>上面这个文件表明，设备里的蓝牙芯片有自己的固件，并会在MD5验证之后显示出来。</p>
 
@@ -192,7 +192,7 @@ DECIMAL       HEXADECIMAL     HEURISTIC ENTROPY ANALYSIS
 
 <p>所以还是语言文件要有意思的多，让我们随便看看其中一个：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151205/2015120516072558830.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015120516072558830.jpg" alt=""></p>
 
 <p>这段数据的结构非常简单：</p>
 
@@ -246,7 +246,7 @@ stack hi = 0x000004d4
 
 <p>接着是许多数据表和ARM文档。很快我就从中了解到一个最重要的信息，那就是执行流程从闪存ROM到了ARM区域。这可以从PC（程序计数器）的值中看出。它的值就是保存在RAM中的内存区域。请注意下面这张来自Atmel的数据表：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151205/2015120516220876426.png" alt="" /></p>
+<p><img src="../images_result/images/2015120516220876426.png" alt=""></p>
 
 <p>因为某种原因，执行从ROM区域跳到了我们装载语言文件区域附近的SRAM，起始地址是0x20000000。如果我们能够控制好我们语言文件的位置或者从正确的方向“推动”程序计数器，我们就能自己控制跳跃到内存区域。</p>
 
@@ -276,7 +276,7 @@ stack hi = 0x000004d4
 
 <h1>0x06 代码执行</h1>
 
-<hr />
+<hr>
 
 <p>好的，我们现在已经知道如何转移到内存中的任何一个地方了，在一个普通的操作系统中，有很多我们可以做的事情：系统调用、标准库调用等等。但这个设备就没这么好了。</p>
 
@@ -322,7 +322,7 @@ Disassembly of section .text:
 
 <p>下面这张图片是在第二个文件（0x00810003）设置的所有内容：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151205/2015120516072937506.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015120516072937506.jpg" alt=""></p>
 
 <p>第四个双字很明显指向我们的payload，然后我把文件装载到了手表中，像之前那样通过选择语言执行跳转。在又一次崩溃之后，我们得到了这样的的崩溃日志（请注意第1、2、3行）：</p>
 
@@ -344,7 +344,7 @@ Disassembly of section .text:
  stack hi = 0x000004d4
 </code></pre>
 
-<p>如上图所示，我们现在就可以在一个在物联网设备的封闭固件中进行任意的代码执行了！</p>      </p>
+<p>如上图所示，我们现在就可以在一个在物联网设备的封闭固件中进行任意的代码执行了！</p>      <p></p>
     
 			</body>
 		</html>

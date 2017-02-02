@@ -3,20 +3,20 @@
 			<head>
 			     <title>Android密码学相关 - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6049">http://drops.wooyun.org/tips/6049</a></h1>
 				
       <p>
-        <h2>Android密码学相关-案例wifi万能钥匙</h2>
+        </p><h2>Android密码学相关-案例wifi万能钥匙</h2>
 
-<hr />
+<hr>
 
 <p>[TOC]</p>
 
 <h3>起因</h3>
 
-<hr />
+<hr>
 
 <ul>
 <li><p>考虑文章可读性未做过多马赛克,又希望不对厂商造成过多影响,故发布文章距离文章完成已经有些时日,如有出入欢迎指正.(关联漏洞厂商给了低危,想来就厂商看来此风险威胁不大)</p></li>
@@ -42,7 +42,7 @@
 
 <h3>万能钥匙版本</h3>
 
-<hr />
+<hr>
 
 <p>官网版:</p>
 
@@ -56,19 +56,19 @@
 
 <h3>摘要算法</h3>
 
-<hr />
+<hr>
 
 <p>首先抓包分析确定关键字后追踪其调用调用</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503281512388.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503281512388.png" alt=""></p>
 
 <p>定位到摘要算法:传入的Map对象后转成数组排序后拼接上传入的string进行md5最后转成大写.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503281530603.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503281530603.png" alt=""></p>
 
 <p>然后再找到key,到这里看貌似这个key是静态的.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503281619634.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503281619634.png" alt=""></p>
 
 <p>现在可以根据这个写出sign的类了.</p>
 
@@ -79,7 +79,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 class Digest {
-    public static final String key = "<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1b574a223f757e5b7c53">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>*Jq%KOL";
+    public static final String key = "<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1b574a223f757e5b7c53">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>*Jq%KOL";
     public static final String retSn = "d407b1220d9447afac1653c337b00abf";  //服务器返回的retSn需要每次都换...
     /**
      * @param args
@@ -201,39 +201,39 @@ public class Main implements IXposedHookLoadPackage {
 }
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503281620503.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503281620503.png" alt=""></p>
 
 <p>通过hook发现大部分请求的sign是按照之前分析的方法计算出的,但是在查询密码处计算sign的key一直在变化的,这里是一个动态的key</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503281762193.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503281762193.png" alt=""></p>
 
 <p>再返回去分析摘要算法的调用情况来追踪动态key如何产生的,交叉引用xrefs</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503281816296.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503281816296.png" alt=""></p>
 
 <p>原来计算sign的方式还请求包中pid的值有关</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503281939995.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503281939995.png" alt=""></p>
 
 <p>当pid=qryapwd:commoanswith所用的key并非之前提到的静态密钥,而且调用一个方法,追踪此方法发现此参数是从默认的shared_prefs文件中读取的.如果为空才使用静态密钥.(分享wifi密码和查询wifi密码均进入此条件)</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503281980535.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503281980535.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282023205.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503282023205.png" alt=""></p>
 
 <p>那么shared_prefs默认文件中的值又是从哪里生成的了?通过抓包可以发现这个是由服务器返回的.每次查询后都会更新</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282064274.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503282064274.png" alt=""></p>
 
 <p>现在已经完全了解官网版本的两种摘要算法,可以自己构造请求来查询wifi密码了.</p>
 
 <h3>请求频率与dhid</h3>
 
-<hr />
+<hr>
 
 <p>在之后的测试发现如果查询过于频繁会被服务器给ban掉,通过fuzz发现服务器是通过dhid这个参数来判断是请求来源是否为同一设备,修改dhid然后重新计算sign发包.此处的sign是通过上文digest(v1,retSn)算出的.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282153783.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015062503282153783.jpg" alt=""></p>
 
 <p>显然dhid也做了合法性效验,继续探索dhid是如何生成的,客户端是从私有文件中取得dhid的,而客户端的dhid是由应用安装后发送请求由服务器返回的.</p>
 
@@ -241,7 +241,7 @@ public class Main implements IXposedHookLoadPackage {
 
 <h3>老版本遗留问题</h3>
 
-<hr />
+<hr>
 
 <p>在搜索wifi万能钥匙早期版本的过程中,发现googleplay上的版本为早期1.x version的.摘要算法和加密算法都基本和新版本一致只不过密钥不同.服务端通过v参数(版本号)来区分计算sign.</p>
 
@@ -251,11 +251,11 @@ public class Main implements IXposedHookLoadPackage {
 
 <h3>pwd加密算法分析</h3>
 
-<hr />
+<hr>
 
 <p>查询密码后服务器返回的wifi密码是加密过的,但是这种加密客户端必定对应有解密算法.你的剑就是我的剑.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282195827.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503282195827.png" alt=""></p>
 
 <pre><code>#!java
 import javax.crypto.Cipher;
@@ -278,7 +278,7 @@ public class AES {
     }
 
     static byte[] getIV() {
-        String iv = "<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="325811505602724442024158">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>!3jnv"; //IV length: must be 16 bytes long
+        String iv = "<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="325811505602724442024158">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>!3jnv"; //IV length: must be 16 bytes long
         return iv.getBytes();
     }
 
@@ -311,31 +311,31 @@ public class AES {
 
 <h3>伪造wifi密码</h3>
 
-<hr />
+<hr>
 
 <p>如果不想改密码还可以伪造分享ap请求来覆盖之前的密码,依然需要计算sign哦.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282231256.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503282231256.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282220145.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503282220145.png" alt=""></p>
 
 <p>再覆盖一次.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282231454.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503282231454.png" alt=""></p>
 
 <h3>wifi密码查询小工具</h3>
 
-<hr />
+<hr>
 
 <p>综合上述分析就可以制作出自己的wifi密码查询工具了.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282362962.jpg" alt="" /></p>
+<p><img src="../images_result/images/2015062503282362962.jpg" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282380463.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503282380463.png" alt=""></p>
 
 <p>顺手也写了一个android客户端.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282459839.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503282459839.png" alt=""></p>
 
 <h3>乌云案例</h3>
 
@@ -359,7 +359,7 @@ public class AES {
 
 <p>得想出一种方案让攻击者知道sign的算法也很难利用此算法,例如:计算sign之后对数据进行非对称加密,这时要对sign重新计算sign就无法直接从http包中获取字段,要解密也没有私钥.只有通过hook以及反编译来获得计算的sign的参数变得较为繁琐,如果有必要可以对应用进行加壳使用反编译和hook变得更加困难.</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282467843.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503282467843.png" alt=""></p>
 
 <p>设计好方案之后的关键就是选择加密算法/密钥存储位置.</p>
 
@@ -367,11 +367,11 @@ public class AES {
 
 <h2>Android密码学相关-加密/摘要算法</h2>
 
-<hr />
+<hr>
 
 <h3>分类</h3>
 
-<hr />
+<hr>
 
 <p>对称加密(symmetric cryptography)/共享密钥加密(shared-key cryptography):AES/DES/RC4/3DES...</p>
 
@@ -387,7 +387,7 @@ public class AES {
 
 <h3>易混淆概念</h3>
 
-<hr />
+<hr>
 
 <p>Message Authentication:消息认证是一个过程，用以验证接收消息的真实性（的确是由它所声称的实体发来的）和完整性（未被篡改、插入、删除），同时还用于验证消息的顺序性和时间性（未重排、重放、延迟).</p>
 
@@ -425,7 +425,7 @@ public class AES {
 
 <h3>选择加密算法/摘要算法</h3>
 
-<hr />
+<hr>
 
 <ul>
 <li>密码生成key的加密算法 : AES的key是由使用passwd和salt的方法生成</li>
@@ -437,7 +437,7 @@ public class AES {
 在用户session做个字段当盐?
 -->
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282489692.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503282489692.png" alt=""></p>
 
 <ul>
 <li>特别重要的用户数据加解密/签名验证应选择基于密码生成key的加密算法 (PBE)</li>
@@ -445,11 +445,11 @@ public class AES {
 <li>客户端/服务端通信...加解密/签名验证使用公钥加密算法 (非对称加密)</li>
 </ul>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282515169.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503282515169.png" alt=""></p>
 
 <h3>Protecting Key</h3>
 
-<hr />
+<hr>
 
 <p>当使用加密技术以确保敏感数据安全（机密性和完整性），如果密钥(key)泄露即使是最强大的加密算法和密钥长度也不能保障来自第三方的攻击.所以一个好的保存密钥的方式变得十分重要.</p>
 
@@ -459,7 +459,7 @@ public class AES {
 
 <p>算法生成密钥:本地数据加解密</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503282598831.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503282598831.png" alt=""></p>
 
 <p>key的存储位置</p>
 
@@ -485,7 +485,7 @@ public class AES {
 
 <h3>建议</h3>
 
-<hr />
+<hr>
 
 <p>1.当指定的加密算法时显式指定加密模式和填充方式</p>
 
@@ -512,7 +512,7 @@ keySpec = new PBEKeySpec(password, salt, KEY_GEN_ITERATION_COUNT, KEY_LENGTH_BIT
 
 <h3>加密使用native方法,so也不一定安全</h3>
 
-<hr />
+<hr>
 
 <p>1.hook&amp;注入</p>
 
@@ -575,13 +575,13 @@ public class Main3 implements IXposedHookLoadPackage {
 
 <h3>伪随机数生成器(PRNG)</h3>
 
-<hr />
+<hr>
 
 <p>http://drops.wooyun.org/papers/5164</p>
 
 <h3>非对称加密:RSA加解密的example</h3>
 
-<hr />
+<hr>
 
 <pre><code>#!java
 package org.wooyun.digest;
@@ -707,7 +707,7 @@ public final class RsaCryptoAsymmetricKey {
 
 <h3>对称加密:AES(PBEKey)加解密的example</h3>
 
-<hr />
+<hr>
 
 <pre><code>#!java
 package org.wooyun.crypto;
@@ -845,7 +845,7 @@ public final class AesCryptoPBEKey {
 
 <h3>签名:AES(PBEKey) HMAC example</h3>
 
-<hr />
+<hr>
 
 <pre><code>#!java
 package org.wooyun.crypto;
@@ -963,7 +963,7 @@ public final class HmacPBEKey {
 
 <h3>兼容性问题</h3>
 
-<hr />
+<hr>
 
 <p>android就是那么让人操心,应用的易用性肯定要放在安全性前面.服务端的环境可以控制,但是客户端的环境就没有办法了.无法保证每个用户都环境都是一样的.</p>
 
@@ -1126,11 +1126,11 @@ provider: HarmonyJSSE
 
 <h3>参考</h3>
 
-<hr />
+<hr>
 
 <p><a href="http://www.jssec.org/dl/android_securecoding_en.pdf">http://www.jssec.org/dl/android&#95;securecoding&#95;en.pdf</a></p>
 
-<p><a href="http://stackoverflow.com/questions/7560974/what-crypto-algorithms-does-android-support">http://stackoverflow.com/questions/7560974/what-crypto-algorithms-does-android-support</a></p>      </p>
+<p><a href="http://stackoverflow.com/questions/7560974/what-crypto-algorithms-does-android-support">http://stackoverflow.com/questions/7560974/what-crypto-algorithms-does-android-support</a></p>      <p></p>
     
 			</body>
 		</html>

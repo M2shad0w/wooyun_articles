@@ -3,18 +3,18 @@
 			<head>
 			     <title>逆向基础 OS-specific  (一) - 左懒</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/7428">http://drops.wooyun.org/binary/7428</a></h1>
 				
       <p>
-        <h1>64章 传递参数的方法</h1>
+        </p><h1>64章 传递参数的方法</h1>
 
-<hr />
+<hr>
 
 <h1>64.1 cdcel</h1>
 
-<hr />
+<hr>
 
 <p>这种传递参数的方法在C/C++语言里面比较流行。</p>
 
@@ -33,7 +33,7 @@ add esp, 12 ; returns ESP
 
 <h1>64.2 stdcall</h1>
 
-<hr />
+<hr>
 
 <p>该调用方法与cdecl差不多，除了被调用者必须通过RET x指令代替RET指令将ESP指针设置为初始化状态，其中<code>x = arguments number * sizeof(int)</code>。调用者无需调整栈指针(ESP)。</p>
 
@@ -68,7 +68,7 @@ int __stdcall f2 (int a, int b, int c)
 <pre><code>_a$ = 8 ; size = 4
 _b$ = 12 ; size = 4
 _c$ = 16 ; size = 4
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4a152c780a7b78">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> PROC
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="4a152c780a7b78">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> PROC
     push ebp
     mov ebp, esp
     mov eax, DWORD PTR _a$[ebp]
@@ -76,12 +76,12 @@ _c$ = 16 ; size = 4
     add eax, DWORD PTR _c$[ebp]
     pop ebp
     ret 12 ; 0000000cH
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="dd82bbef9decef">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ENDP
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="dd82bbef9decef">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ENDP
 ; ...
     push 3
     push 2
     push 1
-    call <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="bae5dc88fa8b88">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+    call <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="bae5dc88fa8b88">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
     push eax
     push OFFSET $SG81369
     call _printf
@@ -94,7 +94,7 @@ _c$ = 16 ; size = 4
 
 <h1>64.3 fastcall</h1>
 
-<hr />
+<hr>
 
 <p>这是一种将部分参数通过寄存器传入，其余参数通过栈方式传入的方法。它的执行效率在一些旧时CPU比cdecl/stdcall要好（因为小栈的压力）。然而，在现代的CPU中使用该调用方式不一定能获得更好的性能。</p>
 
@@ -127,19 +127,19 @@ int __fastcall f3 (int a, int b, int c)
 <p>Listing 64.5: Optimizing MSVC 2010 /Ob0</p>
 
 <pre><code>_c$ = 8         ; size = 4
-@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="731540334241">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> PROC
+@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="731540334241">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> PROC
 ; _a$ = ecx
 ; _b$ = edx
     mov eax, ecx
     imul eax, edx
     add eax, DWORD PTR _c$[esp-4]
     ret 4
-@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d8beeb98e9ea">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ENDP
+@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d8beeb98e9ea">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ENDP
 ; ...
     mov edx, 2
     push 3
     lea ecx, DWORD PTR [edx-1]
-    call @<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e88edba8d9da">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+    call @<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="e88edba8d9da">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
     push eax
     push OFFSET $SG81390
     call _printf
@@ -164,7 +164,7 @@ int __fastcall f3 (int a, int b, int c)
 
 <h1>64.4 thiscall</h1>
 
-<hr />
+<hr>
 
 <p>这是C++里面传递this指针的成员函数调用约定。</p>
 
@@ -176,7 +176,7 @@ int __fastcall f3 (int a, int b, int c)
 
 <h1>64.5 x86-64</h1>
 
-<hr />
+<hr>
 
 <h3>64.5.1 Windows x64</h3>
 
@@ -349,13 +349,13 @@ main:
 
 <h1>64.6 返回float和double类型的值</h1>
 
-<hr />
+<hr>
 
 <p>除了Win64之外，其它返回float和double类型的值都是通过FPU里面的ST(0)寄存器返回的。 在Win64里面，返回float和double类型的值是通过XMM0寄存器返回。</p>
 
 <h1>64.7 修改参数</h1>
 
-<hr />
+<hr>
 
 <p>有时候，C/C++程序员（虽然不仅仅是这些人）可能会问，如果他们碰巧修改了参数会怎样？答案非常简单，这些参数是保存在栈里面的，修改参数的时候是修改这个栈里面的内容，调用者并没有在被调用函数退出之后再使用它们（至少在我的实践中没有遇到这种情况）。</p>
 
@@ -394,7 +394,7 @@ _f END
 
 <h1>64.8 使用指针的函数参数</h1>
 
-<hr />
+<hr>
 
 <p>...更有意思的是，有可能在程序中，取一个函数参数的指针并将其传递给另外一个函数。</p>
 
@@ -490,7 +490,7 @@ f:
     .string "%d\n"
 </code></pre>
 
-<p>顺便提一下，一个类似影子空间的使用在这里也被提及过（46.1.2）。</p>      </p>
+<p>顺便提一下，一个类似影子空间的使用在这里也被提及过（46.1.2）。</p>      <p></p>
     
 			</body>
 		</html>

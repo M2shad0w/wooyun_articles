@@ -3,14 +3,14 @@
 			<head>
 			     <title>常见验证码的弱点与验证码识别 - insight-labs</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/141">http://drops.wooyun.org/tips/141</a></h1>
 				
       <p>
-        <h2>0x00 简介</h2>
+        </p><h2>0x00 简介</h2>
 
-<hr />
+<hr>
 
 <p>验证码作为一种辅助安全手段在Web安全中有着特殊的地位，验证码安全和web应用中的众多漏洞相比似乎微不足道，但是千里之堤毁于蚁穴，有些时候如果能绕过验证码，则可以把手动变为自动，对于Web安全检测有很大的帮助。</p>
 
@@ -68,21 +68,21 @@
 
 <p>Python Image Library是pyhon里面带的一个图形处理库，功能比较强大，是我们的首选。</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410270159916.png" alt="20130605190615_98443.png" /></p>
+<p><img src="../images_result/images/2013100410270159916.png" alt="20130605190615_98443.png"></p>
 
 <p>SVM图像边界区分</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410270248009.png" alt="20130605192502_65273.png" /></p>
+<p><img src="../images_result/images/2013100410270248009.png" alt="20130605192502_65273.png"></p>
 
 <p>SVM原理，把数据映射到高维空间，然后寻找能够分割的超平面</p>
 
 <p>识别验证码需要充分利用图片中的信息，才能把验证码的文字和背景部分分离，一张典型的jpeg图片，每个像素都可以放在一个5维的空间里，这5个维度分别是，X,Y,R,G,B，也就是像素的坐标和颜色，在计算机图形学中，有很多种色彩空间，最常用的比如RGB，印刷用的CYMK，还有比较少见的HSL或者HSV，每种色彩空间的维度都不一样，但是可以通过公式互相转换。</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410270273950.png" alt="20130605193040_40334.png" /></p>
+<p><img src="../images_result/images/2013100410270273950.png" alt="20130605193040_40334.png"></p>
 
 <p>RGB色彩空间构成的立方体，每个维度代表一种颜色</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101809463348968.png" alt="20130605193155_34999.png" /></p>
+<p><img src="../images_result/images/2013101809463348968.png" alt="20130605193155_34999.png"></p>
 
 <p>HSL（色相饱和度）色彩空间构成的锥体，可以参考：</p>
 
@@ -94,7 +94,7 @@
 
 <p>更加直观的图片，大家感受一下：</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410270361306.png" alt="20130605194036_39590.png" /></p>
+<p><img src="../images_result/images/2013100410270361306.png" alt="20130605194036_39590.png"></p>
 
 <p>随便把一张图片的每个像素都映射到RGB色彩空间里就能获得一个这样的立方体。</p>
 
@@ -102,23 +102,23 @@
 
 <p>对于在RGB空间中不好区分颜色，可以把色彩空间转换为HSV或HSL：</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410270354489.png" alt="20130605194730_56543.png" /></p>
+<p><img src="../images_result/images/2013100410270354489.png" alt="20130605194730_56543.png"></p>
 
 <h2>0x01 验证码识别的原理和过程</h2>
 
-<hr />
+<hr>
 
 <p>第一步：    二值化</p>
 
 <p>所谓二值化就是把不需要的信息通通去除，比如背景，干扰线，干扰像素等等，只剩下需要识别的文字，让图片变成2进制点阵。</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410270492372.png" alt="20130605195023_13222.png" /></p>
+<p><img src="../images_result/images/2013100410270492372.png" alt="20130605195023_13222.png"></p>
 
 <p>第二步： 文字分割</p>
 
 <p>为了能识别出字符，需要对要识别的文字图图片进行分割，把每个字符作为单独的一个图片看待。</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410270469286.png" alt="20130605200952_55267.png" /></p>
+<p><img src="../images_result/images/2013100410270469286.png" alt="20130605200952_55267.png"></p>
 
 <p>第三步：标准化</p>
 
@@ -132,7 +132,7 @@
 
 <p>在文章的后半部分会详细解释每步的各种算法</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410270485126.png" alt="20130605220655_80781.png" /></p>
+<p><img src="../images_result/images/2013100410270485126.png" alt="20130605220655_80781.png"></p>
 
 <h3>二值化算法</h3>
 
@@ -140,11 +140,11 @@
 
 <p>新浪和discuz的验证码</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410270574022.jpg" alt="20130607213048_17172.jpg" /><img src="http://static.wooyun.org/20131004/2013100410270593853.jpg" alt="20130607213105_77426.jpg" /></p>
+<p><img src="../images_result/images/2013100410270574022.jpg" alt="20130607213048_17172.jpg"><img src="../images_result/images/2013100410270593853.jpg" alt="20130607213105_77426.jpg"></p>
 
 <p>通过对文字部分和干扰部分取样可以发现，文字部分的R、G值一般在100左右，B值接近255，但是背景干扰的R、G值则大大高于文字部分，接近200，比较接近文字轮廓部分的像素的RG值也在150以上。通过程序遍历一遍像素就可以完全去掉背景。</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101809463539011.jpg" alt="20130607213146_11252.jpg" /></p>
+<p><img src="../images_result/images/2013101809463539011.jpg" alt="20130607213146_11252.jpg"></p>
 
 <p>Discuz的验证码同理</p>
 
@@ -152,7 +152,7 @@
 
 <p>如下图：假如当前像素的坐标是x,y  图形坐标系的原点是图像的左上角</p>
 
-<p><img src="http://static.wooyun.org/20131018/2013101809463533591.jpg" alt="20130607213238_98076.jpg" /></p>
+<p><img src="../images_result/images/2013101809463533591.jpg" alt="20130607213238_98076.jpg"></p>
 
 <p>干扰线对于识别验证码增加了一些难度，不过干扰线只有很小的几率会以大角度曲线的方式出现，大部分时间还是小角度直线，去除算法可以参考<a href="http://wenku.baidu.com/view/63bac64f2b160b4e767fcfed.html">http://wenku.baidu.com/view/63bac64f2b160b4e767fcfed.html</a></p>
 
@@ -164,7 +164,7 @@
 
 <p>种子填充算法可以方便的计算出任意色块的面积，对于没有粘连字符或者粘连但是字符每个颜色不一样的验证码来说，去除干扰色块的效果很好，你只需要大概计算一下最小的和最大的字符平均占多少像素，然后把这段区间之外像素数的色块排除掉即可。</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410270648577.gif" alt="Recursive_Flood_Fill_4_%28aka%29.gif" />                    <img src="http://static.wooyun.org/20131004/2013100410270736449.gif" alt="Recursive_Flood_Fill_8_%28aka%29.gif" /></p>
+<p><img src="../images_result/images/2013100410270648577.gif" alt="Recursive_Flood_Fill_4_%28aka%29.gif">                    <img src="../images_result/images/2013100410270736449.gif" alt="Recursive_Flood_Fill_8_%28aka%29.gif"></p>
 
 <p>上下左右4个方向填充还有8个方向填充的不同</p>
 
@@ -178,13 +178,13 @@
 
 <p>破解验证码的重点和难点就在于能否成功分割字符，这一点也是机器视觉里的一道难题，对物件的识别能力。对于颜色相同又完全粘连的字符，比如google的验证码，目前是没法做到5%以上的识别率的。不过google的验证码基本上人类也只有30%的识别率</p>
 
-<p>对于字符之间完全没有粘连的验证码，比如这个->_-> <img src="http://static.wooyun.org/20131004/2013100410270728767.php" alt="captcha.php" /></p>
+<p>对于字符之间完全没有粘连的验证码，比如这个->_-> <img src="../images_result/images/2013100410270728767.php" alt="captcha.php"></p>
 
 <p>分割起来是非常的容易，用最基本的扫描线法就可以分割，比如从最左侧开始从上到下（y=0&#45;--|||||y=n）扫描，如果没有遇到任何文字的像素，就则往右一个像素然后再扫描，如果遇到有文字像素存在，就记录当前横坐标,继续向右扫，突然没有文字像素的时候，就说明到了两个字符直接的空白部分，重复这个步骤再横向扫描就能找到每个字符最边缘4个像素的位置，然后可以用PIL内建的crop功能把单独的字符抠出来。</p>
 
 <p>对于有少许粘连但是只是在字符边角的地方重叠几个像素的验证码，可以用垂直像素直方图的统计方法分割。如下图：</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410270770745.png" alt="20130607230457_19520.png" /></p>
+<p><img src="../images_result/images/2013100410270770745.png" alt="20130607230457_19520.png"></p>
 
 <p>图上半部分是垂直像素直方图的一种直观展示，假如图片宽度为100像素，则把图片切割为100个1像素的竖线，下面的红色部分为当前x坐标上所有黑色像素的总和。这么一来可以很容易的通过直方图的波峰波谷把4个字母分割开。图片的下半部分是扫描线分隔法，因为干扰线和字符旋转的存在，只有M和5直接才出现了连续的空白部分。</p>
 
@@ -192,7 +192,7 @@
 
 <p>另外对于彩色的验证码，还可以用颜色分割，比如12306的：</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410270898817.png" alt="20130607233647_17982.png" /></p>
+<p><img src="../images_result/images/2013100410270898817.png" alt="20130607233647_17982.png"></p>
 
 <p>12306的验证码，每个字符颜色都不一样，真是省事啊。</p>
 
@@ -204,7 +204,7 @@
 
 <p>还原随机旋转的字符一般采用的是旋转卡壳算法：</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410270830366.png" alt="20130607235719_94258.png" /></p>
+<p><img src="../images_result/images/2013100410270830366.png" alt="20130607235719_94258.png"></p>
 
 <p>此算法非常简单，对一张图片左右各旋转30度的范围，每次1度，旋转后用扫描线法判断字符的宽度，对于标准的长方形字体，在完全垂直的时候肯定是宽度最窄的。嗯？纳尼？上面的图是中间的最窄？好像的确是这样，不过只要每次旋转后的结果都一样，对于识别率不会有影响。</p>
 
@@ -214,7 +214,7 @@
 
 <h3>骨架细化：腐蚀算法</h3>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410270978173.png" alt="20130608000722_87311.png" /></p>
+<p><img src="../images_result/images/2013100410270978173.png" alt="20130608000722_87311.png"></p>
 
 <p>腐蚀算法的原理有点像剥洋葱，从最外层沿着最外面的一层像素一圈一圈的去掉，直到里面只剩下一层像素为止。腐蚀算法里面需要用到另一个算法，叫做凸包算法，用来找一堆像素点里面最外围的一层。</p>
 
@@ -222,7 +222,7 @@
 
 <p>详情请自行google……</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410270912366.png" alt="20130608001005_74310.png" /></p>
+<p><img src="../images_result/images/2013100410270912366.png" alt="20130608001005_74310.png"></p>
 
 <p>分割算法差不多就到这里了，都是一些比较基础的内容。下面是最终的识别。</p>
 
@@ -238,7 +238,7 @@
 
 <p>最后一种最NB的识别算法，就是神经网络，神经网络是一种模拟动物神经元工作模式的算法，神经网络有多种不同的结构，但是基本架构分为输入层，隐含层和输出层，输入和输出均为二进制。</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410270943161.png" alt="20130608003739_59697.png" /></p>
+<p><img src="../images_result/images/2013100410270943161.png" alt="20130608003739_59697.png"></p>
 
 <p>对于验证码识别来说，输入和输出节点不宜过多，因为多了很慢……所以如果样本矩阵为20x20 400个像素的话，需要对应的也要有400个输入节点，因此我们需要对整个矩阵提取特征值，比如先横向每两个数字XOR一下，然后再竖向每两个数字XOR。</p>
 
@@ -248,11 +248,11 @@
 
 <p>有些不甘寂寞的程序员又玩出了些新花样，比如各种GIF甚至flv格式的动画验证码，下面我来分析一下腾讯安全中心的GIF验证码。</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410271083499.gif" alt="20130608005708_49515.gif" /></p>
+<p><img src="../images_result/images/2013100410271083499.gif" alt="20130608005708_49515.gif"></p>
 
 <p>晃来晃去的看似很难，放慢100倍一帧一帧再看看？</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410271023580.gif" alt="20130608010202_83349.gif" /></p>
+<p><img src="../images_result/images/2013100410271023580.gif" alt="20130608010202_83349.gif"></p>
 
 <p>基本上每帧都有一个字符和其他的分开，用最简单的扫描法就能分割出来。</p>
 
@@ -262,7 +262,7 @@
 
 <p>另外就是一些所谓的高用户体验的验证码，比如freebuf的：</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410271122654.png" alt="20130608010939_57828.png" /></p>
+<p><img src="../images_result/images/2013100410271122654.png" alt="20130608010939_57828.png"></p>
 
 <p>拖动解锁按钮会触发执行一段js，生成一串随机字符串，ajax给后端程序判断。</p>
 
@@ -270,7 +270,7 @@
 
 <p>还有就是声音验证码的识别，现在很多验证码为了提高用户体验和照顾视觉障碍的用户，都有声音验证码，一般来说是机器生成一段读数字的语音。但是在这方面上很多程序员都偷懒了，预先找了10个数字的声音录音，然后生成的时候把他们随机拼到一起，结果就是这样：</p>
 
-<p><img src="http://static.wooyun.org/20131004/2013100410271119727.png" alt="20130608011512_96225.png" /></p>
+<p><img src="../images_result/images/2013100410271119727.png" alt="20130608011512_96225.png"></p>
 
 <p>前3秒为语音提示，后面的是数字，有没有发现什么？</p>
 
@@ -311,7 +311,7 @@
 •同样强度完全不同的一套验证码
 </code></pre>
 
-<h3>附件添加一个破解验证码的实例包括程序大家自行研究吧：<a href="http://static.wooyun.org/20141017/2014101711073747148.zip">验证码识别</a></h3>      </p>
+<h3>附件添加一个破解验证码的实例包括程序大家自行研究吧：<a href="http://static.wooyun.org/20141017/2014101711073747148.zip">验证码识别</a></h3>      <p></p>
     
 			</body>
 		</html>

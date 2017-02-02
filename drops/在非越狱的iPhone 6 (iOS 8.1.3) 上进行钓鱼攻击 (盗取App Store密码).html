@@ -3,14 +3,14 @@
 			<head>
 			     <title>在非越狱的iPhone 6 (iOS 8.1.3) 上进行钓鱼攻击 (盗取App Store密码) - 蒸米</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/4998">http://drops.wooyun.org/mobile/4998</a></h1>
 				
       <p>
-        <h1>0x00 简介</h1>
+        </p><h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>weibo:http://weibo.com/zhengmin1989</p>
 
@@ -20,8 +20,8 @@
 
 <!--more-->
 
-<p><embed src="http://player.youku.com/player.php/sid/XODgyOTMxMTE2/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash">
-</embed></p>
+<p><embed src="http://player.youku.com/player.php/sid/XODgyOTMxMTE2/v.swf" allowfullscreen="true" quality="high" width="480" height="400" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash">
+</p>
 
 <p>在这个demo中，App Store是货真价实的系统app，但是弹出来的登录框不是App Store的，而是另一个在后台运行的app伪造的。我们知道在沙盒策略中，一个app运行在自己的沙盒空间中，理论上说是无法影响其他app的，如果能够产生影响就是一个很严重的问题。除了沙盒逃逸外，要让这个demo成功还需要具备以下几点要求：</p>
 
@@ -35,11 +35,11 @@
 
 <h1>0x01 start</h1>
 
-<hr />
+<hr>
 
 <h2>1. 安装钓鱼app到目标设备</h2>
 
-<hr />
+<hr>
 
 <p> 钓鱼app会使用一些特殊的API函数（后面会讲到，因为这些API不属于PrivateFrameworks，所以不确定是否是private API），所以我们需要考虑如果App Store拒绝接受这种app的情况。如果App Store拒绝接受的话，一般有两个方案：</p>
 
@@ -49,7 +49,7 @@
 
 <h2>2．后台无线运行并开机启动</h2>
 
-<hr />
+<hr>
 
 <p> 这个有好几种方案，我这里简单介绍两种：</p>
 
@@ -59,7 +59,7 @@
 
 <h2>3．检测目标app（比如App Store）的运行状态</h2>
 
-<hr />
+<hr>
 
 <p>这个也有好多方法，简单介绍两个：</p>
 
@@ -69,7 +69,7 @@
 
 <h2>4．得到Apple ID的用户名以便实施钓鱼攻击。这个细节请参考CVE-2014-4423。 </h2>
 
-<hr />
+<hr>
 
 <h2>5．弹出钓鱼对话框</h2>
 
@@ -77,13 +77,13 @@
 
 <p>比如下图，第一个是真正的对话框，而第二个是我伪造的，为了区分，我故意把K变成了小写。通过CFUserNotificationCreate()这个API，我们可以伪造很多应用的登陆对话框，不光是App Store，还可以是YouTube，Gmail，天猫等等。因为伪造的对话框和真实对话框没有任何区别，用户中招的几率会变得非常大。这个API本来是为Mac OS X设计的，但是因为iOS和Mac OS X共用了一些基本的底层框架，但是在iOS并没有屏蔽这个API接口，也没有做任何的权限检测，最后导致了沙盒逃逸。 </p>
 
-<p><img src="http://static.wooyun.org/20150227/2015022710364721021.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015022710364721021.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20150227/2015022710364823266.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015022710364823266.png" alt="enter image description here"></p>
 
 <h1>0x02 结语 &amp; 参考文章</h1>
 
-<hr />
+<hr>
 
 <p>人们往往认为iOS比android的安全，所以在使用苹果手机的时候格外大胆，但事实并非如此。通过几个漏洞的combo，黑客们可以很容易的骗取你的帐号密码。更恐怖的是，本文所展示iOS漏洞也只是冰山一角。在我们ASIACCS 15论文中，我们还介绍了iOS远程控制，监控等漏洞的利用，有兴趣的同学可以继续学习。</p>
 
@@ -91,7 +91,7 @@
 <li>Min Zheng, Hui Xue, Yulong Zhang, Tao Wei, John C.S. Lui. "Enpublic Apps: Security Threats Using iOS Enterprise and Developer Certificates". (Full Paper)  Proceedings of 10th ACM Symposium on Information, Computer and Communications Security (ASIACCS 2015)</li>
 </ol>
 
-<p> 2. Tielei Wang, Kangjie Lu, Long Lu, Simon Chung, and Wenke Lee. "Jekyll on iOS: When Benign Apps Become Evil", Proceedings of Usenix Security 2013</p>      </p>
+<p> 2. Tielei Wang, Kangjie Lu, Long Lu, Simon Chung, and Wenke Lee. "Jekyll on iOS: When Benign Apps Become Evil", Proceedings of Usenix Security 2013</p>      <p></p>
     
 			</body>
 		</html>

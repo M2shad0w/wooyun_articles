@@ -3,14 +3,14 @@
 			<head>
 			     <title>使用sqlmap中tamper脚本绕过waf - 刘海哥</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tools/4760">http://drops.wooyun.org/tools/4760</a></h1>
 				
       <p>
-        <h1>0x00 背景</h1>
+        </p><h1>0x00 背景</h1>
 
-<hr />
+<hr>
 
 <p>sqlmap中的tamper脚本来对目标进行更高效的攻击。</p>
 
@@ -18,11 +18,11 @@
 
 <h1>0x01 start</h1>
 
-<hr />
+<hr>
 
 <h2>脚本名：apostrophemask.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：用utf8代替引号</p>
 
@@ -36,7 +36,7 @@ Example: ("1 AND '1'='1") '1 AND %EF%BC%871%EF%BC%87=%EF%BC%871'
 
 <h2>脚本名：equaltolike.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：like 代替等号</p>
 
@@ -56,7 +56,7 @@ Example:
 
 <p>脚本名：space2dash.py</p>
 
-<hr />
+<hr>
 
 <p>作用：绕过过滤‘=’ 替换空格字符（”），（’ – ‘）后跟一个破折号注释，一个随机字符串和一个新行（’ n’）</p>
 
@@ -70,7 +70,7 @@ Example: ('1 AND 9227=9227') '1--nVNaVoPYeva%0AAND--ngNvzqu%0A9227=9227'
 
 <h2>脚本名：greatest.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：绕过过滤’>’ ,用GREATEST替换大于号。</p>
 
@@ -80,7 +80,7 @@ Example: ('1 AND A &gt; B') '1 AND GREATEST(A,B+1)=A' Tested against: * MySQL 4,
 
 <h2>脚本名：space2hash.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：空格替换为#号 随机字符串 以及换行符</p>
 
@@ -102,7 +102,7 @@ Example:
 
 <h2>脚本名：apostrophenullencode.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：绕过过滤双引号，替换字符和双引号。</p>
 
@@ -120,7 +120,7 @@ Example: tamper("1 AND '1'='1") '1 AND %00%271%00%27=%00%271'
 
 <h2>脚本名：halfversionedmorekeywords.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：当数据库为mysql时绕过防火墙，每个关键字之前添加mysql版本评论</p>
 
@@ -144,7 +144,7 @@ Example:
 
 <h2>脚本名：space2morehash.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：空格替换为 #号 以及更多随机字符串 换行符</p>
 
@@ -164,7 +164,7 @@ Example:
 
 <h2>脚本名：appendnullbyte.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：在有效负荷结束位置加载零字节字符编码</p>
 
@@ -180,7 +180,7 @@ Example: ('1 AND 1=1') '1 AND 1=1%00'
 
 <h2>脚本名：ifnull2ifisnull.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：绕过对 IFNULL 过滤。 替换类似’IFNULL(A, B)’为’IF(ISNULL(A), B, A)’</p>
 
@@ -206,7 +206,7 @@ Example:
 
 <h2>脚本名：space2mssqlblank.py(mssql)</h2>
 
-<hr />
+<hr>
 
 <p>作用：空格替换为其它空符号</p>
 
@@ -216,13 +216,13 @@ Example:
 
 <h2>ASCII table:</h2>
 
-<hr />
+<hr>
 
 <p>案例一: wooyun.org/bugs/wooyun-2010-062878</p>
 
 <h2>脚本名：base64encode.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：用base64编码替换 Example: ("1' AND SLEEP(5)#") 'MScgQU5EIFNMRUVQKDUpIw==' Requirement: all</p>
 
@@ -234,7 +234,7 @@ Example:
 
 <h2>脚本名：space2mssqlhash.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：替换空格</p>
 
@@ -244,7 +244,7 @@ Example: ('1 AND 9227=9227') '1%23%0AAND%23%0A9227=9227' Requirement: * MSSQL * 
 
 <h2>脚本名：modsecurityversioned.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：过滤空格，包含完整的查询版本注释</p>
 
@@ -262,7 +262,7 @@ Example: ('1 AND 2&gt;1--') '1 /*!30874AND 2&gt;1*/--'
 
 <h2>脚本名：space2mysqlblank.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：空格替换其它空白符号(mysql)</p>
 
@@ -290,7 +290,7 @@ Example:
 
 <h2>脚本名：between.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：用between替换大于号（>）</p>
 
@@ -309,7 +309,7 @@ Example: ('1 AND A &gt; B--') '1 AND A NOT BETWEEN 0 AND B--'
 
 <h2>脚本名：space2mysqldash.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：替换空格字符（”）（’ – ‘）后跟一个破折号注释一个新行（’ n’）</p>
 
@@ -328,7 +328,7 @@ Example: ('1 AND 9227=9227') '1--%0AAND--%0A9227=9227'
 
 <h2>脚本名：multiplespaces.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：围绕SQL关键字添加多个空格</p>
 
@@ -342,7 +342,7 @@ Example: ('1 UNION SELECT foobar') '1 UNION SELECT foobar'
 
 <h2>脚本名：space2plus.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：用+替换空格</p>
 
@@ -352,7 +352,7 @@ Example: ('SELECT id FROM users') 'SELECT+id+FROM+users' Tested against: all
 
 <h2>脚本名：bluecoat.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：代替空格字符后与一个有效的随机空白字符的SQL语句。 然后替换=为like</p>
 
@@ -368,7 +368,7 @@ Example: ('SELECT id FROM users where id = 1') 'SELECT%09id FROM users where id 
 
 <h2>脚本名：nonrecursivereplacement.py</h2>
 
-<hr />
+<hr>
 
 <p>双重查询语句。取代predefined SQL关键字with表示 suitable for替代（例如 .replace（“SELECT”、””)） filters</p>
 
@@ -378,7 +378,7 @@ Example: ('1 UNION SELECT 2--') '1 UNIOUNIONN SELESELECTCT 2--' Tested against: 
 
 <h2>脚本名：space2randomblank.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：代替空格字符（“”）从一个随机的空白字符可选字符的有效集</p>
 
@@ -390,7 +390,7 @@ Example: ('SELECT id FROM users') 'SELECT%0Did%0DFROM%0Ausers'
 
 <h2>脚本名：sp_password.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：追加sp&#95;password’从DBMS日志的自动模糊处理的有效载荷的末尾</p>
 
@@ -400,7 +400,7 @@ Example: ('1 AND 9227=9227-- ') '1 AND 9227=9227-- sp\_password' Requirement: * 
 
 <h2>脚本名：chardoubleencode.py</h2>
 
-<hr />
+<hr>
 
 <p>作用: 双url编码(不处理以编码的)</p>
 
@@ -414,7 +414,7 @@ Example:
 
 <h2>脚本名：unionalltounion.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：替换UNION ALL SELECT UNION SELECT</p>
 
@@ -424,7 +424,7 @@ Example:
 
 <h2>脚本名：charencode.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：url编码</p>
 
@@ -447,7 +447,7 @@ Example:
 
 <h2>脚本名：randomcase.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：随机大小写 Example:</p>
 
@@ -467,7 +467,7 @@ Example:
 
 <h2>脚本名：unmagicquotes.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：宽字符绕过 GPC addslashes</p>
 
@@ -481,7 +481,7 @@ Example:
 
 <h2>脚本名：randomcomments.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：用/**/分割sql关键字</p>
 
@@ -493,7 +493,7 @@ Example:
 
 <h2>脚本名：charunicodeencode.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：字符串 unicode 编码</p>
 
@@ -525,7 +525,7 @@ Example:
 
 <h2>脚本名：securesphere.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：追加特制的字符串</p>
 
@@ -537,7 +537,7 @@ Example: ('1 AND 1=1') "1 AND 1=1 and '0having'='0having'"
 
 <h2>脚本名：versionedmorekeywords.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：注释绕过</p>
 
@@ -557,7 +557,7 @@ Example:
 
 <h2>脚本名：space2comment.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：Replaces space character (‘ ‘) with comments ‘/**/’</p>
 
@@ -582,7 +582,7 @@ Example:
 
 <h2>脚本名：halfversionedmorekeywords.py</h2>
 
-<hr />
+<hr>
 
 <p>作用：关键字前加注释</p>
 
@@ -606,7 +606,7 @@ Example:
 <li>MySQL 4.0.18, 5.0.22</li>
 </ul>
 
-<p>收集于: http://www.91ri.org/7852.html http://www.91ri.org/7869.html http://www.91ri.org/7860.html</p>      </p>
+<p>收集于: http://www.91ri.org/7852.html http://www.91ri.org/7869.html http://www.91ri.org/7860.html</p>      <p></p>
     
 			</body>
 		</html>

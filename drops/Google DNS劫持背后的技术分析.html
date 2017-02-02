@@ -3,14 +3,14 @@
 			<head>
 			     <title>Google DNS劫持背后的技术分析 - insight-labs</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/1207">http://drops.wooyun.org/papers/1207</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>最近世界真是越来越不太平了，尤其是对于大部分普通人而言。昨天又传来噩耗，根据网络监测公司BGPMon，Google的公开DNS服务器 IP 8.8.8.8被劫持到了委内瑞拉和巴西超过22分钟。</p>
 
@@ -18,11 +18,11 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/20140714/2014071403342836188.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071403342836188.png" alt="enter image description here"></p>
 
 <p>根据砖家们的推测，这次劫持可能是黑客利用了Border Gateway Protocol(BGP) 协议中一个众所周知的漏洞来实现的，BGP协议为ISP级的路由协议，一般用来协调大型ISP之间的路由走向。这次劫持可以让黑客把网上的部分流量劫持从而经过他们所控制的路由。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071403342986428.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071403342986428.png" alt="enter image description here"></p>
 
 <p>这已经不是Google DNS服务器被第一次劫持了，在2010年也Google DNS的流量也曾经被劫持到了罗马尼亚和奥地利境内。</p>
 
@@ -30,7 +30,7 @@
 
 <h2>0x01 BGP劫持详解</h2>
 
-<hr />
+<hr>
 
 <p>本部分来源于Tony Kapela 和 Alex Pilosov在2008年 Defcon会议上的演讲。</p>
 
@@ -115,11 +115,11 @@
 <pre><code>10.10.220.0/22
 </code></pre>
 
-<p>在AS 200中<br />
-ASN 200向相邻的AS 20和30发送BGP通告。<br />
+<p>在AS 200中<br>
+ASN 200向相邻的AS 20和30发送BGP通告。<br>
 此时为正常的状态。</p>
 
-<p><img src="http://static.wooyun.org/201403/2014031815415353677.png" alt="2014031815415353677.png" /></p>
+<p><img src="../images_result/images/2014031815415353677.png" alt="2014031815415353677.png"></p>
 
 <p>攻击者控制了AS 100的BGP路由。</p>
 
@@ -132,7 +132,7 @@ ASN 200向相邻的AS 20和30发送BGP通告。<br />
 
 <p>于是我们把AS10，20和200加入我们的AS PATH prepend list</p>
 
-<p><img src="http://static.wooyun.org/201403/2014031815423285580.png" alt="2014031815423285580.png" /></p>
+<p><img src="../images_result/images/2014031815423285580.png" alt="2014031815423285580.png"></p>
 
 <p>通过route-map把目标IP段加入BGP路由表</p>
 
@@ -147,11 +147,11 @@ set as-path prepend 10 20 200
 <pre><code>ip route 10.10.220.0 255.255.255.0 4.3.2.1 
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201403/2014031815431276804.png" alt="2014031815431276804.png" /></p>
+<p><img src="../images_result/images/2014031815431276804.png" alt="2014031815431276804.png"></p>
 
 <p>完成后可以看出，AS30 40 50 60的数据包如果想要到AS 200去，都会先经过AS 100.</p>
 
-<p>到了这里我们已经可以分析出，BGP劫持的本质再次回到安全的本质既是信任这一点，因为BGP直接无条件信任对方AS发来的路由信息，并且缺乏有效的认证和过滤手段，导致BGP劫持屡次得手。</p>      </p>
+<p>到了这里我们已经可以分析出，BGP劫持的本质再次回到安全的本质既是信任这一点，因为BGP直接无条件信任对方AS发来的路由信息，并且缺乏有效的认证和过滤手段，导致BGP劫持屡次得手。</p>      <p></p>
     
 			</body>
 		</html>

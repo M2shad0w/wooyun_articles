@@ -3,22 +3,22 @@
 			<head>
 			     <title>Python urllib HTTP头注入漏洞 - virusdefender</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/16905">http://drops.wooyun.org/papers/16905</a></h1>
 				
       <p>
-        <p>from:<a href="http://blog.blindspotsecurity.com/2016/06/advisory-http-header-injection-in.html">http://blog.blindspotsecurity.com/2016/06/advisory-http-header-injection-in.html</a></p>
+        </p><p>from:<a href="http://blog.blindspotsecurity.com/2016/06/advisory-http-header-injection-in.html">http://blog.blindspotsecurity.com/2016/06/advisory-http-header-injection-in.html</a></p>
 
 <h1>0x00 总览</h1>
 
-<hr />
+<hr>
 
 <p>Python的urllib库（在Python2中为<code>urllib2</code>，在Python3中为<code>urllib</code>）有一个HTTP协议下的协议流注入漏洞。如果攻击者可以控制Python代码访问任意URL或者让Python代码访问一个恶意的web servr，那这个漏洞可能会危害内网服务安全。</p>
 
 <h1>0x01 问题在哪</h1>
 
-<hr />
+<hr>
 
 <p>HTTP协议解析host的时候可以接受百分号编码的值，解码，然后包含在HTTP数据流里面，但是没有进一步的验证或者编码，这就可以注入一个换行符。</p>
 
@@ -99,7 +99,7 @@ http://localhost%00%0d%0ax-bar:%20:12345/foo
 
 <h1>0x02 攻击面</h1>
 
-<hr />
+<hr>
 
 <p>下面会讨论几个可能导致严重后果的攻击方式。当然还远远不够，攻击都需要特定的场景，有很多不同的方法可以利用，还不能确定有没有其他的利用方式。</p>
 
@@ -206,29 +206,29 @@ bar
 
 <h1>0x03 多版本的Python都受到影响</h1>
 
-<hr />
+<hr>
 
 <p>Python 2和3版本都受到影响，Cedric Buissart 提供了修复问题的部分信息。</p>
 
-<p>3.4 / 3.5 : <a href="https://hg.python.org/cpython/rev/bf3e1c9b80e9">revision 94952</a><br />
+<p>3.4 / 3.5 : <a href="https://hg.python.org/cpython/rev/bf3e1c9b80e9">revision 94952</a><br>
 2.7 : <a href="https://hg.python.org/cpython/rev/1c45047c5102">revision 94951</a></p>
 
 <p>虽然已经在最新的版本中修复了，但是很多系统的稳定版是没法得到修复的，比如最新的Debian Stable就还存在这个漏洞。</p>
 
 <h1>0x04 我的一点思考</h1>
 
-<hr />
+<hr>
 
 <p>Redis和memcached的开发者提供的默认配置是没有密码的，这个是不负责任的。当然，我能理解他们认为这些东西应该在"可信的内网"中使用。问题，实际上很少的内网能比外网更安全。未授权的服务即使监听在localhost，也会受到影响的。在安装过程中加一个随机生成的密码也并不难，开发者应该严肃的面对安全问题。</p>
 
 <h1>0x05 译者注</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>这个漏洞编号是 CVE-2016-5699，RedHat给申请的 http://www.openwall.com/lists/oss-security/2016/06/14/7</li>
 <li>以前Python bugs中的讨论 https://bugs.python.org/issue22928</li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

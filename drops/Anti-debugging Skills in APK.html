@@ -3,22 +3,22 @@
 			<head>
 			     <title>Anti-debugging Skills in APK - unLimit安全小组</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/16969">http://drops.wooyun.org/mobile/16969</a></h1>
 				
       <p>
-        <p><strong>Author：超六、曲和</strong></p>
+        </p><p><strong>Author：超六、曲和</strong></p>
 
 <h1>0x00 时间相关反调试</h1>
 
-<hr />
+<hr>
 
 <p>通过计算某部分代码的执行时间差来判断是否被调试，在Linux内核下可以通过time、gettimeofday，或者直接通过sys call来获取当前时间。另外，还可以通过自定义SIGALRM信号来判断程序运行是否超时。</p>
 
 <h1>0x01 检测关键文件</h1>
 
-<hr />
+<hr>
 
 <p><strong>（1）</strong>/proc/pid/status、/proc/pid/task/pid/status</p>
 
@@ -26,13 +26,13 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20160618/2016061803091789295apk1.jpg" alt="pic1" /></p>
+<p><img src="../images_result/images/2016061803091789295apk1.jpg" alt="pic1"></p>
 
 <p><strong>（2）</strong>/proc/pid/stat、/proc/pid/task/pid/stat</p>
 
 <p>调试状态下/proc/pid/stat、/proc/pid/task/pid/stat文件中第二个字段是t（T）：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160618/2016061803091836696apk2.jpg" alt="pic2" /></p>
+<p><img src="../images_result/images/2016061803091836696apk2.jpg" alt="pic2"></p>
 
 <p><strong>（3）</strong>/proc/pid/wchan、/proc/pid/task/pid/wchan</p>
 
@@ -40,19 +40,19 @@
 
 <h1>0x02 检测端口号</h1>
 
-<hr />
+<hr>
 
 <p>使用IDA动态调试APK时，android_server默认监听23946端口，所以通过检测端口号可以起到一定的反调试作用。具体而言，可以通过检测/proc/net/tcp文件，或者直接system执行命令<code>netstat -apn</code>等。</p>
 
 <h1>0x03 检测android_server、gdb、gdbserver</h1>
 
-<hr />
+<hr>
 
 <p>在对APK进行动态调试时，可能会打开android&#95;server、gdb、gdbserver等调试相关进程，一般情况下，这几个打开的进程名和文件名相同，所以可以通过运行状态下的进程名来检测这些调试相关进程。具体而言，可以通过打开/proc/pid/cmdline、/proc/pid/statue等文件来获取进程名。当然，这种检测方法非常容易绕过――直接修改android&#95;server、gdb、gdbserver的名字即可。</p>
 
 <h1>0x04 signal</h1>
 
-<hr />
+<hr>
 
 <p>信号机制在apk调试攻防中有着非常重要的作用，大部分主流加固厂商都会通过信号机制来增加壳的强度。在反调试中最常见的要数SIGTRAP信号了，SIGTRAP原本是调试器设置断点时发出的信号，为了能更好的理解SIGTRAP信号反调试，先让我们看看一下调试器设置断点的原理：</p>
 
@@ -194,7 +194,7 @@ extern "C" void __attribute__((noinline)) __attribute__((visibility("default")))
 
 <h1>0x05 检测软件断点</h1>
 
-<hr />
+<hr>
 
 <p>上一节说了使用SIGTRAP反调试的原理，由此可以衍生出另一种很常见的反调试方法――检测软件断点。软件断点通过改写目标地址的头几字节为breakpoint指令，只需要遍历so中可执行segment，查找是否出现breakpoint指令即可。实现大致如下：</p>
 
@@ -281,7 +281,7 @@ void anti5(){
 
 <h1>0x06 进程间通信</h1>
 
-<hr />
+<hr>
 
 <p>大部分加固会新建进程或者新建线程，在这些新建的线程和进程中完成反调试操作，然而如果这些进程、线程相对独立的话，很容易通过挂起、杀死的方式直接使得反调试失效。为了保证反调试线程、进程的存活，就需要一种通信方式，定期确认反调试线程、进程依然存活，所以进程间通信是高级反调试不可或缺的方式。在Linux下有很多进程间通信的方式，比如管道、信号、共享内存、套接字（socket）等，下面提供一个通过管道将反调试进程和主进程联系起来的简单例子：</p>
 
@@ -369,7 +369,7 @@ anti3();
 
 <p>传统检测TracerPid的方法是直接在子进程中循环检测，一旦发现则主动杀死进程。本实例将循环检测TracerPid和进程间通信结合，一旦反调试子进程被挂起或被杀死，父进程也会马上终止，原理大致如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160618/2016061803092064301apk3.jpg" alt="pic3" /></p>
+<p><img src="../images_result/images/2016061803092064301apk3.jpg" alt="pic3"></p>
 
 <p>父进程的守护线程在从pipe中read到statue值之前，默认statue值为-1，收到子进程往pipe中写的statue值之后，重置statue值，如果未被调试，statue值为0，反之则为被调试状态。该做法的优势在于，一旦反调试进程被终止或被挂起，守护线程也能马上发现。</p>
 
@@ -377,7 +377,7 @@ anti3();
 
 <h1>0x07 dalvik 虚拟机内部相关字段</h1>
 
-<hr />
+<hr>
 
 <p>在dalvik虚拟机中自带了检测调试器的代码，其本质是检测DvmGlobals结构体中的相关字段：</p>
 
@@ -418,11 +418,11 @@ bool dvmDbgIsDebuggerConnected()
 
 <h1>0x08 IDA arm、thumb指令识别缺陷</h1>
 
-<hr />
+<hr>
 
 <p>众所周知，IDA采用递归下降算法来反汇编指令，而该算法最大的缺点在于它无法处理间接代码路径，无法识别动态算出来的跳转。而arm架构下由于存在arm和thumb指令集，就涉及到指令集切换，IDA在某些情况下无法智能识别arm和thumb指令，比如下图所示代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160618/2016061803092254384apk4.jpg" alt="pic4" /></p>
+<p><img src="../images_result/images/2016061803092254384apk4.jpg" alt="pic4"></p>
 
 <p>bx r3指令会切换指令集，而参数r3是动态计算出来的，IDA无法失败r3的值，而默认将bx r3后面的指令当成跳转地址，将后面地址的指令识别成了arm指令，而实际上其仍为thumb指令。</p>
 
@@ -430,7 +430,7 @@ bool dvmDbgIsDebuggerConnected()
 
 <h1>0x09 Ptrace</h1>
 
-<hr />
+<hr>
 
 <p>Ptrace是gdb等调试器实现的核心，通过ptrace可以监控、控制被调试进程的状态、信号、执行等。而每个进程在同一时刻最多只能被一个调试进程ptrace，根据这个原理，可以主动ptrace自己的关键子进程，这样可以在一定程度上防止子进程被调试。</p>
 
@@ -440,19 +440,19 @@ bool dvmDbgIsDebuggerConnected()
 
 <h1>0x0A Inotify 监控文件</h1>
 
-<hr />
+<hr>
 
 <p>在Linux下，inotify可以实现监控文件系统事件（打开、读写、删除等），加固方案可以通过inotify监控apk自身的某些文件，某些内存dump技术通过/proc/pid/maps、/proc/pid/mem来实现内存dump，所以监控对这些文件的读写也能起到一定的反调试效果。</p>
 
 <h1>0x0B 总结</h1>
 
-<hr />
+<hr>
 
 <p>本文总结了主流加固厂商大部分反调试技巧，APK下的反调试技巧和win、linux下的大同小异，核心原理都是类似的。说到底，反调试只能尽可能的增加逆向难度，APK的安全防护绝不能仅仅依靠反调试，APK安全需要从整体架构上入手，在关键代码上加入强混淆，甚至通过vmp来增大关键代码的逆向难度。</p>
 
 <h1>0x0C Reference</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li>/bionic/linker/linker.h</li>
@@ -461,7 +461,7 @@ bool dvmDbgIsDebuggerConnected()
 <li><a href="http://androidxref.com/4.4.4_r1/xref/dalvik/vm/native/dalvik_system_VMDebug.cpp">http://androidxref.com/4.4.4&#95;r1/xref/dalvik/vm/native/dalvik&#95;system_VMDebug.cpp</a></li>
 <li><a href="http://blog.jobbole.com/23632/">http://blog.jobbole.com/23632/</a></li>
 <li><a href="http://www.spongeliu.com/165.html">http://www.spongeliu.com/165.html</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

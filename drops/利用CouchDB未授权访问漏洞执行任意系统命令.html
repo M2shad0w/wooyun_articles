@@ -3,20 +3,20 @@
 			<head>
 			     <title>利用CouchDB未授权访问漏洞执行任意系统命令 - 阿里云安全</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/16030">http://drops.wooyun.org/papers/16030</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>5月16日阿里云盾攻防对抗团队从外部渠道获知CouchDB数据库存在未授权访问漏洞（在配置不正确的情况下）。经过测试，云盾团队率先发现利用该未授权访问漏洞不仅会造成数据的丢失和泄露，<code>甚至可执行任意系统命令</code>。云盾安全专家团队第一时间完成了漏洞上报、安全评级，并通知了所有可能受影响的用户。下面将对该漏洞的出处和技术细节做详细解释。</p>
 
 <h1>0x01 漏洞的来龙去脉</h1>
 
-<hr />
+<hr>
 
 <p>CouchDB 是一个开源的面向文档的数据库管理系统，可以通过 <code>RESTful JavaScript Object Notation (JSON) API</code> 访问。CouchDB会默认会在5984端口开放Restful的API接口，用于数据库的管理功能。</p>
 
@@ -49,13 +49,13 @@ coffeescript = /usr/bin/couchjs /usr/share/couchdb/server/main-coffee.js
   <p>The CouchDB Server Configuration API provide an interface to query and update the various configuration values within a running CouchDB instance</p>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20160518/2016051813382071701139.png" alt="" /></p>
+<p><img src="../images_result/images/2016051813382071701139.png" alt=""></p>
 
 <p>也就是说，除了<code>local.ini</code>的配置文件，CouchDB允许通过自身提供的<code>Restful API</code>接口动态修改配置属性。结合以上两点，<strong>我们可以通过一个未授权访问的CouchDB</strong>，通过修改其<code>query_server</code>配置，来执行系统命令。</p>
 
 <h1>0x02 漏洞的POC</h1>
 
-<hr />
+<hr>
 
 <p>新增<code>query_server</code>配置，这里执行ifconfig命令</p>
 
@@ -76,17 +76,17 @@ curl -X PUT 'http://1.1.1.1:5984/vultest/vul' -d '{"_id":"770895a97726d5ca6d70a2
 curl -X POST 'http://1.1.1.1:5984/vultest/_temp_view?limit=11' -d '{"language":"cmd","map":""}' -H 'Content-Type: application/json'
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20160518/2016051813382396781227.png" alt="" /></p>
+<p><img src="../images_result/images/2016051813382396781227.png" alt=""></p>
 
 <p>执行后，可以看到，指定的命令已经成功执行：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160518/2016051813382510428315.png" alt="" /></p>
+<p><img src="../images_result/images/2016051813382510428315.png" alt=""></p>
 
 <p>至于如何回显执行结果，各位可以动动脑筋，欢迎互动。</p>
 
 <h1>0x03 漏洞修复建议：</h1>
 
-<hr />
+<hr>
 
 <p>1、指定CouchDB绑定的IP （需要重启CouchDB才能生效） 在 /etc/couchdb/local.ini 文件中找到 “bind_address = 0.0.0.0” ，把 0.0.0.0 修改为 127.0.0.1 ，然后保存。注：修改后只有本机才能访问CouchDB。</p>
 
@@ -99,7 +99,7 @@ curl -X POST 'http://1.1.1.1:5984/vultest/_temp_view?limit=11' -d '{"language":"
 <li><a href="http://docs.couchdb.org/en/1.6.1/api/server/configuration.html#api-config">http://docs.couchdb.org/en/1.6.1/api/server/configuration.html#api-config</a></li>
 <li><a href="http://docs.couchdb.org/en/1.6.1/intro/api.html">http://docs.couchdb.org/en/1.6.1/intro/api.html</a></li>
 <li><a href="http://docs.couchdb.org/en/1.6.1/config/query-servers.html">http://docs.couchdb.org/en/1.6.1/config/query-servers.html</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

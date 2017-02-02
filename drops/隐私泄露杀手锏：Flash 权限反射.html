@@ -3,14 +3,14 @@
 			<head>
 			     <title>隐私泄露杀手锏：Flash 权限反射 - EtherDream</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5732">http://drops.wooyun.org/papers/5732</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>一直以为该风险早已被重视，但最近无意中发现，仍有不少网站存在该缺陷，其中不乏一些常用的邮箱、社交网站，于是有必要再探讨一遍。</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01 原理</h1>
 
-<hr />
+<hr>
 
 <p>这一切还得从经典的授权操作说起：</p>
 
@@ -42,13 +42,13 @@ Security.allowDomain('*')
 
 <h1>0x02 利用</h1>
 
-<hr />
+<hr>
 
 <h3>关联容器</h3>
 
 <p>在 Flash 里，舞台（stage）是这个世界的根基。无论加载多少个 swf，舞台始终只有一个。任何元素（DisplayObject）必须添加到舞台、或其子容器下，才能展示和交互。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503074267030.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503074267030.png" alt=""></p>
 
 <p>因此，不同 swf 创建的元素，都是通过同一个舞台展示的。它们能感知相互的存在，只是受到同源策略的限制，未必能相互操作。</p>
 
@@ -102,7 +102,7 @@ loader.load(new URLRequest('//swf-site/vul.swf'));
 
 <p>由于 Vul 定义了一个叫 download 的公开方法，并且授权了所有的域名，因此在第三方 exp.swf 里，自然也能调用它：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503074262085.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503074262085.png" alt=""></p>
 
 <pre><code>#!javascript
 main.download('//swf-site/data');
@@ -177,7 +177,7 @@ loader.load(new URLRequest('//swf-site/vul.swf'));
 
 <p>攻击者拥有了 victim-site 的访问权，即可跨站读取页面数据，访问用户的个人信息了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503074335305.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503074335305.png" alt=""></p>
 
 <p>由于大多 Web 开发者对 Flash 的安全仍局限于 XSS 之上，从而忽视了这类风险。即使在如今，网络上仍存在大量可被利用的缺陷 swf 文件，甚至不乏一些大网站也纷纷中招。</p>
 
@@ -203,7 +203,7 @@ loader.load(new URLRequest('//swf-site/vul.swf'));
 
 <h1>0x03 案例</h1>
 
-<hr />
+<hr>
 
 <p>这里分享一个现实中的案例，之前已上报并修复了的。</p>
 
@@ -211,23 +211,23 @@ loader.load(new URLRequest('//swf-site/vul.swf'));
 
 <p>反编译后可发现，主类初始化时就开启了 * 的授权，因此整个 swf 中的类即可随意使用了！</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503074363228.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503074363228.png" alt=""></p>
 
 <p>同时，其中一个叫 FlashRequest 的类，封装了常用的网络操作，并且关键方法都是 public 的：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503074467541.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503074467541.png" alt=""></p>
 
 <p>我们将其反射出来，根据其规范调用，即可发起跨源请求了！</p>
 
 <p>由于网易不少站点的 crossdomain.xml 都授权了 126.com，因此可暗中查看已登录用户的 163/126 邮件了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503074429194.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503074429194.png" alt=""></p>
 
 <p>甚至还可以读取用户的通信录，将恶意链接传播给更多的用户！</p>
 
 <h1>0x04 进阶</h1>
 
-<hr />
+<hr>
 
 <p>借助爬虫和工具，我们可以找出不少可轻易利用的 swf 文件。不过本着研究的目的，我们继续探讨一些需仔细分析才能利用的案例。</p>
 
@@ -529,13 +529,13 @@ JSON.decode(s);
 
 <p>我们尝试将 HTML 字符传入 JSON 解码器，最终被断在了类库抛出的异常处：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503074583245.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503074583245.png" alt=""></p>
 
 <p>异常中的前两个参数，看起来没多大意义。但第三个参数，里面究竟藏着是什么？</p>
 
 <p>不用猜想，这正是我们想要的东西 —— 传入解码器的整个字符参数！</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503074546994.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503074546994.png" alt=""></p>
 
 <p>如此，我们就可在全局异常捕获中，拿到完整的返回数据了：</p>
 
@@ -545,13 +545,13 @@ loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERRO
 });
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503074599310.png" alt="" /></p>
+<p><img src="../images_result/images/2015062503074599310.png" alt=""></p>
 
 <p>惊呆了吧！只要仔细探索，一些看似不可能实现的，其实也能找到解决方案。</p>
 
 <h1>0x05 补救</h1>
 
-<hr />
+<hr>
 
 <p>如果从代码层面来修补，短时间内也难以完成。</p>
 
@@ -565,7 +565,7 @@ loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERRO
 
 <h1>0x06 总结</h1>
 
-<hr />
+<hr>
 
 <p>最后总结下，本文提到的 3 类权限：</p>
 
@@ -579,7 +579,7 @@ loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERRO
 
 <p>也许会觉得 Flash 里坑太多了，根本防不胜防。但事实上这些特征早已存在，只是未被开发者重视而已。以至于各大网站如今仍普遍躺枪。</p>
 
-<p>当然，信息泄露对每个用户都是受害者。希望能让更多的开发者看到，及时修复安全隐患。</p>      </p>
+<p>当然，信息泄露对每个用户都是受害者。希望能让更多的开发者看到，及时修复安全隐患。</p>      <p></p>
     
 			</body>
 		</html>

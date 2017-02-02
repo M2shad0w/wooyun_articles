@@ -3,14 +3,14 @@
 			<head>
 			     <title>显示每个CPU的IDT信息 - correy</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/4854">http://drops.wooyun.org/tips/4854</a></h1>
 				
       <p>
-        <h1>0x00 简介</h1>
+        </p><h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>记得2008年看保护模式的教程时，痛苦与那些众多的位信息等复杂的结构。 后来入这行，干了几年的驱动。 这是才对这些CPU基本的知识有点了解。</p>
 
@@ -22,7 +22,7 @@
 
 <h1>0x01 start</h1>
 
-<hr />
+<hr>
 
 <p>这里不说保护模式的一些基本原理，假定看官已经知道了。</p>
 
@@ -369,7 +369,7 @@ vmci!DllUnload+0x7d6 (KINTERRUPT 81c1d008)
 
 <h2>1.首先是多CPU。</h2>
 
-<hr />
+<hr>
 
 <p>早期的Windows版本可以用内核导出的变量KeNumberProcessors。</p>
 
@@ -435,7 +435,7 @@ test!_AMD64_DESCRIPTOR
 
 <p>不说了：看垃圾代码吧！ 注释以上的结构摘自：WRK。 书于匆忙之后，如有不足请指正。</p>
 
-<hr />
+<hr>
 
 <pre><code>#!c
 /*
@@ -740,7 +740,7 @@ NTSTATUS DriverEntry(__in struct _DRIVER_OBJECT * DriverObject, __in PUNICODE_ST
 } 
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>#!bash
 /*
@@ -1149,7 +1149,7 @@ nt!_KIDTENTRY64
    +0x00c Reserved1        : Uint4B
    +0x000 Alignment        : Uint8B
 */
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

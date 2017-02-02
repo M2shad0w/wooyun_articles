@@ -3,14 +3,14 @@
 			<head>
 			     <title>Webshell安全检测篇 - 守望者实验室</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/10807">http://drops.wooyun.org/papers/10807</a></h1>
 				
       <p>
-        <h1>0x00 基于流量的检测方式</h1>
+        </p><h1>0x00 基于流量的检测方式</h1>
 
-<hr />
+<hr>
 
 <p><strong>1.概述</strong></p>
 
@@ -26,7 +26,7 @@
 
 <p>Webshell的分类笔者总结如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/2015112803214489797111.jpg" alt="1p1" /></p>
+<p><img src="../images_result/images/2015112803214489797111.jpg" alt="1p1"></p>
 
 <p>前段时间由于工作的需要完成了一个Webshell检测系统，根据当时的需求写了一篇关于使用基于Agent模型和基于日志分析模型来检测服务器上的文件是否是Webshell的文章，原文可以参见：</p>
 
@@ -34,7 +34,7 @@
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20151128/2015112803214618092121.jpg" alt="1p2" /></p>
+<p><img src="../images_result/images/2015112803214618092121.jpg" alt="1p2"></p>
 
 <p><strong>2.基于流量的webshell检测思考</strong></p>
 
@@ -61,7 +61,7 @@
 
 <p>这种方式的特殊点在于不是一个完整的文件在网络中中传输而是一个存在于HTTP协议中的一个参数在网络中传输，传输参数的方式既可能是GET也可能是POST，我们来看下面一个真实的例子：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/2015112803245912286131.jpg" alt="1p3" /></p>
+<p><img src="../images_result/images/2015112803245912286131.jpg" alt="1p3"></p>
 
 <p>在上图中我们不难发现这显然是使用一句话木马客户端通过POST的形式正在上传一个Webshell的脚本代码，并且将内容写入一句话木马相同目录下的一个body.asp的文件当中，从而实现上传“大马”。在截取到的流量数据中可以发现，如：<code>act= body.asp value=Execute</code>等payload，通过在检测这些payload就可以在上传的过程中分析Webshell及其行为。</p>
 
@@ -69,13 +69,13 @@
 
 <p>于Webshell是被制作用来控制服务器或者窃取机密信息的，要实现这些能力攻击者就必须向Webshell发送一些控制指令从而操作Webshell。在控制指令中通常包含特征明显的攻击payload。我们来观察一下如下几种payload：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/2015112803214778648146.png" alt="1p4" /></p>
+<p><img src="../images_result/images/2015112803214778648146.png" alt="1p4"></p>
 
 <p>上图中显然是Webshell正在试图连接网站的数据库，并且攻击者使用的是POST的方式向Webshell提交连接参数，其中可以发现的payload有：<code>action=sqladmin</code>,<code>dbhost=localhost</code>,<code>dbport=3306</code>,<code>dbuser=root</code>,<code>dbpass=1qaz2wsx</code>,<code>connect=connect</code>等。</p>
 
 <p>我们再看一个由著名一句话Webshell管理工具“菜刀”远程控制“菜刀马”并发出的指令的流量数据：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/2015112803254721794151.jpg" alt="1p5" /></p>
+<p><img src="../images_result/images/2015112803254721794151.jpg" alt="1p5"></p>
 
 <p>上图中看出“菜刀”使用了base64的方式加密了发送给“菜刀马”的指令，通过分析我们能够观察到其中的两个关键payload z1和z2。</p>
 
@@ -95,7 +95,7 @@ z2=cd /d “D:\www\qhrdww\”&amp;whoami&amp;echo [S]&amp;cd&amp;echo [E]7
 
 <h1>0x01 深入用户的内心</h1>
 
-<hr />
+<hr>
 
 <p><strong>1.WEBSHELL是什么？意味着什么？</strong></p>
 
@@ -111,7 +111,7 @@ z2=cd /d “D:\www\qhrdww\”&amp;whoami&amp;echo [S]&amp;cd&amp;echo [E]7
 
 <p>网上有各种各样的开源和免费工具，暂且不说他们的识别率。这些东西为什么仅仅是一个工具？</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/2015112803215035522211.jpg" alt="2p1" /></p>
+<p><img src="../images_result/images/2015112803215035522211.jpg" alt="2p1"></p>
 
 <p>笔者认为，工具为什么叫工具，主要以下特点：</p>
 
@@ -164,21 +164,21 @@ z2=cd /d “D:\www\qhrdww\”&amp;whoami&amp;echo [S]&amp;cd&amp;echo [E]7
 
 <p>再往俗的说五点：管用、好看、省事、便利、好使。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/2015112803215241729229.png" alt="2p2" /></p>
+<p><img src="../images_result/images/2015112803215241729229.png" alt="2p2"></p>
 
 <h1>0x02 基于行为分析来发现"未知的Webshell"</h1>
 
-<hr />
+<hr>
 
 <p><strong>1."已知" or "未知"</strong></p>
 
 <p>已知的已知，已知的未知，未知的未知，这个最近安全行业也谈的比较多，目前圈内热炒的“威胁情报”，其实应该属于“已知的未知”，对本地来说是未知威胁，其实是别的地方已经发生过的威胁。真正的“未知的未知”怎么办，虽然从没发生过的威胁首次在我们身上发生的概率很小很小，但是目前好多攻击都是窃取管理员的身份或者合法用户身份去做一些貌似合法的操作，这些内部发生的“异常”行为，没有外部的“威胁情报”等数据可对比。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/2015112803215321048311.jpg" alt="3p1" /></p>
+<p><img src="../images_result/images/2015112803215321048311.jpg" alt="3p1"></p>
 
 <p>加密会逐步成为网络流量的常态，基于“协议异常或行为异常”将成为无法解读内容情景下安全威胁检测的重要手段。 基于“内容”检测和基于“行为”检测互补来发现威胁。异常不一定是威胁，但一般来说威胁一定首先是异常。下图也表达了基于白名单的异常行为分析的重要性。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/201511280321553428932.jpg" alt="3p2" /></p>
+<p><img src="../images_result/images/201511280321553428932.jpg" alt="3p2"></p>
 
 <p>当下的安全攻防一个特点就是，未知攻击会越来越多，你所面临的攻击工具可能是从来没有使用过（或者身边的监控视野范围没有看到过），你手上的webshell样本再多，攻击者总是能制作出新的更轻量级功能更全的webshell，如何发现未知的webshell?如何做到天网恢恢疏而不漏？</p>
 
@@ -186,11 +186,11 @@ z2=cd /d “D:\www\qhrdww\”&amp;whoami&amp;echo [S]&amp;cd&amp;echo [E]7
 
 <p>webshell运行后，B/S数据通过HTTP交互，HTTP请求/响应中可以找到蛛丝马迹，这是动态特征检测先前我们说到过webshell通信是HTTP协议。基于payload的行为分析，不仅对已知webshell进行检测，还能识别出未知的、伪装性强的webshell。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/201511280321578447633.jpg" alt="3p3" /></p>
+<p><img src="../images_result/images/201511280321578447633.jpg" alt="3p3"></p>
 
 <p>（1）对webshell的访问特征（IP/UA/Cookie)、payload特征、path特征、时间特征等进行关联分析，以时间为索引，还原攻击事件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/201511280321586401934.jpg" alt="3p4" /></p>
+<p><img src="../images_result/images/201511280321586401934.jpg" alt="3p4"></p>
 
 <p>（2）基于异常的HTTP请求</p>
 
@@ -212,7 +212,7 @@ z2=cd /d “D:\www\qhrdww\”&amp;whoami&amp;echo [S]&amp;cd&amp;echo [E]7
 
 <h1>0x03 基于流量的Webshell分析样例</h1>
 
-<hr />
+<hr>
 
 <p><strong>1."大马"典型操作</strong></p>
 
@@ -220,7 +220,7 @@ z2=cd /d “D:\www\qhrdww\”&amp;whoami&amp;echo [S]&amp;cd&amp;echo [E]7
 
 <p>我们知道“大马”的目的就是为了提权以及控制。常见的“大马”一般都是功能较多结构也较为复杂的，“单一文件实现众多功能”是“大马”的设计目的之一，一方面大在功能，另一方面大在体积。在形形色色的“大马”中不难总结其中典型的功能。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/201511280322009130741.jpg" alt="4p1" /></p>
+<p><img src="../images_result/images/201511280322009130741.jpg" alt="4p1"></p>
 
 <ul>
 <li>文件操作：上传、下载、编辑、删除。</li>
@@ -236,15 +236,15 @@ z2=cd /d “D:\www\qhrdww\”&amp;whoami&amp;echo [S]&amp;cd&amp;echo [E]7
 
 <p>让我们来进行一个简单的提权工具的上传的操作，通过Webshell我们可以这样做：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/2015112803220111254423.png" alt="4p2" /></p>
+<p><img src="../images_result/images/2015112803220111254423.png" alt="4p2"></p>
 
 <p>在文件成功发送到服务器上之后我们来看一下在服务器端我们从网络流量中抓取的记录：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/201511280322036493643.jpg" alt="4p3" /></p>
+<p><img src="../images_result/images/201511280322036493643.jpg" alt="4p3"></p>
 
 <p>紧接着我们从流量中看一下服务器返回的包的内容：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/2015112803220587673442.png" alt="4p4" /></p>
+<p><img src="../images_result/images/2015112803220587673442.png" alt="4p4"></p>
 
 <p>通过抓取实际的网络流量来获取一对Payload他们分别出现在访问请求中和服务器返回的数据中：</p>
 
@@ -260,19 +260,19 @@ Return Payload：200
 
 <p>再来看一个真实的操作MySQL数据的一个例子：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/2015112803220673537451.png" alt="4p5" /></p>
+<p><img src="../images_result/images/2015112803220673537451.png" alt="4p5"></p>
 
 <p>同样的在服务器上通过抓包工具获取的流量信息如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/2015112803220794762461.png" alt="4p6" /></p>
+<p><img src="../images_result/images/2015112803220794762461.png" alt="4p6"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/2015112803220970843471.png" alt="4p7" /></p>
+<p><img src="../images_result/images/2015112803220970843471.png" alt="4p7"></p>
 
 <p>服务器返回的流量信息也一并拿出来：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/2015112803221065102481.png" alt="4p8" /></p>
+<p><img src="../images_result/images/2015112803221065102481.png" alt="4p8"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/201511280322122398449.jpg" alt="4p9" /></p>
+<p><img src="../images_result/images/201511280322122398449.jpg" alt="4p9"></p>
 
 <p>可以看到在一个连接数据库的操作过程中流量中也产生了众多的Payload，简单的将POST数据进行URL解码可以看的更明显一些：</p>
 
@@ -293,17 +293,17 @@ Return Payload：localhost|root|mysql|200|*.sql|user
 
 <p>最后我们来看一个命令执行的操作过程：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/20151128032220671024101.png" alt="4p10" /></p>
+<p><img src="../images_result/images/20151128032220671024101.png" alt="4p10"></p>
 
 <p>检查服务器端获取到的流量数据：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/20151128032221142784111.png" alt="4p11" /></p>
+<p><img src="../images_result/images/20151128032221142784111.png" alt="4p11"></p>
 
 <p>检查服务器返回的流量可以得到如下数据：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/20151128032223456954121.png" alt="4p12" /></p>
+<p><img src="../images_result/images/20151128032223456954121.png" alt="4p12"></p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/20151128032224535154131.png" alt="4p13" /></p>
+<p><img src="../images_result/images/20151128032224535154131.png" alt="4p13"></p>
 
 <p>在这个案例中攻击者向服务器发送了一条查看当前权限的命令，服务器在获得指令后运行并将结果通过响应主题反馈给攻击者。我们来分析一下Payload</p>
 
@@ -319,27 +319,27 @@ Return Payload：200|net authority\|system
 
 <h1>0x04 webshell之"看见"的能力分析</h1>
 
-<hr />
+<hr>
 
 <p><strong>1.webshell的典型攻击序列图</strong></p>
 
 <p>下图是一个典型的webshell的攻击序列图，利用web的漏洞，获取web权限，上传小马，安装大马，然后远程调用webshell，执行各种命令，以达到获取数据等恶意目的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/2015112803221386425511.jpg" alt="5p1" /></p>
+<p><img src="../images_result/images/2015112803221386425511.jpg" alt="5p1"></p>
 
-<p>Rsa的一段分析材料，对看见能力做了便利的说明。并针对基于流量的分析手段与传统的IDS\IPS\SIEM做了对比。 <img src="http://static.wooyun.org//drops/20151128/201511280322155631552.jpg" alt="5p2" /></p>
+<p>Rsa的一段分析材料，对看见能力做了便利的说明。并针对基于流量的分析手段与传统的IDS\IPS\SIEM做了对比。 <img src="../images_result/images/201511280322155631552.jpg" alt="5p2"></p>
 
 <p><strong>2.从killchain来分析各阶段“看见”能力</strong></p>
 
 <p>从kill chain来看，靠采集系统自身的流量的技术手段，在前两个阶段Reconnaissance、Weaponise这两个阶段是很难看到行为。（结合威胁情报可以更大范围的看到这两个阶段的信息），基于流量的payload分析技术可以在Delivery、Exploit、Installation、Command &amp;Control (C2)、Action这几个阶段都能看到攻击行为。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/201511280322169056753.jpg" alt="5p3" /></p>
+<p><img src="../images_result/images/201511280322169056753.jpg" alt="5p3"></p>
 
 <p><strong>3.从防护方的“安全对抗”能力视角看</strong></p>
 
 <p>安全防护能力分几个等级</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/2015112803221780398541.png" alt="5p4" /></p>
+<p><img src="../images_result/images/2015112803221780398541.png" alt="5p4"></p>
 
 <ul>
 <li>Detect: Can you see/find it?（能否检测到攻击）</li>
@@ -352,7 +352,7 @@ Return Payload：200|net authority\|system
 
 <p>针对web的安全防护能力手段总结如下图：</p>
 
-<p><img src="http://static.wooyun.org//drops/20151128/2015112803221991613551.png" alt="5p5" /></p>
+<p><img src="../images_result/images/2015112803221991613551.png" alt="5p5"></p>
 
 <p><strong>4.Webshell的检测的三种手段</strong></p>
 
@@ -384,7 +384,7 @@ Return Payload：200|net authority\|system
 <li>对日志进行综合分析，回溯整个攻击过程。</li>
 </ul>
 
-<p>三种检测方式，基于文件的检测，很多时候获取样本的部署成本比较高，同时仅仅靠样本无法看到整个攻击过程。基于日志的有些行为信息在日志中看不到，总体来说还是基于“流量”的看到的信息最多，也能更充分的还原整个攻击过程。</p>      </p>
+<p>三种检测方式，基于文件的检测，很多时候获取样本的部署成本比较高，同时仅仅靠样本无法看到整个攻击过程。基于日志的有些行为信息在日志中看不到，总体来说还是基于“流量”的看到的信息最多，也能更充分的还原整个攻击过程。</p>      <p></p>
     
 			</body>
 		</html>

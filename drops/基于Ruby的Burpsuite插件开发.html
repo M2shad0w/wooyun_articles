@@ -3,14 +3,14 @@
 			<head>
 			     <title>基于Ruby的Burpsuite插件开发 - 等TA回来</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/14684">http://drops.wooyun.org/tips/14684</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>BurpSuite是久负盛名的web应用安全测试工具，在安全圈子中被誉为“神器”。它的核心功能是http代理，并在此基础上提供了丰富的自定义配置选项，协助使用者设计不同的方案进行渗透或者安全监测。此外，除了工具本身提供的功能以外，burpsuite神器提供了一组java编写的应用接口，通过java或基于java的Jython、Jruby，可以实现许多自定义的功能插件。在工作中，笔者尝试使用Ruby进行BurpSuite Extention的插件开发，这个过程有一些坑需要同特定的方式解决，希望能和大家分享这点经验。在这里，不针对具体业务，不讨论编程语言优劣，只希望能够丰富这个生态系统，让Burp的爱好者们多一种选择。</p>
 
@@ -18,7 +18,7 @@
 
 <h1>0x01开发环境</h1>
 
-<hr />
+<hr>
 
 <h3>1 软件配置</h3>
 
@@ -73,7 +73,7 @@ $ rvm -v
 
 <pre><code>#!bash
 $ rvm install jruby
-$ rvm --ruby-version use <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="aac0d8dfc8d3eac8dfd8da">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> --create
+$ rvm --ruby-version use <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="aac0d8dfc8d3eac8dfd8da">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> --create
 </code></pre>
 
 <p>执行‘<code>rvm list</code>’ 查看是否安装成功。</p>
@@ -140,7 +140,7 @@ JRUBY_HOME=/Users/myname/.rvm/rubies/jruby-1.7.19 java -XX:MaxPermSize=1G -Xmx1g
 
 <p>打开Burp，在Extender-->Options选项卡最下方的Ruby Environment部门导入你的Jruby.jar文件，没如果没有报错，则说说明加载成功。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041114510479175119.jpg" alt="载入jruby.jar" /></p>
+<p><img src="../images_result/images/2016041114510479175119.jpg" alt="载入jruby.jar"></p>
 
 <h3>2.4 测试</h3>
 
@@ -150,23 +150,23 @@ JRUBY_HOME=/Users/myname/.rvm/rubies/jruby-1.7.19 java -XX:MaxPermSize=1G -Xmx1g
 
 <p>点击Extentders标签下的Extention选项卡，在上半部分左侧点击“Add"</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/2016041114510646326215.jpg" alt="添加插件" /></p>
+<p><img src="../images_result/images/2016041114510646326215.jpg" alt="添加插件"></p>
 
 <p>在Extention type处选择ruby类型，点击Select file选择解压出来的helloworld.rb文件。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/201604111451082732339.jpg" alt="添加插件2" /></p>
+<p><img src="../images_result/images/201604111451082732339.jpg" alt="添加插件2"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/201604111451103886145.jpg" alt="添加到插件3" /></p>
+<p><img src="../images_result/images/201604111451103886145.jpg" alt="添加到插件3"></p>
 
 <p>回到主页面点击Next，就会在弹出的控制台窗口中显示Hello World字符，此时全部的准备工作都已完成。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/201604111451111188256.jpg" alt="hello output burp" /></p>
+<p><img src="../images_result/images/201604111451111188256.jpg" alt="hello output burp"></p>
 
 <h1>0x02 第一个Ruby扩展插件</h1>
 
-<hr />
+<hr>
 
-<p>在开发个人的第一个插件之前，如果有时间，看一下Burpsuite官方提供的开发者文档可以帮助开发者对接口系列的设计有更全面的认识。地址在：<a href="https://portswigger.net/burp/extender/api/index.html">https://portswigger.net/burp/extender/api/index.html</a><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="92711210d2daf7e0a2fbfc770e3a7a2d0b753d15740415753932762a3f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script><a href="http://drops.wooyun.org/tools/14040">http://drops.wooyun.org/tools/14040</a>对一些主要的接口做了介绍，大家可以参考。有了上面这些准备，就可以真正开始着手开发你的Burp插件了。</p>
+<p>在开发个人的第一个插件之前，如果有时间，看一下Burpsuite官方提供的开发者文档可以帮助开发者对接口系列的设计有更全面的认识。地址在：<a href="https://portswigger.net/burp/extender/api/index.html">https://portswigger.net/burp/extender/api/index.html</a><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="92711210d2daf7e0a2fbfc770e3a7a2d0b753d15740415753932762a3f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script><a href="http://drops.wooyun.org/tools/14040">http://drops.wooyun.org/tools/14040</a>对一些主要的接口做了介绍，大家可以参考。有了上面这些准备，就可以真正开始着手开发你的Burp插件了。</p>
 
 <p>Burp的插件开发是有固定的模式的，为了说明这个模式，请看下面几行代码。</p>
 
@@ -248,11 +248,11 @@ curl -x 127.0.0.1:8009 http://www.xxx.com -I
 
 <p>效果如图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/201604111451133100667.jpg" alt="test output" /></p>
+<p><img src="../images_result/images/201604111451133100667.jpg" alt="test output"></p>
 
 <h1>0x03 创建一个HttpMessageEditorTab实例</h1>
 
-<hr />
+<hr>
 
 <p>在HTTP History或者Repeater标签下的每一组请求响应中都有若干个Tab界面，分别叫做Raw、Headers、Hex（在响应部分还有HTML和Render），这样的每一个Tab都都被称作一个Http Message Editor Tab，我们可以根据自己的需要自定义一组新的Tab，并设计每一个Tab的功能。</p>
 
@@ -296,7 +296,7 @@ end
 
 <p>getTabCaption方法返回的文本（String类型）就是Tab显示的名称。</p>
 
-<p>getUiComponent方法返回java.awt.Component对象，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2bce85a8c2abb1c394ac6b5f535f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&#95;input.get&#95;component()获得。</p>
+<p>getUiComponent方法返回java.awt.Component对象，<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2bce85a8c2abb1c394ac6b5f535f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&#95;input.get&#95;component()获得。</p>
 
 <p>isEnabled方法返回一个布尔值，可以根据条件判断当前Tab是否显示。</p>
 
@@ -396,13 +396,13 @@ end
 
 <p>将上述代码保存至一个ruby文件中并在BurpExtender选项卡中载入，就可以看到如下效果：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/201604111451152365677.jpg" alt="正常的响应json数据" /></p>
+<p><img src="../images_result/images/201604111451152365677.jpg" alt="正常的响应json数据"></p>
 
-<p><img src="http://static.wooyun.org//drops/20160411/201604111451177674485.jpg" alt="格式化后的json数据" /></p>
+<p><img src="../images_result/images/201604111451177674485.jpg" alt="格式化后的json数据"></p>
 
 <h1>0x04 总结</h1>
 
-<hr />
+<hr>
 
 <p>具备一定ruby编程基础的小伙伴看懂上面的这两段代码并不是难事，实际上笔者最初的想法是把自己在工作中写的一个工具作为案例来分享，但最终放弃了这个想法。原因是考虑到这个工具跟工作的场景结合比较紧密，通用性不强所以不便于移植，另一方面这个工具代码量比较大，结构也较本文中讲解的代码复杂一些，如果要详细讲解清楚可能要占用大量篇幅，反而可能把重要的信息淹没。</p>
 
@@ -412,7 +412,7 @@ end
 
 <h1>0x05 参考资料</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="http://drops.wooyun.org/tools/5751">burpsuite扩展开发之Python</a></li>
@@ -420,7 +420,7 @@ end
 <li><a href="http://drops.wooyun.org/tools/14040">BurpSuite插件开发指南之 API 上篇</a></li>
 <li><a href="https://www.trustwave.com/Resources/SpiderLabs-Blog/JSON-Crypto-Helper-a-Ruby-based-Burp-Extension-for-JSON-Encryption/Decryption---Part-I/">JSON Crypto Helper a Ruby-based Burp Extension for JSON Encryption/Decryption - Part I</a></li>
 <li><a href="https://portswigger.net/burp/extender/api/index.html?index-all.html">BurpSuite Extension API Index</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

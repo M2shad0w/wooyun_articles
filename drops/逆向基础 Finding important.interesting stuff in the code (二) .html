@@ -3,14 +3,14 @@
 			<head>
 			     <title>逆向基础 Finding important/interesting stuff in the code (二)  - zing</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/7649">http://drops.wooyun.org/papers/7649</a></h1>
 				
       <p>
-        <h1>第58章</h1>
+        </p><h1>第58章</h1>
 
-<hr />
+<hr>
 
 <h2>调用assert</h2>
 
@@ -50,7 +50,7 @@
 
 <h1>第59章</h1>
 
-<hr />
+<hr>
 
 <h2>常量</h2>
 
@@ -136,7 +136,7 @@ jnz _error_not_a_MIDI_file
 
 <h1>第60章</h1>
 
-<hr />
+<hr>
 
 <h2>寻找合适的指令</h2>
 
@@ -193,7 +193,7 @@ FPU ST(0): 0.333333
 tracer -l:excel.exe bpx=excel.exe!BASE+0x11E91B,set(st0,666)
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>PID=36540|TID=24056|(0) 0x2f40e91b (Excel.exe!BASE+0x11e91b)
 EAX=0x00680006 EBX=0x00680018 ECX=0x00000001 EDX=0x00000001
@@ -208,7 +208,7 @@ Set ST0 register to 666.000000
 
 <p>Excel在这个单元中显示666，我们也可以确信的确找到了正确的位置。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150806/2015080621414996781.png" alt="" /></p>
+<p><img src="../images_result/images/2015080621414996781.png" alt=""></p>
 
 <p>如果我们尝试使用同样的Excel版本，但是是64位的，会发现只有12个FDIV指令，我们的目标指令在第三个。</p>
 
@@ -229,7 +229,7 @@ Set ST0 register to 666.000000
 
 <p>下面这个awk脚本可用于处理IDA的.list文件：</p>
 
-<p>gawk -e '$2=="xor" { tmp=substr($3, 0, length($3)-1); if (tmp!=$4) if($4!="esp") if ($4!="ebp")⤦ ￼￼￼￼￼￼￼￼</p>      </p>
+<p>gawk -e '$2=="xor" { tmp=substr($3, 0, length($3)-1); if (tmp!=$4) if($4!="esp") if ($4!="ebp")⤦ ￼￼￼￼￼￼￼￼</p>      <p></p>
     
 			</body>
 		</html>

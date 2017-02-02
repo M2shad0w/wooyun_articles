@@ -3,12 +3,12 @@
 			<head>
 			     <title>Android.Hook框架xposed篇(Http流量监控) - 瘦蛟舞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/7488">http://drops.wooyun.org/tips/7488</a></h1>
 				
       <p>
-        <p>官方教程:<a href="https://github.com/rovo89/XposedBridge/wiki/Development-tutorial">https://github.com/rovo89/XposedBridge/wiki/Development-tutorial</a></p>
+        </p><p>官方教程:<a href="https://github.com/rovo89/XposedBridge/wiki/Development-tutorial">https://github.com/rovo89/XposedBridge/wiki/Development-tutorial</a></p>
 
 <p>官网:<a href="http://repo.xposed.info/module/de.robv.android.xposed.installer">http://repo.xposed.info/module/de.robv.android.xposed.installer</a></p>
 
@@ -18,7 +18,7 @@
 
 <h3>模块基本开发流程</h3>
 
-<hr />
+<hr>
 
 <p>1.创建工程android4.0.3(api15,测试发现其他版本也可以),可以不用activity</p>
 
@@ -182,7 +182,7 @@ b.XC_MethodReplacement
 
 <h3>模块开发中的一些细节</h3>
 
-<hr />
+<hr>
 
 <p>1.Dalvik 孵化器 Zygote (Android系统中，所有的应用程序进程以及系统服务进程SystemServer都是由Zygote进程孕育/fork出来的)进程对应的程序是/system/bin/app_process. Xposed 框架中真正起作用的是对方法的 hook。</p>
 
@@ -346,7 +346,7 @@ android.async.http复写HttpGet导致zjdroid hook org.apache.http.impl.client.Ab
 
 <h3>实战Hook android 中可能的出现 HTTP 请求</h3>
 
-<hr />
+<hr>
 
 <p>首先确定http 请求的 api,大致分为:</p>
 
@@ -546,7 +546,7 @@ else {
 
 <h3>一些常用工具</h3>
 
-<hr />
+<hr>
 
 <ul>
 <li>zjdroid:脱壳/api监控</li>
@@ -554,7 +554,7 @@ else {
 <li>IntentMonitor:可以监控显/隐意图 intent</li>
 <li>Xinstaller:设置应用/设备属性...</li>
 <li>XPrivacy:权限管理</li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>黑掉俄克拉荷马州立大学的学生卡 - light</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/5017">http://drops.wooyun.org/papers/5017</a></h1>
 				
       <p>
-        <h1>0x00 磁条基础知识科普</h1>
+        </p><h1>0x00 磁条基础知识科普</h1>
 
-<hr />
+<hr>
 
 <p>文中所有内容仅供学习研究使用，用于非法用途者，一切后果自负！</p>
 
@@ -80,7 +80,7 @@
 
 <h1>0x01 俄克拉荷马州立大学ID卡</h1>
 
-<hr />
+<hr>
 
 <p>俄克拉荷马州立大学ID卡是该大学官方发布的身份认证卡，用途有：</p>
 
@@ -92,13 +92,13 @@
 
 <p>校园网各种功能使用时的认证（http://it.okstate.edu/services/id/）</p>
 
-<p><img src="http://static.wooyun.org/20150228/2015022807192182604.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015022807192182604.jpg" alt="enter image description here"></p>
 
 <p>该卡就长这样，注意右下角的卡号，目测每张卡都有唯一的16位卡号）</p>
 
 <h1>0x02 说干就干</h1>
 
-<hr />
+<hr>
 
 <p>首先发现每张卡的ID都是以数字“60383800”开头的，这一段之后的两位经过分析只有“05”、“06”、“11”三种情况。</p>
 
@@ -106,17 +106,17 @@
 
 <p>而这个地址可以供我们查看ID是否有效：https://app.it.okstate.edu/idcard/</p>
 
-<p><img src="http://static.wooyun.org/20150228/2015022807192262619.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015022807192262619.png" alt="enter image description here"></p>
 
 <p>这个网页允许任何人输入16位的ID号来查询该卡号是否合法。</p>
 
 <p>一个合法的ID查询后将显示如下结果：</p>
 
-<p><img src="http://static.wooyun.org/20150228/2015022807192551906.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015022807192551906.png" alt="enter image description here"></p>
 
 <p>如果卡号不合法，显示结果是这样：</p>
 
-<p><img src="http://static.wooyun.org/20150228/2015022807192672523.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015022807192672523.png" alt="enter image description here"></p>
 
 <p>卡号查询返回的内容有：</p>
 
@@ -166,7 +166,7 @@ ID 卡号
 
 <h1>0x03 梳理头绪</h1>
 
-<hr />
+<hr>
 
 <p>到现在为止，我们得到以下线索：</p>
 
@@ -174,7 +174,7 @@ ID 卡号
 
 <h1>0x04 祭出神器</h1>
 
-<hr />
+<hr>
 
 <p>我们使用unitech生产的MSRC206磁条读写器（light教授友情提示：我们华强北生产的也不差）。这一一款商业级的磁条读写器，支持HiCo和LoCo的磁卡，并具有相当牛逼的编码器，可以覆盖现有的HiCo卡。</p>
 
@@ -206,17 +206,17 @@ ID 卡号
 
 <p>这里有个注意点：我们修改了持卡人姓名，但是卡号没有改。</p>
 
-<p><img src="http://static.wooyun.org/20150228/2015022807193880088.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015022807193880088.jpg" alt="enter image description here"></p>
 
 <p>左上方为刷入了修改姓名后数据的复制卡，右上方为源卡数据直接复制的复制卡，左下方是源卡，右下方同右上。</p>
 
 <p>背面照：</p>
 
-<p><img src="http://static.wooyun.org/20150228/2015022807193837953.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015022807193837953.png" alt="enter image description here"></p>
 
 <h1>0x05 提枪上阵</h1>
 
-<hr />
+<hr>
 
 <p>我们的猥琐团队开始在各种场合使用这些复制的空白卡。</p>
 
@@ -224,7 +224,7 @@ ID 卡号
 
 <p>接下来，我们又派团队的老皮拿着复制卡在校园里到处铺张浪费，大家可以翻墙看我们录制的演示视频：http://youtu.be/Bw2Ugezb7Fs</p>
 
-<p><img src="http://static.wooyun.org/20150228/2015022807193946720.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015022807193946720.png" alt="enter image description here"></p>
 
 <p>以上的测试中我们得到几点经验：</p>
 
@@ -232,7 +232,7 @@ ID 卡号
 
 <h1>0x06 整装待发</h1>
 
-<hr />
+<hr>
 
 <p>有了上面的试验和经验，我们再次总结一下现在掌握的信息：</p>
 
@@ -240,7 +240,7 @@ ID 卡号
 
 <h1>0x07 扩大战果</h1>
 
-<hr />
+<hr>
 
 <p>现在所掌握的信息已经足够我们进行大规模行动了。</p>
 
@@ -277,13 +277,13 @@ for (var i=1; i &lt;= 100; i += 1){
 
 <h1>0x08 回归和谐</h1>
 
-<hr />
+<hr>
 
 <p>接下来的步骤将带我们逃离上述的可怕情景，回归平静、和谐的校园生活，但实施起来会有点痛苦。</p>
 
 <p>立即下线ID卡号查询网站 https://app.it.okstate.edu/idcard/ 重新设计ID卡 每个人都重新发一张新的ID卡 审核、测试涉及ID卡的所有系统 所有系统对验证事务进行严格检查 添加双重验证</p>
 
-<p>参考文档：http://en.wikipedia.org/wiki/Magnetic&#95;stripe&#95;card 原文地址：http://snelling.io/hacking-oklahoma-state-university-student-id</p>      </p>
+<p>参考文档：http://en.wikipedia.org/wiki/Magnetic&#95;stripe&#95;card 原文地址：http://snelling.io/hacking-oklahoma-state-university-student-id</p>      <p></p>
     
 			</body>
 		</html>

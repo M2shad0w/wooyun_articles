@@ -3,14 +3,14 @@
 			<head>
 			     <title>XSS挑战第二期 Writeup - mramydnei</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/938">http://drops.wooyun.org/papers/938</a></h1>
 				
       <p>
-        <h2>0x00前言</h2>
+        </p><h2>0x00前言</h2>
 
-<hr />
+<hr>
 
 <p>之前搞了一期感觉反响挺好的，就又搞了一期。不过说实话审核起来很吃力，因为大家的答案都太给力了。所以在接下来的解释文当中如果出现错误，希望各位看官可以不吝指正。可能参与的人，都发现了这期的核心问题就是【没有了”.”我们应该如何去XSS？】。如果有人有心去谷歌过这个问题，应该会在<a href="http://sla.ckers.org/forum/read.php?2,12964,12974">http://sla.ckers.org/forum/read.php?2,12964,12974</a>这个链接里，找到答案。</p>
 
@@ -24,7 +24,7 @@ with(location)with(hash)eval(substring(1))
 
 <h2>0x01设定</h2>
 
-<hr />
+<hr>
 
 <p>(1) 过滤了所有的</p>
 
@@ -40,9 +40,9 @@ with(location)with(hash)eval(substring(1))
 
 <h2>0x02结果</h2>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org/20140918/2014091811373235372.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091811373235372.png" alt="enter image description here"></p>
 
 <p>这次是上次挑战的第一名/fd拿下了这次挑战的First Blood。</p>
 
@@ -137,11 +137,11 @@ http://techni.duapp.com/challenge/index.php?xss=oncutYWxlcnQoMSk%22oncut%3Dwith%
 
 <h2>0x03 写在最后</h2>
 
-<hr />
+<hr>
 
 <p>因为个人水平有限，可能挑战的内容做的不是很好。和实际场景相比有一些出入。如果你觉得这些答案都很有趣并想对上面的方法进行测试，可能需要你付出一点点的耐心。因为，所使用的浏览器的不同，版本的不同，系统补丁的不同等缘故可能会有无法重现的情况发生。</p>
 
-<p>附上此次比赛的源代码：<a href="http://static.wooyun.org/20141017/2014101714085323964.zip">XSSC2.zip</a></p>      </p>
+<p>附上此次比赛的源代码：<a href="http://static.wooyun.org/20141017/2014101714085323964.zip">XSSC2.zip</a></p>      <p></p>
     
 			</body>
 		</html>

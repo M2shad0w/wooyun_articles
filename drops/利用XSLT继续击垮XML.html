@@ -3,14 +3,14 @@
 			<head>
 			     <title>利用XSLT继续击垮XML - 小飞</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/12747">http://drops.wooyun.org/tips/12747</a></h1>
 				
       <p>
-        <h1>0x00 介绍</h1>
+        </p><h1>0x00 介绍</h1>
 
-<hr />
+<hr>
 
 <h3>XSL</h3>
 
@@ -34,7 +34,7 @@
 
 <h1>0x01 攻击模型</h1>
 
-<hr />
+<hr>
 
 <h3>客户/服务端：数字表示及运算风险</h3>
 
@@ -44,27 +44,27 @@
 
 <p>比如</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/2016021403555937094114.jpg" alt="p1" /></p>
+<p><img src="../images_result/images/2016021403555937094114.jpg" alt="p1"></p>
 
 <p>以及它的样式</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/201602140356003029125.jpg" alt="p2" /></p>
+<p><img src="../images_result/images/201602140356003029125.jpg" alt="p2"></p>
 
 <p>在诸如Xsltproc, Php, Perl, Ruby, Python, Safari, Chrome和Opera的libxslt系的处理软件上，都会将上面这段xml解释成这样(chrome)：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/201602140356034950734.jpg" alt="p3" /></p>
+<p><img src="../images_result/images/201602140356034950734.jpg" alt="p3"></p>
 
 <p>问题很明显了。</p>
 
 <p>IOActive给出了他们研究调查的结果</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/201602140356043299944.jpg" alt="p4" /></p>
+<p><img src="../images_result/images/201602140356043299944.jpg" alt="p4"></p>
 
 <h3>随机数</h3>
 
 <p>同样的，xsl的某些vendor对于随机数的生成也是相当写意的。而这个粗糙的vendor竟然还是应用最广泛的libxslt，由于这个库在生成随机数的时候根本就没有IV，所以每一次生成的随机数，都是根本不变的。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/201602140356171613454.jpg" alt="p5" /></p>
+<p><img src="../images_result/images/201602140356171613454.jpg" alt="p5"></p>
 
 <p>让我们将这个和PRG一起hi起来。。。</p>
 
@@ -78,13 +78,13 @@
 
 <p>在IOActive的报告中</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/201602140356196183164.jpg" alt="p6" /></p>
+<p><img src="../images_result/images/201602140356196183164.jpg" alt="p6"></p>
 
 <p>无疑成功取到了结果，成功BYPASS。</p>
 
 <p>而我本地测试的时候却在Safari控制塔得到这样的提示</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/201602140356203480673.jpg" alt="p7" /></p>
+<p><img src="../images_result/images/201602140356203480673.jpg" alt="p7"></p>
 
 <p>无疑是被sop ban掉了。</p>
 
@@ -119,7 +119,7 @@
 
 <p>当B被解析时，会尝试调用A表，而A表会试着用document()读取/etc/passwd的内容,很明显这不是一个xml文档，所以不可能读取，幸运的是在输出的错误信息里面，我们可以看到目标文本的第一行被输出了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160214/201602140356221138682.jpg" alt="p8" /></p>
+<p><img src="../images_result/images/201602140356221138682.jpg" alt="p8"></p>
 
 <p>虽然只有第一行，但是第一行能够获取的铭感信息可不少了</p>
 
@@ -130,7 +130,7 @@
 <li>.pgpass: PostgreSQL password</li>
 </ul>
 
-<p>这次，xsltproc php perl ruby这四种语言的所有方法（document() ，import() ，include()）都受到影响 （php不愧是世界上最好的语言，什么事儿都有他的份）</p>      </p>
+<p>这次，xsltproc php perl ruby这四种语言的所有方法（document() ，import() ，include()）都受到影响 （php不愧是世界上最好的语言，什么事儿都有他的份）</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,26 +3,26 @@
 			<head>
 			     <title>PHP自动化白盒审计技术与实现 - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/6261">http://drops.wooyun.org/tips/6261</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>国内公开的PHP自动化审计技术资料较少，相比之下，国外已经出现了比较优秀的自动化审计实现，比如RIPS是基于token流为基础进行一系列的代码分析。传统静态分析技术如数据流分析、污染传播分析应用于PHP这种动态脚本语言分析相对较少，但是却是实现白盒自动化技术中比较关键的技术点。今天笔者主要介绍一下最近的研究与实现成果，在此抛砖引玉，希望国内更多的安全研究人员将精力投入至PHP自动化审计技术这一有意义的领域中。</p>
 
 <h1>0x01 基础知识</h1>
 
-<hr />
+<hr>
 
 <p>自动化审计的实现方式有多种，比如直接使用正则表达式规则库进行定位匹配，这种方法最简单，但是准确率是最低的。最可靠的思路是结合静态分析技术领域中的知识进行设计，一般静态分析安全工具的流程大多是下图的形式：</p>
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502384893512.png" alt="" /></p>
+<p><img src="../images_result/images/2015062502384893512.png" alt=""></p>
 
 <p>静态分析工作所要做的第一件事情就是将源码进行建模，通俗一点讲，就是将字符串的源码转为方便于我们后续漏洞分析的中间表示形式，即一组代表此代码的数据结构。建模工作中一般会采用编译技术领域中的方法，如词法分析生成token，生成抽象语法树，生成控制流程图等。建模工作的优劣，直接影响到后续污染传播分析和数据流分析的效果。</p>
 
@@ -30,11 +30,11 @@
 
 <h1>0x02 实现思路</h1>
 
-<hr />
+<hr>
 
 <p>经过一段时间的努力，笔者和小伙伴也大致实现了一款针对自动化的静态分析工具。具体实现思路正是采用了静态分析技术，如果想深入了解实现思路，可以阅读之前发过的<a href="http://blog.csdn.net/u011721501/article/details/44982111">文章</a>。 在工具中，自动化审计流程如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502384998416.png" alt="" /></p>
+<p><img src="../images_result/images/2015062502384998416.png" alt=""></p>
 
 <blockquote>
   <ul>
@@ -49,7 +49,7 @@
 
 <h2>0x03 初始化工作</h2>
 
-<hr />
+<hr>
 
 <p>在真实的PHP审计中，遇到敏感函数的调用，比如<code>mysql_query</code>，我们就会不由自主地去手动分析第一个参数，看是否可控。事实上，很多CMS都会将一些数据库查询的方法进行封装，使得调用方便且程序逻辑清晰，比如封装为一个类MysqlDB。这时，在审计中我们就不会搜索<code>mysql_query</code>关键字了，而是去找比如<code>db-&gt;getOne</code>这种类的调用。</p>
 
@@ -59,7 +59,7 @@
 
 <p>对于类信息和方法信息的搜集，应该作为框架初始化的一部分完成，存储在单例上下文中：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502384944528.png" alt="" /></p>
+<p><img src="../images_result/images/2015062502384944528.png" alt=""></p>
 
 <p>同时，需要识别分析的PHP文件是否是真正处理用户请求的文件，因为有些CMS中，一般会将封装好的类写入单独的文件中，比如将数据库操作类或者文件操作类封装到文件中。对于这些文件，进行污染传播分析是没有意义的，所以在框架初始化的时候需要进行识别，原理很简单，分析调用类型语句和定义类型语句的比例，根据阈值进行判别，错误率很小。</p>
 
@@ -67,7 +67,7 @@
 
 <h1>0x04 用户函数处理</h1>
 
-<hr />
+<hr>
 
 <p>常见的web漏洞，一般都是由于危险参数用户可控导致的，这种漏洞称之为污点类型漏洞，比如常见的SQLI，XSS等。 PHP内置的一些函数本身是危险的，比如echo可能会造成反射型XSS。然而真实代码中，没人会直接调用一些内置的功能函数，而是进行再次封装，作为自定义的函数，比如：</p>
 
@@ -94,7 +94,7 @@ function myexec($cmd)
 
 <h1>0x05 处理变量的净化和编码</h1>
 
-<hr />
+<hr>
 
 <p>在真实的审计过程中，一旦发现危险参数是可控的，我们就会迫不及待地去寻找看程序员有没有对该变量进行有效的过滤或者编码，由此判断是否存在漏洞。 自动化审计中，也是遵循这个思路。在实现中，首先要对每一个PHP中的安全函数进行统计和配置，在程序分析时，对每一条数据流信息，都应该进行回溯收集必要的净化和编码信息，比如:</p>
 
@@ -108,17 +108,17 @@ mysql_query($a) ;
 
 <p>上面的代码片段看起来有些怪异，但只是作为演示使用。从代码片段可以看出，变量a经过了intval和htmlspecialchars两个净化处理，根据配置文件，我们顺利的收集到了这些信息。这时，要进行一次回溯，目的是将当前代码行向上的净化和编码信息进行归并。 比如在第三行时，变量a的净化信息只有一条intval，但是第五行时，要求将变量a的净化信息归并，收集为一个list集合intval和htmlspecialchars，方法就是收集到前驱代码中的所有数据流的信息，并进行回溯。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502384927913.png" alt="" /></p>
+<p><img src="../images_result/images/2015062502384927913.png" alt=""></p>
 
 <p>细节部分是，当用户同时对同一个变量调用了如base64&#95;encode和base64&#95;decode两个函数，那么这个变量的base64编码会被消除。同样，如果同时进行转义和反转义也要进行消除。但是如果调用顺序不对或者只进行了decode，那么你懂的，相当危险。</p>
 
 <h1>0x06 变量回溯和污点分析</h1>
 
-<hr />
+<hr>
 
 <h3>1、变量回溯</h3>
 
-<hr />
+<hr>
 
 <p>为了寻找出所有的危险sink点的参数（traceSymbol），将向前回溯与当前Block相连的所有的基本块，具体过程如下：</p>
 
@@ -134,7 +134,7 @@ mysql_query($a) ;
 
 <h3>2、污点分析</h3>
 
-<hr />
+<hr>
 
 <p>污点分析在过程间分析处理内置和用户定义函数过程中开始，如果程序分析时遇到了敏感的函数调用，则使用回溯或者从上下文中获取到危险参数节点，并开始进行污点分析。通俗讲，就是进行危险参数是否可能导致漏洞的判别。污点分析工作在代码<code>TaintAnalyser</code>中进行实现，获取到危险参数后，具体步骤如下：</p>
 
@@ -147,13 +147,13 @@ mysql_query($a) ;
   </ul>
 </blockquote>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502385056629.png" alt="" /></p>
+<p><img src="../images_result/images/2015062502385056629.png" alt=""></p>
 
 <h1>0x07 目前的效果</h1>
 
-<hr />
+<hr>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502385095172.png" alt="此处输入图片的描述" /></p>
+<p><img src="../images_result/images/2015062502385095172.png" alt="此处输入图片的描述"></p>
 
 <p>我们对<code>simple-log_v1.3.12</code>进行了测试性扫描，结果是：</p>
 
@@ -166,7 +166,7 @@ mysql_query($a) ;
 
 <h1>0x08 总结</h1>
 
-<hr />
+<hr>
 
 <p>静态分析领域中，很多安全研究人员都是做C/C++/反编译汇编等方向，目前脚本语言领域也急需技术力量投入进去，因为这是一件很有意义的事情。</p>
 
@@ -176,7 +176,7 @@ mysql_query($a) ;
 
 <p>最后，<code>talk is cheap, show me the code</code>. 实现代码在<a href="https://github.com/OneSourceCat/phpvulhunter">github</a>上可以找到。</p>
 
-<p>代码分享出来的目的是供有志于或者已经投身于该领域的安全研究人员进行研究与讨论，目前还达不到随便拿出一个CMS就能跑的效果，望大家不要有所幻想。</p>      </p>
+<p>代码分享出来的目的是供有志于或者已经投身于该领域的安全研究人员进行研究与讨论，目前还达不到随便拿出一个CMS就能跑的效果，望大家不要有所幻想。</p>      <p></p>
     
 			</body>
 		</html>

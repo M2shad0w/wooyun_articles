@@ -3,14 +3,14 @@
 			<head>
 			     <title>反编译系列教程(中) - MalwareBenchmark</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/13514">http://drops.wooyun.org/papers/13514</a></h1>
 				
       <p>
-        <h1>0x00 反编译的局限、先决条件和评价指标</h1>
+        </p><h1>0x00 反编译的局限、先决条件和评价指标</h1>
 
-<hr />
+<hr>
 
 <p>反编译技术具有一些局限性，各类反编译工具或者系统，都面临着一些共同的困难，多数困难是由于需要恢复出一些输入的二进制文件中并非显式提供的信息，毕竟编程语言在设计时考虑的不是逆向工程，而是正向编译。这部分是有志反编译技术人士面临的主要技术困难。<strong>同时，也是恶意代码编写者常用于对抗反编译的技术手段。</strong></p>
 
@@ -94,7 +94,7 @@
 
 <h1>0x01 常见反编译框架</h1>
 
-<hr />
+<hr>
 
 <p>比起如何使用一款反编译工具，我们这里更关心如何设计和实现一款实用的反编译器以及需要用到哪些技术。在这里，我们还是站在较为宏观的角度列举和认识一下几种常见的反编译器框架。在讨论框架的同时，分析它们各自的优点，进行必要的对比。从整体上学习传统反编译器是如何设计的？能够解决实际问题的新型反编译又是如何设计的？以反编译为核心技术实现的具有二进制翻译功能、同时又具备反编译能力的“翻译器”是怎样设计的？</p>
 
@@ -118,7 +118,7 @@
 
 <p>dcc是用C语言编写的一个适用于DOS操作系统的原型反编译器(昆士兰大学Cristina Cifuentes博士期间进行的反编译研究成果)。dcc最初在一台运行Ultrix的DecStation 3000上开发，后来被移植到运行DOS的PC机体系结构上。dcc把Intel i80286体系结构的.exe文件和.com文件作为输入，并且产生目标C语言和汇编语言程序。这个反编译器严格按照上一节介绍的反编译上下文环境设计实现，它的框架由图所示的几个部分组成。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/20160307130450163904-1.png" alt="4-1" /></p>
+<p><img src="../images_result/images/20160307130450163904-1.png" alt="4-1"></p>
 
 <p>图1 dcc反编译器框架</p>
 
@@ -179,13 +179,13 @@ for (a = 1; a &lt; 50; a++) { /*其它 C代码 */}
 
 <p>UQBT的1999版框架如图所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/20160307130451575974-2.png" alt="p4-2" /></p>
+<p><img src="../images_result/images/20160307130451575974-2.png" alt="p4-2"></p>
 
 <p>图2 UQBT原始框架</p>
 
 <p>2001年扩展后的框架结构如所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/20160307130453247034-3.jpg" alt="4-3" /></p>
+<p><img src="../images_result/images/20160307130453247034-3.jpg" alt="4-3"></p>
 
 <p>图3 UQBT的扩展框架</p>
 
@@ -302,13 +302,13 @@ for (a = 1; a &lt; 50; a++) { /*其它 C代码 */}
 
 <p>BAP是由David Brumley在BitBlaze静态分析组建Vine的基础上改进得到的，与BitBlaze相比，BAP对中间语言做了一些扩展，清除了Vine中存在的几个漏洞。其框架如图所示。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160307/20160307130454579374-4.jpg" alt="4-4" /></p>
+<p><img src="../images_result/images/20160307130454579374-4.jpg" alt="4-4"></p>
 
 <p>图4 BAP框架</p>
 
 <p>由图中可以看到，BAP分为前端、中间语言、后端三部分。其中前端主要完成二进制文件格式的解析及语义的提升，后端主要完成相关的优化、程序验证、其他的程序分析工作、生成相关的图、代码生成等工作，中间语言代码则是基于libVEX第三方库生成的VEX IR中间语言代码转换得到的。BAP基于第三方的工具集，主要包括：反汇编器、代码转换库、GNU中的二进制文件解析工具libbfd，决策过程等。其中反汇编器BAP主要支持IDA Pro和GNU objdump，代码转换库是libVEX。值得一提的是，BAP支持动态分析，TEMU就是基于QEMU专门针对x86平台的动态分析引擎，TEMU为用户提供了各种语义提取接口以及动态污点分析接口，为用户进行动静态结合的漏洞挖掘及恶意代码分析等工作提供了很好的平台。</p>
 
-<p>由于BAP前端主要依赖于第三方库，只要第三方库支持的平台，BAP就会支持，第三方库不支持的平台BAP也无法进行分析，要实现对新平台的支持，只能依赖第三方库的扩展，因此存在被动扩展的问题。</p>      </p>
+<p>由于BAP前端主要依赖于第三方库，只要第三方库支持的平台，BAP就会支持，第三方库不支持的平台BAP也无法进行分析，要实现对新平台的支持，只能依赖第三方库的扩展，因此存在被动扩展的问题。</p>      <p></p>
     
 			</body>
 		</html>

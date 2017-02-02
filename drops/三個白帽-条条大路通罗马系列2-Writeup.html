@@ -3,14 +3,14 @@
 			<head>
 			     <title>三個白帽-条条大路通罗马系列2-Writeup - 路人甲</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/16055">http://drops.wooyun.org/tips/16055</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>好好的Web咋變成了misc？友谊小船，說翻就翻！！！！</p>
 
@@ -19,7 +19,7 @@
 
 <h1>0x01 獲取源碼</h1>
 
-<hr />
+<hr>
 
 <p>沒有Tips的代碼審計題，源碼獲取必定是第一關。右鍵看源碼，沒東西，看看header頭，果然有蹊蹺。</p>
 
@@ -90,7 +90,7 @@ if($_POST['username']='admin' &amp;&amp; $password['username'] !== 'admin' &amp;
 
 <h1>0x03 二次驗證</h1>
 
-<hr />
+<hr>
 
 <pre><code>#!php
 if (isset($_POST['salt']))
@@ -135,7 +135,7 @@ if (isset($_POST['salt']))
 
 <h1>0x04 PATHINFO模式</h1>
 
-<hr />
+<hr>
 
 <pre><code>#!php
 $URL = $_SERVER['REQUEST_URI'];
@@ -177,7 +177,7 @@ else {
 <p>LN牛的提示：</p>
 
 <blockquote>
-  <p>索题小二(516421987) 2016-05-20 1:12:49<br />
+  <p>索题小二(516421987) 2016-05-20 1:12:49<br>
   多点框架经验应该能猜到</p>
 </blockquote>
 
@@ -189,7 +189,7 @@ else {
 
 <h1>0x05 上傳之fuzz後綴</h1>
 
-<hr />
+<hr>
 
 <pre><code>#!php
 if($_FILES["file"]['size'] &gt; 0 &amp;&amp; $_FILES["file"]['size'] &lt; 102400) {
@@ -299,12 +299,12 @@ fuck($ext, $contents);
 
 <h2>0x06 什麼鬼？Misc</h2>
 
-<hr />
+<hr>
 
 <p>getshell之後果真很蛋疼，很奔溃！</p>
 
 <blockquote>
-  <p>imstudy(214329772) 1:44:30<br />
+  <p>imstudy(214329772) 1:44:30<br>
   我都说拿完shell内心是奔溃的了，你竟然不信我</p>
 </blockquote>
 
@@ -353,7 +353,7 @@ if __name__ == '__main__':
 <p>通關，此時此刻，我的內心依舊崩潰中！</p>
 
 <pre><code>FLAG ： miao{fb49ac8a528901913ea2c664c6a8d6a1}
-</code></pre>      </p>
+</code></pre>      <p></p>
     
 			</body>
 		</html>

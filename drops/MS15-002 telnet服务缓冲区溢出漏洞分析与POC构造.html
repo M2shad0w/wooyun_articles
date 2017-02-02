@@ -3,14 +3,14 @@
 			<head>
 			     <title>MS15-002 telnet服务缓冲区溢出漏洞分析与POC构造 - cssembly</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4621">http://drops.wooyun.org/papers/4621</a></h1>
 				
       <p>
-        <h1>0x00 漏洞原理分析</h1>
+        </p><h1>0x00 漏洞原理分析</h1>
 
-<hr />
+<hr>
 
 <p>MS15-002是微软telnet服务中的缓冲区溢出漏洞，下面对其原理进行分析并构造POC。</p>
 
@@ -22,15 +22,15 @@ signed int __thiscall CRFCProtocol::ProcessDataReceivedOnSocket(CRFCProtocol *th
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org/drops/20150116/2015011600311841215%E6%8D%95%E8%8E%B73.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015011600311841215%E6%8D%95%E8%8E%B73.png" alt="enter image description here"></p>
 
 <p>补丁前，该函数分别为：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150116/2015011600264192771%E6%8D%95%E8%8E%B7.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015011600264192771%E6%8D%95%E8%8E%B7.png" alt="enter image description here"></p>
 
 <p>补丁后，该函数为：</p>
 
-<p><img src="http://static.wooyun.org/drops/20150116/2015011600270429929%E6%8D%95%E8%8E%B71.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015011600270429929%E6%8D%95%E8%8E%B71.png" alt="enter image description here"></p>
 
 <p>也就是说原来一个缓冲区变成了两个，调用完</p>
 
@@ -78,7 +78,7 @@ void __thiscall CRFCProtocol::DoTxBinary(CRFCProtocol *this, unsigned __int8 **a
 
 <p>函数，可以看到函数修改了参数3的值，即*a3 += 3。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150116/2015011600280485514%E6%8D%95%E8%8E%B72.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015011600280485514%E6%8D%95%E8%8E%B72.png" alt="enter image description here"></p>
 
 <p>经过分析可以知道，如果v13 - &amp;Src =2047，则满足v13 - &amp;Src &lt;= 2048条件，此时如果(*(&amp;off_1011008 + 3 * v7))(v3, &amp;v14, &amp;v13, *v6)调用的是CRFCProtocol::DoTxBinary函数，且执行到了如下指令序列时，显然导致了缓冲区溢出。</p>
 
@@ -101,7 +101,7 @@ v7[3] = 0;
 
 <h1>0x01 环境搭建与POC构造</h1>
 
-<hr />
+<hr>
 
 <p>Win7上安装并启动telnet服务端，执行net user exp 123456 /ADD增加用户exp，通过net localgroup TelnetClients exp /ADD将该用户添加至TelnetClients组，这样就能够通过telnet客户端进行登录了。</p>
 
@@ -113,7 +113,7 @@ signed int __thiscall CRFCProtocol::ProcessDataReceivedOnSocket(CRFCProtocol *th
 
 <p>中<em>a2为接收到的数据的长度，最大为0x400，v6指向接收到的数据，显然为了触发溢出，必须在调用(</em>(&amp;off_1011008 + 3 * v7))(v3, &amp;v14, &amp;v13, *v6)时，让数据出现膨胀，保证处理过后的Src缓冲区中的数据长度大于0x800。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150116/2015011600340392148%E6%8D%95%E8%8E%B74.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015011600340392148%E6%8D%95%E8%8E%B74.png" alt="enter image description here"></p>
 
 <p>查看(*(&amp;off_1011008 + 3 * v7))(v3, &amp;v14, &amp;v13, *v6)处可以调用的函数，</p>
 
@@ -123,7 +123,7 @@ void __thiscall CRFCProtocol::AreYouThere(CRFCProtocol *this, unsigned __int8 **
 
 <p>显然会导致数据膨胀，a4是接收到的数据中的一个字节，执行后，a3指向的缓冲区中将写入9字节的固定数据。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150116/2015011600264192771%E6%8D%95%E8%8E%B7.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015011600264192771%E6%8D%95%E8%8E%B7.png" alt="enter image description here"></p>
 
 <p>通过wireshark截包，简单对协议进行分析，构造POC如下，让程序多次执行CRFCProtocol::AreYouThere函数，最终触发异常。</p>
 
@@ -146,11 +146,11 @@ signed int __thiscall CRFCProtocol::ProcessDataReceivedOnSocket( CRFCProtocol *t
 
 <p>处设置断点，中断后可以看到<em>a2 = 0x400，</em>(DWORD<em>)(</em>(DWORD*)(this+0x1E40)+ 0x16c8)指向接收到得数据。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150116/2015011600345942061%E6%8D%95%E8%8E%B75.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015011600345942061%E6%8D%95%E8%8E%B75.png" alt="enter image description here"></p>
 
 <p>在函数返回前设置断点，执行之后，可以看到_&#95;security&#95;check_cookie检测到了栈溢出，触发了异常，中断到调试器。</p>
 
-<p><img src="http://static.wooyun.org/drops/20150116/2015011600432596383%E6%8D%95%E8%8E%B76.png" alt="enter image description here" /></p>      </p>
+<p><img src="../images_result/images/2015011600432596383%E6%8D%95%E8%8E%B76.png" alt="enter image description here"></p>      <p></p>
     
 			</body>
 		</html>

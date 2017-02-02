@@ -3,20 +3,20 @@
 			<head>
 			     <title>浅谈被加壳ELF文件的DUMP修复 - 腾讯电脑管家</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/6559">http://drops.wooyun.org/papers/6559</a></h1>
 				
       <p>
-        <p>前面的文章中，我已经介绍了如何调试被加壳的ELF，这里不在叙述，直接进入正题，以某加固为例，如何DUMP和修复被加壳的ELF，使其能调试加载</p>
+        </p><p>前面的文章中，我已经介绍了如何调试被加壳的ELF，这里不在叙述，直接进入正题，以某加固为例，如何DUMP和修复被加壳的ELF，使其能调试加载</p>
 
 <p>我们先来看看被加壳ELF的头和Program Header</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011249042.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503011249042.png" alt="enter image description here"></p>
 
 <!--more-->
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011274260.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503011274260.png" alt="enter image description here"></p>
 
 <p>首先我要让调试器停在入口点0x3860的位置</p>
 
@@ -38,7 +38,7 @@ PT_LOAD : align_down(0x28ca4,0x1000) = 0x28000 ---- align_up(0x28ca4, 0x8000) = 
 
 <p>按照上述方法DUMP完，我们来看看IDA加载以后，JNI_ONLOAD的样子</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011332297.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503011332297.png" alt="enter image description here"></p>
 
 <p>看下红色的部分，奇怪了，本来应该有的代码去哪里了??</p>
 
@@ -46,7 +46,7 @@ PT_LOAD : align_down(0x28ca4,0x1000) = 0x28000 ---- align_up(0x28ca4, 0x8000) = 
 
 <p>可是动态调试器中明明可以看到这段代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011350311.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503011350311.png" alt="enter image description here"></p>
 
 <p>对照Program Header, 再看<code>0x221b0</code>这个地址，PT_LOAD节中并没有描述这个地址 所以，失败就是在这个地方，壳的代码里一定是mmap了这段内存，将解密后的数据，放进去，并修改了内存属性</p>
 
@@ -70,7 +70,7 @@ mprotect(0x3000, 0x23710, 0x5)
 <li>修改PT_DYNAMIC节的offset,和VA相等 修复完的节表如下：</li>
 </ol>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011356188.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503011356188.png" alt="enter image description here"></p>
 
 <p>最后一个注意的地方，就是干掉INIT段或者是INIT_ARRAY段</p>
 
@@ -80,21 +80,21 @@ mprotect(0x3000, 0x23710, 0x5)
 
 <p>看下图，INIT段已经不存在了</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011342159.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503011342159.png" alt="enter image description here"></p>
 
 <p>我们来打开IDA，加载修复的文件，看看效果：</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011337040.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503011337040.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011329135.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503011329135.png" alt="enter image description here"></p>
 
 <p>数据完整，再看看动态加载的效果</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062503011334368.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062503011334368.png" alt="enter image description here"></p>
 
 <p>加载成功~~~</p>
 
-<p>哈哈，至此，修复完成</p>      </p>
+<p>哈哈，至此，修复完成</p>      <p></p>
     
 			</body>
 		</html>

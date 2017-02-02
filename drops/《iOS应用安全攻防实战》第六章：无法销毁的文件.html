@@ -3,12 +3,12 @@
 			<head>
 			     <title>《iOS应用安全攻防实战》第六章：无法销毁的文件 - 博文视点安全技术大系</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/8148">http://drops.wooyun.org/papers/8148</a></h1>
 				
       <p>
-        <p>将一个普通的文件系统想象为一个大的笔记本。当一个文件被删除时，许多人以为这一页是被用“三福”牌记号笔完全涂黑了，就像关于51 区的机密文档那样。但事实上，在这个操作背后所发生的一切更像是用一支很细的红色笔在这一页上面画了一个巨大的X。文件被标记为已删除，但内容实际上还存在于笔记本上。所有想知道其看起来是什么样的人还是可以轻松地读出它的内容，而不管有一个红色的X 将它标记为已删除。这就是庭审律师（不论是美剧<code>Boston Legal</code> 中的还是真实生活中的律师）如何从嫌疑犯的电脑里还原出大量已删除的文件。苹果公司也知道这一点，因此，在<code>iOS 4</code> 中开始使用一些特殊的精心设计的文件系统加密方法来防止已删除文件被还原出来。然而，这种技巧并不完美，有时候文件依然可能被盗。</p>
+        </p><p>将一个普通的文件系统想象为一个大的笔记本。当一个文件被删除时，许多人以为这一页是被用“三福”牌记号笔完全涂黑了，就像关于51 区的机密文档那样。但事实上，在这个操作背后所发生的一切更像是用一支很细的红色笔在这一页上面画了一个巨大的X。文件被标记为已删除，但内容实际上还存在于笔记本上。所有想知道其看起来是什么样的人还是可以轻松地读出它的内容，而不管有一个红色的X 将它标记为已删除。这就是庭审律师（不论是美剧<code>Boston Legal</code> 中的还是真实生活中的律师）如何从嫌疑犯的电脑里还原出大量已删除的文件。苹果公司也知道这一点，因此，在<code>iOS 4</code> 中开始使用一些特殊的精心设计的文件系统加密方法来防止已删除文件被还原出来。然而，这种技巧并不完美，有时候文件依然可能被盗。</p>
 
 <p>在前面我们已经看到，<code>iOS 4</code> 和<code>iOS 5</code> 使用了加密的文件系统，在这个文件系统中的所有文件都使用了一个唯一的密钥进行加密。在文件系统中，这个密钥被保存在名为<code>cprotect</code>的属性中，并且它实际上也是被所谓的<code>AES-Wrap</code> 方式加密的，加密它的密钥或者是存放在<code>NAND</code> 可擦除区域的<code>Dkey</code>，或者是保护等级密钥中的一个。当删除一个文件时，该文件的<code>cprotect</code> 属性会随之被丢掉。而拿不到这个属性中的加密密钥，文件就无法被揭秘，那么将其还原出来也就没有意义。</p>
 
@@ -24,7 +24,7 @@
 
 <h1>0x00 刮取HFS 日志</h1>
 
-<hr />
+<hr>
 
 <p>在第5章中已经介绍了<code>Sogeti</code> 的免费数据保护工具套件，它包含一组用于解密<code>iOS</code> 文件和钥匙链数据的工具。这个套件中的另一个名为<code>emf_undelete</code>的工具用于刮取出<code>HFS</code> 日志中包含了文件加密密钥的<code>cprotect</code>属性。这个工具会尝试着使用这些密钥来解密磁盘中残留的文件。就像Iris一样，HFS日志只会存储有限的一段时间里的信息，直到这些信息成为更旧的数据被轮换出去。这段时间的长度取决于设备的活跃程度，可能短到只有一天，也可能长达数周。设备使用得越频繁，<code>HFS</code> 日志轮换出老旧数据就越快。</p>
 
@@ -78,7 +78,7 @@ return True
 
 <h1>0x01 还原闲置空间</h1>
 
-<hr />
+<hr>
 
 <p>彻底扫描未分配的空间，这是试图恢复已删除数据的最后方法。在反删除工具中默认禁用该功能，因为要刮取未分配的内存需要相当长的时间，而且效果通常也并不太好。</p>
 
@@ -96,7 +96,7 @@ carveEMFemptySpace(volume, fks, carveokdir)
 
 <h1>0x02 常被还原出来的数据</h1>
 
-<hr />
+<hr>
 
 <p>通过刮取<code>HFS</code> 日志可以还原出许多不同的文件来。事实上，任何曾经存在于文件系统上的东西都可能被还原，尤其是像属性列表、图像等较小的文件。由于<code>HFS</code> 日志的大小有限，因此，小文件被还原出来的概率更大。</p>
 
@@ -108,13 +108,13 @@ carveEMFemptySpace(volume, fks, carveokdir)
 
 <p>软件中哪怕是最安全的加密数据的内容（见图6-1）。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150820/2015082008471712324.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015082008471712324.png" alt="enter image description here"></p>
 
 <p>图6-1．恢复出来的用户邮件截屏，邮件软件是取证中非常有用的工具</p>
 
 <p>除了应用软件截屏泄露，安全的网站也会面临这一问题。不管是Google（见图6-2），还是你在企业VPN 内部看到的机密邮件，截屏泄露都会导致保护得最好的数据变得不安全。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150820/2015082008471763315.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015082008471763315.png" alt="enter image description here"></p>
 
 <p>图6-2．从一个Safari浏览会话中恢复出来的截屏</p>
 
@@ -138,9 +138,9 @@ carveEMFemptySpace(volume, fks, carveokdir)
 
 <h1>0x03 总结</h1>
 
-<hr />
+<hr>
 
-<p>任何刚刚被删除的文件都可能存在于日志中。千万不要依赖于设备会在文件删除后安全地抹除它们这一假设，而最好是认为文件系统在底层压根就没有加密保护能力。如果数据中包含了你不希望攻击者能还原出来的敏感信息，那就不要将这段数据的明文副本写入磁盘中。在第11 章中，你会学到一系列的反取证技巧。通过这些技巧，可以使删除文件时会安全地清除数据，并且使你的应用软件在挂起时不会保存屏幕截图。</p>      </p>
+<p>任何刚刚被删除的文件都可能存在于日志中。千万不要依赖于设备会在文件删除后安全地抹除它们这一假设，而最好是认为文件系统在底层压根就没有加密保护能力。如果数据中包含了你不希望攻击者能还原出来的敏感信息，那就不要将这段数据的明文副本写入磁盘中。在第11 章中，你会学到一系列的反取证技巧。通过这些技巧，可以使删除文件时会安全地清除数据，并且使你的应用软件在挂起时不会保存屏幕截图。</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,20 +3,20 @@
 			<head>
 			     <title>Kippo蜜罐指南 - 我是壮丁</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/4578">http://drops.wooyun.org/papers/4578</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>测试了一下kippo这个ssh蜜罐,算是一篇总结吧</p>
 
 <h1>0x01 测试环境</h1>
 
-<hr />
+<hr>
 
 <pre><code>CentOS release 6.2 (Final)
 Linux www.centos.com 2.6.32-220.el6.x86_64 #1 SMP Tue Dec 6 19:48:22 GMT 2011 x86_64 x86_64 x86_64 GNU/Linux
@@ -26,7 +26,7 @@ Linux www.centos.com 2.6.32-220.el6.x86_64 #1 SMP Tue Dec 6 19:48:22 GMT 2011 x8
 
 <h1>0x02:搭建</h1>
 
-<hr />
+<hr>
 
 <pre><code>#!bash
 cd /home/
@@ -92,7 +92,7 @@ python2.6 setup.py install
 
 <h1>0x03 图形化</h1>
 
-<hr />
+<hr>
 
 <pre><code>yum install httpd php php-mysql php-gd php-curl
 </code></pre>
@@ -131,11 +131,11 @@ su - kippo
 
 <p>访问http://ip/kippo</p>
 
-<p><img src="http://static.wooyun.org/drops/20150112/20150112014124925761.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/20150112014124925761.png" alt="enter image description here"></p>
 
 <h1>0x04 结构</h1>
 
-<hr />
+<hr>
 
 <p>data: 存放ssh key,lastlog.txt和userdb.txt lastlog.txt:last命令的输出,即存储了登陆蜜罐的信息,也可以伪造 userdb.txt:可以登陆的用户,可以给一个用户设置多个密码,一个用户一行 格式为username:uid:password</p>
 
@@ -151,7 +151,7 @@ su - kippo
 
 <p>utils: convert32.py:把tty的日志转换为标准32位的小数格式,其实直接strings查看就可以了 createfs.py:可以用来模拟真实系统的一些文件目录之类的,不过需要设置一下</p>
 
-<p><img src="http://static.wooyun.org/drops/20150112/20150112014634918742.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/20150112014634918742.png" alt="enter image description here"></p>
 
 <p>需要重定向保存输出,然后去替换fs.pickle文件,这样就可以模拟真实系统了.</p>
 
@@ -163,7 +163,7 @@ su - kippo
 
 <h1>0x05 配置文件</h1>
 
-<hr />
+<hr>
 
 <pre><code>kippo.cfg:
 ==========================================================
@@ -258,10 +258,10 @@ dsa_public_key = data/ssh_host_dsa_key.pub
 dsa_private_key = data/ssh_host_dsa_key
 
 # Enables passing commands using ssh execCommand
-# e.g. ssh <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="30425f5f44705c5f53515c585f4344">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> &lt;command&gt;
+# e.g. ssh <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="30425f5f44705c5f53515c585f4344">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> &lt;command&gt;
 #
 # (default: false)
-#是否支持 ssh <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a8dac7c7dce8c4c7cbc9c4c0c7dbdc">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> &lt;command&gt;这种命令的执行,默认是false的
+#是否支持 ssh <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a8dac7c7dce8c4c7cbc9c4c0c7dbdc">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> &lt;command&gt;这种命令的执行,默认是false的
 exec_enabled = true
 
 # IP address to bind to when opening outgoing connections. Used exclusively by
@@ -361,7 +361,7 @@ interact_port = 5123
 
 #[database_xmpp]
 #server = sensors.carnivore.it
-#user = <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d1b0bfbebfa8bcbea4a291a2b4bfa2bea3a2ffb2b0a3bfb8a7bea3b4ffb8a5">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+#user = <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d1b0bfbebfa8bcbea4a291a2b4bfa2bea3a2ffb2b0a3bfb8a7bea3b4ffb8a5">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 #password = anonymous
 #muc = dionaea.sensors.carnivore.it
 #signal_createsession = kippo-events
@@ -388,7 +388,7 @@ interact_port = 5123
 
 <h1>0x06 debug</h1>
 
-<hr />
+<hr>
 
 <p>时间显示存在问题 使用了0时区的时间,这里是东8区</p>
 
@@ -408,7 +408,7 @@ def nowUnix(self):
 
 <h1>0x07 缺点</h1>
 
-<hr />
+<hr>
 
 <ol>
 <li><p>功能有限</p></li>
@@ -419,13 +419,13 @@ def nowUnix(self):
 
 <h1>0x08 后记</h1>
 
-<hr />
+<hr>
 
-<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9f7d1f037a211e780b377d1f027b25197a00257a1014df7a3b3576072c763c1178051be9efec">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>,放了半个月,以下是收集到的一些数据</p>
+<p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="9f7d1f037a211e780b377d1f027b25197a00257a1014df7a3b3576072c763c1178051be9efec">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>,放了半个月,以下是收集到的一些数据</p>
 
-<p><img src="http://static.wooyun.org/drops/20150112/20150112015346411513.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/20150112015346411513.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/drops/20150112/20150112015500273454.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/20150112015500273454.png" alt="enter image description here"></p>
 
 <p>有少量的恶意程序,收集到了少量的恶意程序,有兴趣的可以私信我啊~~~</p>
 
@@ -438,7 +438,7 @@ def nowUnix(self):
 
 <p>http://bruteforce.gr/kippo-graph</p>
 
-<p>http://www.google.com/</p>      </p>
+<p>http://www.google.com/</p>      <p></p>
     
 			</body>
 		</html>

@@ -3,16 +3,16 @@
 			<head>
 			     <title>利用 Chakra JIT Spray 绕过 DEP 和 CFG - xlab</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/11171">http://drops.wooyun.org/binary/11171</a></h1>
 				
       <p>
-        <p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="44302b29262f212134213604acc1faaceaeba3cac0a2e9e2a1eadaadeec8a1eae0">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
+        </p><p><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="44302b29262f212134213604acc1faaceaeba3cac0a2e9e2a1eadaadeec8a1eae0">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script></p>
 
 <h1>0x00 摘要</h1>
 
-<hr />
+<hr>
 
 <p>JIT Spray是一种诞生于2010年的漏洞利用技术，可将Shellcode嵌入到JIT引擎生成的可执行代码中。目前，包括Chakra在内的各JIT引擎几乎都针对该技术采取了防御措施，包括随机插入空指令、立即数加密等。本文将指出Chakra的JIT Spray防御措施的两个问题（分别存在于Windows 8.1及其之前的系统，以及Windows 10之中），使得攻击者可在IE中用JIT Spray技术执行Shellcode，从而绕过DEP。同时，本文还给出了一种利用Chakra的JIT引擎绕过CFG的方法。</p>
 
@@ -20,7 +20,7 @@
 
 <h1>0x01 JIT引擎的立即数加密</h1>
 
-<hr />
+<hr>
 
 <p>立即数加密是最重要的JIT Spray缓解技术。Chakra引擎会对每一个高位或低位不是0x0000或0xFFFF的用户传入的立即数用随机生成的Key进行异或，再在运行时还原。例如，对于以下JavaScript：</p>
 
@@ -50,7 +50,7 @@ a ^= 0x90909090;
 
 <h1>0x02 绕过Windows 8.1及其之前Chakra引擎的立即数加密</h1>
 
-<hr />
+<hr>
 
 <p>Chakra引擎内部对整数n会以n<em>2+1的方式存储。所以，在处理n=n+m时，不必从n</em>2+1还原出n再和m相加，只需要将m<em>2加到n</em>2+1的结果上去即可。而对于m*2，Windows 8.1及其之前的Chakra引擎会认为是其自身生成的数据，而不是用户传入的，所以不会进行加密。例如对以下JavaScript：</p>
 
@@ -124,7 +124,7 @@ a += 0x18EB9090/2;
 
 <h1>0x03 绕过Windows 10的 Chakra引擎的立即数加密</h1>
 
-<hr />
+<hr>
 
 <p>Windows 10的Chakra引擎并没有前述问题。但是，由于Windows 10的Chakra引擎高度优化，在处理整数类型数组写入操作时，会用最高效的方式生成JIT代码。例如，对于下面的JavaScript语句：</p>
 
@@ -152,7 +152,7 @@ ar[0x9090/2] = 0x9090;
 
 <h1>0x04 利用Chakra引擎绕过CFG</h1>
 
-<hr />
+<hr>
 
 <p>利用前面介绍的两种方法，可以实施JIT Spray绕过DEP。但嵌入在JIT代码中的Shellcode执行入口地址显然无法通过CFG检查。但实际上Chakra引擎的实现中就存在可用来绕过CFG的地方。</p>
 
@@ -174,7 +174,7 @@ ar[0x9090/2] = 0x9090;
 
 <h1>0x05 定位JIT内存和“cfgJumper”</h1>
 
-<hr />
+<hr>
 
 <p>要利用JIT Spray绕过DEP和利用“cfgJumper”绕过CFG，就需要定位JIT编译后的代码和“cfgJumper”，有趣的是，找到它们的方法几乎是相同的。</p>
 
@@ -235,7 +235,7 @@ Chakra!Js::InterpreterStackFrame::DelayDynamicInterpreterThunk:
 
 <h1>0x06 随机插入空指令的问题</h1>
 
-<hr />
+<hr>
 
 <p>除了立即数加密，Chakra引擎也采用了随机插入空指令的方法来缓解JIT Spray。不过Chakra插入空指令的密度并不高。PoC中使用的由29个16位数组成的JIT Shellcode，在针对Windows 10的利用方式中，会生成29条x86指令，其中几乎不会被插入空指令。但是在针对Windows 8.1及其之前的Chakra引擎的利用方式中，会生成约200条x86指令，就很可能被插入空指令。</p>
 
@@ -250,7 +250,7 @@ Chakra!Js::InterpreterStackFrame::DelayDynamicInterpreterThunk:
 
 <p>本文测试环境是安装了2015年5月补丁的Windows 8.1和Windows 10 TP 9926。</p>
 
-<p>本文所述问题微软已于2015年9月修复。</p>      </p>
+<p>本文所述问题微软已于2015年9月修复。</p>      <p></p>
     
 			</body>
 		</html>

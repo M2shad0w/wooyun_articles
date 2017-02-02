@@ -3,14 +3,14 @@
 			<head>
 			     <title>IDAPython 让你的生活更滋润 part1 and part2 - 蒸米</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/11849">http://drops.wooyun.org/tips/11849</a></h1>
 				
       <p>
-        <h1>0x00 序</h1>
+        </p><h1>0x00 序</h1>
 
-<hr />
+<hr>
 
 <p>今天在网上看到平底锅blog上Josh Grunzweig发表了一系列关于利用IDAPython分析malware的教程。感觉内容非常不错，于是翻译成中文与大家一起分享。原文地址：</p>
 
@@ -20,7 +20,7 @@
 
 <h1>0x01 背景</h1>
 
-<hr />
+<hr>
 
 <p>作为一名malware逆向工程师，我的日常活动就是使用IDA Pro。这并不奇怪，因为IDA Pro可以说是行业标配（尽管它的替代品，如radare2和hopper也<em>越来越受欢迎</em>）。IDA其中一个非常强大的功能就是可以使用Python脚本(又被称为IDAPython)。用户可以通过IDAPython调用大量的IDA API。当然，用户还可以通过使用IDAPython获取到脚本语言提供的各种功能。</p>
 
@@ -36,21 +36,21 @@
 
 <h1>0x02 利用IDAPython解决字符串加密问题</h1>
 
-<hr />
+<hr>
 
 <p>为了能提供更多的教程给分析师，我准备写一篇带例子的分析文章供大家学习。在本系列的第一部分，我将教大家编写一个脚本用来解决一个malware样本的多处字符串混淆问题。</p>
 
 <p>在逆向分析一个病毒样本的时候，我遇到了这样一个函数：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/2016010515455078360117.png" alt="p1" /> 图片1 字符串解密函数</p>
+<p><img src="../images_result/images/2016010515455078360117.png" alt="p1"> 图片1 字符串解密函数</p>
 
 <p>根据以往的经验，我怀疑这个函数是用来进行解密的。关于这个函数大量的引用证实了我的猜想。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051545526945126.png" alt="p2" /> 图2 大量的对可疑函数的引用</p>
+<p><img src="../images_result/images/201601051545526945126.png" alt="p2"> 图2 大量的对可疑函数的引用</p>
 
 <p>在图2中，我们可以看到有116处对这个函数的引用。每当这个函数被调用时，都有一段数据作为参数通过ESI寄存器提供给这个函数。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051545531353136.png" alt="p3" /> 图3可疑的函数 (405BF0) 被调用的实例</p>
+<p><img src="../images_result/images/201601051545531353136.png" alt="p3"> 图3可疑的函数 (405BF0) 被调用的实例</p>
 
 <p>在这个时候，我已经非常肯定这个函数是malware用来在运行时进行字符串解密的函数了。当我们面临这种情况时，我们一般有如下几种选择：</p>
 
@@ -190,25 +190,25 @@ MakeComm(ref, dec)
 
 <p>增加了这一步后，我们能够非常清晰的看到交叉引用的数据。如下图所示，我们可以很轻松的分辨出哪些字符串被引用了：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051545552679345.png" alt="p4" /> 图4 运行完脚本后的字符串交叉引用界面</p>
+<p><img src="../images_result/images/201601051545552679345.png" alt="p4"> 图4 运行完脚本后的字符串交叉引用界面</p>
 
 <p>除此之外，我们在反汇编代码中也能看到这些解密后的字符串作为注释：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051545576132455.png" alt="p5" /> 图5 运行完脚本后的反汇编代码</p>
+<p><img src="../images_result/images/201601051545576132455.png" alt="p5"> 图5 运行完脚本后的反汇编代码</p>
 
 <h1>0x03 利用IDAPython解决函数/库调用的哈希混淆问题</h1>
 
-<hr />
+<hr>
 
 <p>在反编译中我们经常会见到shellcode和malware使用哈希算法来混淆加载的函数或者库。比如逆向工程师们经常会在shellcode中看到混淆后的函数名。总的来说，整个过程是很简单的。代码在运行时会先加载knerel32.dll。然后，它会用这个加载的镜像去识别并存储LoadLibraryA函数，这函数是用来加载更多的库和函数的。这种特定的技术一般采用某种哈希算法来识别函数的。最常用的哈希算法一般是CRC32，当然，其他的一些变种算法，如ROR13，也是非常常见的。</p>
 
 <p>比如说，当我逆向一个malware的某一部分内容的时候，我看到了如下的代码：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051545591956265.png" alt="p6" /> 图片6 malware使用CRC32哈希算法来动态的加载函数</p>
+<p><img src="../images_result/images/201601051545591956265.png" alt="p6"> 图片6 malware使用CRC32哈希算法来动态的加载函数</p>
 
 <p>因为0xEDB88320这个常数是CRC32算法的常用参数。所以我们可以判断出这个例子使用了CRC32哈希算法。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051546017969074.png" alt="p7" /> 图片7 确认CRC32算法</p>
+<p><img src="../images_result/images/201601051546017969074.png" alt="p7"> 图片7 确认CRC32算法</p>
 
 <p>通过图7我们可以确定这个算法是CRC32算法。现在，算法和函数已经确定了。我们可以通过交叉引用（ida中按x）的数量来确定这个函数被被调用了多少次。可以看到这个函数一共被调用了190次。显然，手动的解密并重命名这些哈希值并不是我们想要的。因此，我们可以使用IDAPython来帮我们解决。</p>
 
@@ -266,7 +266,7 @@ if enumeration == 0xFFFFFFFF:
 
 <p>这个枚举的值随后将会被修改。下一步要干的事情是根据函数的哈希值来确定真实的函数地址。这一部分看起来很像第一部分的内容。我们通过观察这个函数的结构可以发现CRC32哈希值是这个加载函数的第二个参数。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051546033839084.png" alt="p8" /> 图片8 传递给load_function()的参数</p>
+<p><img src="../images_result/images/201601051546033839084.png" alt="p8"> 图片8 传递给load_function()的参数</p>
 
 <p>同样的，我们还是枚举之前的指令来寻找函数的第二个参数。当我们找到后，我们通过output.json中的JSON数据来进行检测，并且确保有一个函数名对应了这个哈希值。代码如下：</p>
 
@@ -322,7 +322,7 @@ def convert_offset_to_enum(addr):
 
 <p>当我们把这个枚举转换完成后，我们来研究一下如何修改DWORD处的值，因为DWORD处的值保存了加载后的函数地址。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/201601051546051504594.png" alt="p9" /> 图片9 当加载完函数后，程序将函数地址存储到了DWORD地址</p>
+<p><img src="../images_result/images/201601051546051504594.png" alt="p9"> 图片9 当加载完函数后，程序将函数地址存储到了DWORD地址</p>
 
 <p>为了做到这一点，我们不光需要遍历之前的指令，还要查找之后的指令，也就是将eax存储到一个DWORD地址的指令。当我们发现这条指令之后，我们可以给这个DWORD地址重新命名成正确的函数名。为了防止冲突，我们在函数名前加上一个”<code>d_</code>”字符串。</p>
 
@@ -338,11 +338,11 @@ while address &lt;= address_plus_30:
 
 <p>等这一切都做完后，我们会发现原来很难读懂的汇编代码变得很好理解了。如图所示：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/2016010515460623712104.png" alt="p10" /> 图片10 运行完脚本后的变化</p>
+<p><img src="../images_result/images/2016010515460623712104.png" alt="p10"> 图片10 运行完脚本后的变化</p>
 
 <p>现在，当我们看到DOWRDS列表的时候，就已经能得到真实的函数名字了。并且这些数据能够很好的帮助我们进行静态分析。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160105/2016010515460843495118.png" alt="p11" /></p>
+<p><img src="../images_result/images/2016010515460843495118.png" alt="p11"></p>
 
 <p>完整的代码如下：</p>
 
@@ -422,9 +422,9 @@ enum_for_xrefs(conversion_function, json_data, enumeration)
 
 <h1>0x04 总结</h1>
 
-<hr />
+<hr>
 
-<p>在上一节中，我们利用IDAPython成功的解决了一个哈希混淆的问题，在这个问题中我们用到了枚举对象。枚举对象对我们分析这类问题会很有帮助，能够节省我们大量的时间。并且这个对象可以很容易的在IDA工程中提取或者加载，这对我们进行批量的逆向分析会很有帮助。</p>      </p>
+<p>在上一节中，我们利用IDAPython成功的解决了一个哈希混淆的问题，在这个问题中我们用到了枚举对象。枚举对象对我们分析这类问题会很有帮助，能够节省我们大量的时间。并且这个对象可以很容易的在IDA工程中提取或者加载，这对我们进行批量的逆向分析会很有帮助。</p>      <p></p>
     
 			</body>
 		</html>

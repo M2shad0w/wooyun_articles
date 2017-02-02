@@ -3,20 +3,20 @@
 			<head>
 			     <title>基于ossec logstash es大数据安全关联分析 - winsyk</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2821">http://drops.wooyun.org/tips/2821</a></h1>
 				
       <p>
-        <h2>0x00 前言：</h2>
+        </p><h2>0x00 前言：</h2>
 
-<hr />
+<hr>
 
 <p>对于大数据我相信大多数人都不陌生，特别现在是在大数据时代，当下流行的技术很多人都可以朗朗上口比如hadoop、hbase、spark、storm，那么在数据收集中，是否有好的解决办法来帮助企业进行安全管理及策略分析呢，笔者搜索了很多资料，通过自己的实践分享一篇我对大数据日志分析及处理的见解，本篇技术是基于logstash elasticsearch、redis结合ossec来做的开源方案。 在《无处可藏》中斯诺登提到NSA对网络及数据收集的原则是收集一切，在企业安全上也需要做到如此，众所周知安全的风险来自于边界，黑客也会挑一些比较边缘的业务进行入侵，但这些东西我们都没记录但对于后续的应急响应和入侵检测来说就无从谈起，所以在企业内做大数据的原则也是“收集一切”。 开篇提到的这些主要是为了下文做铺垫，本文基于系统安全日志来做收集及处理，希望能给大家提供一些思路，整体为开源技术，屌丝安全的本质是“快”，当前社会唯快不破。</p>
 
 <h2>0x01: 技术架构： 使用到的工具如下：</h2>
 
-<hr />
+<hr>
 
 <blockquote>
   <p>Ossec（事件源、alert源）
@@ -32,13 +32,13 @@
 
 <h2>0x02：实施方案：</h2>
 
-<hr />
+<hr>
 
 <p>关于如何安装，请参考： https://app.yinxiang.com/shard/s21/sh/f4e62686-16ef-4549-beb1-c5124b232df6/f538a1ea304ff4191acf494a1a1bd4f9</p>
 
 <h2>0x03：技术实践：</h2>
 
-<hr />
+<hr>
 
 <p><strong>1、 系统日志收集：</strong></p>
 
@@ -50,11 +50,11 @@
 
 <p>Syslog日志进来后不能不做分析，如果不分析，数据就不会被用活只是死数据，这里用到开源ids系统，Ossec，Ossec大家或许并不陌生，ossec 支持2种模式：1、ossec agent； 2、基于syslog方式对日志做收集，通过客户端配置syslog将日志传送到ossec server，然后ossec server会通过对分析日志进格式化处理规则解析，判断异常并且对其做处理，比如写入数据库，触发告警，如图1为处理日志过程。</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812480353816.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812480353816.png" alt="enter image description here"></p>
 
 <p>如图2为ossec整个工作过程：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812480384186.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812480384186.png" alt="enter image description here"></p>
 
 <p><strong>3、 日志集中化管理 logstash:</strong></p>
 
@@ -65,7 +65,7 @@
 
 <p>将logstash启动，logstash_agent.conf内容如下图：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812480353824.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812480353824.png" alt="enter image description here"></p>
 
 <p>对上图logstash内容进行分解，它一共做了这些事。</p>
 
@@ -80,7 +80,7 @@
 
 <p>ElasticSearch是一个基于Lucene构建的开源，分布式，RESTful搜索引擎。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便。 在本文中ElasticSearch主要的作用，通过es读取logstash内ossec日志进行全文检索，方便后续日志展现及搜索，es默认端口为9200，成功开启es后会提示如下：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812480468275.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812480468275.png" alt="enter image description here"></p>
 
 <p>ElasticSearch启动后可以通过访问http://127.0.0.1:9200来查看es工作是否正常，出现如下数据证明es正常工作 9300端口主要用于和es集群通信发数据。</p>
 
@@ -132,9 +132,9 @@ stdout { codec =&gt; rubydebug }
 
 <p>既然已经将上述工作都做到位了，那么需要有界面来展现劳动成果及后续进行日志分析，这里使用kibana来做展现，关于kibana各位请自行搜索，我只简单说下我的理解，它的资料很少，笔者在学习过程中也是一路摸索，推荐大家使用这个dashboard来展现日志，下载地址：https://github.com/magenx/Logstash/blob/master/kibana/kibana_dashboard.json <strong>6、 结果展现：</strong></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812480475946.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812480475946.png" alt="enter image description here"></p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812480473620.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812480473620.png" alt="enter image description here"></p>
 
 <p><strong>6.1、 结合Ossec应用场景：</strong></p>
 
@@ -161,13 +161,13 @@ stdout { codec =&gt; rubydebug }
 
 <p>如果有用户触发到该规则，kibana会展现告警如下：</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812480416312.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812480416312.png" alt="enter image description here"></p>
 
 <h2>0x04：</h2>
 
-<hr />
+<hr>
 
-<p>借用一句话，安全这个东西就是这样的，你遇到的我没遇到过，我遇到的你可能也没有遇到过，其实只要一说，大家就都明白了。 ” 希望此文对你有帮助，谢谢！</p>      </p>
+<p>借用一句话，安全这个东西就是这样的，你遇到的我没遇到过，我遇到的你可能也没有遇到过，其实只要一说，大家就都明白了。 ” 希望此文对你有帮助，谢谢！</p>      <p></p>
     
 			</body>
 		</html>

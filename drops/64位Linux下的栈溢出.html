@@ -3,14 +3,14 @@
 			<head>
 			     <title>64位Linux下的栈溢出 - f0r</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/2288">http://drops.wooyun.org/tips/2288</a></h1>
 				
       <p>
-        <p>from:http://packetstormsecurity.com/files/download/127007/64bit-overflow.pdf</p>
+        </p><p>from:http://packetstormsecurity.com/files/download/127007/64bit-overflow.pdf</p>
 
-<hr />
+<hr>
 
 <p>本文的目的是让大家学到64位缓冲区溢出的基础知识。 作者Mr.Un1k0d3r RingZer0 Team</p>
 
@@ -30,7 +30,7 @@
 
 <h2>0x01 x86和x86_64的区别</h2>
 
-<hr />
+<hr>
 
 <p>第一个主要区别就是内存地址的大小。这没啥可惊奇的: 不过即便内存地址有64位长用户空间也只能使用前47位要牢记这点因为当你指定一个大于0x00007fffffffffff的地址时会抛出一个异常。那也就意味着0x4141414141414141会抛出异常而0x0000414141414141是安全的。当你在进行模糊测试或编写利用程序的时候我觉得这是个很巧妙的部分。</p>
 
@@ -38,7 +38,7 @@
 
 <h2>0x02 漏洞代码片段</h2>
 
-<hr />
+<hr>
 
 <pre><code>#!cpp
 int main(int argc, char **argv) { 
@@ -65,7 +65,7 @@ $ gcc -m64 bof.c -o bof -z execstack -fno-stack-protector
 
 <h2>0x03 触发溢出</h2>
 
-<hr />
+<hr>
 
 <p>首先我们来确认一下确实可以让这个进程崩溃。</p>
 
@@ -78,7 +78,7 @@ Segmentation fault (core dumped)
 
 <p>好来确认一下我们控制的RIP指令指针</p>
 
-<p><img src="http://static.wooyun.org/20140918/2014091812470142898.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014091812470142898.jpg" alt="enter image description here"></p>
 
 <p>你可以通过stepi单步执行来过一遍程序流程译者应该用ni比较合适。 当过了strcpy调用(0x40066c)之后你会发现当前缓冲区指针指向0x7fffffffdc90而不是0x7fffffffdcd0这是gdb的环境变量和其他东西造成的。不过现在我们不关心之后会解决的。 重要的说明* 在之后的内容中当我提到leave指令时就是指的上面的地址0x400685。 最后这是strcpy过后的栈</p>
 
@@ -152,7 +152,7 @@ The program no longer exists.
 
 <h2>0x04 控制RIP</h2>
 
-<hr />
+<hr>
 
 <p>我们发现了个小问题不过只要是问题总有办法解决的我们可以用个小一点的缓冲区去溢出这样指向rsp的地址就会像0x0000414141414141一样了。 通过简单的数学运算就可以很轻松地算出我们缓冲区的大小。我们知道缓冲区开始于0x7fffffffdc90。Leave指令之后rsp将指向0x7fffffffdd98。</p>
 
@@ -257,7 +257,7 @@ gs      0x0     0
 
 <h2>0x05 跳入用户控制的缓冲区</h2>
 
-<hr />
+<hr>
 
 <p>事实上这部分内容没什么特别的或者新的东西你只需要指向你控制的缓冲区开头。也就是第一个printf显示出来的值在这里是0x7fffffffdc90。通过gdb也可以很容易地重新获得这个值你只需在调用strcpy之后显示栈。</p>
 
@@ -306,7 +306,7 @@ $ gdb -tui bof
 
 <h2>0x06 执行shellcode</h2>
 
-<hr />
+<hr>
 
 <p>在这个例子中我准备用个定制的shellcode去读/etc/passwd的内容。</p>
 
@@ -413,7 +413,7 @@ f\x65\x74\x63\x2f\x70\x61\x73\x73\x77\x64\x41" + "A" * 182 + 
 
 <h2>0x07 GDB vs 现实</h2>
 
-<hr />
+<hr>
 
 <p>因为gdb会初始化一些变量和其他的东西所以如果你试着在gdb之外使用同样的利用脚本就会失败。不过在这个例子中我加了个对printf的调用来输出缓冲区指针。这样我们就可以很容易地找到正确的值并且在真实的环境中获得地址。</p>
 
@@ -430,7 +430,7 @@ $ ./bof $(python -c 'print "\xeb\x3f\x5f\x80\x77\x0b\x41\x48\x31
 0x7fffffffdcf0 
 ?_w 
 
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="89c8c1b8c1b8efc1bdadc1c1b8efc1b8c1b8c9c1c1b8c1b8">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&lt; 
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="89c8c1b8c1b8efc1bdadc1c1b8efc1b8c1b8c9c1c1b8c1b8">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&lt; 
 /etc/passwdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 
@@ -451,7 +451,7 @@ $ ./bof $(python -c 'print "\xeb\x3f\x5f\x80\x77\x0b\x41\x48\x31
 0x7fffffffdcf0 
 ?_w 
 
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3e7f760f760f58760a1a76760f58760f760f7e76760f760f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&lt; 
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="3e7f760f760f58760a1a76760f58760f760f7e76760f760f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&lt; 
 /etc/passwdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 
@@ -469,13 +469,13 @@ man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
 
 <h2>0x08 结语</h2>
 
-<hr />
+<hr>
 
 <p>希望你们能喜欢这篇关于Linux下x86_64缓冲区溢出的文章，有很多关于x86溢出的文章了，但64位的溢出比较少见。</p>
 
 <p>祝你们拿到好多好多shell!</p>
 
-<p>感谢</p>      </p>
+<p>感谢</p>      <p></p>
     
 			</body>
 		</html>

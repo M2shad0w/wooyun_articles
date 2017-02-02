@@ -3,20 +3,20 @@
 			<head>
 			     <title>OSSEC服务端配置客户端批量部署方案 - hello</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/9424">http://drops.wooyun.org/%e8%bf%90%e7%bb%b4%e5%ae%89%e5%85%a8/9424</a></h1>
 				
       <p>
-        <h1>0x00 前言</h1>
+        </p><h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>最近也在研究ossec报警规则，还没研究的很透彻，暂时不是这篇文章的内容。ossec中文资料还是比较少，外文文献比较多。之前看到drops的两篇文章分享<a href="http://drops.wooyun.org/tips/2821">http://drops.wooyun.org/tips/2821</a>，<a href="http://drops.wooyun.org/tips/636">http://drops.wooyun.org/tips/636</a>，看到评论都说批量部署是个坑，比较麻烦。现在说下我的方案，如何批量安装部署客户端。对大家有帮助，可以解决大家在批量部署过程遇到的问题。</p>
 
 <h1>0x01 服务端配置</h1>
 
-<hr />
+<hr>
 
 <p>服务端IP:192.168.145.128</p>
 
@@ -34,7 +34,7 @@ host_name:ip
 ...
 </code></pre>
 
-<p><img src="http://static.wooyun.org//drops/20151010/2015101012451825277113.png" alt="" /></p>
+<p><img src="../images_result/images/2015101012451825277113.png" alt=""></p>
 
 <p>这样的信息对，在大企业里面可通过api直接获取得到。</p>
 
@@ -65,7 +65,7 @@ f.close()
 
 <h1>0x02 客户端agent批量部署</h1>
 
-<hr />
+<hr>
 
 <p>agent群体比较大，批量部署需要面临两个问题：</p>
 
@@ -79,11 +79,11 @@ f.close()
 
 <p>去掉一些注释，使其赋值，就不用通过对话模式进行赋值了。</p>
 
-<p><img src="http://static.wooyun.org//drops/20151010/2015101012452174219213.png" alt="" /></p>
+<p><img src="../images_result/images/2015101012452174219213.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20151010/2015101012452332652310.png" alt="" /></p>
+<p><img src="../images_result/images/2015101012452332652310.png" alt=""></p>
 
-<p><img src="http://static.wooyun.org//drops/20151010/201510101245282895142.png" alt="" /></p>
+<p><img src="../images_result/images/201510101245282895142.png" alt=""></p>
 
 <p><strong>把修改后的文件preloaded-vars.conf拷贝到之前的ftp服务器或者web服务器下方便客户端下载</strong>。</p>
 
@@ -135,9 +135,9 @@ wget http://192.168.145.128/ossec.conf
 
 <h1>0x03 总结</h1>
 
-<hr />
+<hr>
 
-<p>最后，可以通过ossec-wui查看客户端的部署情况或者在安装目录下 <code>/var/ossec/bin/agent-control</code>查看客户端的状态。</p>      </p>
+<p>最后，可以通过ossec-wui查看客户端的部署情况或者在安装目录下 <code>/var/ossec/bin/agent-control</code>查看客户端的状态。</p>      <p></p>
     
 			</body>
 		</html>

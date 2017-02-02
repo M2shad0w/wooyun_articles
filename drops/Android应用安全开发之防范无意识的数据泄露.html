@@ -3,20 +3,20 @@
 			<head>
 			     <title>Android应用安全开发之防范无意识的数据泄露 - gh0stbo</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/mobile/12469">http://drops.wooyun.org/mobile/12469</a></h1>
 				
       <p>
-        <h1>0x00 简介</h1>
+        </p><h1>0x00 简介</h1>
 
-<hr />
+<hr>
 
 <p>OWASP移动安全漏洞Top 10中第4个就是无意识的数据泄漏。当应用程序存储数据的位置本身是脆弱的时，就会造成无意识的数据泄漏。这些位置可能包括剪贴板，URL缓存，浏览器的Cookies，HTML5数据存储，分析数据等等。例如，一个用户在登录银行应用的时候已经把密码复制到了剪贴板，恶意应用程序通过访问用户剪贴板数据就可以获取密码了。</p>
 
 <h1>0x01 避免缓存网络数据</h1>
 
-<hr />
+<hr>
 
 <p>数据可以在用户无意识的情况下被各种工具捕获。开发人员经常忽视包括log/debug输出信息，Cookies，Web历史记录，Web缓存等的一些数据存储方式存在的安全隐患。例如，通常浏览器访问页面时，会在临时文件夹下保存页面的html，js，图片等等。当页面上包含敏感信息时，这些信息也会存储在临时文件中。这就造成了安全隐患。在移动设备上尽可能不要存储/缓存敏感数据。这是避免设备上缓存的数据泄漏的最好的方式。</p>
 
@@ -32,7 +32,7 @@
 
 <h1>0x02 Android:避免GUI对象缓存</h1>
 
-<hr />
+<hr>
 
 <p>由于多任务处理的原因，整个应用程序都可以驻留在内存中，所以Android应用程序界面也会驻留在内存中。发现或者盗取了设备的攻击者可以直接查看到仍然驻留在内存中的用户之前查看过的界面，并看到仍显示在GUI上的所以数据。银行应用程序就是一个例子，一个用户查看了交易记录，然后“退出”应用程序。攻击者通过直接启动交易视图activity可以看到以前的交易被显示出来。</p>
 
@@ -46,7 +46,7 @@
 
 <h1>0x03 限制用户名缓存</h1>
 
-<hr />
+<hr>
 
 <p>如果缓存了用户名，在运行时，用户名会在任何类型的身份验证之前加载进内存，从而允许潜在的恶意进程截获用户名。</p>
 
@@ -56,7 +56,7 @@
 
 <h1>0x04 留意键盘缓存</h1>
 
-<hr />
+<hr>
 
 <p>键盘缓存是意外的数据泄漏问题之一。安卓键盘包含一个用户字典，如果一个用户在文本框输入一些文本，输入法就可能通过用户字典缓存一些由用户输入的数据，用于以后对用户的输入进行自动纠错。而此用户字典不需要什么特殊权限就在任何应用中使用。恶意软件可以通过获取键盘缓存提取这些数据。缓存的内容超出了应用程序的管理权限,所以应用程序不能从缓存中删除数据。</p>
 
@@ -70,7 +70,7 @@
 
 <h1>0x05 复制和粘贴</h1>
 
-<hr />
+<hr>
 
 <p>无论数据源是否加密，存在于剪贴板中的敏感数据都是可以被任意修改的。如果用户复制的是明文敏感数据，那么其它应用程序通过访问剪贴板就可以获取到该明文敏感数据了。</p>
 
@@ -80,7 +80,7 @@
 
 <h1>0x06 敏感文件删除</h1>
 
-<hr />
+<hr>
 
 <p>Android通过调用<code>file.delete()</code>是不能安全地把文件抹去。只要文件不被覆盖就可以被进行恢复。<a href="http://www.android-recovery.net/android-data-recovery.html">Android Data Recovery</a>就具备这个功能。</p>
 
@@ -92,15 +92,15 @@
 
 <h1>0x07 屏幕截取和录制防范</h1>
 
-<hr />
+<hr>
 
 <p>Android 5.0新增的屏幕录制接口，无需特殊权限，使用如下系统API即可实现屏幕录制功能：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160126/2016012612383527529127.jpg" alt="p1" /></p>
+<p><img src="../images_result/images/2016012612383527529127.jpg" alt="p1"></p>
 
 <p>发起录制请求后，系统弹出如下提示框请求用户确认：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160126/2016012612383774445220.jpg" alt="p2" /></p>
+<p><img src="../images_result/images/2016012612383774445220.jpg" alt="p2"></p>
 
 <p>在上图中，“AZ Screen Recorder”为需要录制屏幕的软件名称，“将开始截取您的屏幕上显示的所有内容”是系统自带的提示信息，不可更改或删除。用户点击“立即开始”便开始录制屏幕，录制完成后在指定的目录生成mp4文件。</p>
 
@@ -112,7 +112,7 @@
 
 <h1>0x08 参考资料</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html</a></li>
@@ -121,7 +121,7 @@
 <li><a href="https://www.nowsecure.com/resources/secure-mobile-development/caching-and-logging/be-aware-of-the-keyboard-cache/">https://www.nowsecure.com/resources/secure-mobile-development/caching-and-logging/be-aware-of-the-keyboard-cache/</a></li>
 <li><a href="https://www.nowsecure.com/resources/secure-mobile-development/caching-and-logging/be-aware-of-copy-paste/">https://www.nowsecure.com/resources/secure-mobile-development/caching-and-logging/be-aware-of-copy-paste/</a></li>
 <li><a href="http://www.freebuf.com/vuls/81905.html">http://www.freebuf.com/vuls/81905.html</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

@@ -3,16 +3,16 @@
 			<head>
 			     <title>以欧洲组织为目标的基于python的恶意软件家族PWOBot - Fnut</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/15200">http://drops.wooyun.org/tips/15200</a></h1>
 				
       <p>
-        <p>Links:<a href="http://researchcenter.paloaltonetworks.com/2016/04/unit42-python-based-pwobot-targets-european-organizations/">http://researchcenter.paloaltonetworks.com/2016/04/unit42-python-based-pwobot-targets-european-organizations/</a></p>
+        </p><p>Links:<a href="http://researchcenter.paloaltonetworks.com/2016/04/unit42-python-based-pwobot-targets-european-organizations/">http://researchcenter.paloaltonetworks.com/2016/04/unit42-python-based-pwobot-targets-european-organizations/</a></p>
 
 <h1>0x00 前言</h1>
 
-<hr />
+<hr>
 
 <p>我们发现了一个叫做“PWOBot”的恶意软件家族，这个恶意软件家族相当的独特，因为它完全是用Python编写的，并通过<a href="http://www.pyinstaller.org/">PyInstaller</a>进行编译来生成一个windows下的可执行程序。这个恶意软件被证实影响了大量的欧洲组织，特别是在波兰。此外，这个恶意软件只通过一个流行的波兰文件共享web服务来传播的。</p>
 
@@ -24,7 +24,7 @@
 
 <h1>0x01 目标</h1>
 
-<hr />
+<hr>
 
 <p>在过去的半年中，我们发现PWOBot影响了以下的组织：</p>
 
@@ -73,13 +73,13 @@ s6424.chomikuj[.]pl/File.aspx?e=o_4Gk0x3F9FWxSDo4JWYuvGXDCsbytZMY
 
 <h1>0x02 恶意软件分析</h1>
 
-<hr />
+<hr>
 
 <p>正如最开始提到的，PWOBot是完全用Python编写的。攻击者利用PyInstaller来把Python代码转换成Windows可执行程序。因此，因为Python被使用了，所以它可以很简单的被移植到其他操作系统，比如Linux或者OSX。</p>
 
 <p>除了最初的运行之外，PWOBot会首先卸载掉它可能会发现的之前的PWOBot的版本。它会查询<code>Run</code>注册表项，判断是否存在之前的版本。主要的版本针对注册表项<code>Run</code>使用了一种<code>pwo[VERSION]</code>的格式，在这里<code>[version]</code>代表的是PWOBot的版本号。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/2016042604461233717.png" alt="" /></p>
+<p><img src="../images_result/images/2016042604461233717.png" alt=""></p>
 
 <p>图一 PWOBot uninstalling previous versions</p>
 
@@ -106,11 +106,11 @@ s6424.chomikuj[.]pl/File.aspx?e=o_4Gk0x3F9FWxSDo4JWYuvGXDCsbytZMY
 
 <p>PWOBot有两个配置文件，其中一指定了这个恶意软件的各种配置，另一个确定了PWOBot在执行的时候应该连接哪个远程服务器。</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/2016042604470395332.png" alt="" /></p>
+<p><img src="../images_result/images/2016042604470395332.png" alt=""></p>
 
 <p>图二 PWOBot settings configuration</p>
 
-<p><img src="http://static.wooyun.org//drops/20160426/2016042604494486335.png" alt="" /></p>
+<p><img src="../images_result/images/2016042604494486335.png" alt=""></p>
 
 <p>图三 PWOBot remote server configuration</p>
 
@@ -170,7 +170,7 @@ s6424.chomikuj[.]pl/File.aspx?e=o_4Gk0x3F9FWxSDo4JWYuvGXDCsbytZMY
 
 <h1>0x03 结论</h1>
 
-<hr />
+<hr>
 
 <p>PWOBot作为一个恶意软件家族是非常有意思的，因为它是完全用python写的。尽管在历史上它只影响过windows平台，但是因为它的底层的代码是跨平台的，它可以很简单的被移植到Linux和OSX上去。这个事实以及它的模块化的设计，让PWOBot成为一个潜在的重要的威胁。</p>
 
@@ -190,7 +190,7 @@ s6424.chomikuj[.]pl/File.aspx?e=o_4Gk0x3F9FWxSDo4JWYuvGXDCsbytZMY
 <li>http://www.pyinstaller.org/</li>
 <li>https://www.torproject.org/</li>
 <li>https://github.com/pan-unit42/iocs/tree/master/pwobot/hashes.txt</li>
-</ol>      </p>
+</ol>      <p></p>
     
 			</body>
 		</html>

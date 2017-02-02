@@ -3,49 +3,49 @@
 			<head>
 			     <title>金融反欺诈-海外信用卡黑色产业链 - 阿里巴巴云誉</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/news/14382">http://drops.wooyun.org/news/14382</a></h1>
 				
       <p>
-        <h1>0x00 概述</h1>
+        </p><h1>0x00 概述</h1>
 
-<hr />
+<hr>
 
 <p>上篇文章<a href="http://drops.wooyun.org/tips/13008">金融反欺诈-交易基础介绍</a>我们详细介绍了银行卡的相关内容，以及银行卡的可复制的风险。本篇文章主要介绍下海外信用卡欺诈的相关内容，并初步探讨下信用卡反欺诈的方式。</p>
 
 <h1>0x01 基础介绍</h1>
 
-<hr />
+<hr>
 
 <h3>一）基础名词：</h3>
 
-<p>Credit Card：<br />
+<p>Credit Card：<br>
 信用卡，有一定的信用额度，并可以提前预支资金用于消费的卡。</p>
 
 <!--more-->
 
-<p>CVV2：<br />
+<p>CVV2：<br>
 通常指我们平时所说的信用卡的CVV，其真实叫法为CVV2(Card Verification Value 2->Visa)，Visa卡组织叫CVV2，MasterCard卡组织叫CVC2(Card Validation Code->MasterCard),在国内，中国银联称之为CVN2。 CVV2的设计是主要用于线上的交易卡的合法性校验，一般是3-4位数字，打印在银行卡的背面。</p>
 
-<p>EMV(Europay、MasterCard与Visa缩写):<br />
-EMV是指国际金融业界对于智能支付卡与可使用芯片卡的POS终端机以ATM机等所制定的标准，最初由Europay、MasterCard、Visa三家卡组织制定。<br />
+<p>EMV(Europay、MasterCard与Visa缩写):<br>
+EMV是指国际金融业界对于智能支付卡与可使用芯片卡的POS终端机以ATM机等所制定的标准，最初由Europay、MasterCard、Visa三家卡组织制定。<br>
 符合EMV标准的支付卡叫做芯片卡，即EMV智能卡(通常也称为IC卡)。芯片卡的信息储存在集成电路中而非过去的磁条里，但大部分EMV卡有可以向下兼容的磁条。</p>
 
-<p>CNP(card not present transaction)：<br />
+<p>CNP(card not present transaction)：<br>
 通俗来讲，是指不需要出示物理卡即可进行消费的交易，比如线上的信用卡交易、电话购物等。</p>
 
-<p>Chargeback:<br />
+<p>Chargeback:<br>
 拒付，即若持卡人查看自己的消费账单时发现并非自己的交易，或者对交易不满意(比如购买的物品不符合商家描述、货物不对等)，向发卡行提出申请退款的请求。拒付有多种情况，其中由于信用卡欺诈产生的拒付较多。</p>
 
-<p>Fallback Charge:<br />
+<p>Fallback Charge:<br>
 回退交易，是指芯片卡(EMV)的交易本该使用芯片进行交易，但因为各种问题(技术问题、伪造卡、攻击等)，使得通过不支持EMV的POS机或者支持EMV卡的POS机，使用磁条信息进行了交易。</p>
 
 <h3>二）欺诈消费流程：</h3>
 
 <p>一次信用卡欺诈的消费过程如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160402/2016040207064561025v1.png" alt="" /></p>
+<p><img src="../images_result/images/2016040207064561025v1.png" alt=""></p>
 
 <p>说明：</p>
 
@@ -71,26 +71,26 @@ EMV是指国际金融业界对于智能支付卡与可使用芯片卡的POS终�
 
 <p>商户收到收单行的拒付处理，选择接受或拒绝。并将结果反馈给收单行。</p>
 
-<p>收单行：若商户同意拒付，则会撤销扣款，返回给持卡人。若商户拒绝，则收单行将结果反馈给卡组织。<br />
+<p>收单行：若商户同意拒付，则会撤销扣款，返回给持卡人。若商户拒绝，则收单行将结果反馈给卡组织。<br>
 卡组织：卡组织对拒付进行仲裁，最终判断损失由谁来承担。</p>
 
-<p>坏账：<br />
+<p>坏账：<br>
 若商户无法获得应收的款项，则称为坏账。</p>
 
-<p>拒付率：<br />
+<p>拒付率：<br>
 如果商户的拒付率过高，那么卡组织会请求商户进行整改，严重的话可能取消商户的交易通道。</p>
 
 <p>在坏账中，商户中的角色很重要，如果没有做好风控，没有进行强的安全校验，则很可能遭受损失。</p>
 
 <h1>0x02 海外信用卡黑色产业链</h1>
 
-<hr />
+<hr>
 
 <p>产业链：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160402/2016040207064776091v2.png" alt="" /></p>
+<p><img src="../images_result/images/2016040207064776091v2.png" alt=""></p>
 
-<p>说明：<br />
+<p>说明：<br>
 在这条黑色产业链里，绿色箭头表示数据的流向、红色箭头表示利益流向。</p>
 
 <p>攻击者通常是售卖者，其通过各种方式获取用户的银行卡信息，并通过售卖平台售卖。</p>
@@ -119,47 +119,47 @@ EMV是指国际金融业界对于智能支付卡与可使用芯片卡的POS终�
 
 <p>数据窃取主要是指获取信用卡的原始磁道信息或者可以用于支付的信用卡信息。</p>
 
-<p>漏洞攻击：<br />
-通过攻击，并植入恶意软件去窃取信用卡信息。比如通过渗透测试等方式，入侵到商户或收单行的支付网络，通过在POS机或者ATM机(Windows主机占多数)植入后门，后门能够从内存里获取Dumps数据。<br />
+<p>漏洞攻击：<br>
+通过攻击，并植入恶意软件去窃取信用卡信息。比如通过渗透测试等方式，入侵到商户或收单行的支付网络，通过在POS机或者ATM机(Windows主机占多数)植入后门，后门能够从内存里获取Dumps数据。<br>
 或者是通过挂马、社会工程学等各种方式攻击普通用户，用户在运行软件后会被植入恶意后门，软件检测到网银的登陆或支付信息后会记录并发给控制端。</p>
 
-<p>钓鱼方式：<br />
+<p>钓鱼方式：<br>
 钓鱼方式主要指伪造银行的页面，引导用户登录，并记录用户信息。比如将伪造的银行网站通过邮件、伪基站等方式发送给用户。缺乏安全意识的用户可能会直接输入信用卡等相关信息。比如我们通过伪基站伪造招商银行，并发钓鱼链接给用户，安全意识较差的用户是很难去察觉是伪造的银行地址的。如图</p>
 
-<p><img src="http://static.wooyun.org//drops/20160402/2016040207064855755v3.png" alt="" /></p>
+<p><img src="../images_result/images/2016040207064855755v3.png" alt=""></p>
 
-<p>社会工程学：<br />
+<p>社会工程学：<br>
 社会工程学通常结合数据泄露、钓鱼等实施。当欺诈者通过各种方式掌握了用户的相关信息，并可通过进一步的方式获得更多的信息。比如根据掌握持卡人泄露的卡号、姓名等信息，伪装银行的工作人员去试探获取持卡人的PIN密码、CVV2码等。</p>
 
-<p>线下获取方式：<br />
+<p>线下获取方式：<br>
 线下的获取方式通常有偷盗用户信用卡、侧录信用卡。比如在ATM机安装测录仪器，用户在无感知的情况下刷卡取钱，导致信用卡被复制。比如POS机安装测录仪器，通过优惠活动等引导用户刷卡、或与商户勾结，趁用户不注意时候复制信用卡。</p>
 
 <h3>三）数据倒卖</h3>
 
 <p><strong>1.术语</strong></p>
 
-<p>Dumps：<br />
+<p>Dumps：<br>
 Dumps是指银行卡的原始磁条信息，可以通过MSR等读卡器读取或者在POS机、ATM机里安装后门直接从内存里读取。</p>
 
-<p>Fullz：<br />
+<p>Fullz：<br>
 是欺诈术语，是指可用于实现交易的信息，其携带了持卡人的一些详细信息，比如姓名、住址、信用卡信息、社保号码、出生日期等。</p>
 
-<p>Checker：<br />
+<p>Checker：<br>
 交易平台中会有给购买卡信息的用户提供check的服务，check卡信息是否有效，其通过扣除小款的金额，并查看返回码，确认卡的有效性，并从中收取费用。</p>
 
 <p>我们来看几个银行卡信息交易平台</p>
 
 <p>如图1.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160402/2016040207065042310v4.png" alt="" /></p>
+<p><img src="../images_result/images/2016040207065042310v4.png" alt=""></p>
 
 <p>如图2.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160402/2016040207065294660v5.png" alt="" /></p>
+<p><img src="../images_result/images/2016040207065294660v5.png" alt=""></p>
 
 <p>如图3.</p>
 
-<p><img src="http://static.wooyun.org//drops/20160402/2016040207065393662v6.png" alt="" /></p>
+<p><img src="../images_result/images/2016040207065393662v6.png" alt=""></p>
 
 <p>在这些交易平台中都是支持比特币交易，实现匿名性。同时网站还会提供一些代理服务、服务器、付费教程，以及售卖paypal、ebay等账号信息。</p>
 
@@ -167,13 +167,13 @@ Dumps是指银行卡的原始磁条信息，可以通过MSR等读卡器读取或
 
 <p><strong>1.角色：</strong></p>
 
-<p>Dropper：<br />
+<p>Dropper：<br>
 Dropper角色是指为购买线上实体物品的欺诈者提供合法收货地址的服务人员。他们通常是利用伪造的ID去租赁一个合法的住址，然后用于给欺诈者提供接收商品的服务。</p>
 
-<p>Runner：<br />
+<p>Runner：<br>
 Runner角色是指通过伪造的卡直接去ATM机取现的人。</p>
 
-<p>Shopper：<br />
+<p>Shopper：<br>
 Shopper角色是指，通过拿伪造的银行卡去实体的商店进行消费套现的人。</p>
 
 <p><strong>2.线上获利：</strong></p>
@@ -232,7 +232,7 @@ Shopper角色是指，通过拿伪造的银行卡去实体的商店进行消费�
 
 <h1>0x03 信用卡反欺诈方式</h1>
 
-<hr />
+<hr>
 
 <h3>一）发卡行、卡组织</h3>
 
@@ -280,41 +280,41 @@ Shopper角色是指，通过拿伪造的银行卡去实体的商店进行消费�
 
 <p><strong>一）基础防护</strong></p>
 
-<p>1.设备指纹<br />
+<p>1.设备指纹<br>
 在欺诈中，通常是伴随多个账号用于欺诈。所以需要一种能够唯一标识用户的方法，其中通过设备指纹识别用户是一种很重要的方法。商户可以自己建立设备指纹信誉库，或者购买一些权威的第三方服务。</p>
 
-<p>2.机器行为<br />
+<p>2.机器行为<br>
 商户应该有自己的机器行为检测方式，通过多种方式来识别是否是机器行为。</p>
 
-<p>3.防垃圾注册<br />
+<p>3.防垃圾注册<br>
 商户应该具有垃圾注册防控的机制，对于批量注册、批量登陆有防控机制。当然基于ip的拦截会显得不是那么有效，对于欺诈者来讲，切换ip的成本很低。垃圾注册的防控通常需要结合设备指纹、机器行为检测。</p>
 
 <p>4.增强绑卡校验</p>
 
-<p>a.利用3D校验<br />
+<p>a.利用3D校验<br>
 即用户在绑卡的时候需要提供设置的网上交易密码，认证通过后确定用户的合法身份。</p>
 
-<p>b.利用Micro-Charge<br />
+<p>b.利用Micro-Charge<br>
 即绑卡过程中，向用户扣除一随机的金额，然后用户在收到扣款账单后，填写此金额来确认身份。其中paypal在绑卡中是向信用卡扣除1.95$，然后返回给用户一个四位数的验证码，通过验证码来确认。</p>
 
-<p>c.不允许绑定特殊类型的卡<br />
+<p>c.不允许绑定特殊类型的卡<br>
 比如GiftCard，用户拿着这些卡去绑定，等消费完成商户进行扣款(先使用后付费的模式)时候，会发现无法扣款等。</p>
 
-<p>d.黑卡黑名单，卡Bin黑名单<br />
+<p>d.黑卡黑名单，卡Bin黑名单<br>
 即对于出现欺诈较多的小银行、出现盗卡较多的区域，拒绝绑定或进行风险打标。</p>
 
 <p>5.消费校验</p>
 
-<p>a.0$、1$ authentication<br />
+<p>a.0$、1$ authentication<br>
 0元或1元校验，是指通过扣取0元或1元的方式，来确认绑定的卡是否有效。比如有如下的场景，在提供“先使用后付款”服务的商户中，用户绑卡通过了，但是其过了很长时间才进行了消费，用户消费完成后，商户执行扣款时发现卡可能已经失效。</p>
 
-<p>b.AWS(Address Verification System)校验<br />
+<p>b.AWS(Address Verification System)校验<br>
 即用户地址的校验，在购买实体物品时候可以对其进行校验。</p>
 
-<p>c.预冻结金额<br />
+<p>c.预冻结金额<br>
 比如在提供“先使用后付款”服务的商户中，若用户购买了大量金额的服务，但等到商家进行资金清算时，发现所绑卡的余额不足。所以在超过一定金额的消费后，可以采取冻结金额的方式。</p>
 
-<p>6.业务监控<br />
+<p>6.业务监控<br>
 商户应该有自己的业务监控系统。比如基于用户的，基于设备的、基于IP的交易数据监控。及时查看异常交易，并采取相应的确认措施。比如邮件确认、电话回访或者人工确认。</p>
 
 <p><strong>二）基于机器学习的信用卡反欺诈</strong></p>
@@ -364,7 +364,7 @@ Shopper角色是指，通过拿伪造的银行卡去实体的商店进行消费�
 
 <p>比如在一次交易流程中，大致流程如下：</p>
 
-<p><img src="http://static.wooyun.org//drops/20160402/2016040207065567473v7.png" alt="" /></p>
+<p><img src="../images_result/images/2016040207065567473v7.png" alt=""></p>
 
 <p>在反欺诈中，用户的所有行为信息需要联通，而不只是在消费的时候针对当前的用户行为、设备信息等进行判断。而是从用户注册开始，记录用户的行为信息(比如是否风险ip、是否代理等)，在登陆时也如此，这些信息反馈到绑卡阶段。同时绑卡流程中继续将信息累积，最终反馈到交易行为。继而再结合所有的信息形成信用体系，来构建风控模型。</p>
 
@@ -372,13 +372,13 @@ Shopper角色是指，通过拿伪造的银行卡去实体的商店进行消费�
 
 <h1>0x04 总结</h1>
 
-<hr />
+<hr>
 
 <p>信用卡欺诈产生已久，卡组织、银行、商户都应采取相应的措施来减少风险。对于商户来讲，建立自己的风控模型尤为重要。</p>
 
 <h1>0x05 参考</h1>
 
-<hr />
+<hr>
 
 <ul>
 <li><a href="https://www.blackhat.com/docs/asia-15/materials/asia-15-Singh-The-Underground-Ecosystem-Of-Credit-Card-Frauds-wp.pdf">https://www.blackhat.com/docs/asia-15/materials/asia-15-Singh-The-Underground-Ecosystem-Of-Credit-Card-Frauds-wp.pdf</a></li>
@@ -389,7 +389,7 @@ Shopper角色是指，通过拿伪造的银行卡去实体的商店进行消费�
 <li><a href="https://usa.visa.com/dam/VCOM/download/merchants/chargeback-management-guidelines-for-visa-merchants.pdf">https://usa.visa.com/dam/VCOM/download/merchants/chargeback-management-guidelines-for-visa-merchants.pdf</a></li>
 <li><a href="http://www.emv-connection.com/downloads/2015/05/EMF-Liability-Shift-Document-FINAL5-052715.pdf">http://www.emv-connection.com/downloads/2015/05/EMF-Liability-Shift-Document-FINAL5-052715.pdf</a></li>
 <li><a href="http://www.emv-connection.com/downloads/2012/05/Fallback-Transaction-Guidance-Final-Nov-2015.pdf">http://www.emv-connection.com/downloads/2012/05/Fallback-Transaction-Guidance-Final-Nov-2015.pdf</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

@@ -3,14 +3,14 @@
 			<head>
 			     <title>逆向基础（三） - reverse-engineering</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/tips/1963">http://drops.wooyun.org/tips/1963</a></h1>
 				
       <p>
-        <h1>CHAPER7</h1>
+        </p><h1>CHAPER7</h1>
 
-<hr />
+<hr>
 
 <h2>访问传递参数</h2>
 
@@ -82,7 +82,7 @@ _main ENDP
 
 <p>我们在OllyDbg中观察，跟踪到函数f()使用第一个参数的位置，可以看到寄存器EBP指向栈底，图中使用红色箭头标识。栈帧中第一个被保存的是EBP的值，第二个是返回地址（RA），第三个是参数1，接下来是参数2，以此类推。因此，当我们访问第一个参数时EBP应该加8（2个32-bit字节宽度）。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071412295556178.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071412295556178.png" alt="enter image description here"></p>
 
 <p>Figure 7.1: OllyDbg: 函数f()内部</p>
 
@@ -406,7 +406,7 @@ main    endp
 
 <h1>Chapter 8</h1>
 
-<hr />
+<hr>
 
 <h2>一个或者多个字的返回值</h2>
 
@@ -512,7 +512,7 @@ struct s get_some_values (int a)
 <pre><code>#!bash
 $T3853 = 8                  ; size = 4
 _a$ = 12                    ; size = 4
-?get_some_values@@YA?AUs@@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5018100a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> PROC      ; get_some_values
+?get_some_values@@YA?AUs@@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="5018100a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> PROC      ; get_some_values
     mov     ecx, DWORD PTR _a$[esp-4]
     mov     eax, DWORD PTR $T3853[esp-4]
     lea     edx, DWORD PTR [ecx+1]
@@ -522,7 +522,7 @@ _a$ = 12                    ; size = 4
     mov     DWORD PTR [eax+4], edx
     mov     DWORD PTR [eax+8], ecx
     ret     0
-?get_some_values@@YA?AUs@@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d199918b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ENDP      ; get_some_values
+?get_some_values@@YA?AUs@@<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d199918b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script> ENDP      ; get_some_values
 </code></pre>
 
 <p>内部变量传递指针到结构体的宏为$T3853。</p>
@@ -566,7 +566,7 @@ _get_some_values endp
 
 <h1>Chapter 9</h1>
 
-<hr />
+<hr>
 
 <h2>指针</h2>
 
@@ -646,23 +646,23 @@ _main   ENDP
 
 <p>现在两个全局变量的值被加载到寄存器传递给printf(): fig. 9.4.</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071412295654564.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071412295654564.png" alt="enter image description here"></p>
 
 <p>Figure 9.1: OllyDbg: 全局变量地址被传递进f1()</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071412295668309.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071412295668309.png" alt="enter image description here"></p>
 
 <p>Figure 9.2: OllyDbg: f1()开始</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071412295760083.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071412295760083.png" alt="enter image description here"></p>
 
 <p>Figure 9.3: OllyDbg: f1()完成</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071412295727546.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071412295727546.png" alt="enter image description here"></p>
 
 <p>Figure 9.4: OllyDbg: 全局变量被传递进printf()</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071412295844080.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071412295844080.png" alt="enter image description here"></p>
 
 <p>Figure 9.5: OllyDbg: memory map</p>
 
@@ -720,15 +720,15 @@ _main   PROC
 
 <p>f1()完成时结果0xDB18和0x243存放在地址0x35FCF4和0x35FCF8。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071412295839333.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071412295839333.png" alt="enter image description here"></p>
 
 <p>Figure 9.6: OllyDbg: 局部变量地址被圧栈</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071412295963986.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071412295963986.png" alt="enter image description here"></p>
 
 <p>Figure 9.7: OllyDbg: f1()starting</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071412295957956.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071412295957956.png" alt="enter image description here"></p>
 
 <p>Figure 9.8: OllyDbg: f1()finished</p>
 
@@ -738,7 +738,7 @@ _main   PROC
 
 <h1>Chapter 10</h1>
 
-<hr />
+<hr>
 
 <h2>条件跳转</h2>
 
@@ -797,25 +797,25 @@ _f_signed   PROC
         mov     ebp, esp
         mov     eax, DWORD PTR _a$[ebp]
         cmp     eax, DWORD PTR _b$[ebp]
-        jle     SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="dafe9694e99abc">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_signed
+        jle     SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="dafe9694e99abc">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_signed
         push    OFFSET $SG737       ; ’a&gt;b’
         call    _printf
         add     esp, 4
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="26026a68156640">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_signed:
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="26026a68156640">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_signed:
         mov     ecx, DWORD PTR _a$[ebp]
         cmp     ecx, DWORD PTR _b$[ebp]
-        jne     SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="cce88082fe8caa">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_signed
+        jne     SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="cce88082fe8caa">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_signed
         push    OFFSET $SG739       ; ’a==b’
         call    _printf
         add     esp, 4
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2400686a166442">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_signed:
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2400686a166442">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_signed:
         mov     edx, DWORD PTR _a$[ebp]
         cmp     edx, DWORD PTR _b$[ebp]
-        jge     SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0521494b314563">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_signed
+        jge     SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0521494b314563">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_signed
         push    OFFSET $SG741       ; ’a&lt;b’
         call    _printf
         add     esp, 4
-        <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="92b6dedca6d2f4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_signed:
+        <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="92b6dedca6d2f4">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_signed:
         pop     ebp
         ret     0
 _f_signed   ENDP
@@ -835,25 +835,25 @@ _f_unsigned     PROC
         mov     ebp, esp
         mov     eax, DWORD PTR _a$[ebp]
         cmp     eax, DWORD PTR _b$[ebp]
-        jbe     SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="bf9bf3f18cffd9">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_unsigned
+        jbe     SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="bf9bf3f18cffd9">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_unsigned
         push    OFFSET $SG2761 ; ’a&gt;b’
         call    _printf
         add     esp, 4
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a682eae895e6c0">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_unsigned:
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a682eae895e6c0">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_unsigned:
         mov     ecx, DWORD PTR _a$[ebp]
         cmp     ecx, DWORD PTR _b$[ebp]
-        jne     SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c1e58d8ff381a7">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_unsigned
+        jne     SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c1e58d8ff381a7">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_unsigned
         push    OFFSET $SG2763 ; ’a==b’
         call    _printf
         add     esp, 4
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0d2941433f4d6b">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_unsigned:
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="0d2941433f4d6b">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_unsigned:
         mov     edx, DWORD PTR _a$[ebp]
         cmp     edx, DWORD PTR _b$[ebp]
-        jae     SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ecc8a0a2d8ac8a">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_unsigned
+        jae     SHORT <a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="ecc8a0a2d8ac8a">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_unsigned
         push    OFFSET $SG2765 ; ’a&lt;b’
         call    _printf
         add     esp, 4
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="092d45473d496f">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_unsigned:
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="092d45473d496f">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>_unsigned:
         pop     ebp
         ret     0
 _f_unsigned     ENDP
@@ -897,15 +897,15 @@ _main   ENDP
 
 <p>第三个条件跳转：fig. 10.3.我们可以发现<a href="http://static.wooyun.org/20141017/2014101711184580126.png">14</a>当CF=0 (carry flag)时，JNB将被触发。在该例中条件不为真，所以第三个printf()将被执行。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071412300022836.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071412300022836.png" alt="enter image description here"></p>
 
 <p>Figure 10.1: OllyDbg: f_unsigned(): 第一个条件跳转</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071412300096348.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071412300096348.png" alt="enter image description here"></p>
 
 <p>Figure 10.2: OllyDbg: f_unsigned(): 第二个条件跳转</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071412300122139.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071412300122139.png" alt="enter image description here"></p>
 
 <p>Figure 10.3: OllyDbg: f_unsigned(): 第三个条件跳转</p>
 
@@ -919,15 +919,15 @@ _main   ENDP
 
 <p>第三个条件跳转将不会被触发，因为仅有SF=OF，该例中不为真: fig. 10.6.</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071412300232039.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071412300232039.png" alt="enter image description here"></p>
 
 <p>Figure 10.4: OllyDbg: f_signed(): 第一个条件跳转</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071412300273409.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071412300273409.png" alt="enter image description here"></p>
 
 <p>Figure 10.5: OllyDbg: f_signed(): 第二个条件跳转</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071412300239487.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071412300239487.png" alt="enter image description here"></p>
 
 <p>Figure 10.6: OllyDbg: f_signed(): 第三个条件跳转</p>
 
@@ -957,11 +957,11 @@ _main   ENDP
 
 <p>如果忘了这些跳转，printf()可能会被多次调用，这种行为可能是我们不需要的。</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071412300322931.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071412300322931.png" alt="enter image description here"></p>
 
 <p>Figure 10.7: Hiew: f_unsigned() 函数</p>
 
-<p><img src="http://static.wooyun.org/20140714/2014071412300368549.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2014071412300368549.png" alt="enter image description here"></p>
 
 <p>Figure 10.8: Hiew:我们修改 f_unsigned() 函数</p>
 
@@ -1147,7 +1147,7 @@ f_unsigned:
 
 <p>BLE通常是条件跳转小于或等于（Less than or Equal），BNE—不等于（Not Equal），BGE—大于或等于（Greater than or Equal）。</p>
 
-<p>f_unsigned函数是同样的，只是使用的指令用来处理无符号数值：BLS (Unsigned lower or same) 和BCS (Carry Set (Greater than or equal)).</p>      </p>
+<p>f_unsigned函数是同样的，只是使用的指令用来处理无符号数值：BLS (Unsigned lower or same) 和BCS (Carry Set (Greater than or equal)).</p>      <p></p>
     
 			</body>
 		</html>

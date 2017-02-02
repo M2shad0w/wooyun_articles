@@ -3,14 +3,14 @@
 			<head>
 			     <title>逆向基础 OS-specific (三) - 左懒</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/binary/7452">http://drops.wooyun.org/binary/7452</a></h1>
 				
       <p>
-        <h1>66章 系统调用(syscall-s)</h1>
+        </p><h1>66章 系统调用(syscall-s)</h1>
 
-<hr />
+<hr>
 
 <p>众所周知，所有运行的进程在操作系统里面分为两类：一类拥有访问全部硬件设备的权限（内核空间）而另一类无法直接访问硬件设备(用户空间)。</p>
 
@@ -34,7 +34,7 @@
 
 <h2>66.1 Linux</h2>
 
-<hr />
+<hr>
 
 <p>在Linux系统中，系统调用通常使用int 0x80中断进行调用。通过EAX寄存器传递调用号，再通过其它寄存器传递所需参数。</p>
 
@@ -67,7 +67,7 @@ ld 1.o
 
 <h2>66.2 Windows</h2>
 
-<hr />
+<hr>
 
 <p>Windows系统使用int 0x2e中断或x86下特有的指令SYSENTER调用用系统调用服务。</p>
 
@@ -77,11 +77,11 @@ ld 1.o
 
 <h1>67章 Linux</h1>
 
-<hr />
+<hr>
 
 <h2>67.1 位置无关代码</h2>
 
-<hr />
+<hr>
 
 <p>在分析Linux共享库的时候(.so)的时候，可能会经常看到类似下面的代码：</p>
 
@@ -137,7 +137,7 @@ int f1(int var)
 gcc -fPIC -shared -O3 -o 1.so 1.c
 </code></pre>
 
-<hr />
+<hr>
 
 <pre><code>.text:00000440 public __x86_get_pc_thunk_bx
 .text:00000440 __x86_get_pc_thunk_bx proc near ; CODE XREF: _init_proc+4
@@ -203,7 +203,7 @@ gcc -fPIC -shared -O3 -o 1.so 1.c
 736: 03 18                   add ebx,DWORD PTR [rax]
 738: 31 c0                   xor eax,eax
 73a: 89 da                   mov edx,ebx
-73c: e8 df fe ff ff          call 620 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="90cfcfe0e2f9fee4f6cff3f8fbd0e0fce4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
+73c: e8 df fe ff ff          call 620 &lt;<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="90cfcfe0e2f9fee4f6cff3f8fbd0e0fce4">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>&gt;
 741: 89 d8                   mov eax,ebx
 743: 5b                      pop rbx
 744: c3                      ret
@@ -219,7 +219,7 @@ gcc -fPIC -shared -O3 -o 1.so 1.c
 
 <h2>67.2 LD_PRELOAD hack in Linux</h2>
 
-<hr />
+<hr>
 
 <p>Linux允许让我们自己的动态链接库加载在其它动态链接库之前，甚至是系统库（如 libc.so.6）。</p>
 
@@ -355,7 +355,7 @@ ssize_t read(int fd, void *buf, size_t count)
 <li><a href="http://go.yurichev.com/17043">Verysimpleinterceptionofthestrcmp()(YongHuang)</a></li>
 <li><a href="http://go.yurichev.com/17145">KevinPulo—FunwithLD_PRELOAD.Alotofexamplesandideas.</a></li>
 <li><a href="http://go.yurichev.com/17146">File functions interception for compression/decompression files on fly (zlibc).</a></li>
-</ul>      </p>
+</ul>      <p></p>
     
 			</body>
 		</html>

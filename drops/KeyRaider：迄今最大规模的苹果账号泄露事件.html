@@ -3,16 +3,16 @@
 			<head>
 			     <title>KeyRaider：迄今最大规模的苹果账号泄露事件 - 小饼仔</title>
 				 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-			</head>
+			<link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style><link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/github-dark.css" media="screen"><link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print"><style type="text/css">body {width: 90%;max-width: 960px;display: block;margin: 0 auto;}img {max-width: 900px;}</style></head>
 			<body>
 				<h1>原文地址:<a href="http://drops.wooyun.org/papers/8363">http://drops.wooyun.org/papers/8363</a></h1>
 				
       <p>
-        <p>from:<a href="http://researchcenter.paloaltonetworks.com/2015/08/keyraider-ios-malware-steals-over-225000-apple-accounts-to-create-free-app-utopia/">KeyRaider: iOS Malware Steals Over 225,000 Apple Accounts to Create Free App Utopia</a></p>
+        </p><p>from:<a href="http://researchcenter.paloaltonetworks.com/2015/08/keyraider-ios-malware-steals-over-225000-apple-accounts-to-create-free-app-utopia/">KeyRaider: iOS Malware Steals Over 225,000 Apple Accounts to Create Free App Utopia</a></p>
 
 <h1>摘要</h1>
 
-<hr />
+<hr>
 
 <p>最近，<code>WeipTech（</code>威锋技术组）分析了一些用户报告的<code>可疑iOS应用</code>，发现了存储在某服务器上超过<code>22,5000</code>个有效的Apple账户和密码。</p>
 
@@ -36,13 +36,13 @@
 
 <h1>发现KeyRaider</h1>
 
-<hr />
+<hr>
 
 <p>此次攻击最早由<code>i_82</code>发现，他是一名来自扬州大学的学生、<code>WeipTech</code>成员。<code>WeipTech</code>是一个非职业技术团体，由<code>WeiPhone</code>(中国最大的Apple粉丝网站)的用户组成。之前<code>WeipTech</code>与我们合作，披露了<code>iOS</code>和<code>OS X</code>上的恶意软件<code>AppBuyer</code>、<code>WireLurker</code>。</p>
 
 <p>从2015-07-01开始，<code>WeipTech</code> 开始调查一些用户Apple账户在未经授权的情况下，购买和安装了<code>iOS app</code>。再对用户安装的越狱应用进行调查后，他们发现了一款越狱应用收集用户信息，并上传到一个未知的网站。他们发现这个网站存在SQL注入，能够查看到所有的数据记录。<code>Figure 1</code>是”<code>top 100</code>”数据库的截图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150901/2015090105151293512.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090105151293512.png" alt="enter image description here"></p>
 
 <p>Figure 1. WeipTech 发现在C2服务器上存在SQL注入(from WeipTech)</p>
 
@@ -58,17 +58,17 @@
 
 <h1>KeyRaider 来源</h1>
 
-<hr />
+<hr>
 
 <p>据我们了解，<code>KeyRaider</code>仅通过 <code>Weiphone’Cydia</code> 仓库在越狱iOS设备上来进行传播。不像其他的<code>Cydia源</code>，如<code>BigBoss</code>、<code>ModMyi</code>。<code>WeiPhone</code>为注册用户提供私有仓库，用户可以直接上传他们的越狱应用app，并与其他人进行共享</p>
 
 <p>在2015年，一个名为“<code>mischa07</code>”的用户，上传了至少15款<code>KeyRaider</code> 应用到它的私人仓库(<a href="http://apt.so/index.php?r=cydiaTa/index&amp;user_id=8676626">http://apt.so/index.php?r=cydiaTa/index&amp;user_id=8676626</a>)，如<code>Figure 2</code>. 此外，他的名字也被作为加解密<code>key</code>，硬编码在恶意软件中，如<code>Figure 3</code>。我们高度怀疑此人为<code>KeyRaider’s</code> 的开发者。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150901/2015090105151310353.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090105151310353.png" alt="enter image description here"></p>
 
 <p>Figure 2. mischa07’s 个人Cydia 仓库</p>
 
-<p><img src="http://static.wooyun.org//drops/20150901/2015090105151388231.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090105151388231.png" alt="enter image description here"></p>
 
 <p>Figure 3. “mischa07″ 作为加密key被硬编码在恶意软中</p>
 
@@ -82,15 +82,15 @@
 
 <p><code>Mischa07</code>也在 <code>Weiphone</code> 社区中对这两款越狱应用进行推广，如<code>Figure 6</code>，但一些用户并不相信这些所谓神奇的功能。然而，根据<code>Weiphone’s</code> 网站上显示，<code>iappinbuy</code> 仍人有<code>20,199</code>次下载，如<code>Figure 4</code>，而<code>iappstore</code> 有62次下载(仅对最新版进行统计)</p>
 
-<p><img src="http://static.wooyun.org//drops/20150901/2015090105151376636.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090105151376636.png" alt="enter image description here"></p>
 
 <p>Figure 4. 一个恶意样本被下载超过30,000 次</p>
 
-<p><img src="http://static.wooyun.org//drops/20150901/2015090105151433209.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090105151433209.png" alt="enter image description here"></p>
 
 <p>Figure 5.  iappstore 恶意软件能够直接从App Store安装需要付费的 apps</p>
 
-<p><img src="http://static.wooyun.org//drops/20150901/2015090105151490209.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090105151490209.png" alt="enter image description here"></p>
 
 <p>Figure 6. 作者推广它的iappstore 应用</p>
 
@@ -102,7 +102,7 @@
 
 <h1>窃取用户数据</h1>
 
-<hr />
+<hr>
 
 <p><code>KeyRaider</code>收集三种用户数据，通过<code>HTTP</code>请求上传到<code>C2服务器</code>，这里发现了两个不同的<code>C2服务器</code></p>
 
@@ -112,22 +112,22 @@
 
 <p>在分析的过程中，这些域名都被解析到了<code>113.10.174.167</code>这个IP地址。在C2服务器上的 “<code>top100</code>” 数据库里有三张表 “<code>aid</code>”, “<code>cer</code>t” 和 “<code>other</code>”。 在<code>server</code>端，<code>KeyRaider</code> 利用4个<code>PHP</code>脚本来存取数据库，<code>aid.php</code>, <code>cert.php</code>, <code>other.php</code> 和 <code>data.php</code> 通过分析代码和<code>WeipTech</code>下载的泄露数据，我们发现<code>aid</code>表存储<code>225,941</code>条记录，包含<code>Apple ID</code>的用户名、密码、设备<code>GUID</code>。 <code>Cert</code>表存储了<code>5,841</code>条受感染设备的证书和私钥，而这些信息用于<code>Apple</code>推送消息通知服务，如<code>Figure 7</code>。最后<code>other</code>表存储了超过<code>3,000条</code>设备的<code>GUID</code>和来至<code>app store server</code> 的<code>app</code>购买凭证</p>
 
-<p><img src="http://static.wooyun.org//drops/20150901/2015090105151450550.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090105151450550.png" alt="enter image description here"></p>
 
 <p>Figure 7. 泄露cert表中的一条记录</p>
 
 <p>我们对泄露的<code>Apple ID</code>邮箱地址进行了整理，有超过一半的用户使用QQ邮箱，下是排名前十的账户邮箱地址域名（其中6个主要由中国用户在使用）</p>
 
-<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d537557795a4a4fbb6bab8">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="799bf9db39484f4a571a1614">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a7452705e7cec4cbc8d2c389c4c8ca">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d032507290b7bdb1b9bcfeb3bfbd">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c022406280f1f2f6eea3afad">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fb197b59bb93948f969a9297d5989496">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="29cba98b695a404748074a4644">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="997b193bd9eff0e9b7e8e8b7faf6f4">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2ac8aa886a474f04494547">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
-<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7193f1d3314042485f121e1c">[email&#160;protected]</a><script data-cfhash='f9e31' type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<pre><code><a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d537557795a4a4fbb6bab8">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="799bf9db39484f4a571a1614">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="a7452705e7cec4cbc8d2c389c4c8ca">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="d032507290b7bdb1b9bcfeb3bfbd">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="c022406280f1f2f6eea3afad">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="fb197b59bb93948f969a9297d5989496">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="29cba98b695a404748074a4644">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="997b193bd9eff0e9b7e8e8b7faf6f4">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="2ac8aa886a474f04494547">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
+<a class="__cf_email__" href="/cdn-cgi/l/email-protection" data-cfemail="7193f1d3314042485f121e1c">[email&#160;protected]</a><script data-cfhash="f9e31" type="text/javascript">/* <![CDATA[ */!function(t,e,r,n,c,a,p){try{t=document.currentScript||function(){for(t=document.getElementsByTagName('script'),e=t.length;e--;)if(t[e].getAttribute('data-cfhash'))return t[e]}();if(t&&(c=t.previousSibling)){p=t.parentNode;if(a=c.getAttribute('data-cfemail')){for(e='',r='0x'+a.substr(0,2)|0,n=2;a.length-n;n+=2)e+='%'+('0'+('0x'+a.substr(n,2)^r).toString(16)).slice(-2);p.replaceChild(document.createTextNode(decodeURIComponent(e)),c)}p.removeChild(t)}}catch(u){}}()/* ]]> */</script>
 </code></pre>
 
 <p>然而，我们也发现一些属于其他国家或地区的邮箱地址域名，这包括</p>
@@ -154,7 +154,7 @@
 
 <h1>恶意行为</h1>
 
-<hr />
+<hr>
 
 <p><code>KeyRaider</code>恶意代码存在于 <code>Mach-O</code> 动态库中，作为<code>MobileSubstrate</code> 框架的插件。通过<code>MobileSubstrate API</code>，恶意软件能够<code>hook</code>系统进程或其他<code>iOS apps</code>的任意<code>API</code></p>
 
@@ -169,21 +169,21 @@
 
 <h1>窃取Apple账户数据</h1>
 
-<hr />
+<hr>
 
 <p>大部分<code>KeyRaider</code> 样本<code>hook itunesstored</code>进程的 <code>SSLRead</code>和<code>SSLWrite</code>函数(Figure 8). <code>itunesstored</code> 是系统守护进程，负责与<code>app store</code>进行通信(使用 iTunes 协议)。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150901/2015090105151597391.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090105151597391.png" alt="enter image description here"></p>
 
 <p>Figure 8. KeyRaider hooks SSLRead and SSLWrite in itunesstored</p>
 
 <p>当<code>App Store</code> 客户端像用户请求输入<code>Apple</code>账户登录时，登录信息会通过<code>SSL</code>加密会话发送到<code>App Store server</code>。在<code>SSLwrite</code>的替换函数中，<code>KeyRaider</code> 会寻找此类会话，通过特定的pattern在发送的数据中搜寻<code>Apple</code> 账户的用户名、密码和设备 <code>GUID</code>(Figure 9). 接下来，在<code>SSLRead</code>替换函数中，这些凭证会通过AES加密算法，使用静态的key “<code>mischa07</code>”来加密，然后发送到<code>KeyRaider  C2 服务器</code>(Figure 10).</p>
 
-<p><img src="http://static.wooyun.org//drops/20150901/2015090105151573890.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090105151573890.png" alt="enter image description here"></p>
 
 <p>Figure 9. Searching for Apple account information in SSL data</p>
 
-<p><img src="http://static.wooyun.org//drops/20150901/2015090105151545183.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090105151545183.png" alt="enter image description here"></p>
 
 <p>Figure 10. Uploading stolen credentials to the C2 server</p>
 
@@ -191,23 +191,23 @@
 
 <h1>窃取证书和私钥</h1>
 
-<hr />
+<hr>
 
 <p>在一些样本中，<code>KeyRaider</code> 也会<code>hook apsd</code>守护进程 – 负责<code>iOS</code>系统的<code>Apple</code>推送通知服务。它<code>hook</code> 定义在<code>Security</code> 框架的<code>SecItemCopyMatching</code> 函数。这个API用于搜寻匹配给定查询的 <code>keychain items</code>。</p>
 
 <p>当搜索查询有值为“<code>APSClientIdentity</code>”的<code>label</code> ，<code>KeyRaider</code> 会执行原来<code>SecItemCopyMatching</code>函数，然后调用<code>SecIdentityCopyCertificate</code> 和 <code>SecIdentityCopyPrivateKey</code>，从原本函数执行返回结果中来拷贝证书和私钥 (Figure 11). 之后，这些信息和<code>GUID</code>一起被发送到C2服务器上(Figure 12). 在<code>iOS keychain</code>中，被标记<code>APSClientIdentity</code> 的key用于推送通知。通过这些信息，攻击者可以在系统上伪造推送通知。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150901/2015090105151650564.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090105151650564.png" alt="enter image description here"></p>
 
 <p>Figure 11. Copy push service’s certificate and private key</p>
 
-<p><img src="http://static.wooyun.org//drops/20150901/2015090105151623420.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090105151623420.png" alt="enter image description here"></p>
 
 <p>Figure 12. Upload certificate and key</p>
 
 <h1>锁定设备</h1>
 
-<hr />
+<hr>
 
 <p>当<code>KeyRaider  hook SecItemCopyMatching</code>，除了拦截通知证书，它也会将当前查询的label和特定的字符串 “<code>com.Apple.lockdown.identity.activation</code>”进行比较。如果匹配，<code>KeyRaider</code> 会将查询结果的值设置为0. (Figure 13)</p>
 
@@ -217,13 +217,13 @@
 
 <h1>免费的APPS</h1>
 
-<hr />
+<hr>
 
 <p>一些<code>KeyRaider</code> 样本实现了从<code>C2服务器</code>下载购买凭证和Apple账户的功能。但这个功能仅仅在 <code>iappstore</code> 和 <code>iappinbuy</code> 两个应用中被真正使用过。 根据用户的描述，<code>iappstore</code> 能够免费从<code>app store</code>中下载任意应用。让我们来看一下他们是如何实现的.</p>
 
 <p>这个<code>app hook SSLWrite</code> 两次，第一次用于窃取密码。第二次<code>hook</code> 会尝试判断当前的HTTP请求是否是“<code>POST /WebObjects/MZBuy.woa/wa/buyProduct</code>”。以此来判断当前会话是否是使用<code>iTunes</code>协议进行购买。(Figure 14).</p>
 
-<p><img src="http://static.wooyun.org//drops/20150901/2015090105151613719.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090105151613719.png" alt="enter image description here"></p>
 
 <p>Figure 14. Hooking app purchase session</p>
 
@@ -233,11 +233,11 @@
 
 <p>如果文件不存在，它会调用 <code>readAidUrl()</code>，<code>readAidUrl</code>会从<code>KeyRaider C2服务器</code>下载新的账户信息，然后创建一个账户对象。(Figure 15). Figure 16 展示了一个从服务器下载的账户。</p>
 
-<p><img src="http://static.wooyun.org//drops/20150901/2015090105151761835.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090105151761835.png" alt="enter image description here"></p>
 
 <p>Figure 15. Downloads apple account from C2 server</p>
 
-<p><img src="http://static.wooyun.org//drops/20150901/2015090105151712772.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090105151712772.png" alt="enter image description here"></p>
 
 <p>Figure 16. Stolen apple account was downloaded from C2 server</p>
 
@@ -250,7 +250,7 @@
 
 <p>这会造成使用远程Apple账户来登陆当前的<code>iTunes</code>会话(Figure 17)</p>
 
-<p><img src="http://static.wooyun.org//drops/20150901/2015090105151741636.png" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090105151741636.png" alt="enter image description here"></p>
 
 <p>Figure 17. Emulating login protocol</p>
 
@@ -267,7 +267,7 @@
 
 <h1>电话勒索</h1>
 
-<hr />
+<hr>
 
 <p>除了窃取Apple账户来购买app，<code>KeyRaider</code> 拥有内置的锁定功能来进行勒索。</p>
 
@@ -275,13 +275,13 @@
 
 <p>下面是一名受害者报告的被勒索截图</p>
 
-<p><img src="http://static.wooyun.org//drops/20150901/2015090105151725097.jpg" alt="enter image description here" /></p>
+<p><img src="../images_result/images/2015090105151725097.jpg" alt="enter image description here"></p>
 
 <p>Figure 19. Ransom message on locked iPhone</p>
 
 <h1>其他潜在的风险</h1>
 
-<hr />
+<hr>
 
 <p>下面是一些攻击者利用你泄露的用户名、密码等信息能够做的事情</p>
 
@@ -295,7 +295,7 @@
 
 <h1>保护和预防</h1>
 
-<hr />
+<hr>
 
 <p>需要注意，<code>KeyRaider</code> 仅影响越狱的iOS设备，未越狱设备不受影响。 <code>WeipTech</code>上线了查询服务 &lt;http://www.weiptech.org/ >，你可以输入自己的Apple账户邮箱，了解它是否被泄露。<code>Palo Alto Networks</code> 在8月26日将窃取的账户信息反馈给了<code>Apple</code>。还需要注意的是，因为攻击者发现并修复了其接收数据服务器的漏洞，<code>WeipTech</code> 只能还原约一半的被窃取数据。因此，从不受信任的<code>Cydia 源</code>安装过这类越狱应用的用户可能都会受影响。</p>
 
@@ -317,7 +317,7 @@
 
 <h1>样本信息</h1>
 
-<hr />
+<hr>
 
 <pre><code>9ae5549fdd90142985c3ae7a7e983d4fcb2b797f CertPlugin.dylib
 bb56acf8b48900f62eb4e4380dcf7f5acfbdf80d MPPlugin.dylib
@@ -333,7 +333,7 @@ a05b9af5f4c40129575cce321cd4b0435f89fba8 9catbbs.ibackground_3.2.deb
 
 <h3>致谢</h3>
 
-<p>特别感谢来自<code>WeipTech</code>的<code>i_82</code>向我们共享数据、报告以及其它有用的信息。 感谢来自<code>WeipTech</code>的<code>CDSQ</code>向我们提供样本，感谢来自<code>WooYun</code>的<code>Xsser</code>、<code>FengGou</code>的信息共享。 感谢<code>Palo Alto Networks</code>的<code>Sereyvathana Ty</code>、<code>Zhaoyan Xu</code>、<code>Rongbo Shao</code>几位对恶意软件进行的分析，感谢<code>Palo Alto Networks</code>的<code>Ryan Olson</code>对本报告的审校。</p>      </p>
+<p>特别感谢来自<code>WeipTech</code>的<code>i_82</code>向我们共享数据、报告以及其它有用的信息。 感谢来自<code>WeipTech</code>的<code>CDSQ</code>向我们提供样本，感谢来自<code>WooYun</code>的<code>Xsser</code>、<code>FengGou</code>的信息共享。 感谢<code>Palo Alto Networks</code>的<code>Sereyvathana Ty</code>、<code>Zhaoyan Xu</code>、<code>Rongbo Shao</code>几位对恶意软件进行的分析，感谢<code>Palo Alto Networks</code>的<code>Ryan Olson</code>对本报告的审校。</p>      <p></p>
     
 			</body>
 		</html>
